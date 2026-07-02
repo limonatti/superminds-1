@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking Wheel · Play time! 🎡</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{--purple:#8b5cf6;--pink:#ff6ba6;--ink:#2b2450}
+  body{font-family:'Baloo 2','Comic Sans MS','Segoe UI',sans-serif;color:var(--ink);
+    background:linear-gradient(135deg,#ffe9f3,#e7f0ff 50%,#e9fff4);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:16px;text-align:center}
+  a.home{position:fixed;top:10px;left:10px;background:var(--purple);color:#fff;padding:8px 14px;
+    border-radius:14px;text-decoration:none;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+  h1{color:var(--purple);font-size:clamp(22px,5vw,34px);text-shadow:2px 2px 0 #fff;margin:36px 0 2px}
+  .sub{color:#7a6fb0;font-weight:700;font-size:14px;margin-bottom:14px}
+  .stage{position:relative;width:330px;height:330px;max-width:92vw;max-height:92vw}
+  canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 8px 24px rgba(0,0,0,.15);background:#fff}
+  .pin{position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;
+    border-top:26px solid var(--pink);filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));z-index:5}
+  .hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;
+    border-radius:50%;background:#fff;border:4px solid var(--purple);display:flex;align-items:center;
+    justify-content:center;font-size:24px;z-index:4}
+  button.spin{margin-top:16px;background:var(--pink);color:#fff;border:none;font-family:inherit;
+    font-weight:800;font-size:20px;padding:14px 34px;border-radius:20px;cursor:pointer;
+    box-shadow:0 5px 0 rgba(0,0,0,.15)}
+  button.spin:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
+  button.spin:disabled{filter:grayscale(.5);opacity:.7}
+  .result{margin-top:16px;min-height:120px;background:#fff;border-radius:20px;border:4px solid #fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.1);padding:16px 20px;max-width:440px;width:92vw;
+    opacity:0;transform:scale(.9);transition:.25s}
+  .result.show{opacity:1;transform:scale(1)}
+  .result .emo{font-size:52px}
+  .result .say{font-size:24px;font-weight:800;margin:6px 0 2px}
+  .result .ru{color:#9a90c4;font-weight:700;font-size:13px}
+  .listen{margin-top:10px;background:var(--purple);color:#fff;border:none;font-family:inherit;
+    font-weight:800;padding:8px 18px;border-radius:14px;cursor:pointer}
+  .modes{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+  .modes button{border:none;font-family:inherit;font-weight:800;font-size:13px;padding:8px 12px;
+    border-radius:12px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  .modes button.on{background:var(--purple);color:#fff}
+  .foot{color:#b3aad6;font-size:12px;font-weight:700;margin-top:20px}
+</style>
+</head>
+<body>
+  <a class="home" href="index.html">← Меню</a>
+  <h1>🎡 Speaking Wheel</h1>
+  <div class="sub">Крути колесо и говори по-английски! · Super Minds 1 · Unit 2</div>
+
+  <div class="modes" id="modes">
+    <button data-m="name" class="on">It's a ball</button>
+    <button data-m="poss">It's my ball</button>
+    <button data-m="adj">a big red ball</button>
+    <button data-m="like">I like the ball</button>
+  </div>
+
+  <div class="stage">
+    <div class="pin"></div>
+    <canvas id="wheel" width="330" height="330"></canvas>
+    <div class="hub">🎈</div>
+  </div>
+
+  <button class="spin" id="spin">Крути! 🎯</button>
+
+  <div class="result" id="result">
+    <div class="emo" id="rEmo">👆</div>
+    <div class="say" id="rSay">Нажми «Крути!»</div>
+    <div class="ru" id="rRu"></div>
+    <button class="listen" id="listen" style="display:none">🔊 listen</button>
+  </div>
+
+  <div class="foot">@english.with_asya 💜</div>
+
+<script>
+var TOYS=[
+ {en:'ball',ru:'мяч',e:'⚽'},{en:'doll',ru:'кукла',e:'🪆'},
+ {en:'teddy bear',ru:'мишка',e:'🧸'},{en:'car',ru:'машинка',e:'🚗'},
+ {en:'train',ru:'поезд',e:'🚂'},{en:'plane',ru:'самолёт',e:'✈️'},
+ {en:'bike',ru:'велосипед',e:'🚲'},{en:'kite',ru:'змей',e:'🪁'},
+ {en:'robot',ru:'робот',e:'🤖'},{en:'boat',ru:'лодка',e:'⛵'},
+ {en:'game',ru:'игра',e:'🎮'},{en:'camera',ru:'фотоаппарат',e:'📷'}
+];
+var COLORS=['#ff6ba6','#3ba7ff','#37c98a','#ffd23f','#ff924c','#8b5cf6'];
+var ADJ=['big','small','red','blue','green','yellow','new','old'];
+var ADJRU={big:'большой',small:'маленький',red:'красный',blue:'синий',green:'зелёный',yellow:'жёлтый',new:'новый',old:'старый'};
+
+var cv=document.getElementById('wheel'),ctx=cv.getContext('2d');
+var N=TOYS.length,seg=2*Math.PI/N,rot=0,spinning=false;
+var DPR=window.devicePixelRatio||1;
+cv.width=330*DPR;cv.height=330*DPR;ctx.scale(DPR,DPR);
+var R=165,cx=165,cy=165;
+
+function draw(){
+  ctx.clearRect(0,0,330,330);
+  for(var i=0;i<N;i++){
+    var a0=rot+i*seg,a1=a0+seg;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R-6,a0,a1);ctx.closePath();
+    ctx.fillStyle=COLORS[i%COLORS.length];ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+    // emoji
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(a0+seg/2);
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='26px serif';
+    ctx.fillText(TOYS[i].e,R*0.62,0);ctx.restore();
+  }
+  ctx.beginPath();ctx.arc(cx,cy,R-6,0,2*Math.PI);ctx.strokeStyle='#fff';ctx.lineWidth=6;ctx.stroke();
+}
+draw();
+
+var mode='name';
+document.querySelectorAll('#modes button').forEach(function(b){
+  b.onclick=function(){document.querySelectorAll('#modes button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');mode=b.dataset.m;};
+});
+
+function say(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+function prompt(t){
+  if(mode==='name') return {en:"It's a "+t.en+".", ru:'Это '+t.ru+'.'};
+  if(mode==='poss'){var p=pick(['my','your','his','her']);return {en:"It's "+p+" "+t.en+".", ru:'('+p+') '+t.ru};}
+  if(mode==='adj'){var a=pick(ADJ);return {en:"a "+a+" "+t.en, ru:ADJRU[a]+' '+t.ru};}
+  return {en:"I like the "+t.en+".", ru:'Мне нравится '+t.ru+'.'};
+}
+
+var res=document.getElementById('result'),spinBtn=document.getElementById('spin');
+function show(i){
+  var t=TOYS[i],p=prompt(t);
+  document.getElementById('rEmo').textContent=t.e;
+  document.getElementById('rSay').textContent=p.en;
+  document.getElementById('rRu').textContent=p.ru;
+  var lb=document.getElementById('listen');lb.style.display='inline-block';
+  lb.onclick=function(){say(p.en);};
+  res.classList.add('show');
+  say(p.en);
+}
+
+function winnerIndex(){
+  // pointer at top = 270deg (canvas y-down). local angle a = (270 - rotDeg) mod 360
+  var rotDeg=(rot*180/Math.PI)%360; if(rotDeg<0)rotDeg+=360;
+  var a=(270-rotDeg)%360; if(a<0)a+=360;
+  return Math.floor(a/(360/N))%N;
+}
+
+spinBtn.onclick=function(){
+  if(spinning)return;spinning=true;spinBtn.disabled=true;res.classList.remove('show');
+  var start=rot, spins=5+Math.random()*3, target=start+spins*2*Math.PI+Math.random()*2*Math.PI;
+  var dur=3600, t0=performance.now();
+  function frame(now){
+    var p=Math.min((now-t0)/dur,1);
+    var e=1-Math.pow(1-p,3); // ease-out cubic
+    rot=start+(target-start)*e; draw();
+    if(p<1){requestAnimationFrame(frame);}
+    else{spinning=false;spinBtn.disabled=false;show(winnerIndex());}
+  }
+  requestAnimationFrame(frame);
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Minds 1 · Unit 2 · Play time! 🎈</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root{
+    --pink:#ff6ba6; --purple:#8b5cf6; --blue:#3ba7ff; --green:#37c98a;
+    --yellow:#ffd23f; --orange:#ff924c; --red:#ff5c7a;
+    --ink:#2b2450; --paper:#fff;
+  }
+  body{
+    font-family:'Baloo 2','Comic Sans MS','Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ffe9f3 0%,#e7f0ff 50%,#e9fff4 100%);
+    color:var(--ink); min-height:100vh; padding:16px; overflow-x:hidden;
+  }
+  h1{ text-align:center; font-size:clamp(24px,5vw,40px); color:var(--purple);
+    text-shadow:2px 2px 0 #fff, 4px 4px 0 rgba(139,92,246,.2); margin-bottom:4px;}
+  .sub{ text-align:center; color:#7a6fb0; font-weight:700; margin-bottom:16px; font-size:15px;}
+  .tabs{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;}
+  .tab{ border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:15px;
+    padding:12px 18px; border-radius:20px; color:#fff; box-shadow:0 4px 0 rgba(0,0,0,.15);
+    transition:transform .1s, filter .2s; }
+  .tab:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,.15);}
+  .tab.t1{background:var(--pink);} .tab.t2{background:var(--blue);}
+  .tab.t3{background:var(--green);} .tab.t4{background:var(--orange);}
+  .tab:not(.active){ filter:grayscale(.35) opacity(.75);}
+  .panel{ display:none; max-width:920px; margin:0 auto; animation:pop .3s ease;}
+  .panel.active{ display:block; }
+  @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+
+  /* FLASHCARDS */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px;}
+  .card{ perspective:1000px; height:180px; cursor:pointer;}
+  .inner{ position:relative; width:100%; height:100%; transition:transform .55s;
+    transform-style:preserve-3d;}
+  .card.flip .inner{ transform:rotateY(180deg);}
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:22px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,.12); border:4px solid #fff;}
+  .front{ background:var(--paper);}
+  .front .emo{ font-size:64px;}
+  .front .en{ font-size:24px; font-weight:800; margin-top:6px;}
+  .front .hint{ font-size:12px; color:#aaa; margin-top:6px;}
+  .back{ transform:rotateY(180deg); color:#fff; flex-direction:column; gap:4px;}
+  .back .ru{ font-size:24px; font-weight:800;}
+  .back .emo{ font-size:40px;}
+  .speak{ margin-top:8px; background:rgba(255,255,255,.3); border:none; color:#fff;
+    font-weight:800; padding:6px 14px; border-radius:14px; cursor:pointer; font-family:inherit;}
+  .c0{background:var(--pink)} .c1{background:var(--blue)} .c2{background:var(--green)}
+  .c3{background:var(--orange)} .c4{background:var(--purple)} .c5{background:var(--red)}
+
+  /* MATCHING */
+  .board{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:10px;}
+  .col{ display:flex; flex-direction:column; gap:10px;}
+  .colh{ text-align:center; font-weight:800; color:var(--purple); margin-bottom:2px;}
+  .chip{ padding:14px; border-radius:16px; background:#fff; border:3px solid #eee;
+    font-size:20px; font-weight:800; text-align:center; cursor:pointer; transition:.15s;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);}
+  .chip .big{ font-size:34px;}
+  .chip.sel{ border-color:var(--purple); transform:scale(1.04); background:#f3ecff;}
+  .chip.done{ background:#d6f7e6; border-color:var(--green); color:#1c9b64;
+    cursor:default; opacity:.75;}
+  .chip.wrong{ animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+  /* QUIZ (possessives + adjectives) */
+  .q{ background:#fff; border-radius:22px; padding:22px; box-shadow:0 6px 16px rgba(0,0,0,.1);
+    text-align:center; border:4px solid #fff;}
+  .q .scene{ font-size:70px;}
+  .q .prompt{ font-size:22px; font-weight:800; margin:10px 0 4px;}
+  .q .promptru{ color:#9a90c4; font-weight:700; margin-bottom:14px; font-size:14px;}
+  .opts{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+  .opt{ border:none; font-family:inherit; font-weight:800; font-size:19px; cursor:pointer;
+    padding:14px 22px; border-radius:16px; background:var(--blue); color:#fff;
+    box-shadow:0 4px 0 rgba(0,0,0,.15); transition:transform .1s;}
+  .opt:active{ transform:translateY(3px);}
+  .opt.ok{ background:var(--green)!important;}
+  .opt.no{ background:var(--red)!important;}
+  .fb{ min-height:26px; font-weight:800; margin-top:12px; font-size:18px;}
+  .bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .score{ font-weight:800; color:var(--orange); font-size:18px;}
+  .stars{ font-size:20px;}
+  .next{ margin-top:14px; background:var(--purple); color:#fff; border:none; font-family:inherit;
+    font-weight:800; font-size:16px; padding:12px 24px; border-radius:16px; cursor:pointer;
+    box-shadow:0 4px 0 rgba(0,0,0,.15);}
+  .next:active{transform:translateY(3px);}
+  .win{ text-align:center; font-size:22px; font-weight:800; color:var(--green); padding:20px;}
+  .footer{ text-align:center; color:#b3aad6; font-size:12px; margin-top:26px; font-weight:700;}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:10px;left:10px;z-index:99;background:#8b5cf6;color:#fff;padding:8px 14px;border-radius:14px;text-decoration:none;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.15)">← Меню</a>
+  <h1>🎈 Play time! 🧸</h1>
+  <div class="sub">Super Minds 1 · Unit 2 · стр. 23–25 · игрушки, my/your/his/her, big red ball</div>
+
+  <div class="tabs">
+    <button class="tab t1 active" data-p="flash">🃏 Карточки</button>
+    <button class="tab t2" data-p="match">🧩 Найди пару</button>
+    <button class="tab t3" data-p="poss">👦 Чей это?</button>
+    <button class="tab t4" data-p="adj">🌈 Собери фразу</button>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <section class="panel active" id="flash">
+    <p style="text-align:center;color:#7a6fb0;font-weight:700;margin-bottom:12px;">Нажми на карточку, чтобы перевернуть 🔄 · 🔊 послушай слово</p>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <!-- MATCHING -->
+  <section class="panel" id="match">
+    <div class="bar">
+      <span class="score" id="mScore">Пар найдено: 0</span>
+      <button class="next" id="mReset">↺ Заново</button>
+    </div>
+    <p style="text-align:center;color:#7a6fb0;font-weight:700;margin-bottom:6px;">Соедини слово с картинкой!</p>
+    <div class="board">
+      <div class="col"><div class="colh">Слово</div><div id="mWords"></div></div>
+      <div class="col"><div class="colh">Картинка</div><div id="mPics"></div></div>
+    </div>
+  </section>
+
+  <!-- POSSESSIVES -->
+  <section class="panel" id="poss">
+    <div class="bar"><span class="score" id="pScore">⭐ 0</span><span class="stars" id="pStars"></span></div>
+    <div class="q" id="pQ"></div>
+  </section>
+
+  <!-- ADJECTIVE + NOUN -->
+  <section class="panel" id="adj">
+    <div class="bar"><span class="score" id="aScore">⭐ 0</span><span class="stars" id="aStars"></span></div>
+    <div class="q" id="aQ"></div>
+  </section>
+
+  <div class="footer">Made for @english.with_asya 💜 · англ + рус · для детей 6–8</div>
+
+<script>
+/* ---------- speech ---------- */
+function say(t){
+  try{ speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=.85; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- data (Super Minds 1, Unit 2 Play time!) ---------- */
+var TOYS=[
+  {en:'ball',ru:'мяч',e:'⚽'}, {en:'doll',ru:'кукла',e:'🪆'},
+  {en:'teddy bear',ru:'мишка',e:'🧸'}, {en:'car',ru:'машинка',e:'🚗'},
+  {en:'train',ru:'поезд',e:'🚂'}, {en:'plane',ru:'самолёт',e:'✈️'},
+  {en:'bike',ru:'велосипед',e:'🚲'}, {en:'kite',ru:'воздушный змей',e:'🪁'},
+  {en:'robot',ru:'робот',e:'🤖'}, {en:'boat',ru:'лодка',e:'⛵'},
+  {en:'computer game',ru:'компьютерная игра',e:'🎮'}, {en:'camera',ru:'фотоаппарат',e:'📷'}
+];
+
+/* ---------- flashcards ---------- */
+var cards=document.getElementById('cards');
+TOYS.forEach(function(t,i){
+  var d=document.createElement('div'); d.className='card';
+  d.innerHTML=
+    '<div class="inner">'+
+      '<div class="face front"><div class="emo">'+t.e+'</div><div class="en">'+t.en+'</div>'+
+        '<div class="hint">нажми 🔄</div></div>'+
+      '<div class="face back c'+(i%6)+'"><div class="ru">'+t.ru+'</div><div class="emo">'+t.e+'</div>'+
+        '<button class="speak">🔊 listen</button></div>'+
+    '</div>';
+  d.addEventListener('click',function(){ d.classList.toggle('flip'); if(d.classList.contains('flip'))say(t.en);});
+  d.querySelector('.speak').addEventListener('click',function(ev){ ev.stopPropagation(); say(t.en);});
+  cards.appendChild(d);
+});
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); document.getElementById(b.dataset.p).classList.add('active');
+  });
+});
+
+/* ---------- matching ---------- */
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var mSet, mFound, mSelWord;
+function buildMatch(){
+  mSet=shuffle(TOYS).slice(0,6); mFound=0; mSelWord=null;
+  document.getElementById('mScore').textContent='Пар найдено: 0';
+  var W=document.getElementById('mWords'), P=document.getElementById('mPics');
+  W.innerHTML=''; P.innerHTML='';
+  shuffle(mSet).forEach(function(t){
+    var c=document.createElement('div'); c.className='chip'; c.textContent=t.en; c.dataset.en=t.en;
+    c.onclick=function(){ if(c.classList.contains('done'))return; say(t.en);
+      document.querySelectorAll('#mWords .chip').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel'); mSelWord=c; };
+    W.appendChild(c);
+  });
+  shuffle(mSet).forEach(function(t){
+    var c=document.createElement('div'); c.className='chip'; c.innerHTML='<span class="big">'+t.e+'</span>'; c.dataset.en=t.en;
+    c.onclick=function(){ if(c.classList.contains('done'))return;
+      if(!mSelWord){ c.classList.add('wrong'); setTimeout(()=>c.classList.remove('wrong'),400); return;}
+      if(mSelWord.dataset.en===t.en){
+        c.classList.add('done'); mSelWord.classList.add('done'); mSelWord.classList.remove('sel'); mSelWord=null;
+        mFound++; document.getElementById('mScore').textContent='Пар найдено: '+mFound;
+        say(t.en);
+        if(mFound===mSet.length){ setTimeout(function(){ document.getElementById('mScore').textContent='🎉 Молодец! Все пары!';},300);}
+      }else{
+        c.classList.add('wrong'); var w=mSelWord; w.classList.add('wrong');
+        setTimeout(function(){c.classList.remove('wrong');w.classList.remove('wrong');},400);
+      }};
+    P.appendChild(c);
+  });
+}
+document.getElementById('mReset').onclick=buildMatch;
+buildMatch();
+
+/* ---------- possessives quiz ---------- */
+var POSS=[
+  {e:'👦⚽',prompt:"It's ___ ball. (Tom)",ru:'Это мяч Тома',ans:'his',opts:['his','her']},
+  {e:'👧🪆',prompt:"It's ___ doll. (Lucy)",ru:'Это кукла Люси',ans:'her',opts:['his','her']},
+  {e:'🙋‍♀️🧸',prompt:"It's ___ teddy. (я)",ru:'Это мой мишка',ans:'my',opts:['my','your']},
+  {e:'👉🚗',prompt:"It's ___ car. (ты)",ru:'Это твоя машинка',ans:'your',opts:['my','your']},
+  {e:'👦🚲',prompt:"It's ___ bike. (Ben)",ru:'Это велосипед Бена',ans:'his',opts:['his','her']},
+  {e:'👧🪁',prompt:"It's ___ kite. (Anna)",ru:'Это змей Анны',ans:'her',opts:['his','her']},
+  {e:'🙋🤖',prompt:"It's ___ robot. (я)",ru:'Это мой робот',ans:'my',opts:['my','your']},
+  {e:'👉⛵',prompt:"It's ___ boat. (ты)",ru:'Это твоя лодка',ans:'your',opts:['my','your']}
+];
+/* ---------- adjective + noun quiz ---------- */
+var ADJ=[
+  {e:'🔴⚽',prompt:'a ___ ball',ru:'красный мяч',ans:'red',opts:['red','blue','green']},
+  {e:'🔵🚗',prompt:'a ___ car',ru:'синяя машинка',ans:'blue',opts:['red','blue','yellow']},
+  {e:'🟡🪁',prompt:'a ___ kite',ru:'жёлтый змей',ans:'yellow',opts:['yellow','green','red']},
+  {e:'🟢🚂',prompt:'a ___ train',ru:'зелёный поезд',ans:'green',opts:['green','blue','red']},
+  {e:'🧸➕',prompt:'a ___ teddy',ru:'большой мишка',ans:'big',opts:['big','small']},
+  {e:'🚗➖',prompt:'a ___ car',ru:'маленькая машинка',ans:'small',opts:['big','small']},
+  {e:'🤖✨',prompt:'a ___ robot',ru:'новый робот',ans:'new',opts:['new','old']},
+  {e:'⛵🕰️',prompt:'an ___ boat',ru:'старая лодка',ans:'old',opts:['new','old']}
+];
+
+function runQuiz(cfg){
+  var idx=0, score=0, data=shuffle(cfg.data);
+  var Q=document.getElementById(cfg.q), S=document.getElementById(cfg.score), St=document.getElementById(cfg.stars);
+  function stars(){St.textContent='⭐'.repeat(score);}
+  function render(){
+    if(idx>=data.length){
+      Q.innerHTML='<div class="win">🏆 Ура! '+score+' из '+data.length+'!<br>'+
+        (score===data.length?'Идеально! 💯':'Хорошая работа! 👏')+
+        '</div><button class="next" id="'+cfg.q+'R">↺ Ещё раз</button>';
+      document.getElementById(cfg.q+'R').onclick=function(){idx=0;score=0;S.textContent='⭐ 0';stars();data=shuffle(cfg.data);render();};
+      return;
+    }
+    var it=data[idx];
+    Q.innerHTML='<div class="scene">'+it.e+'</div>'+
+      '<div class="prompt">'+it.prompt+'</div>'+
+      '<div class="promptru">'+it.ru+'</div>'+
+      '<div class="opts"></div><div class="fb"></div>';
+    var opts=Q.querySelector('.opts'), fb=Q.querySelector('.fb');
+    shuffle(it.opts).forEach(function(o){
+      var b=document.createElement('button'); b.className='opt'; b.textContent=o;
+      b.onclick=function(){
+        Array.from(opts.children).forEach(x=>x.disabled=true);
+        if(o===it.ans){ b.classList.add('ok'); score++; S.textContent='⭐ '+score; stars();
+          fb.textContent='✅ '+it.prompt.replace('___',it.ans); fb.style.color='#37c98a';
+          say(it.prompt.replace('___',it.ans).replace(/[()]/g,''));
+        }else{
+          b.classList.add('no'); fb.textContent='❌ Правильно: '+it.ans; fb.style.color='#ff5c7a';
+          Array.from(opts.children).forEach(function(x){if(x.textContent===it.ans)x.classList.add('ok');});
+        }
+        var n=document.createElement('button'); n.className='next'; n.textContent='Дальше →';
+        n.onclick=function(){idx++;render();}; fb.after(n);
+      };
+      opts.appendChild(b);
+    });
+  }
+  S.textContent='⭐ 0'; stars(); render();
+}
+runQuiz({data:POSS,q:'pQ',score:'pScore',stars:'pStars'});
+runQuiz({data:ADJ,q:'aQ',score:'aScore',stars:'aStars'});
+</script>
+</body>
+</html>
