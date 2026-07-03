@@ -1,58 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speaking Wheel · Play time! 🎡</title>
+<title>Колесо-говорилка · Play time!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{--purple:#8b5cf6;--pink:#ff6ba6;--ink:#2b2450}
-  body{font-family:'Baloo 2','Comic Sans MS','Segoe UI',sans-serif;color:var(--ink);
-    background:linear-gradient(135deg,#ffe9f3,#e7f0ff 50%,#e9fff4);min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;padding:16px;text-align:center}
-  a.home{position:fixed;top:10px;left:10px;background:var(--purple);color:#fff;padding:8px 14px;
-    border-radius:14px;text-decoration:none;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.15)}
-  h1{color:var(--purple);font-size:clamp(22px,5vw,34px);text-shadow:2px 2px 0 #fff;margin:36px 0 2px}
-  .sub{color:#7a6fb0;font-weight:700;font-size:14px;margin-bottom:14px}
+  :root{--paper:#FBF7EF;--ink:#4a3f35;--muted:#8a7f70;--coral:#D97757;--coral-d:#C4643F;--sage:#94A67A;--line:#EFE7DA}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
+    background:radial-gradient(1200px 480px at 15% -8%, #FBE7DE 0%, rgba(251,231,222,0) 60%),
+      radial-gradient(1100px 460px at 100% 0%, #E6EDE4 0%, rgba(230,237,228,0) 55%), var(--paper);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;text-align:center}
+  a.home{position:fixed;top:12px;left:12px;background:var(--coral);color:#fff;padding:9px 15px;
+    border-radius:14px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 rgba(150,90,60,.25)}
+  h1{font-family:'Baloo 2',cursive;color:var(--coral-d);font-size:clamp(24px,5vw,36px);margin:40px 0 2px}
+  .sub{color:var(--muted);font-weight:700;font-size:14px;margin-bottom:14px;max-width:460px}
+  .modes{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;max-width:520px}
+  .modes button{border:1px solid var(--line);font-family:inherit;font-weight:800;font-size:13px;padding:9px 13px;
+    border-radius:13px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 8px rgba(150,120,90,.08)}
+  .modes button.on{background:var(--coral);color:#fff;border-color:var(--coral)}
   .stage{position:relative;width:330px;height:330px;max-width:92vw;max-height:92vw}
-  canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 8px 24px rgba(0,0,0,.15);background:#fff}
-  .pin{position:absolute;top:-6px;left:50%;transform:translateX(-50%);
-    width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;
-    border-top:26px solid var(--pink);filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));z-index:5}
-  .hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;
-    border-radius:50%;background:#fff;border:4px solid var(--purple);display:flex;align-items:center;
-    justify-content:center;font-size:24px;z-index:4}
-  button.spin{margin-top:16px;background:var(--pink);color:#fff;border:none;font-family:inherit;
-    font-weight:800;font-size:20px;padding:14px 34px;border-radius:20px;cursor:pointer;
-    box-shadow:0 5px 0 rgba(0,0,0,.15)}
-  button.spin:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
-  button.spin:disabled{filter:grayscale(.5);opacity:.7}
-  .result{margin-top:16px;min-height:120px;background:#fff;border-radius:20px;border:4px solid #fff;
-    box-shadow:0 6px 16px rgba(0,0,0,.1);padding:16px 20px;max-width:440px;width:92vw;
-    opacity:0;transform:scale(.9);transition:.25s}
+  canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 10px 26px rgba(150,110,80,.16);background:#fff}
+  .pin{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:0;height:0;
+    border-left:16px solid transparent;border-right:16px solid transparent;border-top:26px solid var(--coral);
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));z-index:5}
+  .hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;
+    background:#fff;border:4px solid var(--coral);display:flex;align-items:center;justify-content:center;font-size:24px;z-index:4}
+  button.spin{margin-top:16px;background:var(--coral);color:#fff;border:none;font-family:'Baloo 2',cursive;
+    font-weight:700;font-size:20px;padding:13px 34px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 rgba(150,90,60,.28)}
+  button.spin:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(150,90,60,.28)}
+  button.spin:disabled{filter:grayscale(.4);opacity:.7}
+  .result{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:20px;
+    box-shadow:0 8px 20px rgba(150,120,90,.12);padding:18px 22px;max-width:460px;width:92vw;
+    opacity:0;transform:scale(.92);transition:.25s}
   .result.show{opacity:1;transform:scale(1)}
-  .result .emo{font-size:52px}
-  .result .say{font-size:24px;font-weight:800;margin:6px 0 2px}
-  .result .ru{color:#9a90c4;font-weight:700;font-size:13px}
-  .listen{margin-top:10px;background:var(--purple);color:#fff;border:none;font-family:inherit;
-    font-weight:800;padding:8px 18px;border-radius:14px;cursor:pointer}
-  .modes{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-  .modes button{border:none;font-family:inherit;font-weight:800;font-size:13px;padding:8px 12px;
-    border-radius:12px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.1)}
-  .modes button.on{background:var(--purple);color:#fff}
-  .foot{color:#b3aad6;font-size:12px;font-weight:700;margin-top:20px}
+  .result .emo{font-size:58px;line-height:1}
+  .result .task{font-size:18px;font-weight:800;margin:8px 0 4px;color:var(--coral-d)}
+  .tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .tag{font-size:13px;font-weight:800;color:#fff;border-radius:10px;padding:4px 11px}
+  .tag.who{background:var(--coral)} .tag.col{background:var(--sage)} .tag.sz{background:#C99A5B}
+  .hint{color:var(--muted);font-weight:700;font-size:12.5px;margin-top:10px}
+  footer{color:#c3b8a6;font-size:12px;font-weight:700;margin-top:22px}
 </style>
 </head>
 <body>
   <a class="home" href="index.html">← Меню</a>
-  <h1>🎡 Speaking Wheel</h1>
-  <div class="sub">Крути колесо и говори по-английски! · Super Minds 1 · Unit 2</div>
+  <h1>🎡 Колесо-говорилка</h1>
+  <div class="sub">Крути колесо и составь предложение по-английски сам. Скажи вслух — учитель проверит!</div>
 
   <div class="modes" id="modes">
-    <button data-m="name" class="on">It's a ball</button>
-    <button data-m="poss">It's my ball</button>
-    <button data-m="adj">a big red ball</button>
-    <button data-m="like">I like the ball</button>
+    <button data-m="name" class="on">Что это?</button>
+    <button data-m="poss">Чей? (мой/твой/его/её)</button>
+    <button data-m="adj">Какой? (цвет, размер)</button>
+    <button data-m="like">Мне нравится…</button>
   </div>
 
   <div class="stage">
@@ -65,32 +68,29 @@
 
   <div class="result" id="result">
     <div class="emo" id="rEmo">👆</div>
-    <div class="say" id="rSay">Нажми «Крути!»</div>
-    <div class="ru" id="rRu"></div>
-    <button class="listen" id="listen" style="display:none">🔊 listen</button>
+    <div class="task" id="rTask">Нажми «Крути!»</div>
+    <div class="tags" id="rTags"></div>
+    <div class="hint" id="rHint"></div>
   </div>
 
-  <div class="foot">@english.with_asya 💜</div>
+  <footer>@english.with_asya</footer>
 
 <script>
 var TOYS=[
- {en:'ball',ru:'мяч',e:'⚽'},{en:'doll',ru:'кукла',e:'🪆'},
- {en:'teddy bear',ru:'мишка',e:'🧸'},{en:'car',ru:'машинка',e:'🚗'},
- {en:'train',ru:'поезд',e:'🚂'},{en:'plane',ru:'самолёт',e:'✈️'},
- {en:'bike',ru:'велосипед',e:'🚲'},{en:'kite',ru:'змей',e:'🪁'},
- {en:'robot',ru:'робот',e:'🤖'},{en:'boat',ru:'лодка',e:'⛵'},
- {en:'game',ru:'игра',e:'🎮'},{en:'camera',ru:'фотоаппарат',e:'📷'}
+ {ru:'мяч',e:'⚽'},{ru:'кукла',e:'🪆'},{ru:'мишка',e:'🧸'},{ru:'машинка',e:'🚗'},
+ {ru:'поезд',e:'🚂'},{ru:'самолёт',e:'✈️'},{ru:'велосипед',e:'🚲'},{ru:'воздушный змей',e:'🪁'},
+ {ru:'робот',e:'🤖'},{ru:'лодка',e:'⛵'},{ru:'игра',e:'🎮'},{ru:'фотоаппарат',e:'📷'}
 ];
-var COLORS=['#ff6ba6','#3ba7ff','#37c98a','#ffd23f','#ff924c','#8b5cf6'];
-var ADJ=['big','small','red','blue','green','yellow','new','old'];
-var ADJRU={big:'большой',small:'маленький',red:'красный',blue:'синий',green:'зелёный',yellow:'жёлтый',new:'новый',old:'старый'};
+var COLORS=['#D97757','#7C9CB5','#94A67A','#E0A458','#6FA8A0','#C99A5B'];
+var OWNERS=['я','ты','он','она'];
+var RU_COL=['красный','синий','зелёный','жёлтый','оранжевый'];
+var RU_SZ=['большой','маленький','новый','старый'];
 
 var cv=document.getElementById('wheel'),ctx=cv.getContext('2d');
 var N=TOYS.length,seg=2*Math.PI/N,rot=0,spinning=false;
 var DPR=window.devicePixelRatio||1;
 cv.width=330*DPR;cv.height=330*DPR;ctx.scale(DPR,DPR);
 var R=165,cx=165,cy=165;
-
 function draw(){
   ctx.clearRect(0,0,330,330);
   for(var i=0;i<N;i++){
@@ -98,7 +98,6 @@ function draw(){
     ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R-6,a0,a1);ctx.closePath();
     ctx.fillStyle=COLORS[i%COLORS.length];ctx.fill();
     ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
-    // emoji
     ctx.save();ctx.translate(cx,cy);ctx.rotate(a0+seg/2);
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='26px serif';
     ctx.fillText(TOYS[i].e,R*0.62,0);ctx.restore();
@@ -112,46 +111,65 @@ document.querySelectorAll('#modes button').forEach(function(b){
   b.onclick=function(){document.querySelectorAll('#modes button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');mode=b.dataset.m;};
 });
-
-function say(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 
-function prompt(t){
-  if(mode==='name') return {en:"It's a "+t.en+".", ru:'Это '+t.ru+'.'};
-  if(mode==='poss'){var p=pick(['my','your','his','her']);return {en:"It's "+p+" "+t.en+".", ru:'('+p+') '+t.ru};}
-  if(mode==='adj'){var a=pick(ADJ);return {en:"a "+a+" "+t.en, ru:ADJRU[a]+' '+t.ru};}
-  return {en:"I like the "+t.en+".", ru:'Мне нравится '+t.ru+'.'};
-}
+// --- игровые звуки (Web Audio, без файлов) ---
+var AC=null;
+function actx(){ if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} return AC; }
+function tick(v){ var c=actx(); if(!c)return; var o=c.createOscillator(),g=c.createGain();
+  o.type='square'; o.frequency.value=1300; o.connect(g); g.connect(c.destination);
+  var t=c.currentTime; g.gain.setValueAtTime(0.14*(v||1),t);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.035); o.start(t); o.stop(t+0.05); }
+function ding(){ var c=actx(); if(!c)return; [660,880].forEach(function(f,i){
+  var o=c.createOscillator(),g=c.createGain(); o.type='sine'; o.frequency.value=f;
+  o.connect(g); g.connect(c.destination); var t=c.currentTime+i*0.11;
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.22,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.5); o.start(t); o.stop(t+0.55); }); }
 
 var res=document.getElementById('result'),spinBtn=document.getElementById('spin');
 function show(i){
-  var t=TOYS[i],p=prompt(t);
+  var t=TOYS[i];
   document.getElementById('rEmo').textContent=t.e;
-  document.getElementById('rSay').textContent=p.en;
-  document.getElementById('rRu').textContent=p.ru;
-  var lb=document.getElementById('listen');lb.style.display='inline-block';
-  lb.onclick=function(){say(p.en);};
+  var task='', tags='', hint='Скажи предложение по-английски вслух.';
+  if(mode==='name'){
+    task='Что это за игрушка?';
+    hint='Составь предложение: It’s a … (назови игрушку по-английски).';
+  } else if(mode==='poss'){
+    var o=pick(OWNERS);
+    task='Чья это игрушка?';
+    tags='<span class="tag who">хозяин: '+o+'</span>';
+    hint='Составь предложение: чей + игрушка (мой / твой / его / её).';
+  } else if(mode==='adj'){
+    var c=pick(RU_COL); task='Опиши игрушку.';
+    tags='<span class="tag col">'+c+'</span>';
+    if(Math.random()<0.5){var s=pick(RU_SZ);tags='<span class="tag sz">'+s+'</span>'+tags;}
+    hint='Составь предложение: размер + цвет + игрушка.';
+  } else {
+    task='Что тебе нравится?';
+    hint='Составь предложение: I like the … (назови игрушку).';
+  }
+  document.getElementById('rTask').textContent=task;
+  document.getElementById('rTags').innerHTML=tags;
+  document.getElementById('rHint').textContent=hint;
   res.classList.add('show');
-  say(p.en);
 }
-
 function winnerIndex(){
-  // pointer at top = 270deg (canvas y-down). local angle a = (270 - rotDeg) mod 360
   var rotDeg=(rot*180/Math.PI)%360; if(rotDeg<0)rotDeg+=360;
   var a=(270-rotDeg)%360; if(a<0)a+=360;
   return Math.floor(a/(360/N))%N;
 }
-
 spinBtn.onclick=function(){
   if(spinning)return;spinning=true;spinBtn.disabled=true;res.classList.remove('show');
+  var c=actx(); if(c&&c.state==='suspended'){c.resume();}
   var start=rot, spins=5+Math.random()*3, target=start+spins*2*Math.PI+Math.random()*2*Math.PI;
-  var dur=3600, t0=performance.now();
+  var dur=3600, t0=performance.now(), lastSeg=Math.floor(rot/seg);
   function frame(now){
-    var p=Math.min((now-t0)/dur,1);
-    var e=1-Math.pow(1-p,3); // ease-out cubic
+    var p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
     rot=start+(target-start)*e; draw();
+    var s=Math.floor(rot/seg);
+    if(s!==lastSeg){lastSeg=s;tick(0.5+0.5*(1-p));}   // тиканье, тише к концу
     if(p<1){requestAnimationFrame(frame);}
-    else{spinning=false;spinBtn.disabled=false;show(winnerIndex());}
+    else{spinning=false;spinBtn.disabled=false;ding();show(winnerIndex());}
   }
   requestAnimationFrame(frame);
 };
