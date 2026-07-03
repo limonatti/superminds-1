@@ -143,6 +143,11 @@ function say(t){
     var u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=.85; speechSynthesis.speak(u);
   }catch(e){}
 }
+/* ---------- проверочные звуки ---------- */
+var _ac=null;
+function _actx(){ if(!_ac){try{_ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} if(_ac&&_ac.state==='suspended')_ac.resume(); return _ac; }
+function sfxOK(){ var c=_actx(); if(!c)return; [[880,0],[1245,0.10]].forEach(function(p){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=p[0];o.connect(g);g.connect(c.destination);var t=c.currentTime+p[1];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.3);o.start(t);o.stop(t+0.32);}); }
+function sfxNo(){ var c=_actx(); if(!c)return; var o=c.createOscillator(),g=c.createGain();o.type='square';var t=c.currentTime;o.frequency.setValueAtTime(220,t);o.frequency.exponentialRampToValueAtTime(110,t+0.2);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0.18,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.24);o.start(t);o.stop(t+0.26); }
 
 /* ---------- data (Super Minds 1, Unit 2 Play time!) ---------- */
 var TOYS=[
@@ -201,9 +206,10 @@ function buildMatch(){
       if(mSelWord.dataset.en===t.en){
         c.classList.add('done'); mSelWord.classList.add('done'); mSelWord.classList.remove('sel'); mSelWord=null;
         mFound++; document.getElementById('mScore').textContent='Пар найдено: '+mFound;
-        say(t.en);
+        sfxOK(); say(t.en);
         if(mFound===mSet.length){ setTimeout(function(){ document.getElementById('mScore').textContent='🎉 Молодец! Все пары!';},300);}
       }else{
+        sfxNo();
         c.classList.add('wrong'); var w=mSelWord; w.classList.add('wrong');
         setTimeout(function(){c.classList.remove('wrong');w.classList.remove('wrong');},400);
       }};
@@ -258,11 +264,11 @@ function runQuiz(cfg){
       var b=document.createElement('button'); b.className='opt'; b.textContent=o;
       b.onclick=function(){
         Array.from(opts.children).forEach(x=>x.disabled=true);
-        if(o===it.ans){ b.classList.add('ok'); score++; S.textContent='⭐ '+score; stars();
+        if(o===it.ans){ b.classList.add('ok'); score++; S.textContent='⭐ '+score; stars(); sfxOK();
           fb.textContent='✅ '+it.prompt.replace('___',it.ans); fb.style.color='#37c98a';
           say(it.prompt.replace('___',it.ans).replace(/[()]/g,''));
         }else{
-          b.classList.add('no'); fb.textContent='❌ Правильно: '+it.ans; fb.style.color='#ff5c7a';
+          b.classList.add('no'); sfxNo(); fb.textContent='❌ Правильно: '+it.ans; fb.style.color='#ff5c7a';
           Array.from(opts.children).forEach(function(x){if(x.textContent===it.ans)x.classList.add('ok');});
         }
         var n=document.createElement('button'); n.className='next'; n.textContent='Дальше →';
