@@ -3,64 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Колесо-говорилка · Play time!</title>
+<title>Колесо-говорилка · Pet show</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{--paper:#f4e9d8;--ink:#1c1310;--muted:#5a4f47;--coral:#7c2340;--coral-d:#7c2340;--sage:#5f8f5a;--line:#e3d3ba}
-  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
-    background:#f4e9d8;
+  :root{--paper:#f4e9d8;--ink:#1c1310;--muted:#5a4f47;--accent:#7c2340;--sage:#5f8f5a;--line:#e3d3ba}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#f4e9d8;
     min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;text-align:center}
-  a.home{position:fixed;top:12px;left:12px;background:var(--coral);color:#fff;padding:9px 16px;
+  a.home{position:fixed;top:12px;left:12px;background:var(--accent);color:#fff;padding:9px 16px;
     border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
-  h1{font-family:'Fredoka',sans-serif;color:var(--coral-d);font-size:clamp(24px,5vw,36px);margin:40px 0 2px}
+  h1{font-family:'Fredoka',sans-serif;color:var(--accent);font-size:clamp(24px,5vw,36px);margin:40px 0 2px}
   .sub{color:var(--muted);font-weight:700;font-size:14px;margin-bottom:14px;max-width:460px}
   .modes{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;max-width:520px}
   .modes button{border:1px solid var(--line);font-family:inherit;font-weight:800;font-size:13px;padding:9px 13px;
     border-radius:13px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 8px rgba(150,120,90,.08)}
-  .modes button.on{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .modes button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .stage{position:relative;width:330px;height:330px;max-width:92vw;max-height:92vw}
   canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 10px 26px rgba(150,110,80,.16);background:#fff}
   .pin{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:0;height:0;
-    border-left:16px solid transparent;border-right:16px solid transparent;border-top:26px solid var(--coral);
+    border-left:16px solid transparent;border-right:16px solid transparent;border-top:26px solid var(--accent);
     filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));z-index:5}
   .hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;
-    background:#fff;border:4px solid var(--coral);display:flex;align-items:center;justify-content:center;font-size:24px;z-index:4}
-  button.spin{margin-top:16px;background:var(--coral);color:#fff;border:none;font-family:'Fredoka',sans-serif;
-    font-weight:700;font-size:20px;padding:13px 34px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 rgba(150,90,60,.28)}
-  button.spin:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(150,90,60,.28)}
+    background:#fff;border:4px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:24px;z-index:4}
+  button.spin{margin-top:16px;background:var(--accent);color:#fff;border:none;font-family:'Fredoka',sans-serif;
+    font-weight:700;font-size:20px;padding:13px 34px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 #5c1730}
+  button.spin:active{transform:translateY(4px);box-shadow:0 1px 0 #5c1730}
   button.spin:disabled{filter:grayscale(.4);opacity:.7}
   .result{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:20px;
     box-shadow:0 8px 20px rgba(150,120,90,.12);padding:18px 22px;max-width:460px;width:92vw;
     opacity:0;transform:scale(.92);transition:.25s}
   .result.show{opacity:1;transform:scale(1)}
   .result .emo{font-size:58px;line-height:1}
-  .result .task{font-size:18px;font-weight:800;margin:8px 0 4px;color:var(--coral-d)}
+  .result .task{font-size:18px;font-weight:800;margin:8px 0 4px;color:var(--accent)}
   .tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
   .tag{font-size:13px;font-weight:800;color:#fff;border-radius:10px;padding:4px 11px}
-  .tag.who{background:var(--coral)} .tag.col{background:var(--sage)} .tag.sz{background:#C99A5B}
+  .tag.a{background:var(--accent)} .tag.b{background:var(--sage)}
   .hint{color:var(--muted);font-weight:700;font-size:12.5px;margin-top:10px}
   footer{color:#c3b8a6;font-size:12px;font-weight:700;margin-top:22px}
 </style>
 </head>
 <body>
-  <a class="home" href="unit2.html">← Меню</a>
+  <a class="home" href="unit3.html">← Меню</a>
   <h1>🎡 Колесо-говорилка</h1>
-  <div class="sub">Крути колесо и составь предложение по-английски сам. Скажи вслух — учитель проверит!</div>
+  <div class="sub">Pet show · крути колесо и составь предложение сам. Скажи вслух!</div>
 
   <div class="modes" id="modes">
     <button data-m="name" class="on">Что это?</button>
-    <button data-m="poss">Чей? (мой/твой/его/её)</button>
-    <button data-m="adj">Какой? (цвет, размер)</button>
-    <button data-m="like">Мне нравится…</button>
+    <button data-m="where">Где? (in/on/under)</button>
+    <button data-m="like">Нравится?</button>
   </div>
 
   <div class="stage">
     <div class="pin"></div>
     <canvas id="wheel" width="330" height="330"></canvas>
-    <div class="hub">🎈</div>
+    <div class="hub">🐾</div>
   </div>
 
   <button class="spin" id="spin">Крути! 🎯</button>
@@ -75,18 +72,17 @@
   <footer>@english.with_asya</footer>
 
 <script>
-var TOYS=[
- {ru:'мяч',e:'⚽'},{ru:'кукла',e:'🪆'},{ru:'мишка',e:'🧸'},{ru:'машинка',e:'🚗'},
- {ru:'поезд',e:'🚂'},{ru:'самолёт',e:'✈️'},{ru:'велосипед',e:'🚲'},{ru:'воздушный змей',e:'🪁'},
- {ru:'робот',e:'🤖'},{ru:'лодка',e:'⛵'},{ru:'игра',e:'🎮'},{ru:'фотоаппарат',e:'📷'}
+var ANIMALS=[
+ {ru:'кошка',e:'🐱'},{ru:'собака',e:'🐶'},{ru:'лягушка',e:'🐸'},{ru:'утка',e:'🦆'},
+ {ru:'рыбка',e:'🐟'},{ru:'птица',e:'🐦'},{ru:'паук',e:'🕷️'},{ru:'ящерица',e:'🦎'},
+ {ru:'крыса',e:'🐀'},{ru:'слон',e:'🐘'},{ru:'ослик',e:'🫏'},{ru:'кролик',e:'🐰'}
 ];
-var COLORS=['#D97757','#7C9CB5','#94A67A','#E0A458','#6FA8A0','#C99A5B'];
-var OWNERS=['я','ты','он','она'];
-var RU_COL=['красный','синий','зелёный','жёлтый','оранжевый'];
-var RU_SZ=['большой','маленький','новый','старый'];
+var COLORS=['#7c2340','#b5654a','#5f8f5a','#c9843b','#6FA8A0','#9a5b7a'];
+var PREP=[['in','в'],['on','на'],['under','под']];
+var OBJ=[['box','коробка'],['chair','стул'],['bag','сумка'],['tree','дерево']];
 
 var cv=document.getElementById('wheel'),ctx=cv.getContext('2d');
-var N=TOYS.length,seg=2*Math.PI/N,rot=0,spinning=false;
+var N=ANIMALS.length,seg=2*Math.PI/N,rot=0,spinning=false;
 var DPR=window.devicePixelRatio||1;
 cv.width=330*DPR;cv.height=330*DPR;ctx.scale(DPR,DPR);
 var R=165,cx=165,cy=165;
@@ -99,7 +95,7 @@ function draw(){
     ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
     ctx.save();ctx.translate(cx,cy);ctx.rotate(a0+seg/2);
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='26px serif';
-    ctx.fillText(TOYS[i].e,R*0.62,0);ctx.restore();
+    ctx.fillText(ANIMALS[i].e,R*0.62,0);ctx.restore();
   }
   ctx.beginPath();ctx.arc(cx,cy,R-6,0,2*Math.PI);ctx.strokeStyle='#fff';ctx.lineWidth=6;ctx.stroke();
 }
@@ -112,7 +108,6 @@ document.querySelectorAll('#modes button').forEach(function(b){
 });
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 
-// --- игровые звуки (Web Audio, без файлов) ---
 var AC=null;
 function actx(){ if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} return AC; }
 function tick(v){ var c=actx(); if(!c)return; var o=c.createOscillator(),g=c.createGain();
@@ -127,25 +122,22 @@ function ding(){ var c=actx(); if(!c)return; [660,880].forEach(function(f,i){
 
 var res=document.getElementById('result'),spinBtn=document.getElementById('spin');
 function show(i){
-  var t=TOYS[i];
-  document.getElementById('rEmo').textContent=t.e;
-  var task='', tags='', hint='Скажи предложение по-английски вслух.';
+  var a=ANIMALS[i];
+  document.getElementById('rEmo').textContent=a.e;
+  var task='', tags='', hint='';
   if(mode==='name'){
-    task='Что это за игрушка?';
-    hint='Составь предложение: It’s a … (назови игрушку по-английски).';
-  } else if(mode==='poss'){
-    var o=pick(OWNERS);
-    task='Чья это игрушка?';
-    tags='<span class="tag who">хозяин: '+o+'</span>';
-    hint='Составь предложение: чей + игрушка (мой / твой / его / её).';
-  } else if(mode==='adj'){
-    var c=pick(RU_COL); task='Опиши игрушку.';
-    tags='<span class="tag col">'+c+'</span>';
-    if(Math.random()<0.5){var s=pick(RU_SZ);tags='<span class="tag sz">'+s+'</span>'+tags;}
-    hint='Составь предложение: размер + цвет + игрушка.';
+    task='Что это за животное?';
+    hint='Составь предложение: It’s a … (назови по-английски).';
+  } else if(mode==='where'){
+    var p=pick(PREP), o=pick(OBJ);
+    task='Где животное?';
+    tags='<span class="tag a">'+p[1]+'</span><span class="tag b">'+o[1]+'</span>';
+    hint='Составь: It’s '+'___'+' the '+'___'+'. (in / on / under + предмет)';
   } else {
-    task='Что тебе нравится?';
-    hint='Составь предложение: I like the … (назови игрушку).';
+    var lk=pick([['👍','нравится'],['👎','не нравится']]);
+    task='Скажи: '+lk[1];
+    tags='<span class="tag a">'+lk[0]+' '+lk[1]+'</span>';
+    hint='I like … / I don’t like … (+ животное во мн. числе).';
   }
   document.getElementById('rTask').textContent=task;
   document.getElementById('rTags').innerHTML=tags;
@@ -166,7 +158,7 @@ spinBtn.onclick=function(){
     var p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
     rot=start+(target-start)*e; draw();
     var s=Math.floor(rot/seg);
-    if(s!==lastSeg){lastSeg=s;tick(0.5+0.5*(1-p));}   // тиканье, тише к концу
+    if(s!==lastSeg){lastSeg=s;tick(0.5+0.5*(1-p));}
     if(p<1){requestAnimationFrame(frame);}
     else{spinning=false;spinBtn.disabled=false;ding();show(winnerIndex());}
   }

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карточки и игры · Pet show</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{--accent:#7c2340;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
+    --ink:#1c1310;--muted:#5a4f47;--line:#e3d3ba}
+  body{font-family:'Nunito','Segoe UI',sans-serif;background:#f4e9d8;color:var(--ink);min-height:100vh;padding:16px}
+  a.home{position:fixed;top:10px;left:10px;z-index:99;background:var(--accent);color:#fff;padding:9px 16px;
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
+  h1{text-align:center;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,42px);color:var(--accent);margin-bottom:2px}
+  .sub{text-align:center;color:var(--muted);font-weight:700;margin-bottom:16px;font-size:15px}
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  .tab{border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:800;font-size:14px;
+    padding:11px 16px;border-radius:14px;color:var(--ink);background:#fff;box-shadow:0 3px 8px rgba(150,120,90,.08)}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .panel{display:none;max-width:920px;margin:0 auto}
+  .panel.active{display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .card{perspective:1000px;height:180px;cursor:pointer}
+  .inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+  .card.flip .inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12);border:4px solid #fff}
+  .front{background:#fff}
+  .front .emo{font-size:64px} .front .en{font-size:22px;font-weight:800;margin-top:6px}
+  .front .hint{font-size:12px;color:#b9ad9c;margin-top:6px}
+  .back{transform:rotateY(180deg);color:#fff;flex-direction:column;gap:4px}
+  .back .ru{font-size:22px;font-weight:800} .back .emo{font-size:40px}
+  .speak{margin-top:8px;background:rgba(255,255,255,.25);border:none;color:#fff;font-weight:800;padding:6px 14px;border-radius:14px;cursor:pointer;font-family:inherit}
+  .c0{background:var(--accent)}.c1{background:var(--terra)}.c2{background:var(--olive)}
+  .c3{background:var(--mustard)}.c4{background:var(--teal)}.c5{background:var(--plum)}
+  .board{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
+  .col{display:flex;flex-direction:column;gap:10px}
+  .colh{text-align:center;font-weight:800;color:var(--accent);margin-bottom:2px}
+  .chip{padding:14px;border-radius:16px;background:#fff;border:3px solid #eee;font-size:20px;font-weight:800;
+    text-align:center;cursor:pointer;transition:.15s;box-shadow:0 3px 8px rgba(0,0,0,.08)}
+  .chip .big{font-size:34px}
+  .chip.sel{border-color:var(--accent);transform:scale(1.04);background:#f7ecef}
+  .chip.done{background:#dff0dc;border-color:var(--olive);color:#3c7a3a;cursor:default;opacity:.75}
+  .chip.wrong{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .score{font-weight:800;color:var(--mustard);font-size:18px}
+  .q{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 16px rgba(0,0,0,.1);text-align:center;border:4px solid #fff}
+  .scene{position:relative;width:150px;height:150px;margin:6px auto 8px}
+  .scene .box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:66px}
+  .scene .an{position:absolute;left:50%;transform:translateX(-50%);font-size:40px}
+  .an.on{top:-6px} .an.in{top:50%;transform:translate(-50%,-50%)} .an.under{bottom:-6px}
+  .prompt{font-size:20px;font-weight:800;margin:6px 0 2px}
+  .promptru{color:var(--muted);font-weight:700;margin-bottom:12px;font-size:13px}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .opt{border:none;font-family:inherit;font-weight:800;font-size:19px;cursor:pointer;padding:13px 22px;border-radius:16px;
+    background:var(--terra);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s}
+  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#c0392b!important}
+  .fb{min-height:26px;font-weight:800;margin-top:12px;font-size:18px}
+  .next{margin-top:14px;background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:16px;
+    padding:11px 24px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+  .reset{background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:14px;padding:9px 16px;border-radius:14px;cursor:pointer;box-shadow:0 3px 0 #5c1730}
+  .footer{text-align:center;color:#c3b8a6;font-size:12px;margin-top:26px;font-weight:700}
+</style>
+</head>
+<body>
+<a class="home" href="unit3.html">← Меню</a>
+<h1>🐾 Pet show</h1>
+<div class="sub">Super Minds 1 · Unit 2… Unit 3 · животные · in/on/under · I like</div>
+
+<div class="tabs">
+  <button class="tab active" data-p="flash">🃏 Карточки</button>
+  <button class="tab" data-p="match">🧩 Найди пару</button>
+  <button class="tab" data-p="where">📦 Где? (in/on/under)</button>
+  <button class="tab" data-p="like">👍 Люблю / не люблю</button>
+</div>
+
+<section class="panel active" id="flash">
+  <p style="text-align:center;color:var(--muted);font-weight:700;margin-bottom:12px">Нажми на карточку, чтобы перевернуть 🔄 · 🔊 послушай слово</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section class="panel" id="match">
+  <div class="bar"><span class="score" id="mScore">Пар найдено: 0</span><button class="reset" id="mReset">↺ Заново</button></div>
+  <p style="text-align:center;color:var(--muted);font-weight:700;margin-bottom:6px">Соедини слово с картинкой!</p>
+  <div class="board"><div class="col"><div class="colh">Слово</div><div id="mWords"></div></div>
+  <div class="col"><div class="colh">Картинка</div><div id="mPics"></div></div></div>
+</section>
+
+<section class="panel" id="where">
+  <div class="bar"><span class="score" id="wScore">⭐ 0</span></div>
+  <div class="q" id="wQ"></div>
+</section>
+
+<section class="panel" id="like">
+  <div class="bar"><span class="score" id="lScore">⭐ 0</span></div>
+  <div class="q" id="lQ"></div>
+</section>
+
+<div class="footer">Made for @english.with_asya 💜 · англ + рус · для детей 6–8</div>
+
+<script>
+var ANIMALS=[
+ {en:'cat',ru:'кошка',e:'🐱'},{en:'dog',ru:'собака',e:'🐶'},{en:'frog',ru:'лягушка',e:'🐸'},
+ {en:'duck',ru:'утка',e:'🦆'},{en:'fish',ru:'рыбка',e:'🐟'},{en:'bird',ru:'птица',e:'🐦'},
+ {en:'spider',ru:'паук',e:'🕷️'},{en:'lizard',ru:'ящерица',e:'🦎'},{en:'rat',ru:'крыса',e:'🐀'},
+ {en:'elephant',ru:'слон',e:'🐘'},{en:'donkey',ru:'ослик',e:'🫏'},{en:'rabbit',ru:'кролик',e:'🐰'}
+];
+function say(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+var _ac=null;function _ax(){if(!_ac){try{_ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(_ac&&_ac.state==='suspended')_ac.resume();return _ac;}
+function sfxOK(){var c=_ax();if(!c)return;[[880,0],[1245,0.10]].forEach(function(p){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=p[0];o.connect(g);g.connect(c.destination);var t=c.currentTime+p[1];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.3);o.start(t);o.stop(t+0.32);});}
+function sfxNo(){var c=_ax();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type='square';var t=c.currentTime;o.frequency.setValueAtTime(220,t);o.frequency.exponentialRampToValueAtTime(110,t+0.2);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0.18,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.24);o.start(t);o.stop(t+0.26);}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+/* cards */
+var cards=document.getElementById('cards');
+ANIMALS.forEach(function(t,i){
+  var d=document.createElement('div');d.className='card';
+  d.innerHTML='<div class="inner"><div class="face front"><div class="emo">'+t.e+'</div><div class="en">'+t.en+'</div><div class="hint">нажми 🔄</div></div>'+
+    '<div class="face back c'+(i%6)+'"><div class="ru">'+t.ru+'</div><div class="emo">'+t.e+'</div><button class="speak">🔊 listen</button></div></div>';
+  d.addEventListener('click',function(){d.classList.toggle('flip');if(d.classList.contains('flip'))say(t.en);});
+  d.querySelector('.speak').addEventListener('click',function(ev){ev.stopPropagation();say(t.en);});
+  cards.appendChild(d);
+});
+
+/* tabs */
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.p).classList.add('active');};});
+
+/* matching */
+var mSet,mFound,mSel;
+function buildMatch(){
+  mSet=shuffle(ANIMALS).slice(0,6);mFound=0;mSel=null;
+  document.getElementById('mScore').textContent='Пар найдено: 0';
+  var W=document.getElementById('mWords'),P=document.getElementById('mPics');W.innerHTML='';P.innerHTML='';
+  shuffle(mSet).forEach(function(t){var c=document.createElement('div');c.className='chip';c.textContent=t.en;c.dataset.en=t.en;
+    c.onclick=function(){if(c.classList.contains('done'))return;say(t.en);document.querySelectorAll('#mWords .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');mSel=c;};W.appendChild(c);});
+  shuffle(mSet).forEach(function(t){var c=document.createElement('div');c.className='chip';c.innerHTML='<span class="big">'+t.e+'</span>';c.dataset.en=t.en;
+    c.onclick=function(){if(c.classList.contains('done'))return;
+      if(!mSel){c.classList.add('wrong');setTimeout(()=>c.classList.remove('wrong'),400);return;}
+      if(mSel.dataset.en===t.en){c.classList.add('done');mSel.classList.add('done');mSel.classList.remove('sel');mSel=null;mFound++;
+        document.getElementById('mScore').textContent='Пар найдено: '+mFound;sfxOK();say(t.en);
+        if(mFound===mSet.length)setTimeout(function(){document.getElementById('mScore').textContent='🎉 Молодец! Все пары!';},300);}
+      else{sfxNo();c.classList.add('wrong');var w=mSel;w.classList.add('wrong');setTimeout(function(){c.classList.remove('wrong');w.classList.remove('wrong');},400);}};P.appendChild(c);});
+}
+document.getElementById('mReset').onclick=buildMatch;buildMatch();
+
+/* where (in/on/under) */
+var PREP=[['in','в'],['on','на'],['under','под']];
+var wScore=0;
+function wRender(){
+  var a=pick(ANIMALS),p=pick(PREP);
+  var Q=document.getElementById('wQ');
+  Q.innerHTML='<div class="scene"><span class="box">📦</span><span class="an '+p[0]+'">'+a.e+'</span></div>'+
+    '<div class="prompt">The '+a.en+' is ___ the box.</div>'+
+    '<div class="promptru">Где животное? (in / on / under)</div><div class="opts"></div><div class="fb"></div>';
+  var opts=Q.querySelector('.opts'),fb=Q.querySelector('.fb');
+  shuffle(PREP).forEach(function(o){var b=document.createElement('button');b.className='opt';b.textContent=o[0];
+    b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
+      if(o[0]===p[0]){b.classList.add('ok');wScore++;document.getElementById('wScore').textContent='⭐ '+wScore;sfxOK();
+        fb.textContent='✅ The '+a.en+' is '+p[0]+' the box.';fb.style.color='#5f8f5a';say('The '+a.en+' is '+p[0]+' the box');}
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+p[0];fb.style.color='#c0392b';
+        Array.from(opts.children).forEach(x=>{if(x.textContent===p[0])x.classList.add('ok');});}
+      var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=wRender;fb.after(n);};
+    opts.appendChild(b);});
+}
+wRender();
+
+/* like / don't like */
+var lScore=0;
+function lRender(){
+  var a=pick(ANIMALS),likeIt=Math.random()<0.5;
+  var Q=document.getElementById('lQ');
+  Q.innerHTML='<div class="scene" style="height:96px"><span class="box" style="font-size:60px">'+a.e+'</span>'+
+    '<span style="position:absolute;right:20px;bottom:0;font-size:40px">'+(likeIt?'👍':'👎')+'</span></div>'+
+    '<div class="prompt">'+(likeIt?'👍 нравится':'👎 не нравится')+'</div>'+
+    '<div class="promptru">Выбери правильную фразу</div><div class="opts"></div><div class="fb"></div>';
+  var ans=likeIt?("I like "+a.en+"s."):("I don't like "+a.en+"s.");
+  var wrong=likeIt?("I don't like "+a.en+"s."):("I like "+a.en+"s.");
+  var opts=Q.querySelector('.opts'),fb=Q.querySelector('.fb');
+  shuffle([ans,wrong]).forEach(function(o){var b=document.createElement('button');b.className='opt';b.style.fontSize='16px';b.textContent=o;
+    b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
+      if(o===ans){b.classList.add('ok');lScore++;document.getElementById('lScore').textContent='⭐ '+lScore;sfxOK();fb.textContent='✅ '+ans;fb.style.color='#5f8f5a';say(ans);}
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+ans;fb.style.color='#c0392b';Array.from(opts.children).forEach(x=>{if(x.textContent===ans)x.classList.add('ok');});}
+      var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=lRender;fb.after(n);};
+    opts.appendChild(b);});
+}
+lRender();
+
+/* open tab from hash */
+if(location.hash){var t=document.querySelector('.tab[data-p="'+location.hash.slice(1)+'"]');if(t)t.click();}
+</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гейм-шоу · Super Minds 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{--paper:#f4e9d8;--ink:#1c1310;--muted:#5a4f47;--accent:#7c2340;--line:#e3d3ba}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#f4e9d8;min-height:100vh;padding:14px}
+  a.home{position:fixed;top:12px;left:12px;z-index:20;background:var(--accent);color:#fff;padding:9px 16px;
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
+  h1{font-family:'Fredoka',sans-serif;text-align:center;color:var(--accent);font-size:clamp(26px,5vw,40px);margin:34px 0 2px}
+  .sub{text-align:center;color:var(--muted);font-weight:700;font-size:14px;margin-bottom:18px}
+  .wrap{max-width:900px;margin:0 auto}
+  .card{background:#fff;border-radius:24px;box-shadow:0 8px 0 #e3d3ba;padding:22px}
+  .lbl{font-family:'Fredoka',sans-serif;font-size:18px;margin:6px 0 10px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+  .pick{border:2px solid var(--line);background:#fff;font-family:'Nunito';font-weight:800;font-size:16px;
+    padding:12px 20px;border-radius:16px;cursor:pointer;color:var(--ink)}
+  .pick.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .big{display:block;margin:8px auto 0;background:var(--accent);color:#fff;border:none;font-family:'Fredoka',sans-serif;
+    font-weight:700;font-size:22px;padding:14px 40px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 #5c1730}
+  .big:active{transform:translateY(4px);box-shadow:0 1px 0 #5c1730}
+  /* teams */
+  .teams{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:6px}
+  .team{border-radius:16px;padding:10px 16px;color:#fff;font-weight:900;min-width:120px;text-align:center;
+    box-shadow:0 4px 0 rgba(0,0,0,.15);opacity:.6;transition:.15s}
+  .team.cur{opacity:1;transform:translateY(-3px);outline:4px solid #ffffffcc}
+  .team .nm{font-size:13px;font-family:'Nunito'}
+  .team .sc{font-family:'Fredoka',sans-serif;font-size:30px;line-height:1}
+  .turn{text-align:center;font-weight:800;color:var(--accent);margin:4px 0 14px;font-size:16px}
+  /* board */
+  .board{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  @media(max-width:620px){.board{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:430px){.board{grid-template-columns:repeat(3,1fr)}}
+  .tile{aspect-ratio:1;border:none;border-radius:18px;background:var(--accent);color:#fff;
+    font-family:'Fredoka',sans-serif;font-size:30px;cursor:pointer;box-shadow:0 5px 0 #5c1730;transition:.12s}
+  .tile:active{transform:translateY(3px);box-shadow:0 2px 0 #5c1730}
+  .tile.used{background:#e6dccb;color:#b6a992;box-shadow:0 5px 0 #d5c8b2;cursor:default}
+  .fin{display:block;margin:18px auto 0;background:#5f8f5a;color:#fff;border:none;font-family:'Fredoka',sans-serif;
+    font-weight:700;font-size:17px;padding:11px 26px;border-radius:15px;cursor:pointer;box-shadow:0 4px 0 #497045}
+  /* modal */
+  .ov{position:fixed;inset:0;background:rgba(28,19,16,.55);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+  .ov.show{display:flex}
+  .modal{background:#fff;border-radius:26px;max-width:460px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  .pts{display:inline-block;background:#e6b93f;color:#4a3a10;font-weight:900;font-family:'Nunito';padding:4px 14px;border-radius:999px;font-size:14px}
+  .qemo{font-size:70px;line-height:1;margin:10px 0 6px}
+  .qru{font-family:'Fredoka',sans-serif;font-size:22px;color:var(--accent);margin-bottom:6px}
+  .qhint{color:var(--muted);font-weight:700;font-size:13px}
+  .ans{font-family:'Fredoka',sans-serif;font-size:24px;color:#5f8f5a;min-height:30px;margin:12px 0 4px}
+  .timer{font-family:'Fredoka',sans-serif;font-size:16px;color:var(--muted);margin-top:6px}
+  .mbtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .mbtn{border:none;font-family:'Fredoka',sans-serif;font-weight:700;font-size:17px;padding:12px 22px;border-radius:15px;cursor:pointer;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+  .ok{background:#5f8f5a;box-shadow:0 4px 0 #497045} .no{background:#c0392b;box-shadow:0 4px 0 #97281c}
+  .rev{background:#b5654a;box-shadow:0 4px 0 #8c4a34}
+  .mbtn:active{transform:translateY(3px)}
+  /* win */
+  .win{position:fixed;inset:0;background:rgba(28,19,16,.6);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
+  .win.show{display:flex}
+  .winbox{background:#fff;border-radius:28px;max-width:460px;width:100%;padding:30px 24px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  .winbox h2{font-family:'Fredoka',sans-serif;color:var(--accent);font-size:30px;margin:6px 0}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+  footer{text-align:center;color:#c3b8a6;font-size:12px;font-weight:700;margin-top:24px}
+</style>
+</head>
+<body>
+<a class="home" href="index.html">← Юниты</a>
+<canvas id="confetti"></canvas>
+<div class="wrap">
+  <h1>🎮 Гейм-шоу</h1>
+  <div class="sub">Командная игра на очки · Super Minds 1</div>
+
+  <div class="card" id="setup">
+    <div class="lbl">Сколько команд?</div>
+    <div class="row" id="teamPick">
+      <button class="pick on" data-n="2">2</button>
+      <button class="pick" data-n="3">3</button>
+      <button class="pick" data-n="4">4</button>
+    </div>
+    <div class="lbl">Тема</div>
+    <div class="row" id="setPick">
+      <button class="pick on" data-s="u2">Unit 2 · Игрушки</button>
+      <button class="pick" data-s="u3">Unit 3 · Животные</button>
+    </div>
+    <button class="big" id="start">Играть! 🎯</button>
+  </div>
+
+  <div class="card" id="game" style="display:none">
+    <div class="teams" id="teams"></div>
+    <div class="turn" id="turn"></div>
+    <div class="board" id="board"></div>
+    <button class="fin" id="finish">Финиш 🏁</button>
+  </div>
+</div>
+
+<div class="ov" id="ov">
+  <div class="modal">
+    <span class="pts" id="mPts"></span>
+    <div class="qemo" id="mEmo"></div>
+    <div class="qru" id="mRu"></div>
+    <div class="qhint" id="mHint">Скажи по-английски</div>
+    <div class="ans" id="mAns"></div>
+    <div class="timer" id="mTimer"></div>
+    <div class="mbtns">
+      <button class="mbtn rev" id="mReveal">Показать ответ</button>
+      <button class="mbtn ok" id="mOk">✅ Верно</button>
+      <button class="mbtn no" id="mNo">❌ Мимо</button>
+    </div>
+  </div>
+</div>
+
+<div class="win" id="winScreen">
+  <div class="winbox">
+    <div style="font-size:60px">🏆</div>
+    <h2 id="winTitle"></h2>
+    <div id="winScores" style="font-family:'Nunito';font-weight:800;color:#5a4f47;margin:8px 0 16px"></div>
+    <button class="big" id="again" style="box-shadow:0 5px 0 #5c1730">Играть ещё 🔁</button>
+  </div>
+</div>
+
+<footer>@english.with_asya · Super Minds 1</footer>
+
+<script>
+/* ---------- звуки ---------- */
+var _ac=null;function _ax(){if(!_ac){try{_ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(_ac&&_ac.state==='suspended')_ac.resume();return _ac;}
+function sfxOK(){var c=_ax();if(!c)return;[[880,0],[1245,0.10]].forEach(function(p){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=p[0];o.connect(g);g.connect(c.destination);var t=c.currentTime+p[1];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.3);o.start(t);o.stop(t+0.32);});}
+function sfxNo(){var c=_ax();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type='square';var t=c.currentTime;o.frequency.setValueAtTime(220,t);o.frequency.exponentialRampToValueAtTime(110,t+0.2);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0.18,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.24);o.start(t);o.stop(t+0.26);}
+function fanfare(){var c=_ax();if(!c)return;[523,659,784,1046].forEach(function(f,i){var o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=f;o.connect(g);g.connect(c.destination);var t=c.currentTime+i*0.13;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.03);g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);o.start(t);o.stop(t+0.55);});}
+
+/* ---------- конфетти ---------- */
+var cv=document.getElementById('confetti'),cx=cv.getContext('2d'),parts=[],raf=null;
+function fit(){cv.width=innerWidth;cv.height=innerHeight;}fit();addEventListener('resize',fit);
+var CFC=['#7c2340','#b5654a','#e6b93f','#5f8f5a','#d97757','#3ba7ff'];
+function burst(n,power){for(var i=0;i<n;i++){parts.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*power,vy:(Math.random()-1)*power,g:.25+Math.random()*.2,c:CFC[i%CFC.length],s:6+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.4,life:120});}if(!raf)loop();}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore();if(p.life<0||p.y>cv.height+20)parts.splice(i,1);}if(parts.length)raf=requestAnimationFrame(loop);else{raf=null;cx.clearRect(0,0,cv.width,cv.height);}}
+
+/* ---------- данные ---------- */
+var SETS={
+ u2:[
+  {e:'⚽',ru:'Назови игрушку',en:"It's a ball."},{e:'🪆',ru:'Назови игрушку',en:"It's a doll."},
+  {e:'🧸',ru:'Назови игрушку',en:"It's a teddy bear."},{e:'🚗',ru:'Назови игрушку',en:"It's a car."},
+  {e:'🚂',ru:'Назови игрушку',en:"It's a train."},{e:'✈️',ru:'Назови игрушку',en:"It's a plane."},
+  {e:'🚲',ru:'Назови игрушку',en:"It's a bike."},{e:'🪁',ru:'Назови игрушку',en:"It's a kite."},
+  {e:'🤖',ru:'Назови игрушку',en:"It's a robot."},{e:'⛵',ru:'Назови игрушку',en:"It's a boat."},
+  {e:'👦 🚗',ru:'Чей? (он)',en:"It's his car."},{e:'👧 🪆',ru:'Чья? (она)',en:"It's her doll."},
+  {e:'🙋 🧸',ru:'Чей? (я)',en:"It's my teddy."},{e:'👉 ⚽',ru:'Чей? (ты)',en:"It's your ball."},
+  {e:'🔴 ⚽',ru:'Какой? (цвет)',en:"a red ball"},{e:'🔵 🚗',ru:'Какой? (цвет)',en:"a blue car"},
+  {e:'🟢 🚂',ru:'Какой? (цвет)',en:"a green train"},{e:'🟡 🪁',ru:'Какой? (цвет)',en:"a yellow kite"},
+  {e:'🧸 ➕',ru:'Какой? (размер)',en:"a big teddy"},{e:'🚗 ➖',ru:'Какой? (размер)',en:"a small car"}
+ ],
+ u3:[
+  {e:'🐱',ru:'Назови животное',en:"It's a cat."},{e:'🐶',ru:'Назови животное',en:"It's a dog."},
+  {e:'🐸',ru:'Назови животное',en:"It's a frog."},{e:'🦆',ru:'Назови животное',en:"It's a duck."},
+  {e:'🐟',ru:'Назови животное',en:"It's a fish."},{e:'🐦',ru:'Назови животное',en:"It's a bird."},
+  {e:'🕷️',ru:'Назови животное',en:"It's a spider."},{e:'🦎',ru:'Назови животное',en:"It's a lizard."},
+  {e:'🐀',ru:'Назови животное',en:"It's a rat."},{e:'🐘',ru:'Назови животное',en:"It's an elephant."},
+  {e:'🐸 ⬆️📦',ru:'Где лягушка? (сверху)',en:"on the box"},{e:'🐱 📦',ru:'Где кошка? (внутри)',en:"in the box"},
+  {e:'🐶 ⬇️📦',ru:'Где собака? (под)',en:"under the box"},{e:'🦆 ⬆️🪑',ru:'Где утка? (на стуле)',en:"on the chair"},
+  {e:'🐟 🎒',ru:'Где рыбка? (в сумке)',en:"in the bag"},{e:'🐀 ⬇️🪑',ru:'Где крыса? (под стулом)',en:"under the chair"},
+  {e:'🐸👍',ru:'Скажи: нравится',en:"I like frogs."},{e:'🕷️👎',ru:'Скажи: не нравится',en:"I don't like spiders."},
+  {e:'🐱👍',ru:'Скажи: нравится',en:"I like cats."},{e:'🐀👎',ru:'Скажи: не нравится',en:"I don't like rats."}
+ ]
+};
+var TEAMCOL=['#7c2340','#b5654a','#5f8f5a','#c9843b'];
+var TEAMNAME=['Команда 1','Команда 2','Команда 3','Команда 4'];
+
+/* ---------- состояние ---------- */
+var nTeams=2,setKey='u2',scores=[],cur=0,tiles=[],curTile=-1,timerId=null;
+
+document.querySelectorAll('#teamPick .pick').forEach(function(b){b.onclick=function(){document.querySelectorAll('#teamPick .pick').forEach(x=>x.classList.remove('on'));b.classList.add('on');nTeams=+b.dataset.n;};});
+document.querySelectorAll('#setPick .pick').forEach(function(b){b.onclick=function(){document.querySelectorAll('#setPick .pick').forEach(x=>x.classList.remove('on'));b.classList.add('on');setKey=b.dataset.s;};});
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+document.getElementById('start').onclick=function(){
+  _ax();
+  scores=[];for(var i=0;i<nTeams;i++)scores.push(0);
+  cur=0;
+  var pool=shuffle(SETS[setKey]).slice(0,15);
+  var ptsOpts=[10,15,20];
+  tiles=pool.map(function(q,i){return {q:q,pts:ptsOpts[Math.floor(Math.random()*3)],used:false};});
+  document.getElementById('setup').style.display='none';
+  document.getElementById('game').style.display='block';
+  renderTeams();renderBoard();
+};
+function renderTeams(){
+  var h='';for(var i=0;i<nTeams;i++){h+='<div class="team'+(i===cur?' cur':'')+'" style="background:'+TEAMCOL[i]+'"><div class="nm">'+TEAMNAME[i]+'</div><div class="sc">'+scores[i]+'</div></div>';}
+  document.getElementById('teams').innerHTML=h;
+  document.getElementById('turn').textContent='Ход: '+TEAMNAME[cur];
+}
+function renderBoard(){
+  var h='';tiles.forEach(function(t,i){h+='<button class="tile'+(t.used?' used':'')+'" data-i="'+i+'">'+(t.used?'✓':(i+1))+'</button>';});
+  var b=document.getElementById('board');b.innerHTML=h;
+  b.querySelectorAll('.tile').forEach(function(el){el.onclick=function(){var i=+el.dataset.i;if(!tiles[i].used)openTile(i);};});
+}
+function openTile(i){
+  curTile=i;var t=tiles[i];
+  document.getElementById('mPts').textContent='+'+t.pts+' очков';
+  document.getElementById('mEmo').textContent=t.q.e;
+  document.getElementById('mRu').textContent=t.q.ru;
+  document.getElementById('mAns').textContent='';
+  document.getElementById('ov').classList.add('show');
+  startTimer(20);
+}
+function startTimer(s){clearInterval(timerId);var el=document.getElementById('mTimer');el.textContent='⏱ '+s;timerId=setInterval(function(){s--;el.textContent='⏱ '+s;if(s<=0){clearInterval(timerId);el.textContent='⏱ время!';sfxNo();}},1000);}
+document.getElementById('mReveal').onclick=function(){document.getElementById('mAns').textContent=tiles[curTile].q.en;};
+document.getElementById('mOk').onclick=function(){scores[cur]+=tiles[curTile].pts;markDone(true);};
+document.getElementById('mNo').onclick=function(){markDone(false);};
+function markDone(ok){
+  clearInterval(timerId);
+  tiles[curTile].used=true;
+  document.getElementById('ov').classList.remove('show');
+  if(ok){sfxOK();burst(60,16);}else{sfxNo();}
+  cur=(cur+1)%nTeams;
+  renderTeams();renderBoard();
+  if(tiles.every(function(t){return t.used;}))finish();
+}
+document.getElementById('finish').onclick=finish;
+function finish(){
+  var max=Math.max.apply(null,scores);
+  var winners=[];for(var i=0;i<nTeams;i++)if(scores[i]===max)winners.push(TEAMNAME[i]);
+  document.getElementById('winTitle').textContent=winners.length>1?('Ничья: '+winners.join(', ')):('Победа: '+winners[0]+'!');
+  var sc='';for(var j=0;j<nTeams;j++)sc+=TEAMNAME[j]+': '+scores[j]+'   ';
+  document.getElementById('winScores').textContent=sc;
+  document.getElementById('winScreen').classList.add('show');
+  fanfare();burst(160,22);setTimeout(function(){burst(140,20);},500);
+}
+document.getElementById('again').onclick=function(){
+  document.getElementById('winScreen').classList.remove('show');
+  document.getElementById('game').style.display='none';
+  document.getElementById('setup').style.display='block';
+};
+</script>
+</body>
+</html>
