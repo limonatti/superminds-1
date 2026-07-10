@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Комикс-задания · The go-kart race</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{--accent:#7c2340;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
+    --ink:#1c1310;--muted:#5a4f47;--line:#e3d3ba}
+  body{font-family:'Nunito','Segoe UI',sans-serif;background:#f4e9d8;color:var(--ink);min-height:100vh;padding:16px}
+  a.home{position:fixed;top:10px;left:10px;z-index:99;background:var(--accent);color:#fff;padding:9px 16px;
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
+  h1{text-align:center;font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,40px);color:var(--accent);margin:38px 0 2px}
+  .sub{text-align:center;color:var(--muted);font-weight:700;margin-bottom:16px;font-size:14px}
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  .tab{border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:800;font-size:13.5px;
+    padding:11px 15px;border-radius:14px;color:var(--ink);background:#fff;box-shadow:0 3px 8px rgba(150,120,90,.08)}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .panel{display:none;max-width:920px;margin:0 auto}
+  .panel.active{display:block}
+  .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .score{font-weight:800;color:var(--mustard);font-size:18px}
+  .reset{background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:14px;padding:9px 16px;border-radius:14px;cursor:pointer;box-shadow:0 3px 0 #5c1730}
+  .lead{text-align:center;color:var(--muted);font-weight:700;margin-bottom:12px;font-size:14px}
+  /* order game */
+  .oGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .oCard{background:#fff;border:3px solid #eee;border-radius:18px;padding:10px;cursor:pointer;text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,.07);transition:.15s;position:relative}
+  .oCard img{width:100%;height:110px;object-fit:contain;border-radius:12px}
+  .oCard .cap{font-size:12px;font-weight:800;margin-top:6px;line-height:1.15;color:var(--ink)}
+  .oCard .num{position:absolute;top:-10px;left:-10px;width:30px;height:30px;border-radius:50%;background:var(--olive);
+    color:#fff;font-weight:800;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+  .oCard.done{border-color:var(--olive);background:#eef6ec;opacity:.9}
+  .oCard.done .num{display:flex}
+  .oCard.wrong{animation:shake .4s;border-color:#c0392b}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+  /* who + phrase */
+  .q{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 16px rgba(0,0,0,.1);text-align:center;border:4px solid #fff}
+  .quote{font-size:23px;font-weight:900;color:var(--accent);margin:4px 0 4px}
+  .qru{color:var(--muted);font-weight:700;font-size:13px;margin-bottom:14px}
+  .bigemo{font-size:60px;line-height:1;margin:2px 0 6px}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .who{border:none;background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 10px 10px;cursor:pointer;
+    width:104px;font-family:inherit;transition:transform .1s;box-shadow:0 3px 8px rgba(0,0,0,.08)}
+  .who img{width:78px;height:78px;object-fit:contain;border-radius:12px;display:block;margin:0 auto}
+  .who span{display:block;font-weight:800;font-size:14px;margin-top:4px;color:var(--ink)}
+  .who:active{transform:translateY(2px)} .who.ok{border-color:var(--olive);background:#eef6ec}
+  .who.no{border-color:#c0392b;background:#f8e9e7}
+  .opt{border:none;font-family:inherit;font-weight:800;font-size:18px;cursor:pointer;padding:13px 22px;border-radius:16px;
+    background:var(--terra);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s}
+  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#c0392b!important}
+  .fb{min-height:26px;font-weight:800;margin-top:12px;font-size:18px}
+  .next{margin-top:14px;background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:16px;
+    padding:11px 24px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+  .speak{margin-top:6px;background:#f0e6d6;border:none;color:var(--accent);font-weight:800;padding:7px 16px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px}
+  .footer{text-align:center;color:#c3b8a6;font-size:12px;margin-top:26px;font-weight:700}
+  .win{text-align:center;background:#fff;border-radius:22px;padding:26px;box-shadow:0 6px 16px rgba(0,0,0,.1);margin-top:8px}
+  .win img{width:120px;height:120px;object-fit:contain}
+</style>
+</head>
+<body>
+<a class="home" href="unit2.html">← Меню</a>
+<h1>🏎 The go-kart race</h1>
+<div class="sub">Super Minds 1 · Unit 2 · «Why is Misty happy?» · fair play</div>
+
+<div class="tabs">
+  <button class="tab active" data-p="order">🧩 Собери историю</button>
+  <button class="tab" data-p="who">💬 Кто это сказал?</button>
+  <button class="tab" data-p="phrase">✅ Правильная фраза</button>
+  <button class="tab" data-p="phon">🔤 Фоникс e</button>
+</div>
+
+<!-- ORDER -->
+<section class="panel active" id="order">
+  <div class="bar"><span class="score" id="oScore">Шаг 1 из 8</span><button class="reset" id="oReset">↺ Заново</button></div>
+  <p class="lead">Нажимай сцены <b>по порядку</b> — от старта до победы! 1 → 8</p>
+  <div class="oGrid" id="oGrid"></div>
+  <div class="win" id="oWin" style="display:none"></div>
+</section>
+
+<!-- WHO -->
+<section class="panel" id="who">
+  <div class="bar"><span class="score" id="wScore">⭐ 0</span><button class="reset" id="wReset">↺ Заново</button></div>
+  <div class="q" id="wQ"></div>
+</section>
+
+<!-- PHRASE -->
+<section class="panel" id="phrase">
+  <div class="bar"><span class="score" id="pScore">⭐ 0</span><button class="reset" id="pReset">↺ Заново</button></div>
+  <div class="q" id="pQ"></div>
+</section>
+
+<!-- PHONICS -->
+<section class="panel" id="phon">
+  <div class="bar"><span class="score" id="fScore">⭐ 0</span><button class="reset" id="fReset">↺ Заново</button></div>
+  <p class="lead">Звук <b>e</b> — как в слове <b>red</b> 🔴. Есть ли звук «э» в слове?</p>
+  <div class="q" id="fQ"></div>
+</section>
+
+<div class="footer">Made for @english.with_asya 💜 · англ + рус · для детей 6–8</div>
+
+<script>
+var BASE='https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/';
+var IMG={
+  misty:BASE+'hf_20260710_062855_381c375a-b17a-45f3-beb6-2dc6a0dd6815.png',
+  thunder:BASE+'hf_20260710_062907_629882fc-61f3-4250-989a-8b51e26435a8.png',
+  flash:BASE+'hf_20260710_062909_5d168615-e4d4-4a7a-8820-793e9009f43c.png',
+  man:BASE+'hf_20260710_062911_f720afdf-1824-4961-893d-a95ccc3c6e80.png',
+  red:BASE+'hf_20260710_062912_aebbb497-64b4-49ca-9881-54ef1bc251c7.png',
+  kartG:BASE+'hf_20260710_062921_18196371-87c3-4037-8340-24aec5b4365e.png',
+  kartR:BASE+'hf_20260710_062923_bcedec75-027c-493e-9ff2-d6c4bfa326c5.png',
+  trophy:BASE+'hf_20260710_062924_7fce482e-9c6b-4de1-a43a-1a38c6c7105d.png'
+};
+
+/* ---- sound + speech ---- */
+function say(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+var _ac=null;function ax(){if(!_ac){try{_ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(_ac&&_ac.state==='suspended')_ac.resume();return _ac;}
+function ok(){var c=ax();if(!c)return;[[660,0],[880,.12]].forEach(function(f){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f[0];o.connect(g);g.connect(c.destination);var t=c.currentTime+f[1];g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.4);o.start(t);o.stop(t+.45);});}
+function no(){var c=ax();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type='square';o.frequency.setValueAtTime(300,c.currentTime);o.frequency.exponentialRampToValueAtTime(120,c.currentTime+.3);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(.18,c.currentTime);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.34);o.start();o.stop(c.currentTime+.36);}
+function fanfare(){var c=ax();if(!c)return;[523,659,784,1047].forEach(function(f,i){var o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=f;o.connect(g);g.connect(c.destination);var t=c.currentTime+i*.13;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.3,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.5);o.start(t);o.stop(t+.55);});}
+
+/* ---- tabs ---- */
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active');});
+  b.classList.add('active');document.getElementById(b.dataset.p).classList.add('active');ax();};});
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ================= ORDER ================= */
+var STORY=[
+ {img:'man',cap:'«This is Ben and Misty!» Red: «What an ugly old go-kart!»'},
+ {img:'kartR',cap:'Man: «1, 2, 3 – go!»'},
+ {img:'flash',cap:'Flash: «Great, Misty!» Red girl: «Stop her!»'},
+ {img:'red',cap:'Misty: «Help!» Red: «Now I’m first!»'},
+ {img:'misty',cap:'Misty: «That isn’t fair!» Thunder: «Just a minute.»'},
+ {img:'thunder',cap:'Thunder: «Hold on, Misty!»'},
+ {img:'kartG',cap:'Misty: «Woah!» Red: «No!»'},
+ {img:'trophy',cap:'Man: «Congratulations! You’re first!»'}
+];
+var oStep,oCards;
+function oBuild(){
+  oStep=0;var g=document.getElementById('oGrid');g.innerHTML='';document.getElementById('oWin').style.display='none';g.style.display='';
+  document.getElementById('oScore').textContent='Шаг 1 из 8';
+  var order=shuffle(STORY.map(function(s,i){return i;}));
+  order.forEach(function(idx){
+    var s=STORY[idx];var d=document.createElement('div');d.className='oCard';d.dataset.idx=idx;
+    d.innerHTML='<div class="num"></div><img src="'+IMG[s.img]+'" alt=""><div class="cap">'+s.cap+'</div>';
+    d.onclick=function(){oClick(d,idx);};g.appendChild(d);
+  });
+}
+function oClick(d,idx){
+  if(d.classList.contains('done'))return;
+  if(idx===oStep){d.classList.add('done');d.querySelector('.num').textContent=oStep+1;ok();oStep++;
+    document.getElementById('oScore').textContent=oStep<8?('Шаг '+(oStep+1)+' из 8'):'Готово! 🎉';
+    if(oStep===8){fanfare();var w=document.getElementById('oWin');document.getElementById('oGrid').style.display='none';
+      w.style.display='';w.innerHTML='<img src="'+IMG.trophy+'"><h2 style="color:var(--accent);font-family:Fredoka">Ура! История собрана! 🏆</h2><p style="color:var(--muted);font-weight:700;margin-top:6px">Misty победила честно — fair play!</p><button class="next" onclick="oBuild()">↺ Ещё раз</button>';}
+  } else {no();d.classList.add('wrong');setTimeout(function(){d.classList.remove('wrong');},400);}
+}
+document.getElementById('oReset').onclick=oBuild;oBuild();
+
+/* ================= WHO SAID ================= */
+var CHARS={misty:'Misty',thunder:'Thunder',man:'Man',flash:'Flash',red:'Red driver'};
+var WHO=[
+ {q:'Help!',ru:'На помощь!',a:'misty'},
+ {q:'Hold on, Misty!',ru:'Держись, Мисти!',a:'thunder'},
+ {q:'Congratulations! You’re first!',ru:'Поздравляю! Ты первая!',a:'man'},
+ {q:'Great, Misty!',ru:'Молодец, Мисти!',a:'flash'},
+ {q:'What an ugly old go-kart!',ru:'Какой уродливый старый карт!',a:'red'},
+ {q:'That isn’t fair!',ru:'Это нечестно!',a:'misty'},
+ {q:'Just a minute.',ru:'Минуточку.',a:'thunder'},
+ {q:'1, 2, 3 – go!',ru:'Раз, два, три — марш!',a:'man'},
+ {q:'Now I’m first!',ru:'Теперь я первый!',a:'red'},
+ {q:'Thank you!',ru:'Спасибо!',a:'misty'}
+];
+var wList,wI,wScore;
+function wStart(){wList=shuffle(WHO);wI=0;wScore=0;document.getElementById('wScore').textContent='⭐ 0';wShow();}
+function wShow(){
+  if(wI>=wList.length){wDone();return;}
+  var it=wList[wI];var keys=Object.keys(CHARS);
+  var html='<div class="quote">«'+it.q+'»</div><div class="qru">'+it.ru+'</div>'+
+    '<button class="speak" onclick="say(\''+it.q.replace(/'/g,"\\'")+'\')">🔊 Послушать</button>'+
+    '<p class="qru" style="margin-top:12px">Кто это сказал?</p><div class="opts">';
+  keys.forEach(function(k){html+='<button class="who" data-k="'+k+'"><img src="'+IMG[k]+'"><span>'+CHARS[k]+'</span></button>';});
+  html+='</div><div class="fb" id="wFb"></div>';
+  var Q=document.getElementById('wQ');Q.innerHTML=html;
+  Q.querySelectorAll('.who').forEach(function(b){b.onclick=function(){wPick(b,it);};});
+}
+function wPick(b,it){
+  var all=document.querySelectorAll('#wQ .who');all.forEach(function(x){x.style.pointerEvents='none';});
+  if(b.dataset.k===it.a){b.classList.add('ok');ok();wScore++;document.getElementById('wScore').textContent='⭐ '+wScore;document.getElementById('wFb').textContent='✅ Верно!';document.getElementById('wFb').style.color='var(--olive)';}
+  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.k===it.a)x.classList.add('ok');});document.getElementById('wFb').textContent='❌ Это '+CHARS[it.a];document.getElementById('wFb').style.color='#c0392b';}
+  var n=document.createElement('button');n.className='next';n.textContent=wI<wList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){wI++;wShow();};document.getElementById('wQ').appendChild(n);
+}
+function wDone(){fanfare();document.getElementById('wQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+wScore+' из '+wList.length+'! 🎉</h2><button class="next" onclick="wStart()">↺ Ещё раз</button>';}
+document.getElementById('wReset').onclick=wStart;wStart();
+
+/* ================= RIGHT PHRASE ================= */
+var PHR=[
+ {emo:'🏆',s:'Твой друг выиграл гонку!',a:'Congratulations!',opts:['Congratulations!','Help!','Just a minute.']},
+ {emo:'😱',s:'Ты падаешь с карта!',a:'Help!',opts:['Help!','Thank you!','Congratulations!']},
+ {emo:'🤝',s:'Держись крепче, не упади!',a:'Hold on!',opts:['Hold on!','Go!','Congratulations!']},
+ {emo:'⏳',s:'Подожди минутку, я иду!',a:'Just a minute.',opts:['Just a minute.','Help!','Thank you!']},
+ {emo:'🎂',s:'У друга день рождения!',a:'Congratulations!',opts:['Congratulations!','Hold on!','Help!']},
+ {emo:'🎁',s:'Тебе подарили подарок.',a:'Thank you!',opts:['Thank you!','Help!','Go!']},
+ {emo:'🏁',s:'Старт гонки! Что кричит судья?',a:'Go!',opts:['Go!','Help!','Thank you!']}
+];
+var pList,pI,pScore;
+function pStart(){pList=shuffle(PHR);pI=0;pScore=0;document.getElementById('pScore').textContent='⭐ 0';pShow();}
+function pShow(){
+  if(pI>=pList.length){pDone();return;}
+  var it=pList[pI];var o=shuffle(it.opts);
+  var html='<div class="bigemo">'+it.emo+'</div><div class="qru" style="font-size:15px;margin-bottom:12px">'+it.s+'</div><div class="opts">';
+  o.forEach(function(op){html+='<button class="opt" data-o="'+op.replace(/"/g,'')+'">'+op+'</button>';});
+  html+='</div><div class="fb" id="pFb"></div>';
+  var Q=document.getElementById('pQ');Q.innerHTML=html;
+  Q.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){pPick(b,it);};});
+}
+function pPick(b,it){
+  var all=document.querySelectorAll('#pQ .opt');all.forEach(function(x){x.style.pointerEvents='none';});
+  if(b.dataset.o===it.a){b.classList.add('ok');ok();say(it.a);pScore++;document.getElementById('pScore').textContent='⭐ '+pScore;document.getElementById('pFb').textContent='✅ Верно!';document.getElementById('pFb').style.color='var(--olive)';}
+  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.o===it.a)x.classList.add('ok');});document.getElementById('pFb').textContent='❌ Нужно: '+it.a;document.getElementById('pFb').style.color='#c0392b';}
+  var n=document.createElement('button');n.className='next';n.textContent=pI<pList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){pI++;pShow();};document.getElementById('pQ').appendChild(n);
+}
+function pDone(){fanfare();document.getElementById('pQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+pScore+' из '+pList.length+'! 🎉</h2><button class="next" onclick="pStart()">↺ Ещё раз</button>';}
+document.getElementById('pReset').onclick=pStart;pStart();
+
+/* ================= PHONICS e ================= */
+var FWORDS=[
+ {w:'red',e:true},{w:'ten',e:true},{w:'pen',e:true},{w:'hen',e:true},{w:'bed',e:true},{w:'egg',e:true},{w:'Ken',e:true},{w:'net',e:true},
+ {w:'cat',e:false},{w:'dog',e:false},{w:'sun',e:false},{w:'pig',e:false},{w:'box',e:false},{w:'bus',e:false}
+];
+var fList,fI,fScore;
+function fStart(){fList=shuffle(FWORDS);fI=0;fScore=0;document.getElementById('fScore').textContent='⭐ 0';fShow();}
+function fShow(){
+  if(fI>=fList.length){fDone();return;}
+  var it=fList[fI];
+  var html='<div class="quote" style="font-size:40px">'+it.w+'</div>'+
+    '<button class="speak" onclick="say(\''+it.w+'\')">🔊 Послушать</button>'+
+    '<p class="qru" style="margin-top:14px">Есть звук «e» (как в red)?</p><div class="opts">'+
+    '<button class="opt" data-v="1" style="background:var(--olive)">✅ Есть e</button>'+
+    '<button class="opt" data-v="0" style="background:var(--terra)">❌ Нет</button>'+
+    '</div><div class="fb" id="fFb"></div>';
+  var Q=document.getElementById('fQ');Q.innerHTML=html;
+  say(it.w);
+  Q.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){fPick(b,it);};});
+}
+function fPick(b,it){
+  var all=document.querySelectorAll('#fQ .opt');all.forEach(function(x){x.style.pointerEvents='none';});
+  var chose=b.dataset.v==='1';
+  if(chose===it.e){b.classList.add('ok');ok();fScore++;document.getElementById('fScore').textContent='⭐ '+fScore;document.getElementById('fFb').textContent='✅ Верно!';document.getElementById('fFb').style.color='var(--olive)';}
+  else{b.classList.add('no');no();document.getElementById('fFb').textContent=it.e?('✅ В «'+it.w+'» есть звук e'):('❌ В «'+it.w+'» нет звука e');document.getElementById('fFb').style.color='#c0392b';}
+  var n=document.createElement('button');n.className='next';n.textContent=fI<fList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){fI++;fShow();};document.getElementById('fQ').appendChild(n);
+}
+function fDone(){fanfare();document.getElementById('fQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+fScore+' из '+fList.length+'! 🎉</h2><button class="next" onclick="fStart()">↺ Ещё раз</button>';}
+document.getElementById('fReset').onclick=fStart;fStart();
+</script>
+</body>
+</html>
