@@ -45,6 +45,11 @@
   .circle .opts{display:flex;gap:14px;flex-wrap:wrap}
   .circle .opt{border:2px solid #cdbfa8;border-radius:999px;padding:7px 18px;font-size:18px;font-weight:600}
 
+  .gram .grow{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+  .gram .em{font-size:28px;width:38px;text-align:center}
+  .gram .gq{font-size:19px;font-weight:600}
+  .gram .gq::first-letter{text-transform:none}
+  .gram .gh{font:700 13px 'Nunito',sans-serif;color:#b5654a;margin-left:4px}
   .foot{text-align:center;font:700 12px 'Nunito',sans-serif;color:#a99a86;margin-top:26px;border-top:1px dashed #e3d3ba;padding-top:12px}
 
   @media print{
@@ -68,6 +73,38 @@
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     const LT="abcdefghijklmnop".split("");
+
+    // Грамматика по юнитам (оригинальные задания по теме юнита)
+    const GRAMMAR={
+      u1:{focus:"a — It's a…", items:[
+        {em:"🖊️",q:"It's ___ pen."},{em:"📕",q:"It's ___ book."},
+        {em:"🎒",q:"It's ___ bag."},{em:"🪑",q:"It's ___ desk."}]},
+      u2:{focus:"my / his / her",items:[
+        {em:"⚽",q:"It's ___ ball.",hint:"(моя)"},{em:"🚗",q:"It's ___ car.",hint:"(его)"},
+        {em:"🪆",q:"It's ___ doll.",hint:"(её)"},{em:"🪁",q:"It's a big red ___.",hint:"(kite)"}]},
+      u3:{focus:"in / on / under · like",items:[
+        {em:"🐱",q:"The cat is ___ the box.",hint:"(в)"},{em:"🐶",q:"The dog is ___ the bed.",hint:"(на)"},
+        {em:"🐸",q:"The frog is ___ the table.",hint:"(под)"},{em:"❤️",q:"I ___ dogs.",hint:"(люблю)"},
+        {em:"🚫",q:"I ___ like spiders.",hint:"(don't)"}]},
+      u4:{focus:"have got · like",items:[
+        {em:"🍎",q:"I've ___ an apple.",hint:"(got)"},{em:"🍌",q:"I ___ bananas.",hint:"(люблю)"},
+        {em:"🥚",q:"I don't ___ eggs.",hint:"(like)"},{em:"🍰",q:"___ you like cake?",hint:"(Do)"}]},
+      u5:{focus:"can / can't",items:[
+        {em:"🏊",q:"I ___ swim.",hint:"(умею)"},{em:"🕊️",q:"I ___ fly.",hint:"(не умею)"},
+        {em:"🏃",q:"___ you run?",hint:"(умеешь?)"},{em:"💃",q:"She ___ dance.",hint:"(умеет)"}]},
+      u6:{focus:"there is / there are · on / under",items:[
+        {em:"🛋️",q:"There ___ a sofa.",hint:"(is)"},{em:"🛏️",q:"There ___ three beds.",hint:"(are)"},
+        {em:"💡",q:"The lamp is ___ the table.",hint:"(на)"},{em:"🐱",q:"The cat is ___ the bed.",hint:"(под)"}]},
+      u7:{focus:"present continuous · wearing",items:[
+        {em:"🧢",q:"I'm ___ a hat.",hint:"(wearing)"},{em:"👗",q:"She's ___ a red dress.",hint:"(wearing)"},
+        {em:"🧥",q:"He's got ___ jacket.",hint:"(a)"},{em:"👟",q:"They're wearing ___.",hint:"(shoes)"}]},
+      u8:{focus:"has got · How many?",items:[
+        {em:"👀",q:"It's ___ two eyes.",hint:"(got)"},{em:"👃",q:"The robot ___ got one nose.",hint:"(has)"},
+        {em:"💪",q:"___ many arms? Two.",hint:"(How)"},{em:"🗣️",q:"It's got ___ big head.",hint:"(a)"}]},
+      u9:{focus:"present continuous",items:[
+        {em:"🌊",q:"She's ___ in the sea.",hint:"(swimming)"},{em:"🏰",q:"He's ___ a sandcastle.",hint:"(building)"},
+        {em:"🙂",q:"What ___ you doing?",hint:"(are)"},{em:"☀️",q:"The sun ___ shining.",hint:"(is)"}]}
+    };
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||"u1";
@@ -98,6 +135,14 @@
       return '<div class="crow"><span class="em">'+w.emoji+'</span><div class="opts">'+opts+'</div></div>';
     }).join("");
 
+    // Задание 4: грамматика юнита
+    const g=GRAMMAR[unit.id];
+    let gramHtml="";
+    if(g){
+      const rows=g.items.map(it=>'<div class="grow"><span class="em">'+it.em+'</span><span class="gq">'+esc(it.q)+'</span>'+(it.hint?'<span class="gh">'+esc(it.hint)+'</span>':'')+'</div>').join("");
+      gramHtml='<h2><span class="num">4</span> Грамматика <span class="sm">— '+esc(g.focus)+'</span></h2><div class="gram">'+rows+'</div>';
+    }
+
     document.getElementById("sheet").innerHTML=
       '<div class="head"><div><div class="u">SUPER MINDS 1 · '+esc(unitNo.toUpperCase())+'</div><div class="t">'+unit.emoji+' '+esc(unit.title)+'</div></div><div style="font-size:40px">✏️</div></div>'+
       '<div class="name">Имя: ____________________________     Дата: ____________</div>'+
@@ -110,6 +155,8 @@
 
       '<h2><span class="num">3</span> Обведи правильное слово <span class="sm">— посмотри на картинку</span></h2>'+
       '<div class="circle">'+circle+'</div>'+
+
+      gramHtml+
 
       '<div class="foot">Made for @english.with_asya · Super Minds 1 (2nd edition) · '+esc(unit.title)+'</div>';
   </script>
