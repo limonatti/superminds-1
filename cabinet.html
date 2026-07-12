@@ -28,16 +28,33 @@
   .msg.err{color:#a23b1e} .msg.ok{color:#3f7a20}
   .note{font:700 12px 'Nunito',sans-serif;color:#a99a86;text-align:center;margin-top:14px;line-height:1.5}
 
-  /* dashboard */
-  .who{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .who{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
   .who .name{font-size:24px;font-weight:700;color:#7c2340}
   .logout{background:#f4e9d8;border-radius:999px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340}
-  .total{background:#dfeadd;border-radius:20px;padding:18px;text-align:center;margin-bottom:18px}
-  .total .big{font-size:40px;font-weight:700;color:#3f7a20}
-  .total .lbl{font:800 13px 'Nunito',sans-serif;color:#5a4f47}
+
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .bigcard{border-radius:20px;padding:16px;text-align:center}
+  .bigcard .n{font-size:34px;font-weight:700}
+  .bigcard .l{font:800 12px 'Nunito',sans-serif;margin-top:2px}
+  .c-streak{background:#fdeede} .c-streak .n{color:#d9772b}
+  .c-pts{background:#e7f0e1} .c-pts .n{color:#3f7a20}
+
+  .total{background:#eef4ea;border-radius:16px;padding:12px;text-align:center;margin-bottom:16px}
+  .total .big{font-size:26px;font-weight:700;color:#3f7a20}
+  .total .lbl{font:800 12px 'Nunito',sans-serif;color:#5a4f47}
+
+  .sec-title{font:900 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin:6px 2px 10px}
+  .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+  .badge{text-align:center}
+  .badge .m{width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative}
+  .badge.earned .m{background:radial-gradient(circle at 50% 35%,#ffe08a,#f4b93c);box-shadow:0 4px 0 #d99a1e}
+  .badge.locked .m{background:#ece3d3;filter:grayscale(1);opacity:.55}
+  .badge .cap{font:800 10.5px 'Nunito',sans-serif;color:#5a4f47;margin-top:5px;line-height:1.15;display:block}
+  .badge.earned .cap{color:#b5771a}
+
   .urow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
   .urow .ue{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;background:#f6e2cf;flex:none}
-  .urow .ut{font:800 14px 'Nunito',sans-serif;flex:none;width:120px}
+  .urow .ut{font:800 14px 'Nunito',sans-serif;flex:none;width:118px}
   .urow .ub{flex:1;height:12px;background:#e9dcc6;border-radius:999px;overflow:hidden}
   .urow .ub > i{display:block;height:100%;background:#7cb342;width:0}
   .urow .un{font:800 12px 'Nunito',sans-serif;color:#5a4f47;width:44px;text-align:right;flex:none}
@@ -58,89 +75,80 @@
   <script src="words.js"></script>
   <script src="sm-auth.js"></script>
   <script>
-    let authTab = "in"; // in | up
-
+    let authTab="in";
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-    function renderAuth() {
-      document.getElementById("sub").textContent = SM.isCloud
-        ? "Войди, чтобы прогресс сохранялся на всех устройствах"
-        : "Введи имя — прогресс сохранится на этом устройстве";
-      const root = document.getElementById("root");
-      const cloud = SM.isCloud;
-      root.innerHTML =
-        '<div class="panel">' +
-          (cloud ?
-            '<div class="tabs">' +
-              '<button class="tab ' + (authTab==="in"?"on":"") + '" onclick="setTab(\'in\')">Вход</button>' +
-              '<button class="tab ' + (authTab==="up"?"on":"") + '" onclick="setTab(\'up\')">Регистрация</button>' +
-            '</div>' : '') +
-          ((!cloud || authTab==="up") ? '<label>ИМЯ</label><input id="fName" placeholder="Например, Маша">' : '') +
-          (cloud ? '<label>EMAIL (родителя)</label><input id="fEmail" type="email" placeholder="mail@example.com">' +
-                   '<label>ПАРОЛЬ</label><input id="fPass" type="password" placeholder="минимум 6 символов">' : '') +
-          '<button class="primary" id="go">' + (cloud ? (authTab==="in"?"Войти":"Создать аккаунт") : "Начать") + '</button>' +
-          '<div class="msg" id="msg"></div>' +
-          (cloud ? '' : '<div class="note">Настоящие аккаунты (вход с любого устройства, учитель видит прогресс) включаются подключением Supabase — см. SETUP-SUPABASE.md</div>') +
+    function renderAuth(){
+      document.getElementById("sub").textContent = SM.isCloud ? "Войди, чтобы прогресс сохранялся на всех устройствах" : "Введи имя — прогресс сохранится на этом устройстве";
+      const cloud=SM.isCloud;
+      document.getElementById("root").innerHTML=
+        '<div class="panel">'+
+        (cloud?'<div class="tabs"><button class="tab '+(authTab==="in"?"on":"")+'" onclick="setTab(\'in\')">Вход</button><button class="tab '+(authTab==="up"?"on":"")+'" onclick="setTab(\'up\')">Регистрация</button></div>':'')+
+        ((!cloud||authTab==="up")?'<label>ИМЯ</label><input id="fName" placeholder="Например, Маша">':'')+
+        (cloud?'<label>EMAIL (родителя)</label><input id="fEmail" type="email" placeholder="mail@example.com"><label>ПАРОЛЬ</label><input id="fPass" type="password" placeholder="минимум 6 символов">':'')+
+        '<button class="primary" id="go">'+(cloud?(authTab==="in"?"Войти":"Создать аккаунт"):"Начать")+'</button>'+
+        '<div class="msg" id="msg"></div>'+
+        (cloud?'':'<div class="note">Настоящие аккаунты включаются подключением Supabase — см. SETUP-SUPABASE.md</div>')+
         '</div>';
-      document.getElementById("go").onclick = submit;
+      document.getElementById("go").onclick=submit;
     }
-
-    function setTab(t){ authTab=t; renderAuth(); }
-
-    async function submit() {
-      const msg = document.getElementById("msg");
-      msg.className = "msg"; msg.textContent = "…";
-      const name = (document.getElementById("fName")||{}).value || "";
-      const email = (document.getElementById("fEmail")||{}).value || "";
-      const pass = (document.getElementById("fPass")||{}).value || "";
+    function setTab(t){authTab=t;renderAuth();}
+    async function submit(){
+      const msg=document.getElementById("msg");msg.className="msg";msg.textContent="…";
+      const name=(document.getElementById("fName")||{}).value||"";
+      const email=(document.getElementById("fEmail")||{}).value||"";
+      const pass=(document.getElementById("fPass")||{}).value||"";
       let res;
-      if (!SM.isCloud) { res = await SM.signUp(name, "", ""); }
-      else if (authTab === "up") { res = await SM.signUp(name, email, pass); }
-      else { res = await SM.signIn(email, pass); }
-      if (!res.ok) { msg.className = "msg err"; msg.textContent = res.error || "Ошибка"; return; }
-      if (res.needConfirm) { msg.className = "msg ok"; msg.textContent = "Аккаунт создан! Проверь почту и подтверди email, потом войди."; return; }
+      if(!SM.isCloud)res=await SM.signUp(name,"","");
+      else if(authTab==="up")res=await SM.signUp(name,email,pass);
+      else res=await SM.signIn(email,pass);
+      if(!res.ok){msg.className="msg err";msg.textContent=res.error||"Ошибка";return;}
+      if(res.needConfirm){msg.className="msg ok";msg.textContent="Аккаунт создан! Проверь почту и подтверди email, потом войди.";return;}
       route();
     }
 
-    function unitStats(progress) {
-      return SM_UNITS.map(u => {
-        const ids = u.words.map((w,i)=>u.id+"-"+i);
-        const learned = ids.filter(id => progress[id] && progress[id].status === "learned").length;
-        return { u, learned, total: ids.length };
-      });
+    function unitStats(progress){
+      return SM_UNITS.map(u=>{const ids=u.words.map((w,i)=>u.id+"-"+i);
+        const learned=ids.filter(id=>progress[id]&&progress[id].status==="learned").length;
+        return {u,learned,total:ids.length,done:learned===ids.length};});
     }
 
-    async function renderDash(user) {
-      document.getElementById("sub").textContent = "Твой прогресс по словам";
-      const progress = await SM.loadProgress();
-      const stats = unitStats(progress);
-      const totalLearned = stats.reduce((s,x)=>s+x.learned,0);
-      const totalWords = stats.reduce((s,x)=>s+x.total,0);
-      const root = document.getElementById("root");
-      let rows = stats.map(x =>
-        '<div class="urow">' +
-          '<div class="ue">' + x.u.emoji + '</div>' +
-          '<div class="ut">' + esc(x.u.title) + '</div>' +
-          '<div class="ub"><i style="width:' + (x.total? x.learned/x.total*100:0) + '%"></i></div>' +
-          '<div class="un">' + x.learned + '/' + x.total + '</div>' +
-        '</div>'
+    async function renderDash(user){
+      document.getElementById("sub").textContent="Твой прогресс, серия и бейджи";
+      const progress=await SM.loadProgress()||{};
+      const meta=progress.__meta||{};
+      const stats=unitStats(progress);
+      const totalLearned=stats.reduce((s,x)=>s+x.learned,0);
+      const totalWords=stats.reduce((s,x)=>s+x.total,0);
+      const dayStreak=meta.dayStreak||0;
+      const points=meta.totalPoints||0;
+      const earnedCount=stats.filter(x=>x.done).length;
+
+      const badges=stats.map(x=>
+        '<div class="badge '+(x.done?"earned":"locked")+'"><div class="m">'+(x.done?x.u.emoji:"🔒")+'</div><span class="cap">'+esc(x.u.title)+'</span></div>'
       ).join("");
-      root.innerHTML =
-        '<div class="panel">' +
-          '<div class="who"><div class="name">Привет, ' + esc(user.name) + '!</div>' +
-            '<button class="logout" id="out">Выйти</button></div>' +
-          '<div class="total"><div class="big">' + totalLearned + ' / ' + totalWords + '</div>' +
-            '<div class="lbl">выучено слов</div></div>' +
-          rows +
-          '<a class="cta" href="trainer.html">Продолжить учить слова →</a>' +
+      const rows=stats.map(x=>
+        '<div class="urow"><div class="ue">'+x.u.emoji+'</div><div class="ut">'+esc(x.u.title)+'</div><div class="ub"><i style="width:'+(x.total?x.learned/x.total*100:0)+'%"></i></div><div class="un">'+x.learned+'/'+x.total+'</div></div>'
+      ).join("");
+
+      document.getElementById("root").innerHTML=
+        '<div class="panel">'+
+          '<div class="who"><div class="name">Привет, '+esc(user.name)+'!</div><button class="logout" id="out">Выйти</button></div>'+
+          '<div class="cards2">'+
+            '<div class="bigcard c-streak"><div class="n">🔥 '+dayStreak+'</div><div class="l">дней подряд</div></div>'+
+            '<div class="bigcard c-pts"><div class="n">⭐ '+points+'</div><div class="l">очков</div></div>'+
+          '</div>'+
+          '<div class="total"><div class="big">'+totalLearned+' / '+totalWords+'</div><div class="lbl">выучено слов</div></div>'+
+          '<div class="sec-title">БЕЙДЖИ ЗА ЮНИТЫ · '+earnedCount+' / '+stats.length+'</div>'+
+          '<div class="badges">'+badges+'</div>'+
+          '<div class="sec-title">ПРОГРЕСС ПО ЮНИТАМ</div>'+
+          rows+
+          '<a class="cta" href="trainer.html">Продолжить учить слова →</a>'+
         '</div>';
-      document.getElementById("out").onclick = async () => { await SM.signOut(); route(); };
+      document.getElementById("out").onclick=async()=>{await SM.signOut();route();};
     }
 
-    async function route() {
-      const user = await SM.getUser();
-      if (user) renderDash(user); else renderAuth();
-    }
+    async function route(){ const user=await SM.getUser(); if(user)renderDash(user); else renderAuth(); }
     route();
   </script>
 </body>

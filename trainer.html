@@ -74,14 +74,21 @@
   .pcard .pem{font-size:22px;margin-right:6px}
 
   .next{margin-top:14px;width:100%;background:#7c2340;color:#fff;border-radius:16px;padding:14px;font:800 16px 'Nunito',sans-serif;display:none}
-  .flash{animation:fl .5s}
-  @keyframes fl{0%{background:#fff}30%{background:#eaffe0}100%{background:#fff}}
 
   .done-box{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:34px 22px;text-align:center}
   .done-box .big{font-size:60px}
   .done-box h2{margin:8px 0 4px;color:#7c2340}
   .done-box .again{margin-top:16px;background:#7c2340;color:#fff;border-radius:16px;padding:14px 24px;font:800 16px 'Nunito',sans-serif}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+
+  /* бейдж-тост */
+  .badgeToast{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,19,16,.45);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
+  .badgeToast.show{opacity:1;pointer-events:auto}
+  .badgeCard{background:#fff;border-radius:28px;padding:32px 30px;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.3);animation:pop .3s ease;max-width:320px}
+  .badgeCard .medal{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#ffe08a,#f4b93c);display:flex;align-items:center;justify-content:center;font-size:60px;margin:0 auto 14px;box-shadow:0 6px 0 #d99a1e}
+  .badgeCard h3{margin:0 0 4px;color:#7c2340;font-size:22px}
+  .badgeCard p{margin:0;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .badgeCard .ok{margin-top:16px;background:#7c2340;color:#fff;border-radius:14px;padding:11px 26px;font:800 15px 'Nunito',sans-serif}
 </style>
 </head>
 <body>
@@ -101,7 +108,7 @@
 
     <div class="stats">
       <div class="stat" id="stPts">⭐ 0</div>
-      <div class="stat" id="stStreak">🔥 0</div>
+      <div class="stat" id="stDays">🔥 0 дн.</div>
       <div class="bar"><i id="barFill"></i></div>
       <div class="stat" id="stProg">0/0</div>
     </div>
@@ -111,11 +118,20 @@
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
   </div>
 
+  <div class="badgeToast" id="badgeToast">
+    <div class="badgeCard">
+      <div class="medal" id="badgeMedal">🏅</div>
+      <h3 id="badgeTitle">Бейдж получен!</h3>
+      <p id="badgeText"></p>
+      <button class="ok" id="badgeOk">Ура! 🎉</button>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script src="sm-auth.js"></script>
   <script>
-    const TARGET = 4; // сколько раз ответить верно, чтобы слово «выучено»
+    const TARGET = 4;
     const MODES = [
       { id: "mix",     label: "⚡ Микс",     cls: "mix" },
       { id: "flash",   label: "🃏 Карточки" },
@@ -129,327 +145,214 @@
 
     let selectedUnits = SM_UNITS.map(u => u.id);
     let mode = "mix";
-    let progress = {};   // { id: {level, correct, seen, status} }
+    let progress = {};   // { id:{level,correct,seen,status}, __meta:{...} }
+    let meta = { totalPoints:0, dayStreak:0, bestStreak:0, lastActive:null, badges:[] };
     let points = 0, streak = 0;
-    let prevId = null;
-    let busy = false;
-    let saveTimer = null;
+    let prevId = null, busy = false, saveTimer = null;
 
-    /* ---------- helpers ---------- */
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function pool(){ return SM_ALL_WORDS.filter(w => selectedUnits.includes(w.unitId)); }
     function lvl(id){ return (progress[id] && progress[id].level) || 0; }
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-
     function speak(t){ try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
 
-    let actx = null;
-    function beep(ok){
-      try{
-        actx = actx || new (window.AudioContext||window.webkitAudioContext)();
-        const seq = ok ? [[660,0],[880,.12]] : [[200,0]];
-        seq.forEach(([f,t])=>{
-          const o=actx.createOscillator(), g=actx.createGain();
-          o.frequency.value=f; o.type="sine"; o.connect(g); g.connect(actx.destination);
-          const s=actx.currentTime+t; g.gain.setValueAtTime(.0001,s); g.gain.exponentialRampToValueAtTime(.2,s+.02);
-          g.gain.exponentialRampToValueAtTime(.0001,s+.18); o.start(s); o.stop(s+.2);
-        });
-      }catch(e){}
+    let actx=null;
+    function beep(ok){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+      const seq=ok?[[660,0],[880,.12]]:[[200,0]];
+      seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
+        const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){} }
+
+    /* ---- дата / дневной streak ---- */
+    function dstr(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+    function touchDay(){
+      meta = progress.__meta || { totalPoints:0, dayStreak:0, bestStreak:0, lastActive:null, badges:[] };
+      if(!meta.badges) meta.badges = [];
+      const t = dstr(new Date());
+      if(meta.lastActive !== t){
+        const y = new Date(); y.setDate(y.getDate()-1);
+        meta.dayStreak = (meta.lastActive === dstr(y)) ? (meta.dayStreak||0)+1 : 1;
+        meta.lastActive = t;
+        if((meta.dayStreak||0) > (meta.bestStreak||0)) meta.bestStreak = meta.dayStreak;
+        progress.__meta = meta; saveSoon();
+      }
+      points = meta.totalPoints || 0;
     }
 
-    /* ---------- progress ---------- */
     function learnedCount(){ return pool().filter(w => lvl(w.id) >= TARGET).length; }
     function refreshStats(){
-      const total = pool().length, done = learnedCount();
-      document.getElementById("stProg").textContent = done + "/" + total;
-      document.getElementById("barFill").style.width = total ? (done/total*100)+"%" : "0%";
-      document.getElementById("stPts").textContent = "⭐ " + points;
-      document.getElementById("stStreak").textContent = "🔥 " + streak;
+      const total=pool().length, done=learnedCount();
+      document.getElementById("stProg").textContent = done+"/"+total;
+      document.getElementById("barFill").style.width = total?(done/total*100)+"%":"0%";
+      document.getElementById("stPts").textContent = "⭐ "+points;
+      document.getElementById("stDays").textContent = "🔥 "+(meta.dayStreak||0)+" дн.";
     }
-    function saveSoon(){ clearTimeout(saveTimer); saveTimer = setTimeout(()=>SM.saveProgress(progress), 600); }
+    function saveSoon(){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>SM.saveProgress(progress),600); }
+
     function record(word, ok){
       const p = progress[word.id] || { level:0, correct:0, seen:0, status:"learning" };
       p.seen++;
-      if(ok){ p.correct++; p.level = Math.min(TARGET, p.level+1); }
-      else  { p.level = Math.max(0, p.level-1); }
-      p.status = p.level >= TARGET ? "learned" : "learning";
-      progress[word.id] = p;
-      if(ok){ points += 10; streak++; if(streak%5===0) points += 5; }
-      else { streak = 0; }
+      if(ok){ p.correct++; p.level=Math.min(TARGET,p.level+1); } else { p.level=Math.max(0,p.level-1); }
+      p.status = p.level>=TARGET ? "learned":"learning";
+      progress[word.id]=p;
+      if(ok){ points+=10; streak++; if(streak%5===0) points+=5; } else { streak=0; }
+      meta.totalPoints = points; progress.__meta = meta;
+      if(ok) checkBadge(word);
       refreshStats(); saveSoon();
     }
 
-    /* ---------- word picker (спейс-репетишн) ---------- */
-    function pickWord(){
-      const p = pool();
-      if(!p.length) return null;
-      let cand = p.filter(w => lvl(w.id) < TARGET);
-      if(!cand.length) cand = p;                       // всё выучено → повторяем
-      cand = cand.filter(w => w.id !== prevId);
-      if(!cand.length) cand = p.filter(w=>lvl(w.id)<TARGET) ; if(!cand.length) cand = p;
-      // взвешиваем к менее выученным
-      const weighted = [];
-      cand.forEach(w => { const rep = (TARGET - lvl(w.id)) + 1; for(let i=0;i<rep;i++) weighted.push(w); });
-      const w = weighted[Math.floor(Math.random()*weighted.length)];
-      prevId = w.id;
-      return w;
+    /* ---- бейджи за юниты ---- */
+    function unitDone(u){ return u.words.every((w,i)=> (progress[u.id+"-"+i] && progress[u.id+"-"+i].level>=TARGET)); }
+    function checkBadge(word){
+      const u = SM_UNITS.find(x=>x.id===word.unitId);
+      if(!u) return;
+      if(unitDone(u) && !meta.badges.includes(u.id)){
+        meta.badges.push(u.id); progress.__meta=meta;
+        showBadge(u);
+      }
     }
-    function distractors(word, n){
-      return shuffle(SM_ALL_WORDS.filter(x => x.id !== word.id)).slice(0, n);
+    function showBadge(u){
+      document.getElementById("badgeMedal").textContent = u.emoji;
+      document.getElementById("badgeText").textContent = "Юнит «"+u.title+"» выучен полностью!";
+      const t=document.getElementById("badgeToast"); t.classList.add("show");
+      try{beep(true);setTimeout(()=>beep(true),160);}catch(e){}
     }
+    document.addEventListener("DOMContentLoaded",()=>{});
 
-    /* ---------- UI: chips + modes ---------- */
+    function pickWord(){
+      const p=pool(); if(!p.length) return null;
+      let cand=p.filter(w=>lvl(w.id)<TARGET); if(!cand.length) cand=p;
+      let c2=cand.filter(w=>w.id!==prevId); if(c2.length) cand=c2;
+      const weighted=[]; cand.forEach(w=>{const rep=(TARGET-lvl(w.id))+1;for(let i=0;i<rep;i++)weighted.push(w);});
+      const w=weighted[Math.floor(Math.random()*weighted.length)]; prevId=w.id; return w;
+    }
+    function distractors(word,n){ return shuffle(SM_ALL_WORDS.filter(x=>x.id!==word.id)).slice(0,n); }
+
     function renderChips(){
-      const box = document.getElementById("chips"); box.innerHTML = "";
-      const allOn = selectedUnits.length === SM_UNITS.length;
-      const all = document.createElement("button");
-      all.className = "chip" + (allOn?" on":""); all.textContent = "Все юниты";
-      all.onclick = () => { selectedUnits = allOn ? [] : SM_UNITS.map(u=>u.id); renderChips(); nextRound(); };
-      box.appendChild(all);
-      SM_UNITS.forEach(u => {
-        const c = document.createElement("button");
-        c.className = "chip" + (selectedUnits.includes(u.id)?" on":"");
-        c.textContent = u.emoji + " " + u.title;
-        c.onclick = () => {
-          if(selectedUnits.includes(u.id)) selectedUnits = selectedUnits.filter(x=>x!==u.id);
-          else selectedUnits.push(u.id);
-          renderChips(); nextRound();
-        };
-        box.appendChild(c);
-      });
+      const box=document.getElementById("chips"); box.innerHTML="";
+      const allOn=selectedUnits.length===SM_UNITS.length;
+      const all=document.createElement("button"); all.className="chip"+(allOn?" on":""); all.textContent="Все юниты";
+      all.onclick=()=>{selectedUnits=allOn?[]:SM_UNITS.map(u=>u.id);renderChips();nextRound();}; box.appendChild(all);
+      SM_UNITS.forEach(u=>{const c=document.createElement("button");c.className="chip"+(selectedUnits.includes(u.id)?" on":"");
+        c.textContent=u.emoji+" "+u.title;
+        c.onclick=()=>{if(selectedUnits.includes(u.id))selectedUnits=selectedUnits.filter(x=>x!==u.id);else selectedUnits.push(u.id);renderChips();nextRound();};
+        box.appendChild(c);});
     }
     function renderModes(){
-      const box = document.getElementById("modes"); box.innerHTML = "";
-      MODES.forEach(m => {
-        const b = document.createElement("button");
-        b.className = "mode " + (m.cls||"") + (mode===m.id?" on":"");
-        b.textContent = m.label;
-        b.onclick = () => { mode = m.id; renderModes(); nextRound(); };
-        box.appendChild(b);
-      });
+      const box=document.getElementById("modes"); box.innerHTML="";
+      MODES.forEach(m=>{const b=document.createElement("button");b.className="mode "+(m.cls||"")+(mode===m.id?" on":"");b.textContent=m.label;
+        b.onclick=()=>{mode=m.id;renderModes();nextRound();};box.appendChild(b);});
     }
 
-    /* ---------- round dispatch ---------- */
     function nextRound(){
-      busy = false;
-      refreshStats();
-      const stage = document.getElementById("stage");
-      if(!pool().length){ stage.innerHTML = '<div class="card"><div class="prompt">Выбери хотя бы один юнит 👆</div></div>'; return; }
-      if(mode === "pairs"){ return renderPairs(); }
-      if(learnedCount() === pool().length && mode !== "flash"){ return renderDone(); }
-      const w = pickWord();
-      let t = mode;
-      if(mode === "mix"){
-        let types = ["chooseEn","chooseRu","listen","assemble","type"];
-        if(/[ -]/.test(w.en)) types = ["chooseEn","chooseRu","listen","type"]; // без «собери» для фраз
-        t = types[Math.floor(Math.random()*types.length)];
-      }
-      if((t==="assemble") && /[ -]/.test(w.en)) t = "chooseEn";
-      if(t==="flash") renderFlash(w);
-      else if(t==="listen") renderListen(w);
-      else if(t==="chooseEn") renderChoose(w, "toEn");
-      else if(t==="chooseRu") renderChoose(w, "toRu");
-      else if(t==="type") renderType(w);
-      else if(t==="assemble") renderAssemble(w);
+      busy=false; refreshStats();
+      const stage=document.getElementById("stage");
+      if(!pool().length){stage.innerHTML='<div class="card"><div class="prompt">Выбери хотя бы один юнит 👆</div></div>';return;}
+      if(mode==="pairs") return renderPairs();
+      if(learnedCount()===pool().length && mode!=="flash") return renderDone();
+      const w=pickWord(); let t=mode;
+      if(mode==="mix"){ let types=["chooseEn","chooseRu","listen","assemble","type"]; if(/[ -]/.test(w.en)) types=["chooseEn","chooseRu","listen","type"]; t=types[Math.floor(Math.random()*types.length)]; }
+      if(t==="assemble"&&/[ -]/.test(w.en)) t="chooseEn";
+      if(t==="flash")renderFlash(w); else if(t==="listen")renderListen(w);
+      else if(t==="chooseEn")renderChoose(w,"toEn"); else if(t==="chooseRu")renderChoose(w,"toRu");
+      else if(t==="type")renderType(w); else if(t==="assemble")renderAssemble(w);
     }
-
     function autoNext(ms){ setTimeout(()=>{ if(mode!=="flash") nextRound(); }, ms||1100); }
 
-    /* ---------- Карточки ---------- */
     function renderFlash(w){
-      const stage = document.getElementById("stage");
-      stage.innerHTML =
-        '<div class="card" id="fc">' +
-          '<div class="emoji">'+w.emoji+'</div>' +
-          '<div class="word">'+esc(w.en)+'</div>' +
-          '<button class="speak" id="spk">🔊 послушать</button>' +
-          '<div class="ru" id="ru" style="display:none;margin-top:8px">'+esc(w.ru)+'</div>' +
-          '<div class="prompt" id="ph">нажми на карточку, чтобы увидеть перевод</div>' +
-        '</div>' +
-        '<div class="fc-btns" id="fb" style="display:none">' +
-          '<button class="no" id="bno">❌ Ещё учу</button>' +
-          '<button class="yes" id="byes">✅ Знаю</button>' +
-        '</div>';
-      speak(w.en);
-      let flipped = false;
-      document.getElementById("spk").onclick = e => { e.stopPropagation(); speak(w.en); };
-      document.getElementById("fc").onclick = () => { if(flipped) return; flipped=true;
-        document.getElementById("ru").style.display="block";
-        document.getElementById("ph").style.display="none";
-        document.getElementById("fb").style.display="flex"; };
-      document.getElementById("bno").onclick = () => { record(w,false); nextRound(); };
-      document.getElementById("byes").onclick = () => { record(w,true); beep(true); nextRound(); };
+      const stage=document.getElementById("stage");
+      stage.innerHTML='<div class="card" id="fc"><div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div>'+
+        '<button class="speak" id="spk">🔊 послушать</button><div class="ru" id="ru" style="display:none;margin-top:8px">'+esc(w.ru)+'</div>'+
+        '<div class="prompt" id="ph">нажми на карточку, чтобы увидеть перевод</div></div>'+
+        '<div class="fc-btns" id="fb" style="display:none"><button class="no" id="bno">❌ Ещё учу</button><button class="yes" id="byes">✅ Знаю</button></div>';
+      speak(w.en); let flipped=false;
+      document.getElementById("spk").onclick=e=>{e.stopPropagation();speak(w.en);};
+      document.getElementById("fc").onclick=()=>{if(flipped)return;flipped=true;document.getElementById("ru").style.display="block";document.getElementById("ph").style.display="none";document.getElementById("fb").style.display="flex";};
+      document.getElementById("bno").onclick=()=>{record(w,false);nextRound();};
+      document.getElementById("byes").onclick=()=>{record(w,true);beep(true);nextRound();};
     }
-
-    /* ---------- Выбор (перевод / слово) ---------- */
-    function renderChoose(w, dir){
-      const stage = document.getElementById("stage");
-      const opts = shuffle([w, ...distractors(w,3)]);
-      const head = dir==="toEn"
-        ? '<div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
-        : '<div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
-      stage.innerHTML = '<div class="card">'+head+'</div><div class="opts" id="opts"></div>';
-      if(dir==="toRu"){ speak(w.en); const s=document.getElementById("spk"); if(s) s.onclick=()=>speak(w.en); }
-      const box = document.getElementById("opts");
-      opts.forEach(o => {
-        const b = document.createElement("button"); b.className="opt";
-        b.textContent = dir==="toEn" ? o.en : o.ru;
-        b.onclick = () => {
-          if(busy) return; busy=true;
-          const ok = o.id===w.id;
-          const correctBtn = [...box.children].find(c => c.textContent === (dir==="toEn"?w.en:w.ru));
-          if(ok){ b.classList.add("correct"); } else { b.classList.add("wrong"); if(correctBtn) correctBtn.classList.add("correct"); }
-          beep(ok); if(dir==="toEn") speak(w.en); record(w, ok); autoNext(ok?900:1500);
-        };
-        box.appendChild(b);
-      });
+    function renderChoose(w,dir){
+      const stage=document.getElementById("stage"); const opts=shuffle([w,...distractors(w,3)]);
+      const head=dir==="toEn"?'<div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
+        :'<div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
+      stage.innerHTML='<div class="card">'+head+'</div><div class="opts" id="opts"></div>';
+      if(dir==="toRu"){speak(w.en);const s=document.getElementById("spk");if(s)s.onclick=()=>speak(w.en);}
+      const box=document.getElementById("opts");
+      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=dir==="toEn"?o.en:o.ru;
+        b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent===(dir==="toEn"?w.en:w.ru));
+          if(ok)b.classList.add("correct");else{b.classList.add("wrong");if(cb)cb.classList.add("correct");}
+          beep(ok);if(dir==="toEn")speak(w.en);record(w,ok);autoNext(ok?900:1500);};box.appendChild(b);});
     }
-
-    /* ---------- Аудирование ---------- */
     function renderListen(w){
-      const stage = document.getElementById("stage");
-      const opts = shuffle([w, ...distractors(w,3)]);
-      stage.innerHTML =
-        '<div class="card"><button class="bigspeak" id="big">🔊</button>' +
-          '<div class="prompt">послушай и выбери картинку</div></div>' +
-        '<div class="opts" id="opts"></div>';
-      speak(w.en);
-      document.getElementById("big").onclick = () => speak(w.en);
-      const box = document.getElementById("opts");
-      opts.forEach(o => {
-        const b = document.createElement("button"); b.className="opt";
-        b.innerHTML = '<span class="oem">'+o.emoji+'</span>'+esc(o.en);
-        b.onclick = () => {
-          if(busy) return; busy=true;
-          const ok = o.id===w.id;
-          const correctBtn = [...box.children].find(c => c.textContent.includes(w.en));
-          if(ok) b.classList.add("correct"); else { b.classList.add("wrong"); if(correctBtn) correctBtn.classList.add("correct"); }
-          beep(ok); speak(w.en); record(w, ok); autoNext(ok?900:1500);
-        };
-        box.appendChild(b);
-      });
+      const stage=document.getElementById("stage"); const opts=shuffle([w,...distractors(w,3)]);
+      stage.innerHTML='<div class="card"><button class="bigspeak" id="big">🔊</button><div class="prompt">послушай и выбери картинку</div></div><div class="opts" id="opts"></div>';
+      speak(w.en); document.getElementById("big").onclick=()=>speak(w.en);
+      const box=document.getElementById("opts");
+      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+o.emoji+'</span>'+esc(o.en);
+        b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent.includes(w.en));
+          if(ok)b.classList.add("correct");else{b.classList.add("wrong");if(cb)cb.classList.add("correct");}
+          beep(ok);speak(w.en);record(w,ok);autoNext(ok?900:1500);};box.appendChild(b);});
     }
-
-    /* ---------- Впиши слово ---------- */
     function renderType(w){
-      const stage = document.getElementById("stage");
-      stage.innerHTML =
-        '<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div>' +
-          '<button class="speak" id="spk">🔊 послушать</button>' +
-          '<div class="prompt">напиши слово по-английски</div></div>' +
-        '<div class="field"><input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type here…"><button class="check" id="chk">OK</button></div>' +
-        '<button class="next" id="next">дальше →</button>';
-      speak(w.en);
-      document.getElementById("spk").onclick = () => speak(w.en);
-      const inp = document.getElementById("inp"); inp.focus();
-      function submit(){
-        if(busy) return; busy=true;
-        const val = inp.value.trim().toLowerCase();
-        const ok = val === w.en.toLowerCase();
-        inp.style.borderColor = ok ? "#7cb342" : "#e07a5f";
-        inp.style.background = ok ? "#dff0d2" : "#fbe0d8";
-        if(!ok){ inp.value = w.en; }
-        beep(ok); speak(w.en); record(w, ok);
-        document.getElementById("next").style.display="block";
-        document.getElementById("next").onclick = nextRound;
-      }
-      document.getElementById("chk").onclick = submit;
-      inp.addEventListener("keydown", e => { if(e.key==="Enter") submit(); });
+      const stage=document.getElementById("stage");
+      stage.innerHTML='<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><button class="speak" id="spk">🔊 послушать</button><div class="prompt">напиши слово по-английски</div></div>'+
+        '<div class="field"><input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type here…"><button class="check" id="chk">OK</button></div><button class="next" id="next">дальше →</button>';
+      speak(w.en); document.getElementById("spk").onclick=()=>speak(w.en);
+      const inp=document.getElementById("inp"); inp.focus();
+      function submit(){ if(busy)return;busy=true;const val=inp.value.trim().toLowerCase();const ok=val===w.en.toLowerCase();
+        inp.style.borderColor=ok?"#7cb342":"#e07a5f";inp.style.background=ok?"#dff0d2":"#fbe0d8";if(!ok)inp.value=w.en;
+        beep(ok);speak(w.en);record(w,ok);const n=document.getElementById("next");n.style.display="block";n.onclick=nextRound;}
+      document.getElementById("chk").onclick=submit; inp.addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
     }
-
-    /* ---------- Собери слово ---------- */
     function renderAssemble(w){
-      const stage = document.getElementById("stage");
-      const target = w.en;
-      const letters = shuffle(target.split(""));
-      stage.innerHTML =
-        '<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div>' +
-          '<div class="built" id="built"></div>' +
-          '<div class="letters" id="lets"></div>' +
-          '<button class="tinybtn" id="clr">⌫ стереть</button>' +
-        '</div><button class="next" id="next">дальше →</button>';
-      const builtEl = document.getElementById("built"), lets = document.getElementById("lets");
-      let built = [];
-      letters.forEach((ch,i) => {
-        const b = document.createElement("button"); b.className="letter"; b.textContent=ch; b.dataset.i=i;
-        b.onclick = () => { if(busy||b.classList.contains("used")) return; b.classList.add("used"); built.push({ch,el:b}); draw(); };
-        lets.appendChild(b);
-      });
-      document.getElementById("clr").onclick = () => { if(busy) return; const last=built.pop(); if(last) last.el.classList.remove("used"); draw(); };
-      function draw(){
-        builtEl.textContent = built.map(x=>x.ch).join("");
-        if(built.length === target.length){
-          busy = true;
-          const guess = built.map(x=>x.ch).join("");
-          const ok = guess === target;
-          builtEl.style.color = ok ? "#3f7a20" : "#a23b1e";
-          if(!ok) builtEl.textContent = target;
-          beep(ok); speak(target); record(w, ok);
-          const nx = document.getElementById("next"); nx.style.display="block"; nx.onclick = nextRound;
-        }
-      }
+      const stage=document.getElementById("stage");const target=w.en;const letters=shuffle(target.split(""));
+      stage.innerHTML='<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="built" id="built"></div><div class="letters" id="lets"></div><button class="tinybtn" id="clr">⌫ стереть</button></div><button class="next" id="next">дальше →</button>';
+      const builtEl=document.getElementById("built"),lets=document.getElementById("lets");let built=[];
+      letters.forEach((ch,i)=>{const b=document.createElement("button");b.className="letter";b.textContent=ch;
+        b.onclick=()=>{if(busy||b.classList.contains("used"))return;b.classList.add("used");built.push({ch,el:b});draw();};lets.appendChild(b);});
+      document.getElementById("clr").onclick=()=>{if(busy)return;const last=built.pop();if(last)last.el.classList.remove("used");draw();};
+      function draw(){ builtEl.textContent=built.map(x=>x.ch).join("");
+        if(built.length===target.length){busy=true;const ok=built.map(x=>x.ch).join("")===target;builtEl.style.color=ok?"#3f7a20":"#a23b1e";if(!ok)builtEl.textContent=target;
+          beep(ok);speak(target);record(w,ok);const n=document.getElementById("next");n.style.display="block";n.onclick=nextRound;} }
     }
-
-    /* ---------- Найди пару ---------- */
     function renderPairs(){
-      const stage = document.getElementById("stage");
-      const p = pool();
-      const batch = shuffle(p).slice(0, Math.min(6, p.length));
-      const left = shuffle(batch.map(w => ({w, side:"en"})));
-      const right = shuffle(batch.map(w => ({w, side:"ru"})));
-      const rows = Math.max(left.length, right.length);
-      let html = '<div class="pairs" id="pairs">';
-      // чередуем колонки построчно для сетки 2 колонки
-      for(let i=0;i<rows;i++){
-        const l = left[i], r = right[i];
-        html += l ? '<button class="pcard" data-id="'+l.w.id+'" data-side="en"><span class="pem">'+l.w.emoji+'</span>'+esc(l.w.en)+'</button>' : '<div></div>';
-        html += r ? '<button class="pcard" data-id="'+r.w.id+'" data-side="ru">'+esc(r.w.ru)+'</button>' : '<div></div>';
-      }
-      html += '</div>';
-      stage.innerHTML = '<div class="prompt" style="text-align:center;margin-bottom:8px">Соедини слово и перевод</div>' + html;
-      let sel = null, left_count = batch.length;
-      document.querySelectorAll("#pairs .pcard").forEach(c => {
-        c.onclick = () => {
-          if(c.classList.contains("done")) return;
-          if(!sel){ sel = c; c.classList.add("sel"); if(c.dataset.side==="en") speak(c.textContent.replace(/[^a-zA-Z '-]/g,"").trim()); return; }
-          if(sel === c){ c.classList.remove("sel"); sel=null; return; }
-          if(sel.dataset.side === c.dataset.side){ sel.classList.remove("sel"); sel=c; c.classList.add("sel"); return; }
-          // пара выбрана
-          const w = SM_ALL_WORDS.find(x=>x.id===c.dataset.id);
-          if(sel.dataset.id === c.dataset.id){
-            beep(true); const en = SM_ALL_WORDS.find(x=>x.id===c.dataset.id); speak(en.en);
-            sel.classList.add("done"); c.classList.add("done"); sel.classList.remove("sel");
-            record(w, true); sel=null; left_count--;
-            if(left_count===0) setTimeout(renderPairs, 500);
-          } else {
-            beep(false); const s=sel; s.classList.add("wrong"); c.classList.add("wrong");
-            const ww = SM_ALL_WORDS.find(x=>x.id===s.dataset.id); if(ww) record(ww, false);
-            setTimeout(()=>{ s.classList.remove("wrong","sel"); c.classList.remove("wrong"); }, 600); sel=null;
-          }
-        };
-      });
+      const stage=document.getElementById("stage");const p=pool();const batch=shuffle(p).slice(0,Math.min(6,p.length));
+      const left=shuffle(batch.map(w=>({w,side:"en"})));const right=shuffle(batch.map(w=>({w,side:"ru"})));const rows=Math.max(left.length,right.length);
+      let html='<div class="pairs" id="pairs">';
+      for(let i=0;i<rows;i++){const l=left[i],r=right[i];
+        html+=l?'<button class="pcard" data-id="'+l.w.id+'" data-side="en"><span class="pem">'+l.w.emoji+'</span>'+esc(l.w.en)+'</button>':'<div></div>';
+        html+=r?'<button class="pcard" data-id="'+r.w.id+'" data-side="ru">'+esc(r.w.ru)+'</button>':'<div></div>';}
+      html+='</div>';
+      stage.innerHTML='<div class="prompt" style="text-align:center;margin-bottom:8px">Соедини слово и перевод</div>'+html;
+      let sel=null,left_count=batch.length;
+      document.querySelectorAll("#pairs .pcard").forEach(c=>{c.onclick=()=>{
+        if(c.classList.contains("done"))return;
+        if(!sel){sel=c;c.classList.add("sel");if(c.dataset.side==="en"){const en=SM_ALL_WORDS.find(x=>x.id===c.dataset.id);if(en)speak(en.en);}return;}
+        if(sel===c){c.classList.remove("sel");sel=null;return;}
+        if(sel.dataset.side===c.dataset.side){sel.classList.remove("sel");sel=c;c.classList.add("sel");return;}
+        const w=SM_ALL_WORDS.find(x=>x.id===c.dataset.id);
+        if(sel.dataset.id===c.dataset.id){beep(true);const en=SM_ALL_WORDS.find(x=>x.id===c.dataset.id);if(en)speak(en.en);
+          sel.classList.add("done");c.classList.add("done");sel.classList.remove("sel");record(w,true);sel=null;left_count--;
+          if(left_count===0)setTimeout(renderPairs,500);}
+        else{beep(false);const s=sel;s.classList.add("wrong");c.classList.add("wrong");const ww=SM_ALL_WORDS.find(x=>x.id===s.dataset.id);if(ww)record(ww,false);
+          setTimeout(()=>{s.classList.remove("wrong","sel");c.classList.remove("wrong");},600);sel=null;}
+      };});
     }
-
-    /* ---------- Готово ---------- */
     function renderDone(){
-      const stage = document.getElementById("stage");
-      stage.innerHTML =
-        '<div class="done-box"><div class="big">🎉</div><h2>Все слова выучены!</h2>' +
-        '<div class="prompt">Заработано ⭐ '+points+' очков. Можно повторить или выбрать другой режим.</div>' +
-        '<button class="again" id="again">🔁 Повторить</button></div>';
-      document.getElementById("again").onclick = () => { prevId=null; mode = "mix"; renderModes(); nextRound(); };
+      const stage=document.getElementById("stage");
+      stage.innerHTML='<div class="done-box"><div class="big">🎉</div><h2>Все слова выучены!</h2><div class="prompt">Заработано ⭐ '+points+' очков. Серия: 🔥 '+(meta.dayStreak||0)+' дн.</div><button class="again" id="again">🔁 Повторить</button></div>';
+      document.getElementById("again").onclick=()=>{prevId=null;mode="mix";renderModes();nextRound();};
     }
 
-    /* ---------- init ---------- */
+    document.getElementById("badgeOk").onclick=()=>document.getElementById("badgeToast").classList.remove("show");
+    document.getElementById("badgeToast").onclick=e=>{ if(e.target.id==="badgeToast") document.getElementById("badgeToast").classList.remove("show"); };
+
     (async function(){
-      const user = await SM.getUser();
-      if(user) document.getElementById("greet").textContent = "Привет, "+user.name+"! Учим слова 💪";
-      if(SM.isCloud && !user){
-        const b=document.getElementById("banner"); b.style.display="block";
-        b.innerHTML='Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';
-      }
-      progress = await SM.loadProgress() || {};
-      renderChips(); renderModes(); nextRound();
+      const user=await SM.getUser();
+      if(user)document.getElementById("greet").textContent="Привет, "+user.name+"! Учим слова 💪";
+      if(SM.isCloud&&!user){const b=document.getElementById("banner");b.style.display="block";b.innerHTML='Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';}
+      progress=await SM.loadProgress()||{};
+      touchDay();
+      renderChips();renderModes();nextRound();
     })();
   </script>
 </body>
