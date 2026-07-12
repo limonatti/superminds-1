@@ -1,6 +1,6 @@
 /* Super Minds 1 · словарь тренажёра
    Каждый юнит: { id, unit, title, emoji, color, words:[{en, ru, emoji}] }
-   id слова строим как unitId + "-" + индекс — используется для прогресса. */
+   id слова: unitId + "-" + индекс — используется для прогресса. */
 window.SM_UNITS = [
   {
     id: "welcome", unit: "Welcome", title: "Friends · цвета", emoji: "👋", color: "#f6e2cf",
@@ -14,7 +14,8 @@ window.SM_UNITS = [
       { en: "pink", ru: "розовый", emoji: "🌸" },
       { en: "brown", ru: "коричневый", emoji: "🟤" },
       { en: "black", ru: "чёрный", emoji: "⚫" },
-      { en: "white", ru: "белый", emoji: "⚪" }
+      { en: "white", ru: "белый", emoji: "⚪" },
+      { en: "grey", ru: "серый", emoji: "🩶" }
     ]
   },
   {
@@ -44,7 +45,9 @@ window.SM_UNITS = [
       { en: "pencil case", ru: "пенал", emoji: "🖍️" },
       { en: "desk", ru: "парта", emoji: "🪑" },
       { en: "chair", ru: "стул", emoji: "💺" },
-      { en: "notebook", ru: "тетрадь", emoji: "📓" }
+      { en: "notebook", ru: "тетрадь", emoji: "📓" },
+      { en: "teacher", ru: "учитель", emoji: "👩‍🏫" },
+      { en: "board", ru: "доска", emoji: "📋" }
     ]
   },
   {
@@ -59,7 +62,9 @@ window.SM_UNITS = [
       { en: "kite", ru: "воздушный змей", emoji: "🪁" },
       { en: "bike", ru: "велосипед", emoji: "🚲" },
       { en: "computer game", ru: "компьютерная игра", emoji: "🎮" },
-      { en: "monster", ru: "монстрик", emoji: "👾" }
+      { en: "monster", ru: "монстрик", emoji: "👾" },
+      { en: "robot", ru: "робот", emoji: "🤖" },
+      { en: "balloon", ru: "шарик", emoji: "🎈" }
     ]
   },
   {
@@ -74,7 +79,9 @@ window.SM_UNITS = [
       { en: "frog", ru: "лягушка", emoji: "🐸" },
       { en: "rabbit", ru: "кролик", emoji: "🐰" },
       { en: "spider", ru: "паук", emoji: "🕷️" },
-      { en: "lizard", ru: "ящерица", emoji: "🦎" }
+      { en: "lizard", ru: "ящерица", emoji: "🦎" },
+      { en: "duck", ru: "утка", emoji: "🦆" },
+      { en: "elephant", ru: "слон", emoji: "🐘" }
     ]
   },
   {
@@ -89,7 +96,9 @@ window.SM_UNITS = [
       { en: "chicken", ru: "курица", emoji: "🍗" },
       { en: "egg", ru: "яйцо", emoji: "🥚" },
       { en: "milk", ru: "молоко", emoji: "🥛" },
-      { en: "juice", ru: "сок", emoji: "🧃" }
+      { en: "juice", ru: "сок", emoji: "🧃" },
+      { en: "bread", ru: "хлеб", emoji: "🍞" },
+      { en: "water", ru: "вода", emoji: "💧" }
     ]
   },
   {
@@ -104,7 +113,9 @@ window.SM_UNITS = [
       { en: "ride a bike", ru: "кататься на велосипеде", emoji: "🚴" },
       { en: "play football", ru: "играть в футбол", emoji: "⚽" },
       { en: "run", ru: "бегать", emoji: "🏃" },
-      { en: "jump", ru: "прыгать", emoji: "🤸" }
+      { en: "jump", ru: "прыгать", emoji: "🤸" },
+      { en: "climb", ru: "лазить", emoji: "🧗" },
+      { en: "play tennis", ru: "играть в теннис", emoji: "🎾" }
     ]
   },
   {
@@ -119,7 +130,9 @@ window.SM_UNITS = [
       { en: "bed", ru: "кровать", emoji: "🛏️" },
       { en: "sofa", ru: "диван", emoji: "🛋️" },
       { en: "table", ru: "стол", emoji: "🪑" },
-      { en: "lamp", ru: "лампа", emoji: "💡" }
+      { en: "lamp", ru: "лампа", emoji: "💡" },
+      { en: "clock", ru: "часы", emoji: "🕐" },
+      { en: "cupboard", ru: "шкаф", emoji: "🗄️" }
     ]
   },
   {
@@ -134,7 +147,9 @@ window.SM_UNITS = [
       { en: "socks", ru: "носки", emoji: "🧦" },
       { en: "hat", ru: "шапка", emoji: "🧢" },
       { en: "jacket", ru: "куртка", emoji: "🧥" },
-      { en: "shorts", ru: "шорты", emoji: "🩳" }
+      { en: "shorts", ru: "шорты", emoji: "🩳" },
+      { en: "boots", ru: "ботинки", emoji: "🥾" },
+      { en: "gloves", ru: "перчатки", emoji: "🧤" }
     ]
   },
   {
@@ -149,7 +164,9 @@ window.SM_UNITS = [
       { en: "eyes", ru: "глаза", emoji: "👀" },
       { en: "ears", ru: "уши", emoji: "👂" },
       { en: "nose", ru: "нос", emoji: "👃" },
-      { en: "mouth", ru: "рот", emoji: "👄" }
+      { en: "mouth", ru: "рот", emoji: "👄" },
+      { en: "hair", ru: "волосы", emoji: "💇" },
+      { en: "fingers", ru: "пальцы", emoji: "🖐️" }
     ]
   },
   {
@@ -164,7 +181,9 @@ window.SM_UNITS = [
       { en: "bucket", ru: "ведёрко", emoji: "🪣" },
       { en: "spade", ru: "лопатка", emoji: "🛠️" },
       { en: "sandcastle", ru: "замок из песка", emoji: "🏰" },
-      { en: "starfish", ru: "морская звезда", emoji: "⭐" }
+      { en: "starfish", ru: "морская звезда", emoji: "⭐" },
+      { en: "towel", ru: "полотенце", emoji: "🧺" },
+      { en: "umbrella", ru: "зонт", emoji: "⛱️" }
     ]
   }
 ];

@@ -13,40 +13,75 @@
   button{font-family:inherit;cursor:pointer;border:none}
   .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
   .cab{position:fixed;top:12px;right:12px;z-index:9;background:#fff;color:#7c2340;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
-  .wrap{max-width:700px;margin:0 auto;padding:64px 20px 56px}
-  h1{margin:0;text-align:center;font-size:clamp(30px,6vw,46px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{text-align:center;margin:10px 0 22px;font:800 15px 'Nunito',sans-serif;color:#5a4f47}
-  .banner{background:#fff4e0;border:2px solid #f0c96b;border-radius:16px;padding:12px 16px;font:700 13px 'Nunito',sans-serif;color:#7a5b12;text-align:center;margin-bottom:18px}
+  .wrap{max-width:720px;margin:0 auto;padding:64px 18px 56px}
+  h1{margin:0;text-align:center;font-size:clamp(28px,6vw,44px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .banner{background:#fff4e0;border:2px solid #f0c96b;border-radius:16px;padding:11px 15px;font:700 13px 'Nunito',sans-serif;color:#7a5b12;text-align:center;margin-bottom:16px}
   .banner a{color:#7c2340;font-weight:900;text-decoration:underline}
-  .label{font:800 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.5px;margin:0 2px 8px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:7px 14px;font:800 13px 'Nunito',sans-serif;color:#5a4f47}
-  .chip.on{background:#7c2340;border-color:#7c2340;color:#fff}
-  .modes{display:flex;gap:10px;margin-bottom:20px}
-  .mode{flex:1;background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:12px;font:800 15px 'Nunito',sans-serif;color:#5a4f47}
-  .mode.on{background:#7c2340;border-color:#7c2340;color:#fff}
-  .progress{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-  .bar{flex:1;height:14px;background:#e9dcc6;border-radius:999px;overflow:hidden}
-  .bar > i{display:block;height:100%;background:#7cb342;width:0;transition:width .3s}
-  .pcount{font:800 13px 'Nunito',sans-serif;color:#5a4f47;white-space:nowrap}
+  .label{font:800 11px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.5px;margin:0 2px 8px}
 
-  .card{background:#fff;border-radius:28px;box-shadow:0 8px 0 #e3d3ba;padding:36px 24px;text-align:center;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative}
-  .emoji{font-size:84px;line-height:1;margin-bottom:14px}
-  .word{font-size:40px;font-weight:700;color:#7c2340}
-  .ru{font-size:30px;font-weight:600;color:#1c1310;margin-top:6px}
-  .hint{font:700 13px 'Nunito',sans-serif;color:#a99a86;margin-top:16px}
-  .speak{margin-top:14px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
-  .fc-btns{display:flex;gap:12px;margin-top:18px}
-  .fc-btns button{flex:1;border-radius:16px;padding:16px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:6px 12px;font:800 12.5px 'Nunito',sans-serif;color:#5a4f47}
+  .chip.on{background:#7c2340;border-color:#7c2340;color:#fff}
+
+  .modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .mode{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:9px 13px;font:800 13.5px 'Nunito',sans-serif;color:#5a4f47}
+  .mode.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .mode.mix.on{background:#e0952a;border-color:#e0952a}
+  .mode.mix{color:#b06a12;border-color:#f0c96b}
+
+  .stats{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .stat{background:#fff;border-radius:12px;padding:7px 12px;font:800 13px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;white-space:nowrap}
+  .bar{flex:1;height:14px;background:#e9dcc6;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#8bc34a,#7cb342);width:0;transition:width .35s}
+
+  .card{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:30px 22px;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:pop .25s ease}
+  @keyframes pop{from{transform:scale(.97);opacity:.4}to{transform:scale(1);opacity:1}}
+  .emoji{font-size:76px;line-height:1;margin-bottom:10px}
+  .word{font-size:38px;font-weight:700;color:#7c2340}
+  .ru{font-size:26px;font-weight:600;color:#1c1310}
+  .prompt{font:800 13px 'Nunito',sans-serif;color:#a99a86;margin-top:12px}
+  .speak{margin-top:12px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
+  .bigspeak{width:120px;height:120px;border-radius:50%;background:#f6e2cf;font-size:56px;display:flex;align-items:center;justify-content:center;margin:6px auto 4px;box-shadow:0 6px 0 #e3d3ba}
+
+  .fc-btns{display:flex;gap:12px;margin-top:16px}
+  .fc-btns button{flex:1;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 rgba(0,0,0,.08)}
   .no{background:#fbe0d8;color:#a23b1e}
   .yes{background:#dff0d2;color:#3f7a20}
 
-  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:18px;padding:18px;font-size:22px;font-weight:600;color:#1c1310}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:18px;padding:16px;font-size:20px;font-weight:600;color:#1c1310;transition:transform .1s}
+  .opt:active{transform:scale(.97)}
+  .opt .oem{font-size:30px;display:block;margin-bottom:4px}
   .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
   .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
-  .next{margin-top:16px;width:100%;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;display:none}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
+
+  .field{display:flex;gap:8px;margin-top:16px}
+  .field input{flex:1;border:2px solid #e3d3ba;border-radius:16px;padding:15px 16px;font:700 22px 'Fredoka',sans-serif;text-align:center;background:#fdfbf7;color:#1c1310}
+  .field input:focus{outline:none;border-color:#7c2340}
+  .check{background:#7c2340;color:#fff;border-radius:16px;padding:0 22px;font:800 16px 'Nunito',sans-serif}
+
+  .built{min-height:46px;font-size:30px;font-weight:700;color:#7c2340;letter-spacing:3px;margin-top:14px;border-bottom:3px dashed #e3d3ba;display:inline-flex;gap:2px;justify-content:center;min-width:120px;padding:4px 8px}
+  .letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .letter{background:#fff;border:2px solid #e3d3ba;border-radius:12px;width:46px;height:52px;font-size:24px;font-weight:700;color:#7c2340;display:flex;align-items:center;justify-content:center}
+  .letter.used{opacity:.25;pointer-events:none}
+  .tinybtn{margin-top:12px;background:#f4e9d8;border-radius:999px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340}
+
+  .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
+  .pcard{background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:14px 10px;font-size:17px;font-weight:600;text-align:center;min-height:52px;display:flex;align-items:center;justify-content:center}
+  .pcard.sel{border-color:#7c2340;background:#fbeef1}
+  .pcard.done{opacity:0;pointer-events:none;transition:opacity .35s}
+  .pcard .pem{font-size:22px;margin-right:6px}
+
+  .next{margin-top:14px;width:100%;background:#7c2340;color:#fff;border-radius:16px;padding:14px;font:800 16px 'Nunito',sans-serif;display:none}
+  .flash{animation:fl .5s}
+  @keyframes fl{0%{background:#fff}30%{background:#eaffe0}100%{background:#fff}}
+
+  .done-box{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:34px 22px;text-align:center}
+  .done-box .big{font-size:60px}
+  .done-box h2{margin:8px 0 4px;color:#7c2340}
+  .done-box .again{margin-top:16px;background:#7c2340;color:#fff;border-radius:16px;padding:14px 24px;font:800 16px 'Nunito',sans-serif}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
 </style>
 </head>
 <body>
@@ -61,14 +96,14 @@
     <div class="label">ВЫБЕРИ ЮНИТЫ</div>
     <div class="chips" id="chips"></div>
 
-    <div class="modes">
-      <button class="mode on" id="mFlash" onclick="setMode('flash')">🃏 Карточки</button>
-      <button class="mode" id="mQuiz" onclick="setMode('quiz')">✍️ Квиз</button>
-    </div>
+    <div class="label">РЕЖИМ</div>
+    <div class="modes" id="modes"></div>
 
-    <div class="progress">
+    <div class="stats">
+      <div class="stat" id="stPts">⭐ 0</div>
+      <div class="stat" id="stStreak">🔥 0</div>
       <div class="bar"><i id="barFill"></i></div>
-      <div class="pcount" id="pcount">0 / 0</div>
+      <div class="stat" id="stProg">0/0</div>
     </div>
 
     <div id="stage"></div>
@@ -80,178 +115,341 @@
   <script src="words.js"></script>
   <script src="sm-auth.js"></script>
   <script>
-    let selectedUnits = SM_UNITS.map(u => u.id); // по умолчанию все
-    let mode = "flash";
-    let deck = [];        // текущий набор слов
-    let idx = 0;
-    let flipped = false;
-    let progress = {};    // { wordId: {status, correct, seen} }
-    let answered = false;
+    const TARGET = 4; // сколько раз ответить верно, чтобы слово «выучено»
+    const MODES = [
+      { id: "mix",     label: "⚡ Микс",     cls: "mix" },
+      { id: "flash",   label: "🃏 Карточки" },
+      { id: "listen",  label: "🎧 Аудио" },
+      { id: "chooseEn",label: "🔤 Выбор слова" },
+      { id: "chooseRu",label: "🌍 Перевод" },
+      { id: "type",    label: "⌨️ Впиши" },
+      { id: "assemble",label: "🧩 Собери" },
+      { id: "pairs",   label: "🔗 Найди пару" }
+    ];
 
-    function wordsForSelection() {
-      return SM_ALL_WORDS.filter(w => selectedUnits.includes(w.unitId));
-    }
-    function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+    let selectedUnits = SM_UNITS.map(u => u.id);
+    let mode = "mix";
+    let progress = {};   // { id: {level, correct, seen, status} }
+    let points = 0, streak = 0;
+    let prevId = null;
+    let busy = false;
+    let saveTimer = null;
 
-    function speak(text) {
-      try {
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = "en-US"; u.rate = 0.9;
-        speechSynthesis.cancel(); speechSynthesis.speak(u);
-      } catch (e) {}
+    /* ---------- helpers ---------- */
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function pool(){ return SM_ALL_WORDS.filter(w => selectedUnits.includes(w.unitId)); }
+    function lvl(id){ return (progress[id] && progress[id].level) || 0; }
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+    function speak(t){ try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
+
+    let actx = null;
+    function beep(ok){
+      try{
+        actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+        const seq = ok ? [[660,0],[880,.12]] : [[200,0]];
+        seq.forEach(([f,t])=>{
+          const o=actx.createOscillator(), g=actx.createGain();
+          o.frequency.value=f; o.type="sine"; o.connect(g); g.connect(actx.destination);
+          const s=actx.currentTime+t; g.gain.setValueAtTime(.0001,s); g.gain.exponentialRampToValueAtTime(.2,s+.02);
+          g.gain.exponentialRampToValueAtTime(.0001,s+.18); o.start(s); o.stop(s+.2);
+        });
+      }catch(e){}
     }
 
-    /* ---- прогресс ---- */
-    function learnedCount() {
-      const ids = wordsForSelection().map(w => w.id);
-      return ids.filter(id => progress[id] && progress[id].status === "learned").length;
+    /* ---------- progress ---------- */
+    function learnedCount(){ return pool().filter(w => lvl(w.id) >= TARGET).length; }
+    function refreshStats(){
+      const total = pool().length, done = learnedCount();
+      document.getElementById("stProg").textContent = done + "/" + total;
+      document.getElementById("barFill").style.width = total ? (done/total*100)+"%" : "0%";
+      document.getElementById("stPts").textContent = "⭐ " + points;
+      document.getElementById("stStreak").textContent = "🔥 " + streak;
     }
-    function refreshProgressBar() {
-      const total = wordsForSelection().length;
-      const done = learnedCount();
-      document.getElementById("pcount").textContent = done + " / " + total;
-      document.getElementById("barFill").style.width = total ? (done / total * 100) + "%" : "0%";
-    }
-    async function mark(word, learned) {
-      const p = progress[word.id] || { status: "learning", correct: 0, seen: 0 };
+    function saveSoon(){ clearTimeout(saveTimer); saveTimer = setTimeout(()=>SM.saveProgress(progress), 600); }
+    function record(word, ok){
+      const p = progress[word.id] || { level:0, correct:0, seen:0, status:"learning" };
       p.seen++;
-      if (learned) { p.correct++; p.status = "learned"; }
-      else { p.status = "learning"; }
+      if(ok){ p.correct++; p.level = Math.min(TARGET, p.level+1); }
+      else  { p.level = Math.max(0, p.level-1); }
+      p.status = p.level >= TARGET ? "learned" : "learning";
       progress[word.id] = p;
-      refreshProgressBar();
-      await SM.saveProgress(progress);
+      if(ok){ points += 10; streak++; if(streak%5===0) points += 5; }
+      else { streak = 0; }
+      refreshStats(); saveSoon();
     }
 
-    /* ---- чипы юнитов ---- */
-    function renderChips() {
-      const box = document.getElementById("chips");
-      box.innerHTML = "";
+    /* ---------- word picker (спейс-репетишн) ---------- */
+    function pickWord(){
+      const p = pool();
+      if(!p.length) return null;
+      let cand = p.filter(w => lvl(w.id) < TARGET);
+      if(!cand.length) cand = p;                       // всё выучено → повторяем
+      cand = cand.filter(w => w.id !== prevId);
+      if(!cand.length) cand = p.filter(w=>lvl(w.id)<TARGET) ; if(!cand.length) cand = p;
+      // взвешиваем к менее выученным
+      const weighted = [];
+      cand.forEach(w => { const rep = (TARGET - lvl(w.id)) + 1; for(let i=0;i<rep;i++) weighted.push(w); });
+      const w = weighted[Math.floor(Math.random()*weighted.length)];
+      prevId = w.id;
+      return w;
+    }
+    function distractors(word, n){
+      return shuffle(SM_ALL_WORDS.filter(x => x.id !== word.id)).slice(0, n);
+    }
+
+    /* ---------- UI: chips + modes ---------- */
+    function renderChips(){
+      const box = document.getElementById("chips"); box.innerHTML = "";
       const allOn = selectedUnits.length === SM_UNITS.length;
       const all = document.createElement("button");
-      all.className = "chip" + (allOn ? " on" : "");
-      all.textContent = "Все";
-      all.onclick = () => { selectedUnits = allOn ? [] : SM_UNITS.map(u => u.id); renderChips(); startDeck(); };
+      all.className = "chip" + (allOn?" on":""); all.textContent = "Все юниты";
+      all.onclick = () => { selectedUnits = allOn ? [] : SM_UNITS.map(u=>u.id); renderChips(); nextRound(); };
       box.appendChild(all);
       SM_UNITS.forEach(u => {
         const c = document.createElement("button");
-        c.className = "chip" + (selectedUnits.includes(u.id) ? " on" : "");
+        c.className = "chip" + (selectedUnits.includes(u.id)?" on":"");
         c.textContent = u.emoji + " " + u.title;
         c.onclick = () => {
-          if (selectedUnits.includes(u.id)) selectedUnits = selectedUnits.filter(x => x !== u.id);
+          if(selectedUnits.includes(u.id)) selectedUnits = selectedUnits.filter(x=>x!==u.id);
           else selectedUnits.push(u.id);
-          renderChips(); startDeck();
+          renderChips(); nextRound();
         };
         box.appendChild(c);
       });
     }
-
-    function setMode(m) {
-      mode = m;
-      document.getElementById("mFlash").classList.toggle("on", m === "flash");
-      document.getElementById("mQuiz").classList.toggle("on", m === "quiz");
-      startDeck();
-    }
-
-    function startDeck() {
-      const pool = wordsForSelection();
-      refreshProgressBar();
-      const stage = document.getElementById("stage");
-      if (!pool.length) { stage.innerHTML = '<div class="card"><div class="hint">Выбери хотя бы один юнит 👆</div></div>'; return; }
-      deck = shuffle(pool);
-      idx = 0;
-      render();
-    }
-
-    function render() {
-      if (mode === "flash") renderFlash(); else renderQuiz();
-    }
-
-    /* ---- Карточки ---- */
-    function renderFlash() {
-      flipped = false;
-      const w = deck[idx];
-      const stage = document.getElementById("stage");
-      stage.innerHTML =
-        '<div class="card" id="fcard">' +
-          '<div class="emoji">' + w.emoji + '</div>' +
-          '<div class="word">' + w.en + '</div>' +
-          '<button class="speak" id="spk">🔊 послушать</button>' +
-          '<div class="ru" id="ruLine" style="display:none">' + w.ru + '</div>' +
-          '<div class="hint" id="fhint">нажми на карточку, чтобы увидеть перевод</div>' +
-        '</div>' +
-        '<div class="fc-btns" id="fbtns" style="display:none">' +
-          '<button class="no" id="bNo">❌ Ещё учу</button>' +
-          '<button class="yes" id="bYes">✅ Знаю</button>' +
-        '</div>';
-      speak(w.en);
-      document.getElementById("spk").onclick = (e) => { e.stopPropagation(); speak(w.en); };
-      document.getElementById("fcard").onclick = () => {
-        if (flipped) return;
-        flipped = true;
-        document.getElementById("ruLine").style.display = "block";
-        document.getElementById("fhint").style.display = "none";
-        document.getElementById("fbtns").style.display = "flex";
-      };
-      document.getElementById("bNo").onclick = async () => { await mark(w, false); nextFlash(); };
-      document.getElementById("bYes").onclick = async () => { await mark(w, true); nextFlash(); };
-    }
-    function nextFlash() {
-      idx++;
-      if (idx >= deck.length) { deck = shuffle(deck); idx = 0; }
-      renderFlash();
-    }
-
-    /* ---- Квиз ---- */
-    function renderQuiz() {
-      answered = false;
-      const w = deck[idx];
-      const pool = SM_ALL_WORDS.filter(x => x.id !== w.id);
-      const distract = shuffle(pool).slice(0, 3);
-      const opts = shuffle([w, ...distract]);
-      const stage = document.getElementById("stage");
-      stage.innerHTML =
-        '<div class="card">' +
-          '<div class="emoji">' + w.emoji + '</div>' +
-          '<div class="ru">' + w.ru + '</div>' +
-          '<div class="hint">выбери английское слово</div>' +
-        '</div>' +
-        '<div class="opts" id="opts"></div>' +
-        '<button class="next" id="next">дальше →</button>';
-      const box = document.getElementById("opts");
-      opts.forEach(o => {
+    function renderModes(){
+      const box = document.getElementById("modes"); box.innerHTML = "";
+      MODES.forEach(m => {
         const b = document.createElement("button");
-        b.className = "opt"; b.textContent = o.en;
-        b.onclick = () => answerQuiz(b, o, w);
+        b.className = "mode " + (m.cls||"") + (mode===m.id?" on":"");
+        b.textContent = m.label;
+        b.onclick = () => { mode = m.id; renderModes(); nextRound(); };
         box.appendChild(b);
       });
-      document.getElementById("next").onclick = nextQuiz;
-    }
-    async function answerQuiz(btn, chosen, correct) {
-      if (answered) return;
-      answered = true;
-      const correctBtn = [...document.querySelectorAll(".opt")].find(b => b.textContent === correct.en);
-      if (chosen.id === correct.id) { btn.classList.add("correct"); speak(correct.en); await mark(correct, true); }
-      else { btn.classList.add("wrong"); if (correctBtn) correctBtn.classList.add("correct"); speak(correct.en); await mark(correct, false); }
-      document.getElementById("next").style.display = "block";
-    }
-    function nextQuiz() {
-      idx++;
-      if (idx >= deck.length) { deck = shuffle(deck); idx = 0; }
-      renderQuiz();
     }
 
-    /* ---- старт ---- */
-    (async function init() {
-      const user = await SM.getUser();
-      if (user) document.getElementById("greet").textContent = "Привет, " + user.name + "! Учим слова 💪";
-      const banner = document.getElementById("banner");
-      if (SM.isCloud && !user) {
-        banner.style.display = "block";
-        banner.innerHTML = 'Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';
+    /* ---------- round dispatch ---------- */
+    function nextRound(){
+      busy = false;
+      refreshStats();
+      const stage = document.getElementById("stage");
+      if(!pool().length){ stage.innerHTML = '<div class="card"><div class="prompt">Выбери хотя бы один юнит 👆</div></div>'; return; }
+      if(mode === "pairs"){ return renderPairs(); }
+      if(learnedCount() === pool().length && mode !== "flash"){ return renderDone(); }
+      const w = pickWord();
+      let t = mode;
+      if(mode === "mix"){
+        let types = ["chooseEn","chooseRu","listen","assemble","type"];
+        if(/[ -]/.test(w.en)) types = ["chooseEn","chooseRu","listen","type"]; // без «собери» для фраз
+        t = types[Math.floor(Math.random()*types.length)];
       }
-      progress = await SM.loadProgress();
-      renderChips();
-      startDeck();
+      if((t==="assemble") && /[ -]/.test(w.en)) t = "chooseEn";
+      if(t==="flash") renderFlash(w);
+      else if(t==="listen") renderListen(w);
+      else if(t==="chooseEn") renderChoose(w, "toEn");
+      else if(t==="chooseRu") renderChoose(w, "toRu");
+      else if(t==="type") renderType(w);
+      else if(t==="assemble") renderAssemble(w);
+    }
+
+    function autoNext(ms){ setTimeout(()=>{ if(mode!=="flash") nextRound(); }, ms||1100); }
+
+    /* ---------- Карточки ---------- */
+    function renderFlash(w){
+      const stage = document.getElementById("stage");
+      stage.innerHTML =
+        '<div class="card" id="fc">' +
+          '<div class="emoji">'+w.emoji+'</div>' +
+          '<div class="word">'+esc(w.en)+'</div>' +
+          '<button class="speak" id="spk">🔊 послушать</button>' +
+          '<div class="ru" id="ru" style="display:none;margin-top:8px">'+esc(w.ru)+'</div>' +
+          '<div class="prompt" id="ph">нажми на карточку, чтобы увидеть перевод</div>' +
+        '</div>' +
+        '<div class="fc-btns" id="fb" style="display:none">' +
+          '<button class="no" id="bno">❌ Ещё учу</button>' +
+          '<button class="yes" id="byes">✅ Знаю</button>' +
+        '</div>';
+      speak(w.en);
+      let flipped = false;
+      document.getElementById("spk").onclick = e => { e.stopPropagation(); speak(w.en); };
+      document.getElementById("fc").onclick = () => { if(flipped) return; flipped=true;
+        document.getElementById("ru").style.display="block";
+        document.getElementById("ph").style.display="none";
+        document.getElementById("fb").style.display="flex"; };
+      document.getElementById("bno").onclick = () => { record(w,false); nextRound(); };
+      document.getElementById("byes").onclick = () => { record(w,true); beep(true); nextRound(); };
+    }
+
+    /* ---------- Выбор (перевод / слово) ---------- */
+    function renderChoose(w, dir){
+      const stage = document.getElementById("stage");
+      const opts = shuffle([w, ...distractors(w,3)]);
+      const head = dir==="toEn"
+        ? '<div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
+        : '<div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
+      stage.innerHTML = '<div class="card">'+head+'</div><div class="opts" id="opts"></div>';
+      if(dir==="toRu"){ speak(w.en); const s=document.getElementById("spk"); if(s) s.onclick=()=>speak(w.en); }
+      const box = document.getElementById("opts");
+      opts.forEach(o => {
+        const b = document.createElement("button"); b.className="opt";
+        b.textContent = dir==="toEn" ? o.en : o.ru;
+        b.onclick = () => {
+          if(busy) return; busy=true;
+          const ok = o.id===w.id;
+          const correctBtn = [...box.children].find(c => c.textContent === (dir==="toEn"?w.en:w.ru));
+          if(ok){ b.classList.add("correct"); } else { b.classList.add("wrong"); if(correctBtn) correctBtn.classList.add("correct"); }
+          beep(ok); if(dir==="toEn") speak(w.en); record(w, ok); autoNext(ok?900:1500);
+        };
+        box.appendChild(b);
+      });
+    }
+
+    /* ---------- Аудирование ---------- */
+    function renderListen(w){
+      const stage = document.getElementById("stage");
+      const opts = shuffle([w, ...distractors(w,3)]);
+      stage.innerHTML =
+        '<div class="card"><button class="bigspeak" id="big">🔊</button>' +
+          '<div class="prompt">послушай и выбери картинку</div></div>' +
+        '<div class="opts" id="opts"></div>';
+      speak(w.en);
+      document.getElementById("big").onclick = () => speak(w.en);
+      const box = document.getElementById("opts");
+      opts.forEach(o => {
+        const b = document.createElement("button"); b.className="opt";
+        b.innerHTML = '<span class="oem">'+o.emoji+'</span>'+esc(o.en);
+        b.onclick = () => {
+          if(busy) return; busy=true;
+          const ok = o.id===w.id;
+          const correctBtn = [...box.children].find(c => c.textContent.includes(w.en));
+          if(ok) b.classList.add("correct"); else { b.classList.add("wrong"); if(correctBtn) correctBtn.classList.add("correct"); }
+          beep(ok); speak(w.en); record(w, ok); autoNext(ok?900:1500);
+        };
+        box.appendChild(b);
+      });
+    }
+
+    /* ---------- Впиши слово ---------- */
+    function renderType(w){
+      const stage = document.getElementById("stage");
+      stage.innerHTML =
+        '<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div>' +
+          '<button class="speak" id="spk">🔊 послушать</button>' +
+          '<div class="prompt">напиши слово по-английски</div></div>' +
+        '<div class="field"><input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type here…"><button class="check" id="chk">OK</button></div>' +
+        '<button class="next" id="next">дальше →</button>';
+      speak(w.en);
+      document.getElementById("spk").onclick = () => speak(w.en);
+      const inp = document.getElementById("inp"); inp.focus();
+      function submit(){
+        if(busy) return; busy=true;
+        const val = inp.value.trim().toLowerCase();
+        const ok = val === w.en.toLowerCase();
+        inp.style.borderColor = ok ? "#7cb342" : "#e07a5f";
+        inp.style.background = ok ? "#dff0d2" : "#fbe0d8";
+        if(!ok){ inp.value = w.en; }
+        beep(ok); speak(w.en); record(w, ok);
+        document.getElementById("next").style.display="block";
+        document.getElementById("next").onclick = nextRound;
+      }
+      document.getElementById("chk").onclick = submit;
+      inp.addEventListener("keydown", e => { if(e.key==="Enter") submit(); });
+    }
+
+    /* ---------- Собери слово ---------- */
+    function renderAssemble(w){
+      const stage = document.getElementById("stage");
+      const target = w.en;
+      const letters = shuffle(target.split(""));
+      stage.innerHTML =
+        '<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div>' +
+          '<div class="built" id="built"></div>' +
+          '<div class="letters" id="lets"></div>' +
+          '<button class="tinybtn" id="clr">⌫ стереть</button>' +
+        '</div><button class="next" id="next">дальше →</button>';
+      const builtEl = document.getElementById("built"), lets = document.getElementById("lets");
+      let built = [];
+      letters.forEach((ch,i) => {
+        const b = document.createElement("button"); b.className="letter"; b.textContent=ch; b.dataset.i=i;
+        b.onclick = () => { if(busy||b.classList.contains("used")) return; b.classList.add("used"); built.push({ch,el:b}); draw(); };
+        lets.appendChild(b);
+      });
+      document.getElementById("clr").onclick = () => { if(busy) return; const last=built.pop(); if(last) last.el.classList.remove("used"); draw(); };
+      function draw(){
+        builtEl.textContent = built.map(x=>x.ch).join("");
+        if(built.length === target.length){
+          busy = true;
+          const guess = built.map(x=>x.ch).join("");
+          const ok = guess === target;
+          builtEl.style.color = ok ? "#3f7a20" : "#a23b1e";
+          if(!ok) builtEl.textContent = target;
+          beep(ok); speak(target); record(w, ok);
+          const nx = document.getElementById("next"); nx.style.display="block"; nx.onclick = nextRound;
+        }
+      }
+    }
+
+    /* ---------- Найди пару ---------- */
+    function renderPairs(){
+      const stage = document.getElementById("stage");
+      const p = pool();
+      const batch = shuffle(p).slice(0, Math.min(6, p.length));
+      const left = shuffle(batch.map(w => ({w, side:"en"})));
+      const right = shuffle(batch.map(w => ({w, side:"ru"})));
+      const rows = Math.max(left.length, right.length);
+      let html = '<div class="pairs" id="pairs">';
+      // чередуем колонки построчно для сетки 2 колонки
+      for(let i=0;i<rows;i++){
+        const l = left[i], r = right[i];
+        html += l ? '<button class="pcard" data-id="'+l.w.id+'" data-side="en"><span class="pem">'+l.w.emoji+'</span>'+esc(l.w.en)+'</button>' : '<div></div>';
+        html += r ? '<button class="pcard" data-id="'+r.w.id+'" data-side="ru">'+esc(r.w.ru)+'</button>' : '<div></div>';
+      }
+      html += '</div>';
+      stage.innerHTML = '<div class="prompt" style="text-align:center;margin-bottom:8px">Соедини слово и перевод</div>' + html;
+      let sel = null, left_count = batch.length;
+      document.querySelectorAll("#pairs .pcard").forEach(c => {
+        c.onclick = () => {
+          if(c.classList.contains("done")) return;
+          if(!sel){ sel = c; c.classList.add("sel"); if(c.dataset.side==="en") speak(c.textContent.replace(/[^a-zA-Z '-]/g,"").trim()); return; }
+          if(sel === c){ c.classList.remove("sel"); sel=null; return; }
+          if(sel.dataset.side === c.dataset.side){ sel.classList.remove("sel"); sel=c; c.classList.add("sel"); return; }
+          // пара выбрана
+          const w = SM_ALL_WORDS.find(x=>x.id===c.dataset.id);
+          if(sel.dataset.id === c.dataset.id){
+            beep(true); const en = SM_ALL_WORDS.find(x=>x.id===c.dataset.id); speak(en.en);
+            sel.classList.add("done"); c.classList.add("done"); sel.classList.remove("sel");
+            record(w, true); sel=null; left_count--;
+            if(left_count===0) setTimeout(renderPairs, 500);
+          } else {
+            beep(false); const s=sel; s.classList.add("wrong"); c.classList.add("wrong");
+            const ww = SM_ALL_WORDS.find(x=>x.id===s.dataset.id); if(ww) record(ww, false);
+            setTimeout(()=>{ s.classList.remove("wrong","sel"); c.classList.remove("wrong"); }, 600); sel=null;
+          }
+        };
+      });
+    }
+
+    /* ---------- Готово ---------- */
+    function renderDone(){
+      const stage = document.getElementById("stage");
+      stage.innerHTML =
+        '<div class="done-box"><div class="big">🎉</div><h2>Все слова выучены!</h2>' +
+        '<div class="prompt">Заработано ⭐ '+points+' очков. Можно повторить или выбрать другой режим.</div>' +
+        '<button class="again" id="again">🔁 Повторить</button></div>';
+      document.getElementById("again").onclick = () => { prevId=null; mode = "mix"; renderModes(); nextRound(); };
+    }
+
+    /* ---------- init ---------- */
+    (async function(){
+      const user = await SM.getUser();
+      if(user) document.getElementById("greet").textContent = "Привет, "+user.name+"! Учим слова 💪";
+      if(SM.isCloud && !user){
+        const b=document.getElementById("banner"); b.style.display="block";
+        b.innerHTML='Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';
+      }
+      progress = await SM.loadProgress() || {};
+      renderChips(); renderModes(); nextRound();
     })();
   </script>
 </body>
