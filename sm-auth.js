@@ -5,8 +5,8 @@
    Пока они пустые, сайт работает на localStorage: прогресс хранится
    в браузере ученика (без входа между устройствами). Инструкция —
    в файле SETUP-SUPABASE.md. */
-const SM_SUPABASE_URL = "";        // напр. https://xxxx.supabase.co
-const SM_SUPABASE_ANON_KEY = "";   // публичный anon-ключ (не секретный service key!)
+const SM_SUPABASE_URL = "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
+const SM_SUPABASE_ANON_KEY = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG"; // публичный ключ (безопасно хранить в коде)
 /* ------------------------------------------------------------------ */
 
 window.SM = (function () {
