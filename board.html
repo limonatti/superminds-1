@@ -3,251 +3,257 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Super Minds · Доска</title>
+<title>Доска · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;overflow:hidden;font-family:'Nunito',sans-serif;background:#e9dfca}
+  html,body{margin:0;height:100%;overflow:hidden;font-family:'Nunito',sans-serif;background:#e9dfca;user-select:none}
   button,select{font-family:inherit;cursor:pointer}
-  #bar{position:fixed;top:0;left:0;right:0;height:56px;background:#7c2340;display:flex;align-items:center;gap:6px;padding:0 10px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.2);overflow-x:auto}
-  #bar a.home{color:#fff;font-weight:800;font-size:14px;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;white-space:nowrap}
-  .tool{background:rgba(255,255,255,.12);border:2px solid transparent;color:#fff;font-weight:800;font-size:15px;padding:8px 12px;border-radius:12px;white-space:nowrap}
+  #bar{position:fixed;top:0;left:0;right:0;height:54px;background:#7c2340;display:flex;align-items:center;gap:6px;padding:0 10px;z-index:30;box-shadow:0 2px 8px rgba(0,0,0,.2);overflow-x:auto}
+  #bar a.home{color:#fff;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
+  .tool{background:rgba(255,255,255,.12);border:2px solid transparent;color:#fff;font-size:16px;padding:7px 10px;border-radius:11px;white-space:nowrap;line-height:1}
   .tool.on{background:#fff;color:#7c2340;border-color:#fff}
-  .sep{width:1px;height:30px;background:rgba(255,255,255,.25);margin:0 4px;flex:none}
-  .sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;flex:none;cursor:pointer}
+  .sep{width:1px;height:28px;background:rgba(255,255,255,.25);margin:0 3px;flex:none}
+  .sw{width:24px;height:24px;border-radius:50%;border:2px solid #fff;flex:none;cursor:pointer}
   .sw.on{outline:3px solid #ffd27a;outline-offset:1px}
-  .size{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex:none}
-  .size.on{background:#fff}
-  .size i{display:block;border-radius:50%;background:#fff}
-  .size.on i{background:#7c2340}
-  select{background:rgba(255,255,255,.14);color:#fff;border:none;border-radius:10px;padding:8px;font-weight:800;font-size:13px}
+  select{background:rgba(255,255,255,.14);color:#fff;border:none;border-radius:10px;padding:7px;font:800 12px 'Nunito',sans-serif}
   select option{color:#1c1310}
   #live{margin-left:auto;display:flex;align-items:center;gap:6px;flex:none}
-  #status{color:#fff;font:800 12px 'Nunito',sans-serif;background:rgba(255,255,255,.14);padding:7px 12px;border-radius:999px;white-space:nowrap}
-  #status .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f0c96b;margin-right:5px;vertical-align:middle}
+  #status{color:#fff;font:800 12px 'Nunito',sans-serif;background:rgba(255,255,255,.14);padding:7px 11px;border-radius:999px;white-space:nowrap}
+  #status .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0c96b;margin-right:5px}
   #status.on .dot{background:#7ee787}
   #invite{background:#e0952a;color:#fff}
 
-  #board{position:fixed;top:56px;left:0;right:0;bottom:0;background:
-    linear-gradient(#00000008 1px,transparent 1px),
-    linear-gradient(90deg,#00000008 1px,transparent 1px);
-    background-size:28px 28px;background-color:#fdfaf0;touch-action:none}
-  #ink{position:absolute;inset:0;z-index:1}
-  #overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
-  .card{position:absolute;pointer-events:auto;background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:8px 10px;box-shadow:0 4px 10px rgba(0,0,0,.12);text-align:center;cursor:grab;user-select:none;min-width:76px}
-  .card .em{font-size:34px;line-height:1}
-  .card .en{font:800 15px 'Nunito',sans-serif;color:#7c2340;margin-top:2px}
-  .card .x{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;background:#c0392b;color:#fff;font-size:13px;border:none;display:none}
-  .card:hover .x{display:block}
-  .tbox{position:absolute;pointer-events:auto;font:800 24px 'Fredoka',sans-serif;color:#1c1310;background:transparent;border:1px dashed transparent;padding:2px 4px;min-width:20px;cursor:grab;outline:none}
-  .tbox:focus{border-color:#7c2340;cursor:text}
-  .hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:7px 16px;font:700 12px 'Nunito',sans-serif;color:#8a7a68;box-shadow:0 3px 10px rgba(0,0,0,.1);z-index:15}
+  #stage{position:fixed;top:54px;left:0;right:0;bottom:0;overflow:hidden;background:#fdfaf0;
+    background-image:radial-gradient(#00000010 1.2px,transparent 1.2px);background-size:26px 26px;touch-action:none;cursor:grab}
+  #stage.draw{cursor:crosshair}#stage.del{cursor:pointer}#stage.panning{cursor:grabbing}
+  #world{position:absolute;top:0;left:0;transform-origin:0 0}
+  #ink{position:absolute;overflow:visible;pointer-events:none;left:0;top:0;width:1px;height:1px}
+  .obj{position:absolute;pointer-events:auto;cursor:grab}
+  .note{width:150px;min-height:110px;border-radius:10px;padding:10px;font:700 16px 'Fredoka',sans-serif;color:#3a2a10;box-shadow:0 4px 12px rgba(0,0,0,.14);outline:none;overflow-wrap:anywhere}
+  .txt{font:800 26px 'Fredoka',sans-serif;color:#1c1310;padding:2px 4px;outline:none;min-width:24px;white-space:pre-wrap}
+  .card{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:8px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.12);min-width:78px}
+  .card .em{font-size:32px;line-height:1}.card .en{font:800 15px 'Nunito',sans-serif;color:#7c2340;margin-top:2px}
+  .obj .del-x{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;background:#c0392b;color:#fff;font-size:12px;border:none;display:none}
+  #world.del .obj .del-x{display:block}
+  #world.del .shape{pointer-events:auto;cursor:pointer}
+  .shape{pointer-events:none}
+
+  #cursors{position:fixed;inset:54px 0 0 0;pointer-events:none;z-index:20;overflow:hidden}
+  .cur{position:absolute;transform:translate(-2px,-2px);transition:left .05s linear,top .05s linear}
+  .cur svg{display:block}
+  .zoom{position:fixed;left:12px;bottom:12px;z-index:25;display:flex;gap:6px;align-items:center;background:#7c2340;border-radius:999px;padding:6px 8px;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+  .zoom button{background:rgba(255,255,255,.16);color:#fff;border:none;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer}
+  .zoom span{color:#fff;font:800 12px 'Nunito',sans-serif;min-width:42px;text-align:center}
+  .hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:7px 16px;font:700 12px 'Nunito',sans-serif;color:#8a7a68;box-shadow:0 3px 10px rgba(0,0,0,.1);z-index:15}
 </style>
 </head>
 <body>
   <div id="bar">
     <a class="home" href="course.html">← Домой</a>
     <span class="sep"></span>
-    <button class="tool on" id="tPen">✏️</button>
-    <button class="tool" id="tErase">🩹</button>
-    <button class="tool" id="tText">🔤</button>
+    <button class="tool on" data-t="pan" title="Рука">🖐</button>
+    <button class="tool" data-t="pen" title="Ручка">✏️</button>
+    <button class="tool" data-t="note" title="Стикер">🟨</button>
+    <button class="tool" data-t="text" title="Текст">🔤</button>
+    <button class="tool" data-t="rect" title="Прямоугольник">▭</button>
+    <button class="tool" data-t="ellipse" title="Овал">⬭</button>
+    <button class="tool" data-t="arrow" title="Стрелка">↗</button>
+    <button class="tool" data-t="del" title="Удалить">🧽</button>
     <span class="sep"></span>
-    <span id="palette" style="display:flex;gap:6px;align-items:center"></span>
-    <span id="sizes" style="display:flex;gap:6px;align-items:center"></span>
+    <span id="palette" style="display:flex;gap:5px;align-items:center"></span>
     <span class="sep"></span>
     <select id="unitSel"></select>
     <button class="tool" id="addCards">＋ Слова</button>
     <span class="sep"></span>
-    <button class="tool" id="undo">↩️</button>
-    <button class="tool" id="clear">🧹</button>
-    <button class="tool" id="save">💾</button>
-    <span id="live">
-      <span id="status"><span class="dot"></span><span id="statusTxt">подключение…</span></span>
-      <button class="tool" id="invite">🔗 Позвать</button>
-    </span>
+    <button class="tool" id="clear" title="Очистить">🧹</button>
+    <button class="tool" id="save" title="Сохранить PNG">💾</button>
+    <span id="live"><span id="status"><span class="dot"></span><span id="statusTxt">…</span></span><button class="tool" id="invite">🔗 Позвать</button></span>
   </div>
 
-  <div id="board">
-    <canvas id="ink"></canvas>
-    <div id="overlay"></div>
+  <div id="stage">
+    <div id="world"><svg id="ink"></svg></div>
   </div>
-  <div class="hint" id="hint">Рисуй · перетаскивай карточки · 🔊 нажми на карточку · «Позвать» — пригласить ученика на эту же доску</div>
+  <div id="cursors"></div>
+  <div class="zoom"><button id="zout">−</button><span id="zlbl">100%</span><button id="zin">+</button><button id="zreset" title="Сброс">⌂</button></div>
+  <div class="hint">🖐 двигай холст · колесо — зум · выбери инструмент сверху · 🔗 «Позвать» — пригласи ученика</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script>
-    /* ---------- параметры ---------- */
-    const COLORS=["#1c1310","#7c2340","#c0392b","#e67e22","#27ae60","#2980b9","#8e44ad","#ffffff"];
-    const SIZES=[3,6,12];
-    let tool="pen", color="#1c1310", size=6;
+    const COLORS=["#1c1310","#7c2340","#c0392b","#e0952a","#27ae60","#2980b9","#8e44ad","#ffffff"];
+    const NOTE_COLORS={"#e0952a":"#ffe08a","#27ae60":"#c8efc0","#2980b9":"#bfe0ff","#8e44ad":"#e6cdf5","#c0392b":"#ffc9c0","#1c1310":"#fff3c4","#7c2340":"#f6cddb","#ffffff":"#ffffff"};
+    let tool="pan", color="#1c1310";
+    const NS="http://www.w3.org/2000/svg";
 
-    /* ---------- комната ---------- */
+    const stage=document.getElementById("stage"), world=document.getElementById("world"), ink=document.getElementById("ink");
+    const cursors=document.getElementById("cursors");
+    const cam={x:0,y:0,s:1};
+    function applyCam(){ world.style.transform="translate("+cam.x+"px,"+cam.y+"px) scale("+cam.s+")"; document.getElementById("zlbl").textContent=Math.round(cam.s*100)+"%"; drawCursors(); }
+    function toWorld(sx,sy){ const r=stage.getBoundingClientRect(); return {x:(sx-r.left-cam.x)/cam.s, y:(sy-r.top-cam.y)/cam.s}; }
+    function toScreen(wx,wy){ return {x:wx*cam.s+cam.x, y:wy*cam.s+cam.y}; }
+
+    /* объекты */
+    const objs={};   // id -> {type, ...}
+    function genId(){return Math.random().toString(36).slice(2,9);}
+
+    /* ---- Realtime ---- */
     const params=new URLSearchParams(location.search);
-    let room=params.get("room");
-    if(!room){ room=Math.random().toString(36).slice(2,7).toUpperCase();
-      history.replaceState(null,"","?room="+room); }
-
-    /* ---------- Supabase Realtime ---------- */
+    let room=params.get("room"); if(!room){room=Math.random().toString(36).slice(2,7).toUpperCase();history.replaceState(null,"","?room="+room);}
     const SB_URL="https://kdzpmbuohfjbtjpqrdfx.supabase.co";
     const SB_KEY="sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+    const myColor=["#e0952a","#2980b9","#27ae60","#8e44ad","#c0392b"][Math.floor(Math.random()*5)];
+    const myId=genId();
     let channel=null, online=false;
-    function setStatus(txt,on){document.getElementById("statusTxt").textContent=txt;document.getElementById("status").classList.toggle("on",!!on);}
-    (function initRealtime(){
-      try{
-        const sb=window.supabase.createClient(SB_URL,SB_KEY,{realtime:{params:{eventsPerSecond:40}}});
-        channel=sb.channel("board:"+room,{config:{broadcast:{self:false}}});
-        channel.on("broadcast",{event:"op"},({payload})=>applyRemote(payload));
-        channel.subscribe((st)=>{
-          if(st==="SUBSCRIBED"){online=true;setStatus("комната "+room,true);send({t:"hello"});}
-          else if(st==="CHANNEL_ERROR"||st==="TIMED_OUT"){online=false;setStatus("оффлайн",false);}
-        });
-      }catch(e){setStatus("оффлайн",false);}
-    })();
+    function setStatus(t,on){document.getElementById("statusTxt").textContent=t;document.getElementById("status").classList.toggle("on",!!on);}
+    (function(){try{
+      const sb=window.supabase.createClient(SB_URL,SB_KEY,{realtime:{params:{eventsPerSecond:60}}});
+      channel=sb.channel("board:"+room,{config:{broadcast:{self:false}}});
+      channel.on("broadcast",{event:"op"},({payload})=>applyRemote(payload));
+      channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setStatus("комната "+room,true);send({t:"hello"});} else if(st==="CHANNEL_ERROR"||st==="TIMED_OUT"){online=false;setStatus("оффлайн",false);} });
+    }catch(e){setStatus("оффлайн",false);}})();
     function send(op){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:op});}catch(e){}} }
 
-    document.getElementById("invite").onclick=()=>{
-      const url=location.origin+location.pathname+"?room="+room;
-      if(navigator.clipboard){navigator.clipboard.writeText(url).then(()=>alert("Ссылка на доску скопирована!\nОтправь её ученику:\n\n"+url),()=>prompt("Скопируй ссылку для ученика:",url));}
-      else prompt("Скопируй ссылку для ученика:",url);
-    };
+    document.getElementById("invite").onclick=()=>{const url=location.origin+location.pathname+"?room="+room;
+      if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на доску скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));else prompt("Скопируй ссылку:",url);};
 
-    /* ---------- холст ---------- */
-    const board=document.getElementById("board"), overlay=document.getElementById("overlay");
-    const canvas=document.getElementById("ink"), ctx=canvas.getContext("2d");
-    function fit(){ const r=board.getBoundingClientRect(); let img=null;
-      try{img=canvas.width?ctx.getImageData(0,0,canvas.width,canvas.height):null;}catch(e){}
-      canvas.width=r.width; canvas.height=r.height; ctx.lineCap="round"; ctx.lineJoin="round";
-      if(img)try{ctx.putImageData(img,0,0);}catch(e){}
-    }
-    fit(); window.addEventListener("resize",fit);
-
+    /* ---- инструменты / палитра ---- */
+    document.querySelectorAll(".tool[data-t]").forEach(b=>b.onclick=()=>setTool(b.dataset.t));
+    function setTool(t){tool=t;document.querySelectorAll(".tool[data-t]").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+      stage.classList.toggle("draw",["pen","rect","ellipse","arrow","note","text"].includes(t));
+      stage.classList.toggle("del",t==="del"); world.classList.toggle("del",t==="del");}
     const pal=document.getElementById("palette");
     COLORS.forEach(c=>{const b=document.createElement("button");b.className="sw"+(c===color?" on":"");b.style.background=c;
-      b.onclick=()=>{color=c;tool="pen";syncTools();[...pal.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");};pal.appendChild(b);});
-    const sz=document.getElementById("sizes");
-    SIZES.forEach(s=>{const b=document.createElement("button");b.className="size"+(s===size?" on":"");const i=document.createElement("i");i.style.width=s+2+"px";i.style.height=s+2+"px";b.appendChild(i);
-      b.onclick=()=>{size=s;[...sz.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");};sz.appendChild(b);});
+      b.onclick=()=>{color=c;[...pal.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");};pal.appendChild(b);});
 
-    function syncTools(){document.getElementById("tPen").classList.toggle("on",tool==="pen");
-      document.getElementById("tErase").classList.toggle("on",tool==="erase");
-      document.getElementById("tText").classList.toggle("on",tool==="text");}
-    document.getElementById("tPen").onclick=()=>{tool="pen";syncTools();};
-    document.getElementById("tErase").onclick=()=>{tool="erase";syncTools();};
-    document.getElementById("tText").onclick=()=>{tool="text";syncTools();};
+    /* ---- зум ---- */
+    stage.addEventListener("wheel",e=>{e.preventDefault();const f=e.deltaY<0?1.12:1/1.12;zoomAt(e.clientX,e.clientY,f);},{passive:false});
+    function zoomAt(sx,sy,f){const r=stage.getBoundingClientRect();const px=sx-r.left,py=sy-r.top;const ns=Math.min(4,Math.max(.2,cam.s*f));
+      cam.x=px-(px-cam.x)*(ns/cam.s);cam.y=py-(py-cam.y)*(ns/cam.s);cam.s=ns;applyCam();}
+    document.getElementById("zin").onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1.2);};
+    document.getElementById("zout").onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1/1.2);};
+    document.getElementById("zreset").onclick=()=>{cam.x=0;cam.y=0;cam.s=1;applyCam();};
 
-    /* рисование локально + трансляция */
-    function seg(x0,y0,x1,y1,c,w,erase){
-      ctx.globalCompositeOperation=erase?"destination-out":"source-over";
-      ctx.strokeStyle=c;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();
-      ctx.globalCompositeOperation="source-over";
-    }
-    let drawing=false,last=null;
-    const undoStack=[];
-    function pushUndo(){try{undoStack.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(undoStack.length>25)undoStack.shift();}catch(e){}}
-    function pos(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
-    canvas.addEventListener("pointerdown",e=>{
-      if(tool==="text"){placeText(e);return;}
-      drawing=true;pushUndo();last=pos(e);
-      const w=tool==="erase"?size*4:size;
-      seg(last.x,last.y,last.x,last.y,color,w,tool==="erase");
-      send({t:"d",a:last.x,b:last.y,c:last.x,d:last.y,k:color,w:w,e:tool==="erase"?1:0});
+    /* ---- рисование / создание / пан ---- */
+    let mode=null, cur=null, panStart=null;
+    stage.addEventListener("pointerdown",e=>{
+      if(e.target.closest(".obj")) return;         // объекты обрабатывают себя
+      const w=toWorld(e.clientX,e.clientY);
+      if(tool==="pan"){ mode="pan"; panStart={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y}; stage.classList.add("panning"); stage.setPointerCapture(e.pointerId); return; }
+      if(tool==="pen"){ mode="pen"; const id=genId(); const o={type:"stroke",id,color,pts:[w]}; objs[id]=o; o.el=svgPath(o); ink.appendChild(o.el); send({t:"ss",id,c:color}); send({t:"sp",id,x:w.x,y:w.y}); cur=o; stage.setPointerCapture(e.pointerId); return; }
+      if(tool==="rect"||tool==="ellipse"||tool==="arrow"){ mode="shape"; const id=genId(); const o={type:"shape",id,shape:tool,x0:w.x,y0:w.y,x1:w.x,y1:w.y,color}; objs[id]=o; o.el=svgShape(o); ink.appendChild(o.el); cur=o; stage.setPointerCapture(e.pointerId); return; }
+      if(tool==="note"){ addNote(genId(),{x:w.x,y:w.y,color,text:""},false,true); setTool("pan"); return; }
+      if(tool==="text"){ addText(genId(),{x:w.x,y:w.y,color,text:"текст"},false,true); setTool("pan"); return; }
     });
-    canvas.addEventListener("pointermove",e=>{if(!drawing)return;const p=pos(e);const w=tool==="erase"?size*4:size;
-      seg(last.x,last.y,p.x,p.y,color,w,tool==="erase");
-      send({t:"d",a:last.x,b:last.y,c:p.x,d:p.y,k:color,w:w,e:tool==="erase"?1:0});last=p;});
-    window.addEventListener("pointerup",()=>{drawing=false;});
+    stage.addEventListener("pointermove",e=>{
+      cursorOut(e.clientX,e.clientY);
+      if(mode==="pan"){ cam.x=panStart.cx+(e.clientX-panStart.x); cam.y=panStart.cy+(e.clientY-panStart.y); applyCam(); return; }
+      if(mode==="pen"&&cur){ const w=toWorld(e.clientX,e.clientY); cur.pts.push(w); cur.el.setAttribute("d",dOf(cur.pts)); send({t:"sp",id:cur.id,x:w.x,y:w.y}); return; }
+      if(mode==="shape"&&cur){ const w=toWorld(e.clientX,e.clientY); cur.x1=w.x; cur.y1=w.y; updShape(cur); return; }
+    });
+    window.addEventListener("pointerup",()=>{
+      if(mode==="shape"&&cur){ send({t:"sa",o:{id:cur.id,shape:cur.shape,x0:cur.x0,y0:cur.y0,x1:cur.x1,y1:cur.y1,color:cur.color}}); }
+      if(mode==="pan") stage.classList.remove("panning");
+      mode=null; cur=null;
+    });
 
-    document.getElementById("undo").onclick=()=>{const img=undoStack.pop();if(img)ctx.putImageData(img,0,0);};
-    document.getElementById("clear").onclick=()=>{if(confirm("Очистить всю доску?")){doClear();send({t:"clear"});}};
-    function doClear(){pushUndo();ctx.clearRect(0,0,canvas.width,canvas.height);overlay.innerHTML="";cards={};texts={};}
-    document.getElementById("save").onclick=()=>{
-      const out=document.createElement("canvas");out.width=canvas.width;out.height=canvas.height;const o=out.getContext("2d");
-      o.fillStyle="#fdfaf0";o.fillRect(0,0,out.width,out.height);o.drawImage(canvas,0,0);
-      const a=document.createElement("a");a.download="board.png";a.href=out.toDataURL("image/png");a.click();
-    };
+    /* ---- SVG helpers ---- */
+    function dOf(pts){ return pts.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" "); }
+    function svgPath(o){ const p=document.createElementNS(NS,"path"); p.setAttribute("fill","none"); p.setAttribute("stroke",o.color); p.setAttribute("stroke-width","3"); p.setAttribute("stroke-linecap","round"); p.setAttribute("stroke-linejoin","round"); p.setAttribute("d",dOf(o.pts)); return p; }
+    function svgShape(o){ let el; if(o.shape==="ellipse"){el=document.createElementNS(NS,"ellipse");} else if(o.shape==="rect"){el=document.createElementNS(NS,"rect");} else {el=document.createElementNS(NS,"line");el.setAttribute("marker-end","url(#arrowh)");}
+      el.setAttribute("class","shape"); el.setAttribute("fill","none"); el.setAttribute("stroke",o.color); el.setAttribute("stroke-width","3"); el.dataset.id=o.id;
+      el.addEventListener("pointerdown",ev=>{ if(tool==="del"){ev.stopPropagation();removeObj(o.id);send({t:"rm",id:o.id});} }); updShape2(el,o); return el; }
+    function updShape(o){ updShape2(o.el,o); }
+    function updShape2(el,o){ const x=Math.min(o.x0,o.x1),y=Math.min(o.y0,o.y1),w=Math.abs(o.x1-o.x0),h=Math.abs(o.y1-o.y0);
+      if(o.shape==="rect"){el.setAttribute("x",x);el.setAttribute("y",y);el.setAttribute("width",w);el.setAttribute("height",h);el.setAttribute("rx",6);}
+      else if(o.shape==="ellipse"){el.setAttribute("cx",(o.x0+o.x1)/2);el.setAttribute("cy",(o.y0+o.y1)/2);el.setAttribute("rx",w/2);el.setAttribute("ry",h/2);}
+      else {el.setAttribute("x1",o.x0);el.setAttribute("y1",o.y0);el.setAttribute("x2",o.x1);el.setAttribute("y2",o.y1);} }
+    (function(){const defs=document.createElementNS(NS,"defs");const m=document.createElementNS(NS,"marker");m.setAttribute("id","arrowh");m.setAttribute("markerWidth","6");m.setAttribute("markerHeight","6");m.setAttribute("refX","5");m.setAttribute("refY","3");m.setAttribute("orient","auto");const pa=document.createElementNS(NS,"path");pa.setAttribute("d","M0,0 L6,3 L0,6 Z");pa.setAttribute("fill","context-stroke");m.appendChild(pa);defs.appendChild(m);ink.appendChild(defs);})();
 
-    /* ---------- карточки ---------- */
+    /* ---- DOM объекты: стикер / текст / карточка ---- */
     function speak(x){try{const u=new SpeechSynthesisUtterance(x);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
-    let cards={}, texts={};
-    function genId(){return Math.random().toString(36).slice(2,8);}
-    const sel=document.getElementById("unitSel");
-    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
-
-    function makeCard(id,d){ // d:{en,emoji,x,y}
-      if(cards[id])return cards[id];
-      const c=document.createElement("div");c.className="card";c.style.left=d.x+"px";c.style.top=d.y+"px";
-      c.innerHTML='<button class="x">✕</button><div class="em">'+d.emoji+'</div><div class="en">'+d.en+'</div>';
-      overlay.appendChild(c);cards[id]={el:c,d:d};
-      c.querySelector(".x").onclick=ev=>{ev.stopPropagation();c.remove();delete cards[id];send({t:"cr",id:id});};
-      draggable(c,()=>speak(d.en),(x,y)=>{d.x=x;d.y=y;send({t:"cm",id:id,x:x,y:y});});
-      return c;
-    }
-    function addUnitCards(uid){
-      const u=SM_UNITS.find(x=>x.id===uid);if(!u)return;
-      u.words.slice(0,8).forEach((w,i)=>{const id=genId();const d={en:w.en,emoji:w.emoji,x:40+(i%4)*100,y:30+Math.floor(i/4)*110};
-        makeCard(id,d);send({t:"ca",id:id,d:d});});
-    }
-    document.getElementById("addCards").onclick=()=>addUnitCards(sel.value);
-    // команда из «Комнаты урока»: добавить слова выбранного юнита
-    window.addEventListener("message",e=>{ if(e&&e.data&&e.data.type==="sm-add"&&e.data.unit) addUnitCards(e.data.unit); });
-
-    /* ---------- текст ---------- */
-    function makeText(id,d){ // d:{x,y,color,text}
-      if(texts[id])return texts[id];
-      const t=document.createElement("div");t.className="tbox";t.contentEditable="true";t.style.color=d.color;
-      t.style.left=d.x+"px";t.style.top=d.y+"px";t.textContent=d.text;
-      overlay.appendChild(t);texts[id]={el:t,d:d};
-      draggable(t,()=>t.focus(),(x,y)=>{d.x=x;d.y=y;send({t:"tm",id:id,x:x,y:y});},true);
-      t.addEventListener("input",()=>{d.text=t.textContent;send({t:"te",id:id,text:d.text});});
-      return t;
-    }
-    function placeText(e){
-      const id=genId();const d={x:e.clientX-board.getBoundingClientRect().left,y:e.clientY-board.getBoundingClientRect().top-16,color:color,text:"текст"};
-      const t=makeText(id,d);send({t:"ta",id:id,d:d});
-      setTimeout(()=>t.focus(),10);tool="pen";syncTools();
-    }
-
-    /* ---------- перетаскивание ---------- */
-    function draggable(el,onTap,onMove,isText){
+    function place(el,x,y){el.style.left=x+"px";el.style.top=y+"px";}
+    function delX(el,id){const b=document.createElement("button");b.className="del-x";b.textContent="✕";b.onclick=ev=>{ev.stopPropagation();removeObj(id);send({t:"rm",id});};el.appendChild(b);}
+    function dragObj(el,o,onTap){
       let sx,sy,ox,oy,moved,dragging=false;
       el.addEventListener("pointerdown",e=>{
-        if(isText&&document.activeElement===el)return;
-        dragging=true;moved=false;sx=e.clientX;sy=e.clientY;ox=parseFloat(el.style.left)||0;oy=parseFloat(el.style.top)||0;
-        el.setPointerCapture(e.pointerId);el.style.cursor="grabbing";e.stopPropagation();
+        if(tool==="del"){e.stopPropagation();removeObj(o.id);send({t:"rm",id:o.id});return;}
+        if(el.isContentEditable&&document.activeElement===el)return;
+        e.stopPropagation();dragging=true;moved=false;sx=e.clientX;sy=e.clientY;ox=o.x;oy=o.y;el.setPointerCapture(e.pointerId);el.style.cursor="grabbing";
       });
-      el.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-sx,dy=e.clientY-sy;
-        if(Math.abs(dx)+Math.abs(dy)>4)moved=true;const nx=ox+dx,ny=oy+dy;el.style.left=nx+"px";el.style.top=ny+"px";if(onMove)onMove(nx,ny);});
+      el.addEventListener("pointermove",e=>{if(!dragging)return;const dx=(e.clientX-sx)/cam.s,dy=(e.clientY-sy)/cam.s;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;o.x=ox+dx;o.y=oy+dy;place(el,o.x,o.y);send({t:"mv",id:o.id,x:o.x,y:o.y});});
       el.addEventListener("pointerup",()=>{dragging=false;el.style.cursor="grab";if(!moved&&onTap)onTap();});
     }
+    function addNote(id,d,remote,focus){ if(objs[id])return; const el=document.createElement("div"); el.className="obj note"; el.style.background=NOTE_COLORS[d.color]||"#fff3c4"; el.contentEditable="true"; el.textContent=d.text||""; place(el,d.x,d.y); world.appendChild(el);
+      const o={type:"note",id,x:d.x,y:d.y,color:d.color,el}; objs[id]=o; delX(el,id); dragObj(el,o);
+      el.addEventListener("input",()=>send({t:"nt",id,text:el.textContent}));
+      if(!remote) send({t:"na",o:{id,x:d.x,y:d.y,color:d.color,text:d.text||""}}); if(focus)setTimeout(()=>el.focus(),10); }
+    function addText(id,d,remote,focus){ if(objs[id])return; const el=document.createElement("div"); el.className="obj txt"; el.style.color=d.color; el.contentEditable="true"; el.textContent=d.text||"текст"; place(el,d.x,d.y); world.appendChild(el);
+      const o={type:"text",id,x:d.x,y:d.y,color:d.color,el}; objs[id]=o; delX(el,id); dragObj(el,o);
+      el.addEventListener("input",()=>send({t:"tt",id,text:el.textContent}));
+      if(!remote) send({t:"ta",o:{id,x:d.x,y:d.y,color:d.color,text:d.text||"текст"}}); if(focus)setTimeout(()=>{el.focus();document.execCommand&&document.execCommand("selectAll");},10); }
+    function addCard(id,d,remote){ if(objs[id])return; const el=document.createElement("div"); el.className="obj card"; el.innerHTML='<div class="em">'+d.emoji+'</div><div class="en">'+d.en+'</div>'; place(el,d.x,d.y); world.appendChild(el);
+      const o={type:"card",id,x:d.x,y:d.y,en:d.en,emoji:d.emoji,el}; objs[id]=o; delX(el,id); dragObj(el,o,()=>speak(d.en));
+      if(!remote) send({t:"ca",o:{id,x:d.x,y:d.y,en:d.en,emoji:d.emoji}}); }
 
-    /* ---------- приём событий ---------- */
-    function applyRemote(op){
-      switch(op.t){
-        case "d": seg(op.a,op.b,op.c,op.d,op.k,op.w,op.e); break;
-        case "clear": doClear(); break;
-        case "ca": makeCard(op.id,op.d); break;
-        case "cm": if(cards[op.id]){cards[op.id].el.style.left=op.x+"px";cards[op.id].el.style.top=op.y+"px";cards[op.id].d.x=op.x;cards[op.id].d.y=op.y;} break;
-        case "cr": if(cards[op.id]){cards[op.id].el.remove();delete cards[op.id];} break;
-        case "ta": makeText(op.id,op.d); break;
-        case "tm": if(texts[op.id]){texts[op.id].el.style.left=op.x+"px";texts[op.id].el.style.top=op.y+"px";} break;
-        case "te": if(texts[op.id]){texts[op.id].el.textContent=op.text;texts[op.id].d.text=op.text;} break;
-        case "hello": sendSnapshot(); break;
-        case "snap": applySnapshot(op); break;
-      }
-    }
-    function sendSnapshot(){
-      let img="";try{img=canvas.toDataURL("image/png");}catch(e){}
-      const cs={},ts={};Object.keys(cards).forEach(id=>cs[id]=cards[id].d);Object.keys(texts).forEach(id=>ts[id]=texts[id].d);
-      send({t:"snap",img:img,cards:cs,texts:ts});
+    function removeObj(id){ const o=objs[id]; if(!o)return; if(o.el&&o.el.remove)o.el.remove(); delete objs[id]; }
+
+    /* ---- слова на доску (центр текущего вида) ---- */
+    const sel=document.getElementById("unitSel");
+    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
+    function addUnitCards(uid){ const u=SM_UNITS.find(x=>x.id===uid); if(!u)return; const r=stage.getBoundingClientRect(); const c=toWorld(r.left+60,r.top+40);
+      u.words.slice(0,8).forEach((w,i)=>addCard(genId(),{x:c.x+(i%4)*110,y:c.y+Math.floor(i/4)*120,en:w.en,emoji:w.emoji},false)); }
+    document.getElementById("addCards").onclick=()=>addUnitCards(sel.value);
+    window.addEventListener("message",e=>{ if(e&&e.data&&e.data.type==="sm-add"&&e.data.unit) addUnitCards(e.data.unit); });
+
+    document.getElementById("clear").onclick=()=>{ if(confirm("Очистить всю доску?")){ doClear(); send({t:"clr"}); } };
+    function doClear(){ Object.keys(objs).forEach(removeObj); }
+    document.getElementById("save").onclick=()=>{ alert("Совет: сделай скриншот экрана — доска бесконечная, PNG сохранит только видимую часть."); };
+
+    /* ---- живые курсоры ---- */
+    const peers={}; let lastCur=0;
+    function cursorOut(sx,sy){ const now=Date.now(); if(now-lastCur<45)return; lastCur=now; const w=toWorld(sx,sy); send({t:"cur",id:myId,x:w.x,y:w.y,c:myColor}); }
+    function drawCursors(){ Object.keys(peers).forEach(id=>{const p=peers[id];const s=toScreen(p.x,p.y);p.el.style.left=s.x+"px";p.el.style.top=s.y+"px";}); }
+    function showPeer(id,x,y,c){ let p=peers[id]; if(!p){ const el=document.createElement("div"); el.className="cur"; el.innerHTML='<svg width="26" height="26" viewBox="0 0 26 26"><path d="M2 2 L2 20 L7 15 L11 23 L14 22 L10 14 L18 14 Z" fill="'+(c||"#e0952a")+'" stroke="#fff" stroke-width="1.5"/></svg>'; cursors.appendChild(el); p=peers[id]={el}; setTimeout(()=>{},0);} p.x=x;p.y=y; const s=toScreen(x,y); p.el.style.left=s.x+"px"; p.el.style.top=s.y+"px"; clearTimeout(p.to); p.to=setTimeout(()=>{p.el.remove();delete peers[id];},4000); }
+
+    /* ---- приём ---- */
+    function applyRemote(op){ switch(op.t){
+      case "cur": showPeer(op.id,op.x,op.y,op.c); break;
+      case "ss": { const o={type:"stroke",id:op.id,color:op.c,pts:[]}; objs[op.id]=o; o.el=svgPath(o); ink.appendChild(o.el); break; }
+      case "sp": { const o=objs[op.id]; if(o&&o.type==="stroke"){o.pts.push({x:op.x,y:op.y});o.el.setAttribute("d",dOf(o.pts));} break; }
+      case "sa": { if(!objs[op.o.id]){const o=Object.assign({type:"shape"},op.o);objs[o.id]=o;o.el=svgShape(o);ink.appendChild(o.el);updShape(o);} break; }
+      case "na": addNote(op.o.id,op.o,true); break;
+      case "nt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)o.el.textContent=op.text; break; }
+      case "ta": addText(op.o.id,op.o,true); break;
+      case "tt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)o.el.textContent=op.text; break; }
+      case "ca": addCard(op.o.id,op.o,true); break;
+      case "mv": { const o=objs[op.id]; if(o&&o.el&&o.el.style){o.x=op.x;o.y=op.y;place(o.el,op.x,op.y);} break; }
+      case "rm": removeObj(op.id); break;
+      case "clr": doClear(); break;
+      case "hello": sendSnapshot(); break;
+      case "snap": applySnapshot(op); break;
+    } }
+    function sendSnapshot(){ const list=Object.keys(objs).map(id=>{const o=objs[id];
+      if(o.type==="stroke")return{type:"stroke",id,color:o.color,pts:o.pts};
+      if(o.type==="shape")return{type:"shape",id,shape:o.shape,x0:o.x0,y0:o.y0,x1:o.x1,y1:o.y1,color:o.color};
+      if(o.type==="note")return{type:"note",id,x:o.x,y:o.y,color:o.color,text:o.el.textContent};
+      if(o.type==="text")return{type:"text",id,x:o.x,y:o.y,color:o.color,text:o.el.textContent};
+      if(o.type==="card")return{type:"card",id,x:o.x,y:o.y,en:o.en,emoji:o.emoji};});
+      send({t:"snap",list});
     }
     let gotSnap=false;
-    function applySnapshot(op){
-      if(gotSnap)return;gotSnap=true;
-      if(op.img){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0);im.src=op.img;}
-      if(op.cards)Object.keys(op.cards).forEach(id=>makeCard(id,op.cards[id]));
-      if(op.texts)Object.keys(op.texts).forEach(id=>makeText(id,op.texts[id]));
+    function applySnapshot(op){ if(gotSnap||!op.list)return; gotSnap=true;
+      op.list.forEach(o=>{ if(objs[o.id])return;
+        if(o.type==="stroke"){const so={type:"stroke",id:o.id,color:o.color,pts:o.pts};objs[o.id]=so;so.el=svgPath(so);ink.appendChild(so.el);}
+        else if(o.type==="shape"){const so=Object.assign({type:"shape"},o);objs[o.id]=so;so.el=svgShape(so);ink.appendChild(so.el);updShape(so);}
+        else if(o.type==="note")addNote(o.id,o,true);
+        else if(o.type==="text")addText(o.id,o,true);
+        else if(o.type==="card")addCard(o.id,o,true);
+      });
     }
+
+    applyCam();
   </script>
 </body>
 </html>
