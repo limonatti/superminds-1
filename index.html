@@ -25,10 +25,13 @@
   .sec .t{font-size:24px;font-weight:700;margin:2px 0 8px}
   .sec .d{font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:#5a4f47;margin-bottom:18px;min-height:54px}
   .go span{background:#7c2340;color:#fff;font:800 15px 'Nunito',sans-serif;padding:11px 26px;border-radius:999px;display:inline-block}
-  .dicewrap{text-align:center;margin-top:26px}
-  .dicebtn{background:#e0952a;color:#fff;font:800 16px 'Nunito',sans-serif;padding:14px 28px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 6px 0 #b06a12;transition:transform .12s}
-  .dicebtn:hover{transform:translateY(-3px)}
+  .dicewrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .dicebtn,.boardbtn{font:800 16px 'Nunito',sans-serif;padding:14px 26px;border:none;border-radius:999px;cursor:pointer;transition:transform .12s;text-decoration:none;display:inline-block}
+  .dicebtn{background:#e0952a;color:#fff;box-shadow:0 6px 0 #b06a12}
+  .boardbtn{background:#7c2340;color:#fff;box-shadow:0 6px 0 #5e1a30}
+  .dicebtn:hover,.boardbtn:hover{transform:translateY(-3px)}
   .dicebtn:active{transform:translateY(2px);box-shadow:0 3px 0 #b06a12}
+  .boardbtn:active{transform:translateY(2px);box-shadow:0 3px 0 #5e1a30}
   .foot{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
   @media(max-width:720px){.sections{grid-template-columns:1fr}.sec .d{min-height:0}}
 </style>
@@ -63,6 +66,7 @@
       </a>
     </div>
     <div class="dicewrap">
+      <a class="boardbtn" href="board.html">🧑‍🏫 Доска для урока</a>
       <button class="dicebtn" onclick="randomGame()">🎲 Случайная игра</button>
     </div>
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>

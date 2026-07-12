@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Super Minds 1 · Доска</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;font-family:'Nunito',sans-serif;background:#e9dfca}
+  button,select{font-family:inherit;cursor:pointer}
+  #bar{position:fixed;top:0;left:0;right:0;height:56px;background:#7c2340;display:flex;align-items:center;gap:6px;padding:0 10px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.2);overflow-x:auto}
+  #bar a.home{color:#fff;font-weight:800;font-size:14px;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;white-space:nowrap}
+  .tool{background:rgba(255,255,255,.12);border:2px solid transparent;color:#fff;font-weight:800;font-size:15px;padding:8px 12px;border-radius:12px;white-space:nowrap}
+  .tool.on{background:#fff;color:#7c2340;border-color:#fff}
+  .sep{width:1px;height:30px;background:rgba(255,255,255,.25);margin:0 4px;flex:none}
+  .sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;flex:none;cursor:pointer}
+  .sw.on{outline:3px solid #ffd27a;outline-offset:1px}
+  .size{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex:none}
+  .size.on{background:#fff}
+  .size i{display:block;border-radius:50%;background:#fff}
+  .size.on i{background:#7c2340}
+  select{background:rgba(255,255,255,.14);color:#fff;border:none;border-radius:10px;padding:8px;font-weight:800;font-size:13px}
+  select option{color:#1c1310}
+
+  #board{position:fixed;top:56px;left:0;right:0;bottom:0;background:
+    linear-gradient(#00000008 1px,transparent 1px),
+    linear-gradient(90deg,#00000008 1px,transparent 1px);
+    background-size:28px 28px;background-color:#fdfaf0;touch-action:none}
+  #ink{position:absolute;inset:0;z-index:1}
+  #overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .card{position:absolute;pointer-events:auto;background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:8px 10px;box-shadow:0 4px 10px rgba(0,0,0,.12);text-align:center;cursor:grab;user-select:none;min-width:76px}
+  .card .em{font-size:34px;line-height:1}
+  .card .en{font:800 15px 'Nunito',sans-serif;color:#7c2340;margin-top:2px}
+  .card .x{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;background:#c0392b;color:#fff;font-size:13px;border:none;display:none}
+  .card:hover .x{display:block}
+  .tbox{position:absolute;pointer-events:auto;font:800 24px 'Fredoka',sans-serif;color:#1c1310;background:transparent;border:1px dashed transparent;padding:2px 4px;min-width:20px;cursor:grab;outline:none}
+  .tbox:focus{border-color:#7c2340;cursor:text}
+  .hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:7px 16px;font:700 12px 'Nunito',sans-serif;color:#8a7a68;box-shadow:0 3px 10px rgba(0,0,0,.1);z-index:15}
+</style>
+</head>
+<body>
+  <div id="bar">
+    <a class="home" href="index.html">← Домой</a>
+    <span class="sep"></span>
+    <button class="tool on" id="tPen">✏️ Ручка</button>
+    <button class="tool" id="tErase">🩹 Ластик</button>
+    <button class="tool" id="tText">🔤 Текст</button>
+    <span class="sep"></span>
+    <span id="palette" style="display:flex;gap:6px;align-items:center"></span>
+    <span id="sizes" style="display:flex;gap:6px;align-items:center"></span>
+    <span class="sep"></span>
+    <select id="unitSel"></select>
+    <button class="tool" id="addCards">＋ Слова</button>
+    <span class="sep"></span>
+    <button class="tool" id="undo">↩️</button>
+    <button class="tool" id="clear">🧹 Очистить</button>
+    <button class="tool" id="save">💾 PNG</button>
+  </div>
+
+  <div id="board">
+    <canvas id="ink"></canvas>
+    <div id="overlay"></div>
+  </div>
+  <div class="hint" id="hint">Рисуй на доске · перетаскивай карточки · 🔊 нажми на карточку, чтобы услышать</div>
+
+  <script src="words.js"></script>
+  <script>
+    const COLORS=["#1c1310","#7c2340","#c0392b","#e67e22","#27ae60","#2980b9","#8e44ad","#ffffff"];
+    const SIZES=[3,6,12];
+    let tool="pen", color="#1c1310", size=6;
+
+    const board=document.getElementById("board"), overlay=document.getElementById("overlay");
+    const canvas=document.getElementById("ink"), ctx=canvas.getContext("2d");
+    function fit(){ const r=board.getBoundingClientRect(); let img=null;
+      try{img=canvas.width?ctx.getImageData(0,0,canvas.width,canvas.height):null;}catch(e){}
+      canvas.width=r.width; canvas.height=r.height;
+      ctx.lineCap="round"; ctx.lineJoin="round";
+      if(img)try{ctx.putImageData(img,0,0);}catch(e){}
+    }
+    fit(); window.addEventListener("resize",fit);
+
+    /* палитра и размеры */
+    const pal=document.getElementById("palette");
+    COLORS.forEach(c=>{const b=document.createElement("button");b.className="sw"+(c===color?" on":"");b.style.background=c;
+      b.onclick=()=>{color=c;tool="pen";syncTools();[...pal.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");};pal.appendChild(b);});
+    const sz=document.getElementById("sizes");
+    SIZES.forEach(s=>{const b=document.createElement("button");b.className="size"+(s===size?" on":"");const i=document.createElement("i");i.style.width=s+2+"px";i.style.height=s+2+"px";b.appendChild(i);
+      b.onclick=()=>{size=s;[...sz.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");};sz.appendChild(b);});
+
+    function syncTools(){document.getElementById("tPen").classList.toggle("on",tool==="pen");
+      document.getElementById("tErase").classList.toggle("on",tool==="erase");
+      document.getElementById("tText").classList.toggle("on",tool==="text");}
+    document.getElementById("tPen").onclick=()=>{tool="pen";syncTools();};
+    document.getElementById("tErase").onclick=()=>{tool="erase";syncTools();};
+    document.getElementById("tText").onclick=()=>{tool="text";syncTools();};
+
+    /* рисование */
+    let drawing=false,last=null;
+    const undoStack=[];
+    function pushUndo(){try{undoStack.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(undoStack.length>25)undoStack.shift();}catch(e){}}
+    function pos(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+    canvas.addEventListener("pointerdown",e=>{
+      if(tool==="text"){placeText(e);return;}
+      drawing=true;pushUndo();last=pos(e);
+      ctx.globalCompositeOperation = tool==="erase"?"destination-out":"source-over";
+      ctx.strokeStyle=color;ctx.lineWidth=tool==="erase"?size*4:size;
+      // точка
+      ctx.beginPath();ctx.arc(last.x,last.y,(tool==="erase"?size*4:size)/2,0,7);ctx.fillStyle=color;
+      if(tool!=="erase")ctx.fill(); else {ctx.beginPath();ctx.arc(last.x,last.y,size*2,0,7);ctx.fill();}
+    });
+    canvas.addEventListener("pointermove",e=>{if(!drawing)return;const p=pos(e);
+      ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;});
+    window.addEventListener("pointerup",()=>{drawing=false;ctx.globalCompositeOperation="source-over";});
+
+    document.getElementById("undo").onclick=()=>{const img=undoStack.pop();if(img)ctx.putImageData(img,0,0);};
+    document.getElementById("clear").onclick=()=>{if(confirm("Очистить всю доску?")){pushUndo();ctx.clearRect(0,0,canvas.width,canvas.height);overlay.innerHTML="";}};
+    document.getElementById("save").onclick=()=>{
+      const out=document.createElement("canvas");out.width=canvas.width;out.height=canvas.height;const o=out.getContext("2d");
+      o.fillStyle="#fdfaf0";o.fillRect(0,0,out.width,out.height);o.drawImage(canvas,0,0);
+      const a=document.createElement("a");a.download="board.png";a.href=out.toDataURL("image/png");a.click();
+    };
+
+    /* текст */
+    function placeText(e){
+      const t=document.createElement("div");t.className="tbox";t.contentEditable="true";t.style.color=color;
+      t.style.left=(e.clientX-board.getBoundingClientRect().left)+"px";
+      t.style.top=(e.clientY-board.getBoundingClientRect().top-16)+"px";
+      t.textContent="текст";
+      overlay.appendChild(t);makeDraggable(t,true);
+      setTimeout(()=>{t.focus();document.execCommand&&document.execCommand("selectAll",false,null);},10);
+      tool="pen";syncTools();
+    }
+
+    /* карточки-слова */
+    function speak(x){try{const u=new SpeechSynthesisUtterance(x);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    const sel=document.getElementById("unitSel");
+    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
+    document.getElementById("addCards").onclick=()=>{
+      const u=SM_UNITS.find(x=>x.id===sel.value);if(!u)return;
+      u.words.slice(0,8).forEach((w,i)=>{
+        const c=document.createElement("div");c.className="card";
+        c.style.left=(40+(i%4)*100)+"px";c.style.top=(30+Math.floor(i/4)*110)+"px";
+        c.innerHTML='<button class="x">✕</button><div class="em">'+w.emoji+'</div><div class="en">'+w.en+'</div>';
+        overlay.appendChild(c);
+        c.querySelector(".x").onclick=ev=>{ev.stopPropagation();c.remove();};
+        makeDraggable(c,false,()=>speak(w.en));
+      });
+    };
+
+    /* перетаскивание + тап */
+    function makeDraggable(el,isText,onTap){
+      let sx,sy,ox,oy,moved,dragging=false;
+      el.addEventListener("pointerdown",e=>{
+        if(isText&&document.activeElement===el)return; // редактирование текста
+        dragging=true;moved=false;sx=e.clientX;sy=e.clientY;
+        ox=parseFloat(el.style.left)||0;oy=parseFloat(el.style.top)||0;
+        el.setPointerCapture(e.pointerId);el.style.cursor="grabbing";e.stopPropagation();
+      });
+      el.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-sx,dy=e.clientY-sy;
+        if(Math.abs(dx)+Math.abs(dy)>4)moved=true;el.style.left=(ox+dx)+"px";el.style.top=(oy+dy)+"px";});
+      el.addEventListener("pointerup",e=>{dragging=false;el.style.cursor="grab";
+        if(!moved){ if(isText){el.focus();} else if(onTap){onTap();} }});
+    }
+  </script>
+</body>
+</html>
