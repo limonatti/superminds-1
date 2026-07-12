@@ -103,6 +103,48 @@ window.SM = (function () {
       return { ok: !error, error: error && error.message };
     },
 
+    /* ---------- Класс: учитель / ученики ---------- */
+    async myProfile() {
+      if (!useCloud) return null;
+      const c = ensureClient(); if (!c) return null;
+      const u = await this.getUser(); if (!u) return null;
+      const { data } = await c.from("profiles").select("role,teacher_id,teacher_code,name").eq("user_id", u.id).maybeSingle();
+      return data || null;
+    },
+    /* Учитель: гарантировать профиль и получить свой код */
+    async ensureTeacherCode(name) {
+      if (!useCloud) return { code: "LOCAL", error: null };
+      const c = ensureClient(); if (!c) return { error: "no client" };
+      const u = await this.getUser(); if (!u) return { error: "not signed in" };
+      const prof = await this.myProfile();
+      if (prof && prof.teacher_code) return { code: prof.teacher_code };
+      for (let i = 0; i < 4; i++) {
+        const code = Math.random().toString(36).slice(2, 8).toUpperCase();
+        const { error } = await c.from("profiles").upsert(
+          { user_id: u.id, name: name || u.name, role: "teacher", teacher_code: code },
+          { onConflict: "user_id" }
+        );
+        if (!error) return { code: code };
+        if (!(error.message || "").toLowerCase().includes("teacher_code")) return { error: error.message };
+      }
+      return { error: "не удалось создать код" };
+    },
+    /* Ученик: привязаться к учителю по коду */
+    async joinTeacher(code) {
+      if (!useCloud) return { ok: false, error: "нужен Supabase" };
+      const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+      const { error } = await c.rpc("join_teacher", { p_code: (code || "").trim() });
+      return { ok: !error, error: error && error.message };
+    },
+    /* Учитель: список учеников с прогрессом */
+    async myStudents() {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const { data, error } = await c.rpc("my_students");
+      if (error) { console.warn("my_students:", error.message); return []; }
+      return data || [];
+    },
+
     /* Таблица лидеров: [{name, week_points, total_points}] (только облако) */
     async leaderboard() {
       if (!useCloud) return [];

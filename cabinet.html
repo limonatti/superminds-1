@@ -65,6 +65,11 @@
   .lbrow .nm{flex:1;font:800 14px 'Nunito',sans-serif;color:#1c1310;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .lbrow .pt{font:900 14px 'Nunito',sans-serif;color:#3f7a20;flex:none}
   .lbempty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:10px}
+  .classbox{background:#eef4ea;border-radius:16px;padding:12px 14px;margin-bottom:16px}
+  .classbox.joined{color:#3f7a20;font:800 14px 'Nunito',sans-serif;text-align:center}
+  .classrow{display:flex;gap:8px}
+  .classrow input{flex:1;border:2px solid #cdbfa8;border-radius:12px;padding:10px 12px;font:700 15px 'Fredoka',sans-serif;text-transform:uppercase;background:#fff}
+  .classrow button{background:#7c2340;color:#fff;border-radius:12px;padding:0 16px;font:800 14px 'Nunito',sans-serif}
   .cta{display:block;text-align:center;margin-top:20px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
 </style>
@@ -138,6 +143,19 @@
         '<div class="urow"><div class="ue">'+x.u.emoji+'</div><div class="ut">'+esc(x.u.title)+'</div><div class="ub"><i style="width:'+(x.total?x.learned/x.total*100:0)+'%"></i></div><div class="un">'+x.learned+'/'+x.total+'</div></div>'
       ).join("");
 
+      // Класс: привязка к учителю
+      let classHtml="";
+      if(SM.isCloud){
+        let prof=null; try{ prof=await SM.myProfile(); }catch(e){}
+        if(prof && prof.teacher_id){
+          classHtml='<div class="classbox joined">👩‍🏫 Ты в классе учителя ✓</div>';
+        } else {
+          classHtml='<div class="classbox"><div class="sec-title">КОД УЧИТЕЛЯ</div>'+
+            '<div class="classrow"><input id="tcode" placeholder="напр. AB12CD" maxlength="8"><button id="tjoin">Войти в класс</button></div>'+
+            '<div class="msg" id="tmsg"></div></div>';
+        }
+      }
+
       // Таблица лидеров за неделю
       let board=[]; try{ board=await SM.leaderboard(); }catch(e){}
       const medals=["🥇","🥈","🥉"];
@@ -161,6 +179,7 @@
             '<div class="bigcard c-pts"><div class="n">⭐ '+points+'</div><div class="l">очков</div></div>'+
           '</div>'+
           '<div class="total"><div class="big">'+totalLearned+' / '+totalWords+'</div><div class="lbl">выучено слов</div></div>'+
+          classHtml+
           '<div class="sec-title">БЕЙДЖИ ЗА ЮНИТЫ · '+earnedCount+' / '+stats.length+'</div>'+
           '<div class="badges">'+badges+'</div>'+
           '<div class="sec-title">ПРОГРЕСС ПО ЮНИТАМ</div>'+
@@ -169,6 +188,15 @@
           '<a class="cta" href="trainer.html">Продолжить учить слова →</a>'+
         '</div>';
       document.getElementById("out").onclick=async()=>{await SM.signOut();route();};
+      var jb=document.getElementById("tjoin");
+      if(jb){ jb.onclick=async()=>{
+        var m=document.getElementById("tmsg");m.className="msg";m.textContent="…";
+        var code=(document.getElementById("tcode").value||"").trim();
+        if(!code){m.className="msg err";m.textContent="Введи код";return;}
+        var r=await SM.joinTeacher(code);
+        if(r.ok){m.className="msg ok";m.textContent="Готово! Ты в классе 🎉";setTimeout(()=>renderDash(user),700);}
+        else {m.className="msg err";m.textContent=r.error||"Код не найден";}
+      };}
     }
 
     async function route(){ const user=await SM.getUser(); if(user)renderDash(user); else renderAuth(); }
