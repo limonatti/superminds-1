@@ -70,6 +70,13 @@
   .classrow{display:flex;gap:8px}
   .classrow input{flex:1;border:2px solid #cdbfa8;border-radius:12px;padding:10px 12px;font:700 15px 'Fredoka',sans-serif;text-transform:uppercase;background:#fff}
   .classrow button{background:#7c2340;color:#fff;border-radius:12px;padding:0 16px;font:800 14px 'Nunito',sans-serif}
+  .hwbox{margin-bottom:16px}
+  .hwrow{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:#fff4e0;border:2px solid #f0c96b;margin-bottom:8px;flex-wrap:wrap}
+  .hwrow.done{background:#eef4ea;border-color:#bcd9ac}
+  .hwrow .hwt{flex:1;font:800 13.5px 'Nunito',sans-serif;color:#1c1310;min-width:120px}
+  .hwrow .hwopen{background:#7c2340;color:#fff;border-radius:999px;padding:7px 14px;font:800 12px 'Nunito',sans-serif;text-decoration:none}
+  .hwrow .hwbtn{background:#3f7a20;color:#fff;border:none;border-radius:999px;padding:7px 14px;font:800 12px 'Nunito',sans-serif;cursor:pointer}
+  .hwrow .hwdone{font-size:18px}
   .cta{display:block;text-align:center;margin-top:20px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
 </style>
@@ -156,6 +163,21 @@
         }
       }
 
+      // Домашка от учителя
+      let hwHtml="";
+      if(SM.isCloud){
+        let hw=[]; try{ hw=await SM.myAssignments(); }catch(e){}
+        if(hw.length){
+          const kinds={trainer:{i:"🎯",l:"Тренажёр",href:"trainer.html?unit="},games:{i:"🎮",l:"Игры",href:"games.html?u="},worksheet:{i:"✏️",l:"Лист",href:"worksheet.html?u="}};
+          const rows=hw.map(a=>{const k=kinds[a.kind]||kinds.trainer;const uu=SM_UNITS.find(x=>x.id===a.unit_id);const lbl=uu?(uu.emoji+" "+esc(uu.title)):esc(a.unit_id);
+            return '<div class="hwrow'+(a.done?" done":"")+'"><span class="hwt">'+k.i+' '+lbl+' · '+k.l+'</span>'+
+              '<a class="hwopen" href="'+k.href+a.unit_id+'"'+(a.kind==="worksheet"?' target="_blank"':'')+'>Открыть</a>'+
+              (a.done?'<span class="hwdone">✅</span>':'<button class="hwbtn" data-id="'+a.id+'">Выполнено</button>')+'</div>';
+          }).join("");
+          hwHtml='<div class="sec-title">📚 ДОМАШКА ОТ УЧИТЕЛЯ</div><div class="hwbox">'+rows+'</div>';
+        }
+      }
+
       // Таблица лидеров за неделю
       let board=[]; try{ board=await SM.leaderboard(); }catch(e){}
       const medals=["🥇","🥈","🥉"];
@@ -180,6 +202,7 @@
           '</div>'+
           '<div class="total"><div class="big">'+totalLearned+' / '+totalWords+'</div><div class="lbl">выучено слов</div></div>'+
           classHtml+
+          hwHtml+
           '<div class="sec-title">БЕЙДЖИ ЗА ЮНИТЫ · '+earnedCount+' / '+stats.length+'</div>'+
           '<div class="badges">'+badges+'</div>'+
           '<div class="sec-title">ПРОГРЕСС ПО ЮНИТАМ</div>'+
@@ -197,6 +220,10 @@
         if(r.ok){m.className="msg ok";m.textContent="Готово! Ты в классе 🎉";setTimeout(()=>renderDash(user),700);}
         else {m.className="msg err";m.textContent=r.error||"Код не найден";}
       };}
+      document.querySelectorAll(".hwbtn").forEach(b=>{ b.onclick=async()=>{
+        b.textContent="…"; const r=await SM.markAssignment(b.dataset.id,true);
+        if(r.ok) renderDash(user); else b.textContent="Выполнено";
+      };});
     }
 
     async function route(){ const user=await SM.getUser(); if(user)renderDash(user); else renderAuth(); }

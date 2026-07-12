@@ -44,6 +44,16 @@
   .srow .st{font:800 12px 'Nunito',sans-serif;color:#5a4f47;display:flex;gap:10px;flex-wrap:wrap}
   .srow .st b{color:#3f7a20}
   .empty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:14px}
+  .scard{background:#faf4ea;border-radius:14px;padding:8px 10px;margin-bottom:10px}
+  .scard .srow{background:transparent;padding:4px 2px;margin:0}
+  .assign-btn{background:#3f7a20;color:#fff;border:none;border-radius:999px;padding:7px 12px;font:800 12px 'Nunito',sans-serif;cursor:pointer;flex:none}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 2px 2px}
+  .chip{display:inline-flex;align-items:center;gap:5px;background:#fff4e0;border:1.5px solid #f0c96b;border-radius:999px;padding:4px 8px;font:800 11.5px 'Nunito',sans-serif;color:#7a5b12}
+  .chip.done{background:#eef4ea;border-color:#bcd9ac;color:#3f7a20}
+  .chip .del{background:none;border:none;color:#c0392b;cursor:pointer;font-size:12px;padding:0 0 0 2px}
+  .assignform{display:none;gap:6px;margin:8px 2px 2px;flex-wrap:wrap}
+  .assignform select{border:2px solid #e3d3ba;border-radius:10px;padding:8px;font:800 12px 'Nunito',sans-serif;background:#fff;flex:1;min-width:120px}
+  .assignform .assign-go{background:#7c2340;color:#fff;border:none;border-radius:10px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
 </style>
 </head>
@@ -106,11 +116,23 @@
       const codeRes=await SM.ensureTeacherCode(user.name);
       const code=codeRes.code||"—";
       const students=await SM.myStudents();
+      let asg=[]; try{ asg=await SM.classAssignments(); }catch(e){}
+      const byStudent={}; asg.forEach(a=>{ (byStudent[a.student_id]=byStudent[a.student_id]||[]).push(a); });
+      const unitOptions=SM_UNITS.map(u=>'<option value="'+u.id+'">'+u.emoji+' '+esc(u.title)+'</option>').join("");
+      const kindOptions='<option value="trainer">🎯 Тренажёр</option><option value="games">🎮 Игры</option><option value="worksheet">✏️ Лист</option>';
+      const kmap={trainer:"🎯",games:"🎮",worksheet:"✏️"};
+      function uLabel(uid){var u=SM_UNITS.find(x=>x.id===uid);return u?(u.emoji+" "+u.title):uid;}
 
       const rows = students.length ? students.map(s=>{
-        const data=s.data||{}; const meta=data.__meta||{};
-        return '<div class="srow"><div class="av">🧒</div><div class="nm">'+esc(s.name)+'</div>'+
-          '<div class="st"><span>✅ <b>'+learned(data)+'</b> слов</span><span>⭐ '+(meta.totalPoints||0)+'</span><span>🔥 '+(meta.dayStreak||0)+' дн.</span><span>🕘 '+ago(s.updated_at)+'</span></div></div>';
+        const data=s.data||{}; const meta=data.__meta||{}; const sid=s.student_id;
+        const chips=(byStudent[sid]||[]).map(a=>'<span class="chip'+(a.done?" done":"")+'">'+(kmap[a.kind]||"🎯")+' '+esc(uLabel(a.unit_id))+' '+(a.done?"✓":"⏳")+'<button class="del" data-id="'+a.id+'">✕</button></span>').join("");
+        return '<div class="scard">'+
+          '<div class="srow"><div class="av">🧒</div><div class="nm">'+esc(s.name)+'</div>'+
+            '<div class="st"><span>✅ <b>'+learned(data)+'</b></span><span>⭐ '+(meta.totalPoints||0)+'</span><span>🔥 '+(meta.dayStreak||0)+'</span><span>🕘 '+ago(s.updated_at)+'</span></div>'+
+            '<button class="assign-btn" data-sid="'+sid+'">＋ Задать</button></div>'+
+          (chips?'<div class="chips">'+chips+'</div>':'')+
+          '<div class="assignform" id="af-'+sid+'"><select class="af-unit">'+unitOptions+'</select><select class="af-kind">'+kindOptions+'</select><button class="assign-go" data-sid="'+sid+'">Задать</button></div>'+
+        '</div>';
       }).join("") : '<div class="empty">Пока нет учеников. Дай им код класса — и они появятся здесь.</div>';
 
       document.getElementById("body").innerHTML=
@@ -122,6 +144,13 @@
         rows;
 
       document.getElementById("refresh").onclick=()=>renderDash(user);
+      document.querySelectorAll(".assign-btn").forEach(b=>b.onclick=()=>{var f=document.getElementById("af-"+b.dataset.sid);f.style.display=(f.style.display==="flex"?"none":"flex");});
+      document.querySelectorAll(".assign-go").forEach(b=>b.onclick=async()=>{
+        var card=document.getElementById("af-"+b.dataset.sid);var unit=card.querySelector(".af-unit").value;var kind=card.querySelector(".af-kind").value;
+        b.textContent="…";var r=await SM.assignTo(b.dataset.sid,unit,kind);
+        if(r.ok)renderDash(user);else{b.textContent="Задать";alert(r.error||"Ошибка");}
+      });
+      document.querySelectorAll(".del").forEach(b=>b.onclick=async()=>{ if(!confirm("Удалить задание?"))return; await SM.deleteAssignment(b.dataset.id); renderDash(user);});
       document.getElementById("copy").onclick=()=>{
         const txt="Заходи ко мне на English with Asya! Открой «Кабинет ученика» и введи код класса: "+code+"\n"+location.origin+location.pathname.replace(/teacher\.html$/,"cabinet.html");
         if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert("Приглашение скопировано!\n\n"+txt),()=>prompt("Скопируй:",txt));

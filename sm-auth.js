@@ -145,6 +145,41 @@ window.SM = (function () {
       return data || [];
     },
 
+    /* ---------- Домашки ---------- */
+    async assignTo(studentId, unitId, kind) {
+      if (!useCloud) return { ok: false, error: "нужен Supabase" };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+      const { error } = await c.from("assignments").insert({ teacher_id: u.id, student_id: studentId, unit_id: unitId, kind: kind });
+      return { ok: !error, error: error && error.message };
+    },
+    async classAssignments() {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const { data, error } = await c.rpc("class_assignments");
+      if (error) { console.warn("class_assignments:", error.message); return []; }
+      return data || [];
+    },
+    async deleteAssignment(id) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const { error } = await c.from("assignments").delete().eq("id", id);
+      return { ok: !error, error: error && error.message };
+    },
+    async myAssignments() {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const u = await this.getUser(); if (!u) return [];
+      const { data } = await c.from("assignments").select("id,unit_id,kind,done,created_at").eq("student_id", u.id).order("created_at", { ascending: false });
+      return data || [];
+    },
+    async markAssignment(id, done) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const { error } = await c.rpc("mark_assignment_done", { p_id: id, p_done: done });
+      return { ok: !error, error: error && error.message };
+    },
+
     /* Таблица лидеров: [{name, week_points, total_points}] (только облако) */
     async leaderboard() {
       if (!useCloud) return [];
