@@ -358,6 +358,16 @@
     document.getElementById("badgeOk").onclick=()=>document.getElementById("badgeToast").classList.remove("show");
     document.getElementById("badgeToast").onclick=e=>{ if(e.target.id==="badgeToast") document.getElementById("badgeToast").classList.remove("show"); };
 
+    // предвыбор юнита из ссылки: ?unit=u4  или  ?units=u4,u5
+    (function(){
+      const q=new URLSearchParams(location.search);
+      let ids=[];
+      if(q.get("unit")) ids=[q.get("unit")];
+      else if(q.get("units")) ids=q.get("units").split(",");
+      ids=ids.filter(id=>SM_UNITS.some(u=>u.id===id));
+      if(ids.length) selectedUnits=ids;
+    })();
+
     (async function(){
       const user=await SM.getUser();
       if(user)document.getElementById("greet").textContent="Привет, "+user.name+"! Учим слова 💪";

@@ -64,7 +64,7 @@ window.SM_UNITS = [
       { en: "computer game", ru: "компьютерная игра", emoji: "🎮" },
       { en: "monster", ru: "монстрик", emoji: "👾" },
       { en: "robot", ru: "робот", emoji: "🤖" },
-      { en: "balloon", ru: "шарик", emoji: "🎈" }
+      { en: "go-kart", ru: "картинг", emoji: "🏎️" }
     ]
   },
   {

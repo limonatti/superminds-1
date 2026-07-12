@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Minds 1 · Рабочий лист</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310}
+  a{color:inherit;text-decoration:none}
+  .bar{position:sticky;top:0;display:flex;gap:10px;justify-content:center;padding:12px;background:#f4e9d8;z-index:5}
+  .bar a,.bar button{background:#7c2340;color:#fff;border:none;cursor:pointer;padding:10px 18px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .bar a.ghost{background:#fff;color:#7c2340}
+  .sheet{max-width:760px;margin:0 auto 40px;background:#fff;border-radius:10px;padding:34px 40px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .head{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #7c2340;padding-bottom:12px;margin-bottom:8px}
+  .head .t{font-size:26px;font-weight:700;color:#7c2340}
+  .head .u{font:900 12px 'Nunito',sans-serif;color:#b5654a;letter-spacing:1px}
+  .name{font:700 13px 'Nunito',sans-serif;color:#7a6a58;margin:6px 0 22px}
+  h2{font-size:18px;color:#1c1310;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+  h2 .num{background:#7c2340;color:#fff;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 14px 'Nunito',sans-serif}
+  h2 .sm{font:700 12px 'Nunito',sans-serif;color:#8a7a68;font-weight:700}
+
+  /* match */
+  .match{display:flex;justify-content:space-between;gap:30px}
+  .col{flex:1}
+  .mrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border:2px solid #e3d3ba;border-radius:12px;margin-bottom:10px;min-height:48px}
+  .mrow .lab{font:800 13px 'Nunito',sans-serif;color:#7c2340;width:20px}
+  .mrow .en{font-size:20px;font-weight:600}
+  .mrow .em{font-size:30px}
+  .dot{width:12px;height:12px;border-radius:50%;background:#7c2340;margin-left:auto}
+  .col.pics .dot{margin-left:0;margin-right:auto}
+  .col.pics .mrow{flex-direction:row-reverse}
+
+  /* write */
+  .write{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px}
+  .wcell{display:flex;align-items:center;gap:12px}
+  .wcell .em{font-size:38px}
+  .wcell .blanks{font-size:26px;font-weight:700;letter-spacing:6px;color:#1c1310;border-bottom:2px solid #bbb;flex:1;padding-bottom:2px;min-height:34px}
+
+  /* circle */
+  .circle .crow{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+  .circle .em{font-size:36px;width:46px;text-align:center}
+  .circle .opts{display:flex;gap:14px;flex-wrap:wrap}
+  .circle .opt{border:2px solid #cdbfa8;border-radius:999px;padding:7px 18px;font-size:18px;font-weight:600}
+
+  .foot{text-align:center;font:700 12px 'Nunito',sans-serif;color:#a99a86;margin-top:26px;border-top:1px dashed #e3d3ba;padding-top:12px}
+
+  @media print{
+    body{background:#fff}
+    .bar{display:none}
+    .sheet{box-shadow:none;margin:0;max-width:none;border-radius:0;padding:8mm 10mm}
+    @page{margin:10mm}
+  }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <a class="ghost" href="workbook.html">← Work Book</a>
+    <button onclick="window.print()">🖨 Печать / Сохранить в PDF</button>
+    <a class="ghost" id="trainerLink" href="trainer.html">🎯 Тренажёр</a>
+  </div>
+  <div class="sheet" id="sheet"></div>
+
+  <script src="words.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    const LT="abcdefghijklmnop".split("");
+
+    const q=new URLSearchParams(location.search);
+    const uid=q.get("u")||"u1";
+    const unit=SM_UNITS.find(u=>u.id===uid)||SM_UNITS[0];
+    document.getElementById("trainerLink").href="trainer.html?unit="+unit.id;
+
+    const words=unit.words.slice(0,10);
+    const idx=SM_UNITS.indexOf(unit);
+    const unitNo = unit.unit;
+
+    // Задание 1: соедини (слова слева перемешаны отдельно от картинок)
+    const leftWords=shuffle(words);
+    const rightPics=shuffle(words);
+    const matchLeft=leftWords.map((w,i)=>'<div class="mrow"><span class="lab">'+(i+1)+'</span><span class="en">'+esc(w.en)+'</span><span class="dot"></span></div>').join("");
+    const matchRight=rightPics.map((w,i)=>'<div class="mrow"><span class="lab">'+LT[i]+'</span><span class="em">'+w.emoji+'</span><span class="dot"></span></div>').join("");
+
+    // Задание 2: впиши слово (первая буква-подсказка + прочерки)
+    const writeCells=words.map(w=>{
+      const first=w.en[0];
+      const rest=w.en.slice(1).replace(/[a-zA-Zа-яё-]/gi,"_").replace(/ /g," ");
+      return '<div class="wcell"><span class="em">'+w.emoji+'</span><span class="blanks">'+esc(first)+" "+esc(rest.split("").join(" "))+'</span></div>';
+    }).join("");
+
+    // Задание 3: обведи правильное слово
+    const circle=shuffle(words).slice(0,6).map(w=>{
+      const others=shuffle(words.filter(x=>x.en!==w.en)).slice(0,2);
+      const opts=shuffle([w,...others]).map(o=>'<span class="opt">'+esc(o.en)+'</span>').join("");
+      return '<div class="crow"><span class="em">'+w.emoji+'</span><div class="opts">'+opts+'</div></div>';
+    }).join("");
+
+    document.getElementById("sheet").innerHTML=
+      '<div class="head"><div><div class="u">SUPER MINDS 1 · '+esc(unitNo.toUpperCase())+'</div><div class="t">'+unit.emoji+' '+esc(unit.title)+'</div></div><div style="font-size:40px">✏️</div></div>'+
+      '<div class="name">Имя: ____________________________     Дата: ____________</div>'+
+
+      '<h2><span class="num">1</span> Соедини слово и картинку <span class="sm">— проведи линию</span></h2>'+
+      '<div class="match"><div class="col words">'+matchLeft+'</div><div class="col pics">'+matchRight+'</div></div>'+
+
+      '<h2><span class="num">2</span> Впиши слово <span class="sm">— первая буква уже есть</span></h2>'+
+      '<div class="write">'+writeCells+'</div>'+
+
+      '<h2><span class="num">3</span> Обведи правильное слово <span class="sm">— посмотри на картинку</span></h2>'+
+      '<div class="circle">'+circle+'</div>'+
+
+      '<div class="foot">Made for @english.with_asya · Super Minds 1 (2nd edition) · '+esc(unit.title)+'</div>';
+  </script>
+</body>
+</html>
