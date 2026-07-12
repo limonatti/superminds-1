@@ -1,7 +1,9 @@
-/* Super Minds 1 · словарь тренажёра
+/* Мультиучебники: данные курсов + выбор текущего курса.
    Каждый юнит: { id, unit, title, emoji, color, words:[{en, ru, emoji}] }
-   id слова: unitId + "-" + индекс — используется для прогресса. */
-window.SM_UNITS = [
+   id слова: unitId + "-" + индекс — используется для прогресса.
+   Добавить новый учебник = добавить SM_COURSE_DATA["xxx"]=[...] и запись в SM_COURSES. */
+window.SM_COURSE_DATA = window.SM_COURSE_DATA || {};
+window.SM_COURSE_DATA["sm1"] = [
   {
     id: "welcome", unit: "Welcome", title: "Friends · цвета", emoji: "👋", color: "#f6e2cf",
     words: [
@@ -188,9 +190,23 @@ window.SM_UNITS = [
   }
 ];
 
-/* Плоский список всех слов с уникальными id */
-window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
-  return u.words.map(function (w, i) {
-    return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji };
+/* ---- Реестр учебников (курсов) ---- */
+window.SM_COURSES = [
+  { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true },
+  { id: "sm2",  title: "Super Minds 2", subtitle: "добавим вместе",         emoji: "📘", color: "#e4ebf2", ready: false },
+  { id: "own",  title: "Свой учебник",  subtitle: "добавим вместе",         emoji: "➕", color: "#f6e2cf", ready: false }
+];
+
+/* ---- Выбор текущего курса (localStorage, по умолчанию sm1) ---- */
+(function () {
+  var cid;
+  try { cid = localStorage.getItem("sm-course"); } catch (e) {}
+  if (!cid || !window.SM_COURSE_DATA[cid]) cid = "sm1";
+  window.SM_COURSE = window.SM_COURSES.filter(function (c) { return c.id === cid; })[0] || window.SM_COURSES[0];
+  window.SM_UNITS = window.SM_COURSE_DATA[cid];
+  window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
+    return u.words.map(function (w, i) {
+      return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji };
+    });
   });
-});
+})();

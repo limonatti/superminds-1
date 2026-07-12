@@ -3,79 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Super Minds 1 · English with Asya</title>
+<title>English with Asya · Мои учебники</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
   body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 60px}
-  .top{display:flex;justify-content:flex-end;margin-bottom:6px}
-  .cab{background:#fff;color:#7c2340;font:800 14px 'Nunito',sans-serif;padding:10px 20px;border-radius:999px;box-shadow:0 5px 0 #e3d3ba;display:inline-flex;align-items:center;gap:7px}
-  .head{text-align:center;margin-bottom:34px}
-  h1{margin:0;font-size:clamp(34px,7vw,58px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:#5a4f47;margin:10px 0 0}
-  .sections{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
-  .sec{background:#fff;border-radius:30px;padding:30px 24px;box-shadow:0 8px 0 #e3d3ba;
-    transition:transform .14s ease,box-shadow .14s ease;display:block;text-align:center}
-  .sec:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
-  .medal{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;margin:0 auto 18px}
-  .m1{background:#e4ebf2} .m2{background:#f6e2cf} .m3{background:#dfeadd}
-  .sec .t{font-size:24px;font-weight:700;margin:2px 0 8px}
-  .sec .d{font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:#5a4f47;margin-bottom:18px;min-height:54px}
-  .go span{background:#7c2340;color:#fff;font:800 15px 'Nunito',sans-serif;padding:11px 26px;border-radius:999px;display:inline-block}
-  .dicewrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:26px}
-  .dicebtn,.boardbtn{font:800 16px 'Nunito',sans-serif;padding:14px 26px;border:none;border-radius:999px;cursor:pointer;transition:transform .12s;text-decoration:none;display:inline-block}
-  .dicebtn{background:#e0952a;color:#fff;box-shadow:0 6px 0 #b06a12}
-  .boardbtn{background:#7c2340;color:#fff;box-shadow:0 6px 0 #5e1a30}
-  .dicebtn:hover,.boardbtn:hover{transform:translateY(-3px)}
-  .dicebtn:active{transform:translateY(2px);box-shadow:0 3px 0 #b06a12}
-  .boardbtn:active{transform:translateY(2px);box-shadow:0 3px 0 #5e1a30}
-  .foot{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
-  @media(max-width:720px){.sections{grid-template-columns:1fr}.sec .d{min-height:0}}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .wrap{max-width:900px;margin:0 auto;padding:44px 24px 60px}
+  .top{display:flex;justify-content:flex-end;gap:10px;margin-bottom:6px}
+  .pill{background:#fff;color:#7c2340;font:800 14px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 5px 0 #e3d3ba;display:inline-flex;align-items:center;gap:7px}
+  .head{text-align:center;margin-bottom:30px}
+  h1{margin:0;font-size:clamp(32px,7vw,54px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{font:800 16px 'Nunito',sans-serif;color:#5a4f47;margin:10px 0 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
+  .course{background:#fff;border-radius:28px;padding:26px 22px;box-shadow:0 8px 0 #e3d3ba;text-align:center;transition:transform .14s,box-shadow .14s;cursor:pointer;position:relative}
+  .course.ready:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
+  .course.soon{opacity:.72}
+  .cover{width:104px;height:104px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:54px;margin:0 auto 16px}
+  .course .t{font-size:22px;font-weight:700;margin:2px 0 4px}
+  .course .s{font:800 12.5px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:16px;min-height:32px}
+  .go{background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:10px 22px;border-radius:999px;display:inline-block}
+  .badge{position:absolute;top:14px;right:14px;background:#f0c96b;color:#7a5b12;font:900 10px 'Nunito',sans-serif;padding:4px 9px;border-radius:999px;letter-spacing:.5px}
+  .tools{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .tbtn{font:800 15px 'Nunito',sans-serif;padding:13px 24px;border-radius:999px;color:#fff}
+  .board{background:#7c2340;box-shadow:0 6px 0 #5e1a30}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:40px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
-      <a class="cab" href="cabinet.html">👤 Кабинет ученика</a>
+      <a class="pill" href="cabinet.html">👤 Кабинет ученика</a>
     </div>
     <div class="head">
-      <h1>Super Minds 1</h1>
-      <div class="sub">English with Asya · выбери раздел</div>
+      <h1>🎓 English with Asya</h1>
+      <div class="sub">Мои учебники — выбери курс</div>
     </div>
-    <div class="sections">
-      <a class="sec" href="studentbook.html">
-        <div class="medal m1">📕</div>
-        <div class="t">Student Book</div>
-        <div class="d">Учебник: онлайн-игры, карточки, комиксы и колесо по юнитам</div>
-        <div class="go"><span>Открыть →</span></div>
-      </a>
-      <a class="sec" href="workbook.html">
-        <div class="medal m2">📗</div>
-        <div class="t">Work Book</div>
-        <div class="d">Рабочая тетрадь: распечатки, грамматика, соедини и впиши, бинго</div>
-        <div class="go"><span>Открыть →</span></div>
-      </a>
-      <a class="sec" href="trainer.html">
-        <div class="medal m3">🎯</div>
-        <div class="t">Тренажёр слов</div>
-        <div class="d">Учи слова всех юнитов: карточки и квиз. Прогресс в кабинете</div>
-        <div class="go"><span>Учить →</span></div>
-      </a>
-    </div>
-    <div class="dicewrap">
-      <a class="boardbtn" href="board.html">🧑‍🏫 Доска для урока</a>
-      <button class="dicebtn" onclick="randomGame()">🎲 Случайная игра</button>
+    <div class="grid" id="grid"></div>
+    <div class="tools">
+      <a class="tbtn board" href="board.html">🧑‍🏫 Доска для урока</a>
     </div>
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
   </div>
+
+  <script src="words.js"></script>
   <script>
-    function randomGame(){
-      var u=["u1","u2","u3","u4","u5","u6","u7","u8","u9"];
-      location.href="games.html?u="+u[Math.floor(Math.random()*u.length)];
-    }
+    const grid=document.getElementById("grid");
+    SM_COURSES.forEach(c=>{
+      const el=document.createElement("div");
+      el.className="course "+(c.ready?"ready":"soon");
+      el.innerHTML=
+        (c.ready?'':'<div class="badge">СКОРО</div>')+
+        '<div class="cover" style="background:'+c.color+'">'+c.emoji+'</div>'+
+        '<div class="t">'+c.title+'</div>'+
+        '<div class="s">'+c.subtitle+'</div>'+
+        '<div class="go">'+(c.ready?'Открыть →':'Добавить вместе')+'</div>';
+      el.onclick=()=>{
+        if(c.ready){ try{localStorage.setItem("sm-course",c.id);}catch(e){} location.href="course.html"; }
+        else { alert("Этот учебник ещё не добавлен. Напиши мне — добавим его вместе, по чуть-чуть! 🙂"); }
+      };
+      grid.appendChild(el);
+    });
   </script>
 </body>
 </html>
