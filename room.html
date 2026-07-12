@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Комната урока · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;font-family:'Nunito',sans-serif;background:#e9dfca;color:#1c1310}
+  button,select,a{font-family:inherit}
+  #top{height:52px;background:#7c2340;display:flex;align-items:center;gap:8px;padding:0 12px;color:#fff}
+  #top a.home{color:#fff;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
+  #top .title{font:800 16px 'Nunito',sans-serif;white-space:nowrap}
+  #top .rc{margin-left:auto;display:flex;align-items:center;gap:8px}
+  #top .room{background:rgba(255,255,255,.14);padding:7px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
+  #top .room .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f0c96b;margin-right:5px}
+  #top .room.on .dot{background:#7ee787}
+  #invite{background:#e0952a;color:#fff;border:none;cursor:pointer;padding:8px 14px;border-radius:999px;font:800 13px 'Nunito',sans-serif}
+
+  #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+  #boardCol{flex:1.7;min-width:0;border-right:3px solid #d9c9ac}
+  #boardCol iframe{width:100%;height:100%;border:none;display:block}
+  #panel{flex:1;min-width:280px;max-width:440px;background:#fff;display:flex;flex-direction:column}
+  .prow{padding:12px 14px;border-bottom:2px solid #f1e7d5}
+  .lbl{font:900 11px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin-bottom:8px}
+  select#unit{width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px;font:800 15px 'Nunito',sans-serif;color:#1c1310;background:#fdfbf7}
+  .acts{display:flex;gap:8px;margin-top:10px}
+  .act{flex:1;border:2px solid #e3d3ba;background:#fff;border-radius:12px;padding:10px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
+  .act.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .openbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .open{background:#f4e9d8;border:none;border-radius:999px;padding:8px 14px;font:800 12.5px 'Nunito',sans-serif;color:#7c2340;cursor:pointer;text-decoration:none}
+  #frameWrap{flex:1;min-height:0}
+  #frameWrap iframe{width:100%;height:100%;border:none;display:block;background:#f4e9d8}
+  .hint{font:700 12px 'Nunito',sans-serif;color:#a99a86;margin-top:8px;line-height:1.4}
+  @media(max-width:820px){#main{flex-direction:column}#boardCol{flex:none;height:52%;border-right:none;border-bottom:3px solid #d9c9ac}#panel{max-width:none;height:48%}}
+</style>
+</head>
+<body>
+  <div id="top">
+    <a class="home" href="course.html">← Домой</a>
+    <span class="title">🧑‍🏫 Комната урока</span>
+    <span class="rc">
+      <span class="room" id="room"><span class="dot"></span><span id="roomTxt">…</span></span>
+      <button id="invite">🔗 Позвать ученика</button>
+    </span>
+  </div>
+
+  <div id="main">
+    <div id="boardCol"><iframe id="board" title="Доска"></iframe></div>
+    <div id="panel">
+      <div class="prow">
+        <div class="lbl">ЮНИТ УРОКА</div>
+        <select id="unit"></select>
+        <div class="acts">
+          <button class="act on" id="aTrainer" data-k="trainer">🎯 Тренажёр</button>
+          <button class="act" id="aGames" data-k="games">🎮 Игры</button>
+        </div>
+        <div class="openbtns">
+          <a class="open" id="openTr" target="_blank">Тренажёр ↗</a>
+          <a class="open" id="openGm" target="_blank">Игры ↗</a>
+          <a class="open" id="openWs" target="_blank">✏️ Лист ↗</a>
+          <button class="open" id="toBoard">＋ Слова на доску</button>
+        </div>
+        <div class="hint">Юнит и задание видят оба. Рисуйте вместе на доске слева. «Позвать ученика» — отправь ссылку, он войдёт в эту же комнату.</div>
+      </div>
+      <div id="frameWrap"><iframe id="frame" title="Задание"></iframe></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script>
+    const params=new URLSearchParams(location.search);
+    let room=params.get("room");
+    if(!room){ room=Math.random().toString(36).slice(2,7).toUpperCase(); history.replaceState(null,"","?room="+room); }
+
+    // доска в iframe (сама синхронизируется по board:room)
+    document.getElementById("board").src="board.html?room="+encodeURIComponent(room);
+
+    // выбор юнита + задания
+    const unitSel=document.getElementById("unit");
+    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.unit+" · "+u.title;unitSel.appendChild(o);});
+    let kind="trainer", unit=SM_UNITS[0].id, applying=false;
+
+    function frameSrc(){ return (kind==="games"?"games.html?u=":"trainer.html?unit=")+unit; }
+    function apply(broadcast){
+      document.getElementById("frame").src=frameSrc();
+      document.getElementById("aTrainer").classList.toggle("on",kind==="trainer");
+      document.getElementById("aGames").classList.toggle("on",kind==="games");
+      document.getElementById("openTr").href="trainer.html?unit="+unit;
+      document.getElementById("openGm").href="games.html?u="+unit;
+      document.getElementById("openWs").href="worksheet.html?u="+unit;
+      unitSel.value=unit;
+      if(broadcast) send({unit:unit,kind:kind});
+    }
+    unitSel.onchange=()=>{unit=unitSel.value;apply(true);};
+    document.getElementById("aTrainer").onclick=()=>{kind="trainer";apply(true);};
+    document.getElementById("aGames").onclick=()=>{kind="games";apply(true);};
+    document.getElementById("toBoard").onclick=()=>{
+      const bf=document.getElementById("board");
+      try{ bf.contentWindow.postMessage({type:"sm-add",unit:unit}, location.origin); }catch(e){}
+    };
+
+    // синхронизация панели урока через Supabase Realtime
+    const SB_URL="https://kdzpmbuohfjbtjpqrdfx.supabase.co";
+    const SB_KEY="sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+    let channel=null, online=false;
+    function setOnline(on){document.getElementById("room").classList.toggle("on",on);document.getElementById("roomTxt").textContent=(on?"комната ":"оффлайн · ")+room;}
+    setOnline(false);
+    (function(){try{
+      const sb=window.supabase.createClient(SB_URL,SB_KEY);
+      channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
+      channel.on("broadcast",{event:"op"},({payload})=>{
+        if(payload.t==="state"){unit=payload.unit;kind=payload.kind;apply(false);}
+        else if(payload.t==="hello"){send({unit:unit,kind:kind});}
+      });
+      channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
+    }catch(e){}})();
+    function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",unit:s.unit,kind:s.kind}});}catch(e){}} }
+
+    document.getElementById("invite").onclick=()=>{
+      const url=location.origin+location.pathname+"?room="+room;
+      if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на урок скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));
+      else prompt("Скопируй ссылку:",url);
+    };
+
+    apply(false);
+  </script>
+</body>
+</html>

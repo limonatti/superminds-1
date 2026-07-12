@@ -183,11 +183,14 @@
       draggable(c,()=>speak(d.en),(x,y)=>{d.x=x;d.y=y;send({t:"cm",id:id,x:x,y:y});});
       return c;
     }
-    document.getElementById("addCards").onclick=()=>{
-      const u=SM_UNITS.find(x=>x.id===sel.value);if(!u)return;
+    function addUnitCards(uid){
+      const u=SM_UNITS.find(x=>x.id===uid);if(!u)return;
       u.words.slice(0,8).forEach((w,i)=>{const id=genId();const d={en:w.en,emoji:w.emoji,x:40+(i%4)*100,y:30+Math.floor(i/4)*110};
         makeCard(id,d);send({t:"ca",id:id,d:d});});
-    };
+    }
+    document.getElementById("addCards").onclick=()=>addUnitCards(sel.value);
+    // команда из «Комнаты урока»: добавить слова выбранного юнита
+    window.addEventListener("message",e=>{ if(e&&e.data&&e.data.type==="sm-add"&&e.data.unit) addUnitCards(e.data.unit); });
 
     /* ---------- текст ---------- */
     function makeText(id,d){ // d:{x,y,color,text}
