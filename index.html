@@ -25,6 +25,10 @@
   .sec .t{font-size:24px;font-weight:700;margin:2px 0 8px}
   .sec .d{font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:#5a4f47;margin-bottom:18px;min-height:54px}
   .go span{background:#7c2340;color:#fff;font:800 15px 'Nunito',sans-serif;padding:11px 26px;border-radius:999px;display:inline-block}
+  .dicewrap{text-align:center;margin-top:26px}
+  .dicebtn{background:#e0952a;color:#fff;font:800 16px 'Nunito',sans-serif;padding:14px 28px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 6px 0 #b06a12;transition:transform .12s}
+  .dicebtn:hover{transform:translateY(-3px)}
+  .dicebtn:active{transform:translateY(2px);box-shadow:0 3px 0 #b06a12}
   .foot{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
   @media(max-width:720px){.sections{grid-template-columns:1fr}.sec .d{min-height:0}}
 </style>
@@ -58,7 +62,16 @@
         <div class="go"><span>Учить →</span></div>
       </a>
     </div>
+    <div class="dicewrap">
+      <button class="dicebtn" onclick="randomGame()">🎲 Случайная игра</button>
+    </div>
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
   </div>
+  <script>
+    function randomGame(){
+      var u=["u1","u2","u3","u4","u5","u6","u7","u8","u9"];
+      location.href="games.html?u="+u[Math.floor(Math.random()*u.length)];
+    }
+  </script>
 </body>
 </html>
