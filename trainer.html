@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Minds 1 · Тренажёр слов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .cab{position:fixed;top:12px;right:12px;z-index:9;background:#fff;color:#7c2340;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .wrap{max-width:700px;margin:0 auto;padding:64px 20px 56px}
+  h1{margin:0;text-align:center;font-size:clamp(30px,6vw,46px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:10px 0 22px;font:800 15px 'Nunito',sans-serif;color:#5a4f47}
+  .banner{background:#fff4e0;border:2px solid #f0c96b;border-radius:16px;padding:12px 16px;font:700 13px 'Nunito',sans-serif;color:#7a5b12;text-align:center;margin-bottom:18px}
+  .banner a{color:#7c2340;font-weight:900;text-decoration:underline}
+  .label{font:800 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.5px;margin:0 2px 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:7px 14px;font:800 13px 'Nunito',sans-serif;color:#5a4f47}
+  .chip.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .modes{display:flex;gap:10px;margin-bottom:20px}
+  .mode{flex:1;background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:12px;font:800 15px 'Nunito',sans-serif;color:#5a4f47}
+  .mode.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .progress{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .bar{flex:1;height:14px;background:#e9dcc6;border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:#7cb342;width:0;transition:width .3s}
+  .pcount{font:800 13px 'Nunito',sans-serif;color:#5a4f47;white-space:nowrap}
+
+  .card{background:#fff;border-radius:28px;box-shadow:0 8px 0 #e3d3ba;padding:36px 24px;text-align:center;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative}
+  .emoji{font-size:84px;line-height:1;margin-bottom:14px}
+  .word{font-size:40px;font-weight:700;color:#7c2340}
+  .ru{font-size:30px;font-weight:600;color:#1c1310;margin-top:6px}
+  .hint{font:700 13px 'Nunito',sans-serif;color:#a99a86;margin-top:16px}
+  .speak{margin-top:14px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
+  .fc-btns{display:flex;gap:12px;margin-top:18px}
+  .fc-btns button{flex:1;border-radius:16px;padding:16px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  .no{background:#fbe0d8;color:#a23b1e}
+  .yes{background:#dff0d2;color:#3f7a20}
+
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:18px;padding:18px;font-size:22px;font-weight:600;color:#1c1310}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .next{margin-top:16px;width:100%;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;display:none}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
+</style>
+</head>
+<body>
+  <a class="home" href="index.html">← Домой</a>
+  <a class="cab" href="cabinet.html">👤 Кабинет</a>
+  <div class="wrap">
+    <h1>🎯 Тренажёр слов</h1>
+    <div class="sub" id="greet">Super Minds 1 · учи слова всех юнитов</div>
+
+    <div id="banner" class="banner" style="display:none"></div>
+
+    <div class="label">ВЫБЕРИ ЮНИТЫ</div>
+    <div class="chips" id="chips"></div>
+
+    <div class="modes">
+      <button class="mode on" id="mFlash" onclick="setMode('flash')">🃏 Карточки</button>
+      <button class="mode" id="mQuiz" onclick="setMode('quiz')">✍️ Квиз</button>
+    </div>
+
+    <div class="progress">
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="pcount" id="pcount">0 / 0</div>
+    </div>
+
+    <div id="stage"></div>
+
+    <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    let selectedUnits = SM_UNITS.map(u => u.id); // по умолчанию все
+    let mode = "flash";
+    let deck = [];        // текущий набор слов
+    let idx = 0;
+    let flipped = false;
+    let progress = {};    // { wordId: {status, correct, seen} }
+    let answered = false;
+
+    function wordsForSelection() {
+      return SM_ALL_WORDS.filter(w => selectedUnits.includes(w.unitId));
+    }
+    function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+    function speak(text) {
+      try {
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "en-US"; u.rate = 0.9;
+        speechSynthesis.cancel(); speechSynthesis.speak(u);
+      } catch (e) {}
+    }
+
+    /* ---- прогресс ---- */
+    function learnedCount() {
+      const ids = wordsForSelection().map(w => w.id);
+      return ids.filter(id => progress[id] && progress[id].status === "learned").length;
+    }
+    function refreshProgressBar() {
+      const total = wordsForSelection().length;
+      const done = learnedCount();
+      document.getElementById("pcount").textContent = done + " / " + total;
+      document.getElementById("barFill").style.width = total ? (done / total * 100) + "%" : "0%";
+    }
+    async function mark(word, learned) {
+      const p = progress[word.id] || { status: "learning", correct: 0, seen: 0 };
+      p.seen++;
+      if (learned) { p.correct++; p.status = "learned"; }
+      else { p.status = "learning"; }
+      progress[word.id] = p;
+      refreshProgressBar();
+      await SM.saveProgress(progress);
+    }
+
+    /* ---- чипы юнитов ---- */
+    function renderChips() {
+      const box = document.getElementById("chips");
+      box.innerHTML = "";
+      const allOn = selectedUnits.length === SM_UNITS.length;
+      const all = document.createElement("button");
+      all.className = "chip" + (allOn ? " on" : "");
+      all.textContent = "Все";
+      all.onclick = () => { selectedUnits = allOn ? [] : SM_UNITS.map(u => u.id); renderChips(); startDeck(); };
+      box.appendChild(all);
+      SM_UNITS.forEach(u => {
+        const c = document.createElement("button");
+        c.className = "chip" + (selectedUnits.includes(u.id) ? " on" : "");
+        c.textContent = u.emoji + " " + u.title;
+        c.onclick = () => {
+          if (selectedUnits.includes(u.id)) selectedUnits = selectedUnits.filter(x => x !== u.id);
+          else selectedUnits.push(u.id);
+          renderChips(); startDeck();
+        };
+        box.appendChild(c);
+      });
+    }
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById("mFlash").classList.toggle("on", m === "flash");
+      document.getElementById("mQuiz").classList.toggle("on", m === "quiz");
+      startDeck();
+    }
+
+    function startDeck() {
+      const pool = wordsForSelection();
+      refreshProgressBar();
+      const stage = document.getElementById("stage");
+      if (!pool.length) { stage.innerHTML = '<div class="card"><div class="hint">Выбери хотя бы один юнит 👆</div></div>'; return; }
+      deck = shuffle(pool);
+      idx = 0;
+      render();
+    }
+
+    function render() {
+      if (mode === "flash") renderFlash(); else renderQuiz();
+    }
+
+    /* ---- Карточки ---- */
+    function renderFlash() {
+      flipped = false;
+      const w = deck[idx];
+      const stage = document.getElementById("stage");
+      stage.innerHTML =
+        '<div class="card" id="fcard">' +
+          '<div class="emoji">' + w.emoji + '</div>' +
+          '<div class="word">' + w.en + '</div>' +
+          '<button class="speak" id="spk">🔊 послушать</button>' +
+          '<div class="ru" id="ruLine" style="display:none">' + w.ru + '</div>' +
+          '<div class="hint" id="fhint">нажми на карточку, чтобы увидеть перевод</div>' +
+        '</div>' +
+        '<div class="fc-btns" id="fbtns" style="display:none">' +
+          '<button class="no" id="bNo">❌ Ещё учу</button>' +
+          '<button class="yes" id="bYes">✅ Знаю</button>' +
+        '</div>';
+      speak(w.en);
+      document.getElementById("spk").onclick = (e) => { e.stopPropagation(); speak(w.en); };
+      document.getElementById("fcard").onclick = () => {
+        if (flipped) return;
+        flipped = true;
+        document.getElementById("ruLine").style.display = "block";
+        document.getElementById("fhint").style.display = "none";
+        document.getElementById("fbtns").style.display = "flex";
+      };
+      document.getElementById("bNo").onclick = async () => { await mark(w, false); nextFlash(); };
+      document.getElementById("bYes").onclick = async () => { await mark(w, true); nextFlash(); };
+    }
+    function nextFlash() {
+      idx++;
+      if (idx >= deck.length) { deck = shuffle(deck); idx = 0; }
+      renderFlash();
+    }
+
+    /* ---- Квиз ---- */
+    function renderQuiz() {
+      answered = false;
+      const w = deck[idx];
+      const pool = SM_ALL_WORDS.filter(x => x.id !== w.id);
+      const distract = shuffle(pool).slice(0, 3);
+      const opts = shuffle([w, ...distract]);
+      const stage = document.getElementById("stage");
+      stage.innerHTML =
+        '<div class="card">' +
+          '<div class="emoji">' + w.emoji + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<div class="hint">выбери английское слово</div>' +
+        '</div>' +
+        '<div class="opts" id="opts"></div>' +
+        '<button class="next" id="next">дальше →</button>';
+      const box = document.getElementById("opts");
+      opts.forEach(o => {
+        const b = document.createElement("button");
+        b.className = "opt"; b.textContent = o.en;
+        b.onclick = () => answerQuiz(b, o, w);
+        box.appendChild(b);
+      });
+      document.getElementById("next").onclick = nextQuiz;
+    }
+    async function answerQuiz(btn, chosen, correct) {
+      if (answered) return;
+      answered = true;
+      const correctBtn = [...document.querySelectorAll(".opt")].find(b => b.textContent === correct.en);
+      if (chosen.id === correct.id) { btn.classList.add("correct"); speak(correct.en); await mark(correct, true); }
+      else { btn.classList.add("wrong"); if (correctBtn) correctBtn.classList.add("correct"); speak(correct.en); await mark(correct, false); }
+      document.getElementById("next").style.display = "block";
+    }
+    function nextQuiz() {
+      idx++;
+      if (idx >= deck.length) { deck = shuffle(deck); idx = 0; }
+      renderQuiz();
+    }
+
+    /* ---- старт ---- */
+    (async function init() {
+      const user = await SM.getUser();
+      if (user) document.getElementById("greet").textContent = "Привет, " + user.name + "! Учим слова 💪";
+      const banner = document.getElementById("banner");
+      if (SM.isCloud && !user) {
+        banner.style.display = "block";
+        banner.innerHTML = 'Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';
+      }
+      progress = await SM.loadProgress();
+      renderChips();
+      startDeck();
+    })();
+  </script>
+</body>
+</html>

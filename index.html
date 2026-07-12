@@ -10,46 +10,52 @@
   *{box-sizing:border-box}
   body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:820px;margin:0 auto;padding:48px 24px 60px}
-  .head{text-align:center;margin-bottom:8px}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 60px}
+  .top{display:flex;justify-content:flex-end;margin-bottom:6px}
+  .cab{background:#fff;color:#7c2340;font:800 14px 'Nunito',sans-serif;padding:10px 20px;border-radius:999px;box-shadow:0 5px 0 #e3d3ba;display:inline-flex;align-items:center;gap:7px}
+  .head{text-align:center;margin-bottom:34px}
   h1{margin:0;font-size:clamp(34px,7vw,58px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:#5a4f47;margin:10px 0 34px}
-  .units{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .unit{background:#fff;border-radius:30px;padding:30px 26px;box-shadow:0 8px 0 #e3d3ba;
-    transition:transform .14s ease,box-shadow .14s ease;display:block}
-  .unit:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
-  .medal{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:60px;margin:0 auto 18px}
-  .m2{background:#f6e2cf} .m3{background:#dfeadd}
-  .unit .u{font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;color:#b5654a;text-align:center}
-  .unit .t{font-size:28px;font-weight:700;text-align:center;margin:2px 0 6px}
-  .unit .d{font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:#5a4f47;text-align:center;margin-bottom:16px;min-height:36px}
-  .go{display:block;text-align:center}
+  .sub{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:#5a4f47;margin:10px 0 0}
+  .sections{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
+  .sec{background:#fff;border-radius:30px;padding:30px 24px;box-shadow:0 8px 0 #e3d3ba;
+    transition:transform .14s ease,box-shadow .14s ease;display:block;text-align:center}
+  .sec:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
+  .medal{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;margin:0 auto 18px}
+  .m1{background:#e4ebf2} .m2{background:#f6e2cf} .m3{background:#dfeadd}
+  .sec .t{font-size:24px;font-weight:700;margin:2px 0 8px}
+  .sec .d{font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:#5a4f47;margin-bottom:18px;min-height:54px}
   .go span{background:#7c2340;color:#fff;font:800 15px 'Nunito',sans-serif;padding:11px 26px;border-radius:999px;display:inline-block}
-  .foot{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
-  @media(max-width:560px){.units{grid-template-columns:1fr}}
+  .foot{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+  @media(max-width:720px){.sections{grid-template-columns:1fr}.sec .d{min-height:0}}
 </style>
 </head>
 <body>
   <div class="wrap">
+    <div class="top">
+      <a class="cab" href="cabinet.html">👤 Кабинет ученика</a>
+    </div>
     <div class="head">
       <h1>Super Minds 1</h1>
-      <div class="sub">English with Asya · выбери юнит</div>
+      <div class="sub">English with Asya · выбери раздел</div>
     </div>
-    <div class="units">
-      <a class="unit" href="unit2.html">
-        <div class="medal m2">🧸</div>
-        <div class="u">UNIT 2</div>
-        <div class="t">Play time!</div>
-        <div class="d">Игрушки · my / his / her · a big red ball</div>
+    <div class="sections">
+      <a class="sec" href="studentbook.html">
+        <div class="medal m1">📕</div>
+        <div class="t">Student Book</div>
+        <div class="d">Учебник: онлайн-игры, карточки, комиксы и колесо по юнитам</div>
         <div class="go"><span>Открыть →</span></div>
       </a>
-      <a class="unit" href="unit3.html">
-        <div class="medal m3">🐸</div>
-        <div class="u">UNIT 3</div>
-        <div class="t">Pet show</div>
-        <div class="d">Животные · in / on / under · I like / don't like</div>
+      <a class="sec" href="workbook.html">
+        <div class="medal m2">📗</div>
+        <div class="t">Work Book</div>
+        <div class="d">Рабочая тетрадь: распечатки, грамматика, соедини и впиши, бинго</div>
         <div class="go"><span>Открыть →</span></div>
+      </a>
+      <a class="sec" href="trainer.html">
+        <div class="medal m3">🎯</div>
+        <div class="t">Тренажёр слов</div>
+        <div class="d">Учи слова всех юнитов: карточки и квиз. Прогресс в кабинете</div>
+        <div class="go"><span>Учить →</span></div>
       </a>
     </div>
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
