@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Minds 1 · Игры</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .wrap{max-width:720px;margin:0 auto;padding:60px 16px 50px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .games{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
+  .gbtn{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:10px 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .gbtn.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .stage{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:24px;min-height:360px}
+  .center{text-align:center}
+  .big{font-size:64px;line-height:1}
+  .speak{margin-top:10px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
+  .primary{background:#7c2340;color:#fff;border-radius:16px;padding:14px 26px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5e1a30}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+
+  /* wheel */
+  .wheelwrap{position:relative;width:300px;height:300px;margin:6px auto 4px}
+  .pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:32px;z-index:3;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+  #wheel{transition:transform 4s cubic-bezier(.17,.67,.24,1)}
+  .result{margin-top:12px;font-size:24px;font-weight:700;color:#7c2340;min-height:30px}
+  .phrase{font:800 15px 'Nunito',sans-serif;color:#5a4f47;margin-top:2px}
+
+  /* memory */
+  .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;margin:0 auto}
+  .mcard{aspect-ratio:1;border-radius:16px;background:#7c2340;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer;transition:transform .12s;padding:4px;text-align:center;word-break:break-word}
+  .mcard .q{font-size:30px}
+  .mcard.open{background:#fff;border:2px solid #e3d3ba;color:#1c1310}
+  .mcard.done{background:#dff0d2;border:2px solid #7cb342;color:#3f7a20;cursor:default}
+  .mcard.en{font-size:16px}
+  .mstat{text-align:center;font:800 14px 'Nunito',sans-serif;color:#5a4f47;margin-bottom:12px}
+
+  /* race */
+  .lane{position:relative;background:#eef4ea;border-radius:14px;height:56px;margin-bottom:10px;overflow:hidden;border:2px solid #dfeadd}
+  .lane.red{background:#fbeef0;border-color:#f3d4da}
+  .lane .car{position:absolute;top:8px;left:2%;font-size:30px;transition:left .4s ease}
+  .lane .flag{position:absolute;right:6px;top:12px;font-size:24px}
+  .turn{text-align:center;font:900 16px 'Nunito',sans-serif;margin:6px 0 12px}
+  .turn.green{color:#3f7a20} .turn.red{color:#c0392b}
+
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:15px;font-size:20px;font-weight:600}
+  .opt .oem{font-size:28px;display:block;margin-bottom:2px}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+
+  .timer{font:900 22px 'Nunito',sans-serif;color:#7c2340;text-align:center}
+  .score{font:900 16px 'Nunito',sans-serif;color:#3f7a20;text-align:center;margin-top:4px}
+</style>
+</head>
+<body>
+  <a class="home" href="studentbook.html">← Student Book</a>
+  <div class="wrap">
+    <h1 id="title">🎮 Игры</h1>
+    <div class="sub" id="sub"></div>
+    <div class="games" id="games"></div>
+    <div class="stage" id="stage"></div>
+    <div class="foot">Made for @english.with_asya · Super Minds 1 · для детей 6–8</div>
+  </div>
+
+  <script src="words.js"></script>
+  <script>
+    const q=new URLSearchParams(location.search);
+    const unit=SM_UNITS.find(u=>u.id===(q.get("u")||"u1"))||SM_UNITS[0];
+    document.getElementById("title").textContent="🎮 Игры · "+unit.emoji+" "+unit.title;
+    document.getElementById("sub").textContent="Super Minds 1 · "+unit.unit;
+    const WORDS=unit.words.map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji}));
+
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    let actx=null;
+    function beep(ok){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const seq=ok?[[660,0],[880,.12]]:[[200,0]];
+      seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
+      const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){}}
+    function fanfare(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.12],[784,.24],[1046,.4]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){}}
+    function distract(w,n){return shuffle(WORDS.filter(x=>x.id!==w.id)).slice(0,n);}
+
+    const GAMES=[
+      {id:"wheel",label:"🎡 Колесо"},
+      {id:"memory",label:"🧠 Мемори"},
+      {id:"race",label:"🏁 Гонка"},
+      {id:"flash",label:"⚡ Молния"}
+    ];
+    let game="wheel";
+    function renderGames(){const box=document.getElementById("games");box.innerHTML="";
+      GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(game===g.id?" on":"");b.textContent=g.label;
+        b.onclick=()=>{game=g.id;renderGames();start();};box.appendChild(b);});}
+    function start(){ if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else flash(); }
+
+    /* ---------- Колесо ---------- */
+    function wheel(){
+      const items=WORDS.slice(0,10);
+      const n=items.length, sec=360/n, R=150, cx=150, cy=150;
+      const cols=["#f6e2cf","#dfeadd","#e4ebf2","#fbe6de","#efe0e6","#faf1d8"];
+      function pt(ang){const a=(ang-90)*Math.PI/180;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];}
+      let paths="",labels="";
+      items.forEach((w,i)=>{const a0=i*sec,a1=(i+1)*sec;const[p0x,p0y]=pt(a0),[p1x,p1y]=pt(a1);
+        paths+='<path d="M'+cx+','+cy+' L'+p0x.toFixed(1)+','+p0y.toFixed(1)+' A'+R+','+R+' 0 0 1 '+p1x.toFixed(1)+','+p1y.toFixed(1)+' Z" fill="'+cols[i%cols.length]+'" stroke="#fff" stroke-width="2"/>';
+        const[lx,ly]=pt(a0+sec/2);const mx=cx+(lx-cx)*0.68, my=cy+(ly-cy)*0.68;
+        labels+='<text x="'+mx.toFixed(1)+'" y="'+(my+8).toFixed(1)+'" font-size="24" text-anchor="middle">'+w.emoji+'</text>';});
+      document.getElementById("stage").innerHTML=
+        '<div class="center"><div class="wheelwrap"><div class="pointer">🔻</div>'+
+        '<svg id="wheel" width="300" height="300" viewBox="0 0 300 300">'+paths+labels+
+        '<circle cx="150" cy="150" r="26" fill="#7c2340"/><text x="150" y="158" font-size="22" text-anchor="middle">🎡</text></svg></div>'+
+        '<div class="result" id="res">Крути колесо!</div><div class="phrase" id="phr"></div>'+
+        '<button class="primary" id="spin" style="margin-top:10px">Крутить 🎡</button></div>';
+      let rot=0, spinning=false;
+      const wheelEl=document.getElementById("wheel");
+      document.getElementById("spin").onclick=()=>{
+        if(spinning)return;spinning=true;
+        const extra=360*5+Math.floor(Math.random()*360);rot+=extra;
+        wheelEl.style.transform="rotate("+rot+"deg)";
+        setTimeout(()=>{
+          const eff=(360-(rot%360))%360;const idx=Math.floor(eff/sec)%n;const w=items[idx];
+          document.getElementById("res").textContent=w.en+" "+w.emoji;
+          document.getElementById("phr").textContent="Скажи: «It's a "+w.en+".» ("+w.ru+")";
+          speak("It's a "+w.en);beep(true);spinning=false;
+        },4100);
+      };
+    }
+
+    /* ---------- Мемори ---------- */
+    function memory(){
+      const pick=shuffle(WORDS).slice(0,6);
+      let cards=[];pick.forEach(w=>{cards.push({id:w.id,type:"en",txt:w.en,w});cards.push({id:w.id,type:"em",txt:w.emoji,w});});
+      cards=shuffle(cards);
+      let open=[],done=0,moves=0,lock=false;
+      document.getElementById("stage").innerHTML='<div class="mstat" id="mstat">Найди все пары! Ходов: 0</div><div class="mgrid" id="mgrid"></div>';
+      const grid=document.getElementById("mgrid");
+      cards.forEach((c,i)=>{const d=document.createElement("button");d.className="mcard";d.innerHTML='<span class="q">❓</span>';d.dataset.i=i;
+        d.onclick=()=>{
+          if(lock||d.classList.contains("open")||d.classList.contains("done"))return;
+          d.classList.add("open");if(c.type==="en")d.classList.add("en");d.innerHTML=c.txt;
+          if(c.type==="em")speak(c.w.en);
+          open.push({c,d});
+          if(open.length===2){moves++;document.getElementById("mstat").textContent="Найди все пары! Ходов: "+moves;
+            if(open[0].c.id===open[1].c.id){open.forEach(o=>{o.d.classList.remove("open");o.d.classList.add("done");});done++;beep(true);open=[];
+              if(done===pick.length){setTimeout(()=>{fanfare();document.getElementById("mstat").innerHTML="🎉 Все пары найдены за "+moves+" ходов!";},300);}}
+            else{lock=true;beep(false);setTimeout(()=>{open.forEach(o=>{o.d.classList.remove("open","en");o.d.innerHTML='<span class="q">❓</span>';});open=[];lock=false;},900);}}
+        };grid.appendChild(d);});
+    }
+
+    /* ---------- Гонка команд ---------- */
+    function race(){
+      const STEPS=6;let posG=0,posR=0,turn="green",busy=false;
+      document.getElementById("stage").innerHTML=
+        '<div class="lane green"><div class="car" id="carG" style="left:2%">🏎️</div><div class="flag">🏁</div></div>'+
+        '<div class="lane red"><div class="car" id="carR" style="left:2%">🚗</div><div class="flag">🏁</div></div>'+
+        '<div class="turn green" id="turn">Зелёные, ваш ход! 💚</div>'+
+        '<div id="qbox"></div>';
+      function place(){document.getElementById("carG").style.left=(2+posG/STEPS*84)+"%";document.getElementById("carR").style.left=(2+posR/STEPS*84)+"%";}
+      function ask(){
+        busy=false;
+        const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
+        let html='<div class="center" style="margin-top:6px"><div class="big">'+w.emoji+'</div><div class="phrase">выбери слово</div></div><div class="opts" id="opts"></div>';
+        document.getElementById("qbox").innerHTML=html;
+        const box=document.getElementById("opts");
+        opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
+          b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;
+            if(ok){b.classList.add("correct");beep(true);speak(w.en);if(turn==="green")posG++;else posR++;place();}
+            else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
+            if(posG>=STEPS||posR>=STEPS){const win=posG>=STEPS?"Зелёные":"Красные";setTimeout(()=>{fanfare();
+              document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:20px"><div class="big">🏆</div><h2 style="color:#7c2340;margin:6px 0">'+win+' победили!</h2><button class="primary" onclick="location.reload()">Ещё раз</button></div>';
+              document.getElementById("turn").textContent="";},700);return;}
+            setTimeout(()=>{turn=turn==="green"?"red":"green";const t=document.getElementById("turn");
+              t.className="turn "+turn;t.textContent=turn==="green"?"Зелёные, ваш ход! 💚":"Красные, ваш ход! ❤️";ask();},1100);};
+          box.appendChild(b);});
+      }
+      place();ask();
+    }
+
+    /* ---------- Молния (на время) ---------- */
+    function flash(){
+      let score=0,left=30,timer=null,busy=false;
+      document.getElementById("stage").innerHTML=
+        '<div class="timer" id="tm">⏱ 30</div><div class="score" id="sc">Очки: 0</div><div id="qbox" style="margin-top:10px"></div>';
+      function tick(){left--;document.getElementById("tm").textContent="⏱ "+left;if(left<=0){clearInterval(timer);end();}}
+      function ask(){busy=false;const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
+        document.getElementById("qbox").innerHTML='<div class="center"><div class="big">'+w.emoji+'</div><div class="phrase">'+w.ru+' — выбери слово</div></div><div class="opts" id="opts"></div>';
+        const box=document.getElementById("opts");
+        opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
+          b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;
+            if(ok){b.classList.add("correct");beep(true);score++;document.getElementById("sc").textContent="Очки: "+score;}
+            else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
+            speak(w.en);setTimeout(ask,ok?350:700);};box.appendChild(b);});}
+      function end(){document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:16px"><div class="big">'+(score>=10?"🌟":"⚡")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+'</h2><button class="primary" onclick="(function(){location.reload();})()">Ещё раз</button></div>';fanfare();}
+      timer=setInterval(tick,1000);ask();
+    }
+
+    renderGames();start();
+  </script>
+</body>
+</html>
