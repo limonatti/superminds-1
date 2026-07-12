@@ -58,6 +58,13 @@
   .urow .ub{flex:1;height:12px;background:#e9dcc6;border-radius:999px;overflow:hidden}
   .urow .ub > i{display:block;height:100%;background:#7cb342;width:0}
   .urow .un{font:800 12px 'Nunito',sans-serif;color:#5a4f47;width:44px;text-align:right;flex:none}
+  .lb{margin-bottom:6px}
+  .lbrow{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:12px;margin-bottom:6px;background:#faf4ea}
+  .lbrow.me{background:#fdeede;border:2px solid #f0c96b}
+  .lbrow .rk{font-size:18px;width:26px;text-align:center;flex:none;font-weight:700;color:#b5771a}
+  .lbrow .nm{flex:1;font:800 14px 'Nunito',sans-serif;color:#1c1310;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lbrow .pt{font:900 14px 'Nunito',sans-serif;color:#3f7a20;flex:none}
+  .lbempty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:10px}
   .cta{display:block;text-align:center;margin-top:20px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
 </style>
@@ -131,6 +138,21 @@
         '<div class="urow"><div class="ue">'+x.u.emoji+'</div><div class="ut">'+esc(x.u.title)+'</div><div class="ub"><i style="width:'+(x.total?x.learned/x.total*100:0)+'%"></i></div><div class="un">'+x.learned+'/'+x.total+'</div></div>'
       ).join("");
 
+      // Таблица лидеров за неделю
+      let board=[]; try{ board=await SM.leaderboard(); }catch(e){}
+      const medals=["🥇","🥈","🥉"];
+      let lb;
+      if(!SM.isCloud){ lb=""; }
+      else if(!board.length){ lb='<div class="sec-title">🏆 ТАБЛИЦА ЛИДЕРОВ · ЗА НЕДЕЛЮ</div><div class="lb"><div class="lbempty">Пока никто не набрал очков на этой неделе. Будь первым! 💪</div></div>'; }
+      else {
+        let mine=false;
+        const items=board.map((r,i)=>{
+          const me=(!mine && r.name===user.name); if(me)mine=true;
+          return '<div class="lbrow'+(me?" me":"")+'"><div class="rk">'+(medals[i]||(i+1))+'</div><div class="nm">'+esc(r.name)+(me?" (ты)":"")+'</div><div class="pt">⭐ '+(r.week_points||0)+'</div></div>';
+        }).join("");
+        lb='<div class="sec-title">🏆 ТАБЛИЦА ЛИДЕРОВ · ЗА НЕДЕЛЮ</div><div class="lb">'+items+'</div>';
+      }
+
       document.getElementById("root").innerHTML=
         '<div class="panel">'+
           '<div class="who"><div class="name">Привет, '+esc(user.name)+'!</div><button class="logout" id="out">Выйти</button></div>'+
@@ -143,6 +165,7 @@
           '<div class="badges">'+badges+'</div>'+
           '<div class="sec-title">ПРОГРЕСС ПО ЮНИТАМ</div>'+
           rows+
+          lb+
           '<a class="cta" href="trainer.html">Продолжить учить слова →</a>'+
         '</div>';
       document.getElementById("out").onclick=async()=>{await SM.signOut();route();};

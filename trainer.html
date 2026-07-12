@@ -162,8 +162,17 @@
       seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
         const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){} }
 
-    /* ---- дата / дневной streak ---- */
+    /* ---- дата / дневной streak / неделя ---- */
     function dstr(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+    function weekKey(dt){ const d=new Date(Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate()));
+      const day=(d.getUTCDay()+6)%7; d.setUTCDate(d.getUTCDate()-day+3);
+      const firstThu=new Date(Date.UTC(d.getUTCFullYear(),0,4));
+      const week=1+Math.round(((d-firstThu)/86400000 - 3 + ((firstThu.getUTCDay()+6)%7))/7);
+      return d.getUTCFullYear()+"-"+String(week).padStart(2,"0"); }
+    function playFanfare(){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+      const notes=[[523.25,0],[659.25,.12],[783.99,.24],[1046.5,.40]];
+      notes.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);
+        const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){} }
     function touchDay(){
       meta = progress.__meta || { totalPoints:0, dayStreak:0, bestStreak:0, lastActive:null, badges:[] };
       if(!meta.badges) meta.badges = [];
@@ -194,7 +203,10 @@
       if(ok){ p.correct++; p.level=Math.min(TARGET,p.level+1); } else { p.level=Math.max(0,p.level-1); }
       p.status = p.level>=TARGET ? "learned":"learning";
       progress[word.id]=p;
-      if(ok){ points+=10; streak++; if(streak%5===0) points+=5; } else { streak=0; }
+      if(ok){ let g=10; streak++; if(streak%5===0) g+=5; points+=g;
+        const wk=weekKey(new Date()); if(meta.weekKey!==wk){ meta.weekKey=wk; meta.weekPoints=0; }
+        meta.weekPoints=(meta.weekPoints||0)+g;
+      } else { streak=0; }
       meta.totalPoints = points; progress.__meta = meta;
       if(ok) checkBadge(word);
       refreshStats(); saveSoon();
@@ -214,7 +226,7 @@
       document.getElementById("badgeMedal").textContent = u.emoji;
       document.getElementById("badgeText").textContent = "Юнит «"+u.title+"» выучен полностью!";
       const t=document.getElementById("badgeToast"); t.classList.add("show");
-      try{beep(true);setTimeout(()=>beep(true),160);}catch(e){}
+      playFanfare();
     }
     document.addEventListener("DOMContentLoaded",()=>{});
 

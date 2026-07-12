@@ -101,6 +101,18 @@ window.SM = (function () {
         { onConflict: "user_id" }
       );
       return { ok: !error, error: error && error.message };
+    },
+
+    /* Таблица лидеров: [{name, week_points, total_points}] (только облако) */
+    async leaderboard() {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const { data, error } = await c.from("leaderboard")
+        .select("name,week_points,total_points")
+        .order("week_points", { ascending: false })
+        .limit(10);
+      if (error) { console.warn("leaderboard:", error.message); return []; }
+      return data || [];
     }
   };
 
