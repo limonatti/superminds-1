@@ -55,52 +55,52 @@ window.SM_COURSE_DATA["sm1"] = [
   {
     id: "u2", unit: "Unit 2", title: "Play time!", emoji: "🧸", color: "#f6e2cf",
     words: [
-      { en: "ball", ru: "мяч", emoji: "⚽" },
-      { en: "teddy", ru: "мишка", emoji: "🧸" },
-      { en: "doll", ru: "кукла", emoji: "🪆" },
-      { en: "train", ru: "поезд", emoji: "🚂" },
-      { en: "car", ru: "машинка", emoji: "🚗" },
-      { en: "plane", ru: "самолёт", emoji: "✈️" },
-      { en: "kite", ru: "воздушный змей", emoji: "🪁" },
-      { en: "bike", ru: "велосипед", emoji: "🚲" },
-      { en: "computer game", ru: "компьютерная игра", emoji: "🎮" },
-      { en: "monster", ru: "монстрик", emoji: "👾" },
-      { en: "robot", ru: "робот", emoji: "🤖" },
-      { en: "go-kart", ru: "картинг", emoji: "🏎️" }
+      { en: "ball", ru: "мяч", emoji: "⚽", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123914_5095b465-c597-409a-b9a1-ef7dba94717f.png" },
+      { en: "teddy", ru: "мишка", emoji: "🧸", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123917_475f4319-7c3f-46a6-b3b9-8fa38b890051.png" },
+      { en: "doll", ru: "кукла", emoji: "🪆", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123921_20b0a5f8-4c63-4505-9230-7cb2cde73b96.png" },
+      { en: "train", ru: "поезд", emoji: "🚂", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123924_f0b25246-661e-4147-b90b-d7f8622bc379.png" },
+      { en: "car", ru: "машинка", emoji: "🚗", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123929_78f3af4f-2f11-4717-9e64-cd16f83037a0.png" },
+      { en: "plane", ru: "самолёт", emoji: "✈️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123932_d3b2a328-5527-41f0-88f4-839308988915.png" },
+      { en: "kite", ru: "воздушный змей", emoji: "🪁", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123935_23cc7431-58fb-4ae5-a84d-820513f415a3.png" },
+      { en: "bike", ru: "велосипед", emoji: "🚲", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123939_1c918b06-d42c-41ef-8662-e19fb3633213.png" },
+      { en: "computer game", ru: "компьютерная игра", emoji: "🎮", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123942_9163b4d7-47f3-47fd-821a-70a1b7040946.png" },
+      { en: "monster", ru: "монстрик", emoji: "👾", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123945_4a62bcab-07c2-4cd3-9bc9-2d0a00610926.png" },
+      { en: "robot", ru: "робот", emoji: "🤖", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123948_3fc2f0d0-2d4d-4d54-a096-4309c6920102.png" },
+      { en: "go-kart", ru: "картинг", emoji: "🏎️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123951_ca987b7a-1c0d-4a8c-868a-5326485eb630.png" }
     ]
   },
   {
     id: "u3", unit: "Unit 3", title: "Pet show", emoji: "🐸", color: "#dfeadd",
     words: [
-      { en: "dog", ru: "собака", emoji: "🐶" },
-      { en: "cat", ru: "кошка", emoji: "🐱" },
-      { en: "bird", ru: "птица", emoji: "🐦" },
-      { en: "fish", ru: "рыбка", emoji: "🐟" },
-      { en: "mouse", ru: "мышь", emoji: "🐭" },
-      { en: "horse", ru: "лошадь", emoji: "🐴" },
-      { en: "frog", ru: "лягушка", emoji: "🐸" },
-      { en: "rabbit", ru: "кролик", emoji: "🐰" },
-      { en: "spider", ru: "паук", emoji: "🕷️" },
-      { en: "lizard", ru: "ящерица", emoji: "🦎" },
-      { en: "duck", ru: "утка", emoji: "🦆" },
-      { en: "elephant", ru: "слон", emoji: "🐘" }
+      { en: "dog", ru: "собака", emoji: "🐶", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_115606_c26927ac-f3ef-4bbe-a91a-2cde0d6f1700.png" },
+      { en: "cat", ru: "кошка", emoji: "🐱", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_055756_3053d807-f4b9-45d3-9bad-e1a654355513.png" },
+      { en: "bird", ru: "птица", emoji: "🐦", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060403_0120dd3b-3fc7-4b7b-9c3d-c097b117d25e.png" },
+      { en: "fish", ru: "рыбка", emoji: "🐟", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060401_57070287-b8b1-4221-a16d-cd684fa48acf.png" },
+      { en: "mouse", ru: "мышь", emoji: "🐭", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123900_4bb0c5a5-e84f-4f89-a1ba-6cca8fc551f4.png" },
+      { en: "horse", ru: "лошадь", emoji: "🐴", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_123903_87861ac5-09ae-4ec0-8606-08d24769c4ea.png" },
+      { en: "frog", ru: "лягушка", emoji: "🐸", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060358_348bd60d-29b7-488a-9e4a-9660e858cd64.png" },
+      { en: "rabbit", ru: "кролик", emoji: "🐰", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060412_98956f20-08c2-4f45-bbf0-39ac0867ec45.png" },
+      { en: "spider", ru: "паук", emoji: "🕷️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060404_c1f09276-dca1-48dc-a1fd-ce23329a5477.png" },
+      { en: "lizard", ru: "ящерица", emoji: "🦎", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060405_d5b19be3-08db-476a-b0e5-5ce7b348e59d.png" },
+      { en: "duck", ru: "утка", emoji: "🦆", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060400_60d2de5c-a715-441c-a8ad-0acf783ac11d.png" },
+      { en: "elephant", ru: "слон", emoji: "🐘", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260706_060409_dcfb2f41-b6e0-48bb-a9a6-1d00779918eb.png" }
     ]
   },
   {
     id: "u4", unit: "Unit 4", title: "Lunchtime", emoji: "🍎", color: "#fbe6de",
     words: [
-      { en: "apple", ru: "яблоко", emoji: "🍎" },
-      { en: "banana", ru: "банан", emoji: "🍌" },
-      { en: "orange", ru: "апельсин", emoji: "🍊" },
-      { en: "sandwich", ru: "бутерброд", emoji: "🥪" },
-      { en: "cake", ru: "торт", emoji: "🍰" },
-      { en: "ice cream", ru: "мороженое", emoji: "🍦" },
-      { en: "chicken", ru: "курица", emoji: "🍗" },
-      { en: "egg", ru: "яйцо", emoji: "🥚" },
-      { en: "milk", ru: "молоко", emoji: "🥛" },
-      { en: "juice", ru: "сок", emoji: "🧃" },
-      { en: "bread", ru: "хлеб", emoji: "🍞" },
-      { en: "water", ru: "вода", emoji: "💧" }
+      { en: "apple", ru: "яблоко", emoji: "🍎", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124006_0b0e1c9a-192a-4b0e-9712-606dcbd7d9a2.png" },
+      { en: "banana", ru: "банан", emoji: "🍌", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124009_c9de35d4-b3a2-4544-acfe-8362661767a4.png" },
+      { en: "orange", ru: "апельсин", emoji: "🍊", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124014_660e58d3-4717-4728-9e81-2052f9631f4c.png" },
+      { en: "sandwich", ru: "бутерброд", emoji: "🥪", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124017_39433336-297b-476c-9125-ac752529abbe.png" },
+      { en: "cake", ru: "торт", emoji: "🍰", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124021_8999c958-b0eb-45d9-b5ad-951528d89555.png" },
+      { en: "ice cream", ru: "мороженое", emoji: "🍦", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124024_607ceadf-8b96-4aaa-9a66-fe7be5fc14ba.png" },
+      { en: "chicken", ru: "курица", emoji: "🍗", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124028_dc676a1a-4319-4990-8076-f13ab8473657.png" },
+      { en: "egg", ru: "яйцо", emoji: "🥚", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124031_26198f19-6756-4159-a9b1-5519f122478c.png" },
+      { en: "milk", ru: "молоко", emoji: "🥛", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124034_62e50218-aeeb-4340-88ee-4dd12ef6a5a1.png" },
+      { en: "juice", ru: "сок", emoji: "🧃", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124039_4eefc669-2a5d-47b8-89ae-e1885e28d1ba.png" },
+      { en: "bread", ru: "хлеб", emoji: "🍞", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124042_6956e105-5b43-41e5-ae5b-cf0312e87436.png" },
+      { en: "water", ru: "вода", emoji: "💧", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_124045_2b5c2674-6892-48ed-bfb3-72de7e01e569.png" }
     ]
   },
   {
