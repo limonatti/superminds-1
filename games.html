@@ -92,7 +92,7 @@
       {id:"race",label:"🏁 Гонка"},
       {id:"flash",label:"⚡ Молния"}
     ];
-    let game="wheel";
+    let game=(GAMES.some(g=>g.id===q.get("game"))?q.get("game"):"wheel");
     function renderGames(){const box=document.getElementById("games");box.innerHTML="";
       GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(game===g.id?" on":"");b.textContent=g.label;
         b.onclick=()=>{game=g.id;renderGames();start();};box.appendChild(b);});}

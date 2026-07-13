@@ -366,6 +366,8 @@
       else if(q.get("units")) ids=q.get("units").split(",");
       ids=ids.filter(id=>SM_UNITS.some(u=>u.id===id));
       if(ids.length) selectedUnits=ids;
+      const m=q.get("mode");
+      if(m && MODES.some(x=>x.id===m)) mode=m;
     })();
 
     (async function(){
