@@ -62,7 +62,7 @@
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
-    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО"};
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС"};
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
@@ -182,7 +182,57 @@
         if(guess.length===goal.length){const ok=guess.toLowerCase()===goal.toLowerCase();built.style.color=ok?"#3f7a20":"#a23b1e";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Правильно: "+esc(target);if(ok)speak(target);}else{built.style.color="#7c2340";fb.textContent="";}}
       return c;
     }
-    const R={choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters};
+    function ytId(u){const m=(u||"").match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:"";}
+    function renderText(e){
+      const body=esc(e.data.body).split(/\n+/).map(p=>'<p style="margin:0 0 8px;line-height:1.6;font-weight:500">'+p+'</p>').join("");
+      return card('<div class="kind">'+KIND.text+'</div>'+(e.data.title?'<div class="qt">'+esc(e.data.title)+'</div>':'')+'<div style="font-size:16px">'+body+'</div>');
+    }
+    function renderImage(e){
+      return card('<div class="kind">'+KIND.image+'</div><img src="'+esc(e.data.url)+'" alt="" style="max-width:100%;border-radius:14px;display:block">'+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+    }
+    function renderVideo(e){
+      const id=ytId(e.data.url);
+      const emb=id?'<div style="position:relative;padding-top:56%;border-radius:14px;overflow:hidden"><iframe src="https://www.youtube.com/embed/'+id+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>':'<div class="qt">Ссылка на видео не распознана</div>';
+      return card('<div class="kind">'+KIND.video+'</div>'+emb+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+    }
+    function renderAudio(e){
+      const c=card('<div class="kind">'+KIND.audio+'</div><div style="text-align:center"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div>'+(e.data.caption?'<div style="text-align:center;font:800 14px \'Nunito\',sans-serif;color:#5a4f47;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+      c.querySelector(".check").onclick=()=>speak(e.data.body);
+      return c;
+    }
+    function renderDialogue(e){
+      const rows=e.data.lines.map((l,i)=>{const right=i%2===1;
+        return '<div style="display:flex;justify-content:'+(right?"flex-end":"flex-start")+';margin-bottom:8px"><div class="dbub" data-t="'+esc(l.text)+'" style="max-width:80%;background:'+(right?"#dff0d2":"#fdfbf7")+';border:2px solid '+(right?"#bcd9ac":"#e3d3ba")+';border-radius:14px;padding:9px 12px;cursor:pointer"><b style="color:#7c2340;font:800 12px \'Nunito\',sans-serif">'+esc(l.who)+'</b><br>'+esc(l.text)+'</div></div>';}).join("");
+      const c=card('<div class="kind">'+KIND.dialogue+'</div><div class="qt" style="font-size:15px;color:#a99a86">нажми на реплику, чтобы услышать</div>'+rows);
+      c.querySelectorAll(".dbub").forEach(b=>b.onclick=()=>speak(b.dataset.t));
+      return c;
+    }
+    function renderNote(e){
+      return card('<div class="kind">'+KIND.note+'</div><div style="background:#fff4e0;border:2px solid #f0c96b;border-radius:14px;padding:14px;font-size:16px;font-weight:500;line-height:1.6;color:#7a5b12">'+esc(e.data.body).replace(/\n/g,"<br>")+'</div>');
+    }
+    function renderOpen(e){
+      const c=card('<div class="kind">'+KIND.open+'</div><div class="qt">'+esc(e.data.q)+'</div><textarea rows="3" placeholder="напиши свой ответ…" style="width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px;font:600 15px \'Fredoka\',sans-serif;background:#fdfbf7;margin-top:8px"></textarea>'+(e.data.model?'<button class="check" style="margin-top:8px;background:#eef4ea;color:#3f7a20">Показать образец</button><div class="model" style="display:none;margin-top:8px;background:#eef4ea;border-radius:12px;padding:10px;font-weight:500">'+esc(e.data.model)+'</div>':''));
+      const mb=c.querySelector(".check");if(mb)mb.onclick=()=>{c.querySelector(".model").style.display="block";};
+      return c;
+    }
+    function renderFillbox(e){
+      const parts=e.data.q.split("___");
+      const c=card('<div class="kind">'+KIND.fillbox+'</div><div class="qt" style="line-height:2.2"></div><div class="words" style="margin-top:12px"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>');
+      const qt=c.querySelector(".qt"),bank=c.querySelector(".words"),fb=c.querySelector(".fb");
+      const slots=[];
+      parts.forEach((p,i)=>{ if(p) qt.appendChild(document.createTextNode(p));
+        if(i<parts.length-1){const s=document.createElement("span");s.textContent="____";s.style.cssText="display:inline-block;min-width:64px;border-bottom:3px solid #7c2340;text-align:center;font-weight:700;color:#7c2340;margin:0 4px;cursor:pointer";
+          const slot={el:s,val:"",chip:null};slots.push(slot);
+          s.onclick=()=>{ if(slot.chip){slot.chip.classList.remove("used");slot.chip=null;slot.val="";s.textContent="____";} };
+          qt.appendChild(s);}});
+      shuffle(e.data.answers.concat(e.data.extra||[])).forEach(w=>{const b=document.createElement("button");b.className="word";b.textContent=w;
+        b.onclick=()=>{ if(b.classList.contains("used"))return; const slot=slots.find(x=>!x.val); if(!slot)return; slot.val=w;slot.chip=b;slot.el.textContent=w;b.classList.add("used"); };
+        bank.appendChild(b);});
+      c.querySelector(".check").onclick=()=>{let good=0;slots.forEach((s,i)=>{const ok=norm(s.val)===norm(e.data.answers[i]);s.el.style.color=ok?"#3f7a20":"#a23b1e";if(ok)good++;});
+        fb.className="fb "+(good===slots.length?"ok":"no");fb.textContent=good===slots.length?"Верно! 🎉":("Верно "+good+" из "+slots.length);};
+      return c;
+    }
+    const R={choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
     (async function(){
       const root=document.getElementById("root");

@@ -62,7 +62,15 @@
       multi:{label:"☑️ Несколько ответов"},
       categorize:{label:"🗂 Категории"},
       cloze:{label:"🔽 Пропуски-выбор"},
-      letters:{label:"🔡 Собери слово"}
+      letters:{label:"🔡 Собери слово"},
+      fillbox:{label:"📦 Впиши из банка слов"},
+      text:{label:"📖 Текст / статья"},
+      image:{label:"🖼 Картинка"},
+      video:{label:"🎬 Видео (YouTube)"},
+      audio:{label:"🔊 Аудио (озвучка)"},
+      dialogue:{label:"💬 Диалог"},
+      note:{label:"🗒 Заметка / правило"},
+      open:{label:"📝 Открытый вопрос"}
     };
     let editId=null;
 
@@ -108,7 +116,39 @@
       } else if(type==="letters"){
         f.innerHTML='<label>СЛОВО ИЛИ ФРАЗА</label><input id="word" placeholder="banana" value="'+esc(data.word||"")+'">'+
           '<label>ПОДСКАЗКА (перевод, необязательно)</label><input id="hint" placeholder="банан" value="'+esc(data.hint||"")+'">';
+      } else if(type==="fillbox"){
+        f.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ ___</label><textarea id="q" rows="3" placeholder="I ___ a cat. She ___ a dog.">'+esc(data.q||"")+'</textarea>'+
+          '<label>ПРАВИЛЬНЫЕ СЛОВА (по порядку, через запятую)</label><input id="answers" placeholder="have, has" value="'+esc((data.answers||[]).join(", "))+'">'+
+          '<label>ЛИШНИЕ СЛОВА В БАНКЕ (через запятую, необязательно)</label><input id="extra" placeholder="had, is" value="'+esc((data.extra||[]).join(", "))+'">';
+      } else if(type==="text"){
+        f.innerHTML='<label>ЗАГОЛОВОК (необязательно)</label><input id="ttl" placeholder="My family" value="'+esc(data.title||"")+'">'+
+          '<label>ТЕКСТ</label><textarea id="body" rows="6" placeholder="Напиши текст для чтения…">'+esc(data.body||"")+'</textarea>';
+      } else if(type==="image"){
+        f.innerHTML='<label>ССЫЛКА НА КАРТИНКУ (URL)</label><input id="url" placeholder="https://…/picture.jpg" value="'+esc(data.url||"")+'">'+
+          '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="A cat" value="'+esc(data.caption||"")+'">';
+      } else if(type==="video"){
+        f.innerHTML='<label>ССЫЛКА НА YOUTUBE</label><input id="url" placeholder="https://youtu.be/…" value="'+esc(data.url||"")+'">'+
+          '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Песенка про цвета" value="'+esc(data.caption||"")+'">';
+      } else if(type==="audio"){
+        f.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><textarea id="body" rows="3" placeholder="Listen and repeat: red, blue, green">'+esc(data.body||"")+'</textarea>'+
+          '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Слушай и повторяй" value="'+esc(data.caption||"")+'">';
+      } else if(type==="dialogue"){
+        f.innerHTML='<label>РЕПЛИКИ (кто → что)</label><div id="lines"></div><button class="add" id="addLine" type="button">＋ реплика</button>';
+        const lines=data.lines||[{who:"A",text:""},{who:"B",text:""}];
+        lines.forEach(l=>addLine(l.who,l.text));
+        document.getElementById("addLine").onclick=()=>addLine("A","");
+      } else if(type==="note"){
+        f.innerHTML='<label>ЗАМЕТКА / ПРАВИЛО</label><textarea id="body" rows="4" placeholder="my / his / her — притяжательные местоимения…">'+esc(data.body||"")+'</textarea>';
+      } else if(type==="open"){
+        f.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea id="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(data.q||"")+'</textarea>'+
+          '<label>ОБРАЗЕЦ ОТВЕТА (необязательно — ученик сможет открыть)</label><textarea id="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(data.model||"")+'</textarea>';
       }
+    }
+    function addLine(who,text){
+      const box=document.getElementById("lines");const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<input class="who" type="text" placeholder="A" value="'+esc(who)+'" style="max-width:64px"><input class="dtext" type="text" placeholder="реплика" value="'+esc(text)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>1) d.remove(); };
+      box.appendChild(d);
     }
     function addOptM(val,checked){
       const box=document.getElementById("opts");const d=document.createElement("div");d.className="optrow";
@@ -198,6 +238,50 @@
         const word=document.getElementById("word").value.trim();
         if(!word) return {err:"Впиши слово"};
         return {data:{word,hint:document.getElementById("hint").value.trim()}};
+      }
+      if(type==="fillbox"){
+        const q=document.getElementById("q").value.trim();
+        const answers=document.getElementById("answers").value.split(",").map(s=>s.trim()).filter(Boolean);
+        const extra=document.getElementById("extra").value.split(",").map(s=>s.trim()).filter(Boolean);
+        const gaps=(q.match(/___/g)||[]).length;
+        if(!gaps) return {err:"Добавь пропуски ___"};
+        if(answers.length!==gaps) return {err:"Слов должно быть столько же, сколько пропусков ("+gaps+")"};
+        return {data:{q,answers,extra}};
+      }
+      if(type==="text"){
+        const body=document.getElementById("body").value.trim();
+        if(!body) return {err:"Впиши текст"};
+        return {data:{title:document.getElementById("ttl").value.trim(),body}};
+      }
+      if(type==="image"){
+        const url=document.getElementById("url").value.trim();
+        if(!/^https?:\/\//.test(url)) return {err:"Вставь ссылку на картинку (http…)"};
+        return {data:{url,caption:document.getElementById("caption").value.trim()}};
+      }
+      if(type==="video"){
+        const url=document.getElementById("url").value.trim();
+        if(!/youtu/.test(url)) return {err:"Вставь ссылку на YouTube"};
+        return {data:{url,caption:document.getElementById("caption").value.trim()}};
+      }
+      if(type==="audio"){
+        const body=document.getElementById("body").value.trim();
+        if(!body) return {err:"Впиши текст для озвучки"};
+        return {data:{body,caption:document.getElementById("caption").value.trim()}};
+      }
+      if(type==="dialogue"){
+        const lines=[...document.querySelectorAll("#lines .optrow")].map(r=>({who:r.querySelector(".who").value.trim()||"•",text:r.querySelector(".dtext").value.trim()})).filter(l=>l.text);
+        if(!lines.length) return {err:"Добавь хотя бы одну реплику"};
+        return {data:{lines}};
+      }
+      if(type==="note"){
+        const body=document.getElementById("body").value.trim();
+        if(!body) return {err:"Впиши заметку"};
+        return {data:{body}};
+      }
+      if(type==="open"){
+        const q=document.getElementById("q").value.trim();
+        if(!q) return {err:"Впиши вопрос"};
+        return {data:{q,model:document.getElementById("model").value.trim()}};
       }
       return {err:"?"};
     }
