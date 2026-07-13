@@ -27,6 +27,10 @@
   .optrow input[type=text]{flex:1}
   .optrow .rm{background:#fbe0d8;color:#a23b1e;border-radius:10px;padding:8px 11px;font:800 13px 'Nunito',sans-serif;flex:none}
   .add{background:#eef4ea;color:#3f7a20;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;margin-top:4px}
+  .imgrow{display:flex;gap:8px}
+  .imgrow .img{flex:1}
+  .upl{background:#eef4ea;color:#3f7a20;border-radius:12px;padding:0 14px;font:800 13px 'Nunito',sans-serif;flex:none;white-space:nowrap}
+  .imgprev img{max-width:130px;border-radius:10px;margin-top:8px;border:2px solid #e3d3ba}
   .addbig{display:block;width:100%;margin-top:6px;background:#3f7a20;color:#fff;border-radius:12px;padding:11px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #2c5716}
   .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Nunito',sans-serif;color:#3f7a20;flex:none}
   .qblock{border:2px solid #e3d3ba;border-radius:14px;padding:12px 12px 14px;margin-bottom:12px;background:#fdfbf7}
@@ -83,6 +87,34 @@
     // типы, где в одном упражнении можно добавлять несколько заданий-вопросов
     const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open"]);
     let editId=null;
+
+    /* ---- загрузка картинки с компьютера (сжатие в браузере, без сервера) ---- */
+    function pickImage(input,cb){
+      const fi=document.createElement("input");fi.type="file";fi.accept="image/*";
+      fi.onchange=()=>{const file=fi.files&&fi.files[0];if(!file)return;
+        const rd=new FileReader();
+        rd.onload=()=>{const img=new Image();
+          img.onload=()=>{const max=800;let w=img.width,h=img.height;
+            if(w>max||h>max){const s=Math.min(max/w,max/h);w=Math.round(w*s);h=Math.round(h*s);}
+            const cv=document.createElement("canvas");cv.width=w;cv.height=h;cv.getContext("2d").drawImage(img,0,0,w,h);
+            input.value=cv.toDataURL("image/jpeg",0.82);if(cb)cb();};
+          img.onerror=()=>{input.value=rd.result;if(cb)cb();};
+          img.src=rd.result;};
+        rd.readAsDataURL(file);};
+      fi.click();
+    }
+    function wireImageIn(scope){
+      const inp=scope.querySelector(".img");if(!inp)return;
+      const btn=scope.querySelector(".upl"),prev=scope.querySelector(".imgprev");
+      function showPrev(){ if(prev) prev.innerHTML=inp.value?('<img src="'+inp.value.replace(/"/g,"&quot;")+'" alt="">'):""; }
+      if(btn)btn.onclick=()=>pickImage(inp,showPrev);
+      inp.addEventListener("input",showPrev);showPrev();
+    }
+    function imageFieldHTML(val,idAttr){
+      return '<label>🖼 КАРТИНКА (необязательно — можно вместо текста)</label>'+
+        '<div class="imgrow"><input '+(idAttr?'id="'+idAttr+'" ':'')+'class="img" placeholder="вставь ссылку или загрузи файл →" value="'+esc(val||"")+'"><button class="upl" type="button">📁 файл</button></div>'+
+        '<div class="imgprev"></div>';
+    }
 
     /* ---------- ряды для под-элементов (по контейнеру, не по id) ---------- */
     function optRow(box,val,checked,radioName){
@@ -152,7 +184,8 @@
       } else if(type==="open"){
         bf.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea class="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(d.q||"")+'</textarea><label>ОБРАЗЕЦ ОТВЕТА (необязательно)</label><textarea class="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(d.model||"")+'</textarea>';
       }
-      bf.insertAdjacentHTML('beforeend','<label>🖼 КАРТИНКА (URL — необязательно, можно вместо текста)</label><input class="img" placeholder="https://…/pic.png" value="'+esc(d.img||"")+'">');
+      bf.insertAdjacentHTML('beforeend',imageFieldHTML(d.img));
+      wireImageIn(bf);
       blocks.appendChild(b);
       renumber();
     }
@@ -193,8 +226,9 @@
         f.innerHTML='<label>ЗАГОЛОВОК (необязательно)</label><input id="ttl" placeholder="My family" value="'+esc(data.title||"")+'">'+
           '<label>ТЕКСТ</label><textarea id="body" rows="6" placeholder="Напиши текст для чтения…">'+esc(data.body||"")+'</textarea>';
       } else if(type==="image"){
-        f.innerHTML='<label>ССЫЛКА НА КАРТИНКУ (URL)</label><input id="url" placeholder="https://…/picture.jpg" value="'+esc(data.url||"")+'">'+
+        f.innerHTML='<label>КАРТИНКА (ссылка или загрузи файл)</label><div class="imgrow"><input id="url" class="img" placeholder="вставь ссылку или загрузи файл →" value="'+esc(data.url||"")+'"><button class="upl" type="button">📁 файл</button></div><div class="imgprev"></div>'+
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="A cat" value="'+esc(data.caption||"")+'">';
+        wireImageIn(f);
       } else if(type==="video"){
         f.innerHTML='<label>ССЫЛКА НА YOUTUBE</label><input id="url" placeholder="https://youtu.be/…" value="'+esc(data.url||"")+'">'+
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Песенка про цвета" value="'+esc(data.caption||"")+'">';
@@ -205,7 +239,8 @@
         f.innerHTML='<label>ЗАМЕТКА / ПРАВИЛО</label><textarea id="body" rows="4" placeholder="my / his / her — притяжательные местоимения…">'+esc(data.body||"")+'</textarea>';
       }
       if(type!=="image"){
-        f.insertAdjacentHTML('beforeend','<label>🖼 КАРТИНКА (URL — необязательно)</label><input id="exImg" placeholder="https://…/pic.png" value="'+esc(data.img||"")+'">');
+        f.insertAdjacentHTML('beforeend',imageFieldHTML(data.img,"exImg"));
+        wireImageIn(f);
       }
     }
 
@@ -315,7 +350,7 @@
       }
       if(type==="image"){
         const url=document.getElementById("url").value.trim();
-        if(!/^https?:\/\//.test(url)) return {err:"Вставь ссылку на картинку (http…)"};
+        if(!/^(https?:\/\/|data:image\/)/.test(url)) return {err:"Вставь ссылку на картинку или загрузи файл"};
         return {data:{url,caption:document.getElementById("caption").value.trim()}};
       }
       if(type==="video"){
