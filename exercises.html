@@ -243,7 +243,9 @@
       ex.forEach(e=>{ const fn=R[e.type]; if(!fn)return;
         // многозадачные упражнения: e.data.items = [вопрос1, вопрос2, …]
         const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
-        items.forEach((item,i)=>{ try{ root.appendChild(fn({type:e.type,data:item})); }catch(err){} });
+        items.forEach((item,i)=>{ try{ const el=fn({type:e.type,data:item});
+          if(item&&item.img){ const im=document.createElement("img"); im.src=item.img; im.alt=""; im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px"; const k=el.querySelector(".kind"); if(k) k.insertAdjacentElement("afterend",im); else el.insertBefore(im,el.firstChild); }
+          root.appendChild(el); }catch(err){} });
       });
     })();
   </script>

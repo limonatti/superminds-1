@@ -152,6 +152,7 @@
       } else if(type==="open"){
         bf.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea class="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(d.q||"")+'</textarea><label>ОБРАЗЕЦ ОТВЕТА (необязательно)</label><textarea class="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(d.model||"")+'</textarea>';
       }
+      bf.insertAdjacentHTML('beforeend','<label>🖼 КАРТИНКА (URL — необязательно, можно вместо текста)</label><input class="img" placeholder="https://…/pic.png" value="'+esc(d.img||"")+'">');
       blocks.appendChild(b);
       renumber();
     }
@@ -203,66 +204,73 @@
       } else if(type==="note"){
         f.innerHTML='<label>ЗАМЕТКА / ПРАВИЛО</label><textarea id="body" rows="4" placeholder="my / his / her — притяжательные местоимения…">'+esc(data.body||"")+'</textarea>';
       }
+      if(type!=="image"){
+        f.insertAdjacentHTML('beforeend','<label>🖼 КАРТИНКА (URL — необязательно)</label><input id="exImg" placeholder="https://…/pic.png" value="'+esc(data.img||"")+'">');
+      }
     }
 
     /* ---------- чтение одного блока-вопроса ---------- */
     function readItem(type,b){
+      const imgEl=b.querySelector(".img");
+      const img=imgEl?imgEl.value.trim():"";
+      const hasImg=!!img;
+      function ret(data){ if(img) data.img=img; return {data}; }
       if(type==="choice"){
         const q=b.querySelector(".q").value.trim();
         const rows=[...b.querySelectorAll(".opts .optrow")].map(r=>({t:r.querySelector(".otext").value.trim(),c:r.querySelector('input[type=radio]').checked}));
         const kept=rows.filter(x=>x.t);
-        if(!q) return {err:"впиши вопрос"};
+        if(!q&&!hasImg) return {err:"впиши вопрос или добавь картинку"};
         if(kept.length<2) return {err:"нужно минимум 2 варианта"};
         const correct=kept.findIndex(x=>x.c);
         if(correct<0) return {err:"отметь правильный вариант"};
-        return {data:{q,opts:kept.map(x=>x.t),correct}};
+        return ret({q,opts:kept.map(x=>x.t),correct});
       }
       if(type==="multi"){
         const q=b.querySelector(".q").value.trim();
         const rows=[...b.querySelectorAll(".opts .optrow")].map(r=>({t:r.querySelector(".otext").value.trim(),c:r.querySelector('input[type=checkbox]').checked}));
         const kept=rows.filter(x=>x.t);
-        if(!q) return {err:"впиши вопрос"};
+        if(!q&&!hasImg) return {err:"впиши вопрос или добавь картинку"};
         if(kept.length<2) return {err:"нужно минимум 2 варианта"};
         const correct=[]; kept.forEach((x,i)=>{ if(x.c) correct.push(i); });
         if(!correct.length) return {err:"отметь хотя бы один правильный"};
-        return {data:{q,opts:kept.map(x=>x.t),correct}};
+        return ret({q,opts:kept.map(x=>x.t),correct});
       }
       if(type==="gap"){
         const q=b.querySelector(".q").value.trim();const answer=b.querySelector(".answer").value.trim();
         if(!q||q.indexOf("___")<0) return {err:"впиши предложение с ___"};
         if(!answer) return {err:"впиши ответ"};
-        return {data:{q,answer}};
+        return ret({q,answer});
       }
       if(type==="order"){
         const answer=b.querySelector(".answer").value.trim();
         if(answer.split(/\s+/).filter(Boolean).length<2) return {err:"впиши предложение из 2+ слов"};
-        return {data:{answer}};
+        return ret({answer});
       }
       if(type==="tf"){
         const statement=b.querySelector(".statement").value.trim();
-        if(!statement) return {err:"впиши утверждение"};
-        return {data:{statement,correct:b.querySelector(".correct").value==="true"}};
+        if(!statement&&!hasImg) return {err:"впиши утверждение или добавь картинку"};
+        return ret({statement,correct:b.querySelector(".correct").value==="true"});
       }
       if(type==="listen"){
         const audio=b.querySelector(".audio").value.trim();const answer=b.querySelector(".answer").value.trim();
         if(!audio) return {err:"впиши текст для озвучки"};
         if(!answer) return {err:"впиши ответ"};
-        return {data:{audio,answer}};
+        return ret({audio,answer});
       }
       if(type==="cloze"){
         const q=b.querySelector(".q").value.trim();
         if(!/\[\[.*?\]\]/.test(q)) return {err:"добавь хотя бы один пропуск [[a|b]]"};
-        return {data:{q}};
+        return ret({q});
       }
       if(type==="letters"){
         const word=b.querySelector(".word").value.trim();
         if(!word) return {err:"впиши слово"};
-        return {data:{word,hint:b.querySelector(".hint").value.trim()}};
+        return ret({word,hint:b.querySelector(".hint").value.trim()});
       }
       if(type==="open"){
         const q=b.querySelector(".q").value.trim();
-        if(!q) return {err:"впиши вопрос"};
-        return {data:{q,model:b.querySelector(".model").value.trim()}};
+        if(!q&&!hasImg) return {err:"впиши вопрос или добавь картинку"};
+        return ret({q,model:b.querySelector(".model").value.trim()});
       }
       return {err:"?"};
     }
@@ -367,6 +375,8 @@
       const msg=document.getElementById("msg");msg.className="msg";msg.textContent="…";
       const type=document.getElementById("type").value;
       const r=readForm(type); if(r.err){msg.className="msg err";msg.textContent=r.err;return;}
+      const exImg=document.getElementById("exImg");
+      if(exImg&&exImg.value.trim()&&r.data&&!r.data.items) r.data.img=exImg.value.trim();
       const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),data:r.data});
       if(res.ok){msg.className="msg ok";msg.textContent=editId?"Обновлено ✓":"Сохранено ✓ — упражнение появилось в юните";editId=null;document.getElementById("title").value="";renderForm(type);loadList();}
       else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
