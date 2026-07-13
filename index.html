@@ -40,6 +40,7 @@
       <a class="pill" href="cabinet.html">👤 Кабинет ученика</a>
     </div>
     <div class="head">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054522_5c0f8f0e-e44d-4299-96e9-adf0cbae9bed.png" alt="" style="width:150px;height:150px;object-fit:contain;display:block;margin:0 auto 4px">
       <h1>🎓 English with Asya</h1>
       <div class="sub">Мои учебники — выбери курс</div>
     </div>
@@ -58,7 +59,7 @@
       el.className="course "+(c.ready?"ready":"soon");
       el.innerHTML=
         (c.ready?'':'<div class="badge">СКОРО</div>')+
-        '<div class="cover" style="background:'+c.color+'">'+c.emoji+'</div>'+
+        '<div class="cover" style="background:'+c.color+'">'+(c.img?'<img src="'+c.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:24px">':c.emoji)+'</div>'+
         '<div class="t">'+c.title+'</div>'+
         '<div class="s">'+c.subtitle+'</div>'+
         '<div class="go">'+(c.ready?'Открыть →':'Добавить вместе')+'</div>';

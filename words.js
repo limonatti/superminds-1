@@ -192,7 +192,7 @@ window.SM_COURSE_DATA["sm1"] = [
 
 /* ---- Реестр учебников (курсов) ---- */
 window.SM_COURSES = [
-  { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true },
+  { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true, img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054541_850dabec-bbfc-4814-8d79-266c06b5b0b2.png" },
   { id: "sm2",  title: "Super Minds 2", subtitle: "добавим вместе",         emoji: "📘", color: "#e4ebf2", ready: false },
   { id: "own",  title: "Свой учебник",  subtitle: "добавим вместе",         emoji: "➕", color: "#f6e2cf", ready: false }
 ];
