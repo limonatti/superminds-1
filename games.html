@@ -75,7 +75,7 @@
     const unit=SM_UNITS.find(u=>u.id===(q.get("u")||"u1"))||SM_UNITS[0];
     document.getElementById("title").textContent="🎮 Игры · "+unit.emoji+" "+unit.title;
     document.getElementById("sub").textContent="Super Minds 1 · "+unit.unit;
-    const WORDS=unit.words.map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji}));
+    const WORDS=unit.words.map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji,img:w.img||null}));
 
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
@@ -108,7 +108,7 @@
       items.forEach((w,i)=>{const a0=i*sec,a1=(i+1)*sec;const[p0x,p0y]=pt(a0),[p1x,p1y]=pt(a1);
         paths+='<path d="M'+cx+','+cy+' L'+p0x.toFixed(1)+','+p0y.toFixed(1)+' A'+R+','+R+' 0 0 1 '+p1x.toFixed(1)+','+p1y.toFixed(1)+' Z" fill="'+cols[i%cols.length]+'" stroke="#fff" stroke-width="2"/>';
         const[lx,ly]=pt(a0+sec/2);const mx=cx+(lx-cx)*0.68, my=cy+(ly-cy)*0.68;
-        labels+='<text x="'+mx.toFixed(1)+'" y="'+(my+8).toFixed(1)+'" font-size="24" text-anchor="middle">'+w.emoji+'</text>';});
+        labels+=(w.img?'<image href="'+w.img+'" x="'+(mx-16).toFixed(1)+'" y="'+(my-16).toFixed(1)+'" width="32" height="32"/>':'<text x="'+mx.toFixed(1)+'" y="'+(my+8).toFixed(1)+'" font-size="24" text-anchor="middle">'+w.emoji+'</text>');});
       document.getElementById("stage").innerHTML=
         '<div class="center"><div class="wheelwrap"><div class="pointer">🔻</div>'+
         '<svg id="wheel" width="300" height="300" viewBox="0 0 300 300">'+paths+labels+
@@ -141,7 +141,7 @@
       cards.forEach((c,i)=>{const d=document.createElement("button");d.className="mcard";d.innerHTML='<span class="q">❓</span>';d.dataset.i=i;
         d.onclick=()=>{
           if(lock||d.classList.contains("open")||d.classList.contains("done"))return;
-          d.classList.add("open");if(c.type==="en")d.classList.add("en");d.innerHTML=c.txt;
+          d.classList.add("open");if(c.type==="en")d.classList.add("en");d.innerHTML=(c.type==="em"?SM_face(c.w,42):c.txt);
           if(c.type==="em")speak(c.w.en);
           open.push({c,d});
           if(open.length===2){moves++;document.getElementById("mstat").textContent="Найди все пары! Ходов: "+moves;
@@ -163,7 +163,7 @@
       function ask(){
         busy=false;
         const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
-        let html='<div class="center" style="margin-top:6px"><div class="big">'+w.emoji+'</div><div class="phrase">выбери слово</div></div><div class="opts" id="opts"></div>';
+        let html='<div class="center" style="margin-top:6px"><div class="big">'+SM_face(w,72)+'</div><div class="phrase">выбери слово</div></div><div class="opts" id="opts"></div>';
         document.getElementById("qbox").innerHTML=html;
         const box=document.getElementById("opts");
         opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
@@ -187,7 +187,7 @@
         '<div class="timer" id="tm">⏱ 30</div><div class="score" id="sc">Очки: 0</div><div id="qbox" style="margin-top:10px"></div>';
       function tick(){left--;document.getElementById("tm").textContent="⏱ "+left;if(left<=0){clearInterval(timer);end();}}
       function ask(){busy=false;const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
-        document.getElementById("qbox").innerHTML='<div class="center"><div class="big">'+w.emoji+'</div><div class="phrase">'+w.ru+' — выбери слово</div></div><div class="opts" id="opts"></div>';
+        document.getElementById("qbox").innerHTML='<div class="center"><div class="big">'+SM_face(w,72)+'</div><div class="phrase">'+w.ru+' — выбери слово</div></div><div class="opts" id="opts"></div>';
         const box=document.getElementById("opts");
         opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
           b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;

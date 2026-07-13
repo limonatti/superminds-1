@@ -272,7 +272,7 @@
 
     function renderFlash(w){
       const stage=document.getElementById("stage");
-      stage.innerHTML='<div class="card" id="fc"><div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div>'+
+      stage.innerHTML='<div class="card" id="fc"><div class="emoji">'+SM_face(w,92)+'</div><div class="word">'+esc(w.en)+'</div>'+
         '<button class="speak" id="spk">🔊 послушать</button><div class="ru" id="ru" style="display:none;margin-top:8px">'+esc(w.ru)+'</div>'+
         '<div class="prompt" id="ph">нажми на карточку, чтобы увидеть перевод</div></div>'+
         '<div class="fc-btns" id="fb" style="display:none"><button class="no" id="bno">❌ Ещё учу</button><button class="yes" id="byes">✅ Знаю</button></div>';
@@ -284,8 +284,8 @@
     }
     function renderChoose(w,dir){
       const stage=document.getElementById("stage"); const opts=shuffle([w,...distractors(w,3)]);
-      const head=dir==="toEn"?'<div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
-        :'<div class="emoji">'+w.emoji+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
+      const head=dir==="toEn"?'<div class="emoji">'+SM_face(w,92)+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
+        :'<div class="emoji">'+SM_face(w,92)+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
       stage.innerHTML='<div class="card">'+head+'</div><div class="opts" id="opts"></div>';
       if(dir==="toRu"){speak(w.en);const s=document.getElementById("spk");if(s)s.onclick=()=>speak(w.en);}
       const box=document.getElementById("opts");
@@ -299,14 +299,14 @@
       stage.innerHTML='<div class="card"><button class="bigspeak" id="big">🔊</button><div class="prompt">послушай и выбери картинку</div></div><div class="opts" id="opts"></div>';
       speak(w.en); document.getElementById("big").onclick=()=>speak(w.en);
       const box=document.getElementById("opts");
-      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+o.emoji+'</span>'+esc(o.en);
+      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+SM_face(o,40)+'</span>'+esc(o.en);
         b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent.includes(w.en));
           if(ok)b.classList.add("correct");else{b.classList.add("wrong");if(cb)cb.classList.add("correct");}
           beep(ok);speak(w.en);record(w,ok);autoNext(ok?900:1500);};box.appendChild(b);});
     }
     function renderType(w){
       const stage=document.getElementById("stage");
-      stage.innerHTML='<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><button class="speak" id="spk">🔊 послушать</button><div class="prompt">напиши слово по-английски</div></div>'+
+      stage.innerHTML='<div class="card"><div class="emoji">'+SM_face(w,92)+'</div><div class="ru">'+esc(w.ru)+'</div><button class="speak" id="spk">🔊 послушать</button><div class="prompt">напиши слово по-английски</div></div>'+
         '<div class="field"><input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type here…"><button class="check" id="chk">OK</button></div><button class="next" id="next">дальше →</button>';
       speak(w.en); document.getElementById("spk").onclick=()=>speak(w.en);
       const inp=document.getElementById("inp"); inp.focus();
@@ -317,7 +317,7 @@
     }
     function renderAssemble(w){
       const stage=document.getElementById("stage");const target=w.en;const letters=shuffle(target.split(""));
-      stage.innerHTML='<div class="card"><div class="emoji">'+w.emoji+'</div><div class="ru">'+esc(w.ru)+'</div><div class="built" id="built"></div><div class="letters" id="lets"></div><button class="tinybtn" id="clr">⌫ стереть</button></div><button class="next" id="next">дальше →</button>';
+      stage.innerHTML='<div class="card"><div class="emoji">'+SM_face(w,92)+'</div><div class="ru">'+esc(w.ru)+'</div><div class="built" id="built"></div><div class="letters" id="lets"></div><button class="tinybtn" id="clr">⌫ стереть</button></div><button class="next" id="next">дальше →</button>';
       const builtEl=document.getElementById("built"),lets=document.getElementById("lets");let built=[];
       letters.forEach((ch,i)=>{const b=document.createElement("button");b.className="letter";b.textContent=ch;
         b.onclick=()=>{if(busy||b.classList.contains("used"))return;b.classList.add("used");built.push({ch,el:b});draw();};lets.appendChild(b);});
@@ -331,7 +331,7 @@
       const left=shuffle(batch.map(w=>({w,side:"en"})));const right=shuffle(batch.map(w=>({w,side:"ru"})));const rows=Math.max(left.length,right.length);
       let html='<div class="pairs" id="pairs">';
       for(let i=0;i<rows;i++){const l=left[i],r=right[i];
-        html+=l?'<button class="pcard" data-id="'+l.w.id+'" data-side="en"><span class="pem">'+l.w.emoji+'</span>'+esc(l.w.en)+'</button>':'<div></div>';
+        html+=l?'<button class="pcard" data-id="'+l.w.id+'" data-side="en"><span class="pem">'+SM_face(l.w,34)+'</span>'+esc(l.w.en)+'</button>':'<div></div>';
         html+=r?'<button class="pcard" data-id="'+r.w.id+'" data-side="ru">'+esc(r.w.ru)+'</button>':'<div></div>';}
       html+='</div>';
       stage.innerHTML='<div class="prompt" style="text-align:center;margin-bottom:8px">Соедини слово и перевод</div>'+html;

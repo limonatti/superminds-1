@@ -38,18 +38,18 @@ window.SM_COURSE_DATA["sm1"] = [
   {
     id: "u1", unit: "Unit 1", title: "At school", emoji: "🏫", color: "#e4ebf2",
     words: [
-      { en: "pen", ru: "ручка", emoji: "🖊️" },
-      { en: "pencil", ru: "карандаш", emoji: "✏️" },
-      { en: "rubber", ru: "ластик", emoji: "🧽" },
-      { en: "ruler", ru: "линейка", emoji: "📏" },
-      { en: "book", ru: "книга", emoji: "📖" },
-      { en: "bag", ru: "рюкзак", emoji: "🎒" },
-      { en: "pencil case", ru: "пенал", emoji: "🖍️" },
-      { en: "desk", ru: "парта", emoji: "🪑" },
-      { en: "chair", ru: "стул", emoji: "💺" },
-      { en: "notebook", ru: "тетрадь", emoji: "📓" },
-      { en: "teacher", ru: "учитель", emoji: "👩‍🏫" },
-      { en: "board", ru: "доска", emoji: "📋" }
+      { en: "pen", ru: "ручка", emoji: "🖊️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060447_dd402818-9ccf-4b49-bdc7-cbd963438045.png" },
+      { en: "pencil", ru: "карандаш", emoji: "✏️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060449_144713dd-4453-40f8-8b41-764ad7aee97d.png" },
+      { en: "rubber", ru: "ластик", emoji: "🧽", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060452_a00c96ba-2c54-44ea-9433-77bb43cee445.png" },
+      { en: "ruler", ru: "линейка", emoji: "📏", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060454_42db52f9-cd9f-4183-a484-ed6926020649.png" },
+      { en: "book", ru: "книга", emoji: "📖", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060530_33da6804-3cf7-42a6-a767-34ed1cef39c5.png" },
+      { en: "bag", ru: "рюкзак", emoji: "🎒", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060532_c7c89dc3-1f0c-4654-9bab-9f448b768edd.png" },
+      { en: "pencil case", ru: "пенал", emoji: "🖍️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060535_369c5887-c2f5-4473-90ea-72f38c567c37.png" },
+      { en: "desk", ru: "парта", emoji: "🪑", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060538_966f120f-ada1-4dc2-b098-82665383a842.png" },
+      { en: "chair", ru: "стул", emoji: "💺", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060552_27e81608-380a-4a04-b4c9-14069dca915a.png" },
+      { en: "notebook", ru: "тетрадь", emoji: "📓", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060555_ad92feb8-c638-48ec-8c6e-bb4249cb2bea.png" },
+      { en: "teacher", ru: "учитель", emoji: "👩‍🏫", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060557_2aaed4b0-0b83-4dc6-aa21-89a10b599260.png" },
+      { en: "board", ru: "доска", emoji: "📋", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060600_502a7f21-cce4-4b80-bc5c-ad2f7134f4ce.png" }
     ]
   },
   {
@@ -206,7 +206,14 @@ window.SM_COURSES = [
   window.SM_UNITS = window.SM_COURSE_DATA[cid];
   window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
     return u.words.map(function (w, i) {
-      return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji };
+      return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji, img: w.img || null };
     });
   });
 })();
+
+/* Отрисовать «лицо» слова: картинка если есть, иначе эмодзи. px — размер. */
+window.SM_face = function (w, px) {
+  px = px || 64;
+  if (w && w.img) return '<img src="' + w.img + '" alt="" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;vertical-align:middle;border-radius:12px">';
+  return '<span style="font-size:' + px + 'px;line-height:1">' + (w ? w.emoji : "") + '</span>';
+};

@@ -119,20 +119,20 @@
     const leftWords=shuffle(words);
     const rightPics=shuffle(words);
     const matchLeft=leftWords.map((w,i)=>'<div class="mrow"><span class="lab">'+(i+1)+'</span><span class="en">'+esc(w.en)+'</span><span class="dot"></span></div>').join("");
-    const matchRight=rightPics.map((w,i)=>'<div class="mrow"><span class="lab">'+LT[i]+'</span><span class="em">'+w.emoji+'</span><span class="dot"></span></div>').join("");
+    const matchRight=rightPics.map((w,i)=>'<div class="mrow"><span class="lab">'+LT[i]+'</span><span class="em">'+SM_face(w,44)+'</span><span class="dot"></span></div>').join("");
 
     // Задание 2: впиши слово (первая буква-подсказка + прочерки)
     const writeCells=words.map(w=>{
       const first=w.en[0];
       const rest=w.en.slice(1).replace(/[a-zA-Zа-яё-]/gi,"_").replace(/ /g," ");
-      return '<div class="wcell"><span class="em">'+w.emoji+'</span><span class="blanks">'+esc(first)+" "+esc(rest.split("").join(" "))+'</span></div>';
+      return '<div class="wcell"><span class="em">'+SM_face(w,44)+'</span><span class="blanks">'+esc(first)+" "+esc(rest.split("").join(" "))+'</span></div>';
     }).join("");
 
     // Задание 3: обведи правильное слово
     const circle=shuffle(words).slice(0,6).map(w=>{
       const others=shuffle(words.filter(x=>x.en!==w.en)).slice(0,2);
       const opts=shuffle([w,...others]).map(o=>'<span class="opt">'+esc(o.en)+'</span>').join("");
-      return '<div class="crow"><span class="em">'+w.emoji+'</span><div class="opts">'+opts+'</div></div>';
+      return '<div class="crow"><span class="em">'+SM_face(w,44)+'</span><div class="opts">'+opts+'</div></div>';
     }).join("");
 
     // Задание 4: грамматика юнита
