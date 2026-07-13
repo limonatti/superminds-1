@@ -27,11 +27,19 @@
   .optrow input[type=text]{flex:1}
   .optrow .rm{background:#fbe0d8;color:#a23b1e;border-radius:10px;padding:8px 11px;font:800 13px 'Nunito',sans-serif;flex:none}
   .add{background:#eef4ea;color:#3f7a20;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;margin-top:4px}
+  .addbig{display:block;width:100%;margin-top:6px;background:#3f7a20;color:#fff;border-radius:12px;padding:11px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #2c5716}
   .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Nunito',sans-serif;color:#3f7a20;flex:none}
+  .qblock{border:2px solid #e3d3ba;border-radius:14px;padding:12px 12px 14px;margin-bottom:12px;background:#fdfbf7}
+  .qblock .bh{display:flex;justify-content:space-between;align-items:center}
+  .qblock .bh .n{font:900 11px 'Nunito',sans-serif;color:#b5654a;letter-spacing:.6px}
+  .qblock .bh .rmq{background:#fbe0d8;color:#a23b1e;border-radius:999px;padding:5px 11px;font:800 12px 'Nunito',sans-serif}
+  .qblock label:first-child{margin-top:4px}
+  .hinttext{font:700 12px 'Nunito',sans-serif;color:#a99a86;margin-top:6px}
   .sec-title{font:900 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin:26px 2px 12px}
   .exrow{display:flex;align-items:center;gap:10px;background:#faf4ea;border-radius:12px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
   .exrow .t{flex:1;font:800 13.5px 'Nunito',sans-serif;min-width:130px}
   .exrow .badge{background:#f0c96b;color:#7a5b12;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif}
+  .exrow .cnt{background:#dbe8f5;color:#2a5f8f;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif}
   .exrow .ed{background:#7c2340;color:#fff;border-radius:999px;padding:6px 12px;font:800 12px 'Nunito',sans-serif}
   .exrow .de{background:#fbe0d8;color:#a23b1e;border-radius:999px;padding:6px 10px;font:800 12px 'Nunito',sans-serif}
   .empty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:12px}
@@ -72,50 +80,110 @@
       note:{label:"🗒 Заметка / правило"},
       open:{label:"📝 Открытый вопрос"}
     };
+    // типы, где в одном упражнении можно добавлять несколько заданий-вопросов
+    const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open"]);
     let editId=null;
 
-    /* ---- формы по типам ---- */
+    /* ---------- ряды для под-элементов (по контейнеру, не по id) ---------- */
+    function optRow(box,val,checked,radioName){
+      const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<label class="corr"><input type="radio" name="'+radioName+'" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" class="otext" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function optRowM(box,val,checked){
+      const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<label class="corr"><input type="checkbox" class="ochk" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" class="otext" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function pairRow(box,a,b){
+      const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<input type="text" class="pa" placeholder="dog" value="'+esc(a)+'"><input type="text" class="pb" placeholder="собака" value="'+esc(b)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function catRow(box,name,items){
+      const d=document.createElement("div");d.style.cssText="border:2px solid #e3d3ba;border-radius:12px;padding:10px;margin-bottom:8px";
+      d.innerHTML='<div style="display:flex;gap:8px;align-items:center"><input class="cname" type="text" placeholder="Название (напр. Животные)" value="'+esc(name)+'"><button class="rm" type="button">✕</button></div>'+
+        '<textarea class="citems" rows="3" placeholder="dog\ncat\nbird" style="margin-top:6px">'+esc(items)+'</textarea>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function lineRow(box,who,text){
+      const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<input class="who" type="text" placeholder="A" value="'+esc(who)+'" style="max-width:64px"><input class="dtext" type="text" placeholder="реплика" value="'+esc(text)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>1) d.remove(); };
+      box.appendChild(d);
+    }
+
+    /* ---------- блок одного вопроса (для многозадачных типов) ---------- */
+    function renumber(){ [...document.querySelectorAll("#blocks .qblock .bh .n")].forEach((n,i)=>n.textContent="ЗАДАНИЕ "+(i+1)); }
+    function addBlock(type,d){
+      d=d||{};
+      const blocks=document.getElementById("blocks");
+      const uid="r"+Math.random().toString(36).slice(2);
+      const b=document.createElement("div");b.className="qblock";b.dataset.type=type;
+      b.innerHTML='<div class="bh"><span class="n">ЗАДАНИЕ</span><button class="rmq" type="button">✕ убрать</button></div><div class="bf"></div>';
+      b.querySelector(".rmq").onclick=()=>{ if(blocks.children.length>1){b.remove();renumber();} };
+      const bf=b.querySelector(".bf");
+      if(type==="choice"){
+        bf.innerHTML='<label>ВОПРОС</label><input class="q" placeholder="What colour is the sky?" value="'+esc(d.q||"")+'"><label>ВАРИАНТЫ (отметь правильный)</label><div class="opts"></div><button class="add addOpt" type="button">＋ вариант</button>';
+        const box=bf.querySelector(".opts");const opts=d.opts||["","",""];const cor=(typeof d.correct==="number")?d.correct:0;
+        opts.forEach((o,i)=>optRow(box,o,i===cor,uid));
+        bf.querySelector(".addOpt").onclick=()=>optRow(box,"",false,uid);
+      } else if(type==="multi"){
+        bf.innerHTML='<label>ВОПРОС</label><input class="q" placeholder="Отметь всех животных" value="'+esc(d.q||"")+'"><label>ВАРИАНТЫ (отметь все правильные)</label><div class="opts"></div><button class="add addOpt" type="button">＋ вариант</button>';
+        const box=bf.querySelector(".opts");const opts=d.opts||["","",""];const cor=d.correct||[];
+        opts.forEach((o,i)=>optRowM(box,o,cor.includes(i)));
+        bf.querySelector(".addOpt").onclick=()=>optRowM(box,"",false);
+      } else if(type==="gap"){
+        bf.innerHTML='<label>ПРЕДЛОЖЕНИЕ (пропуск обозначь ___)</label><input class="q" placeholder="I ___ a cat." value="'+esc(d.q||"")+'"><label>ОТВЕТ (варианты через запятую)</label><input class="answer" placeholder="have, ve" value="'+esc(d.answer||"")+'">';
+      } else if(type==="order"){
+        bf.innerHTML='<label>ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ (слова через пробел)</label><input class="answer" placeholder="I like cats" value="'+esc(d.answer||"")+'">';
+      } else if(type==="tf"){
+        bf.innerHTML='<label>УТВЕРЖДЕНИЕ</label><input class="statement" placeholder="A dog is an animal." value="'+esc(d.statement||"")+'"><label>ПРАВИЛЬНЫЙ ОТВЕТ</label><select class="correct"><option value="true"'+(d.correct!==false?" selected":"")+'>Верно</option><option value="false"'+(d.correct===false?" selected":"")+'>Неверно</option></select>';
+      } else if(type==="listen"){
+        bf.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><input class="audio" placeholder="It is a red ball" value="'+esc(d.audio||"")+'"><label>ОТВЕТ УЧЕНИКА (варианты через запятую)</label><input class="answer" placeholder="ball, a ball" value="'+esc(d.answer||"")+'">';
+      } else if(type==="cloze"){
+        bf.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ</label><textarea class="q" rows="3" placeholder="I [[am|is|are]] happy. She [[likes|like]] cats.">'+esc(d.q||"")+'</textarea><div class="hinttext">Пропуск: [[правильный|неправильный|неправильный]]. Первый вариант — правильный.</div>';
+      } else if(type==="letters"){
+        bf.innerHTML='<label>СЛОВО ИЛИ ФРАЗА</label><input class="word" placeholder="banana" value="'+esc(d.word||"")+'"><label>ПОДСКАЗКА (перевод, необязательно)</label><input class="hint" placeholder="банан" value="'+esc(d.hint||"")+'">';
+      } else if(type==="open"){
+        bf.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea class="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(d.q||"")+'</textarea><label>ОБРАЗЕЦ ОТВЕТА (необязательно)</label><textarea class="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(d.model||"")+'</textarea>';
+      }
+      blocks.appendChild(b);
+      renumber();
+    }
+
+    /* ---------- формы по типам ---------- */
     function renderForm(type,data){
       const f=document.getElementById("fields"); data=data||{};
-      if(type==="choice"){
-        f.innerHTML='<label>ВОПРОС</label><input id="q" placeholder="Например: What colour is the sky?" value="'+esc(data.q||"")+'">'+
-          '<label>ВАРИАНТЫ (отметь правильный)</label><div id="opts"></div><button class="add" id="addOpt" type="button">＋ вариант</button>';
-        const opts=data.opts||["","",""]; const cor=data.correct||0;
-        opts.forEach((o,i)=>addOpt(o,i===cor));
-        document.getElementById("addOpt").onclick=()=>addOpt("",false);
-      } else if(type==="gap"){
-        f.innerHTML='<label>ПРЕДЛОЖЕНИЕ (пропуск обозначь ___)</label><input id="q" placeholder="I ___ a cat." value="'+esc(data.q||"")+'">'+
-          '<label>ОТВЕТ (варианты через запятую)</label><input id="answer" placeholder="have, ve" value="'+esc(data.answer||"")+'">';
-      } else if(type==="match"){
-        f.innerHTML='<label>ПАРЫ (слово ↔ перевод)</label><div id="pairs"></div><button class="add" id="addPair" type="button">＋ пара</button>';
-        const pairs=data.pairs||[{a:"",b:""},{a:"",b:""},{a:"",b:""}];
-        pairs.forEach(p=>addPair(p.a,p.b));
-        document.getElementById("addPair").onclick=()=>addPair("","");
-      } else if(type==="order"){
-        f.innerHTML='<label>ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ (слова через пробел)</label><input id="answer" placeholder="I like cats" value="'+esc(data.answer||"")+'">';
-      } else if(type==="tf"){
-        f.innerHTML='<label>УТВЕРЖДЕНИЕ</label><input id="statement" placeholder="A dog is an animal." value="'+esc(data.statement||"")+'">'+
-          '<label>ПРАВИЛЬНЫЙ ОТВЕТ</label><select id="correct"><option value="true"'+(data.correct!==false?" selected":"")+'>Верно</option><option value="false"'+(data.correct===false?" selected":"")+'>Неверно</option></select>';
-      } else if(type==="listen"){
-        f.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><input id="audio" placeholder="It is a red ball" value="'+esc(data.audio||"")+'">'+
-          '<label>ОТВЕТ УЧЕНИКА (варианты через запятую)</label><input id="answer" placeholder="ball, a ball" value="'+esc(data.answer||"")+'">';
-      } else if(type==="multi"){
-        f.innerHTML='<label>ВОПРОС</label><input id="q" placeholder="Отметь всех животных" value="'+esc(data.q||"")+'">'+
-          '<label>ВАРИАНТЫ (отметь все правильные)</label><div id="opts"></div><button class="add" id="addOpt" type="button">＋ вариант</button>';
-        const opts=data.opts||["","",""]; const cor=data.correct||[];
-        opts.forEach((o,i)=>addOptM(o,cor.includes(i)));
-        document.getElementById("addOpt").onclick=()=>addOptM("",false);
+      if(QREPEAT.has(type)){
+        f.innerHTML='<div id="blocks"></div><button class="addbig" id="addBlock" type="button">＋ добавить задание</button>';
+        let items=[];
+        if(data.items&&data.items.length) items=data.items;
+        else if(Object.keys(data).length) items=[data];
+        else items=[{}];
+        items.forEach(it=>addBlock(type,it||{}));
+        document.getElementById("addBlock").onclick=()=>addBlock(type,{});
+        return;
+      }
+      if(type==="match"){
+        f.innerHTML='<label>ПАРЫ (слово ↔ перевод)</label><div id="pairs"></div><button class="add" id="addPair" type="button">＋ добавить пару</button>';
+        const box=document.getElementById("pairs");const pairs=data.pairs||[{a:"",b:""},{a:"",b:""},{a:"",b:""}];
+        pairs.forEach(p=>pairRow(box,p.a,p.b));
+        document.getElementById("addPair").onclick=()=>pairRow(box,"","");
       } else if(type==="categorize"){
-        f.innerHTML='<label>КАТЕГОРИИ (слова — по одному в строке)</label><div id="cats"></div><button class="add" id="addCat" type="button">＋ категория</button>';
-        const cats=data.cats||[{name:"",items:[]},{name:"",items:[]}];
-        cats.forEach(c=>addCat(c.name,(c.items||[]).join("\n")));
-        document.getElementById("addCat").onclick=()=>addCat("","");
-      } else if(type==="cloze"){
-        f.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ</label><textarea id="q" rows="4" placeholder="I [[am|is|are]] happy. She [[likes|like]] cats.">'+esc(data.q||"")+'</textarea>'+
-          '<div style="font:700 12px \'Nunito\',sans-serif;color:#a99a86;margin-top:6px">Пропуск: [[правильный|неправильный|неправильный]]. Первый вариант — правильный.</div>';
-      } else if(type==="letters"){
-        f.innerHTML='<label>СЛОВО ИЛИ ФРАЗА</label><input id="word" placeholder="banana" value="'+esc(data.word||"")+'">'+
-          '<label>ПОДСКАЗКА (перевод, необязательно)</label><input id="hint" placeholder="банан" value="'+esc(data.hint||"")+'">';
+        f.innerHTML='<label>КАТЕГОРИИ (слова — по одному в строке)</label><div id="cats"></div><button class="add" id="addCat" type="button">＋ добавить категорию</button>';
+        const box=document.getElementById("cats");const cats=data.cats||[{name:"",items:[]},{name:"",items:[]}];
+        cats.forEach(c=>catRow(box,c.name,(c.items||[]).join("\n")));
+        document.getElementById("addCat").onclick=()=>catRow(box,"","");
+      } else if(type==="dialogue"){
+        f.innerHTML='<label>РЕПЛИКИ (кто → что)</label><div id="lines"></div><button class="add" id="addLine" type="button">＋ добавить реплику</button>';
+        const box=document.getElementById("lines");const lines=data.lines||[{who:"A",text:""},{who:"B",text:""}];
+        lines.forEach(l=>lineRow(box,l.who,l.text));
+        document.getElementById("addLine").onclick=()=>lineRow(box,"A","");
       } else if(type==="fillbox"){
         f.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ ___</label><textarea id="q" rows="3" placeholder="I ___ a cat. She ___ a dog.">'+esc(data.q||"")+'</textarea>'+
           '<label>ПРАВИЛЬНЫЕ СЛОВА (по порядку, через запятую)</label><input id="answers" placeholder="have, has" value="'+esc((data.answers||[]).join(", "))+'">'+
@@ -132,112 +200,96 @@
       } else if(type==="audio"){
         f.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><textarea id="body" rows="3" placeholder="Listen and repeat: red, blue, green">'+esc(data.body||"")+'</textarea>'+
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Слушай и повторяй" value="'+esc(data.caption||"")+'">';
-      } else if(type==="dialogue"){
-        f.innerHTML='<label>РЕПЛИКИ (кто → что)</label><div id="lines"></div><button class="add" id="addLine" type="button">＋ реплика</button>';
-        const lines=data.lines||[{who:"A",text:""},{who:"B",text:""}];
-        lines.forEach(l=>addLine(l.who,l.text));
-        document.getElementById("addLine").onclick=()=>addLine("A","");
       } else if(type==="note"){
         f.innerHTML='<label>ЗАМЕТКА / ПРАВИЛО</label><textarea id="body" rows="4" placeholder="my / his / her — притяжательные местоимения…">'+esc(data.body||"")+'</textarea>';
-      } else if(type==="open"){
-        f.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea id="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(data.q||"")+'</textarea>'+
-          '<label>ОБРАЗЕЦ ОТВЕТА (необязательно — ученик сможет открыть)</label><textarea id="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(data.model||"")+'</textarea>';
       }
     }
-    function addLine(who,text){
-      const box=document.getElementById("lines");const d=document.createElement("div");d.className="optrow";
-      d.innerHTML='<input class="who" type="text" placeholder="A" value="'+esc(who)+'" style="max-width:64px"><input class="dtext" type="text" placeholder="реплика" value="'+esc(text)+'"><button class="rm" type="button">✕</button>';
-      d.querySelector(".rm").onclick=()=>{ if(box.children.length>1) d.remove(); };
-      box.appendChild(d);
-    }
-    function addOptM(val,checked){
-      const box=document.getElementById("opts");const d=document.createElement("div");d.className="optrow";
-      d.innerHTML='<label class="corr"><input type="checkbox" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
-      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
-      box.appendChild(d);
-    }
-    function addCat(name,items){
-      const box=document.getElementById("cats");const d=document.createElement("div");d.style.cssText="border:2px solid #e3d3ba;border-radius:12px;padding:10px;margin-bottom:8px";
-      d.innerHTML='<div style="display:flex;gap:8px;align-items:center"><input class="cname" type="text" placeholder="Название (напр. Животные)" value="'+esc(name)+'"><button class="rm" type="button">✕</button></div>'+
-        '<textarea class="citems" rows="3" placeholder="dog\ncat\nbird" style="margin-top:6px">'+esc(items)+'</textarea>';
-      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
-      box.appendChild(d);
-    }
-    function addOpt(val,checked){
-      const box=document.getElementById("opts");const d=document.createElement("div");d.className="optrow";
-      d.innerHTML='<label class="corr"><input type="radio" name="cor" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
-      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
-      box.appendChild(d);
-    }
-    function addPair(a,b){
-      const box=document.getElementById("pairs");const d=document.createElement("div");d.className="optrow";
-      d.innerHTML='<input type="text" placeholder="dog" value="'+esc(a)+'"><input type="text" placeholder="собака" value="'+esc(b)+'"><button class="rm" type="button">✕</button>';
-      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
-      box.appendChild(d);
-    }
-    function readForm(type){
+
+    /* ---------- чтение одного блока-вопроса ---------- */
+    function readItem(type,b){
       if(type==="choice"){
-        const q=document.getElementById("q").value.trim();
-        const rows=[...document.querySelectorAll("#opts .optrow")];
-        const opts=rows.map(r=>r.querySelector('input[type=text]').value.trim());
-        let correct=rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
-        if(!q) return {err:"Впиши вопрос"};
-        if(opts.filter(Boolean).length<2) return {err:"Нужно минимум 2 варианта"};
-        if(correct<0) return {err:"Отметь правильный вариант"};
-        return {data:{q,opts:opts.filter(Boolean),correct}};
+        const q=b.querySelector(".q").value.trim();
+        const rows=[...b.querySelectorAll(".opts .optrow")].map(r=>({t:r.querySelector(".otext").value.trim(),c:r.querySelector('input[type=radio]').checked}));
+        const kept=rows.filter(x=>x.t);
+        if(!q) return {err:"впиши вопрос"};
+        if(kept.length<2) return {err:"нужно минимум 2 варианта"};
+        const correct=kept.findIndex(x=>x.c);
+        if(correct<0) return {err:"отметь правильный вариант"};
+        return {data:{q,opts:kept.map(x=>x.t),correct}};
+      }
+      if(type==="multi"){
+        const q=b.querySelector(".q").value.trim();
+        const rows=[...b.querySelectorAll(".opts .optrow")].map(r=>({t:r.querySelector(".otext").value.trim(),c:r.querySelector('input[type=checkbox]').checked}));
+        const kept=rows.filter(x=>x.t);
+        if(!q) return {err:"впиши вопрос"};
+        if(kept.length<2) return {err:"нужно минимум 2 варианта"};
+        const correct=[]; kept.forEach((x,i)=>{ if(x.c) correct.push(i); });
+        if(!correct.length) return {err:"отметь хотя бы один правильный"};
+        return {data:{q,opts:kept.map(x=>x.t),correct}};
       }
       if(type==="gap"){
-        const q=document.getElementById("q").value.trim();const answer=document.getElementById("answer").value.trim();
-        if(!q||q.indexOf("___")<0) return {err:"Впиши предложение с ___"};
-        if(!answer) return {err:"Впиши ответ"};
+        const q=b.querySelector(".q").value.trim();const answer=b.querySelector(".answer").value.trim();
+        if(!q||q.indexOf("___")<0) return {err:"впиши предложение с ___"};
+        if(!answer) return {err:"впиши ответ"};
         return {data:{q,answer}};
       }
-      if(type==="match"){
-        const rows=[...document.querySelectorAll("#pairs .optrow")];
-        const pairs=rows.map(r=>{const ins=r.querySelectorAll("input");return {a:ins[0].value.trim(),b:ins[1].value.trim()};}).filter(p=>p.a&&p.b);
-        if(pairs.length<2) return {err:"Нужно минимум 2 пары"};
-        return {data:{pairs}};
-      }
       if(type==="order"){
-        const answer=document.getElementById("answer").value.trim();
-        if(answer.split(/\s+/).length<2) return {err:"Впиши предложение из 2+ слов"};
+        const answer=b.querySelector(".answer").value.trim();
+        if(answer.split(/\s+/).filter(Boolean).length<2) return {err:"впиши предложение из 2+ слов"};
         return {data:{answer}};
       }
       if(type==="tf"){
-        const statement=document.getElementById("statement").value.trim();
-        if(!statement) return {err:"Впиши утверждение"};
-        return {data:{statement,correct:document.getElementById("correct").value==="true"}};
+        const statement=b.querySelector(".statement").value.trim();
+        if(!statement) return {err:"впиши утверждение"};
+        return {data:{statement,correct:b.querySelector(".correct").value==="true"}};
       }
       if(type==="listen"){
-        const audio=document.getElementById("audio").value.trim();const answer=document.getElementById("answer").value.trim();
-        if(!audio) return {err:"Впиши текст для озвучки"};
-        if(!answer) return {err:"Впиши ответ"};
+        const audio=b.querySelector(".audio").value.trim();const answer=b.querySelector(".answer").value.trim();
+        if(!audio) return {err:"впиши текст для озвучки"};
+        if(!answer) return {err:"впиши ответ"};
         return {data:{audio,answer}};
       }
-      if(type==="multi"){
-        const q=document.getElementById("q").value.trim();
-        const rows=[...document.querySelectorAll("#opts .optrow")];
-        const opts=rows.map(r=>r.querySelector('input[type=text]').value.trim());
-        const correct=[]; rows.forEach((r,i)=>{ if(r.querySelector('input[type=checkbox]').checked) correct.push(i); });
-        if(!q) return {err:"Впиши вопрос"};
-        if(opts.filter(Boolean).length<2) return {err:"Нужно минимум 2 варианта"};
-        if(!correct.length) return {err:"Отметь хотя бы один правильный"};
-        return {data:{q,opts,correct}};
+      if(type==="cloze"){
+        const q=b.querySelector(".q").value.trim();
+        if(!/\[\[.*?\]\]/.test(q)) return {err:"добавь хотя бы один пропуск [[a|b]]"};
+        return {data:{q}};
+      }
+      if(type==="letters"){
+        const word=b.querySelector(".word").value.trim();
+        if(!word) return {err:"впиши слово"};
+        return {data:{word,hint:b.querySelector(".hint").value.trim()}};
+      }
+      if(type==="open"){
+        const q=b.querySelector(".q").value.trim();
+        if(!q) return {err:"впиши вопрос"};
+        return {data:{q,model:b.querySelector(".model").value.trim()}};
+      }
+      return {err:"?"};
+    }
+
+    function readForm(type){
+      if(QREPEAT.has(type)){
+        const blocks=[...document.querySelectorAll("#blocks .qblock")];
+        const items=[];
+        for(let i=0;i<blocks.length;i++){ const r=readItem(type,blocks[i]); if(r.err) return {err:"Задание "+(i+1)+": "+r.err}; items.push(r.data); }
+        if(!items.length) return {err:"Добавь хотя бы одно задание"};
+        return {data:{items}};
+      }
+      if(type==="match"){
+        const rows=[...document.querySelectorAll("#pairs .optrow")];
+        const pairs=rows.map(r=>({a:r.querySelector(".pa").value.trim(),b:r.querySelector(".pb").value.trim()})).filter(p=>p.a&&p.b);
+        if(pairs.length<2) return {err:"Нужно минимум 2 пары"};
+        return {data:{pairs}};
       }
       if(type==="categorize"){
         const cats=[...document.querySelectorAll("#cats > div")].map(d=>({name:d.querySelector(".cname").value.trim(),items:d.querySelector(".citems").value.split("\n").map(s=>s.trim()).filter(Boolean)})).filter(c=>c.name&&c.items.length);
         if(cats.length<2) return {err:"Нужно 2+ категории со словами"};
         return {data:{cats}};
       }
-      if(type==="cloze"){
-        const q=document.getElementById("q").value.trim();
-        if(!/\[\[.*?\]\]/.test(q)) return {err:"Добавь хотя бы один пропуск [[a|b]]"};
-        return {data:{q}};
-      }
-      if(type==="letters"){
-        const word=document.getElementById("word").value.trim();
-        if(!word) return {err:"Впиши слово"};
-        return {data:{word,hint:document.getElementById("hint").value.trim()}};
+      if(type==="dialogue"){
+        const lines=[...document.querySelectorAll("#lines .optrow")].map(r=>({who:r.querySelector(".who").value.trim()||"•",text:r.querySelector(".dtext").value.trim()})).filter(l=>l.text);
+        if(!lines.length) return {err:"Добавь хотя бы одну реплику"};
+        return {data:{lines}};
       }
       if(type==="fillbox"){
         const q=document.getElementById("q").value.trim();
@@ -268,25 +320,25 @@
         if(!body) return {err:"Впиши текст для озвучки"};
         return {data:{body,caption:document.getElementById("caption").value.trim()}};
       }
-      if(type==="dialogue"){
-        const lines=[...document.querySelectorAll("#lines .optrow")].map(r=>({who:r.querySelector(".who").value.trim()||"•",text:r.querySelector(".dtext").value.trim()})).filter(l=>l.text);
-        if(!lines.length) return {err:"Добавь хотя бы одну реплику"};
-        return {data:{lines}};
-      }
       if(type==="note"){
         const body=document.getElementById("body").value.trim();
         if(!body) return {err:"Впиши заметку"};
         return {data:{body}};
       }
-      if(type==="open"){
-        const q=document.getElementById("q").value.trim();
-        if(!q) return {err:"Впиши вопрос"};
-        return {data:{q,model:document.getElementById("model").value.trim()}};
-      }
       return {err:"?"};
     }
 
-    /* ---- экраны ---- */
+    /* ---------- счётчик заданий в упражнении (для списка) ---------- */
+    function itemCount(e){
+      const d=e.data||{};
+      if(d.items) return d.items.length;
+      if(d.pairs) return d.pairs.length;
+      if(d.cats) return d.cats.length;
+      if(d.lines) return d.lines.length;
+      return 1;
+    }
+
+    /* ---------- экраны ---------- */
     function renderLogin(){
       document.getElementById("sub").textContent="войди как учитель, чтобы создавать упражнения";
       document.getElementById("root").innerHTML='<div class="panel"><div class="empty">Сначала войди в <a href="teacher.html" style="color:#7c2340;text-decoration:underline">кабинет учителя</a>, потом вернись сюда.</div></div>';
@@ -323,8 +375,9 @@
       const list=document.getElementById("list");
       const ex=await SM.myExercises(SM_COURSE.id);
       if(!ex.length){list.innerHTML='<div class="empty">Пока нет упражнений. Создай первое 👆</div>';return;}
-      list.innerHTML=ex.map(e=>{const uu=SM_UNITS.find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;
+      list.innerHTML=ex.map(e=>{const uu=SM_UNITS.find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;const n=itemCount(e);
         return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+
+          (n>1?'<span class="cnt">'+n+' заданий</span>':'')+
           '<span class="t">'+esc(e.title||un)+' · '+esc(un)+'</span>'+
           '<button class="ed" data-id="'+e.id+'">✎</button><button class="de" data-id="'+e.id+'">🗑</button></div>';
       }).join("");
