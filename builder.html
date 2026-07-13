@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конструктор упражнений · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .wrap{max-width:680px;margin:0 auto;padding:64px 20px 60px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 22px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .panel{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px}
+  label{display:block;font:800 12px 'Nunito',sans-serif;color:#8a7a68;margin:12px 2px 6px;letter-spacing:.5px}
+  input,select,textarea{width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px 12px;font:600 15px 'Fredoka',sans-serif;color:#1c1310;background:#fdfbf7}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:#7c2340}
+  .row2{display:flex;gap:10px}
+  .primary{width:100%;margin-top:16px;background:#7c2340;color:#fff;border-radius:14px;padding:14px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5e1a30}
+  .msg{margin-top:12px;font:700 13px 'Nunito',sans-serif;text-align:center;min-height:16px}
+  .msg.err{color:#a23b1e}.msg.ok{color:#3f7a20}
+  .optrow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .optrow input[type=text]{flex:1}
+  .optrow .rm{background:#fbe0d8;color:#a23b1e;border-radius:10px;padding:8px 11px;font:800 13px 'Nunito',sans-serif;flex:none}
+  .add{background:#eef4ea;color:#3f7a20;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;margin-top:4px}
+  .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Nunito',sans-serif;color:#3f7a20;flex:none}
+  .sec-title{font:900 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin:26px 2px 12px}
+  .exrow{display:flex;align-items:center;gap:10px;background:#faf4ea;border-radius:12px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
+  .exrow .t{flex:1;font:800 13.5px 'Nunito',sans-serif;min-width:130px}
+  .exrow .badge{background:#f0c96b;color:#7a5b12;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif}
+  .exrow .ed{background:#7c2340;color:#fff;border-radius:999px;padding:6px 12px;font:800 12px 'Nunito',sans-serif}
+  .exrow .de{background:#fbe0d8;color:#a23b1e;border-radius:999px;padding:6px 10px;font:800 12px 'Nunito',sans-serif}
+  .empty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:12px}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+</style>
+</head>
+<body>
+  <a class="home" href="teacher.html">← Кабинет</a>
+  <div class="wrap">
+    <h1>🛠 Конструктор упражнений</h1>
+    <div class="sub" id="sub">создавай свои упражнения — как на edvibe</div>
+    <div id="root"></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    const TYPES={
+      choice:{label:"✅ Выбор ответа"},
+      gap:{label:"✍️ Впиши слово"},
+      match:{label:"🔗 Найди пару"},
+      order:{label:"🔀 Порядок слов"},
+      tf:{label:"🟢 Верно / Неверно"},
+      listen:{label:"🎧 Аудирование"},
+      multi:{label:"☑️ Несколько ответов"},
+      categorize:{label:"🗂 Категории"},
+      cloze:{label:"🔽 Пропуски-выбор"},
+      letters:{label:"🔡 Собери слово"}
+    };
+    let editId=null;
+
+    /* ---- формы по типам ---- */
+    function renderForm(type,data){
+      const f=document.getElementById("fields"); data=data||{};
+      if(type==="choice"){
+        f.innerHTML='<label>ВОПРОС</label><input id="q" placeholder="Например: What colour is the sky?" value="'+esc(data.q||"")+'">'+
+          '<label>ВАРИАНТЫ (отметь правильный)</label><div id="opts"></div><button class="add" id="addOpt" type="button">＋ вариант</button>';
+        const opts=data.opts||["","",""]; const cor=data.correct||0;
+        opts.forEach((o,i)=>addOpt(o,i===cor));
+        document.getElementById("addOpt").onclick=()=>addOpt("",false);
+      } else if(type==="gap"){
+        f.innerHTML='<label>ПРЕДЛОЖЕНИЕ (пропуск обозначь ___)</label><input id="q" placeholder="I ___ a cat." value="'+esc(data.q||"")+'">'+
+          '<label>ОТВЕТ (варианты через запятую)</label><input id="answer" placeholder="have, ve" value="'+esc(data.answer||"")+'">';
+      } else if(type==="match"){
+        f.innerHTML='<label>ПАРЫ (слово ↔ перевод)</label><div id="pairs"></div><button class="add" id="addPair" type="button">＋ пара</button>';
+        const pairs=data.pairs||[{a:"",b:""},{a:"",b:""},{a:"",b:""}];
+        pairs.forEach(p=>addPair(p.a,p.b));
+        document.getElementById("addPair").onclick=()=>addPair("","");
+      } else if(type==="order"){
+        f.innerHTML='<label>ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ (слова через пробел)</label><input id="answer" placeholder="I like cats" value="'+esc(data.answer||"")+'">';
+      } else if(type==="tf"){
+        f.innerHTML='<label>УТВЕРЖДЕНИЕ</label><input id="statement" placeholder="A dog is an animal." value="'+esc(data.statement||"")+'">'+
+          '<label>ПРАВИЛЬНЫЙ ОТВЕТ</label><select id="correct"><option value="true"'+(data.correct!==false?" selected":"")+'>Верно</option><option value="false"'+(data.correct===false?" selected":"")+'>Неверно</option></select>';
+      } else if(type==="listen"){
+        f.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><input id="audio" placeholder="It is a red ball" value="'+esc(data.audio||"")+'">'+
+          '<label>ОТВЕТ УЧЕНИКА (варианты через запятую)</label><input id="answer" placeholder="ball, a ball" value="'+esc(data.answer||"")+'">';
+      } else if(type==="multi"){
+        f.innerHTML='<label>ВОПРОС</label><input id="q" placeholder="Отметь всех животных" value="'+esc(data.q||"")+'">'+
+          '<label>ВАРИАНТЫ (отметь все правильные)</label><div id="opts"></div><button class="add" id="addOpt" type="button">＋ вариант</button>';
+        const opts=data.opts||["","",""]; const cor=data.correct||[];
+        opts.forEach((o,i)=>addOptM(o,cor.includes(i)));
+        document.getElementById("addOpt").onclick=()=>addOptM("",false);
+      } else if(type==="categorize"){
+        f.innerHTML='<label>КАТЕГОРИИ (слова — по одному в строке)</label><div id="cats"></div><button class="add" id="addCat" type="button">＋ категория</button>';
+        const cats=data.cats||[{name:"",items:[]},{name:"",items:[]}];
+        cats.forEach(c=>addCat(c.name,(c.items||[]).join("\n")));
+        document.getElementById("addCat").onclick=()=>addCat("","");
+      } else if(type==="cloze"){
+        f.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ</label><textarea id="q" rows="4" placeholder="I [[am|is|are]] happy. She [[likes|like]] cats.">'+esc(data.q||"")+'</textarea>'+
+          '<div style="font:700 12px \'Nunito\',sans-serif;color:#a99a86;margin-top:6px">Пропуск: [[правильный|неправильный|неправильный]]. Первый вариант — правильный.</div>';
+      } else if(type==="letters"){
+        f.innerHTML='<label>СЛОВО ИЛИ ФРАЗА</label><input id="word" placeholder="banana" value="'+esc(data.word||"")+'">'+
+          '<label>ПОДСКАЗКА (перевод, необязательно)</label><input id="hint" placeholder="банан" value="'+esc(data.hint||"")+'">';
+      }
+    }
+    function addOptM(val,checked){
+      const box=document.getElementById("opts");const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<label class="corr"><input type="checkbox" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function addCat(name,items){
+      const box=document.getElementById("cats");const d=document.createElement("div");d.style.cssText="border:2px solid #e3d3ba;border-radius:12px;padding:10px;margin-bottom:8px";
+      d.innerHTML='<div style="display:flex;gap:8px;align-items:center"><input class="cname" type="text" placeholder="Название (напр. Животные)" value="'+esc(name)+'"><button class="rm" type="button">✕</button></div>'+
+        '<textarea class="citems" rows="3" placeholder="dog\ncat\nbird" style="margin-top:6px">'+esc(items)+'</textarea>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function addOpt(val,checked){
+      const box=document.getElementById("opts");const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<label class="corr"><input type="radio" name="cor" style="width:auto"'+(checked?" checked":"")+'>верный</label><input type="text" placeholder="вариант" value="'+esc(val)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function addPair(a,b){
+      const box=document.getElementById("pairs");const d=document.createElement("div");d.className="optrow";
+      d.innerHTML='<input type="text" placeholder="dog" value="'+esc(a)+'"><input type="text" placeholder="собака" value="'+esc(b)+'"><button class="rm" type="button">✕</button>';
+      d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      box.appendChild(d);
+    }
+    function readForm(type){
+      if(type==="choice"){
+        const q=document.getElementById("q").value.trim();
+        const rows=[...document.querySelectorAll("#opts .optrow")];
+        const opts=rows.map(r=>r.querySelector('input[type=text]').value.trim());
+        let correct=rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
+        if(!q) return {err:"Впиши вопрос"};
+        if(opts.filter(Boolean).length<2) return {err:"Нужно минимум 2 варианта"};
+        if(correct<0) return {err:"Отметь правильный вариант"};
+        return {data:{q,opts:opts.filter(Boolean),correct}};
+      }
+      if(type==="gap"){
+        const q=document.getElementById("q").value.trim();const answer=document.getElementById("answer").value.trim();
+        if(!q||q.indexOf("___")<0) return {err:"Впиши предложение с ___"};
+        if(!answer) return {err:"Впиши ответ"};
+        return {data:{q,answer}};
+      }
+      if(type==="match"){
+        const rows=[...document.querySelectorAll("#pairs .optrow")];
+        const pairs=rows.map(r=>{const ins=r.querySelectorAll("input");return {a:ins[0].value.trim(),b:ins[1].value.trim()};}).filter(p=>p.a&&p.b);
+        if(pairs.length<2) return {err:"Нужно минимум 2 пары"};
+        return {data:{pairs}};
+      }
+      if(type==="order"){
+        const answer=document.getElementById("answer").value.trim();
+        if(answer.split(/\s+/).length<2) return {err:"Впиши предложение из 2+ слов"};
+        return {data:{answer}};
+      }
+      if(type==="tf"){
+        const statement=document.getElementById("statement").value.trim();
+        if(!statement) return {err:"Впиши утверждение"};
+        return {data:{statement,correct:document.getElementById("correct").value==="true"}};
+      }
+      if(type==="listen"){
+        const audio=document.getElementById("audio").value.trim();const answer=document.getElementById("answer").value.trim();
+        if(!audio) return {err:"Впиши текст для озвучки"};
+        if(!answer) return {err:"Впиши ответ"};
+        return {data:{audio,answer}};
+      }
+      if(type==="multi"){
+        const q=document.getElementById("q").value.trim();
+        const rows=[...document.querySelectorAll("#opts .optrow")];
+        const opts=rows.map(r=>r.querySelector('input[type=text]').value.trim());
+        const correct=[]; rows.forEach((r,i)=>{ if(r.querySelector('input[type=checkbox]').checked) correct.push(i); });
+        if(!q) return {err:"Впиши вопрос"};
+        if(opts.filter(Boolean).length<2) return {err:"Нужно минимум 2 варианта"};
+        if(!correct.length) return {err:"Отметь хотя бы один правильный"};
+        return {data:{q,opts,correct}};
+      }
+      if(type==="categorize"){
+        const cats=[...document.querySelectorAll("#cats > div")].map(d=>({name:d.querySelector(".cname").value.trim(),items:d.querySelector(".citems").value.split("\n").map(s=>s.trim()).filter(Boolean)})).filter(c=>c.name&&c.items.length);
+        if(cats.length<2) return {err:"Нужно 2+ категории со словами"};
+        return {data:{cats}};
+      }
+      if(type==="cloze"){
+        const q=document.getElementById("q").value.trim();
+        if(!/\[\[.*?\]\]/.test(q)) return {err:"Добавь хотя бы один пропуск [[a|b]]"};
+        return {data:{q}};
+      }
+      if(type==="letters"){
+        const word=document.getElementById("word").value.trim();
+        if(!word) return {err:"Впиши слово"};
+        return {data:{word,hint:document.getElementById("hint").value.trim()}};
+      }
+      return {err:"?"};
+    }
+
+    /* ---- экраны ---- */
+    function renderLogin(){
+      document.getElementById("sub").textContent="войди как учитель, чтобы создавать упражнения";
+      document.getElementById("root").innerHTML='<div class="panel"><div class="empty">Сначала войди в <a href="teacher.html" style="color:#7c2340;text-decoration:underline">кабинет учителя</a>, потом вернись сюда.</div></div>';
+    }
+    async function renderBuilder(user){
+      document.getElementById("sub").textContent=SM_COURSE.emoji+" "+SM_COURSE.title+" · создавай упражнения";
+      const unitOpts=SM_UNITS.map(u=>'<option value="'+u.id+'">'+u.emoji+' '+esc(u.title)+'</option>').join("");
+      const typeOpts=Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].label+'</option>').join("");
+      document.getElementById("root").innerHTML=
+        '<div class="panel">'+
+          '<div class="row2"><div style="flex:1"><label>ЮНИТ</label><select id="unit">'+unitOpts+'</select></div>'+
+          '<div style="flex:1"><label>ТИП</label><select id="type">'+typeOpts+'</select></div></div>'+
+          '<label>НАЗВАНИЕ (необязательно)</label><input id="title" placeholder="Моё упражнение">'+
+          '<div id="fields"></div>'+
+          '<button class="primary" id="save">💾 Сохранить упражнение</button>'+
+          '<div class="msg" id="msg"></div>'+
+        '</div>'+
+        '<div class="sec-title">МОИ УПРАЖНЕНИЯ</div><div id="list"><div class="empty">Загрузка…</div></div>';
+      const typeSel=document.getElementById("type");
+      typeSel.onchange=()=>{editId=null;document.getElementById("title").value="";renderForm(typeSel.value);};
+      renderForm(typeSel.value);
+      document.getElementById("save").onclick=save;
+      loadList();
+    }
+    async function save(){
+      const msg=document.getElementById("msg");msg.className="msg";msg.textContent="…";
+      const type=document.getElementById("type").value;
+      const r=readForm(type); if(r.err){msg.className="msg err";msg.textContent=r.err;return;}
+      const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),data:r.data});
+      if(res.ok){msg.className="msg ok";msg.textContent=editId?"Обновлено ✓":"Сохранено ✓ — упражнение появилось в юните";editId=null;document.getElementById("title").value="";renderForm(type);loadList();}
+      else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
+    }
+    async function loadList(){
+      const list=document.getElementById("list");
+      const ex=await SM.myExercises(SM_COURSE.id);
+      if(!ex.length){list.innerHTML='<div class="empty">Пока нет упражнений. Создай первое 👆</div>';return;}
+      list.innerHTML=ex.map(e=>{const uu=SM_UNITS.find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;
+        return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+
+          '<span class="t">'+esc(e.title||un)+' · '+esc(un)+'</span>'+
+          '<button class="ed" data-id="'+e.id+'">✎</button><button class="de" data-id="'+e.id+'">🗑</button></div>';
+      }).join("");
+      list.querySelectorAll(".ed").forEach(b=>b.onclick=()=>{const e=ex.find(x=>x.id===b.dataset.id);loadForEdit(e);});
+      list.querySelectorAll(".de").forEach(b=>b.onclick=async()=>{if(!confirm("Удалить упражнение?"))return;await SM.deleteExercise(b.dataset.id);loadList();});
+    }
+    function loadForEdit(e){
+      editId=e.id;
+      document.getElementById("unit").value=e.unit_id;
+      document.getElementById("type").value=e.type;
+      document.getElementById("title").value=e.title||"";
+      renderForm(e.type,e.data);
+      window.scrollTo({top:0,behavior:"smooth"});
+      const m=document.getElementById("msg");m.className="msg ok";m.textContent="Редактируешь упражнение — измени и сохрани";
+    }
+
+    (async function(){ const u=await SM.getUser(); if(u&&SM.isCloud) renderBuilder(u); else renderLogin(); })();
+  </script>
+</body>
+</html>

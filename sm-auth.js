@@ -145,6 +145,41 @@ window.SM = (function () {
       return data || [];
     },
 
+    /* ---------- Конструктор упражнений ---------- */
+    async saveExercise(ex) {
+      if (!useCloud) return { ok: false, error: "нужен Supabase" };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+      const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, type: ex.type, title: ex.title || null, data: ex.data || {} };
+      if (ex.id) {
+        const { error } = await c.from("exercises").update(row).eq("id", ex.id);
+        return { ok: !error, error: error && error.message };
+      }
+      const { data, error } = await c.from("exercises").insert(row).select("id").single();
+      return { ok: !error, id: data && data.id, error: error && error.message };
+    },
+    async myExercises(course) {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const u = await this.getUser(); if (!u) return [];
+      let q = c.from("exercises").select("id,course,unit_id,type,title,data,created_at").eq("author_id", u.id).order("created_at", { ascending: false });
+      if (course) q = q.eq("course", course);
+      const { data } = await q; return data || [];
+    },
+    async exercisesFor(course, unit) {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const { data, error } = await c.from("exercises").select("id,type,title,data,created_at").eq("course", course).eq("unit_id", unit).order("created_at", { ascending: true });
+      if (error) { console.warn("exercisesFor:", error.message); return []; }
+      return data || [];
+    },
+    async deleteExercise(id) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const { error } = await c.from("exercises").delete().eq("id", id);
+      return { ok: !error, error: error && error.message };
+    },
+
     /* ---------- Домашки ---------- */
     async assignTo(studentId, unitId, kind) {
       if (!useCloud) return { ok: false, error: "нужен Supabase" };

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Упражнения · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .wrap{max-width:640px;margin:0 auto;padding:64px 18px 56px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 20px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:18px}
+  .qt{font-size:20px;font-weight:600;margin-bottom:6px}
+  .kind{font:900 10px 'Nunito',sans-serif;color:#b5654a;letter-spacing:1px;margin-bottom:8px}
+  .opts{display:grid;gap:10px;margin-top:10px}
+  .opt{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px;font-size:18px;font-weight:600;text-align:left}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .field{display:flex;gap:8px;margin-top:6px}
+  .field input{flex:1;border:2px solid #e3d3ba;border-radius:12px;padding:12px 14px;font:700 18px 'Fredoka',sans-serif;background:#fdfbf7}
+  .field input:focus{outline:none;border-color:#7c2340}
+  .check{background:#7c2340;color:#fff;border-radius:12px;padding:0 20px;font:800 15px 'Nunito',sans-serif}
+  .fb{margin-top:10px;font:800 14px 'Nunito',sans-serif;min-height:18px}
+  .fb.ok{color:#3f7a20}.fb.no{color:#a23b1e}
+  .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
+  .pc{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:12px;padding:13px 10px;font-size:17px;font-weight:600;text-align:center}
+  .pc.sel{border-color:#7c2340;background:#fbeef1}
+  .pc.done{opacity:0;pointer-events:none;transition:opacity .35s}
+  .words{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .word{background:#fff;border:2px solid #e3d3ba;border-radius:12px;padding:9px 13px;font-size:17px;font-weight:600}
+  .word.used{opacity:.25;pointer-events:none}
+  .built{min-height:40px;border-bottom:3px dashed #e3d3ba;margin-top:12px;padding:6px 4px;font-size:20px;font-weight:700;color:#7c2340}
+  .tf{display:flex;gap:10px;margin-top:10px}
+  .tf button{flex:1;border-radius:14px;padding:14px;font:800 16px 'Nunito',sans-serif;border:2px solid #e3d3ba;background:#fdfbf7}
+  .tf button.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .tf button.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .empty a{color:#7c2340;text-decoration:underline;font-weight:900}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+</style>
+</head>
+<body>
+  <a class="home" href="units.html">← Юниты</a>
+  <div class="wrap">
+    <h1>🧩 Упражнения</h1>
+    <div class="sub" id="sub">от твоего учителя</div>
+    <div id="root"><div class="empty">Загрузка…</div></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО"};
+
+    const q=new URLSearchParams(location.search);
+    const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
+    const unit=SM_UNITS.find(x=>x.id===uid);
+    document.getElementById("sub").textContent=(unit?unit.emoji+" "+unit.title:"")+" · упражнения";
+
+    function card(inner){const d=document.createElement("div");d.className="card";d.innerHTML=inner;return d;}
+
+    function renderChoice(e){
+      const c=card('<div class="kind">'+KIND.choice+'</div><div class="qt">'+esc(e.data.q)+'</div><div class="opts"></div><div class="fb" ></div>');
+      const box=c.querySelector(".opts"),fb=c.querySelector(".fb");let done=false;
+      e.data.opts.forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=o;
+        b.onclick=()=>{if(done)return;done=true;const ok=i===e.data.correct;
+          if(ok){b.classList.add("correct");fb.className="fb ok";fb.textContent="Верно! 🎉";}
+          else{b.classList.add("wrong");[...box.children][e.data.correct].classList.add("correct");fb.className="fb no";fb.textContent="Правильный ответ подсвечен";}};
+        box.appendChild(b);});
+      return c;
+    }
+    function renderGap(e){
+      const parts=esc(e.data.q).split("___");
+      const c=card('<div class="kind">'+KIND.gap+'</div><div class="qt">'+parts[0]+' <span style="color:#b5654a">___</span> '+(parts[1]||"")+'</div><div class="field"><input placeholder="впиши слово"><button class="check">OK</button></div><div class="fb"></div>');
+      const inp=c.querySelector("input"),fb=c.querySelector(".fb");
+      const ans=e.data.answer.split(",").map(norm);
+      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#e07a5f";inp.style.background=ok?"#dff0d2":"#fbe0d8";
+        if(ok){fb.className="fb ok";fb.textContent="Верно! 🎉";}else{fb.className="fb no";fb.textContent="Ответ: "+esc(e.data.answer.split(",")[0].trim());}}
+      c.querySelector(".check").onclick=go;inp.addEventListener("keydown",ev=>{if(ev.key==="Enter")go();});
+      return c;
+    }
+    function renderMatch(e){
+      const c=card('<div class="kind">'+KIND.match+'</div><div class="qt">Соедини пары</div><div class="pairs"></div><div class="fb"></div>');
+      const box=c.querySelector(".pairs"),fb=c.querySelector(".fb");
+      const left=shuffle(e.data.pairs.map((p,i)=>({t:p.a,i}))),right=shuffle(e.data.pairs.map((p,i)=>({t:p.b,i})));
+      const rows=Math.max(left.length,right.length);let sel=null,left_n=e.data.pairs.length;
+      for(let r=0;r<rows;r++){[left[r],right[r]].forEach((it,col)=>{const b=document.createElement("button");b.className="pc";b.textContent=it?it.t:"";b.dataset.i=it?it.i:"-";b.dataset.side=col;if(!it)b.style.visibility="hidden";
+        b.onclick=()=>{ if(b.classList.contains("done"))return;
+          if(!sel){sel=b;b.classList.add("sel");if(col===0)speak(it.t);return;}
+          if(sel===b){b.classList.remove("sel");sel=null;return;}
+          if(sel.dataset.side===b.dataset.side){sel.classList.remove("sel");sel=b;b.classList.add("sel");return;}
+          if(sel.dataset.i===b.dataset.i){sel.classList.add("done");b.classList.add("done");sel.classList.remove("sel");sel=null;left_n--;if(left_n===0){fb.className="fb ok";fb.textContent="Все пары найдены! 🎉";}}
+          else{const s=sel;s.classList.add("wrong");b.classList.add("wrong");setTimeout(()=>{s.classList.remove("wrong","sel");b.classList.remove("wrong");},500);sel=null;}};
+        box.appendChild(b);});}
+      return c;
+    }
+    function renderOrder(e){
+      const c=card('<div class="kind">'+KIND.order+'</div><div class="qt">Собери предложение</div><div class="built"></div><div class="words"></div><div class="field" style="margin-top:10px"><button class="check">Проверить</button></div><div class="fb"></div>');
+      const words=e.data.answer.split(/\s+/);const shuf=shuffle(words.map((w,i)=>({w,i})));
+      const wbox=c.querySelector(".words"),built=c.querySelector(".built"),fb=c.querySelector(".fb");let seq=[];
+      shuf.forEach(o=>{const b=document.createElement("button");b.className="word";b.textContent=o.w;
+        b.onclick=()=>{if(b.classList.contains("used"))return;b.classList.add("used");seq.push({w:o.w,el:b});draw();};wbox.appendChild(b);});
+      built.onclick=()=>{const last=seq.pop();if(last)last.el.classList.remove("used");draw();};
+      function draw(){built.textContent=seq.map(x=>x.w).join(" ");}
+      c.querySelector(".check").onclick=()=>{const ok=norm(seq.map(x=>x.w).join(" "))===norm(e.data.answer);
+        if(ok){fb.className="fb ok";fb.textContent="Верно! 🎉";speak(e.data.answer);}else{fb.className="fb no";fb.textContent="Правильно: "+esc(e.data.answer);}};
+      return c;
+    }
+    function renderTF(e){
+      const c=card('<div class="kind">'+KIND.tf+'</div><div class="qt">'+esc(e.data.statement)+'</div><div class="tf"><button data-v="true">✅ Верно</button><button data-v="false">❌ Неверно</button></div><div class="fb"></div>');
+      const fb=c.querySelector(".fb");let done=false;
+      c.querySelectorAll(".tf button").forEach(b=>b.onclick=()=>{if(done)return;done=true;const chose=b.dataset.v==="true";const ok=chose===e.data.correct;
+        b.classList.add(ok?"correct":"wrong");if(!ok){[...c.querySelectorAll(".tf button")].find(x=>(x.dataset.v==="true")===e.data.correct).classList.add("correct");}
+        fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Не угадал";});
+      return c;
+    }
+    function renderListen(e){
+      const c=card('<div class="kind">'+KIND.listen+'</div><div style="text-align:center;margin:6px 0"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div><div class="qt" style="text-align:center;font-size:15px;color:#a99a86">послушай и впиши</div><div class="field"><input placeholder="впиши, что услышал"><button class="check ok2">OK</button></div><div class="fb"></div>');
+      const btn=c.querySelector(".check"),inp=c.querySelector("input"),fb=c.querySelector(".fb");
+      const ans=e.data.answer.split(",").map(norm);
+      btn.onclick=()=>speak(e.data.audio); setTimeout(()=>speak(e.data.audio),400);
+      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#e07a5f";inp.style.background=ok?"#dff0d2":"#fbe0d8";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Ответ: "+esc(e.data.answer.split(",")[0].trim());}
+      c.querySelector(".ok2").onclick=go;inp.addEventListener("keydown",ev=>{if(ev.key==="Enter")go();});
+      return c;
+    }
+    function renderMulti(e){
+      const c=card('<div class="kind">'+KIND.multi+'</div><div class="qt">'+esc(e.data.q)+'</div><div class="opts"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>');
+      const box=c.querySelector(".opts"),fb=c.querySelector(".fb");const chosen=new Set();
+      e.data.opts.forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=o;
+        b.onclick=()=>{ if(chosen.has(i)){chosen.delete(i);b.style.background="#fdfbf7";b.style.borderColor="#e3d3ba";}else{chosen.add(i);b.style.background="#eef4ea";b.style.borderColor="#7cb342";} };
+        box.appendChild(b);});
+      c.querySelector(".check").onclick=()=>{const cor=new Set(e.data.correct);const ok=chosen.size===cor.size&&[...chosen].every(i=>cor.has(i));
+        [...box.children].forEach((b,i)=>{ if(cor.has(i))b.classList.add("correct"); else if(chosen.has(i))b.classList.add("wrong"); });
+        fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Правильные подсвечены";};
+      return c;
+    }
+    function renderCategorize(e){
+      const c=card('<div class="kind">'+KIND.categorize+'</div><div class="qt">Разложи по категориям</div><div class="catitems"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>');
+      const box=c.querySelector(".catitems"),fb=c.querySelector(".fb");
+      const items=[]; e.data.cats.forEach((cat,ci)=>cat.items.forEach(it=>items.push({t:it,ci})));
+      const opts=e.data.cats.map((cat,ci)=>'<option value="'+ci+'">'+esc(cat.name)+'</option>').join("");
+      shuffle(items).forEach(it=>{const d=document.createElement("div");d.style.cssText="display:flex;align-items:center;gap:8px;margin-bottom:8px";
+        d.innerHTML='<span style="flex:1;font-size:17px;font-weight:600">'+esc(it.t)+'</span><select data-c="'+it.ci+'" style="border:2px solid #e3d3ba;border-radius:10px;padding:8px;font:700 14px \'Nunito\',sans-serif;background:#fdfbf7">'+opts+'</select>';
+        box.appendChild(d);});
+      c.querySelector(".check").onclick=()=>{let good=0,tot=0;box.querySelectorAll("select").forEach(s=>{tot++;const ok=String(s.dataset.c)===s.value;s.style.borderColor=ok?"#7cb342":"#e07a5f";s.style.background=ok?"#dff0d2":"#fbe0d8";if(ok)good++;});
+        fb.className="fb "+(good===tot?"ok":"no");fb.textContent=good===tot?"Всё верно! 🎉":("Верно "+good+" из "+tot);};
+      return c;
+    }
+    function renderCloze(e){
+      const parts=e.data.q.split(/(\[\[.*?\]\])/g);
+      let html='<div class="kind">'+KIND.cloze+'</div><div class="qt" style="line-height:2.1"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>';
+      const c=card(html); const qt=c.querySelector(".qt"),fb=c.querySelector(".fb");
+      parts.forEach(p=>{const m=p.match(/^\[\[(.*?)\]\]$/);
+        if(m){const opts=m[1].split("|").map(s=>s.trim());const correct=opts[0];const sel=document.createElement("select");sel.dataset.a=correct;sel.style.cssText="border:2px solid #7c2340;border-radius:8px;padding:5px 6px;font:700 16px 'Fredoka',sans-serif;background:#fbeef1;margin:0 3px";
+          const blank=document.createElement("option");blank.textContent="…";blank.value="";sel.appendChild(blank);
+          shuffle(opts).forEach(o=>{const op=document.createElement("option");op.textContent=o;op.value=o;sel.appendChild(op);});qt.appendChild(sel);}
+        else if(p){qt.appendChild(document.createTextNode(p));}});
+      c.querySelector(".check").onclick=()=>{let good=0,tot=0;qt.querySelectorAll("select").forEach(s=>{tot++;const ok=norm(s.value)===norm(s.dataset.a);s.style.borderColor=ok?"#7cb342":"#e07a5f";s.style.background=ok?"#dff0d2":"#fbe0d8";if(ok)good++;});
+        fb.className="fb "+(good===tot?"ok":"no");fb.textContent=good===tot?"Верно! 🎉":("Верно "+good+" из "+tot);};
+      return c;
+    }
+    function renderLetters(e){
+      const c=card('<div class="kind">'+KIND.letters+'</div><div class="qt">Собери слово'+(e.data.hint?' <span style="color:#a99a86;font-size:16px">('+esc(e.data.hint)+')</span>':'')+'</div><div class="built"></div><div class="words"></div><div class="field" style="margin-top:8px"><button class="check">⌫ стереть</button></div><div class="fb"></div>');
+      const wbox=c.querySelector(".words"),built=c.querySelector(".built"),fb=c.querySelector(".fb");
+      const target=e.data.word;const letters=shuffle(target.replace(/ /g,"").split(""));let seq=[];
+      letters.forEach(ch=>{const b=document.createElement("button");b.className="word";b.textContent=ch;
+        b.onclick=()=>{if(b.classList.contains("used"))return;b.classList.add("used");seq.push({ch,el:b});draw();};wbox.appendChild(b);});
+      c.querySelector(".check").onclick=()=>{const last=seq.pop();if(last)last.el.classList.remove("used");draw();};
+      function draw(){built.textContent=seq.map(x=>x.ch).join("");const guess=seq.map(x=>x.ch).join("");const goal=target.replace(/ /g,"");
+        if(guess.length===goal.length){const ok=guess.toLowerCase()===goal.toLowerCase();built.style.color=ok?"#3f7a20":"#a23b1e";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Правильно: "+esc(target);if(ok)speak(target);}else{built.style.color="#7c2340";fb.textContent="";}}
+      return c;
+    }
+    const R={choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters};
+
+    (async function(){
+      const root=document.getElementById("root");
+      let ex=[]; try{ ex=await SM.exercisesFor(SM_COURSE.id, uid); }catch(e){}
+      if(!SM.isCloud){ root.innerHTML='<div class="empty">Упражнения работают с настоящими аккаунтами (Supabase).</div>'; return; }
+      if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html">Конструкторе</a>.</div>'; return; }
+      root.innerHTML="";
+      ex.forEach(e=>{ const fn=R[e.type]; if(fn){ try{ root.appendChild(fn(e)); }catch(err){} } });
+    })();
+  </script>
+</body>
+</html>
