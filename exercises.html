@@ -62,7 +62,7 @@
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
-    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС"};
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ"};
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
@@ -232,8 +232,29 @@
         fb.className="fb "+(good===slots.length?"ok":"no");fb.textContent=good===slots.length?"Верно! 🎉":("Верно "+good+" из "+slots.length);};
       return c;
     }
-    const R={choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
+    function renderEmbed(e){
+      const d=e.data||{};
+      const src=d.src||(window.SM_embed&&d.url?(window.SM_embed(d.url)||{}).src:"")||d.url;
+      if(!src) throw new Error("no src");
+      const ratio=d.ratio,h=d.h||520;
+      let ifr;
+      if(ratio) ifr='<div style="position:relative;padding-top:'+ratio+'%;border-radius:14px;overflow:hidden;border:2px solid #e3d3ba"><iframe src="'+esc(src)+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
+      else ifr='<iframe src="'+esc(src)+'" style="width:100%;height:'+h+'px;border:2px solid #e3d3ba;border-radius:14px;background:#fff" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+      return card('<div class="kind">'+KIND.embed+(d.name?" · "+esc(d.name):"")+'</div>'+ifr+
+        '<div style="margin-top:8px;text-align:right"><a href="'+esc(d.url||src)+'" target="_blank" style="font:800 12px \'Nunito\',sans-serif;color:#7c2340">Открыть в новой вкладке ↗</a></div>');
+    }
+    const R={embed:renderEmbed,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
+    /* Кнопка конструктора для учителя — прямо из урока, юнит уже выбран */
+    (async function(){
+      try{ const p=await SM.myProfile();
+        if(p&&p.role==="teacher"){
+          const w=document.createElement("div"); w.style.cssText="text-align:center;margin:-6px 0 16px";
+          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #e3d3ba">🛠 Добавить упражнение в этот урок</a>';
+          const sub=document.getElementById("sub"); sub.insertAdjacentElement("afterend",w);
+        }
+      }catch(e){}
+    })();
     (async function(){
       const root=document.getElementById("root");
       let ex=[],loadErr=null; try{ ex=await SM.exercisesFor(SM_COURSE.id, uid); }catch(e){ loadErr=e; }
@@ -242,6 +263,7 @@
       if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html">Конструкторе</a>.</div>'; return; }
       root.innerHTML="";
       ex.forEach(e=>{ const fn=R[e.type];
+        if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Nunito',sans-serif;color:#5a4f47;margin:4px 4px 8px";hd.textContent=e.title;root.appendChild(hd);}
         if(!fn){ root.appendChild(card('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
         // многозадачные упражнения: e.data.items = [вопрос1, вопрос2, …]
         const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];

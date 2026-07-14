@@ -232,3 +232,36 @@ window.SM = (function () {
 
   return api;
 })();
+
+/* Превратить ссылку внешней платформы в адрес для встраивания (iframe).
+   Поддержка: YouTube, Vimeo, Wordwall, LearningApps, LiveWorksheets, Quizlet,
+   Genially, Miro, Google Drive/Docs. Прочие ссылки — как есть. */
+window.SM_embed = function (url) {
+  url = (url || "").trim();
+  if (!url) return null;
+  if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+  var m;
+  if ((m = url.match(/(?:youtube\.com\/(?:watch\?[^#]*v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{6,})/i)))
+    return { src: "https://www.youtube-nocookie.com/embed/" + m[1], ratio: 56.25, name: "YouTube" };
+  if ((m = url.match(/vimeo\.com\/(\d+)/i)))
+    return { src: "https://player.vimeo.com/video/" + m[1], ratio: 56.25, name: "Vimeo" };
+  if ((m = url.match(/wordwall\.net\/(?:[a-z]{2,3}\/)?(?:resource|play|embed)\/(\d+)/i)))
+    return { src: "https://wordwall.net/embed/" + m[1], h: 500, name: "Wordwall" };
+  if ((m = url.match(/learningapps\.org\/(?:watch\?v=|display\?v=|view)(\w+)/i)))
+    return { src: "https://learningapps.org/watch?v=" + m[1], h: 540, name: "LearningApps" };
+  if ((m = url.match(/learningapps\.org\/(\d+)/i)))
+    return { src: "https://learningapps.org/watch?app=" + m[1], h: 540, name: "LearningApps" };
+  if (/liveworksheets\.com/i.test(url))
+    return { src: url, h: 900, name: "LiveWorksheets" };
+  if ((m = url.match(/quizlet\.com\/(\d+)/i)))
+    return { src: "https://quizlet.com/" + m[1] + "/flashcards/embed?x=1jj1", h: 500, name: "Quizlet" };
+  if ((m = url.match(/view\.geniall?y?\.?(?:ly|com)?\/(\w+)/i)))
+    return { src: url, h: 620, name: "Genially" };
+  if ((m = url.match(/miro\.com\/app\/board\/([\w=~-]+)\//i)))
+    return { src: "https://miro.com/app/live-embed/" + m[1] + "/", h: 620, name: "Miro" };
+  if ((m = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/i)))
+    return { src: "https://drive.google.com/file/d/" + m[1] + "/preview", h: 620, name: "Google Drive" };
+  if (/docs\.google\.com/i.test(url))
+    return { src: url.replace(/\/edit[^\/]*$/, "/preview"), h: 620, name: "Google Docs" };
+  return { src: url, h: 620, name: "сайт" };
+};
