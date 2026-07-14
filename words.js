@@ -44,7 +44,7 @@ window.SM_COURSE_DATA["sm1"] = [
       { en: "ruler", ru: "линейка", emoji: "📏", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060454_42db52f9-cd9f-4183-a484-ed6926020649.png" },
       { en: "book", ru: "книга", emoji: "📖", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060530_33da6804-3cf7-42a6-a767-34ed1cef39c5.png" },
       { en: "bag", ru: "рюкзак", emoji: "🎒", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060532_c7c89dc3-1f0c-4654-9bab-9f448b768edd.png" },
-      { en: "pencil case", ru: "пенал", emoji: "🖍️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060535_369c5887-c2f5-4473-90ea-72f38c567c37.png" },
+      { en: "pencil case", ru: "пенал", emoji: "🖍️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260714_180624_1a520775-e80b-4352-8a29-ddc1964f7d1b.png" },
       { en: "desk", ru: "парта", emoji: "🪑", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060538_966f120f-ada1-4dc2-b098-82665383a842.png" },
       { en: "chair", ru: "стул", emoji: "💺", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060552_27e81608-380a-4a04-b4c9-14069dca915a.png" },
       { en: "notebook", ru: "тетрадь", emoji: "📓", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_060555_ad92feb8-c638-48ec-8c6e-bb4249cb2bea.png" },
@@ -131,7 +131,7 @@ window.SM_COURSE_DATA["sm1"] = [
       { en: "garden", ru: "сад", emoji: "🌳", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130028_e27630d5-0ed0-4d07-b783-31b4455eed11.png" },
       { en: "bed", ru: "кровать", emoji: "🛏️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130034_1930c0ef-93e2-4653-a87c-bf32d33d783c.png" },
       { en: "sofa", ru: "диван", emoji: "🛋️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130954_0780b939-5496-4d33-8803-b623c417c0d9.png" },
-      { en: "table", ru: "стол", emoji: "🪑", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130922_fcb9b066-afe3-4dea-b0bf-cd9a490ab77c.png" },
+      { en: "table", ru: "стол", emoji: "🪑", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260714_180608_5a87d052-7ae7-4a6e-972a-feec9db28d00.png" },
       { en: "lamp", ru: "лампа", emoji: "💡", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130927_cc576601-8889-445f-98cf-07fa9e5fff16.png" },
       { en: "clock", ru: "часы", emoji: "🕐", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130931_1899e839-4822-4551-ad53-2604bc2f2729.png" },
       { en: "cupboard", ru: "шкаф", emoji: "🗄️", img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_130935_f1ffd6a4-d874-4b5d-8b41-66eaa187101d.png" }

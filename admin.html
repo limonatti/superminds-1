@@ -35,6 +35,10 @@
   .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
   .empty a{color:#7c2340;text-decoration:underline;font-weight:900}
   .hint{font:700 12px 'Nunito',sans-serif;color:#8a7a68;margin:6px 2px 0;line-height:1.6}
+  .imgrow{display:flex;gap:8px}
+  .imgrow input{flex:1}
+  .imgrow .upl{flex:none}
+  .imgprev img{max-width:180px;max-height:120px;border-radius:14px;border:2px solid #e3d3ba;margin-top:8px;display:block}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
 </style>
 </head>
@@ -60,6 +64,28 @@
     function bindSw(id){document.querySelectorAll("#"+id+" .sw").forEach(b=>b.onclick=()=>{document.querySelectorAll("#"+id+" .sw").forEach(x=>x.classList.remove("on"));b.classList.add("on");});}
     function swVal(id){const b=document.querySelector("#"+id+" .sw.on");return b?b.dataset.c:COLORS[0];}
     function m(cls,txt){const e=document.getElementById("msg");if(e){e.className="msg "+cls;e.textContent=txt;}}
+    /* загрузка картинки с компьютера: сжимается в браузере, сервер не нужен */
+    function pickImage(input,cb){
+      const fi=document.createElement("input");fi.type="file";fi.accept="image/*";
+      fi.onchange=()=>{const file=fi.files&&fi.files[0];if(!file)return;
+        const rd=new FileReader();
+        rd.onload=()=>{const img=new Image();
+          img.onload=()=>{const max=600;let w=img.width,h=img.height;
+            if(w>max||h>max){const sc=Math.min(max/w,max/h);w=Math.round(w*sc);h=Math.round(h*sc);}
+            const cv=document.createElement("canvas");cv.width=w;cv.height=h;cv.getContext("2d").drawImage(img,0,0,w,h);
+            input.value=cv.toDataURL("image/jpeg",0.82);if(cb)cb();};
+          img.onerror=()=>{input.value=rd.result;if(cb)cb();};
+          img.src=rd.result;};
+        rd.readAsDataURL(file);};
+      fi.click();
+    }
+    function wireCover(){
+      const inp=document.getElementById("img"),btn=document.getElementById("imgBtn"),prev=document.getElementById("imgPrev");
+      if(!inp)return;
+      function show(){prev.innerHTML=inp.value?('<img src="'+inp.value.replace(/"/g,"&quot;")+'" alt="">'):"";}
+      if(btn)btn.onclick=()=>pickImage(inp,show);
+      inp.addEventListener("input",show);show();
+    }
     async function refresh(){try{if(window.SM_refreshCloudCourses)await window.SM_refreshCloudCourses();}catch(e){}}
 
     /* ---------- Учебники ---------- */
@@ -97,10 +123,11 @@
         '<label>Подзаголовок</label><input id="st" value="'+esc(c&&c.subtitle||"")+'" placeholder="2nd edition · 7–9 лет">'+
         '<label>Эмодзи-обложка</label><input id="em" value="'+esc(c&&c.emoji||"📘")+'" maxlength="4" style="width:90px;text-align:center;font-size:26px">'+
         '<label>Цвет</label>'+colorPicker("csw",c&&c.color||COLORS[1])+
-        '<label>Картинка-обложка (ссылка, необязательно)</label><input id="img" value="'+esc(c&&c.img||"")+'" placeholder="https://…">'+
+        '<label>Картинка-обложка (ссылка или файл с компьютера)</label><div class="imgrow"><input id="img" value="'+esc(c&&c.img||"")+'" placeholder="вставь ссылку или загрузи файл →"><button class="bt upl" type="button" id="imgBtn">📁 файл</button></div><div id="imgPrev" class="imgprev"></div>'+
         '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить</button><button class="bt" id="cancel">Отмена</button></div>'+
         '<div class="msg" id="msg"></div></div>';
       bindSw("csw");
+      wireCover();
       document.getElementById("cancel").onclick=showCourses;
       document.getElementById("save").onclick=async()=>{
         const t=document.getElementById("t").value.trim();
