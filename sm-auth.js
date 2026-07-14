@@ -145,6 +145,76 @@ window.SM = (function () {
       return data || [];
     },
 
+    /* ---------- Конструктор учебников (книги и юниты) ---------- */
+    async myCourses() {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const u = await this.getUser(); if (!u) return [];
+      const { data } = await c.from("courses").select("id,slug,title,subtitle,emoji,color,img,created_at").eq("owner_id", u.id).order("created_at", { ascending: true });
+      return data || [];
+    },
+    async saveCourse(cr) {
+      if (!useCloud) return { ok: false, error: "нужен Supabase" };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+      const row = { owner_id: u.id, title: cr.title, subtitle: cr.subtitle || null, emoji: cr.emoji || "📘", color: cr.color || "#e4ebf2", img: cr.img || null };
+      if (cr.id) {
+        const { data, error } = await c.from("courses").update(row).eq("id", cr.id).select("id,slug");
+        if (error) return { ok: false, error: error.message };
+        if (!data || !data.length) return { ok: false, error: "Нет прав на изменение" };
+        return { ok: true, slug: data[0].slug };
+      }
+      row.slug = "c" + Math.random().toString(36).slice(2, 8);
+      const { data, error } = await c.from("courses").insert(row).select("id,slug").single();
+      return { ok: !error, id: data && data.id, slug: data && data.slug, error: error && error.message };
+    },
+    async deleteCourse(id, slug) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      await c.from("units").delete().eq("course_slug", slug);
+      await c.from("exercises").delete().eq("course", slug);
+      const { error } = await c.from("courses").delete().eq("id", id);
+      return { ok: !error, error: error && error.message };
+    },
+    async myUnits(courseSlug) {
+      if (!useCloud) return [];
+      const c = ensureClient(); if (!c) return [];
+      const u = await this.getUser(); if (!u) return [];
+      const { data } = await c.from("units").select("id,course_slug,slug,unit_label,title,emoji,color,position,words,created_at").eq("owner_id", u.id).eq("course_slug", courseSlug).order("position", { ascending: true }).order("created_at", { ascending: true });
+      return data || [];
+    },
+    async saveUnit(un) {
+      if (!useCloud) return { ok: false, error: "нужен Supabase" };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+      const row = { owner_id: u.id, course_slug: un.course_slug, unit_label: un.unit_label || null, title: un.title, emoji: un.emoji || "📖", color: un.color || "#f6e2cf", words: un.words || [] };
+      if (un.id) {
+        const { data, error } = await c.from("units").update(row).eq("id", un.id).select("id");
+        if (error) return { ok: false, error: error.message };
+        if (!data || !data.length) return { ok: false, error: "Нет прав на изменение" };
+        return { ok: true };
+      }
+      row.slug = "u" + Date.now().toString(36);
+      row.position = Math.floor(Date.now() / 1000);
+      const { data, error } = await c.from("units").insert(row).select("id").single();
+      return { ok: !error, id: data && data.id, error: error && error.message };
+    },
+    async deleteUnit(id) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      const { error } = await c.from("units").delete().eq("id", id);
+      return { ok: !error, error: error && error.message };
+    },
+    async setUnitPositions(list) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      for (const it of list) {
+        const { error } = await c.from("units").update({ position: it.position }).eq("id", it.id);
+        if (error) return { ok: false, error: error.message };
+      }
+      return { ok: true };
+    },
+
     /* ---------- Конструктор упражнений ---------- */
     async saveExercise(ex) {
       if (!useCloud) return { ok: false, error: "нужен Supabase" };

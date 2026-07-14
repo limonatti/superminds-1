@@ -194,8 +194,48 @@ window.SM_COURSE_DATA["sm1"] = [
 window.SM_COURSES = [
   { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true, img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054541_850dabec-bbfc-4814-8d79-266c06b5b0b2.png" },
   { id: "sm2",  title: "Super Minds 2", subtitle: "добавим вместе",         emoji: "📘", color: "#e4ebf2", ready: false },
-  { id: "own",  title: "Свой учебник",  subtitle: "добавим вместе",         emoji: "➕", color: "#f6e2cf", ready: false }
+  { id: "own",  title: "Свой учебник",  subtitle: "создай в конструкторе",  emoji: "➕", color: "#f6e2cf", ready: false, admin: true }
 ];
+
+/* ---- Учебники из облака (создаются в admin.html) ---- */
+(function () {
+  try {
+    var cc = JSON.parse(localStorage.getItem("sm-cloud-cache") || "null");
+    if (cc && cc.courses && cc.data) {
+      cc.courses.forEach(function (c) {
+        if (window.SM_COURSE_DATA[c.id]) return;
+        window.SM_COURSE_DATA[c.id] = cc.data[c.id] || [];
+        window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, { id: c.id, title: c.title, subtitle: c.subtitle || "мой учебник", emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true });
+      });
+    }
+  } catch (e) {}
+})();
+
+/* Обновить кэш облачных учебников (вызывается при загрузке и из admin.html) */
+window.SM_refreshCloudCourses = function () {
+  var URL_ = "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
+  var KEY_ = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+  function j(u) { return fetch(u, { headers: { apikey: KEY_, Authorization: "Bearer " + KEY_ } }).then(function (r) { return r.json(); }); }
+  return Promise.all([
+    j(URL_ + "/rest/v1/courses?select=slug,title,subtitle,emoji,color,img&order=created_at.asc"),
+    j(URL_ + "/rest/v1/units?select=course_slug,slug,unit_label,title,emoji,color,position,words&order=position.asc,created_at.asc")
+  ]).then(function (res) {
+    var courses = res[0] || [], units = res[1] || [];
+    if (!Array.isArray(courses) || !Array.isArray(units)) return;
+    var data = {};
+    units.forEach(function (u) {
+      var w = Array.isArray(u.words) ? u.words : [];
+      (data[u.course_slug] = data[u.course_slug] || []).push({ id: u.slug, unit: u.unit_label || "", title: u.title, emoji: u.emoji || "📖", color: u.color || "#f6e2cf", words: w });
+    });
+    try {
+      localStorage.setItem("sm-cloud-cache", JSON.stringify({
+        courses: courses.map(function (c) { return { id: c.slug, title: c.title, subtitle: c.subtitle, emoji: c.emoji, color: c.color, img: c.img }; }),
+        data: data
+      }));
+    } catch (e) {}
+  }).catch(function (e) {});
+};
+window.SM_refreshCloudCourses();
 
 /* ---- Выбор текущего курса (localStorage, по умолчанию sm1) ---- */
 (function () {

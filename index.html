@@ -65,6 +65,7 @@
         '<div class="go">'+(c.ready?'Открыть →':'Добавить вместе')+'</div>';
       el.onclick=()=>{
         if(c.ready){ try{localStorage.setItem("sm-course",c.id);}catch(e){} location.href="course.html"; }
+        else if(c.admin){ location.href="admin.html"; }
         else { alert("Этот учебник ещё не добавлен. Напиши мне — добавим его вместе, по чуть-чуть! 🙂"); }
       };
       grid.appendChild(el);

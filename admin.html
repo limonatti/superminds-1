@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конструктор учебников · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:64px 16px 60px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px}
+  .sub{text-align:center;margin:8px 0 22px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .panel{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:18px}
+  .sec-title{font:900 14px 'Nunito',sans-serif;color:#7c2340;letter-spacing:1.5px;text-transform:uppercase;margin:6px 2px 12px}
+  label{display:block;font:800 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:1px;margin:14px 2px 6px;text-transform:uppercase}
+  input,textarea{width:100%;box-sizing:border-box;border:2px solid #e3d3ba;border-radius:12px;padding:11px 13px;font:600 16px 'Fredoka',sans-serif;background:#fdfbf7;outline:none}
+  input:focus,textarea:focus{border-color:#7c2340}
+  textarea{resize:vertical;line-height:1.5}
+  .row2{display:flex;gap:12px;margin-top:16px}
+  .primary{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 22px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba;margin-top:16px}
+  .bt{background:#fff;border:2px solid #e3d3ba;border-radius:12px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
+  .bt:hover{border-color:#7c2340;color:#7c2340}
+  .bt.main{background:#2980b9;border-color:#2980b9;color:#fff}
+  .crow{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;box-shadow:0 6px 0 #e3d3ba;padding:12px 14px;margin-bottom:12px;flex-wrap:wrap}
+  .ce{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;overflow:hidden}
+  .ce img{width:100%;height:100%;object-fit:cover}
+  .ct{flex:1;font:700 17px 'Fredoka',sans-serif;min-width:140px}
+  .ct small{display:block;font:700 12px 'Nunito',sans-serif;color:#8a7a68}
+  .swatches{display:flex;gap:8px;flex-wrap:wrap}
+  .sw{width:38px;height:38px;border-radius:12px;border:3px solid transparent;cursor:pointer}
+  .sw.on{border-color:#7c2340}
+  .msg{margin-top:12px;font:800 14px 'Nunito',sans-serif;min-height:18px}
+  .msg.err{color:#a23b1e}.msg.ok{color:#3f7a20}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .empty a{color:#7c2340;text-decoration:underline;font-weight:900}
+  .hint{font:700 12px 'Nunito',sans-serif;color:#8a7a68;margin:6px 2px 0;line-height:1.6}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+</style>
+</head>
+<body>
+  <a class="home" href="index.html">← Главная</a>
+  <div class="wrap">
+    <h1>📚 Конструктор учебников</h1>
+    <div class="sub" id="sub">создавай свои книги, юниты и слова — без программиста</div>
+    <div id="root"><div class="empty">Загрузка…</div></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    const COLORS=["#dfeadd","#e4ebf2","#f6e2cf","#fbe6de","#efe0e6","#faf1d8","#e7f0e1"];
+    const root=document.getElementById("root");
+    let curCourse=null;
+
+    function colorPicker(id,sel){return '<div class="swatches" id="'+id+'">'+COLORS.map(c=>'<button type="button" class="sw'+(c===sel?" on":"")+'" data-c="'+c+'" style="background:'+c+'"></button>').join("")+'</div>';}
+    function bindSw(id){document.querySelectorAll("#"+id+" .sw").forEach(b=>b.onclick=()=>{document.querySelectorAll("#"+id+" .sw").forEach(x=>x.classList.remove("on"));b.classList.add("on");});}
+    function swVal(id){const b=document.querySelector("#"+id+" .sw.on");return b?b.dataset.c:COLORS[0];}
+    function m(cls,txt){const e=document.getElementById("msg");if(e){e.className="msg "+cls;e.textContent=txt;}}
+    async function refresh(){try{if(window.SM_refreshCloudCourses)await window.SM_refreshCloudCourses();}catch(e){}}
+
+    /* ---------- Учебники ---------- */
+    async function showCourses(){
+      curCourse=null;
+      root.innerHTML='<div class="empty">Загрузка…</div>';
+      const cs=await SM.myCourses();
+      root.innerHTML='<div class="sec-title">Мои учебники</div>'+
+        (cs.length?cs.map(courseRow).join(""):'<div class="empty">Пока нет своих учебников. Создай первый 👇</div>')+
+        '<button class="primary" id="newC">＋ Новый учебник</button><div class="msg" id="msg"></div>'+
+        '<div class="hint">Учебник появится на главной странице сайта. Внутри — юниты со словами: они автоматически работают в тренажёре слов, играх, листах и упражнениях.</div>';
+      document.getElementById("newC").onclick=()=>courseForm(null);
+      cs.forEach(c=>{
+        document.getElementById("units-"+c.id).onclick=()=>showUnits(c);
+        document.getElementById("open-"+c.id).onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
+        document.getElementById("edit-"+c.id).onclick=()=>courseForm(c);
+        document.getElementById("del-"+c.id).onclick=async()=>{
+          if(!confirm("Удалить учебник «"+c.title+"» со всеми юнитами и упражнениями?"))return;
+          const r=await SM.deleteCourse(c.id,c.slug);
+          if(r.ok){await refresh();showCourses();}else alert(r.error||"Ошибка");
+        };
+      });
+    }
+    function courseRow(c){
+      return '<div class="crow"><span class="ce" style="background:'+(c.color||"#eee")+'">'+(c.img?'<img src="'+esc(c.img)+'" alt="">':(c.emoji||"📘"))+'</span>'+
+        '<span class="ct">'+esc(c.title)+'<small>'+esc(c.subtitle||"")+'</small></span>'+
+        '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+
+        '<button id="open-'+c.id+'" class="bt">открыть</button>'+
+        '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
+        '<button id="del-'+c.id+'" class="bt" title="удалить">🗑</button></div>';
+    }
+    function courseForm(c){
+      root.innerHTML='<div class="panel"><div class="sec-title">'+(c?"Настройки учебника":"Новый учебник")+'</div>'+
+        '<label>Название</label><input id="t" value="'+esc(c&&c.title||"")+'" placeholder="Super Minds 2">'+
+        '<label>Подзаголовок</label><input id="st" value="'+esc(c&&c.subtitle||"")+'" placeholder="2nd edition · 7–9 лет">'+
+        '<label>Эмодзи-обложка</label><input id="em" value="'+esc(c&&c.emoji||"📘")+'" maxlength="4" style="width:90px;text-align:center;font-size:26px">'+
+        '<label>Цвет</label>'+colorPicker("csw",c&&c.color||COLORS[1])+
+        '<label>Картинка-обложка (ссылка, необязательно)</label><input id="img" value="'+esc(c&&c.img||"")+'" placeholder="https://…">'+
+        '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить</button><button class="bt" id="cancel">Отмена</button></div>'+
+        '<div class="msg" id="msg"></div></div>';
+      bindSw("csw");
+      document.getElementById("cancel").onclick=showCourses;
+      document.getElementById("save").onclick=async()=>{
+        const t=document.getElementById("t").value.trim();
+        if(!t){m("err","Впиши название учебника");return;}
+        m("","…");
+        const r=await SM.saveCourse({id:c&&c.id,title:t,subtitle:document.getElementById("st").value.trim(),emoji:document.getElementById("em").value.trim()||"📘",color:swVal("csw"),img:document.getElementById("img").value.trim()});
+        if(r.ok){await refresh();showCourses();}else m("err",r.error||"Ошибка");
+      };
+    }
+
+    /* ---------- Юниты ---------- */
+    async function showUnits(c){
+      curCourse=c;
+      root.innerHTML='<div class="empty">Загрузка…</div>';
+      const us=await SM.myUnits(c.slug);
+      root.innerHTML='<button class="bt" id="back">← учебники</button>'+
+        '<div class="sec-title" style="margin-top:14px">'+esc((c.emoji||"📘")+" "+c.title)+' · юниты</div>'+
+        (us.length?us.map((u,i)=>unitRow(u,i,us.length)).join(""):'<div class="empty">Пока нет юнитов. Добавь первый 👇</div>')+
+        '<button class="primary" id="newU">＋ Новый юнит</button><div class="msg" id="msg"></div>'+
+        '<div class="hint">Слова юнита автоматически попадают в тренажёр, игры и листы. Упражнения к юниту добавляй через 🛠 Конструктор на странице урока.</div>';
+      document.getElementById("back").onclick=showCourses;
+      document.getElementById("newU").onclick=()=>unitForm(null);
+      us.forEach((u,i)=>{
+        document.getElementById("ue-"+u.id).onclick=()=>unitForm(u);
+        document.getElementById("ud-"+u.id).onclick=async()=>{
+          if(!confirm("Удалить юнит «"+u.title+"»?"))return;
+          const r=await SM.deleteUnit(u.id);
+          if(r.ok){await refresh();showUnits(c);}else alert(r.error||"Ошибка");
+        };
+        const up=document.getElementById("uu-"+u.id),dn=document.getElementById("un-"+u.id);
+        if(up)up.onclick=()=>moveUnit(us,i,-1);
+        if(dn)dn.onclick=()=>moveUnit(us,i,1);
+      });
+    }
+    async function moveUnit(us,i,d){
+      const j=i+d;if(j<0||j>=us.length)return;
+      [us[i],us[j]]=[us[j],us[i]];
+      const r=await SM.setUnitPositions(us.map((u,k)=>({id:u.id,position:k+1})));
+      if(r.ok){await refresh();showUnits(curCourse);}else alert(r.error||"Ошибка");
+    }
+    function unitRow(u,i,n){
+      return '<div class="crow"><span class="ce" style="background:'+(u.color||"#eee")+'">'+(u.emoji||"📖")+'</span>'+
+        '<span class="ct">'+esc((u.unit_label?u.unit_label+" · ":"")+u.title)+'<small>'+((u.words&&u.words.length)||0)+' слов</small></span>'+
+        (i>0?'<button id="uu-'+u.id+'" class="bt">↑</button>':'')+
+        (i<n-1?'<button id="un-'+u.id+'" class="bt">↓</button>':'')+
+        '<button id="ue-'+u.id+'" class="bt" title="редактировать">✎</button>'+
+        '<button id="ud-'+u.id+'" class="bt" title="удалить">🗑</button></div>';
+    }
+    function unitForm(u){
+      const words=(u&&u.words||[]).map(w=>[w.en,w.ru,w.emoji,w.img].filter(Boolean).join(" — ")).join("\n");
+      root.innerHTML='<div class="panel"><div class="sec-title">'+(u?"Редактировать юнит":"Новый юнит")+' · '+esc(curCourse.title)+'</div>'+
+        '<div class="row2" style="margin-top:0"><div style="flex:1"><label>Номер</label><input id="lb" value="'+esc(u&&u.unit_label||"")+'" placeholder="Unit 1"></div>'+
+        '<div style="width:110px"><label>Эмодзи</label><input id="em" value="'+esc(u&&u.emoji||"📖")+'" maxlength="4" style="text-align:center;font-size:22px"></div></div>'+
+        '<label>Название юнита</label><input id="t" value="'+esc(u&&u.title||"")+'" placeholder="At school">'+
+        '<label>Цвет</label>'+colorPicker("usw",u&&u.color||COLORS[2])+
+        '<label>Слова — по одному в строке</label>'+
+        '<textarea id="ws" rows="10" placeholder="cat — кошка — 🐱&#10;dog — собака — 🐶&#10;school — школа — 🏫">'+esc(words)+'</textarea>'+
+        '<div class="hint">Формат строки: <b>английское — перевод — эмодзи — ссылка на картинку</b>. Эмодзи и картинка необязательны. Разделитель — тире.</div>'+
+        '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить юнит</button><button class="bt" id="cancel">Отмена</button></div>'+
+        '<div class="msg" id="msg"></div></div>';
+      bindSw("usw");
+      document.getElementById("cancel").onclick=()=>showUnits(curCourse);
+      document.getElementById("save").onclick=async()=>{
+        const t=document.getElementById("t").value.trim();
+        if(!t){m("err","Впиши название юнита");return;}
+        const ws=parseWords(document.getElementById("ws").value);
+        m("","…");
+        const r=await SM.saveUnit({id:u&&u.id,course_slug:curCourse.slug,unit_label:document.getElementById("lb").value.trim(),title:t,emoji:document.getElementById("em").value.trim()||"📖",color:swVal("usw"),words:ws});
+        if(r.ok){await refresh();showUnits(curCourse);}else m("err",r.error||"Ошибка");
+      };
+    }
+    function parseWords(txt){
+      return txt.split("\n").map(s=>s.trim()).filter(Boolean).map(line=>{
+        const p=line.split(/\s*[—–]\s*|\s+-\s+/).map(x=>x.trim());
+        const w={en:p[0]||"",ru:p[1]||""};
+        for(let i=2;i<p.length;i++){ if(/^https?:\/\//.test(p[i])) w.img=p[i]; else if(p[i]) w.emoji=p[i]; }
+        if(!w.emoji) w.emoji="⭐";
+        return w;
+      }).filter(w=>w.en);
+    }
+
+    (async function(){
+      const u=await SM.getUser();
+      if(!u||!SM.isCloud){ root.innerHTML='<div class="empty">Сначала войди в <a href="teacher.html">кабинет учителя</a>, потом вернись сюда.</div>'; return; }
+      const p=await SM.myProfile();
+      if(!p||p.role!=="teacher"){ root.innerHTML='<div class="empty">Конструктор учебников доступен учителю. Войди в <a href="teacher.html">кабинет учителя</a>.</div>'; return; }
+      showCourses();
+    })();
+  </script>
+</body>
+</html>
