@@ -150,13 +150,14 @@ window.SM = (function () {
       if (!useCloud) return { ok: false, error: "нужен Supabase" };
       const c = ensureClient(); if (!c) return { ok: false };
       const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
-      const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, type: ex.type, title: ex.title || null, data: ex.data || {} };
+      const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, type: ex.type, title: ex.title || null, section: ex.section || null, data: ex.data || {} };
       if (ex.id) {
         const { data, error } = await c.from("exercises").update(row).eq("id", ex.id).select("id");
         if (error) return { ok: false, error: error.message };
         if (!data || !data.length) return { ok: false, error: "Изменение не применилось: нет прав или упражнение не найдено. Выйди и войди заново." };
         return { ok: true };
       }
+      row.position = Math.floor(Date.now() / 1000); // новые — в конец урока
       const { data, error } = await c.from("exercises").insert(row).select("id").single();
       return { ok: !error, id: data && data.id, error: error && error.message };
     },
@@ -164,16 +165,26 @@ window.SM = (function () {
       if (!useCloud) return [];
       const c = ensureClient(); if (!c) return [];
       const u = await this.getUser(); if (!u) return [];
-      let q = c.from("exercises").select("id,course,unit_id,type,title,data,created_at").eq("author_id", u.id).order("created_at", { ascending: false });
+      let q = c.from("exercises").select("id,course,unit_id,type,title,section,position,data,created_at").eq("author_id", u.id).order("created_at", { ascending: false });
       if (course) q = q.eq("course", course);
       const { data } = await q; return data || [];
     },
     async exercisesFor(course, unit) {
       if (!useCloud) return [];
       const c = ensureClient(); if (!c) return [];
-      const { data, error } = await c.from("exercises").select("id,type,title,data,created_at").eq("course", course).eq("unit_id", unit).order("created_at", { ascending: true });
+      const { data, error } = await c.from("exercises").select("id,type,title,section,position,data,created_at").eq("course", course).eq("unit_id", unit).order("position", { ascending: true }).order("created_at", { ascending: true });
       if (error) { console.warn("exercisesFor:", error.message); return []; }
       return data || [];
+    },
+    /* Сохранить порядок упражнений в уроке: [{id, position}, …] */
+    async setPositions(list) {
+      if (!useCloud) return { ok: false };
+      const c = ensureClient(); if (!c) return { ok: false };
+      for (const it of list) {
+        const { error } = await c.from("exercises").update({ position: it.position }).eq("id", it.id);
+        if (error) return { ok: false, error: error.message };
+      }
+      return { ok: true };
     },
     async deleteExercise(id) {
       if (!useCloud) return { ok: false };

@@ -416,7 +416,8 @@
         '<div class="panel">'+
           '<div class="row2"><div style="flex:1"><label>ЮНИТ</label><select id="unit">'+unitOpts+'</select></div>'+
           '<div style="flex:1"><label>ТИП</label><select id="type">'+typeOpts+'</select></div></div>'+
-          '<label>НАЗВАНИЕ (необязательно)</label><input id="title" placeholder="Моё упражнение">'+
+          '<label>НАЗВАНИЕ / ИНСТРУКЦИЯ (необязательно)</label><input id="title" placeholder="Прочитай и выбери ответ">'+
+          '<label>РАЗДЕЛ УРОКА (необязательно)</label><input id="section" list="seclist" placeholder="Лексика / Грамматика / Видео…"><datalist id="seclist"><option>Лексика</option><option>Грамматика</option><option>Аудирование</option><option>Чтение</option><option>Видео</option><option>Говорение</option><option>Игры</option><option>Домашка</option></datalist>'+
           '<div id="fields"></div>'+
           '<button class="primary" id="save">💾 Сохранить упражнение</button>'+
           '<div class="msg" id="msg"></div>'+
@@ -436,8 +437,8 @@
       const r=readForm(type); if(r.err){msg.className="msg err";msg.textContent=r.err;return;}
       const exImg=document.getElementById("exImg");
       if(exImg&&exImg.value.trim()&&r.data&&!r.data.items) r.data.img=exImg.value.trim();
-      const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),data:r.data});
-      if(res.ok){const uid=document.getElementById("unit").value;msg.className="msg ok";msg.innerHTML=(editId?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';editId=null;document.getElementById("title").value="";renderForm(type);loadList();}
+      const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),section:document.getElementById("section").value.trim(),data:r.data});
+      if(res.ok){const uid=document.getElementById("unit").value;msg.className="msg ok";msg.innerHTML=(editId?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';editId=null;document.getElementById("title").value="";document.getElementById("section").value="";renderForm(type);loadList();}
       else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
     }
     async function loadList(){
@@ -445,19 +446,22 @@
       const ex=await SM.myExercises(SM_COURSE.id);
       if(!ex.length){list.innerHTML='<div class="empty">Пока нет упражнений. Создай первое 👆</div>';return;}
       list.innerHTML=ex.map(e=>{const uu=SM_UNITS.find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;const n=itemCount(e);
-        return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+
+        return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+(e.section?'<span class="cnt">'+esc(e.section)+'</span>':'')+
           (n>1?'<span class="cnt">'+n+' заданий</span>':'')+
           '<span class="t">'+esc(e.title||un)+' · '+esc(un)+'</span>'+
           '<button class="ed" data-id="'+e.id+'">✎</button><button class="de" data-id="'+e.id+'">🗑</button></div>';
       }).join("");
       list.querySelectorAll(".ed").forEach(b=>b.onclick=()=>{const e=ex.find(x=>x.id===b.dataset.id);loadForEdit(e);});
       list.querySelectorAll(".de").forEach(b=>b.onclick=async()=>{if(!confirm("Удалить упражнение?"))return;await SM.deleteExercise(b.dataset.id);loadList();});
+      const ep=new URLSearchParams(location.search).get("edit");
+      if(ep&&!window.__editHandled){window.__editHandled=true;const e2=ex.find(x=>x.id===ep);if(e2)loadForEdit(e2);}
     }
     function loadForEdit(e){
       editId=e.id;
       document.getElementById("unit").value=e.unit_id;
       document.getElementById("type").value=e.type;
       document.getElementById("title").value=e.title||"";
+      document.getElementById("section").value=e.section||"";
       renderForm(e.type,e.data);
       window.scrollTo({top:0,behavior:"smooth"});
       const m=document.getElementById("msg");m.className="msg ok";m.textContent="Редактируешь упражнение — измени и сохрани";

@@ -43,6 +43,11 @@
   .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
   .empty a{color:#7c2340;text-decoration:underline;font-weight:900}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+  .sechead{display:flex;align-items:center;gap:12px;margin:28px 4px 14px;font:900 14px 'Nunito',sans-serif;color:#7c2340;letter-spacing:1.5px;text-transform:uppercase}
+  .sechead::after{content:"";flex:1;height:3px;background:#e3d3ba;border-radius:2px}
+  .tbar{display:flex;justify-content:flex-end;gap:6px;margin:0 2px 6px}
+  .tbar button,.tbar a{background:#fff;border:2px solid #e3d3ba;border-radius:10px;padding:4px 12px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;text-decoration:none;cursor:pointer}
+  .tbar button:hover,.tbar a:hover{border-color:#7c2340;color:#7c2340}
 </style>
 </head>
 <body>
@@ -245,32 +250,51 @@
     }
     const R={embed:renderEmbed,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
-    /* Кнопка конструктора для учителя — прямо из урока, юнит уже выбран */
-    (async function(){
-      try{ const p=await SM.myProfile();
-        if(p&&p.role==="teacher"){
-          const w=document.createElement("div"); w.style.cssText="text-align:center;margin:-6px 0 16px";
-          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #e3d3ba">🛠 Добавить упражнение в этот урок</a>';
-          const sub=document.getElementById("sub"); sub.insertAdjacentElement("afterend",w);
-        }
-      }catch(e){}
-    })();
-    (async function(){
+    let IS_TEACHER=false;
+    function warnCard(html){return card(html);}
+    async function moveEx(ex,idx,d){
+      const j=idx+d; if(j<0||j>=ex.length) return;
+      [ex[idx],ex[j]]=[ex[j],ex[idx]];
+      const r=await SM.setPositions(ex.map((e,i)=>({id:e.id,position:i+1})));
+      if(r&&r.ok) loadAndRender(); else alert("Не удалось сохранить порядок: "+((r&&r.error)||""));
+    }
+    async function loadAndRender(){
       const root=document.getElementById("root");
       let ex=[],loadErr=null; try{ ex=await SM.exercisesFor(SM_COURSE.id, uid); }catch(e){ loadErr=e; }
       if(loadErr){ root.innerHTML='<div class="empty">Не удалось загрузить упражнения (нет связи с базой). Обнови страницу.</div>'; return; }
       if(!SM.isCloud){ root.innerHTML='<div class="empty">Упражнения работают с настоящими аккаунтами (Supabase).</div>'; return; }
-      if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html">Конструкторе</a>.</div>'; return; }
+      if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html?u='+encodeURIComponent(uid)+'">Конструкторе</a>.</div>'; return; }
       root.innerHTML="";
-      ex.forEach(e=>{ const fn=R[e.type];
-        if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Nunito',sans-serif;color:#5a4f47;margin:4px 4px 8px";hd.textContent=e.title;root.appendChild(hd);}
-        if(!fn){ root.appendChild(card('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
-        // многозадачные упражнения: e.data.items = [вопрос1, вопрос2, …]
+      let lastSection=null;
+      ex.forEach((e,idx)=>{
+        if(e.section&&e.section!==lastSection){ const sh=document.createElement("div"); sh.className="sechead"; sh.textContent=e.section; root.appendChild(sh); lastSection=e.section; }
+        if(!e.section) lastSection=null;
+        const wrap=document.createElement("div"); root.appendChild(wrap);
+        if(IS_TEACHER){
+          const bar=document.createElement("div"); bar.className="tbar";
+          bar.innerHTML='<button data-d="-1" title="переместить выше">↑</button><button data-d="1" title="переместить ниже">↓</button><a href="builder.html?u='+encodeURIComponent(uid)+'&edit='+e.id+'" title="редактировать в конструкторе">✎</a>';
+          bar.querySelectorAll("button").forEach(b=>b.onclick=()=>moveEx(ex,idx,parseInt(b.dataset.d,10)));
+          wrap.appendChild(bar);
+        }
+        if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Nunito',sans-serif;color:#5a4f47;margin:4px 4px 8px";hd.textContent=e.title;wrap.appendChild(hd);}
+        const fn=R[e.type];
+        if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
         const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
         items.forEach((item,i)=>{ try{ const el=fn({type:e.type,data:item});
           if(item&&item.img){ const im=document.createElement("img"); im.src=item.img; im.alt=""; im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px"; const k=el.querySelector(".kind"); if(k) k.insertAdjacentElement("afterend",im); else el.insertBefore(im,el.firstChild); }
-          root.appendChild(el); }catch(err){ root.appendChild(card('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
+          wrap.appendChild(el); }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
       });
+    }
+    (async function(){
+      try{ const p=await SM.myProfile();
+        if(p&&p.role==="teacher"){
+          IS_TEACHER=true;
+          const w=document.createElement("div"); w.style.cssText="text-align:center;margin:-6px 0 16px";
+          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #e3d3ba">🛠 Добавить упражнение в этот урок</a>';
+          document.getElementById("sub").insertAdjacentElement("afterend",w);
+        }
+      }catch(e){}
+      loadAndRender();
     })();
   </script>
 </body>
