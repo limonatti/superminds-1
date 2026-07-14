@@ -413,7 +413,7 @@
       const exImg=document.getElementById("exImg");
       if(exImg&&exImg.value.trim()&&r.data&&!r.data.items) r.data.img=exImg.value.trim();
       const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),data:r.data});
-      if(res.ok){msg.className="msg ok";msg.textContent=editId?"Обновлено ✓":"Сохранено ✓ — упражнение появилось в юните";editId=null;document.getElementById("title").value="";renderForm(type);loadList();}
+      if(res.ok){const uid=document.getElementById("unit").value;msg.className="msg ok";msg.innerHTML=(editId?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';editId=null;document.getElementById("title").value="";renderForm(type);loadList();}
       else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
     }
     async function loadList(){

@@ -152,8 +152,10 @@ window.SM = (function () {
       const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
       const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, type: ex.type, title: ex.title || null, data: ex.data || {} };
       if (ex.id) {
-        const { error } = await c.from("exercises").update(row).eq("id", ex.id);
-        return { ok: !error, error: error && error.message };
+        const { data, error } = await c.from("exercises").update(row).eq("id", ex.id).select("id");
+        if (error) return { ok: false, error: error.message };
+        if (!data || !data.length) return { ok: false, error: "Изменение не применилось: нет прав или упражнение не найдено. Выйди и войди заново." };
+        return { ok: true };
       }
       const { data, error } = await c.from("exercises").insert(row).select("id").single();
       return { ok: !error, id: data && data.id, error: error && error.message };
