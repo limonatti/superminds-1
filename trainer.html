@@ -237,7 +237,11 @@
       const weighted=[]; cand.forEach(w=>{const rep=(TARGET-lvl(w.id))+1;for(let i=0;i<rep;i++)weighted.push(w);});
       const w=weighted[Math.floor(Math.random()*weighted.length)]; prevId=w.id; return w;
     }
-    function distractors(word,n){ return shuffle(SM_ALL_WORDS.filter(x=>x.id!==word.id)).slice(0,n); }
+    function distractors(word,n){
+      const seen={};seen[(word.en||"").toLowerCase()]=1;const out=[];
+      const pool=shuffle(SM_ALL_WORDS.filter(x=>x.unitId===word.unitId)).concat(shuffle(SM_ALL_WORDS));
+      for(const x of pool){const k=(x.en||"").toLowerCase();if(seen[k])continue;seen[k]=1;out.push(x);if(out.length>=n)break;}
+      return out; }
 
     function renderChips(){
       const box=document.getElementById("chips"); box.innerHTML="";

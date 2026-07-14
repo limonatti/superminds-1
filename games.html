@@ -84,7 +84,14 @@
       seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
       const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){}}
     function fanfare(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.12],[784,.24],[1046,.4]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){}}
-    function distract(w,n){return shuffle(WORDS.filter(x=>x.id!==w.id)).slice(0,n);}
+    function distract(w,n){const seen={};seen[(w.en||"").toLowerCase()]=1;const out=[];
+      for(const x of shuffle(WORDS)){const k=(x.en||"").toLowerCase();if(seen[k])continue;seen[k]=1;out.push(x);if(out.length>=n)break;}
+      return out;}
+    /* колода без повторов: вопросы не повторяются, пока не пройдут все слова */
+    let DECK=[],lastEn=null;
+    function nextWord(){if(!DECK.length)DECK=shuffle(WORDS);let w=DECK.pop();
+      if(lastEn&&w.en===lastEn&&DECK.length){DECK.unshift(w);w=DECK.pop();}
+      lastEn=w.en;return w;}
 
     const GAMES=[
       {id:"wheel",label:"🎡 Колесо"},
@@ -132,7 +139,7 @@
 
     /* ---------- Мемори ---------- */
     function memory(){
-      const pick=shuffle(WORDS).slice(0,6);
+      const seenM={},uq=[];shuffle(WORDS).forEach(w=>{const k=(w.en||"").toLowerCase();if(!seenM[k]){seenM[k]=1;uq.push(w);}});const pick=uq.slice(0,6);
       let cards=[];pick.forEach(w=>{cards.push({id:w.id,type:"en",txt:w.en,w});cards.push({id:w.id,type:"em",txt:w.emoji,w});});
       cards=shuffle(cards);
       let open=[],done=0,moves=0,lock=false;
@@ -162,7 +169,7 @@
       function place(){document.getElementById("carG").style.left=(2+posG/STEPS*84)+"%";document.getElementById("carR").style.left=(2+posR/STEPS*84)+"%";}
       function ask(){
         busy=false;
-        const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
+        const w=nextWord();const opts=shuffle([w,...distract(w,3)]);
         let html='<div class="center" style="margin-top:6px"><div class="big">'+SM_face(w,72)+'</div><div class="phrase">выбери слово</div></div><div class="opts" id="opts"></div>';
         document.getElementById("qbox").innerHTML=html;
         const box=document.getElementById("opts");
@@ -186,7 +193,7 @@
       document.getElementById("stage").innerHTML=
         '<div class="timer" id="tm">⏱ 30</div><div class="score" id="sc">Очки: 0</div><div id="qbox" style="margin-top:10px"></div>';
       function tick(){left--;document.getElementById("tm").textContent="⏱ "+left;if(left<=0){clearInterval(timer);end();}}
-      function ask(){busy=false;const w=shuffle(WORDS)[0];const opts=shuffle([w,...distract(w,3)]);
+      function ask(){busy=false;const w=nextWord();const opts=shuffle([w,...distract(w,3)]);
         document.getElementById("qbox").innerHTML='<div class="center"><div class="big">'+SM_face(w,72)+'</div><div class="phrase">'+w.ru+' — выбери слово</div></div><div class="opts" id="opts"></div>';
         const box=document.getElementById("opts");
         opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
