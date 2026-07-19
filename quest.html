@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Квест · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#16a085}
+  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .map{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;background:linear-gradient(#e7f0e1,#f6f9f2);border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:18px 10px;margin-bottom:16px}
+  .stp{width:58px;height:58px;border-radius:50%;background:#fff;border:3px solid #e3d3ba;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;transition:transform .2s}
+  .stp.done{border-color:#7cb342;background:#dff0d2}
+  .stp.cur{border-color:#16a085;transform:scale(1.15);box-shadow:0 0 0 4px rgba(22,160,133,.2)}
+  .dash{width:18px;height:4px;background:#e3d3ba;border-radius:2px}
+  .dash.done{background:#7cb342}
+  .hero{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:22px;animation:hop 1s ease-in-out infinite}
+  @keyframes hop{50%{transform:translateX(-50%) translateY(-5px)}}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:24px;text-align:center}
+  .big{font-size:64px;line-height:1;margin:6px 0}
+  .qt{font-size:22px;font-weight:700;color:#7c2340;margin:8px 0 14px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .opt{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px;font-size:17px;font-weight:600;cursor:pointer}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+  .lt{background:#fff;border:2px solid #e3d3ba;border-radius:12px;padding:10px 14px;font-size:20px;font-weight:700;cursor:pointer}
+  .lt.used{opacity:.25;pointer-events:none}
+  .built{min-height:40px;border-bottom:3px dashed #e3d3ba;margin:8px auto;max-width:300px;padding:6px;font-size:24px;font-weight:700;color:#16a085;letter-spacing:2px}
+  .prog{font:900 14px 'Nunito',sans-serif;color:#5a4f47;text-align:center;margin-bottom:8px}
+  .primary{background:#16a085;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba;margin-top:12px}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .chest{font-size:90px;animation:shake .6s ease-in-out infinite}
+  @keyframes shake{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+  .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
+  @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+</style>
+</head>
+<body>
+  <a class="home" href="units.html">← Юниты</a>
+  <div class="wrap">
+    <h1>🗺 Квест</h1>
+    <div class="sub" id="sub"></div>
+    <div class="map" id="map"></div>
+    <div id="root"><div class="empty">Загрузка…</div></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    let actx=null;
+    function beep(ok){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const seq=ok?[[660,0],[880,.12]]:[[200,0]];
+      seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
+      const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){}}
+    function fanfare(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.12],[784,.24],[1046,.4]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){}}
+    function confetti(){const em=["🎉","✨","⭐","🎊","🏆"];for(let i=0;i<28;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*22)+"px";sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";document.body.appendChild(sp);setTimeout(()=>sp.remove(),4200);}}
+
+    const q=new URLSearchParams(location.search);
+    const unit=SM_UNITS.find(u=>u.id===(q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id)))||SM_UNITS[0];
+    document.getElementById("sub").textContent=(unit?unit.emoji+" "+unit.title:"")+" · пройди путь и открой сундук!";
+    const WORDS=(unit&&unit.words||[]).map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji,img:w.img||null}));
+    const root=document.getElementById("root");
+
+    const PLACES=["🌲","🌉","🏰","🌋","🏝️"];
+    const STEPS=PLACES.length, PERSTEP=3;
+    let step=0, qInStep=0, mistakes=0;
+    let deck=[];
+    function nextWord(){if(!deck.length)deck=shuffle(WORDS);return deck.pop();}
+    function distract(w,n){const seen={};seen[(w.en||"").toLowerCase()]=1;const out=[];
+      for(const x of shuffle(WORDS)){const k=(x.en||"").toLowerCase();if(seen[k])continue;seen[k]=1;out.push(x);if(out.length>=n)break;}
+      return out;}
+
+    function drawMap(){
+      const m=document.getElementById("map");m.innerHTML="";
+      for(let i=0;i<STEPS;i++){
+        const d=document.createElement("div");d.className="stp"+(i<step?" done":i===step?" cur":"");
+        d.innerHTML=PLACES[i]+(i===step?'<div class="hero">🧒</div>':"");
+        m.appendChild(d);
+        const dash=document.createElement("div");dash.className="dash"+(i<step?" done":"");m.appendChild(dash);
+      }
+      const chest=document.createElement("div");chest.className="stp"+(step>=STEPS?" done":"");chest.textContent="🎁";m.appendChild(chest);
+    }
+
+    function ask(){
+      if(!WORDS.length){root.innerHTML='<div class="empty">В этом юните пока нет слов — квест недоступен. Добавь слова в 📚 Конструкторе.</div>';return;}
+      if(step>=STEPS){finish();return;}
+      drawMap();
+      const w=nextWord();
+      const mode=(step+qInStep)%3;
+      const progTxt='<div class="prog">Локация '+(step+1)+' из '+STEPS+' · задание '+(qInStep+1)+' из '+PERSTEP+'</div>';
+      if(mode===0){ // ru+emoji -> выбери en
+        const opts=shuffle([w,...distract(w,3)]);
+        root.innerHTML=progTxt+'<div class="card"><div class="big">'+SM_face(w,72)+'</div><div class="qt">'+esc(w.ru)+'</div><div class="opts" id="op"></div></div>';
+        const op=document.getElementById("op");let done=false;
+        opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
+          b.onclick=()=>{if(done)return;done=true;const ok=o.id===w.id;
+            try{SM.srsQueue(w.id,ok);}catch(e){}
+            if(ok){b.classList.add("correct");beep(true);say(w.en);}else{mistakes++;b.classList.add("wrong");beep(false);const cb=[...op.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");say(w.en);}
+            setTimeout(()=>{advance(ok);},ok?700:1300);};
+          op.appendChild(b);});
+      } else if(mode===1){ // аудио -> выбери en
+        const opts=shuffle([w,...distract(w,3)]);
+        root.innerHTML=progTxt+'<div class="card"><div class="big">🎧</div><div class="qt">Послушай и выбери слово</div><button class="opt" id="pl" style="margin-bottom:10px">🔊 Слушать</button><div class="opts" id="op"></div></div>';
+        document.getElementById("pl").onclick=()=>say(w.en);say(w.en);
+        const op=document.getElementById("op");let done=false;
+        opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
+          b.onclick=()=>{if(done)return;done=true;const ok=o.id===w.id;
+            try{SM.srsQueue(w.id,ok);}catch(e){}
+            if(ok){b.classList.add("correct");beep(true);}else{mistakes++;b.classList.add("wrong");beep(false);const cb=[...op.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
+            setTimeout(()=>{advance(ok);},ok?700:1300);};
+          op.appendChild(b);});
+      } else { // собери слово из букв
+        const target=w.en.replace(/\s+/g,"").toLowerCase();
+        const letters=shuffle(target.split(""));
+        root.innerHTML=progTxt+'<div class="card"><div class="big">'+SM_face(w,64)+'</div><div class="qt">'+esc(w.ru)+' — собери слово</div><div class="built" id="bl"></div><div class="letters" id="lts"></div></div>';
+        const bl=document.getElementById("bl"),lts=document.getElementById("lts");
+        let built="";
+        letters.forEach(ch=>{const b=document.createElement("button");b.className="lt";b.textContent=ch;
+          b.onclick=()=>{if(b.classList.contains("used"))return;
+            b.classList.add("used");built+=ch;bl.textContent=built;
+            if(built.length===target.length){
+              const ok=built===target;
+              try{SM.srsQueue(w.id,ok);}catch(e){}
+              bl.style.color=ok?"#3f7a20":"#a23b1e";
+              if(ok){beep(true);say(w.en);}else{mistakes++;beep(false);bl.textContent=built+" → "+target;say(w.en);}
+              setTimeout(()=>{advance(ok);},ok?800:1600);
+            }};
+          lts.appendChild(b);});
+      }
+    }
+    function advance(ok){
+      qInStep++;
+      if(qInStep>=PERSTEP){qInStep=0;step++;beep(true);}
+      ask();
+    }
+    async function finish(){
+      drawMap();
+      try{SM.srsFlush();}catch(e){}
+      const stars=mistakes===0?3:mistakes<=2?2:1;
+      root.innerHTML='<div class="card"><div class="chest" id="ch">🎁</div><div class="qt">Ты дошёл до сундука!<br>Нажми, чтобы открыть</div></div>';
+      document.getElementById("ch").onclick=async()=>{
+        fanfare();confetti();
+        root.innerHTML='<div class="card"><div class="big">🏆</div><h2 style="color:#16a085;margin:6px 0">Квест пройден!</h2>'+
+          '<div style="font-size:34px;margin:6px 0">'+"⭐".repeat(stars)+"☆".repeat(3-stars)+'</div>'+
+          '<div style="font:800 13px \'Nunito\',sans-serif;color:#8a7a68">'+(mistakes===0?"Без единой ошибки — вау!":"Ошибок: "+mistakes)+'</div>'+
+          '<button class="primary" onclick="location.reload()">Пройти ещё раз</button></div>';
+        try{
+          const u=await SM.getUser();
+          if(u){const p=await SM.loadProgress();p.__quest=p.__quest||{};
+            const prev=p.__quest[unit.id]||{};
+            p.__quest[unit.id]={done:true,stars:Math.max(prev.stars||0,stars),at:Date.now()};
+            await SM.saveProgress(p);}
+        }catch(e){}
+      };
+    }
+    addEventListener("pagehide",()=>{try{SM.srsFlush();}catch(e){}});
+    drawMap();ask();
+  </script>
+</body>
+</html>

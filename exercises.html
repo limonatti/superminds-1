@@ -67,7 +67,7 @@
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
-    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ"};
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ",reading:"ЧТЕНИЕ · ЭКЗАМЕН",tfns:"TRUE / FALSE / NOT STATED",wordform:"СЛОВООБРАЗОВАНИЕ",headings:"ПОДБЕРИ ЗАГОЛОВКИ"};
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
@@ -282,7 +282,91 @@
       });
       return c;
     }
-    const R={embed:renderEmbed,shadow:renderShadow,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
+    function textBlock(t){return '<div style="background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px 16px;font-size:16px;line-height:1.65;white-space:pre-wrap;margin-bottom:14px;text-align:left">'+esc(t)+'</div>';}
+    function renderReading(e){
+      const d=e.data||{};if(!d.text||!d.qs)throw new Error("bad");
+      const c=card('<div class="kind">'+KIND.reading+'</div>'+textBlock(d.text)+'<div class="rq"></div>');
+      const box=c.querySelector(".rq");
+      d.qs.forEach(qq=>{
+        const w=document.createElement("div");w.style.marginBottom="14px";
+        w.innerHTML='<div class="qt" style="font-size:17px">'+esc(qq.q)+'</div><div class="opts"></div>';
+        const ob=w.querySelector(".opts");let done=false;
+        qq.opts.forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=o;
+          b.onclick=()=>{if(done)return;done=true;
+            if(i===qq.correct){b.classList.add("correct");}
+            else{b.classList.add("wrong");ob.children[qq.correct].classList.add("correct");}};
+          ob.appendChild(b);});
+        box.appendChild(w);
+      });
+      return c;
+    }
+    function renderTFNS(e){
+      const d=e.data||{};if(!d.text||!d.sts)throw new Error("bad");
+      const LBL={T:"Верно",F:"Неверно",N:"Не сказано"};
+      const c=card('<div class="kind">'+KIND.tfns+'</div>'+textBlock(d.text)+'<div class="tq"></div>');
+      const box=c.querySelector(".tq");
+      d.sts.forEach(st=>{
+        const w=document.createElement("div");w.style.cssText="margin-bottom:12px;text-align:left";
+        w.innerHTML='<div style="font-size:16px;font-weight:600;margin-bottom:6px">'+esc(st.s)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap"></div>';
+        const row=w.lastChild;let done=false;
+        ["T","F","N"].forEach(k=>{const b=document.createElement("button");b.className="opt";b.style.flex="1";b.style.minWidth="90px";b.textContent=LBL[k];
+          b.onclick=()=>{if(done)return;done=true;
+            if(k===st.a){b.classList.add("correct");}
+            else{b.classList.add("wrong");[...row.children].forEach((x,i)=>{if(["T","F","N"][i]===st.a)x.classList.add("correct");});}};
+          row.appendChild(b);});
+        box.appendChild(w);
+      });
+      return c;
+    }
+    function renderWordform(e){
+      const d=e.data||{};const items=d.items||[];if(!items.length)throw new Error("bad");
+      const c=card('<div class="kind">'+KIND.wordform+'</div><div class="wf"></div>');
+      const box=c.querySelector(".wf");
+      items.forEach(it=>{
+        const w=document.createElement("div");w.style.cssText="margin-bottom:14px;text-align:left";
+        w.innerHTML='<div style="font-size:16px;font-weight:600;margin-bottom:6px">'+esc(it.q).replace("___",'<span style="color:#7c2340;font-weight:800">_____</span>')+
+          ' <span style="background:#fbeef1;border:2px solid #e3d3ba;border-radius:8px;padding:2px 8px;font:800 13px \'Nunito\',sans-serif;color:#7c2340">'+esc(it.base)+'</span></div>'+
+          '<div class="field" style="display:flex;gap:8px"><input placeholder="впиши форму слова" style="flex:1;border:2px solid #e3d3ba;border-radius:12px;padding:10px 13px;font:700 16px \'Fredoka\',sans-serif;background:#fdfbf7"><button class="check" style="background:#7c2340;color:#fff;border:0;border-radius:12px;padding:0 18px;font:800 14px \'Nunito\',sans-serif;cursor:pointer">✓</button></div>'+
+          '<div class="fb" style="font:800 13px \'Nunito\',sans-serif;min-height:16px;margin-top:4px"></div>';
+        const inp=w.querySelector("input"),fb=w.querySelector(".fb");
+        w.querySelector(".check").onclick=()=>{
+          const ok=norm(inp.value)===norm(it.answer);
+          fb.style.color=ok?"#3f7a20":"#a23b1e";
+          fb.textContent=ok?"Верно! 🎉":("Правильно: "+it.answer);
+          inp.style.borderColor=ok?"#7cb342":"#e07a5f";
+        };
+        box.appendChild(w);
+      });
+      return c;
+    }
+    function renderHeadings(e){
+      const d=e.data||{};const paras=d.paras||[],heads=d.heads||[];
+      if(paras.length<2||heads.length<paras.length)throw new Error("bad");
+      const order=shuffle(heads.map((h,i)=>i));
+      const c=card('<div class="kind">'+KIND.headings+'</div>'+
+        '<div style="font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-bottom:10px;text-align:left">Подбери заголовок к каждому абзацу. Один заголовок — лишний!</div>'+
+        '<ol style="text-align:left;padding-left:20px;margin:0 0 12px">'+order.map(i=>'<li style="font-weight:600;margin-bottom:4px">'+esc(heads[i])+'</li>').join("")+'</ol>'+
+        '<div class="hp"></div><button class="check" style="background:#7c2340;color:#fff;border:0;border-radius:12px;padding:12px 20px;font:800 14px \'Nunito\',sans-serif;cursor:pointer;margin-top:6px">Проверить</button><div class="fb" style="font:800 14px \'Nunito\',sans-serif;margin-top:8px;min-height:18px"></div>');
+      const box=c.querySelector(".hp"),sels=[];
+      paras.forEach((p,pi)=>{
+        const w=document.createElement("div");w.style.cssText="margin-bottom:12px;text-align:left";
+        w.innerHTML='<div style="background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.6;white-space:pre-wrap"><b>'+String.fromCharCode(65+pi)+'.</b> '+esc(p)+'</div>'+
+          '<select style="margin-top:6px;width:100%;border:2px solid #e3d3ba;border-radius:10px;padding:9px;font:700 14px \'Nunito\',sans-serif;background:#fff"><option value="">— выбери заголовок —</option>'+
+          order.map((i,k)=>'<option value="'+i+'">'+(k+1)+". "+esc(heads[i])+'</option>').join("")+'</select>';
+        sels.push(w.querySelector("select"));
+        box.appendChild(w);
+      });
+      c.querySelector(".check").onclick=()=>{
+        let good=0;
+        sels.forEach((sel,pi)=>{const ok=sel.value!==""&&parseInt(sel.value,10)===pi;
+          sel.style.borderColor=ok?"#7cb342":"#e07a5f";if(ok)good++;});
+        const fb=c.querySelector(".fb");
+        fb.style.color=good===paras.length?"#3f7a20":"#a23b1e";
+        fb.textContent=good===paras.length?"Всё верно! 🎉":("Верно "+good+" из "+paras.length);
+      };
+      return c;
+    }
+    const R={embed:renderEmbed,shadow:renderShadow,reading:renderReading,tfns:renderTFNS,wordform:renderWordform,headings:renderHeadings,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
     let IS_TEACHER=false;
     function warnCard(html){return card(html);}

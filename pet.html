@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Мой питомец · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  .wrap{max-width:560px;margin:0 auto;padding:64px 16px 60px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#e0952a}
+  .sub{text-align:center;margin:6px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:24px;text-align:center;margin-bottom:16px}
+  .pet{font-size:110px;line-height:1.1;display:inline-block}
+  .pet.happy{animation:bounce .7s ease-in-out 3}
+  @keyframes bounce{50%{transform:translateY(-16px) scale(1.06)}}
+  .pname{border:0;border-bottom:3px dashed #e3d3ba;background:none;font:700 22px 'Fredoka',sans-serif;color:#7c2340;text-align:center;width:220px;outline:none;margin-top:6px}
+  .stage{font:800 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:4px}
+  .bar{height:16px;background:#f0e6d8;border-radius:999px;overflow:hidden;margin:12px auto 4px;max-width:320px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#e0952a,#7cb342);border-radius:999px;transition:width .6s}
+  .xp{font:800 12px 'Nunito',sans-serif;color:#8a7a68}
+  .feed{background:#e0952a;color:#fff;border:0;border-radius:14px;padding:14px 26px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba;margin-top:14px}
+  .feed:disabled{opacity:.5;cursor:default}
+  .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .stat{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:16px;padding:10px 16px;font:800 13px 'Nunito',sans-serif;color:#5a4f47}
+  .stat b{display:block;font-size:20px;color:#7c2340}
+  .sticks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .stick{width:64px;height:64px;border-radius:16px;background:#fdfbf7;border:2px solid #e3d3ba;display:flex;align-items:center;justify-content:center;font-size:32px}
+  .stick.locked{filter:grayscale(1);opacity:.35}
+  .sec-title{font:900 13px 'Nunito',sans-serif;color:#7c2340;letter-spacing:1.5px;text-transform:uppercase;margin:4px 0 12px}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .empty a{color:#7c2340;font-weight:900}
+  .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
+  @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+</style>
+</head>
+<body>
+  <a class="home" href="units.html">← Юниты</a>
+  <div class="wrap">
+    <h1>🐣 Мой питомец</h1>
+    <div class="sub">занимайся английским — и питомец растёт!</div>
+    <div id="root"><div class="empty">Загрузка…</div></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function confetti(){const em=["🎉","✨","⭐","💛"];for(let i=0;i<22;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*18)+"px";sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";document.body.appendChild(sp);setTimeout(()=>sp.remove(),4000);}}
+    const root=document.getElementById("root");
+    const STAGES=[
+      {min:0,   emoji:"🥚", name:"Яйцо"},
+      {min:40,  emoji:"🐣", name:"Птенчик"},
+      {min:120, emoji:"🐥", name:"Цыплёнок"},
+      {min:300, emoji:"🦜", name:"Попугай-говорун"},
+      {min:600, emoji:"🦉", name:"Мудрая сова"},
+      {min:1000,emoji:"🦄", name:"Единорог английского"}
+    ];
+    function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+    function yesterday(){const d=new Date(Date.now()-864e5);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+
+    let P=null, pet=null;
+    async function load(){
+      const u=await SM.getUser();
+      if(!u){root.innerHTML='<div class="empty">Питомец живёт в твоём аккаунте. Войди в <a href="cabinet.html">кабинет</a> 🙂</div>';return;}
+      P=await SM.loadProgress();
+      pet=P.__pet||{};
+      render();
+    }
+    function calc(){
+      const meta=P.__meta||{};
+      let learned=0,practiced=0;
+      Object.keys(P).forEach(k=>{
+        if(k.startsWith("__"))return;
+        const e=P[k];if(!e||typeof e!=="object")return;
+        if(e.status==="learned")learned++;
+        if(e.seen)practiced++;
+      });
+      const quests=Object.keys(P.__quest||{}).length;
+      const xp=(meta.totalPoints||0)+learned*5+quests*20+(pet.fedCount||0)*3;
+      let st=STAGES[0],next=null;
+      for(const s of STAGES){if(xp>=s.min)st=s;else{next=s;break;}}
+      return {xp,st,next,learned,practiced,quests,streak:pet.streak||0};
+    }
+    function render(){
+      const c=calc();
+      const fedToday=pet.fed===today();
+      const pct=c.next?Math.min(100,Math.round((c.xp-c.st.min)/(c.next.min-c.st.min)*100)):100;
+      root.innerHTML=
+        '<div class="card">'+
+          '<div class="pet" id="pt">'+c.st.emoji+'</div><br>'+
+          '<input class="pname" id="nm" maxlength="16" value="'+esc(pet.name||"Дружок")+'" title="Можно переименовать">'+
+          '<div class="stage">'+c.st.name+(c.next?' · до «'+c.next.name+'» осталось '+(c.next.min-c.xp)+' ⚡':' · максимальный уровень!')+'</div>'+
+          '<div class="bar"><i style="width:'+pct+'%"></i></div><div class="xp">⚡ '+c.xp+' энергии</div>'+
+          '<button class="feed" id="fd" '+(fedToday?"disabled":"")+'>'+(fedToday?"Уже покормлен сегодня 😊":"🍎 Покормить питомца")+'</button>'+
+          '<div class="row">'+
+            '<div class="stat"><b>🔥 '+c.streak+'</b>дней подряд</div>'+
+            '<div class="stat"><b>'+c.learned+'</b>слов выучено</div>'+
+            '<div class="stat"><b>'+c.quests+'</b>квестов</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="card"><div class="sec-title">Наклейки за квесты</div><div class="sticks" id="sk"></div></div>';
+      document.getElementById("nm").onchange=async ev=>{pet.name=ev.target.value.trim()||"Дружок";P.__pet=pet;await SM.saveProgress(P);};
+      document.getElementById("fd").onclick=feed;
+      const sk=document.getElementById("sk");
+      const qd=P.__quest||{};
+      SM_UNITS.forEach(u=>{
+        const got=qd[u.id]&&qd[u.id].done;
+        const d=document.createElement("div");d.className="stick"+(got?"":" locked");d.title=u.title+(got?" · пройден!":" · пройди квест юнита");
+        d.textContent=u.emoji;sk.appendChild(d);
+      });
+    }
+    async function feed(){
+      if(pet.fed===today())return;
+      pet.streak=(pet.fed===yesterday())?(pet.streak||0)+1:1;
+      pet.fed=today();pet.fedCount=(pet.fedCount||0)+1;
+      P.__pet=pet;
+      await SM.saveProgress(P);
+      render();
+      const pt=document.getElementById("pt");pt.classList.add("happy");
+      confetti();
+      try{const u=new SpeechSynthesisUtterance("Yummy! Thank you!");u.lang="en-US";u.rate=1;speechSynthesis.speak(u);}catch(e){}
+    }
+    load();
+  </script>
+</body>
+</html>

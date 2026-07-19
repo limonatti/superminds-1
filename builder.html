@@ -81,6 +81,10 @@
       video:{label:"🎬 Видео (YouTube)"},
       embed:{label:"🌐 Интерактив по ссылке (Wordwall, LearningApps…)"},
       shadow:{label:"🗣 Shadowing (фразы для повторения вслух)"},
+      reading:{label:"📖 Экзамен: чтение с вопросами"},
+      tfns:{label:"🔍 Экзамен: True / False / Not stated"},
+      wordform:{label:"🔤 Экзамен: словообразование"},
+      headings:{label:"📰 Экзамен: подбери заголовки"},
       audio:{label:"🔊 Аудио (озвучка)"},
       dialogue:{label:"💬 Диалог"},
       note:{label:"🗒 Заметка / правило"},
@@ -195,6 +199,36 @@
     /* ---------- формы по типам ---------- */
     function renderForm(type,data){
       const f=document.getElementById("fields"); data=data||{};
+      if(type==="reading"){
+        const ql=(data.qs||[]).map(x=>x.q+" | "+x.opts.map((o,i)=>i===x.correct?o+"*":o).join(" | ")).join("\n");
+        f.innerHTML='<label>ТЕКСТ ДЛЯ ЧТЕНИЯ</label><textarea id="rtext" rows="7" placeholder="Впиши или вставь текст…">'+esc(data.text||"")+'</textarea>'+
+          '<label>ВОПРОСЫ — по одному в строке: Вопрос? | вариант | верный вариант* | вариант</label>'+
+          '<textarea id="rqs" rows="6" placeholder="Where is the cat? | in the bag | under the bed* | at school">'+esc(ql)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Верный вариант помечай звёздочкой *. Формат как в ОГЭ/ЕГЭ/TOEFL: чтение + множественный выбор.</div>';
+        return;
+      }
+      if(type==="tfns"){
+        const tl=(data.sts||[]).map(x=>x.s+" | "+x.a).join("\n");
+        f.innerHTML='<label>ТЕКСТ</label><textarea id="ttext" rows="6">'+esc(data.text||"")+'</textarea>'+
+          '<label>УТВЕРЖДЕНИЯ — по одному в строке: утверждение | T, F или N</label>'+
+          '<textarea id="tsts" rows="5" placeholder="The dog is big. | T&#10;The cat can swim. | N">'+esc(tl)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">T = True (верно), F = False (неверно), N = Not stated (в тексте не сказано)</div>';
+        return;
+      }
+      if(type==="wordform"){
+        const wl=(data.items||[]).map(x=>x.q+" | "+x.base+" | "+x.answer).join("\n");
+        f.innerHTML='<label>СТРОКИ — предложение с ___ | СЛОВО-ОСНОВА | ответ</label>'+
+          '<textarea id="wlines" rows="6" placeholder="He is a good ___ . | TEACH | teacher&#10;She sings ___ . | BEAUTIFUL | beautifully">'+esc(wl)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Как в ЕГЭ: ученик образует нужную форму слова, написанного заглавными буквами.</div>';
+        return;
+      }
+      if(type==="headings"){
+        f.innerHTML='<label>АБЗАЦЫ — разделяй ПУСТОЙ строкой</label><textarea id="hparas" rows="8" placeholder="Первый абзац…&#10;&#10;Второй абзац…">'+esc((data.paras||[]).join("\n\n"))+'</textarea>'+
+          '<label>ЗАГОЛОВКИ — по одному в строке, в том же порядке, что абзацы; лишние — в конце</label>'+
+          '<textarea id="hheads" rows="5" placeholder="Заголовок к абзацу 1&#10;Заголовок к абзацу 2&#10;Лишний заголовок">'+esc((data.heads||[]).join("\n"))+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Как в ОГЭ/IELTS: ученику заголовки покажутся перемешанными.</div>';
+        return;
+      }
       if(type==="shadow"){
         f.innerHTML='<label>ФРАЗЫ — по одной в строке (ребёнок слушает и повторяет вслух)</label>'+
           '<textarea id="lines" rows="7" placeholder="Hello! My name is Sam.&#10;I like apples and milk.&#10;This is my school bag.">'+esc((data.lines||[]).join("\n"))+'</textarea>';
@@ -331,6 +365,82 @@
     }
 
     function readForm(type){
+      if(type==="reading"){
+        const ql=(data.qs||[]).map(x=>x.q+" | "+x.opts.map((o,i)=>i===x.correct?o+"*":o).join(" | ")).join("\n");
+        f.innerHTML='<label>ТЕКСТ ДЛЯ ЧТЕНИЯ</label><textarea id="rtext" rows="7" placeholder="Впиши или вставь текст…">'+esc(data.text||"")+'</textarea>'+
+          '<label>ВОПРОСЫ — по одному в строке: Вопрос? | вариант | верный вариант* | вариант</label>'+
+          '<textarea id="rqs" rows="6" placeholder="Where is the cat? | in the bag | under the bed* | at school">'+esc(ql)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Верный вариант помечай звёздочкой *. Формат как в ОГЭ/ЕГЭ/TOEFL: чтение + множественный выбор.</div>';
+        return;
+      }
+      if(type==="tfns"){
+        const tl=(data.sts||[]).map(x=>x.s+" | "+x.a).join("\n");
+        f.innerHTML='<label>ТЕКСТ</label><textarea id="ttext" rows="6">'+esc(data.text||"")+'</textarea>'+
+          '<label>УТВЕРЖДЕНИЯ — по одному в строке: утверждение | T, F или N</label>'+
+          '<textarea id="tsts" rows="5" placeholder="The dog is big. | T&#10;The cat can swim. | N">'+esc(tl)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">T = True (верно), F = False (неверно), N = Not stated (в тексте не сказано)</div>';
+        return;
+      }
+      if(type==="wordform"){
+        const wl=(data.items||[]).map(x=>x.q+" | "+x.base+" | "+x.answer).join("\n");
+        f.innerHTML='<label>СТРОКИ — предложение с ___ | СЛОВО-ОСНОВА | ответ</label>'+
+          '<textarea id="wlines" rows="6" placeholder="He is a good ___ . | TEACH | teacher&#10;She sings ___ . | BEAUTIFUL | beautifully">'+esc(wl)+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Как в ЕГЭ: ученик образует нужную форму слова, написанного заглавными буквами.</div>';
+        return;
+      }
+      if(type==="headings"){
+        f.innerHTML='<label>АБЗАЦЫ — разделяй ПУСТОЙ строкой</label><textarea id="hparas" rows="8" placeholder="Первый абзац…&#10;&#10;Второй абзац…">'+esc((data.paras||[]).join("\n\n"))+'</textarea>'+
+          '<label>ЗАГОЛОВКИ — по одному в строке, в том же порядке, что абзацы; лишние — в конце</label>'+
+          '<textarea id="hheads" rows="5" placeholder="Заголовок к абзацу 1&#10;Заголовок к абзацу 2&#10;Лишний заголовок">'+esc((data.heads||[]).join("\n"))+'</textarea>'+
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#8a7a68;margin-top:6px">Как в ОГЭ/IELTS: ученику заголовки покажутся перемешанными.</div>';
+        return;
+      }
+      if(type==="reading"){
+        const text=document.getElementById("rtext").value.trim();
+        if(!text) return {err:"Впиши текст"};
+        const qs=[];
+        for(const line of document.getElementById("rqs").value.split("\n").map(x=>x.trim()).filter(Boolean)){
+          const parts=line.split("|").map(x=>x.trim()).filter(Boolean);
+          if(parts.length<3) return {err:"В вопросе нужно 2+ варианта: "+line.slice(0,40)};
+          const q=parts[0];let correct=-1;
+          const opts=parts.slice(1).map((o,i)=>{if(o.endsWith("*")){correct=i;return o.slice(0,-1).trim();}return o;});
+          if(correct<0) return {err:"Пометь верный вариант звёздочкой *: "+q.slice(0,40)};
+          qs.push({q,opts,correct});
+        }
+        if(!qs.length) return {err:"Добавь хотя бы один вопрос"};
+        return {data:{text,qs}};
+      }
+      if(type==="tfns"){
+        const text=document.getElementById("ttext").value.trim();
+        if(!text) return {err:"Впиши текст"};
+        const sts=[];
+        for(const line of document.getElementById("tsts").value.split("\n").map(x=>x.trim()).filter(Boolean)){
+          const i=line.lastIndexOf("|");
+          if(i<0) return {err:"Формат: утверждение | T, F или N"};
+          const st=line.slice(0,i).trim(), a=line.slice(i+1).trim().toUpperCase();
+          if(!["T","F","N"].includes(a)) return {err:"Ответ должен быть T, F или N: "+st.slice(0,40)};
+          sts.push({s:st,a});
+        }
+        if(!sts.length) return {err:"Добавь хотя бы одно утверждение"};
+        return {data:{text,sts}};
+      }
+      if(type==="wordform"){
+        const items=[];
+        for(const line of document.getElementById("wlines").value.split("\n").map(x=>x.trim()).filter(Boolean)){
+          const p=line.split("|").map(x=>x.trim());
+          if(p.length<3||p[0].indexOf("___")<0) return {err:"Формат: предложение с ___ | СЛОВО | ответ"};
+          items.push({q:p[0],base:p[1].toUpperCase(),answer:p[2]});
+        }
+        if(!items.length) return {err:"Добавь хотя бы одну строку"};
+        return {data:{items}};
+      }
+      if(type==="headings"){
+        const paras=document.getElementById("hparas").value.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+        const heads=document.getElementById("hheads").value.split("\n").map(x=>x.trim()).filter(Boolean);
+        if(paras.length<2) return {err:"Нужно 2+ абзаца (разделяй пустой строкой)"};
+        if(heads.length<paras.length) return {err:"Заголовков должно быть не меньше, чем абзацев"};
+        return {data:{paras,heads}};
+      }
       if(type==="shadow"){
         const lines=document.getElementById("lines").value.split("\n").map(x=>x.trim()).filter(Boolean);
         if(!lines.length) return {err:"Впиши хотя бы одну фразу"};
