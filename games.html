@@ -131,7 +131,7 @@
       return out;}
     /* колода без повторов: вопросы не повторяются, пока не пройдут все слова */
     let DECK=[],lastEn=null;
-    function nextWord(){if(!DECK.length)DECK=shuffle(WORDS);let w=DECK.pop();
+    function nextWord(){if(!WORDS.length)return {en:"",ru:"",emoji:"❓",id:"none"};if(!DECK.length)DECK=shuffle(WORDS);let w=DECK.pop();
       if(lastEn&&w.en===lastEn&&DECK.length){DECK.unshift(w);w=DECK.pop();}
       lastEn=w.en;return w;}
 
@@ -148,7 +148,9 @@
     function renderGames(){const box=document.getElementById("games");box.innerHTML="";
       GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(game===g.id?" on":"");b.textContent=g.label;
         b.onclick=()=>{game=g.id;renderGames();start();};box.appendChild(b);});}
-    function start(){ if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else if(game==="balloon")balloon(); else if(game==="mole")mole(); else if(game==="box")box(); else flash(); }
+    function start(){
+      if(!WORDS.length){document.getElementById("stage").innerHTML='<div class="center" style="padding:34px 12px"><div class="big">📭</div><h2 style="color:#7c2340;margin:8px 0">В этом юните пока нет слов</h2><div class="phrase">Добавь слова в «📚 Конструкторе учебников» — и все игры заработают!</div></div>';return;}
+      if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else if(game==="balloon")balloon(); else if(game==="mole")mole(); else if(game==="box")box(); else flash(); }
 
     /* ---------- Колесо ---------- */
     function wheel(){
