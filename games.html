@@ -57,6 +57,34 @@
 
   .timer{font:900 22px 'Nunito',sans-serif;color:#7c2340;text-align:center}
   .score{font:900 16px 'Nunito',sans-serif;color:#3f7a20;text-align:center;margin-top:4px}
+
+  /* шарики */
+  .balar{position:relative;height:340px;background:linear-gradient(#e8f3fb,#f9fcff);border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-top:10px}
+  .bal{position:absolute;width:92px;text-align:center;cursor:pointer;user-select:none}
+  .bal .bb{font-size:58px;line-height:1;transition:transform .22s}
+  .bal.pop .bb{transform:scale(0)}
+  .bal .bw{font:800 13px 'Nunito',sans-serif;background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:3px 9px;display:inline-block}
+  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
+
+  /* кроты */
+  .holes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:470px;margin:14px auto 0}
+  .hole{position:relative;height:112px;background:#fdfbf7;border-radius:18px;border:2px solid #e3d3ba;overflow:hidden}
+  .hole .dirt{position:absolute;bottom:0;left:8%;right:8%;height:22px;background:#c9a27a;border-radius:50% 50% 0 0}
+  .mole{position:absolute;left:0;right:0;bottom:-110px;text-align:center;transition:bottom .25s;cursor:pointer}
+  .mole.up{bottom:8px}
+  .mole .mm{font-size:42px;line-height:1}
+  .mole .mw{font:800 12px 'Nunito',sans-serif;background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:2px 8px;display:inline-block}
+
+  /* коробки */
+  .gifts{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px;max-width:520px;margin:14px auto 0}
+  .gift{background:#fff;border:2px solid #e3d3ba;border-radius:18px;min-height:96px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:42px;cursor:pointer;box-shadow:0 5px 0 #e3d3ba;transition:transform .12s}
+  .gift:hover{transform:scale(1.05)}
+  .gift.open{background:#fdfbf7;cursor:default;font-size:28px;transform:none}
+  .gift .gw{font:800 13px 'Nunito',sans-serif;margin-top:4px}
+
+  /* конфетти */
+  .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
+  @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
 </style>
 </head>
 <body>
@@ -84,6 +112,20 @@
       seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
       const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){}}
     function fanfare(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.12],[784,.24],[1046,.4]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){}}
+    /* короткий «тик» трещотки колеса */
+    function tickSnd(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type="square";o.frequency.value=1500;o.connect(g);g.connect(actx.destination);const t=actx.currentTime;g.gain.setValueAtTime(.11,t);g.gain.exponentialRampToValueAtTime(.0001,t+.045);o.start(t);o.stop(t+.05);}catch(e){}}
+    /* тики с замедлением: чем медленнее колесо, тем реже щелчки */
+    function spinTicks(durMs,crossings){
+      for(let i=1;i<=crossings;i++){
+        const t=i/crossings, x=1-Math.pow(1-t,1/3);
+        setTimeout(tickSnd,Math.round(x*durMs));
+      }
+    }
+    function confetti(){const em=["🎉","✨","⭐","🎊","💛","💙","💚"];
+      for(let i=0;i<26;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];
+        sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*20)+"px";
+        sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";sp.style.animationDelay=(Math.random()*.5)+"s";
+        document.body.appendChild(sp);setTimeout(()=>sp.remove(),4200);}}
     function distract(w,n){const seen={};seen[(w.en||"").toLowerCase()]=1;const out=[];
       for(const x of shuffle(WORDS)){const k=(x.en||"").toLowerCase();if(seen[k])continue;seen[k]=1;out.push(x);if(out.length>=n)break;}
       return out;}
@@ -97,13 +139,16 @@
       {id:"wheel",label:"🎡 Колесо"},
       {id:"memory",label:"🧠 Мемори"},
       {id:"race",label:"🏁 Гонка"},
-      {id:"flash",label:"⚡ Молния"}
+      {id:"flash",label:"⚡ Молния"},
+      {id:"balloon",label:"🎈 Шарики"},
+      {id:"mole",label:"🐹 Кроты"},
+      {id:"box",label:"🎁 Коробки"}
     ];
     let game=(GAMES.some(g=>g.id===q.get("game"))?q.get("game"):"wheel");
     function renderGames(){const box=document.getElementById("games");box.innerHTML="";
       GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(game===g.id?" on":"");b.textContent=g.label;
         b.onclick=()=>{game=g.id;renderGames();start();};box.appendChild(b);});}
-    function start(){ if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else flash(); }
+    function start(){ if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else if(game==="balloon")balloon(); else if(game==="mole")mole(); else if(game==="box")box(); else flash(); }
 
     /* ---------- Колесо ---------- */
     function wheel(){
@@ -128,11 +173,12 @@
         if(spinning)return;spinning=true;
         const extra=360*5+Math.floor(Math.random()*360);rot+=extra;
         wheelEl.style.transform="rotate("+rot+"deg)";
+        spinTicks(4000,Math.min(70,Math.round(extra/sec)));
         setTimeout(()=>{
           const eff=(360-(rot%360))%360;const idx=Math.floor(eff/sec)%n;const w=items[idx];
           document.getElementById("res").textContent=w.en+" "+w.emoji;
           document.getElementById("phr").textContent="Скажи: «It's a "+w.en+".» ("+w.ru+")";
-          speak("It's a "+w.en);beep(true);spinning=false;
+          speak("It's a "+w.en);fanfare();confetti();spinning=false;
         },4100);
       };
     }
@@ -177,7 +223,7 @@
           b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;
             if(ok){b.classList.add("correct");beep(true);speak(w.en);if(turn==="green")posG++;else posR++;place();}
             else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
-            if(posG>=STEPS||posR>=STEPS){const win=posG>=STEPS?"Зелёные":"Красные";setTimeout(()=>{fanfare();
+            if(posG>=STEPS||posR>=STEPS){const win=posG>=STEPS?"Зелёные":"Красные";setTimeout(()=>{fanfare();confetti();
               document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:20px"><div class="big">🏆</div><h2 style="color:#7c2340;margin:6px 0">'+win+' победили!</h2><button class="primary" onclick="location.reload()">Ещё раз</button></div>';
               document.getElementById("turn").textContent="";},700);return;}
             setTimeout(()=>{turn=turn==="green"?"red":"green";const t=document.getElementById("turn");
@@ -203,6 +249,106 @@
             speak(w.en);setTimeout(ask,ok?350:700);};box.appendChild(b);});}
       function end(){document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:16px"><div class="big">'+(score>=10?"🌟":"⚡")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+'</h2><button class="primary" onclick="(function(){location.reload();})()">Ещё раз</button></div>';fanfare();}
       timer=setInterval(tick,1000);ask();
+    }
+
+    /* ---------- 🎈 Лопни шарик ---------- */
+    function balloon(){
+      let score=0,round=0;const total=8;let busy=false;
+      document.getElementById("stage").innerHTML=
+        '<div class="score" id="sc">Очки: 0</div>'+
+        '<div class="center"><div class="phrase" id="bq" style="font-size:20px;margin:6px 0"></div></div>'+
+        '<div class="balar" id="ar"></div>';
+      function roundGo(){
+        const ar=document.getElementById("ar");if(!ar)return;
+        if(round>=total){end();return;}
+        round++;busy=false;
+        const w=nextWord();const opts=shuffle([w,...distract(w,3)]);
+        document.getElementById("bq").innerHTML='Лопни шарик: <b>'+w.ru+'</b> '+(w.emoji||"");
+        ar.innerHTML="";
+        opts.forEach((o,i)=>{
+          const d=document.createElement("div");d.className="bal";
+          d.style.left=(4+i*24)+"%";d.style.top=(14+Math.random()*45)+"%";
+          d.style.animation="bob "+(2+Math.random()*1.6)+"s ease-in-out infinite";
+          d.innerHTML='<div class="bb" style="filter:hue-rotate('+(i*75)+'deg)">🎈</div><div class="bw">'+o.en+'</div>';
+          d.onclick=()=>{if(busy)return;
+            if(o.id===w.id){busy=true;d.classList.add("pop");beep(true);speak(w.en);score++;
+              document.getElementById("sc").textContent="Очки: "+score;setTimeout(roundGo,650);}
+            else{beep(false);d.style.opacity=.3;d.style.pointerEvents="none";}};
+          ar.appendChild(d);});
+      }
+      function end(){const ar=document.getElementById("ar");if(!ar)return;
+        ar.innerHTML='<div class="center" style="padding-top:96px"><div class="big">'+(score>=6?"🌟":"🎈")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="balloon()">Ещё раз</button></div>';
+        fanfare();if(score>=6)confetti();}
+      roundGo();
+    }
+
+    /* ---------- 🐹 Поймай крота ---------- */
+    let moleTimer=null;
+    function mole(){
+      clearTimeout(moleTimer);
+      let score=0,round=0;const total=10;let busy=false;
+      document.getElementById("stage").innerHTML=
+        '<div class="score" id="sc">Очки: 0</div>'+
+        '<div class="center"><div class="phrase" id="mq" style="font-size:20px;margin:6px 0"></div></div>'+
+        '<div class="holes" id="hz"></div>';
+      const hz=document.getElementById("hz");
+      for(let i=0;i<6;i++){const h=document.createElement("div");h.className="hole";
+        h.innerHTML='<div class="dirt"></div><div class="mole"><div class="mm">🐹</div><div class="mw"></div></div>';hz.appendChild(h);}
+      const moles=[...hz.querySelectorAll(".mole")];
+      function roundGo(){
+        if(!hz.isConnected)return;
+        if(round>=total){end();return;}
+        round++;busy=false;
+        const w=nextWord();const opts=shuffle([w,...distract(w,2)]);
+        document.getElementById("mq").innerHTML='Поймай крота со словом: <b>'+w.ru+'</b> '+(w.emoji||"");
+        moles.forEach(m=>{m.classList.remove("up");m.onclick=null;m.querySelector(".mm").textContent="🐹";});
+        const idxs=shuffle([0,1,2,3,4,5]).slice(0,opts.length);
+        idxs.forEach((hi,k)=>{const m=moles[hi],o=opts[k];
+          m.querySelector(".mw").textContent=o.en;
+          setTimeout(()=>{if(hz.isConnected&&!busy)m.classList.add("up");},90+k*140);
+          m.onclick=()=>{if(busy)return;
+            if(o.id===w.id){busy=true;clearTimeout(moleTimer);beep(true);speak(w.en);score++;
+              document.getElementById("sc").textContent="Очки: "+score;m.querySelector(".mm").textContent="⭐";
+              setTimeout(roundGo,650);}
+            else{beep(false);m.classList.remove("up");}};});
+        clearTimeout(moleTimer);
+        moleTimer=setTimeout(()=>{if(!busy&&hz.isConnected){busy=true;moles.forEach(m=>m.classList.remove("up"));beep(false);setTimeout(roundGo,450);}},3400);
+      }
+      function end(){clearTimeout(moleTimer);
+        document.getElementById("stage").innerHTML='<div class="center" style="margin-top:34px"><div class="big">'+(score>=7?"🏆":"🐹")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="mole()">Ещё раз</button></div>';
+        fanfare();if(score>=7)confetti();}
+      roundGo();
+    }
+
+    /* ---------- 🎁 Открой коробку ---------- */
+    function box(){
+      const seenB={},uq=[];shuffle(WORDS).forEach(w=>{const k=(w.en||"").toLowerCase();if(!seenB[k]){seenB[k]=1;uq.push(w);}});
+      const pick=uq.slice(0,8);let opened=0,score=0;
+      document.getElementById("stage").innerHTML=
+        '<div class="score" id="sc">Очки: 0</div>'+
+        '<div class="center"><div class="phrase" style="margin-top:4px">Открывай коробки и выбирай перевод!</div></div>'+
+        '<div class="gifts" id="gf"></div><div id="bq"></div>';
+      const gf=document.getElementById("gf");
+      pick.forEach(w=>{
+        const g=document.createElement("div");g.className="gift";g.textContent="🎁";
+        g.onclick=()=>{
+          if(g.classList.contains("open")||document.getElementById("bo"))return;
+          g.classList.add("open");g.innerHTML='<div>'+SM_face(w,42)+'</div><div class="gw">'+w.en+'</div>';
+          speak(w.en);
+          const opts=shuffle([w,...distract(w,2)]);
+          const bq=document.getElementById("bq");let done=false;
+          bq.innerHTML='<div class="center"><div class="phrase" style="margin-top:10px">Что значит «'+w.en+'»?</div></div><div class="opts" id="bo" style="max-width:430px;margin:10px auto 0"></div>';
+          const bo=document.getElementById("bo");
+          opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.ru;
+            b.onclick=()=>{if(done)return;done=true;
+              if(o.id===w.id){b.classList.add("correct");beep(true);score++;document.getElementById("sc").textContent="Очки: "+score;}
+              else{b.classList.add("wrong");beep(false);const cb=[...bo.children].find(x=>x.textContent===w.ru);if(cb)cb.classList.add("correct");}
+              opened++;setTimeout(()=>{bq.innerHTML="";if(opened>=pick.length)end();},850);};
+            bo.appendChild(b);});
+        };
+        gf.appendChild(g);});
+      function end(){document.getElementById("bq").innerHTML='<div class="center" style="margin-top:14px"><div class="big">'+(score>=6?"🏆":"🎁")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+pick.length+'</h2><button class="primary" onclick="box()">Ещё раз</button></div>';
+        fanfare();if(score>=6)confetti();}
     }
 
     renderGames();start();
