@@ -80,6 +80,7 @@
       image:{label:"🖼 Картинка"},
       video:{label:"🎬 Видео (YouTube)"},
       embed:{label:"🌐 Интерактив по ссылке (Wordwall, LearningApps…)"},
+      shadow:{label:"🗣 Shadowing (фразы для повторения вслух)"},
       audio:{label:"🔊 Аудио (озвучка)"},
       dialogue:{label:"💬 Диалог"},
       note:{label:"🗒 Заметка / правило"},
@@ -194,6 +195,11 @@
     /* ---------- формы по типам ---------- */
     function renderForm(type,data){
       const f=document.getElementById("fields"); data=data||{};
+      if(type==="shadow"){
+        f.innerHTML='<label>ФРАЗЫ — по одной в строке (ребёнок слушает и повторяет вслух)</label>'+
+          '<textarea id="lines" rows="7" placeholder="Hello! My name is Sam.&#10;I like apples and milk.&#10;This is my school bag.">'+esc((data.lines||[]).join("\n"))+'</textarea>';
+        return;
+      }
       if(type==="embed"){
         f.innerHTML='<label>ССЫЛКА — YouTube, Wordwall, LearningApps, LiveWorksheets, Quizlet, Genially, Miro, Google Drive…</label>'+
           '<input id="url" placeholder="https://wordwall.net/resource/…" value="'+esc(data.url||"")+'">'+
@@ -325,6 +331,11 @@
     }
 
     function readForm(type){
+      if(type==="shadow"){
+        const lines=document.getElementById("lines").value.split("\n").map(x=>x.trim()).filter(Boolean);
+        if(!lines.length) return {err:"Впиши хотя бы одну фразу"};
+        return {data:{lines}};
+      }
       if(type==="embed"){
         const url=document.getElementById("url").value.trim();
         if(!url) return {err:"Вставь ссылку на материал"};

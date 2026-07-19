@@ -103,6 +103,25 @@ window.SM = (function () {
       return { ok: !error, error: error && error.message };
     },
 
+    /* ---------- Умное повторение (ящики Лейтнера) ---------- */
+    srsQ: [],
+    srsQueue(wordId, ok) { this.srsQ.push({ id: wordId, ok: !!ok }); if (this.srsQ.length >= 12) this.srsFlush(); },
+    async srsFlush() {
+      if (!this.srsQ.length) return { ok: true };
+      const q = this.srsQ.splice(0, this.srsQ.length);
+      const p = await this.loadProgress();
+      const days = [0, 1, 2, 4, 7, 15];
+      q.forEach(it => {
+        const e = p[it.id] || { level: 0, correct: 0, seen: 0, status: "learning" };
+        e.seen = (e.seen || 0) + 1; if (it.ok) e.correct = (e.correct || 0) + 1;
+        e.b = it.ok ? Math.min((e.b || 0) + 1, 5) : 0;
+        e.due = Date.now() + days[e.b] * 864e5;
+        if (!it.ok) e.status = "learning";
+        p[it.id] = e;
+      });
+      return this.saveProgress(p);
+    },
+
     /* ---------- Класс: учитель / ученики ---------- */
     async myProfile() {
       if (!useCloud) return null;

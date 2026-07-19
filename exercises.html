@@ -67,7 +67,7 @@
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
-    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ"};
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ"};
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
@@ -248,7 +248,41 @@
       return card('<div class="kind">'+KIND.embed+(d.name?" · "+esc(d.name):"")+'</div>'+ifr+
         '<div style="margin-top:8px;text-align:right"><a href="'+esc(d.url||src)+'" target="_blank" style="font:800 12px \'Nunito\',sans-serif;color:#7c2340">Открыть в новой вкладке ↗</a></div>');
     }
-    const R={embed:renderEmbed,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
+    function renderShadow(e){
+      const lines=(e.data&&e.data.lines)||[];
+      if(!lines.length) throw new Error("no lines");
+      const c=card('<div class="kind">'+KIND.shadow+'</div>'+
+        '<div style="font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-bottom:8px">Скорость: <select class="shrate" style="font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:2px 6px"><option value="0.6">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
+        '<div class="shlines"></div>');
+      const box=c.querySelector(".shlines"),rateSel=c.querySelector(".shrate");
+      lines.forEach(line=>{
+        const row=document.createElement("div");
+        row.style.cssText="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap";
+        row.innerHTML='<button class="pl" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer">🔊</button>'+
+          '<span style="flex:1;font-size:17px;font-weight:600;min-width:150px">'+esc(line)+'</span>'+
+          '<button class="rc" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer">🎤</button>'+
+          '<button class="my" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer" disabled>▶️</button>';
+        const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my");
+        pl.onclick=()=>{try{const u=new SpeechSynthesisUtterance(line);u.lang="en-US";u.rate=parseFloat(rateSel.value);speechSynthesis.cancel();speechSynthesis.speak(u);}catch(err){}};
+        let myUrl=null;
+        rc.onclick=async()=>{
+          if(window.__shRec){ window.__shRec.stop(); return; }
+          try{
+            const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+            const mr=new MediaRecorder(stream);const chunks=[];
+            mr.ondataavailable=ev=>chunks.push(ev.data);
+            mr.onstop=()=>{stream.getTracks().forEach(t=>t.stop());window.__shRec=null;rc.textContent="🎤";
+              if(myUrl)URL.revokeObjectURL(myUrl);myUrl=URL.createObjectURL(new Blob(chunks,{type:"audio/webm"}));my.disabled=false;};
+            window.__shRec=mr;mr.start();rc.textContent="⏹";
+            setTimeout(()=>{if(window.__shRec===mr)mr.stop();},10000);
+          }catch(err){alert("Разреши доступ к микрофону 🎤");}
+        };
+        my.onclick=()=>{if(myUrl)new Audio(myUrl).play();};
+        box.appendChild(row);
+      });
+      return c;
+    }
+    const R={embed:renderEmbed,shadow:renderShadow,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
     let IS_TEACHER=false;
     function warnCard(html){return card(html);}

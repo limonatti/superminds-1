@@ -97,7 +97,9 @@
     <div class="foot">Made for @english.with_asya · Super Minds 1 · для детей 6–8</div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
   <script>
     const q=new URLSearchParams(location.search);
     const unit=SM_UNITS.find(u=>u.id===(q.get("u")||"u1"))||SM_UNITS[0];
@@ -223,6 +225,7 @@
         const box=document.getElementById("opts");
         opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
           b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;
+            try{SM.srsQueue(w.id,ok);}catch(e){}
             if(ok){b.classList.add("correct");beep(true);speak(w.en);if(turn==="green")posG++;else posR++;place();}
             else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
             if(posG>=STEPS||posR>=STEPS){const win=posG>=STEPS?"Зелёные":"Красные";setTimeout(()=>{fanfare();confetti();
@@ -246,6 +249,7 @@
         const box=document.getElementById("opts");
         opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.en;
           b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;
+            try{SM.srsQueue(w.id,ok);}catch(e){}
             if(ok){b.classList.add("correct");beep(true);score++;document.getElementById("sc").textContent="Очки: "+score;}
             else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
             speak(w.en);setTimeout(ask,ok?350:700);};box.appendChild(b);});}
@@ -273,9 +277,9 @@
           d.style.animation="bob "+(2+Math.random()*1.6)+"s ease-in-out infinite";
           d.innerHTML='<div class="bb" style="filter:hue-rotate('+(i*75)+'deg)">🎈</div><div class="bw">'+o.en+'</div>';
           d.onclick=()=>{if(busy)return;
-            if(o.id===w.id){busy=true;d.classList.add("pop");beep(true);speak(w.en);score++;
+            if(o.id===w.id){busy=true;d.classList.add("pop");beep(true);speak(w.en);score++;try{SM.srsQueue(w.id,true);}catch(e){}
               document.getElementById("sc").textContent="Очки: "+score;setTimeout(roundGo,650);}
-            else{beep(false);d.style.opacity=.3;d.style.pointerEvents="none";}};
+            else{beep(false);d.style.opacity=.3;d.style.pointerEvents="none";try{SM.srsQueue(w.id,false);}catch(e){}}};
           ar.appendChild(d);});
       }
       function end(){const ar=document.getElementById("ar");if(!ar)return;
@@ -309,10 +313,10 @@
           m.querySelector(".mw").textContent=o.en;
           setTimeout(()=>{if(hz.isConnected&&!busy)m.classList.add("up");},90+k*140);
           m.onclick=()=>{if(busy)return;
-            if(o.id===w.id){busy=true;clearTimeout(moleTimer);beep(true);speak(w.en);score++;
+            if(o.id===w.id){busy=true;clearTimeout(moleTimer);beep(true);speak(w.en);score++;try{SM.srsQueue(w.id,true);}catch(e){}
               document.getElementById("sc").textContent="Очки: "+score;m.querySelector(".mm").textContent="⭐";
               setTimeout(roundGo,650);}
-            else{beep(false);m.classList.remove("up");}};});
+            else{beep(false);m.classList.remove("up");try{SM.srsQueue(w.id,false);}catch(e){}}};});
         clearTimeout(moleTimer);
         moleTimer=setTimeout(()=>{if(!busy&&hz.isConnected){busy=true;moles.forEach(m=>m.classList.remove("up"));beep(false);setTimeout(roundGo,450);}},3400);
       }
@@ -343,6 +347,7 @@
           const bo=document.getElementById("bo");
           opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.ru;
             b.onclick=()=>{if(done)return;done=true;
+              try{SM.srsQueue(w.id,o.id===w.id);}catch(e){}
               if(o.id===w.id){b.classList.add("correct");beep(true);score++;document.getElementById("sc").textContent="Очки: "+score;}
               else{b.classList.add("wrong");beep(false);const cb=[...bo.children].find(x=>x.textContent===w.ru);if(cb)cb.classList.add("correct");}
               opened++;setTimeout(()=>{bq.innerHTML="";if(opened>=pick.length)end();},850);};
@@ -353,6 +358,8 @@
         fanfare();if(score>=6)confetti();}
     }
 
+    addEventListener("pagehide",()=>{try{SM.srsFlush();}catch(e){}});
+    setInterval(()=>{try{SM.srsFlush();}catch(e){}},15000);
     renderGames();start();
   </script>
 </body>

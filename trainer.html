@@ -202,6 +202,8 @@
       p.seen++;
       if(ok){ p.correct++; p.level=Math.min(TARGET,p.level+1); } else { p.level=Math.max(0,p.level-1); }
       p.status = p.level>=TARGET ? "learned":"learning";
+      p.b = ok ? Math.min((p.b||0)+1,5) : 0;
+      p.due = Date.now() + [0,1,2,4,7,15][p.b]*864e5;
       progress[word.id]=p;
       if(ok){ let g=10; streak++; if(streak%5===0) g+=5; points+=g;
         const wk=weekKey(new Date()); if(meta.weekKey!==wk){ meta.weekKey=wk; meta.weekPoints=0; }

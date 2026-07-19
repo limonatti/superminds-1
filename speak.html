@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Говорилка · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#7c2340}
+  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
+  .tab{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:10px 20px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
+  .tab.on{background:#8e44ad;border-color:#8e44ad;color:#fff}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:24px;text-align:center}
+  .big{font-size:72px;line-height:1;margin:6px 0}
+  .word{font-size:34px;font-weight:700;color:#7c2340;margin:4px 0}
+  .ru{font:800 15px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:14px}
+  .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .b{border:0;border-radius:14px;padding:14px 22px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba}
+  .b.listen{background:#e4ebf2;color:#1c1310}
+  .b.mic{background:#8e44ad;color:#fff}
+  .b.mic.rec{background:#c0392b;animation:pulse 1s infinite}
+  @keyframes pulse{50%{transform:scale(1.06)}}
+  .stars{font-size:30px;min-height:40px;margin-top:10px}
+  .heard{font:700 13px 'Nunito',sans-serif;color:#8a7a68;min-height:18px;margin-top:6px}
+  .prog{font:900 14px 'Nunito',sans-serif;color:#5a4f47;text-align:center;margin:12px 0}
+  .primary{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .shrow{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap;text-align:left}
+  .shrow .sb{border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
+  .shrow .tx{flex:1;font-size:17px;font-weight:600;min-width:150px}
+  .rate{font:700 13px 'Nunito',sans-serif;color:#8a7a68;text-align:left;margin-bottom:6px}
+  .rate select{font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:3px 8px}
+  .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
+  @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+</style>
+</head>
+<body>
+  <a class="home" href="units.html">← Юниты</a>
+  <div class="wrap">
+    <h1>🗣 Говорилка</h1>
+    <div class="sub" id="sub"></div>
+    <div class="tabs">
+      <button class="tab on" id="tabW">🎤 Слова</button>
+      <button class="tab" id="tabS">🔁 Shadowing</button>
+    </div>
+    <div id="root"><div class="empty">Загрузка…</div></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function say(t,rate){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function norm(s){return (s||"").trim().toLowerCase().replace(/[^a-z ]/g,"").replace(/\s+/g," ");}
+    function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;const d=[];for(let i=0;i<=m;i++)d[i]=[i];for(let j=0;j<=n;j++)d[0][j]=j;
+      for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+    function confetti(){const em=["🎉","✨","⭐","🎊"];for(let i=0;i<24;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*20)+"px";sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";document.body.appendChild(sp);setTimeout(()=>sp.remove(),4000);}}
+
+    const q=new URLSearchParams(location.search);
+    const unit=SM_UNITS.find(u=>u.id===(q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id)))||SM_UNITS[0];
+    document.getElementById("sub").textContent=(unit?unit.emoji+" "+unit.title:"")+" · слушай, говори, сравнивай";
+    const WORDS=(unit&&unit.words||[]).map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji,img:w.img||null}));
+    const root=document.getElementById("root");
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+    /* ---------- 🎤 Слова ---------- */
+    let deck=[],idx=0,stars=0,tries=0;
+    function speakGame(){
+      if(!WORDS.length){root.innerHTML='<div class="empty">В этом юните пока нет слов. Добавь их в 📚 Конструкторе учебников.</div>';return;}
+      deck=shuffle(WORDS).slice(0,10);idx=0;stars=0;
+      round_();
+    }
+    function round_(){
+      if(idx>=deck.length){end_();return;}
+      const w=deck[idx];tries=0;
+      root.innerHTML='<div class="prog">Слово '+(idx+1)+' из '+deck.length+' · ⭐ '+stars+'</div>'+
+        '<div class="card"><div class="big">'+SM_face(w,84)+'</div>'+
+        '<div class="word">'+esc(w.en)+'</div><div class="ru">'+esc(w.ru)+'</div>'+
+        '<div class="btns"><button class="b listen" id="ls">🔊 Послушать</button>'+
+        (SR?'<button class="b mic" id="mc">🎤 Сказать</button>':'')+
+        '</div><div class="stars" id="st"></div><div class="heard" id="hd">'+(SR?"":"Микрофон работает в Google Chrome — открой сайт там 🙂")+'</div>'+
+        (SR?'':'<button class="primary" style="margin-top:10px" id="skip">Дальше →</button>')+
+        '</div>';
+      document.getElementById("ls").onclick=()=>say(w.en);
+      if(!SR){document.getElementById("skip").onclick=()=>{idx++;round_();};return;}
+      const mc=document.getElementById("mc");
+      mc.onclick=()=>{
+        const rec=new SR();rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=4;
+        mc.classList.add("rec");mc.textContent="🎙 Слушаю…";
+        document.getElementById("hd").textContent="";
+        rec.onresult=ev=>{
+          const alts=[...ev.results[0]].map(a=>norm(a.transcript));
+          const target=norm(w.en);
+          let got=0;
+          for(const a of alts){
+            if(a===target){got=3;break;}
+            if(a.includes(target)||lev(a,target)<=Math.max(1,Math.floor(target.length/4))){got=Math.max(got,2);}
+          }
+          finish(got,alts[0]||"");
+        };
+        rec.onerror=()=>finish(-1,"");
+        rec.onend=()=>{mc.classList.remove("rec");mc.textContent="🎤 Сказать";};
+        rec.start();
+      };
+      function finish(got,heard){
+        const st=document.getElementById("st"),hd=document.getElementById("hd");
+        if(got===-1){hd.textContent="Не расслышала — попробуй ещё раз, говори чётко 🙂";return;}
+        hd.textContent=heard?("Я услышала: «"+heard+"»"):"";
+        if(got>=2){
+          st.textContent=got===3?"⭐⭐⭐":"⭐⭐";stars+=got;
+          try{SM.srsQueue(w.id,true);}catch(e){}
+          say(got===3?"Excellent!":"Good job!");
+          setTimeout(()=>{idx++;round_();},1400);
+        }else{
+          tries++;
+          if(tries>=2){st.textContent="⭐";stars+=1;try{SM.srsQueue(w.id,false);}catch(e){}
+            hd.textContent+=" · Послушай ещё раз и идём дальше";say(w.en);
+            setTimeout(()=>{idx++;round_();},1800);}
+          else{st.textContent="🤔";hd.textContent+=" · Попробуй ещё раз! Сначала нажми 🔊";}
+        }
+      }
+    }
+    function end_(){
+      try{SM.srsFlush();}catch(e){}
+      const max=deck.length*3;
+      root.innerHTML='<div class="card"><div class="big">'+(stars>=max*0.7?"🏆":"🗣")+'</div>'+
+        '<h2 style="color:#7c2340;margin:6px 0">⭐ '+stars+' из '+max+'</h2>'+
+        '<div class="ru">Отличная тренировка произношения!</div>'+
+        '<button class="primary" id="again">Ещё раз</button></div>';
+      document.getElementById("again").onclick=speakGame;
+      if(stars>=max*0.7)confetti();
+    }
+
+    /* ---------- 🔁 Shadowing ---------- */
+    async function shadowing(){
+      root.innerHTML='<div class="empty">Загрузка…</div>';
+      let lines=[];
+      try{
+        const ex=await SM.exercisesFor(SM_COURSE.id,unit.id);
+        ex.forEach(e=>{
+          if(e.type==="shadow"&&e.data){const its=(e.data.items&&e.data.items.length)?e.data.items:[e.data];its.forEach(it=>{(it.lines||[]).forEach(l=>lines.push(l));});}
+          if(e.type==="dialogue"&&e.data){const its=(e.data.items&&e.data.items.length)?e.data.items:[e.data];its.forEach(it=>{(it.lines||[]).forEach(l=>{if(l.text)lines.push(l.text);});});}
+        });
+      }catch(e){}
+      if(!lines.length) lines=WORDS.slice(0,10).map(w=>w.en);
+      if(!lines.length){root.innerHTML='<div class="empty">Пока нечего повторять. Учитель может добавить фразы: Конструктор → тип «🗣 Shadowing».</div>';return;}
+      let html='<div class="card" style="text-align:left"><div class="rate">Скорость: <select id="rate"><option value="0.6">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select>'+
+        ' <span style="margin-left:6px">Слушай → повторяй вслух → запиши себя и сравни</span></div><div id="shl"></div></div>';
+      root.innerHTML=html;
+      const shl=document.getElementById("shl"),rateSel=document.getElementById("rate");
+      let activeRec=null;
+      lines.forEach(line=>{
+        const row=document.createElement("div");row.className="shrow";
+        row.innerHTML='<button class="sb pl">🔊</button><span class="tx">'+esc(line)+'</span><button class="sb rc">🎤</button><button class="sb my" disabled>▶️</button>';
+        const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my");
+        let myUrl=null;
+        pl.onclick=()=>say(line,parseFloat(rateSel.value));
+        rc.onclick=async()=>{
+          if(activeRec){activeRec.stop();return;}
+          try{
+            const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+            const mr=new MediaRecorder(stream);const chunks=[];
+            mr.ondataavailable=ev=>chunks.push(ev.data);
+            mr.onstop=()=>{stream.getTracks().forEach(t=>t.stop());activeRec=null;rc.textContent="🎤";
+              if(myUrl)URL.revokeObjectURL(myUrl);myUrl=URL.createObjectURL(new Blob(chunks,{type:"audio/webm"}));my.disabled=false;};
+            activeRec=mr;mr.start();rc.textContent="⏹";
+            setTimeout(()=>{if(activeRec===mr)mr.stop();},12000);
+          }catch(e){alert("Разреши доступ к микрофону 🎤");}
+        };
+        my.onclick=()=>{if(myUrl)new Audio(myUrl).play();};
+        shl.appendChild(row);
+      });
+    }
+
+    const tw=document.getElementById("tabW"),ts=document.getElementById("tabS");
+    tw.onclick=()=>{tw.classList.add("on");ts.classList.remove("on");speakGame();};
+    ts.onclick=()=>{ts.classList.add("on");tw.classList.remove("on");shadowing();};
+    addEventListener("pagehide",()=>{try{SM.srsFlush();}catch(e){}});
+    speakGame();
+  </script>
+</body>
+</html>
