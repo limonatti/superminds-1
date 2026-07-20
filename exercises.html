@@ -65,7 +65,7 @@
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-    function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function speak(t){if(window.SM_speak)return SM_speak(t);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
     const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ",reading:"ЧТЕНИЕ · ЭКЗАМЕН",tfns:"TRUE / FALSE / NOT STATED",wordform:"СЛОВООБРАЗОВАНИЕ",headings:"ПОДБЕРИ ЗАГОЛОВКИ"};
 
@@ -263,7 +263,7 @@
           '<button class="rc" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer">🎤</button>'+
           '<button class="my" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer" disabled>▶️</button>';
         const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my");
-        pl.onclick=()=>{try{const u=new SpeechSynthesisUtterance(line);u.lang="en-US";u.rate=parseFloat(rateSel.value);speechSynthesis.cancel();speechSynthesis.speak(u);}catch(err){}};
+        pl.onclick=()=>{if(window.SM_speak)return SM_speak(line,parseFloat(rateSel.value));try{const u=new SpeechSynthesisUtterance(line);u.lang="en-US";u.rate=parseFloat(rateSel.value);speechSynthesis.cancel();speechSynthesis.speak(u);}catch(err){}};
         let myUrl=null;
         rc.onclick=async()=>{
           if(window.__shRec){ window.__shRec.stop(); return; }

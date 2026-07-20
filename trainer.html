@@ -154,7 +154,7 @@
     function pool(){ return SM_ALL_WORDS.filter(w => selectedUnits.includes(w.unitId)); }
     function lvl(id){ return (progress[id] && progress[id].level) || 0; }
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-    function speak(t){ try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
+    function speak(t){ if(window.SM_speak)return SM_speak(t); try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
 
     let actx=null;
     function beep(ok){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();

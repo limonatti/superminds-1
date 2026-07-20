@@ -42,6 +42,7 @@
     <div class="foot">Made for @english.with_asya</div>
   </div>
 
+  <script src="words.js"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function norm(s){return (s||"").trim().toLowerCase().replace(/[^a-z' ]/g,"").replace(/\s+/g," ");}
@@ -82,7 +83,7 @@
     let cur=SOUNDS[0].id, activeRec=null;
     const chips=document.getElementById("chips"),root=document.getElementById("root");
 
-    function say(t,rate){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function say(t,rate){if(window.SM_speak)return SM_speak(t,rate||0.8);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
 
     function drawChips(){
       chips.innerHTML="";

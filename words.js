@@ -256,3 +256,66 @@ window.SM_face = function (w, px) {
   if (w && w.img) return '<img src="' + w.img + '" alt="" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;vertical-align:middle;border-radius:12px">';
   return '<span style="font-size:' + px + 'px;line-height:1">' + (w ? w.emoji : "") + '</span>';
 };
+
+/* ---- Голосовой движок: US/GB, женский/мужской. Выбор хранится в localStorage ---- */
+(function () {
+  var CHOICES = { "us-f": { lang: "en-US", g: "f" }, "us-m": { lang: "en-US", g: "m" }, "gb-f": { lang: "en-GB", g: "f" }, "gb-m": { lang: "en-GB", g: "m" } };
+  var FEM = ["female", "zira", "jenny", "aria", "samantha", "sonia", "libby", "hazel", "karen", "victoria", "susan", "ava", "emma", "joanna", "salli", "kate", "serena", "stephanie", "allison", "michelle", "ana", "clara"];
+  var MAL = ["male", "david", "daniel", "guy", "ryan", "george", "alex", "fred", "thomas", "brian", "matthew", "oliver", "james", "arthur", "christopher", "eric", "roger", "william"];
+  function score(v, want) {
+    var n = (v.name || "").toLowerCase();
+    var lang = (v.lang || "").replace("_", "-");
+    if (lang.slice(0, 2) !== "en") return -1;
+    var s = 0;
+    if (lang === want.lang) s += 40;
+    var fem = FEM.some(function (x) { return n.indexOf(x) >= 0; });
+    var mal = MAL.some(function (x) { return n.indexOf(x) >= 0; });
+    if (want.g === "f" && fem) s += 25;
+    if (want.g === "m" && mal) s += 25;
+    if (want.g === "f" && mal && !fem) s -= 20;
+    if (want.g === "m" && fem && !mal) s -= 20;
+    if (n.indexOf("natural") >= 0 || n.indexOf("neural") >= 0) s += 30; // голоса Edge — самые живые
+    if (n.indexOf("google") >= 0) s += 20;
+    if (n.indexOf("premium") >= 0 || n.indexOf("enhanced") >= 0) s += 15;
+    if (n.indexOf("compact") >= 0) s -= 15;
+    return s;
+  }
+  window.SM_speak = function (text, rate) {
+    try {
+      var u = new SpeechSynthesisUtterance(text);
+      var key = null; try { key = localStorage.getItem("sm-voice"); } catch (e) {}
+      var want = CHOICES[key] || CHOICES["us-f"];
+      var best = null, bs = -1;
+      (speechSynthesis.getVoices() || []).forEach(function (v) {
+        var sc = score(v, want); if (sc > bs) { bs = sc; best = v; }
+      });
+      if (best) { u.voice = best; u.lang = best.lang; } else u.lang = want.lang;
+      u.rate = rate || 0.9;
+      u.pitch = 1;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    } catch (e) {}
+  };
+  try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = function () {}; } catch (e) {}
+
+  /* плавающий переключатель голоса (внизу справа на каждой странице) */
+  function widget() {
+    if (document.getElementById("smVoiceBtn") || !document.body) return;
+    var LBL = { "us-f": "🇺🇸 👩", "us-m": "🇺🇸 👨", "gb-f": "🇬🇧 👩", "gb-m": "🇬🇧 👨" };
+    var b = document.createElement("button");
+    b.id = "smVoiceBtn";
+    b.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:998;background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer;box-shadow:0 4px 0 #e3d3ba";
+    b.title = "Голос озвучки — клик переключает: США/Британия · женский/мужской";
+    function refresh() { var k = null; try { k = localStorage.getItem("sm-voice"); } catch (e) {} b.textContent = "🔊 " + (LBL[k] || LBL["us-f"]); }
+    refresh();
+    b.onclick = function () {
+      var order = ["us-f", "us-m", "gb-f", "gb-m"];
+      var cur = null; try { cur = localStorage.getItem("sm-voice"); } catch (e) {}
+      var next = order[(order.indexOf(cur) + 1) % order.length];
+      try { localStorage.setItem("sm-voice", next); } catch (e) {}
+      refresh();
+      window.SM_speak("Hello! I am your English voice.");
+    };
+    document.body.appendChild(b);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", widget); else widget();
+})();

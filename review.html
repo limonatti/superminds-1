@@ -44,7 +44,7 @@
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-    function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function say(t){if(window.SM_speak)return SM_speak(t);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function confetti(){const em=["🎉","✨","⭐","🎊"];for(let i=0;i<24;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*20)+"px";sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";document.body.appendChild(sp);setTimeout(()=>sp.remove(),4000);}}
     const root=document.getElementById("root");
     const byId={};SM_ALL_WORDS.forEach(w=>byId[w.id]=w);

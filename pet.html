@@ -123,7 +123,7 @@
       render();
       const pt=document.getElementById("pt");pt.classList.add("happy");
       confetti();
-      try{const u=new SpeechSynthesisUtterance("Yummy! Thank you!");u.lang="en-US";u.rate=1;speechSynthesis.speak(u);}catch(e){}
+      if(window.SM_speak)SM_speak("Yummy! Thank you!",1);else try{const u=new SpeechSynthesisUtterance("Yummy! Thank you!");u.lang="en-US";u.rate=1;speechSynthesis.speak(u);}catch(e){}
     }
     load();
   </script>
