@@ -261,7 +261,7 @@ window.SM_face = function (w, px) {
 (function () {
   var CHOICES = { "us-f": { lang: "en-US", g: "f" }, "us-m": { lang: "en-US", g: "m" }, "gb-f": { lang: "en-GB", g: "f" }, "gb-m": { lang: "en-GB", g: "m" } };
   var FEM = ["female", "zira", "jenny", "aria", "samantha", "sonia", "libby", "hazel", "karen", "victoria", "susan", "ava", "emma", "joanna", "salli", "kate", "serena", "stephanie", "allison", "michelle", "ana", "clara"];
-  var MAL = ["male", "david", "daniel", "guy", "ryan", "george", "alex", "fred", "thomas", "brian", "matthew", "oliver", "james", "arthur", "christopher", "eric", "roger", "william"];
+  var MAL = ["male", "david", "daniel", "guy", "ryan", "george", "alex", "fred", "thomas", "brian", "matthew", "oliver", "james", "arthur", "christopher", "eric", "roger", "william", "aaron", "nathan", "evan", "tom"];
   function score(v, want) {
     var n = (v.name || "").toLowerCase();
     var lang = (v.lang || "").replace("_", "-");
@@ -269,7 +269,8 @@ window.SM_face = function (w, px) {
     var s = 0;
     if (lang === want.lang) s += 40;
     var fem = FEM.some(function (x) { return n.indexOf(x) >= 0; });
-    var mal = MAL.some(function (x) { return n.indexOf(x) >= 0; });
+    var nm = n.replace(/female/g, ""); /* чтобы "male" не находился внутри "female" */
+    var mal = MAL.some(function (x) { return nm.indexOf(x) >= 0; });
     if (want.g === "f" && fem) s += 25;
     if (want.g === "m" && mal) s += 25;
     if (want.g === "f" && mal && !fem) s -= 20;
