@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Произношение · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  .wrap{max-width:680px;margin:0 auto;padding:64px 16px 60px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#c0392b}
+  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
+  .chip.on{background:#c0392b;border-color:#c0392b;color:#fff}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:16px}
+  .tip{background:#fbeef1;border:2px solid #e3d3ba;border-radius:14px;padding:12px 14px;font:700 14px 'Nunito',sans-serif;color:#7c2340;margin-bottom:14px;line-height:1.5}
+  .rate{font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:8px}
+  .rate select{font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:3px 8px}
+  .row{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap}
+  .row:last-child{border-bottom:0}
+  .row .tx{flex:1;font-size:17px;font-weight:600;min-width:150px}
+  .sb{border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
+  .sb:disabled{opacity:.4;cursor:default}
+  .sb.rec{background:#c0392b;color:#fff;border-color:#c0392b;animation:pulse 1s infinite}
+  @keyframes pulse{50%{transform:scale(1.08)}}
+  .stars{font-size:16px;min-width:60px;text-align:center}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+  .hint{font:700 12px 'Nunito',sans-serif;color:#8a7a68;text-align:center;margin-top:10px;line-height:1.6}
+</style>
+</head>
+<body>
+  <a class="home" href="units.html">← Юниты</a>
+  <div class="wrap">
+    <h1>🎙 Произношение</h1>
+    <div class="sub">выбери звук → слушай → повторяй → запиши себя → проверь</div>
+    <div class="chips" id="chips"></div>
+    <div id="root"></div>
+    <div class="hint">🔊 — эталон · 🎤 — записать себя · ▶️ — моя запись · 🎯 — проверка (скажи фразу, платформа распознает)<br>Свои фразы для shadowing добавляй в Конструкторе: тип «🗣 Shadowing» — они появятся в уроке и во вкладке Речь.</div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script>
+    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function norm(s){return (s||"").trim().toLowerCase().replace(/[^a-z' ]/g,"").replace(/\s+/g," ");}
+    function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;const d=[];for(let i=0;i<=m;i++)d[i]=[i];for(let j=0;j<=n;j++)d[0][j]=j;
+      for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+
+    const SOUNDS=[
+      {id:"th1",chip:"TH (think)",title:"Глухой TH — think, three",
+       tip:"Кончик языка легко зажми между зубами и выдувай воздух — как будто тихо шипишь. Не «с» и не «ф»!",
+       phrases:["Think about three things.","Thank you for the birthday cake.","I think it is Thursday.","Three thin panthers are thirsty.","Maths is my favourite thing.","I see three hundred and thirty-three."]},
+      {id:"th2",chip:"TH (this)",title:"Звонкий TH — this, mother",
+       tip:"Язык так же между зубами, но теперь включи голос — горло дрожит. Не «з» и не «д»!",
+       phrases:["This is my brother.","That is their mother.","The weather is nice today.","Together with my father.","These toys and those books.","My brother and my father are together."]},
+      {id:"rl",chip:"R / L",title:"R и L — red, lorry",
+       tip:"Для R язык загни назад и не дрожи им (это не русская «р»!). Для L кончик языка прижми к бугоркам за верхними зубами.",
+       phrases:["Red lorry, yellow lorry.","I really like rice.","Look at the little rabbit.","Larry likes red lollipops.","The library is really large.","A lovely yellow ruler."]},
+      {id:"wv",chip:"W / V",title:"W и V — we, very",
+       tip:"Для W сложи губы трубочкой, как для «у». Для V прикуси нижнюю губу верхними зубами. Это разные звуки!",
+       phrases:["We love very warm weather.","William visits his village.","A very wet winter.","Wave to Victor and Vicky.","Twelve white waves.","We watch a very good video."]},
+      {id:"ii",chip:"i / ee",title:"Короткий i и долгий ee — ship / sheep",
+       tip:"Ship — короткий расслабленный «и». Sheep — долгий «ии», растяни губы в улыбке. От этого меняется смысл слова!",
+       phrases:["This ship has six sheep.","Sit in this seat, please.","A big green bin.","He is eating a bit of meat.","Little Tim eats sweet peas.","Six kids see three green trees."]},
+      {id:"ae",chip:"A (cat)",title:"Звук Æ — cat, apple",
+       tip:"Открой рот шире, чем для русской «э», и улыбнись: получится звук между «а» и «э».",
+       phrases:["The black cat sat on a mat.","Dad has a happy hamster.","An apple in a bag.","The fat rat has a hat.","Ann and Dan clap hands.","A happy family at the camp."]},
+      {id:"ng",chip:"NG",title:"Звук NG — sing, king",
+       tip:"Задняя часть языка поднимается к нёбу, звук идёт через нос. Никакой «г» в конце — язык не отпускай!",
+       phrases:["I am singing and dancing.","The king is bringing a ring.","Good morning! Everything is amazing.","A long song for the young king.","Reading, writing and running.","Spring morning, birds are singing."]},
+      {id:"h",chip:"H",title:"Звук H — hello, house",
+       tip:"Просто лёгкий выдох, как будто дышишь на замёрзшее стекло. Не русская жёсткая «х»!",
+       phrases:["Hello! How are you?","Harry has a happy horse.","A huge house on a hill.","He has hot chocolate at home.","Help the hungry hedgehog.","How high is that hill?"]},
+      {id:"tw",chip:"🌀 Скороговорки",title:"Классические скороговорки",
+       tip:"Начни медленно (🐢), потом ускоряйся. Скажи три раза подряд без ошибок — ты чемпион!",
+       phrases:["She sells seashells on the seashore.","Peter Piper picked a peck of pickled peppers.","How much wood would a woodchuck chuck if a woodchuck could chuck wood?","Fuzzy Wuzzy was a bear.","A big black bug bit a big black bear.","Red leather, yellow leather."]}
+    ];
+
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    let cur=SOUNDS[0].id, activeRec=null;
+    const chips=document.getElementById("chips"),root=document.getElementById("root");
+
+    function say(t,rate){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+
+    function drawChips(){
+      chips.innerHTML="";
+      SOUNDS.forEach(s=>{const b=document.createElement("button");b.className="chip"+(s.id===cur?" on":"");b.textContent=s.chip;
+        b.onclick=()=>{cur=s.id;drawChips();draw();};chips.appendChild(b);});
+    }
+    function draw(){
+      const s=SOUNDS.find(x=>x.id===cur);
+      root.innerHTML='<div class="card"><h2 style="margin:0 0 10px;color:#c0392b;font-size:20px">'+esc(s.title)+'</h2>'+
+        '<div class="tip">💡 '+esc(s.tip)+'</div>'+
+        '<div class="rate">Скорость: <select id="rate"><option value="0.55">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
+        '<div id="list"></div></div>';
+      const list=document.getElementById("list"),rateSel=document.getElementById("rate");
+      s.phrases.forEach(ph=>{
+        const row=document.createElement("div");row.className="row";
+        row.innerHTML='<button class="sb pl">🔊</button><span class="tx">'+esc(ph)+'</span>'+
+          '<button class="sb rc" title="записать себя">🎤</button><button class="sb my" title="моя запись" disabled>▶️</button>'+
+          (SR?'<button class="sb ck" title="проверка произношения">🎯</button>':'')+
+          '<span class="stars"></span>';
+        const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my"),ck=row.querySelector(".ck"),st=row.querySelector(".stars");
+        let myUrl=null;
+        pl.onclick=()=>say(ph,parseFloat(rateSel.value));
+        rc.onclick=async()=>{
+          if(activeRec){activeRec.stop();return;}
+          try{
+            const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+            const mr=new MediaRecorder(stream);const chunks=[];
+            mr.ondataavailable=ev=>chunks.push(ev.data);
+            mr.onstop=()=>{stream.getTracks().forEach(t=>t.stop());activeRec=null;rc.classList.remove("rec");rc.textContent="🎤";
+              if(myUrl)URL.revokeObjectURL(myUrl);myUrl=URL.createObjectURL(new Blob(chunks,{type:"audio/webm"}));my.disabled=false;};
+            activeRec=mr;mr.start();rc.classList.add("rec");rc.textContent="⏹";
+            setTimeout(()=>{if(activeRec===mr)mr.stop();},15000);
+          }catch(e){alert("Разреши доступ к микрофону 🎤");}
+        };
+        my.onclick=()=>{if(myUrl)new Audio(myUrl).play();};
+        if(ck)ck.onclick=()=>{
+          const rec=new SR();rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=4;
+          ck.classList.add("rec");st.textContent="🎙…";
+          rec.onresult=ev=>{
+            const target=norm(ph);
+            let best=99;
+            [...ev.results[0]].forEach(a=>{best=Math.min(best,lev(norm(a.transcript),target));});
+            const tol=Math.max(2,Math.floor(target.length/8));
+            st.textContent=best===0?"⭐⭐⭐":best<=tol?"⭐⭐":best<=tol*2?"⭐":"🤔";
+          };
+          rec.onerror=()=>{st.textContent="🤷";};
+          rec.onend=()=>ck.classList.remove("rec");
+          rec.start();
+        };
+        list.appendChild(row);
+      });
+    }
+    if(!SR){/* без Chrome проверка 🎯 скрыта, остальное работает */}
+    drawChips();draw();
+  </script>
+</body>
+</html>

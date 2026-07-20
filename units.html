@@ -46,7 +46,7 @@
     document.getElementById("sub").textContent = "Юниты · выбери занятие";
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     const list=document.getElementById("list");
-    document.getElementById("list").insertAdjacentHTML("beforebegin",'<div class="toprow"><a class="revlink" style="margin:0" href="review.html">🧠 Мои слова</a><a class="revlink" style="margin:0" href="pet.html">🐣 Мой питомец</a></div>');
+    document.getElementById("list").insertAdjacentHTML("beforebegin",'<div class="toprow"><a class="revlink" style="margin:0" href="review.html">🧠 Мои слова</a><a class="revlink" style="margin:0" href="pet.html">🐣 Мой питомец</a><a class="revlink" style="margin:0" href="pronounce.html">🎙 Произношение</a></div>');
     SM_UNITS.forEach(u=>{
       const el=document.createElement("div");el.className="unit";
       el.innerHTML=
