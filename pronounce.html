@@ -38,7 +38,7 @@
     <div class="sub">выбери звук → слушай → повторяй → запиши себя → проверь</div>
     <div class="chips" id="chips"></div>
     <div id="root"></div>
-    <div class="hint">🔊 — эталон · 🎤 — записать себя · ▶️ — моя запись · 🎯 — проверка (скажи фразу, платформа распознает)<br>Свои фразы для shadowing добавляй в Конструкторе: тип «🗣 Shadowing» — они появятся в уроке и во вкладке Речь.</div>
+    <div class="hint">🔊 — эталон · 🎤 — записать себя · ▶️ — моя запись · 🎯 — проверка голосом · 🎬 — эта фраза в фильмах (PlayPhrase, откроется в новой вкладке)<br>Свои фразы для shadowing добавляй в Конструкторе: тип «🗣 Shadowing» — они появятся в уроке и во вкладке Речь.</div>
     <div class="foot">Made for @english.with_asya</div>
   </div>
 
@@ -101,6 +101,7 @@
         row.innerHTML='<button class="sb pl">🔊</button><span class="tx">'+esc(ph)+'</span>'+
           '<button class="sb rc" title="записать себя">🎤</button><button class="sb my" title="моя запись" disabled>▶️</button>'+
           (SR?'<button class="sb ck" title="проверка произношения">🎯</button>':'')+
+          '<a class="sb" style="text-decoration:none" title="услышать фразу в фильмах (откроется PlayPhrase в новой вкладке)" target="_blank" rel="noopener" href="https://www.playphrase.me/#/search?q='+encodeURIComponent(ph)+'">🎬</a>'+
           '<span class="stars"></span>';
         const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my"),ck=row.querySelector(".ck"),st=row.querySelector(".stars");
         let myUrl=null;
