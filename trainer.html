@@ -377,6 +377,10 @@
     })();
 
     (async function(){
+      if(!SM_ALL_WORDS.length){
+        document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#8a7a68"><div style="font-size:52px">📭</div><h2 style="color:#7c2340;margin:8px 0">В этом учебнике пока нет слов</h2>Добавь слова в юниты через 📚 Конструктор учебников — и тренажёр заработает!</div>';
+        return;
+      }
       const user=await SM.getUser();
       if(user)document.getElementById("greet").textContent="Привет, "+user.name+"! Учим слова 💪";
       if(SM.isCloud&&!user){const b=document.getElementById("banner");b.style.display="block";b.innerHTML='Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';}
