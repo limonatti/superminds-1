@@ -95,7 +95,8 @@
       "<label>Цвет</label>" + colorPicker("usw", u && u.color || COLORS[2]) +
       '<label>Слова юнита</label><div id="wlist"></div>' +
       '<div class="wbar"><button type="button" class="bt" id="addW">＋ слово</button>' +
-      '<button type="button" class="bt" id="mode">⇄ ввести списком</button></div>' +
+      '<button type="button" class="bt" id="mode">⇄ ввести списком</button>' +
+      '<button type="button" class="bt" id="aiFill" style="background:#2980b9;border-color:#2980b9;color:#fff">🤖 Заполнить переводы и эмодзи</button></div>' +
       '<div class="hint" id="whint">У каждого слова: эмодзи, английское, перевод. <b>📁</b> — загрузить картинку с компьютера (сожмётся автоматически), <b>🔗</b> — вставить ссылку на картинку.</div>' +
       '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить юнит</button><button class="bt" id="cancel">Отмена</button></div>' +
       '<div class="msg" id="msg"></div></div>';
@@ -164,6 +165,31 @@
       else { renderBulk(); bulk = true; this.textContent = "⇄ вернуться к списку";
         document.getElementById("addW").style.display = "none";
         document.getElementById("whint").innerHTML = "Быстрый ввод: одно слово в строке, формат <b>английское — перевод — эмодзи</b>. Потом вернись к списку, чтобы добавить картинки."; }
+    };
+
+    // 🤖 ассистент: заполнить пустые переводы и эмодзи
+    var aiBtn = document.getElementById("aiFill");
+    if (aiBtn) aiBtn.onclick = async function () {
+      if (bulk) syncFromBulk();
+      var need = W.filter(function (w) { return (w.en || "").trim() && (!(w.ru || "").trim() || !(w.emoji || "").trim()); });
+      if (!need.length) { m("ok", "Всё уже заполнено 👍"); return; }
+      var old = aiBtn.textContent;
+      aiBtn.disabled = true; aiBtn.textContent = "🤖 думаю…"; m("", "Ассистент подбирает переводы…");
+      var res = await SM_AI.call("translate", { words: need.map(function (w) { return w.en.trim(); }) });
+      aiBtn.disabled = false; aiBtn.textContent = old;
+      if (!res.ok) { m("err", res.error); return; }
+      var items = (res.data && res.data.items) || [];
+      var map = {};
+      items.forEach(function (it) { if (it.en) map[it.en.toLowerCase().trim()] = it; });
+      var filled = 0;
+      W.forEach(function (w) {
+        var it = map[(w.en || "").toLowerCase().trim()];
+        if (!it) return;
+        if (!(w.ru || "").trim() && it.ru) { w.ru = it.ru; filled++; }
+        if (!(w.emoji || "").trim() && it.emoji) { w.emoji = it.emoji; }
+      });
+      if (bulk) { document.getElementById("mode").click(); } else { renderRows(); }
+      m("ok", "Готово: заполнено переводов — " + filled + ". Проверь и поправь, если нужно.");
     };
 
     document.getElementById("cancel").onclick = function () { showUnits(curCourse); };
