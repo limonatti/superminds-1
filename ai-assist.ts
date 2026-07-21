@@ -3,8 +3,10 @@
 // Вызывать может только залогиненный учитель — чтобы никто не тратил баланс.
 
 const ANTHROPIC_KEY = Deno.env.get("ANTHROPIC_API_KEY");
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_ANON = Deno.env.get("SUPABASE_ANON_KEY");
+// URL и публичный ключ — не секреты, можно держать в коде (fallback на случай,
+// если окружение не отдаёт стандартные переменные).
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
+const SUPABASE_ANON = Deno.env.get("SUPABASE_ANON_KEY") || "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
 
 const MODEL_SMART = "claude-sonnet-5";
 const MODEL_FAST = "claude-haiku-4-5-20251001";
@@ -109,6 +111,15 @@ const TASKS: Record<string, Task> = {
 };
 
 Deno.serve(async (req) => {
+  try {
+    return await handle(req);
+  } catch (e) {
+    // что бы ни случилось — отвечаем с CORS, иначе браузер видит «Failed to fetch»
+    return json({ error: "Внутренняя ошибка: " + (e?.message || String(e)) }, 500);
+  }
+});
+
+async function handle(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
   if (!ANTHROPIC_KEY) return json({ error: "ANTHROPIC_API_KEY не задан в Secrets" }, 500);
@@ -177,4 +188,4 @@ Deno.serve(async (req) => {
     raw: parsed ? undefined : clean,
     usage: data.usage,
   });
-});
+}
