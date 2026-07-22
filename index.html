@@ -70,6 +70,21 @@
       };
       grid.appendChild(el);
     });
+    /* Курсы Speakout — прямые ссылки на тренажёры */
+    const EXTRA=[
+      {title:"Speakout B1+",subtitle:"3rd edition · тренажёр по юнитам",emoji:"🗣️",color:"#dce9f2",href:"speakout-b1plus.html"},
+      {title:"Speakout B1",subtitle:"3rd edition · тренажёр по юнитам",emoji:"💬",color:"#f6e2cf",href:"speakout-b1.html"}
+    ];
+    EXTRA.forEach(c=>{
+      const el=document.createElement("div");
+      el.className="course ready";
+      el.innerHTML='<div class="cover" style="background:'+c.color+'">'+c.emoji+'</div>'+
+        '<div class="t">'+c.title+'</div>'+
+        '<div class="s">'+c.subtitle+'</div>'+
+        '<div class="go">Открыть →</div>';
+      el.onclick=()=>{ location.href=c.href; };
+      grid.appendChild(el);
+    });
   </script>
 </body>
 </html>
