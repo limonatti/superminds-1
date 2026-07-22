@@ -2,7 +2,9 @@
 // Посредник между сайтом и Claude API. Ключ живёт только здесь, в коде сайта его нет.
 // Вызывать может только залогиненный учитель — чтобы никто не тратил баланс.
 
-const ANTHROPIC_KEY = Deno.env.get("ANTHROPIC_API_KEY");
+// .trim() убирает случайные пробелы/переносы строки, попавшие при вставке ключа
+const ANTHROPIC_KEY = (Deno.env.get("ANTHROPIC_API_KEY") || "").trim();
+const OPENAI_KEY = (Deno.env.get("OPENAI_API_KEY") || "").trim();
 // URL и публичный ключ — не секреты, можно держать в коде (fallback на случай,
 // если окружение не отдаёт стандартные переменные).
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
@@ -147,6 +149,36 @@ async function handle(req: Request): Promise<Response> {
   // --- задача ---
   let body: any;
   try { body = await req.json(); } catch { return json({ error: "Плохой запрос" }, 400); }
+
+  // --- генерация картинки (OpenAI) ---
+  if (body.task === "image") {
+    if (!OPENAI_KEY) return json({ error: "OPENAI_API_KEY не задан в Secrets" }, 500);
+    const p = body.payload || {};
+    const word = (p.en || "").toString().slice(0, 60);
+    const ru = (p.ru || "").toString().slice(0, 60);
+    if (!word) return json({ error: "нет слова для картинки" }, 400);
+    const prompt =
+      "A simple, friendly, colorful flat vector illustration of \"" + word + "\"" +
+      (ru ? " (" + ru + ")" : "") +
+      " for a children's English flashcard. Single clear object, centered, plain white background, " +
+      "no text, no letters, soft rounded shapes, bright cheerful colors, suitable for kids aged 6-10.";
+    const ir = await fetch("https://api.openai.com/v1/images/generations", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + OPENAI_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "gpt-image-1", prompt: prompt, size: "1024x1024", quality: "low", n: 1 }),
+    });
+    if (!ir.ok) {
+      const t = await ir.text();
+      if (ir.status === 401) return json({ error: "OpenAI: ключ неверный или отозван" }, 502);
+      if (ir.status === 429 || t.includes("billing") || t.includes("quota")) return json({ error: "OpenAI: закончились средства или лимит" }, 402);
+      return json({ error: "OpenAI ответил ошибкой (" + ir.status + ")" }, 502);
+    }
+    const idata = await ir.json();
+    const b64 = idata.data && idata.data[0] && idata.data[0].b64_json;
+    if (!b64) return json({ error: "OpenAI не вернул картинку" }, 502);
+    return json({ ok: true, image: "data:image/png;base64," + b64 });
+  }
+
   const task = TASKS[body.task];
   if (!task) return json({ error: "Неизвестная задача: " + body.task }, 400);
 
