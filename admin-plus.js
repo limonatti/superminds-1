@@ -96,7 +96,8 @@
       '<label>Слова юнита</label><div id="wlist"></div>' +
       '<div class="wbar"><button type="button" class="bt" id="addW">＋ слово</button>' +
       '<button type="button" class="bt" id="mode">⇄ ввести списком</button>' +
-      '<button type="button" class="bt" id="aiFill" style="background:#2980b9;border-color:#2980b9;color:#fff">🤖 Заполнить переводы и эмодзи</button></div>' +
+      '<button type="button" class="bt" id="aiFill" style="background:#2980b9;border-color:#2980b9;color:#fff">🤖 Заполнить переводы и эмодзи</button>' +
+      '<button type="button" class="bt" id="aiImgAll" style="background:#3f7a20;border-color:#3f7a20;color:#fff">🎨 Картинки ко всем словам</button></div>' +
       '<div class="hint" id="whint">У каждого слова: эмодзи, английское, перевод. <b>📁</b> — загрузить картинку с компьютера (сожмётся автоматически), <b>🔗</b> — вставить ссылку на картинку.</div>' +
       '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить юнит</button><button class="bt" id="cancel">Отмена</button></div>' +
       '<div class="msg" id="msg"></div></div>';
@@ -204,6 +205,36 @@
       });
       if (bulk) { document.getElementById("mode").click(); } else { renderRows(); }
       m("ok", "Готово: заполнено переводов — " + filled + ". Проверь и поправь, если нужно.");
+    };
+
+    // 🎨 массовая генерация картинок ко всем словам без картинки
+    var aiImgAll = document.getElementById("aiImgAll");
+    if (aiImgAll) aiImgAll.onclick = async function () {
+      if (typeof SM_AI === "undefined") { alert("Модуль ассистента не загрузился, обнови страницу"); return; }
+      if (bulk) syncFromBulk();
+      var need = [];
+      W.forEach(function (w, i) { if ((w.en || "").trim() && !((w.img || "").trim())) need.push(i); });
+      if (!need.length) { m("ok", "У всех слов уже есть картинки 👍"); return; }
+      var secs = need.length * 20;
+      var mins = Math.max(1, Math.round(secs / 60));
+      if (!confirm("Нарисовать картинки к " + need.length + " словам?\n\nЭто займёт примерно " + mins + " мин и спишет ориентировочно $" + (need.length * 0.015).toFixed(2) + " с баланса OpenAI.\n\nНе закрывай страницу до конца.")) return;
+      aiImgAll.disabled = true; aiBtn && (aiBtn.disabled = true);
+      var done = 0, fail = 0;
+      for (var k = 0; k < need.length; k++) {
+        var idx = need[k];
+        var en = (W[idx].en || "").trim();
+        m("", "🎨 Рисую " + (k + 1) + " из " + need.length + ": «" + en + "»…");
+        try {
+          var res = await SM_AI.call("image", { en: en, ru: (W[idx].ru || "").trim() });
+          if (res.ok && res.image) {
+            await new Promise(function (resolve) { SM_AI.compress(res.image, function (small) { W[idx].img = small; resolve(); }); });
+            done++;
+          } else { fail++; }
+        } catch (e) { fail++; }
+      }
+      aiImgAll.disabled = false; aiFill && (aiFill.disabled = false);
+      renderRows();
+      m(fail ? "err" : "ok", "Готово: нарисовано " + done + " из " + need.length + (fail ? " (не удалось " + fail + " — попробуй их вручную кнопкой 🎨)" : "") + ". Не забудь сохранить юнит!");
     };
 
     document.getElementById("cancel").onclick = function () { showUnits(curCourse); };
