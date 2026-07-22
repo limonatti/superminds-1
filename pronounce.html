@@ -3,142 +3,280 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Произношение · English with Asya</title>
+<title>Произношение · asyaenglish</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
-  .wrap{max-width:680px;margin:0 auto;padding:64px 16px 60px}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
-  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#c0392b}
-  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
-  .chip.on{background:#c0392b;border-color:#c0392b;color:#fff}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:16px}
-  .tip{background:#fbeef1;border:2px solid #e3d3ba;border-radius:14px;padding:12px 14px;font:700 14px 'Nunito',sans-serif;color:#7c2340;margin-bottom:14px;line-height:1.5}
-  .rate{font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:8px}
-  .rate select{font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:3px 8px}
-  .row{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap}
-  .row:last-child{border-bottom:0}
-  .row .tx{flex:1;font-size:17px;font-weight:600;min-width:150px}
-  .sb{border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
-  .sb:disabled{opacity:.4;cursor:default}
-  .sb.rec{background:#c0392b;color:#fff;border-color:#c0392b;animation:pulse 1s infinite}
-  @keyframes pulse{50%{transform:scale(1.08)}}
-  .stars{font-size:16px;min-width:60px;text-align:center}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
-  .hint{font:700 12px 'Nunito',sans-serif;color:#8a7a68;text-align:center;margin-top:10px;line-height:1.6}
+body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+.wrap{max-width:680px;margin:0 auto;padding:64px 16px 60px}
+.home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#c0392b}
+.sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
+.chip.on{background:#c0392b;border-color:#c0392b;color:#fff}
+.card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:16px}
+.tip{background:#fbeef1;border:2px solid #e3d3ba;border-radius:14px;padding:12px 14px;font:700 14px 'Nunito',sans-serif;color:#7c2340;margin-bottom:14px;line-height:1.5}
+.rate{font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:8px}
+.rate select{font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:3px 8px}
+
+/* строка фразы */
+.ph{border:2px solid #efe3d2;border-radius:16px;padding:12px 14px;margin-bottom:12px;background:#fdfbf7}
+.ph .txt{font-size:18px;font-weight:600;margin-bottom:10px;line-height:1.35}
+.ph .acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{border:2px solid #e3d3ba;background:#fff;border-radius:12px;padding:9px 13px;cursor:pointer;font:800 13px 'Nunito',sans-serif;color:#5a4f47;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:#c0392b;color:#c0392b}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ref{background:#eef4ea;border-color:#bcd9ac;color:#3f7a20}
+.btn.rec{background:#c0392b;border-color:#c0392b;color:#fff}
+.btn.mine{background:#e4ebf2;border-color:#a9c7e2;color:#2a5f8f}
+.btn.film{background:#f3e8fb;border-color:#d8b6ea;color:#7a3ea0;text-decoration:none}
+.stars{margin-left:auto;font-size:20px;min-width:74px;text-align:right}
+
+/* панель записи */
+.recpanel{display:none;align-items:center;gap:12px;margin-top:10px;background:#fff0ee;border:2px solid #f3c0b6;border-radius:14px;padding:12px 14px}
+.recpanel.on{display:flex}
+.reddot{width:14px;height:14px;border-radius:50%;background:#c0392b;animation:blink 1s infinite;flex:none}
+@keyframes blink{50%{opacity:.25}}
+.bars{display:flex;align-items:flex-end;gap:3px;height:34px;flex:1}
+.bars i{flex:1;background:#c0392b;border-radius:3px 3px 0 0;height:20%;animation:eq .8s infinite ease-in-out}
+.bars i:nth-child(2){animation-delay:.1s}.bars i:nth-child(3){animation-delay:.2s}.bars i:nth-child(4){animation-delay:.3s}
+.bars i:nth-child(5){animation-delay:.15s}.bars i:nth-child(6){animation-delay:.25s}.bars i:nth-child(7){animation-delay:.05s}
+.bars i:nth-child(8){animation-delay:.35s}.bars i:nth-child(9){animation-delay:.18s}.bars i:nth-child(10){animation-delay:.28s}
+@keyframes eq{0%,100%{height:20%}50%{height:100%}}
+.rectime{font:900 15px 'Nunito',sans-serif;color:#c0392b;min-width:44px;text-align:center}
+.recstop{background:#c0392b;color:#fff;border:0;border-radius:10px;padding:9px 14px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
+
+/* самооценка (когда нет распознавания) */
+.selfrate{display:none;gap:4px;margin-top:8px;align-items:center;font:700 12px 'Nunito',sans-serif;color:#8a7a68}
+.selfrate.on{display:flex}
+.selfrate .s{font-size:22px;cursor:pointer;filter:grayscale(1);opacity:.5}
+.selfrate .s.on{filter:none;opacity:1}
+.coachtip{display:none;margin-top:10px;background:#eef4ea;border:2px solid #bcd9ac;border-radius:14px;padding:10px 12px;font:700 13px 'Nunito',sans-serif;color:#3f7a20;line-height:1.5}
+.coachtip.on{display:block}
+.coachtip b{color:#2c5716}
+
+/* прогресс */
+.prog{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:18px 20px;margin-bottom:16px}
+.prog .ttl{font:900 13px 'Nunito',sans-serif;color:#c0392b;letter-spacing:.6px;margin-bottom:12px}
+.prog .big2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.prog .bc{border-radius:16px;padding:14px;text-align:center}
+.prog .bc .n{font-size:30px;font-weight:700}
+.prog .bc .l{font:800 12px 'Nunito',sans-serif;margin-top:2px}
+.graph{display:flex;align-items:flex-end;gap:6px;height:80px;background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:12px 10px 8px}
+.graph .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.graph .col .bar{width:72%;border-radius:6px 6px 0 0;background:#7cb342}
+.graph .col .wd{font:800 10px 'Nunito',sans-serif;color:#5a4f47}
+.graph .col .vv{font:800 10px 'Nunito',sans-serif;color:#8a7a68;min-height:12px}
+.hint{font:700 12px 'Nunito',sans-serif;color:#8a7a68;text-align:center;margin-top:10px;line-height:1.6}
+.foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
 </style>
 </head>
 <body>
-  <a class="home" href="units.html">← Юниты</a>
-  <div class="wrap">
-    <h1>🎙 Произношение</h1>
-    <div class="sub">выбери звук → слушай → повторяй → запиши себя → проверь</div>
-    <div class="chips" id="chips"></div>
-    <div id="root"></div>
-    <div class="hint">🔊 — эталон · 🎤 — записать себя · ▶️ — моя запись · 🎯 — проверка голосом · 🎬 — эта фраза в фильмах (PlayPhrase, откроется в новой вкладке)<br>Свои фразы для shadowing добавляй в Конструкторе: тип «🗣 Shadowing» — они появятся в уроке и во вкладке Речь.</div>
-    <div class="foot">Made for @english.with_asya</div>
-  </div>
+<a class="home" href="units.html">← Юниты</a>
+<div class="wrap">
+<h1>🎙 Произношение</h1>
+<div class="sub">слушай эталон → жми «Записать» → говори → слушай себя → получай звёзды ⭐</div>
+<div id="progress"></div>
+<div class="chips" id="chips"></div>
+<div id="root"></div>
+<div class="hint">Как это работает: нажми <b>🎤 Записать</b> — увидишь, что идёт запись (полоски и таймер). Скажи фразу и нажми <b>⏹ Стоп</b>. ИИ-коуч 🤖 послушает и поставит звёзды ⭐ + даст короткий совет. Потом можно <b>▶️ Послушать себя</b>. Всё сохраняется — график вверху показывает, как растёт твоё произношение. 🎬 — та же фраза в кино (PlayPhrase).<br>Нужно быть в аккаунте (кабинет ученика), чтобы коуч работал и прогресс сохранялся.</div>
+<div class="foot">Made by asyaenglish</div>
+</div>
 
-  <script src="words.js"></script>
-  <script>
-    function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-    function norm(s){return (s||"").trim().toLowerCase().replace(/[^a-z' ]/g,"").replace(/\s+/g," ");}
-    function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;const d=[];for(let i=0;i<=m;i++)d[i]=[i];for(let j=0;j<=n;j++)d[0][j]=j;
-      for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-ai.js"></script>
+<script>
+/* ---- запись → WAV (для ИИ-коуча) ---- */
+function u8ToB64(u8){var s="";var CH=0x8000;for(var i=0;i<u8.length;i+=CH){s+=String.fromCharCode.apply(null,u8.subarray(i,i+CH));}return btoa(s);}
+function encodeWav(pcm,rate){var buf=new ArrayBuffer(44+pcm.length*2);var v=new DataView(buf);
+function ws(o,s){for(var i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));}
+ws(0,"RIFF");v.setUint32(4,36+pcm.length*2,true);ws(8,"WAVE");ws(12,"fmt ");v.setUint32(16,16,true);
+v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);
+v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,"data");v.setUint32(40,pcm.length*2,true);
+var o=44;for(var i=0;i<pcm.length;i++){var x=Math.max(-1,Math.min(1,pcm[i]));v.setInt16(o,x<0?x*0x8000:x*0x7FFF,true);o+=2;}
+return buf;}
+async function blobToWavB64(blob){
+var ab=await blob.arrayBuffer();
+var AC=window.AudioContext||window.webkitAudioContext;var ac=new AC();
+var decoded=await ac.decodeAudioData(ab);
+var rate=16000;var len=Math.max(1,Math.round(decoded.duration*rate));
+var off=new OfflineAudioContext(1,len,rate);
+var src=off.createBufferSource();src.buffer=decoded;src.connect(off.destination);src.start();
+var rendered=await off.startRendering();
+var pcm=rendered.getChannelData(0);
+return u8ToB64(new Uint8Array(encodeWav(pcm,rate)));
+}
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function norm(s){return (s||"").trim().toLowerCase().replace(/[^a-z' ]/g,"").replace(/\s+/g," ");}
+function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;const d=[];for(let i=0;i<=m;i++)d[i]=[i];for(let j=0;j<=n;j++)d[0][j]=j;
+for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
 
-    const SOUNDS=[
-      {id:"th1",chip:"TH (think)",title:"Глухой TH — think, three",
-       tip:"Кончик языка легко зажми между зубами и выдувай воздух — как будто тихо шипишь. Не «с» и не «ф»!",
-       phrases:["Think about three things.","Thank you for the birthday cake.","I think it is Thursday.","Three thin panthers are thirsty.","Maths is my favourite thing.","I see three hundred and thirty-three."]},
-      {id:"th2",chip:"TH (this)",title:"Звонкий TH — this, mother",
-       tip:"Язык так же между зубами, но теперь включи голос — горло дрожит. Не «з» и не «д»!",
-       phrases:["This is my brother.","That is their mother.","The weather is nice today.","Together with my father.","These toys and those books.","My brother and my father are together."]},
-      {id:"rl",chip:"R / L",title:"R и L — red, lorry",
-       tip:"Для R язык загни назад и не дрожи им (это не русская «р»!). Для L кончик языка прижми к бугоркам за верхними зубами.",
-       phrases:["Red lorry, yellow lorry.","I really like rice.","Look at the little rabbit.","Larry likes red lollipops.","The library is really large.","A lovely yellow ruler."]},
-      {id:"wv",chip:"W / V",title:"W и V — we, very",
-       tip:"Для W сложи губы трубочкой, как для «у». Для V прикуси нижнюю губу верхними зубами. Это разные звуки!",
-       phrases:["We love very warm weather.","William visits his village.","A very wet winter.","Wave to Victor and Vicky.","Twelve white waves.","We watch a very good video."]},
-      {id:"ii",chip:"i / ee",title:"Короткий i и долгий ee — ship / sheep",
-       tip:"Ship — короткий расслабленный «и». Sheep — долгий «ии», растяни губы в улыбке. От этого меняется смысл слова!",
-       phrases:["This ship has six sheep.","Sit in this seat, please.","A big green bin.","He is eating a bit of meat.","Little Tim eats sweet peas.","Six kids see three green trees."]},
-      {id:"ae",chip:"A (cat)",title:"Звук Æ — cat, apple",
-       tip:"Открой рот шире, чем для русской «э», и улыбнись: получится звук между «а» и «э».",
-       phrases:["The black cat sat on a mat.","Dad has a happy hamster.","An apple in a bag.","The fat rat has a hat.","Ann and Dan clap hands.","A happy family at the camp."]},
-      {id:"ng",chip:"NG",title:"Звук NG — sing, king",
-       tip:"Задняя часть языка поднимается к нёбу, звук идёт через нос. Никакой «г» в конце — язык не отпускай!",
-       phrases:["I am singing and dancing.","The king is bringing a ring.","Good morning! Everything is amazing.","A long song for the young king.","Reading, writing and running.","Spring morning, birds are singing."]},
-      {id:"h",chip:"H",title:"Звук H — hello, house",
-       tip:"Просто лёгкий выдох, как будто дышишь на замёрзшее стекло. Не русская жёсткая «х»!",
-       phrases:["Hello! How are you?","Harry has a happy horse.","A huge house on a hill.","He has hot chocolate at home.","Help the hungry hedgehog.","How high is that hill?"]},
-      {id:"tw",chip:"🌀 Скороговорки",title:"Классические скороговорки",
-       tip:"Начни медленно (🐢), потом ускоряйся. Скажи три раза подряд без ошибок — ты чемпион!",
-       phrases:["She sells seashells on the seashore.","Peter Piper picked a peck of pickled peppers.","How much wood would a woodchuck chuck if a woodchuck could chuck wood?","Fuzzy Wuzzy was a bear.","A big black bug bit a big black bear.","Red leather, yellow leather."]}
-    ];
+const SOUNDS=[
+{id:"th1",chip:"TH (think)",title:"Глухой TH — think, three",
+tip:"Кончик языка легко зажми между зубами и выдувай воздух — как будто тихо шипишь. Не «с» и не «ф»!",
+phrases:["Think about three things.","Thank you for the birthday cake.","I think it is Thursday.","Three thin panthers are thirsty.","Maths is my favourite thing.","I see three hundred and thirty-three."]},
+{id:"th2",chip:"TH (this)",title:"Звонкий TH — this, mother",
+tip:"Язык так же между зубами, но теперь включи голос — горло дрожит. Не «з» и не «д»!",
+phrases:["This is my brother.","That is their mother.","The weather is nice today.","Together with my father.","These toys and those books.","My brother and my father are together."]},
+{id:"rl",chip:"R / L",title:"R и L — red, lorry",
+tip:"Для R язык загни назад и не дрожи им (это не русская «р»!). Для L кончик языка прижми к бугоркам за верхними зубами.",
+phrases:["Red lorry, yellow lorry.","I really like rice.","Look at the little rabbit.","Larry likes red lollipops.","The library is really large.","A lovely yellow ruler."]},
+{id:"wv",chip:"W / V",title:"W и V — we, very",
+tip:"Для W сложи губы трубочкой, как для «у». Для V прикуси нижнюю губу верхними зубами. Это разные звуки!",
+phrases:["We love very warm weather.","William visits his village.","A very wet winter.","Wave to Victor and Vicky.","Twelve white waves.","We watch a very good video."]},
+{id:"ii",chip:"i / ee",title:"Короткий i и долгий ee — ship / sheep",
+tip:"Ship — короткий расслабленный «и». Sheep — долгий «ии», растяни губы в улыбке. От этого меняется смысл слова!",
+phrases:["This ship has six sheep.","Sit in this seat, please.","A big green bin.","He is eating a bit of meat.","Little Tim eats sweet peas.","Six kids see three green trees."]},
+{id:"ae",chip:"A (cat)",title:"Звук Æ — cat, apple",
+tip:"Открой рот шире, чем для русской «э», и улыбнись: получится звук между «а» и «э».",
+phrases:["The black cat sat on a mat.","Dad has a happy hamster.","An apple in a bag.","The fat rat has a hat.","Ann and Dan clap hands.","A happy family at the camp."]},
+{id:"ng",chip:"NG",title:"Звук NG — sing, king",
+tip:"Задняя часть языка поднимается к нёбу, звук идёт через нос. Никакой «г» в конце — язык не отпускай!",
+phrases:["I am singing and dancing.","The king is bringing a ring.","Good morning! Everything is amazing.","A long song for the young king.","Reading, writing and running.","Spring morning, birds are singing."]},
+{id:"h",chip:"H",title:"Звук H — hello, house",
+tip:"Просто лёгкий выдох, как будто дышишь на замёрзшее стекло. Не русская жёсткая «х»!",
+phrases:["Hello! How are you?","Harry has a happy horse.","A huge house on a hill.","He has hot chocolate at home.","Help the hungry hedgehog.","How high is that hill?"]},
+{id:"tw",chip:"🌀 Скороговорки",title:"Классические скороговорки",
+tip:"Начни медленно (🐢), потом ускоряйся. Скажи три раза подряд без ошибок — ты чемпион!",
+phrases:["She sells seashells on the seashore.","Peter Piper picked a peck of pickled peppers.","How much wood would a woodchuck chuck if a woodchuck could chuck wood?","Fuzzy Wuzzy was a bear.","A big black bug bit a big black bear.","Red leather, yellow leather."]}
+];
 
-    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-    let cur=SOUNDS[0].id, activeRec=null;
-    const chips=document.getElementById("chips"),root=document.getElementById("root");
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let cur=SOUNDS[0].id, activeRec=null, activeSR=null, recTimer=null;
+const chips=document.getElementById("chips"),root=document.getElementById("root");
 
-    function say(t,rate){if(window.SM_speak)return SM_speak(t,rate||0.8);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+function say(t,rate){if(window.SM_speak)return SM_speak(t,rate||0.8);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate||0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
 
-    function drawChips(){
-      chips.innerHTML="";
-      SOUNDS.forEach(s=>{const b=document.createElement("button");b.className="chip"+(s.id===cur?" on":"");b.textContent=s.chip;
-        b.onclick=()=>{cur=s.id;drawChips();draw();};chips.appendChild(b);});
+/* ---- прогресс ---- */
+function dayKey(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+const WD=["Вс","Пн","Вт","Ср","Чт","Пт","Сб"];
+async function renderProgress(){
+  const box=document.getElementById("progress");
+  if(!window.SM||!SM.isCloud){box.innerHTML="";return;}
+  let user=null; try{user=await SM.getUser();}catch(e){}
+  if(!user){box.innerHTML="";return;}
+  let att=[]; try{att=(await SM.myAttempts()).filter(a=>a.ex_type==="pronounce");}catch(e){}
+  const now=new Date(),days=[];
+  for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);days.push({key:dayKey(d),wd:WD[d.getDay()],n:0,ok:0});}
+  const byK={};days.forEach(x=>byK[x.key]=x);
+  let total=att.length,tot7=0,ok7=0;
+  att.forEach(a=>{const k=dayKey(new Date(a.created_at));if(byK[k]){byK[k].n++;tot7++;if(a.correct){byK[k].ok++;ok7++;}}});
+  const pct7=tot7?Math.round(ok7/tot7*100):0;
+  const cols=days.map(x=>{const p=x.n?Math.round(x.ok/x.n*100):0;const h=x.n?Math.max(6,Math.round(p*0.55)):3;
+    return '<div class="col"><div class="vv">'+(x.n?p+"%":"")+'</div><div class="bar" style="height:'+h+'px;background:'+(x.n?(p>=66?"#7cb342":p>=33?"#f0c96b":"#e07a5f"):"#e9dcc6")+'"></div><div class="wd">'+x.wd+'</div></div>';}).join("");
+  box.innerHTML='<div class="prog"><div class="ttl">🎙 ТВОЙ ПРОГРЕСС ПРОИЗНОШЕНИЯ</div>'+
+    '<div class="big2"><div class="bc" style="background:#fdeede"><div class="n" style="color:#c0392b">'+tot7+'</div><div class="l">фраз за 7 дней</div></div>'+
+    '<div class="bc" style="background:#e7f0e1"><div class="n" style="color:#3f7a20">'+pct7+'%</div><div class="l">хорошо (2–3⭐)</div></div></div>'+
+    '<div class="graph">'+cols+'</div>'+
+    '<div class="hint" style="margin-top:8px">Всего проговорено фраз: <b>'+total+'</b>. Столбик выше — чем зеленее, тем чище произношение в этот день.</div></div>';
+}
+
+async function saveScore(stars){
+  try{ if(window.SM&&SM.isCloud){ const u=await SM.getUser(); if(u) await SM.saveAttempt({course:null,unit_id:"pronounce",exercise_id:null,ex_type:"pronounce",correct:stars>=2}); } }catch(e){}
+}
+
+function drawChips(){
+  chips.innerHTML="";
+  SOUNDS.forEach(s=>{const b=document.createElement("button");b.className="chip"+(s.id===cur?" on":"");b.textContent=s.chip;
+  b.onclick=()=>{cur=s.id;drawChips();draw();};chips.appendChild(b);});
+}
+
+function stopAll(){
+  if(activeRec){try{activeRec.stop();}catch(e){}}
+  if(activeSR){try{activeSR.stop();}catch(e){}}
+  if(recTimer){clearInterval(recTimer);recTimer=null;}
+}
+
+function draw(){
+  const s=SOUNDS.find(x=>x.id===cur);
+  root.innerHTML='<div class="card"><h2 style="margin:0 0 10px;color:#c0392b;font-size:20px">'+esc(s.title)+'</h2>'+
+    '<div class="tip">💡 '+esc(s.tip)+'</div>'+
+    '<div class="rate">Скорость эталона: <select id="rate"><option value="0.55">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
+    '<div id="list"></div></div>';
+  const list=document.getElementById("list"),rateSel=document.getElementById("rate");
+  s.phrases.forEach(ph=>{
+    const box=document.createElement("div");box.className="ph";
+    box.innerHTML='<div class="txt">'+esc(ph)+'</div>'+
+      '<div class="acts">'+
+        '<button class="btn ref b-ref">🔊 Эталон</button>'+
+        '<button class="btn b-rec">🎤 Записать</button>'+
+        '<button class="btn mine b-my" disabled>▶️ Послушать себя</button>'+
+        '<a class="btn film" target="_blank" rel="noopener" href="https://www.playphrase.me/#/search?q='+encodeURIComponent(ph)+'">🎬 В кино</a>'+
+        '<span class="stars b-st"></span>'+
+      '</div>'+
+      '<div class="recpanel b-panel"><span class="reddot"></span><span class="rectime b-time">0.0</span>'+
+        '<div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>'+
+        '<button class="recstop b-stop">⏹ Стоп</button></div>'+
+      '<div class="selfrate b-self">Оцени себя: <span class="s" data-v="1">⭐</span><span class="s" data-v="2">⭐</span><span class="s" data-v="3">⭐</span></div>'+
+      '<div class="coachtip b-tip"></div>';
+    const bRef=box.querySelector(".b-ref"),bRec=box.querySelector(".b-rec"),bMy=box.querySelector(".b-my"),bSt=box.querySelector(".b-st"),
+          panel=box.querySelector(".b-panel"),bTime=box.querySelector(".b-time"),bStop=box.querySelector(".b-stop"),bSelf=box.querySelector(".b-self"),bTip=box.querySelector(".b-tip");
+    let myUrl=null,scored=false;
+
+    bRef.onclick=()=>say(ph,parseFloat(rateSel.value));
+    bMy.onclick=()=>{if(myUrl)new Audio(myUrl).play();};
+
+    function showStars(stars){
+      scored=true;
+      bSt.textContent=stars>=3?"⭐⭐⭐":stars===2?"⭐⭐":stars===1?"⭐":"🤔";
+      saveScore(stars); renderProgress();
     }
-    function draw(){
-      const s=SOUNDS.find(x=>x.id===cur);
-      root.innerHTML='<div class="card"><h2 style="margin:0 0 10px;color:#c0392b;font-size:20px">'+esc(s.title)+'</h2>'+
-        '<div class="tip">💡 '+esc(s.tip)+'</div>'+
-        '<div class="rate">Скорость: <select id="rate"><option value="0.55">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
-        '<div id="list"></div></div>';
-      const list=document.getElementById("list"),rateSel=document.getElementById("rate");
-      s.phrases.forEach(ph=>{
-        const row=document.createElement("div");row.className="row";
-        row.innerHTML='<button class="sb pl">🔊</button><span class="tx">'+esc(ph)+'</span>'+
-          '<button class="sb rc" title="записать себя">🎤</button><button class="sb my" title="моя запись" disabled>▶️</button>'+
-          (SR?'<button class="sb ck" title="проверка произношения">🎯</button>':'')+
-          '<a class="sb" style="text-decoration:none" title="услышать фразу в фильмах (откроется PlayPhrase в новой вкладке)" target="_blank" rel="noopener" href="https://www.playphrase.me/#/search?q='+encodeURIComponent(ph)+'">🎬</a>'+
-          '<span class="stars"></span>';
-        const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my"),ck=row.querySelector(".ck"),st=row.querySelector(".stars");
-        let myUrl=null;
-        pl.onclick=()=>say(ph,parseFloat(rateSel.value));
-        rc.onclick=async()=>{
-          if(activeRec){activeRec.stop();return;}
+    function showTip(tip){ if(tip){ bTip.innerHTML="🤖 <b>Коуч:</b> "+esc(tip); bTip.classList.add("on"); } }
+
+    // самооценка (fallback, если коуч недоступен)
+    bSelf.querySelectorAll(".s").forEach(el=>el.onclick=()=>{
+      const v=parseInt(el.dataset.v,10);
+      bSelf.querySelectorAll(".s").forEach(x=>x.classList.toggle("on",parseInt(x.dataset.v,10)<=v));
+      if(!scored) showStars(v);
+    });
+
+    bStop.onclick=()=>stopAll();
+
+    bRec.onclick=async()=>{
+      if(activeRec){stopAll();return;}
+      scored=false; bSt.textContent=""; bTip.classList.remove("on"); bTip.innerHTML="";
+      bSelf.classList.remove("on"); bSelf.querySelectorAll(".s").forEach(x=>x.classList.remove("on"));
+      let stream;
+      try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); }
+      catch(e){ alert("Разреши доступ к микрофону 🎤"); return; }
+      const mr=new MediaRecorder(stream);const chunks=[];
+      mr.ondataavailable=ev=>chunks.push(ev.data);
+      mr.onstop=async()=>{
+        stream.getTracks().forEach(t=>t.stop());activeRec=null;
+        panel.classList.remove("on"); bRec.classList.remove("rec"); bRec.textContent="🎤 Записать";
+        if(recTimer){clearInterval(recTimer);recTimer=null;}
+        const blob=new Blob(chunks,{type:"audio/webm"});
+        if(myUrl)URL.revokeObjectURL(myUrl);
+        myUrl=URL.createObjectURL(blob);
+        bMy.disabled=false;
+        // отправляем ИИ-коучу
+        const logged = window.SM && SM.isCloud && await SM.getUser().catch(()=>null);
+        if(window.SM_AI && logged){
+          bSt.textContent="🤖…";
           try{
-            const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-            const mr=new MediaRecorder(stream);const chunks=[];
-            mr.ondataavailable=ev=>chunks.push(ev.data);
-            mr.onstop=()=>{stream.getTracks().forEach(t=>t.stop());activeRec=null;rc.classList.remove("rec");rc.textContent="🎤";
-              if(myUrl)URL.revokeObjectURL(myUrl);myUrl=URL.createObjectURL(new Blob(chunks,{type:"audio/webm"}));my.disabled=false;};
-            activeRec=mr;mr.start();rc.classList.add("rec");rc.textContent="⏹";
-            setTimeout(()=>{if(activeRec===mr)mr.stop();},15000);
-          }catch(e){alert("Разреши доступ к микрофону 🎤");}
-        };
-        my.onclick=()=>{if(myUrl)new Audio(myUrl).play();};
-        if(ck)ck.onclick=()=>{
-          const rec=new SR();rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=4;
-          ck.classList.add("rec");st.textContent="🎙…";
-          rec.onresult=ev=>{
-            const target=norm(ph);
-            let best=99;
-            [...ev.results[0]].forEach(a=>{best=Math.min(best,lev(norm(a.transcript),target));});
-            const tol=Math.max(2,Math.floor(target.length/8));
-            st.textContent=best===0?"⭐⭐⭐":best<=tol?"⭐⭐":best<=tol*2?"⭐":"🤔";
-          };
-          rec.onerror=()=>{st.textContent="🤷";};
-          rec.onend=()=>ck.classList.remove("rec");
-          rec.start();
-        };
-        list.appendChild(row);
-      });
-    }
-    if(!SR){/* без Chrome проверка 🎯 скрыта, остальное работает */}
-    drawChips();draw();
-  </script>
+            const b64=await blobToWavB64(blob);
+            const res=await SM_AI.call("pronounce_coach",{phrase:ph, audio_b64:b64});
+            if(res.ok && res.stars){ showStars(res.stars); showTip(res.tip); }
+            else { bSt.textContent="🤷"; bSelf.classList.add("on"); if(res.error) showTip("Не расслышал — попробуй ещё раз рядом с микрофоном."); }
+          }catch(e){ bSt.textContent=""; bSelf.classList.add("on"); }
+        } else {
+          // не залогинен или нет модуля — самооценка
+          bSelf.classList.add("on"); bSt.textContent="послушай ▶️";
+        }
+      };
+      activeRec=mr;mr.start();
+      panel.classList.add("on"); bRec.classList.add("rec"); bRec.textContent="⏹ Идёт запись";
+      const t0=Date.now();
+      recTimer=setInterval(()=>{bTime.textContent=((Date.now()-t0)/1000).toFixed(1);},100);
+      setTimeout(()=>{if(activeRec===mr)stopAll();},12000);
+    };
+    list.appendChild(box);
+  });
+}
+
+drawChips();draw();renderProgress();
+</script>
 </body>
 </html>
