@@ -55,7 +55,7 @@
 <div class="conf" id="conf">🎉</div>
 <script>
 const UNITS=[
-{n:1,t:"Me & mine",e:"🎒",d:"Narrative tenses · verb patterns · phrasal verbs · вещи и материалы",
+{n:1,t:"Me & mine",e:"🎒",d:"Narrative tenses · verb patterns · phrasal verbs · вещи и материалы",page:"speakout-b1plus-u1.html",
  g:[
   {q:"When I got home, I realised I ___ my keys at work.",o:["left","had left","was leaving"],a:1},
   {q:"While she ___ to music, someone knocked at the door.",o:["listened","was listening","had listened"],a:1},
@@ -237,7 +237,7 @@ let scores={};
 UNITS.forEach((u,i)=>{const b=document.createElement("button");b.className="tab"+(i===0?" on":"");b.textContent=u.e+" "+u.n+". "+u.t;b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(i);};tabs.appendChild(b);});
 function render(i){
   const u=UNITS[i];scores[i]={got:0,total:u.g.length+u.f.length+u.v.length};
-  let h='<div class="uhead"><div class="t">'+u.e+' Unit '+u.n+' · '+u.t+'</div><div class="d">'+u.d+'</div><div class="score" id="sc">Счёт: 0 / '+scores[i].total+'</div></div>';
+  let h='<div class="uhead"><div class="t">'+u.e+' Unit '+u.n+' · '+u.t+'</div><div class="d">'+u.d+'</div>'+(u.page?'<div style="margin-top:10px"><a href="'+u.page+'" style="background:#e0952a;color:#fff;font:800 13px Nunito,sans-serif;padding:9px 16px;border-radius:999px;text-decoration:none">📖 Полный урок: теория + аудирование →</a></div>':'')+'<div class="score" id="sc">Счёт: 0 / '+scores[i].total+'</div></div>';
   h+='<div class="sec">📘 Грамматика — выбери вариант</div>';
   u.g.forEach((t,k)=>{h+=mc(k+1,t);});
   h+='<div class="sec">✍️ Впиши слово</div>';
