@@ -148,7 +148,54 @@ async function handle(req: Request): Promise<Response> {
   if (!who.ok) return json({ error: "Сессия истекла — войди заново" }, 401);
   const user = await who.json();
 
-  // --- только учитель ---
+  // --- тело запроса ---
+  let body: any;
+  try { body = await req.json(); } catch { return json({ error: "Плохой запрос" }, 400); }
+
+  // --- ИИ-коуч произношения: доступен любому вошедшему ученику ---
+  if (body.task === "pronounce_coach") {
+    if (!OPENAI_KEY) return json({ error: "OPENAI_API_KEY не задан в Secrets" }, 500);
+    const p = body.payload || {};
+    const phrase = (p.phrase || "").toString().slice(0, 200);
+    const audio = p.audio_b64;
+    if (!audio) return json({ error: "нет аудио" }, 400);
+    const sys =
+      "Ты добрый учитель английского для детей 6–10 лет. Слушаешь, как ребёнок произнёс фразу, " +
+      "и оцениваешь именно ПРОИЗНОШЕНИЕ (звуки, ударение), а не грамматику. " +
+      "Отвечай ТОЛЬКО валидным JSON без markdown: {\"stars\":1|2|3,\"tip\":\"…\"}. " +
+      "tip — один короткий добрый совет на русском, максимум 12 слов, про конкретный звук. " +
+      "3 звезды — почти как носитель; 2 — понятно, 1–2 звука можно улучшить; 1 — старается, но много ошибок. " +
+      "Никогда не ругай, хвали за старание.";
+    const cr = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + OPENAI_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gpt-4o-audio-preview",
+        modalities: ["text"],
+        max_tokens: 200,
+        messages: [
+          { role: "system", content: sys },
+          { role: "user", content: [
+            { type: "text", text: "Ребёнок должен был сказать: \"" + phrase + "\". Оцени произношение по аудио." },
+            { type: "input_audio", input_audio: { data: audio, format: "wav" } },
+          ] },
+        ],
+      }),
+    });
+    if (!cr.ok) {
+      const t = await cr.text();
+      if (cr.status === 401) return json({ error: "OpenAI: ключ неверный" }, 502);
+      if (cr.status === 429 || t.includes("quota") || t.includes("billing")) return json({ error: "OpenAI: закончились средства или лимит" }, 402);
+      return json({ error: "OpenAI ответил ошибкой (" + cr.status + ")" }, 502);
+    }
+    const cdata = await cr.json();
+    const ctxt = (cdata.choices && cdata.choices[0] && cdata.choices[0].message && cdata.choices[0].message.content) || "";
+    const cclean = ctxt.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+    let cparsed: any = null; try { cparsed = JSON.parse(cclean); } catch (e) { /* ignore */ }
+    return json({ ok: true, stars: cparsed && cparsed.stars, tip: cparsed && cparsed.tip, raw: cparsed ? undefined : cclean });
+  }
+
+  // --- остальные задачи — только учитель ---
   const prof = await fetch(
     `${SUPABASE_URL}/rest/v1/profiles?user_id=eq.${user.id}&select=role`,
     { headers: { Authorization: auth, apikey: SUPABASE_ANON! } },
@@ -157,10 +204,6 @@ async function handle(req: Request): Promise<Response> {
   if (!rows.length || rows[0].role !== "teacher") {
     return json({ error: "Ассистент доступен только учителю" }, 403);
   }
-
-  // --- задача ---
-  let body: any;
-  try { body = await req.json(); } catch { return json({ error: "Плохой запрос" }, 400); }
 
   // --- генерация картинки (OpenAI) ---
   if (body.task === "image") {
