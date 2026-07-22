@@ -341,6 +341,23 @@ if (error) { console.warn("class_progress:", error.message); return []; }
 return data || [];
 },
 
+/* Загрузить картинку (data-URL) в хранилище, вернуть публичную ссылку.
+   Так картинки не раздувают базу. При ошибке вызывающий оставляет data-URL. */
+async uploadImage(dataUrl) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false };
+try {
+const resp = await fetch(dataUrl); const blob = await resp.blob();
+const ext = (blob.type.indexOf("png") >= 0) ? "png" : "jpg";
+const path = u.id + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 7) + "." + ext;
+const { error } = await c.storage.from("word-images").upload(path, blob, { contentType: blob.type || "image/jpeg", upsert: false });
+if (error) return { ok: false, error: error.message };
+const { data } = c.storage.from("word-images").getPublicUrl(path);
+return { ok: true, url: data && data.publicUrl };
+} catch (e) { return { ok: false, error: String(e) }; }
+},
+
 /* Таблица лидеров: [{name, week_points, total_points}] (только облако) */
 async leaderboard() {
 if (!useCloud) return [];

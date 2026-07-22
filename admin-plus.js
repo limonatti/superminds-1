@@ -23,6 +23,18 @@
   /* ---------- вспомогательное ---------- */
   function isImgSrc(s) { return /^(https?:\/\/|data:image)/i.test(s || ""); }
 
+  // залить картинку (data-URL) в хранилище и вернуть ссылку; при ошибке — исходный data-URL
+  async function toStoredUrl(dataUrl) {
+    try {
+      if (!dataUrl || dataUrl.indexOf("data:") !== 0) return dataUrl; // уже ссылка
+      if (window.SM && SM.uploadImage) {
+        var r = await SM.uploadImage(dataUrl);
+        if (r && r.ok && r.url) return r.url;
+      }
+    } catch (e) {}
+    return dataUrl;
+  }
+
   /* картинки теперь можно и загруженные файлом (data:) */
   window.parseWords = function (txt) {
     return txt.split("\n").map(function (s) { return s.trim(); }).filter(Boolean).map(function (line) {
@@ -295,7 +307,7 @@
         else if (v) alert("Нужна ссылка, начинающаяся с https://");
       } else if (act === "file") {
         var tmp = document.createElement("input");
-        pickImage(tmp, function () { W[i].img = tmp.value; renderRows(); });
+        pickImage(tmp, function () { m("", "Загружаю картинку…"); toStoredUrl(tmp.value).then(function (url) { W[i].img = url; renderRows(); m("", ""); }); });
       } else if (act === "genimg") {
         var en = (W[i].en || "").trim();
         if (!en) { alert("Сначала впиши английское слово в этой строке"); return; }
@@ -305,8 +317,10 @@
         SM_AI.call("image", { en: en, ru: (W[i].ru || "").trim() }).then(function (res) {
           if (!res.ok || !res.image) { b.disabled = false; b.textContent = "🎨"; m("err", res.error || "Не удалось нарисовать"); return; }
           SM_AI.compress(res.image, function (small) {
-            W[i].img = small; renderRows();
-            m("ok", "Картинка готова для «" + en + "» 🎨 Не забудь сохранить юнит.");
+            toStoredUrl(small).then(function (url) {
+              W[i].img = url; renderRows();
+              m("ok", "Картинка готова для «" + en + "» 🎨 Не забудь сохранить юнит.");
+            });
           });
         });
       }
@@ -372,7 +386,7 @@
         try {
           var res = await SM_AI.call("image", { en: en, ru: (W[idx].ru || "").trim() });
           if (res.ok && res.image) {
-            await new Promise(function (resolve) { SM_AI.compress(res.image, function (small) { W[idx].img = small; resolve(); }); });
+            await new Promise(function (resolve) { SM_AI.compress(res.image, function (small) { toStoredUrl(small).then(function (url) { W[idx].img = url; resolve(); }); }); });
             done++;
           } else { fail++; }
         } catch (e) { fail++; }
