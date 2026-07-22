@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speakout B1 · Тренажёр · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 70px}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  h1{margin:14px 0 2px;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,46px);font-weight:700;color:#7c2340;letter-spacing:-1px;text-align:center}
+  .sub{font-weight:800;font-size:14px;color:#5a4f47;margin:0 0 22px;text-align:center}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+  .tab{border:none;cursor:pointer;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:10px 14px;border-radius:999px;box-shadow:0 3px 0 #e3d3ba}
+  .tab.on{background:#7c2340;color:#fff;box-shadow:0 3px 0 #4d1527}
+  .uhead{background:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 6px 0 #e3d3ba;margin-bottom:18px}
+  .uhead .t{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:#7c2340}
+  .uhead .d{font-size:13.5px;font-weight:700;color:#5a4f47;margin-top:4px}
+  .score{margin-top:10px;font-weight:900;font-size:14px;color:#27632a}
+  .sec{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#7c2340;margin:24px 4px 10px}
+  .card{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;color:#1c1310;padding:9px 16px;border-radius:12px;transition:transform .08s}
+  .opt:hover{transform:translateY(-2px)}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:160px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .reset{border:none;cursor:pointer;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 3px 0 #e3d3ba;margin-top:18px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+  .conf{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);font-size:64px;pointer-events:none;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="home" href="index.html">← Домой</a></div>
+  <h1>Speakout B1 · Тренажёр</h1>
+  <p class="sub">Грамматика и лексика по юнитам · выбери юнит и решай</p>
+  <div class="tabs" id="tabs"></div>
+  <div id="app"></div>
+  <div class="foot">Made for @english.with_asya · упражнения авторские, по темам курса Speakout 3rd ed. B1</div>
+</div>
+<div class="conf" id="conf">🎉</div>
+<script>
+const UNITS=[
+{n:1,t:"People",e:"🧑‍🤝‍🧑",d:"Present Simple и Continuous · state verbs · verb patterns · характер и работа",
+ g:[
+  {q:"Right now she ___ dinner.",o:["cooks","is cooking","cook"],a:1},
+  {q:"I ___ this song! It's great.",o:["am loving","love","loves"],a:1},
+  {q:"He ___ to work by bus every day.",o:["is going","go","goes"],a:2},
+  {q:"Где место для <i>usually</i>? «We ___ watch TV in the evening.»",o:["We watch usually","We usually watch","Usually we watch always"],a:1},
+  {q:"I enjoy ___ new people.",o:["to meet","meeting","meet"],a:1},
+  {q:"She wants ___ a new job.",o:["finding","to find","find"],a:1},
+  {q:"The film was ___ good.",o:["really","very much","much"],a:0},
+  {q:"They ___ at the moment — call back later.",o:["work","are working","works"],a:1}],
+ f:[
+  {q:"She ___ (not/like) horror films.",a:["doesn't like","does not like"]},
+  {q:"What are you ___ (do) right now?",a:["doing"]},
+  {q:"I decided ___ (move) to Spain.",a:["to move"]},
+  {q:"He's good at ___ (cook).",a:["cooking"]}],
+ v:[
+  {q:"Общительный человек, любит компании — он …",o:["shy","sociable","lazy"],a:1},
+  {q:"My sister never gives up. She's very ___.",o:["determined","nervous","rude"],a:0},
+  {q:"Человек, который всегда приходит вовремя — …",o:["punctual","patient","polite"],a:0},
+  {q:"Someone who thinks about other people's feelings is ___.",o:["selfish","kind","bossy"],a:1},
+  {q:"A(n) ___ designs buildings.",o:["lawyer","architect","plumber"],a:1},
+  {q:"I work ___ a waiter at weekends.",o:["like","as","for"],a:1}]},
+{n:2,t:"Tale tellers",e:"📖",d:"Narrative tenses · Past Simple vs Present Perfect · предлоги времени · фильмы · get/make",
+ g:[
+  {q:"While I ___ home, I saw an old friend.",o:["walked","was walking","have walked"],a:1},
+  {q:"When we arrived, the film ___.",o:["already started","had already started","has already started"],a:1},
+  {q:"I ___ this book twice.",o:["read","have read","had read"],a:1},
+  {q:"She ___ her leg last winter.",o:["has broken","broke","had broken"],a:1},
+  {q:"We met ___ 2019.",o:["in","on","at"],a:0},
+  {q:"The lesson starts ___ 2 o'clock.",o:["in","on","at"],a:2},
+  {q:"I was born ___ 15th May.",o:["in","on","at"],a:1},
+  {q:"Yesterday I ___ TV when the phone rang.",o:["watched","was watching","have watched"],a:1}],
+ f:[
+  {q:"I had never ___ (see) snow before that trip.",a:["seen"]},
+  {q:"Last night we ___ (go) to the cinema.",a:["went"]},
+  {q:"She has ___ (write) three books.",a:["written"]},
+  {q:"They ___ (live) here since 2020.",a:["have lived","have been living","'ve lived"]}],
+ v:[
+  {q:"The journey was so ___ — I slept all the way.",o:["boring","bored"],a:0},
+  {q:"I'm really ___ in history.",o:["interesting","interested"],a:1},
+  {q:"Фильм, над которым смеёшься — это …",o:["comedy","thriller","documentary"],a:0},
+  {q:"___ a mistake",o:["do","make","get"],a:1},
+  {q:"___ better after an illness",o:["get","make","do"],a:0},
+  {q:"We ___ friends at university.",o:["did","made","got"],a:1}]},
+{n:3,t:"Questions",e:"❓",d:"Вопросы · планы: going to / Present Continuous / will · phrasal verbs · город",
+ g:[
+  {q:"___ does the film start?",o:["What time","What","How long"],a:0},
+  {q:"Who ___ this cake? — My mum did.",o:["made","did make","makes"],a:0},
+  {q:"Could you tell me where ___?",o:["is the station","the station is"],a:1},
+  {q:"Look at those clouds! It ___ rain.",o:["will","is going to","rains"],a:1},
+  {q:"We ___ dinner with Anna on Friday — it's all arranged.",o:["will have","are having","have"],a:1},
+  {q:"I'm thirsty. — I ___ you some water.",o:["get","will get","am getting"],a:1},
+  {q:"What are you ___ this weekend?",o:["doing","do","will do"],a:0},
+  {q:"Do you know if he ___ coming to the party?",o:["is","does","will"],a:0}],
+ f:[
+  {q:"___ you ever been to Malta?",a:["have"]},
+  {q:"Tonight we ___ (meet) friends at 7 — it's arranged.",a:["are meeting","'re meeting"]},
+  {q:"I think people ___ (travel) to Mars one day.",a:["will travel","'ll travel"]},
+  {q:"Where ___ she from?",a:["is"]}],
+ v:[
+  {q:"You can borrow books from a ___.",o:["library","bookshop","stadium"],a:0},
+  {q:"I need cash — where's the nearest ___?",o:["pharmacy","cash machine","bus stop"],a:1},
+  {q:"We watched the match at the ___.",o:["gallery","stadium","town hall"],a:1},
+  {q:"It took me ages to ___ a decision.",o:["make","do","get"],a:0},
+  {q:"carry on = …",o:["continue","stop","arrive"],a:0},
+  {q:"find out = …",o:["discover","lose","forget"],a:0}]},
+{n:4,t:"Winners",e:"🏆",d:"Modals: must / have to / should · артикли · Present Perfect + superlative · спорт",
+ g:[
+  {q:"You ___ wear a helmet — it's the law.",o:["must","should","can"],a:0},
+  {q:"You ___ pay — it's free.",o:["mustn't","don't have to","can't"],a:1},
+  {q:"You look tired. You ___ go to bed earlier.",o:["should","must","have to"],a:0},
+  {q:"Players ___ touch the ball with their hands in football.",o:["mustn't","don't have to","shouldn't"],a:0},
+  {q:"She's ___ engineer.",o:["a","an","the"],a:1},
+  {q:"I love ___ music.",o:["the","a","— (без артикля)"],a:2},
+  {q:"It's ___ best film I've ever seen.",o:["a","the","— (без артикля)"],a:1},
+  {q:"This is the most interesting book I ___ read.",o:["ever","have ever","had ever"],a:1}],
+ f:[
+  {q:"It's the worst meal I have ever ___ (eat).",a:["eaten"]},
+  {q:"You ___ (should + not) drink so much coffee.",a:["shouldn't","should not"]},
+  {q:"Do we ___ to wear a uniform?",a:["have"]},
+  {q:"She plays ___ piano beautifully.",a:["the"]}],
+ v:[
+  {q:"She ___ a world record.",o:["broke","won","beat"],a:0},
+  {q:"Our team ___ the final 3–0.",o:["won","beat","earned"],a:0},
+  {q:"He ___ his opponent in the final.",o:["won","beat","broke"],a:1},
+  {q:"___ tennis",o:["play","do","go"],a:0},
+  {q:"___ yoga",o:["play","do","go"],a:1},
+  {q:"___ skiing",o:["play","do","go"],a:2}]},
+{n:5,t:"News",e:"📰",d:"Relative clauses · reported speech · прогнозы will/might · новости и соцсети",
+ g:[
+  {q:"That's the journalist ___ wrote the article.",o:["who","which","where"],a:0},
+  {q:"This is the town ___ I grew up.",o:["which","where","who"],a:1},
+  {q:"The phone, ___ I bought last week, has already broken.",o:["that","which","what"],a:1},
+  {q:"She said she ___ tired.",o:["is","was","be"],a:1},
+  {q:"He told me he ___ the news.",o:["hasn't seen","hadn't seen","doesn't see"],a:1},
+  {q:"«I'll call you.» → She said she ___ call me.",o:["will","would","can"],a:1},
+  {q:"I think it ___ rain tomorrow — take an umbrella just in case.",o:["might","might to","will to"],a:0},
+  {q:"Scientists say sea levels ___ rise.",o:["are going to","going to","will to"],a:0}],
+ f:[
+  {q:"«I live in Rome.» → She told me she ___ (live) in Rome.",a:["lived"]},
+  {q:"The man ___ lives next door is a journalist.",a:["who","that"]},
+  {q:"«I'm busy.» → He said he ___ busy.",a:["was"]},
+  {q:"Experts predict prices ___ (go) up.",a:["will go","'ll go"]}],
+ v:[
+  {q:"False information online is called ___ news.",o:["fake","false","wrong"],a:0},
+  {q:"A story that everyone shares quickly goes ___.",o:["viral","global","popular"],a:0},
+  {q:"The newspaper published the ___ on its front page.",o:["headline","title","caption"],a:0},
+  {q:"___ news — срочные новости",o:["break","breaking","broken"],a:1},
+  {q:"The opening ___ of the Olympics",o:["ceremony","party","meeting"],a:0},
+  {q:"We ___ a party for her birthday.",o:["made","threw","did"],a:1}]},
+{n:6,t:"Creators",e:"🎨",d:"used to · сравнения · Present Perfect + for/since/yet · искусство · extreme adjectives",
+ g:[
+  {q:"I ___ play the piano when I was a child.",o:["used to","use to","used"],a:0},
+  {q:"Did you ___ live in Moscow?",o:["used to","use to","using to"],a:1},
+  {q:"This gallery is ___ than the one in the centre.",o:["more big","bigger","biggest"],a:1},
+  {q:"It's the ___ painting in the museum.",o:["more famous","most famous","famousest"],a:1},
+  {q:"I've lived here ___ five years.",o:["for","since","from"],a:0},
+  {q:"She's worked there ___ 2021.",o:["for","since","during"],a:1},
+  {q:"Have you finished ___?",o:["yet","already","just"],a:0},
+  {q:"My drawing isn't ___ good as yours.",o:["as","so much","than"],a:0}],
+ f:[
+  {q:"I ___ to hate opera, but now I love it.",a:["used"]},
+  {q:"This is the ___ (good) concert I've ever been to.",a:["best"]},
+  {q:"We haven't seen him ___ Monday.",a:["since"]},
+  {q:"Painting is ___ (easy) than sculpture, in my opinion.",a:["easier"]}],
+ v:[
+  {q:"Человек, который пишет картины — …",o:["painter","paint","painting"],a:0},
+  {q:"Существительное от <i>create</i> (то, что создано):",o:["creation","creative","creatively"],a:0},
+  {q:"The concert was absolutely ___! (не просто good)",o:["brilliant","fine","okay"],a:0},
+  {q:"I'm not just tired, I'm ___.",o:["exhausted","sleepy","calm"],a:0},
+  {q:"The food wasn't just bad, it was ___.",o:["awful","not nice","so-so"],a:0},
+  {q:"We went to an ___ of modern art.",o:["exhibition","experiment","expedition"],a:0}]},
+{n:7,t:"Travel",e:"✈️",d:"1-й и 2-й conditionals · quantifiers · reflexive pronouns · путешествия",
+ g:[
+  {q:"If it rains tomorrow, we ___ at home.",o:["stay","will stay","would stay"],a:1},
+  {q:"If I ___ rich, I'd travel the world.",o:["am","was","will be"],a:1},
+  {q:"If you heat ice, it ___.",o:["melts","will melt","would melt"],a:0},
+  {q:"She ___ happier if she lived by the sea.",o:["will be","would be","is"],a:1},
+  {q:"There are too ___ tourists here in summer.",o:["much","many","few"],a:1},
+  {q:"We don't have ___ time — hurry!",o:["many","much","a few"],a:1},
+  {q:"There are ___ nice cafés near the beach.",o:["a little","a few","much"],a:1},
+  {q:"I taught ___ to swim.",o:["me","myself","mine"],a:1}],
+ f:[
+  {q:"If we miss the bus, we ___ (take) a taxi.",a:["will take","'ll take"]},
+  {q:"If I had more money, I ___ (buy) a camper van.",a:["would buy","'d buy"]},
+  {q:"Have a great holiday — enjoy ___! (вы)",a:["yourselves","yourself"]},
+  {q:"How ___ luggage do you have?",a:["much"]}],
+ v:[
+  {q:"You sleep in a tent when you go ___.",o:["camping","cruising","sightseeing"],a:0},
+  {q:"Осмотр достопримечательностей — это …",o:["sightseeing","shopping","sunbathing"],a:0},
+  {q:"The village was really ___ — like a postcard.",o:["picturesque","crowded","polluted"],a:0},
+  {q:"The city centre was ___ with tourists.",o:["crowded","empty","quiet"],a:0},
+  {q:"We booked our ___ online — a small hotel.",o:["accommodation","luggage","souvenir"],a:0},
+  {q:"I always bring back a ___ from my holidays.",o:["souvenir","ticket","timetable"],a:0}]},
+{n:8,t:"Know-how",e:"🛠️",d:"can / could / be able to · пассив · -ing form · технологии · phrasal verbs",
+ g:[
+  {q:"I ___ swim when I was four.",o:["can","could","was able"],a:1},
+  {q:"She hasn't been ___ to fix it yet.",o:["can","able","could"],a:1},
+  {q:"One day we ___ be able to live on Mars.",o:["will","can","could to"],a:0},
+  {q:"This bridge ___ in 1932.",o:["built","was built","is built"],a:1},
+  {q:"Millions of videos ___ every day.",o:["upload","are uploaded","uploaded"],a:1},
+  {q:"The film ___ by a teenager.",o:["made","was made","has made"],a:1},
+  {q:"___ is my favourite hobby.",o:["Cook","Cooking","To cooking"],a:1},
+  {q:"I'm interested in ___ languages.",o:["learn","learning","to learn"],a:1}],
+ f:[
+  {q:"Paper ___ (invent) in China.",a:["was invented"]},
+  {q:"I won't ___ able to come tomorrow.",a:["be"]},
+  {q:"___ (run) every morning keeps me fit.",a:["running"]},
+  {q:"These phones ___ (make) in Korea.",a:["are made"]}],
+ v:[
+  {q:"My laptop broke ___ during the meeting.",o:["down","up","off"],a:0},
+  {q:"I need to ___ out how this app works.",o:["find","look","take"],a:0},
+  {q:"Can you ___ up the wifi?",o:["set","put","get"],a:0},
+  {q:"I try to ___ up a new skill every year.",o:["pick","take","bring"],a:0},
+  {q:"Don't forget to ___ your work before you close the file.",o:["save","keep","hold"],a:0},
+  {q:"The battery is dead — I need to ___ my phone.",o:["charge","fill","load"],a:0}]}
+];
+const app=document.getElementById("app"),tabs=document.getElementById("tabs");
+let scores={};
+UNITS.forEach((u,i)=>{const b=document.createElement("button");b.className="tab"+(i===0?" on":"");b.textContent=u.e+" "+u.n+". "+u.t;b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(i);};tabs.appendChild(b);});
+function esc(s){return s;}
+function render(i){
+  const u=UNITS[i];scores[i]={got:0,total:u.g.length+u.f.length+u.v.length};
+  let h='<div class="uhead"><div class="t">'+u.e+' Unit '+u.n+' · '+u.t+'</div><div class="d">'+u.d+'</div><div class="score" id="sc">Счёт: 0 / '+scores[i].total+'</div></div>';
+  h+='<div class="sec">📘 Грамматика — выбери вариант</div>';
+  u.g.forEach((t,k)=>{h+=mc("g"+k,k+1,t);});
+  h+='<div class="sec">✍️ Впиши слово</div>';
+  u.f.forEach((t,k)=>{h+=gap("f"+k,k+1,t);});
+  h+='<div class="sec">🗂 Лексика — выбери вариант</div>';
+  u.v.forEach((t,k)=>{h+=mc("v"+k,k+1,t);});
+  h+='<button class="reset" onclick="render('+i+')">🔄 Сбросить юнит</button>';
+  app.innerHTML=h;
+  app.querySelectorAll("[data-mc]").forEach(card=>{
+    const a=+card.dataset.a;let done=false;
+    card.querySelectorAll(".opt").forEach((btn,bi)=>{btn.onclick=()=>{
+      if(done)return;
+      if(bi===a){btn.classList.add("ok");done=true;card.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump(i);}
+      else{btn.classList.add("bad");btn.disabled=true;}
+    };});
+  });
+  app.querySelectorAll("[data-gap]").forEach(card=>{
+    const ans=JSON.parse(card.dataset.ans);const inp=card.querySelector(".gap-in");const btn=card.querySelector(".chk");const an=card.querySelector(".ans");let done=false;
+    function check(){if(done)return;const val=inp.value.trim().toLowerCase().replace(/\s+/g," ");
+      if(ans.some(x=>x.toLowerCase()===val)){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump(i);}
+      else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: правильный ответ — "+ans[0];}}
+    btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  });
+}
+function bump(i){scores[i].got++;const sc=document.getElementById("sc");sc.textContent="Счёт: "+scores[i].got+" / "+scores[i].total;
+  if(scores[i].got===scores[i].total){const c=document.getElementById("conf");c.style.opacity=1;setTimeout(()=>c.style.opacity=0,1600);sc.textContent+=" — отлично! 🎉";}}
+function mc(id,n,t){return '<div class="card" data-mc data-a="'+t.a+'"><div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div></div>';}
+function gap(id,n,t){return '<div class="card" data-gap data-ans=\''+JSON.stringify(t.a).replace(/'/g,"&#39;")+'\'><div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div></div>';}
+render(0);
+</script>
+</body>
+</html>
