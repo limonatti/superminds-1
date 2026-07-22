@@ -60,7 +60,7 @@
     <button class="tool" data-t="rect" title="Прямоугольник">▭</button>
     <button class="tool" data-t="ellipse" title="Овал">⬭</button>
     <button class="tool" data-t="arrow" title="Стрелка">↗</button>
-    <button class="tool" data-t="del" title="Удалить">🧽</button>
+    <button class="tool" data-t="del" title="Ластик">🧽</button>
     <span class="sep"></span>
     <span id="palette" style="display:flex;gap:5px;align-items:center"></span>
     <span class="sep"></span>
@@ -135,12 +135,25 @@
     document.getElementById("zout").onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1/1.2);};
     document.getElementById("zreset").onclick=()=>{cam.x=0;cam.y=0;cam.s=1;applyCam();};
 
+    /* ---- ластик: стирает всё под курсором (можно вести, как настоящим ластиком) ---- */
+    function eraseAt(sx,sy){
+      const offs=[[0,0],[6,0],[-6,0],[0,6],[0,-6],[4,4],[-4,-4],[4,-4],[-4,4]];
+      offs.forEach(d=>{
+        document.elementsFromPoint(sx+d[0],sy+d[1]).forEach(el=>{
+          let id=null;
+          if(el.classList&&el.classList.contains("shape")&&el.dataset&&el.dataset.id) id=el.dataset.id;
+          if(id&&objs[id]){ removeObj(id); send({t:"rm",id}); }
+        });
+      });
+    }
+
     /* ---- рисование / создание / пан ---- */
     let mode=null, cur=null, panStart=null;
     stage.addEventListener("pointerdown",e=>{
       if(e.target.closest(".obj")) return;         // объекты обрабатывают себя
       const w=toWorld(e.clientX,e.clientY);
       if(tool==="pan"){ mode="pan"; panStart={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y}; stage.classList.add("panning"); stage.setPointerCapture(e.pointerId); return; }
+      if(tool==="del"){ mode="erase"; stage.setPointerCapture(e.pointerId); eraseAt(e.clientX,e.clientY); return; }
       if(tool==="pen"){ mode="pen"; const id=genId(); const o={type:"stroke",id,color,pts:[w]}; objs[id]=o; o.el=svgPath(o); ink.appendChild(o.el); send({t:"ss",id,c:color}); send({t:"sp",id,x:w.x,y:w.y}); cur=o; stage.setPointerCapture(e.pointerId); return; }
       if(tool==="rect"||tool==="ellipse"||tool==="arrow"){ mode="shape"; const id=genId(); const o={type:"shape",id,shape:tool,x0:w.x,y0:w.y,x1:w.x,y1:w.y,color}; objs[id]=o; o.el=svgShape(o); ink.appendChild(o.el); cur=o; stage.setPointerCapture(e.pointerId); return; }
       if(tool==="note"){ addNote(genId(),{x:w.x,y:w.y,color,text:""},false,true); setTool("pan"); return; }
@@ -149,6 +162,7 @@
     stage.addEventListener("pointermove",e=>{
       cursorOut(e.clientX,e.clientY);
       if(mode==="pan"){ cam.x=panStart.cx+(e.clientX-panStart.x); cam.y=panStart.cy+(e.clientY-panStart.y); applyCam(); return; }
+      if(mode==="erase"){ eraseAt(e.clientX,e.clientY); return; }
       if(mode==="pen"&&cur){ const w=toWorld(e.clientX,e.clientY); cur.pts.push(w); cur.el.setAttribute("d",dOf(cur.pts)); send({t:"sp",id:cur.id,x:w.x,y:w.y}); return; }
       if(mode==="shape"&&cur){ const w=toWorld(e.clientX,e.clientY); cur.x1=w.x; cur.y1=w.y; updShape(cur); return; }
     });
@@ -160,10 +174,11 @@
 
     /* ---- SVG helpers ---- */
     function dOf(pts){ return pts.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" "); }
-    function svgPath(o){ const p=document.createElementNS(NS,"path"); p.setAttribute("fill","none"); p.setAttribute("stroke",o.color); p.setAttribute("stroke-width","3"); p.setAttribute("stroke-linecap","round"); p.setAttribute("stroke-linejoin","round"); p.setAttribute("d",dOf(o.pts)); return p; }
+    function svgPath(o){ const p=document.createElementNS(NS,"path"); p.setAttribute("class","shape"); p.dataset.id=o.id; p.setAttribute("fill","none"); p.setAttribute("stroke",o.color); p.setAttribute("stroke-width","3"); p.setAttribute("stroke-linecap","round"); p.setAttribute("stroke-linejoin","round"); p.setAttribute("d",dOf(o.pts));
+      p.addEventListener("pointerdown",ev=>{ if(tool==="del"){removeObj(o.id);send({t:"rm",id:o.id});} }); return p; }
     function svgShape(o){ let el; if(o.shape==="ellipse"){el=document.createElementNS(NS,"ellipse");} else if(o.shape==="rect"){el=document.createElementNS(NS,"rect");} else {el=document.createElementNS(NS,"line");el.setAttribute("marker-end","url(#arrowh)");}
       el.setAttribute("class","shape"); el.setAttribute("fill","none"); el.setAttribute("stroke",o.color); el.setAttribute("stroke-width","3"); el.dataset.id=o.id;
-      el.addEventListener("pointerdown",ev=>{ if(tool==="del"){ev.stopPropagation();removeObj(o.id);send({t:"rm",id:o.id});} }); updShape2(el,o); return el; }
+      el.addEventListener("pointerdown",ev=>{ if(tool==="del"){removeObj(o.id);send({t:"rm",id:o.id});} }); updShape2(el,o); return el; }
     function updShape(o){ updShape2(o.el,o); }
     function updShape2(el,o){ const x=Math.min(o.x0,o.x1),y=Math.min(o.y0,o.y1),w=Math.abs(o.x1-o.x0),h=Math.abs(o.y1-o.y0);
       if(o.shape==="rect"){el.setAttribute("x",x);el.setAttribute("y",y);el.setAttribute("width",w);el.setAttribute("height",h);el.setAttribute("rx",6);}
@@ -174,7 +189,9 @@
     /* ---- DOM объекты: стикер / текст / карточка ---- */
     function speak(x){try{const u=new SpeechSynthesisUtterance(x);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function place(el,x,y){el.style.left=x+"px";el.style.top=y+"px";}
-    function delX(el,id){const b=document.createElement("button");b.className="del-x";b.textContent="✕";b.onclick=ev=>{ev.stopPropagation();removeObj(id);send({t:"rm",id});};el.appendChild(b);}
+    function txtOf(el){ const c=el.cloneNode(true); c.querySelectorAll(".del-x").forEach(b=>b.remove()); return c.textContent; }
+    function setTxt(el,text){ el.textContent=text; if(el._delx) el.appendChild(el._delx); }
+    function delX(el,id){const b=document.createElement("button");b.className="del-x";b.textContent="✕";b.onclick=ev=>{ev.stopPropagation();removeObj(id);send({t:"rm",id});};el.appendChild(b);el._delx=b;}
     function dragObj(el,o,onTap){
       let sx,sy,ox,oy,moved,dragging=false;
       el.addEventListener("pointerdown",e=>{
@@ -187,11 +204,11 @@
     }
     function addNote(id,d,remote,focus){ if(objs[id])return; const el=document.createElement("div"); el.className="obj note"; el.style.background=NOTE_COLORS[d.color]||"#fff3c4"; el.contentEditable="true"; el.textContent=d.text||""; place(el,d.x,d.y); world.appendChild(el);
       const o={type:"note",id,x:d.x,y:d.y,color:d.color,el}; objs[id]=o; delX(el,id); dragObj(el,o);
-      el.addEventListener("input",()=>send({t:"nt",id,text:el.textContent}));
+      el.addEventListener("input",()=>send({t:"nt",id,text:txtOf(el)}));
       if(!remote) send({t:"na",o:{id,x:d.x,y:d.y,color:d.color,text:d.text||""}}); if(focus)setTimeout(()=>el.focus(),10); }
     function addText(id,d,remote,focus){ if(objs[id])return; const el=document.createElement("div"); el.className="obj txt"; el.style.color=d.color; el.contentEditable="true"; el.textContent=d.text||"текст"; place(el,d.x,d.y); world.appendChild(el);
       const o={type:"text",id,x:d.x,y:d.y,color:d.color,el}; objs[id]=o; delX(el,id); dragObj(el,o);
-      el.addEventListener("input",()=>send({t:"tt",id,text:el.textContent}));
+      el.addEventListener("input",()=>send({t:"tt",id,text:txtOf(el)}));
       if(!remote) send({t:"ta",o:{id,x:d.x,y:d.y,color:d.color,text:d.text||"текст"}}); if(focus)setTimeout(()=>{el.focus();document.execCommand&&document.execCommand("selectAll");},10); }
     function addCard(id,d,remote){ if(objs[id])return; const el=document.createElement("div"); el.className="obj card"; el.innerHTML='<div class="em">'+d.emoji+'</div><div class="en">'+d.en+'</div>'; place(el,d.x,d.y); world.appendChild(el);
       const o={type:"card",id,x:d.x,y:d.y,en:d.en,emoji:d.emoji,el}; objs[id]=o; delX(el,id); dragObj(el,o,()=>speak(d.en));
@@ -224,9 +241,9 @@
       case "sp": { const o=objs[op.id]; if(o&&o.type==="stroke"){o.pts.push({x:op.x,y:op.y});o.el.setAttribute("d",dOf(o.pts));} break; }
       case "sa": { if(!objs[op.o.id]){const o=Object.assign({type:"shape"},op.o);objs[o.id]=o;o.el=svgShape(o);ink.appendChild(o.el);updShape(o);} break; }
       case "na": addNote(op.o.id,op.o,true); break;
-      case "nt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)o.el.textContent=op.text; break; }
+      case "nt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)setTxt(o.el,op.text); break; }
       case "ta": addText(op.o.id,op.o,true); break;
-      case "tt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)o.el.textContent=op.text; break; }
+      case "tt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)setTxt(o.el,op.text); break; }
       case "ca": addCard(op.o.id,op.o,true); break;
       case "mv": { const o=objs[op.id]; if(o&&o.el&&o.el.style){o.x=op.x;o.y=op.y;place(o.el,op.x,op.y);} break; }
       case "rm": removeObj(op.id); break;
@@ -237,8 +254,8 @@
     function sendSnapshot(){ const list=Object.keys(objs).map(id=>{const o=objs[id];
       if(o.type==="stroke")return{type:"stroke",id,color:o.color,pts:o.pts};
       if(o.type==="shape")return{type:"shape",id,shape:o.shape,x0:o.x0,y0:o.y0,x1:o.x1,y1:o.y1,color:o.color};
-      if(o.type==="note")return{type:"note",id,x:o.x,y:o.y,color:o.color,text:o.el.textContent};
-      if(o.type==="text")return{type:"text",id,x:o.x,y:o.y,color:o.color,text:o.el.textContent};
+      if(o.type==="note")return{type:"note",id,x:o.x,y:o.y,color:o.color,text:txtOf(o.el)};
+      if(o.type==="text")return{type:"text",id,x:o.x,y:o.y,color:o.color,text:txtOf(o.el)};
       if(o.type==="card")return{type:"card",id,x:o.x,y:o.y,en:o.en,emoji:o.emoji};});
       send({t:"snap",list});
     }
