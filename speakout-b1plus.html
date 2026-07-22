@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speakout B1+ · Тренажёр · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 70px}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  h1{margin:14px 0 2px;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,46px);font-weight:700;color:#1d4e6b;letter-spacing:-1px;text-align:center}
+  .sub{font-weight:800;font-size:14px;color:#5a4f47;margin:0 0 22px;text-align:center}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+  .tab{border:none;cursor:pointer;background:#fff;color:#1d4e6b;font:800 13px 'Nunito',sans-serif;padding:10px 14px;border-radius:999px;box-shadow:0 3px 0 #d3dde3}
+  .tab.on{background:#1d4e6b;color:#fff;box-shadow:0 3px 0 #0e2c3f}
+  .uhead{background:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 6px 0 #d3dde3;margin-bottom:18px}
+  .uhead .t{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:#1d4e6b}
+  .uhead .d{font-size:13.5px;font-weight:700;color:#5a4f47;margin-top:4px}
+  .score{margin-top:10px;font-weight:900;font-size:14px;color:#27632a}
+  .sec{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#1d4e6b;margin:24px 4px 10px}
+  .card{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 0 #d3dde3;margin-bottom:12px}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #d3dde3;background:#f7fafc;cursor:pointer;font:800 14px 'Nunito',sans-serif;color:#1c1310;padding:9px 16px;border-radius:12px;transition:transform .08s}
+  .opt:hover{transform:translateY(-2px)}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #d3dde3;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#f7fafc;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .reset{border:none;cursor:pointer;background:#fff;color:#1d4e6b;font:800 13px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 3px 0 #d3dde3;margin-top:18px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+  .conf{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);font-size:64px;pointer-events:none;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="home" href="index.html">← Домой</a><a class="home" href="speakout-b1.html">B1 →</a></div>
+  <h1>Speakout B1+ · Тренажёр</h1>
+  <p class="sub">Грамматика и лексика по юнитам · выбери юнит и решай</p>
+  <div class="tabs" id="tabs"></div>
+  <div id="app"></div>
+  <div class="foot">Made for @english.with_asya · упражнения авторские, по темам курса Speakout 3rd ed. B1+</div>
+</div>
+<div class="conf" id="conf">🎉</div>
+<script>
+const UNITS=[
+{n:1,t:"Me & mine",e:"🎒",d:"Narrative tenses · verb patterns · phrasal verbs · вещи и материалы",
+ g:[
+  {q:"When I got home, I realised I ___ my keys at work.",o:["left","had left","was leaving"],a:1},
+  {q:"While she ___ to music, someone knocked at the door.",o:["listened","was listening","had listened"],a:1},
+  {q:"I ___ my old phone for years before it finally died.",o:["used","was using","had used"],a:2},
+  {q:"He suggested ___ to the flea market.",o:["to go","going","go"],a:1},
+  {q:"They agreed ___ us with the move.",o:["helping","to help","help"],a:1},
+  {q:"I can't imagine ___ without my laptop.",o:["to live","living","live"],a:1},
+  {q:"I gave ___ most of my old clothes last month.",o:["away","up","in"],a:0},
+  {q:"Everyone came ___ my brother — he was ill.",o:["except for","apart","besides of"],a:0}],
+ f:[
+  {q:"He ___ (wear) a strange hat when I saw him.",a:["was wearing"]},
+  {q:"By midnight everyone ___ (leave) the party.",a:["had left"]},
+  {q:"She refused ___ (sell) her grandmother's ring.",a:["to sell"]},
+  {q:"I don't mind ___ (lend) you my bike.",a:["lending"]}],
+ v:[
+  {q:"Кольцо из золота — a ___ ring.",o:["gold","golden","goldy"],a:0},
+  {q:"My bag is made of ___ — настоящая кожа.",o:["leather","fur","wool"],a:0},
+  {q:"Ваза из стекла — a ___ vase.",o:["glass","glassy","glazed"],a:0},
+  {q:"Это досталось мне от бабушки: I ___ it from my grandmother.",o:["inherited","borrowed","earned"],a:0},
+  {q:"Вещь в идеальном состоянии — in perfect ___.",o:["condition","situation","position"],a:0},
+  {q:"Оставить голосовое сообщение — ___ a message.",o:["leave","put","stay"],a:0}]},
+{n:2,t:"Behaviour",e:"🧠",d:"Present Perfect Simple vs Continuous · relative clauses · привычки · раздражители",
+ g:[
+  {q:"I ___ to get up earlier recently — and it works!",o:["tried","have been trying","try"],a:1},
+  {q:"She ___ three online courses this year.",o:["has finished","has been finishing","finishes"],a:0},
+  {q:"How long ___ you ___ yoga? — For about a year.",o:["did … do","have … been doing","do … do"],a:1},
+  {q:"My eyes hurt because I ___ at the screen all day.",o:["looked","have been looking","look"],a:1},
+  {q:"The man ___ lives upstairs plays drums at night.",o:["who","which","whose"],a:0},
+  {q:"That's the café ___ we first met.",o:["which","where","that"],a:1},
+  {q:"My neighbour, ___ dog barks all day, never apologises.",o:["who's","whose","which"],a:1},
+  {q:"People ___ chew loudly drive me crazy.",o:["who","which","where"],a:0}],
+ f:[
+  {q:"I've ___ (know) her since school.",a:["known"]},
+  {q:"He's been ___ (learn) Spanish for two months.",a:["learning"]},
+  {q:"She has just ___ (give) up sugar.",a:["given"]},
+  {q:"The film ___ we watched yesterday was brilliant. (какое слово?)",a:["which","that"]}],
+ v:[
+  {q:"Что-то очень бесит: it really ___ me.",o:["annoys","enjoys","bores"],a:0},
+  {q:"«Мелкая ненавистная привычка окружающих» — a pet ___.",o:["hate","dog","fear"],a:0},
+  {q:"Избавиться от привычки — ___ a habit.",o:["break","cut","lose"],a:0},
+  {q:"Выработать привычку — ___ up a habit.",o:["pick","take","get"],a:1},
+  {q:"He always ___ his temper in traffic — злится.",o:["loses","breaks","drops"],a:0},
+  {q:"Быть в хорошем настроении — in a good ___.",o:["mood","feeling","mind"],a:0}]},
+{n:3,t:"Working life",e:"💼",d:"Conditionals · must / have to / need to · работа · собеседования",
+ g:[
+  {q:"If I get the job, I ___ you straight away.",o:["tell","will tell","would tell"],a:1},
+  {q:"If I worked from home, I ___ more time with my kids.",o:["will spend","would spend","spend"],a:1},
+  {q:"You ___ finish the report today — it's urgent.",o:["must","might","could"],a:0},
+  {q:"We ___ wear a suit on Fridays — it's casual day.",o:["mustn't","don't have to","can't"],a:1},
+  {q:"You ___ be late for the interview — плохая идея.",o:["shouldn't","don't have to","needn't"],a:0},
+  {q:"I ___ to renew my contract next month.",o:["must","need","should"],a:1},
+  {q:"Unless you ___ harder, you won't get promoted.",o:["work","will work","worked"],a:0},
+  {q:"If she ___ the manager, she'd change everything.",o:["is","were","will be"],a:1}],
+ f:[
+  {q:"If it ___ (rain), the meeting will be online.",a:["rains"]},
+  {q:"If I ___ (be) you, I'd ask for a pay rise.",a:["were","was"]},
+  {q:"We didn't ___ to work last Monday — был выходной.",a:["have"]},
+  {q:"You ___ (must + not) tell anyone — it's confidential.",a:["mustn't","must not"]}],
+ v:[
+  {q:"Работать сверхурочно — work ___.",o:["overtime","overwork","uptime"],a:0},
+  {q:"Заявление о приёме на работу — a job ___.",o:["application","appliance","applying"],a:0},
+  {q:"Подать заявку на вакансию — ___ for a job.",o:["apply","ask","request"],a:0},
+  {q:"Повышение по службе — a ___.",o:["promotion","motion","position"],a:0},
+  {q:"Уволиться по собственному желанию — ___ your job.",o:["quit","fire","sack"],a:0},
+  {q:"Зарплата (ежемесячная) — a ___.",o:["salary","fee","tip"],a:0}]},
+{n:4,t:"Fact or fiction?",e:"🕵️",d:"was going to · косвенные вопросы · правда и ложь · новости",
+ g:[
+  {q:"I ___ call you, but I forgot. (собирался)",o:["was going to","will","would to"],a:0},
+  {q:"We ___ to fly to Rome, but the flight was cancelled.",o:["were planning","plan","will plan"],a:0},
+  {q:"Could you tell me what time ___?",o:["does the film start","the film starts","starts the film"],a:1},
+  {q:"Do you know ___ he's coming?",o:["that if","whether","what"],a:1},
+  {q:"I wonder ___ she said that.",o:["why","why did","that why"],a:0},
+  {q:"___ you agree that the story sounds strange?",o:["Don't","Doesn't","Aren't"],a:0},
+  {q:"He asked me where ___.",o:["I lived","did I live","do I live"],a:0},
+  {q:"I have no idea ___ the rumour is true.",o:["that","whether","what"],a:1}],
+ f:[
+  {q:"I ___ going to tell you, honestly!",a:["was"]},
+  {q:"Do you know where ___ lives? (он)",a:["he"]},
+  {q:"Could you tell me how much it ___ (cost)?",a:["costs"]},
+  {q:"They ___ going to buy a house, but prices went up. (они)",a:["were"]}],
+ v:[
+  {q:"Выдумка, обман (розыгрыш) — a ___.",o:["hoax","fact","proof"],a:0},
+  {q:"Сказать неправду — tell a ___.",o:["lie","lay","false"],a:0},
+  {q:"Говорить правду — tell the ___.",o:["truth","true","real"],a:0},
+  {q:"Заголовок новости — a ___.",o:["headline","headword","topline"],a:0},
+  {q:"Достоверный источник — a reliable ___.",o:["source","sauce","resource"],a:1},
+  {q:"Обмануть кого-то — ___ someone.",o:["deceive","believe","receive"],a:0}]},
+{n:5,t:"Consumer",e:"🛍️",d:"Цель: to / in order to / so that · сравнения · реклама · покупки",
+ g:[
+  {q:"I went online ___ compare prices.",o:["for","to","so"],a:1},
+  {q:"She saved money ___ she could buy a new phone.",o:["so that","to","in order"],a:0},
+  {q:"We left early ___ to miss the traffic.",o:["in order not","for not","so not"],a:0},
+  {q:"This model is ___ cheaper than the old one.",o:["much","very","more"],a:0},
+  {q:"The more you buy, ___ you save.",o:["the more","more","the most"],a:0},
+  {q:"It's ___ as expensive as I expected.",o:["not nearly","not near","no nearly"],a:0},
+  {q:"This is by ___ the best deal I've found.",o:["far","much","away"],a:0},
+  {q:"The service is getting ___ and ___.",o:["worse … worse","bad … bad","worst … worst"],a:0}],
+ f:[
+  {q:"I called the shop ___ (order) to complain.",a:["in"]},
+  {q:"The ___ (early) you book, the cheaper it is.",a:["earlier"]},
+  {q:"This café is far ___ (good) than the one near work.",a:["better"]},
+  {q:"I turned off notifications so ___ I could focus.",a:["that"]}],
+ v:[
+  {q:"Вернуть деньги за покупку — get a ___.",o:["refund","fund","reward"],a:0},
+  {q:"Скидка — a ___.",o:["discount","account","amount"],a:0},
+  {q:"Выгодная покупка — a ___.",o:["bargain","burden","budget"],a:0},
+  {q:"Целевая аудитория рекламы — target ___.",o:["audience","auditorium","attendance"],a:0},
+  {q:"Бренд, торговая марка — a ___.",o:["brand","brend","mark"],a:0},
+  {q:"Оформить заказ онлайн — place an ___.",o:["order","offer","item"],a:0}]},
+{n:6,t:"Places",e:"🏙️",d:"so / such · be & get used to · город и транспорт · рекомендации",
+ g:[
+  {q:"The traffic was ___ bad that we missed the show.",o:["so","such","too"],a:0},
+  {q:"It's ___ a beautiful city!",o:["so","such","very much"],a:1},
+  {q:"I'm used ___ up early now.",o:["to get","to getting","get"],a:1},
+  {q:"When I moved here, I couldn't ___ used to the noise.",o:["get","be","go"],a:0},
+  {q:"She ___ used to living alone — ей уже привычно.",o:["is","gets","was get"],a:0},
+  {q:"There was ___ much noise that I couldn't sleep.",o:["so","such","such a"],a:0},
+  {q:"He's slowly ___ used to his new commute.",o:["being","getting","having"],a:1},
+  {q:"It was ___ long journey that we were exhausted.",o:["so","such a","a so"],a:1}],
+ f:[
+  {q:"I'm not used to ___ (drive) on the left.",a:["driving"]},
+  {q:"The food was ___ good that we came back the next day.",a:["so"]},
+  {q:"It was such ___ interesting museum! (артикль)",a:["an"]},
+  {q:"You'll soon get ___ to the weather here.",a:["used"]}],
+ v:[
+  {q:"Час пик — ___ hour.",o:["rush","race","fast"],a:0},
+  {q:"Пробка — a traffic ___.",o:["jam","stop","block"],a:0},
+  {q:"Пригород — the ___.",o:["suburbs","subway","outskirt"],a:0},
+  {q:"Пешеходная зона — a ___ zone.",o:["pedestrian","walker","stroller"],a:0},
+  {q:"Оживлённый район — a ___ area.",o:["lively","alive","living"],a:0},
+  {q:"Добираться на работу — ___ to work.",o:["commute","communicate","commit"],a:0}]},
+{n:7,t:"Connect",e:"📱",d:"Reported speech · reporting verbs · passives · интернет-общение",
+ g:[
+  {q:"«I'm tired.» → She said she ___ tired.",o:["is","was","were"],a:1},
+  {q:"«We'll meet tomorrow.» → They said they ___ meet the next day.",o:["will","would","can"],a:1},
+  {q:"He asked me if I ___ the message.",o:["saw","had seen","have seen"],a:1},
+  {q:"She ___ me to check my spam folder.",o:["said","told","spoke"],a:1},
+  {q:"He ___ to fix my laptop. (пообещал)",o:["promised","suggested","denied"],a:0},
+  {q:"She ___ breaking the printer. (отрицала)",o:["denied","refused","admitted to not"],a:0},
+  {q:"Millions of messages ___ every minute.",o:["send","are sent","sent"],a:1},
+  {q:"My account ___ last night. (взломали)",o:["hacked","was hacked","has hacked"],a:1}],
+ f:[
+  {q:"«I can help.» → He said he ___ help.",a:["could"]},
+  {q:"She asked me where I ___ . (жил/жила)",a:["lived"]},
+  {q:"The photo ___ (take) in 1990.",a:["was taken"]},
+  {q:"He suggested ___ (create) a group chat.",a:["creating"]}],
+ v:[
+  {q:"Выложить фото в сеть — ___ a photo.",o:["post","mail","print"],a:0},
+  {q:"Подписаться на кого-то — ___ someone.",o:["follow","subscribe","watch"],a:0},
+  {q:"Делиться слишком личным в сети — ___.",o:["oversharing","overposting","outsharing"],a:0},
+  {q:"Поддерживать связь — keep in ___.",o:["touch","reach","line"],a:0},
+  {q:"Ответить на сообщение — ___ to a message.",o:["reply","answer back","return"],a:0},
+  {q:"Пароль — a ___.",o:["password","passport","codeword"],a:0}]},
+{n:8,t:"Wisdom",e:"🦉",d:"Third conditional · should have · would (прошлые привычки) · советы",
+ g:[
+  {q:"If I ___ harder at school, I'd have gone to university.",o:["studied","had studied","would study"],a:1},
+  {q:"If we'd left earlier, we ___ the train.",o:["would catch","would have caught","caught"],a:1},
+  {q:"I ___ have said that — I'm sorry.",o:["shouldn't","wouldn't","mustn't"],a:0},
+  {q:"You ___ have told me! Я бы помогла.",o:["should","must","need"],a:0},
+  {q:"When I was little, my grandad ___ tell us stories every night.",o:["would","should","must"],a:0},
+  {q:"If she ___ me, I would have come.",o:["called","had called","would call"],a:1},
+  {q:"I wish I ___ more languages.",o:["speak","spoke","will speak"],a:1},
+  {q:"We ___ have worried — everything was fine.",o:["needn't","mustn't","can't"],a:0}],
+ f:[
+  {q:"If I'd known, I ___ have come earlier. (бы)",a:["would"]},
+  {q:"You should ___ (listen) to me!",a:["have listened"]},
+  {q:"If they ___ (not/miss) the bus, they'd have arrived on time.",a:["hadn't missed"]},
+  {q:"My mum ___ always read to me before bed. (бывало)",a:["would"]}],
+ v:[
+  {q:"Дать совет — ___ advice.",o:["give","make","do"],a:0},
+  {q:"Прислушаться к совету — ___ someone's advice.",o:["take","get","catch"],a:0},
+  {q:"Учиться на ошибках — learn from your ___.",o:["mistakes","faults","errors"],a:0},
+  {q:"Мудрое решение — a ___ decision.",o:["wise","clever","smart"],a:0},
+  {q:"«Если бы я был на твоём месте…» — If I ___ in your shoes…",o:["were","am","be"],a:0},
+  {q:"Извлечь урок — ___ a lesson.",o:["learn","study","teach"],a:0}]}
+];
+const app=document.getElementById("app"),tabs=document.getElementById("tabs");
+let scores={};
+UNITS.forEach((u,i)=>{const b=document.createElement("button");b.className="tab"+(i===0?" on":"");b.textContent=u.e+" "+u.n+". "+u.t;b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(i);};tabs.appendChild(b);});
+function render(i){
+  const u=UNITS[i];scores[i]={got:0,total:u.g.length+u.f.length+u.v.length};
+  let h='<div class="uhead"><div class="t">'+u.e+' Unit '+u.n+' · '+u.t+'</div><div class="d">'+u.d+'</div><div class="score" id="sc">Счёт: 0 / '+scores[i].total+'</div></div>';
+  h+='<div class="sec">📘 Грамматика — выбери вариант</div>';
+  u.g.forEach((t,k)=>{h+=mc(k+1,t);});
+  h+='<div class="sec">✍️ Впиши слово</div>';
+  u.f.forEach((t,k)=>{h+=gap(k+1,t);});
+  h+='<div class="sec">🗂 Лексика — выбери вариант</div>';
+  u.v.forEach((t,k)=>{h+=mc(k+1,t);});
+  h+='<button class="reset" onclick="render('+i+')">🔄 Сбросить юнит</button>';
+  app.innerHTML=h;
+  app.querySelectorAll("[data-mc]").forEach(card=>{
+    const a=+card.dataset.a;let done=false;
+    card.querySelectorAll(".opt").forEach((btn,bi)=>{btn.onclick=()=>{
+      if(done)return;
+      if(bi===a){btn.classList.add("ok");done=true;card.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump(i);}
+      else{btn.classList.add("bad");btn.disabled=true;}
+    };});
+  });
+  app.querySelectorAll("[data-gap]").forEach(card=>{
+    const ans=JSON.parse(card.dataset.ans);const inp=card.querySelector(".gap-in");const btn=card.querySelector(".chk");const an=card.querySelector(".ans");let done=false;
+    function check(){if(done)return;const val=inp.value.trim().toLowerCase().replace(/\s+/g," ");
+      if(ans.some(x=>x.toLowerCase()===val)){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump(i);}
+      else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: правильный ответ — "+ans[0];}}
+    btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  });
+}
+function bump(i){scores[i].got++;const sc=document.getElementById("sc");sc.textContent="Счёт: "+scores[i].got+" / "+scores[i].total;
+  if(scores[i].got===scores[i].total){const c=document.getElementById("conf");c.style.opacity=1;setTimeout(()=>c.style.opacity=0,1600);sc.textContent+=" — отлично! 🎉";}}
+function mc(n,t){return '<div class="card" data-mc data-a="'+t.a+'"><div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div></div>';}
+function gap(n,t){return '<div class="card" data-gap data-ans=\''+JSON.stringify(t.a).replace(/'/g,"&#39;")+'\'><div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div></div>';}
+render(0);
+</script>
+</body>
+</html>
