@@ -44,6 +44,58 @@
     location.href = "builder.html";
   }
 
+  /* ---------- дубликат учебника (обёртка над showCourses) ---------- */
+  (function () {
+    var origShowCourses = window.showCourses;
+    if (typeof origShowCourses !== "function") return;
+    window.showCourses = async function () {
+      var r = await origShowCourses.apply(this, arguments);
+      try { await addDupButtons(); } catch (e) {}
+      return r;
+    };
+    async function addDupButtons() {
+      var cs = await SM.myCourses();
+      cs.forEach(function (c) {
+        var del = document.getElementById("del-" + c.id);
+        if (!del || document.getElementById("dup-" + c.id)) return;
+        var b = document.createElement("button");
+        b.className = "bt"; b.id = "dup-" + c.id; b.title = "сделать копию учебника"; b.textContent = "⧉";
+        del.parentNode.insertBefore(b, del);
+        b.onclick = async function () {
+          if (!confirm("Сделать полную копию учебника «" + c.title + "» — со всеми юнитами, словами и упражнениями?")) return;
+          var msg = document.getElementById("msg");
+          function say(t) { if (msg) { msg.className = "msg"; msg.textContent = t; } }
+          b.disabled = true; say("Копирую учебник…");
+          var cr = await SM.saveCourse({ title: c.title + " (копия)", subtitle: c.subtitle, emoji: c.emoji, color: c.color, img: c.img });
+          if (!cr.ok || !cr.slug) { b.disabled = false; say(""); alert(cr.error || "Не удалось создать учебник"); return; }
+          var newSlug = cr.slug;
+          var units = await SM.myUnits(c.slug);
+          for (var i = 0; i < units.length; i++) {
+            var u = units[i];
+            say("Копирую юнит " + (i + 1) + " из " + units.length + "…");
+            var ur = await SM.saveUnit({ course_slug: newSlug, unit_label: u.unit_label || "", title: u.title, emoji: u.emoji || "📖", color: u.color || COLORS[2], words: u.words || [] });
+            if (!ur.ok) continue;
+            var nlist = await SM.myUnits(newSlug);
+            var nu = nlist.filter(function (x) { return x.id === ur.id; })[0] || nlist[nlist.length - 1];
+            var exs = [];
+            try { exs = await SM.exercisesFor(c.slug, u.slug); } catch (e) {}
+            for (var k = 0; k < exs.length; k++) {
+              await SM.saveExercise({ course: newSlug, unit_id: nu.slug, type: exs[k].type, title: exs[k].title, section: exs[k].section, data: exs[k].data });
+            }
+          }
+          try { if (window.SM_refreshCloudCourses) await window.SM_refreshCloudCourses(); } catch (e) {}
+          showCourses();
+        };
+      });
+    }
+    // первая отрисовка успевает до установки обёртки — добьём кнопки
+    var t = 0;
+    var iv = setInterval(function () {
+      if (document.querySelector('[id^="del-"]')) { addDupButtons(); }
+      if (++t > 12) clearInterval(iv);
+    }, 500);
+  })();
+
   /* ---------- список юнитов ---------- */
   window.unitRow = function (u, i, n) {
     return '<div class="crow"><span class="ce" style="background:' + (u.color || "#eee") + '">' + (u.emoji || "📖") + "</span>" +
@@ -52,6 +104,7 @@
       (i > 0 ? '<button id="uu-' + u.id + '" class="bt">↑</button>' : "") +
       (i < n - 1 ? '<button id="un-' + u.id + '" class="bt">↓</button>' : "") +
       '<button id="ue-' + u.id + '" class="bt" title="слова и настройки">✎ Слова</button>' +
+      '<button id="uc-' + u.id + '" class="bt" title="сделать копию">⧉</button>' +
       '<button id="ud-' + u.id + '" class="bt" title="удалить">🗑</button></div>';
   };
 
@@ -147,6 +200,24 @@
         if (!confirm("Удалить юнит «" + u.title + "»?")) return;
         var r = await SM.deleteUnit(u.id);
         if (r.ok) { await refresh(); showUnits(c); } else alert(r.error || "Ошибка");
+      };
+      document.getElementById("uc-" + u.id).onclick = async function () {
+        if (!confirm("Сделать копию юнита «" + u.title + "» со словами и упражнениями?")) return;
+        m("", "Копирую юнит…");
+        var r = await SM.saveUnit({ course_slug: c.slug, unit_label: u.unit_label || "", title: u.title + " (копия)", emoji: u.emoji || "📖", color: u.color || COLORS[2], words: u.words || [] });
+        if (!r.ok) { m("err", r.error || "Ошибка"); return; }
+        var list = await SM.myUnits(c.slug);
+        var nu = list.filter(function (x) { return x.id === r.id; })[0] || list[list.length - 1];
+        var exs = [];
+        try { exs = await SM.exercisesFor(c.slug, u.slug); } catch (e) {}
+        var copied = 0;
+        for (var k = 0; k < exs.length; k++) {
+          m("", "Копирую упражнения… " + (k + 1) + " из " + exs.length);
+          var xr = await SM.saveExercise({ course: c.slug, unit_id: nu.slug, type: exs[k].type, title: exs[k].title, section: exs[k].section, data: exs[k].data });
+          if (xr.ok) copied++;
+        }
+        await refresh();
+        showUnits(c);
       };
       var up = document.getElementById("uu-" + u.id), dn = document.getElementById("un-" + u.id);
       if (up) up.onclick = function () { moveUnit(us, i, -1); };
