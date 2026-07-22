@@ -170,7 +170,7 @@ async function handle(req: Request): Promise<Response> {
       method: "POST",
       headers: { "Authorization": "Bearer " + OPENAI_KEY, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gpt-4o-audio-preview",
+        model: "gpt-audio",
         modalities: ["text"],
         max_tokens: 200,
         messages: [
