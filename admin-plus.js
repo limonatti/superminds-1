@@ -7,7 +7,7 @@
   /* ---------- стили ---------- */
   var css = document.createElement("style");
   css.textContent =
-    ".wrow{display:grid;grid-template-columns:62px 1fr 1fr auto auto;gap:8px;align-items:center;margin-bottom:9px}" +
+    ".wrow{display:grid;grid-template-columns:62px 1fr 1fr auto auto auto;gap:8px;align-items:center;margin-bottom:9px}" +
     ".wrow input{padding:9px 10px;font-size:15px}" +
     ".wrow .w-em{text-align:center;font-size:19px}" +
     ".wrow .bt{padding:8px 11px}" +
@@ -109,6 +109,7 @@
         '<input class="w-em" data-i="' + i + '" data-k="emoji" value="' + esc(w.emoji) + '" maxlength="4" placeholder="🐱">' +
         '<input class="w-en" data-i="' + i + '" data-k="en" value="' + esc(w.en) + '" placeholder="cat">' +
         '<input class="w-ru" data-i="' + i + '" data-k="ru" value="' + esc(w.ru) + '" placeholder="кошка">' +
+        '<button type="button" class="bt" data-act="genimg" data-i="' + i + '" title="сгенерировать картинку ИИ" style="background:#eafaf0;border-color:#b6e0c7">🎨</button>' +
         '<button type="button" class="bt" data-act="file" data-i="' + i + '" title="картинка с компьютера">📁</button>' +
         '<button type="button" class="bt" data-act="del" data-i="' + i + '" title="убрать слово">🗑</button>' +
         (w.img
@@ -149,6 +150,19 @@
       } else if (act === "file") {
         var tmp = document.createElement("input");
         pickImage(tmp, function () { W[i].img = tmp.value; renderRows(); });
+      } else if (act === "genimg") {
+        var en = (W[i].en || "").trim();
+        if (!en) { alert("Сначала впиши английское слово в этой строке"); return; }
+        if (typeof SM_AI === "undefined") { alert("Модуль ассистента не загрузился, обнови страницу"); return; }
+        b.textContent = "⏳"; b.disabled = true;
+        m("", "🎨 Рисую картинку для «" + en + "»… это ~20 секунд, не закрывай страницу");
+        SM_AI.call("image", { en: en, ru: (W[i].ru || "").trim() }).then(function (res) {
+          if (!res.ok || !res.image) { b.disabled = false; b.textContent = "🎨"; m("err", res.error || "Не удалось нарисовать"); return; }
+          SM_AI.compress(res.image, function (small) {
+            W[i].img = small; renderRows();
+            m("ok", "Картинка готова для «" + en + "» 🎨 Не забудь сохранить юнит.");
+          });
+        });
       }
     });
 

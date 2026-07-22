@@ -22,8 +22,22 @@ window.SM_AI = (function () {
     } catch (e) { return { ok: false, error: "Нет связи с ассистентом" }; }
     let j; try { j = await r.json(); } catch (e) { return { ok: false, error: "Пустой ответ сервера" }; }
     if (!r.ok || j.error) return { ok: false, error: j.error || ("Ошибка " + r.status) };
-    return { ok: true, data: j.data, raw: j.raw };
+    return { ok: true, data: j.data, raw: j.raw, image: j.image };
   }
 
-  return { call };
+  // сжать картинку в браузере до 600px JPEG, чтобы не раздувать базу
+  function compress(dataUrl, cb) {
+    var img = new Image();
+    img.onload = function () {
+      var max = 600, w = img.width, h = img.height;
+      if (w > max || h > max) { var s = Math.min(max / w, max / h); w = Math.round(w * s); h = Math.round(h * s); }
+      var cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+      cv.getContext("2d").drawImage(img, 0, 0, w, h);
+      cb(cv.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = function () { cb(dataUrl); };
+    img.src = dataUrl;
+  }
+
+  return { call: call, compress: compress };
 })();
