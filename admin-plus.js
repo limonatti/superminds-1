@@ -62,10 +62,84 @@
     root.innerHTML = '<button class="bt" id="back">← учебники</button>' +
       '<div class="sec-title" style="margin-top:14px">' + esc((c.emoji || "📘") + " " + c.title) + " · юниты</div>" +
       (us.length ? us.map(function (u, i) { return unitRow(u, i, us.length); }).join("") : '<div class="empty">Пока нет юнитов. Добавь первый 👇</div>') +
-      '<button class="primary" id="newU">＋ Новый юнит</button><div class="msg" id="msg"></div>' +
+      '<button class="primary" id="newU">＋ Новый юнит</button>' +
+      '<button class="primary" id="aiLesson" style="background:#2980b9;box-shadow:0 4px 0 #1c5a85">🤖 Собрать урок по теме</button>' +
+      '<div class="msg" id="msg"></div>' +
       '<div class="hint">У каждого юнита две кнопки: <b>✎ Слова</b> — список слов, картинки и настройки; <b>🧩 Упражнения</b> — конструктор заданий именно для этого юнита (выбор ответа, пропуски, пары, аудио и остальные типы). Слова автоматически попадают в тренажёр, игры и листы.</div>';
     document.getElementById("back").onclick = showCourses;
     document.getElementById("newU").onclick = function () { unitForm(null); };
+
+    // 🤖 собрать целый урок по теме: слова → юнит → упражнения
+    var aiL = document.getElementById("aiLesson");
+    if (aiL) aiL.onclick = async function () {
+      if (typeof SM_AI === "undefined") { alert("Модуль ассистента не загрузился, обнови страницу"); return; }
+      var topic = prompt("О чём урок? Напиши тему на русском или английском.\nНапример: Животные, Еда, Моя семья, В школе, Погода");
+      if (!topic || !topic.trim()) return;
+      topic = topic.trim();
+      if (!confirm('Собрать урок «' + topic + '»?\n\nClaude придумает ~10 слов и 3 упражнения (выбор ответа, пары, впиши слово). Займёт около минуты. Картинки к словам можно добавить потом кнопкой 🎨.')) return;
+
+      aiL.disabled = true;
+      function ms(t) { m("", t); }
+      ms("🤖 Подбираю слова по теме «" + topic + "»…");
+      var wr = await SM_AI.call("topic_words", { topic: topic, count: 10 });
+      if (!wr.ok || !wr.data || !(wr.data.words && wr.data.words.length)) { aiL.disabled = false; m("err", (wr.error || "Не удалось подобрать слова")); return; }
+      var d = wr.data;
+      var words = d.words.map(function (w) { return { en: (w.en || "").trim(), ru: (w.ru || "").trim(), emoji: (w.emoji || "⭐"), img: undefined }; }).filter(function (w) { return w.en; });
+
+      ms("💾 Создаю юнит «" + (d.title || topic) + "» (" + words.length + " слов)…");
+      var sr = await SM.saveUnit({ course_slug: c.slug, unit_label: "", title: d.title || topic, emoji: d.emoji || "📖", color: COLORS[2], words: words });
+      if (!sr.ok) { aiL.disabled = false; m("err", sr.error || "Не удалось создать юнит"); return; }
+      await refresh();
+      var units = await SM.myUnits(c.slug);
+      var saved = units.filter(function (x) { return x.id === sr.id; })[0] || units[units.length - 1];
+      var unitSlug = saved && saved.slug;
+      var en = words.map(function (w) { return w.en; });
+
+      var types = [
+        { t: "choice", name: "выбор ответа" },
+        { t: "match", name: "найди пару" },
+        { t: "gap", name: "впиши слово" },
+      ];
+      var made = 0;
+      for (var i = 0; i < types.length; i++) {
+        ms("🧩 Собираю упражнение «" + types[i].name + "» (" + (i + 1) + " из " + types.length + ")…");
+        try {
+          var er = await SM_AI.call("exercise", { type: types[i].t, words: en, title: d.title || topic, count: 5 });
+          if (!er.ok || !er.data) continue;
+          var dataObj;
+          if (types[i].t === "match") {
+            var pairs = (er.data.pairs || []).map(function (p) { return { a: p.l || p.en || "", b: p.r || p.ru || "" }; }).filter(function (p) { return p.a && p.b; });
+            if (pairs.length < 2) continue;
+            dataObj = { pairs: pairs };
+          } else {
+            if (!(er.data.items && er.data.items.length)) continue;
+            dataObj = { items: er.data.items };
+          }
+          var xr = await SM.saveExercise({ course: c.slug, unit_id: unitSlug, type: types[i].t, title: null, section: "Лексика", data: dataObj });
+          if (xr.ok) made++;
+        } catch (e) {}
+      }
+
+      aiL.disabled = false;
+      lessonDone(saved, d.title || topic, words.length, made);
+    };
+
+    function lessonDone(saved, title, nWords, nEx) {
+      root.innerHTML = '<div class="panel okpanel">' +
+        '<div style="font-size:44px">🎉</div><div class="big">Урок собран!</div>' +
+        '<div class="hint" style="text-align:center">«' + esc(title) + '» · ' + nWords + ' слов · ' + nEx + ' упражнений. Слова уже работают в тренажёре, играх и листах.</div>' +
+        '<div style="margin:18px 0 4px"><button class="primary" id="lArt">🎨 Добавить картинки к словам</button></div>' +
+        '<div><button class="bt" id="lList">← к списку юнитов</button>' +
+        (saved ? '<button class="bt" id="lView">👀 посмотреть упражнения</button>' : "") +
+        (saved ? '<button class="bt" id="lMore">🧩 добавить ещё упражнения</button>' : "") +
+        '</div></div>';
+      document.getElementById("lArt").onclick = function () { unitForm(saved); };
+      document.getElementById("lList").onclick = function () { showUnits(c); };
+      var v = document.getElementById("lView");
+      if (v) v.onclick = function () { try { localStorage.setItem("sm-course", c.slug); } catch (e) {} location.href = "exercises.html?u=" + encodeURIComponent(saved.slug); };
+      var mo = document.getElementById("lMore");
+      if (mo) mo.onclick = function () { try { localStorage.setItem("sm-course", c.slug); localStorage.setItem("sm-builder-unit", saved.slug); } catch (e) {} location.href = "builder.html"; };
+    }
     us.forEach(function (u, i) {
       document.getElementById("ue-" + u.id).onclick = function () { unitForm(u); };
       document.getElementById("ux-" + u.id).onclick = function () { toBuilder(c.slug, u.slug); };
