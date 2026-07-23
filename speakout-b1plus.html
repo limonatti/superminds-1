@@ -13,32 +13,32 @@
   .wrap{max-width:860px;margin:0 auto;padding:28px 18px 70px}
   .top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
   .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
-  h1{margin:14px 0 2px;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,46px);font-weight:700;color:#1d4e6b;letter-spacing:-1px;text-align:center}
+  h1{margin:14px 0 2px;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,46px);font-weight:700;color:#7c2340;letter-spacing:-1px;text-align:center}
   .sub{font-weight:800;font-size:14px;color:#5a4f47;margin:0 0 22px;text-align:center}
   .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
-  .tab{border:none;cursor:pointer;background:#fff;color:#1d4e6b;font:800 13px 'Nunito',sans-serif;padding:10px 14px;border-radius:999px;box-shadow:0 3px 0 #d3dde3}
-  .tab.on{background:#1d4e6b;color:#fff;box-shadow:0 3px 0 #0e2c3f}
-  .uhead{background:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 6px 0 #d3dde3;margin-bottom:18px}
-  .uhead .t{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:#1d4e6b}
+  .tab{border:none;cursor:pointer;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:10px 14px;border-radius:999px;box-shadow:0 3px 0 #e3d3ba}
+  .tab.on{background:#7c2340;color:#fff;box-shadow:0 3px 0 #4d1527}
+  .uhead{background:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 6px 0 #e3d3ba;margin-bottom:18px}
+  .uhead .t{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:#7c2340}
   .uhead .d{font-size:13.5px;font-weight:700;color:#5a4f47;margin-top:4px}
   .score{margin-top:10px;font-weight:900;font-size:14px;color:#27632a}
-  .sec{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#1d4e6b;margin:24px 4px 10px}
-  .card{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 0 #d3dde3;margin-bottom:12px}
+  .sec{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#7c2340;margin:24px 4px 10px}
+  .card{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
   .opts{display:flex;flex-wrap:wrap;gap:8px}
-  .opt{border:2px solid #d3dde3;background:#f7fafc;cursor:pointer;font:800 14px 'Nunito',sans-serif;color:#1c1310;padding:9px 16px;border-radius:12px;transition:transform .08s}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;color:#1c1310;padding:9px 16px;border-radius:12px;transition:transform .08s}
   .opt:hover{transform:translateY(-2px)}
   .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
   .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
   .opt:disabled{cursor:default;opacity:.85}
   .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .gap-in{border:2px solid #d3dde3;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#f7fafc;outline:none}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
   .gap-in.ok{background:#c8efc0;border-color:#27ae60}
   .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
   .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
-  .reset{border:none;cursor:pointer;background:#fff;color:#1d4e6b;font:800 13px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 3px 0 #d3dde3;margin-top:18px}
+  .reset{border:none;cursor:pointer;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 3px 0 #e3d3ba;margin-top:18px}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
   .conf{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);font-size:64px;pointer-events:none;opacity:0;transition:opacity .3s}
 </style>
@@ -77,7 +77,7 @@ const UNITS=[
   {q:"Это досталось мне от бабушки: I ___ it from my grandmother.",o:["inherited","borrowed","earned"],a:0},
   {q:"Вещь в идеальном состоянии — in perfect ___.",o:["condition","situation","position"],a:0},
   {q:"Оставить голосовое сообщение — ___ a message.",o:["leave","put","stay"],a:0}]},
-{n:2,t:"Behaviour",e:"🧠",d:"Present Perfect Simple vs Continuous · relative clauses · привычки · раздражители",
+{n:2,t:"Behaviour",e:"🧠",d:"Present Perfect Simple vs Continuous · relative clauses · привычки · раздражители",page:"speakout-b1plus-u2.html",
  g:[
   {q:"I ___ to get up earlier recently — and it works!",o:["tried","have been trying","try"],a:1},
   {q:"She ___ three online courses this year.",o:["has finished","has been finishing","finishes"],a:0},
@@ -99,7 +99,7 @@ const UNITS=[
   {q:"Выработать привычку — ___ up a habit.",o:["pick","take","get"],a:1},
   {q:"He always ___ his temper in traffic — злится.",o:["loses","breaks","drops"],a:0},
   {q:"Быть в хорошем настроении — in a good ___.",o:["mood","feeling","mind"],a:0}]},
-{n:3,t:"Working life",e:"💼",d:"Conditionals · must / have to / need to · работа · собеседования",
+{n:3,t:"Working life",e:"💼",d:"Conditionals · must / have to / need to · работа · собеседования",page:"speakout-b1plus-u3.html",
  g:[
   {q:"If I get the job, I ___ you straight away.",o:["tell","will tell","would tell"],a:1},
   {q:"If I worked from home, I ___ more time with my kids.",o:["will spend","would spend","spend"],a:1},
@@ -121,7 +121,7 @@ const UNITS=[
   {q:"Повышение по службе — a ___.",o:["promotion","motion","position"],a:0},
   {q:"Уволиться по собственному желанию — ___ your job.",o:["quit","fire","sack"],a:0},
   {q:"Зарплата (ежемесячная) — a ___.",o:["salary","fee","tip"],a:0}]},
-{n:4,t:"Fact or fiction?",e:"🕵️",d:"was going to · косвенные вопросы · правда и ложь · новости",
+{n:4,t:"Fact or fiction?",e:"🕵️",d:"was going to · косвенные вопросы · правда и ложь · новости",page:"speakout-b1plus-u4.html",
  g:[
   {q:"I ___ call you, but I forgot. (собирался)",o:["was going to","will","would to"],a:0},
   {q:"We ___ to fly to Rome, but the flight was cancelled.",o:["were planning","plan","will plan"],a:0},
@@ -143,7 +143,7 @@ const UNITS=[
   {q:"Заголовок новости — a ___.",o:["headline","headword","topline"],a:0},
   {q:"Достоверный источник — a reliable ___.",o:["source","sauce","resource"],a:1},
   {q:"Обмануть кого-то — ___ someone.",o:["deceive","believe","receive"],a:0}]},
-{n:5,t:"Consumer",e:"🛍️",d:"Цель: to / in order to / so that · сравнения · реклама · покупки",
+{n:5,t:"Consumer",e:"🛍️",d:"Цель: to / in order to / so that · сравнения · реклама · покупки",page:"speakout-b1plus-u5.html",
  g:[
   {q:"I went online ___ compare prices.",o:["for","to","so"],a:1},
   {q:"She saved money ___ she could buy a new phone.",o:["so that","to","in order"],a:0},
@@ -165,7 +165,7 @@ const UNITS=[
   {q:"Целевая аудитория рекламы — target ___.",o:["audience","auditorium","attendance"],a:0},
   {q:"Бренд, торговая марка — a ___.",o:["brand","brend","mark"],a:0},
   {q:"Оформить заказ онлайн — place an ___.",o:["order","offer","item"],a:0}]},
-{n:6,t:"Places",e:"🏙️",d:"so / such · be & get used to · город и транспорт · рекомендации",
+{n:6,t:"Places",e:"🏙️",d:"so / such · be & get used to · город и транспорт · рекомендации",page:"speakout-b1plus-u6.html",
  g:[
   {q:"The traffic was ___ bad that we missed the show.",o:["so","such","too"],a:0},
   {q:"It's ___ a beautiful city!",o:["so","such","very much"],a:1},
@@ -187,7 +187,7 @@ const UNITS=[
   {q:"Пешеходная зона — a ___ zone.",o:["pedestrian","walker","stroller"],a:0},
   {q:"Оживлённый район — a ___ area.",o:["lively","alive","living"],a:0},
   {q:"Добираться на работу — ___ to work.",o:["commute","communicate","commit"],a:0}]},
-{n:7,t:"Connect",e:"📱",d:"Reported speech · reporting verbs · passives · интернет-общение",
+{n:7,t:"Connect",e:"📱",d:"Reported speech · reporting verbs · passives · интернет-общение",page:"speakout-b1plus-u7.html",
  g:[
   {q:"«I'm tired.» → She said she ___ tired.",o:["is","was","were"],a:1},
   {q:"«We'll meet tomorrow.» → They said they ___ meet the next day.",o:["will","would","can"],a:1},
@@ -209,7 +209,7 @@ const UNITS=[
   {q:"Поддерживать связь — keep in ___.",o:["touch","reach","line"],a:0},
   {q:"Ответить на сообщение — ___ to a message.",o:["reply","answer back","return"],a:0},
   {q:"Пароль — a ___.",o:["password","passport","codeword"],a:0}]},
-{n:8,t:"Wisdom",e:"🦉",d:"Third conditional · should have · would (прошлые привычки) · советы",
+{n:8,t:"Wisdom",e:"🦉",d:"Third conditional · should have · would (прошлые привычки) · советы",page:"speakout-b1plus-u8.html",
  g:[
   {q:"If I ___ harder at school, I'd have gone to university.",o:["studied","had studied","would study"],a:1},
   {q:"If we'd left earlier, we ___ the train.",o:["would catch","would have caught","caught"],a:1},

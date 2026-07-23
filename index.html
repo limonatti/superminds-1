@@ -72,13 +72,13 @@
     });
     /* Курсы Speakout — прямые ссылки на тренажёры */
     const EXTRA=[
-      {title:"Speakout B1+",subtitle:"3rd edition · тренажёр по юнитам",emoji:"🗣️",color:"#dce9f2",href:"speakout-b1plus.html"},
+      {title:"Speakout B1+",subtitle:"3rd edition · курс по юнитам",img:"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260723_065850_052fe4a4-4e77-4ea3-b2fa-735727fc46b1.png",color:"#0e2c3f",href:"speakout-b1plus-course.html"},
       {title:"Speakout B1",subtitle:"3rd edition · тренажёр по юнитам",emoji:"💬",color:"#f6e2cf",href:"speakout-b1.html"}
     ];
     EXTRA.forEach(c=>{
       const el=document.createElement("div");
       el.className="course ready";
-      el.innerHTML='<div class="cover" style="background:'+c.color+'">'+c.emoji+'</div>'+
+      el.innerHTML='<div class="cover" style="background:'+c.color+'">'+(c.img?'<img src="'+c.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:24px">':c.emoji)+'</div>'+
         '<div class="t">'+c.title+'</div>'+
         '<div class="s">'+c.subtitle+'</div>'+
         '<div class="go">Открыть →</div>';
