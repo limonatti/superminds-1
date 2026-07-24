@@ -141,6 +141,48 @@
     padding:12px 20px;border-radius:14px;font-family:'Fredoka';font-weight:600;box-shadow:var(--shadow-lg);
     opacity:0;pointer-events:none;transition:.3s;z-index:99}
   .toast.show{opacity:1}
+
+  /* ===== Vowels section ===== */
+  .vbanner{background:linear-gradient(135deg,#fff2f2,#eefcf7);border:3px solid #ffe3d6;border-radius:22px;
+    padding:18px 20px;margin:6px 0 16px;display:flex;gap:18px;flex-wrap:wrap;align-items:stretch}
+  .vbanner .vh{flex:1;min-width:230px;border-radius:16px;padding:14px 16px;font-weight:700}
+  .vbanner .angry{background:#ffe9e9;border:2px solid #ffc9c9;color:#a23b3b}
+  .vbanner .happy{background:#e7fbf1;border:2px solid #b6ecd2;color:#1f7a51}
+  .vbanner .vh .face{font-size:34px}
+  .vbanner .vh b{font-family:'Fredoka'}
+  .vbanner .vh .en{display:block;color:var(--muted);font-weight:700;font-size:12px;margin-top:4px}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .vcard{background:#fff;border-radius:20px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+    border:3px solid transparent;transition:transform .12s}
+  .vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .vcard .vl{font-family:'Fredoka';font-weight:700;font-size:44px;color:#a685e2;line-height:1}
+  .vcard .faces{font-size:26px;margin-top:4px}
+  .vcard .cap{color:var(--muted);font-weight:700;font-size:12px;margin-top:4px}
+  .vExplain{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .vExplain .vhalf{flex:1;min-width:220px;border-radius:16px;padding:12px 14px;font-weight:700;font-size:14px}
+  .vExplain .angry{background:#ffe9e9;border:2px solid #ffc9c9;color:#a23b3b}
+  .vExplain .happy{background:#e7fbf1;border:2px solid #b6ecd2;color:#1f7a51}
+  .vExplain .face{font-size:30px}
+  .secTitle.angry{color:#c0392b}
+  .secTitle.happy{color:#1f7a51}
+  .bigChoices{display:flex;gap:14px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .bigChoice{cursor:pointer;border:3px solid #eee;border-radius:20px;padding:14px 26px;background:#fff;
+    font-family:'Fredoka';font-weight:600;font-size:18px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bigChoice .f{font-size:40px}
+  .bigChoice.angry:hover{border-color:#ffb3b3;background:#fff4f4}
+  .bigChoice.happy:hover{border-color:#a7e6c7;background:#f2fdf7}
+  .qword{font-family:'Fredoka';font-weight:700;font-size:52px;text-align:center;margin:6px 0}
+  .qword .hl{color:#a685e2}
+  .magicBox{text-align:center;padding:10px}
+  .magicWord{font-family:'Fredoka';font-weight:700;font-size:60px;letter-spacing:2px}
+  .magicWord .v{transition:color .3s}
+  .magicWord .e{color:#ff6b6b;opacity:0;transition:opacity .4s}
+  .magicWord.on .v{color:#1f7a51}
+  .magicWord.on .e{opacity:1}
+  .magicFace{font-size:46px;margin:6px}
+  .vsheetCol{display:inline-block;width:46%;vertical-align:top;border:3px solid #ddd;border-radius:14px;padding:10px;margin:1%}
+  .vsheetCol h4{margin:2px 0 8px;font-size:18px}
+  .vsheetWord{border-bottom:2px dotted #ccc;padding:8px 4px;font-size:20px}
 </style>
 </head>
 <body>
@@ -166,6 +208,8 @@
       <div class="progbar"><span id="progFill"></span></div>
     </div>
   </header>
+
+  <section id="vowelHost" class="group"></section>
 
   <main id="groups"></main>
 
@@ -217,6 +261,8 @@
         <div class="gTabs">
           <div class="gTab on" data-g="letter" onclick="switchGame('letter')">🔎 Найди букву</div>
           <div class="gTab" data-g="sound" onclick="switchGame('sound')">🎯 Поймай звук</div>
+          <div class="gTab" data-g="build" onclick="switchGame('build')">🧩 Собери слово</div>
+          <div class="gTab" data-g="listen" onclick="switchGame('listen')">🔊 Слушай и выбери</div>
         </div>
         <div class="game" id="gameArea"></div>
       </div>
@@ -225,6 +271,53 @@
       <div class="actions">
         <button class="btn" id="learnBtn" onclick="toggleLearned()">✅ Выучил! · Mark learned</button>
         <button class="btn" style="background:var(--p6)" onclick="openWorksheet()">🖨️ Worksheet (печать)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vowel modal -->
+<div class="overlay noprint" id="voverlay" onclick="if(event.target===this)closeVowel()">
+  <div class="modal">
+    <div class="top" id="vTop" style="background:linear-gradient(135deg,#a685e2,#8460c9)">
+      <button class="close" onclick="closeVowel()">×</button>
+      <div class="hero">
+        <div class="letter" id="vLetter">Aa</div>
+        <div class="meta">
+          <h2 id="vTitle">Гласная</h2>
+          <div class="ru" id="vSub"></div>
+        </div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="vExplain">
+        <div class="vhalf angry"><span class="face">😠</span> <b>Короткая — обиженная гласная.</b> Её закрывает согласная, поэтому она сердится и звучит коротко.
+          <span class="en" style="display:block;color:#a23b3b;opacity:.8;font-size:12px;margin-top:4px">Short vowel — grumpy: a consonant shuts it in, so it sounds short.</span></div>
+        <div class="vhalf happy"><span class="face">😊</span> <b>Длинная — радостная гласная.</b> Она открыта всем и говорит своё имя (как в алфавите).
+          <span class="en" style="display:block;color:#1f7a51;opacity:.8;font-size:12px;margin-top:4px">Long vowel — happy &amp; open: it says its own name.</span></div>
+      </div>
+
+      <div class="sec">
+        <h3 class="secTitle angry">😠 Короткий звук <span class="en" id="vShortIpa"></span></h3>
+        <div class="words" id="vShort"></div>
+      </div>
+      <div class="sec">
+        <h3 class="secTitle happy">😊 Длинный звук <span class="en" id="vLongIpa"></span></h3>
+        <div class="words" id="vLong"></div>
+      </div>
+
+      <div class="sec">
+        <h3>🎮 Игры <span class="en">Play &amp; learn</span></h3>
+        <div class="gTabs">
+          <div class="gTab on" data-vg="sort" onclick="switchVGame('sort')">😠 / 😊 Угадай</div>
+          <div class="gTab" data-vg="magic" onclick="switchVGame('magic')">✨ Magic e</div>
+          <div class="gTab" data-vg="pair" onclick="switchVGame('pair')">🔀 Найди пару</div>
+        </div>
+        <div id="vGameArea"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" style="background:var(--p6)" onclick="openVowelSheet()">🖨️ Worksheet (печать)</button>
       </div>
     </div>
   </div>
@@ -465,8 +558,11 @@ function syncLearnBtn(){
 let curGame='letter';
 function switchGame(g){
   curGame=g;
-  document.querySelectorAll('.gTab').forEach(t=>t.classList.toggle('on',t.dataset.g===g));
-  if(g==='letter')gameFindLetter();else gameCatchSound();
+  document.querySelectorAll('#overlay .gTab').forEach(t=>t.classList.toggle('on',t.dataset.g===g));
+  if(g==='letter')gameFindLetter();
+  else if(g==='sound')gameCatchSound();
+  else if(g==='build')gameBuildWord();
+  else gameListenChoose();
 }
 function pick(arr,n,exclude){
   const pool=arr.filter(x=>x!==exclude);
@@ -527,6 +623,53 @@ function gameCatchSound(){
   });
 }
 
+/* Game 3: build the word — choose the missing first letter */
+function gameBuildWord(){
+  const s=current;
+  const target=s.disp.split(' ')[0][0]; // first letter char
+  const word=s.words[0];
+  const rest=word.w.slice(word.w.toLowerCase().indexOf(target.toLowerCase())+1);
+  const opts=shuffle([target,...pick(ALL.map(x=>x.disp[0]),3,target)]);
+  const area=document.getElementById('gameArea');
+  area.innerHTML=`
+    <div class="gPrompt">Какая буква первая? Собери слово · <span class="en">Pick the first letter</span></div>
+    <div style="text-align:center;font-size:52px;margin:6px 0">${word.e}</div>
+    <div class="qword"><span class="hl" id="blank">＿</span>${rest}</div>
+    <div class="tiles" id="btiles"></div>`;
+  const box=document.getElementById('btiles');
+  box.innerHTML=opts.map(o=>`<button class="tile" style="color:${s.color}" data-o="${o}">${o}</button>`).join('');
+  box.querySelectorAll('.tile').forEach(tl=>{
+    tl.onclick=()=>{
+      if(tl.dataset.o.toLowerCase()===target.toLowerCase()){
+        tl.classList.add('right');document.getElementById('blank').textContent=target;
+        say(word.w);toast('✅ '+word.w+'!');confetti();setTimeout(gameBuildWord,1100);}
+      else{tl.classList.add('wrong');setTimeout(()=>tl.classList.remove('wrong'),350);}
+    };
+  });
+}
+
+/* Game 4: listen & choose the picture you heard */
+function gameListenChoose(){
+  const s=current;
+  const right=s.words[Math.floor(Math.random()*s.words.length)];
+  const otherWords=[];ALL.forEach(x=>{if(x.id!==s.id)x.words.forEach(w=>otherWords.push(w));});
+  const opts=shuffle([right,...pick(otherWords,3)]);
+  const area=document.getElementById('gameArea');
+  area.innerHTML=`
+    <div class="gPrompt">Слушай слово и выбери картинку · <span class="en">Listen &amp; tap the picture</span></div>
+    <div style="text-align:center;margin:6px 0"><button class="btn" onclick="say('${right.w}')">🔊 Повторить · Play again</button></div>
+    <div class="tiles" id="ltiles"></div>`;
+  const box=document.getElementById('ltiles');
+  box.innerHTML=opts.map(o=>`<button class="tile" data-w="${o.w}"><span style="font-size:40px">${o.e}</span></button>`).join('');
+  box.querySelectorAll('.tile').forEach(tl=>{
+    tl.onclick=()=>{
+      if(tl.dataset.w===right.w){tl.classList.add('right');toast('✅ '+right.w+'!');confetti();setTimeout(gameListenChoose,1100);}
+      else{tl.classList.add('wrong');say(tl.dataset.w);setTimeout(()=>tl.classList.remove('wrong'),400);}
+    };
+  });
+  setTimeout(()=>say(right.w),300);
+}
+
 /* ============ WORKSHEET ============ */
 function openWorksheet(){
   const s=current;
@@ -558,8 +701,34 @@ function openWorksheet(){
       </div>
 
       <div class="wsSec">
-        <h3>4. Раскрась · Colour the picture (${rights[0].w})</h3>
+        <h3>4. Соедини слово с картинкой · Match the word to the picture</h3>
+        <table style="width:100%;font-size:22px"><tr>
+          <td style="width:45%">${rights.map(w=>`<div class="vsheetWord">${w.w}</div>`).join('')}</td>
+          <td style="width:10%"></td>
+          <td style="width:45%">${shuffle(rights.map(w=>w.e)).map(e=>`<div class="vsheetWord" style="text-align:right;font-size:34px">${e}</div>`).join('')}</td>
+        </tr></table>
+      </div>
+
+      <div class="wsSec">
+        <h3>5. Найди и обведи букву «${target}» · Find and circle «${target}»</h3>
+        <div style="font-family:'Fredoka';font-size:30px;letter-spacing:14px;word-spacing:6px">
+          ${shuffle([target[0],target[0].toLowerCase(),...pick(ALL.map(x=>x.disp[0]),10)]).concat(shuffle([target[0].toLowerCase(),...pick(ALL.map(x=>x.disp[0].toLowerCase()),10)])).join(' ')}
+        </div>
+      </div>
+
+      <div class="wsSec">
+        <h3>6. Посчитай картинки и напиши число · Count the pictures &amp; write the number</h3>
+        <div style="font-size:40px">${Array(3).fill(rights[0].e).join(' ')} &nbsp;=&nbsp; ______ &nbsp;&nbsp;&nbsp; ${Array(2).fill(rights[1]?rights[1].e:rights[0].e).join(' ')} &nbsp;=&nbsp; ______</div>
+      </div>
+
+      <div class="wsSec">
+        <h3>7. Раскрась · Colour the picture (${rights[0].w})</h3>
         <div class="colorbig">${rights[0].e}</div>
+      </div>
+
+      <div class="wsSec">
+        <h3>8. Нарисуй что-нибудь на звук «${target}» · Draw something starting with «${target}»</h3>
+        <div style="border:3px dashed #ccc;border-radius:16px;height:140px"></div>
       </div>
 
       <div style="text-align:center;color:#aaa;font-weight:700;margin-top:20px">English Sounds · Jolly Phonics · ${s.disp}</div>
@@ -585,6 +754,225 @@ function confetti(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
+/* ================= VOWELS (long / short) ================= */
+const VOWELS=[
+ {id:"a",disp:"Aa",shortIpa:"/æ/",longIpa:"/eɪ/",
+  short:[{w:"cat",e:"🐱",r:"кот"},{w:"hat",e:"🎩",r:"шляпа"},{w:"apple",e:"🍎",r:"яблоко"},{w:"bag",e:"🎒",r:"сумка"}],
+  long:[{w:"cake",e:"🎂",r:"торт"},{w:"rain",e:"🌧️",r:"дождь"},{w:"snake",e:"🐍",r:"змея"},{w:"gate",e:"🚪",r:"ворота"}],
+  pairs:[["cap","cape"],["man","mane"],["tap","tape"],["plan","plane"]]},
+ {id:"e",disp:"Ee",shortIpa:"/e/",longIpa:"/iː/",
+  short:[{w:"bed",e:"🛏️",r:"кровать"},{w:"egg",e:"🥚",r:"яйцо"},{w:"hen",e:"🐔",r:"курица"},{w:"net",e:"🥅",r:"сеть"}],
+  long:[{w:"tree",e:"🌳",r:"дерево"},{w:"bee",e:"🐝",r:"пчела"},{w:"green",e:"💚",r:"зелёный"},{w:"three",e:"3️⃣",r:"три"}],
+  pairs:[["pet","Pete"],["them","theme"],["her","here"],["we","wee"]]},
+ {id:"i",disp:"Ii",shortIpa:"/ɪ/",longIpa:"/aɪ/",
+  short:[{w:"pig",e:"🐷",r:"свинка"},{w:"fish",e:"🐟",r:"рыба"},{w:"ink",e:"🖊️",r:"чернила"},{w:"six",e:"6️⃣",r:"шесть"}],
+  long:[{w:"kite",e:"🪁",r:"змей"},{w:"bike",e:"🚲",r:"велосипед"},{w:"ice",e:"🧊",r:"лёд"},{w:"five",e:"5️⃣",r:"пять"}],
+  pairs:[["kit","kite"],["bit","bite"],["pin","pine"],["rid","ride"]]},
+ {id:"o",disp:"Oo",shortIpa:"/ɒ/",longIpa:"/əʊ/",
+  short:[{w:"dog",e:"🐶",r:"собака"},{w:"box",e:"📦",r:"коробка"},{w:"frog",e:"🐸",r:"лягушка"},{w:"pot",e:"🍲",r:"горшок"}],
+  long:[{w:"bone",e:"🦴",r:"кость"},{w:"nose",e:"👃",r:"нос"},{w:"boat",e:"⛵",r:"лодка"},{w:"rope",e:"🪢",r:"верёвка"}],
+  pairs:[["hop","hope"],["not","note"],["rob","robe"],["cod","code"]]},
+ {id:"u",disp:"Uu",shortIpa:"/ʌ/",longIpa:"/juː/",
+  short:[{w:"sun",e:"☀️",r:"солнце"},{w:"cup",e:"☕",r:"чашка"},{w:"bus",e:"🚌",r:"автобус"},{w:"duck",e:"🦆",r:"утка"}],
+  long:[{w:"cube",e:"🧊",r:"кубик"},{w:"unicorn",e:"🦄",r:"единорог"},{w:"tube",e:"🧪",r:"трубка"},{w:"mule",e:"🐴",r:"мул"}],
+  pairs:[["cub","cube"],["tub","tube"],["us","use"],["cut","cute"]]},
+];
+let curV=null, vGame='sort';
+
+function renderVowels(){
+  const host=document.getElementById('vowelHost');
+  host.innerHTML=`
+    <div class="group-h">
+      <span class="chip" style="background:linear-gradient(135deg,#ff6b6b,#6bcB77)">Гласные</span>
+      <div><h2>Короткие 😠 и длинные 😊 · Long &amp; Short Vowels</h2>
+      <div class="en">A · E · I · O · U — обиженные и радостные гласные</div></div>
+    </div>
+    <div class="vbanner">
+      <div class="vh angry"><span class="face">😠</span> <b>Обиженные (короткие) гласные</b><br>
+        Их <b>закрывает согласная</b> — они сердятся и звучат коротко: c<b>a</b>t, p<b>i</b>g, d<b>o</b>g.
+        <span class="en">Short vowels are closed by a consonant → grumpy &amp; short.</span></div>
+      <div class="vh happy"><span class="face">😊</span> <b>Радостные (длинные) гласные</b><br>
+        Они <b>открыты всем</b> и говорят своё имя: c<b>a</b>ke, b<b>i</b>ke, b<b>o</b>ne.
+        <span class="en">Long vowels are open → happy, they say their own name.</span></div>
+    </div>
+    <div class="vgrid">${VOWELS.map(v=>`
+      <div class="vcard" onclick="openVowel('${v.id}')">
+        <div class="vl">${v.disp}</div>
+        <div class="faces">😠 ${v.shortIpa} &nbsp;·&nbsp; 😊 ${v.longIpa}</div>
+        <div class="cap">${v.short[0].e}${v.long[0].e} нажми · tap</div>
+      </div>`).join('')}</div>`;
+}
+
+function openVowel(id){
+  curV=VOWELS.find(v=>v.id===id);
+  const v=curV;
+  document.getElementById('vLetter').textContent=v.disp;
+  document.getElementById('vTitle').textContent='Гласная '+v.disp+' · Vowel '+v.disp;
+  document.getElementById('vSub').textContent='😠 короткая '+v.shortIpa+'   ·   😊 длинная '+v.longIpa;
+  document.getElementById('vShortIpa').textContent=v.shortIpa;
+  document.getElementById('vLongIpa').textContent=v.longIpa;
+  document.getElementById('vShort').innerHTML=v.short.map(w=>wordCard(w)).join('');
+  document.getElementById('vLong').innerHTML=v.long.map(w=>wordCard(w)).join('');
+  switchVGame('sort');
+  document.getElementById('voverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function wordCard(w){return `<div class="word" onclick="say('${w.w}')"><div class="e">${w.e}</div><div class="w">${w.w}</div><div class="r">${w.r}</div></div>`;}
+function closeVowel(){document.getElementById('voverlay').classList.remove('open');document.body.style.overflow='';speechSynthesis.cancel();}
+
+function switchVGame(g){
+  vGame=g;
+  document.querySelectorAll('#voverlay .gTab').forEach(t=>t.classList.toggle('on',t.dataset.vg===g));
+  if(g==='sort')vGameSort();
+  else if(g==='magic')vGameMagic();
+  else vGamePair();
+}
+
+/* Game: match short word to its long (magic-e) partner */
+let pIdx=0;
+function vGamePair(){pIdx=0;vRenderPair();}
+function vRenderPair(){
+  const v=curV;const pair=v.pairs[pIdx%v.pairs.length];
+  const [sh,lo]=pair;
+  const opts=shuffle([lo,...v.pairs.filter(p=>p[1]!==lo).map(p=>p[1]).slice(0,3)]);
+  const area=document.getElementById('vGameArea');
+  area.innerHTML=`
+    <div class="gPrompt">😠 <b>${sh}</b> + magic e = ? Найди радостное слово · <span class="en">Find the long partner</span></div>
+    <div class="tiles" id="ptiles"></div>`;
+  const box=document.getElementById('ptiles');
+  box.innerHTML=opts.map(o=>`<button class="tile" style="font-size:22px;color:#1f7a51" data-w="${o}">${o}</button>`).join('');
+  box.querySelectorAll('.tile').forEach(tl=>{
+    tl.onclick=()=>{
+      if(tl.dataset.w===lo){tl.classList.add('right');say(lo);toast('😊 '+lo+'!');confetti();pIdx++;setTimeout(vRenderPair,1000);}
+      else{tl.classList.add('wrong');setTimeout(()=>tl.classList.remove('wrong'),400);}
+    };
+  });
+  say(sh);
+}
+
+/* Game: is the vowel angry(short) or happy(long)? */
+let vQueue=[],vIdx=0,vRight=0;
+function vGameSort(){
+  const v=curV;
+  vQueue=shuffle([...v.short.map(w=>({...w,type:'short'})),...v.long.map(w=>({...w,type:'long'}))]);
+  vIdx=0;vRight=0;vRenderSort();
+}
+function vRenderSort(){
+  const area=document.getElementById('vGameArea');
+  if(vIdx>=vQueue.length){area.innerHTML=`<div class="celebrate">🎉 Готово! ${vRight}/${vQueue.length} · Well done!</div>
+    <div style="text-align:center"><button class="btn small" onclick="vGameSort()">Ещё раз · Again</button></div>`;confetti();return;}
+  const it=vQueue[vIdx];
+  const letter=curV.disp[0].toLowerCase();
+  const hl=it.w.replace(new RegExp(letter,'i'),m=>`<span class="hl">${m}</span>`);
+  area.innerHTML=`
+    <div class="gPrompt">Обиженная 😠 или радостная 😊 гласная? <span class="en">Short or long vowel?</span></div>
+    <div class="qword">${hl}</div>
+    <div class="bigChoices">
+      <button class="bigChoice angry" onclick="vAnswer('short')"><span class="f">😠</span>короткая<br>short</button>
+      <button class="bigChoice happy" onclick="vAnswer('long')"><span class="f">😊</span>длинная<br>long</button>
+    </div>
+    <div class="score" style="text-align:center;margin-top:12px">${vIdx+1} / ${vQueue.length}</div>`;
+  say(it.w);
+}
+function vAnswer(ans){
+  const it=vQueue[vIdx];
+  if(ans===it.type){vRight++;toast('✅ Верно! Correct!');}
+  else{toast(it.type==='short'?'😠 Это короткая · short':'😊 Это длинная · long');}
+  vIdx++;setTimeout(vRenderSort,700);
+}
+
+/* Game: Magic e turns a grumpy short word into a happy long word */
+let mIdx=0;
+function vGameMagic(){mIdx=0;vRenderMagic();}
+function vRenderMagic(){
+  const v=curV;const pair=v.pairs[mIdx%v.pairs.length];
+  const [sh,lo]=pair;
+  const letter=v.disp[0].toLowerCase();
+  // build short word with highlighted vowel
+  const shHtml=sh.split('').map(ch=>ch.toLowerCase()===letter?`<span class="v">${ch}</span>`:ch).join('');
+  const area=document.getElementById('vGameArea');
+  area.innerHTML=`
+    <div class="gPrompt">Добавь волшебную «e» — гласная станет радостной! <span class="en">Add magic ‘e’: the grumpy vowel turns happy &amp; long</span></div>
+    <div class="magicBox">
+      <div class="magicFace" id="mFace">😠</div>
+      <div class="magicWord" id="mWord">${shHtml}<span class="e">e</span></div>
+      <div style="margin-top:14px">
+        <button class="btn" id="mBtn" onclick="castMagic('${lo}')">✨ Добавить magic e</button>
+        <button class="btn ghost small" onclick="nextMagic()">Другое слово →</button>
+      </div>
+      <div class="celebrate" id="mMsg"></div>
+    </div>`;
+  say(sh);
+}
+function castMagic(lo){
+  document.getElementById('mWord').classList.add('on');
+  document.getElementById('mFace').textContent='😊';
+  document.getElementById('mMsg').innerHTML=`😠 <b>${document.getElementById('mWord').textContent.replace(/e$/,'')}</b> → 😊 <b>${lo}</b>`;
+  document.getElementById('mBtn').disabled=true;
+  say(lo);confetti();
+}
+function nextMagic(){mIdx++;vRenderMagic();}
+
+/* Worksheet for a vowel: sort + magic e */
+function openVowelSheet(){
+  const v=curV;
+  const mixed=shuffle([...v.short.map(w=>({...w,t:'😠'})),...v.long.map(w=>({...w,t:'😊'}))]);
+  document.getElementById('sheet').innerHTML=`
+    <div class="ws">
+      <h1>Worksheet — Гласная ${v.disp} · Vowel ${v.disp}</h1>
+      <div class="wsSub">Имя · Name: ________________   😠 короткая ${v.shortIpa} · 😊 длинная ${v.longIpa}</div>
+
+      <div class="wsSec">
+        <h3>1. Распредели слова: 😠 короткие или 😊 длинные? · Sort the words</h3>
+        <div style="font-size:22px;margin:8px 0">${mixed.map(w=>`${w.e} <b>${w.w}</b>`).join(' &nbsp;·&nbsp; ')}</div>
+        <div>
+          <div class="vsheetCol"><h4>😠 Короткие · Short</h4>${'<div class="vsheetWord">&nbsp;</div>'.repeat(4)}</div>
+          <div class="vsheetCol"><h4>😊 Длинные · Long</h4>${'<div class="vsheetWord">&nbsp;</div>'.repeat(4)}</div>
+        </div>
+      </div>
+
+      <div class="wsSec">
+        <h3>2. Волшебная «e» · Magic e (обиженная → радостная)</h3>
+        <div style="font-size:22px">
+          ${v.pairs.map(p=>`😠 <b>${p[0]}</b> + e &nbsp;→&nbsp; 😊 __________________`).join('<br><br>')}
+        </div>
+      </div>
+
+      <div class="wsSec">
+        <h3>3. Обведи гласную и нарисуй ей лицо 😠/😊 · Circle the vowel, draw its face</h3>
+        <div style="font-size:40px">${v.short[0].e} ${v.short[0].w} &nbsp;&nbsp; ${v.long[0].e} ${v.long[0].w}</div>
+        <div class="writeline"></div>
+      </div>
+
+      <div class="wsSec">
+        <h3>4. Соедини короткое 😠 и длинное 😊 · Match short to long</h3>
+        <table style="width:100%;font-size:22px"><tr>
+          <td style="width:45%">${v.pairs.map(p=>`<div class="vsheetWord">😠 ${p[0]}</div>`).join('')}</td>
+          <td style="width:10%"></td>
+          <td style="width:45%">${shuffle(v.pairs.map(p=>p[1])).map(x=>`<div class="vsheetWord" style="text-align:right">😊 ${x}</div>`).join('')}</td>
+        </tr></table>
+      </div>
+
+      <div class="wsSec">
+        <h3>5. Впиши гласную и прочитай · Write the vowel &amp; read</h3>
+        <div style="font-size:26px;line-height:2.2">
+          😠 c__t &nbsp;&nbsp; p__g &nbsp;&nbsp; d__g &nbsp;&nbsp; s__n &nbsp;&nbsp; b__d<br>
+          😊 c__ke &nbsp;&nbsp; b__ke &nbsp;&nbsp; b__ne &nbsp;&nbsp; c__be &nbsp;&nbsp; tr__e
+        </div>
+      </div>
+
+      <div class="wsSec">
+        <h3>6. Раскрась 😠 красным, 😊 зелёным · Colour: short=red, long=green</h3>
+        <div style="font-size:44px">${v.short[0].e} ${v.short[0].w} &nbsp;&nbsp;&nbsp;&nbsp; ${v.long[0].e} ${v.long[0].w}</div>
+      </div>
+
+      <div style="text-align:center;color:#aaa;font-weight:700;margin-top:20px">English Sounds · Vowels · ${v.disp}</div>
+    </div>`;
+  window.print();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVowel();});
+
+renderVowels();
 renderHome();
 </script>
 </body>
