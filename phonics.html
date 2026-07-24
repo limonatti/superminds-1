@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Sounds — Курс чтения английских звуков для детей</title>
+<meta name="description" content="Jolly Phonics — 42 звука английского языка. Игры, worksheets и видео для детей.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff7ef; --card:#ffffff; --ink:#2b2140; --muted:#7a7192;
+    --p1:#ff6b6b; --p2:#4ecdc4; --p3:#ffd166; --p4:#a685e2; --p5:#5aa9ff; --p6:#ff9f68; --p7:#6bcB77;
+    --shadow:0 8px 24px rgba(80,50,120,.12);
+    --shadow-lg:0 16px 40px rgba(80,50,120,.2);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Nunito',system-ui,sans-serif; color:var(--ink);
+    background:
+      radial-gradient(1200px 500px at 10% -10%, #ffe9d6 0, transparent 60%),
+      radial-gradient(1000px 500px at 110% 0%, #dff6f3 0, transparent 55%),
+      var(--bg);
+    min-height:100vh;
+  }
+  h1,h2,h3,.f{font-family:'Fredoka',sans-serif;font-weight:600}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+  /* Header */
+  header{padding:22px 0 8px}
+  .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{font-size:40px}
+  .brand h1{margin:0;font-size:clamp(24px,4vw,38px);line-height:1.05}
+  .brand .sub{color:var(--muted);font-weight:700;font-size:14px;margin-top:2px}
+  .progwrap{margin:18px 0 6px;background:#fff;border-radius:18px;padding:14px 18px;box-shadow:var(--shadow)}
+  .progwrap .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .progbar{height:16px;border-radius:20px;background:#eee5f2;overflow:hidden;margin-top:10px}
+  .progbar > span{display:block;height:100%;width:0;border-radius:20px;
+    background:linear-gradient(90deg,var(--p1),var(--p3),var(--p2));transition:width .5s}
+  .btn{cursor:pointer;border:none;border-radius:14px;padding:10px 16px;font-family:'Fredoka';font-size:16px;
+    font-weight:600;color:#fff;background:var(--p4);box-shadow:var(--shadow);transition:transform .1s}
+  .btn:active{transform:scale(.96)}
+  .btn.ghost{background:#fff;color:var(--ink);border:2px solid #eee}
+  .btn.small{padding:7px 12px;font-size:14px;border-radius:11px}
+
+  /* Groups */
+  .group{margin:34px 0}
+  .group-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .chip{font-family:'Fredoka';font-weight:600;color:#fff;border-radius:14px;padding:6px 14px;font-size:15px}
+  .group-h h2{margin:0;font-size:22px}
+  .group-h .en{color:var(--muted);font-weight:700;font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+
+  .card{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow);
+    cursor:pointer;position:relative;transition:transform .12s, box-shadow .12s;text-align:center;border:3px solid transparent}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .card .big{font-family:'Fredoka';font-weight:700;font-size:46px;line-height:1;margin:6px 0 4px}
+  .card .emos{font-size:22px;letter-spacing:2px}
+  .card .lbl{color:var(--muted);font-weight:700;font-size:13px;margin-top:6px}
+  .card .done{position:absolute;top:10px;right:10px;font-size:20px;opacity:0;transition:.2s}
+  .card.learned{border-color:var(--p7);background:#f2fbf3}
+  .card.learned .done{opacity:1}
+
+  /* Modal */
+  .overlay{position:fixed;inset:0;background:rgba(43,33,64,.55);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;z-index:50;padding:20px;overflow:auto}
+  .overlay.open{display:flex}
+  .modal{background:#fff;border-radius:26px;max-width:820px;width:100%;box-shadow:var(--shadow-lg);
+    overflow:hidden;margin:auto}
+  .modal .top{padding:22px 24px;color:#fff;position:relative}
+  .modal .close{position:absolute;top:16px;right:18px;font-size:26px;cursor:pointer;background:rgba(255,255,255,.25);
+    border:none;color:#fff;width:40px;height:40px;border-radius:12px;line-height:1}
+  .hero{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .hero .letter{font-family:'Fredoka';font-weight:700;font-size:74px;line-height:.9;
+    background:rgba(255,255,255,.25);border-radius:20px;padding:6px 22px}
+  .hero .meta h2{margin:0;font-size:26px}
+  .hero .meta .ipa{font-weight:800;opacity:.95}
+  .hero .meta .ru{font-weight:700;opacity:.95;font-size:15px;margin-top:2px}
+  .modal .body{padding:20px 24px 26px}
+  .sec{margin:18px 0}
+  .sec h3{margin:0 0 10px;font-size:17px;display:flex;gap:8px;align-items:center}
+  .sec h3 .en{color:var(--muted);font-size:13px;font-weight:700}
+  .words{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+  .word{background:#faf6ff;border:2px solid #efe7fb;border-radius:16px;padding:12px 8px;text-align:center;cursor:pointer}
+  .word:hover{border-color:var(--p4)}
+  .word .e{font-size:34px}
+  .word .w{font-family:'Fredoka';font-weight:600;font-size:18px;margin-top:2px}
+  .word .r{color:var(--muted);font-size:12px;font-weight:700}
+  .videoBox{position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
+  .videoBox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .hint{background:#fff8e6;border:2px solid #ffe7ad;border-radius:14px;padding:10px 14px;color:#8a6d1f;font-weight:700;font-size:14px}
+  .yt-link{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--p1);text-decoration:none;font-size:14px;margin-top:8px}
+
+  /* Games */
+  .game{min-height:220px}
+  .gTabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .gTab{cursor:pointer;border:2px solid #eee;background:#fff;border-radius:12px;padding:8px 14px;font-family:'Fredoka';font-weight:600}
+  .gTab.on{background:var(--p2);color:#fff;border-color:var(--p2)}
+  .gPrompt{font-family:'Fredoka';font-weight:600;font-size:18px;margin-bottom:12px}
+  .gPrompt .en{color:var(--muted);font-size:13px;font-weight:700;display:block}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px}
+  .tile{aspect-ratio:1;border-radius:18px;border:3px solid #eee;background:#fff;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-family:'Fredoka';font-weight:700;font-size:34px;transition:transform .1s}
+  .tile .cap{font-size:12px;font-family:'Nunito';color:var(--muted);font-weight:700}
+  .tile:active{transform:scale(.94)}
+  .tile.right{background:#e9fbec;border-color:var(--p7);animation:pop .3s}
+  .tile.wrong{background:#ffecec;border-color:var(--p1);animation:shake .3s}
+  @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .score{font-family:'Fredoka';font-weight:600;color:var(--p7)}
+  .celebrate{text-align:center;padding:16px;font-family:'Fredoka';font-weight:600;font-size:20px;color:var(--p7)}
+
+  /* Worksheet (screen preview + print) */
+  #sheet{display:none}
+  @media print{
+    body *{visibility:hidden}
+    #sheet, #sheet *{visibility:visible}
+    #sheet{display:block !important;position:absolute;inset:0;padding:0;background:#fff}
+    .noprint{display:none !important}
+  }
+  .ws{padding:26px;max-width:800px;margin:auto}
+  .ws h1{font-size:30px;margin:0 0 4px}
+  .ws .wsSub{color:#666;font-weight:700;margin-bottom:18px}
+  .ws .wsSec{margin:20px 0;page-break-inside:avoid}
+  .ws .wsSec h3{font-size:18px;margin:0 0 10px;border-bottom:3px dotted #bbb;padding-bottom:4px}
+  .trace{font-family:'Fredoka';font-weight:700;font-size:80px;color:#dcdcdc;letter-spacing:24px;
+    -webkit-text-stroke:2px #c9c9c9;user-select:none;line-height:1.1}
+  .writeline{height:70px;border-bottom:3px dashed #ccc;border-top:3px solid #eee;margin:10px 0;position:relative}
+  .writeline:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dotted #ddd}
+  .pics{display:flex;gap:18px;flex-wrap:wrap;font-size:56px;margin-top:6px}
+  .pics .pic{width:96px;height:96px;border:3px solid #ddd;border-radius:16px;display:flex;align-items:center;justify-content:center}
+  .colorbig{font-size:120px;text-align:center;filter:grayscale(1);opacity:.85}
+
+  footer{color:var(--muted);text-align:center;padding:30px 0;font-weight:700;font-size:13px}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
+    padding:12px 20px;border-radius:14px;font-family:'Fredoka';font-weight:600;box-shadow:var(--shadow-lg);
+    opacity:0;pointer-events:none;transition:.3s;z-index:99}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="wrap noprint">
+  <header>
+    <div class="brand">
+      <div class="logo">🔤</div>
+      <div>
+        <h1>English Sounds</h1>
+        <div class="sub">Читаем английские буквы и звуки · 42 звука Jolly Phonics · Reading English sounds for kids</div>
+      </div>
+    </div>
+
+    <div class="progwrap">
+      <div class="row">
+        <div class="f" style="font-size:18px">Мой прогресс · My progress</div>
+        <div>
+          <span id="progText" class="f" style="color:var(--muted)">0 / 42</span>
+          <button class="btn ghost small" onclick="resetProgress()" style="margin-left:10px">Сбросить · Reset</button>
+        </div>
+      </div>
+      <div class="progbar"><span id="progFill"></span></div>
+    </div>
+  </header>
+
+  <main id="groups"></main>
+
+  <footer>
+    Сделано с ❤️ для маленьких читателей · Нажми на любую букву, слушай звук, играй и печатай worksheet.<br>
+    English Sounds · Jolly Phonics 42 sounds
+  </footer>
+</div>
+
+<!-- Sound modal -->
+<div class="overlay noprint" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="top" id="modalTop">
+      <button class="close" onclick="closeModal()">×</button>
+      <div class="hero">
+        <div class="letter" id="mLetter">Ss</div>
+        <div class="meta">
+          <h2 id="mTitle">Sound</h2>
+          <div class="ipa" id="mIpa"></div>
+          <div class="ru" id="mRu"></div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" style="background:rgba(255,255,255,.25)" onclick="speakSound()">🔊 Звук</button>
+        </div>
+      </div>
+    </div>
+    <div class="body">
+      <!-- words -->
+      <div class="sec">
+        <h3>👂 Слушай слова <span class="en">Listen to the words (tap)</span></h3>
+        <div class="words" id="mWords"></div>
+      </div>
+
+      <!-- video -->
+      <div class="sec">
+        <h3>🎬 Видео-песенка <span class="en">Watch &amp; sing</span></h3>
+        <div class="videoBox" id="mVideo"></div>
+        <a class="yt-link" id="mYtLink" target="_blank" rel="noopener">▶ Открыть отдельное видео этого звука на YouTube ↗</a>
+      </div>
+
+      <!-- action hint -->
+      <div class="sec">
+        <div class="hint" id="mAction"></div>
+      </div>
+
+      <!-- games -->
+      <div class="sec">
+        <h3>🎮 Игры <span class="en">Play &amp; learn</span></h3>
+        <div class="gTabs">
+          <div class="gTab on" data-g="letter" onclick="switchGame('letter')">🔎 Найди букву</div>
+          <div class="gTab" data-g="sound" onclick="switchGame('sound')">🎯 Поймай звук</div>
+        </div>
+        <div class="game" id="gameArea"></div>
+      </div>
+
+      <!-- actions -->
+      <div class="actions">
+        <button class="btn" id="learnBtn" onclick="toggleLearned()">✅ Выучил! · Mark learned</button>
+        <button class="btn" style="background:var(--p6)" onclick="openWorksheet()">🖨️ Worksheet (печать)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Printable worksheet -->
+<div id="sheet"></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ DATA: 42 Jolly Phonics sounds ============ */
+const GROUPS = [
+ {name:"Группа 1", en:"Group 1", color:"var(--p1)", video:"zqW2hGc5Iow", sounds:[
+   {id:"s", disp:"Ss", ipa:"/s/", ru:"звук «с»", act:"Шипи как змейка и води рукой волной 🐍 · Weave hand like a snake",
+     words:[{w:"snake",e:"🐍",r:"змея"},{w:"sun",e:"☀️",r:"солнце"},{w:"sock",e:"🧦",r:"носок"}]},
+   {id:"a", disp:"Aa", ipa:"/æ/", ru:"краткий «э» (как в apple)", act:"Дёргай руку, будто муравей кусает 🐜 · Wiggle fingers like ants",
+     words:[{w:"apple",e:"🍎",r:"яблоко"},{w:"ant",e:"🐜",r:"муравей"},{w:"alligator",e:"🐊",r:"аллигатор"}]},
+   {id:"t", disp:"Tt", ipa:"/t/", ru:"звук «т»", act:"Верти головой как в теннисе 🎾 · Turn head side to side",
+     words:[{w:"tiger",e:"🐯",r:"тигр"},{w:"tomato",e:"🍅",r:"помидор"},{w:"train",e:"🚂",r:"поезд"}]},
+   {id:"i", disp:"Ii", ipa:"/ɪ/", ru:"краткий «и» (как в igloo)", act:"Изобрази мышку: и-и-и 🐭 · Pretend to be a mouse",
+     words:[{w:"igloo",e:"🛖",r:"иглу"},{w:"iguana",e:"🦎",r:"игуана"},{w:"ink",e:"🖊️",r:"чернила"}]},
+   {id:"p", disp:"Pp", ipa:"/p/", ru:"звук «п»", act:"Дуй на свечку: п-п-п 🕯️ · Puff out candles",
+     words:[{w:"pig",e:"🐷",r:"свинка"},{w:"pen",e:"🖊️",r:"ручка"},{w:"pizza",e:"🍕",r:"пицца"}]},
+   {id:"n", disp:"Nn", ipa:"/n/", ru:"звук «н»", act:"Разведи руки как самолёт: нннн ✈️ · Aeroplane arms",
+     words:[{w:"nose",e:"👃",r:"нос"},{w:"net",e:"🥅",r:"сеть"},{w:"nest",e:"🪺",r:"гнездо"}]},
+ ]},
+ {name:"Группа 2", en:"Group 2", color:"var(--p2)", video:"EmjLDLo-8nM", sounds:[
+   {id:"c", disp:"Cc", ipa:"/k/", ru:"звук «к»", act:"Щёлкай, будто фотоаппарат 📷 · Click like a camera",
+     words:[{w:"cat",e:"🐱",r:"кот"},{w:"car",e:"🚗",r:"машина"},{w:"cake",e:"🎂",r:"торт"}]},
+   {id:"k", disp:"Kk", ipa:"/k/", ru:"звук «к» (та же, что Cc)", act:"Пинай мяч: к-к ⚽ · Kick a ball",
+     words:[{w:"kite",e:"🪁",r:"воздушный змей"},{w:"key",e:"🔑",r:"ключ"},{w:"koala",e:"🐨",r:"коала"}]},
+   {id:"e", disp:"Ee", ipa:"/e/", ru:"краткий «э» (как в egg)", act:"Разбей яйцо о край: э-э 🥚 · Tap an egg",
+     words:[{w:"egg",e:"🥚",r:"яйцо"},{w:"elephant",e:"🐘",r:"слон"},{w:"elbow",e:"💪",r:"локоть"}]},
+   {id:"h", disp:"Hh", ipa:"/h/", ru:"выдох «х»", act:"Дыши как после бега: х-х 🏃 · Pant like running",
+     words:[{w:"hat",e:"🎩",r:"шляпа"},{w:"house",e:"🏠",r:"дом"},{w:"horse",e:"🐴",r:"лошадь"}]},
+   {id:"r", disp:"Rr", ipa:"/r/", ru:"английский «р» (рычим)", act:"Рычи как собачка: ррр 🐶 · Growl like a dog",
+     words:[{w:"rabbit",e:"🐰",r:"кролик"},{w:"rain",e:"🌧️",r:"дождь"},{w:"ring",e:"💍",r:"кольцо"}]},
+   {id:"m", disp:"Mm", ipa:"/m/", ru:"звук «м» (вкусно!)", act:"Потри животик: ммм вкусно 😋 · Rub tummy",
+     words:[{w:"mouse",e:"🐭",r:"мышь"},{w:"moon",e:"🌙",r:"луна"},{w:"milk",e:"🥛",r:"молоко"}]},
+   {id:"d", disp:"Dd", ipa:"/d/", ru:"звук «д»", act:"Стучи в барабан: д-д-д 🥁 · Beat a drum",
+     words:[{w:"dog",e:"🐶",r:"собака"},{w:"duck",e:"🦆",r:"утка"},{w:"door",e:"🚪",r:"дверь"}]},
+ ]},
+ {name:"Группа 3", en:"Group 3", color:"#e6a700", video:"_HJKdWTVd94", sounds:[
+   {id:"g", disp:"Gg", ipa:"/g/", ru:"звук «г»", act:"Лей воду из бутылки: г-г-г 💧 · Water glugging",
+     words:[{w:"goat",e:"🐐",r:"коза"},{w:"girl",e:"👧",r:"девочка"},{w:"grapes",e:"🍇",r:"виноград"}]},
+   {id:"o", disp:"Oo", ipa:"/ɒ/", ru:"краткий «о» (как в orange)", act:"Включай-выключай свет: о-о 💡 · Flick a switch",
+     words:[{w:"orange",e:"🍊",r:"апельсин"},{w:"octopus",e:"🐙",r:"осьминог"},{w:"olive",e:"🫒",r:"оливка"}]},
+   {id:"u", disp:"Uu", ipa:"/ʌ/", ru:"краткий «а» (как в cup)", act:"Поднимай зонт: ап! ☂️ · Umbrella up",
+     words:[{w:"umbrella",e:"☂️",r:"зонт"},{w:"bus",e:"🚌",r:"автобус"},{w:"cup",e:"☕",r:"чашка"}]},
+   {id:"l", disp:"Ll", ipa:"/l/", ru:"звук «л»", act:"Оближи леденец: л-л-л 🍭 · Lick a lolly",
+     words:[{w:"lion",e:"🦁",r:"лев"},{w:"leaf",e:"🍃",r:"лист"},{w:"lemon",e:"🍋",r:"лимон"}]},
+   {id:"f", disp:"Ff", ipa:"/f/", ru:"звук «ф»", act:"Рыбка выдувает пузырьки: ффф 🐟 · Fish blowing",
+     words:[{w:"fish",e:"🐟",r:"рыба"},{w:"frog",e:"🐸",r:"лягушка"},{w:"flower",e:"🌸",r:"цветок"}]},
+   {id:"b", disp:"Bb", ipa:"/b/", ru:"звук «б»", act:"Отбивай мяч: б-б-б ⚽ · Bounce a ball",
+     words:[{w:"ball",e:"⚽",r:"мяч"},{w:"banana",e:"🍌",r:"банан"},{w:"bear",e:"🐻",r:"медведь"}]},
+ ]},
+ {name:"Группа 4", en:"Group 4", color:"var(--p4)", video:"xg4cHMYhNb8", sounds:[
+   {id:"ai", disp:"ai", ipa:"/eɪ/", ru:"дифтонг «эй»", act:"Приложи руку к уху: a? · Cup ear ‘pardon?’",
+     words:[{w:"rain",e:"🌧️",r:"дождь"},{w:"train",e:"🚂",r:"поезд"},{w:"snail",e:"🐌",r:"улитка"}]},
+   {id:"j", disp:"Jj", ipa:"/dʒ/", ru:"звук «дж»", act:"Прыгай вверх-вниз: дж-дж 🤸 · Wobble like jelly",
+     words:[{w:"jellyfish",e:"🪼",r:"медуза"},{w:"juice",e:"🧃",r:"сок"},{w:"jet",e:"✈️",r:"самолёт"}]},
+   {id:"oa", disp:"oa", ipa:"/əʊ/", ru:"дифтонг «оу»", act:"Удивись: oh! 😮 · Say ‘oh!’",
+     words:[{w:"boat",e:"⛵",r:"лодка"},{w:"goat",e:"🐐",r:"коза"},{w:"coat",e:"🧥",r:"пальто"}]},
+   {id:"ie", disp:"ie", ipa:"/aɪ/", ru:"дифтонг «ай»", act:"Показывай на себя: it’s me! 👉 · Point ‘aye’",
+     words:[{w:"pie",e:"🥧",r:"пирог"},{w:"tie",e:"👔",r:"галстук"},{w:"kite",e:"🪁",r:"змей"}]},
+   {id:"ee", disp:"ee", ipa:"/iː/", ru:"долгий «ии»", act:"Как ослик: ee-aw 🫏 · Donkey ‘ee-aw’",
+     words:[{w:"bee",e:"🐝",r:"пчела"},{w:"tree",e:"🌳",r:"дерево"},{w:"sheep",e:"🐑",r:"овца"}]},
+   {id:"or", disp:"or", ipa:"/ɔː/", ru:"звук «о(р)»", act:"Марш как солдат: or, or 🪖 · March ‘or, or’",
+     words:[{w:"fork",e:"🍴",r:"вилка"},{w:"horse",e:"🐴",r:"лошадь"},{w:"corn",e:"🌽",r:"кукуруза"}]},
+ ]},
+ {name:"Группа 5", en:"Group 5", color:"var(--p5)", video:"6xdYF4JFXFQ", sounds:[
+   {id:"z", disp:"Zz", ipa:"/z/", ru:"звук «з» (жужжим)", act:"Жужжи как пчела: ззз 🐝 · Buzz like a bee",
+     words:[{w:"zebra",e:"🦓",r:"зебра"},{w:"zoo",e:"🦁",r:"зоопарк"},{w:"zip",e:"🧥",r:"молния"}]},
+   {id:"w", disp:"Ww", ipa:"/w/", ru:"губной «в/у»", act:"Дуй как ветер: wooo 🌬️ · Blow like wind",
+     words:[{w:"water",e:"💧",r:"вода"},{w:"watch",e:"⌚",r:"часы"},{w:"window",e:"🪟",r:"окно"}]},
+   {id:"ng", disp:"ng", ipa:"/ŋ/", ru:"носовой «нг»", act:"Силач напрягся: nnng 💪 · Strong man ‘nng’",
+     words:[{w:"ring",e:"💍",r:"кольцо"},{w:"king",e:"👑",r:"король"},{w:"sing",e:"🎤",r:"петь"}]},
+   {id:"v", disp:"Vv", ipa:"/v/", ru:"звук «в» (зубной)", act:"Веди машинку: вввв 🚐 · Drive a van",
+     words:[{w:"van",e:"🚐",r:"фургон"},{w:"violin",e:"🎻",r:"скрипка"},{w:"volcano",e:"🌋",r:"вулкан"}]},
+   {id:"oo", disp:"oo", ipa:"/uː/ · /ʊ/", ru:"«уу» (moon) и «у» (book)", act:"Кукушка: oo-oo 🐦 · Cuckoo ‘oo-oo’",
+     words:[{w:"moon",e:"🌙",r:"луна"},{w:"book",e:"📖",r:"книга"},{w:"foot",e:"🦶",r:"нога"}]},
+ ]},
+ {name:"Группа 6", en:"Group 6", color:"var(--p6)", video:"P6kFav191wM", sounds:[
+   {id:"y", disp:"Yy", ipa:"/j/", ru:"звук «й»", act:"Ешь йогурт: yum 🥄 · Yogurt spoon",
+     words:[{w:"yellow",e:"💛",r:"жёлтый"},{w:"yoyo",e:"🪀",r:"йо-йо"},{w:"yak",e:"🐃",r:"як"}]},
+   {id:"x", disp:"Xx", ipa:"/ks/", ru:"звук «кс»", act:"Фотографируй рентген: ks 🩻 · X-ray click",
+     words:[{w:"fox",e:"🦊",r:"лиса"},{w:"box",e:"📦",r:"коробка"},{w:"six",e:"6️⃣",r:"шесть"}]},
+   {id:"ch", disp:"ch", ipa:"/tʃ/", ru:"звук «ч»", act:"Поезд едет: ч-ч-ч 🚂 · Choo-choo train",
+     words:[{w:"cheese",e:"🧀",r:"сыр"},{w:"chair",e:"🪑",r:"стул"},{w:"chicken",e:"🐔",r:"курица"}]},
+   {id:"sh", disp:"sh", ipa:"/ʃ/", ru:"звук «ш» (тише!)", act:"Палец к губам: шшш 🤫 · Finger ‘shh’",
+     words:[{w:"sheep",e:"🐑",r:"овца"},{w:"ship",e:"🚢",r:"корабль"},{w:"shell",e:"🐚",r:"ракушка"}]},
+   {id:"th1", disp:"th", ipa:"/θ/", ru:"глухой «θ» (язык между зубов)", act:"Высунь язычок: th 👅 · Tongue out ‘th’",
+     words:[{w:"thumb",e:"👍",r:"большой палец"},{w:"three",e:"3️⃣",r:"три"},{w:"thin",e:"📏",r:"тонкий"}]},
+   {id:"th2", disp:"th", ipa:"/ð/", ru:"звонкий «ð» (this, that)", act:"Язычок дрожит: this 👅 · Buzzy ‘th’",
+     words:[{w:"this",e:"👇",r:"это"},{w:"that",e:"👉",r:"то"},{w:"feather",e:"🪶",r:"перо"}]},
+ ]},
+ {name:"Группа 7", en:"Group 7", color:"var(--p7)", video:"4cJe85Jkg0s", sounds:[
+   {id:"qu", disp:"qu", ipa:"/kw/", ru:"звук «кв»", act:"Утка крякает: кв-кв 🦆 · Duck ‘quack’",
+     words:[{w:"queen",e:"👑",r:"королева"},{w:"quick",e:"🏃",r:"быстрый"},{w:"question",e:"❓",r:"вопрос"}]},
+   {id:"ou", disp:"ou", ipa:"/aʊ/", ru:"дифтонг «ау»", act:"Ой, больно: ow! 🤕 · Say ‘ow!’",
+     words:[{w:"house",e:"🏠",r:"дом"},{w:"mouse",e:"🐭",r:"мышь"},{w:"cloud",e:"☁️",r:"облако"}]},
+   {id:"oi", disp:"oi", ipa:"/ɔɪ/", ru:"дифтонг «ой»", act:"Позови: oi! 📣 · Call ‘oi!’",
+     words:[{w:"coin",e:"🪙",r:"монета"},{w:"oil",e:"🛢️",r:"масло"},{w:"soil",e:"🪴",r:"почва"}]},
+   {id:"ue", disp:"ue", ipa:"/juː/", ru:"«ю/уу»", act:"Помаши: bye, you! 👋 · Wave ‘you’",
+     words:[{w:"blue",e:"🔵",r:"синий"},{w:"glue",e:"🧴",r:"клей"},{w:"statue",e:"🗽",r:"статуя"}]},
+   {id:"er", disp:"er", ipa:"/ə/", ru:"безударный «ер»", act:"Стучи молотком: er-er 🔨 · Hammer ‘er’",
+     words:[{w:"hammer",e:"🔨",r:"молоток"},{w:"ladder",e:"🪜",r:"лестница"},{w:"sister",e:"👧",r:"сестра"}]},
+   {id:"ar", disp:"ar", ipa:"/ɑː/", ru:"долгий «аа(р)»", act:"Пират говорит: arr! 🏴‍☠️ · Pirate ‘arr’",
+     words:[{w:"car",e:"🚗",r:"машина"},{w:"star",e:"⭐",r:"звезда"},{w:"farm",e:"🚜",r:"ферма"}]},
+ ]},
+];
+
+/* flatten */
+const ALL = [];
+GROUPS.forEach((g,gi)=>g.sounds.forEach(s=>{s.gi=gi;s.color=g.color;s.video=g.video;ALL.push(s);}));
+const TOTAL = ALL.length;
+
+/* ============ state ============ */
+let learned = load();
+let current = null;
+
+function load(){try{return JSON.parse(localStorage.getItem('es_learned')||'{}')}catch(e){return {}}}
+function save(){localStorage.setItem('es_learned',JSON.stringify(learned))}
+
+/* ============ render home ============ */
+function renderHome(){
+  const root = document.getElementById('groups');
+  root.innerHTML = GROUPS.map((g,gi)=>`
+    <section class="group">
+      <div class="group-h">
+        <span class="chip" style="background:${g.color}">${g.name}</span>
+        <div><h2>${g.sounds.map(s=>s.disp.split(' ')[0]).join(' · ')}</h2>
+        <div class="en">${g.en} · ${g.sounds.length} звук${g.sounds.length>4?'ов':'а'}</div></div>
+      </div>
+      <div class="grid">
+        ${g.sounds.map(s=>cardHTML(s)).join('')}
+      </div>
+    </section>`).join('');
+  updateProgress();
+}
+function cardHTML(s){
+  const done = learned[s.id]?'learned':'';
+  return `<div class="card ${done}" style="border-color:${learned[s.id]?'var(--p7)':'transparent'}" onclick="openSound('${s.id}')">
+    <div class="done">🌟</div>
+    <div class="big" style="color:${s.color}">${s.disp.split(' ')[0]}</div>
+    <div class="emos">${s.words.slice(0,3).map(w=>w.e).join('')}</div>
+    <div class="lbl">${s.ipa}</div>
+  </div>`;
+}
+function updateProgress(){
+  const n = Object.values(learned).filter(Boolean).length;
+  document.getElementById('progText').textContent = n+' / '+TOTAL;
+  document.getElementById('progFill').style.width = (n/TOTAL*100)+'%';
+}
+function resetProgress(){ if(confirm('Сбросить весь прогресс? · Reset all progress?')){learned={};save();renderHome();} }
+
+/* ============ speech ============ */
+let voices=[];
+function loadVoices(){voices=speechSynthesis.getVoices();}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+function say(text,rate=.85){
+  if(!('speechSynthesis' in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB';u.rate=rate;u.pitch=1.1;
+  const v=voices.find(v=>/en-GB/i.test(v.lang))||voices.find(v=>/en/i.test(v.lang));
+  if(v)u.voice=v;
+  speechSynthesis.speak(u);
+}
+function speakSound(){
+  if(!current)return;
+  // approximate the phoneme by saying it, then example word
+  const w=current.words[0];
+  say(current.disp.replace(/[^a-z]/gi,'').slice(0,2).toLowerCase()+'... '+w.w,.8);
+}
+
+/* ============ open sound modal ============ */
+function openSound(id){
+  current = ALL.find(s=>s.id===id);
+  const s=current;
+  document.getElementById('modalTop').style.background=`linear-gradient(135deg, ${s.color}, ${shade(s.color)})`;
+  document.getElementById('mLetter').textContent=s.disp;
+  document.getElementById('mTitle').textContent='Звук '+s.disp+'  ·  Sound '+s.disp;
+  document.getElementById('mIpa').textContent='IPA: '+s.ipa;
+  document.getElementById('mRu').textContent=s.ru;
+  // words
+  document.getElementById('mWords').innerHTML=s.words.map(w=>`
+    <div class="word" onclick="say('${w.w}')">
+      <div class="e">${w.e}</div><div class="w">${w.w}</div><div class="r">${w.r}</div>
+    </div>`).join('');
+  // video
+  document.getElementById('mVideo').innerHTML=
+    `<iframe src="https://www.youtube-nocookie.com/embed/${s.video}" title="Phonics video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>`;
+  const q=encodeURIComponent('jolly phonics '+s.disp.split(' ')[0]+' sound for kids');
+  document.getElementById('mYtLink').href='https://www.youtube.com/results?search_query='+q;
+  // action
+  document.getElementById('mAction').innerHTML='💡 <b>Действие · Action:</b> '+s.act;
+  // learned btn
+  syncLearnBtn();
+  // game
+  switchGame('letter');
+  // open
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>say(s.words[0].w),350);
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('mVideo').innerHTML=''; // stop video
+  document.body.style.overflow='';
+  speechSynthesis.cancel();
+}
+function shade(c){ // darker variant for gradient
+  const map={'var(--p1)':'#e04b4b','var(--p2)':'#33b3aa','#e6a700':'#c08a00','var(--p4)':'#8460c9',
+    'var(--p5)':'#3a86e0','var(--p6)':'#e87f45','var(--p7)':'#4fa85c'};
+  return map[c]||'#555';
+}
+
+/* ============ learned ============ */
+function toggleLearned(){
+  if(!current)return;
+  learned[current.id]=!learned[current.id];
+  save();syncLearnBtn();updateProgress();
+  // update card
+  renderHome();
+  if(learned[current.id]){toast('🌟 Молодец! Well done!');confetti();}
+}
+function syncLearnBtn(){
+  const b=document.getElementById('learnBtn');
+  if(learned[current.id]){b.textContent='🌟 Выучено · Learned';b.style.background='var(--p7)';}
+  else{b.textContent='✅ Выучил! · Mark learned';b.style.background='var(--p4)';}
+}
+
+/* ============ GAMES ============ */
+let curGame='letter';
+function switchGame(g){
+  curGame=g;
+  document.querySelectorAll('.gTab').forEach(t=>t.classList.toggle('on',t.dataset.g===g));
+  if(g==='letter')gameFindLetter();else gameCatchSound();
+}
+function pick(arr,n,exclude){
+  const pool=arr.filter(x=>x!==exclude);
+  const out=[];
+  while(out.length<n && pool.length){out.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);}
+  return out;
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* Game 1: find the target letter among distractors */
+function gameFindLetter(){
+  const s=current;
+  const target=s.disp.split(' ')[0];
+  const others=pick(ALL.map(x=>x.disp.split(' ')[0]),8,target);
+  const tiles=shuffle([target,...others.slice(0,8)]);
+  const area=document.getElementById('gameArea');
+  area.innerHTML=`
+    <div class="gPrompt">Найди букву «${target}» · <span class="en">Tap the letter «${target}»</span></div>
+    <div class="tiles" id="tiles"></div>`;
+  const box=document.getElementById('tiles');
+  box.innerHTML=tiles.map((t,i)=>`<button class="tile" style="color:${s.color}" data-t="${t}">${t}</button>`).join('');
+  box.querySelectorAll('.tile').forEach(tl=>{
+    tl.onclick=()=>{
+      if(tl.dataset.t===target){tl.classList.add('right');say(s.words[0].w);toast('✅ Верно! Correct!');confetti();
+        setTimeout(gameFindLetter,900);}
+      else{tl.classList.add('wrong');setTimeout(()=>tl.classList.remove('wrong'),350);}
+    };
+  });
+}
+
+/* Game 2: catch words that start with this sound */
+function gameCatchSound(){
+  const s=current;
+  const rights=s.words.slice(0,2);
+  // distractors from other sounds
+  const otherWords=[];
+  ALL.forEach(x=>{if(x.id!==s.id)x.words.forEach(w=>otherWords.push(w));});
+  const wrongs=pick(otherWords,4);
+  let items=shuffle([...rights.map(w=>({...w,ok:true})),...wrongs.map(w=>({...w,ok:false}))]);
+  let found=0;const need=rights.length;
+  const area=document.getElementById('gameArea');
+  area.innerHTML=`
+    <div class="gPrompt">Поймай слова со звуком «${s.disp.split(' ')[0]}» · <span class="en">Tap words that start with «${s.disp.split(' ')[0]}»</span></div>
+    <div class="tiles" id="tiles2"></div>
+    <div class="celebrate" id="gres"></div>`;
+  const box=document.getElementById('tiles2');
+  box.innerHTML=items.map((it,i)=>`<button class="tile" data-i="${i}"><span style="font-size:40px">${it.e}</span><span class="cap">${it.w}</span></button>`).join('');
+  box.querySelectorAll('.tile').forEach(tl=>{
+    tl.onclick=()=>{
+      const it=items[+tl.dataset.i];
+      if(tl.classList.contains('right')||tl.classList.contains('wrong'))return;
+      say(it.w);
+      if(it.ok){tl.classList.add('right');found++;
+        if(found>=need){document.getElementById('gres').textContent='🎉 Отлично! All found!';confetti();
+          setTimeout(gameCatchSound,1300);}}
+      else{tl.classList.add('wrong');setTimeout(()=>tl.classList.remove('wrong'),400);}
+    };
+  });
+}
+
+/* ============ WORKSHEET ============ */
+function openWorksheet(){
+  const s=current;
+  const target=s.disp.split(' ')[0];
+  const rights=s.words;
+  const distract=pick(ALL.filter(x=>x.id!==s.id).flatMap(x=>x.words),2);
+  const circleItems=shuffle([...rights.slice(0,3),...distract]);
+  document.getElementById('sheet').innerHTML=`
+    <div class="ws">
+      <h1>Worksheet — Звук ${s.disp} · Sound ${s.disp} <span style="font-size:22px">${s.ipa}</span></h1>
+      <div class="wsSub">Имя · Name: ________________________     Дата · Date: __________</div>
+
+      <div class="wsSec">
+        <h3>1. Обведи букву · Trace the letter</h3>
+        <div class="trace">${(target+' ').repeat(4)}</div>
+        <div class="trace" style="font-size:60px">${(target.toLowerCase()+' ').repeat(5)}</div>
+      </div>
+
+      <div class="wsSec">
+        <h3>2. Напиши сам · Write it yourself</h3>
+        <div class="writeline"></div>
+        <div class="writeline"></div>
+      </div>
+
+      <div class="wsSec">
+        <h3>3. Обведи картинки со звуком «${target}» · Circle pictures with the «${target}» sound</h3>
+        <div class="pics">${circleItems.map(w=>`<div class="pic">${w.e}</div>`).join('')}</div>
+        <div style="color:#888;font-weight:700;margin-top:8px">Слова · Words: ${rights.map(w=>w.w).join(', ')}</div>
+      </div>
+
+      <div class="wsSec">
+        <h3>4. Раскрась · Colour the picture (${rights[0].w})</h3>
+        <div class="colorbig">${rights[0].e}</div>
+      </div>
+
+      <div style="text-align:center;color:#aaa;font-weight:700;margin-top:20px">English Sounds · Jolly Phonics · ${s.disp}</div>
+    </div>`;
+  window.print();
+}
+
+/* ============ ui helpers ============ */
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1600);}
+function confetti(){
+  const colors=['#ff6b6b','#4ecdc4','#ffd166','#a685e2','#5aa9ff','#6bcB77'];
+  for(let i=0;i<24;i++){
+    const d=document.createElement('div');
+    d.style.cssText=`position:fixed;z-index:200;top:-10px;left:${Math.random()*100}vw;width:10px;height:14px;
+      background:${colors[i%colors.length]};border-radius:2px;pointer-events:none;
+      transform:rotate(${Math.random()*360}deg);transition:transform 1.4s ease-in, top 1.4s ease-in, opacity 1.4s`;
+    document.body.appendChild(d);
+    requestAnimationFrame(()=>{d.style.top='105vh';d.style.transform=`translateX(${(Math.random()-.5)*200}px) rotate(720deg)`;d.style.opacity='0';});
+    setTimeout(()=>d.remove(),1500);
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+renderHome();
+</script>
+</body>
+</html>
