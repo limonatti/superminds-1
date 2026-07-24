@@ -320,3 +320,25 @@ window.SM_face = function (w, px) {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", widget); else widget();
 })();
+/* Раздел чтения (Phonics) — карточка в главном меню */
+(function () {
+  function add() {
+    var grid = document.querySelector('.grid');
+    if (!grid) return false;
+    if (document.getElementById('phonicsCard')) return true;
+    var c = document.createElement('div');
+    c.className = 'course ready';
+    c.id = 'phonicsCard';
+    c.style.cursor = 'pointer';
+    c.innerHTML =
+      '<div class="cover" style="background:#ffe0d6">🔤</div>' +
+      '<div class="t">Чтение · Phonics</div>' +
+      '<div class="s">буквы и звуки · 42 звука + гласные · игры</div>' +
+      '<div class="go">Открыть →</div>';
+    c.addEventListener('click', function () { location.href = 'phonics.html'; });
+    grid.appendChild(c);
+    return true;
+  }
+  function start(){ if(add())return; var n=0,t=setInterval(function(){ if(add()||++n>40) clearInterval(t); },200); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
