@@ -187,7 +187,7 @@
     (function(){const defs=document.createElementNS(NS,"defs");const m=document.createElementNS(NS,"marker");m.setAttribute("id","arrowh");m.setAttribute("markerWidth","6");m.setAttribute("markerHeight","6");m.setAttribute("refX","5");m.setAttribute("refY","3");m.setAttribute("orient","auto");const pa=document.createElementNS(NS,"path");pa.setAttribute("d","M0,0 L6,3 L0,6 Z");pa.setAttribute("fill","context-stroke");m.appendChild(pa);defs.appendChild(m);ink.appendChild(defs);})();
 
     /* ---- DOM объекты: стикер / текст / карточка ---- */
-    function speak(x){try{const u=new SpeechSynthesisUtterance(x);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+    function speak(x){if(window.SM_speak)return SM_speak(x,.95);try{const u=new SpeechSynthesisUtterance(x);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function place(el,x,y){el.style.left=x+"px";el.style.top=y+"px";}
     function txtOf(el){ const c=el.cloneNode(true); c.querySelectorAll(".del-x").forEach(b=>b.remove()); return c.textContent; }
     function setTxt(el,text){ el.textContent=text; if(el._delx) el.appendChild(el._delx); }

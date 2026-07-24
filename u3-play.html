@@ -64,6 +64,7 @@
   .reset{background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:14px;padding:9px 16px;border-radius:14px;cursor:pointer;box-shadow:0 3px 0 #5c1730}
   .footer{text-align:center;color:#c3b8a6;font-size:12px;margin-top:26px;font-weight:700}
 </style>
+<script src="sm-voice.js"></script>
 </head>
 <body>
 <a class="home" href="unit3.html">← Меню</a>
@@ -108,7 +109,7 @@ var ANIMALS=[
  {en:'spider',ru:'паук',e:'🕷️'},{en:'lizard',ru:'ящерица',e:'🦎'},{en:'rat',ru:'крыса',e:'🐀'},
  {en:'elephant',ru:'слон',e:'🐘'},{en:'donkey',ru:'ослик',e:'🫏'},{en:'rabbit',ru:'кролик',e:'🐰'}
 ];
-function say(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+function say(t){if(window.SM_speak)return SM_speak(t,.95);try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.95;speechSynthesis.speak(u);}catch(e){}}
 var _ac=null;function _ax(){if(!_ac){try{_ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(_ac&&_ac.state==='suspended')_ac.resume();return _ac;}
 function sfxOK(){var c=_ax();if(!c)return;[[880,0],[1245,0.10]].forEach(function(p){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=p[0];o.connect(g);g.connect(c.destination);var t=c.currentTime+p[1];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.3);o.start(t);o.stop(t+0.32);});}
 function sfxNo(){var c=_ax();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type='square';var t=c.currentTime;o.frequency.setValueAtTime(220,t);o.frequency.exponentialRampToValueAtTime(110,t+0.2);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0.18,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.24);o.start(t);o.stop(t+0.26);}

@@ -95,6 +95,12 @@
     <div class="g-ex">My aunt, <b>whose</b> house is full of cats, never travels. <span class="ru">— чей</span></div>
     <div class="g-ex">The habit <b>that/which</b> annoys me most is loud chewing. <span class="ru">— о вещах</span></div>
   </div>
+  <div class="card">
+    <span class="gt">3. Урок D — характер и поведение</span>
+    <div class="g-ex">He <b>tends to</b> interrupt when he's excited. <span class="ru">— склонен, часто так делает</span></div>
+    <div class="g-ex">She <b>can be</b> a bit messy, but she's really kind. <span class="ru">— бывает + прилагательное</span></div>
+    <div class="g-ex">I'm <b>the kind of person who</b> plans everything. <span class="ru">— я из тех, кто…</span></div>
+  </div>
 
   <h2>🔤 Слова юнита <span style="font-size:13px;color:#8a7a68">(нажми 🔊 и повтори)</span></h2>
   <div class="words" id="words"></div>
@@ -151,14 +157,36 @@ const wbox=document.getElementById("words");
 WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
   d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
   d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
-function pickVoice(pref){const vs=speechSynthesis.getVoices();return vs.find(v=>v.name.includes(pref))||vs.find(v=>v.lang==="en-GB")||vs.find(v=>v.lang.startsWith("en"))||null;}
-function say(t,voice,rate){const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";const v=voice||pickVoice("Daniel");if(v)u.voice=v;u.rate=rate||0.92;speechSynthesis.speak(u);}
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
 document.getElementById("lplay").onclick=()=>{
   speechSynthesis.cancel();
-  const mv=pickVoice("Daniel")||pickVoice("Google UK English Male");
-  const fv=pickVoice("Samantha")||pickVoice("Google UK English Female")||pickVoice("Karen");
-  DIALOG.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);u.lang="en-GB";u.rate=0.9;
-    const v=(who==="m")?mv:fv;if(v)u.voice=v;speechSynthesis.speak(u);});
+  const mv=enVoice("m"),fv=enVoice("f");
+  DIALOG.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
 };
 document.getElementById("lstop").onclick=()=>speechSynthesis.cancel();
 document.getElementById("lscript").onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};

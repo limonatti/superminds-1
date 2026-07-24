@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speakout B1 · Курс · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  .head{text-align:center;margin:6px 0 26px}
+  h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,48px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{font-weight:800;font-size:15px;color:#5a4f47;margin:10px 0 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+  .u{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;cursor:pointer;transition:transform .14s,box-shadow .14s;display:block}
+  .u:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
+  .u .cover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center}
+  .u .cover span{font-size:clamp(48px,9vw,68px);filter:drop-shadow(0 5px 8px rgba(0,0,0,.28))}
+  .u .b{padding:13px 16px 16px}
+  .u .n{font:900 11px 'Nunito',sans-serif;color:#b5654a;letter-spacing:1px}
+  .u .t{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:#7c2340;margin:2px 0 4px}
+  .u .d{font-size:12px;color:#8a7a68;font-weight:700;line-height:1.4;min-height:34px}
+  .u .go{display:inline-block;margin-top:8px;background:#7c2340;color:#fff;font:800 12px 'Nunito',sans-serif;padding:8px 15px;border-radius:999px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="index.html">🏠 Домой</a>
+    <a class="home alt" href="speakout-b1.html">🎯 Быстрый тренажёр</a>
+  </div>
+  <div class="head">
+    <h1>🗣️ Speakout B1</h1>
+    <div class="sub">Курс по юнитам · теория · аудирование · упражнения · рабочая тетрадь</div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1</div>
+</div>
+<script>
+const UNITS=[
+ {n:1,t:"People",e:"🧑‍🤝‍🧑",g:["#7c2340","#e0952a"],d:"Present Simple/Continuous · verb patterns · характер"},
+ {n:2,t:"Tale tellers",e:"📖",g:["#5e1a30","#b5654a"],d:"narrative tenses · Past vs Perfect · истории"},
+ {n:3,t:"Questions",e:"❓",g:["#7c2340","#a8632c"],d:"вопросы · планы · phrasal verbs"},
+ {n:4,t:"Winners",e:"🏆",g:["#6a2038","#d98b2b"],d:"modals · артикли · спорт и рекорды"},
+ {n:5,t:"News",e:"📰",g:["#7c2340","#c47a1e"],d:"relative clauses · reported speech · прогнозы"},
+ {n:6,t:"Creators",e:"🎨",g:["#5e1a30","#e0952a"],d:"used to · сравнения · искусство"},
+ {n:7,t:"Travel",e:"✈️",g:["#6a2038","#b5654a"],d:"conditionals · quantifiers · путешествия"},
+ {n:8,t:"Know-how",e:"🛠️",g:["#7c2340","#8a4a1e"],d:"can/be able to · пассив · технологии"}
+];
+const grid=document.getElementById("grid");
+UNITS.forEach(u=>{const a=document.createElement("a");a.className="u";a.href="speakout-b1-u"+u.n+".html";
+  a.innerHTML='<div class="cover" style="background:linear-gradient(135deg,'+u.g[0]+','+u.g[1]+')"><span>'+u.e+'</span></div>'+
+    '<div class="b"><div class="n">UNIT '+u.n+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div><div class="go">Открыть урок →</div></div>';
+  grid.appendChild(a);});
+</script>
+</body>
+</html>
