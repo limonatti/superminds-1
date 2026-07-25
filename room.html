@@ -142,7 +142,7 @@
       <button id="vidClose" title="Закрыть видео">×</button>
     </div>
     <div id="vidBody"><div id="vidGrip" title="Потяни, чтобы изменить размер"></div></div>
-    <div id="vidHint">Тяни за уголок ↘ или жми S · M · L. «Экран» — показать свой экран. Управление уроком передаётся кнопкой «🎮» в шапке.</div>
+    <div id="vidHint">Тяни за уголок ↘ или жми S · M · L. «Экран» — показать свой экран. Не видно себя — нажми «плитку» ⊞ в панели Jitsi или увеличь окно. Управление уроком — кнопка «🎮» в шапке.</div>
   </div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
@@ -278,6 +278,10 @@
             configOverwrite:{
               prejoinPageEnabled:false, prejoinConfig:{enabled:false},
               startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true,
+              /* по умолчанию в звонке вдвоём Jitsi прячет твоё превью — возвращаем его */
+              disable1On1Mode:true,
+              disableSelfView:false,
+              filmstrip:{disableStageFilmstrip:true},
               /* короткий набор кнопок — иначе в маленьком окне всё уезжает в «…» */
               toolbarButtons:["microphone","camera","desktop","tileview","hangup"],
               disableResponsiveTiles:true
@@ -285,6 +289,7 @@
             interfaceConfigOverwrite:{
               TOOLBAR_ALWAYS_VISIBLE:true,
               TOOLBAR_BUTTONS:["microphone","camera","desktop","tileview","hangup"],
+              VERTICAL_FILMSTRIP:false, filmStripOnly:false,
               SHOW_JITSI_WATERMARK:false, SHOW_WATERMARK_FOR_GUESTS:false,
               MOBILE_APP_PROMO:false, DISABLE_VIDEO_BACKGROUND:true
             }
@@ -314,7 +319,8 @@
       var w=document.getElementById("videoWrap"),h=document.getElementById("vidHead"),
           body=document.getElementById("vidBody"),grip=document.getElementById("vidGrip");
       var MINW=260,MINH=160;
-      var PRESETS={s:[300,210],m:[420,310],l:[680,470]};
+      /* M и L специально просторные: в тесном окне Jitsi прячет полоску с превью */
+      var PRESETS={s:[320,230],m:[480,360],l:[720,520]};
 
       function clampIntoView(){
         /* пока окно скрыто, размеры равны нулю — мерить нельзя, иначе схлопнем его в точку */
