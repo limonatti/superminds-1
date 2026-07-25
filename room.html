@@ -22,11 +22,12 @@
   #panel.collapsed{display:none}
   #panelShow{display:none;position:fixed;right:12px;bottom:12px;z-index:20;background:#7c2340;color:#fff;border:none;cursor:pointer;padding:11px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 10px rgba(0,0,0,.25)}
   #panelShow.on{display:block}
-  #videoWrap{position:fixed;top:64px;left:16px;width:270px;z-index:40;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.45);display:none}
+  #videoWrap{position:fixed;top:64px;left:16px;width:340px;z-index:40;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.45);display:none}
   #videoWrap.on{display:block}
   #vidHead{display:flex;align-items:center;justify-content:space-between;background:#7c2340;color:#fff;font:800 12px 'Nunito',sans-serif;padding:6px 10px;cursor:move;user-select:none}
   #vidHead button{background:rgba(255,255,255,.2);color:#fff;border:none;cursor:pointer;width:22px;height:22px;border-radius:6px;font-size:15px;line-height:1}
-  #vidBody iframe{width:270px;height:170px;border:none;display:block;background:#111}
+  #vidBody{width:340px;height:250px;background:#111}
+  #vidBody iframe{width:100%!important;height:100%!important;border:none;display:block}
 
   #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
   #boardCol{flex:1.7;min-width:0;border-right:3px solid #d9c9ac}
@@ -86,6 +87,7 @@
   <div id="videoWrap"><div id="vidHead"><span>📹 Видео с учеником</span><button id="vidClose" aria-label="Закрыть">×</button></div><div id="vidBody"></div></div>
   <button id="panelShow">⟩ Показать панель</button>
 
+  <script src="https://meet.jit.si/external_api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script>
@@ -165,13 +167,26 @@
       else prompt("Скопируй ссылку:",url);
     };
 
-    // Видеозвонок (Jitsi) — маленькое плавающее окно поверх доски
+    // Видеозвонок (Jitsi External API) — маленькое плавающее окно поверх доски
+    var jitsiApi=null;
     function vidOpen(on){
       var w=document.getElementById("videoWrap"),body=document.getElementById("vidBody"),b=document.getElementById("vidBtn");
-      if(on){ var rn="ewa-lesson-"+encodeURIComponent(room);
-        body.innerHTML='<iframe allow="camera; microphone; fullscreen; autoplay" src="https://meet.jit.si/'+rn+'#config.prejoinPageEnabled=false" title="Видеозвонок"></iframe>';
-        w.classList.add("on"); b.textContent="📹 Скрыть видео"; }
-      else { w.classList.remove("on"); body.innerHTML=""; b.textContent="📹 Видео"; }
+      if(on){
+        if(jitsiApi)return;
+        if(typeof JitsiMeetExternalAPI==="undefined"){ body.innerHTML='<div style="color:#fff;padding:16px;font:700 13px Nunito,sans-serif">Видео ещё грузится, нажми ещё раз через секунду.</div>'; w.classList.add("on"); return; }
+        try{
+          jitsiApi=new JitsiMeetExternalAPI("meet.jit.si",{
+            roomName:"ewa-lesson-"+room,
+            parentNode:body, width:"100%", height:"100%",
+            userInfo:{displayName:"Учитель"},
+            configOverwrite:{prejoinPageEnabled:false, prejoinConfig:{enabled:false}, startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true}
+          });
+        }catch(e){ body.innerHTML='<div style="color:#fff;padding:16px;font:700 13px Nunito,sans-serif">Не удалось открыть видео. Обнови страницу.</div>'; }
+        w.classList.add("on"); b.textContent="📹 Скрыть видео";
+      } else {
+        if(jitsiApi){try{jitsiApi.dispose();}catch(e){} jitsiApi=null;}
+        w.classList.remove("on"); body.innerHTML=""; b.textContent="📹 Видео";
+      }
     }
     document.getElementById("vidBtn").onclick=function(){ vidOpen(!document.getElementById("videoWrap").classList.contains("on")); };
     document.getElementById("vidClose").onclick=function(){ vidOpen(false); };
