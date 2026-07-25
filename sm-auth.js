@@ -368,7 +368,125 @@ const { data, error } = await c.from("leaderboard")
 .limit(10);
 if (error) { console.warn("leaderboard:", error.message); return []; }
 return data || [];
-}
+},
+	/* ========== ПЛАТФОРМА MVP: курсы Speakout, ДЗ по юнитам, материалы, детальный прогресс ========== */
+	/* Учитель: назначить ученику курс (один активный) */
+	async enrolCourse(studentId, course) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const { error } = await c.from("enrolments").upsert(
+			{ teacher_id: u.id, student_id: studentId, course: course }, { onConflict: "student_id" });
+		return { ok: !error, error: error && error.message };
+	},
+	/* Ученик: свой назначенный курс */
+	async myCourse() {
+		if (!useCloud) return null;
+		const c = ensureClient(); if (!c) return null;
+		const u = await this.getUser(); if (!u) return null;
+		const { data } = await c.from("enrolments").select("course").eq("student_id", u.id).maybeSingle();
+		return data ? data.course : null;
+	},
+	/* Учитель: курс конкретного ученика */
+	async studentCourse(studentId) {
+		if (!useCloud) return null;
+		const c = ensureClient(); if (!c) return null;
+		const { data } = await c.from("enrolments").select("course").eq("student_id", studentId).maybeSingle();
+		return data ? data.course : null;
+	},
+	/* Учитель: выдать ДЗ по юниту Speakout */
+	async addHW(studentId, course, unit, note) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const { error } = await c.from("hw").insert(
+			{ teacher_id: u.id, student_id: studentId, course: course, unit: unit, note: note || null });
+		return { ok: !error, error: error && error.message };
+	},
+	async listHW(studentId) { /* учитель */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data } = await c.from("hw").select("id,course,unit,note,done,created_at").eq("student_id", studentId).order("created_at", { ascending: false });
+		return data || [];
+	},
+	async myHW() { /* ученик */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data } = await c.from("hw").select("id,course,unit,note,done,created_at").eq("student_id", u.id).order("created_at", { ascending: false });
+		return data || [];
+	},
+	async setHWDone(id, done) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("hw").update({ done: !!done }).eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+	async deleteHW(id) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("hw").delete().eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+	/* Материалы (доп. ссылки сверх курса) */
+	async addMaterial(studentId, title, url, note) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const { error } = await c.from("materials").insert(
+			{ teacher_id: u.id, student_id: studentId, title: title, url: url, note: note || null });
+		return { ok: !error, error: error && error.message };
+	},
+	async listMaterials(studentId) { /* учитель */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data } = await c.from("materials").select("id,title,url,note,created_at").eq("student_id", studentId).order("created_at", { ascending: false });
+		return data || [];
+	},
+	async myMaterials() { /* ученик */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data } = await c.from("materials").select("id,title,url,note,created_at").eq("student_id", u.id).order("created_at", { ascending: false });
+		return data || [];
+	},
+	async deleteMaterial(id) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("materials").delete().eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+	/* Ученик: сохранить пачку ответов по юниту (детальный прогресс) */
+	async saveHwAttempts(rows) {
+		if (!useCloud || !rows || !rows.length) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false };
+		const payload = rows.map(r => ({
+			student_id: u.id, course: r.course, unit: r.unit, ex_index: r.ex_index,
+			section: r.section || null, question: (r.question || "").slice(0, 500),
+			answer: (r.answer == null ? null : String(r.answer).slice(0, 300)),
+			correct: !!r.correct, duration_ms: r.duration_ms || null
+		}));
+		const { error } = await c.from("hw_attempts").insert(payload);
+		return { ok: !error, error: error && error.message };
+	},
+	/* Учитель: детальные результаты ученика по юниту */
+	async studentHwResults(studentId, course, unit) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.rpc("student_hw_results", { p_student: studentId, p_course: course, p_unit: unit });
+		if (error) { console.warn("student_hw_results:", error.message); return []; }
+		return data || [];
+	},
+	/* Учитель: сводка ДЗ ученика (юниты, попытки, верно, время) */
+	async studentHwSummary(studentId) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.rpc("student_hw_summary", { p_student: studentId });
+		if (error) { console.warn("student_hw_summary:", error.message); return []; }
+		return data || [];
+	},
+
 };
 
 return api;

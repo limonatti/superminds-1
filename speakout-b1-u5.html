@@ -171,6 +171,8 @@
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 5</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
 <script>
 const WORDS=[["headline", "заголовок"], ["journalist", "журналист"], ["to report", "сообщать"], ["breaking news", "срочные новости"], ["rumour", "слух"], ["to post", "опубликовать"], ["to share", "делиться"], ["viral", "вирусный"], ["reliable", "надёжный"], ["fake", "фальшивый"], ["to announce", "объявлять"], ["to spread", "распространяться"], ["update", "обновление"], ["source", "источник"], ["front page", "первая полоса"], ["to interview", "брать интервью"], ["editor", "редактор"], ["trustworthy", "заслуживающий доверия"], ["to double-check", "перепроверять"], ["comment section", "раздел комментариев"]];
 const PRONWORDS=["information", "decision", "question", "opinion", "television", "connection", "education"];
@@ -222,20 +224,29 @@ document.getElementById("lplay").onclick=()=>{
 };
 document.getElementById("lstop").onclick=()=>speechSynthesis.cancel();
 document.getElementById("lscript").onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"speakout-b1",unit:5};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
 let sc=0,tot=0;
 function bump(){sc++;document.getElementById("sc").textContent=sc;}
-function mcCard(t,n){tot++;const d=document.createElement("div");d.className="card";
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
   d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
-  let done=false;
+  let done=false,logged=false;
   d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
     if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
-function gapCard(t,n){tot++;const d=document.createElement("div");d.className="card";
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
   d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
-  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false;
-  function check(){if(done)return;const v=inp.value.trim().toLowerCase().replace(/\s+/g," ");
-    if(t.a.some(x=>x.toLowerCase()===v)){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
     else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
   btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   return d;}
@@ -254,22 +265,22 @@ shuffle(CHUNKS).forEach((c,i)=>{
   const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
   const opts=shuffle([c[1],...others]);
   const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
-  chpr.appendChild(mcCard(t,i+1));
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
 });
 /* Аудирование → вопросы */
-const lq=document.getElementById("lq");LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1)));
+const lq=document.getElementById("lq");LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
 /* Чтение → вопросы */
-const rq=document.getElementById("rq");RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1)));
+const rq=document.getElementById("rq");RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 /* Упражнения */
-const ex=document.getElementById("ex");EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1)));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1)));
+const ex=document.getElementById("ex");EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));
 /* How to */
-const fx=document.getElementById("fx");FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1)));
+const fx=document.getElementById("fx");FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
 /* Speaking — карточки-подсказки (без проверки) */
 const spk=document.getElementById("spk");
 SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1)));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1)));
+const wb=document.getElementById("wb");WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));
 document.getElementById("tot").textContent=tot;
 
 </script>

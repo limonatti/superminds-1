@@ -55,6 +55,22 @@
   .assignform select{border:2px solid #e3d3ba;border-radius:10px;padding:8px;font:800 12px 'Nunito',sans-serif;background:#fff;flex:1;min-width:120px}
   .assignform .assign-go{background:#7c2340;color:#fff;border:none;border-radius:10px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
   .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
+  .spk-btn{background:#2e6f4e;color:#fff;border:none;border-radius:999px;padding:7px 12px;font:800 12px 'Nunito',sans-serif;cursor:pointer;flex:none;margin-top:6px}
+  .spk-panel{display:none;margin:8px 0 2px;background:#f2f7f3;border:1.5px solid #bcd9c8;border-radius:12px;padding:10px}
+  .spk-panel.on{display:block}
+  .spk-panel .r{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+  .spk-panel select,.spk-panel input{border:2px solid #cfe0d4;border-radius:10px;padding:8px;font:700 12.5px 'Nunito',sans-serif;background:#fff}
+  .spk-panel input{flex:1;min-width:120px}
+  .spk-panel .go{background:#2e6f4e;color:#fff;border:none;border-radius:10px;padding:8px 14px;font:800 12px 'Nunito',sans-serif;cursor:pointer}
+  .spk-panel .lbl2{font:900 11px 'Nunito',sans-serif;color:#5a4f47;letter-spacing:.5px;margin:8px 0 4px}
+  .hwchip{display:inline-flex;align-items:center;gap:5px;background:#eaf3ee;border:1.5px solid #bcd9c8;border-radius:999px;padding:4px 8px;font:800 11.5px 'Nunito',sans-serif;color:#2e6f4e;margin:0 4px 4px 0}
+  .hwchip.done{opacity:.65}
+  .hwchip .del{background:none;border:none;color:#c0392b;cursor:pointer;font-size:12px}
+  .resbtn{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #cfe0d4;border-radius:10px;padding:8px 10px;font:800 12.5px 'Nunito',sans-serif;color:#1c1310;cursor:pointer;margin-bottom:6px}
+  .att{border-radius:8px;padding:7px 10px;margin-bottom:5px;font:700 12.5px 'Nunito',sans-serif}
+  .att.ok{background:#d7f0d0;border:1px solid #7cb342}
+  .att.no{background:#ffd9d2;border:1px solid #e0745e}
+  .att .qa{color:#5a4f47;margin-top:2px}
 </style>
 </head>
 <body>
@@ -132,6 +148,7 @@
             '<button class="assign-btn" data-sid="'+sid+'">＋ Задать</button></div>'+
           (chips?'<div class="chips">'+chips+'</div>':'')+
           '<div class="assignform" id="af-'+sid+'"><select class="af-unit">'+unitOptions+'</select><select class="af-kind">'+kindOptions+'</select><button class="assign-go" data-sid="'+sid+'">Задать</button></div>'+
+          '<button class="spk-btn" data-sid="'+sid+'">🎓 Speakout</button><div class="spk-panel" id="spk-'+sid+'"></div>'+
         '</div>';
       }).join("") : '<div class="empty">Пока нет учеников. Дай им код класса — и они появятся здесь.</div>';
 
@@ -153,11 +170,50 @@
         if(r.ok)renderDash(user);else{b.textContent="Задать";alert(r.error||"Ошибка");}
       });
       document.querySelectorAll(".del").forEach(b=>b.onclick=async()=>{ if(!confirm("Удалить задание?"))return; await SM.deleteAssignment(b.dataset.id); renderDash(user);});
+      document.querySelectorAll(".spk-btn").forEach(b=>b.onclick=()=>{var p=document.getElementById("spk-"+b.dataset.sid);var open=p.classList.toggle("on");if(open&&!p.dataset.loaded){p.dataset.loaded="1";loadSpk(b.dataset.sid);}});
       document.getElementById("copy").onclick=()=>{
         const txt="Заходи ко мне на English with Asya! Открой «Кабинет ученика» и введи код класса: "+code+"\n"+location.origin+location.pathname.replace(/teacher\.html$/,"cabinet.html");
         if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert("Приглашение скопировано!\n\n"+txt),()=>prompt("Скопируй:",txt));
         else prompt("Скопируй:",txt);
       };
+    }
+
+
+    function fmtMs(ms){ms=ms||0;var sec=Math.round(ms/1000);var m=Math.floor(sec/60);return m+"м "+(sec%60)+"с";}
+    function stripTags(h){return (h||"").replace(/<[^>]*>/g,"");}
+    const SPK_COURSES=[["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"]];
+    const SPK_L={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
+    async function loadSpk(sid){
+      const el=document.getElementById("spk-"+sid); el.innerHTML='<div class="lbl2">Загрузка…</div>';
+      let course=null,hw=[],mats=[],sum=[];
+      try{course=await SM.studentCourse(sid);}catch(e){}
+      try{hw=await SM.listHW(sid);}catch(e){}
+      try{mats=await SM.listMaterials(sid);}catch(e){}
+      try{sum=await SM.studentHwSummary(sid);}catch(e){}
+      const cOpts=SPK_COURSES.map(c=>'<option value="'+c[0]+'"'+(c[0]===course?' selected':'')+'>'+c[1]+'</option>').join("");
+      const uOpts=[1,2,3,4,5,6,7,8].map(n=>'<option value="'+n+'">Unit '+n+'</option>').join("");
+      let html='<div class="lbl2">КУРС УЧЕНИКА</div><div class="r"><select class="sp-course">'+cOpts+'</select><button class="go sp-savecourse">Назначить курс</button></div>';
+      html+='<div class="lbl2">ДОМАШКА ПО ЮНИТУ</div><div class="r"><select class="sp-unit">'+uOpts+'</select><input class="sp-note" placeholder="заметка (необяз.)"><button class="go sp-addhw">Задать ДЗ</button></div>';
+      if(hw.length)html+='<div>'+hw.map(a=>'<span class="hwchip'+(a.done?" done":"")+'">'+(SPK_L[a.course]||a.course)+' U'+a.unit+' '+(a.done?"✓":"⏳")+'<button class="del sp-delhw" data-id="'+a.id+'">✕</button></span>').join("")+'</div>';
+      html+='<div class="lbl2">МАТЕРИАЛ (ссылка)</div><div class="r"><input class="sp-mtitle" placeholder="название"><input class="sp-murl" placeholder="https://…"><button class="go sp-addmat">Добавить</button></div>';
+      if(mats.length)html+='<div>'+mats.map(m=>'<span class="hwchip">🔗 '+esc(m.title)+'<button class="del sp-delmat" data-id="'+m.id+'">✕</button></span>').join("")+'</div>';
+      html+='<div class="lbl2">РЕЗУЛЬТАТЫ (нажми юнит — увидишь ответы)</div>';
+      html+= sum.length ? sum.map(r=>'<button class="resbtn sp-res" data-c="'+r.course+'" data-u="'+r.unit+'">'+(SPK_L[r.course]||r.course)+' · Unit '+r.unit+' — <b>'+r.correct+'/'+r.attempts+'</b> верно · ⏱ '+fmtMs(r.total_ms)+'</button>').join("")
+                          : '<div class="lbl2" style="color:#a99a86">Пока нет выполненных упражнений.</div>';
+      html+='<div class="sp-detail"></div>';
+      el.innerHTML=html;
+      el.querySelector(".sp-savecourse").onclick=async(e)=>{e.target.textContent="…";const r=await SM.enrolCourse(sid,el.querySelector(".sp-course").value);e.target.textContent=r.ok?"Готово ✓":"Назначить курс";};
+      el.querySelector(".sp-addhw").onclick=async(e)=>{e.target.textContent="…";const c=el.querySelector(".sp-course").value;const u=+el.querySelector(".sp-unit").value;const n=el.querySelector(".sp-note").value;const r=await SM.addHW(sid,c,u,n);if(r.ok)loadSpk(sid);else{e.target.textContent="Задать ДЗ";alert(r.error||"Ошибка");}};
+      el.querySelector(".sp-addmat").onclick=async(e)=>{const t=el.querySelector(".sp-mtitle").value.trim();const url=el.querySelector(".sp-murl").value.trim();if(!t||!url){alert("Впиши название и ссылку");return;}e.target.textContent="…";const r=await SM.addMaterial(sid,t,url,"");if(r.ok)loadSpk(sid);else{e.target.textContent="Добавить";alert(r.error||"Ошибка");}};
+      el.querySelectorAll(".sp-delhw").forEach(b=>b.onclick=async()=>{await SM.deleteHW(b.dataset.id);loadSpk(sid);});
+      el.querySelectorAll(".sp-delmat").forEach(b=>b.onclick=async()=>{await SM.deleteMaterial(b.dataset.id);loadSpk(sid);});
+      el.querySelectorAll(".sp-res").forEach(b=>b.onclick=async()=>{
+        const det=el.querySelector(".sp-detail");det.innerHTML='<div class="lbl2">Загрузка…</div>';
+        const rows=await SM.studentHwResults(sid,b.dataset.c,+b.dataset.u);
+        det.innerHTML = rows.length ? ('<div class="lbl2">'+(SPK_L[b.dataset.c]||b.dataset.c)+' · Unit '+b.dataset.u+' — ответы ученика</div>'+
+          rows.map(a=>'<div class="att '+(a.correct?"ok":"no")+'"><div>'+(a.correct?"✅":"❌")+' '+esc(stripTags(a.question))+'</div><div class="qa">ответ: <b>'+esc(a.answer||"—")+'</b></div></div>').join(""))
+          : '<div class="lbl2" style="color:#a99a86">Нет данных.</div>';
+      });
     }
 
     async function route(){ const user=await SM.getUser(); if(user)renderDash(user); else renderAuth(); }
