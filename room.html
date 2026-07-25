@@ -269,7 +269,7 @@
       var w=document.getElementById("videoWrap"),body=document.getElementById("vidBody"),b=document.getElementById("vidBtn");
       if(on){
         if(jitsiApi)return;
-        if(typeof JitsiMeetExternalAPI==="undefined"){ vidMsg("Видео ещё грузится, нажми ещё раз через секунду."); w.classList.add("on"); return; }
+        if(typeof JitsiMeetExternalAPI==="undefined"){ vidMsg("Видео ещё грузится, нажми ещё раз через секунду."); w.classList.add("on"); if(window.vidRestoreSize)window.vidRestoreSize(); return; }
         try{
           jitsiApi=new JitsiMeetExternalAPI("meet.jit.si",{
             roomName:"ewa-lesson-"+room,
@@ -299,7 +299,9 @@
             document.getElementById("vCam").classList.toggle("off",!!(e&&e.muted));
           });
         }catch(e){ vidMsg("Не удалось открыть видео. Обнови страницу."); }
-        w.classList.add("on"); b.textContent="📹 Скрыть видео";
+        w.classList.add("on");
+        if(window.vidRestoreSize)window.vidRestoreSize();
+        b.textContent="📹 Скрыть видео";
       } else {
         if(jitsiApi){try{jitsiApi.dispose();}catch(e){} jitsiApi=null;}
         w.classList.remove("on"); vidClear(); b.textContent="📹 Видео";
@@ -315,6 +317,8 @@
       var PRESETS={s:[300,210],m:[420,310],l:[680,470]};
 
       function clampIntoView(){
+        /* пока окно скрыто, размеры равны нулю — мерить нельзя, иначе схлопнем его в точку */
+        if(!w.classList.contains("on"))return;
         if(w.classList.contains("max"))return;
         var maxW=window.innerWidth-16, maxH=window.innerHeight-120;
         var cw=Math.min(w.offsetWidth,maxW), ch=Math.min(body.offsetHeight,maxH);
@@ -337,6 +341,20 @@
         if(remember!==false){ try{ localStorage.setItem("ewa-vid-size",k); }catch(e){} }
       }
       window.vidSetSize=setSize;
+      /* вернуть сохранённый размер в момент показа окна */
+      window.vidRestoreSize=function(){
+        var saved="m";
+        try{ saved=localStorage.getItem("ewa-vid-size")||"m"; }catch(e){}
+        if(saved==="free"){
+          var wh=["420","310"];
+          try{ wh=(localStorage.getItem("ewa-vid-wh")||"420x310").split("x"); }catch(e){}
+          w.style.width=Math.max(MINW,Math.min(+wh[0]||420,window.innerWidth-16))+"px";
+          body.style.height=Math.max(MINH,Math.min(+wh[1]||310,window.innerHeight-140))+"px";
+          Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){b.classList.remove("on");});
+          clampIntoView();
+        } else setSize(saved,false);
+        if(w.offsetWidth<MINW||body.offsetHeight<MINH) setSize("m",false);
+      };
 
       Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){
         b.addEventListener("mousedown",function(e){e.stopPropagation();});
