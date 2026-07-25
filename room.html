@@ -25,7 +25,7 @@
   #panel{flex:1;min-width:280px;max-width:440px;background:#fff;display:flex;flex-direction:column}
   .prow{padding:12px 14px;border-bottom:2px solid #f1e7d5}
   .lbl{font:900 11px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin-bottom:8px}
-  select#unit{width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px;font:800 15px 'Nunito',sans-serif;color:#1c1310;background:#fdfbf7}
+  select#unit,select#course{width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px;font:800 15px 'Nunito',sans-serif;color:#1c1310;background:#fdfbf7}
   .acts{display:flex;gap:8px;margin-top:10px}
   .act{flex:1;border:2px solid #e3d3ba;background:#fff;border-radius:12px;padding:10px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer}
   .act.on{background:#7c2340;border-color:#7c2340;color:#fff}
@@ -51,7 +51,9 @@
     <div id="boardCol"><iframe id="board" title="Доска"></iframe></div>
     <div id="panel">
       <div class="prow">
-        <div class="lbl">ЮНИТ УРОКА</div>
+        <div class="lbl">КУРС</div>
+        <select id="course"></select>
+        <div class="lbl" style="margin-top:10px">ЮНИТ УРОКА</div>
         <select id="unit"></select>
         <div class="acts">
           <button class="act on" id="aTrainer" data-k="trainer">🎯 Тренажёр</button>
@@ -61,6 +63,7 @@
           <a class="open" id="openTr" target="_blank">Тренажёр ↗</a>
           <a class="open" id="openGm" target="_blank">Игры ↗</a>
           <a class="open" id="openWs" target="_blank">✏️ Лист ↗</a>
+          <a class="open" id="openLesson" target="_blank" style="display:none">Открыть урок ↗</a>
           <button class="open" id="toBoard">＋ Слова на доску</button>
         </div>
         <div class="hint">Юнит и задание видят оба. Рисуйте вместе на доске слева. «Позвать ученика» — отправь ссылку, он войдёт в эту же комнату.</div>
@@ -79,22 +82,44 @@
     // доска в iframe (сама синхронизируется по board:room)
     document.getElementById("board").src="board.html?room="+encodeURIComponent(room);
 
-    // выбор юнита + задания
+    // выбор курса + юнита + задания
+    const COURSES=[{id:"sm",label:"🧒 Super Minds 1"},{id:"speakout-b1",label:"🗣️ Speakout B1"},{id:"speakout-b1plus",label:"🗣️ Speakout B1+"}];
+    const courseSel=document.getElementById("course");
     const unitSel=document.getElementById("unit");
-    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.unit+" · "+u.title;unitSel.appendChild(o);});
-    let kind="trainer", unit=SM_UNITS[0].id, applying=false;
+    COURSES.forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=c.label;courseSel.appendChild(o);});
+    let course="sm", kind="trainer", unit="";
+    function buildUnits(){
+      unitSel.innerHTML="";
+      if(course==="sm"){
+        SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.unit+" · "+u.title;unitSel.appendChild(o);});
+        unit=SM_UNITS[0].id;
+      } else {
+        for(let n=1;n<=8;n++){const o=document.createElement("option");o.value=String(n);o.textContent="Unit "+n;unitSel.appendChild(o);}
+        unit="1";
+      }
+    }
+    buildUnits();
 
-    function frameSrc(){ return (kind==="games"?"games.html?u=":"trainer.html?unit=")+unit; }
+    function frameSrc(){ return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
+      const isSM=course==="sm";
       document.getElementById("frame").src=frameSrc();
+      document.querySelector(".acts").style.display=isSM?"flex":"none";
       document.getElementById("aTrainer").classList.toggle("on",kind==="trainer");
       document.getElementById("aGames").classList.toggle("on",kind==="games");
-      document.getElementById("openTr").href="trainer.html?unit="+unit;
-      document.getElementById("openGm").href="games.html?u="+unit;
-      document.getElementById("openWs").href="worksheet.html?u="+unit;
-      unitSel.value=unit;
-      if(broadcast) send({unit:unit,kind:kind});
+      ["openTr","openGm","openWs","toBoard"].forEach(id=>document.getElementById(id).style.display=isSM?"":"none");
+      document.getElementById("openLesson").style.display=isSM?"none":"";
+      if(isSM){
+        document.getElementById("openTr").href="trainer.html?unit="+unit;
+        document.getElementById("openGm").href="games.html?u="+unit;
+        document.getElementById("openWs").href="worksheet.html?u="+unit;
+      } else {
+        document.getElementById("openLesson").href=course+"-u"+unit+".html";
+      }
+      courseSel.value=course; unitSel.value=unit;
+      if(broadcast) send({course:course,unit:unit,kind:kind});
     }
+    courseSel.onchange=()=>{course=courseSel.value;buildUnits();apply(true);};
     unitSel.onchange=()=>{unit=unitSel.value;apply(true);};
     document.getElementById("aTrainer").onclick=()=>{kind="trainer";apply(true);};
     document.getElementById("aGames").onclick=()=>{kind="games";apply(true);};
@@ -113,12 +138,12 @@
       const sb=window.supabase.createClient(SB_URL,SB_KEY);
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
-        if(payload.t==="state"){unit=payload.unit;kind=payload.kind;apply(false);}
+        if(payload.t==="state"){ if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;apply(false);}
         else if(payload.t==="hello"){send({unit:unit,kind:kind});}
       });
       channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
     }catch(e){}})();
-    function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",unit:s.unit,kind:s.kind}});}catch(e){}} }
+    function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",course:s.course,unit:s.unit,kind:s.kind}});}catch(e){}} }
 
     document.getElementById("invite").onclick=()=>{
       const url=location.origin+location.pathname+"?room="+room;
