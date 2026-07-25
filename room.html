@@ -133,6 +133,7 @@
       <button id="vShare" title="Показать свой экран собеседнику">🖥 Экран</button>
       <button id="vMic" title="Микрофон">🎤</button>
       <button id="vCam" title="Камера">📷</button>
+      <button id="vTile" title="Показать всех плиткой — себя видно всегда">⊞ Я</button>
       <span class="sizes">
         <button data-sz="s" title="Маленькое окно">S</button>
         <button data-sz="m" class="on" title="Среднее окно">M</button>
@@ -294,6 +295,14 @@
               MOBILE_APP_PROMO:false, DISABLE_VIDEO_BACKGROUND:true
             }
           });
+          /* плиточная раскладка сразу при входе: в ней своё окно видно всегда,
+             независимо от режима «один-на-один» */
+          jitsiApi.addListener("videoConferenceJoined",()=>{
+            setTimeout(()=>{ try{ jitsiApi.executeCommand("setTileView",true); }catch(e){} },800);
+          });
+          jitsiApi.addListener("tileViewChanged",e=>{
+            document.getElementById("vTile").classList.toggle("act",!!(e&&e.enabled));
+          });
           jitsiApi.addListener("screenSharingStatusChanged",e=>{
             document.getElementById("vShare").classList.toggle("act",!!(e&&e.on));
           });
@@ -423,6 +432,7 @@
     document.getElementById("vShare").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleShareScreen"); };
     document.getElementById("vMic").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleAudio"); };
     document.getElementById("vCam").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleVideo"); };
+    document.getElementById("vTile").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleTileView"); };
     // Сворачивание правой панели
     document.getElementById("panelBtn").onclick=function(){
       var p=document.getElementById("panel"),c=p.classList.toggle("collapsed");
