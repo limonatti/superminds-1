@@ -22,12 +22,23 @@
   #panel.collapsed{display:none}
   #panelShow{display:none;position:fixed;right:12px;bottom:12px;z-index:20;background:#7c2340;color:#fff;border:none;cursor:pointer;padding:11px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 10px rgba(0,0,0,.25)}
   #panelShow.on{display:block}
-  #videoWrap{position:fixed;top:64px;left:16px;width:340px;z-index:40;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.45);display:none}
+  #videoWrap{position:fixed;top:64px;left:16px;width:420px;z-index:40;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.45);display:none}
   #videoWrap.on{display:block}
-  #vidHead{display:flex;align-items:center;justify-content:space-between;background:#7c2340;color:#fff;font:800 12px 'Nunito',sans-serif;padding:6px 10px;cursor:move;user-select:none}
-  #vidHead button{background:rgba(255,255,255,.2);color:#fff;border:none;cursor:pointer;width:22px;height:22px;border-radius:6px;font-size:15px;line-height:1}
-  #vidBody{width:340px;height:250px;background:#111}
+  #videoWrap.max{top:60px!important;left:8px!important;width:calc(100vw - 16px)!important;border-radius:12px}
+  #vidHead{display:flex;align-items:center;gap:6px;background:#7c2340;color:#fff;font:800 12px 'Nunito',sans-serif;padding:6px 8px;cursor:move;user-select:none;flex-wrap:wrap}
+  #vidHead .ttl{margin-right:auto;white-space:nowrap}
+  #vidHead button{background:rgba(255,255,255,.2);color:#fff;border:none;cursor:pointer;height:26px;min-width:26px;padding:0 8px;border-radius:8px;font:800 12px 'Nunito',sans-serif;line-height:1}
+  #vidHead button:hover{background:rgba(255,255,255,.34)}
+  #vidHead button.act{background:#e0952a}
+  #vidHead button.off{background:#c0392b}
+  #vidHead .sizes{display:flex;gap:3px}
+  #vidHead .sizes button{min-width:26px;padding:0 6px}
+  #vidHead .sizes button.on{background:#3f7a20}
+  #vidBody{width:100%;height:310px;background:#111;position:relative}
   #vidBody iframe{width:100%!important;height:100%!important;border:none;display:block}
+  #vidGrip{position:absolute;right:0;bottom:0;width:22px;height:22px;cursor:nwse-resize;background:
+     linear-gradient(135deg,transparent 0 46%,rgba(255,255,255,.75) 46% 54%,transparent 54% 70%,rgba(255,255,255,.75) 70% 78%,transparent 78%);z-index:5}
+  #vidHint{color:#ffd27a;font:700 11px 'Nunito',sans-serif;padding:5px 9px;background:#5e1a30;line-height:1.45}
 
   #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
   #boardCol{flex:1.7;min-width:0;border-right:3px solid #d9c9ac}
@@ -115,7 +126,23 @@
       <div id="frameWrap"><iframe id="frame" title="Задание"></iframe></div>
     </div>
   </div>
-  <div id="videoWrap"><div id="vidHead"><span>📹 Видео с учеником</span><button id="vidClose" aria-label="Закрыть">×</button></div><div id="vidBody"></div></div>
+  <div id="videoWrap">
+    <div id="vidHead">
+      <span class="ttl">📹 Видео</span>
+      <button id="vShare" title="Показать свой экран собеседнику">🖥 Экран</button>
+      <button id="vMic" title="Микрофон">🎤</button>
+      <button id="vCam" title="Камера">📷</button>
+      <span class="sizes">
+        <button data-sz="s" title="Маленькое окно">S</button>
+        <button data-sz="m" class="on" title="Среднее окно">M</button>
+        <button data-sz="l" title="Большое окно">L</button>
+        <button data-sz="max" title="Во всю ширину">⛶</button>
+      </span>
+      <button id="vidClose" title="Закрыть видео">×</button>
+    </div>
+    <div id="vidBody"><div id="vidGrip" title="Потяни, чтобы изменить размер"></div></div>
+    <div id="vidHint">Тяни за уголок ↘ или жми S · M · L. «Экран» — показать свой экран. Управление уроком передаётся кнопкой «🎮» в шапке.</div>
+  </div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
   <div id="ask"></div>
@@ -225,32 +252,152 @@
 
     // Видеозвонок (Jitsi External API) — маленькое плавающее окно поверх доски
     var jitsiApi=null;
+    /* чистим окно, но бережём уголок-ресайзер */
+    function vidClear(){
+      var body=document.getElementById("vidBody");
+      Array.prototype.slice.call(body.children).forEach(function(el){ if(el.id!=="vidGrip") el.remove(); });
+    }
+    function vidMsg(t){
+      vidClear();
+      var d=document.createElement("div");
+      d.style.cssText="color:#fff;padding:16px;font:700 13px Nunito,sans-serif";
+      d.textContent=t;
+      document.getElementById("vidBody").appendChild(d);
+    }
     function vidOpen(on){
       var w=document.getElementById("videoWrap"),body=document.getElementById("vidBody"),b=document.getElementById("vidBtn");
       if(on){
         if(jitsiApi)return;
-        if(typeof JitsiMeetExternalAPI==="undefined"){ body.innerHTML='<div style="color:#fff;padding:16px;font:700 13px Nunito,sans-serif">Видео ещё грузится, нажми ещё раз через секунду.</div>'; w.classList.add("on"); return; }
+        if(typeof JitsiMeetExternalAPI==="undefined"){ vidMsg("Видео ещё грузится, нажми ещё раз через секунду."); w.classList.add("on"); return; }
         try{
           jitsiApi=new JitsiMeetExternalAPI("meet.jit.si",{
             roomName:"ewa-lesson-"+room,
             parentNode:body, width:"100%", height:"100%",
             userInfo:{displayName:(ME==="t"?"Учитель":"Ученик")},
-            configOverwrite:{prejoinPageEnabled:false, prejoinConfig:{enabled:false}, startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true}
+            configOverwrite:{
+              prejoinPageEnabled:false, prejoinConfig:{enabled:false},
+              startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true,
+              /* короткий набор кнопок — иначе в маленьком окне всё уезжает в «…» */
+              toolbarButtons:["microphone","camera","desktop","tileview","hangup"],
+              disableResponsiveTiles:true
+            },
+            interfaceConfigOverwrite:{
+              TOOLBAR_ALWAYS_VISIBLE:true,
+              TOOLBAR_BUTTONS:["microphone","camera","desktop","tileview","hangup"],
+              SHOW_JITSI_WATERMARK:false, SHOW_WATERMARK_FOR_GUESTS:false,
+              MOBILE_APP_PROMO:false, DISABLE_VIDEO_BACKGROUND:true
+            }
           });
-        }catch(e){ body.innerHTML='<div style="color:#fff;padding:16px;font:700 13px Nunito,sans-serif">Не удалось открыть видео. Обнови страницу.</div>'; }
+          jitsiApi.addListener("screenSharingStatusChanged",e=>{
+            document.getElementById("vShare").classList.toggle("act",!!(e&&e.on));
+          });
+          jitsiApi.addListener("audioMuteStatusChanged",e=>{
+            document.getElementById("vMic").classList.toggle("off",!!(e&&e.muted));
+          });
+          jitsiApi.addListener("videoMuteStatusChanged",e=>{
+            document.getElementById("vCam").classList.toggle("off",!!(e&&e.muted));
+          });
+        }catch(e){ vidMsg("Не удалось открыть видео. Обнови страницу."); }
         w.classList.add("on"); b.textContent="📹 Скрыть видео";
       } else {
         if(jitsiApi){try{jitsiApi.dispose();}catch(e){} jitsiApi=null;}
-        w.classList.remove("on"); body.innerHTML=""; b.textContent="📹 Видео";
+        w.classList.remove("on"); vidClear(); b.textContent="📹 Видео";
       }
     }
     document.getElementById("vidBtn").onclick=function(){ vidOpen(!document.getElementById("videoWrap").classList.contains("on")); };
     document.getElementById("vidClose").onclick=function(){ vidOpen(false); };
-    (function(){ var w=document.getElementById("videoWrap"),h=document.getElementById("vidHead"),body=document.getElementById("vidBody"),dx=0,dy=0,drag=false;
-      h.addEventListener("mousedown",function(e){drag=true;dx=e.clientX-w.offsetLeft;dy=e.clientY-w.offsetTop;body.style.pointerEvents="none";e.preventDefault();});
-      document.addEventListener("mousemove",function(e){if(!drag)return;w.style.left=Math.max(0,Math.min(window.innerWidth-w.offsetWidth,e.clientX-dx))+"px";w.style.top=Math.max(52,Math.min(window.innerHeight-40,e.clientY-dy))+"px";});
+    /* ---------- Окно видео: перетаскивание, размеры, свободный ресайз ---------- */
+    (function(){
+      var w=document.getElementById("videoWrap"),h=document.getElementById("vidHead"),
+          body=document.getElementById("vidBody"),grip=document.getElementById("vidGrip");
+      var MINW=260,MINH=160;
+      var PRESETS={s:[300,210],m:[420,310],l:[680,470]};
+
+      function clampIntoView(){
+        if(w.classList.contains("max"))return;
+        var maxW=window.innerWidth-16, maxH=window.innerHeight-120;
+        var cw=Math.min(w.offsetWidth,maxW), ch=Math.min(body.offsetHeight,maxH);
+        w.style.width=cw+"px"; body.style.height=ch+"px";
+        w.style.left=Math.max(0,Math.min(window.innerWidth-cw,w.offsetLeft))+"px";
+        w.style.top=Math.max(52,Math.min(window.innerHeight-90,w.offsetTop))+"px";
+      }
+      function setSize(k,remember){
+        if(k==="max"){
+          w.classList.add("max");
+          body.style.height=Math.max(MINH,window.innerHeight-190)+"px";
+        } else {
+          w.classList.remove("max");
+          var p=PRESETS[k]||PRESETS.m;
+          w.style.width=Math.min(p[0],window.innerWidth-16)+"px";
+          body.style.height=Math.min(p[1],window.innerHeight-140)+"px";
+        }
+        Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){ b.classList.toggle("on",b.dataset.sz===k); });
+        clampIntoView();
+        if(remember!==false){ try{ localStorage.setItem("ewa-vid-size",k); }catch(e){} }
+      }
+      window.vidSetSize=setSize;
+
+      Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){
+        b.addEventListener("mousedown",function(e){e.stopPropagation();});
+        b.onclick=function(e){ e.stopPropagation(); setSize(b.dataset.sz); };
+      });
+
+      /* перетаскивание за шапку (кнопки не тянут окно) */
+      var dx=0,dy=0,drag=false;
+      h.addEventListener("mousedown",function(e){
+        if(e.target.closest("button"))return;
+        drag=true;dx=e.clientX-w.offsetLeft;dy=e.clientY-w.offsetTop;body.style.pointerEvents="none";e.preventDefault();
+      });
+      document.addEventListener("mousemove",function(e){
+        if(!drag)return;
+        w.classList.remove("max");
+        w.style.left=Math.max(0,Math.min(window.innerWidth-w.offsetWidth,e.clientX-dx))+"px";
+        w.style.top=Math.max(52,Math.min(window.innerHeight-60,e.clientY-dy))+"px";
+      });
       document.addEventListener("mouseup",function(){if(drag){drag=false;body.style.pointerEvents="";}});
+
+      /* свободный ресайз за уголок */
+      var rz=false,sx=0,sy=0,sw=0,sh=0;
+      grip.addEventListener("mousedown",function(e){
+        rz=true;sx=e.clientX;sy=e.clientY;sw=w.offsetWidth;sh=body.offsetHeight;
+        w.classList.remove("max"); body.style.pointerEvents="none";
+        e.preventDefault();e.stopPropagation();
+      });
+      document.addEventListener("mousemove",function(e){
+        if(!rz)return;
+        var nw=Math.max(MINW,Math.min(window.innerWidth-w.offsetLeft-8,sw+(e.clientX-sx)));
+        var nh=Math.max(MINH,Math.min(window.innerHeight-w.offsetTop-90,sh+(e.clientY-sy)));
+        w.style.width=nw+"px"; body.style.height=nh+"px";
+      });
+      document.addEventListener("mouseup",function(){
+        if(rz){ rz=false; body.style.pointerEvents="";
+          Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){b.classList.remove("on");});
+          try{ localStorage.setItem("ewa-vid-size","free");
+               localStorage.setItem("ewa-vid-wh",w.offsetWidth+"x"+body.offsetHeight); }catch(e){}
+        }
+      });
+      window.addEventListener("resize",clampIntoView);
+
+      /* восстановить прошлый размер */
+      try{
+        var saved=localStorage.getItem("ewa-vid-size");
+        if(saved==="free"){
+          var wh=(localStorage.getItem("ewa-vid-wh")||"420x310").split("x");
+          w.style.width=Math.min(+wh[0],window.innerWidth-16)+"px";
+          body.style.height=Math.min(+wh[1],window.innerHeight-140)+"px";
+          Array.prototype.forEach.call(h.querySelectorAll(".sizes button"),function(b){b.classList.remove("on");});
+        } else setSize(saved||"m",false);
+      }catch(e){ setSize("m",false); }
     })();
+
+    /* ---------- Свои кнопки управления звонком (не зависят от тесной панели Jitsi) ---------- */
+    function jitsiCmd(cmd){
+      if(!jitsiApi){ alert("Сначала включи видео кнопкой «📹 Видео»."); return; }
+      try{ jitsiApi.executeCommand(cmd); }catch(e){ alert("Не получилось. Обнови страницу и попробуй снова."); }
+    }
+    document.getElementById("vShare").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleShareScreen"); };
+    document.getElementById("vMic").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleAudio"); };
+    document.getElementById("vCam").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleVideo"); };
     // Сворачивание правой панели
     document.getElementById("panelBtn").onclick=function(){
       var p=document.getElementById("panel"),c=p.classList.toggle("collapsed");
