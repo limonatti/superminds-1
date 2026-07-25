@@ -6,7 +6,7 @@ import json, sys, importlib
 
 RENDER = r'''
 const wbox=document.getElementById("words");
-WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
   d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
   d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
 /* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
@@ -35,13 +35,13 @@ function enVoice(g){
   return best;
 }
 function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
-document.getElementById("lplay").onclick=()=>{
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
   speechSynthesis.cancel();
   const mv=enVoice("m"),fv=enVoice("f");
   DIALOG.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
 };
-document.getElementById("lstop").onclick=()=>speechSynthesis.cancel();
-document.getElementById("lscript").onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"@@HWCOURSE@@",unit:@@NUM@@};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -70,36 +70,36 @@ function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("d
   return d;}
 /* Произношение */
 const pbox=document.getElementById("pron");
-PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
 /* Чанки — учим (с озвучкой) */
 const cbox=document.getElementById("chunks");
-CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
   d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
   d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 const chpr=document.getElementById("chpr");
-shuffle(CHUNKS).forEach((c,i)=>{
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
   const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
   const opts=shuffle([c[1],...others]);
   const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
   chpr.appendChild(mcCard(t,i+1,"chunk"));
 });
 /* Аудирование → вопросы */
-const lq=document.getElementById("lq");LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
 /* Чтение → вопросы */
-const rq=document.getElementById("rq");RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 /* Упражнения */
-const ex=document.getElementById("ex");EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
-const fx=document.getElementById("fx");FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
 /* Speaking — карточки-подсказки (без проверки) */
 const spk=document.getElementById("spk");
-SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));
-document.getElementById("tot").textContent=tot;
+const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 '''
 
 TEMPLATE = r'''<!DOCTYPE html>
@@ -193,7 +193,10 @@ TEMPLATE = r'''<!DOCTYPE html>
   </div>
 
   <h2>📖 Грамматика юнита</h2>
-@@GRAMMAR@@
+  <div class="card" style="text-align:center">
+    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и упражнения этого юнита — отдельным заданием (ДЗ).</div>
+    <a href="@@HWCOURSE@@-u@@NUM@@-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none">✏️ Грамматика юнита →</a>
+  </div>
 
   <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
   <div class="words" id="words"></div>
@@ -221,9 +224,6 @@ TEMPLATE = r'''<!DOCTYPE html>
   <div class="read"><h3>@@READ_TITLE@@</h3>@@READ@@</div>
   <div id="rq" style="margin-top:14px"></div>
 
-  <h2>✏️ Упражнения</h2>
-  <div id="ex"></div>
-
   <h2>@@HOWTO_TITLE@@</h2>
   <div class="card">
 @@HOWTO@@
@@ -233,14 +233,88 @@ TEMPLATE = r'''<!DOCTYPE html>
   <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
   <div id="spk"></div>
 
-  <h2>📝 Workbook · закрепление</h2>
-  <div class="wbband">Дополнительная практика по темам рабочей тетради этого юнита. Сначала реши здесь — потом сверься с бумажной Workbook.</div>
-  <div id="wb"></div>
-
   <h2>🏠 Домашнее задание</h2>
   <div class="hw">@@HW@@</div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+@@DATA@@
+@@RENDER@@
+</script>
+</body>
+</html>
+'''
+
+GRAMMAR_TEMPLATE = r'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit @@NUM@@ · Грамматика · Speakout @@LEVEL@@ · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .g-ex b{color:#7c2340}
+  .ru{color:#8a7a68;font-size:13px}
+  .gt{color:#7c2340;font-size:16px;font-weight:900}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+  td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
+  th{background:#f6ede0;color:#7c2340}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="@@HWCOURSE@@-u@@NUM@@.html">← Урок (лексика)</a>
+    <a class="home alt" href="@@TRAINER@@">🎯 Тренажёр</a>
+    <a class="home" href="@@HUB@@">Все юниты</a>
+  </div>
+  <h1>Unit @@NUM@@ · Грамматика</h1>
+  <div class="d">📚 @@DESC@@</div>
+
+  <h2>📖 Разбор грамматики</h2>
+@@GRAMMAR@@
+
+  <h2>✏️ Упражнения</h2>
+  <div id="ex"></div>
+
+  <h2>📝 Workbook · закрепление</h2>
+  <div class="wbband">Дополнительная практика по темам рабочей тетради этого юнита. Сначала реши здесь — потом сверься с бумажной Workbook.</div>
+  <div id="wb"></div>
+
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
@@ -295,6 +369,13 @@ def build(mod_name):
         fn="%s-u%d.html" % (META["prefix"], u["n"])
         open(fn,"w",encoding="utf-8").write(h)
         print("wrote",fn)
+        # грамматическая страница (ДЗ)
+        g=GRAMMAR_TEMPLATE
+        for k,v in rep.items(): g=g.replace(k,v)
+        g=g.replace("@@HWCOURSE@@", META["prefix"]).replace("@@NUM@@", str(u["n"]))
+        gfn="%s-u%d-grammar.html" % (META["prefix"], u["n"])
+        open(gfn,"w",encoding="utf-8").write(g)
+        print("wrote",gfn)
 
 if __name__=="__main__":
     build(sys.argv[1])

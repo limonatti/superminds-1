@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 7 · Travel · Speakout B1 · English with Asya</title>
+<title>Unit 7 · Грамматика · Speakout B1 · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -14,15 +14,9 @@
   .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
   .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
   .home.alt{background:#e0952a}
-  .hero{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-bottom:22px}
-  .hero img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
-  .hcover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;position:relative}
-  .hcover span{font-size:clamp(70px,18vw,130px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
-  .hero .hb{padding:18px 22px}
-  .hero h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,38px);color:#7c2340}
-  .hero .d{font-weight:800;font-size:14px;color:#5a4f47;margin-top:6px}
-  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:30px 4px 12px}
-  .sec-i{font-size:13px;color:#8a7a68;font-weight:700}
+  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
   .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
   .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
   .g-ex b{color:#7c2340}
@@ -31,25 +25,6 @@
   table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
   td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
   th{background:#f6ede0;color:#7c2340}
-  .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  @media(max-width:620px){.words{grid-template-columns:1fr}}
-  .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
-  .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
-  .word .en{font-weight:900;font-size:15px}
-  .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
-  .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-  .chip{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:8px 14px;border-radius:999px;color:#7c2340}
-  .chip:hover{background:#fdfaf0}
-  .lc{background:#7c2340;border-radius:22px;padding:20px 22px;color:#fff;box-shadow:0 6px 0 #4d1527}
-  .lc h3{margin:0 0 6px;font-family:'Fredoka',sans-serif;font-size:20px}
-  .lc p{margin:4px 0 12px;font-weight:700;font-size:13.5px;opacity:.9}
-  .lbtn{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;margin-right:8px}
-  .lbtn.sec{background:rgba(255,255,255,.18)}
-  #script{display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65}
-  #script b{color:#ffd27a}
-  .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
-  .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
-  .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
   .opts{display:flex;flex-wrap:wrap;gap:8px}
@@ -64,9 +39,6 @@
   .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
-  .hw{background:#fff7ea;border:2px dashed #e0952a;border-radius:18px;padding:16px 20px;font-size:14.5px}
-  .spkcard{background:#eef6ff00;background:#fbf4ff;border:2px solid #b98cc9;border-radius:16px;padding:12px 16px;margin-bottom:10px;font-size:14.5px;font-weight:700;color:#5a3a66}
-  .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
   .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
@@ -75,76 +47,43 @@
 <div class="wrap">
   <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
   <div class="top">
-    <a class="home" href="speakout-b1-course.html">← Все юниты</a>
+    <a class="home" href="speakout-b1-u7.html">← Урок (лексика)</a>
     <a class="home alt" href="speakout-b1.html">🎯 Тренажёр</a>
-    <a class="home" href="index.html">🏠 Домой</a>
+    <a class="home" href="speakout-b1-course.html">Все юниты</a>
   </div>
+  <h1>Unit 7 · Грамматика</h1>
+  <div class="d">📚 1st & 2nd conditionals · quantifiers · рекомендации · reflexive pronouns</div>
 
-  <div class="hero">
-    <div class="hcover" style="background:linear-gradient(135deg,#6a2038,#b5654a)"><span>✈️</span></div>
-    <div class="hb">
-      <h1>Unit 7 · Travel</h1>
-      <div class="d">📚 1st & 2nd conditionals · quantifiers · рекомендации · reflexive pronouns</div>
-    </div>
-  </div>
-
-  <h2>📖 Грамматика юнита</h2>
-  <div class="card" style="text-align:center">
-    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и упражнения этого юнита — отдельным заданием (ДЗ).</div>
-    <a href="speakout-b1-u7-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none">✏️ Грамматика юнита →</a>
-  </div>
-
-  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
-  <div class="words" id="words"></div>
-
-  <h2>🗣️ Произношение <span class="sec-i">звук /ɜː/ (bird)</span></h2>
-  <div class="card"><div style="font-size:14px;margin-bottom:8px">Долгий звук <b>/ɜː/</b>: world, girl, first. Округли губы, тяни. Слушай.</div><div class="pronbox" id="pron"></div></div>
-
-  <h2>🧩 Chunks — выражения целиком <span class="sec-i">(учи фразой, не по словам)</span></h2>
-  <div class="words" id="chunks"></div>
-  <h2>🎯 Тренажёр чанков <span class="sec-i">(выбери перевод)</span></h2>
-  <div id="chpr"></div>
-
-  <h2>🎧 Аудирование</h2>
-  <div class="lc">
-    <h3>Planning a trip</h3>
-    <p>Послушай диалог (озвучивается прямо в браузере), потом ответь на вопросы. Слушай сколько угодно раз.</p>
-    <button class="lbtn" id="lplay">▶ Слушать</button>
-    <button class="lbtn sec" id="lstop">⏹ Стоп</button>
-    <button class="lbtn sec" id="lscript">📜 Показать текст</button>
-    <div id="script"><b>Rosa:</b> I'm so excited! If we save enough, we'll go to Portugal in June.<br>
-      <b>Jack:</b> Nice! Have you booked the flights yet?<br>
-      <b>Rosa:</b> Not yet. There aren't many cheap ones left, so we should hurry.<br>
-      <b>Jack:</b> If I were you, I'd book today. Do you need any help packing?<br>
-      <b>Rosa:</b> Thanks, but I can do it myself. I've made a list.<br>
-      <b>Jack:</b> Good idea. Don't take too much luggage — trains have little space.<br>
-      <b>Rosa:</b> True. I'd recommend travelling light. It's worth seeing the old town too.<br>
-      <b>Jack:</b> Definitely. Enjoy yourself — and send me a postcard!</div>
-  </div>
-  <div id="lq" style="margin-top:14px"></div>
-
-  <h2>📕 Чтение</h2>
-  <div class="read"><h3>Slow travel</h3><p>Many people try to see ten cities in ten days. They take hundreds of photos but remember almost nothing. A new idea called 'slow travel' says the opposite: stay longer, do less, feel more. Instead of rushing, you <b>travel light</b>, walk a lot and talk to local people.</p>
-<p>Slow travellers often go <b>off the beaten track</b>. They skip the busiest sights and find a small café, a quiet beach or a market where nobody speaks English. It can be scary to explore <b>by yourself</b>, but that is where the best stories come from. As one traveller said, 'I'd recommend getting a little lost.'</p></div>
-  <div id="rq" style="margin-top:14px"></div>
-
-  <h2>🧭 How to… порекомендовать место</h2>
+  <h2>📖 Разбор грамматики</h2>
   <div class="card">
-    <div class="g-ex"><b>You should definitely visit…</b> <span class="ru">— обязательно сходи</span></div>
-    <div class="g-ex"><b>It's (well) worth seeing…</b> <span class="ru">— стоит увидеть</span></div>
-    <div class="g-ex"><b>I'd recommend…</b> <span class="ru">— я бы посоветовал(а)</span></div>
-    <div class="g-ex"><b>Don't miss…</b> <span class="ru">— не пропусти</span></div>
+    <span class="gt">1. Conditionals — 1st & 2nd</span>
+    <div class="g-ex"><b>1st</b> (реально): If it <b>rains</b>, we<b>'ll stay</b> in. <span class="ru">— if + Present, will</span></div>
+    <div class="g-ex"><b>2nd</b> (фантазия): If I <b>had</b> more money, I<b>'d travel</b> the world. <span class="ru">— if + Past, would</span></div>
+    <div class="g-ex"><b>unless</b> = if not: We'll be late <b>unless</b> we hurry.</div>
   </div>
-  <div id="fx"></div>
+  <div class="card">
+    <span class="gt">2. Quantifiers — сколько?</span>
+    <table>
+      <tr><th></th><th>Исчисляемые</th><th>Неисчисляемые</th></tr>
+      <tr><td>много</td><td>many / How many?</td><td>much / How much?</td></tr>
+      <tr><td>немного</td><td>a few</td><td>a little</td></tr>
+    </table>
+    <div class="g-ex"><b>some</b> (утв.) / <b>any</b> (вопр., отриц.) · <b>too much</b> luggage · <b>not enough</b> time</div>
+  </div>
+  <div class="card">
+    <span class="gt">3. Урок D — reflexive pronouns</span>
+    <div class="g-ex">myself, yourself, himself, herself, ourselves, themselves</div>
+    <div class="g-ex">I did it <b>myself</b>. · <b>Enjoy yourself!</b> · <b>by myself</b> = один/одна</div>
+  </div>
 
-  <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
-  <div id="spk"></div>
+  <h2>✏️ Упражнения</h2>
+  <div id="ex"></div>
 
-  <h2>🏠 Домашнее задание</h2>
-  <div class="hw"><b>Поездка мечты.</b> Спланируй путешествие: 2 предложения в 1st conditional (реальный план), 1 во 2nd conditional (мечта: «If I had…, I would…»), и 3 рекомендации (should / it's worth / I'd recommend).<br><br>
-   Плюс пройди <a href="speakout-b1.html" style="color:#b06e12;font-weight:900;text-decoration:underline">тренажёр Unit 7</a> и пришли Асе скрин со счётом 🙂</div>
+  <h2>📝 Workbook · закрепление</h2>
+  <div class="wbband">Дополнительная практика по темам рабочей тетради этого юнита. Сначала реши здесь — потом сверься с бумажной Workbook.</div>
+  <div id="wb"></div>
 
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 7</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 7 · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>

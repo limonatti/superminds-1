@@ -47,7 +47,7 @@
 <div class="wrap">
   <div class="top"><a class="home" href="speakout-b1-course.html">← Все юниты</a> <a class="home" href="index.html">🏠 Домой</a></div>
   <h1>Speakout B1 · Тренажёр</h1>
-  <p class="sub">Грамматика и лексика по юнитам · выбери юнит и решай</p>
+  <p class="sub">Лексика и выражения по юнитам · грамматика — в ДЗ ученика</p>
   <div class="tabs" id="tabs"></div>
   <div id="app"></div>
   <div class="foot">Made for @english.with_asya · упражнения авторские, по темам курса Speakout 3rd ed. B1</div>
@@ -237,10 +237,8 @@ let scores={};
 UNITS.forEach((u,i)=>{const b=document.createElement("button");b.className="tab"+(i===0?" on":"");b.textContent=u.e+" "+u.n+". "+u.t;b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(i);};tabs.appendChild(b);});
 function esc(s){return s;}
 function render(i){
-  const u=UNITS[i];scores[i]={got:0,total:u.g.length+u.f.length+u.v.length};
+  const u=UNITS[i];scores[i]={got:0,total:u.f.length+u.v.length};
   let h='<div class="uhead"><div class="t">'+u.e+' Unit '+u.n+' · '+u.t+'</div><div class="d">'+u.d+'</div><div class="score" id="sc">Счёт: 0 / '+scores[i].total+'</div></div>';
-  h+='<div class="sec">📘 Грамматика — выбери вариант</div>';
-  u.g.forEach((t,k)=>{h+=mc("g"+k,k+1,t);});
   h+='<div class="sec">✍️ Впиши слово</div>';
   u.f.forEach((t,k)=>{h+=gap("f"+k,k+1,t);});
   h+='<div class="sec">🗂 Лексика — выбери вариант</div>';
