@@ -164,10 +164,27 @@
     </div>
   </div></div>
 
-  <script src="https://meet.jit.si/external_api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script>
+    /* ============================================================
+       СЕРВЕР ВИДЕОЗВОНКОВ — единственное место, где его меняют.
+       "meet.jit.si" — публичный сервер Jitsi. Он обрывает встроенный
+       звонок через 5 минут (их правило для встраивания в чужие сайты,
+       вход в аккаунт на это не влияет).
+       Свой сервер лимитов не имеет: подними его по инструкции
+       JITSI-SERVER.md и впиши сюда его адрес, например
+       const JITSI_DOMAIN = "meet.englishwithasya.ru";
+       Больше менять нигде ничего не нужно.
+       ============================================================ */
+    const JITSI_DOMAIN = "meet.jit.si";
+    (function(){
+      var s=document.createElement("script");
+      s.src="https://"+JITSI_DOMAIN+"/external_api.js"; s.async=true;
+      s.onerror=function(){ console.warn("Не загрузился external_api.js с "+JITSI_DOMAIN); };
+      document.head.appendChild(s);
+    })();
+
     const params=new URLSearchParams(location.search);
     const ME=params.get("s")?"s":"t";          // t — учитель (создал комнату), s — ученик (пришёл по ссылке)
     const OTHER=ME==="t"?"s":"t";
@@ -272,7 +289,7 @@
         if(jitsiApi)return;
         if(typeof JitsiMeetExternalAPI==="undefined"){ vidMsg("Видео ещё грузится, нажми ещё раз через секунду."); w.classList.add("on"); if(window.vidRestoreSize)window.vidRestoreSize(); return; }
         try{
-          jitsiApi=new JitsiMeetExternalAPI("meet.jit.si",{
+          jitsiApi=new JitsiMeetExternalAPI(JITSI_DOMAIN,{
             roomName:"ewa-lesson-"+room,
             parentNode:body, width:"100%", height:"100%",
             userInfo:{displayName:(ME==="t"?"Учитель":"Ученик")},
