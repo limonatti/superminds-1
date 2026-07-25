@@ -76,6 +76,7 @@
           <a class="open" id="openWs" target="_blank">✏️ Лист ↗</a>
           <a class="open" id="openLesson" target="_blank" style="display:none">Открыть урок ↗</a>
           <button class="open" id="toBoard">＋ Слова на доску</button>
+          <button class="open" id="tbToggle">📖 Скрыть учебник</button>
         </div>
         <div class="hint">Юнит и задание видят оба. Рисуйте вместе на доске слева. «Позвать ученика» — отправь ссылку, он войдёт в эту же комнату.</div>
       </div>
@@ -184,6 +185,12 @@
       var p=document.getElementById("panel"),c=p.classList.toggle("collapsed");
       document.getElementById("panelBtn").textContent=c?"⟩ Панель":"⟨ Панель";
       document.getElementById("panelShow").classList.toggle("on",c);
+    };
+    document.getElementById("tbToggle").onclick=function(){
+      var f=document.getElementById("frameWrap"),b=document.getElementById("tbToggle");
+      var hidden=(f.style.display==="none");
+      f.style.display=hidden?"":"none";
+      b.textContent=hidden?"📖 Скрыть учебник":"📖 Показать учебник";
     };
     document.getElementById("panelShow").onclick=function(){
       document.getElementById("panel").classList.remove("collapsed");
