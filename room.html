@@ -22,9 +22,11 @@
   #panel.collapsed{display:none}
   #panelShow{display:none;position:fixed;right:12px;bottom:12px;z-index:20;background:#7c2340;color:#fff;border:none;cursor:pointer;padding:11px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 10px rgba(0,0,0,.25)}
   #panelShow.on{display:block}
-  #videoWrap{background:#111;border-bottom:2px solid #d9c9ac}
-  #videoWrap iframe{width:100%;height:280px;border:none;display:block;background:#111}
-  #videoWrap .vhint{color:#cbb; font:700 12px 'Nunito',sans-serif;padding:10px 12px}
+  #videoWrap{position:fixed;top:64px;left:16px;width:270px;z-index:40;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.45);display:none}
+  #videoWrap.on{display:block}
+  #vidHead{display:flex;align-items:center;justify-content:space-between;background:#7c2340;color:#fff;font:800 12px 'Nunito',sans-serif;padding:6px 10px;cursor:move;user-select:none}
+  #vidHead button{background:rgba(255,255,255,.2);color:#fff;border:none;cursor:pointer;width:22px;height:22px;border-radius:6px;font-size:15px;line-height:1}
+  #vidBody iframe{width:270px;height:170px;border:none;display:block;background:#111}
 
   #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
   #boardCol{flex:1.7;min-width:0;border-right:3px solid #d9c9ac}
@@ -59,7 +61,6 @@
   <div id="main">
     <div id="boardCol"><iframe id="board" title="Доска"></iframe></div>
     <div id="panel">
-      <div id="videoWrap" style="display:none"></div>
       <div class="prow">
         <div class="lbl">КУРС</div>
         <select id="course"></select>
@@ -81,6 +82,7 @@
       <div id="frameWrap"><iframe id="frame" title="Задание"></iframe></div>
     </div>
   </div>
+  <div id="videoWrap"><div id="vidHead"><span>📹 Видео с учеником</span><button id="vidClose" aria-label="Закрыть">×</button></div><div id="vidBody"></div></div>
   <button id="panelShow">⟩ Показать панель</button>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -162,14 +164,21 @@
       else prompt("Скопируй ссылку:",url);
     };
 
-    // Видеозвонок (Jitsi, та же комната у учителя и ученика)
-    document.getElementById("vidBtn").onclick=function(){
-      var w=document.getElementById("videoWrap"),b=document.getElementById("vidBtn");
-      if(w.dataset.on){ w.style.display="none"; w.innerHTML=""; delete w.dataset.on; b.textContent="📹 Видео"; }
-      else { var rn="ewa-lesson-"+encodeURIComponent(room);
-        w.innerHTML='<iframe allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/'+rn+'#config.prejoinPageEnabled=false&userInfo.displayName=%22\u0423\u0447\u0438\u0442\u0435\u043b\u044c%22" title="Видеозвонок"></iframe>';
-        w.style.display="block"; w.dataset.on="1"; b.textContent="📹 Скрыть видео"; }
-    };
+    // Видеозвонок (Jitsi) — маленькое плавающее окно поверх доски
+    function vidOpen(on){
+      var w=document.getElementById("videoWrap"),body=document.getElementById("vidBody"),b=document.getElementById("vidBtn");
+      if(on){ var rn="ewa-lesson-"+encodeURIComponent(room);
+        body.innerHTML='<iframe allow="camera; microphone; fullscreen; autoplay" src="https://meet.jit.si/'+rn+'#config.prejoinPageEnabled=false" title="Видеозвонок"></iframe>';
+        w.classList.add("on"); b.textContent="📹 Скрыть видео"; }
+      else { w.classList.remove("on"); body.innerHTML=""; b.textContent="📹 Видео"; }
+    }
+    document.getElementById("vidBtn").onclick=function(){ vidOpen(!document.getElementById("videoWrap").classList.contains("on")); };
+    document.getElementById("vidClose").onclick=function(){ vidOpen(false); };
+    (function(){ var w=document.getElementById("videoWrap"),h=document.getElementById("vidHead"),body=document.getElementById("vidBody"),dx=0,dy=0,drag=false;
+      h.addEventListener("mousedown",function(e){drag=true;dx=e.clientX-w.offsetLeft;dy=e.clientY-w.offsetTop;body.style.pointerEvents="none";e.preventDefault();});
+      document.addEventListener("mousemove",function(e){if(!drag)return;w.style.left=Math.max(0,Math.min(window.innerWidth-w.offsetWidth,e.clientX-dx))+"px";w.style.top=Math.max(52,Math.min(window.innerHeight-40,e.clientY-dy))+"px";});
+      document.addEventListener("mouseup",function(){if(drag){drag=false;body.style.pointerEvents="";}});
+    })();
     // Сворачивание правой панели
     document.getElementById("panelBtn").onclick=function(){
       var p=document.getElementById("panel"),c=p.classList.toggle("collapsed");
