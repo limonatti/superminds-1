@@ -10,10 +10,11 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;overflow:hidden;font-family:'Nunito',sans-serif;background:#e9dfca;color:#1c1310}
   button,select,a{font-family:inherit}
-  #top{height:52px;background:#7c2340;display:flex;align-items:center;gap:8px;padding:0 12px;color:#fff}
+  #top{min-height:52px;background:#7c2340;display:flex;align-items:center;gap:8px;padding:7px 12px;color:#fff;flex-wrap:wrap;row-gap:7px}
   #top a.home{color:#fff;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
   #top .title{font:800 16px 'Nunito',sans-serif;white-space:nowrap}
-  #top .rc{margin-left:auto;display:flex;align-items:center;gap:8px}
+  #top .rc{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;row-gap:7px}
+  @media(max-width:900px){ #top .title{display:none} #top button.tb,#top #invite{padding:8px 10px;font-size:12px} }
   #top .room{background:rgba(255,255,255,.14);padding:7px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
   #top .room .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f0c96b;margin-right:5px}
   #top .room.on .dot{background:#7ee787}
@@ -550,6 +551,17 @@
     document.getElementById("crdBtn").onclick=()=>document.getElementById("crd").classList.add("on");
     document.getElementById("crdClose").onclick=()=>document.getElementById("crd").classList.remove("on");
     document.getElementById("crd").addEventListener("click",e=>{ if(e.target.id==="crd")e.target.classList.remove("on"); });
+
+    /* шапка переносится на вторую строку — двигаем содержимое вниз, чтобы кнопки
+       никогда не уезжали за край и оставались кликабельными */
+    function fitTop(){
+      var t=document.getElementById("top").offsetHeight;
+      document.getElementById("main").style.top=t+"px";
+      var v=document.getElementById("videoWrap");
+      if(parseInt(v.style.top||"64",10)<t+6) v.style.top=(t+8)+"px";
+    }
+    window.addEventListener("resize",fitTop);
+    setTimeout(fitTop,0); setTimeout(fitTop,400);
 
     if(ME==="s"){
       document.getElementById("invite").style.display="none";
