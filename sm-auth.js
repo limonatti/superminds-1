@@ -478,6 +478,57 @@ return data || [];
 		if (error) { console.warn("student_hw_results:", error.message); return []; }
 		return data || [];
 	},
+	/* ---------- Приглашения ученика (одноразовая ссылка) ---------- */
+	/* Учитель: создать одноразовое приглашение → {ok, code} */
+	async createInvite(note) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("create_invite", { p_note: note || null });
+		return { ok: !error, code: data, error: error && error.message };
+	},
+	/* Учитель: свои приглашения */
+	async myInvites() {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.rpc("my_invites");
+		if (error) { console.warn("my_invites:", error.message); return []; }
+		return data || [];
+	},
+	/* Любой: проверить код ДО создания аккаунта → {ok, teacher} */
+	async inviteCheck(code) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("invite_check", { p_code: (code || "").trim() });
+		return { ok: !error, teacher: data, error: error && error.message };
+	},
+	/* Ученик: активировать приглашение (после входа) */
+	async redeemInvite(code, name) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("redeem_invite", { p_code: (code || "").trim(), p_name: name || null });
+		return { ok: !error, status: data, error: error && error.message };
+	},
+	/* Регистрация ученика по приглашению: имя + пароль, email необязателен.
+	   Если email не указан — генерируем технический адрес, ученик его не видит.
+	   Логин потом: тот же экран, имя + пароль. */
+	studentLogin(name) {
+		return "s." + (name || "").trim().toLowerCase()
+			.replace(/[^a-zа-яё0-9]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 24);
+	},
+	async signUpStudent(name, password, email, code) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const login = (email || "").trim() || (this.studentLogin(name) + "." +
+			Math.random().toString(36).slice(2, 6) + "@student.asya");
+		const { data, error } = await c.auth.signUp({
+			email: login, password: password, options: { data: { name: name, login: login } }
+		});
+		if (error) return { ok: false, error: error.message };
+		if (!data.session) return { ok: false, needConfirm: true, login: login, error: "Подтверждение email включено в Supabase. Выключи его: Authentication → Sign In / Providers → Email → Confirm email → off." };
+		const r = await this.redeemInvite(code, name);
+		if (!r.ok) return { ok: false, error: r.error || "Не удалось привязать к учителю" };
+		return { ok: true, login: login };
+	},
 	/* Учитель: сводка ДЗ ученика (юниты, попытки, верно, время) */
 	async studentHwSummary(studentId) {
 		if (!useCloud) return [];

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приглашение · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .wrap{max-width:460px;margin:0 auto;padding:48px 18px 48px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,7vw,38px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:10px 0 22px;font:800 15px 'Nunito',sans-serif;color:#5a4f47;line-height:1.5}
+  .panel{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:24px 20px}
+  .tabs{display:flex;gap:8px;margin-bottom:16px}
+  .tab{flex:1;background:#f4e9d8;border-radius:14px;padding:11px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .tab.on{background:#7c2340;color:#fff}
+  label{display:block;font:800 12px 'Nunito',sans-serif;color:#8a7a68;margin:14px 2px 6px;letter-spacing:.5px}
+  input{width:100%;border:2px solid #e3d3ba;border-radius:14px;padding:13px 14px;font:600 16px 'Fredoka',sans-serif;color:#1c1310;background:#fdfbf7}
+  input:focus{outline:none;border-color:#7c2340}
+  .primary{width:100%;margin-top:20px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5e1a30}
+  .primary[disabled]{opacity:.55;box-shadow:none;cursor:default}
+  .msg{margin-top:14px;font:700 13.5px 'Nunito',sans-serif;text-align:center;min-height:18px;line-height:1.5}
+  .msg.err{color:#a23b1e}.msg.ok{color:#3f7a20}
+  .note{font:700 12px 'Nunito',sans-serif;color:#a99a86;text-align:center;margin-top:14px;line-height:1.6}
+  .from{background:#dfeadd;border-radius:18px;padding:14px;text-align:center;margin-bottom:16px;font:800 14px 'Nunito',sans-serif;color:#3f7a20}
+  .from b{display:block;font-size:19px;margin-top:2px;color:#2e6f4e}
+  .bad{background:#ffe3dc;border-radius:18px;padding:16px;text-align:center;font:800 14px 'Nunito',sans-serif;color:#a23b1e;line-height:1.5}
+  .opt{font:700 12.5px 'Nunito',sans-serif;color:#7c2340;text-align:center;margin-top:12px;cursor:pointer;text-decoration:underline}
+  .hidden{display:none}
+  .loginbox{background:#fff7e8;border:2px solid #f0c96b;border-radius:16px;padding:14px;margin-top:14px;font:700 13px 'Nunito',sans-serif;color:#7a5b12;line-height:1.6;text-align:center}
+  .loginbox b{display:block;font-size:16px;color:#1c1310;word-break:break-all;margin-top:4px}
+  .foot{text-align:center;font:700 12.5px 'Nunito',sans-serif;color:#8a7a68;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎓 Добро пожаловать!</h1>
+  <div class="sub" id="sub">проверяем приглашение…</div>
+  <div id="root"></div>
+  <div class="foot">Made for @english.with_asya</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+const Q = new URLSearchParams(location.search);
+let CODE = (Q.get("i") || Q.get("code") || "").trim().toUpperCase();
+let TEACHER = "";
+let tab = "up";
+const $ = id => document.getElementById(id);
+const esc = s => (s || "").replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function showBad(text, withCodeField) {
+  $("sub").textContent = "нужна ссылка от учителя";
+  $("root").innerHTML =
+    '<div class="panel"><div class="bad">' + esc(text) + '</div>' +
+    (withCodeField
+      ? '<label>КОД ПРИГЛАШЕНИЯ</label><input id="fCode" placeholder="например, A1B2C3D4" maxlength="12" value="' + esc(CODE) + '">' +
+        '<button class="primary" id="goCode">Проверить код</button><div class="msg" id="msg"></div>'
+      : '') +
+    '</div>';
+  const b = $("goCode");
+  if (b) b.onclick = async () => {
+    CODE = ($("fCode").value || "").trim().toUpperCase();
+    if (!CODE) { $("msg").className = "msg err"; $("msg").textContent = "Введи код"; return; }
+    $("msg").className = "msg"; $("msg").textContent = "…";
+    check();
+  };
+}
+
+function renderForm() {
+  $("sub").textContent = "создай аккаунт — и увидишь свои задания";
+  $("root").innerHTML =
+    '<div class="panel">' +
+      '<div class="from">Приглашение от учителя<b>' + esc(TEACHER) + '</b></div>' +
+      '<div class="tabs">' +
+        '<button class="tab ' + (tab === "up" ? "on" : "") + '" id="tUp">Я новенький</button>' +
+        '<button class="tab ' + (tab === "in" ? "on" : "") + '" id="tIn">У меня есть аккаунт</button>' +
+      '</div>' +
+      (tab === "up"
+        ? '<label>КАК ТЕБЯ ЗОВУТ</label><input id="fName" placeholder="Например, Маша" autocomplete="name">' +
+          '<label>ПРИДУМАЙ ПАРОЛЬ</label><input id="fPass" type="password" placeholder="минимум 6 символов" autocomplete="new-password">' +
+          '<div class="opt" id="toggleMail">＋ добавить email (необязательно)</div>' +
+          '<div id="mailWrap" class="hidden"><label>EMAIL (НЕОБЯЗАТЕЛЬНО)</label><input id="fMail" type="email" placeholder="mail@example.com" autocomplete="email"></div>' +
+          '<button class="primary" id="go">Начать учиться →</button>'
+        : '<label>ТВОЙ ЛОГИН ИЛИ EMAIL</label><input id="fMail" placeholder="логин, который выдал сайт" autocomplete="username">' +
+          '<label>ПАРОЛЬ</label><input id="fPass" type="password" placeholder="пароль" autocomplete="current-password">' +
+          '<button class="primary" id="go">Войти →</button>') +
+      '<div class="msg" id="msg"></div>' +
+      '<div class="note">Email нужен только чтобы не потерять пароль. Без него тоже всё работает.</div>' +
+    '</div>';
+
+  $("tUp").onclick = () => { tab = "up"; renderForm(); };
+  $("tIn").onclick = () => { tab = "in"; renderForm(); };
+  const tm = $("toggleMail");
+  if (tm) tm.onclick = () => { $("mailWrap").classList.toggle("hidden"); tm.classList.add("hidden"); };
+  $("go").onclick = submit;
+}
+
+async function submit() {
+  const msg = $("msg"), btn = $("go");
+  msg.className = "msg"; msg.textContent = "…"; btn.disabled = true;
+  const pass = ($("fPass").value || "").trim();
+  const mail = (($("fMail") || {}).value || "").trim();
+
+  if (tab === "up") {
+    const name = ($("fName").value || "").trim();
+    if (!name) { msg.className = "msg err"; msg.textContent = "Впиши имя"; btn.disabled = false; return; }
+    if (pass.length < 6) { msg.className = "msg err"; msg.textContent = "Пароль — минимум 6 символов"; btn.disabled = false; return; }
+    const r = await SM.signUpStudent(name, pass, mail, CODE);
+    if (!r.ok) { msg.className = "msg err"; msg.textContent = r.error || "Не получилось"; btn.disabled = false; return; }
+    if (!mail) {
+      msg.className = "msg ok";
+      msg.innerHTML = 'Готово! 🎉<div class="loginbox">Твой логин для входа — сохрани его:<b>' + esc(r.login) + '</b></div>';
+      setTimeout(() => { location.href = "cabinet.html"; }, 6000);
+      return;
+    }
+    msg.className = "msg ok"; msg.textContent = "Готово! 🎉";
+    setTimeout(() => { location.href = "cabinet.html"; }, 900);
+    return;
+  }
+
+  const r = await SM.signIn(mail, pass);
+  if (!r.ok) { msg.className = "msg err"; msg.textContent = r.error || "Не получилось войти"; btn.disabled = false; return; }
+  const u = await SM.getUser();
+  const rd = await SM.redeemInvite(CODE, (u && u.name) || "");
+  if (!rd.ok) { msg.className = "msg err"; msg.textContent = rd.error || "Код не подошёл"; btn.disabled = false; return; }
+  msg.className = "msg ok"; msg.textContent = "Готово! 🎉";
+  setTimeout(() => { location.href = "cabinet.html"; }, 900);
+}
+
+async function check() {
+  if (!window.SM || !SM.isCloud) {
+    showBad("Аккаунты пока не подключены. Напиши учителю.", false);
+    return;
+  }
+  if (!CODE) { showBad("Открой ссылку-приглашение, которую прислал учитель, или введи код вручную.", true); return; }
+  const r = await SM.inviteCheck(CODE);
+  if (!r.ok) { showBad(r.error || "Код не подошёл", true); return; }
+  TEACHER = r.teacher || "учитель";
+  renderForm();
+}
+check();
+</script>
+</body>
+</html>

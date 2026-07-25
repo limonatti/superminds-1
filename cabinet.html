@@ -197,6 +197,10 @@
             (a.done?'<span class="hwdone">✅</span>':'<button class="hwbtn spkdone" data-id="'+a.id+'">Выполнено</button>')+'</div>';});
           mats.forEach(m=>{p+='<div class="hwrow"><span class="hwt">🔗 '+esc(m.title)+(m.note?' — '+esc(m.note):'')+'</span><a class="hwopen" href="'+esc(m.url)+'" target="_blank" rel="noopener">Открыть</a></div>';});
           spkHtml='<div class="sec-title">🎓 SPEAKOUT — ОТ УЧИТЕЛЯ</div><div class="hwbox">'+p+'</div>';
+        } else {
+          let prof2=null; try{ prof2=await SM.myProfile(); }catch(e){}
+          if(prof2 && prof2.teacher_id)
+            spkHtml='<div class="sec-title">🎓 КУРС</div><div class="hwbox"><div class="hwrow"><span class="hwt">Учитель ещё не назначил курс. Загляни сюда позже 🙂</span></div></div>';
         }
       }
 

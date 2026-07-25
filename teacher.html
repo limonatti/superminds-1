@@ -44,6 +44,12 @@
   .srow .st{font:800 12px 'Nunito',sans-serif;color:#5a4f47;display:flex;gap:10px;flex-wrap:wrap}
   .srow .st b{color:#3f7a20}
   .empty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:14px}
+  .bigInvite{background:#3f7a20;color:#fff;border:none;border-radius:16px;padding:14px 22px;font:800 15px 'Nunito',sans-serif;box-shadow:0 5px 0 #2e5a17;cursor:pointer;margin-top:10px}
+  .bigInvite:disabled{opacity:.6;box-shadow:none}
+  .invout{margin-top:10px;font:700 12.5px 'Nunito',sans-serif}
+  .invout.err{color:#a23b1e}
+  .invout .invlink{background:#fff;border:2px dashed #7cb342;border-radius:12px;padding:10px;word-break:break-all;color:#1c1310;font:700 12.5px 'Nunito',sans-serif}
+  .invout .invcopy{margin-top:8px;background:#7c2340;color:#fff;border:none;border-radius:999px;padding:9px 18px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
   .scard{background:#faf4ea;border-radius:14px;padding:8px 10px;margin-bottom:10px}
   .scard .srow{background:transparent;padding:4px 2px;margin:0}
   .assign-btn{background:#3f7a20;color:#fff;border:none;border-radius:999px;padding:7px 12px;font:800 12px 'Nunito',sans-serif;cursor:pointer;flex:none}
@@ -88,6 +94,10 @@
   <script>
     let authTab="in";
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function copyText(txt){
+      if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert("Скопировано!\n\n"+txt),()=>prompt("Скопируй:",txt));
+      else prompt("Скопируй:",txt);
+    }
     function ago(ts){ if(!ts)return "—"; const d=(Date.now()-new Date(ts).getTime())/86400000;
       if(d<1)return "сегодня"; if(d<2)return "вчера"; return Math.floor(d)+" дн. назад"; }
     function learned(data){ let n=0; for(const k in data){ if(k==="__meta")continue; if(data[k]&&data[k].status==="learned")n++; } return n; }
@@ -139,6 +149,7 @@
       const kmap={trainer:"🎯",games:"🎮",worksheet:"✏️"};
       function uLabel(uid){var u=SM_UNITS.find(x=>x.id===uid);return u?(u.emoji+" "+u.title):uid;}
 
+      const inviteBase = location.origin + location.pathname.replace(/teacher\.html$/,"join.html");
       const rows = students.length ? students.map(s=>{
         const data=s.data||{}; const meta=data.__meta||{}; const sid=s.student_id;
         const chips=(byStudent[sid]||[]).map(a=>'<span class="chip'+(a.done?" done":"")+'">'+(kmap[a.kind]||"🎯")+' '+esc(uLabel(a.unit_id))+' '+(a.done?"✓":"⏳")+'<button class="del" data-id="'+a.id+'">✕</button></span>').join("");
@@ -150,15 +161,18 @@
           '<div class="assignform" id="af-'+sid+'"><select class="af-unit">'+unitOptions+'</select><select class="af-kind">'+kindOptions+'</select><button class="assign-go" data-sid="'+sid+'">Задать</button></div>'+
           '<button class="spk-btn" data-sid="'+sid+'">🎓 Speakout</button><div class="spk-panel" id="spk-'+sid+'"></div>'+
         '</div>';
-      }).join("") : '<div class="empty">Пока нет учеников. Дай им код класса — и они появятся здесь.</div>';
+      }).join("") : '<div class="empty">Пока нет учеников.<br><button class="bigInvite" id="emptyInvite">＋ Пригласить ученика</button></div>';
 
       document.getElementById("body").innerHTML=
-        '<div class="codebox"><div class="lbl">КОД КЛАССА</div><div class="code">'+esc(code)+'</div>'+
-          '<button id="copy">🔗 Скопировать приглашение</button>'+
+        '<div class="codebox"><div class="lbl">ПРИГЛАСИТЬ УЧЕНИКА</div>'+
+          '<button class="bigInvite" id="mkInvite">🔗 Создать ссылку-приглашение</button>'+
+          '<div class="invout" id="invout"></div>'+
+          '<div class="lbl" style="margin-top:12px">ПОСТОЯННЫЙ КОД КЛАССА</div><div class="code">'+esc(code)+'</div>'+
+          '<button id="copy">📋 Скопировать код</button>'+
           ' <a href="room.html" style="display:inline-block;margin-top:6px;background:#3f7a20;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">🧑‍🏫 Комната урока</a>'+
           ' <a href="builder.html" style="display:inline-block;margin-top:6px;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">🛠 Конструктор</a>'+
           ' <a href="admin.html" style="display:inline-block;margin-top:6px;margin-left:6px;background:#7c2340;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">📚 Учебники</a>'+
-          '<div class="hint">Ученик заходит в «Кабинет ученика» и вводит этот код</div></div>'+
+          '<div class="hint">Ссылка одноразовая — по ней зарегистрируется один ученик. Код класса работает всегда.</div></div>'+
         '<div class="sec-title">МОИ УЧЕНИКИ · '+students.length+'<button id="refresh">↻ Обновить</button></div>'+
         rows;
 
@@ -172,10 +186,25 @@
       document.querySelectorAll(".del").forEach(b=>b.onclick=async()=>{ if(!confirm("Удалить задание?"))return; await SM.deleteAssignment(b.dataset.id); renderDash(user);});
       document.querySelectorAll(".spk-btn").forEach(b=>b.onclick=()=>{var p=document.getElementById("spk-"+b.dataset.sid);var open=p.classList.toggle("on");if(open&&!p.dataset.loaded){p.dataset.loaded="1";loadSpk(b.dataset.sid);}});
       document.getElementById("copy").onclick=()=>{
-        const txt="Заходи ко мне на English with Asya! Открой «Кабинет ученика» и введи код класса: "+code+"\n"+location.origin+location.pathname.replace(/teacher\.html$/,"cabinet.html");
-        if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert("Приглашение скопировано!\n\n"+txt),()=>prompt("Скопируй:",txt));
-        else prompt("Скопируй:",txt);
+        const txt="Заходи ко мне на English with Asya! Открой ссылку и впиши имя с паролем:\n"+inviteBase+"?i="+code;
+        copyText(txt);
       };
+      async function makeInvite(btn){
+        btn.disabled=true; const old=btn.textContent; btn.textContent="…";
+        const r=await SM.createInvite(null);
+        btn.disabled=false; btn.textContent=old;
+        const out=document.getElementById("invout");
+        if(!r.ok){ if(out){out.className="invout err";out.textContent=r.error||"Не получилось создать ссылку";} else alert(r.error||"Ошибка"); return; }
+        const link=inviteBase+"?i="+r.code;
+        if(out){
+          out.className="invout ok";
+          out.innerHTML='<div class="invlink">'+esc(link)+'</div><button class="invcopy">📋 Скопировать ссылку</button>';
+          out.querySelector(".invcopy").onclick=()=>copyText("Заходи ко мне на English with Asya! Открой ссылку и впиши имя с паролем:\n"+link);
+        } else copyText("Заходи ко мне на English with Asya! Открой ссылку и впиши имя с паролем:\n"+link);
+      }
+      document.getElementById("mkInvite").onclick=(e)=>makeInvite(e.target);
+      var ei=document.getElementById("emptyInvite");
+      if(ei)ei.onclick=()=>document.getElementById("mkInvite").click();
     }
 
 
