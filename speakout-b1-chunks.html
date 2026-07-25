@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тренажёр чанков · Speakout B1 · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:720px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;color:#7c2340;font-size:clamp(24px,5vw,34px);margin:6px 4px 4px}
+  .sub{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 16px}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+  .seg{display:inline-flex;background:#fff;border-radius:999px;box-shadow:0 3px 0 #e3d3ba;overflow:hidden}
+  .seg button{border:none;background:none;cursor:pointer;font:800 13px 'Nunito',sans-serif;padding:9px 16px;color:#7c2340}
+  .seg button.on{background:#7c2340;color:#fff}
+  select{border:2px solid #e3d3ba;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;background:#fff;color:#7c2340;outline:none}
+  .count{font-weight:800;font-size:13px;color:#8a7a68;margin-left:auto}
+  /* карточка */
+  .flash{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:36px 24px;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none}
+  .flash .en{font-family:'Fredoka',sans-serif;font-size:clamp(24px,6vw,34px);color:#7c2340}
+  .flash .ru{font-size:20px;color:#1c1310;font-weight:800}
+  .flash .hint{font-size:12px;color:#b0a290;font-weight:700;margin-top:14px}
+  .flash .u{position:relative;top:-10px;font-size:11px;color:#b5654a;font-weight:900;letter-spacing:1px}
+  .row{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .btn{border:none;cursor:pointer;border-radius:999px;font:800 14px 'Nunito',sans-serif;padding:11px 18px}
+  .btn.p{background:#7c2340;color:#fff}
+  .btn.a{background:#e0952a;color:#fff}
+  .btn.s{background:#fff;color:#7c2340;box-shadow:0 3px 0 #e3d3ba}
+  /* квиз */
+  .q{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;text-align:center;margin:8px 0 16px}
+  .opts{display:grid;gap:10px}
+  .opt{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 15px 'Nunito',sans-serif;padding:14px 16px;border-radius:14px;text-align:left}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .score{background:#7c2340;color:#fff;border-radius:14px;padding:10px 16px;font-weight:900;text-align:center;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="speakout-b1-course.html">← Все юниты</a>
+    <a class="home alt" href="speakout-b1.html">🎯 Тренажёр</a>
+    <a class="home" href="index.html">🏠 Домой</a>
+  </div>
+  <h1>🧩 Тренажёр чанков · B1</h1>
+  <div class="sub">Слова и выражения целиком — учи фразой, а не по словам</div>
+  <div class="bar">
+    <div class="seg" id="mode">
+      <button data-m="learn" class="on">📚 Учить</button>
+      <button data-m="quiz">🎯 Квиз</button>
+    </div>
+    <select id="unit"></select>
+    <span class="count" id="count"></span>
+  </div>
+  <div id="view"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1</div>
+</div>
+<script src="sm-voice.js"></script>
+<script>
+const DECK=[{"en": "to get on well with", "ru": "хорошо ладить с", "u": 1}, {"en": "a sense of humour", "ru": "чувство юмора", "u": 1}, {"en": "to make friends", "ru": "заводить друзей", "u": 1}, {"en": "do you mind if I…?", "ru": "не против, если я…?", "u": 1}, {"en": "nice to meet you", "ru": "приятно познакомиться", "u": 1}, {"en": "what do you do?", "ru": "кем работаешь?", "u": 1}, {"en": "to have a lot in common", "ru": "иметь много общего", "u": 1}, {"en": "to keep in touch", "ru": "поддерживать связь", "u": 1}, {"en": "outgoing", "ru": "общительный", "u": 1}, {"en": "shy", "ru": "застенчивый", "u": 1}, {"en": "reliable", "ru": "надёжный", "u": 1}, {"en": "generous", "ru": "щедрый", "u": 1}, {"en": "stubborn", "ru": "упрямый", "u": 1}, {"en": "to get on with", "ru": "ладить с", "u": 1}, {"en": "colleague", "ru": "коллега", "u": 1}, {"en": "acquaintance", "ru": "знакомый", "u": 1}, {"en": "to introduce", "ru": "представить, познакомить", "u": 1}, {"en": "polite", "ru": "вежливый", "u": 1}, {"en": "sociable", "ru": "компанейский", "u": 1}, {"en": "sense of humour", "ru": "чувство юмора", "u": 1}, {"en": "to make friends", "ru": "заводить друзей", "u": 1}, {"en": "talkative", "ru": "разговорчивый", "u": 1}, {"en": "confident", "ru": "уверенный в себе", "u": 1}, {"en": "to get to know", "ru": "узнать поближе", "u": 1}, {"en": "neighbour", "ru": "сосед", "u": 1}, {"en": "classmate", "ru": "одноклассник", "u": 1}, {"en": "to keep in touch", "ru": "поддерживать связь", "u": 1}, {"en": "easy-going", "ru": "лёгкий в общении", "u": 1}, {"en": "once upon a time", "ru": "жили-были", "u": 2}, {"en": "all of a sudden", "ru": "внезапно", "u": 2}, {"en": "to be based on", "ru": "быть основанным на", "u": 2}, {"en": "a plot twist", "ru": "поворот сюжета", "u": 2}, {"en": "it turned out that…", "ru": "оказалось, что…", "u": 2}, {"en": "in the end", "ru": "в конце концов", "u": 2}, {"en": "to fall asleep", "ru": "заснуть", "u": 2}, {"en": "a happy ending", "ru": "счастливый конец", "u": 2}, {"en": "plot", "ru": "сюжет", "u": 2}, {"en": "character", "ru": "персонаж", "u": 2}, {"en": "ending", "ru": "концовка", "u": 2}, {"en": "to happen", "ru": "происходить", "u": 2}, {"en": "suddenly", "ru": "вдруг", "u": 2}, {"en": "to realise", "ru": "осознать", "u": 2}, {"en": "novel", "ru": "роман", "u": 2}, {"en": "to describe", "ru": "описывать", "u": 2}, {"en": "event", "ru": "событие", "u": 2}, {"en": "meanwhile", "ru": "тем временем", "u": 2}, {"en": "scary", "ru": "страшный", "u": 2}, {"en": "review", "ru": "рецензия, отзыв", "u": 2}, {"en": "based on", "ru": "основан на", "u": 2}, {"en": "twist", "ru": "поворот сюжета", "u": 2}, {"en": "fairy tale", "ru": "сказка", "u": 2}, {"en": "hero", "ru": "герой", "u": 2}, {"en": "villain", "ru": "злодей", "u": 2}, {"en": "to take place", "ru": "происходить (о действии)", "u": 2}, {"en": "boring", "ru": "скучный", "u": 2}, {"en": "exciting", "ru": "захватывающий", "u": 2}, {"en": "could you tell me…?", "ru": "не подскажете…?", "u": 3}, {"en": "do you know if…?", "ru": "вы не знаете, …?", "u": 3}, {"en": "what are you up to?", "ru": "чем занимаешься?", "u": 3}, {"en": "how's it going?", "ru": "как дела?", "u": 3}, {"en": "to find out", "ru": "узнать", "u": 3}, {"en": "to fill in a form", "ru": "заполнить бланк", "u": 3}, {"en": "to turn up", "ru": "появиться, прийти", "u": 3}, {"en": "on purpose", "ru": "нарочно", "u": 3}, {"en": "to find out", "ru": "узнать", "u": 3}, {"en": "to look for", "ru": "искать", "u": 3}, {"en": "to give up", "ru": "сдаться", "u": 3}, {"en": "to fill in", "ru": "заполнить", "u": 3}, {"en": "to turn up", "ru": "появиться", "u": 3}, {"en": "curious", "ru": "любопытный", "u": 3}, {"en": "to wonder", "ru": "интересоваться, гадать", "u": 3}, {"en": "survey", "ru": "опрос", "u": 3}, {"en": "questionnaire", "ru": "анкета", "u": 3}, {"en": "reply", "ru": "ответ", "u": 3}, {"en": "downtown", "ru": "центр города", "u": 3}, {"en": "direction", "ru": "направление", "u": 3}, {"en": "on purpose", "ru": "нарочно", "u": 3}, {"en": "to figure out", "ru": "сообразить", "u": 3}, {"en": "to book", "ru": "бронировать", "u": 3}, {"en": "ticket", "ru": "билет", "u": 3}, {"en": "museum", "ru": "музей", "u": 3}, {"en": "nearby", "ru": "поблизости", "u": 3}, {"en": "entrance", "ru": "вход", "u": 3}, {"en": "to recommend", "ru": "рекомендовать", "u": 3}, {"en": "to do your best", "ru": "стараться изо всех сил", "u": 4}, {"en": "to give up", "ru": "сдаваться", "u": 4}, {"en": "to beat the record", "ru": "побить рекорд", "u": 4}, {"en": "well done!", "ru": "молодец!", "u": 4}, {"en": "good luck!", "ru": "удачи!", "u": 4}, {"en": "the best I've ever…", "ru": "лучшее, что я когда-либо…", "u": 4}, {"en": "to be allowed to", "ru": "иметь право", "u": 4}, {"en": "fair play", "ru": "честная игра", "u": 4}, {"en": "to win", "ru": "побеждать", "u": 4}, {"en": "to lose", "ru": "проигрывать", "u": 4}, {"en": "champion", "ru": "чемпион", "u": 4}, {"en": "medal", "ru": "медаль", "u": 4}, {"en": "to train", "ru": "тренироваться", "u": 4}, {"en": "competition", "ru": "соревнование", "u": 4}, {"en": "to beat", "ru": "обыграть", "u": 4}, {"en": "record", "ru": "рекорд", "u": 4}, {"en": "effort", "ru": "усилие", "u": 4}, {"en": "achievement", "ru": "достижение", "u": 4}, {"en": "coach", "ru": "тренер", "u": 4}, {"en": "victory", "ru": "победа", "u": 4}, {"en": "teammate", "ru": "товарищ по команде", "u": 4}, {"en": "to score", "ru": "забить, набрать очки", "u": 4}, {"en": "referee", "ru": "судья", "u": 4}, {"en": "fan", "ru": "болельщик", "u": 4}, {"en": "stadium", "ru": "стадион", "u": 4}, {"en": "to celebrate", "ru": "праздновать", "u": 4}, {"en": "opponent", "ru": "соперник", "u": 4}, {"en": "fair", "ru": "честный", "u": 4}, {"en": "to break the news", "ru": "сообщить новость", "u": 5}, {"en": "to go viral", "ru": "стать вирусным", "u": 5}, {"en": "fake news", "ru": "фейковые новости", "u": 5}, {"en": "a reliable source", "ru": "надёжный источник", "u": 5}, {"en": "guess what!", "ru": "угадай что!", "u": 5}, {"en": "you'll never believe…", "ru": "ни за что не поверишь…", "u": 5}, {"en": "as far as I know", "ru": "насколько я знаю", "u": 5}, {"en": "to keep up with the news", "ru": "следить за новостями", "u": 5}, {"en": "headline", "ru": "заголовок", "u": 5}, {"en": "journalist", "ru": "журналист", "u": 5}, {"en": "to report", "ru": "сообщать", "u": 5}, {"en": "breaking news", "ru": "срочные новости", "u": 5}, {"en": "rumour", "ru": "слух", "u": 5}, {"en": "to post", "ru": "опубликовать", "u": 5}, {"en": "to share", "ru": "делиться", "u": 5}, {"en": "viral", "ru": "вирусный", "u": 5}, {"en": "reliable", "ru": "надёжный", "u": 5}, {"en": "fake", "ru": "фальшивый", "u": 5}, {"en": "to announce", "ru": "объявлять", "u": 5}, {"en": "to spread", "ru": "распространяться", "u": 5}, {"en": "update", "ru": "обновление", "u": 5}, {"en": "source", "ru": "источник", "u": 5}, {"en": "front page", "ru": "первая полоса", "u": 5}, {"en": "to interview", "ru": "брать интервью", "u": 5}, {"en": "editor", "ru": "редактор", "u": 5}, {"en": "trustworthy", "ru": "заслуживающий доверия", "u": 5}, {"en": "to double-check", "ru": "перепроверять", "u": 5}, {"en": "comment section", "ru": "раздел комментариев", "u": 5}, {"en": "what do you think of…?", "ru": "как тебе…?", "u": 6}, {"en": "in my opinion", "ru": "по-моему", "u": 6}, {"en": "I couldn't agree more", "ru": "полностью согласен", "u": 6}, {"en": "a work of art", "ru": "произведение искусства", "u": 6}, {"en": "to be into (art)", "ru": "увлекаться (искусством)", "u": 6}, {"en": "not my cup of tea", "ru": "не моё, не по вкусу", "u": 6}, {"en": "for ages", "ru": "целую вечность", "u": 6}, {"en": "to grow on someone", "ru": "начать нравиться со временем", "u": 6}, {"en": "painting", "ru": "картина", "u": 6}, {"en": "artist", "ru": "художник", "u": 6}, {"en": "gallery", "ru": "галерея", "u": 6}, {"en": "sculpture", "ru": "скульптура", "u": 6}, {"en": "talented", "ru": "талантливый", "u": 6}, {"en": "creative", "ru": "творческий", "u": 6}, {"en": "masterpiece", "ru": "шедевр", "u": 6}, {"en": "exhibition", "ru": "выставка", "u": 6}, {"en": "to draw", "ru": "рисовать", "u": 6}, {"en": "style", "ru": "стиль", "u": 6}, {"en": "colourful", "ru": "красочный", "u": 6}, {"en": "to design", "ru": "создавать, проектировать", "u": 6}, {"en": "inspiration", "ru": "вдохновение", "u": 6}, {"en": "to admire", "ru": "восхищаться", "u": 6}, {"en": "brush", "ru": "кисть", "u": 6}, {"en": "canvas", "ru": "холст", "u": 6}, {"en": "portrait", "ru": "портрет", "u": 6}, {"en": "photograph", "ru": "фотография", "u": 6}, {"en": "to imagine", "ru": "воображать", "u": 6}, {"en": "original", "ru": "самобытный", "u": 6}, {"en": "to book a flight", "ru": "забронировать рейс", "u": 7}, {"en": "to check in", "ru": "зарегистрироваться", "u": 7}, {"en": "to get lost", "ru": "заблудиться", "u": 7}, {"en": "it's worth seeing", "ru": "стоит увидеть", "u": 7}, {"en": "I'd recommend…", "ru": "советую…", "u": 7}, {"en": "to travel light", "ru": "путешествовать налегке", "u": 7}, {"en": "off the beaten track", "ru": "вдали от туристов", "u": 7}, {"en": "by myself", "ru": "самостоятельно", "u": 7}, {"en": "journey", "ru": "поездка, путь", "u": 7}, {"en": "flight", "ru": "рейс, полёт", "u": 7}, {"en": "luggage", "ru": "багаж", "u": 7}, {"en": "to book", "ru": "бронировать", "u": 7}, {"en": "destination", "ru": "пункт назначения", "u": 7}, {"en": "sightseeing", "ru": "осмотр достопримечательностей", "u": 7}, {"en": "abroad", "ru": "за границей", "u": 7}, {"en": "souvenir", "ru": "сувенир", "u": 7}, {"en": "delay", "ru": "задержка", "u": 7}, {"en": "to pack", "ru": "паковать", "u": 7}, {"en": "currency", "ru": "валюта", "u": 7}, {"en": "guidebook", "ru": "путеводитель", "u": 7}, {"en": "backpack", "ru": "рюкзак", "u": 7}, {"en": "to check in", "ru": "зарегистрироваться", "u": 7}, {"en": "passport", "ru": "паспорт", "u": 7}, {"en": "boarding pass", "ru": "посадочный талон", "u": 7}, {"en": "to get lost", "ru": "заблудиться", "u": 7}, {"en": "accommodation", "ru": "жильё", "u": 7}, {"en": "return ticket", "ru": "билет туда-обратно", "u": 7}, {"en": "to sunbathe", "ru": "загорать", "u": 7}, {"en": "to plug in", "ru": "включить в розетку", "u": 8}, {"en": "to run out of battery", "ru": "разрядиться", "u": 8}, {"en": "there's something wrong with…", "ru": "что-то не так с…", "u": 8}, {"en": "it won't turn on", "ru": "не включается", "u": 8}, {"en": "to figure out", "ru": "разобраться", "u": 8}, {"en": "user-friendly", "ru": "удобный в использовании", "u": 8}, {"en": "to back up files", "ru": "делать резервную копию", "u": 8}, {"en": "it keeps crashing", "ru": "постоянно виснет", "u": 8}, {"en": "device", "ru": "устройство", "u": 8}, {"en": "screen", "ru": "экран", "u": 8}, {"en": "to charge", "ru": "заряжать", "u": 8}, {"en": "to download", "ru": "скачивать", "u": 8}, {"en": "to update", "ru": "обновлять", "u": 8}, {"en": "gadget", "ru": "гаджет", "u": 8}, {"en": "to plug in", "ru": "подключить в розетку", "u": 8}, {"en": "battery", "ru": "батарея", "u": 8}, {"en": "wireless", "ru": "беспроводной", "u": 8}, {"en": "to fix", "ru": "чинить", "u": 8}, {"en": "instructions", "ru": "инструкция", "u": 8}, {"en": "button", "ru": "кнопка", "u": 8}, {"en": "to switch on", "ru": "включать", "u": 8}, {"en": "useful", "ru": "полезный", "u": 8}, {"en": "app", "ru": "приложение", "u": 8}, {"en": "software", "ru": "ПО, программа", "u": 8}, {"en": "to restart", "ru": "перезагрузить", "u": 8}, {"en": "to solve", "ru": "решать", "u": 8}, {"en": "broken", "ru": "сломанный", "u": 8}, {"en": "handy", "ru": "удобный, под рукой", "u": 8}];
+let mode="learn", unit="all", pool=[], idx=0, flipped=false;
+const $=s=>document.querySelector(s);
+function speak(t){ if(window.SM_speak) SM_speak(t,0.95); }
+function units(){const s=new Set(DECK.map(d=>d.u));return [...s].sort((a,b)=>a-b);}
+function build(){
+  const sel=$("#unit");
+  sel.innerHTML='<option value="all">Все юниты</option>'+units().map(u=>'<option value="'+u+'">Unit '+u+'</option>').join("");
+  sel.onchange=()=>{unit=sel.value;refresh();};
+  document.querySelectorAll("#mode button").forEach(b=>b.onclick=()=>{
+    document.querySelectorAll("#mode button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");mode=b.dataset.m;refresh();});
+  refresh();
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function refresh(){
+  pool=DECK.filter(d=>unit==="all"||d.u==+unit);
+  pool=shuffle(pool);idx=0;flipped=false;
+  $("#count").textContent=pool.length+" карточек";
+  if(mode==="learn")renderLearn();else renderQuiz();
+}
+function renderLearn(){
+  const d=pool[idx];
+  $("#view").innerHTML=
+   '<div class="flash" id="fl"><div class="u">UNIT '+d.u+'</div>'+
+   '<div class="en">'+d.en+'</div>'+
+   '<div class="ru" style="display:none">'+d.ru+'</div>'+
+   '<div class="hint">нажми, чтобы перевернуть</div></div>'+
+   '<div class="row">'+
+   '<button class="btn s" id="prev">← Назад</button>'+
+   '<button class="btn a" id="say">🔊 Слушать</button>'+
+   '<button class="btn p" id="next">Дальше →</button>'+
+   '</div>';
+  const fl=$("#fl"),en=fl.querySelector(".en"),ru=fl.querySelector(".ru"),hint=fl.querySelector(".hint");
+  fl.onclick=()=>{flipped=!flipped;ru.style.display=flipped?"block":"none";en.style.display=flipped?"none":"block";hint.textContent=flipped?d.en:"нажми, чтобы перевернуть";};
+  $("#say").onclick=e=>{e.stopPropagation();speak(d.en);};
+  $("#prev").onclick=()=>{idx=(idx-1+pool.length)%pool.length;flipped=false;renderLearn();};
+  $("#next").onclick=()=>{idx=(idx+1)%pool.length;flipped=false;renderLearn();};
+  speak(d.en);
+}
+let sc=0,seen=0;
+function renderQuiz(){sc=0;seen=0;nextQ();}
+function nextQ(){
+  if(idx>=pool.length){$("#view").innerHTML='<div class="score">Готово! Счёт: '+sc+' / '+pool.length+'</div><div class="row"><button class="btn p" id="again">Ещё раз</button></div>';$("#again").onclick=refresh;return;}
+  const d=pool[idx];
+  const others=shuffle(DECK.filter(x=>x.ru!==d.ru)).slice(0,3).map(x=>x.ru);
+  const opts=shuffle([d.ru,...others]);
+  $("#view").innerHTML='<div class="score">Счёт: '+sc+' / '+pool.length+'</div>'+
+   '<div class="q">'+d.en+' <button class="btn a" id="say" style="padding:6px 12px;font-size:13px">🔊</button></div>'+
+   '<div class="opts">'+opts.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  $("#say").onclick=()=>speak(d.en);
+  let done=false;
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;done=true;
+    if(b.textContent===d.ru){b.classList.add("ok");sc++;}
+    else{b.classList.add("bad");document.querySelectorAll(".opt").forEach(x=>{if(x.textContent===d.ru)x.classList.add("ok");});}
+    document.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+    setTimeout(()=>{idx++;nextQ();},900);});
+}
+build();
+</script>
+</body>
+</html>

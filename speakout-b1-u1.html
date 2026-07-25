@@ -15,12 +15,14 @@
   .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
   .home.alt{background:#e0952a}
   .hero{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-bottom:22px}
+  .hero img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
   .hcover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;position:relative}
   .hcover span{font-size:clamp(70px,18vw,130px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
   .hero .hb{padding:18px 22px}
   .hero h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,38px);color:#7c2340}
   .hero .d{font-weight:800;font-size:14px;color:#5a4f47;margin-top:6px}
   h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:30px 4px 12px}
+  .sec-i{font-size:13px;color:#8a7a68;font-weight:700}
   .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
   .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
   .g-ex b{color:#7c2340}
@@ -35,6 +37,9 @@
   .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
   .word .en{font-weight:900;font-size:15px}
   .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
+  .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:8px 14px;border-radius:999px;color:#7c2340}
+  .chip:hover{background:#fdfaf0}
   .lc{background:#7c2340;border-radius:22px;padding:20px 22px;color:#fff;box-shadow:0 6px 0 #4d1527}
   .lc h3{margin:0 0 6px;font-family:'Fredoka',sans-serif;font-size:20px}
   .lc p{margin:4px 0 12px;font-weight:700;font-size:13.5px;opacity:.9}
@@ -42,6 +47,9 @@
   .lbtn.sec{background:rgba(255,255,255,.18)}
   #script{display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65}
   #script b{color:#ffd27a}
+  .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
+  .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
   .opts{display:flex;flex-wrap:wrap;gap:8px}
@@ -57,6 +65,8 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .hw{background:#fff7ea;border:2px dashed #e0952a;border-radius:18px;padding:16px 20px;font-size:14.5px}
+  .spkcard{background:#eef6ff00;background:#fbf4ff;border:2px solid #b98cc9;border-radius:16px;padding:12px 16px;margin-bottom:10px;font-size:14.5px;font-weight:700;color:#5a3a66}
+  .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
   .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
@@ -102,8 +112,16 @@
     <div class="g-ex">С сильными прилагательными — <b>absolutely</b>: absolutely right / exhausted <span class="ru">(не «very right»)</span></div>
   </div>
 
-  <h2>🔤 Слова юнита <span style="font-size:13px;color:#8a7a68">(нажми 🔊 и повтори)</span></h2>
+  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
   <div class="words" id="words"></div>
+
+  <h2>🗣️ Произношение <span class="sec-i">звук /ŋ/ в -ing</span></h2>
+  <div class="card"><div style="font-size:14px;margin-bottom:8px">Окончание <b>-ing</b> — носовой /ŋ/, без «г» на конце. Нажми и повтори.</div><div class="pronbox" id="pron"></div></div>
+
+  <h2>🧩 Chunks — выражения целиком <span class="sec-i">(учи фразой, не по словам)</span></h2>
+  <div class="words" id="chunks"></div>
+  <h2>🎯 Тренажёр чанков <span class="sec-i">(выбери перевод)</span></h2>
+  <div id="chpr"></div>
 
   <h2>🎧 Аудирование</h2>
   <div class="lc">
@@ -123,6 +141,11 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
+  <h2>📕 Чтение</h2>
+  <div class="read"><h3>The art of small talk</h3><p>Small talk is the light, friendly conversation we have with people we don't know well. In many English-speaking countries it is completely normal to chat about the weather, the weekend or a TV show while you wait for a bus or a coffee. <b>Small talk</b> is not about deep ideas — it is a way of being polite and showing that you are open and friendly.</p>
+<p>Many people say they are 'a bit shy' and find it hard to start. The trick is simple: ask an easy question and really listen to the answer. 'How's it going?' or 'Have you been here before?' are enough. If you find something <b>in common</b> — a hobby, a place, a favourite team — the conversation becomes easy, and a stranger can slowly turn into a friend.</p></div>
+  <div id="rq" style="margin-top:14px"></div>
+
   <h2>✏️ Упражнения</h2>
   <div id="ex"></div>
 
@@ -135,6 +158,9 @@
   </div>
   <div id="fx"></div>
 
+  <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
+  <div id="spk"></div>
+
   <h2>📝 Workbook · закрепление</h2>
   <div class="wbband">Дополнительная практика по темам рабочей тетради этого юнита. Сначала реши здесь — потом сверься с бумажной Workbook.</div>
   <div id="wb"></div>
@@ -146,14 +172,19 @@
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 1</div>
 </div>
 <script>
-const WORDS=[["outgoing", "общительный"], ["shy", "застенчивый"], ["reliable", "надёжный"], ["generous", "щедрый"], ["stubborn", "упрямый"], ["to get on with", "ладить с"], ["colleague", "коллега"], ["acquaintance", "знакомый"], ["to introduce", "представить, познакомить"], ["polite", "вежливый"], ["sociable", "компанейский"], ["sense of humour", "чувство юмора"], ["to make friends", "заводить друзей"], ["talkative", "разговорчивый"]];
+const WORDS=[["outgoing", "общительный"], ["shy", "застенчивый"], ["reliable", "надёжный"], ["generous", "щедрый"], ["stubborn", "упрямый"], ["to get on with", "ладить с"], ["colleague", "коллега"], ["acquaintance", "знакомый"], ["to introduce", "представить, познакомить"], ["polite", "вежливый"], ["sociable", "компанейский"], ["sense of humour", "чувство юмора"], ["to make friends", "заводить друзей"], ["talkative", "разговорчивый"], ["confident", "уверенный в себе"], ["to get to know", "узнать поближе"], ["neighbour", "сосед"], ["classmate", "одноклассник"], ["to keep in touch", "поддерживать связь"], ["easy-going", "лёгкий в общении"]];
+const PRONWORDS=["outgoing", "meeting", "talking", "working", "laughing", "amazing", "interesting"];
+const CHUNKS=[["to get on well with", "хорошо ладить с"], ["a sense of humour", "чувство юмора"], ["to make friends", "заводить друзей"], ["do you mind if I…?", "не против, если я…?"], ["nice to meet you", "приятно познакомиться"], ["what do you do?", "кем работаешь?"], ["to have a lot in common", "иметь много общего"], ["to keep in touch", "поддерживать связь"]];
 const DIALOG=[["m", "Hi! Do you mind if I sit here?"], ["f", "Not at all. I'm Nina. Are you a friend of Anna's?"], ["m", "Yeah, we work together. I'm Sam. How do you know her?"], ["f", "We were at university together. She's so outgoing — she knows everyone!"], ["m", "True. I'm a bit shy at parties, actually."], ["f", "Me too, but you seem really friendly. What do you do, Sam?"], ["m", "I'm a graphic designer. I usually work from home, so I don't chat much."], ["f", "Well, it's really nice talking to you. Let's get a coffee sometime."]];
 const LQ=[{"q": "How do Sam and Anna know each other?", "o": ["they were at school", "they work together", "they are neighbours"], "a": 1}, {"q": "Where did Nina meet Anna?", "o": ["at university", "at work", "at a party"], "a": 0}, {"q": "How does Sam feel at parties?", "o": ["confident", "a bit shy", "bored"], "a": 1}, {"q": "What is Sam's job?", "o": ["teacher", "graphic designer", "journalist"], "a": 1}, {"q": "Where does Sam usually work?", "o": ["in an office", "from home", "abroad"], "a": 1}];
-const EX=[{"q": "Look! The children ___ in the garden.", "o": ["play", "are playing", "plays"], "a": 1}, {"q": "I ___ coffee every single morning.", "o": ["am drinking", "drink", "drinks"], "a": 1}, {"q": "She ___ three languages.", "o": ["is knowing", "knows", "know"], "a": 1}, {"q": "Choose the correct order:", "o": ["We watch usually TV", "We usually watch TV", "Usually watch we TV"], "a": 1}, {"q": "He enjoys ___ new people.", "o": ["to meet", "meeting", "meet"], "a": 1}, {"q": "I've decided ___ a photography course.", "o": ["taking", "to take", "take"], "a": 1}, {"q": "This puzzle is ___ easy — I finished in a minute!", "o": ["really", "much", "more"], "a": 0}, {"q": "You're ___ right, one hundred percent!", "o": ["very", "absolutely", "quite"], "a": 1}];
-const GAPS=[{"q": "Right now I ___ (write) a message to Anna.", "a": ["am writing", "'m writing"]}, {"q": "They ___ (not/like) crowded places.", "a": ["don't like", "do not like"]}, {"q": "I can't stand ___ (wait) in long queues.", "a": ["waiting"]}, {"q": "She's ___ bit quiet today. (модификатор)", "a": ["a"]}];
+const RQ=[{"q": "What is small talk usually about?", "o": ["deep personal problems", "light, everyday topics", "business deals"], "a": 1}, {"q": "Why do people use small talk?", "o": ["to be polite and friendly", "to win an argument", "to sell something"], "a": 0}, {"q": "What is the 'trick' to start?", "o": ["talk about yourself only", "ask an easy question and listen", "stay silent"], "a": 1}, {"q": "What makes a conversation easy?", "o": ["finding something in common", "speaking very fast", "using long words"], "a": 0}];
+const EX=[{"q": "Look! The children ___ in the garden.", "o": ["play", "are playing", "plays"], "a": 1}, {"q": "I ___ coffee every single morning.", "o": ["am drinking", "drink", "drinks"], "a": 1}, {"q": "She ___ three languages.", "o": ["is knowing", "knows", "know"], "a": 1}, {"q": "Choose the correct order:", "o": ["We watch usually TV", "We usually watch TV", "Usually watch we TV"], "a": 1}, {"q": "He enjoys ___ new people.", "o": ["to meet", "meeting", "meet"], "a": 1}, {"q": "I've decided ___ a photography course.", "o": ["taking", "to take", "take"], "a": 1}, {"q": "This puzzle is ___ easy — I finished in a minute!", "o": ["really", "much", "more"], "a": 0}, {"q": "You're ___ right, one hundred percent!", "o": ["very", "absolutely", "quite"], "a": 1}, {"q": "My sister ___ tennis every weekend. (привычка)", "o": ["is playing", "plays", "play"], "a": 1}, {"q": "I can't talk now — I ___ dinner.", "o": ["cook", "am cooking", "cooks"], "a": 1}, {"q": "He ___ mind helping other people.", "o": ["doesn't", "isn't", "don't"], "a": 0}, {"q": "She's ___ easy-going than her brother.", "o": ["more", "most", "much"], "a": 0}];
+const GAPS=[{"q": "Right now I ___ (write) a message to Anna.", "a": ["am writing", "'m writing"]}, {"q": "They ___ (not/like) crowded places.", "a": ["don't like", "do not like"]}, {"q": "I can't stand ___ (wait) in long queues.", "a": ["waiting"]}, {"q": "She's ___ bit quiet today. (модификатор)", "a": ["a"]}, {"q": "We have a lot ___ common. (общего)", "a": ["in"]}, {"q": "They ___ (get) on well with their neighbours. (present simple)", "a": ["get"]}];
 const FX=[{"q": "Начни разговор с незнакомцем:", "o": ["Do you mind if I join you?", "Move, please.", "Why are you here?"], "a": 0}, {"q": "Поддержи беседу:", "o": ["Stop talking.", "So, what do you do?", "I don't care."], "a": 1}, {"q": "Вежливо закончи разговор:", "o": ["It was really nice talking to you!", "Bye forever.", "Finally it's over."], "a": 0}];
+const SPEAK=["Расскажи о своём лучшем друге: какой он, чем занимается, как вы познакомились (5–6 предложений).", "Ролевая игра: знакомишься с новым коллегой на вечеринке. Начни разговор, задай 3 вопроса, вежливо закончи.", "Опиши свой характер: 3 плюса и 1 минус — с модификаторами (a bit, really, quite).", "Small talk на 30 секунд: погода + планы на выходные. Говори без длинных пауз."];
 const WBMC=[{"q": "Человек, с которым ты работаешь = a ___ .", "o": ["colleague", "customer", "stranger"], "a": 0}, {"q": "Завести друзей = to ___ friends.", "o": ["make", "do", "get"], "a": 0}, {"q": "У неё отличное чувство юмора = a great sense of ___ .", "o": ["humour", "mood", "feeling"], "a": 0}];
 const WBGAPS=[{"q": "We ___ (get) on really well — present simple.", "a": ["get"]}, {"q": "I'd like ___ (know) you better.", "a": ["to know"]}, {"q": "He is ___ friendly — усилитель «очень».", "a": ["really", "very"]}];
+
 const wbox=document.getElementById("words");
 WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
   d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
@@ -208,11 +239,39 @@ function gapCard(t,n){tot++;const d=document.createElement("div");d.className="c
     else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
   btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1));
+});
+/* Аудирование → вопросы */
 const lq=document.getElementById("lq");LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1)));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1)));
+/* Упражнения */
 const ex=document.getElementById("ex");EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1)));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1)));
+/* How to */
 const fx=document.getElementById("fx");FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1)));
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook */
 const wb=document.getElementById("wb");WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1)));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1)));
 document.getElementById("tot").textContent=tot;
+
 </script>
 </body>
 </html>

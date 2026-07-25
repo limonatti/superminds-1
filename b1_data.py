@@ -633,3 +633,284 @@ WORDS_BY_UNIT = {
 }
 for _u in DATA:
     _u["words"] = WORDS_BY_UNIT[_u["n"]]
+
+# ===================== РАСШИРЕНИЕ: новые секции (оригинальный контент) =====================
+EXTRAS = {}
+MORE_WORDS = {}
+MORE_EX = {}
+MORE_GAPS = {}
+
+# --- U1 People ---
+MORE_WORDS[1]=[["confident","уверенный в себе"],["to get to know","узнать поближе"],["neighbour","сосед"],["classmate","одноклассник"],["to keep in touch","поддерживать связь"],["easy-going","лёгкий в общении"]]
+MORE_EX[1]=[
+ {"q":"My sister ___ tennis every weekend. (привычка)","o":["is playing","plays","play"],"a":1},
+ {"q":"I can't talk now — I ___ dinner.","o":["cook","am cooking","cooks"],"a":1},
+ {"q":"He ___ mind helping other people.","o":["doesn't","isn't","don't"],"a":0},
+ {"q":"She's ___ easy-going than her brother.","o":["more","most","much"],"a":0},
+]
+MORE_GAPS[1]=[
+ {"q":"We have a lot ___ common. (общего)","a":["in"]},
+ {"q":"They ___ (get) on well with their neighbours. (present simple)","a":["get"]},
+]
+EXTRAS[1]={
+ "pron_focus":"звук /ŋ/ в -ing","pron_note":"Окончание <b>-ing</b> — носовой /ŋ/, без «г» на конце. Нажми и повтори.",
+ "pron_words":["outgoing","meeting","talking","working","laughing","amazing","interesting"],
+ "chunks":[["to get on well with","хорошо ладить с"],["a sense of humour","чувство юмора"],["to make friends","заводить друзей"],["do you mind if I…?","не против, если я…?"],["nice to meet you","приятно познакомиться"],["what do you do?","кем работаешь?"],["to have a lot in common","иметь много общего"],["to keep in touch","поддерживать связь"]],
+ "reading_title":"The art of small talk",
+ "reading":r'''<p>Small talk is the light, friendly conversation we have with people we don't know well. In many English-speaking countries it is completely normal to chat about the weather, the weekend or a TV show while you wait for a bus or a coffee. <b>Small talk</b> is not about deep ideas — it is a way of being polite and showing that you are open and friendly.</p>
+<p>Many people say they are 'a bit shy' and find it hard to start. The trick is simple: ask an easy question and really listen to the answer. 'How's it going?' or 'Have you been here before?' are enough. If you find something <b>in common</b> — a hobby, a place, a favourite team — the conversation becomes easy, and a stranger can slowly turn into a friend.</p>''',
+ "rq":[
+  {"q":"What is small talk usually about?","o":["deep personal problems","light, everyday topics","business deals"],"a":1},
+  {"q":"Why do people use small talk?","o":["to be polite and friendly","to win an argument","to sell something"],"a":0},
+  {"q":"What is the 'trick' to start?","o":["talk about yourself only","ask an easy question and listen","stay silent"],"a":1},
+  {"q":"What makes a conversation easy?","o":["finding something in common","speaking very fast","using long words"],"a":0},
+ ],
+ "speaking":[
+  "Расскажи о своём лучшем друге: какой он, чем занимается, как вы познакомились (5–6 предложений).",
+  "Ролевая игра: знакомишься с новым коллегой на вечеринке. Начни разговор, задай 3 вопроса, вежливо закончи.",
+  "Опиши свой характер: 3 плюса и 1 минус — с модификаторами (a bit, really, quite).",
+  "Small talk на 30 секунд: погода + планы на выходные. Говори без длинных пауз.",
+ ],
+}
+
+# --- U2 Tale tellers ---
+MORE_WORDS[2]=[["fairy tale","сказка"],["hero","герой"],["villain","злодей"],["to take place","происходить (о действии)"],["boring","скучный"],["exciting","захватывающий"]]
+MORE_EX[2]=[
+ {"q":"We ___ dinner when the storm started.","o":["had","were having","have had"],"a":1},
+ {"q":"I ___ never ___ such a scary film before that night.","o":["have / seen","had / seen","was / seeing"],"a":1},
+ {"q":"They got married ___ 2015.","o":["at","on","in"],"a":2},
+ {"q":"The story ___ place in a small village.","o":["takes","is taking","take"],"a":0},
+]
+MORE_GAPS[2]=[
+ {"q":"I've ___ seen this film — one minute ago. (только что)","a":["just"]},
+ {"q":"The sun was shining ___ we walked. (в то время как)","a":["while"]},
+]
+EXTRAS[2]={
+ "pron_focus":"-ed: /t/, /d/, /ɪd/","pron_note":"Окончание <b>-ed</b> звучит по-разному: /t/ (walked), /d/ (played), /ɪd/ (started). Слушай.",
+ "pron_words":["walked","watched","played","opened","started","wanted","happened"],
+ "chunks":[["once upon a time","жили-были"],["all of a sudden","внезапно"],["to be based on","быть основанным на"],["a plot twist","поворот сюжета"],["it turned out that…","оказалось, что…"],["in the end","в конце концов"],["to fall asleep","заснуть"],["a happy ending","счастливый конец"]],
+ "reading_title":"Why we love scary stories",
+ "reading":r'''<p>Humans have told stories for thousands of years. Long before books or films, people sat around a fire and shared tales of heroes, monsters and strange events. A good story has a clear <b>plot</b>, interesting characters and, very often, a surprising <b>twist</b> at the end.</p>
+<p>Scary stories are especially popular. Why do we enjoy being frightened? Scientists say that when we feel safe — on a sofa, not in real danger — a little fear is exciting. Our heart beats faster and then we relax. It <b>turned out</b> that sharing a scary story with friends also brings people closer together. So next time the lights go out, tell a tale!</p>''',
+ "rq":[
+  {"q":"How did people share stories before books?","o":["by phone","around a fire","by letter"],"a":1},
+  {"q":"What does a good story usually have?","o":["only facts","a plot, characters and a twist","no ending"],"a":1},
+  {"q":"Why do we enjoy scary stories?","o":["a little fear feels exciting when we're safe","we like real danger","they are always true"],"a":0},
+  {"q":"What else does a shared scary story do?","o":["makes people tired","brings people closer","costs money"],"a":1},
+ ],
+ "speaking":[
+  "Расскажи короткую историю о странном или смешном случае. Используй narrative tenses (While I was…, I had…).",
+  "Опиши любимый фильм: сюжет, главный герой, чем закончился (не спойлеря концовку сильно).",
+  "Извинись: ты опоздал(а) на встречу. Скажи 3 фразы (I'm so sorry… / It was my fault… / It won't…).",
+  "Продолжи: «Once upon a time there was…» — придумай 4 предложения.",
+ ],
+}
+
+# --- U3 Questions ---
+MORE_WORDS[3]=[["to book","бронировать"],["ticket","билет"],["museum","музей"],["nearby","поблизости"],["entrance","вход"],["to recommend","рекомендовать"]]
+MORE_EX[3]=[
+ {"q":"___ does the museum open? — At nine.","o":["What time","How many","How much"],"a":0},
+ {"q":"Who ___ the window? It's cold now.","o":["did open","opened","open"],"a":1},
+ {"q":"I think it ___ be busy on Saturday.","o":["is going","will","do"],"a":1},
+ {"q":"Could you ___ me a good café nearby?","o":["recommend","recommends","recommending"],"a":0},
+]
+MORE_GAPS[3]=[
+ {"q":"Do you know ___ the station is? (косвенный вопрос)","a":["where"]},
+ {"q":"I'll ___ out the price and text you. (phrasal — узнать)","a":["find"]},
+]
+EXTRAS[3]={
+ "pron_focus":"интонация вопросов","pron_note":"Yes/No-вопросы — интонация вверх ↗; Wh-вопросы — вниз ↘. Слушай и повтори.",
+ "pron_words":["Do you like it?","Are you ready?","Where do you live?","What time is it?","Can you help?","How are you?"],
+ "chunks":[["could you tell me…?","не подскажете…?"],["do you know if…?","вы не знаете, …?"],["what are you up to?","чем занимаешься?"],["how's it going?","как дела?"],["to find out","узнать"],["to fill in a form","заполнить бланк"],["to turn up","появиться, прийти"],["on purpose","нарочно"]],
+ "reading_title":"The city that never sleeps",
+ "reading":r'''<p>Some cities feel alive at every hour. In a big city you can <b>find out</b> what's happening simply by walking around: markets in the morning, offices at noon, music and lights at night. Tourists often ask the same questions — 'Could you tell me where the station is?' or 'Do you know if the museum is open?'</p>
+<p>Locals are usually happy to help. A polite question and a smile open many doors. If you plan a trip, it's a good idea to <b>book</b> tickets online and check the opening times. And don't be afraid to get lost: sometimes the best places are the ones you <b>turn up</b> at by accident.</p>''',
+ "rq":[
+  {"q":"How can you find out what's happening in a big city?","o":["by walking around","by staying in the hotel","by sleeping"],"a":0},
+  {"q":"What questions do tourists often ask?","o":["about prices of houses","directions and opening times","about the weather only"],"a":1},
+  {"q":"What opens many doors?","o":["a polite question and a smile","money only","a map"],"a":0},
+  {"q":"What is a good idea before a trip?","o":["book tickets and check times","never plan anything","travel with no phone"],"a":0},
+ ],
+ "speaking":[
+  "Придумай 6 вопросов новому другу (Yes/No, Wh-, один subject question — «Who…?»).",
+  "Ролевая игра: спроси у прохожего дорогу до вокзала — вежливо (Could you tell me…?).",
+  "Расскажи 3 плана на выходные: going to / Present Continuous / will.",
+  "Опиши свой город туристу: что посмотреть, где поесть, как добраться.",
+ ],
+}
+
+# --- U4 Winners ---
+MORE_WORDS[4]=[["referee","судья"],["fan","болельщик"],["stadium","стадион"],["to celebrate","праздновать"],["opponent","соперник"],["fair","честный"]]
+MORE_EX[4]=[
+ {"q":"Players ___ respect the referee.","o":["have to","don't have to","mustn't"],"a":0},
+ {"q":"You ___ shout at the fans. It's not allowed.","o":["mustn't","don't have to","should"],"a":0},
+ {"q":"It was ___ best match I've ever seen.","o":["a","the","an"],"a":1},
+ {"q":"I love ___ football on Sundays. (в общем)","o":["a","the","—"],"a":2},
+]
+MORE_GAPS[4]=[
+ {"q":"You ___ (should) warm up before you run. (совет)","a":["should"]},
+ {"q":"She's the ___ (fast) runner in the team.","a":["fastest"]},
+]
+EXTRAS[4]={
+ "pron_focus":"слабое 'to' /tə/","pron_note":"В <b>have to</b> и глаголах 'to' часто звучит слабо — /tə/. Слушай естественный ритм.",
+ "pron_words":["have to","want to","need to","going to","try to","the best","the worst"],
+ "chunks":[["to do your best","стараться изо всех сил"],["to give up","сдаваться"],["to beat the record","побить рекорд"],["well done!","молодец!"],["good luck!","удачи!"],["the best I've ever…","лучшее, что я когда-либо…"],["to be allowed to","иметь право"],["fair play","честная игра"]],
+ "reading_title":"What makes a real winner",
+ "reading":r'''<p>We often think a winner is the person with the most medals. But many coaches say that real winning is about effort, not just results. You <b>have to</b> train when you are tired, and you <b>mustn't</b> give up after a bad day. Talent helps, but hard work matters more.</p>
+<p>Fair play is also part of winning. A true champion respects the referee, shakes hands with the <b>opponent</b> and celebrates without laughing at others. That is the best kind of victory. As one runner said, it was <b>the best race she had ever run</b> — not because she was first, but because she never stopped trying.</p>''',
+ "rq":[
+  {"q":"According to coaches, real winning is about…","o":["only medals","effort, not just results","being lucky"],"a":1},
+  {"q":"What must a winner NOT do?","o":["train hard","give up after a bad day","respect the referee"],"a":1},
+  {"q":"What is part of fair play?","o":["respecting the opponent","laughing at others","ignoring the rules"],"a":0},
+  {"q":"Why was it her best race?","o":["she came first","she never stopped trying","it was short"],"a":1},
+ ],
+ "speaking":[
+  "Расскажи о своём любимом спорте: правила (have to / mustn't / can), почему нравится.",
+  "Ролевая игра: поздравь друга с победой и подбодри проигравшего (Well done! / Bad luck, but…).",
+  "«The best … I've ever …» — 3 предложения о лучших вещах в твоей жизни.",
+  "Опиши правила в школе/на работе: что нужно, что нельзя, что можно (must / mustn't / can).",
+ ],
+}
+print("B1 extras 1-4 ready")
+
+# --- U5 News ---
+MORE_WORDS[5]=[["front page","первая полоса"],["to interview","брать интервью"],["editor","редактор"],["trustworthy","заслуживающий доверия"],["to double-check","перепроверять"],["comment section","раздел комментариев"]]
+MORE_EX[5]=[
+ {"q":"The woman ___ won the prize is my aunt.","o":["who","which","where"],"a":0},
+ {"q":"That's the app ___ everyone is talking about.","o":["who","which","whose"],"a":1},
+ {"q":"He said he ___ tired after the trip.","o":["is","was","will be"],"a":1},
+ {"q":"I ___ come tonight, but I'm not sure.","o":["will","might","am going to"],"a":1},
+]
+MORE_GAPS[5]=[
+ {"q":"She told ___ the news yesterday. (кому)","a":["me"]},
+ {"q":"It ___ (may) rain later — прогноз с сомнением.","a":["might"]},
+]
+EXTRAS[5]={
+ "pron_focus":"ударение в словах на -ion","pron_note":"В словах на <b>-ion</b> ударение падает на слог перед -ion: informAtion, deCIsion. Слушай.",
+ "pron_words":["information","decision","question","opinion","television","connection","education"],
+ "chunks":[["to break the news","сообщить новость"],["to go viral","стать вирусным"],["fake news","фейковые новости"],["a reliable source","надёжный источник"],["guess what!","угадай что!"],["you'll never believe…","ни за что не поверишь…"],["as far as I know","насколько я знаю"],["to keep up with the news","следить за новостями"]],
+ "reading_title":"Can you trust the news?",
+ "reading":r'''<p>Today anyone can post a story online, and in seconds it can <b>go viral</b>. That is exciting, but it also means that <b>fake news</b> spreads just as fast as the truth. A shocking headline gets millions of clicks — even when it is completely false.</p>
+<p>So how can you protect yourself? Check the <b>source</b>. Is it a well-known newspaper or a random account? Read past the headline, and see if other <b>reliable</b> sites report the same thing. If a story sounds too strange to be true, double-check before you share it. Being a smart reader is now as important as being a good writer.</p>''',
+ "rq":[
+  {"q":"What can happen to a story in seconds?","o":["it can go viral","it disappears","it becomes a book"],"a":0},
+  {"q":"What spreads as fast as the truth?","o":["fake news","good grammar","photos"],"a":0},
+  {"q":"What gets millions of clicks?","o":["a boring headline","a shocking headline","a long article"],"a":1},
+  {"q":"What should you do before sharing?","o":["double-check the source","share immediately","only read the headline"],"a":0},
+ ],
+ "speaking":[
+  "Перескажи 3 новости, которые слышал(а) недавно (She said… / They told me…).",
+  "Сообщи другу неожиданную новость и отреагируй на его (Guess what! / No way! / That's terrible).",
+  "Дай 3 прогноза на следующий год: will / might / going to.",
+  "Обсуди: как отличить настоящую новость от фейка? Скажи 3–4 предложения.",
+ ],
+}
+
+# --- U6 Creators ---
+MORE_WORDS[6]=[["brush","кисть"],["canvas","холст"],["portrait","портрет"],["photograph","фотография"],["to imagine","воображать"],["original","самобытный"]]
+MORE_EX[6]=[
+ {"q":"I ___ love cartoons when I was little.","o":["used to","use to","am used to"],"a":0},
+ {"q":"This museum is ___ interesting than that one.","o":["more","most","much"],"a":0},
+ {"q":"It's the ___ painting in the gallery. (beautiful)","o":["more beautiful","most beautiful","beautifullest"],"a":1},
+ {"q":"I've known her ___ 2019.","o":["for","since","ago"],"a":1},
+]
+MORE_GAPS[6]=[
+ {"q":"___ you use to draw as a child? (вопрос)","a":["did"]},
+ {"q":"We've been here ___ two hours. (срок)","a":["for"]},
+]
+EXTRAS[6]={
+ "pron_focus":"ударение в длинных словах","pron_note":"Ставь ударение на нужный слог: INteresting, exhiBItion, oRIGinal. Слушай и повтори.",
+ "pron_words":["interesting","beautiful","exhibition","photograph","creative","original","colourful"],
+ "chunks":[["what do you think of…?","как тебе…?"],["in my opinion","по-моему"],["I couldn't agree more","полностью согласен"],["a work of art","произведение искусства"],["to be into (art)","увлекаться (искусством)"],["not my cup of tea","не моё, не по вкусу"],["for ages","целую вечность"],["to grow on someone","начать нравиться со временем"]],
+ "reading_title":"The child who drew on walls",
+ "reading":r'''<p>When she was small, Mia drew on everything — walls, tables, even her shoes. Her parents were not happy, but her grandmother said, 'Let her create.' Mia <b>used to</b> spend hours imagining new worlds with a simple pencil.</p>
+<p>Years later, Mia became a designer. She says the most important thing is not talent but curiosity. 'A <b>work of art</b> starts with a question: what if?' Modern art is not always easy to understand, and it may not be everyone's <b>cup of tea</b>. But, she smiles, sometimes a strange painting slowly <b>grows on you</b> — just like her drawings once grew on her family.</p>''',
+ "rq":[
+  {"q":"What did Mia draw on as a child?","o":["only paper","everything, even her shoes","nothing"],"a":1},
+  {"q":"What did her grandmother say?","o":["'Stop that'","'Let her create'","'Buy new shoes'"],"a":1},
+  {"q":"What does Mia think is most important?","o":["talent","curiosity","money"],"a":1},
+  {"q":"What can a strange painting sometimes do?","o":["grow on you","disappear","stay ugly forever"],"a":0},
+ ],
+ "speaking":[
+  "Опиши, каким было место или ты сам(а) раньше и сейчас: 3 предложения с used to + 2 сравнения.",
+  "Спроси мнение и вырази своё о картине/фильме (What do you think of…? / In my opinion…).",
+  "Расскажи о хобби, которым занимаешься долго: Present Perfect с for/since.",
+  "Опиши произведение искусства, которое тебе нравится, и объясни почему.",
+ ],
+}
+
+# --- U7 Travel ---
+MORE_WORDS[7]=[["passport","паспорт"],["boarding pass","посадочный талон"],["to get lost","заблудиться"],["accommodation","жильё"],["return ticket","билет туда-обратно"],["to sunbathe","загорать"]]
+MORE_EX[7]=[
+ {"q":"If we ___ early, we'll avoid the traffic.","o":["leave","will leave","left"],"a":0},
+ {"q":"If I ___ you, I'd book the hotel now.","o":["am","were","will be"],"a":1},
+ {"q":"There isn't ___ time before the flight.","o":["many","much","few"],"a":1},
+ {"q":"She put up the tent ___ .","o":["himself","herself","yourself"],"a":1},
+]
+MORE_GAPS[7]=[
+ {"q":"We won't get lost ___ we follow the map. (if not)","a":["unless"]},
+ {"q":"I don't have ___ cash with me. (отриц.)","a":["any"]},
+]
+EXTRAS[7]={
+ "pron_focus":"звук /ɜː/ (bird)","pron_note":"Долгий звук <b>/ɜː/</b>: world, girl, first. Округли губы, тяни. Слушай.",
+ "pron_words":["world","first","girl","learn","turn","work","journey"],
+ "chunks":[["to book a flight","забронировать рейс"],["to check in","зарегистрироваться"],["to get lost","заблудиться"],["it's worth seeing","стоит увидеть"],["I'd recommend…","советую…"],["to travel light","путешествовать налегке"],["off the beaten track","вдали от туристов"],["by myself","самостоятельно"]],
+ "reading_title":"Slow travel",
+ "reading":r'''<p>Many people try to see ten cities in ten days. They take hundreds of photos but remember almost nothing. A new idea called 'slow travel' says the opposite: stay longer, do less, feel more. Instead of rushing, you <b>travel light</b>, walk a lot and talk to local people.</p>
+<p>Slow travellers often go <b>off the beaten track</b>. They skip the busiest sights and find a small café, a quiet beach or a market where nobody speaks English. It can be scary to explore <b>by yourself</b>, but that is where the best stories come from. As one traveller said, 'I'd recommend getting a little lost.'</p>''',
+ "rq":[
+  {"q":"What do many tourists do?","o":["stay in one place","see many cities very fast","never take photos"],"a":1},
+  {"q":"What does 'slow travel' suggest?","o":["stay longer and do less","visit more places","travel with heavy bags"],"a":0},
+  {"q":"Where do slow travellers often go?","o":["only famous sights","off the beaten track","home early"],"a":1},
+  {"q":"What does the traveller recommend?","o":["getting a little lost","booking every hour","staying in the hotel"],"a":0},
+ ],
+ "speaking":[
+  "Спланируй поездку мечты: 2 предложения в 1st conditional и 1 во 2nd conditional.",
+  "Порекомендуй туристу свой город: 3 совета (You should… / It's worth… / I'd recommend…).",
+  "Расскажи о поездке, где что-то пошло не так (задержка, потерялся) — narrative tenses.",
+  "Обсуди: что лучше — быстрый тур или slow travel? Объясни своё мнение.",
+ ],
+}
+
+# --- U8 Know-how ---
+MORE_WORDS[8]=[["app","приложение"],["software","ПО, программа"],["to restart","перезагрузить"],["to solve","решать"],["broken","сломанный"],["handy","удобный, под рукой"]]
+MORE_EX[8]=[
+ {"q":"I ___ read when I was five. (past ability)","o":["can","could","am able"],"a":1},
+ {"q":"The report ___ every Monday. (passive present)","o":["writes","is written","wrote"],"a":1},
+ {"q":"___ is my favourite way to relax. (-ing подлежащее)","o":["Cook","Cooking","To cooking"],"a":1},
+ {"q":"She's really good ___ solving problems.","o":["at","in","of"],"a":0},
+]
+MORE_GAPS[8]=[
+ {"q":"I've never been ___ to draw well. (ability)","a":["able"]},
+ {"q":"This bridge ___ (build) in 1930. (passive past)","a":["was built"]},
+]
+EXTRAS[8]={
+ "pron_focus":"звуки /dʒ/ и /tʃ/","pron_note":"<b>/dʒ/</b>: gadget, digital · <b>/tʃ/</b>: touch, switch. Слушай разницу.",
+ "pron_words":["charge","gadget","digital","message","touch","watch","switch"],
+ "chunks":[["to plug in","включить в розетку"],["to run out of battery","разрядиться"],["there's something wrong with…","что-то не так с…"],["it won't turn on","не включается"],["to figure out","разобраться"],["user-friendly","удобный в использовании"],["to back up files","делать резервную копию"],["it keeps crashing","постоянно виснет"]],
+ "reading_title":"When machines say no",
+ "reading":r'''<p>We all know the feeling. You are in a hurry, you press the button, and the screen just freezes. <b>There's something wrong with</b> the machine, and it always happens at the worst moment. Technology is amazing — until it <b>won't turn on</b>.</p>
+<p>The good news is that most problems have simple answers. Is it charged? Have you tried to restart it? Engineers say that <b>figuring out</b> a problem step by step is a skill anyone can learn. And a smart habit saves a lot of tears: always <b>back up your files</b>. Machines break, but your photos and homework don't have to disappear with them.</p>''',
+ "rq":[
+  {"q":"When do machine problems often happen?","o":["at the worst moment","only at night","never"],"a":0},
+  {"q":"What is the good news?","o":["machines never break","most problems have simple answers","you need to be an engineer"],"a":1},
+  {"q":"What skill can anyone learn?","o":["figuring out a problem step by step","building a computer","writing code fast"],"a":0},
+  {"q":"What smart habit saves tears?","o":["backing up your files","buying new devices","turning everything off"],"a":0},
+ ],
+ "speaking":[
+  "Опиши гаджет, которым пользуешься: что он умеет (can / be able to), закончи фразой с -ing.",
+  "Ролевая игра: у тебя сломался телефон — опиши проблему в сервисе (There's something wrong with…).",
+  "Объясни, как что-то делается (пассив): «Coffee is grown… / Cars are made…» — 3 предложения.",
+  "Дай совет другу с ноутбуком, который виснет: 3 шага (Have you tried…? / You should…).",
+ ],
+}
+
+# ===================== Слияние расширений + META =====================
+for _u in DATA:
+    n=_u["n"]
+    _u["words"]  = _u["words"] + MORE_WORDS[n]
+    _u["ex"]     = _u["ex"]   + MORE_EX[n]
+    _u["gaps"]   = _u["gaps"] + MORE_GAPS[n]
+    _u.update(EXTRAS[n])
+
+META = {"prefix":"speakout-b1","level":"B1","hub":"speakout-b1-course.html","trainer":"speakout-b1.html","cover_base":""}

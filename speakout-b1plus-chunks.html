@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тренажёр чанков · Speakout B1+ · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:720px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;color:#7c2340;font-size:clamp(24px,5vw,34px);margin:6px 4px 4px}
+  .sub{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 16px}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+  .seg{display:inline-flex;background:#fff;border-radius:999px;box-shadow:0 3px 0 #e3d3ba;overflow:hidden}
+  .seg button{border:none;background:none;cursor:pointer;font:800 13px 'Nunito',sans-serif;padding:9px 16px;color:#7c2340}
+  .seg button.on{background:#7c2340;color:#fff}
+  select{border:2px solid #e3d3ba;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;background:#fff;color:#7c2340;outline:none}
+  .count{font-weight:800;font-size:13px;color:#8a7a68;margin-left:auto}
+  /* карточка */
+  .flash{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:36px 24px;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none}
+  .flash .en{font-family:'Fredoka',sans-serif;font-size:clamp(24px,6vw,34px);color:#7c2340}
+  .flash .ru{font-size:20px;color:#1c1310;font-weight:800}
+  .flash .hint{font-size:12px;color:#b0a290;font-weight:700;margin-top:14px}
+  .flash .u{position:relative;top:-10px;font-size:11px;color:#b5654a;font-weight:900;letter-spacing:1px}
+  .row{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .btn{border:none;cursor:pointer;border-radius:999px;font:800 14px 'Nunito',sans-serif;padding:11px 18px}
+  .btn.p{background:#7c2340;color:#fff}
+  .btn.a{background:#e0952a;color:#fff}
+  .btn.s{background:#fff;color:#7c2340;box-shadow:0 3px 0 #e3d3ba}
+  /* квиз */
+  .q{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;text-align:center;margin:8px 0 16px}
+  .opts{display:grid;gap:10px}
+  .opt{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 15px 'Nunito',sans-serif;padding:14px 16px;border-radius:14px;text-align:left}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .score{background:#7c2340;color:#fff;border-radius:14px;padding:10px 16px;font-weight:900;text-align:center;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="speakout-b1plus-course.html">← Все юниты</a>
+    <a class="home alt" href="speakout-b1plus.html">🎯 Тренажёр</a>
+    <a class="home" href="index.html">🏠 Домой</a>
+  </div>
+  <h1>🧩 Тренажёр чанков · B1+</h1>
+  <div class="sub">Слова и выражения целиком — учи фразой, а не по словам</div>
+  <div class="bar">
+    <div class="seg" id="mode">
+      <button data-m="learn" class="on">📚 Учить</button>
+      <button data-m="quiz">🎯 Квиз</button>
+    </div>
+    <select id="unit"></select>
+    <span class="count" id="count"></span>
+  </div>
+  <div id="view"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+</div>
+</div>
+<script src="sm-voice.js"></script>
+<script>
+const DECK=[{"en": "it belonged to…", "ru": "это принадлежало…", "u": 1}, {"en": "to be worth a lot", "ru": "стоить много", "u": 1}, {"en": "sentimental value", "ru": "дорог как память", "u": 1}, {"en": "to hold onto something", "ru": "хранить, не расставаться", "u": 1}, {"en": "to pass down", "ru": "передавать по наследству", "u": 1}, {"en": "a one-off", "ru": "единственный в своём роде", "u": 1}, {"en": "to come across", "ru": "случайно найти", "u": 1}, {"en": "for as long as I can remember", "ru": "сколько себя помню", "u": 1}, {"en": "leather", "ru": "кожа (материал)", "u": 1}, {"en": "wooden", "ru": "деревянный", "u": 1}, {"en": "silver", "ru": "серебряный", "u": 1}, {"en": "plastic", "ru": "пластиковый", "u": 1}, {"en": "belongings", "ru": "личные вещи", "u": 1}, {"en": "possession", "ru": "имущество, вещь", "u": 1}, {"en": "valuable", "ru": "ценный", "u": 1}, {"en": "worthless", "ru": "ничего не стоящий", "u": 1}, {"en": "damaged", "ru": "повреждённый", "u": 1}, {"en": "in good condition", "ru": "в хорошем состоянии", "u": 1}, {"en": "to inherit", "ru": "унаследовать", "u": 1}, {"en": "to belong to", "ru": "принадлежать (кому-то)", "u": 1}, {"en": "sentimental value", "ru": "дорог как память", "u": 1}, {"en": "second-hand", "ru": "подержанный", "u": 1}, {"en": "antique", "ru": "антиквариат", "u": 1}, {"en": "to treasure", "ru": "дорожить", "u": 1}, {"en": "heirloom", "ru": "семейная реликвия", "u": 1}, {"en": "clutter", "ru": "хлам, беспорядок", "u": 1}, {"en": "to declutter", "ru": "разбирать хлам", "u": 1}, {"en": "keepsake", "ru": "памятная вещь", "u": 1}, {"en": "it drives me mad", "ru": "это меня бесит", "u": 2}, {"en": "a pet hate", "ru": "что особенно бесит", "u": 2}, {"en": "to be used to", "ru": "привыкнуть к", "u": 2}, {"en": "to put up with", "ru": "мириться с", "u": 2}, {"en": "good manners", "ru": "хорошие манеры", "u": 2}, {"en": "on purpose", "ru": "нарочно", "u": 2}, {"en": "to get on someone's nerves", "ru": "действовать на нервы", "u": 2}, {"en": "I can't stand it", "ru": "терпеть не могу", "u": 2}, {"en": "habit", "ru": "привычка", "u": 2}, {"en": "to give up", "ru": "бросить (привычку)", "u": 2}, {"en": "to take up", "ru": "начать (хобби)", "u": 2}, {"en": "pet hate", "ru": "то, что особенно бесит", "u": 2}, {"en": "annoying", "ru": "раздражающий", "u": 2}, {"en": "to chew", "ru": "жевать", "u": 2}, {"en": "to interrupt", "ru": "перебивать", "u": 2}, {"en": "punctual", "ru": "пунктуальный", "u": 2}, {"en": "routine", "ru": "распорядок дня", "u": 2}, {"en": "to get used to", "ru": "привыкать", "u": 2}, {"en": "messy", "ru": "неаккуратный", "u": 2}, {"en": "tidy", "ru": "аккуратный", "u": 2}, {"en": "to bite your nails", "ru": "грызть ногти", "u": 2}, {"en": "mood", "ru": "настроение", "u": 2}, {"en": "annoyed", "ru": "раздражённый", "u": 2}, {"en": "polite", "ru": "вежливый", "u": 2}, {"en": "rude", "ru": "грубый", "u": 2}, {"en": "to apologise", "ru": "извиняться", "u": 2}, {"en": "behaviour", "ru": "поведение", "u": 2}, {"en": "considerate", "ru": "внимательный к другим", "u": 2}, {"en": "to apply for a job", "ru": "подать на работу", "u": 3}, {"en": "to work overtime", "ru": "работать сверхурочно", "u": 3}, {"en": "a nine-to-five", "ru": "работа с 9 до 5", "u": 3}, {"en": "to be off sick", "ru": "быть на больничном", "u": 3}, {"en": "to hand in your notice", "ru": "подать заявление об уходе", "u": 3}, {"en": "a dream job", "ru": "работа мечты", "u": 3}, {"en": "to get promoted", "ru": "получить повышение", "u": 3}, {"en": "work-life balance", "ru": "баланс работы и жизни", "u": 3}, {"en": "salary", "ru": "зарплата", "u": 3}, {"en": "to apply for", "ru": "подать заявку на", "u": 3}, {"en": "interview", "ru": "собеседование", "u": 3}, {"en": "CV", "ru": "резюме", "u": 3}, {"en": "overtime", "ru": "сверхурочные", "u": 3}, {"en": "deadline", "ru": "крайний срок", "u": 3}, {"en": "colleague", "ru": "коллега", "u": 3}, {"en": "boss", "ru": "начальник", "u": 3}, {"en": "to hire", "ru": "нанять", "u": 3}, {"en": "to quit", "ru": "уволиться", "u": 3}, {"en": "promotion", "ru": "повышение", "u": 3}, {"en": "day off", "ru": "выходной", "u": 3}, {"en": "to work from home", "ru": "работать из дома", "u": 3}, {"en": "experience", "ru": "опыт", "u": 3}, {"en": "employee", "ru": "сотрудник", "u": 3}, {"en": "employer", "ru": "работодатель", "u": 3}, {"en": "shift", "ru": "смена", "u": 3}, {"en": "wage", "ru": "почасовая оплата", "u": 3}, {"en": "to commute", "ru": "ездить на работу", "u": 3}, {"en": "freelance", "ru": "фриланс", "u": 3}, {"en": "to make something up", "ru": "выдумать", "u": 4}, {"en": "to spread a rumour", "ru": "распускать слух", "u": 4}, {"en": "to check the facts", "ru": "проверять факты", "u": 4}, {"en": "believe it or not", "ru": "хочешь верь, хочешь нет", "u": 4}, {"en": "to fall for it", "ru": "повестись", "u": 4}, {"en": "a white lie", "ru": "ложь во спасение", "u": 4}, {"en": "as far as I know", "ru": "насколько я знаю", "u": 4}, {"en": "to be taken in", "ru": "быть обманутым", "u": 4}, {"en": "hoax", "ru": "розыгрыш, обман", "u": 4}, {"en": "to lie", "ru": "лгать", "u": 4}, {"en": "a lie", "ru": "ложь", "u": 4}, {"en": "the truth", "ru": "правда", "u": 4}, {"en": "to trust", "ru": "доверять", "u": 4}, {"en": "headline", "ru": "заголовок", "u": 4}, {"en": "source", "ru": "источник", "u": 4}, {"en": "evidence", "ru": "доказательство", "u": 4}, {"en": "to check facts", "ru": "проверять факты", "u": 4}, {"en": "rumour", "ru": "слух", "u": 4}, {"en": "to spread", "ru": "распространяться", "u": 4}, {"en": "believable", "ru": "правдоподобный", "u": 4}, {"en": "to deceive", "ru": "обмануть", "u": 4}, {"en": "to make up", "ru": "выдумать", "u": 4}, {"en": "to exaggerate", "ru": "преувеличивать", "u": 4}, {"en": "to doubt", "ru": "сомневаться", "u": 4}, {"en": "to confirm", "ru": "подтверждать", "u": 4}, {"en": "genuine", "ru": "подлинный", "u": 4}, {"en": "misleading", "ru": "вводящий в заблуждение", "u": 4}, {"en": "gossip", "ru": "сплетни", "u": 4}, {"en": "a good deal", "ru": "выгодная сделка", "u": 5}, {"en": "to be on sale", "ru": "быть со скидкой", "u": 5}, {"en": "value for money", "ru": "цена-качество", "u": 5}, {"en": "to save up for", "ru": "копить на", "u": 5}, {"en": "window shopping", "ru": "разглядывание витрин", "u": 5}, {"en": "to splash out", "ru": "потратиться", "u": 5}, {"en": "to take it back", "ru": "вернуть товар", "u": 5}, {"en": "is it worth it?", "ru": "оно того стоит?", "u": 5}, {"en": "refund", "ru": "возврат денег", "u": 5}, {"en": "receipt", "ru": "чек", "u": 5}, {"en": "bargain", "ru": "выгодная покупка", "u": 5}, {"en": "discount", "ru": "скидка", "u": 5}, {"en": "to complain", "ru": "жаловаться", "u": 5}, {"en": "customer", "ru": "покупатель", "u": 5}, {"en": "advert", "ru": "реклама", "u": 5}, {"en": "brand", "ru": "бренд", "u": 5}, {"en": "to deliver", "ru": "доставлять", "u": 5}, {"en": "out of stock", "ru": "нет в наличии", "u": 5}, {"en": "to try on", "ru": "примерить", "u": 5}, {"en": "size", "ru": "размер", "u": 5}, {"en": "quality", "ru": "качество", "u": 5}, {"en": "to overspend", "ru": "потратить лишнее", "u": 5}, {"en": "to afford", "ru": "позволить себе", "u": 5}, {"en": "warranty", "ru": "гарантия", "u": 5}, {"en": "second-hand", "ru": "б/у", "u": 5}, {"en": "to compare prices", "ru": "сравнивать цены", "u": 5}, {"en": "cash", "ru": "наличные", "u": 5}, {"en": "to return", "ru": "возвращать (товар)", "u": 5}, {"en": "to get used to", "ru": "привыкать к", "u": 6}, {"en": "off the beaten track", "ru": "вдали от туристов", "u": 6}, {"en": "a stone's throw away", "ru": "в двух шагах", "u": 6}, {"en": "the hustle and bustle", "ru": "городская суета", "u": 6}, {"en": "a lively neighbourhood", "ru": "оживлённый район", "u": 6}, {"en": "it's worth a visit", "ru": "стоит посетить", "u": 6}, {"en": "to settle in", "ru": "обжиться", "u": 6}, {"en": "a green space", "ru": "зелёная зона", "u": 6}, {"en": "suburbs", "ru": "пригород", "u": 6}, {"en": "commute", "ru": "дорога на работу", "u": 6}, {"en": "rush hour", "ru": "час пик", "u": 6}, {"en": "traffic jam", "ru": "пробка", "u": 6}, {"en": "pedestrian", "ru": "пешеход", "u": 6}, {"en": "crowded", "ru": "многолюдный", "u": 6}, {"en": "lively", "ru": "оживлённый", "u": 6}, {"en": "noisy", "ru": "шумный", "u": 6}, {"en": "public transport", "ru": "общественный транспорт", "u": 6}, {"en": "tram", "ru": "трамвай", "u": 6}, {"en": "neighbourhood", "ru": "район", "u": 6}, {"en": "local", "ru": "местный (житель)", "u": 6}, {"en": "convenient", "ru": "удобный", "u": 6}, {"en": "green spaces", "ru": "зелёные зоны", "u": 6}, {"en": "skyscraper", "ru": "небоскрёб", "u": 6}, {"en": "outskirts", "ru": "окраина", "u": 6}, {"en": "cycle lane", "ru": "велодорожка", "u": 6}, {"en": "district", "ru": "район", "u": 6}, {"en": "landmark", "ru": "достопримечательность", "u": 6}, {"en": "to get around", "ru": "передвигаться", "u": 6}, {"en": "to keep in touch", "ru": "поддерживать связь", "u": 7}, {"en": "to get through to someone", "ru": "дозвониться", "u": 7}, {"en": "to drop someone a line", "ru": "черкнуть пару строк", "u": 7}, {"en": "face to face", "ru": "лицом к лицу", "u": 7}, {"en": "to be on the same page", "ru": "быть заодно", "u": 7}, {"en": "to catch up", "ru": "наверстать общение", "u": 7}, {"en": "to hang up", "ru": "повесить трубку", "u": 7}, {"en": "a group chat", "ru": "групповой чат", "u": 7}, {"en": "to text", "ru": "написать сообщение", "u": 7}, {"en": "voice message", "ru": "голосовое", "u": 7}, {"en": "to reply", "ru": "ответить", "u": 7}, {"en": "to ignore", "ru": "игнорировать", "u": 7}, {"en": "group chat", "ru": "групповой чат", "u": 7}, {"en": "notification", "ru": "уведомление", "u": 7}, {"en": "to mute", "ru": "отключить звук", "u": 7}, {"en": "to share", "ru": "поделиться", "u": 7}, {"en": "password", "ru": "пароль", "u": 7}, {"en": "to sign up", "ru": "зарегистрироваться", "u": 7}, {"en": "misunderstanding", "ru": "недопонимание", "u": 7}, {"en": "to hang up", "ru": "положить трубку", "u": 7}, {"en": "to delete", "ru": "удалить", "u": 7}, {"en": "by mistake", "ru": "по ошибке", "u": 7}, {"en": "to reply all", "ru": "ответить всем", "u": 7}, {"en": "emoji", "ru": "эмодзи", "u": 7}, {"en": "typo", "ru": "опечатка", "u": 7}, {"en": "to forward", "ru": "переслать", "u": 7}, {"en": "contact", "ru": "контакт", "u": 7}, {"en": "online", "ru": "в сети", "u": 7}, {"en": "with hindsight", "ru": "задним умом", "u": 8}, {"en": "to learn your lesson", "ru": "извлечь урок", "u": 8}, {"en": "if I'd known…", "ru": "если бы я знал…", "u": 8}, {"en": "to look on the bright side", "ru": "смотреть позитивно", "u": 8}, {"en": "easier said than done", "ru": "легче сказать, чем сделать", "u": 8}, {"en": "to take my advice", "ru": "прислушаться к совету", "u": 8}, {"en": "a blessing in disguise", "ru": "не было бы счастья…", "u": 8}, {"en": "to have second thoughts", "ru": "засомневаться", "u": 8}, {"en": "advice", "ru": "совет (неисчисл.)", "u": 8}, {"en": "to give advice", "ru": "дать совет", "u": 8}, {"en": "to take advice", "ru": "прислушаться к совету", "u": 8}, {"en": "wise", "ru": "мудрый", "u": 8}, {"en": "mistake", "ru": "ошибка", "u": 8}, {"en": "to regret", "ru": "сожалеть", "u": 8}, {"en": "lesson", "ru": "урок (жизни)", "u": 8}, {"en": "experience", "ru": "опыт", "u": 8}, {"en": "to look back", "ru": "оглядываться назад", "u": 8}, {"en": "proverb", "ru": "пословица", "u": 8}, {"en": "generation", "ru": "поколение", "u": 8}, {"en": "to pass on", "ru": "передать (опыт)", "u": 8}, {"en": "patient", "ru": "терпеливый", "u": 8}, {"en": "to appreciate", "ru": "ценить", "u": 8}, {"en": "hindsight", "ru": "запоздалое понимание", "u": 8}, {"en": "to reflect", "ru": "размышлять", "u": 8}, {"en": "decision", "ru": "решение", "u": 8}, {"en": "to warn", "ru": "предупреждать", "u": 8}, {"en": "grateful", "ru": "благодарный", "u": 8}, {"en": "to figure out", "ru": "понять, разобраться", "u": 8}];
+let mode="learn", unit="all", pool=[], idx=0, flipped=false;
+const $=s=>document.querySelector(s);
+function speak(t){ if(window.SM_speak) SM_speak(t,0.95); }
+function units(){const s=new Set(DECK.map(d=>d.u));return [...s].sort((a,b)=>a-b);}
+function build(){
+  const sel=$("#unit");
+  sel.innerHTML='<option value="all">Все юниты</option>'+units().map(u=>'<option value="'+u+'">Unit '+u+'</option>').join("");
+  sel.onchange=()=>{unit=sel.value;refresh();};
+  document.querySelectorAll("#mode button").forEach(b=>b.onclick=()=>{
+    document.querySelectorAll("#mode button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");mode=b.dataset.m;refresh();});
+  refresh();
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function refresh(){
+  pool=DECK.filter(d=>unit==="all"||d.u==+unit);
+  pool=shuffle(pool);idx=0;flipped=false;
+  $("#count").textContent=pool.length+" карточек";
+  if(mode==="learn")renderLearn();else renderQuiz();
+}
+function renderLearn(){
+  const d=pool[idx];
+  $("#view").innerHTML=
+   '<div class="flash" id="fl"><div class="u">UNIT '+d.u+'</div>'+
+   '<div class="en">'+d.en+'</div>'+
+   '<div class="ru" style="display:none">'+d.ru+'</div>'+
+   '<div class="hint">нажми, чтобы перевернуть</div></div>'+
+   '<div class="row">'+
+   '<button class="btn s" id="prev">← Назад</button>'+
+   '<button class="btn a" id="say">🔊 Слушать</button>'+
+   '<button class="btn p" id="next">Дальше →</button>'+
+   '</div>';
+  const fl=$("#fl"),en=fl.querySelector(".en"),ru=fl.querySelector(".ru"),hint=fl.querySelector(".hint");
+  fl.onclick=()=>{flipped=!flipped;ru.style.display=flipped?"block":"none";en.style.display=flipped?"none":"block";hint.textContent=flipped?d.en:"нажми, чтобы перевернуть";};
+  $("#say").onclick=e=>{e.stopPropagation();speak(d.en);};
+  $("#prev").onclick=()=>{idx=(idx-1+pool.length)%pool.length;flipped=false;renderLearn();};
+  $("#next").onclick=()=>{idx=(idx+1)%pool.length;flipped=false;renderLearn();};
+  speak(d.en);
+}
+let sc=0,seen=0;
+function renderQuiz(){sc=0;seen=0;nextQ();}
+function nextQ(){
+  if(idx>=pool.length){$("#view").innerHTML='<div class="score">Готово! Счёт: '+sc+' / '+pool.length+'</div><div class="row"><button class="btn p" id="again">Ещё раз</button></div>';$("#again").onclick=refresh;return;}
+  const d=pool[idx];
+  const others=shuffle(DECK.filter(x=>x.ru!==d.ru)).slice(0,3).map(x=>x.ru);
+  const opts=shuffle([d.ru,...others]);
+  $("#view").innerHTML='<div class="score">Счёт: '+sc+' / '+pool.length+'</div>'+
+   '<div class="q">'+d.en+' <button class="btn a" id="say" style="padding:6px 12px;font-size:13px">🔊</button></div>'+
+   '<div class="opts">'+opts.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  $("#say").onclick=()=>speak(d.en);
+  let done=false;
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;done=true;
+    if(b.textContent===d.ru){b.classList.add("ok");sc++;}
+    else{b.classList.add("bad");document.querySelectorAll(".opt").forEach(x=>{if(x.textContent===d.ru)x.classList.add("ok");});}
+    document.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+    setTimeout(()=>{idx++;nextQ();},900);});
+}
+build();
+</script>
+</body>
+</html>
