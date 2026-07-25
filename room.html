@@ -18,6 +18,13 @@
   #top .room .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f0c96b;margin-right:5px}
   #top .room.on .dot{background:#7ee787}
   #invite{background:#e0952a;color:#fff;border:none;cursor:pointer;padding:8px 14px;border-radius:999px;font:800 13px 'Nunito',sans-serif}
+  #top button.tb{background:rgba(255,255,255,.16);color:#fff;border:none;cursor:pointer;padding:8px 12px;border-radius:999px;font:800 13px 'Nunito',sans-serif;white-space:nowrap}
+  #panel.collapsed{display:none}
+  #panelShow{display:none;position:fixed;right:12px;bottom:12px;z-index:20;background:#7c2340;color:#fff;border:none;cursor:pointer;padding:11px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+  #panelShow.on{display:block}
+  #videoWrap{background:#111;border-bottom:2px solid #d9c9ac}
+  #videoWrap iframe{width:100%;height:280px;border:none;display:block;background:#111}
+  #videoWrap .vhint{color:#cbb; font:700 12px 'Nunito',sans-serif;padding:10px 12px}
 
   #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
   #boardCol{flex:1.7;min-width:0;border-right:3px solid #d9c9ac}
@@ -43,6 +50,8 @@
     <span class="title">🧑‍🏫 Комната урока</span>
     <span class="rc">
       <span class="room" id="room"><span class="dot"></span><span id="roomTxt">…</span></span>
+      <button class="tb" id="vidBtn">📹 Видео</button>
+      <button class="tb" id="panelBtn">⟨ Панель</button>
       <button id="invite">🔗 Позвать ученика</button>
     </span>
   </div>
@@ -50,6 +59,7 @@
   <div id="main">
     <div id="boardCol"><iframe id="board" title="Доска"></iframe></div>
     <div id="panel">
+      <div id="videoWrap" style="display:none"></div>
       <div class="prow">
         <div class="lbl">КУРС</div>
         <select id="course"></select>
@@ -71,6 +81,7 @@
       <div id="frameWrap"><iframe id="frame" title="Задание"></iframe></div>
     </div>
   </div>
+  <button id="panelShow">⟩ Показать панель</button>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
@@ -149,6 +160,26 @@
       const url=location.origin+location.pathname+"?room="+room;
       if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на урок скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));
       else prompt("Скопируй ссылку:",url);
+    };
+
+    // Видеозвонок (Jitsi, та же комната у учителя и ученика)
+    document.getElementById("vidBtn").onclick=function(){
+      var w=document.getElementById("videoWrap"),b=document.getElementById("vidBtn");
+      if(w.dataset.on){ w.style.display="none"; w.innerHTML=""; delete w.dataset.on; b.textContent="📹 Видео"; }
+      else { var rn="ewa-lesson-"+encodeURIComponent(room);
+        w.innerHTML='<iframe allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/'+rn+'#config.prejoinPageEnabled=false&userInfo.displayName=%22\u0423\u0447\u0438\u0442\u0435\u043b\u044c%22" title="Видеозвонок"></iframe>';
+        w.style.display="block"; w.dataset.on="1"; b.textContent="📹 Скрыть видео"; }
+    };
+    // Сворачивание правой панели
+    document.getElementById("panelBtn").onclick=function(){
+      var p=document.getElementById("panel"),c=p.classList.toggle("collapsed");
+      document.getElementById("panelBtn").textContent=c?"⟩ Панель":"⟨ Панель";
+      document.getElementById("panelShow").classList.toggle("on",c);
+    };
+    document.getElementById("panelShow").onclick=function(){
+      document.getElementById("panel").classList.remove("collapsed");
+      document.getElementById("panelBtn").textContent="⟨ Панель";
+      document.getElementById("panelShow").classList.remove("on");
     };
 
     apply(false);
