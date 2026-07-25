@@ -133,15 +133,18 @@
         document.getElementById("openLesson").href=course+"-u"+unit+".html";
       }
       courseSel.value=course; unitSel.value=unit;
+      postSel();
       if(broadcast) send({course:course,unit:unit,kind:kind});
     }
     courseSel.onchange=()=>{course=courseSel.value;buildUnits();apply(true);};
     unitSel.onchange=()=>{unit=unitSel.value;apply(true);};
     document.getElementById("aTrainer").onclick=()=>{kind="trainer";apply(true);};
     document.getElementById("aGames").onclick=()=>{kind="games";apply(true);};
+    function postSel(){ try{ document.getElementById("board").contentWindow.postMessage({type:"sm-set", val:(course==="sm"?unit:(course+"|"+unit))}, location.origin); }catch(e){} }
+    document.getElementById("board").addEventListener("load",postSel);
     document.getElementById("toBoard").onclick=()=>{
       const bf=document.getElementById("board");
-      try{ bf.contentWindow.postMessage({type:"sm-add",unit:unit}, location.origin); }catch(e){}
+      try{ postSel(); bf.contentWindow.postMessage({type:"sm-add-current"}, location.origin); }catch(e){}
     };
 
     // синхронизация панели урока через Supabase Realtime

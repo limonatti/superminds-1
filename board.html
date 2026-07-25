@@ -81,6 +81,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
+  <script src="speakout-words.js"></script>
   <script>
     const COLORS=["#1c1310","#7c2340","#c0392b","#e0952a","#27ae60","#2980b9","#8e44ad","#ffffff"];
     const NOTE_COLORS={"#e0952a":"#ffe08a","#27ae60":"#c8efc0","#2980b9":"#bfe0ff","#8e44ad":"#e6cdf5","#c0392b":"#ffc9c0","#1c1310":"#fff3c4","#7c2340":"#f6cddb","#ffffff":"#ffffff"};
@@ -219,10 +220,20 @@
     /* ---- слова на доску (центр текущего вида) ---- */
     const sel=document.getElementById("unitSel");
     SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
-    function addUnitCards(uid){ const u=SM_UNITS.find(x=>x.id===uid); if(!u)return; const r=stage.getBoundingClientRect(); const c=toWorld(r.left+60,r.top+40);
-      u.words.slice(0,8).forEach((w,i)=>addCard(genId(),{x:c.x+(i%4)*110,y:c.y+Math.floor(i/4)*120,en:w.en,emoji:w.emoji},false)); }
-    document.getElementById("addCards").onclick=()=>addUnitCards(sel.value);
-    window.addEventListener("message",e=>{ if(e&&e.data&&e.data.type==="sm-add"&&e.data.unit) addUnitCards(e.data.unit); });
+    const SPK_LABEL={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
+    if(window.SPEAKOUT_WORDS){ Object.keys(window.SPEAKOUT_WORDS).forEach(course=>{ Object.keys(window.SPEAKOUT_WORDS[course]).forEach(un=>{ const o=document.createElement("option");o.value=course+"|"+un;o.textContent="🗣️ "+(SPK_LABEL[course]||course)+" · U"+un;sel.appendChild(o); }); }); }
+    function placeCards(list){ const r=stage.getBoundingClientRect(); const c=toWorld(r.left+60,r.top+40);
+      list.slice(0,8).forEach((w,i)=>addCard(genId(),{x:c.x+(i%4)*110,y:c.y+Math.floor(i/4)*120,en:w.en,emoji:w.emoji},false)); }
+    function addCurrentWords(val){ val=val||sel.value;
+      if(val && val.indexOf("|")>=0){ const parts=val.split("|"); const list=((window.SPEAKOUT_WORDS||{})[parts[0]]||{})[parts[1]]||[]; placeCards(list.map(w=>({en:w[0],emoji:"🗣️"}))); }
+      else { const u=SM_UNITS.find(x=>x.id===val); if(u) placeCards(u.words.map(w=>({en:w.en,emoji:w.emoji}))); } }
+    function addUnitCards(uid){ addCurrentWords(uid); }
+    document.getElementById("addCards").onclick=()=>addCurrentWords(sel.value);
+    window.addEventListener("message",e=>{ if(!e||!e.data)return;
+      if(e.data.type==="sm-add"&&e.data.unit) addCurrentWords(e.data.unit);
+      else if(e.data.type==="sm-add-current") addCurrentWords(sel.value);
+      else if(e.data.type==="sm-set"&&e.data.val){ if([...sel.options].some(o=>o.value===e.data.val)) sel.value=e.data.val; }
+    });
 
     document.getElementById("clear").onclick=()=>{ if(confirm("Очистить всю доску?")){ doClear(); send({t:"clr"}); } };
     function doClear(){ Object.keys(objs).forEach(removeObj); }
