@@ -199,8 +199,17 @@
     async function renderDash(user){
       document.getElementById("sub").textContent="твой класс и прогресс учеников";
       const root=document.getElementById("root");
-      root.innerHTML='<div class="panel"><div class="who"><div class="name">'+esc(user.name)+'</div><button class="logout" id="out">Выйти</button></div><div id="body"><div class="empty">Загрузка…</div></div></div>';
+      root.innerHTML='<div class="panel"><div class="who"><div class="name">'+esc(user.name)+'</div>'+
+        '<div style="display:flex;gap:8px;flex:none"><button class="logout" id="rename">Сменить имя</button><button class="logout" id="out">Выйти</button></div></div>'+
+        '<div id="body"><div class="empty">Загрузка…</div></div></div>';
       document.getElementById("out").onclick=async()=>{await SM.signOut();route();};
+      document.getElementById("rename").onclick=async()=>{
+        var nm=prompt("Как тебя зовут? Ученики увидят это имя.",user.name||"");
+        if(nm===null)return;
+        var r=await SM.setName(nm);
+        if(!r.ok){alert(r.error||"Не получилось");return;}
+        route();
+      };
 
       const codeRes=await SM.ensureTeacherCode(user.name);
       const code=codeRes.code||"—";

@@ -50,7 +50,27 @@ const c = ensureClient(); if (!c) return null;
 const { data } = await c.auth.getUser();
 if (!data || !data.user) return null;
 const u = data.user;
-return { id: u.id, email: u.email, name: (u.user_metadata && u.user_metadata.name) || u.email };
+let nm = (u.user_metadata && u.user_metadata.name) || "";
+if (!nm) {
+try { const r = await c.from("profiles").select("name").eq("user_id", u.id).maybeSingle();
+if (r && r.data && r.data.name) nm = r.data.name; } catch (e) {}
+}
+if (!nm) nm = String(u.email || "").split("@")[0] || "Ученик";
+return { id: u.id, email: u.email, name: nm };
+},
+
+/* Сменить отображаемое имя (метаданные + профиль) */
+async setName(name) {
+name = (name || "").trim();
+if (!name) return { ok: false, error: "Впиши имя" };
+if (!useCloud) { const lu = localUser() || { id: "local", email: "" }; lu.name = name; localSetUser(lu); return { ok: true }; }
+const c = ensureClient(); if (!c) return { ok: false, error: "Нет подключения" };
+const { error } = await c.auth.updateUser({ data: { name: name } });
+if (error) return { ok: false, error: error.message };
+const { data } = await c.auth.getUser();
+const u = data && data.user;
+if (u) { try { await c.from("profiles").upsert({ user_id: u.id, name: name }, { onConflict: "user_id" }); } catch (e) {} }
+return { ok: true };
 },
 
 async signUp(name, email, password) {

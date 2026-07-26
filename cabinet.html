@@ -271,7 +271,8 @@
 
       document.getElementById("root").innerHTML=
         '<div class="panel">'+
-          '<div class="who"><div class="name">Привет, '+esc(user.name)+'!</div><button class="logout" id="out">Выйти</button></div>'+
+          '<div class="who"><div class="name">Привет, '+esc(user.name)+'!</div>'+
+            '<div style="display:flex;gap:8px;flex:none"><button class="logout" id="rename">Сменить имя</button><button class="logout" id="out">Выйти</button></div></div>'+
           '<div class="cards2">'+
             '<div class="bigcard c-streak"><div class="n">🔥 '+dayStreak+'</div><div class="l">дней подряд</div></div>'+
             '<div class="bigcard c-pts"><div class="n">⭐ '+points+'</div><div class="l">очков</div></div>'+
@@ -289,6 +290,13 @@
           '<a class="cta" href="trainer.html">Продолжить учить слова →</a>'+
         '</div>';
       document.getElementById("out").onclick=async()=>{await SM.signOut();route();};
+      document.getElementById("rename").onclick=async()=>{
+        var nm=prompt("Как тебя зовут?",user.name||"");
+        if(nm===null)return;
+        var r=await SM.setName(nm);
+        if(!r.ok){alert(r.error||"Не получилось");return;}
+        route();
+      };
       var jb=document.getElementById("tjoin");
       if(jb){ jb.onclick=async()=>{
         var m=document.getElementById("tmsg");m.className="msg";m.textContent="…";
