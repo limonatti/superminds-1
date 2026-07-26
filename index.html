@@ -3,88 +3,218 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English with Asya · Мои учебники</title><!-- v2 -->
+<title>English with Asya · Мои учебники</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
 <style>
-  *{box-sizing:border-box}
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
-  a{color:inherit;text-decoration:none}
-  button{font-family:inherit;cursor:pointer;border:none}
-  .wrap{max-width:900px;margin:0 auto;padding:44px 24px 60px}
-  .top{display:flex;justify-content:flex-end;gap:10px;margin-bottom:6px}
-  .pill{background:#fff;color:#7c2340;font:800 14px 'Nunito',sans-serif;padding:10px 18px;border-radius:999px;box-shadow:0 5px 0 #e3d3ba;display:inline-flex;align-items:center;gap:7px}
-  .head{text-align:center;margin-bottom:30px}
-  h1{margin:0;font-size:clamp(32px,7vw,54px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{font:800 16px 'Nunito',sans-serif;color:#5a4f47;margin:10px 0 0}
-  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
-  .course{background:#fff;border-radius:28px;padding:26px 22px;box-shadow:0 8px 0 #e3d3ba;text-align:center;transition:transform .14s,box-shadow .14s;cursor:pointer;position:relative}
-  .course.ready:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(124,35,64,.14)}
-  .course.soon{opacity:.72}
-  .cover{width:104px;height:104px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:54px;margin:0 auto 16px}
-  .course .t{font-size:22px;font-weight:700;margin:2px 0 4px}
-  .course .s{font:800 12.5px 'Nunito',sans-serif;color:#8a7a68;margin-bottom:16px;min-height:32px}
-  .go{background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:10px 22px;border-radius:999px;display:inline-block}
-  .badge{position:absolute;top:14px;right:14px;background:#f0c96b;color:#7a5b12;font:900 10px 'Nunito',sans-serif;padding:4px 9px;border-radius:999px;letter-spacing:.5px}
-  .tools{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
-  .tbtn{font:800 15px 'Nunito',sans-serif;padding:13px 24px;border-radius:999px;color:#fff}
-  .board{background:#7c2340;box-shadow:0 6px 0 #5e1a30}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:40px}
-  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .nav{display:flex;align-items:stretch;gap:0}
+  .nav a{position:relative;padding:12px 18px;font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--color-neutral-800);text-decoration:none}
+  .nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:4px;background:var(--color-accent)}
+  .nav a:hover{background:var(--color-accent-100)}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:20px 32px;border-bottom:2px solid var(--color-divider)}
+  .fact .k{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)}
+  .fact .v{font-size:15px;font-weight:700}
+  .stat{padding:24px 32px;border-right:2px solid var(--color-divider)}
+  .stat:last-child{border-right:0}
+  .stat .n{font-size:44px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .stat .l{margin-top:6px;font-size:13px;font-weight:600;color:var(--color-neutral-700)}
+  .sect{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:32px 40px 20px}
+  .sect h2{margin:0;font-size:15px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .cgrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--color-divider)}
+  .cgrid.two{grid-template-columns:repeat(2,1fr)}
+  .cell{text-align:left;font-family:inherit;background:none;border:0;border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);
+    cursor:pointer;display:flex;flex-direction:column;gap:18px;padding:28px 32px 26px;color:var(--color-text);transition:background .16s ease-out}
+  .cell:hover{background:var(--color-accent-100)}
+  .cell:active{transform:scale(.985)}
+  .cell:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+  .cell.soon{cursor:default;opacity:.55}
+  .cell.soon:hover{background:none}
+  .cell .ttl{font-size:26px;font-weight:800;line-height:1.05;letter-spacing:-.01em}
+  .cell .meta{font-size:14px;font-weight:500;color:var(--color-neutral-700)}
+  .bar{height:6px;background:var(--color-neutral-300)}
+  .bar i{display:block;height:100%;background:var(--color-accent)}
+  .barlbl{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .poster{background:var(--color-accent);color:#fff;display:grid;grid-template-columns:2fr 1fr;align-items:center;gap:24px;padding:44px 40px}
+  .poster .k{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+  .poster .h{font-size:46px;font-weight:800;line-height:1.02;letter-spacing:-.02em;margin-top:10px}
+  .poster a{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--color-accent);padding:16px 22px;font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;justify-self:end}
+  .foot{display:flex;justify-content:space-between;gap:16px;padding:22px 40px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600)}
+  @media(max-width:1000px){
+    .hero,.poster{grid-template-columns:1fr!important}
+    .cgrid,.cgrid.two{grid-template-columns:1fr 1fr}
+    .stats{grid-template-columns:1fr 1fr!important}
+    h1.big{font-size:52px!important}
+  }
+  @media(max-width:640px){
+    .cgrid,.cgrid.two{grid-template-columns:1fr}
+    .nav{display:none}
+    .top{padding:14px 20px!important}
+    .hero>div{padding:32px 20px!important}
+    .sect{padding:24px 20px 16px}
+    .cell{padding:22px 20px}
+    .poster{padding:32px 20px}
+    .foot{flex-direction:column;gap:6px;padding:18px 20px}
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="pill" href="teacher.html">👩‍🏫 Кабинет учителя</a>
-      <a class="pill" href="cabinet.html">👤 Кабинет ученика</a>
+<div style="min-height:100vh;background:var(--color-bg);color:var(--color-text)">
+
+  <div class="top" style="display:flex;align-items:center;justify-content:space-between;gap:32px;padding:18px 40px;border-bottom:2px solid var(--color-divider);background:var(--color-bg);position:sticky;top:0;z-index:10">
+    <div style="display:flex;align-items:center;gap:14px">
+      <span style="width:26px;height:26px;background:var(--color-accent);display:block"></span>
+      <span style="font-size:17px;font-weight:800;letter-spacing:.1em;text-transform:uppercase">English with Asya</span>
     </div>
-    <div class="head">
-      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054522_5c0f8f0e-e44d-4299-96e9-adf0cbae9bed.png" alt="" style="width:150px;height:150px;object-fit:contain;display:block;margin:0 auto 4px">
-      <h1>🎓 English with Asya</h1>
-      <div class="sub">Мои учебники — выбери курс</div>
-    </div>
-    <div class="grid" id="grid"></div>
-    <div class="tools">
-      <a class="tbtn board" href="board.html">🧑‍🏫 Доска для урока</a>
-    </div>
-    <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
+    <nav class="nav">
+      <a class="on" href="index.html">Учебники</a>
+      <a href="course.html">Курс</a>
+      <a href="cabinet.html">Кабинет ученика</a>
+      <a href="teacher.html">Кабинет учителя</a>
+    </nav>
+    <a class="btn btn-primary" href="board.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="M7 21l5-5 5 5"/></svg>
+      Доска для урока
+    </a>
   </div>
 
-  <script src="words.js"></script>
-  <script>
-    const grid=document.getElementById("grid");
-    SM_COURSES.forEach(c=>{
-      const el=document.createElement("div");
-      el.className="course "+(c.ready?"ready":"soon");
-      el.innerHTML=
-        (c.ready?'':'<div class="badge">СКОРО</div>')+
-        '<div class="cover" style="background:'+c.color+'">'+(c.img?'<img src="'+c.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:24px">':c.emoji)+'</div>'+
-        '<div class="t">'+c.title+'</div>'+
-        '<div class="s">'+c.subtitle+'</div>'+
-        '<div class="go">'+(c.ready?'Открыть →':'Добавить вместе')+'</div>';
-      el.onclick=()=>{
-        if(c.ready){ try{localStorage.setItem("sm-course",c.id);}catch(e){} location.href="course.html"; }
-        else if(c.admin){ location.href="admin.html"; }
-        else { alert("Этот учебник ещё не добавлен. Напиши мне — добавим его вместе, по чуть-чуть! 🙂"); }
-      };
-      grid.appendChild(el);
+  <div class="hero" style="display:grid;grid-template-columns:2fr 1fr;border-bottom:2px solid var(--color-divider)">
+    <div style="padding:56px 40px 48px;border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:20px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700)">Программа 2026 / Programme</div>
+      <h1 class="big" style="margin:0;font-size:76px;line-height:.94;font-weight:800;letter-spacing:-.02em">Мои<br>учебники</h1>
+      <div style="font-size:22px;line-height:1.3;font-weight:500;color:var(--color-neutral-700);max-width:560px">
+        Выбери курс — и продолжим с того места, где остановились.
+        <span style="color:var(--color-neutral-600)">Choose your coursebook and keep going.</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div class="fact"><span class="k">Возраст</span><span class="v">6–12 и взрослые</span></div>
+      <div class="fact"><span class="k">Языки</span><span class="v">RU + EN</span></div>
+      <div class="fact"><span class="k">Формат</span><span class="v">Урок + доска</span></div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 32px 28px;gap:10px">
+        <div style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)">Сейчас в работе</div>
+        <div id="nowUnit" style="font-size:20px;font-weight:800;line-height:1.15">Super Minds 1</div>
+        <a class="btn btn-secondary" id="contBtn" href="course.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:6px;text-decoration:none;width:fit-content">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M5 3l14 9-14 9z"/></svg>
+          Продолжить урок
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats" style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--color-divider)">
+    <div class="stat"><div class="n" id="stBooks">3</div><div class="l">учебника / books</div></div>
+    <div class="stat"><div class="n" id="stUnits">—</div><div class="l">юнитов / units</div></div>
+    <div class="stat"><div class="n" id="stWords">—</div><div class="l">слов / words</div></div>
+    <div class="stat"><div class="n" id="stGames" style="color:var(--color-accent)">13</div><div class="l">игр / games</div></div>
+  </div>
+
+  <div class="sect">
+    <h2>Для детей 6–12 / Kids</h2>
+    <div style="display:flex;gap:8px"><span class="tag tag-accent">Все</span><span class="tag tag-outline">6–8</span><span class="tag tag-outline">Фонетика</span></div>
+  </div>
+  <div class="cgrid" id="kids"></div>
+
+  <div class="sect">
+    <h2>Для подростков и взрослых / Teens &amp; adults</h2>
+    <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)">Pearson Speakout</span>
+  </div>
+  <div class="cgrid two" id="adults"></div>
+
+  <div class="poster">
+    <div>
+      <div class="k">English with Asya</div>
+      <div class="h">Learn every day</div>
+    </div>
+    <a href="board.html">Начать урок
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <div class="foot">
+    <span>Made for @english.with_asya</span>
+    <span>англ + рус · дети и взрослые</span>
+  </div>
+</div>
+
+<script src="words.js"></script>
+<script src="speakout-words.js"></script>
+<script>
+  const ICON={
+    book:'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+    box:'<rect x="2" y="4" width="20" height="16"/><path d="M2 10h20"/><path d="M8 4v16"/>',
+    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    head:'<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+    msg:'<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>'
+  };
+  function svg(p,size){ return '<svg width="'+(size||30)+'" height="'+(size||30)+'" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
+
+  /* ---------- реальные данные платформы ---------- */
+  const smUnits=(window.SM_UNITS||[]).length;
+  const smWords=(window.SM_UNITS||[]).reduce((s,u)=>s+((u.words||[]).length),0);
+  function spkCount(c){ const d=(window.SPEAKOUT_WORDS||{})[c]||{}; const units=Object.keys(d).length;
+    const words=Object.keys(d).reduce((s,k)=>s+d[k].length,0); return {units,words}; }
+  const b1=spkCount("speakout-b1"), b1p=spkCount("speakout-b1plus");
+
+  document.getElementById("stUnits").textContent = smUnits + b1.units + b1p.units;
+  document.getElementById("stWords").textContent = smWords + b1.words + b1p.words;
+
+  const KIDS=[
+    {t:"Super Minds 1", meta:smUnits+" юнитов · "+smWords+" слов", tag:"6–8 лет", icon:ICON.book,
+     href:"course.html", ready:true, id:"sm1"},
+    {t:"Phonics Starter", meta:"Звуки и чтение · 42 карточки", tag:"Любой", icon:ICON.head,
+     href:"phonics.html", ready:true},
+    {t:"Свой учебник", meta:"Собери курс в конструкторе", tag:"Конструктор", icon:ICON.box,
+     href:"admin.html", ready:true},
+    {t:"Super Minds 2", meta:"9 юнитов · 36 уроков", tag:"7–9 лет", icon:ICON.book, ready:false},
+    {t:"Kid's Box 1", meta:"8 юнитов · 32 урока", tag:"6–8 лет", icon:ICON.box, ready:false},
+    {t:"Playway 1", meta:"Песни и игры · 24 урока", tag:"6–7 лет", icon:ICON.music, ready:false}
+  ];
+  const ADULTS=[
+    {t:"Speakout B1+", meta:b1p.units+" юнитов · "+b1p.words+" слов", tag:"3rd edition", icon:ICON.msg,
+     href:"speakout-b1plus-course.html", ready:true},
+    {t:"Speakout B1", meta:b1.units+" юнитов · "+b1.words+" слов", tag:"3rd edition", icon:ICON.msg,
+     href:"speakout-b1-course.html", ready:true}
+  ];
+
+  function cardHTML(c,pct){
+    return '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%">'+
+        svg(c.icon)+'<span class="tag '+(c.ready?"tag-neutral":"tag-outline")+'">'+(c.ready?c.tag:"Скоро")+'</span></div>'+
+      '<div style="display:flex;flex-direction:column;gap:6px"><div class="ttl">'+c.t+'</div>'+
+      '<div class="meta">'+c.meta+'</div></div>'+
+      '<div style="display:flex;flex-direction:column;gap:8px;width:100%">'+
+        '<div class="bar"><i style="width:'+(pct||0)+'%"></i></div>'+
+        '<div class="barlbl"><span>'+(c.ready?(pct?("Пройдено "+pct+"%"):"Не начат"):"В планах")+'</span><span>'+(c.ready?"Открыть":"—")+'</span></div>'+
+      '</div>';
+  }
+  function fill(boxId,list){
+    const box=document.getElementById(boxId); box.innerHTML="";
+    list.forEach(c=>{
+      const el=document.createElement(c.ready?"a":"div");
+      el.className="cell"+(c.ready?"":" soon");
+      if(c.ready){ el.href=c.href; el.style.textDecoration="none"; }
+      el.innerHTML=cardHTML(c,0);
+      if(c.ready&&c.id) el.addEventListener("click",()=>{ try{localStorage.setItem("sm-course",c.id);}catch(e){} });
+      box.appendChild(el);
     });
-    /* Курсы Speakout — прямые ссылки на тренажёры */
-    const EXTRA=[
-      {title:"Speakout B1+",subtitle:"3rd edition · курс по юнитам",img:"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260723_065850_052fe4a4-4e77-4ea3-b2fa-735727fc46b1.png",color:"#0e2c3f",href:"speakout-b1plus-course.html"},
-      {title:"Speakout B1",subtitle:"3rd edition · курс по юнитам",emoji:"💬",color:"#f6e2cf",href:"speakout-b1-course.html"}
-    ];
-    EXTRA.forEach(c=>{
-      const el=document.createElement("div");
-      el.className="course ready";
-      el.innerHTML='<div class="cover" style="background:'+c.color+'">'+(c.img?'<img src="'+c.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:24px">':c.emoji)+'</div>'+
-        '<div class="t">'+c.title+'</div>'+
-        '<div class="s">'+c.subtitle+'</div>'+
-        '<div class="go">Открыть →</div>';
-      el.onclick=()=>{ location.href=c.href; };
-      grid.appendChild(el);
-    });
-  </script>
+  }
+  fill("kids",KIDS); fill("adults",ADULTS);
+
+  /* прогресс по выученным словам Super Minds — из локального прогресса тренажёра */
+  (function(){
+    try{
+      const p=JSON.parse(localStorage.getItem("sm-local-progress")||"{}");
+      let learned=0; for(const k in p){ if(k!=="__meta"&&p[k]&&p[k].status==="learned")learned++; }
+      if(!learned||!smWords)return;
+      const pct=Math.min(100,Math.round(learned/smWords*100));
+      const first=document.querySelector("#kids .cell");
+      if(first){ first.querySelector(".bar i").style.width=pct+"%";
+        first.querySelector(".barlbl span").textContent="Пройдено "+pct+"%"; }
+      document.getElementById("nowUnit").textContent="Super Minds 1 · выучено "+learned+" слов";
+    }catch(e){}
+  })();
+</script>
 </body>
 </html>
