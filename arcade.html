@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игротека · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .wrap{max-width:760px;margin:0 auto;padding:62px 16px 50px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 14px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .pickers{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  select{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:10px 12px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .games{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+  .gbtn{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:10px 15px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
+  .gbtn.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .stage{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:24px;min-height:380px}
+  .center{text-align:center}
+  .hintru{font:800 18px 'Nunito',sans-serif;color:#5a4f47;text-align:center}
+  .em{font-size:64px;line-height:1;text-align:center}
+  .primary{background:#7c2340;color:#fff;border-radius:16px;padding:13px 24px;font:800 15px 'Nunito',sans-serif;box-shadow:0 5px 0 #5e1a30}
+  .ghost{background:#f4e9d8;color:#7c2340;border-radius:16px;padding:13px 24px;font:800 15px 'Nunito',sans-serif;box-shadow:0 5px 0 #e3d3ba}
+  .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+  .progress{text-align:center;font:800 13px 'Nunito',sans-serif;color:#a99a86;margin-bottom:10px}
+
+  /* анаграмма и сборка слова */
+  .slots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:16px 0 6px;min-height:56px}
+  .slot{width:46px;height:56px;border-bottom:4px solid #e3d3ba;display:flex;align-items:center;justify-content:center;font:800 30px 'Fredoka',sans-serif;color:#7c2340}
+  .letters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .lt{width:50px;height:56px;background:#fff;border:2px solid #e3d3ba;border-radius:13px;font:800 26px 'Fredoka',sans-serif;color:#1c1310;box-shadow:0 4px 0 #e3d3ba}
+  .lt.used{opacity:.25;pointer-events:none}
+
+  /* варианты */
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:16px;font:700 19px 'Fredoka',sans-serif;text-align:center}
+  .opt .oem{font-size:32px;display:block;margin-bottom:2px}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+
+  /* верно-неверно */
+  .tf{display:flex;gap:12px;justify-content:center;margin-top:18px}
+  .tf button{border-radius:18px;padding:16px 34px;font:800 18px 'Nunito',sans-serif}
+  .yes{background:#dff0d2;color:#3f7a20;box-shadow:0 5px 0 #b9dea6}
+  .no{background:#fbe0d8;color:#a23b1e;box-shadow:0 5px 0 #f0c0b0}
+  .pair{text-align:center;font:700 27px 'Fredoka',sans-serif;margin-top:10px}
+  .pair b{color:#7c2340}
+
+  /* поиск слов */
+  .grid{display:grid;gap:3px;justify-content:center;margin:8px auto 0}
+  .cell{width:34px;height:34px;background:#fdfbf7;border:2px solid #eee3d2;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font:800 16px 'Nunito',sans-serif;color:#5a4f47;cursor:pointer;user-select:none}
+  .cell.pick{background:#ffe9b8;border-color:#e0952a}
+  .cell.found{background:#dff0d2;border-color:#7cb342;color:#3f7a20;cursor:default}
+  .wlist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+  .wtag{background:#f4e9d8;border-radius:999px;padding:5px 12px;font:800 13px 'Nunito',sans-serif;color:#5a4f47}
+  .wtag.done{background:#dff0d2;color:#3f7a20;text-decoration:line-through}
+
+  /* виселица */
+  .hword{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+  .hl{width:34px;border-bottom:4px solid #e3d3ba;font:800 27px 'Fredoka',sans-serif;text-align:center;color:#7c2340;min-height:38px}
+  .keys{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto}
+  .key{width:38px;height:42px;background:#fff;border:2px solid #e3d3ba;border-radius:10px;font:800 16px 'Nunito',sans-serif;box-shadow:0 3px 0 #e3d3ba}
+  .key.miss{background:#f1e6e6;color:#c9a7a7;box-shadow:none;pointer-events:none}
+  .key.hit{background:#dff0d2;color:#3f7a20;box-shadow:none;pointer-events:none}
+  .gallow{font-size:56px;text-align:center;letter-spacing:4px;min-height:64px}
+
+  /* впиши слово */
+  .inp{display:block;margin:16px auto 0;width:min(320px,90%);border:2px solid #e3d3ba;border-radius:16px;padding:14px;font:700 22px 'Fredoka',sans-serif;text-align:center;background:#fdfbf7}
+  .inp:focus{outline:none;border-color:#7c2340}
+  .inp.bad{border-color:#e07a5f;background:#fdf1ee}
+</style>
+</head>
+<body>
+  <a class="home" href="course.html">← Домой</a>
+  <div class="wrap">
+    <h1>🕹 Игротека</h1>
+    <div class="sub">выбери юнит и игру — слова подставятся сами</div>
+    <div class="pickers"><select id="unitSel"></select></div>
+    <div class="games" id="games"></div>
+    <div class="stage" id="stage"></div>
+    <div class="foot">Made for @english.with_asya</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="words.js"></script>
+  <script src="speakout-words.js"></script>
+  <script src="sm-auth.js"></script>
+  <script src="sm-play.js"></script>
+  <script>
+    const q=new URLSearchParams(location.search);
+    const stage=document.getElementById("stage");
+    const sel=document.getElementById("unitSel");
+
+    /* ---- выбор юнита: Super Minds + Speakout ---- */
+    (function(){
+      (window.SM_UNITS||[]).forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
+      const L={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
+      if(window.SPEAKOUT_WORDS) Object.keys(SPEAKOUT_WORDS).forEach(c=>Object.keys(SPEAKOUT_WORDS[c]).forEach(u=>{
+        const o=document.createElement("option");o.value=c+"|"+u;o.textContent="🗣️ "+(L[c]||c)+" · Unit "+u;sel.appendChild(o);}));
+      const want=q.get("u"); if(want&&[...sel.options].some(o=>o.value===want)) sel.value=want;
+    })();
+
+    let WORDS=[];
+    function loadWords(){ WORDS=SMP.words(sel.value).filter(w=>w.en&&/^[a-zA-Z' -]+$/.test(w.en)); }
+    sel.onchange=()=>{ loadWords(); start(current); };
+
+    /* ---- список игр ---- */
+    const GAMES=[
+      {id:"anagram", label:"🔤 Анаграмма"},
+      {id:"listen",  label:"👂 Услышь и выбери"},
+      {id:"truefalse",label:"⚖️ Верно–неверно"},
+      {id:"spell",   label:"⌨️ Впиши слово"},
+      {id:"search",  label:"🔍 Найди слова"},
+      {id:"hang",    label:"🎯 Угадай слово"}
+    ];
+    let current="anagram";
+    const gbox=document.getElementById("games");
+    GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(g.id===current?" on":"");b.textContent=g.label;
+      b.onclick=()=>{SMP.sfx("click");current=g.id;[...gbox.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");start(g.id);};gbox.appendChild(b);});
+
+    function start(id){
+      SMP.hud.hide();
+      stage.innerHTML="";
+      if(!WORDS.length){ stage.innerHTML='<div class="center hintru" style="padding:60px 0">В этом юните пока нет подходящих слов — выбери другой.</div>'; return; }
+      ({anagram:gAnagram,listen:gListen,truefalse:gTrueFalse,spell:gSpell,search:gSearch,hang:gHang}[id]||gAnagram)();
+    }
+    function save(type,ok){ if(window.SM&&SM.isCloud){ try{SM.saveAttempt({course:sel.value,unit_id:sel.value,ex_type:type,correct:ok});}catch(e){} } }
+    function pick(n,exclude){ const p=SMP.shuffle(WORDS.filter(w=>!exclude||w.en!==exclude.en)); return p.slice(0,n); }
+
+    /* ============ 1. АНАГРАММА ============ */
+    function gAnagram(){
+      const list=SMP.shuffle(WORDS).slice(0,8); let i=0, score=0;
+      SMP.hud({score:true});
+      function round(){
+        if(i>=list.length){ SMP.result({score,total:list.length,onAgain:()=>start("anagram"),save:{unit:sel.value,type:"anagram"}}); return; }
+        const w=list[i], letters=SMP.shuffle(w.en.replace(/ /g,"").split(""));
+        let built=[];
+        stage.innerHTML='<div class="progress">'+(i+1)+' из '+list.length+'</div>'+
+          '<div class="em">'+(w.emoji||"🔤")+'</div><div class="hintru">'+(w.ru||"собери слово")+'</div>'+
+          '<div class="slots" id="slots"></div><div class="letters" id="lets"></div>'+
+          '<div class="row"><button class="ghost" id="clr">Сбросить</button><button class="ghost" id="say">🔊 Послушать</button></div>';
+        const slots=document.getElementById("slots"), lets=document.getElementById("lets");
+        const target=w.en.replace(/ /g,"");
+        function draw(){ slots.innerHTML=""; for(let k=0;k<target.length;k++){const d=document.createElement("div");d.className="slot";d.textContent=built[k]||"";slots.appendChild(d);} }
+        draw();
+        letters.forEach((ch,idx)=>{ const b=document.createElement("button"); b.className="lt"; b.textContent=ch.toUpperCase();
+          b.onclick=()=>{ SMP.sfx("click"); built.push(ch); b.classList.add("used"); draw(); check(); }; lets.appendChild(b); });
+        document.getElementById("clr").onclick=()=>{ SMP.sfx("click"); built=[]; [...lets.children].forEach(x=>x.classList.remove("used")); draw(); };
+        document.getElementById("say").onclick=()=>SMP.say(w.en);
+        function check(){
+          if(built.length<target.length)return;
+          const made=built.join("");
+          if(made.toLowerCase()===target.toLowerCase()){ score++; SMP.hud.add(10); SMP.good(slots,10); SMP.say(w.en); i++; setTimeout(round,1100); }
+          else { SMP.bad(slots); SMP.hud.miss(); built=[]; [...lets.children].forEach(x=>x.classList.remove("used")); setTimeout(draw,200); }
+        }
+      }
+      round();
+    }
+
+    /* ============ 2. УСЛЫШЬ И ВЫБЕРИ ============ */
+    function gListen(){
+      const list=SMP.shuffle(WORDS).slice(0,10); let i=0, score=0;
+      SMP.hud({score:true});
+      function round(){
+        if(i>=list.length){ SMP.result({score,total:list.length,onAgain:()=>start("listen"),save:{unit:sel.value,type:"listen"}}); return; }
+        const w=list[i], opts=SMP.shuffle([w].concat(pick(3,w)));
+        stage.innerHTML='<div class="progress">'+(i+1)+' из '+list.length+'</div>'+
+          '<div class="center" style="margin-top:10px"><button class="primary" id="play">🔊 Послушать слово</button></div>'+
+          '<div class="hintru" style="margin-top:14px">выбери, что услышал</div><div class="opts" id="opts"></div>';
+        document.getElementById("play").onclick=()=>SMP.say(w.en);
+        setTimeout(()=>SMP.say(w.en),350);
+        const box=document.getElementById("opts");
+        opts.forEach(o=>{ const b=document.createElement("button"); b.className="opt";
+          b.innerHTML='<span class="oem">'+(o.emoji||"🔤")+'</span>'+o.en;
+          b.onclick=()=>{
+            if(box.dataset.done)return; box.dataset.done="1";
+            const ok=o.en===w.en;
+            if(ok){ b.classList.add("correct"); score++; SMP.hud.add(10); SMP.good(b,10); }
+            else { b.classList.add("wrong"); SMP.bad(b); SMP.hud.miss();
+                   [...box.children].forEach(x=>{ if(x.textContent.indexOf(w.en)>=0)x.classList.add("correct"); }); }
+            save("listen",ok); i++; setTimeout(round,1200);
+          }; box.appendChild(b); });
+      }
+      round();
+    }
+
+    /* ============ 3. ВЕРНО–НЕВЕРНО ============ */
+    function gTrueFalse(){
+      const list=SMP.shuffle(WORDS).slice(0,12); let i=0, score=0;
+      SMP.hud({score:true,lives:3});
+      function round(){
+        if(i>=list.length){ SMP.result({score,total:list.length,onAgain:()=>start("truefalse"),save:{unit:sel.value,type:"truefalse"}}); return; }
+        const w=list[i], truth=Math.random()<.5;
+        const other=pick(1,w)[0]||w;
+        const shownRu=truth?(w.ru||w.en):(other.ru||other.en);
+        stage.innerHTML='<div class="progress">'+(i+1)+' из '+list.length+'</div>'+
+          '<div class="em">'+(w.emoji||"🔤")+'</div>'+
+          '<div class="pair"><b>'+w.en+'</b> — '+shownRu+'</div>'+
+          '<div class="tf"><button class="yes" id="y">✅ Верно</button><button class="no" id="n">❌ Неверно</button></div>';
+        function answer(said){
+          const ok=(said===truth);
+          const el=document.getElementById(said?"y":"n");
+          if(ok){ score++; SMP.hud.add(10); SMP.good(el,10); }
+          else { SMP.bad(el); if(SMP.hud.hit()<=0){ SMP.result({score,total:list.length,title:"Жизни закончились",onAgain:()=>start("truefalse")}); return; } }
+          SMP.say(w.en); save("truefalse",ok); i++; setTimeout(round,1000);
+        }
+        document.getElementById("y").onclick=()=>answer(true);
+        document.getElementById("n").onclick=()=>answer(false);
+      }
+      round();
+    }
+
+    /* ============ 4. ВПИШИ СЛОВО ============ */
+    function gSpell(){
+      const list=SMP.shuffle(WORDS).slice(0,8); let i=0, score=0;
+      SMP.hud({score:true});
+      function round(){
+        if(i>=list.length){ SMP.result({score,total:list.length,onAgain:()=>start("spell"),save:{unit:sel.value,type:"spell"}}); return; }
+        const w=list[i], hint=w.en[0].toUpperCase()+" "+"· ".repeat(Math.max(0,w.en.length-1));
+        stage.innerHTML='<div class="progress">'+(i+1)+' из '+list.length+'</div>'+
+          '<div class="em">'+(w.emoji||"⌨️")+'</div><div class="hintru">'+(w.ru||"напиши слово")+'</div>'+
+          '<div class="center" style="margin-top:10px;font:800 20px Nunito,sans-serif;color:#a99a86;letter-spacing:3px">'+hint+'</div>'+
+          '<input class="inp" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="напиши по-английски">'+
+          '<div class="row"><button class="primary" id="go">Проверить</button><button class="ghost" id="say">🔊</button></div>';
+        const inp=document.getElementById("inp"); setTimeout(()=>inp.focus(),60);
+        document.getElementById("say").onclick=()=>SMP.say(w.en);
+        function go(){
+          const v=(inp.value||"").trim().toLowerCase();
+          if(!v)return;
+          const ok=v===w.en.toLowerCase();
+          if(ok){ score++; SMP.hud.add(10); SMP.good(inp,10); SMP.say(w.en); i++; setTimeout(round,1000); }
+          else { inp.classList.add("bad"); SMP.bad(inp); SMP.hud.miss();
+                 setTimeout(()=>{inp.classList.remove("bad");inp.value="";inp.focus();},600); }
+          save("spell",ok);
+        }
+        document.getElementById("go").onclick=go;
+        inp.addEventListener("keydown",e=>{ if(e.key==="Enter")go(); });
+      }
+      round();
+    }
+
+    /* ============ 5. НАЙДИ СЛОВА ============ */
+    function gSearch(){
+      const N=10;
+      const words=SMP.shuffle(WORDS).filter(w=>/^[a-zA-Z]+$/.test(w.en)&&w.en.length<=N).slice(0,6);
+      if(words.length<3){ stage.innerHTML='<div class="center hintru" style="padding:60px 0">В этом юните мало коротких слов для сетки — выбери другой юнит.</div>'; return; }
+      const grid=[]; for(let r=0;r<N;r++){grid.push(new Array(N).fill(""));}
+      const placed=[];
+      words.forEach(w=>{
+        const up=w.en.toUpperCase(); let done=false;
+        for(let tries=0;tries<80&&!done;tries++){
+          const horiz=Math.random()<.5;
+          const r=Math.floor(Math.random()*(horiz?N:N-up.length+1));
+          const c=Math.floor(Math.random()*(horiz?N-up.length+1:N));
+          let fit=true;
+          for(let k=0;k<up.length;k++){ const rr=horiz?r:r+k, cc=horiz?c+k:c;
+            if(grid[rr][cc]&&grid[rr][cc]!==up[k]){fit=false;break;} }
+          if(!fit)continue;
+          const cells=[];
+          for(let k=0;k<up.length;k++){ const rr=horiz?r:r+k, cc=horiz?c+k:c; grid[rr][cc]=up[k]; cells.push(rr*N+cc); }
+          placed.push({w,cells}); done=true;
+        }
+      });
+      const AZ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for(let r=0;r<N;r++)for(let c=0;c<N;c++) if(!grid[r][c]) grid[r][c]=AZ[Math.floor(Math.random()*26)];
+      SMP.hud({score:true,time:180,onTime:()=>SMP.result({score:found.length,total:placed.length,title:"Время вышло",onAgain:()=>start("search")})});
+      stage.innerHTML='<div class="progress">найди '+placed.length+' слов · нажми первую и последнюю букву</div>'+
+        '<div class="grid" id="g" style="grid-template-columns:repeat('+N+',34px)"></div><div class="wlist" id="wl"></div>';
+      const g=document.getElementById("g"), wl=document.getElementById("wl");
+      for(let r=0;r<N;r++)for(let c=0;c<N;c++){ const d=document.createElement("div"); d.className="cell"; d.textContent=grid[r][c]; d.dataset.i=r*N+c; g.appendChild(d); }
+      placed.forEach((p,idx)=>{ const t=document.createElement("span"); t.className="wtag"; t.id="wt"+idx; t.textContent=p.w.en; wl.appendChild(t); });
+      let first=null; const found=[];
+      g.addEventListener("click",e=>{
+        const cell=e.target.closest(".cell"); if(!cell||cell.classList.contains("found"))return;
+        SMP.sfx("click");
+        if(first===null){ first=+cell.dataset.i; cell.classList.add("pick"); return; }
+        const a=first, b=+cell.dataset.i; first=null;
+        [...g.children].forEach(x=>x.classList.remove("pick"));
+        const hit=placed.findIndex((p,idx)=>!found.includes(idx)&&
+          ((p.cells[0]===a&&p.cells[p.cells.length-1]===b)||(p.cells[0]===b&&p.cells[p.cells.length-1]===a)));
+        if(hit>=0){
+          found.push(hit); placed[hit].cells.forEach(ci=>{ const el=g.querySelector('[data-i="'+ci+'"]'); if(el)el.classList.add("found"); });
+          document.getElementById("wt"+hit).classList.add("done");
+          SMP.hud.add(15); SMP.good(g.querySelector('[data-i="'+placed[hit].cells[0]+'"]'),15); SMP.say(placed[hit].w.en);
+          if(found.length===placed.length) setTimeout(()=>SMP.result({score:found.length,total:placed.length,onAgain:()=>start("search"),save:{unit:sel.value,type:"search"}}),700);
+        } else { SMP.bad(cell); SMP.hud.miss(); }
+      });
+    }
+
+    /* ============ 6. УГАДАЙ СЛОВО ============ */
+    function gHang(){
+      const list=SMP.shuffle(WORDS).slice(0,6); let i=0, score=0;
+      SMP.hud({score:true});
+      const FACES=["😀","🙂","😐","😟","😧","😨","💀"];
+      function round(){
+        if(i>=list.length){ SMP.result({score,total:list.length,onAgain:()=>start("hang"),save:{unit:sel.value,type:"hang"}}); return; }
+        const w=list[i], up=w.en.toUpperCase(); let miss=0; const open=new Set([" ","-","'"]);
+        stage.innerHTML='<div class="progress">'+(i+1)+' из '+list.length+'</div>'+
+          '<div class="gallow" id="face">'+FACES[0]+'</div><div class="hintru">'+(w.ru||"угадай слово")+'</div>'+
+          '<div class="hword" id="hw"></div><div class="keys" id="keys"></div>';
+        const hw=document.getElementById("hw"), keys=document.getElementById("keys"), face=document.getElementById("face");
+        function draw(){ hw.innerHTML=""; [...up].forEach(ch=>{ const d=document.createElement("div"); d.className="hl";
+          d.textContent=open.has(ch)?(ch===" "?" ":ch):""; hw.appendChild(d); }); }
+        draw();
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(ch=>{ const b=document.createElement("button"); b.className="key"; b.textContent=ch;
+          b.onclick=()=>{
+            if(up.indexOf(ch)>=0){ open.add(ch); b.classList.add("hit"); SMP.sfx("ok"); draw();
+              if([...up].every(c=>open.has(c))){ score++; SMP.hud.add(20); SMP.good(hw,20); SMP.say(w.en); i++; setTimeout(round,1300); } }
+            else { miss++; b.classList.add("miss"); SMP.bad(b); face.textContent=FACES[Math.min(miss,6)];
+              if(miss>=6){ SMP.hud.miss(); open.clear(); [...up].forEach(c=>open.add(c)); draw(); SMP.say(w.en);
+                setTimeout(()=>{ i++; round(); },1800); } }
+          }; keys.appendChild(b); });
+      }
+      round();
+    }
+
+    loadWords(); start(current);
+  </script>
+</body>
+</html>
