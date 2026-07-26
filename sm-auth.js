@@ -55,7 +55,9 @@ if (!nm) {
 try { const r = await c.from("profiles").select("name").eq("user_id", u.id).maybeSingle();
 if (r && r.data && r.data.name) nm = r.data.name; } catch (e) {}
 }
-if (!nm) nm = String(u.email || "").split("@")[0] || "Ученик";
+if (!nm) nm = u.email || "";
+if (nm.indexOf("@") > 0) nm = nm.split("@")[0];   /* имя, а не почта */
+if (!nm) nm = "Ученик";
 return { id: u.id, email: u.email, name: nm };
 },
 
