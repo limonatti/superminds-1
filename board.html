@@ -438,31 +438,60 @@
     /* ---- фото ---- */
     function addImg(id,d,remote){ if(objs[id])return;
       const el=document.createElement("div"); el.className="obj pic"; el.style.width=d.w+"px"; el.style.height=d.h+"px"; place(el,d.x,d.y);
-      const im=document.createElement("img"); im.src=d.src; el.appendChild(im); world.appendChild(el);
+      const im=document.createElement("img"); im.crossOrigin="anonymous"; im.src=d.src; el.appendChild(im); world.appendChild(el);
       const o={type:"img",id,x:d.x,y:d.y,w:d.w,h:d.h,src:d.src,el}; objs[id]=o; delX(el,id); dragObj(el,o); resizer(el,o);
       if(!remote) send({t:"any",o:{type:"img",id,x:d.x,y:d.y,w:d.w,h:d.h,src:d.src}}); }
 
+    /* Картинки живут в отдельном хранилище: в доску попадает только ссылка.
+       Если хранилище недоступно — кладём картинку прямо в доску, но мельче. */
     function shrink(file,cb){
       const rd=new FileReader();
       rd.onload=()=>{ const im=new Image(); im.onload=()=>{
-        let W=im.width,H=im.height; const MAX=1000;
+        let W=im.width,H=im.height; const MAX=1600;
         if(Math.max(W,H)>MAX){ const k=MAX/Math.max(W,H); W=Math.round(W*k); H=Math.round(H*k); }
         const cv=document.createElement("canvas"); cv.width=W; cv.height=H;
         cv.getContext("2d").drawImage(im,0,0,W,H);
-        let q=.72, url=cv.toDataURL("image/jpeg",q);
-        while(url.length>150000&&q>.3){ q-=.12; url=cv.toDataURL("image/jpeg",q); }
-        if(url.length>150000){ const cv2=document.createElement("canvas"); cv2.width=Math.round(W*.7); cv2.height=Math.round(H*.7);
-          cv2.getContext("2d").drawImage(im,0,0,cv2.width,cv2.height); url=cv2.toDataURL("image/jpeg",.6); W=cv2.width; H=cv2.height; }
-        cb(url,W,H);
+        cb(cv.toDataURL("image/jpeg",.85),W,H);
       }; im.src=rd.result; };
       rd.readAsDataURL(file);
+    }
+    function shrinkSmall(dataUrl,cb){
+      const im=new Image(); im.onload=()=>{
+        let W=im.width,H=im.height; const MAX=900;
+        if(Math.max(W,H)>MAX){ const k=MAX/Math.max(W,H); W=Math.round(W*k); H=Math.round(H*k); }
+        const cv=document.createElement("canvas"); cv.width=W; cv.height=H;
+        cv.getContext("2d").drawImage(im,0,0,W,H);
+        let q=.7,u=cv.toDataURL("image/jpeg",q);
+        while(u.length>140000&&q>.3){ q-=.12; u=cv.toDataURL("image/jpeg",q); }
+        cb(u);
+      }; im.src=dataUrl;
+    }
+    let warnedStore=false;
+    async function uploadPic(dataUrl){
+      if(!sb)return null;
+      try{
+        const blob=await (await fetch(dataUrl)).blob();
+        const path=room+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,7)+".jpg";
+        const {error}=await sb.storage.from("board-images").upload(path,blob,{contentType:"image/jpeg",upsert:false});
+        if(error){ console.warn("upload:",error.message); return null; }
+        const {data}=sb.storage.from("board-images").getPublicUrl(path);
+        return (data&&data.publicUrl)||null;
+      }catch(e){ return null; }
     }
     function dropFiles(files,at){
       const r=stage.getBoundingClientRect();
       const base=at||toWorld(r.left+r.width/2,r.top+r.height/2);
-      [...files].slice(0,6).forEach((f,i)=>{ if(!/^image\//.test(f.type))return;
-        shrink(f,(url,W,H)=>{ const k=Math.min(1,420/Math.max(W,H)); snapshot();
-          addImg(genId(),{x:base.x+i*26,y:base.y+i*26,w:Math.round(W*k),h:Math.round(H*k),src:url},false); });
+      [...files].slice(0,8).forEach((f,i)=>{ if(!/^image\//.test(f.type))return;
+        shrink(f,async(dataUrl,W,H)=>{
+          const k=Math.min(1,420/Math.max(W,H));
+          const box={x:base.x+i*26,y:base.y+i*26,w:Math.round(W*k),h:Math.round(H*k)};
+          saveLbl.textContent="загружаю фото…";
+          const url=await uploadPic(dataUrl);
+          if(url){ snapshot(); addImg(genId(),Object.assign({src:url},box),false); saveLbl.textContent="сохранено"; }
+          else { shrinkSmall(dataUrl,u=>{ snapshot(); addImg(genId(),Object.assign({src:u},box),false);
+              if(!warnedStore){ warnedStore=true; saveLbl.textContent="фото в доске";
+                alert("Хранилище картинок недоступно — фото легло прямо в доску. Так тоже работает, но много фотографий будут её утяжелять."); } }); }
+        });
       });
     }
     const fileInp=document.getElementById("fileInp");
