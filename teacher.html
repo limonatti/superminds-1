@@ -5,87 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Кабинет учителя · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:'Archivo',sans-serif;min-height:100vh}
   a{color:inherit;text-decoration:none}
-  button{font-family:inherit;cursor:pointer;border:none}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
-  .wrap{max-width:680px;margin:0 auto;padding:64px 20px 56px}
-  h1{margin:0;text-align:center;font-size:clamp(28px,6vw,44px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{text-align:center;margin:10px 0 24px;font:800 15px 'Nunito',sans-serif;color:#5a4f47}
-  .panel{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:26px 24px}
-  .tabs{display:flex;gap:8px;margin-bottom:18px}
-  .tab{flex:1;background:#f4e9d8;border-radius:14px;padding:11px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .tab.on{background:#7c2340;color:#fff}
-  label{display:block;font:800 12px 'Nunito',sans-serif;color:#8a7a68;margin:12px 2px 6px;letter-spacing:.5px}
-  input{width:100%;border:2px solid #e3d3ba;border-radius:14px;padding:13px 14px;font:600 16px 'Fredoka',sans-serif;color:#1c1310;background:#fdfbf7}
-  input:focus{outline:none;border-color:#7c2340}
-  .primary{width:100%;margin-top:18px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5e1a30}
-  .msg{margin-top:14px;font:700 13px 'Nunito',sans-serif;text-align:center;min-height:18px}
-  .msg.err{color:#a23b1e}.msg.ok{color:#3f7a20}
-  .note{font:700 12px 'Nunito',sans-serif;color:#a99a86;text-align:center;margin-top:14px;line-height:1.5}
+  button{font-family:inherit;cursor:pointer}
 
-  .who{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-  .who .name{font-size:22px;font-weight:700;color:#7c2340}
-  .logout{background:#f4e9d8;border-radius:999px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340}
-  .codebox{background:#dfeadd;border-radius:18px;padding:16px;text-align:center;margin-bottom:18px}
-  .codebox .lbl{font:800 12px 'Nunito',sans-serif;color:#5a4f47}
-  .codebox .code{font-size:34px;font-weight:700;color:#3f7a20;letter-spacing:3px;margin:4px 0}
-  .codebox button{margin-top:6px;background:#7c2340;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px 'Nunito',sans-serif}
-  .codebox .hint{font:700 12px 'Nunito',sans-serif;color:#5a7a4f;margin-top:8px}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 32px;
+    border-bottom:2px solid var(--color-divider);background:var(--color-bg);position:sticky;top:0;z-index:10}
+  .brand{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .brand i{width:24px;height:24px;background:var(--color-accent);display:block}
+  .nav{display:flex}
+  .nav a{position:relative;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--color-neutral-800)}
+  .nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:4px;background:var(--color-accent)}
+  .nav a:hover{background:var(--color-accent-100)}
+  .pill{border:2px solid var(--color-text);padding:9px 16px;font-size:12px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--color-text);text-decoration:none;background:none;display:inline-block}
+  .pill:hover{background:var(--color-text);color:var(--color-bg)}
 
-  .sec-title{font:900 12px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.6px;margin:6px 2px 10px;display:flex;justify-content:space-between;align-items:center}
-  .sec-title button{background:#f4e9d8;border-radius:999px;padding:6px 12px;font:800 12px 'Nunito',sans-serif;color:#7c2340}
-  .srow{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;background:#faf4ea;margin-bottom:8px;flex-wrap:wrap}
-  .srow .av{width:38px;height:38px;border-radius:50%;background:#f6e2cf;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
-  .srow .nm{font:800 15px 'Nunito',sans-serif;flex:1;min-width:110px}
-  .srow .st{font:800 12px 'Nunito',sans-serif;color:#5a4f47;display:flex;gap:10px;flex-wrap:wrap}
-  .srow .st b{color:#3f7a20}
-  .empty{font:700 13px 'Nunito',sans-serif;color:#a99a86;text-align:center;padding:14px}
-  .bigInvite{background:#3f7a20;color:#fff;border:none;border-radius:16px;padding:14px 22px;font:800 15px 'Nunito',sans-serif;box-shadow:0 5px 0 #2e5a17;cursor:pointer;margin-top:10px}
-  .bigInvite:disabled{opacity:.6;box-shadow:none}
-  .invout{margin-top:10px;font:700 12.5px 'Nunito',sans-serif}
-  .invout.err{color:#a23b1e}
-  .invout .invlink{background:#fff;border:2px dashed #7cb342;border-radius:12px;padding:10px;word-break:break-all;color:#1c1310;font:700 12.5px 'Nunito',sans-serif}
-  .invout .invcopy{margin-top:8px;background:#7c2340;color:#fff;border:none;border-radius:999px;padding:9px 18px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
-  .scard{background:#faf4ea;border-radius:14px;padding:8px 10px;margin-bottom:10px}
-  .scard .srow{background:transparent;padding:4px 2px;margin:0}
-  .assign-btn{background:#3f7a20;color:#fff;border:none;border-radius:999px;padding:7px 12px;font:800 12px 'Nunito',sans-serif;cursor:pointer;flex:none}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 2px 2px}
-  .chip{display:inline-flex;align-items:center;gap:5px;background:#fff4e0;border:1.5px solid #f0c96b;border-radius:999px;padding:4px 8px;font:800 11.5px 'Nunito',sans-serif;color:#7a5b12}
-  .chip.done{background:#eef4ea;border-color:#bcd9ac;color:#3f7a20}
-  .chip .del{background:none;border:none;color:#c0392b;cursor:pointer;font-size:12px;padding:0 0 0 2px}
-  .assignform{display:none;gap:6px;margin:8px 2px 2px;flex-wrap:wrap}
-  .assignform select{border:2px solid #e3d3ba;border-radius:10px;padding:8px;font:800 12px 'Nunito',sans-serif;background:#fff;flex:1;min-width:120px}
-  .assignform .assign-go{background:#7c2340;color:#fff;border:none;border-radius:10px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;cursor:pointer}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:36px}
-  .spk-btn{background:#2e6f4e;color:#fff;border:none;border-radius:999px;padding:7px 12px;font:800 12px 'Nunito',sans-serif;cursor:pointer;flex:none;margin-top:6px}
-  .spk-panel{display:none;margin:8px 0 2px;background:#f2f7f3;border:1.5px solid #bcd9c8;border-radius:12px;padding:10px}
+  .wrap{max-width:1000px;margin:0 auto;padding:44px 32px 64px}
+  h1{margin:0;font-size:56px;line-height:1;font-weight:800;letter-spacing:-.02em}
+  .sub{margin:12px 0 28px;font-size:18px;font-weight:500;color:var(--color-neutral-700)}
+
+  .panel{border:2px solid var(--color-divider);background:var(--color-surface);padding:0}
+  .panel>*{padding-left:26px;padding-right:26px}
+  .tabs{display:flex;padding:0!important;border-bottom:2px solid var(--color-divider)}
+  .tab{flex:1;background:none;border:0;border-right:2px solid var(--color-divider);padding:14px;
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .tab:last-child{border-right:0}
+  .tab.on{background:var(--color-accent);color:#fff}
+  label{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);margin:18px 0 7px}
+  input{width:100%;border:2px solid var(--color-text);border-radius:0;padding:13px 14px;font:600 16px 'Archivo',sans-serif;color:var(--color-text);background:var(--color-bg)}
+  input:focus{outline:none;border-color:var(--color-accent)}
+  select{font-family:'Archivo',sans-serif;border-radius:0}
+  .primary{width:100%;margin:22px 0 0;background:var(--color-accent);color:#fff;border:0;border-radius:0;padding:16px;
+    font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .primary:hover{background:var(--color-accent-700)}
+  .msg{margin:12px 0 0;font-size:13px;font-weight:700;min-height:18px;padding-bottom:22px}
+  .msg.err{color:var(--color-accent)}.msg.ok{color:var(--color-neutral-800)}
+  .note{font-size:13px;font-weight:600;color:var(--color-neutral-700);padding-top:22px;padding-bottom:22px;line-height:1.55}
+
+  .who{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:22px;padding-bottom:22px;border-bottom:2px solid var(--color-divider)}
+  .who .name{font-size:28px;font-weight:800;letter-spacing:-.01em}
+  .logout{background:none;border:2px solid var(--color-text);border-radius:0;padding:9px 16px;
+    font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)}
+  .logout:hover{background:var(--color-text);color:var(--color-bg)}
+
+  .codebox{margin:0 -26px 0;padding:24px 26px;border-bottom:2px solid var(--color-divider);background:var(--color-bg)}
+  .codebox .lbl{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:10px}
+  .codebox .code{font-size:44px;font-weight:800;letter-spacing:.14em;line-height:1;margin:0 0 12px;color:var(--color-accent)}
+  .codebox button{background:none;border:2px solid var(--color-text);border-radius:0;padding:9px 16px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text);margin-right:6px}
+  .codebox button:hover{background:var(--color-text);color:var(--color-bg)}
+  .codebox .hint{font-size:12px;font-weight:600;color:var(--color-neutral-600);margin-top:14px;line-height:1.5}
+  .codebox .lnk{display:inline-block;border:2px solid var(--color-text);padding:9px 16px;margin:6px 6px 0 0;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text)}
+  .codebox .lnk:hover{background:var(--color-text);color:var(--color-bg)}
+
+  .sec-title{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);
+    padding-top:22px;padding-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .sec-title button{background:none;border:2px solid var(--color-neutral-400);border-radius:0;padding:6px 12px;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .sec-title button:hover{border-color:var(--color-text);color:var(--color-text)}
+
+  .srow{display:flex;align-items:center;gap:12px;padding:4px 0;flex-wrap:wrap}
+  .srow .av{width:36px;height:36px;border:2px solid var(--color-divider);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none}
+  .srow .nm{font-size:17px;font-weight:800;flex:1;min-width:110px;letter-spacing:-.01em}
+  .srow .st{font-size:12px;font-weight:700;color:var(--color-neutral-700);display:flex;gap:12px;flex-wrap:wrap}
+  .srow .st b{color:var(--color-text)}
+  .empty{font-size:14px;font-weight:600;color:var(--color-neutral-700);padding:22px 0}
+  .bigInvite{background:var(--color-accent);color:#fff;border:0;border-radius:0;padding:14px 22px;
+    font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .bigInvite:hover{background:var(--color-accent-700)}
+  .bigInvite:disabled{opacity:.5}
+  .invout{margin-top:12px;font-size:12.5px;font-weight:700}
+  .invout.err{color:var(--color-accent)}
+  .invout .invlink{background:var(--color-surface);border:2px dashed var(--color-neutral-500);padding:12px;word-break:break-all;font-weight:600}
+  .invout .invcopy{margin-top:8px;background:var(--color-text);color:var(--color-bg);border:0;border-radius:0;padding:10px 18px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .scard{border:2px solid var(--color-divider);padding:14px 16px;margin-bottom:12px;background:var(--color-bg)}
+  .assign-btn{background:none;color:var(--color-text);border:2px solid var(--color-text);border-radius:0;padding:7px 12px;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;flex:none}
+  .assign-btn:hover{background:var(--color-text);color:var(--color-bg)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--color-accent-100);border:2px solid var(--color-accent);
+    padding:4px 9px;font-size:11.5px;font-weight:800;color:var(--color-text)}
+  .chip.done{background:var(--color-neutral-200);border-color:var(--color-neutral-400);color:var(--color-neutral-700)}
+  .chip .del{background:none;border:0;color:var(--color-accent);cursor:pointer;font-size:12px;padding:0}
+  .assignform{display:none;gap:6px;margin:10px 0 2px;flex-wrap:wrap}
+  .assignform select{border:2px solid var(--color-text);padding:9px;font-size:12px;font-weight:700;background:var(--color-bg);flex:1;min-width:130px}
+  .assignform .assign-go{background:var(--color-accent);color:#fff;border:0;border-radius:0;padding:9px 18px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .foot{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:18px;border-top:2px solid var(--color-divider);
+    font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600)}
+
+  .spk-btn{background:none;color:var(--color-text);border:2px solid var(--color-neutral-500);border-radius:0;padding:7px 12px;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;flex:none;margin-top:10px}
+  .spk-btn:hover{border-color:var(--color-text)}
+  .spk-panel{display:none;margin:12px 0 2px;background:var(--color-surface);border:2px solid var(--color-divider);padding:14px}
   .spk-panel.on{display:block}
-  .spk-panel .r{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
-  .spk-panel select,.spk-panel input{border:2px solid #cfe0d4;border-radius:10px;padding:8px;font:700 12.5px 'Nunito',sans-serif;background:#fff}
-  .spk-panel input{flex:1;min-width:120px}
-  .spk-panel .go{background:#2e6f4e;color:#fff;border:none;border-radius:10px;padding:8px 14px;font:800 12px 'Nunito',sans-serif;cursor:pointer}
-  .spk-panel .lbl2{font:900 11px 'Nunito',sans-serif;color:#5a4f47;letter-spacing:.5px;margin:8px 0 4px}
-  .hwchip{display:inline-flex;align-items:center;gap:5px;background:#eaf3ee;border:1.5px solid #bcd9c8;border-radius:999px;padding:4px 8px;font:800 11.5px 'Nunito',sans-serif;color:#2e6f4e;margin:0 4px 4px 0}
-  .hwchip.done{opacity:.65}
-  .hwchip .del{background:none;border:none;color:#c0392b;cursor:pointer;font-size:12px}
-  .resbtn{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #cfe0d4;border-radius:10px;padding:8px 10px;font:800 12.5px 'Nunito',sans-serif;color:#1c1310;cursor:pointer;margin-bottom:6px}
-  .att{border-radius:8px;padding:7px 10px;margin-bottom:5px;font:700 12.5px 'Nunito',sans-serif}
-  .att.ok{background:#d7f0d0;border:1px solid #7cb342}
-  .att.no{background:#ffd9d2;border:1px solid #e0745e}
-  .att .qa{color:#5a4f47;margin-top:2px}
+  .spk-panel .r{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .spk-panel select,.spk-panel input{border:2px solid var(--color-neutral-500);border-radius:0;padding:9px;
+    font-size:12.5px;font-weight:700;background:var(--color-bg);color:var(--color-text)}
+  .spk-panel input{flex:1;min-width:130px;width:auto}
+  .spk-panel .go{background:var(--color-text);color:var(--color-bg);border:0;border-radius:0;padding:9px 16px;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .spk-panel .go:hover{background:var(--color-accent)}
+  .spk-panel .lbl2{font-size:11px;font-weight:800;color:var(--color-neutral-600);letter-spacing:.14em;text-transform:uppercase;margin:14px 0 6px}
+  .hwchip{display:inline-flex;align-items:center;gap:6px;background:var(--color-bg);border:2px solid var(--color-neutral-500);
+    padding:4px 9px;font-size:11.5px;font-weight:800;color:var(--color-text);margin:0 5px 5px 0}
+  .hwchip.done{opacity:.55}
+  .hwchip .del{background:none;border:0;color:var(--color-accent);cursor:pointer;font-size:12px}
+  .resbtn{display:block;width:100%;text-align:left;background:var(--color-bg);border:2px solid var(--color-neutral-400);border-radius:0;
+    padding:10px 12px;font-size:12.5px;font-weight:700;color:var(--color-text);margin-bottom:6px}
+  .resbtn:hover{border-color:var(--color-text);background:var(--color-accent-100)}
+  .att{padding:9px 12px;margin-bottom:5px;font-size:12.5px;font-weight:600;border-left:6px solid}
+  .att.ok{background:var(--color-neutral-200);border-color:var(--color-neutral-600)}
+  .att.no{background:var(--color-accent-100);border-color:var(--color-accent)}
+  .att .qa{color:var(--color-neutral-700);margin-top:3px}
+  @media(max-width:640px){
+    .nav{display:none}.bar{padding:14px 20px}.wrap{padding:30px 20px 48px}h1{font-size:38px}
+    .codebox .code{font-size:32px}.foot{flex-direction:column;gap:6px}
+  }
 </style>
 </head>
 <body>
-  <a class="home" href="index.html">← Учебники</a>
+  <div class="bar">
+    <span class="brand"><i></i>English with Asya</span>
+    <nav class="nav">
+      <a href="index.html">Учебники</a>
+      <a href="course.html">Курс</a>
+      <a href="cabinet.html">Кабинет ученика</a>
+      <a class="on" href="teacher.html">Кабинет учителя</a>
+    </nav>
+    <a class="pill" href="board.html">Доска</a>
+  </div>
   <div class="wrap">
-    <h1>👩‍🏫 Кабинет учителя</h1>
+    <div style="font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent);margin-bottom:14px">Учитель / Teacher</div>
+    <h1>Мой класс</h1>
     <div class="sub" id="sub">вход и твой класс</div>
     <div id="root"></div>
-    <div class="foot">Made for @english.with_asya</div>
+    <div class="foot"><span>Made for @english.with_asya</span><span>класс и прогресс</span></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -156,24 +219,24 @@
         return '<div class="scard">'+
           '<div class="srow"><div class="av">🧒</div><div class="nm">'+esc(s.name)+'</div>'+
             '<div class="st"><span>✅ <b>'+learned(data)+'</b></span><span>⭐ '+(meta.totalPoints||0)+'</span><span>🔥 '+(meta.dayStreak||0)+'</span><span>🕘 '+ago(s.updated_at)+'</span></div>'+
-            '<button class="assign-btn" data-sid="'+sid+'">＋ Задать</button></div>'+
+            '<button class="assign-btn" data-sid="'+sid+'">Задать</button></div>'+
           (chips?'<div class="chips">'+chips+'</div>':'')+
           '<div class="assignform" id="af-'+sid+'"><select class="af-unit">'+unitOptions+'</select><select class="af-kind">'+kindOptions+'</select><button class="assign-go" data-sid="'+sid+'">Задать</button></div>'+
-          '<button class="spk-btn" data-sid="'+sid+'">🎓 Speakout</button><div class="spk-panel" id="spk-'+sid+'"></div>'+
+          '<button class="spk-btn" data-sid="'+sid+'">Speakout — курс, ДЗ, результаты</button><div class="spk-panel" id="spk-'+sid+'"></div>'+
         '</div>';
-      }).join("") : '<div class="empty">Пока нет учеников.<br><button class="bigInvite" id="emptyInvite">＋ Пригласить ученика</button></div>';
+      }).join("") : '<div class="empty">Пока нет учеников.<br><br><button class="bigInvite" id="emptyInvite">Пригласить ученика</button></div>';
 
       document.getElementById("body").innerHTML=
         '<div class="codebox"><div class="lbl">ПРИГЛАСИТЬ УЧЕНИКА</div>'+
-          '<button class="bigInvite" id="mkInvite">🔗 Создать ссылку-приглашение</button>'+
+          '<button class="bigInvite" id="mkInvite">Создать ссылку-приглашение</button>'+
           '<div class="invout" id="invout"></div>'+
           '<div class="lbl" style="margin-top:12px">ПОСТОЯННЫЙ КОД КЛАССА</div><div class="code">'+esc(code)+'</div>'+
-          '<button id="copy">📋 Скопировать код</button>'+
-          ' <a href="room.html" style="display:inline-block;margin-top:6px;background:#3f7a20;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">🧑‍🏫 Комната урока</a>'+
-          ' <a href="builder.html" style="display:inline-block;margin-top:6px;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">🛠 Конструктор</a>'+
-          ' <a href="admin.html" style="display:inline-block;margin-top:6px;margin-left:6px;background:#7c2340;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none">📚 Учебники</a>'+
+          '<button id="copy">Скопировать код</button>'+
+          '<a class="lnk" href="room.html">Комната урока</a>'+
+          '<a class="lnk" href="builder.html">Конструктор</a>'+
+          '<a class="lnk" href="admin.html">Учебники</a>'+
           '<div class="hint">Ссылка одноразовая — по ней зарегистрируется один ученик. Код класса работает всегда.</div></div>'+
-        '<div class="sec-title">МОИ УЧЕНИКИ · '+students.length+'<button id="refresh">↻ Обновить</button></div>'+
+        '<div class="sec-title">Мои ученики · '+students.length+'<button id="refresh">Обновить</button></div>'+
         rows;
 
       document.getElementById("refresh").onclick=()=>renderDash(user);
