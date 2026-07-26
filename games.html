@@ -92,6 +92,9 @@
   <div class="wrap">
     <h1 id="title">🎮 Игры</h1>
     <div class="sub" id="sub"></div>
+    <div style="display:flex;justify-content:center;margin-bottom:12px">
+      <select id="unitSel" style="background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:10px 12px;font:800 14px 'Nunito',sans-serif;color:#5a4f47"></select>
+    </div>
     <div class="games" id="games"></div>
     <div class="stage" id="stage"></div>
     <div class="foot">Made for @english.with_asya · Super Minds 1 · для детей 6–8</div>
@@ -99,14 +102,36 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
+  <script src="speakout-words.js"></script>
   <script src="sm-auth.js"></script>
   <script src="sm-play.js"></script>
   <script>
     const q=new URLSearchParams(location.search);
-    const unit=SM_UNITS.find(u=>u.id===(q.get("u")||"u1"))||SM_UNITS[0];
-    document.getElementById("title").textContent="🎮 Игры · "+unit.emoji+" "+unit.title;
-    document.getElementById("sub").textContent="Super Minds 1 · "+unit.unit;
-    const WORDS=unit.words.map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji,img:w.img||null}));
+    /* ---- выбор юнита: Super Minds + Speakout B1 и B1+ ---- */
+    const sel=document.getElementById("unitSel");
+    const SPK_L={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
+    (function(){
+      (window.SM_UNITS||[]).forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
+      if(window.SPEAKOUT_WORDS) Object.keys(SPEAKOUT_WORDS).forEach(c=>Object.keys(SPEAKOUT_WORDS[c]).forEach(u=>{
+        const o=document.createElement("option");o.value=c+"|"+u;o.textContent="🗣️ "+(SPK_L[c]||c)+" · Unit "+u;sel.appendChild(o);}));
+      const want=q.get("u"); if(want&&[...sel.options].some(o=>o.value===want)) sel.value=want;
+    })();
+    let WORDS=[];
+    function loadUnit(){
+      const key=sel.value;
+      WORDS=SMP.words(key);
+      DECK=[];
+      if(key.indexOf("|")>=0){
+        const p=key.split("|");
+        document.getElementById("title").textContent="🎮 Игры · "+(SPK_L[p[0]]||p[0])+" · Unit "+p[1];
+        document.getElementById("sub").textContent="слова юнита "+p[1];
+      } else {
+        const u=(window.SM_UNITS||[]).find(x=>x.id===key)||{};
+        document.getElementById("title").textContent="🎮 Игры · "+(u.emoji||"")+" "+(u.title||"");
+        document.getElementById("sub").textContent="Super Minds 1 · "+(u.unit||"");
+      }
+    }
+    sel.onchange=()=>{ SMP.sfx("click"); loadUnit(); start(); };
 
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     /* звук и анимации берём из общего движка sm-play.js */
@@ -360,7 +385,7 @@
 
     addEventListener("pagehide",()=>{try{SM.srsFlush();}catch(e){}});
     setInterval(()=>{try{SM.srsFlush();}catch(e){}},15000);
-    renderGames();start();
+    loadUnit();renderGames();start();
   </script>
 </body>
 </html>
