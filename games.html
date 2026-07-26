@@ -100,6 +100,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script src="sm-auth.js"></script>
+  <script src="sm-play.js"></script>
   <script>
     const q=new URLSearchParams(location.search);
     const unit=SM_UNITS.find(u=>u.id===(q.get("u")||"u1"))||SM_UNITS[0];
@@ -108,14 +109,11 @@
     const WORDS=unit.words.map((w,i)=>({id:unit.id+"-"+i,en:w.en,ru:w.ru,emoji:w.emoji,img:w.img||null}));
 
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-    function speak(t){if(window.SM_speak)return SM_speak(t);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
-    let actx=null;
-    function beep(ok){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const seq=ok?[[660,0],[880,.12]]:[[200,0]];
-      seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
-      const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){}}
-    function fanfare(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.12],[784,.24],[1046,.4]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;o.connect(g);g.connect(actx.destination);const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.28,s+.03);g.gain.exponentialRampToValueAtTime(.0001,s+.45);o.start(s);o.stop(s+.47);});}catch(e){}}
-    /* короткий «тик» трещотки колеса */
-    function tickSnd(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type="square";o.frequency.value=1500;o.connect(g);g.connect(actx.destination);const t=actx.currentTime;g.gain.setValueAtTime(.11,t);g.gain.exponentialRampToValueAtTime(.0001,t+.045);o.start(t);o.stop(t+.05);}catch(e){}}
+    /* звук и анимации берём из общего движка sm-play.js */
+    function speak(t){ SMP.say(t); }
+    function beep(ok){ SMP.sfx(ok?"ok":"no"); }
+    function fanfare(){ SMP.sfx("win"); }
+    function tickSnd(){ SMP.sfx("tick"); }
     /* тики с замедлением: чем медленнее колесо, тем реже щелчки */
     function spinTicks(durMs,crossings){
       for(let i=1;i<=crossings;i++){
@@ -123,8 +121,10 @@
         setTimeout(tickSnd,Math.round(x*durMs));
       }
     }
-    function confetti(){const em=["🎉","✨","⭐","🎊","💛","💙","💚"];
-      for(let i=0;i<26;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];
+    function confetti(){
+      SMP.confetti(60);
+      const em=["🎉","✨","⭐","🎊","💛","💙","💚"];
+      for(let i=0;i<20;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];
         sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*20)+"px";
         sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";sp.style.animationDelay=(Math.random()*.5)+"s";
         document.body.appendChild(sp);setTimeout(()=>sp.remove(),4200);}}

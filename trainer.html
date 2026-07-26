@@ -132,6 +132,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="words.js"></script>
   <script src="sm-auth.js"></script>
+  <script src="sm-play.js"></script>
   <script>
     const TARGET = 4;
     const MODES = [
@@ -158,11 +159,7 @@
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function speak(t){ if(window.SM_speak)return SM_speak(t); try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
 
-    let actx=null;
-    function beep(ok){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-      const seq=ok?[[660,0],[880,.12]]:[[200,0]];
-      seq.forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.type="sine";o.connect(g);g.connect(actx.destination);
-        const s=actx.currentTime+t;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.2,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.18);o.start(s);o.stop(s+.2);});}catch(e){} }
+    function beep(ok){ SMP.sfx(ok?"ok":"no"); }
 
     /* ---- дата / дневной streak / неделя ---- */
     function dstr(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
