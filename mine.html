@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кубический мир · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  /* ---- кубический мир: своя пиксельная палитра ---- */
+  .mc{--grass:#6ab04c;--grass2:#4a8b34;--dirt:#9c6b43;--dirt2:#7b5230;--stone:#9aa0a6;
+      --gold:#f0c419;--sky:#8fd0f5;--wood:#b3763c;--diam:#3fd0d0;--leaf:#3fa34d;--lava:#f0653a;
+      --night:#2b2540}
+  .px{font-family:"Press Start 2P",monospace;letter-spacing:0}
+
+  .stage{padding:22px 28px 34px;min-height:420px}
+  .board{background:var(--sky);padding:18px;box-shadow:inset 0 0 0 4px rgba(0,0,0,.15)}
+  .board.dark{background:var(--night)}
+  .board.field{background:var(--grass)}
+
+  .task{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 18px;margin-bottom:16px;
+    background:var(--color-text);color:#fff}
+  .task .em{font-size:40px;line-height:1}
+  .task .ru{font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .task .hint{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-400)}
+  .task .sayb{margin-left:auto;background:var(--color-accent);color:#fff;border:0;padding:12px 16px;
+    font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+
+  /* блок */
+  .blk{position:relative;border:0;background:var(--dirt);color:#fff;padding:0;cursor:pointer;
+    box-shadow:inset -7px -7px 0 rgba(0,0,0,.26), inset 7px 7px 0 rgba(255,255,255,.22);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:"Press Start 2P",monospace;font-size:10px;line-height:1.5;word-break:break-word;padding:8px;
+    transition:transform .09s ease-out, opacity .18s ease-out}
+  .blk:hover{transform:translateY(-3px)}
+  .blk:active{transform:scale(.95)}
+  .blk.grass{background:var(--grass)}
+  .blk.stone{background:var(--stone)}
+  .blk.wood{background:var(--wood)}
+  .blk.gold{background:var(--gold);color:#3a2a00}
+  .blk.diam{background:var(--diam);color:#053b3b}
+  .blk.leaf{background:var(--leaf)}
+  .blk.lava{background:var(--lava)}
+  .blk.gone{opacity:0;transform:scale(.4) rotate(8deg);pointer-events:none}
+  .blk.shake{animation:shk .3s}
+  .blk.lit{outline:4px solid #fff;outline-offset:-4px}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+  .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .grid4 .blk,.grid3 .blk{aspect-ratio:1}
+
+  /* крафт */
+  .slots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+  .slot{width:52px;height:52px;background:rgba(0,0,0,.18);box-shadow:inset 0 0 0 4px rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Press Start 2P",monospace;font-size:18px;color:#fff}
+  .slot.full{background:var(--wood);box-shadow:inset -6px -6px 0 rgba(0,0,0,.26), inset 6px 6px 0 rgba(255,255,255,.22)}
+  .chest{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .chest .blk{width:52px;height:52px;font-size:18px;padding:0}
+  .chest .blk.used{opacity:.2;pointer-events:none}
+
+  /* пещера */
+  .cave{position:relative;height:300px;overflow:hidden;background:var(--night);
+    box-shadow:inset 0 0 0 4px rgba(0,0,0,.3)}
+  .cave .floor{position:absolute;left:0;right:0;bottom:0;height:26px;background:var(--stone)}
+  .cave .hero{position:absolute;left:12px;bottom:26px;width:46px;height:60px;background:var(--diam);
+    box-shadow:inset -6px -6px 0 rgba(0,0,0,.26), inset 6px 6px 0 rgba(255,255,255,.22)}
+  .mob{position:absolute;bottom:26px;height:64px;min-width:96px;padding:0 10px}
+  .zone{position:absolute;left:0;top:0;bottom:0;width:64px;background:rgba(236,48,19,.25)}
+
+  /* стройка */
+  .house{display:flex;flex-direction:column-reverse;gap:6px;align-items:center;min-height:220px;justify-content:flex-start}
+  .brow{display:flex;gap:6px}
+  .brick{width:46px;height:30px;background:var(--dirt);
+    box-shadow:inset -5px -5px 0 rgba(0,0,0,.26), inset 5px 5px 0 rgba(255,255,255,.22)}
+  .brick.roof{background:var(--lava)}
+  .brick.door{background:var(--wood)}
+  .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+  .opt{background:var(--color-bg);border:2px solid var(--color-text);padding:16px;text-align:center;
+    font-size:17px;font-weight:700}
+  .opt:hover{background:var(--color-accent-100)}
+  .opt.ok{background:var(--grass);border-color:var(--grass2);color:#fff}
+  .opt.no{background:var(--lava);border-color:var(--lava);color:#fff}
+
+  /* ферма */
+  .farm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  .pen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .pen .blk{aspect-ratio:1;font-size:30px}
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start}
+  .cards .blk{min-height:56px;font-size:10px}
+  .blk.done{background:var(--gold);color:#3a2a00;pointer-events:none}
+
+  .bar2{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .note{font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-top:14px}
+  @media(max-width:760px){
+    .grid4{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .farm{grid-template-columns:minmax(0,1fr)}
+    .task .ru{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери игру</div>
+        <div id="gameList"></div>
+      </div>
+      <div class="pane">
+        <div class="pane-hd">
+          <span>Шаг 2 · <span id="gName">Копалка</span></span>
+          <select id="unitSel" style="border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);border-radius:0;padding:8px 10px;font:700 12px 'Archivo',sans-serif;max-width:230px"></select>
+        </div>
+        <div class="ink">
+          <div><div class="k">Кубический мир / Blocks</div>
+            <h2 id="gTitle">Копалка</h2>
+            <p id="gDesc">Ломай блок с нужным словом.</p></div>
+          <button class="go" id="startBtn">Играть</button>
+        </div>
+        <div class="stage mc" id="stage"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script src="sm-play.js"></script>
+<script>
+const esc = SMUI.esc;
+const stage = document.getElementById("stage");
+const sel = document.getElementById("unitSel");
+const q = new URLSearchParams(location.search);
+
+/* ---------- юниты Super Minds 1 ---------- */
+(function(){
+  (window.SM_UNITS || []).forEach(u => {
+    const o = document.createElement("option");
+    o.value = u.id; o.textContent = u.title; sel.appendChild(o);
+  });
+  const want = q.get("u");
+  if (want && [...sel.options].some(o => o.value === want)) sel.value = want;
+})();
+
+let WORDS = [];
+function loadWords(){
+  WORDS = SMP.words(sel.value).filter(w => w.en && /^[a-zA-Z' -]+$/.test(w.en));
+}
+sel.onchange = () => { loadWords(); start(current); };
+
+/* ---------- игры ---------- */
+const GAMES = [
+  { id:"dig",   t:"Копалка",  d:"Ломай блок с нужным словом.",
+    long:"Наверху русское слово. Найди в стене блок с английским переводом и разбей его." },
+  { id:"craft", t:"Крафт",    d:"Собери слово из букв-блоков.",
+    long:"Кликай буквы по порядку — слово соберётся в верстаке. Ошибся — блок задрожит." },
+  { id:"cave",  t:"Пещера",   d:"Мобы идут — успей выбрать верное слово.",
+    long:"Мобы ползут слева направо. Кликни того, у кого нужное слово, пока он не дошёл до тебя. Три жизни." },
+  { id:"build", t:"Стройка",  d:"Строй дом за верные ответы.",
+    long:"Отвечай, что значит английское слово. За каждый верный ответ кладётся блок — и вырастает дом." },
+  { id:"farm",  t:"Ферма",    d:"Накорми — соедини слово и картинку.",
+    long:"Нажми карточку со словом, потом загон с нужной картинкой. Совпало — загон становится золотым." }
+];
+let current = q.get("g") || "dig";
+if (!GAMES.some(g => g.id === current)) current = "dig";
+
+function drawList(){
+  document.getElementById("gameList").innerHTML = GAMES.map(g =>
+    '<button class="li'+(g.id===current?" on":"")+'" data-g="'+g.id+'">' +
+      '<span class="t">'+g.t+'</span><span class="s">'+esc(g.d)+'</span></button>').join("");
+  document.querySelectorAll("#gameList .li").forEach(b => b.onclick = () => {
+    SMP.sfx("click"); current = b.dataset.g; drawList(); start(current);
+  });
+}
+
+function head(){
+  const g = GAMES.filter(x => x.id === current)[0];
+  document.getElementById("gName").textContent = g.t;
+  document.getElementById("gTitle").textContent = g.t;
+  document.getElementById("gDesc").textContent = g.long;
+}
+
+document.getElementById("startBtn").onclick = () => { SMP.sfx("click"); start(current); };
+
+/* ---------- вспомогательное ---------- */
+const KINDS = ["grass","stone","wood","dirt","leaf","diam"];
+function kind(i){ return KINDS[i % KINDS.length]; }
+function taskBar(w, hint){
+  return '<div class="task"><span class="em">'+(w.emoji||"❓")+'</span>' +
+    '<span><span class="hint">'+esc(hint)+'</span><br><span class="ru">'+esc(w.ru||w.en)+'</span></span>' +
+    '<button class="sayb" id="sayb">Послушать</button></div>';
+}
+function bindSay(en){
+  const b = document.getElementById("sayb");
+  if (b) b.onclick = () => SMP.say(en);
+}
+function endWith(score, total, again){
+  SMP.result({ score, total, onAgain: again, onHome: () => { location.href = "arcade.html"; },
+    save: { course: (window.SM_COURSE||{}).id || null, unit: sel.value, type: "mine-"+current } });
+}
+
+/* ---------- 1. КОПАЛКА ---------- */
+function gDig(){
+  const pool = SMP.shuffle(WORDS);
+  const wall = pool.slice(0, Math.min(12, pool.length));
+  const rounds = SMP.shuffle(wall).slice(0, Math.min(8, wall.length));
+  let i = 0, score = 0;
+  SMP.hud({ score:true, lives:3 });
+
+  function draw(){
+    if (i >= rounds.length){ endWith(score, rounds.length*10, gDig); return; }
+    const target = rounds[i];
+    stage.innerHTML = taskBar(target, "Разбей блок со словом") +
+      '<div class="board"><div class="grid4">' +
+      wall.map((w,k) => '<button class="blk '+kind(k)+'" data-en="'+esc(w.en)+'">'+esc(w.en)+'</button>').join("") +
+      '</div></div><div class="note">Осталось: '+(rounds.length-i)+'</div>';
+    bindSay(target.en);
+    stage.querySelectorAll(".blk").forEach(b => b.onclick = () => {
+      if (b.dataset.en === target.en){
+        SMP.good(b, 10); score += 10; SMP.hud.add(10);
+        b.classList.add("gone");
+        setTimeout(() => { i++; draw(); }, 260);
+      } else {
+        SMP.bad(b); b.classList.add("shake");
+        setTimeout(() => b.classList.remove("shake"), 320);
+        if (SMP.hud.hit() <= 0) endWith(score, rounds.length*10, gDig);
+      }
+    });
+  }
+  draw();
+}
+
+/* ---------- 2. КРАФТ ---------- */
+function gCraft(){
+  const list = SMP.shuffle(WORDS).filter(w => w.en.length <= 9).slice(0, 6);
+  if (!list.length) { stage.innerHTML = '<div class="note">В этом юните нет коротких слов — выбери другой юнит.</div>'; return; }
+  let i = 0, score = 0, pos = 0;
+  SMP.hud({ score:true });
+
+  function draw(){
+    if (i >= list.length){ endWith(score, list.length*10, gCraft); return; }
+    const w = list[i], letters = SMP.shuffle(w.en.toUpperCase().split(""));
+    pos = 0;
+    stage.innerHTML = taskBar(w, "Скрафти слово") +
+      '<div class="board"><div class="slots" id="slots">' +
+        w.en.split("").map((ch,k) => '<div class="slot" data-k="'+k+'">'+(ch===" "?"·":"")+'</div>').join("") +
+      '</div><div class="chest" id="chest">' +
+        letters.map((ch,k) => '<button class="blk wood" data-ch="'+ch+'" data-k="'+k+'">'+ch+'</button>').join("") +
+      '</div></div><div class="note">Слово '+(i+1)+' из '+list.length+'</div>';
+    bindSay(w.en);
+
+    const slots = [...stage.querySelectorAll(".slot")];
+    const need = w.en.toUpperCase().split("");
+    stage.querySelectorAll("#chest .blk").forEach(b => b.onclick = () => {
+      while (need[pos] === " ") pos++;
+      if (b.dataset.ch === need[pos]){
+        const s = slots[pos];
+        s.textContent = b.dataset.ch; s.classList.add("full");
+        b.classList.add("used"); SMP.sfx("pop"); pos++;
+        while (need[pos] === " ") pos++;
+        if (pos >= need.length){
+          SMP.good(s, 10); score += 10; SMP.hud.add(10); SMP.say(w.en);
+          setTimeout(() => { i++; draw(); }, 700);
+        }
+      } else {
+        SMP.bad(b); b.classList.add("shake");
+        setTimeout(() => b.classList.remove("shake"), 320);
+      }
+    });
+  }
+  draw();
+}
+
+/* ---------- 3. ПЕЩЕРА ---------- */
+let caveRaf = null;
+function gCave(){
+  if (caveRaf) cancelAnimationFrame(caveRaf);
+  if (WORDS.length < 4){ stage.innerHTML = '<div class="note">Для пещеры нужно хотя бы четыре слова в юните.</div>'; return; }
+  let score = 0, alive = true;
+  SMP.hud({ score:true, lives:3, time:70, onTime: () => finish() });
+
+  stage.innerHTML = '<div id="taskBox"></div><div class="cave" id="cave">' +
+    '<div class="zone"></div><div class="floor"></div><div class="hero"></div></div>' +
+    '<div class="note">Кликай моба с нужным словом, пока он не дошёл до тебя.</div>';
+  const cave = document.getElementById("cave");
+  let target = null, mobs = [];
+
+  function newWave(){
+    mobs.forEach(m => m.el.remove()); mobs = [];
+    const pick = SMP.shuffle(WORDS).slice(0, 4);
+    target = pick[0];
+    document.getElementById("taskBox").innerHTML = taskBar(target, "Найди моба со словом");
+    bindSay(target.en);
+    SMP.shuffle(pick).forEach((w,k) => {
+      const el = document.createElement("button");
+      el.className = "blk mob " + kind(k+1);
+      el.textContent = w.en;
+      const W = cave.clientWidth || 600;
+      el.style.left = (W + k*150) + "px";
+      cave.appendChild(el);
+      const m = { el, w, x: W + k*150, v: 0.35 + Math.random()*0.25 };
+      el.onclick = () => hit(m);
+      mobs.push(m);
+    });
+  }
+  function hit(m){
+    if (!alive) return;
+    if (m.w.en === target.en){
+      SMP.good(m.el, 10); score += 10; SMP.hud.add(10);
+      m.el.classList.add("gone");
+      setTimeout(newWave, 250);
+    } else {
+      SMP.bad(m.el); m.el.classList.add("shake");
+      setTimeout(() => m.el.classList.remove("shake"), 320);
+      if (SMP.hud.hit() <= 0) finish();
+    }
+  }
+  function finish(){
+    alive = false;
+    if (caveRaf) cancelAnimationFrame(caveRaf);
+    endWith(score, Math.max(score, 100), gCave);
+  }
+  let last = performance.now();
+  function loop(now){
+    if (!alive || !document.body.contains(cave)) return;
+    const dt = Math.min(40, now - last); last = now;
+    mobs.forEach(m => {
+      if (m.el.classList.contains("gone")) return;
+      m.x -= m.v * dt;
+      m.el.style.left = m.x + "px";
+      if (m.x < 64){
+        m.el.classList.add("gone");
+        if (m.w.en === target.en){
+          SMP.sfx("no");
+          if (SMP.hud.hit() <= 0) { finish(); return; }
+          setTimeout(newWave, 200);
+        }
+      }
+    });
+    caveRaf = requestAnimationFrame(loop);
+  }
+  newWave();
+  caveRaf = requestAnimationFrame(loop);
+}
+
+/* ---------- 4. СТРОЙКА ---------- */
+function gBuild(){
+  const list = SMP.shuffle(WORDS).slice(0, Math.min(10, WORDS.length));
+  let i = 0, score = 0, built = 0;
+  SMP.hud({ score:true });
+
+  function houseHtml(n){
+    const rows = [];
+    for (let r = 0; r < 4; r++){
+      const cells = [];
+      for (let c = 0; c < 3; c++){
+        const idx = r*3 + c;
+        if (idx < n) cells.push('<div class="brick'+(r===3?" roof":(r===0&&c===1?" door":""))+'"></div>');
+        else cells.push('<div class="brick" style="opacity:.18"></div>');
+      }
+      rows.push('<div class="brow">'+cells.join("")+'</div>');
+    }
+    return '<div class="board field"><div class="house">'+rows.join("")+'</div></div>';
+  }
+
+  function draw(){
+    if (i >= list.length){ endWith(score, list.length*10, gBuild); return; }
+    const w = list[i];
+    const wrong = SMP.shuffle(WORDS.filter(x => x.en !== w.en)).slice(0, 3);
+    const opts = SMP.shuffle([w].concat(wrong));
+    stage.innerHTML =
+      '<div class="task"><span class="em">🧱</span><span><span class="hint">Что значит слово</span><br>' +
+        '<span class="ru px" style="font-size:16px">'+esc(w.en)+'</span></span>' +
+        '<button class="sayb" id="sayb">Послушать</button></div>' +
+      houseHtml(built) +
+      '<div class="opts">' + opts.map(o =>
+        '<button class="opt" data-en="'+esc(o.en)+'">'+(o.emoji||"")+' '+esc(o.ru||o.en)+'</button>').join("") + '</div>' +
+      '<div class="note">Блоков в доме: '+built+' из 12</div>';
+    bindSay(w.en);
+    stage.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (b.dataset.en === w.en){
+        b.classList.add("ok"); SMP.good(b, 10); score += 10; SMP.hud.add(10);
+        built = Math.min(12, built + 1);
+        setTimeout(() => { i++; draw(); }, 500);
+      } else {
+        b.classList.add("no"); SMP.bad(b);
+        setTimeout(() => b.classList.remove("no"), 500);
+      }
+    });
+  }
+  draw();
+}
+
+/* ---------- 5. ФЕРМА ---------- */
+function gFarm(){
+  const pairs = SMP.shuffle(WORDS).slice(0, Math.min(6, WORDS.length));
+  if (pairs.length < 3){ stage.innerHTML = '<div class="note">Для фермы нужно хотя бы три слова в юните.</div>'; return; }
+  let score = 0, left = pairs.length, chosen = null;
+  SMP.hud({ score:true });
+
+  stage.innerHTML =
+    '<div class="task"><span class="em">🌾</span><span><span class="hint">Соедини слово и картинку</span><br>' +
+      '<span class="ru">Сначала слово, потом загон</span></span></div>' +
+    '<div class="board field"><div class="farm">' +
+      '<div class="cards" id="cards">' + SMP.shuffle(pairs).map(w =>
+        '<button class="blk wood" data-en="'+esc(w.en)+'">'+esc(w.en)+'</button>').join("") + '</div>' +
+      '<div class="pen" id="pen">' + SMP.shuffle(pairs).map(w =>
+        '<button class="blk stone" data-en="'+esc(w.en)+'">'+(w.emoji||"🐾")+'</button>').join("") + '</div>' +
+    '</div></div><div class="note" id="farmNote">Осталось пар: '+left+'</div>';
+
+  stage.querySelectorAll("#cards .blk").forEach(b => b.onclick = () => {
+    stage.querySelectorAll("#cards .blk").forEach(x => x.classList.remove("lit"));
+    b.classList.add("lit"); chosen = b; SMP.sfx("click"); SMP.say(b.dataset.en);
+  });
+  stage.querySelectorAll("#pen .blk").forEach(p => p.onclick = () => {
+    if (!chosen){ SMP.bad(p); return; }
+    if (p.dataset.en === chosen.dataset.en){
+      SMP.good(p, 10); score += 10; SMP.hud.add(10);
+      p.classList.add("done"); chosen.classList.add("done");
+      chosen.classList.remove("lit"); chosen = null; left--;
+      document.getElementById("farmNote").textContent = "Осталось пар: " + left;
+      if (left === 0) setTimeout(() => endWith(score, pairs.length*10, gFarm), 500);
+    } else {
+      SMP.bad(p); p.classList.add("shake");
+      setTimeout(() => p.classList.remove("shake"), 320);
+    }
+  });
+}
+
+/* ---------- запуск ---------- */
+function start(id){
+  if (caveRaf) { cancelAnimationFrame(caveRaf); caveRaf = null; }
+  SMP.hud.hide();
+  head();
+  stage.innerHTML = "";
+  if (!WORDS.length){
+    stage.innerHTML = '<div class="note">В этом юните пока нет подходящих слов — выбери другой.</div>';
+    return;
+  }
+  ({ dig:gDig, craft:gCraft, cave:gCave, build:gBuild, farm:gFarm })[id]();
+}
+
+SMUI.mount({ role:"student", active:"courses" });
+loadWords();
+drawList();
+head();
+start(current);
+</script>
+</body>
+</html>

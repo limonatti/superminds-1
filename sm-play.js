@@ -111,25 +111,31 @@
   @keyframes smp-spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
   .smp-sp{position:fixed;width:10px;height:10px;border-radius:50%;z-index:9999;pointer-events:none;animation:smp-spark .6s ease-out forwards}
   @keyframes smp-up{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-46px);opacity:0}}
-  .smp-pop{position:fixed;z-index:9999;pointer-events:none;font:900 22px 'Nunito',sans-serif;color:#3f7a20;text-shadow:0 2px 0 #fff;animation:smp-up .9s ease-out forwards}
-  .smp-pop.bad{color:#c0392b}
+  .smp-pop{position:fixed;z-index:9999;pointer-events:none;font:800 22px 'Archivo',system-ui,sans-serif;color:#4a8b34;text-shadow:0 2px 0 #fff;animation:smp-up .9s ease-out forwards}
+  .smp-pop.bad{color:#ec3013}
   @keyframes smp-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
   @keyframes smp-bump{0%{transform:scale(1)}45%{transform:scale(1.14)}100%{transform:scale(1)}}
   .smp-shake{animation:smp-shake .38s}
   .smp-bump{animation:smp-bump .38s}
-  #smp-hud{position:fixed;top:10px;right:12px;z-index:60;display:flex;gap:7px;align-items:center;font-family:'Nunito',sans-serif}
-  #smp-hud .p{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:6px 13px;font:900 15px 'Nunito',sans-serif;color:#7c2340;box-shadow:0 3px 0 #e3d3ba;white-space:nowrap}
-  #smp-hud .p.time{color:#2980b9}
-  #smp-hud .p.time.low{color:#c0392b;animation:smp-bump .6s infinite}
-  #smp-hud button{background:#fff;border:2px solid #e3d3ba;border-radius:999px;width:38px;height:38px;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #e3d3ba}
-  #smp-res{position:fixed;inset:0;z-index:9998;background:rgba(28,19,16,.55);display:flex;align-items:center;justify-content:center;padding:18px}
-  #smp-res .box{background:#fff;border-radius:28px;padding:28px 26px;text-align:center;max-width:390px;width:100%;box-shadow:0 12px 0 #d9c9ac;font-family:'Fredoka',sans-serif}
-  #smp-res h2{margin:0 0 4px;font-size:30px;color:#7c2340}
-  #smp-res .stars{font-size:40px;letter-spacing:4px;margin:4px 0 2px}
-  #smp-res .sc{font:900 17px 'Nunito',sans-serif;color:#5a4f47;margin-bottom:16px}
-  #smp-res button{border:none;border-radius:16px;padding:13px 22px;font:800 15px 'Nunito',sans-serif;cursor:pointer;margin:4px}
-  #smp-res .again{background:#7c2340;color:#fff;box-shadow:0 5px 0 #5e1a30}
-  #smp-res .home{background:#f4e9d8;color:#7c2340;box-shadow:0 5px 0 #e3d3ba}`;
+  #smp-hud{position:fixed;top:12px;right:14px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Archivo',system-ui,sans-serif}
+  #smp-hud .p{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;padding:8px 13px;
+    font:800 13px 'Archivo',system-ui,sans-serif;letter-spacing:.04em;color:#201e1d;white-space:nowrap}
+  #smp-hud .p.time{color:#201e1d}
+  #smp-hud .p.time.low{color:#ec3013;animation:smp-bump .6s infinite}
+  #smp-hud button{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;width:38px;height:38px;font-size:15px;cursor:pointer}
+  #smp-hud button:hover{background:#201e1d;color:#f3f2f2}
+  #smp-res{position:fixed;inset:0;z-index:9998;background:rgba(32,30,29,.72);display:flex;align-items:center;justify-content:center;padding:18px}
+  #smp-res .box{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;padding:30px 28px;text-align:left;
+    max-width:420px;width:100%;font-family:'Archivo',system-ui,sans-serif}
+  #smp-res h2{margin:0 0 6px;font-size:30px;font-weight:800;letter-spacing:-.02em;color:#201e1d}
+  #smp-res .stars{font-size:36px;letter-spacing:6px;margin:6px 0 4px}
+  #smp-res .sc{font:700 15px 'Archivo',system-ui,sans-serif;color:#4a4644;margin-bottom:20px}
+  #smp-res button{border:2px solid #201e1d;border-radius:0;padding:13px 20px;
+    font:800 12px 'Archivo',system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin:0 8px 0 0}
+  #smp-res .again{background:#ec3013;border-color:#ec3013;color:#fff}
+  #smp-res .again:hover{background:#dd2b0f;border-color:#dd2b0f}
+  #smp-res .home{background:none;color:#201e1d}
+  #smp-res .home:hover{background:#201e1d;color:#f3f2f2}`;
   (function () { const s = document.createElement("style"); s.textContent = CSS; document.head.appendChild(s); })();
 
   /* ---------------- анимации ---------------- */
