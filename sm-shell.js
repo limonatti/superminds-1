@@ -48,9 +48,26 @@ var TEACHER = [
   { id: "board",    t: "Доска",            i: "board", href: "board.html" }
 ];
 
+/* 1 юнит · 2 юнита · 5 юнитов */
+function plural(n, forms) {
+  n = Math.abs(Math.round(n));
+  var t = n % 100, o = n % 10;
+  if (t > 10 && t < 20) return forms[2];
+  if (o === 1) return forms[0];
+  if (o >= 2 && o <= 4) return forms[1];
+  return forms[2];
+}
+
 var SMUI = {
   icon: svg,
   esc: esc,
+  plural: plural,
+  n: function (num, forms) { return num + " " + plural(num, forms); },
+  UNITS: ["юнит", "юнита", "юнитов"],
+  WORDS: ["слово", "слова", "слов"],
+  DAYS:  ["день", "дня", "дней"],
+  STARS: ["звезда", "звезды", "звёзд"],
+  TASKS: ["задание", "задания", "заданий"],
   _user: undefined,
 
   /* Пользователь с кэшем — чтобы каждый экран не дёргал сеть по три раза */

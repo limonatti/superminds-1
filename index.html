@@ -85,8 +85,8 @@ function drawList(){
   document.getElementById("courseList").innerHTML = CATALOG.map((c,i) => {
     const on = c === sel ? " on" : "";
     let pct = 0, sub = c.sub;
-    if (c.kind === "kids" && c.words) { pct = Math.round(learnedIn(c.data)/c.words*100); sub = c.units + " юнитов · " + c.words + " слов"; }
-    if (c.kind === "spk") sub = c.units + " юнитов · " + c.words + " слов";
+    if (c.kind === "kids" && c.words) { pct = Math.round(learnedIn(c.data)/c.words*100); sub = SMUI.n(c.units, SMUI.UNITS) + " · " + SMUI.n(c.words, SMUI.WORDS); }
+    if (c.kind === "spk") sub = SMUI.n(c.units, SMUI.UNITS) + " · " + SMUI.n(c.words, SMUI.WORDS);
     const bar = (c.kind === "kids" || c.kind === "spk")
       ? '<span class="bar"><i style="width:'+pct+'%"></i></span>' : "";
     return '<button class="li'+on+'" data-i="'+i+'"'+(c.kind==="soon"?" disabled":"")+'>' +
@@ -180,7 +180,7 @@ function drawPane(){
   p.innerHTML =
     '<div class="pane-hd"><span>Шаг 2 · '+esc(c.title)+'</span><span>'+esc(c.sub)+'</span></div>' +
     '<div class="ink"><div><div class="k">Курс / Course</div><h2>'+esc(c.title)+'</h2>' +
-      '<p>Выучено '+learned+' из '+c.words+' слов · '+pct+'%</p></div>' +
+      '<p>Выучено '+learned+' из '+SMUI.n(c.words, SMUI.WORDS)+' · '+pct+'%</p></div>' +
       '<a class="go" href="trainer.html">'+icon("play",15)+' Продолжить</a></div>' +
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Юнитов</span><span class="n">'+c.units+'</span></div>' +

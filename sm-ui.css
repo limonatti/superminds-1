@@ -123,8 +123,8 @@ button{font-family:inherit;cursor:pointer}
   transition:background .16s ease-out;width:100%;background:transparent;border-top:0;border-right:0;text-align:left}
 .row:hover{background:var(--color-accent-100)}
 .row .num{font-size:26px;font-weight:800;color:var(--color-neutral-400);line-height:1}
-.row .t{font-size:17px;font-weight:800;letter-spacing:-.01em}
-.row .d{font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-top:3px}
+.row .t{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.row .d{display:block;font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-top:3px}
 .row.now{background:var(--color-accent-100);border-left-color:var(--color-accent)}
 .row.now .num{color:var(--color-accent)}
 .row.off{opacity:.55}

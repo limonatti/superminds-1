@@ -87,8 +87,8 @@ function nextGoal(p){ const steps=[25,50,100,200,300,500,750,1000];
     '<div class="pane-hd"><span>Награды / Rewards</span><span>'+esc((window.SM_COURSE||{}).title||"")+'</span></div>' +
     '<div class="red">' +
       '<div class="half"><span class="k">Стрик</span>' +
-        '<span class="n">'+streak+' '+(streak===1?"день":"дней")+' подряд</span>' +
-        '<span class="d">'+(best>streak ? "Лучший результат — "+best+". Ещё "+(best-streak+1)+", и ты его побьёшь."
+        '<span class="n">'+SMUI.n(streak, SMUI.DAYS)+' подряд</span>' +
+        '<span class="d">'+(best>streak ? "Лучший результат — "+best+". Ещё "+SMUI.n(best-streak+1, SMUI.DAYS)+", и ты его побьёшь."
                                          : "Это твой лучший результат. Не теряй его.")+'</span></div>' +
       '<div class="half"><span class="k">Звёзды</span><span class="n">'+pts+'</span>' +
         '<div style="display:flex;align-items:center;gap:12px">' +
