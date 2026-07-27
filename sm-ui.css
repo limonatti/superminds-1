@@ -198,9 +198,10 @@ button{font-family:inherit;cursor:pointer}
 /* Узкий экран: колонка списка ложится горизонтальной лентой сверху,
    чтобы содержимому осталась вся ширина. */
 @media(max-width:1160px){
-  .cols{grid-template-columns:minmax(0,1fr)}
-  .list{flex-direction:row;overflow-x:auto;overflow-y:hidden;align-items:stretch;
+  .cols{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .list{flex-direction:row;overflow-x:auto;overflow-y:hidden;align-items:stretch;flex:none;
     border-right:0;border-bottom:2px solid var(--color-divider)}
+  .list > div{display:contents}          /* обёртка не должна ломать ленту */
   .list .step{display:none}
   .li{width:auto;flex:0 0 auto;min-width:190px;border-bottom:0;border-left:0;
     border-right:2px solid var(--color-divider);border-top:6px solid transparent;padding:14px 16px}
