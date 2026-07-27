@@ -5,43 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unit 5 · Грамматика · Speakout B1 · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
   .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
-  .home.alt{background:#e0952a}
-  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
-  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
-  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
-  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
-  .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
-  .g-ex b{color:#7c2340}
-  .ru{color:#8a7a68;font-size:13px}
-  .gt{color:#7c2340;font-size:16px;font-weight:900}
+  .home{background:#ec3013;color:#fff;font:800 13px 'Archivo',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#ec3013}
+  h1{font-family:'Archivo',sans-serif;font-size:clamp(24px,5vw,34px);color:#ec3013;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#4a4644;margin:0 4px 8px}
+  h2{font-family:'Archivo',sans-serif;font-size:24px;color:#ec3013;margin:28px 4px 12px}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #cfcecd;margin-bottom:12px}
+  .g-ex{background:#fdfaf0;border-left:4px solid #ec3013;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .g-ex b{color:#ec3013}
+  .ru{color:#6e6a68;font-size:13px}
+  .gt{color:#ec3013;font-size:16px;font-weight:900}
   table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
-  td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
-  th{background:#f6ede0;color:#7c2340}
+  td,th{border:2px solid #cfcecd;padding:8px 10px;text-align:left}
+  th{background:#f6ede0;color:#ec3013}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
   .opts{display:flex;flex-wrap:wrap;gap:8px}
-  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt{border:2px solid #cfcecd;background:#fdfaf0;cursor:pointer;font:800 14px 'Archivo',sans-serif;padding:9px 16px;border-radius:12px}
   .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
-  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt.bad{background:#ffc9c0;border-color:#ec3013;color:#7b190d}
   .opt:disabled{cursor:default;opacity:.85}
   .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in{border:2px solid #cfcecd;border-radius:12px;padding:9px 12px;font:800 14px 'Archivo',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
   .gap-in.ok{background:#c8efc0;border-color:#27ae60}
-  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
-  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .gap-in.bad{background:#ffc9c0;border-color:#ec3013}
+  .chk{border:none;cursor:pointer;background:#ec3013;color:#fff;font:800 13px 'Archivo',sans-serif;padding:10px 16px;border-radius:12px}
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
-  .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
-  .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
-  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+  .scorebar{position:sticky;top:0;z-index:10;background:#ec3013;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .wbband{background:#fff;border:2px solid #ec3013;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#4a4644;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#6e6a68;margin-top:44px}
 </style>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
 <div class="wrap">
@@ -146,7 +147,7 @@ const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
 function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
 async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
 window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
-(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#ec3013;color:#fff;font:800 12.5px 'Archivo',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
 let sc=0,tot=0;
 function bump(){sc++;document.getElementById("sc").textContent=sc;}
 function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
