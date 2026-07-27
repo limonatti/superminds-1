@@ -21,7 +21,7 @@
   .stage{background:#fff;border-radius:26px;box-shadow:0 8px 0 #cfcecd;padding:24px;min-height:360px}
   .center{text-align:center}
   .big{font-size:64px;line-height:1}
-  .speak{margin-top:10px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Archivo',sans-serif;color:#ec3013}
+  .speak{margin-top:10px;background:#eae9e9;border-radius:999px;padding:9px 20px;font:800 14px 'Archivo',sans-serif;color:#ec3013}
   .primary{background:#ec3013;color:#fff;border-radius:16px;padding:14px 26px;font:800 16px 'Archivo',sans-serif;box-shadow:0 5px 0 #ae1800}
   .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
 
@@ -42,7 +42,7 @@
   .mstat{text-align:center;font:800 14px 'Archivo',sans-serif;color:#4a4644;margin-bottom:12px}
 
   /* race */
-  .lane{position:relative;background:#eef4ea;border-radius:14px;height:56px;margin-bottom:10px;overflow:hidden;border:2px solid #dfeadd}
+  .lane{position:relative;background:#eae9e9;border-radius:14px;height:56px;margin-bottom:10px;overflow:hidden;border:2px solid #eae9e9}
   .lane.red{background:#fbeef0;border-color:#f3d4da}
   .lane .car{position:absolute;top:8px;left:2%;font-size:30px;transition:left .4s ease}
   .lane .flag{position:absolute;right:6px;top:12px;font-size:24px}
@@ -53,7 +53,7 @@
   .opt{background:#fff;border:2px solid #cfcecd;border-radius:16px;padding:15px;font-size:20px;font-weight:600}
   .opt .oem{font-size:28px;display:block;margin-bottom:2px}
   .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
-  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .opt.wrong{background:#fff2ef;border-color:#ec3013;color:#ae1800}
 
   .timer{font:900 22px 'Archivo',sans-serif;color:#ec3013;text-align:center}
   .score{font:900 16px 'Archivo',sans-serif;color:#4a8b34;text-align:center;margin-top:4px}
@@ -184,7 +184,7 @@
     function wheel(){
       const items=WORDS.slice(0,10);
       const n=items.length, sec=360/n, R=150, cx=150, cy=150;
-      const cols=["#f6e2cf","#dfeadd","#e4ebf2","#fbe6de","#efe0e6","#faf1d8"];
+      const cols=["#eae9e9","#eae9e9","#eae9e9","#fbe6de","#efe0e6","#faf1d8"];
       function pt(ang){const a=(ang-90)*Math.PI/180;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];}
       let paths="",labels="";
       items.forEach((w,i)=>{const a0=i*sec,a1=(i+1)*sec;const[p0x,p0y]=pt(a0),[p1x,p1y]=pt(a1);

@@ -4,38 +4,38 @@
 <title>Расскажи о себе · Play time!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
- :root{--paper:#f4e9d8;--ink:#1c1310;--muted:#5a4f47;--coral:#7c2340;--coral-d:#7c2340;--sage:#5f8f5a;--line:#e3d3ba}
- body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
-  background:#f4e9d8;
+ :root{--paper:#f3f2f2;--ink:#201e1d;--muted:#4a4644;--coral:#ec3013;--coral-d:#ec3013;--sage:#5f8f5a;--line:#cfcecd}
+ body{font-family:'Archivo',system-ui,sans-serif;color:var(--ink);
+  background:#f3f2f2;
   min-height:100vh;padding:20px 16px 48px}
  a.home{position:fixed;top:12px;left:12px;background:var(--coral);color:#fff;padding:9px 15px;border-radius:14px;
   text-decoration:none;font-weight:800;box-shadow:0 4px 0 rgba(150,90,60,.25);z-index:9}
  .wrap{max-width:760px;margin:0 auto}
- h1{font-family:'Fredoka',sans-serif;color:var(--coral-d);text-align:center;font-size:clamp(24px,5vw,36px);margin-top:36px}
+ h1{font-family:'Archivo',sans-serif;color:var(--coral-d);text-align:center;font-size:clamp(24px,5vw,36px);margin-top:36px}
  .sub{text-align:center;color:var(--muted);font-weight:700;font-size:14px;margin:2px 0 16px}
  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 20px;
   box-shadow:0 8px 20px rgba(150,120,90,.10);margin-bottom:16px}
  .preview{background:linear-gradient(160deg,#FCEFE7,#FBF7EF);border:1px solid var(--line)}
- .preview .line{font-family:'Fredoka',sans-serif;font-size:clamp(19px,4.4vw,26px);line-height:1.5;color:var(--ink)}
+ .preview .line{font-family:'Archivo',sans-serif;font-size:clamp(19px,4.4vw,26px);line-height:1.5;color:var(--ink)}
  .hl{color:var(--coral-d)}
  .ph{color:#cdbfae}
  .actions{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
- .btn{border:none;font-family:'Fredoka',sans-serif;font-weight:700;font-size:16px;padding:11px 20px;border-radius:15px;
+ .btn{border:none;font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;padding:11px 20px;border-radius:15px;
   cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.12)}
  .btn.listen{background:var(--coral);color:#fff;box-shadow:0 4px 0 rgba(150,90,60,.28)}
  .btn.rnd{background:var(--sage);color:#fff;box-shadow:0 4px 0 rgba(110,130,90,.28)}
  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.12)}
- h2{font-family:'Fredoka',sans-serif;font-size:17px;color:#5c5145;margin:2px 0 10px;display:flex;align-items:center;gap:8px}
+ h2{font-family:'Archivo',sans-serif;font-size:17px;color:#5c5145;margin:2px 0 10px;display:flex;align-items:center;gap:8px}
  h2 .n{background:var(--coral);color:#fff;width:24px;height:24px;border-radius:50%;display:inline-flex;
   align-items:center;justify-content:center;font-size:14px;flex:none}
- input.name{width:100%;font-family:'Nunito';font-weight:800;font-size:20px;color:var(--ink);
+ input.name{width:100%;font-family:'Archivo';font-weight:800;font-size:20px;color:var(--ink);
   border:2px solid var(--line);border-radius:14px;padding:11px 14px;background:#FCFAF5;outline:none}
  input.name:focus{border-color:var(--coral)}
  .row{display:flex;flex-wrap:wrap;gap:8px}
- .chip{border:1.5px solid var(--line);background:#fff;font-family:'Nunito';font-weight:800;font-size:14px;
+ .chip{border:1.5px solid var(--line);background:#fff;font-family:'Archivo';font-weight:800;font-size:14px;
   color:var(--ink);border-radius:13px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
   transition:transform .1s}
  .chip:active{transform:scale(.96)}
@@ -49,6 +49,7 @@
  .sw{width:16px;height:16px;border-radius:5px;border:1px solid rgba(0,0,0,.15);display:inline-block}
  footer{text-align:center;color:#c3b8a6;font-size:12px;font-weight:700;margin-top:24px}
 </style><script src="sm-voice.js"></script>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
  <a class="home" href="unit2.html">← Меню</a>

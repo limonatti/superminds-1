@@ -4,41 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Квест · English with Asya</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
   .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd;text-decoration:none}
   h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#16a085}
-  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .map{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;background:linear-gradient(#e7f0e1,#f6f9f2);border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:18px 10px;margin-bottom:16px}
-  .stp{width:58px;height:58px;border-radius:50%;background:#fff;border:3px solid #e3d3ba;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;transition:transform .2s}
+  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .map{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;background:linear-gradient(#eae9e9,#f6f9f2);border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:18px 10px;margin-bottom:16px}
+  .stp{width:58px;height:58px;border-radius:50%;background:#fff;border:3px solid #cfcecd;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;transition:transform .2s}
   .stp.done{border-color:#7cb342;background:#dff0d2}
   .stp.cur{border-color:#16a085;transform:scale(1.15);box-shadow:0 0 0 4px rgba(22,160,133,.2)}
-  .dash{width:18px;height:4px;background:#e3d3ba;border-radius:2px}
+  .dash{width:18px;height:4px;background:#cfcecd;border-radius:2px}
   .dash.done{background:#7cb342}
   .hero{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:22px;animation:hop 1s ease-in-out infinite}
   @keyframes hop{50%{transform:translateX(-50%) translateY(-5px)}}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:24px;text-align:center}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:24px;text-align:center}
   .big{font-size:64px;line-height:1;margin:6px 0}
-  .qt{font-size:22px;font-weight:700;color:#7c2340;margin:8px 0 14px}
+  .qt{font-size:22px;font-weight:700;color:#ec3013;margin:8px 0 14px}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .opt{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px;font-size:17px;font-weight:600;cursor:pointer}
-  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
-  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .opt{background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:14px;font-size:17px;font-weight:600;cursor:pointer}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
+  .opt.wrong{background:#fff2ef;border-color:#ec3013;color:#ae1800}
   .letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
-  .lt{background:#fff;border:2px solid #e3d3ba;border-radius:12px;padding:10px 14px;font-size:20px;font-weight:700;cursor:pointer}
+  .lt{background:#fff;border:2px solid #cfcecd;border-radius:12px;padding:10px 14px;font-size:20px;font-weight:700;cursor:pointer}
   .lt.used{opacity:.25;pointer-events:none}
-  .built{min-height:40px;border-bottom:3px dashed #e3d3ba;margin:8px auto;max-width:300px;padding:6px;font-size:24px;font-weight:700;color:#16a085;letter-spacing:2px}
-  .prog{font:900 14px 'Nunito',sans-serif;color:#5a4f47;text-align:center;margin-bottom:8px}
-  .primary{background:#16a085;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba;margin-top:12px}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
+  .built{min-height:40px;border-bottom:3px dashed #cfcecd;margin:8px auto;max-width:300px;padding:6px;font-size:24px;font-weight:700;color:#16a085;letter-spacing:2px}
+  .prog{font:900 14px 'Archivo',sans-serif;color:#4a4644;text-align:center;margin-bottom:8px}
+  .primary{background:#16a085;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #cfcecd;margin-top:12px}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:26px;text-align:center;font:700 14px 'Archivo',sans-serif;color:#6e6a68}
   .chest{font-size:90px;animation:shake .6s ease-in-out infinite}
   @keyframes shake{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
   .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
 </style>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>
@@ -129,7 +130,7 @@
             if(built.length===target.length){
               const ok=built===target;
               try{SM.srsQueue(w.id,ok);}catch(e){}
-              bl.style.color=ok?"#3f7a20":"#a23b1e";
+              bl.style.color=ok?"#4a8b34":"#ae1800";
               if(ok){beep(true);say(w.en);}else{mistakes++;beep(false);bl.textContent=built+" → "+target;say(w.en);}
               setTimeout(()=>{advance(ok);},ok?800:1600);
             }};
@@ -150,7 +151,7 @@
         fanfare();confetti();
         root.innerHTML='<div class="card"><div class="big">🏆</div><h2 style="color:#16a085;margin:6px 0">Квест пройден!</h2>'+
           '<div style="font-size:34px;margin:6px 0">'+"⭐".repeat(stars)+"☆".repeat(3-stars)+'</div>'+
-          '<div style="font:800 13px \'Nunito\',sans-serif;color:#8a7a68">'+(mistakes===0?"Без единой ошибки — вау!":"Ошибок: "+mistakes)+'</div>'+
+          '<div style="font:800 13px \'Nunito\',sans-serif;color:#6e6a68">'+(mistakes===0?"Без единой ошибки — вау!":"Ошибок: "+mistakes)+'</div>'+
           '<button class="primary" onclick="location.reload()">Пройти ещё раз</button></div>';
         try{
           const u=await SM.getUser();

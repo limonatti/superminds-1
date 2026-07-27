@@ -26,9 +26,9 @@ h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#ec3013}
 .btn{border:2px solid #cfcecd;background:#fff;border-radius:12px;padding:9px 13px;cursor:pointer;font:800 13px 'Archivo',sans-serif;color:#4a4644;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{border-color:#ec3013;color:#ec3013}
 .btn:disabled{opacity:.4;cursor:default}
-.btn.ref{background:#eef4ea;border-color:#bcd9ac;color:#4a8b34}
+.btn.ref{background:#eae9e9;border-color:#cfcecd;color:#4a8b34}
 .btn.rec{background:#ec3013;border-color:#ec3013;color:#fff}
-.btn.mine{background:#e4ebf2;border-color:#a9c7e2;color:#2a5f8f}
+.btn.mine{background:#eae9e9;border-color:#a9c7e2;color:#2a5f8f}
 .btn.film{background:#f3e8fb;border-color:#d8b6ea;color:#7a3ea0;text-decoration:none}
 .stars{margin-left:auto;font-size:20px;min-width:74px;text-align:right}
 
@@ -51,7 +51,7 @@ h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#ec3013}
 .selfrate.on{display:flex}
 .selfrate .s{font-size:22px;cursor:pointer;filter:grayscale(1);opacity:.5}
 .selfrate .s.on{filter:none;opacity:1}
-.coachtip{display:none;margin-top:10px;background:#eef4ea;border:2px solid #bcd9ac;border-radius:14px;padding:10px 12px;font:700 13px 'Archivo',sans-serif;color:#4a8b34;line-height:1.5}
+.coachtip{display:none;margin-top:10px;background:#eae9e9;border:2px solid #cfcecd;border-radius:14px;padding:10px 12px;font:700 13px 'Archivo',sans-serif;color:#4a8b34;line-height:1.5}
 .coachtip.on{display:block}
 .coachtip b{color:#2c5716}
 
@@ -166,10 +166,10 @@ async function renderProgress(){
   att.forEach(a=>{const k=dayKey(new Date(a.created_at));if(byK[k]){byK[k].n++;tot7++;if(a.correct){byK[k].ok++;ok7++;}}});
   const pct7=tot7?Math.round(ok7/tot7*100):0;
   const cols=days.map(x=>{const p=x.n?Math.round(x.ok/x.n*100):0;const h=x.n?Math.max(6,Math.round(p*0.55)):3;
-    return '<div class="col"><div class="vv">'+(x.n?p+"%":"")+'</div><div class="bar" style="height:'+h+'px;background:'+(x.n?(p>=66?"#7cb342":p>=33?"#f0c96b":"#e07a5f"):"#d8d7d6")+'"></div><div class="wd">'+x.wd+'</div></div>';}).join("");
+    return '<div class="col"><div class="vv">'+(x.n?p+"%":"")+'</div><div class="bar" style="height:'+h+'px;background:'+(x.n?(p>=66?"#7cb342":p>=33?"#cfcecd":"#ec3013"):"#d8d7d6")+'"></div><div class="wd">'+x.wd+'</div></div>';}).join("");
   box.innerHTML='<div class="prog"><div class="ttl">🎙 ТВОЙ ПРОГРЕСС ПРОИЗНОШЕНИЯ</div>'+
-    '<div class="big2"><div class="bc" style="background:#fdeede"><div class="n" style="color:#ec3013">'+tot7+'</div><div class="l">фраз за 7 дней</div></div>'+
-    '<div class="bc" style="background:#e7f0e1"><div class="n" style="color:#4a8b34">'+pct7+'%</div><div class="l">хорошо (2–3⭐)</div></div></div>'+
+    '<div class="big2"><div class="bc" style="background:#fff2ef"><div class="n" style="color:#ec3013">'+tot7+'</div><div class="l">фраз за 7 дней</div></div>'+
+    '<div class="bc" style="background:#eae9e9"><div class="n" style="color:#4a8b34">'+pct7+'%</div><div class="l">хорошо (2–3⭐)</div></div></div>'+
     '<div class="graph">'+cols+'</div>'+
     '<div class="hint" style="margin-top:8px">Всего проговорено фраз: <b>'+total+'</b>. Столбик выше — чем зеленее, тем чище произношение в этот день.</div></div>';
 }

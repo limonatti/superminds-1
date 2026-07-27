@@ -5,50 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Упражнения · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd}
   .wrap{max-width:640px;margin:0 auto;padding:64px 18px 56px}
-  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{text-align:center;margin:8px 0 20px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:22px;margin-bottom:18px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#ec3013;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 20px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:22px;margin-bottom:18px}
   .qt{font-size:20px;font-weight:600;margin-bottom:6px}
-  .kind{font:900 10px 'Nunito',sans-serif;color:#b5654a;letter-spacing:1px;margin-bottom:8px}
+  .kind{font:900 10px 'Archivo',sans-serif;color:#b5654a;letter-spacing:1px;margin-bottom:8px}
   .opts{display:grid;gap:10px;margin-top:10px}
-  .opt{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px;font-size:18px;font-weight:600;text-align:left}
-  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
-  .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
+  .opt{background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:14px;font-size:18px;font-weight:600;text-align:left}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
+  .opt.wrong{background:#fff2ef;border-color:#ec3013;color:#ae1800}
   .field{display:flex;gap:8px;margin-top:6px}
-  .field input{flex:1;border:2px solid #e3d3ba;border-radius:12px;padding:12px 14px;font:700 18px 'Fredoka',sans-serif;background:#fdfbf7}
-  .field input:focus{outline:none;border-color:#7c2340}
-  .check{background:#7c2340;color:#fff;border-radius:12px;padding:0 20px;font:800 15px 'Nunito',sans-serif}
-  .fb{margin-top:10px;font:800 14px 'Nunito',sans-serif;min-height:18px}
-  .fb.ok{color:#3f7a20}.fb.no{color:#a23b1e}
+  .field input{flex:1;border:2px solid #cfcecd;border-radius:12px;padding:12px 14px;font:700 18px 'Archivo',sans-serif;background:#f3f2f2}
+  .field input:focus{outline:none;border-color:#ec3013}
+  .check{background:#ec3013;color:#fff;border-radius:12px;padding:0 20px;font:800 15px 'Archivo',sans-serif}
+  .fb{margin-top:10px;font:800 14px 'Archivo',sans-serif;min-height:18px}
+  .fb.ok{color:#4a8b34}.fb.no{color:#ae1800}
   .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
-  .pc{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:12px;padding:13px 10px;font-size:17px;font-weight:600;text-align:center}
-  .pc.sel{border-color:#7c2340;background:#fbeef1}
+  .pc{background:#f3f2f2;border:2px solid #cfcecd;border-radius:12px;padding:13px 10px;font-size:17px;font-weight:600;text-align:center}
+  .pc.sel{border-color:#ec3013;background:#fbeef1}
   .pc.done{opacity:0;pointer-events:none;transition:opacity .35s}
   .words{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .word{background:#fff;border:2px solid #e3d3ba;border-radius:12px;padding:9px 13px;font-size:17px;font-weight:600}
+  .word{background:#fff;border:2px solid #cfcecd;border-radius:12px;padding:9px 13px;font-size:17px;font-weight:600}
   .word.used{opacity:.25;pointer-events:none}
-  .built{min-height:40px;border-bottom:3px dashed #e3d3ba;margin-top:12px;padding:6px 4px;font-size:20px;font-weight:700;color:#7c2340}
+  .built{min-height:40px;border-bottom:3px dashed #cfcecd;margin-top:12px;padding:6px 4px;font-size:20px;font-weight:700;color:#ec3013}
   .tf{display:flex;gap:10px;margin-top:10px}
-  .tf button{flex:1;border-radius:14px;padding:14px;font:800 16px 'Nunito',sans-serif;border:2px solid #e3d3ba;background:#fdfbf7}
-  .tf button.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
-  .tf button.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
-  .empty a{color:#7c2340;text-decoration:underline;font-weight:900}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
-  .sechead{display:flex;align-items:center;gap:12px;margin:28px 4px 14px;font:900 14px 'Nunito',sans-serif;color:#7c2340;letter-spacing:1.5px;text-transform:uppercase}
-  .sechead::after{content:"";flex:1;height:3px;background:#e3d3ba;border-radius:2px}
+  .tf button{flex:1;border-radius:14px;padding:14px;font:800 16px 'Archivo',sans-serif;border:2px solid #cfcecd;background:#f3f2f2}
+  .tf button.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
+  .tf button.wrong{background:#fff2ef;border-color:#ec3013;color:#ae1800}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:26px;text-align:center;font:700 14px 'Archivo',sans-serif;color:#6e6a68}
+  .empty a{color:#ec3013;text-decoration:underline;font-weight:900}
+  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:30px}
+  .sechead{display:flex;align-items:center;gap:12px;margin:28px 4px 14px;font:900 14px 'Archivo',sans-serif;color:#ec3013;letter-spacing:1.5px;text-transform:uppercase}
+  .sechead::after{content:"";flex:1;height:3px;background:#cfcecd;border-radius:2px}
   .tbar{display:flex;justify-content:flex-end;gap:6px;margin:0 2px 6px}
-  .tbar button,.tbar a{background:#fff;border:2px solid #e3d3ba;border-radius:10px;padding:4px 12px;font:800 14px 'Nunito',sans-serif;color:#5a4f47;text-decoration:none;cursor:pointer}
-  .tbar button:hover,.tbar a:hover{border-color:#7c2340;color:#7c2340}
+  .tbar button,.tbar a{background:#fff;border:2px solid #cfcecd;border-radius:10px;padding:4px 12px;font:800 14px 'Archivo',sans-serif;color:#4a4644;text-decoration:none;cursor:pointer}
+  .tbar button:hover,.tbar a:hover{border-color:#ec3013;color:#ec3013}
 </style>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>
@@ -92,7 +93,7 @@
       const c=card('<div class="kind">'+KIND.gap+'</div><div class="qt">'+parts[0]+' <span style="color:#b5654a">___</span> '+(parts[1]||"")+'</div><div class="field"><input placeholder="впиши слово"><button class="check">OK</button></div><div class="fb"></div>');
       const inp=c.querySelector("input"),fb=c.querySelector(".fb");
       const ans=e.data.answer.split(",").map(norm);
-      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#e07a5f";inp.style.background=ok?"#dff0d2":"#fbe0d8";
+      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#ec3013";inp.style.background=ok?"#dff0d2":"#fff2ef";
         if(ok){fb.className="fb ok";fb.textContent="Верно! 🎉";}else{fb.className="fb no";fb.textContent="Ответ: "+esc(e.data.answer.split(",")[0].trim());}}
       c.querySelector(".check").onclick=go;inp.addEventListener("keydown",ev=>{if(ev.key==="Enter")go();});
       return c;
@@ -133,11 +134,11 @@
       return c;
     }
     function renderListen(e){
-      const c=card('<div class="kind">'+KIND.listen+'</div><div style="text-align:center;margin:6px 0"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div><div class="qt" style="text-align:center;font-size:15px;color:#a99a86">послушай и впиши</div><div class="field"><input placeholder="впиши, что услышал"><button class="check ok2">OK</button></div><div class="fb"></div>');
+      const c=card('<div class="kind">'+KIND.listen+'</div><div style="text-align:center;margin:6px 0"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div><div class="qt" style="text-align:center;font-size:15px;color:#8a8785">послушай и впиши</div><div class="field"><input placeholder="впиши, что услышал"><button class="check ok2">OK</button></div><div class="fb"></div>');
       const btn=c.querySelector(".check"),inp=c.querySelector("input"),fb=c.querySelector(".fb");
       const ans=e.data.answer.split(",").map(norm);
       btn.onclick=()=>speak(e.data.audio); setTimeout(()=>speak(e.data.audio),400);
-      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#e07a5f";inp.style.background=ok?"#dff0d2":"#fbe0d8";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Ответ: "+esc(e.data.answer.split(",")[0].trim());}
+      function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#ec3013";inp.style.background=ok?"#dff0d2":"#fff2ef";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Ответ: "+esc(e.data.answer.split(",")[0].trim());}
       c.querySelector(".ok2").onclick=go;inp.addEventListener("keydown",ev=>{if(ev.key==="Enter")go();});
       return c;
     }
@@ -145,7 +146,7 @@
       const c=card('<div class="kind">'+KIND.multi+'</div><div class="qt">'+esc(e.data.q)+'</div><div class="opts"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>');
       const box=c.querySelector(".opts"),fb=c.querySelector(".fb");const chosen=new Set();
       e.data.opts.forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=o;
-        b.onclick=()=>{ if(chosen.has(i)){chosen.delete(i);b.style.background="#fdfbf7";b.style.borderColor="#e3d3ba";}else{chosen.add(i);b.style.background="#eef4ea";b.style.borderColor="#7cb342";} };
+        b.onclick=()=>{ if(chosen.has(i)){chosen.delete(i);b.style.background="#f3f2f2";b.style.borderColor="#cfcecd";}else{chosen.add(i);b.style.background="#eae9e9";b.style.borderColor="#7cb342";} };
         box.appendChild(b);});
       c.querySelector(".check").onclick=()=>{const cor=new Set(e.data.correct);const ok=chosen.size===cor.size&&[...chosen].every(i=>cor.has(i));
         [...box.children].forEach((b,i)=>{ if(cor.has(i))b.classList.add("correct"); else if(chosen.has(i))b.classList.add("wrong"); });
@@ -158,9 +159,9 @@
       const items=[]; e.data.cats.forEach((cat,ci)=>cat.items.forEach(it=>items.push({t:it,ci})));
       const opts=e.data.cats.map((cat,ci)=>'<option value="'+ci+'">'+esc(cat.name)+'</option>').join("");
       shuffle(items).forEach(it=>{const d=document.createElement("div");d.style.cssText="display:flex;align-items:center;gap:8px;margin-bottom:8px";
-        d.innerHTML='<span style="flex:1;font-size:17px;font-weight:600">'+esc(it.t)+'</span><select data-c="'+it.ci+'" style="border:2px solid #e3d3ba;border-radius:10px;padding:8px;font:700 14px \'Nunito\',sans-serif;background:#fdfbf7">'+opts+'</select>';
+        d.innerHTML='<span style="flex:1;font-size:17px;font-weight:600">'+esc(it.t)+'</span><select data-c="'+it.ci+'" style="border:2px solid #cfcecd;border-radius:10px;padding:8px;font:700 14px \'Nunito\',sans-serif;background:#f3f2f2">'+opts+'</select>';
         box.appendChild(d);});
-      c.querySelector(".check").onclick=()=>{let good=0,tot=0;box.querySelectorAll("select").forEach(s=>{tot++;const ok=String(s.dataset.c)===s.value;s.style.borderColor=ok?"#7cb342":"#e07a5f";s.style.background=ok?"#dff0d2":"#fbe0d8";if(ok)good++;});
+      c.querySelector(".check").onclick=()=>{let good=0,tot=0;box.querySelectorAll("select").forEach(s=>{tot++;const ok=String(s.dataset.c)===s.value;s.style.borderColor=ok?"#7cb342":"#ec3013";s.style.background=ok?"#dff0d2":"#fff2ef";if(ok)good++;});
         fb.className="fb "+(good===tot?"ok":"no");fb.textContent=good===tot?"Всё верно! 🎉":("Верно "+good+" из "+tot);};
       return c;
     }
@@ -169,23 +170,23 @@
       let html='<div class="kind">'+KIND.cloze+'</div><div class="qt" style="line-height:2.1"></div><div class="field" style="margin-top:8px"><button class="check">Проверить</button></div><div class="fb"></div>';
       const c=card(html); const qt=c.querySelector(".qt"),fb=c.querySelector(".fb");
       parts.forEach(p=>{const m=p.match(/^\[\[(.*?)\]\]$/);
-        if(m){const opts=m[1].split("|").map(s=>s.trim());const correct=opts[0];const sel=document.createElement("select");sel.dataset.a=correct;sel.style.cssText="border:2px solid #7c2340;border-radius:8px;padding:5px 6px;font:700 16px 'Fredoka',sans-serif;background:#fbeef1;margin:0 3px";
+        if(m){const opts=m[1].split("|").map(s=>s.trim());const correct=opts[0];const sel=document.createElement("select");sel.dataset.a=correct;sel.style.cssText="border:2px solid #ec3013;border-radius:8px;padding:5px 6px;font:700 16px 'Archivo',sans-serif;background:#fbeef1;margin:0 3px";
           const blank=document.createElement("option");blank.textContent="…";blank.value="";sel.appendChild(blank);
           shuffle(opts).forEach(o=>{const op=document.createElement("option");op.textContent=o;op.value=o;sel.appendChild(op);});qt.appendChild(sel);}
         else if(p){qt.appendChild(document.createTextNode(p));}});
-      c.querySelector(".check").onclick=()=>{let good=0,tot=0;qt.querySelectorAll("select").forEach(s=>{tot++;const ok=norm(s.value)===norm(s.dataset.a);s.style.borderColor=ok?"#7cb342":"#e07a5f";s.style.background=ok?"#dff0d2":"#fbe0d8";if(ok)good++;});
+      c.querySelector(".check").onclick=()=>{let good=0,tot=0;qt.querySelectorAll("select").forEach(s=>{tot++;const ok=norm(s.value)===norm(s.dataset.a);s.style.borderColor=ok?"#7cb342":"#ec3013";s.style.background=ok?"#dff0d2":"#fff2ef";if(ok)good++;});
         fb.className="fb "+(good===tot?"ok":"no");fb.textContent=good===tot?"Верно! 🎉":("Верно "+good+" из "+tot);};
       return c;
     }
     function renderLetters(e){
-      const c=card('<div class="kind">'+KIND.letters+'</div><div class="qt">Собери слово'+(e.data.hint?' <span style="color:#a99a86;font-size:16px">('+esc(e.data.hint)+')</span>':'')+'</div><div class="built"></div><div class="words"></div><div class="field" style="margin-top:8px"><button class="check">⌫ стереть</button></div><div class="fb"></div>');
+      const c=card('<div class="kind">'+KIND.letters+'</div><div class="qt">Собери слово'+(e.data.hint?' <span style="color:#8a8785;font-size:16px">('+esc(e.data.hint)+')</span>':'')+'</div><div class="built"></div><div class="words"></div><div class="field" style="margin-top:8px"><button class="check">⌫ стереть</button></div><div class="fb"></div>');
       const wbox=c.querySelector(".words"),built=c.querySelector(".built"),fb=c.querySelector(".fb");
       const target=e.data.word;const letters=shuffle(target.replace(/ /g,"").split(""));let seq=[];
       letters.forEach(ch=>{const b=document.createElement("button");b.className="word";b.textContent=ch;
         b.onclick=()=>{if(b.classList.contains("used"))return;b.classList.add("used");seq.push({ch,el:b});draw();};wbox.appendChild(b);});
       c.querySelector(".check").onclick=()=>{const last=seq.pop();if(last)last.el.classList.remove("used");draw();};
       function draw(){built.textContent=seq.map(x=>x.ch).join("");const guess=seq.map(x=>x.ch).join("");const goal=target.replace(/ /g,"");
-        if(guess.length===goal.length){const ok=guess.toLowerCase()===goal.toLowerCase();built.style.color=ok?"#3f7a20":"#a23b1e";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Правильно: "+esc(target);if(ok)speak(target);}else{built.style.color="#7c2340";fb.textContent="";}}
+        if(guess.length===goal.length){const ok=guess.toLowerCase()===goal.toLowerCase();built.style.color=ok?"#4a8b34":"#ae1800";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Правильно: "+esc(target);if(ok)speak(target);}else{built.style.color="#ec3013";fb.textContent="";}}
       return c;
     }
     function ytId(u){const m=(u||"").match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:"";}
@@ -194,30 +195,30 @@
       return card('<div class="kind">'+KIND.text+'</div>'+(e.data.title?'<div class="qt">'+esc(e.data.title)+'</div>':'')+'<div style="font-size:16px">'+body+'</div>');
     }
     function renderImage(e){
-      return card('<div class="kind">'+KIND.image+'</div><img src="'+esc(e.data.url)+'" alt="" style="max-width:100%;border-radius:14px;display:block">'+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+      return card('<div class="kind">'+KIND.image+'</div><img src="'+esc(e.data.url)+'" alt="" style="max-width:100%;border-radius:14px;display:block">'+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
     }
     function renderVideo(e){
       const id=ytId(e.data.url);
       const emb=id?'<div style="position:relative;padding-top:56%;border-radius:14px;overflow:hidden"><iframe src="https://www.youtube.com/embed/'+id+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>':'<div class="qt">Ссылка на видео не распознана</div>';
-      return card('<div class="kind">'+KIND.video+'</div>'+emb+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+      return card('<div class="kind">'+KIND.video+'</div>'+emb+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
     }
     function renderAudio(e){
-      const c=card('<div class="kind">'+KIND.audio+'</div><div style="text-align:center"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div>'+(e.data.caption?'<div style="text-align:center;font:800 14px \'Nunito\',sans-serif;color:#5a4f47;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+      const c=card('<div class="kind">'+KIND.audio+'</div><div style="text-align:center"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div>'+(e.data.caption?'<div style="text-align:center;font:800 14px \'Nunito\',sans-serif;color:#4a4644;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
       c.querySelector(".check").onclick=()=>speak(e.data.body);
       return c;
     }
     function renderDialogue(e){
       const rows=e.data.lines.map((l,i)=>{const right=i%2===1;
-        return '<div style="display:flex;justify-content:'+(right?"flex-end":"flex-start")+';margin-bottom:8px"><div class="dbub" data-t="'+esc(l.text)+'" style="max-width:80%;background:'+(right?"#dff0d2":"#fdfbf7")+';border:2px solid '+(right?"#bcd9ac":"#e3d3ba")+';border-radius:14px;padding:9px 12px;cursor:pointer"><b style="color:#7c2340;font:800 12px \'Nunito\',sans-serif">'+esc(l.who)+'</b><br>'+esc(l.text)+'</div></div>';}).join("");
-      const c=card('<div class="kind">'+KIND.dialogue+'</div><div class="qt" style="font-size:15px;color:#a99a86">нажми на реплику, чтобы услышать</div>'+rows);
+        return '<div style="display:flex;justify-content:'+(right?"flex-end":"flex-start")+';margin-bottom:8px"><div class="dbub" data-t="'+esc(l.text)+'" style="max-width:80%;background:'+(right?"#dff0d2":"#f3f2f2")+';border:2px solid '+(right?"#cfcecd":"#cfcecd")+';border-radius:14px;padding:9px 12px;cursor:pointer"><b style="color:#ec3013;font:800 12px \'Nunito\',sans-serif">'+esc(l.who)+'</b><br>'+esc(l.text)+'</div></div>';}).join("");
+      const c=card('<div class="kind">'+KIND.dialogue+'</div><div class="qt" style="font-size:15px;color:#8a8785">нажми на реплику, чтобы услышать</div>'+rows);
       c.querySelectorAll(".dbub").forEach(b=>b.onclick=()=>speak(b.dataset.t));
       return c;
     }
     function renderNote(e){
-      return card('<div class="kind">'+KIND.note+'</div><div style="background:#fff4e0;border:2px solid #f0c96b;border-radius:14px;padding:14px;font-size:16px;font-weight:500;line-height:1.6;color:#7a5b12">'+esc(e.data.body).replace(/\n/g,"<br>")+'</div>');
+      return card('<div class="kind">'+KIND.note+'</div><div style="background:#fff2ef;border:2px solid #cfcecd;border-radius:14px;padding:14px;font-size:16px;font-weight:500;line-height:1.6;color:#4a4644">'+esc(e.data.body).replace(/\n/g,"<br>")+'</div>');
     }
     function renderOpen(e){
-      const c=card('<div class="kind">'+KIND.open+'</div><div class="qt">'+esc(e.data.q)+'</div><textarea rows="3" placeholder="напиши свой ответ…" style="width:100%;border:2px solid #e3d3ba;border-radius:12px;padding:11px;font:600 15px \'Fredoka\',sans-serif;background:#fdfbf7;margin-top:8px"></textarea>'+(e.data.model?'<button class="check" style="margin-top:8px;background:#eef4ea;color:#3f7a20">Показать образец</button><div class="model" style="display:none;margin-top:8px;background:#eef4ea;border-radius:12px;padding:10px;font-weight:500">'+esc(e.data.model)+'</div>':''));
+      const c=card('<div class="kind">'+KIND.open+'</div><div class="qt">'+esc(e.data.q)+'</div><textarea rows="3" placeholder="напиши свой ответ…" style="width:100%;border:2px solid #cfcecd;border-radius:12px;padding:11px;font:600 15px \'Fredoka\',sans-serif;background:#f3f2f2;margin-top:8px"></textarea>'+(e.data.model?'<button class="check" style="margin-top:8px;background:#eae9e9;color:#4a8b34">Показать образец</button><div class="model" style="display:none;margin-top:8px;background:#eae9e9;border-radius:12px;padding:10px;font-weight:500">'+esc(e.data.model)+'</div>':''));
       const mb=c.querySelector(".check");if(mb)mb.onclick=()=>{c.querySelector(".model").style.display="block";};
       return c;
     }
@@ -227,14 +228,14 @@
       const qt=c.querySelector(".qt"),bank=c.querySelector(".words"),fb=c.querySelector(".fb");
       const slots=[];
       parts.forEach((p,i)=>{ if(p) qt.appendChild(document.createTextNode(p));
-        if(i<parts.length-1){const s=document.createElement("span");s.textContent="____";s.style.cssText="display:inline-block;min-width:64px;border-bottom:3px solid #7c2340;text-align:center;font-weight:700;color:#7c2340;margin:0 4px;cursor:pointer";
+        if(i<parts.length-1){const s=document.createElement("span");s.textContent="____";s.style.cssText="display:inline-block;min-width:64px;border-bottom:3px solid #ec3013;text-align:center;font-weight:700;color:#ec3013;margin:0 4px;cursor:pointer";
           const slot={el:s,val:"",chip:null};slots.push(slot);
           s.onclick=()=>{ if(slot.chip){slot.chip.classList.remove("used");slot.chip=null;slot.val="";s.textContent="____";} };
           qt.appendChild(s);}});
       shuffle(e.data.answers.concat(e.data.extra||[])).forEach(w=>{const b=document.createElement("button");b.className="word";b.textContent=w;
         b.onclick=()=>{ if(b.classList.contains("used"))return; const slot=slots.find(x=>!x.val); if(!slot)return; slot.val=w;slot.chip=b;slot.el.textContent=w;b.classList.add("used"); };
         bank.appendChild(b);});
-      c.querySelector(".check").onclick=()=>{let good=0;slots.forEach((s,i)=>{const ok=norm(s.val)===norm(e.data.answers[i]);s.el.style.color=ok?"#3f7a20":"#a23b1e";if(ok)good++;});
+      c.querySelector(".check").onclick=()=>{let good=0;slots.forEach((s,i)=>{const ok=norm(s.val)===norm(e.data.answers[i]);s.el.style.color=ok?"#4a8b34":"#ae1800";if(ok)good++;});
         fb.className="fb "+(good===slots.length?"ok":"no");fb.textContent=good===slots.length?"Верно! 🎉":("Верно "+good+" из "+slots.length);};
       return c;
     }
@@ -244,25 +245,25 @@
       if(!src) throw new Error("no src");
       const ratio=d.ratio,h=d.h||520;
       let ifr;
-      if(ratio) ifr='<div style="position:relative;padding-top:'+ratio+'%;border-radius:14px;overflow:hidden;border:2px solid #e3d3ba"><iframe src="'+esc(src)+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
-      else ifr='<iframe src="'+esc(src)+'" style="width:100%;height:'+h+'px;border:2px solid #e3d3ba;border-radius:14px;background:#fff" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+      if(ratio) ifr='<div style="position:relative;padding-top:'+ratio+'%;border-radius:14px;overflow:hidden;border:2px solid #cfcecd"><iframe src="'+esc(src)+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
+      else ifr='<iframe src="'+esc(src)+'" style="width:100%;height:'+h+'px;border:2px solid #cfcecd;border-radius:14px;background:#fff" allow="autoplay; fullscreen" allowfullscreen></iframe>';
       return card('<div class="kind">'+KIND.embed+(d.name?" · "+esc(d.name):"")+'</div>'+ifr+
-        '<div style="margin-top:8px;text-align:right"><a href="'+esc(d.url||src)+'" target="_blank" style="font:800 12px \'Nunito\',sans-serif;color:#7c2340">Открыть в новой вкладке ↗</a></div>');
+        '<div style="margin-top:8px;text-align:right"><a href="'+esc(d.url||src)+'" target="_blank" style="font:800 12px \'Nunito\',sans-serif;color:#ec3013">Открыть в новой вкладке ↗</a></div>');
     }
     function renderShadow(e){
       const lines=(e.data&&e.data.lines)||[];
       if(!lines.length) throw new Error("no lines");
       const c=card('<div class="kind">'+KIND.shadow+'</div>'+
-        '<div style="font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-bottom:8px">Скорость: <select class="shrate" style="font:inherit;border:2px solid #e3d3ba;border-radius:8px;padding:2px 6px"><option value="0.6">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
+        '<div style="font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-bottom:8px">Скорость: <select class="shrate" style="font:inherit;border:2px solid #cfcecd;border-radius:8px;padding:2px 6px"><option value="0.6">🐢 медленно</option><option value="0.8" selected>🚶 средне</option><option value="1">🏃 обычная</option></select></div>'+
         '<div class="shlines"></div>');
       const box=c.querySelector(".shlines"),rateSel=c.querySelector(".shrate");
       lines.forEach(line=>{
         const row=document.createElement("div");
         row.style.cssText="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap";
-        row.innerHTML='<button class="pl" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer">🔊</button>'+
+        row.innerHTML='<button class="pl" style="border:2px solid #cfcecd;background:#f3f2f2;border-radius:10px;padding:6px 11px;cursor:pointer">🔊</button>'+
           '<span style="flex:1;font-size:17px;font-weight:600;min-width:150px">'+esc(line)+'</span>'+
-          '<button class="rc" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer">🎤</button>'+
-          '<button class="my" style="border:2px solid #e3d3ba;background:#fdfbf7;border-radius:10px;padding:6px 11px;cursor:pointer" disabled>▶️</button>';
+          '<button class="rc" style="border:2px solid #cfcecd;background:#f3f2f2;border-radius:10px;padding:6px 11px;cursor:pointer">🎤</button>'+
+          '<button class="my" style="border:2px solid #cfcecd;background:#f3f2f2;border-radius:10px;padding:6px 11px;cursor:pointer" disabled>▶️</button>';
         const pl=row.querySelector(".pl"),rc=row.querySelector(".rc"),my=row.querySelector(".my");
         pl.onclick=()=>{if(window.SM_speak)return SM_speak(line,parseFloat(rateSel.value));try{const u=new SpeechSynthesisUtterance(line);u.lang="en-US";u.rate=parseFloat(rateSel.value);speechSynthesis.cancel();speechSynthesis.speak(u);}catch(err){}};
         let myUrl=null;
@@ -283,7 +284,7 @@
       });
       return c;
     }
-    function textBlock(t){return '<div style="background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px 16px;font-size:16px;line-height:1.65;white-space:pre-wrap;margin-bottom:14px;text-align:left">'+esc(t)+'</div>';}
+    function textBlock(t){return '<div style="background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:14px 16px;font-size:16px;line-height:1.65;white-space:pre-wrap;margin-bottom:14px;text-align:left">'+esc(t)+'</div>';}
     function renderReading(e){
       const d=e.data||{};if(!d.text||!d.qs)throw new Error("bad");
       const c=card('<div class="kind">'+KIND.reading+'</div>'+textBlock(d.text)+'<div class="rq"></div>');
@@ -325,16 +326,16 @@
       const box=c.querySelector(".wf");
       items.forEach(it=>{
         const w=document.createElement("div");w.style.cssText="margin-bottom:14px;text-align:left";
-        w.innerHTML='<div style="font-size:16px;font-weight:600;margin-bottom:6px">'+esc(it.q).replace("___",'<span style="color:#7c2340;font-weight:800">_____</span>')+
-          ' <span style="background:#fbeef1;border:2px solid #e3d3ba;border-radius:8px;padding:2px 8px;font:800 13px \'Nunito\',sans-serif;color:#7c2340">'+esc(it.base)+'</span></div>'+
-          '<div class="field" style="display:flex;gap:8px"><input placeholder="впиши форму слова" style="flex:1;border:2px solid #e3d3ba;border-radius:12px;padding:10px 13px;font:700 16px \'Fredoka\',sans-serif;background:#fdfbf7"><button class="check" style="background:#7c2340;color:#fff;border:0;border-radius:12px;padding:0 18px;font:800 14px \'Nunito\',sans-serif;cursor:pointer">✓</button></div>'+
+        w.innerHTML='<div style="font-size:16px;font-weight:600;margin-bottom:6px">'+esc(it.q).replace("___",'<span style="color:#ec3013;font-weight:800">_____</span>')+
+          ' <span style="background:#fbeef1;border:2px solid #cfcecd;border-radius:8px;padding:2px 8px;font:800 13px \'Nunito\',sans-serif;color:#ec3013">'+esc(it.base)+'</span></div>'+
+          '<div class="field" style="display:flex;gap:8px"><input placeholder="впиши форму слова" style="flex:1;border:2px solid #cfcecd;border-radius:12px;padding:10px 13px;font:700 16px \'Fredoka\',sans-serif;background:#f3f2f2"><button class="check" style="background:#ec3013;color:#fff;border:0;border-radius:12px;padding:0 18px;font:800 14px \'Nunito\',sans-serif;cursor:pointer">✓</button></div>'+
           '<div class="fb" style="font:800 13px \'Nunito\',sans-serif;min-height:16px;margin-top:4px"></div>';
         const inp=w.querySelector("input"),fb=w.querySelector(".fb");
         w.querySelector(".check").onclick=()=>{
           const ok=norm(inp.value)===norm(it.answer);
-          fb.style.color=ok?"#3f7a20":"#a23b1e";
+          fb.style.color=ok?"#4a8b34":"#ae1800";
           fb.textContent=ok?"Верно! 🎉":("Правильно: "+it.answer);
-          inp.style.borderColor=ok?"#7cb342":"#e07a5f";
+          inp.style.borderColor=ok?"#7cb342":"#ec3013";
         };
         box.appendChild(w);
       });
@@ -345,14 +346,14 @@
       if(paras.length<2||heads.length<paras.length)throw new Error("bad");
       const order=shuffle(heads.map((h,i)=>i));
       const c=card('<div class="kind">'+KIND.headings+'</div>'+
-        '<div style="font:700 13px \'Nunito\',sans-serif;color:#8a7a68;margin-bottom:10px;text-align:left">Подбери заголовок к каждому абзацу. Один заголовок — лишний!</div>'+
+        '<div style="font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-bottom:10px;text-align:left">Подбери заголовок к каждому абзацу. Один заголовок — лишний!</div>'+
         '<ol style="text-align:left;padding-left:20px;margin:0 0 12px">'+order.map(i=>'<li style="font-weight:600;margin-bottom:4px">'+esc(heads[i])+'</li>').join("")+'</ol>'+
-        '<div class="hp"></div><button class="check" style="background:#7c2340;color:#fff;border:0;border-radius:12px;padding:12px 20px;font:800 14px \'Nunito\',sans-serif;cursor:pointer;margin-top:6px">Проверить</button><div class="fb" style="font:800 14px \'Nunito\',sans-serif;margin-top:8px;min-height:18px"></div>');
+        '<div class="hp"></div><button class="check" style="background:#ec3013;color:#fff;border:0;border-radius:12px;padding:12px 20px;font:800 14px \'Nunito\',sans-serif;cursor:pointer;margin-top:6px">Проверить</button><div class="fb" style="font:800 14px \'Nunito\',sans-serif;margin-top:8px;min-height:18px"></div>');
       const box=c.querySelector(".hp"),sels=[];
       paras.forEach((p,pi)=>{
         const w=document.createElement("div");w.style.cssText="margin-bottom:12px;text-align:left";
-        w.innerHTML='<div style="background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.6;white-space:pre-wrap"><b>'+String.fromCharCode(65+pi)+'.</b> '+esc(p)+'</div>'+
-          '<select style="margin-top:6px;width:100%;border:2px solid #e3d3ba;border-radius:10px;padding:9px;font:700 14px \'Nunito\',sans-serif;background:#fff"><option value="">— выбери заголовок —</option>'+
+        w.innerHTML='<div style="background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.6;white-space:pre-wrap"><b>'+String.fromCharCode(65+pi)+'.</b> '+esc(p)+'</div>'+
+          '<select style="margin-top:6px;width:100%;border:2px solid #cfcecd;border-radius:10px;padding:9px;font:700 14px \'Nunito\',sans-serif;background:#fff"><option value="">— выбери заголовок —</option>'+
           order.map((i,k)=>'<option value="'+i+'">'+(k+1)+". "+esc(heads[i])+'</option>').join("")+'</select>';
         sels.push(w.querySelector("select"));
         box.appendChild(w);
@@ -360,9 +361,9 @@
       c.querySelector(".check").onclick=()=>{
         let good=0;
         sels.forEach((sel,pi)=>{const ok=sel.value!==""&&parseInt(sel.value,10)===pi;
-          sel.style.borderColor=ok?"#7cb342":"#e07a5f";if(ok)good++;});
+          sel.style.borderColor=ok?"#7cb342":"#ec3013";if(ok)good++;});
         const fb=c.querySelector(".fb");
-        fb.style.color=good===paras.length?"#3f7a20":"#a23b1e";
+        fb.style.color=good===paras.length?"#4a8b34":"#ae1800";
         fb.textContent=good===paras.length?"Всё верно! 🎉":("Верно "+good+" из "+paras.length);
       };
       return c;
@@ -395,7 +396,7 @@
           bar.querySelectorAll("button").forEach(b=>b.onclick=()=>moveEx(ex,idx,parseInt(b.dataset.d,10)));
           wrap.appendChild(bar);
         }
-        if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Nunito',sans-serif;color:#5a4f47;margin:4px 4px 8px";hd.textContent=e.title;wrap.appendChild(hd);}
+        if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Archivo',sans-serif;color:#4a4644;margin:4px 4px 8px";hd.textContent=e.title;wrap.appendChild(hd);}
         const fn=R[e.type];
         if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
         const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
@@ -409,7 +410,7 @@
         if(p&&p.role==="teacher"){
           IS_TEACHER=true;
           const w=document.createElement("div"); w.style.cssText="text-align:center;margin:-6px 0 16px";
-          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #e3d3ba">🛠 Добавить упражнение в этот урок</a>';
+          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #cfcecd">🛠 Добавить упражнение в этот урок</a>';
           document.getElementById("sub").insertAdjacentElement("afterend",w);
         }
       }catch(e){}

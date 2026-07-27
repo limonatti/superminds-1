@@ -16,8 +16,9 @@ body, button, input, select, textarea, h1, h2, h3, h4{
 h1,h2,h3{ letter-spacing:-.02em !important; font-weight:800 !important }
 
 /* --- никаких скруглений, кроме настоящих кругов --- */
-[class], [style], button, input, select, textarea, a{ border-radius:0 }
-.medal, .av, .ue, .cur, .badge .m, [style*="border-radius:50%"], [style*="border-radius: 50%"]{
+body *{ border-radius:0 !important }
+.medal, .av, .ue, .cur, .dot, .badge .m, .m,
+[style*="border-radius:50%"], [style*="border-radius: 50%"]{
   border-radius:50% !important;
 }
 
