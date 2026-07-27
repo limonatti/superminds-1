@@ -1,0 +1,64 @@
+/* sm-skin.css — общая «шкура» для страниц, написанных до редизайна.
+   Подключается одной строкой и подтягивает старые экраны к стилю Modernist:
+   плоско, нулевой радиус, линейки 2px, шрифт Archivo, красный акцент.
+   Цвета в самих страницах уже заменены; здесь — то, что нельзя было заменить текстом. */
+
+:root{
+  --sk-bg:#f3f2f2; --sk-surface:#eae9e9; --sk-text:#201e1d;
+  --sk-accent:#ec3013; --sk-accent-100:#fff2ef; --sk-accent-700:#ae1800;
+  --sk-divider:#cfcecd; --sk-muted:#4a4644; --sk-muted2:#6e6a68;
+}
+
+/* --- типографика --- */
+body, button, input, select, textarea, h1, h2, h3, h4{
+  font-family:"Archivo", system-ui, -apple-system, sans-serif !important;
+}
+h1,h2,h3{ letter-spacing:-.02em !important; font-weight:800 !important }
+
+/* --- никаких скруглений, кроме настоящих кругов --- */
+[class], [style], button, input, select, textarea, a{ border-radius:0 }
+.medal, .av, .ue, .cur, .badge .m, [style*="border-radius:50%"], [style*="border-radius: 50%"]{
+  border-radius:50% !important;
+}
+
+/* --- убираем «игрушечные» тени, вместо них линейки --- */
+*{ box-shadow:none !important }
+
+/* контейнеры, которые держались на тени, получают рамку */
+.panel, .card, .stage, .sec, .tile, .box, .wrap > .card, .lbtn, .g-ex{
+  border:2px solid var(--sk-divider);
+}
+.panel, .card, .stage, .box{ background:var(--sk-bg) }
+
+/* --- кнопки --- */
+button, .pill, .home, .primary, .ghost, .tbtn, .lbtn, .gbtn, .key, .lt, .opt, .tab, .cta{
+  border-radius:0 !important;
+  letter-spacing:.02em;
+}
+.home, .pill{
+  border:2px solid var(--sk-text) !important;
+  font-weight:800 !important;
+}
+.primary, .cta{
+  background:var(--sk-accent) !important; color:#fff !important;
+  border:2px solid var(--sk-accent) !important; font-weight:800 !important;
+}
+.primary:hover, .cta:hover{ background:var(--sk-accent-700) !important; border-color:var(--sk-accent-700) !important }
+.ghost{
+  background:transparent !important; color:var(--sk-text) !important;
+  border:2px solid var(--sk-text) !important; font-weight:800 !important;
+}
+.ghost:hover{ background:var(--sk-text) !important; color:var(--sk-bg) !important }
+button:active{ transform:scale(.98) }
+
+/* --- поля --- */
+input, select, textarea{
+  border:2px solid var(--sk-text) !important;
+  background:var(--sk-bg) !important; color:var(--sk-text) !important;
+}
+input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--sk-accent) !important }
+*:focus-visible{ outline:2px solid var(--sk-accent); outline-offset:2px }
+
+/* --- служебные подписи --- */
+.sub, .foot, .note, .hint{ color:var(--sk-muted2) !important }
+.foot{ letter-spacing:.1em; text-transform:uppercase; font-size:12px !important }

@@ -5,91 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Super Minds 1 · Тренажёр слов</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
-  .cab{position:fixed;top:12px;right:12px;z-index:9;background:#fff;color:#7c2340;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd}
+  .cab{position:fixed;top:12px;right:12px;z-index:9;background:#fff;color:#ec3013;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd}
   .wrap{max-width:720px;margin:0 auto;padding:64px 18px 56px}
-  h1{margin:0;text-align:center;font-size:clamp(28px,6vw,44px);font-weight:700;color:#7c2340;letter-spacing:-1px}
-  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .banner{background:#fff4e0;border:2px solid #f0c96b;border-radius:16px;padding:11px 15px;font:700 13px 'Nunito',sans-serif;color:#7a5b12;text-align:center;margin-bottom:16px}
-  .banner a{color:#7c2340;font-weight:900;text-decoration:underline}
-  .label{font:800 11px 'Nunito',sans-serif;color:#8a7a68;letter-spacing:.5px;margin:0 2px 8px}
+  h1{margin:0;text-align:center;font-size:clamp(28px,6vw,44px);font-weight:700;color:#ec3013;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .banner{background:#fff4e0;border:2px solid #f0c96b;border-radius:16px;padding:11px 15px;font:700 13px 'Archivo',sans-serif;color:#7a5b12;text-align:center;margin-bottom:16px}
+  .banner a{color:#ec3013;font-weight:900;text-decoration:underline}
+  .label{font:800 11px 'Archivo',sans-serif;color:#6e6a68;letter-spacing:.5px;margin:0 2px 8px}
 
   .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-  .chip{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:6px 12px;font:800 12.5px 'Nunito',sans-serif;color:#5a4f47}
-  .chip.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .chip{background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:6px 12px;font:800 12.5px 'Archivo',sans-serif;color:#4a4644}
+  .chip.on{background:#ec3013;border-color:#ec3013;color:#fff}
 
   .modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-  .mode{background:#fff;border:2px solid #e3d3ba;border-radius:14px;padding:9px 13px;font:800 13.5px 'Nunito',sans-serif;color:#5a4f47}
-  .mode.on{background:#7c2340;border-color:#7c2340;color:#fff}
-  .mode.mix.on{background:#e0952a;border-color:#e0952a}
+  .mode{background:#fff;border:2px solid #cfcecd;border-radius:14px;padding:9px 13px;font:800 13.5px 'Archivo',sans-serif;color:#4a4644}
+  .mode.on{background:#ec3013;border-color:#ec3013;color:#fff}
+  .mode.mix.on{background:#ec3013;border-color:#ec3013}
   .mode.mix{color:#b06a12;border-color:#f0c96b}
 
   .stats{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .stat{background:#fff;border-radius:12px;padding:7px 12px;font:800 13px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;white-space:nowrap}
-  .bar{flex:1;height:14px;background:#e9dcc6;border-radius:999px;overflow:hidden}
+  .stat{background:#fff;border-radius:12px;padding:7px 12px;font:800 13px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd;white-space:nowrap}
+  .bar{flex:1;height:14px;background:#d8d7d6;border-radius:999px;overflow:hidden}
   .bar > i{display:block;height:100%;background:linear-gradient(90deg,#8bc34a,#7cb342);width:0;transition:width .35s}
 
-  .card{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:30px 22px;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:pop .25s ease}
+  .card{background:#fff;border-radius:26px;box-shadow:0 8px 0 #cfcecd;padding:30px 22px;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:pop .25s ease}
   @keyframes pop{from{transform:scale(.97);opacity:.4}to{transform:scale(1);opacity:1}}
   .emoji{font-size:76px;line-height:1;margin-bottom:10px}
-  .word{font-size:38px;font-weight:700;color:#7c2340}
-  .ru{font-size:26px;font-weight:600;color:#1c1310}
-  .prompt{font:800 13px 'Nunito',sans-serif;color:#a99a86;margin-top:12px}
-  .speak{margin-top:12px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
-  .bigspeak{width:120px;height:120px;border-radius:50%;background:#f6e2cf;font-size:56px;display:flex;align-items:center;justify-content:center;margin:6px auto 4px;box-shadow:0 6px 0 #e3d3ba}
+  .word{font-size:38px;font-weight:700;color:#ec3013}
+  .ru{font-size:26px;font-weight:600;color:#201e1d}
+  .prompt{font:800 13px 'Archivo',sans-serif;color:#8a8785;margin-top:12px}
+  .speak{margin-top:12px;background:#f6e2cf;border-radius:999px;padding:9px 20px;font:800 14px 'Archivo',sans-serif;color:#ec3013}
+  .bigspeak{width:120px;height:120px;border-radius:50%;background:#f6e2cf;font-size:56px;display:flex;align-items:center;justify-content:center;margin:6px auto 4px;box-shadow:0 6px 0 #cfcecd}
 
   .fc-btns{display:flex;gap:12px;margin-top:16px}
-  .fc-btns button{flex:1;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  .fc-btns button{flex:1;border-radius:16px;padding:15px;font:800 16px 'Archivo',sans-serif;box-shadow:0 5px 0 rgba(0,0,0,.08)}
   .no{background:#fbe0d8;color:#a23b1e}
-  .yes{background:#dff0d2;color:#3f7a20}
+  .yes{background:#dff0d2;color:#4a8b34}
 
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
-  .opt{background:#fff;border:2px solid #e3d3ba;border-radius:18px;padding:16px;font-size:20px;font-weight:600;color:#1c1310;transition:transform .1s}
+  .opt{background:#fff;border:2px solid #cfcecd;border-radius:18px;padding:16px;font-size:20px;font-weight:600;color:#201e1d;transition:transform .1s}
   .opt:active{transform:scale(.97)}
   .opt .oem{font-size:30px;display:block;margin-bottom:4px}
-  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
   .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
 
   .field{display:flex;gap:8px;margin-top:16px}
-  .field input{flex:1;border:2px solid #e3d3ba;border-radius:16px;padding:15px 16px;font:700 22px 'Fredoka',sans-serif;text-align:center;background:#fdfbf7;color:#1c1310}
-  .field input:focus{outline:none;border-color:#7c2340}
-  .check{background:#7c2340;color:#fff;border-radius:16px;padding:0 22px;font:800 16px 'Nunito',sans-serif}
+  .field input{flex:1;border:2px solid #cfcecd;border-radius:16px;padding:15px 16px;font:700 22px 'Archivo',sans-serif;text-align:center;background:#f3f2f2;color:#201e1d}
+  .field input:focus{outline:none;border-color:#ec3013}
+  .check{background:#ec3013;color:#fff;border-radius:16px;padding:0 22px;font:800 16px 'Archivo',sans-serif}
 
-  .built{min-height:46px;font-size:30px;font-weight:700;color:#7c2340;letter-spacing:3px;margin-top:14px;border-bottom:3px dashed #e3d3ba;display:inline-flex;gap:2px;justify-content:center;min-width:120px;padding:4px 8px}
+  .built{min-height:46px;font-size:30px;font-weight:700;color:#ec3013;letter-spacing:3px;margin-top:14px;border-bottom:3px dashed #cfcecd;display:inline-flex;gap:2px;justify-content:center;min-width:120px;padding:4px 8px}
   .letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
-  .letter{background:#fff;border:2px solid #e3d3ba;border-radius:12px;width:46px;height:52px;font-size:24px;font-weight:700;color:#7c2340;display:flex;align-items:center;justify-content:center}
+  .letter{background:#fff;border:2px solid #cfcecd;border-radius:12px;width:46px;height:52px;font-size:24px;font-weight:700;color:#ec3013;display:flex;align-items:center;justify-content:center}
   .letter.used{opacity:.25;pointer-events:none}
-  .tinybtn{margin-top:12px;background:#f4e9d8;border-radius:999px;padding:8px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340}
+  .tinybtn{margin-top:12px;background:#f3f2f2;border-radius:999px;padding:8px 16px;font:800 13px 'Archivo',sans-serif;color:#ec3013}
 
   .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
-  .pcard{background:#fff;border:2px solid #e3d3ba;border-radius:16px;padding:14px 10px;font-size:17px;font-weight:600;text-align:center;min-height:52px;display:flex;align-items:center;justify-content:center}
-  .pcard.sel{border-color:#7c2340;background:#fbeef1}
+  .pcard{background:#fff;border:2px solid #cfcecd;border-radius:16px;padding:14px 10px;font-size:17px;font-weight:600;text-align:center;min-height:52px;display:flex;align-items:center;justify-content:center}
+  .pcard.sel{border-color:#ec3013;background:#fbeef1}
   .pcard.done{opacity:0;pointer-events:none;transition:opacity .35s}
   .pcard .pem{font-size:22px;margin-right:6px}
 
-  .next{margin-top:14px;width:100%;background:#7c2340;color:#fff;border-radius:16px;padding:14px;font:800 16px 'Nunito',sans-serif;display:none}
+  .next{margin-top:14px;width:100%;background:#ec3013;color:#fff;border-radius:16px;padding:14px;font:800 16px 'Archivo',sans-serif;display:none}
 
-  .done-box{background:#fff;border-radius:26px;box-shadow:0 8px 0 #e3d3ba;padding:34px 22px;text-align:center}
+  .done-box{background:#fff;border-radius:26px;box-shadow:0 8px 0 #cfcecd;padding:34px 22px;text-align:center}
   .done-box .big{font-size:60px}
-  .done-box h2{margin:8px 0 4px;color:#7c2340}
-  .done-box .again{margin-top:16px;background:#7c2340;color:#fff;border-radius:16px;padding:14px 24px;font:800 16px 'Nunito',sans-serif}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:30px}
+  .done-box h2{margin:8px 0 4px;color:#ec3013}
+  .done-box .again{margin-top:16px;background:#ec3013;color:#fff;border-radius:16px;padding:14px 24px;font:800 16px 'Archivo',sans-serif}
+  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:30px}
 
   /* бейдж-тост */
   .badgeToast{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,19,16,.45);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
   .badgeToast.show{opacity:1;pointer-events:auto}
   .badgeCard{background:#fff;border-radius:28px;padding:32px 30px;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.3);animation:pop .3s ease;max-width:320px}
   .badgeCard .medal{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#ffe08a,#f4b93c);display:flex;align-items:center;justify-content:center;font-size:60px;margin:0 auto 14px;box-shadow:0 6px 0 #d99a1e}
-  .badgeCard h3{margin:0 0 4px;color:#7c2340;font-size:22px}
-  .badgeCard p{margin:0;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .badgeCard .ok{margin-top:16px;background:#7c2340;color:#fff;border-radius:14px;padding:11px 26px;font:800 15px 'Nunito',sans-serif}
+  .badgeCard h3{margin:0 0 4px;color:#ec3013;font-size:22px}
+  .badgeCard p{margin:0;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .badgeCard .ok{margin-top:16px;background:#ec3013;color:#fff;border-radius:14px;padding:11px 26px;font:800 15px 'Archivo',sans-serif}
 </style>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
   <a class="home" href="course.html">← Домой</a>
@@ -98,7 +99,7 @@
     <h1>🎯 Тренажёр слов</h1>
     <div class="sub" id="greet">Super Minds 1 · учи слова всех юнитов</div>
 
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px"><a href="review.html" style="background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340;text-decoration:none;box-shadow:0 3px 0 #e3d3ba">🧠 Мои слова</a><a href="pet.html" style="background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340;text-decoration:none;box-shadow:0 3px 0 #e3d3ba">🐣 Мой питомец</a><a href="pronounce.html" style="background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:9px 16px;font:800 13px 'Nunito',sans-serif;color:#7c2340;text-decoration:none;box-shadow:0 3px 0 #e3d3ba">🎙 Произношение</a></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px"><a href="review.html" style="background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:9px 16px;font:800 13px 'Archivo',sans-serif;color:#ec3013;text-decoration:none;box-shadow:0 3px 0 #cfcecd">🧠 Мои слова</a><a href="pet.html" style="background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:9px 16px;font:800 13px 'Archivo',sans-serif;color:#ec3013;text-decoration:none;box-shadow:0 3px 0 #cfcecd">🐣 Мой питомец</a><a href="pronounce.html" style="background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:9px 16px;font:800 13px 'Archivo',sans-serif;color:#ec3013;text-decoration:none;box-shadow:0 3px 0 #cfcecd">🎙 Произношение</a></div>
 
     <div id="banner" class="banner" style="display:none"></div>
 
@@ -328,7 +329,7 @@
         b.onclick=()=>{if(busy||b.classList.contains("used"))return;b.classList.add("used");built.push({ch,el:b});draw();};lets.appendChild(b);});
       document.getElementById("clr").onclick=()=>{if(busy)return;const last=built.pop();if(last)last.el.classList.remove("used");draw();};
       function draw(){ builtEl.textContent=built.map(x=>x.ch).join("");
-        if(built.length===target.length){busy=true;const ok=built.map(x=>x.ch).join("")===target;builtEl.style.color=ok?"#3f7a20":"#a23b1e";if(!ok)builtEl.textContent=target;
+        if(built.length===target.length){busy=true;const ok=built.map(x=>x.ch).join("")===target;builtEl.style.color=ok?"#4a8b34":"#a23b1e";if(!ok)builtEl.textContent=target;
           beep(ok);speak(target);record(w,ok);const n=document.getElementById("next");n.style.display="block";n.onclick=nextRound;} }
     }
     function renderPairs(){
@@ -377,7 +378,7 @@
 
     (async function(){
       if(!SM_ALL_WORDS.length){
-        document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#8a7a68"><div style="font-size:52px">📭</div><h2 style="color:#7c2340;margin:8px 0">В этом учебнике пока нет слов</h2>Добавь слова в юниты через 📚 Конструктор учебников — и тренажёр заработает!</div>';
+        document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#6e6a68"><div style="font-size:52px">📭</div><h2 style="color:#ec3013;margin:8px 0">В этом учебнике пока нет слов</h2>Добавь слова в юниты через 📚 Конструктор учебников — и тренажёр заработает!</div>';
         return;
       }
       const user=await SM.getUser();

@@ -4,30 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Мои слова · English with Asya</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f4e9d8;font-family:'Fredoka',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
   .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e3d3ba;text-decoration:none}
-  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#7c2340}
-  .sub{text-align:center;margin:6px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5a4f47}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:24px;text-align:center}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#ec3013}
+  .sub{text-align:center;margin:6px 0 18px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:24px;text-align:center}
   .big{font-size:64px;line-height:1;margin:6px 0}
-  .qt{font-size:24px;font-weight:700;color:#7c2340;margin:8px 0 14px}
+  .qt{font-size:24px;font-weight:700;color:#ec3013;margin:8px 0 14px}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .opt{background:#fdfbf7;border:2px solid #e3d3ba;border-radius:14px;padding:14px;font-size:17px;font-weight:600;cursor:pointer}
-  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f7a20}
+  .opt{background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:14px;font-size:17px;font-weight:600;cursor:pointer}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
   .opt.wrong{background:#fbe0d8;border-color:#e07a5f;color:#a23b1e}
-  .prog{font:900 14px 'Nunito',sans-serif;color:#5a4f47;text-align:center;margin:12px 0}
-  .primary{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e3d3ba;margin-top:12px}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #e3d3ba;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#8a7a68}
-  .empty a{color:#7c2340;font-weight:900}
-  .boxrow{display:flex;gap:6px;justify-content:center;margin:10px 0 0;font:800 12px 'Nunito',sans-serif;color:#8a7a68;flex-wrap:wrap}
-  .boxrow span{background:#fff;border:2px solid #e3d3ba;border-radius:999px;padding:4px 10px}
+  .prog{font:900 14px 'Archivo',sans-serif;color:#4a4644;text-align:center;margin:12px 0}
+  .primary{background:#ec3013;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #cfcecd;margin-top:12px}
+  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:26px;text-align:center;font:700 14px 'Archivo',sans-serif;color:#6e6a68}
+  .empty a{color:#ec3013;font-weight:900}
+  .boxrow{display:flex;gap:6px;justify-content:center;margin:10px 0 0;font:800 12px 'Archivo',sans-serif;color:#6e6a68;flex-wrap:wrap}
+  .boxrow span{background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:4px 10px}
   .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
-  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#8a7a68;margin-top:26px}
+  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
 </style>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>
@@ -107,7 +108,7 @@
     async function end_(){
       try{await SM.srsFlush();}catch(e){}
       root.innerHTML='<div class="card"><div class="big">'+(good>=deck.length*0.7?"🏆":"🧠")+'</div>'+
-        '<h2 style="color:#7c2340;margin:6px 0">'+good+' из '+deck.length+'</h2>'+
+        '<h2 style="color:#ec3013;margin:6px 0">'+good+' из '+deck.length+'</h2>'+
         '<div class="boxrow"><span>Слова, где были ошибки, вернутся быстрее</span><span>Выученные — реже</span></div>'+
         '<button class="primary" id="more">Продолжить повторение</button></div>';
       document.getElementById("more").onclick=build;
