@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Карточки и игры · Pet show</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{--accent:#7c2340;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
-    --ink:#1c1310;--muted:#5a4f47;--line:#e3d3ba}
-  body{font-family:'Nunito','Segoe UI',sans-serif;background:#f4e9d8;color:var(--ink);min-height:100vh;padding:16px}
+  :root{--accent:#ec3013;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
+    --ink:#201e1d;--muted:#4a4644;--line:#cfcecd}
+  body{font-family:'Archivo','Segoe UI',sans-serif;background:#f3f2f2;color:var(--ink);min-height:100vh;padding:16px}
   a.home{position:fixed;top:10px;left:10px;z-index:99;background:var(--accent);color:#fff;padding:9px 16px;
-    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
-  h1{text-align:center;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,42px);color:var(--accent);margin-bottom:2px}
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #cfcecd}
+  h1{text-align:center;font-family:'Archivo',sans-serif;font-size:clamp(26px,5vw,42px);color:var(--accent);margin-bottom:2px}
   .sub{text-align:center;color:var(--muted);font-weight:700;margin-bottom:16px;font-size:15px}
   .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
   .tab{border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:800;font-size:14px;
@@ -57,7 +57,7 @@
   .opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .opt{border:none;font-family:inherit;font-weight:800;font-size:19px;cursor:pointer;padding:13px 22px;border-radius:16px;
     background:var(--terra);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s}
-  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#c0392b!important}
+  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#ec3013!important}
   .fb{min-height:26px;font-weight:800;margin-top:12px;font-size:18px}
   .next{margin-top:14px;background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:16px;
     padding:11px 24px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15)}
@@ -66,6 +66,7 @@
 </style>
 <script src="sm-voice.js"></script>
   <script src="sm-play.js"></script>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
 <a class="home" href="unit3.html">← Меню</a>
@@ -166,7 +167,7 @@ function wRender(){
     b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
       if(o[0]===p[0]){b.classList.add('ok');wScore++;document.getElementById('wScore').textContent='⭐ '+wScore;sfxOK();
         fb.textContent='✅ The '+a.en+' is '+p[0]+' the box.';fb.style.color='#5f8f5a';say('The '+a.en+' is '+p[0]+' the box');}
-      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+p[0];fb.style.color='#c0392b';
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+p[0];fb.style.color='#ec3013';
         Array.from(opts.children).forEach(x=>{if(x.textContent===p[0])x.classList.add('ok');});}
       var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=wRender;fb.after(n);};
     opts.appendChild(b);});
@@ -188,7 +189,7 @@ function lRender(){
   shuffle([ans,wrong]).forEach(function(o){var b=document.createElement('button');b.className='opt';b.style.fontSize='16px';b.textContent=o;
     b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
       if(o===ans){b.classList.add('ok');lScore++;document.getElementById('lScore').textContent='⭐ '+lScore;sfxOK();fb.textContent='✅ '+ans;fb.style.color='#5f8f5a';say(ans);}
-      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+ans;fb.style.color='#c0392b';Array.from(opts.children).forEach(x=>{if(x.textContent===ans)x.classList.add('ok');});}
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+ans;fb.style.color='#ec3013';Array.from(opts.children).forEach(x=>{if(x.textContent===ans)x.classList.add('ok');});}
       var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=lRender;fb.after(n);};
     opts.appendChild(b);});
 }

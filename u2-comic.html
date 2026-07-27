@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Комикс-задания · The go-kart race</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{--accent:#7c2340;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
-    --ink:#1c1310;--muted:#5a4f47;--line:#e3d3ba}
-  body{font-family:'Nunito','Segoe UI',sans-serif;background:#f4e9d8;color:var(--ink);min-height:100vh;padding:16px}
+  :root{--accent:#ec3013;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
+    --ink:#201e1d;--muted:#4a4644;--line:#cfcecd}
+  body{font-family:'Archivo','Segoe UI',sans-serif;background:#f3f2f2;color:var(--ink);min-height:100vh;padding:16px}
   a.home{position:fixed;top:10px;left:10px;z-index:99;background:var(--accent);color:#fff;padding:9px 16px;
-    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e3d3ba}
-  h1{text-align:center;font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,40px);color:var(--accent);margin:38px 0 2px}
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #cfcecd}
+  h1{text-align:center;font-family:'Archivo',sans-serif;font-size:clamp(24px,5vw,40px);color:var(--accent);margin:38px 0 2px}
   .sub{text-align:center;color:var(--muted);font-weight:700;margin-bottom:16px;font-size:14px}
   .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
   .tab{border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:800;font-size:13.5px;
@@ -35,7 +35,7 @@
     color:#fff;font-weight:800;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 5px rgba(0,0,0,.2)}
   .oCard.done{border-color:var(--olive);background:#eef6ec;opacity:.9}
   .oCard.done .num{display:flex}
-  .oCard.wrong{animation:shake .4s;border-color:#c0392b}
+  .oCard.wrong{animation:shake .4s;border-color:#ec3013}
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
   /* who + phrase */
   .q{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 16px rgba(0,0,0,.1);text-align:center;border:4px solid #fff}
@@ -48,10 +48,10 @@
   .who img{width:78px;height:78px;object-fit:contain;border-radius:12px;display:block;margin:0 auto}
   .who span{display:block;font-weight:800;font-size:14px;margin-top:4px;color:var(--ink)}
   .who:active{transform:translateY(2px)} .who.ok{border-color:var(--olive);background:#eef6ec}
-  .who.no{border-color:#c0392b;background:#f8e9e7}
+  .who.no{border-color:#ec3013;background:#f8e9e7}
   .opt{border:none;font-family:inherit;font-weight:800;font-size:18px;cursor:pointer;padding:13px 22px;border-radius:16px;
     background:var(--terra);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s}
-  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#c0392b!important}
+  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#ec3013!important}
   .fb{min-height:26px;font-weight:800;margin-top:12px;font-size:18px}
   .next{margin-top:14px;background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:16px;
     padding:11px 24px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15)}
@@ -61,6 +61,7 @@
   .win img{width:120px;height:120px;object-fit:contain}
 </style>
 <script src="sm-voice.js"></script>
+<link rel="stylesheet" href="sm-skin.css">
 </head>
 <body>
 <a class="home" href="unit2.html">← Меню</a>
@@ -192,7 +193,7 @@ function wShow(){
 function wPick(b,it){
   var all=document.querySelectorAll('#wQ .who');all.forEach(function(x){x.style.pointerEvents='none';});
   if(b.dataset.k===it.a){b.classList.add('ok');ok();wScore++;document.getElementById('wScore').textContent='⭐ '+wScore;document.getElementById('wFb').textContent='✅ Верно!';document.getElementById('wFb').style.color='var(--olive)';}
-  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.k===it.a)x.classList.add('ok');});document.getElementById('wFb').textContent='❌ Это '+CHARS[it.a];document.getElementById('wFb').style.color='#c0392b';}
+  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.k===it.a)x.classList.add('ok');});document.getElementById('wFb').textContent='❌ Это '+CHARS[it.a];document.getElementById('wFb').style.color='#ec3013';}
   var n=document.createElement('button');n.className='next';n.textContent=wI<wList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){wI++;wShow();};document.getElementById('wQ').appendChild(n);
 }
 function wDone(){fanfare();document.getElementById('wQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+wScore+' из '+wList.length+'! 🎉</h2><button class="next" onclick="wStart()">↺ Ещё раз</button>';}
@@ -222,7 +223,7 @@ function pShow(){
 function pPick(b,it){
   var all=document.querySelectorAll('#pQ .opt');all.forEach(function(x){x.style.pointerEvents='none';});
   if(b.dataset.o===it.a){b.classList.add('ok');ok();say(it.a);pScore++;document.getElementById('pScore').textContent='⭐ '+pScore;document.getElementById('pFb').textContent='✅ Верно!';document.getElementById('pFb').style.color='var(--olive)';}
-  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.o===it.a)x.classList.add('ok');});document.getElementById('pFb').textContent='❌ Нужно: '+it.a;document.getElementById('pFb').style.color='#c0392b';}
+  else{b.classList.add('no');no();all.forEach(function(x){if(x.dataset.o===it.a)x.classList.add('ok');});document.getElementById('pFb').textContent='❌ Нужно: '+it.a;document.getElementById('pFb').style.color='#ec3013';}
   var n=document.createElement('button');n.className='next';n.textContent=pI<pList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){pI++;pShow();};document.getElementById('pQ').appendChild(n);
 }
 function pDone(){fanfare();document.getElementById('pQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+pScore+' из '+pList.length+'! 🎉</h2><button class="next" onclick="pStart()">↺ Ещё раз</button>';}
@@ -252,7 +253,7 @@ function fPick(b,it){
   var all=document.querySelectorAll('#fQ .opt');all.forEach(function(x){x.style.pointerEvents='none';});
   var chose=b.dataset.v==='1';
   if(chose===it.e){b.classList.add('ok');ok();fScore++;document.getElementById('fScore').textContent='⭐ '+fScore;document.getElementById('fFb').textContent='✅ Верно!';document.getElementById('fFb').style.color='var(--olive)';}
-  else{b.classList.add('no');no();document.getElementById('fFb').textContent=it.e?('✅ В «'+it.w+'» есть звук e'):('❌ В «'+it.w+'» нет звука e');document.getElementById('fFb').style.color='#c0392b';}
+  else{b.classList.add('no');no();document.getElementById('fFb').textContent=it.e?('✅ В «'+it.w+'» есть звук e'):('❌ В «'+it.w+'» нет звука e');document.getElementById('fFb').style.color='#ec3013';}
   var n=document.createElement('button');n.className='next';n.textContent=fI<fList.length-1?'Дальше →':'Итог 🏁';n.onclick=function(){fI++;fShow();};document.getElementById('fQ').appendChild(n);
 }
 function fDone(){fanfare();document.getElementById('fQ').innerHTML='<img src="'+IMG.trophy+'" style="width:110px;height:110px;object-fit:contain"><h2 style="color:var(--accent);font-family:Fredoka">'+fScore+' из '+fList.length+'! 🎉</h2><button class="next" onclick="fStart()">↺ Ещё раз</button>';}
