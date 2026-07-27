@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Домашка · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .code{padding:22px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:0;flex-wrap:wrap;align-items:center}
+  .code input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:12px 14px;font:800 15px "Archivo",sans-serif;text-transform:uppercase;width:180px}
+  .code button{border:0;background:var(--color-accent);color:#fff;padding:14px 18px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери задание</div>
+        <div id="hwList"></div>
+      </div>
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
+const KIND = {
+  trainer:  { l:"Тренажёр слов", d:"выучить слова юнита в карточках и квизе", href:"trainer.html?unit=" },
+  games:    { l:"Игры юнита",    d:"пройти игры юнита",                        href:"games.html?u=" },
+  worksheet:{ l:"Рабочий лист",  d:"распечатать и сделать письменно",          href:"worksheet.html?u=" }
+};
+
+let ITEMS = [], sel = 0, MATS = [];
+
+function unitLabel(id){
+  const u = (window.SM_UNITS||[]).filter(x => x.id === id)[0];
+  return u ? u.title : id;
+}
+
+function drawList(){
+  const box = document.getElementById("hwList");
+  if (!ITEMS.length){ box.innerHTML = '<div class="step" style="border:0;color:var(--color-neutral-700);text-transform:none;letter-spacing:0;font-weight:600;font-size:14px">Заданий пока нет.</div>'; return; }
+  box.innerHTML = ITEMS.map((it,i) =>
+    '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
+      '<span class="t">'+esc(it.title)+'</span>' +
+      '<span class="s">'+esc(it.sub)+' · '+(it.done?"сделано":"ждёт")+'</span></button>').join("");
+  box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
+}
+
+function drawPane(){
+  const p = document.getElementById("pane");
+  if (!ITEMS.length){
+    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Задание</span></div>' +
+      SMUI.empty("Домашки нет",
+        "Когда учитель задаст упражнение, оно появится здесь: слева список, справа — что именно делать.") +
+      matsHtml();
+    return;
+  }
+  const it = ITEMS[sel];
+  p.innerHTML =
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(it.title)+'</span><span>'+(it.done?"выполнено":"нужно сделать")+'</span></div>' +
+    '<div class="ink"><div><div class="k">'+esc(it.kicker)+'</div><h2>'+esc(it.title)+'</h2>' +
+      '<p>'+esc(it.desc)+'</p></div>' +
+      '<a class="go" href="'+it.href+'"'+(it.blank?' target="_blank" rel="noopener"':'')+'>'+icon("play",15)+' Начать</a></div>' +
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Статус</span><span class="n'+(it.done?"":" acc")+'">'+(it.done?"Готово":"Ждёт")+'</span></div>' +
+      '<div class="tile"><span class="k">Раздел</span><span class="d" style="font-size:17px;font-weight:800;color:var(--color-text)">'+esc(it.sub)+'</span></div>' +
+      '<div class="tile"><span class="k">Отметить</span>' +
+        (it.done ? '<span class="d">уже отмечено</span>'
+                 : '<button class="b pri sm" id="mark">'+icon("check",14)+' Выполнено</button>') + '</div>' +
+    '</div>' +
+    (it.extra || "") +
+    matsHtml();
+  const mk = document.getElementById("mark");
+  if (mk) mk.onclick = async () => {
+    mk.textContent = "…";
+    const r = it.type === "spk" ? await SM.setHWDone(it.id, true) : await SM.markAssignment(it.id, true);
+    if (r && r.ok) load(); else mk.textContent = "Выполнено";
+  };
+}
+
+function matsHtml(){
+  if (!MATS.length) return "";
+  return '<div class="sect"><span>Материалы от учителя / Links</span><span>'+MATS.length+'</span></div>' +
+    '<div class="rows">' + MATS.map((m,i) =>
+      '<a class="row" href="'+esc(m.url)+'" target="_blank" rel="noopener">' +
+        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(m.title)+'</span><span class="d">'+esc(m.note||m.url)+'</span></span>' +
+        '<span class="b sm">Открыть</span></a>').join("") + "</div>";
+}
+
+async function load(){
+  const p = document.getElementById("pane");
+  const u = await SMUI.requireAuth(p, "student");
+  if (!u) return;
+
+  let a = [], spk = [], prof = null;
+  try { a = (await SM.myAssignments()) || []; } catch(e){}
+  try { spk = (await SM.myHW()) || []; } catch(e){}
+  try { MATS = (await SM.myMaterials()) || []; } catch(e){}
+  try { prof = await SM.myProfile(); } catch(e){}
+
+  ITEMS = [];
+  a.forEach(x => {
+    const k = KIND[x.kind] || KIND.trainer;
+    ITEMS.push({ type:"unit", id:x.id, done:!!x.done,
+      title: k.l + " · " + unitLabel(x.unit_id), sub:"Super Minds", kicker:"Задание / Homework",
+      desc: k.d, href: k.href + x.unit_id, blank: x.kind === "worksheet" });
+  });
+  spk.forEach(x => {
+    ITEMS.push({ type:"spk", id:x.id, done:!!x.done,
+      title:(SPK_L[x.course]||x.course)+" · Unit "+x.unit, sub:"Speakout", kicker:"Задание / Homework",
+      desc: x.note || "Лексика и грамматика юнита "+x.unit,
+      href: x.course+"-u"+x.unit+".html",
+      extra:'<div class="sect"><span>Что открыть</span></div><div class="rows">' +
+        '<a class="row now" href="'+x.course+'-u'+x.unit+'.html"><span class="num">01</span>' +
+        '<span><span class="t">Лексика и чанки</span><span class="d">слова и выражения юнита</span></span>' +
+        '<span class="b pri sm">Учить</span></a>' +
+        '<a class="row" href="'+x.course+'-u'+x.unit+'-grammar.html"><span class="num">02</span>' +
+        '<span><span class="t">Грамматика</span><span class="d">правила и упражнения</span></span>' +
+        '<span class="b sm">Открыть</span></a></div>' });
+  });
+  ITEMS.sort((x,y) => (x.done?1:0) - (y.done?1:0));
+  if (sel >= ITEMS.length) sel = 0;
+
+  /* нет учителя — предложим код класса */
+  if (prof && !prof.teacher_id){
+    document.getElementById("hwList").insertAdjacentHTML("afterbegin", "");
+  }
+
+  drawList(); drawPane();
+
+  if (prof && !prof.teacher_id){
+    document.getElementById("pane").insertAdjacentHTML("afterbegin",
+      '<div class="code"><input id="tc" placeholder="код учителя" maxlength="8">' +
+      '<button id="tj">Войти в класс</button>' +
+      '<span style="font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-left:14px">Код даёт учитель — после этого сюда придёт домашка.</span></div>');
+    document.getElementById("tj").onclick = async () => {
+      const v = (document.getElementById("tc").value||"").trim();
+      if (!v) return;
+      const r = await SM.joinTeacher(v);
+      if (r.ok) load(); else alert(r.error || "Код не найден");
+    };
+  }
+
+  const n = ITEMS.filter(x=>!x.done).length;
+  SMUI.mount({ role:"student", active:"homework", counts: n ? { homework:n } : {} });
+}
+
+SMUI.mount({ role:"student", active:"homework" });
+load();
+</script>
+</body>
+</html>

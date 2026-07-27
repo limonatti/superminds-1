@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расписание · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .week{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px solid var(--color-divider);
+    border-bottom:2px solid var(--color-divider)}
+  .day{border-right:2px solid var(--color-divider);min-height:200px;display:flex;flex-direction:column}
+  .day:last-child{border-right:0}
+  .day .h{padding:14px 16px;border-bottom:2px solid var(--color-divider);
+    font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)}
+  .day.today .h{background:var(--color-accent);color:#fff}
+  .day .b{padding:16px;font-size:13px;font-weight:600;color:var(--color-neutral-600)}
+  @media(max-width:900px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}.day{min-height:120px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols solo">
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const DAYS = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"];
+
+function london(){
+  try { return new Intl.DateTimeFormat("ru-RU",{ timeZone:"Europe/London", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
+  catch(e){ return "—"; }
+}
+
+(async function(){
+  SMUI.mount({ role:"teacher", active:"tsched" });
+  const pane = document.getElementById("pane");
+  const me = await SMUI.requireAuth(pane, "teacher");
+  if (!me) return;
+
+  let students = [];
+  try { students = (await SM.myStudents()) || []; } catch(e){}
+  const today = (new Date().getDay() + 6) % 7;
+
+  pane.innerHTML =
+    '<div class="pane-hd"><span>Расписание / Schedule</span><span>Лондон · '+london()+'</span></div>' +
+    '<div class="ink calm"><div><div class="k">Неделя / Week</div><h2>Расписание ещё не заведено</h2>' +
+      '<p>Здесь будут уроки по дням: ученик, время, кнопка входа в комнату. Пока уроки можно вести из комнаты напрямую.</p></div>' +
+      '<a class="go" href="room.html">'+icon("play",15)+' Открыть комнату урока</a></div>' +
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Учеников в классе</span><span class="n">'+students.length+'</span></div>' +
+      '<div class="tile"><span class="k">Уроков на неделе</span><span class="n">—</span><span class="d">расписание не заведено</span></div>' +
+      '<div class="tile"><span class="k">Время по Лондону</span><span class="n">'+london()+'</span></div>' +
+    '</div>' +
+    '<div class="sect"><span>Неделя / Week</span><span>сегодня выделен</span></div>' +
+    '<div class="week">' + DAYS.map((d,i) =>
+      '<div class="day'+(i===today?" today":"")+'"><div class="h">'+d+'</div>' +
+      '<div class="b">уроков нет</div></div>').join("") + '</div>' +
+    '<div class="sect"><span>Ученики / Students</span><span>'+students.length+'</span></div>' +
+    (students.length
+      ? '<div class="rows">' + students.map((s,i) =>
+          '<a class="row" href="teacher-class.html"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+          '<span><span class="t">'+esc(s.name)+'</span><span class="d">время урока не назначено</span></span>' +
+          '<span class="b sm">Открыть</span></a>').join("") + '</div>'
+      : SMUI.empty("В классе пока никого",
+          "Пригласи ученика в разделе «Мой класс» — он появится здесь, и можно будет ставить уроки."));
+})();
+</script>
+</body>
+</html>

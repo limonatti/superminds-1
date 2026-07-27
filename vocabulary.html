@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словарь · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .w{position:relative;padding-right:44px}
+  .w .say{position:absolute;right:12px;top:14px;border:0;background:none;color:var(--color-neutral-600);padding:4px}
+  .w .say:hover{color:var(--color-accent)}
+  .w .lvl{margin-top:8px;height:4px;background:var(--color-neutral-300)}
+  .w .lvl i{display:block;height:100%;background:var(--color-accent)}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери юнит</div>
+        <div id="uList"></div>
+      </div>
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const TARGET = 4;
+let PROG = {}, sel = -1;   /* -1 = все слова */
+
+function st(id){ return PROG[id] || null; }
+function isLearned(id){ const p = st(id); return !!(p && p.status === "learned"); }
+function isRepeat(id){ const p = st(id); return !!(p && p.status !== "learned" && (p.seen||0) > 0); }
+
+function units(){ return window.SM_UNITS || []; }
+function allWords(){ return window.SM_ALL_WORDS || []; }
+
+function drawList(){
+  const us = units();
+  const rows = ['<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
+    '<span class="t">Все слова курса</span><span class="s">'+allWords().length+' слов</span></button>'];
+  us.forEach((u,i) => {
+    const ids = u.words.map((w,j) => u.id+"-"+j);
+    const done = ids.filter(isLearned).length;
+    rows.push('<button class="li'+(sel===i?" on":"")+'" data-i="'+i+'">' +
+      '<span class="t">'+esc(u.title)+'</span>' +
+      '<span class="s">'+done+' из '+ids.length+' выучено</span>' +
+      '<span class="bar"><i style="width:'+(ids.length?done/ids.length*100:0)+'%"></i></span></button>');
+  });
+  const box = document.getElementById("uList");
+  box.innerHTML = rows.join("");
+  box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
+}
+
+function say(text){
+  try { if (window.SM_speak) return SM_speak(text);
+    const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+function drawPane(){
+  const p = document.getElementById("pane");
+  const us = units();
+  const list = sel === -1 ? allWords()
+    : (us[sel] ? us[sel].words.map((w,j) => Object.assign({ id: us[sel].id+"-"+j }, w)) : []);
+  const title = sel === -1 ? "Все слова курса" : (us[sel] ? us[sel].title : "");
+  const rep = list.filter(w => isRepeat(w.id));
+  const done = list.filter(w => isLearned(w.id));
+
+  p.innerHTML =
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(title)+'</span><span>'+esc((window.SM_COURSE||{}).title||"")+'</span></div>' +
+    '<div class="ink"><div><div class="k">Словарь / Vocabulary</div>' +
+      '<h2>'+(rep.length ? rep.length+" слов ждут повторения" : "Всё повторено")+'</h2>' +
+      '<p>'+(rep.length ? "Красным отмечены слова, которые ты уже видел, но ещё не закрепил."
+                        : "Новые слова появятся здесь, как только начнёшь тренажёр.")+'</p></div>' +
+      '<a class="go" href="trainer.html">'+icon("play",15)+' Карточки</a></div>' +
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Всего слов</span><span class="n">'+list.length+'</span></div>' +
+      '<div class="tile"><span class="k">Выучено</span><span class="n">'+done.length+'</span></div>' +
+      '<div class="tile"><span class="k">На повторение</span><span class="n acc">'+rep.length+'</span></div>' +
+    '</div>' +
+    '<div class="sect"><span>Слова / Words</span><span>красным — на повторение</span></div>' +
+    '<div class="wgrid">' + list.map(w => {
+      const p2 = st(w.id) || {};
+      const lvl = Math.min(100, Math.round((p2.level||0)/TARGET*100));
+      return '<div class="w'+(isRepeat(w.id)?" rep":"")+'">' +
+        '<button class="say" data-w="'+esc(w.en)+'" title="Послушать">'+icon("sound",15)+'</button>' +
+        '<div class="en">'+esc(w.en)+'</div><div class="ru">'+esc(w.ru||"")+'</div>' +
+        (p2.seen ? '<div class="lvl"><i style="width:'+lvl+'%"></i></div>' : "") +
+        '</div>';
+    }).join("") + '</div>';
+
+  p.querySelectorAll(".say").forEach(b => b.onclick = () => say(b.dataset.w));
+}
+
+(async function(){
+  SMUI.mount({ role:"student", active:"vocab" });
+  try { PROG = (await SM.loadProgress()) || {}; } catch(e){ PROG = {}; }
+  drawList(); drawPane();
+})();
+</script>
+</body>
+</html>

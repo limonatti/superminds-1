@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверка домашки · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери работу</div>
+        <div id="qList"></div>
+      </div>
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const KIND_L = { trainer:"Тренажёр слов", games:"Игры юнита", worksheet:"Рабочий лист" };
+const SPK_L  = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
+
+let ME = null, STUDENTS = [], QUEUE = [], ALL = [], sel = 0;
+
+function unitLabel(id){ const u=(window.SM_UNITS||[]).filter(x=>x.id===id)[0]; return u?u.title:id; }
+function nameOf(sid){ const s=STUDENTS.filter(x=>x.student_id===sid)[0]; return s?s.name:"ученик"; }
+
+function drawList(){
+  const box = document.getElementById("qList");
+  if (!QUEUE.length){
+    box.innerHTML = '<div style="padding:18px 20px;font-size:14px;font-weight:600;color:var(--color-neutral-700)">' +
+      'Готовых работ на проверку нет.</div>';
+    return;
+  }
+  box.innerHTML = QUEUE.map((q,i) =>
+    '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
+      '<span class="t">'+esc(q.who)+'</span>' +
+      '<span class="s">'+esc(q.title)+'</span></button>').join("");
+  box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
+}
+
+async function drawPane(){
+  const p = document.getElementById("pane");
+  const openN = ALL.filter(a => !a.done).length;
+  const doneN = ALL.filter(a => a.done).length;
+
+  const tiles =
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Учеников</span><span class="n">'+STUDENTS.length+'</span></div>' +
+      '<div class="tile"><span class="k">Ждут выполнения</span><span class="n acc">'+openN+'</span></div>' +
+      '<div class="tile"><span class="k">Отмечено готовыми</span><span class="n">'+doneN+'</span></div>' +
+    '</div>';
+
+  const table = ALL.length
+    ? '<div class="sect"><span>Все выданные задания</span><span>'+ALL.length+'</span></div>' +
+      '<table class="tb"><thead><tr><th>Ученик</th><th>Задание</th><th>Статус</th></tr></thead><tbody>' +
+      ALL.map(a => '<tr><td><b>'+esc(nameOf(a.student_id))+'</b></td>' +
+        '<td>'+esc((KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id))+'</td>' +
+        '<td'+(a.done?'':' class="late"')+'>'+(a.done?"готово":"ждёт")+'</td></tr>').join("") +
+      '</tbody></table>'
+    : "";
+
+  if (!QUEUE.length){
+    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Очередь проверки</span><span>работ: 0</span></div>' +
+      '<div class="ink calm"><div><div class="k">Проверка / Review</div><h2>Проверять пока нечего</h2>' +
+        '<p>Сюда попадают задания, которые ученик отметил выполненными. Выдать новое можно в разделе «Мой класс».</p></div>' +
+        '<a class="go" href="teacher-class.html">'+icon("play",15)+' Выдать домашку</a></div>' +
+      tiles + table;
+    return;
+  }
+
+  const q = QUEUE[sel];
+  let detail = "";
+  if (q.type === "spk"){
+    let rows = [];
+    try { rows = (await SM.studentHwResults(q.sid, q.course, q.unit)) || []; } catch(e){}
+    detail = '<div class="sect"><span>Ответы ученика</span><span>'+rows.length+'</span></div>' +
+      (rows.length
+        ? '<div class="rows">' + rows.map((a,i) =>
+            '<div class="row'+(a.correct?"":" now")+'" style="cursor:default">' +
+            '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+            '<span><span class="t">'+esc(String(a.question||"").replace(/<[^>]*>/g,""))+'</span>' +
+            '<span class="d">ответ: '+esc(a.answer||"—")+'</span></span>' +
+            '<span class="b sm">'+(a.correct?"верно":"ошибка")+'</span></div>').join("") + '</div>'
+        : '<div class="empty"><div class="p">Ученик открыл юнит, но упражнения ещё не решал.</div></div>');
+  } else {
+    detail = '<div class="sect"><span>Что проверить</span></div>' +
+      '<div class="rows">' +
+        '<a class="row now" href="'+q.href+'"><span class="num">01</span>' +
+        '<span><span class="t">Открыть само задание</span><span class="d">'+esc(q.title)+'</span></span>' +
+        '<span class="b pri sm">Открыть</span></a>' +
+        '<a class="row" href="teacher-class.html"><span class="num">02</span>' +
+        '<span><span class="t">Посмотреть прогресс ученика</span><span class="d">слова, звёзды, стрик</span></span>' +
+        '<span class="b sm">Открыть</span></a></div>';
+  }
+
+  p.innerHTML =
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(q.who)+'</span><span>работ в очереди: '+QUEUE.length+'</span></div>' +
+    '<div class="ink"><div><div class="k">На проверку / To review</div><h2>'+esc(q.title)+'</h2>' +
+      '<p>'+esc(q.who)+' отметил задание выполненным. Посмотри и обсудите на уроке.</p></div>' +
+      '<a class="go" href="room.html">'+icon("play",15)+' Открыть комнату урока</a></div>' +
+    tiles + detail + table;
+}
+
+async function load(){
+  const pane = document.getElementById("pane");
+  ME = await SMUI.requireAuth(pane, "teacher");
+  if (!ME) return;
+
+  try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
+  try { ALL = (await SM.classAssignments()) || []; } catch(e){ ALL = []; }
+
+  QUEUE = ALL.filter(a => a.done).map(a => ({
+    type:"unit", sid:a.student_id, who:nameOf(a.student_id),
+    title:(KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id),
+    href:(a.kind==="games" ? "games.html?u=" : a.kind==="worksheet" ? "worksheet.html?u=" : "trainer.html?unit=")+a.unit_id
+  }));
+
+  /* Speakout: юниты, где ученик уже что-то решал */
+  for (const s of STUDENTS){
+    let sum = [];
+    try { sum = (await SM.studentHwSummary(s.student_id)) || []; } catch(e){}
+    sum.forEach(r => QUEUE.push({
+      type:"spk", sid:s.student_id, who:s.name, course:r.course, unit:r.unit,
+      title:(SPK_L[r.course]||r.course)+" · Unit "+r.unit+" — "+r.correct+" из "+r.attempts+" верно"
+    }));
+  }
+  if (sel >= QUEUE.length) sel = 0;
+
+  drawList();
+  await drawPane();
+  SMUI.mount({ role:"teacher", active:"review", counts: QUEUE.length ? { review: QUEUE.length } : {} });
+}
+
+SMUI.mount({ role:"teacher", active:"review" });
+load();
+</script>
+</body>
+</html>

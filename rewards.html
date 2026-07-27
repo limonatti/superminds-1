@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Награды · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .badges{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--color-divider)}
+  .bg{padding:24px;background:#fff;border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);
+    display:flex;flex-direction:column;gap:14px}
+  .bg .t{font-size:17px;font-weight:800;line-height:1.2}
+  .bg .d{font-size:13px;font-weight:600;color:var(--color-neutral-700)}
+  .bg.off{background:var(--color-neutral-200);opacity:.5}
+  .lb{border-top:2px solid var(--color-divider)}
+  .lbr{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:center;
+    padding:14px 28px;border-bottom:2px solid var(--color-divider)}
+  .lbr.me{background:var(--color-accent-100);border-left:6px solid var(--color-accent);padding-left:22px}
+  .lbr .rk{font-size:17px;font-weight:800;color:var(--color-neutral-600)}
+  .lbr .nm{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lbr .pt{font-size:15px;font-weight:800}
+  @media(max-width:820px){.badges{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols solo">
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+
+/* следующая круглая цель по звёздам */
+function nextGoal(p){ const steps=[25,50,100,200,300,500,750,1000];
+  for (const s of steps) if (p < s) return s; return Math.ceil((p+1)/500)*500; }
+
+(async function(){
+  SMUI.mount({ role:"student", active:"rewards" });
+  const pane = document.getElementById("pane");
+  let prog = {};
+  try { prog = (await SM.loadProgress()) || {}; } catch(e){}
+  const meta = prog.__meta || {};
+  const streak = meta.dayStreak || 0;
+  const best = meta.bestStreak || streak;
+  const pts = meta.totalPoints || 0;
+  const goal = nextGoal(pts);
+
+  const units = window.SM_UNITS || [];
+  const stats = units.map(u => {
+    const ids = u.words.map((w,i) => u.id+"-"+i);
+    const done = ids.filter(id => prog[id] && prog[id].status === "learned").length;
+    return { u, done, total: ids.length, full: ids.length > 0 && done === ids.length };
+  });
+  const closed = stats.filter(s => s.full).length;
+  const learned = stats.reduce((s,x)=>s+x.done,0);
+  const totalW = stats.reduce((s,x)=>s+x.total,0);
+
+  /* награды: закрытые юниты + пороги звёзд */
+  const cards = [];
+  stats.forEach(s => cards.push({
+    on: s.full, icon: "star", t: s.u.title,
+    d: s.full ? "юнит закрыт" : s.done + " из " + s.total + " слов"
+  }));
+  [50,100,200].forEach(n => cards.push({
+    on: pts >= n, icon: pts >= n ? "star" : "lock", t: n + " звёзд",
+    d: pts >= n ? "получено" : "осталось " + (n - pts)
+  }));
+
+  let board = [];
+  try { board = (await SM.leaderboard()) || []; } catch(e){}
+  const me = await SMUI.user();
+
+  pane.innerHTML =
+    '<div class="pane-hd"><span>Награды / Rewards</span><span>'+esc((window.SM_COURSE||{}).title||"")+'</span></div>' +
+    '<div class="red">' +
+      '<div class="half"><span class="k">Стрик</span>' +
+        '<span class="n">'+streak+' '+(streak===1?"день":"дней")+' подряд</span>' +
+        '<span class="d">'+(best>streak ? "Лучший результат — "+best+". Ещё "+(best-streak+1)+", и ты его побьёшь."
+                                         : "Это твой лучший результат. Не теряй его.")+'</span></div>' +
+      '<div class="half"><span class="k">Звёзды</span><span class="n">'+pts+'</span>' +
+        '<div style="display:flex;align-items:center;gap:12px">' +
+          '<div class="pb"><i style="width:'+Math.min(100,Math.round(pts/goal*100))+'%"></i></div>' +
+          '<span style="font-size:14px;font-weight:800">до '+goal+'</span></div></div>' +
+    '</div>' +
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Юнитов закрыто</span><span class="n">'+closed+' / '+stats.length+'</span></div>' +
+      '<div class="tile"><span class="k">Слов выучено</span><span class="n">'+learned+' / '+totalW+'</span></div>' +
+      '<div class="tile"><span class="k">До следующей награды</span><span class="n acc">'+Math.max(0,goal-pts)+'</span><span class="d">звёзд</span></div>' +
+    '</div>' +
+    '<div class="sect"><span>Награды / Badges</span><span>'+cards.filter(c=>c.on).length+' из '+cards.length+'</span></div>' +
+    '<div class="badges">' + cards.map(c =>
+      '<div class="bg'+(c.on?"":" off")+'">' +
+        '<span style="color:'+(c.on?"var(--color-accent)":"currentColor")+'">'+icon(c.icon,26)+'</span>' +
+        '<span class="t">'+esc(c.t)+'</span><span class="d">'+esc(c.d)+'</span></div>').join("") + '</div>' +
+    '<div class="sect"><span>Таблица лидеров · за неделю</span></div>' +
+    (board.length
+      ? '<div class="lb">' + board.map((r,i) => {
+          const mine = me && r.name === me.name;
+          return '<div class="lbr'+(mine?" me":"")+'"><span class="rk">'+(i+1)+'</span>' +
+            '<span class="nm">'+esc(r.name)+(mine?" — ты":"")+'</span>' +
+            '<span class="pt">'+(r.week_points||0)+'</span></div>';
+        }).join("") + '</div>'
+      : SMUI.empty("На этой неделе очков ещё нет",
+          "Позанимайся в тренажёре или поиграй — звёзды появятся здесь и попадут в таблицу класса."));
+})();
+</script>
+</body>
+</html>

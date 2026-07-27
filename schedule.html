@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расписание · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols solo">
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const icon = SMUI.icon;
+const DAYS = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+
+function londonNow(){
+  try { return new Intl.DateTimeFormat("ru-RU",{ timeZone:"Europe/London", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
+  catch(e){ return "—"; }
+}
+
+(async function(){
+  SMUI.mount({ role:"student", active:"schedule" });
+  const pane = document.getElementById("pane");
+  const today = (new Date().getDay() + 6) % 7;
+
+  pane.innerHTML =
+    '<div class="pane-hd"><span>Расписание / Schedule</span><span>Лондон · '+londonNow()+'</span></div>' +
+    '<div class="ink calm"><div><div class="k">Урок / Lesson</div><h2>Расписания пока нет</h2>' +
+      '<p>Учитель ещё не завёл уроки. Когда заведёт — здесь будет неделя, ближайший урок и кнопка входа.</p></div>' +
+      '<a class="go" href="room.html">'+icon("play",15)+' Войти в комнату урока</a></div>' +
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Уроков в месяц</span><span class="n">—</span><span class="d">появится с расписанием</span></div>' +
+      '<div class="tile"><span class="k">Пропущено</span><span class="n">—</span><span class="d">появится с расписанием</span></div>' +
+      '<div class="tile"><span class="k">Оплачено до</span><span class="n">—</span><span class="d">появится с оплатами</span></div>' +
+    '</div>' +
+    '<div class="sect"><span>Неделя / Week</span><span>сегодня выделен</span></div>' +
+    '<div class="rows">' + DAYS.map((d,i) =>
+      '<div class="row'+(i===today?" now":" off")+'" style="cursor:default">' +
+        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+d+'</span><span class="d">'+(i===today?"сегодня — уроков не назначено":"уроков не назначено")+'</span></span>' +
+        '<span class="b sm" style="opacity:.5">—</span></div>').join("") + '</div>' +
+    '<div class="sect"><span>Что подготовить к уроку</span></div>' +
+    '<div class="rows">' +
+      '<a class="row" href="homework.html"><span class="num">01</span>' +
+        '<span><span class="t">Сделать домашку</span><span class="d">задания от учителя</span></span>' +
+        '<span class="b sm">Открыть</span></a>' +
+      '<a class="row" href="trainer.html"><span class="num">02</span>' +
+        '<span><span class="t">Повторить слова</span><span class="d">карточки и квиз</span></span>' +
+        '<span class="b sm">Открыть</span></a>' +
+      '<a class="row" href="room.html"><span class="num">03</span>' +
+        '<span><span class="t">Проверить камеру и микрофон</span><span class="d">в комнате урока</span></span>' +
+        '<span class="b sm">Открыть</span></a>' +
+    '</div>';
+})();
+</script>
+</body>
+</html>

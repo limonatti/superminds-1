@@ -9,155 +9,282 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="modernist.css">
 <style>
+  :root{--rail:88px;--panel:300px}
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;overflow:hidden;font-family:'Archivo',sans-serif;background:var(--color-neutral-300);color:var(--color-text);user-select:none}
+  html,body{margin:0;height:100%;overflow:hidden;font-family:"Archivo",system-ui,sans-serif;
+    background:var(--color-neutral-300);color:var(--color-text);user-select:none}
   button,select{font-family:inherit;cursor:pointer}
+  *:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
 
-  #bar{position:fixed;top:0;left:0;right:0;min-height:54px;background:var(--color-bg);display:flex;align-items:center;gap:4px;
-    padding:6px 10px;z-index:30;border-bottom:2px solid var(--color-divider);flex-wrap:wrap;row-gap:6px}
-  #bar a.home{color:var(--color-text);text-decoration:none;background:none;border:2px solid var(--color-text);padding:7px 12px;border-radius:0;
-    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
-  #bar a.home:hover{background:var(--color-text);color:var(--color-bg)}
-  .tool{background:none;border:2px solid transparent;color:var(--color-text);font-size:16px;padding:7px 10px;border-radius:0;white-space:nowrap;line-height:1}
-  .tool:hover{background:var(--color-accent-100)}
-  .tool.on{background:var(--color-accent);color:#fff;border-color:var(--color-accent)}
-  .tool[disabled]{opacity:.3;cursor:default}
-  .sep{width:2px;height:26px;background:var(--color-divider);margin:0 4px;flex:none}
-  .sw{width:22px;height:22px;border-radius:0;border:2px solid var(--color-text);flex:none;cursor:pointer}
+  /* ---------- левый рельс ---------- */
+  #rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:32;background:var(--color-text);
+    display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px;overflow-y:auto}
+  #rail .home{width:54px;height:54px;display:flex;align-items:center;justify-content:center;color:#fff;
+    border:2px solid var(--color-neutral-800);margin-bottom:8px;flex:none}
+  #rail .home:hover{background:var(--color-neutral-800)}
+  #rail .tool{width:54px;height:54px;display:flex;align-items:center;justify-content:center;flex:none;
+    background:transparent;border:2px solid transparent;color:var(--color-neutral-300);border-radius:0;
+    transition:background .15s ease-out,color .15s ease-out}
+  #rail .tool:hover{background:var(--color-neutral-800);color:#fff}
+  #rail .tool.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  #rail .tool[disabled]{opacity:.3;cursor:default}
+  #rail .tool[disabled]:hover{background:transparent;color:var(--color-neutral-300)}
+  #rail .sep{width:40px;height:2px;background:var(--color-neutral-800);margin:8px 0;flex:none}
+
+  /* ---------- верхняя панель ---------- */
+  #bar{position:fixed;top:0;left:var(--rail);right:var(--panel);min-height:54px;z-index:30;background:var(--color-bg);
+    border-bottom:2px solid var(--color-divider);display:flex;align-items:center;gap:6px;
+    padding:8px 14px;flex-wrap:wrap;row-gap:6px}
+  #bar .tool{display:inline-flex;align-items:center;gap:8px;background:none;border:2px solid var(--color-divider);
+    color:var(--color-text);padding:8px 12px;border-radius:0;white-space:nowrap;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  #bar .tool:hover{background:var(--color-accent-100);border-color:var(--color-accent)}
+  #bar .tool.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  #bar .sep{width:2px;height:26px;background:var(--color-divider);margin:0 2px;flex:none}
+  #bar select{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-divider);
+    border-radius:0;padding:8px;font-size:11px;font-weight:800;letter-spacing:.04em;max-width:190px}
+  #bar select option{text-transform:none}
+  #pages{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+  #pages .tool{padding:8px 11px;min-width:36px;justify-content:center}
+
+  /* ---------- правая панель ---------- */
+  #panel{position:fixed;right:0;top:0;bottom:0;width:300px;z-index:31;background:var(--color-surface);
+    border-left:2px solid var(--color-divider);display:flex;flex-direction:column;overflow-y:auto}
+  #panel .ph{padding:16px 18px 10px;font-size:11px;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--color-neutral-600)}
+  #panel .pb{padding:0 18px 18px;border-bottom:2px solid var(--color-divider)}
+  .wchips{display:flex;gap:0;border:2px solid var(--color-text)}
+  .wchips button{flex:1;height:46px;border:0;border-right:2px solid var(--color-text);background:var(--color-bg);
+    display:flex;align-items:center;justify-content:center}
+  .wchips button:last-child{border-right:0}
+  .wchips button i{display:block;width:26px;background:var(--color-text);border-radius:0}
+  .wchips button.on{background:var(--color-accent)}
+  .wchips button.on i{background:#fff}
+  .echips{display:flex;gap:0;border:2px solid var(--color-text)}
+  .echips button{flex:1;padding:12px 0;border:0;border-right:2px solid var(--color-text);background:var(--color-bg);
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .echips button:last-child{border-right:0}
+  .echips button.on{background:var(--color-accent);color:#fff}
+  #palette{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+  .sw{width:100%;aspect-ratio:1;border-radius:0;border:2px solid var(--color-text);cursor:pointer;padding:0}
   .sw.on{outline:3px solid var(--color-accent);outline-offset:2px}
-  select{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-text);border-radius:0;padding:6px;
-    font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-  select option{color:var(--color-text);text-transform:none}
-  #live{margin-left:auto;display:flex;align-items:center;gap:6px;flex:none}
-  #status{color:var(--color-neutral-700);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-    border:2px solid var(--color-divider);padding:6px 10px;border-radius:0;white-space:nowrap}
-  #status .dot{display:inline-block;width:8px;height:8px;background:var(--color-neutral-500);margin-right:6px}
-  #status.on{color:var(--color-text);border-color:var(--color-text)}
+  #panel .room{display:flex;flex-direction:column;gap:10px}
+  #saveState{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600)}
+  #status{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);
+    display:inline-flex;align-items:center;gap:8px}
+  #status .dot{width:9px;height:9px;background:var(--color-neutral-500);display:block}
+  #status.on{color:var(--color-text)}
   #status.on .dot{background:var(--color-accent)}
-  #invite{background:var(--color-accent);color:#fff;border-color:var(--color-accent)}
-  #invite:hover{background:var(--color-accent-700)}
+  #invite{width:100%;justify-content:center;background:var(--color-accent)!important;border-color:var(--color-accent)!important;color:#fff!important}
+  #invite:hover{background:var(--color-accent-600)!important}
 
-  #stage{position:fixed;top:54px;left:0;right:0;bottom:0;overflow:hidden;background:#fff;
-    background-image:radial-gradient(#00000012 1.2px,transparent 1.2px);background-size:26px 26px;touch-action:none;cursor:grab}
+  /* ---------- полотно ---------- */
+  #stage{position:fixed;top:54px;left:var(--rail);right:var(--panel);bottom:0;overflow:hidden;background:#fff;
+    background-image:linear-gradient(var(--color-neutral-200) 2px,transparent 2px),
+                     linear-gradient(90deg,var(--color-neutral-200) 2px,transparent 2px);
+    background-size:48px 48px;touch-action:none;cursor:grab}
   #stage.draw{cursor:crosshair}#stage.del{cursor:none}#stage.panning{cursor:grabbing}
   #world{position:absolute;top:0;left:0;transform-origin:0 0}
   #ink{position:absolute;overflow:visible;pointer-events:none;left:0;top:0;width:1px;height:1px}
   .obj{position:absolute;pointer-events:auto;cursor:grab}
-  .note{width:150px;min-height:110px;border-radius:0;padding:12px;font:600 16px 'Archivo',sans-serif;color:var(--color-text);
-    border:2px solid var(--color-text);outline:none;overflow-wrap:anywhere}
-  .txt{font:800 26px 'Archivo',sans-serif;color:var(--color-text);padding:2px 4px;outline:none;min-width:24px;white-space:pre-wrap;letter-spacing:-.01em}
-  .card{background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;padding:10px 12px;text-align:center;min-width:78px}
+  .note{width:150px;min-height:110px;border-radius:0;padding:12px;font:600 16px "Archivo",sans-serif;
+    color:var(--color-text);border:2px solid var(--color-text);outline:none;overflow-wrap:anywhere}
+  .txt{font:800 26px "Archivo",sans-serif;color:var(--color-text);padding:2px 4px;outline:none;
+    min-width:24px;white-space:pre-wrap;letter-spacing:-.01em}
+  .card{background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;padding:10px 12px;
+    text-align:center;min-width:78px}
   .card .em{font-size:32px;line-height:1}
-  .card .en{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--color-text);margin-top:4px}
-  .obj .del-x{position:absolute;top:-10px;right:-10px;width:20px;height:20px;border-radius:0;background:var(--color-accent);color:#fff;font-size:12px;border:none;display:none;z-index:3}
+  .card .en{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+  .obj.picked{outline:3px solid var(--color-accent);outline-offset:2px;background:var(--color-accent-100)}
+  .obj .del-x{position:absolute;top:-10px;right:-10px;width:20px;height:20px;border-radius:0;
+    background:var(--color-accent);color:#fff;font-size:12px;border:none;display:none;z-index:3}
   #world.del .obj .del-x{display:block}
   .shape{pointer-events:none}
 
-  /* фото */
   .pic{border-radius:0;border:2px solid var(--color-text);overflow:hidden;background:#fff}
   .pic img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
-  /* встроенный сервис */
-  .emb{background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;overflow:hidden;display:flex;flex-direction:column}
-  .emb .hd{background:var(--color-text);color:var(--color-bg);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-    padding:7px 9px;display:flex;align-items:center;gap:6px;cursor:grab;flex:none}
+  .emb{background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;overflow:hidden;
+    display:flex;flex-direction:column}
+  .emb .hd{background:var(--color-text);color:var(--color-bg);font-size:11px;font-weight:800;
+    letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;display:flex;align-items:center;gap:6px;cursor:grab;flex:none}
   .emb .hd .nm{margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .emb .hd a,.emb .hd button{background:rgba(255,255,255,.18);color:var(--color-bg);border:none;border-radius:0;padding:4px 8px;
-    font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+  .emb .hd a,.emb .hd button{background:rgba(255,255,255,.18);color:var(--color-bg);border:none;border-radius:0;
+    padding:4px 8px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}
   .emb .hd a:hover,.emb .hd button:hover{background:var(--color-accent)}
   .emb iframe{border:none;width:100%;flex:1;background:var(--color-surface)}
-  .rs{position:absolute;right:-7px;bottom:-7px;width:16px;height:16px;border-radius:0;background:var(--color-accent);border:2px solid var(--color-bg);cursor:nwse-resize;z-index:3}
+  .rs{position:absolute;right:-7px;bottom:-7px;width:16px;height:16px;border-radius:0;
+    background:var(--color-accent);border:2px solid var(--color-bg);cursor:nwse-resize;z-index:3}
 
-  #eraserDot{position:fixed;pointer-events:none;border:2px solid var(--color-accent);background:rgba(236,48,19,.12);border-radius:50%;z-index:26;display:none}
-  #cursors{position:fixed;top:54px;left:0;right:0;bottom:0;pointer-events:none;z-index:20;overflow:hidden}
+  #eraserDot{position:fixed;pointer-events:none;border:2px solid var(--color-accent);
+    background:rgba(236,48,19,.12);border-radius:50%;z-index:26;display:none}
+  #cursors{position:fixed;top:54px;left:var(--rail);right:var(--panel);bottom:0;pointer-events:none;z-index:20;overflow:hidden}
   .cur{position:absolute;transform:translate(-2px,-2px);transition:left .05s linear,top .05s linear}
   .cur svg{display:block}
-  .zoom{position:fixed;left:12px;bottom:12px;z-index:25;display:flex;gap:4px;align-items:center;background:var(--color-bg);
-    border:2px solid var(--color-text);border-radius:0;padding:5px 6px}
-  .zoom button{background:none;color:var(--color-text);border:0;width:28px;height:28px;border-radius:0;font-size:18px;cursor:pointer}
+
+  .zoom{position:fixed;left:calc(var(--rail) + 14px);bottom:14px;z-index:25;display:flex;gap:4px;align-items:center;
+    background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;padding:5px 6px}
+  .zoom button{background:none;color:var(--color-text);border:0;width:28px;height:28px;border-radius:0;font-size:18px}
   .zoom button:hover{background:var(--color-accent);color:#fff}
-  .zoom span{color:var(--color-text);font-size:11px;font-weight:800;letter-spacing:.06em;min-width:44px;text-align:center}
-  .hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--color-bg);border:2px solid var(--color-divider);border-radius:0;
-    padding:8px 16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700);z-index:15;max-width:70vw;text-align:center}
-  #drop{position:fixed;inset:0;z-index:40;background:rgba(236,48,19,.9);color:#fff;display:none;align-items:center;justify-content:center;
-    font-size:22px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .zoom span{font-size:11px;font-weight:800;letter-spacing:.06em;min-width:44px;text-align:center}
+  .hint{position:fixed;bottom:14px;left:calc(var(--rail) + (100vw - var(--rail) - var(--panel))/2);transform:translateX(-50%);
+    background:var(--color-bg);border:2px solid var(--color-divider);border-radius:0;padding:8px 16px;
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700);
+    z-index:15;max-width:56vw;text-align:center}
+  #drop{position:fixed;inset:0;z-index:40;background:rgba(236,48,19,.9);color:#fff;display:none;
+    align-items:center;justify-content:center;font-size:22px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
   #drop.on{display:flex}
 
-  /* шторка */
   .curt{background:var(--color-accent);border-radius:0;display:flex;align-items:center;justify-content:center;
     color:#fff;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:8px}
   .curt.open{background:transparent;border:2px dashed var(--color-accent);color:transparent}
-  /* выделение */
   .selbox{position:absolute;border:2px dashed var(--color-accent);background:rgba(236,48,19,.07);pointer-events:none;z-index:5}
-  .obj.picked{outline:3px solid var(--color-accent);outline-offset:2px}
-  #saveState{color:var(--color-neutral-600);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-    border:2px solid var(--color-divider);padding:6px 10px;border-radius:0;white-space:nowrap}
-  /* таймер и кубик */
-  #timerBox{position:fixed;right:14px;bottom:14px;z-index:28;background:var(--color-text);color:var(--color-bg);border-radius:0;
-    padding:14px 18px;display:none;text-align:center}
+
+  #timerBox{display:none;padding:16px 18px;background:var(--color-text);color:var(--color-bg);text-align:left}
   #timerBox.on{display:block}
-  #timerBox .tm{font-size:38px;font-weight:800;letter-spacing:.02em;line-height:1}
-  #timerBox .rw{display:flex;gap:6px;justify-content:center;margin-top:10px}
-  #timerBox button{background:rgba(255,255,255,.16);color:var(--color-bg);border:none;border-radius:0;padding:7px 11px;
-    font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  #timerBox .tm{font-size:44px;font-weight:800;letter-spacing:.02em;line-height:1}
+  #timerBox .rw{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  #timerBox button{background:rgba(255,255,255,.16);color:var(--color-bg);border:none;border-radius:0;
+    padding:8px 11px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
   #timerBox button:hover{background:var(--color-accent)}
-  #diceBox{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);z-index:29;background:var(--color-bg);border:4px solid var(--color-accent);
-    border-radius:0;width:130px;height:130px;display:none;align-items:center;justify-content:center;
-    font-size:68px;font-weight:800;color:var(--color-accent)}
+  #diceBox{position:fixed;left:calc(var(--rail) + (100vw - var(--rail) - var(--panel))/2);top:40%;transform:translate(-50%,-50%);z-index:29;
+    background:var(--color-bg);border:4px solid var(--color-accent);border-radius:0;width:130px;height:130px;
+    display:none;align-items:center;justify-content:center;font-size:68px;font-weight:800;color:var(--color-accent)}
   #diceBox.on{display:flex}
+
+  body.nopanel{--panel:0px}
+  body.nopanel #panel{display:none}
+  @media(max-width:1240px){:root{--panel:250px} #panel{width:250px}}
+  @media(max-width:900px){
+    :root{--rail:64px;--panel:0px}
+    #panel{width:280px;display:none;border-left:2px solid var(--color-text)}
+    body.panelopen #panel{display:flex}
+  }
+  @media(max-width:640px){
+    #rail .tool,#rail .home{width:46px;height:46px}
+    .hint{max-width:70vw;font-size:10px}
+  }
 </style>
 </head>
 <body>
+  <!-- Левый рельс: инструменты -->
+  <div id="rail">
+    <a class="home" href="index.html" title="На главную">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
+
+    <button class="tool on" data-t="pan" title="Рука — двигать холст">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></button>
+    <button class="tool" data-t="pen" title="Ручка">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="M15 5l4 4"/></svg></button>
+    <button class="tool" data-t="marker" title="Маркер — полупрозрачный">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l-6 6v4h4l6-6"/><path d="M22 12l-4.6 4.6a2 2 0 0 1-2.8 0l-4.2-4.2a2 2 0 0 1 0-2.8L15 5"/></svg></button>
+    <button class="tool" data-t="del" title="Ластик — стирает по кусочкам">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H8l-5-5a2 2 0 0 1 0-2.8l8-8a2 2 0 0 1 2.8 0l6 6a2 2 0 0 1 0 2.8z"/><path d="M9 9l6 6"/></svg></button>
+
+    <span class="sep"></span>
+
+    <button class="tool" data-t="note" title="Стикер">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9l7-7V5a2 2 0 0 0-2-2z"/><path d="M14 21v-5a2 2 0 0 1 2-2h5"/></svg></button>
+    <button class="tool" data-t="text" title="Текст">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6V4h16v2"/><path d="M12 4v16"/><path d="M9 20h6"/></svg></button>
+
+    <span class="sep"></span>
+
+    <button class="tool" data-t="rect" title="Прямоугольник">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14"/></svg></button>
+    <button class="tool" data-t="ellipse" title="Овал">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="9" ry="7"/></svg></button>
+    <button class="tool" data-t="tri" title="Треугольник">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l9 16H3z"/></svg></button>
+    <button class="tool" data-t="star" title="Звезда">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></button>
+    <button class="tool" data-t="line" title="Линия">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 19L19 5"/></svg></button>
+    <button class="tool" data-t="arrow" title="Стрелка">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6"/><path d="M9 6h9v9"/></svg></button>
+    <button class="tool" data-t="sel" title="Выделить рамкой">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"><rect x="3" y="3" width="18" height="18"/></svg></button>
+
+    <span class="sep"></span>
+
+    <button class="tool" id="undo" title="Отменить (Cmd+Z)" disabled>
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 8"/></svg></button>
+    <button class="tool" id="redo" title="Вернуть (Shift+Cmd+Z)" disabled>
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M21 13a9 9 0 1 1-3-7.7L21 8"/></svg></button>
+  </div>
+
+  <!-- Верхняя панель: материалы и урок -->
   <div id="bar">
-    <a class="home" href="course.html">← Домой</a>
+    <button class="tool" id="addPhoto" title="Добавить фото">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3v13H3z"/><circle cx="12" cy="13" r="4"/></svg>Фото</button>
+    <button class="tool" id="addEmbed" title="Вставить YouTube, Wordwall, LearningApps и другое">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>Вставить</button>
     <span class="sep"></span>
-    <button class="tool on" data-t="pan" title="Рука — двигать холст">🖐</button>
-    <button class="tool" data-t="pen" title="Ручка">✏️</button>
-    <button class="tool" data-t="marker" title="Маркер — полупрозрачный">🖍</button>
-    <button class="tool" data-t="del" title="Ластик — стирает по кусочкам">🧽</button>
+    <select id="unitSel"></select>
+    <button class="tool" id="addCards">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>Слова</button>
     <span class="sep"></span>
-    <button class="tool" data-t="note" title="Стикер">🟨</button>
-    <button class="tool" data-t="text" title="Текст">🔤</button>
+    <button class="tool" id="curtain" title="Шторка — закрыть ответ">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><path d="M12 3v18"/></svg>Шторка</button>
+    <button class="tool" id="timerBtn" title="Таймер">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg>Таймер</button>
+    <button class="tool" id="diceBtn" title="Кубик">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="16" r="1"/><circle cx="12" cy="12" r="1"/></svg>Кубик</button>
     <span class="sep"></span>
-    <button class="tool" data-t="rect" title="Прямоугольник">▭</button>
-    <button class="tool" data-t="ellipse" title="Овал">⬭</button>
-    <button class="tool" data-t="tri" title="Треугольник">△</button>
-    <button class="tool" data-t="star" title="Звезда">☆</button>
-    <button class="tool" data-t="line" title="Линия">╱</button>
-    <button class="tool" data-t="arrow" title="Стрелка">↗</button>
-    <button class="tool" data-t="sel" title="Выделить рамкой">⬚</button>
+    <span id="pages"></span>
+    <button class="tool" id="addPage" title="Добавить страницу">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
     <span class="sep"></span>
-    <button class="tool" id="undo" title="Отменить (Cmd+Z)" disabled>↩</button>
-    <button class="tool" id="redo" title="Вернуть (Shift+Cmd+Z)" disabled>↪</button>
-    <span class="sep"></span>
-    <span id="palette" style="display:flex;gap:5px;align-items:center"></span>
-    <select id="widthSel" title="Толщина линии">
+    <button class="tool" id="savePng" title="Скачать доску картинкой">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Скачать</button>
+    <button class="tool" id="panelBtn" title="Показать или скрыть правую панель">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><path d="M15 3v18"/></svg>Панель</button>
+    <button class="tool" id="clear" title="Очистить">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>Очистить</button>
+  </div>
+
+  <!-- Правая панель: перо, ластик, цвет, таймер, комната -->
+  <div id="panel">
+    <div class="ph">Толщина линии</div>
+    <div class="pb"><div class="wchips" id="wChips">
+      <button data-w="2" title="Тонкая"><i style="height:2px"></i></button>
+      <button data-w="4" class="on" title="Средняя"><i style="height:4px"></i></button>
+      <button data-w="9" title="Жирная"><i style="height:7px"></i></button>
+      <button data-w="18" title="Очень жирная"><i style="height:11px"></i></button>
+    </div>
+    <select id="widthSel" style="display:none">
       <option value="2">тонкая</option>
       <option value="4" selected>средняя</option>
       <option value="9">жирная</option>
       <option value="18">очень жирная</option>
-    </select>
-    <select id="eraseSel" title="Размер ластика">
+    </select></div>
+
+    <div class="ph">Ластик</div>
+    <div class="pb"><div class="echips" id="eChips">
+      <button data-e="14">S</button>
+      <button data-e="28" class="on">M</button>
+      <button data-e="60">L</button>
+    </div>
+    <select id="eraseSel" style="display:none">
       <option value="14">ластик S</option>
       <option value="28" selected>ластик M</option>
       <option value="60">ластик L</option>
-    </select>
-    <span class="sep"></span>
-    <button class="tool" id="addPhoto" title="Добавить фото">📷 Фото</button>
-    <button class="tool" id="addEmbed" title="Вставить YouTube, Wordwall, LearningApps и другое">🔗 Вставить</button>
-    <span class="sep"></span>
-    <select id="unitSel"></select>
-    <button class="tool" id="addCards">＋ Слова</button>
-    <span class="sep"></span>
-    <button class="tool" id="curtain" title="Шторка — закрыть ответ">🪟 Шторка</button>
-    <button class="tool" id="timerBtn" title="Таймер">⏱</button>
-    <button class="tool" id="diceBtn" title="Кубик">🎲</button>
-    <span class="sep"></span>
-    <span id="pages" style="display:flex;gap:4px;align-items:center"></span>
-    <button class="tool" id="addPage" title="Добавить страницу">＋</button>
-    <span class="sep"></span>
-    <button class="tool" id="savePng" title="Скачать доску картинкой">💾</button>
-    <button class="tool" id="clear" title="Очистить">🧹</button>
-    <span id="live"><span id="saveState" title="Доска сохраняется автоматически">сохранено</span><span id="status"><span class="dot"></span><span id="statusTxt">…</span></span><button class="tool" id="invite">🔗 Позвать</button></span>
+    </select></div>
+
+    <div class="ph">Цвет</div>
+    <div class="pb"><span id="palette"></span></div>
+
+    <div class="ph">Таймер</div>
+    <div class="pb" style="padding:0 0 0 0;border-bottom:2px solid var(--color-divider)">
+      <div id="timerBox"><div class="tm" id="tmTxt">05:00</div>
+        <div class="rw"><button data-m="1">1 мин</button><button data-m="3">3 мин</button><button data-m="5">5 мин</button><button id="tmStop">стоп</button><button id="tmHide">скрыть</button></div></div>
+    </div>
+
+    <div class="ph">Урок / Lesson</div>
+    <div class="pb"><div class="room">
+      <span id="status"><span class="dot"></span><span id="statusTxt">…</span></span>
+      <span id="saveState" title="Доска сохраняется автоматически">сохранено</span>
+      <button class="tool" id="invite" style="border:2px solid var(--color-text);padding:12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">Позвать ученика</button>
+    </div></div>
   </div>
 
   <div id="stage">
@@ -167,11 +294,34 @@
   <div id="cursors"></div>
   <div id="drop">Отпусти — добавлю фото на доску</div>
   <div class="zoom"><button id="zout">−</button><span id="zlbl">100%</span><button id="zin">+</button><button id="zreset" title="Сброс">⌂</button></div>
-  <div class="hint">🖐 двигай холст · колесо — зум · 🧽 стирает по кусочкам · 🪟 шторка прячет ответ · ⬚ выделяет группой · Cmd+Z — отменить</div>
+  <div class="hint">Рука двигает холст · колесо — зум · ластик стирает по кусочкам · шторка прячет ответ · Cmd+Z — отменить</div>
   <input type="file" id="fileInp" accept="image/*" multiple style="display:none">
-  <div id="timerBox"><div class="tm" id="tmTxt">05:00</div>
-    <div class="rw"><button data-m="1">1м</button><button data-m="3">3м</button><button data-m="5">5м</button><button id="tmStop">стоп</button><button id="tmHide">✕</button></div></div>
   <div id="diceBox">?</div>
+
+  <script>
+    /* Плашки толщины и ластика управляют прежними select-ами —
+       вся логика доски осталась нетронутой. */
+    document.addEventListener("DOMContentLoaded", function () {
+      function link(chipsId, selId, attr) {
+        var box = document.getElementById(chipsId), sel = document.getElementById(selId);
+        if (!box || !sel) return;
+        box.querySelectorAll("button").forEach(function (b) {
+          b.onclick = function () {
+            box.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+            b.classList.add("on");
+            sel.value = b.dataset[attr];
+            sel.dispatchEvent(new Event("change"));
+          };
+        });
+      }
+      var pb = document.getElementById("panelBtn");
+      if (pb) pb.onclick = function () {
+        document.body.classList.toggle(window.innerWidth <= 900 ? "panelopen" : "nopanel");
+      };
+      link("wChips", "widthSel", "w");
+      link("eChips", "eraseSel", "e");
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

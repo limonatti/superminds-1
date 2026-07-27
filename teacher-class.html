@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мой класс · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .form{padding:20px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .form select,.form input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:11px 12px;font:700 13px "Archivo",sans-serif;min-width:150px}
+  .form input{flex:1;min-width:180px}
+  .form .go{border:0;background:var(--color-accent);color:#fff;padding:13px 18px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .form .go:hover{background:var(--color-accent-600)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:16px 28px;border-bottom:2px solid var(--color-divider)}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--color-accent);background:var(--color-accent-100);
+    padding:6px 10px;font-size:12px;font-weight:800}
+  .chip.done{border-color:var(--color-neutral-400);background:var(--color-neutral-200);color:var(--color-neutral-700)}
+  .chip button{border:0;background:none;color:var(--color-accent);padding:0;font-size:13px}
+  .note{padding:20px 28px;border-bottom:2px solid var(--color-divider)}
+  .note textarea{width:100%;min-height:110px;border:2px solid var(--color-text);background:var(--color-bg);
+    color:var(--color-text);padding:12px 14px;font:600 14px "Archivo",sans-serif;resize:vertical}
+  .note textarea:focus{outline:none;border-color:var(--color-accent)}
+  .inv{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .inv .lnk{flex:1;min-width:240px;border:2px dashed var(--color-neutral-500);padding:11px 12px;
+    font-size:12.5px;font-weight:600;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери ученика</div>
+        <div id="stList"></div>
+      </div>
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"]];
+const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
+const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
+
+let ME = null, CODE = "—", STUDENTS = [], ASG = {}, sel = 0;
+
+function learned(data){ let n=0; for (const k in data){ if (k!=="__meta" && data[k] && data[k].status==="learned") n++; } return n; }
+function ago(ts){ if(!ts) return "—"; const d=(Date.now()-new Date(ts).getTime())/86400000;
+  if(d<1) return "сегодня"; if(d<2) return "вчера"; return Math.floor(d)+" дн. назад"; }
+function unitLabel(id){ const u=(window.SM_UNITS||[]).filter(x=>x.id===id)[0]; return u?u.title:id; }
+function noteKey(sid){ return "sm-note-"+sid; }
+
+function drawList(){
+  const box = document.getElementById("stList");
+  if (!STUDENTS.length){
+    box.innerHTML = '<div style="padding:18px 20px;font-size:14px;font-weight:600;color:var(--color-neutral-700)">' +
+      'Учеников пока нет. Создай ссылку-приглашение справа.</div>';
+    return;
+  }
+  box.innerHTML = STUDENTS.map((s,i) => {
+    const d = s.data || {}, m = d.__meta || {};
+    return '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
+      '<span class="t">'+esc(s.name)+'</span>' +
+      '<span class="s">'+learned(d)+' слов · звёзд '+(m.totalPoints||0)+' · '+ago(s.updated_at)+'</span></button>';
+  }).join("");
+  box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawPane(); drawList(); });
+}
+
+function inviteHtml(){
+  const base = location.origin + location.pathname.replace(/[^\/]*$/, "join.html");
+  return '<div class="sect"><span>Пригласить ученика / Invite</span><span>код класса — '+esc(CODE)+'</span></div>' +
+    '<div class="inv"><button class="b pri" id="mkInv">Создать ссылку-приглашение</button>' +
+      '<button class="b" id="cpCode">Скопировать код класса</button>' +
+      '<div class="lnk" id="invOut">Ссылка одноразовая — по ней зарегистрируется один ученик. Код класса работает всегда.</div></div>';
+}
+
+function bindInvite(){
+  const base = location.origin + location.pathname.replace(/[^\/]*$/, "join.html");
+  const cp = t => { if (navigator.clipboard) navigator.clipboard.writeText(t).then(()=>alert("Скопировано:\n\n"+t),()=>prompt("Скопируй:",t)); else prompt("Скопируй:",t); };
+  const a = document.getElementById("mkInv");
+  if (a) a.onclick = async () => {
+    a.disabled = true; const old = a.textContent; a.textContent = "…";
+    const r = await SM.createInvite(null);
+    a.disabled = false; a.textContent = old;
+    const out = document.getElementById("invOut");
+    if (!r.ok){ out.textContent = r.error || "Не получилось создать ссылку"; return; }
+    const link = base + "?i=" + r.code;
+    out.textContent = link;
+    cp("Заходи ко мне на English with Asya! Открой ссылку и впиши имя с паролем:\n" + link);
+  };
+  const b = document.getElementById("cpCode");
+  if (b) b.onclick = () => cp("Заходи ко мне на English with Asya! Открой ссылку и впиши имя с паролем:\n" + base + "?i=" + CODE);
+}
+
+async function drawPane(){
+  const p = document.getElementById("pane");
+
+  if (!STUDENTS.length){
+    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Класс</span><span>учеников: 0</span></div>' +
+      '<div class="ink"><div><div class="k">Класс / Class</div><h2>В классе пока никого</h2>' +
+        '<p>Создай ссылку — по ней ученик заведёт аккаунт и сразу попадёт к тебе в класс.</p></div>' +
+        '<a class="go" href="board.html">'+icon("play",15)+' Запустить доску</a></div>' +
+      inviteHtml();
+    bindInvite();
+    return;
+  }
+
+  const s = STUDENTS[sel];
+  const sid = s.student_id;
+  const d = s.data || {}, m = d.__meta || {};
+  const units = window.SM_UNITS || [];
+  const totalW = units.reduce((a,u)=>a+u.words.length,0);
+  const lw = learned(d);
+  const list = ASG[sid] || [];
+  const open = list.filter(a=>!a.done).length;
+
+  let course=null, hw=[], mats=[], sum=[];
+  try { course = await SM.studentCourse(sid); } catch(e){}
+  try { hw = (await SM.listHW(sid)) || []; } catch(e){}
+  try { mats = (await SM.listMaterials(sid)) || []; } catch(e){}
+  try { sum = (await SM.studentHwSummary(sid)) || []; } catch(e){}
+
+  const unitOpts = units.map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
+  const kindOpts = '<option value="trainer">Тренажёр</option><option value="games">Игры</option><option value="worksheet">Лист</option>';
+  const cOpts = SPK.map(c => '<option value="'+c[0]+'"'+(c[0]===course?" selected":"")+'>'+c[1]+'</option>').join("");
+  const uOpts = [1,2,3,4,5,6,7,8].map(n => '<option value="'+n+'">Unit '+n+'</option>').join("");
+  const note = (()=>{ try { return localStorage.getItem(noteKey(sid)) || ""; } catch(e){ return ""; } })();
+
+  p.innerHTML =
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(s.name)+'</span><span>последняя активность: '+ago(s.updated_at)+'</span></div>' +
+    '<div class="ink"><div><div class="k">Ученик / Student</div><h2>'+esc(s.name)+'</h2>' +
+      '<p>'+(open ? open+" заданий ждут выполнения" : "Открытых заданий нет")+'</p></div>' +
+      '<a class="go" href="room.html">'+icon("play",15)+' Запустить доску</a></div>' +
+
+    '<div class="tiles">' +
+      '<div class="tile"><span class="k">Прогресс курса</span><span class="n">'+(totalW?Math.round(lw/totalW*100):0)+'%</span>' +
+        '<span class="d">'+lw+' из '+totalW+' слов</span></div>' +
+      '<div class="tile"><span class="k">Домашка</span><span class="n'+(open?" acc":"")+'">'+open+'</span>' +
+        '<span class="d">открытых заданий</span></div>' +
+      '<div class="tile"><span class="k">Звёзды · стрик</span><span class="n">'+(m.totalPoints||0)+'</span>' +
+        '<span class="d">стрик '+(m.dayStreak||0)+' дней</span></div>' +
+      '<div class="tile"><span class="k">Оплата</span><span class="n">—</span>' +
+        '<span class="d">раздел оплат ещё не заведён</span></div>' +
+    '</div>' +
+
+    '<div class="sect"><span>Выдать домашку · Super Minds</span></div>' +
+    '<div class="form"><select id="afUnit">'+unitOpts+'</select><select id="afKind">'+kindOpts+'</select>' +
+      '<button class="go" id="afGo">Задать</button></div>' +
+    (list.length ? '<div class="chips">' + list.map(a =>
+        '<span class="chip'+(a.done?" done":"")+'">'+esc(KIND_L[a.kind]||a.kind)+' · '+esc(unitLabel(a.unit_id))+
+        (a.done?" ✓":"")+'<button data-del="'+a.id+'" title="Удалить">✕</button></span>').join("") + '</div>' : "") +
+
+    '<div class="sect"><span>Speakout · курс, домашка, материалы</span></div>' +
+    '<div class="form"><select id="spCourse">'+cOpts+'</select>' +
+      '<button class="go" id="spSave">Назначить курс</button></div>' +
+    '<div class="form"><select id="spUnit">'+uOpts+'</select><input id="spNote" placeholder="заметка к заданию (необязательно)">' +
+      '<button class="go" id="spAdd">Задать ДЗ</button></div>' +
+    (hw.length ? '<div class="chips">' + hw.map(a =>
+        '<span class="chip'+(a.done?" done":"")+'">'+esc(SPK_L[a.course]||a.course)+' U'+a.unit+(a.done?" ✓":"")+
+        '<button data-delhw="'+a.id+'" title="Удалить">✕</button></span>').join("") + '</div>' : "") +
+    '<div class="form"><input id="mTitle" placeholder="название материала"><input id="mUrl" placeholder="https://…">' +
+      '<button class="go" id="mAdd">Добавить ссылку</button></div>' +
+    (mats.length ? '<div class="chips">' + mats.map(x =>
+        '<span class="chip done">'+esc(x.title)+'<button data-delm="'+x.id+'" title="Удалить">✕</button></span>').join("") + '</div>' : "") +
+
+    '<div class="sect"><span>Результаты упражнений</span><span>нажми юнит — увидишь ответы</span></div>' +
+    (sum.length
+      ? '<div class="rows">' + sum.map((r,i) =>
+          '<button class="row res" data-c="'+r.course+'" data-u="'+r.unit+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+          '<span><span class="t">'+esc(SPK_L[r.course]||r.course)+' · Unit '+r.unit+'</span>' +
+          '<span class="d">'+r.correct+' из '+r.attempts+' верно · '+Math.round((r.total_ms||0)/1000/60)+' мин</span></span>' +
+          '<span class="b sm">Ответы</span></button>').join("") + '</div>'
+      : '<div class="empty"><div class="p">Ученик ещё не решал упражнения Speakout.</div></div>') +
+    '<div id="det"></div>' +
+
+    '<div class="sect"><span>Заметки по ученику</span><span>видны только тебе, на этом устройстве</span></div>' +
+    '<div class="note"><textarea id="nt" placeholder="Что повторить, на чём споткнулись, что задать дальше…">'+esc(note)+'</textarea>' +
+      '<div style="margin-top:10px"><button class="b" id="ntSave">Сохранить заметку</button></div></div>' +
+
+    inviteHtml();
+
+  bindInvite();
+  bindStudent(sid);
+}
+
+function bindStudent(sid){
+  const $ = id => document.getElementById(id);
+  $("afGo").onclick = async e => {
+    e.target.textContent = "…";
+    const r = await SM.assignTo(sid, $("afUnit").value, $("afKind").value);
+    if (r.ok) load(); else { e.target.textContent = "Задать"; alert(r.error || "Ошибка"); }
+  };
+  document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    if (!confirm("Удалить задание?")) return;
+    await SM.deleteAssignment(b.dataset.del); load();
+  });
+  $("spSave").onclick = async e => {
+    e.target.textContent = "…";
+    const r = await SM.enrolCourse(sid, $("spCourse").value);
+    e.target.textContent = r.ok ? "Готово" : "Назначить курс";
+  };
+  $("spAdd").onclick = async e => {
+    e.target.textContent = "…";
+    const r = await SM.addHW(sid, $("spCourse").value, +$("spUnit").value, $("spNote").value);
+    if (r.ok) drawPane(); else { e.target.textContent = "Задать ДЗ"; alert(r.error || "Ошибка"); }
+  };
+  document.querySelectorAll("[data-delhw]").forEach(b => b.onclick = async () => {
+    await SM.deleteHW(b.dataset.delhw); drawPane();
+  });
+  $("mAdd").onclick = async e => {
+    const t = $("mTitle").value.trim(), u = $("mUrl").value.trim();
+    if (!t || !u) { alert("Впиши название и ссылку"); return; }
+    e.target.textContent = "…";
+    const r = await SM.addMaterial(sid, t, u, "");
+    if (r.ok) drawPane(); else { e.target.textContent = "Добавить ссылку"; alert(r.error || "Ошибка"); }
+  };
+  document.querySelectorAll("[data-delm]").forEach(b => b.onclick = async () => {
+    await SM.deleteMaterial(b.dataset.delm); drawPane();
+  });
+  document.querySelectorAll(".res").forEach(b => b.onclick = async () => {
+    const det = $("det");
+    det.innerHTML = '<div class="sect"><span>Загрузка…</span></div>';
+    const rows = await SM.studentHwResults(sid, b.dataset.c, +b.dataset.u);
+    det.innerHTML = '<div class="sect"><span>Ответы · Unit '+b.dataset.u+'</span><span>'+rows.length+'</span></div>' +
+      (rows.length ? '<div class="rows">' + rows.map((a,i) =>
+        '<div class="row'+(a.correct?"":" now")+'" style="cursor:default"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(String(a.question||"").replace(/<[^>]*>/g,""))+'</span>' +
+        '<span class="d">ответ: '+esc(a.answer||"—")+'</span></span>' +
+        '<span class="b sm">'+(a.correct?"верно":"ошибка")+'</span></div>').join("") + '</div>'
+      : '<div class="empty"><div class="p">Нет данных.</div></div>');
+  });
+  $("ntSave").onclick = e => {
+    try { localStorage.setItem(noteKey(sid), $("nt").value); e.target.textContent = "Сохранено"; }
+    catch(err){ e.target.textContent = "Не вышло сохранить"; }
+    setTimeout(()=>{ e.target.textContent = "Сохранить заметку"; }, 1500);
+  };
+}
+
+async function load(){
+  const pane = document.getElementById("pane");
+  ME = await SMUI.requireAuth(pane, "teacher");
+  if (!ME) return;
+
+  try { const r = await SM.ensureTeacherCode(ME.name); CODE = r.code || "—"; } catch(e){}
+  try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
+  ASG = {};
+  try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id] || []).push(a); }); } catch(e){}
+  if (sel >= STUDENTS.length) sel = 0;
+
+  drawList();
+  await drawPane();
+
+  let queue = 0;
+  try { queue = ((await SM.classAssignments()) || []).filter(a => !a.done).length; } catch(e){}
+  SMUI.mount({ role:"teacher", active:"class", counts: queue ? { review: queue } : {} });
+}
+
+SMUI.mount({ role:"teacher", active:"class" });
+load();
+</script>
+</body>
+</html>
