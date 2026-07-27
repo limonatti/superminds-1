@@ -58,8 +58,12 @@ CATALOG.push({ kind: "phonics", id: "phonics", title: "Phonics Starter", sub: "�
 CATALOG.push({ kind: "spk", id: "speakout-b1plus", title: "Speakout B1+", sub: "подростки и взрослые", units: SPK_UNITS, words: speakoutTotal("speakout-b1plus") });
 CATALOG.push({ kind: "spk", id: "speakout-b1",     title: "Speakout B1",  sub: "подростки и взрослые", units: SPK_UNITS, words: speakoutTotal("speakout-b1") });
 CATALOG.push({ kind: "own", id: "own", title: "Свой учебник", sub: "собери в конструкторе", units: 0, words: 0 });
-["Super Minds 2","Kid's Box 1","Playway 1","Family & Friends 1"].forEach(t =>
-  CATALOG.push({ kind: "soon", id: "soon-"+t, title: t, sub: "скоро", units: 0, words: 0 }));
+/* «скоро» показываем только для тех учебников, которых ещё нет */
+const HAVE = CATALOG.map(c => c.title.toLowerCase().replace(/\s+/g,""));
+["Super Minds 2","Kid's Box 1","Playway 1","Family & Friends 1"].forEach(t => {
+  if (HAVE.indexOf(t.toLowerCase().replace(/\s+/g,"")) >= 0) return;
+  CATALOG.push({ kind: "soon", id: "soon-"+t, title: t, sub: "скоро", units: 0, words: 0 });
+});
 
 /* ---------- прогресс ---------- */
 let PROG = {};

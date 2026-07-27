@@ -192,8 +192,19 @@ button{font-family:inherit;cursor:pointer}
 .auth .msg.err{color:var(--color-accent)}
 
 /* адаптив */
-@media(max-width:1060px){
-  .cols{grid-template-columns:250px minmax(0,1fr)}
+@media(max-width:1240px){
+  .cols{grid-template-columns:260px minmax(0,1fr)}
+}
+/* Узкий экран: колонка списка ложится горизонтальной лентой сверху,
+   чтобы содержимому осталась вся ширина. */
+@media(max-width:1160px){
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .list{flex-direction:row;overflow-x:auto;overflow-y:hidden;align-items:stretch;
+    border-right:0;border-bottom:2px solid var(--color-divider)}
+  .list .step{display:none}
+  .li{width:auto;flex:0 0 auto;min-width:190px;border-bottom:0;border-left:0;
+    border-right:2px solid var(--color-divider);border-top:6px solid transparent;padding:14px 16px}
+  .li.on{border-top-color:var(--color-accent)}
   .ink{grid-template-columns:minmax(0,1fr)}
   .ink .go{justify-self:start}
   .red{grid-template-columns:minmax(0,1fr)}
@@ -206,8 +217,6 @@ button{font-family:inherit;cursor:pointer}
   .navItem{justify-content:center;padding:15px 8px;gap:0}
   .navItem .badge{margin-left:0;position:absolute;top:8px;right:8px}
   .side-user{justify-content:center;padding:16px 8px}
-  .cols{grid-template-columns:minmax(0,1fr)}
-  .list{border-right:0;border-bottom:2px solid var(--color-divider);max-height:230px}
   .ink h2{font-size:24px}
   .pane-hd,.sect,.row,.tb th,.tb td,.empty,.auth{padding-left:18px;padding-right:18px}
   .ink,.red{padding:22px 18px}
