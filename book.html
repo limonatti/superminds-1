@@ -704,21 +704,31 @@ async function mirrorArt(btn){
   if (!list.length){ btn.textContent = "Уже все свои"; return; }
   let done = 0, fail = 0;
   btn.disabled = true;
-  const tick = () => { btn.textContent = "Переношу " + done + "/" + list.length + (fail ? " · сбоев " + fail : ""); };
+  const tick = () => {
+    const left = list.length - done - fail;
+    const mins = Math.ceil(left * 7 / 60);
+    btn.textContent = "Переношу " + done + "/" + list.length +
+      (fail ? " · сбоев " + fail : "") + (left ? " · ~" + mins + " мин" : "");
+  };
   tick();
 
   for (const it of list){
     try{
       /* картинка рисуется в момент первого запроса — даём три попытки с паузой */
       let blob = null, last = null;
-      for (let att = 0; att < 3 && !blob; att++){
+      for (let att = 0; att < 5 && !blob; att++){
         try{
-          const r = await fetch(it.url + (att ? "&a=" + att : ""));
+          const r = await fetch(it.url);
+          if (r.status === 429) throw new Error("429");        /* сервис просит подождать */
           if (!r.ok) throw new Error("http " + r.status);
           const bl = await r.blob();
-          if (bl.size < 500) throw new Error("пусто");
+          if (bl.size < 800) throw new Error("пусто");
           blob = bl;
-        }catch(e){ last = e; await new Promise(r2 => setTimeout(r2, 2500 * (att + 1))); }
+        }catch(e){
+          last = e;
+          const wait = String(e.message).indexOf("429") >= 0 ? 30000 : 6000 * (att + 1);
+          await new Promise(r2 => setTimeout(r2, wait));
+        }
       }
       if (!blob) throw last || new Error("нет картинки");
       const path = COURSE + "/" + it.key + ".jpg";
@@ -730,7 +740,7 @@ async function mirrorArt(btn){
       done++;
     }catch(e){ fail++; }
     tick();
-    await new Promise(r => setTimeout(r, 120));
+    await new Promise(r => setTimeout(r, 5000));   /* бесплатный сервис не любит спешку */
     if ((done + fail) % 12 === 0) await saveBook();     /* промежуточное сохранение */
   }
   await saveBook();
