@@ -610,8 +610,36 @@ function denied(title, text){
 
   BOOK = await loadBook();
   if (!BOOK || !BOOK.units || !BOOK.units.length){
-    denied("Учебник ещё не загружен",
-      "Содержимое хранится в закрытой базе и пока не залито. Если ты учитель — загрузи книгу из панели.");
+    if (!isTeacher){
+      denied("Учебник ещё не загружен",
+        "Содержимое хранится в закрытой базе. Учитель загрузит его — и страница откроется.");
+      return;
+    }
+    document.getElementById("book").innerHTML =
+      '<div class="kicker">Учебник / Coursebook</div><h1>Загрузи содержимое</h1>' +
+      '<div class="lead">Файл книги лежит в папке проекта: <b>' + esc(COURSE) + '-book.json</b>. ' +
+      'Он попадёт в закрытую таблицу базы — на сайте его не будет, скачать со страницы нельзя.</div>' +
+      '<div class="blk"><input type="file" id="bookFile" accept="application/json,.json" ' +
+      'style="border:2px solid var(--color-text);padding:12px;width:100%;background:var(--color-bg)">' +
+      '<div class="grow2" style="margin-top:12px"><button class="tool" id="bookGo">Загрузить в базу</button>' +
+      '<span id="bookMsg" style="font-size:13px;font-weight:700"></span></div></div>';
+    document.getElementById("bookGo").onclick = async () => {
+      const f = (document.getElementById("bookFile").files || [])[0];
+      const msg = document.getElementById("bookMsg");
+      if (!f){ msg.textContent = "Выбери файл"; return; }
+      msg.textContent = "Читаю…";
+      let data;
+      try { data = JSON.parse(await f.text()); }
+      catch (e){ msg.textContent = "Не разобрать JSON"; return; }
+      if (!data.units || !data.units.length){ msg.textContent = "В файле нет юнитов"; return; }
+      msg.textContent = "Заливаю…";
+      const { error } = await sb.from("book_content")
+        .upsert({ course: data.course || COURSE, title: data.title || "", data: data }, { onConflict: "course" });
+      if (error){ msg.textContent = "Ошибка: " + error.message; return; }
+      msg.textContent = "Готово, открываю…";
+      setTimeout(() => location.reload(), 700);
+    };
+    document.getElementById("bbar").style.display = "flex";
     return;
   }
 
