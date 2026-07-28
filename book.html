@@ -45,6 +45,22 @@
   .book[data-kind^="hw"]      {--k:#ec3013;--k-soft:#fff2ef}
 
   .kicker,.hwbadge{color:var(--k)}
+
+  /* ---- цветная шапка разворота: как заголовок главы в бумажном учебнике ---- */
+  .hdr{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+       background:var(--k-soft);border-left:10px solid var(--k);padding:14px 18px;margin:0 0 22px}
+  .hdr::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;
+       background:repeating-linear-gradient(135deg,var(--k) 0 2px,transparent 2px 11px)}
+  .hdr .num{position:relative;z-index:1;font-size:32px;font-weight:900;line-height:1;
+       color:var(--k);letter-spacing:-.05em;flex:none;font-variant-numeric:tabular-nums}
+  .hdr .kicker{position:relative;z-index:1;margin:0}
+  .hdr .chip{position:relative;z-index:1;margin-left:auto;background:var(--k);color:#fff;
+       font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px}
+  .book h1,.book h2{margin-top:0}
+  .book h1{color:var(--color-text)}
+  /* обложка юнита — во всю ширину, крупно */
+  .book[data-kind="cover"] .hdr{border-left-width:14px;padding:20px 22px}
+  .book[data-kind="cover"] .hdr .num{font-size:44px}
   .hwbadge{background:var(--k);color:#fff}
   .blk .h,.ex-src{color:var(--k)}
   .task::before,.wtask .n,.hwlist .it span:first-child,.q .num{color:var(--k)}
@@ -235,6 +251,18 @@
   .pbar{position:fixed;left:0;right:0;bottom:57px;height:4px;background:var(--color-neutral-300);z-index:26}
   .pbar i{display:block;height:100%;background:var(--color-accent);transition:width .2s ease-out}
 
+  /* ---- лента разворотов: видно, где ты в юните, и цвет каждого шага ---- */
+  .rail{position:fixed;left:0;right:0;bottom:61px;z-index:24;display:flex;gap:2px;
+        align-items:flex-end;padding:0 14px 4px;background:var(--color-bg);
+        border-bottom:2px solid var(--color-divider)}
+  .rail i{flex:1 1 0;min-width:3px;height:5px;background:var(--color-neutral-300);
+          cursor:pointer;transition:height .16s ease-out,opacity .16s ease-out;opacity:.55}
+  .rail i:hover{height:12px;opacity:1}
+  .rail i.done{opacity:.85}
+  .rail i.on{height:14px;opacity:1}
+  @media(max-width:900px){.rail{display:none}}
+  @media(max-width:640px){.rail{display:none}}
+
   @media(max-width:820px){
     .book{padding:22px 18px 130px}
     .book h1{font-size:32px}
@@ -260,6 +288,7 @@
 
 <div class="ribbon" id="ribbon" style="display:none"></div>
 <div class="pbar" id="pbarWrap" style="display:none"><i id="pbar"></i></div>
+<div class="rail" id="rail" style="display:none"></div>
 <div class="pager" id="pager" style="display:none">
   <button class="tool" id="prev">← Назад</button>
   <span class="mid" id="pmid"></span>
@@ -493,11 +522,47 @@ function playWord(btn){
   say(btn.dataset.w, "f");
 }
 
+/* Цвет и подпись каждого типа разворота — одни и те же в шапке и в ленте внизу */
+const KIND_LABEL = {
+  cover:"Обложка юнита", words:"Слова", chunks:"Выражения", listening:"Аудио",
+  podcast:"Подкаст", reading:"Чтение", pron:"Произношение", grammar:"Грамматика",
+  discovery:"Выведи правило", gramprac:"Отработка", mc:"Упражнения", gap:"Пропуски",
+  howto:"Как сказать", workbook:"Тетрадь", speaking:"Говорим",
+  hwcover:"Домашка", hwpart:"Домашка", hwwrite:"Домашка", hw:"Домашка"
+};
+const KIND_COLOR = {
+  cover:"#ec3013", words:"#0e8f8f", chunks:"#0e8f8f", pron:"#0e8f8f",
+  listening:"#2563c9", podcast:"#7b3fc4", speaking:"#7b3fc4",
+  reading:"#c47a0a", howto:"#c47a0a", discovery:"#ec3013", grammar:"#201e1d",
+  gramprac:"#3f8f2f", mc:"#3f8f2f", gap:"#3f8f2f", workbook:"#3f8f2f",
+  hwcover:"#ec3013", hwpart:"#ec3013", hwwrite:"#ec3013", hw:"#ec3013"
+};
+
+/* Лента внизу: по одному штриху на разворот юнита, цвет = тип, клик = переход */
+function renderRail(){
+  const rail = document.getElementById("rail");
+  if (!rail || !BOOK) return;
+  const u = BOOK.units[ui];
+  rail.innerHTML = u.spreads.map((sp, i) => {
+    const c = KIND_COLOR[sp.kind] || "#201e1d";
+    const cls = i === si ? "on" : (i < si ? "done" : "");
+    return '<i class="' + cls + '" data-i="' + i + '" title="' + esc(sp.title || "") +
+           '" style="background:' + c + '"></i>';
+  }).join("");
+  rail.querySelectorAll("i").forEach(x => x.onclick = () => {
+    const t = +x.dataset.i;
+    if (t !== si) turn(t > si ? 1 : -1, () => { si = t; });
+  });
+}
+
 function renderSpread(){
   const u = BOOK.units[ui], s = u.spreads[si];
   const b = document.getElementById("book");
   started = Date.now();
-  let h = '<div class="kicker">Unit ' + u.n + ' · ' + esc(u.title) + ' · разворот ' + (si + 1) + ' из ' + u.spreads.length + '</div>';
+  let h = '<div class="hdr">' +
+    '<span class="num">' + String(si + 1).padStart(2, "0") + '</span>' +
+    '<div class="kicker">Unit ' + u.n + ' · ' + esc(u.title) + ' · разворот ' + (si + 1) + ' из ' + u.spreads.length + '</div>' +
+    '<span class="chip">' + esc(KIND_LABEL[s.kind] || "Разворот") + '</span></div>';
 
   const art = s.art ? '<img class="art" data-src="' + esc(s.art) + '" alt="">' : "";
 
@@ -756,6 +821,7 @@ function renderSpread(){
   const done = BOOK.units.slice(0, ui).reduce((a, x) => a + x.spreads.length, 0) + si + 1;
   const all = BOOK.units.reduce((a, x) => a + x.spreads.length, 0);
   document.getElementById("pbar").style.width = (done / all * 100) + "%";
+  renderRail();
   loadNote();
   window.scrollTo({ top: 0 });
   if (lessonOn) broadcast();
@@ -1102,6 +1168,7 @@ function denied(title, text){
   document.getElementById("bbar").style.display = "flex";
   document.getElementById("pager").style.display = "flex";
   document.getElementById("pbarWrap").style.display = "block";
+  document.getElementById("rail").style.display = "flex";
   document.getElementById("ribbon").style.display = "block";
 })();
 </script>
