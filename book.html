@@ -709,10 +709,18 @@ async function mirrorArt(btn){
 
   for (const it of list){
     try{
-      const r = await fetch(it.url);
-      if (!r.ok) throw new Error("http " + r.status);
-      const blob = await r.blob();
-      if (blob.size < 500) throw new Error("пусто");
+      /* картинка рисуется в момент первого запроса — даём три попытки с паузой */
+      let blob = null, last = null;
+      for (let att = 0; att < 3 && !blob; att++){
+        try{
+          const r = await fetch(it.url + (att ? "&a=" + att : ""));
+          if (!r.ok) throw new Error("http " + r.status);
+          const bl = await r.blob();
+          if (bl.size < 500) throw new Error("пусто");
+          blob = bl;
+        }catch(e){ last = e; await new Promise(r2 => setTimeout(r2, 2500 * (att + 1))); }
+      }
+      if (!blob) throw last || new Error("нет картинки");
       const path = COURSE + "/" + it.key + ".jpg";
       const up = await sb.storage.from("book-art")
         .upload(path, blob, { contentType: blob.type || "image/jpeg", upsert: true });
