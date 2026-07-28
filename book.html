@@ -26,7 +26,7 @@
   .grow{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
   /* ---------- разворот ---------- */
-  .book{position:relative;max-width:900px;margin:0 auto;padding:30px 28px 120px}
+  .book{position:relative;width:100%;max-width:900px;margin:0 auto;align-self:center;padding:30px 28px 120px}
   .kicker{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent)}
   .book h1{margin:10px 0 0;font-size:44px;font-weight:800;line-height:1.03;letter-spacing:-.02em}
   .book h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.01em}
@@ -57,6 +57,8 @@
   .card2 .pic{width:56px;height:56px;object-fit:cover;flex:none;background:var(--color-neutral-200);
     border:2px solid var(--color-divider)}
   .card2 .say.human{color:var(--color-accent)}
+  .card2 .pic,.art{opacity:0;transition:opacity .3s ease-out}
+  .card2 .pic.ready,.art.ready{opacity:1}
 
   /* иллюстрации разворота */
   .art{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--color-neutral-200);
@@ -268,6 +270,36 @@ function playDialog(lines, from){
   })();
 }
 
+/* ================= бережная загрузка картинок =================
+   Бесплатный генератор отдаёт картинку по ссылке, но захлёбывается,
+   если дёрнуть его двадцатью запросами разом. Ставим очередь по два
+   и одну повторную попытку — иначе половина карточек остаётся пустой. */
+const imgQ = []; let imgActive = 0;
+function queueImg(el){
+  imgQ.push(el); pumpImg();
+}
+function pumpImg(){
+  while (imgActive < 2 && imgQ.length){
+    const el = imgQ.shift();
+    const src = el.dataset.src;
+    if (!src) continue;
+    imgActive++;
+    const done = () => { imgActive--; pumpImg(); };
+    el.onload = () => { el.classList.add("ready"); done(); };
+    el.onerror = () => {
+      if (!el.dataset.retry){            /* один повтор через паузу */
+        el.dataset.retry = "1";
+        setTimeout(() => { el.src = src + "&r=1"; }, 1500 + Math.random() * 1500);
+      } else { el.remove(); }
+      done();
+    };
+    el.src = src;
+  }
+}
+function armImages(root){
+  root.querySelectorAll("img[data-src]").forEach(queueImg);
+}
+
 /* ================= сохранение ответов ================= */
 const pending = [];
 function record(section, exIndex, question, answer, correct){
@@ -343,7 +375,7 @@ function bindGap(root, items, section){
 function wordCards(items){
   return '<div class="cards">' + items.map(w =>
     '<div class="card2">' +
-    (w.img ? '<img class="pic" src="' + esc(w.img) + '" alt="" loading="lazy">' : "") +
+    (w.img ? '<img class="pic" data-src="' + esc(w.img) + '" alt="">' : "") +
     '<div><div class="en">' + esc(w.en) + '</div>' +
     '<div class="ru">' + esc(w.ru || "") + '</div></div>' +
     '<button class="say' + (w.audio ? " human" : "") + '" data-w="' + esc(w.en) + '"' +
@@ -366,7 +398,7 @@ function renderSpread(){
   started = Date.now();
   let h = '<div class="kicker">Unit ' + u.n + ' · ' + esc(u.title) + ' · разворот ' + (si + 1) + ' из ' + u.spreads.length + '</div>';
 
-  const art = s.art ? '<img class="art" src="' + esc(s.art) + '" alt="" loading="lazy">' : "";
+  const art = s.art ? '<img class="art" data-src="' + esc(s.art) + '" alt="">' : "";
 
   if (s.kind === "cover"){
     h += '<h1>' + esc(s.title) + '</h1><div class="lead">' + esc(s.desc || "") + '</div>' +
@@ -439,6 +471,8 @@ function renderSpread(){
   }
 
   b.innerHTML = h;
+
+  imgQ.length = 0; armImages(b);
 
   /* озвучка слов и реплик */
   b.querySelectorAll(".card2 .say").forEach(x => x.onclick = () => playWord(x));
