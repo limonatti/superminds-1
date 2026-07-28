@@ -413,21 +413,47 @@ function pumpImg(){
     const el = imgQ.shift();
     const src = el.dataset.src;
     if (!src) continue;
+
+    /* очередь адресов: сначала своё хранилище, потом чужой сервер, потом повтор */
+    const chain = [];
+    const key = el.dataset.key;
+    if (src.indexOf(MINE) >= 0) chain.push(src);
+    else {
+      if (key) chain.push(SB_URL + MINE + COURSE + "/" + key + ".jpg");
+      chain.push(src);
+      chain.push(src + "&r=1");
+    }
+
     imgActive++;
+    let step = 0;
     const done = () => { imgActive--; pumpImg(); };
     el.onload = () => { el.classList.add("ready"); done(); };
     el.onerror = () => {
-      if (!el.dataset.retry){            /* один повтор через паузу */
-        el.dataset.retry = "1";
-        setTimeout(() => { el.src = src + "&r=1"; }, 1500 + Math.random() * 1500);
-      } else { el.remove(); }
-      done();
+      step++;
+      if (step < chain.length){
+        const wait = step === 1 ? 0 : 1200 + Math.random() * 1200;   /* своё не нашлось — сразу дальше */
+        setTimeout(() => { el.src = chain[step]; }, wait);
+      } else { el.remove(); done(); }
     };
-    el.src = src;
+    el.src = chain[0];
   }
 }
+/* Каждой картинке проставляем постоянный ключ. По нему читалка сначала ищет
+   картинку в нашем хранилище и только потом идёт на чужой сервер. Благодаря этому
+   пересборка книги больше не «теряет» перенесённые картинки. */
 function armImages(root){
-  root.querySelectorAll("img[data-src]").forEach(queueImg);
+  const u = BOOK && BOOK.units[ui];
+  root.querySelectorAll("img[data-src]").forEach(el => {
+    if (u && !el.dataset.key){
+      if (el.classList.contains("art")) el.dataset.key = "u" + u.n + "-s" + si;
+      else {
+        const card = el.closest(".card2");
+        const en = card && card.querySelector(".en") ? card.querySelector(".en").textContent : "";
+        if (en) el.dataset.key = "u" + u.n + "-w-" + en.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+      }
+    }
+    queueImg(el);
+  });
 }
 
 /* ================= сохранение ответов ================= */
