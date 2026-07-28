@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учебник · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  /* ---------- панель книги ---------- */
+  .bbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    padding:12px 20px;background:var(--color-bg);border-bottom:2px solid var(--color-divider)}
+  .bbar select{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    border-radius:0;padding:9px 10px;font:700 12px "Archivo",sans-serif;max-width:230px}
+  .bbar .t{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)}
+  .tool{border:2px solid var(--color-text);background:none;color:var(--color-text);border-radius:0;
+    padding:9px 12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:7px}
+  .tool:hover{background:var(--color-text);color:var(--color-bg)}
+  .tool.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .tool.teach{border-color:var(--color-accent);color:var(--color-accent)}
+  .tool.teach:hover,.tool.teach.on{background:var(--color-accent);color:#fff}
+  .grow{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+  /* ---------- разворот ---------- */
+  .book{position:relative;max-width:900px;margin:0 auto;padding:30px 28px 120px}
+  .kicker{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent)}
+  .book h1{margin:10px 0 0;font-size:44px;font-weight:800;line-height:1.03;letter-spacing:-.02em}
+  .book h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.01em}
+  .lead{font-size:17px;font-weight:500;color:var(--color-neutral-700);line-height:1.5;margin-top:12px}
+  .blk{margin-top:28px;border-top:2px solid var(--color-divider);padding-top:20px}
+  .blk .h{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--color-neutral-600);margin-bottom:14px}
+
+  .prose{font-size:17px;line-height:1.65}
+  .prose p{margin:0 0 14px}
+  .prose table{width:100%;border-collapse:collapse;margin:8px 0 16px}
+  .prose th{text-align:left;background:var(--color-surface);font-size:11px;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;padding:10px 12px;border:2px solid var(--color-divider)}
+  .prose td{padding:10px 12px;border:2px solid var(--color-divider);font-size:15px}
+  .prose .g-ex{padding:12px 14px;border-left:6px solid var(--color-accent);background:var(--color-accent-100);margin:0 0 10px}
+  .prose .ru{color:var(--color-neutral-700);font-weight:600}
+
+  /* слова и чанки */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0;
+    border-top:2px solid var(--color-divider);border-left:2px solid var(--color-divider)}
+  .card2{padding:14px 16px;border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);
+    display:flex;align-items:flex-start;gap:10px;background:var(--color-bg)}
+  .card2:hover{background:var(--color-accent-100)}
+  .card2 .en{font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .card2 .ru{font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-top:3px}
+  .card2 .say{margin-left:auto;border:0;background:none;color:var(--color-neutral-600);padding:2px}
+  .card2 .say:hover{color:var(--color-accent)}
+
+  /* диалог */
+  .dlg{border-top:2px solid var(--color-divider)}
+  .line{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:start;
+    padding:14px 12px;border-bottom:2px solid var(--color-divider)}
+  .line .who{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);padding-top:3px}
+  .line.f .who{color:var(--color-accent)}
+  .line .tx{font-size:17px;line-height:1.5}
+  .line .say{border:0;background:none;color:var(--color-neutral-500);padding:2px}
+  .line .say:hover{color:var(--color-accent)}
+  .line.now{background:var(--color-accent-100)}
+  .line.hid .tx{filter:blur(5px);user-select:none}
+
+  /* упражнения */
+  .q{border-top:2px solid var(--color-divider);padding:18px 0}
+  .q .num{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-500)}
+  .q .txt{font-size:18px;font-weight:600;line-height:1.45;margin:6px 0 14px}
+  .opts{display:grid;gap:8px}
+  .opt{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);border-radius:0;
+    padding:13px 16px;font:600 16px "Archivo",sans-serif;text-align:left;display:flex;align-items:center;gap:12px}
+  .opt:hover{background:var(--color-accent-100)}
+  .opt b{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--color-neutral-600);flex:none}
+  .opt.ok{background:#4a8b34;border-color:#4a8b34;color:#fff}
+  .opt.ok b{color:rgba(255,255,255,.75)}
+  .opt.no{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .opt.no b{color:rgba(255,255,255,.75)}
+  .opt[disabled]{cursor:default}
+  .key{display:none;margin-top:10px;padding:10px 14px;background:var(--color-surface);
+    border-left:6px solid var(--color-accent);font-size:14px;font-weight:700}
+  body.keys .key{display:block}
+
+  .gapin{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:12px 14px;font:600 17px "Archivo",sans-serif;width:min(340px,100%)}
+  .gapin:focus{outline:none;border-color:var(--color-accent)}
+  .gapin.ok{border-color:#4a8b34;background:#f0f7ee}
+  .gapin.no{border-color:var(--color-accent);background:var(--color-accent-100)}
+  .grow2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+  .tasks{counter-reset:t}
+  .task{border-top:2px solid var(--color-divider);padding:16px 0 16px 44px;position:relative;font-size:17px;line-height:1.5}
+  .task::before{counter-increment:t;content:counter(t);position:absolute;left:0;top:16px;
+    font-size:20px;font-weight:800;color:var(--color-accent)}
+
+  /* видео */
+  .vid{border:2px solid var(--color-divider);background:var(--color-surface);padding:16px}
+  .vid iframe{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+  .vid input{width:100%;border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:11px 12px;font:600 14px "Archivo",sans-serif}
+
+  /* заметки, шторка */
+  .notes{position:fixed;right:0;top:0;bottom:0;width:320px;z-index:40;background:var(--color-text);color:#fff;
+    padding:20px;display:none;flex-direction:column;gap:12px}
+  .notes.on{display:flex}
+  .notes textarea{flex:1;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2);color:#fff;
+    padding:12px;font:600 14px "Archivo",sans-serif;resize:none}
+  .notes textarea:focus{outline:none;border-color:var(--color-accent)}
+  .curtain{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--color-accent);display:none;
+    align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;cursor:ns-resize;user-select:none}
+  .curtain.on{display:flex}
+
+  /* нижняя навигация */
+  .pager{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;align-items:center;gap:12px;
+    padding:12px 20px;background:var(--color-bg);border-top:2px solid var(--color-divider)}
+  .pager .mid{flex:1;min-width:0;text-align:center;font-size:12px;font-weight:700;
+    color:var(--color-neutral-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pbar{position:fixed;left:0;right:0;bottom:57px;height:4px;background:var(--color-neutral-300);z-index:26}
+  .pbar i{display:block;height:100%;background:var(--color-accent);transition:width .2s ease-out}
+
+  @media(max-width:820px){
+    .book{padding:22px 18px 130px}
+    .book h1{font-size:32px}
+    .line{grid-template-columns:70px minmax(0,1fr) auto;gap:10px}
+    .notes{width:100%}
+    .pager{left:64px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="bbar" id="bbar" style="display:none">
+      <a class="tool" href="index.html">← Курс</a>
+      <select id="uSel" title="Юнит"></select>
+      <select id="sSel" title="Разворот"></select>
+      <span class="grow" id="tools"></span>
+    </div>
+    <div class="book" id="book"></div>
+  </div>
+</div>
+
+<div class="pbar" id="pbarWrap" style="display:none"><i id="pbar"></i></div>
+<div class="pager" id="pager" style="display:none">
+  <button class="tool" id="prev">← Назад</button>
+  <span class="mid" id="pmid"></span>
+  <button class="tool" id="next" style="border-color:var(--color-accent);background:var(--color-accent);color:#fff">Вперёд →</button>
+</div>
+<div class="curtain" id="curtain" style="height:0">Шторка · тяни вверх</div>
+<div class="notes" id="notes">
+  <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.6">Заметки к развороту</div>
+  <textarea id="ntArea" placeholder="Что разобрать, на чём споткнулись, что задать…"></textarea>
+  <button class="tool" id="ntSave" style="border-color:#fff;color:#fff">Сохранить</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+const q = new URLSearchParams(location.search);
+const COURSE = q.get("c") || "speakout-b1";
+
+const SB_URL = "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
+const SB_KEY = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+let sb = null;
+try { sb = window.supabase.createClient(SB_URL, SB_KEY); } catch (e) {}
+
+let BOOK = null, ui = 0, si = 0, isTeacher = false, ME = null;
+let answered = {};           /* ключ разворота -> сохранённые ответы */
+let started = Date.now();
+
+/* ================= голоса для диалогов ================= */
+const V = { m: null, f: null, ready: false };
+function pickVoices(){
+  const all = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+  if (!all.length) return;
+  const en = all.filter(v => /^en(-|_)?/i.test(v.lang));
+  const gb = en.filter(v => /GB|UK|British/i.test(v.lang + " " + v.name));
+  const pool = gb.length ? gb : en;
+  const male = /daniel|arthur|george|oliver|male|alex|fred|rishi|thomas/i;
+  const female = /serena|kate|sonia|martha|female|samantha|karen|moira|tessa|libby|hazel/i;
+  V.m = pool.find(v => male.test(v.name)) || pool[0] || null;
+  V.f = pool.find(v => female.test(v.name) && v !== V.m) || pool.find(v => v !== V.m) || V.m;
+  V.ready = true;
+}
+if (window.speechSynthesis){ pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
+
+function say(text, who, cb){
+  if (!window.speechSynthesis) { if (cb) cb(); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-GB";
+  const v = who === "f" ? V.f : who === "m" ? V.m : (V.f || V.m);
+  if (v) u.voice = v;
+  /* если голос один — разводим персонажей высотой и темпом */
+  if (V.m === V.f) { u.pitch = who === "f" ? 1.25 : 0.8; u.rate = who === "f" ? 1.0 : 0.92; }
+  else { u.pitch = who === "f" ? 1.05 : 0.95; u.rate = 0.95; }
+  if (cb) u.onend = cb;
+  speechSynthesis.speak(u);
+}
+
+let playing = false;
+function playDialog(lines, from){
+  const box = document.getElementById("dlgBox");
+  if (!box) return;
+  if (playing){ playing = false; speechSynthesis.cancel();
+    box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
+    const b = document.getElementById("playBtn"); if (b) b.classList.remove("on"), b.textContent = "Слушать диалог";
+    return; }
+  playing = true;
+  const b = document.getElementById("playBtn");
+  if (b){ b.classList.add("on"); b.textContent = "Стоп"; }
+  let i = from || 0;
+  (function step(){
+    if (!playing || i >= lines.length){
+      playing = false;
+      box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
+      if (b){ b.classList.remove("on"); b.textContent = "Слушать диалог"; }
+      return;
+    }
+    box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
+    const el = box.querySelector('.line[data-i="' + i + '"]');
+    if (el){ el.classList.add("now"); el.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    say(lines[i].text, lines[i].who, () => { i++; setTimeout(step, 260); });
+  })();
+}
+
+/* ================= сохранение ответов ================= */
+const pending = [];
+function record(section, exIndex, question, answer, correct){
+  pending.push({ course: COURSE, unit: BOOK.units[ui].n, ex_index: exIndex,
+    section: section, question: question, answer: answer, correct: correct,
+    duration_ms: Date.now() - started });
+  if (pending.length >= 4) flush();
+}
+async function flush(){
+  if (!pending.length || !window.SM || !SM.isCloud) return;
+  const rows = pending.splice(0, pending.length);
+  try { await SM.saveHwAttempts(rows); } catch (e) {}
+}
+window.addEventListener("beforeunload", flush);
+setInterval(flush, 20000);
+
+/* ================= отрисовка разворотов ================= */
+function mcBlock(items, section){
+  return '<div class="tasks">' + items.map((it, k) => {
+    const opts = (it.o || []).map((o, j) =>
+      '<button class="opt" data-k="' + k + '" data-j="' + j + '"><b>' +
+      "ABCD"[j] + '</b><span>' + esc(o) + '</span></button>').join("");
+    return '<div class="q" data-k="' + k + '">' +
+      '<div class="num">Задание ' + (k + 1) + '</div>' +
+      '<div class="txt">' + esc(it.q || "") + '</div>' +
+      '<div class="opts">' + opts + '</div>' +
+      '<div class="key">Ответ: ' + esc((it.o || [])[it.a] || "") + '</div>' +
+      '</div>';
+  }).join("") + '</div>';
+}
+function bindMC(root, items, section){
+  root.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    const k = +b.dataset.k, j = +b.dataset.j, it = items[k];
+    const wrap = root.querySelector('.q[data-k="' + k + '"]');
+    if (wrap.dataset.done) return;
+    wrap.dataset.done = "1";
+    const right = j === it.a;
+    b.classList.add(right ? "ok" : "no");
+    if (!right){
+      const good = wrap.querySelector('.opt[data-j="' + it.a + '"]');
+      if (good) good.classList.add("ok");
+    }
+    wrap.querySelectorAll(".opt").forEach(x => x.disabled = true);
+    record(section, k + 1, it.q || "", (it.o || [])[j] || "", right);
+  });
+}
+function gapBlock(items){
+  return '<div class="tasks">' + items.map((it, k) =>
+    '<div class="q" data-k="' + k + '">' +
+      '<div class="num">Задание ' + (k + 1) + '</div>' +
+      '<div class="txt">' + esc(it.q || "") + '</div>' +
+      '<div class="grow2"><input class="gapin" data-k="' + k + '" placeholder="впиши ответ">' +
+      '<button class="tool" data-check="' + k + '">Проверить</button></div>' +
+      '<div class="key">Ответ: ' + esc((it.a || []).join(" / ")) + '</div>' +
+    '</div>').join("") + '</div>';
+}
+function bindGap(root, items, section){
+  function check(k){
+    const inp = root.querySelector('.gapin[data-k="' + k + '"]');
+    const wrap = root.querySelector('.q[data-k="' + k + '"]');
+    if (!inp || wrap.dataset.done) return;
+    const val = (inp.value || "").trim().toLowerCase();
+    if (!val) return;
+    const ok = (items[k].a || []).some(a => String(a).trim().toLowerCase() === val);
+    inp.classList.add(ok ? "ok" : "no");
+    wrap.dataset.done = "1"; inp.disabled = true;
+    if (!ok) wrap.querySelector(".key").style.display = "block";
+    record(section, k + 1, items[k].q || "", inp.value, ok);
+  }
+  root.querySelectorAll("[data-check]").forEach(b => b.onclick = () => check(+b.dataset.check));
+  root.querySelectorAll(".gapin").forEach(i => i.onkeydown = e => { if (e.key === "Enter") check(+i.dataset.k); });
+}
+function wordCards(items){
+  return '<div class="cards">' + items.map(w =>
+    '<div class="card2"><div><div class="en">' + esc(w.en) + '</div>' +
+    '<div class="ru">' + esc(w.ru || "") + '</div></div>' +
+    '<button class="say" data-w="' + esc(w.en) + '" title="Послушать">' + icon("sound", 16) + '</button></div>').join("") + '</div>';
+}
+
+function renderSpread(){
+  const u = BOOK.units[ui], s = u.spreads[si];
+  const b = document.getElementById("book");
+  started = Date.now();
+  let h = '<div class="kicker">Unit ' + u.n + ' · ' + esc(u.title) + ' · разворот ' + (si + 1) + ' из ' + u.spreads.length + '</div>';
+
+  if (s.kind === "cover"){
+    h += '<h1>' + esc(s.title) + '</h1><div class="lead">' + esc(s.desc || "") + '</div>';
+    if ((s.goals || []).length)
+      h += '<div class="blk"><div class="h">Что разберём</div><div class="tasks">' +
+        s.goals.map(g => '<div class="task">' + esc(g) + '</div>').join("") + '</div></div>';
+    h += '<div class="blk"><div class="h">Видео к юниту</div><div class="vid" id="vidBox"></div></div>';
+  }
+  else if (s.kind === "words" || s.kind === "chunks"){
+    h += '<h2>' + esc(s.title) + '</h2>';
+    h += '<div class="blk"><div class="h">' + (s.kind === "words" ? "Основные слова" : "Выражения") + ' · ' + (s.items || []).length + '</div>' + wordCards(s.items || []) + '</div>';
+    if ((s.extra || []).length)
+      h += '<div class="blk"><div class="h">Дополнительно</div>' + wordCards(s.extra) + '</div>';
+  }
+  else if (s.kind === "grammar" || s.kind === "hw"){
+    h += '<h2>' + esc(s.title) + '</h2><div class="blk"><div class="prose">' + (s.html || "") + '</div></div>';
+  }
+  else if (s.kind === "listening"){
+    const sp = s.speakers || {};
+    h += '<h2>' + esc(s.title) + '</h2>' +
+      '<div class="blk"><div class="h">Диалог · ' + esc(sp.m || "M") + ' и ' + esc(sp.f || "F") + '</div>' +
+      '<div class="grow2" style="margin-bottom:14px">' +
+        '<button class="tool" id="playBtn">Слушать диалог</button>' +
+        '<button class="tool" id="hideBtn">Скрыть текст</button></div>' +
+      '<div class="dlg" id="dlgBox">' + (s.lines || []).map((l, i) =>
+        '<div class="line ' + (l.who === "f" ? "f" : "m") + '" data-i="' + i + '">' +
+        '<div class="who">' + esc(l.who === "f" ? (sp.f || "F") : (sp.m || "M")) + '</div>' +
+        '<div class="tx">' + esc(l.text) + '</div>' +
+        '<button class="say" data-i="' + i + '" title="Послушать">' + icon("sound", 16) + '</button></div>').join("") +
+      '</div></div>';
+    if ((s.questions || []).length)
+      h += '<div class="blk"><div class="h">Вопросы по аудио</div>' + mcBlock(s.questions, "listening") + '</div>';
+  }
+  else if (s.kind === "reading"){
+    h += '<h2>' + esc(s.title) + '</h2>' +
+      '<div class="blk"><div class="prose">' + (s.html || "") + '</div>' +
+      '<div class="grow2" style="margin-top:12px"><button class="tool" id="readAll">Прочитать вслух</button></div></div>';
+    if ((s.questions || []).length)
+      h += '<div class="blk"><div class="h">Вопросы по тексту</div>' + mcBlock(s.questions, "reading") + '</div>';
+  }
+  else if (s.kind === "pron"){
+    h += '<h2>' + esc(s.title) + '</h2>' +
+      '<div class="lead"><b>' + esc(s.focus || "") + '</b></div>' +
+      '<div class="blk"><div class="prose">' + (s.note || "") + '</div>' +
+      wordCards((s.items || []).map(w => ({ en: w, ru: "" }))) + '</div>';
+  }
+  else if (s.kind === "mc"){
+    h += '<h2>' + esc(s.title) + '</h2><div class="blk">' + mcBlock(s.items || [], "exercises") + '</div>';
+  }
+  else if (s.kind === "gap"){
+    h += '<h2>' + esc(s.title) + '</h2><div class="blk">' + gapBlock(s.items || []) + '</div>';
+  }
+  else if (s.kind === "howto"){
+    h += '<h2>' + esc(s.title) + '</h2><div class="blk"><div class="prose">' + (s.html || "") + '</div></div>';
+    if ((s.questions || []).length)
+      h += '<div class="blk"><div class="h">Выбери, что сказать</div>' + mcBlock(s.questions, "function") + '</div>';
+  }
+  else if (s.kind === "workbook"){
+    h += '<h2>' + esc(s.title) + '</h2>';
+    if ((s.mc || []).length) h += '<div class="blk"><div class="h">Выбери вариант</div>' + mcBlock(s.mc, "workbook") + '</div>';
+    if ((s.gaps || []).length) h += '<div class="blk"><div class="h">Впиши</div>' + gapBlock(s.gaps) + '</div>';
+  }
+  else if (s.kind === "speaking"){
+    h += '<h2>' + esc(s.title) + '</h2><div class="blk"><div class="tasks">' +
+      (s.items || []).map(t => '<div class="task">' + esc(t) + '</div>').join("") + '</div></div>';
+  }
+  else {
+    h += '<h2>' + esc(s.title || "") + '</h2><div class="blk"><div class="prose">' + (s.html || "") + '</div></div>';
+  }
+
+  b.innerHTML = h;
+
+  /* озвучка слов и реплик */
+  b.querySelectorAll(".card2 .say").forEach(x => x.onclick = () => say(x.dataset.w, "f"));
+  b.querySelectorAll(".line .say").forEach(x => x.onclick = () => {
+    const i = +x.dataset.i, l = (s.lines || [])[i];
+    if (l) say(l.text, l.who);
+  });
+  const pb = document.getElementById("playBtn");
+  if (pb) pb.onclick = () => playDialog(s.lines || [], 0);
+  const hb = document.getElementById("hideBtn");
+  if (hb) hb.onclick = () => {
+    const box = document.getElementById("dlgBox");
+    const on = box.classList.toggle("hidall");
+    box.querySelectorAll(".line").forEach(l => l.classList.toggle("hid", on));
+    hb.textContent = on ? "Показать текст" : "Скрыть текст";
+    hb.classList.toggle("on", on);
+  };
+  const ra = document.getElementById("readAll");
+  if (ra) ra.onclick = () => {
+    const t = b.querySelector(".prose").textContent.replace(/\s+/g, " ").trim();
+    say(t, "f");
+  };
+
+  /* интерактив */
+  if (s.kind === "mc") bindMC(b, s.items || [], "exercises");
+  if (s.kind === "listening" && (s.questions || []).length) bindMC(b, s.questions, "listening");
+  if (s.kind === "reading" && (s.questions || []).length) bindMC(b, s.questions, "reading");
+  if (s.kind === "howto" && (s.questions || []).length) bindMC(b, s.questions, "function");
+  if (s.kind === "gap") bindGap(b, s.items || [], "gapfill");
+  if (s.kind === "workbook"){
+    if ((s.mc || []).length) bindMC(b, s.mc, "workbook");
+    if ((s.gaps || []).length) bindGap(b, s.gaps, "workbook");
+  }
+  if (s.kind === "cover") renderVideo();
+
+  /* навигация и заметки */
+  document.getElementById("sSel").value = String(si);
+  const nxt = (u.spreads[si + 1] || {}).title || (BOOK.units[ui + 1] ? "Unit " + BOOK.units[ui + 1].n : "конец курса");
+  document.getElementById("pmid").textContent = "Дальше: " + nxt;
+  const done = BOOK.units.slice(0, ui).reduce((a, x) => a + x.spreads.length, 0) + si + 1;
+  const all = BOOK.units.reduce((a, x) => a + x.spreads.length, 0);
+  document.getElementById("pbar").style.width = (done / all * 100) + "%";
+  loadNote();
+  window.scrollTo({ top: 0 });
+  if (lessonOn) broadcast();
+}
+
+/* ---------- видео к юниту ---------- */
+function ytEmbed(url){
+  const m = String(url).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/);
+  return m ? "https://www.youtube-nocookie.com/embed/" + m[1] : null;
+}
+function renderVideo(){
+  const box = document.getElementById("vidBox");
+  if (!box) return;
+  const u = BOOK.units[ui];
+  const emb = ytEmbed(u.video || "");
+  if (emb){
+    box.innerHTML = '<iframe src="' + emb + '" allowfullscreen loading="lazy"></iframe>' +
+      (isTeacher ? '<div class="grow2" style="margin-top:10px"><button class="tool" id="vidEdit">Заменить ссылку</button></div>' : "");
+    const e = document.getElementById("vidEdit");
+    if (e) e.onclick = () => { u.video = ""; renderVideo(); };
+    return;
+  }
+  if (!isTeacher){
+    box.innerHTML = '<div style="font-size:14px;font-weight:600;color:var(--color-neutral-700)">Видео к этому юниту учитель ещё не добавил.</div>';
+    return;
+  }
+  box.innerHTML = '<input id="vidUrl" placeholder="вставь ссылку на YouTube">' +
+    '<div class="grow2" style="margin-top:10px"><button class="tool" id="vidSave">Сохранить видео</button>' +
+    '<span style="font-size:12px;font-weight:600;color:var(--color-neutral-700)">видно только твоим ученикам</span></div>';
+  document.getElementById("vidSave").onclick = async () => {
+    const v = (document.getElementById("vidUrl").value || "").trim();
+    if (!ytEmbed(v)) { alert("Не похоже на ссылку YouTube"); return; }
+    u.video = v; renderVideo(); await saveBook();
+  };
+}
+
+/* ---------- заметки учителя ---------- */
+function noteKey(){ return "book-note-" + COURSE + "-" + BOOK.units[ui].n + "-" + si; }
+function loadNote(){
+  const a = document.getElementById("ntArea");
+  try { a.value = localStorage.getItem(noteKey()) || ""; } catch (e) {}
+}
+document.getElementById("ntSave").onclick = e => {
+  try { localStorage.setItem(noteKey(), document.getElementById("ntArea").value); e.target.textContent = "Сохранено"; }
+  catch (err) { e.target.textContent = "Не вышло"; }
+  setTimeout(() => { e.target.textContent = "Сохранить"; }, 1200);
+};
+
+/* ---------- режим урока: ученик видит ту же страницу ---------- */
+let lessonOn = false, chan = null;
+function lessonChannel(){
+  if (chan || !sb) return chan;
+  chan = sb.channel("book-" + COURSE, { config: { broadcast: { self: false } } });
+  chan.on("broadcast", { event: "page" }, ({ payload }) => {
+    if (isTeacher || !lessonOn) return;
+    if (payload && typeof payload.u === "number"){ ui = payload.u; si = payload.s || 0; fillSpreads(); renderSpread(); }
+  });
+  chan.subscribe();
+  return chan;
+}
+function broadcast(){
+  if (!isTeacher || !lessonOn || !chan) return;
+  chan.send({ type: "broadcast", event: "page", payload: { u: ui, s: si } });
+}
+
+/* ---------- шторка ---------- */
+(function(){
+  const c = document.getElementById("curtain");
+  let drag = false;
+  c.addEventListener("pointerdown", e => { drag = true; c.setPointerCapture(e.pointerId); });
+  c.addEventListener("pointermove", e => {
+    if (!drag) return;
+    const h = Math.max(0, window.innerHeight - e.clientY);
+    c.style.height = h + "px";
+  });
+  c.addEventListener("pointerup", () => { drag = false; });
+})();
+
+/* ---------- селекторы и кнопки ---------- */
+function fillSpreads(){
+  const u = BOOK.units[ui];
+  document.getElementById("uSel").value = String(ui);
+  document.getElementById("sSel").innerHTML = u.spreads.map((s, i) =>
+    '<option value="' + i + '">' + (i + 1) + ". " + esc(s.title).slice(0, 40) + "</option>").join("");
+}
+function go(du, ds){
+  if (du !== null){ ui = du; si = 0; fillSpreads(); }
+  else {
+    si += ds;
+    if (si < 0){ if (ui > 0){ ui--; fillSpreads(); si = BOOK.units[ui].spreads.length - 1; } else si = 0; }
+    if (si >= BOOK.units[ui].spreads.length){
+      if (ui < BOOK.units.length - 1){ ui++; fillSpreads(); si = 0; } else si = BOOK.units[ui].spreads.length - 1;
+    }
+  }
+  renderSpread();
+}
+document.getElementById("prev").onclick = () => go(null, -1);
+document.getElementById("next").onclick = () => go(null, 1);
+document.addEventListener("keydown", e => {
+  if (/input|textarea/i.test((e.target.tagName || ""))) return;
+  if (e.key === "ArrowLeft") go(null, -1);
+  if (e.key === "ArrowRight") go(null, 1);
+});
+
+function buildTools(){
+  const t = document.getElementById("tools");
+  let h = "";
+  if (isTeacher){
+    h += '<button class="tool teach" id="keysBtn">Ключи</button>' +
+         '<button class="tool teach" id="curtBtn">Шторка</button>' +
+         '<button class="tool teach" id="notesBtn">Заметки</button>' +
+         '<button class="tool teach" id="lessonBtn">Режим урока</button>';
+  }
+  t.innerHTML = h;
+  if (!isTeacher) return;
+  document.getElementById("keysBtn").onclick = e => {
+    document.body.classList.toggle("keys");
+    e.target.classList.toggle("on", document.body.classList.contains("keys"));
+  };
+  document.getElementById("curtBtn").onclick = e => {
+    const c = document.getElementById("curtain");
+    const on = c.classList.toggle("on");
+    c.style.height = on ? "220px" : "0";
+    e.target.classList.toggle("on", on);
+  };
+  document.getElementById("notesBtn").onclick = e => {
+    const on = document.getElementById("notes").classList.toggle("on");
+    e.target.classList.toggle("on", on);
+  };
+  document.getElementById("lessonBtn").onclick = e => {
+    lessonOn = !lessonOn;
+    e.target.classList.toggle("on", lessonOn);
+    if (lessonOn){ lessonChannel(); broadcast(); }
+  };
+}
+
+/* ---------- загрузка и доступ ---------- */
+async function saveBook(){
+  if (!sb || !isTeacher) return;
+  try { await sb.from("book_content").update({ data: BOOK }).eq("course", COURSE); } catch (e) {}
+}
+
+async function loadBook(){
+  if (!sb) return null;
+  const { data, error } = await sb.from("book_content").select("data").eq("course", COURSE).maybeSingle();
+  if (error || !data) return null;
+  return data.data;
+}
+
+function denied(title, text){
+  document.getElementById("book").innerHTML =
+    '<div class="kicker">Учебник / Coursebook</div><h1>' + esc(title) + '</h1>' +
+    '<div class="lead">' + text + '</div>' +
+    '<div class="blk"><a class="tool" href="index.html">← Вернуться к курсам</a></div>';
+}
+
+(async function(){
+  SMUI.mount({ role: "student", active: "courses" });
+  const pane = document.getElementById("book");
+  pane.innerHTML = '<div class="kicker">Учебник</div><h1>Открываю…</h1>';
+
+  ME = await SMUI.user();
+  if (!ME){
+    denied("Только для учеников курса",
+      "Этот учебник открыт лишь тем, кто занимается со мной. Войди под своим аккаунтом — и страница откроется.");
+    return;
+  }
+
+  /* учитель или ученик, записанный на этот курс */
+  let prof = null, enrolled = null;
+  try { prof = await SM.myProfile(); } catch (e) {}
+  try { enrolled = await SM.myCourse(); } catch (e) {}
+  isTeacher = !!(prof && prof.role === "teacher");
+  if (!isTeacher && enrolled !== COURSE){
+    denied("Курс тебе ещё не назначен",
+      "Учебник открывается, когда учитель записывает тебя на этот курс. Напиши мне — открою доступ.");
+    return;
+  }
+
+  BOOK = await loadBook();
+  if (!BOOK || !BOOK.units || !BOOK.units.length){
+    denied("Учебник ещё не загружен",
+      "Содержимое хранится в закрытой базе и пока не залито. Если ты учитель — загрузи книгу из панели.");
+    return;
+  }
+
+  document.getElementById("uSel").innerHTML = BOOK.units.map((u, i) =>
+    '<option value="' + i + '">Unit ' + u.n + " · " + esc(u.title) + "</option>").join("");
+  document.getElementById("uSel").onchange = e => go(+e.target.value, 0);
+  document.getElementById("sSel").onchange = e => { si = +e.target.value; renderSpread(); };
+
+  const wantU = +(q.get("u") || 1);
+  ui = Math.max(0, BOOK.units.findIndex(x => x.n === wantU));
+  if (ui < 0) ui = 0;
+
+  buildTools();
+  fillSpreads();
+  renderSpread();
+  if (!isTeacher) lessonChannel(), lessonOn = true;   /* ученик следует за учителем */
+
+  document.getElementById("bbar").style.display = "flex";
+  document.getElementById("pager").style.display = "flex";
+  document.getElementById("pbarWrap").style.display = "block";
+})();
+</script>
+</body>
+</html>

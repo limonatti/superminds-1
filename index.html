@@ -162,7 +162,8 @@ function drawPane(){
         '<a class="go" href="'+c.id+'-course.html">'+icon("play",15)+' Открыть курс</a></div>' +
       unitStrip(labels.map((_,i)=>"U"+(i+1)), 0, selUnit) +
       rowsHtml([
-        { t:"Лексика и чанки", d:"слова и выражения юнита "+(selUnit+1), href:c.id+"-u"+(selUnit+1)+".html", act:"Учить", now:true },
+        { t:"Учебник · интерактивные развороты", d:"страницы юнита, диалоги двумя голосами, упражнения с проверкой — только для учеников курса", href:"book.html?c="+c.id+"&u="+(selUnit+1), act:"Открыть", now:true },
+        { t:"Лексика и чанки", d:"слова и выражения юнита "+(selUnit+1), href:c.id+"-u"+(selUnit+1)+".html", act:"Учить" },
         { t:"Грамматика", d:"правила и упражнения юнита "+(selUnit+1), href:c.id+"-u"+(selUnit+1)+"-grammar.html", act:"Открыть" },
         { t:"Все чанки курса", d:"выражения из всех юнитов одним списком", href:c.id+"-chunks.html", act:"Открыть" }
       ]) +
