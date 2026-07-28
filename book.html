@@ -626,7 +626,8 @@ function buildTools(){
     h += '<button class="tool teach" id="keysBtn">Ключи</button>' +
          '<button class="tool teach" id="curtBtn">Шторка</button>' +
          '<button class="tool teach" id="notesBtn">Заметки</button>' +
-         '<button class="tool teach" id="lessonBtn">Режим урока</button>';
+         '<button class="tool teach" id="lessonBtn">Режим урока</button>' +
+         '<button class="tool teach" id="mirrorBtn" title="Скачать картинки с чужого сервера и положить в своё хранилище">Картинки к себе</button>';
   }
   t.innerHTML = h;
   if (!isTeacher) return;
@@ -644,11 +645,63 @@ function buildTools(){
     const on = document.getElementById("notes").classList.toggle("on");
     e.target.classList.toggle("on", on);
   };
+  document.getElementById("mirrorBtn").onclick = e => mirrorArt(e.target);
   document.getElementById("lessonBtn").onclick = e => {
     lessonOn = !lessonOn;
     e.target.classList.toggle("on", lessonOn);
     if (lessonOn){ lessonChannel(); broadcast(); }
   };
+}
+
+/* ---------- перенос картинок в своё хранилище ----------
+   Пока картинки живут на чужом бесплатном сервисе: работают, но если он ляжет —
+   учебник останется без иллюстраций. Кнопка скачивает их по одной и кладёт
+   в бакет book-art, а ссылки в книге подменяет на свои. */
+const MINE = "/storage/v1/object/public/book-art/";
+
+function artUrls(){
+  const list = [];
+  BOOK.units.forEach((u, ui) => u.spreads.forEach((sp, si) => {
+    if (sp.art && sp.art.indexOf(MINE) < 0) list.push({ set: v => sp.art = v, url: sp.art, key: "u" + u.n + "-s" + si });
+    ["items", "extra"].forEach(f => (sp[f] || []).forEach((w, wi) => {
+      if (w && w.img && w.img.indexOf(MINE) < 0)
+        list.push({ set: v => w.img = v, url: w.img, key: "u" + u.n + "-w-" + String(w.en || wi).replace(/[^a-z0-9]+/gi, "-").toLowerCase() });
+    }));
+  }));
+  return list;
+}
+
+async function mirrorArt(btn){
+  if (!isTeacher || !sb) return;
+  const list = artUrls();
+  if (!list.length){ btn.textContent = "Уже все свои"; return; }
+  let done = 0, fail = 0;
+  btn.disabled = true;
+  const tick = () => { btn.textContent = "Переношу " + done + "/" + list.length + (fail ? " · сбоев " + fail : ""); };
+  tick();
+
+  for (const it of list){
+    try{
+      const r = await fetch(it.url);
+      if (!r.ok) throw new Error("http " + r.status);
+      const blob = await r.blob();
+      if (blob.size < 500) throw new Error("пусто");
+      const path = COURSE + "/" + it.key + ".jpg";
+      const up = await sb.storage.from("book-art")
+        .upload(path, blob, { contentType: blob.type || "image/jpeg", upsert: true });
+      if (up.error) throw up.error;
+      const { data } = sb.storage.from("book-art").getPublicUrl(path);
+      if (data && data.publicUrl) it.set(data.publicUrl);
+      done++;
+    }catch(e){ fail++; }
+    tick();
+    await new Promise(r => setTimeout(r, 120));
+    if ((done + fail) % 12 === 0) await saveBook();     /* промежуточное сохранение */
+  }
+  await saveBook();
+  btn.disabled = false;
+  btn.textContent = "Готово: " + done + (fail ? " · не вышло " + fail : "");
+  setTimeout(() => { btn.textContent = "Картинки к себе"; renderSpread(); }, 2500);
 }
 
 /* ---------- загрузка и доступ ---------- */
