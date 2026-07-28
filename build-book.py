@@ -94,10 +94,6 @@ def spreads_for_unit(u, extras, words_by_unit):
             items=[{"en": w[0], "ru": w[1], "img": word_art(w[0])} for w in words if len(w) >= 2],
             extra=[{"en": w[0], "ru": w[1], "img": word_art(w[0])} for w in more if len(w) >= 2])
 
-    # 3. Грамматика — по развороту на тему
-    for g in u.get("grammar", []):
-        add("grammar", g.get("t", "Грамматика"), html=g.get("h", ""))
-
     # 4. Аудирование: диалог двумя голосами + вопросы
     if u.get("dialog"):
         names = u.get("names") or {}
@@ -150,6 +146,24 @@ def spreads_for_unit(u, extras, words_by_unit):
         add("chunks", "Выражения целиком / Chunks",
             items=[{"en": c[0], "ru": c[1]} for c in ex["chunks"] if len(c) >= 2])
 
+    # --- ГРАММАТИКА ИДЁТ ПОСЛЕ ТЕКСТОВ ---
+    # Порядок на каждую тему: сначала «выведи правило сам» на примерах из диалога,
+    # потом объяснение, потом отработка на тех же героях.
+    disc = _m("DISCOVERY", n) or []
+    prac = _m("GRAM_PRACTICE", n) or []
+    for gi, g in enumerate(u.get("grammar", [])):
+        d = next((x for x in disc if x.get("for") == gi), None)
+        if d:
+            add("discovery", d.get("title") or "Выведи правило",
+                source=d.get("source", ""), lead=d.get("lead", ""),
+                examples=d.get("examples") or [], steps=d.get("steps") or [],
+                rule=d.get("rule", ""))
+        add("grammar", g.get("t", "Грамматика"), html=g.get("h", ""))
+        pr = next((x for x in prac if x.get("for") == gi), None)
+        if pr:
+            add("gramprac", pr.get("title") or "Отработка",
+                lead=pr.get("lead", ""), mc=pr.get("mc") or [], gaps=pr.get("gaps") or [])
+
     # 8. Упражнения (выбор варианта)
     allmc = list(u.get("ex") or [])
     if allmc:
@@ -185,8 +199,22 @@ def spreads_for_unit(u, extras, words_by_unit):
     if egp:
         add("gap", "Дополнительно: впиши пропуски", items=egp)
 
-    # 13. Домашка
-    if u.get("hw"):
+    # 13. ДОМАШКА — отдельным разделом, на материале этого же юнита
+    hw = _m("HOMEWORK", n)
+    if hw:
+        add("hwcover", "Домашнее задание",
+            art=_art("homework illustration: desk, notebook, cup of tea, evening light"),
+            intro=hw.get("intro", ""),
+            parts=[p.get("title", "") for p in hw.get("parts", [])] +
+                  ([hw["write"].get("title", "")] if hw.get("write") else []),
+            note=u.get("hw", ""))
+        for pt in hw.get("parts", []):
+            add("hwpart", pt.get("title") or "Домашка",
+                lead=pt.get("lead", ""), mc=pt.get("mc") or [], gaps=pt.get("gaps") or [])
+        if hw.get("write"):
+            add("hwwrite", hw["write"].get("title") or "Напиши сама",
+                lead=hw["write"].get("lead", ""), tasks=hw["write"].get("tasks") or [])
+    elif u.get("hw"):
         add("hw", "Домашнее задание / Homework", html=u["hw"])
 
     return sp

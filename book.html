@@ -79,6 +79,38 @@
   .line.now{background:var(--color-accent-100)}
   .line.hid .tx{filter:blur(5px);user-select:none}
 
+  /* выведи правило сам */
+  .ex-src{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--color-neutral-600);margin-bottom:14px}
+  .exline{display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;align-items:baseline;
+    padding:13px 0;border-bottom:2px solid var(--color-divider);font-size:17px;line-height:1.5}
+  .exline .who{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent)}
+  .exline b{background:var(--color-accent-100);box-shadow:0 0 0 3px var(--color-accent-100);font-weight:800}
+  .why{display:none;margin-top:10px;padding:11px 14px;background:var(--color-surface);
+    border-left:6px solid var(--color-neutral-500);font-size:14px;font-weight:600;line-height:1.45}
+  .why.on{display:block}
+  .rule{display:none;margin-top:26px;padding:22px 24px;background:var(--color-text);color:#fff}
+  .rule.on{display:block}
+  .rule .h{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--color-accent-300);margin-bottom:10px}
+  .rule .t{font-size:18px;line-height:1.5;font-weight:600}
+  .ruleWait{margin-top:22px;font-size:13px;font-weight:700;color:var(--color-neutral-600)}
+
+  /* домашка */
+  .hwbadge{display:inline-block;background:var(--color-accent);color:#fff;padding:6px 12px;
+    font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .hwlist{border-top:2px solid var(--color-divider)}
+  .hwlist .it{display:grid;grid-template-columns:38px minmax(0,1fr);gap:14px;align-items:baseline;
+    padding:15px 0;border-bottom:2px solid var(--color-divider);font-size:17px;font-weight:700}
+  .hwlist .it span:first-child{font-size:20px;font-weight:800;color:var(--color-accent)}
+  .wtask{border-top:2px solid var(--color-divider);padding:20px 0}
+  .wtask .n{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-500)}
+  .wtask .t{font-size:17px;line-height:1.5;font-weight:600;margin:6px 0 12px}
+  .wtask textarea{width:100%;min-height:130px;border:2px solid var(--color-text);background:var(--color-bg);
+    color:var(--color-text);padding:13px 14px;font:600 16px "Archivo",sans-serif;resize:vertical}
+  .wtask textarea:focus{outline:none;border-color:var(--color-accent)}
+  .wtask .sent{font-size:13px;font-weight:700;color:#4a8b34;margin-top:8px}
+
   /* упражнения */
   .q{border-top:2px solid var(--color-divider);padding:18px 0}
   .q .num{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-500)}
@@ -462,6 +494,60 @@ function renderSpread(){
       '<div class="blk"><div class="prose">' + (s.note || "") + '</div>' +
       wordCards((s.items || []).map(w => ({ en: w, ru: "" }))) + '</div>';
   }
+  else if (s.kind === "discovery"){
+    const md = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+    h += '<div class="kicker" style="margin-top:6px">Сначала заметь · не читай правило</div>' +
+      '<h2 style="margin-top:10px">' + esc(s.title) + '</h2>' +
+      (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : "") +
+      '<div class="blk">' + (s.source ? '<div class="ex-src">Откуда: ' + esc(s.source) + '</div>' : "") +
+      (s.examples || []).map(e =>
+        '<div class="exline"><span class="who">' + esc(e.who || "") + '</span>' +
+        '<span>' + md(e.t || "") + '</span></div>').join("") + '</div>' +
+      '<div class="blk"><div class="h">Теперь ответь сама</div><div class="tasks">' +
+      (s.steps || []).map((st, k) =>
+        '<div class="q" data-k="' + k + '"><div class="num">Шаг ' + (k + 1) + '</div>' +
+        '<div class="txt">' + esc(st.q || "") + '</div>' +
+        '<div class="opts">' + (st.o || []).map((o, j) =>
+          '<button class="opt" data-k="' + k + '" data-j="' + j + '"><b>' + "ABCD"[j] + '</b>' +
+          '<span>' + esc(o) + '</span></button>').join("") + '</div>' +
+        '<div class="why">' + esc(st.why || "") + '</div></div>').join("") + '</div></div>' +
+      '<div class="ruleWait" id="ruleWait">Правило откроется, когда ответишь на все шаги.</div>' +
+      '<div class="rule" id="ruleBox"><div class="h">Ты вывела правило</div>' +
+      '<div class="t">' + esc(s.rule || "") + '</div></div>';
+  }
+  else if (s.kind === "hwcover"){
+    h += '<div class="hwbadge">Домашнее задание</div>' +
+      '<h1 style="margin-top:14px">' + esc(s.title) + '</h1>' +
+      (s.intro ? '<div class="lead">' + esc(s.intro) + '</div>' : "") +
+      (s.art ? '<div class="blk">' + art + '</div>' : "") +
+      '<div class="blk"><div class="h">Что внутри</div><div class="hwlist">' +
+      (s.parts || []).map((t, i) => '<div class="it"><span>' + (i + 1) + '</span><span>' + esc(t) + '</span></div>').join("") +
+      '</div></div>' +
+      (s.note ? '<div class="blk"><div class="h">От учителя</div><div class="prose">' + s.note + '</div></div>' : "");
+  }
+  else if (s.kind === "hwpart"){
+    h += '<div class="hwbadge">Домашка</div><h2 style="margin-top:14px">' + esc(s.title) + '</h2>' +
+      (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : "");
+    if ((s.mc || []).length) h += '<div class="blk"><div class="h">Выбери вариант</div>' + mcBlock(s.mc, "homework") + '</div>';
+    if ((s.gaps || []).length) h += '<div class="blk"><div class="h">Впиши</div>' + gapBlock(s.gaps) + '</div>';
+  }
+  else if (s.kind === "hwwrite"){
+    h += '<div class="hwbadge">Домашка</div><h2 style="margin-top:14px">' + esc(s.title) + '</h2>' +
+      (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : "") +
+      '<div class="blk">' + (s.tasks || []).map((t, i) =>
+        '<div class="wtask"><div class="n">Задание ' + (i + 1) + '</div>' +
+        '<div class="t">' + esc(t) + '</div>' +
+        '<textarea data-w="' + i + '" placeholder="пиши здесь…"></textarea>' +
+        '<div class="grow2" style="margin-top:10px">' +
+        '<button class="tool" data-send="' + i + '">Отправить учителю</button>' +
+        '<span class="sent" id="sent' + i + '"></span></div></div>').join("") + '</div>';
+  }
+  else if (s.kind === "gramprac"){
+    h += '<h2>' + esc(s.title) + '</h2>' +
+      (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : "");
+    if ((s.mc || []).length) h += '<div class="blk"><div class="h">Выбери форму</div>' + mcBlock(s.mc, "grammar") + '</div>';
+    if ((s.gaps || []).length) h += '<div class="blk"><div class="h">Впиши</div>' + gapBlock(s.gaps) + '</div>';
+  }
   else if (s.kind === "mc"){
     h += '<h2>' + esc(s.title) + '</h2><div class="blk">' + mcBlock(s.items || [], "exercises") + '</div>';
   }
@@ -529,6 +615,61 @@ function renderSpread(){
   if (s.kind === "howto" && (s.questions || []).length) bindMC(b, s.questions, "function");
   if (s.kind === "podcast" && (s.questions || []).length) bindMC(b, s.questions, "podcast");
   if (s.kind === "gap") bindGap(b, s.items || [], "gapfill");
+  if (s.kind === "hwpart"){
+    if ((s.mc || []).length) bindMC(b, s.mc, "homework");
+    if ((s.gaps || []).length) bindGap(b, s.gaps, "homework");
+  }
+  if (s.kind === "hwwrite"){
+    const key = i => "hw-" + COURSE + "-" + BOOK.units[ui].n + "-" + i;
+    b.querySelectorAll("textarea[data-w]").forEach(t => {
+      try { t.value = localStorage.getItem(key(t.dataset.w)) || ""; } catch (e) {}
+      t.oninput = () => { try { localStorage.setItem(key(t.dataset.w), t.value); } catch (e) {} };
+    });
+    b.querySelectorAll("[data-send]").forEach(btn => btn.onclick = async () => {
+      const i = btn.dataset.send;
+      const ta = b.querySelector('textarea[data-w="' + i + '"]');
+      const txt = (ta.value || "").trim();
+      const out = document.getElementById("sent" + i);
+      if (txt.length < 15){ out.textContent = "Напиши побольше"; out.style.color = "var(--color-accent)"; return; }
+      btn.textContent = "Отправляю…";
+      const r = await SM.saveHwAttempts([{ course: COURSE, unit: BOOK.units[ui].n,
+        ex_index: 100 + (+i), section: "письмо", question: (s.tasks || [])[i] || "",
+        answer: txt, correct: true, duration_ms: Date.now() - started }]);
+      btn.textContent = "Отправить учителю";
+      out.style.color = "";
+      out.textContent = (r && r.ok) ? "Отправлено ✓" : "Не отправилось, попробуй ещё";
+    });
+  }
+  if (s.kind === "gramprac"){
+    if ((s.mc || []).length) bindMC(b, s.mc, "grammar");
+    if ((s.gaps || []).length) bindGap(b, s.gaps, "grammar");
+  }
+  if (s.kind === "discovery"){
+    const steps = s.steps || [];
+    let solved = 0;
+    b.querySelectorAll(".opt").forEach(btn => btn.onclick = () => {
+      const k = +btn.dataset.k, j = +btn.dataset.j, st = steps[k];
+      const wrap = b.querySelector('.q[data-k="' + k + '"]');
+      if (wrap.dataset.done) return;
+      wrap.dataset.done = "1";
+      const right = j === st.a;
+      btn.classList.add(right ? "ok" : "no");
+      if (!right){
+        const good = wrap.querySelector('.opt[data-j="' + st.a + '"]');
+        if (good) good.classList.add("ok");
+      }
+      wrap.querySelectorAll(".opt").forEach(x => x.disabled = true);
+      const why = wrap.querySelector(".why"); if (why) why.classList.add("on");
+      record("discovery", k + 1, st.q || "", (st.o || [])[j] || "", right);
+      solved++;
+      if (solved >= steps.length){
+        const rb = document.getElementById("ruleBox"), rw = document.getElementById("ruleWait");
+        if (rb) rb.classList.add("on");
+        if (rw) rw.remove();
+        setTimeout(() => rb && rb.scrollIntoView({ behavior: "smooth", block: "center" }), 250);
+      }
+    });
+  }
   if (s.kind === "workbook"){
     if ((s.mc || []).length) bindMC(b, s.mc, "workbook");
     if ((s.gaps || []).length) bindGap(b, s.gaps, "workbook");
