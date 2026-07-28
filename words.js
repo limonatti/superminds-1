@@ -279,6 +279,8 @@ window.SM_face = function (w, px) {
     if (n.indexOf("google") >= 0) s += 20;
     if (n.indexOf("premium") >= 0 || n.indexOf("enhanced") >= 0) s += 15;
     if (n.indexOf("compact") >= 0) s -= 15;
+    /* системные «шуточные» голоса звучат отвратительно — отсекаем */
+    if (/eddy|flo|grandma|grandpa|rocko|sandy|shelley|bubbles|bells|boing|jester|organ|trinoids|whisper|wobble|zarvox|bahh|albert|junior|ralph|superstar|good news|bad news|cellos|deranged|hysterical|novelty|reed|kathy|princess|bruce|agnes|vicki/.test(n)) s -= 200;
     return s;
   }
   window.SM_speak = function (text, rate) {

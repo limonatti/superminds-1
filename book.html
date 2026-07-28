@@ -54,6 +54,16 @@
   .card2 .ru{font-size:13px;font-weight:600;color:var(--color-neutral-700);margin-top:3px}
   .card2 .say{margin-left:auto;border:0;background:none;color:var(--color-neutral-600);padding:2px}
   .card2 .say:hover{color:var(--color-accent)}
+  .card2 .pic{width:56px;height:56px;object-fit:cover;flex:none;background:var(--color-neutral-200);
+    border:2px solid var(--color-divider)}
+  .card2 .say.human{color:var(--color-accent)}
+
+  /* иллюстрации разворота */
+  .art{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--color-neutral-200);
+    border:2px solid var(--color-divider);margin-bottom:20px}
+  .art.sq{aspect-ratio:4/3}
+  .artcap{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--color-neutral-500);margin:-14px 0 20px}
 
   /* диалог */
   .dlg{border-top:2px solid var(--color-divider)}
@@ -178,16 +188,42 @@ let started = Date.now();
 
 /* ================= голоса для диалогов ================= */
 const V = { m: null, f: null, ready: false };
+
+/* Системные «шуточные» голоса — Grandma, Rocko, Zarvox и прочие: звучат ужасно,
+   но браузер отдаёт их наравне с нормальными. Отсекаем жёстко. */
+const BAD_VOICE = /eddy|flo|grandma|grandpa|rocko|sandy|shelley|bubbles|bells|boing|jester|organ|trinoids|whisper|wobble|zarvox|bahh|albert|junior|ralph|superstar|good news|bad news|cellos|deranged|hysterical|novelty|reed|kathy|princess|bruce|agnes|vicki|fred/i;
+const GOOD_VOICE = /google|natural|neural|premium|enhanced|siri/i;
+const FEM_VOICE  = /female|женск|serena|sonia|kate|libby|hazel|karen|samantha|victoria|susan|ava|emma|joanna|salli|stephanie|allison|michelle|clara|martha|tessa|moira|fiona|nicky|catherine|amy/i;
+const MAL_VOICE  = /\bmale|мужск|daniel|дэниэл|arthur|oliver|george|james|thomas|brian|ryan|guy|alex|william|aaron|nathan|evan|\btom\b|matthew|christopher|eric|roger|rishi|callum/i;
+
+function voiceScore(v, want){
+  const name = (v.name || "");
+  const lang = (v.lang || "").replace("_", "-");
+  if (!/^en/i.test(lang)) return -999;
+  let s = 0;
+  if (/^en-GB/i.test(lang)) s += 40; else s += 8;      /* нужен британский */
+  if (GOOD_VOICE.test(name)) s += 35;                   /* живые сетевые голоса */
+  if (BAD_VOICE.test(name)) s -= 200;                   /* шуточные — вон */
+  const fem = FEM_VOICE.test(name);
+  const mal = MAL_VOICE.test(name.replace(/female|женск/gi, ""));
+  if (want === "f"){ if (fem) s += 30; if (mal && !fem) s -= 40; }
+  else { if (mal) s += 30; if (fem && !mal) s -= 40; }
+  return s;
+}
+function bestVoice(all, want, exclude){
+  let best = null, bs = -1000;
+  all.forEach(v => {
+    if (v === exclude) return;
+    const s = voiceScore(v, want);
+    if (s > bs){ bs = s; best = v; }
+  });
+  return bs > -100 ? best : null;
+}
 function pickVoices(){
   const all = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
   if (!all.length) return;
-  const en = all.filter(v => /^en(-|_)?/i.test(v.lang));
-  const gb = en.filter(v => /GB|UK|British/i.test(v.lang + " " + v.name));
-  const pool = gb.length ? gb : en;
-  const male = /daniel|arthur|george|oliver|male|alex|fred|rishi|thomas/i;
-  const female = /serena|kate|sonia|martha|female|samantha|karen|moira|tessa|libby|hazel/i;
-  V.m = pool.find(v => male.test(v.name)) || pool[0] || null;
-  V.f = pool.find(v => female.test(v.name) && v !== V.m) || pool.find(v => v !== V.m) || V.m;
+  V.f = bestVoice(all, "f", null);
+  V.m = bestVoice(all, "m", V.f) || V.f;
   V.ready = true;
 }
 if (window.speechSynthesis){ pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
@@ -306,9 +342,22 @@ function bindGap(root, items, section){
 }
 function wordCards(items){
   return '<div class="cards">' + items.map(w =>
-    '<div class="card2"><div><div class="en">' + esc(w.en) + '</div>' +
+    '<div class="card2">' +
+    (w.img ? '<img class="pic" src="' + esc(w.img) + '" alt="" loading="lazy">' : "") +
+    '<div><div class="en">' + esc(w.en) + '</div>' +
     '<div class="ru">' + esc(w.ru || "") + '</div></div>' +
-    '<button class="say" data-w="' + esc(w.en) + '" title="Послушать">' + icon("sound", 16) + '</button></div>').join("") + '</div>';
+    '<button class="say' + (w.audio ? " human" : "") + '" data-w="' + esc(w.en) + '"' +
+      (w.audio ? ' data-a="' + esc(w.audio) + '"' : "") +
+      ' title="' + (w.audio ? "Живая запись носителя" : "Послушать") + '">' + icon("sound", 16) + '</button></div>').join("") + '</div>';
+}
+
+/* живая запись, если есть; иначе синтез */
+function playWord(btn){
+  const url = btn.dataset.a;
+  if (url){
+    try { const a = new Audio(url); a.play(); return; } catch (e) {}
+  }
+  say(btn.dataset.w, "f");
 }
 
 function renderSpread(){
@@ -317,8 +366,11 @@ function renderSpread(){
   started = Date.now();
   let h = '<div class="kicker">Unit ' + u.n + ' · ' + esc(u.title) + ' · разворот ' + (si + 1) + ' из ' + u.spreads.length + '</div>';
 
+  const art = s.art ? '<img class="art" src="' + esc(s.art) + '" alt="" loading="lazy">' : "";
+
   if (s.kind === "cover"){
-    h += '<h1>' + esc(s.title) + '</h1><div class="lead">' + esc(s.desc || "") + '</div>';
+    h += '<h1>' + esc(s.title) + '</h1><div class="lead">' + esc(s.desc || "") + '</div>' +
+      (s.art ? '<div class="blk">' + art + '</div>' : "");
     if ((s.goals || []).length)
       h += '<div class="blk"><div class="h">Что разберём</div><div class="tasks">' +
         s.goals.map(g => '<div class="task">' + esc(g) + '</div>').join("") + '</div></div>';
@@ -335,7 +387,7 @@ function renderSpread(){
   }
   else if (s.kind === "listening"){
     const sp = s.speakers || {};
-    h += '<h2>' + esc(s.title) + '</h2>' +
+    h += '<h2>' + esc(s.title) + '</h2>' + (s.art ? '<div class="blk">' + art + '</div>' : "") +
       '<div class="blk"><div class="h">Диалог · ' + esc(sp.m || "M") + ' и ' + esc(sp.f || "F") + '</div>' +
       '<div class="grow2" style="margin-bottom:14px">' +
         '<button class="tool" id="playBtn">Слушать диалог</button>' +
@@ -351,7 +403,7 @@ function renderSpread(){
   }
   else if (s.kind === "reading"){
     h += '<h2>' + esc(s.title) + '</h2>' +
-      '<div class="blk"><div class="prose">' + (s.html || "") + '</div>' +
+      '<div class="blk">' + art + '<div class="prose">' + (s.html || "") + '</div>' +
       '<div class="grow2" style="margin-top:12px"><button class="tool" id="readAll">Прочитать вслух</button></div></div>';
     if ((s.questions || []).length)
       h += '<div class="blk"><div class="h">Вопросы по тексту</div>' + mcBlock(s.questions, "reading") + '</div>';
@@ -389,7 +441,7 @@ function renderSpread(){
   b.innerHTML = h;
 
   /* озвучка слов и реплик */
-  b.querySelectorAll(".card2 .say").forEach(x => x.onclick = () => say(x.dataset.w, "f"));
+  b.querySelectorAll(".card2 .say").forEach(x => x.onclick = () => playWord(x));
   b.querySelectorAll(".line .say").forEach(x => x.onclick = () => {
     const i = +x.dataset.i, l = (s.lines || [])[i];
     if (l) say(l.text, l.who);
