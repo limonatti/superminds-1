@@ -25,6 +25,74 @@
   .tool.teach:hover,.tool.teach.on{background:var(--color-accent);color:#fff}
   .grow{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
+  /* ---------- цвет разворота ----------
+     У каждого типа страницы свой оттенок — курс перестаёт быть одноцветным,
+     и ученик по цвету понимает, где он: слушает, читает или выводит правило. */
+  .book{--k:var(--color-accent);--k-soft:var(--color-accent-100)}
+  .book[data-kind="cover"]    {--k:#ec3013;--k-soft:#fff2ef}
+  .book[data-kind="words"]    {--k:#0e8f8f;--k-soft:#e6f6f6}
+  .book[data-kind="listening"]{--k:#2563c9;--k-soft:#e8f0fc}
+  .book[data-kind="podcast"]  {--k:#7b3fc4;--k-soft:#f2ebfb}
+  .book[data-kind="reading"]  {--k:#c47a0a;--k-soft:#fdf3e2}
+  .book[data-kind="pron"]     {--k:#0e8f8f;--k-soft:#e6f6f6}
+  .book[data-kind="chunks"]   {--k:#0e8f8f;--k-soft:#e6f6f6}
+  .book[data-kind="discovery"]{--k:#ec3013;--k-soft:#fff2ef}
+  .book[data-kind="grammar"]  {--k:#201e1d;--k-soft:#eae9e9}
+  .book[data-kind="gramprac"] {--k:#3f8f2f;--k-soft:#edf7ea}
+  .book[data-kind="mc"],.book[data-kind="gap"],.book[data-kind="workbook"]{--k:#3f8f2f;--k-soft:#edf7ea}
+  .book[data-kind="howto"]    {--k:#c47a0a;--k-soft:#fdf3e2}
+  .book[data-kind="speaking"] {--k:#7b3fc4;--k-soft:#f2ebfb}
+  .book[data-kind^="hw"]      {--k:#ec3013;--k-soft:#fff2ef}
+
+  .kicker,.hwbadge{color:var(--k)}
+  .hwbadge{background:var(--k);color:#fff}
+  .blk .h,.ex-src{color:var(--k)}
+  .task::before,.wtask .n,.hwlist .it span:first-child,.q .num{color:var(--k)}
+  .exline .who{color:var(--k)}
+  .exline b{background:var(--k-soft);box-shadow:0 0 0 3px var(--k-soft)}
+  .rule .h{color:var(--k)}
+  .prose .g-ex{border-left-color:var(--k);background:var(--k-soft)}
+  .key{border-left-color:var(--k)}
+  .art{border-color:var(--k)}
+  /* цветная лента сверху страницы */
+  .ribbon{position:fixed;left:0;right:0;top:0;height:5px;background:var(--k);z-index:22;
+    transition:background .35s ease-out}
+
+  /* ---------- листание, как в презентации ---------- */
+  @keyframes pgInR{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+  @keyframes pgInL{from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:none}}
+  @keyframes pgOutL{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-46px)}}
+  @keyframes pgOutR{from{opacity:1;transform:none}to{opacity:0;transform:translateX(46px)}}
+  .book.enter-r{animation:pgInR .34s cubic-bezier(.22,1,.36,1)}
+  .book.enter-l{animation:pgInL .34s cubic-bezier(.22,1,.36,1)}
+  .book.leave-l{animation:pgOutL .2s ease-in forwards}
+  .book.leave-r{animation:pgOutR .2s ease-in forwards}
+
+  /* содержимое проявляется по очереди */
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .book.enter-r > *,.book.enter-l > *{animation:rise .42s cubic-bezier(.22,1,.36,1) backwards;
+    animation-delay:calc(var(--i,0) * 55ms)}
+
+  /* живые реакции */
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.045)}100%{transform:scale(1)}}
+  @keyframes shakeX{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .opt.ok{animation:pop .34s ease-out}
+  .opt.no{animation:shakeX .3s ease-out}
+  .gapin.ok{animation:pop .34s ease-out}
+  .gapin.no{animation:shakeX .3s ease-out}
+  .why.on{animation:rise .3s ease-out}
+  .rule.on{animation:rise .45s cubic-bezier(.22,1,.36,1)}
+  .card2{transition:transform .16s ease-out,background .16s ease-out}
+  .card2:hover{transform:translateY(-2px)}
+  .opt{transition:transform .12s ease-out,background .16s ease-out}
+  .opt:active{transform:scale(.985)}
+  .tool{transition:background .16s ease-out,color .16s ease-out,transform .1s ease-out}
+  .tool:active{transform:scale(.96)}
+
+  @media (prefers-reduced-motion: reduce){
+    .book,.book>*,.opt,.gapin,.why,.rule{animation:none !important}
+  }
+
   /* ---------- разворот ---------- */
   .book{position:relative;width:100%;max-width:900px;margin:0 auto;align-self:center;padding:30px 28px 120px}
   .kicker{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent)}
@@ -190,6 +258,7 @@
   </div>
 </div>
 
+<div class="ribbon" id="ribbon" style="display:none"></div>
 <div class="pbar" id="pbarWrap" style="display:none"><i id="pbar"></i></div>
 <div class="pager" id="pager" style="display:none">
   <button class="tool" id="prev">← Назад</button>
@@ -573,6 +642,10 @@ function renderSpread(){
   }
 
   b.innerHTML = h;
+  b.dataset.kind = s.kind || "";
+  const rb = document.getElementById("ribbon");
+  if (rb) rb.style.background = getComputedStyle(b).getPropertyValue("--k");
+  [...b.children].forEach((el, i) => el.style.setProperty("--i", i));
 
   imgQ.length = 0; armImages(b);
 
@@ -768,19 +841,60 @@ function fillSpreads(){
   document.getElementById("sSel").innerHTML = u.spreads.map((s, i) =>
     '<option value="' + i + '">' + (i + 1) + ". " + esc(s.title).slice(0, 40) + "</option>").join("");
 }
+const REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+let turning = false;
+
+/* Листание, как в презентации: страница уезжает, новая приезжает,
+   содержимое проявляется по очереди. */
+function turn(dir, apply){
+  const b = document.getElementById("book");
+  if (REDUCE || !b){ apply(); renderSpread(); return; }
+  if (turning) return;
+  turning = true;
+  b.classList.remove("enter-r", "enter-l");
+  b.classList.add(dir > 0 ? "leave-l" : "leave-r");
+  setTimeout(() => {
+    b.classList.remove("leave-l", "leave-r");
+    apply();
+    renderSpread();
+    b.classList.add(dir > 0 ? "enter-r" : "enter-l");
+    setTimeout(() => { turning = false; }, 340);
+  }, 190);
+}
+
 function go(du, ds){
-  if (du !== null){ ui = du; si = 0; fillSpreads(); }
-  else {
-    si += ds;
-    if (si < 0){ if (ui > 0){ ui--; fillSpreads(); si = BOOK.units[ui].spreads.length - 1; } else si = 0; }
-    if (si >= BOOK.units[ui].spreads.length){
-      if (ui < BOOK.units.length - 1){ ui++; fillSpreads(); si = 0; } else si = BOOK.units[ui].spreads.length - 1;
+  const dir = du !== null ? 1 : (ds > 0 ? 1 : -1);
+  turn(dir, () => {
+    if (du !== null){ ui = du; si = 0; fillSpreads(); }
+    else {
+      si += ds;
+      if (si < 0){ if (ui > 0){ ui--; fillSpreads(); si = BOOK.units[ui].spreads.length - 1; } else si = 0; }
+      if (si >= BOOK.units[ui].spreads.length){
+        if (ui < BOOK.units.length - 1){ ui++; fillSpreads(); si = 0; } else si = BOOK.units[ui].spreads.length - 1;
+      }
     }
-  }
-  renderSpread();
+  });
 }
 document.getElementById("prev").onclick = () => go(null, -1);
 document.getElementById("next").onclick = () => go(null, 1);
+/* свайп на планшете и телефоне */
+(function(){
+  let x0 = null, y0 = null;
+  document.addEventListener("touchstart", e => {
+    const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY;
+  }, { passive: true });
+  document.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - x0, dy = t.clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6){
+      if (/input|textarea|button/i.test((e.target.tagName || ""))) return;
+      go(null, dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+})();
+
 document.addEventListener("keydown", e => {
   if (/input|textarea/i.test((e.target.tagName || ""))) return;
   if (e.key === "ArrowLeft") go(null, -1);
@@ -971,7 +1085,10 @@ function denied(title, text){
   document.getElementById("uSel").innerHTML = BOOK.units.map((u, i) =>
     '<option value="' + i + '">Unit ' + u.n + " · " + esc(u.title) + "</option>").join("");
   document.getElementById("uSel").onchange = e => go(+e.target.value, 0);
-  document.getElementById("sSel").onchange = e => { si = +e.target.value; renderSpread(); };
+  document.getElementById("sSel").onchange = e => {
+    const v = +e.target.value;
+    turn(v > si ? 1 : -1, () => { si = v; });
+  };
 
   const wantU = +(q.get("u") || 1);
   ui = Math.max(0, BOOK.units.findIndex(x => x.n === wantU));
@@ -985,6 +1102,7 @@ function denied(title, text){
   document.getElementById("bbar").style.display = "flex";
   document.getElementById("pager").style.display = "flex";
   document.getElementById("pbarWrap").style.display = "block";
+  document.getElementById("ribbon").style.display = "block";
 })();
 </script>
 </body>
