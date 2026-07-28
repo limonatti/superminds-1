@@ -250,17 +250,17 @@ function playDialog(lines, from){
   if (!box) return;
   if (playing){ playing = false; speechSynthesis.cancel();
     box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
-    const b = document.getElementById("playBtn"); if (b) b.classList.remove("on"), b.textContent = "Слушать диалог";
+    const b = document.getElementById("playBtn"); if (b) b.classList.remove("on"), b.textContent = b.dataset.lbl || "Слушать диалог";
     return; }
   playing = true;
   const b = document.getElementById("playBtn");
-  if (b){ b.classList.add("on"); b.textContent = "Стоп"; }
+  if (b){ b.dataset.lbl = b.dataset.lbl || b.textContent; b.classList.add("on"); b.textContent = "Стоп"; }
   let i = from || 0;
   (function step(){
     if (!playing || i >= lines.length){
       playing = false;
       box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
-      if (b){ b.classList.remove("on"); b.textContent = "Слушать диалог"; }
+      if (b){ b.classList.remove("on"); b.textContent = b.dataset.lbl || "Слушать диалог"; }
       return;
     }
     box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
@@ -420,6 +420,7 @@ function renderSpread(){
   else if (s.kind === "listening"){
     const sp = s.speakers || {};
     h += '<h2>' + esc(s.title) + '</h2>' + (s.art ? '<div class="blk">' + art + '</div>' : "") +
+      (s.intro ? '<div class="lead">' + esc(s.intro) + '</div>' : "") +
       '<div class="blk"><div class="h">Диалог · ' + esc(sp.m || "M") + ' и ' + esc(sp.f || "F") + '</div>' +
       '<div class="grow2" style="margin-bottom:14px">' +
         '<button class="tool" id="playBtn">Слушать диалог</button>' +
@@ -432,6 +433,21 @@ function renderSpread(){
       '</div></div>';
     if ((s.questions || []).length)
       h += '<div class="blk"><div class="h">Вопросы по аудио</div>' + mcBlock(s.questions, "listening") + '</div>';
+  }
+  else if (s.kind === "podcast"){
+    h += '<h2>' + esc(s.title) + '</h2>' + (s.art ? '<div class="blk">' + art + '</div>' : "") +
+      (s.intro ? '<div class="lead">' + esc(s.intro) + '</div>' : "") +
+      '<div class="blk"><div class="h">Слушай целиком</div>' +
+      '<div class="grow2" style="margin-bottom:14px">' +
+        '<button class="tool" id="playBtn">Включить подкаст</button>' +
+        '<button class="tool" id="hideBtn">Скрыть текст</button></div>' +
+      '<div class="dlg" id="dlgBox">' + (s.lines || []).map((t, i) =>
+        '<div class="line" data-i="' + i + '" style="grid-template-columns:34px minmax(0,1fr) auto">' +
+        '<div class="who">' + (i + 1) + '</div><div class="tx">' + esc(t) + '</div>' +
+        '<button class="say" data-i="' + i + '" title="Послушать">' + icon("sound", 16) + '</button></div>').join("") +
+      '</div></div>';
+    if ((s.questions || []).length)
+      h += '<div class="blk"><div class="h">Вопросы по подкасту</div>' + mcBlock(s.questions, "podcast") + '</div>';
   }
   else if (s.kind === "reading"){
     h += '<h2>' + esc(s.title) + '</h2>' +
@@ -481,7 +497,17 @@ function renderSpread(){
     if (l) say(l.text, l.who);
   });
   const pb = document.getElementById("playBtn");
-  if (pb) pb.onclick = () => playDialog(s.lines || [], 0);
+  if (pb) pb.onclick = () => {
+    const seq = s.kind === "podcast"
+      ? (s.lines || []).map(t => ({ text: t, who: s.voice || "f" }))
+      : (s.lines || []);
+    playDialog(seq, 0);
+  };
+  if (s.kind === "podcast"){
+    b.querySelectorAll(".line .say").forEach(x => x.onclick = () => {
+      const t = (s.lines || [])[+x.dataset.i]; if (t) say(t, s.voice || "f");
+    });
+  }
   const hb = document.getElementById("hideBtn");
   if (hb) hb.onclick = () => {
     const box = document.getElementById("dlgBox");
@@ -501,6 +527,7 @@ function renderSpread(){
   if (s.kind === "listening" && (s.questions || []).length) bindMC(b, s.questions, "listening");
   if (s.kind === "reading" && (s.questions || []).length) bindMC(b, s.questions, "reading");
   if (s.kind === "howto" && (s.questions || []).length) bindMC(b, s.questions, "function");
+  if (s.kind === "podcast" && (s.questions || []).length) bindMC(b, s.questions, "podcast");
   if (s.kind === "gap") bindGap(b, s.items || [], "gapfill");
   if (s.kind === "workbook"){
     if ((s.mc || []).length) bindMC(b, s.mc, "workbook");

@@ -58,6 +58,16 @@ def load(path):
     return m
 
 
+# Расширение курса: длинные диалоги, подкасты, большие тексты, доп. практика
+try:
+    _more = load("b1_more.py")
+except Exception:
+    _more = None
+
+def _m(name, n):
+    return (getattr(_more, name, {}) or {}).get(n) if _more else None
+
+
 def spreads_for_unit(u, extras, words_by_unit):
     """Разложить юнит на развороты. Каждый разворот = одна страница читалки."""
     n = u.get("n")
@@ -97,7 +107,33 @@ def spreads_for_unit(u, extras, words_by_unit):
             lines=[{"who": d[0], "text": d[1]} for d in u["dialog"] if len(d) >= 2],
             questions=u.get("lq") or [])
 
+    # 4b. Длинный диалог — полноценная сцена вместо восьми реплик
+    ld = _m("LONG_DIALOG", n)
+    if ld:
+        add("listening", ld.get("title") or "Диалог / Dialogue",
+            art=_art("scene: " + (ld.get("title") or "conversation")),
+            intro=ld.get("intro", ""),
+            speakers=ld.get("names") or {"m": "Man", "f": "Woman"},
+            lines=[{"who": l[0], "text": l[1]} for l in ld.get("lines", []) if len(l) >= 2],
+            questions=ld.get("questions") or [])
+
+    # 4c. Подкаст — монолог одним голосом
+    pc = _m("PODCAST", n)
+    if pc:
+        add("podcast", pc.get("title") or "Подкаст / Podcast",
+            art=_art("podcast illustration: " + (pc.get("title") or "story")),
+            intro=pc.get("intro", ""),
+            voice=pc.get("voice", "f"),
+            lines=pc.get("text") or [],
+            questions=pc.get("questions") or [])
+
     # 5. Чтение
+    lr = _m("LONG_READING", n)
+    if lr:
+        add("reading", lr.get("title") or "Чтение / Reading",
+            art=_art("magazine illustration: " + (lr.get("title") or "article")),
+            html=lr.get("html", ""), questions=lr.get("questions") or [])
+
     if ex.get("reading"):
         add("reading", ex.get("reading_title") or "Чтение / Reading",
             art=_art("magazine illustration: " + (ex.get("reading_title") or "article")),
@@ -140,6 +176,14 @@ def spreads_for_unit(u, extras, words_by_unit):
     # 12. Говорение
     if ex.get("speaking"):
         add("speaking", "Говорим / Speaking", items=ex["speaking"])
+
+    # 12b. Дополнительная практика
+    emc = _m("EXTRA_MC", n)
+    if emc:
+        add("mc", "Дополнительная практика", items=emc)
+    egp = _m("EXTRA_GAP", n)
+    if egp:
+        add("gap", "Дополнительно: впиши пропуски", items=egp)
 
     # 13. Домашка
     if u.get("hw"):
