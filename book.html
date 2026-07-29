@@ -360,7 +360,74 @@ function pickVoices(){
 }
 if (window.speechSynthesis){ pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
 
-function say(text, who, cb){
+/* ================= ЖИВОЙ ГОЛОС (Kokoro) =================
+   Открытая модель на 82 млн параметров, лицензия Apache-2.0. Работает прямо
+   в браузере ученицы: ни ключей, ни аккаунтов, ни лимитов, ни оплаты.
+   Первый запуск скачивает около 90 МБ — дальше браузер держит их у себя.
+   Если модель не поднялась (старый браузер, нет сети) — молча падаем
+   на системный синтез, тот самый, что был раньше. */
+const LIVE = {
+  on: localStorage.getItem("liveVoice") !== "off",
+  tts: null, loading: null, failed: false,
+  audio: null,
+  f: "bf_emma",    /* британские голоса под курс */
+  m: "bm_george",
+  mem: new Map()   /* короткий кэш в памяти на текущую сессию */
+};
+
+function liveStatus(t){
+  const el = document.getElementById("liveBtn");
+  if (el) el.textContent = t;
+}
+
+async function liveReady(){
+  if (LIVE.tts) return LIVE.tts;
+  if (LIVE.failed) return null;
+  if (LIVE.loading) return LIVE.loading;
+  LIVE.loading = (async () => {
+    try{
+      liveStatus("Голос грузится…");
+      const { KokoroTTS } = await import("https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm");
+      const webgpu = !!navigator.gpu;
+      LIVE.tts = await KokoroTTS.from_pretrained("onnx-community/Kokoro-82M-v1.0-ONNX", {
+        dtype: webgpu ? "fp32" : "q8",
+        device: webgpu ? "webgpu" : "wasm"
+      });
+      liveStatus("Живой голос");
+      return LIVE.tts;
+    }catch(e){
+      LIVE.failed = true;
+      liveStatus("Живой голос ✕");
+      console.warn("Kokoro не поднялся, работаем системным синтезом:", e);
+      return null;
+    }finally{ LIVE.loading = null; }
+  })();
+  return LIVE.loading;
+}
+
+/* Float32 → WAV: не зависим от того, что именно вернёт версия библиотеки */
+function pcmToWav(samples, rate){
+  const n = samples.length, buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf);
+  const put = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  put(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); put(8, "WAVE"); put(12, "fmt ");
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true);
+  v.setUint16(32, 2, true); v.setUint16(34, 16, true); put(36, "data");
+  v.setUint32(40, n * 2, true);
+  let o = 44;
+  for (let i = 0; i < n; i++){
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    v.setInt16(o, s < 0 ? s * 0x8000 : s * 0x7fff, true); o += 2;
+  }
+  return new Blob([buf], { type: "audio/wav" });
+}
+
+function stopSpeak(){
+  try { speechSynthesis.cancel(); } catch (e) {}
+  if (LIVE.audio){ try { LIVE.audio.pause(); } catch (e) {} LIVE.audio = null; }
+}
+
+function saySystem(text, who, cb){
   if (!window.speechSynthesis) { if (cb) cb(); return; }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
@@ -374,11 +441,42 @@ function say(text, who, cb){
   speechSynthesis.speak(u);
 }
 
+function say(text, who, cb){
+  stopSpeak();
+  if (!LIVE.on || LIVE.failed){ saySystem(text, who, cb); return; }
+  const voice = who === "m" ? LIVE.m : LIVE.f;
+  const key = voice + "|" + text;
+  const play = url => {
+    const a = new Audio(url);
+    LIVE.audio = a;
+    a.onended = () => { LIVE.audio = null; if (cb) cb(); };
+    a.onerror  = () => { LIVE.audio = null; saySystem(text, who, cb); };
+    a.play().catch(() => { LIVE.audio = null; saySystem(text, who, cb); });
+  };
+  if (LIVE.mem.has(key)){ play(LIVE.mem.get(key)); return; }
+  (async () => {
+    const tts = await liveReady();
+    if (!tts){ saySystem(text, who, cb); return; }
+    try{
+      const out = await tts.generate(text, { voice: voice });
+      const blob = (out && typeof out.toBlob === "function")
+        ? out.toBlob()
+        : pcmToWav(out.audio, out.sampling_rate || 24000);
+      const url = URL.createObjectURL(blob);
+      LIVE.mem.set(key, url);
+      play(url);
+    }catch(e){
+      console.warn("Kokoro не смог озвучить, отдаём системному:", e);
+      saySystem(text, who, cb);
+    }
+  })();
+}
+
 let playing = false;
 function playDialog(lines, from){
   const box = document.getElementById("dlgBox");
   if (!box) return;
-  if (playing){ playing = false; speechSynthesis.cancel();
+  if (playing){ playing = false; stopSpeak();
     box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
     const b = document.getElementById("playBtn"); if (b) b.classList.remove("on"), b.textContent = b.dataset.lbl || "Слушать диалог";
     return; }
@@ -995,7 +1093,10 @@ document.addEventListener("keydown", e => {
 
 function buildTools(){
   const t = document.getElementById("tools");
-  let h = "";
+  /* Живой голос доступен и ученице, и учителю */
+  let h = '<button class="tool' + (LIVE.on ? " on" : "") + '" id="liveBtn" ' +
+          'title="Живой голос вместо системного. Первый раз качает модель, дальше мгновенно.">' +
+          (LIVE.on ? "Живой голос" : "Голос системы") + '</button>';
   if (isTeacher){
     h += '<button class="tool teach" id="keysBtn">Ключи</button>' +
          '<button class="tool teach" id="curtBtn">Шторка</button>' +
@@ -1004,6 +1105,18 @@ function buildTools(){
          '<button class="tool teach" id="mirrorBtn" title="Скачать картинки с чужого сервера и положить в своё хранилище">Картинки к себе</button>';
   }
   t.innerHTML = h;
+
+  const lb = document.getElementById("liveBtn");
+  lb.onclick = () => {
+    LIVE.on = !LIVE.on;
+    localStorage.setItem("liveVoice", LIVE.on ? "on" : "off");
+    lb.classList.toggle("on", LIVE.on);
+    lb.textContent = LIVE.on ? "Живой голос" : "Голос системы";
+    stopSpeak();
+    if (LIVE.on) liveReady();      /* греем заранее, чтобы первое нажатие не ждало */
+  };
+  if (LIVE.on) setTimeout(liveReady, 1500);
+
   if (!isTeacher) return;
   document.getElementById("keysBtn").onclick = e => {
     document.body.classList.toggle("keys");
