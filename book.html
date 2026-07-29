@@ -369,7 +369,7 @@ if (window.speechSynthesis){ pickVoices(); speechSynthesis.onvoiceschanged = pic
 const LIVE = {
   on: localStorage.getItem("liveVoice") !== "off",
   tts: null, loading: null, failed: false,
-  audio: null,
+  audio: null, baked: null, podcastVoice: "f",
   f: "bf_emma",    /* британские голоса под курс */
   m: "bm_george",
   mem: new Map()   /* короткий кэш в памяти на текущую сессию */
@@ -388,10 +388,10 @@ async function liveReady(){
     try{
       liveStatus("Голос грузится…");
       const { KokoroTTS } = await import("https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm");
-      const webgpu = !!navigator.gpu;
+      /* Всегда wasm + q8: около 90 МБ и работает везде.
+         Вариант fp32 под webgpu весит втрое больше и на практике не поднялся. */
       LIVE.tts = await KokoroTTS.from_pretrained("onnx-community/Kokoro-82M-v1.0-ONNX", {
-        dtype: webgpu ? "fp32" : "q8",
-        device: webgpu ? "webgpu" : "wasm"
+        dtype: "q8", device: "wasm"
       });
       liveStatus("Живой голос");
       return LIVE.tts;
@@ -441,11 +441,72 @@ function saySystem(text, who, cb){
   speechSynthesis.speak(u);
 }
 
+/* Постоянное имя записи: одинаковый текст одним голосом = один файл */
+async function voiceKey(text, voice){
+  const s = voice + "|" + text.replace(/\s+/g, " ").trim();
+  const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 24);
+}
+function bakedUrl(key){
+  return SB_URL + MINE + COURSE + "/audio/" + key + ".wav";
+}
+
+/* Что уже озвучено и лежит в хранилище — спрашиваем один раз за загрузку */
+async function loadBaked(){
+  if (!sb || LIVE.baked) return LIVE.baked;
+  const set = new Set();
+  try{
+    for (let off = 0; ; off += 100){
+      const l = await sb.storage.from("book-art").list(COURSE + "/audio", { limit: 100, offset: off });
+      if (l.error || !l.data || !l.data.length) break;
+      l.data.forEach(x => set.add(x.name.replace(/\.wav$/, "")));
+      if (l.data.length < 100) break;
+    }
+  }catch(e){}
+  LIVE.baked = set;
+  return set;
+}
+
+/* Синтез одной реплики: сначала готовая запись, потом своя генерация */
+async function voiceBlob(text, who){
+  const voice = who === "m" ? LIVE.m : LIVE.f;
+  const key = await voiceKey(text, voice);
+  if (LIVE.mem.has(key)) return { key: key, url: LIVE.mem.get(key) };
+
+  const baked = await loadBaked();
+  if (baked && baked.has(key)){
+    const url = bakedUrl(key);
+    LIVE.mem.set(key, url);
+    return { key: key, url: url };
+  }
+  const tts = await liveReady();
+  if (!tts) return null;
+  const out = await tts.generate(text, { voice: voice });
+  const blob = (out && typeof out.toBlob === "function")
+    ? out.toBlob()
+    : pcmToWav(out.audio, out.sampling_rate || 24000);
+  const url = URL.createObjectURL(blob);
+  LIVE.mem.set(key, url);
+  return { key: key, url: url, blob: blob };
+}
+
+/* Пока звучит одна реплика, тихо готовим следующие — чтобы не было пауз */
+function prefetchLines(lines, from, count){
+  if (!LIVE.on || LIVE.failed) return;
+  const rest = (lines || []).slice(from, from + (count || 2));
+  (async () => {
+    for (const l of rest){
+      const text = typeof l === "string" ? l : l.text;
+      const who  = typeof l === "string" ? (LIVE.podcastVoice || "f") : l.who;
+      if (!text) continue;
+      try { await voiceBlob(text, who); } catch (e) { return; }
+    }
+  })();
+}
+
 function say(text, who, cb){
   stopSpeak();
   if (!LIVE.on || LIVE.failed){ saySystem(text, who, cb); return; }
-  const voice = who === "m" ? LIVE.m : LIVE.f;
-  const key = voice + "|" + text;
   const play = url => {
     const a = new Audio(url);
     LIVE.audio = a;
@@ -453,20 +514,13 @@ function say(text, who, cb){
     a.onerror  = () => { LIVE.audio = null; saySystem(text, who, cb); };
     a.play().catch(() => { LIVE.audio = null; saySystem(text, who, cb); });
   };
-  if (LIVE.mem.has(key)){ play(LIVE.mem.get(key)); return; }
   (async () => {
-    const tts = await liveReady();
-    if (!tts){ saySystem(text, who, cb); return; }
     try{
-      const out = await tts.generate(text, { voice: voice });
-      const blob = (out && typeof out.toBlob === "function")
-        ? out.toBlob()
-        : pcmToWav(out.audio, out.sampling_rate || 24000);
-      const url = URL.createObjectURL(blob);
-      LIVE.mem.set(key, url);
-      play(url);
+      const got = await voiceBlob(text, who);
+      if (!got){ saySystem(text, who, cb); return; }
+      play(got.url);
     }catch(e){
-      console.warn("Kokoro не смог озвучить, отдаём системному:", e);
+      console.warn("Живой голос не справился, отдаём системному:", e);
       saySystem(text, who, cb);
     }
   })();
@@ -494,6 +548,7 @@ function playDialog(lines, from){
     box.querySelectorAll(".line").forEach(l => l.classList.remove("now"));
     const el = box.querySelector('.line[data-i="' + i + '"]');
     if (el){ el.classList.add("now"); el.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    prefetchLines(lines, i + 1, 2);          /* следующие реплики готовим заранее */
     say(lines[i].text, lines[i].who, () => { i++; setTimeout(step, 260); });
   })();
 }
@@ -1102,7 +1157,8 @@ function buildTools(){
          '<button class="tool teach" id="curtBtn">Шторка</button>' +
          '<button class="tool teach" id="notesBtn">Заметки</button>' +
          '<button class="tool teach" id="lessonBtn">Режим урока</button>' +
-         '<button class="tool teach" id="mirrorBtn" title="Скачать картинки с чужого сервера и положить в своё хранилище">Картинки к себе</button>';
+         '<button class="tool teach" id="mirrorBtn" title="Скачать картинки с чужого сервера и положить в своё хранилище">Картинки к себе</button>' +
+         '<button class="tool teach" id="bakeBtn" title="Озвучить все реплики юнита заранее и сложить в хранилище — ученица не будет ждать">Озвучка к себе</button>';
   }
   t.innerHTML = h;
 
@@ -1133,6 +1189,7 @@ function buildTools(){
     e.target.classList.toggle("on", on);
   };
   document.getElementById("mirrorBtn").onclick = e => mirrorArt(e.target);
+  document.getElementById("bakeBtn").onclick = e => bakeVoice(e.target);
   document.getElementById("lessonBtn").onclick = e => {
     lessonOn = !lessonOn;
     e.target.classList.toggle("on", lessonOn);
@@ -1156,6 +1213,59 @@ function artUrls(){
     }));
   }));
   return list;
+}
+
+/* Учительский инструмент: озвучить весь юнит заранее и сложить в хранилище.
+   Ученица потом просто скачивает готовый файл — ни модели, ни ожидания. */
+async function bakeVoice(btn){
+  if (!isTeacher || !sb) return;
+  const u = BOOK.units[ui];
+  const jobs = [];
+  u.spreads.forEach(sp => {
+    (sp.lines || []).forEach(l => {
+      if (typeof l === "string") jobs.push({ text: l, who: sp.voice || "f" });
+      else if (l && l.text)      jobs.push({ text: l.text, who: l.who });
+    });
+    ["items", "extra"].forEach(f => (sp[f] || []).forEach(w => {
+      if (w && w.en) jobs.push({ text: w.en, who: "f" });
+    }));
+  });
+  if (!jobs.length){ btn.textContent = "Нечего озвучивать"; return; }
+
+  btn.disabled = true;
+  const tts = await liveReady();
+  if (!tts){ btn.textContent = "Голос не поднялся"; btn.disabled = false; return; }
+  const baked = await loadBaked();
+
+  let done = 0, skip = 0, fail = 0;
+  const tick = () => {
+    const left = jobs.length - done - skip - fail;
+    btn.textContent = "Озвучиваю " + (done + skip) + "/" + jobs.length +
+      (fail ? " · сбоев " + fail : "") + (left ? " · ~" + Math.ceil(left * 5 / 60) + " мин" : "");
+  };
+  tick();
+
+  for (const j of jobs){
+    try{
+      const voice = j.who === "m" ? LIVE.m : LIVE.f;
+      const key = await voiceKey(j.text, voice);
+      if (baked.has(key)){ skip++; tick(); continue; }
+      const out = await tts.generate(j.text, { voice: voice });
+      const blob = (out && typeof out.toBlob === "function")
+        ? out.toBlob()
+        : pcmToWav(out.audio, out.sampling_rate || 24000);
+      const up = await sb.storage.from("book-art")
+        .upload(COURSE + "/audio/" + key + ".wav", blob, { contentType: "audio/wav" });
+      if (up.error && !/exists/i.test(up.error.message || "")) throw up.error;
+      baked.add(key);
+      LIVE.mem.set(key, bakedUrl(key));
+      done++;
+    }catch(e){ fail++; }
+    tick();
+  }
+  btn.disabled = false;
+  btn.textContent = "Готово: " + done + (skip ? " · было " + skip : "") + (fail ? " · не вышло " + fail : "");
+  setTimeout(() => { btn.textContent = "Озвучка к себе"; }, 4000);
 }
 
 async function mirrorArt(btn){
