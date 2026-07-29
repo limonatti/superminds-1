@@ -404,7 +404,13 @@
 
     /* Комната урока — та же доска, но плюс видеозвонок и передача управления.
        Код комнаты передаём, чтобы не потерять то, что уже нарисовано. */
-    (function(){ const a=document.getElementById("toRoom"); if(a) a.href="room.html?room="+room; })();
+    (function(){
+      const a=document.getElementById("toRoom");
+      if(!a) return;
+      /* внутри комнаты урока доска уже встроена — там эта кнопка не нужна */
+      if(window.top !== window){ a.style.display="none"; if(a.nextElementSibling) a.nextElementSibling.style.display="none"; return; }
+      a.href="room.html?room="+room;
+    })();
 
     document.getElementById("invite").onclick=()=>{const url=location.origin+location.pathname+"?room="+room;
       if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на доску скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));else prompt("Скопируй ссылку:",url);};
