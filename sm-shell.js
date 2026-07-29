@@ -38,6 +38,8 @@ var STUDENT = [
   { id: "schedule", t: "Расписание", i: "cal",   href: "schedule.html" },
   { id: "rewards",  t: "Награды",    i: "star",  href: "rewards.html" },
   { id: "vocab",    t: "Словарь",    i: "voc",   href: "vocabulary.html" },
+  /* Комната урока — доска + видеозвонок + передача управления. Голая доска отдельным пунктом. */
+  { id: "room",     t: "Урок",       i: "play",  href: "room.html" },
   { id: "board",    t: "Доска",      i: "board", href: "board.html" }
 ];
 var TEACHER = [
@@ -45,6 +47,7 @@ var TEACHER = [
   { id: "review",   t: "Проверка домашки", i: "file",  href: "teacher-homework.html" },
   { id: "tsched",   t: "Расписание",       i: "cal",   href: "teacher-schedule.html" },
   { id: "payments", t: "Оплаты",           i: "card",  href: "teacher-payments.html" },
+  { id: "room",     t: "Комната урока",    i: "play",  href: "room.html" },
   { id: "board",    t: "Доска",            i: "board", href: "board.html" }
 ];
 

@@ -284,6 +284,8 @@
       <span id="status"><span class="dot"></span><span id="statusTxt">…</span></span>
       <span id="saveState" title="Доска сохраняется автоматически">сохранено</span>
       <button class="tool" id="invite" style="border:2px solid var(--color-text);padding:12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">Позвать ученика</button>
+      <a class="tool" id="toRoom" href="room.html" style="display:block;text-align:center;text-decoration:none;background:var(--color-accent);border:2px solid var(--color-accent);color:#fff;padding:12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">Видео и управление →</a>
+      <div style="font-size:11px;font-weight:600;color:var(--color-neutral-700);line-height:1.45;margin-top:2px">Это доска отдельно. Видеозвонок и передача управления ученику — в комнате урока, доска там та же.</div>
     </div></div>
   </div>
 
@@ -399,6 +401,10 @@
       }catch(e){}
     }
     function send(op){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:op});}catch(e){}} }
+
+    /* Комната урока — та же доска, но плюс видеозвонок и передача управления.
+       Код комнаты передаём, чтобы не потерять то, что уже нарисовано. */
+    (function(){ const a=document.getElementById("toRoom"); if(a) a.href="room.html?room="+room; })();
 
     document.getElementById("invite").onclick=()=>{const url=location.origin+location.pathname+"?room="+room;
       if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на доску скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));else prompt("Скопируй ссылку:",url);};
