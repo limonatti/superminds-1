@@ -21,14 +21,23 @@
   .seg button.on{background:#e0952a}
   #bar .ic{background:rgba(255,255,255,.14);color:#fff;width:38px;height:38px;border-radius:10px;font-size:18px;flex:none}
   #stage{position:relative;height:calc(100% - 56px);background:#3a1020;display:flex;align-items:stretch;justify-content:center}
-  #page{flex:1;max-width:1000px;background:#f4e9d8;box-shadow:0 0 40px rgba(0,0,0,.4);overflow:hidden;transition:opacity .18s}
-  #page.turn{opacity:0}
+  #page{flex:1;max-width:1000px;background:#f4e9d8;box-shadow:0 0 40px rgba(0,0,0,.4);overflow:hidden;transition:opacity .2s ease,transform .2s ease}
+  #page.turn{opacity:0;transform:translateX(24px) scale(.985)}
+  #page.turn.back{transform:translateX(-24px) scale(.985)}
   #page iframe{width:100%;height:100%;border:none;display:block;background:#f4e9d8}
   .arrow{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:#7c2340;color:#fff;font-size:24px;box-shadow:0 6px 16px rgba(0,0,0,.35);z-index:5;opacity:.9}
   .arrow:hover{opacity:1}
   #prev{left:14px}#next{right:14px}
   .arrow:disabled{opacity:.25;cursor:default}
   #foot{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.35);padding:6px 14px;border-radius:999px;font:800 12px 'Nunito',sans-serif;z-index:5}
+  @media(max-width:700px){
+    #bar{gap:6px;padding:0 8px}
+    #bar .title{display:none}
+    .arrow{width:42px;height:42px;font-size:20px}
+    #prev{left:6px}#next{right:6px}
+    #page{max-width:none}
+    #foot{font-size:11px;padding:5px 10px}
+  }
 </style>
 </head>
 <body>
@@ -61,7 +70,7 @@
   var tabs=document.getElementById("tabs");
   for(var i=1;i<=8;i++){(function(u){var b=document.createElement("button");b.className="tab"+(u===n?" on":"");b.textContent="U"+u;b.onclick=function(){n=u;render(true);};tabs.appendChild(b);})(i);}
   function src(){ var suf=mode==="grammar"?"-grammar":(mode==="workbook"?"-workbook":""); return course+"-u"+n+suf+".html"; }
-  function render(turn){
+  function render(turn, back){
     var f=document.getElementById("frame"),p=document.getElementById("page");
     function go(){ f.src=src();
       [].forEach.call(tabs.children,function(b,i){b.classList.toggle("on",(i+1)===n);});
@@ -71,13 +80,13 @@
       document.getElementById("foot").textContent=(LABEL[course]||"")+" · Unit "+n+" / 8 · "+(mode==="grammar"?"грамматика":(mode==="workbook"?"workbook":"лексика и чанки"));
       var u=new URLSearchParams(location.search);u.set("course",course);u.set("u",n);history.replaceState(null,"","?"+u.toString());
     }
-    if(turn){ p.classList.add("turn"); setTimeout(function(){go();p.classList.remove("turn");},160); } else go();
+    if(turn){ p.classList.add("turn"); if(back)p.classList.add("back"); setTimeout(function(){go();p.classList.remove("turn");p.classList.remove("back");},180); } else go();
   }
-  document.getElementById("prev").onclick=function(){ if(n>1){n--;render(true);} };
+  document.getElementById("prev").onclick=function(){ if(n>1){n--;render(true,true);} };
   document.getElementById("next").onclick=function(){ if(n<8){n++;render(true);} };
   document.querySelectorAll("#mode button").forEach(function(b){b.onclick=function(){mode=b.dataset.m;render(true);};});
   document.getElementById("full").onclick=function(){ var el=document.documentElement; if(document.fullscreenElement){document.exitFullscreen();} else if(el.requestFullscreen){el.requestFullscreen();} };
-  document.addEventListener("keydown",function(e){ if(e.key==="ArrowRight"&&n<8){n++;render(true);} else if(e.key==="ArrowLeft"&&n>1){n--;render(true);} });
+  document.addEventListener("keydown",function(e){ if(e.key==="ArrowRight"&&n<8){n++;render(true);} else if(e.key==="ArrowLeft"&&n>1){n--;render(true,true);} });
   render(false);
 </script>
 </body>
