@@ -29,6 +29,19 @@
   .inv{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .inv .lnk{flex:1;min-width:240px;border:2px dashed var(--color-neutral-500);padding:11px 12px;
     font-size:12.5px;font-weight:600;word-break:break-all}
+  /* Выдача ДЗ — карточка */
+  .hwform{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:grid;gap:12px}
+  .hf-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .hf-row>label{width:120px;flex:none;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .hf-row select,.hf-row input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:11px 12px;font:700 13px "Archivo",sans-serif}
+  .hf-row input[type=text],.hf-row input#hMsg{flex:1;min-width:220px}
+  .parts{display:flex;gap:14px;flex-wrap:wrap}
+  .parts .cb{display:inline-flex;align-items:center;gap:6px;font:700 13px "Archivo",sans-serif;cursor:pointer}
+  .parts .cb input{width:17px;height:17px;accent-color:var(--color-accent)}
+  .hwform .go.big{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .hwform .go.big:hover{background:var(--color-accent-600)}
 </style>
 </head>
 <body>
@@ -54,6 +67,7 @@ const esc = SMUI.esc, icon = SMUI.icon;
 const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"]];
 const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
+const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
 let ME = null, CODE = "—", STUDENTS = [], ASG = {}, sel = 0;
 
@@ -62,6 +76,8 @@ function ago(ts){ if(!ts) return "—"; const d=(Date.now()-new Date(ts).getTime
   if(d<1) return "сегодня"; if(d<2) return "вчера"; return Math.floor(d)+" дн. назад"; }
 function unitLabel(id){ const u=(window.SM_UNITS||[]).filter(x=>x.id===id)[0]; return u?u.title:id; }
 function noteKey(sid){ return "sm-note-"+sid; }
+/* ДЗ Speakout: части/срок/комментарий кодируем в поле note (JSON) */
+function parseNote(n){ try { const o=JSON.parse(n); if(o && (o.parts||o.due||o.msg!==undefined)) return o; } catch(e){} return { msg: n||"" }; }
 
 function drawList(){
   const box = document.getElementById("stList");
@@ -133,22 +149,20 @@ async function drawPane(){
   try { mats = (await SM.listMaterials(sid)) || []; } catch(e){}
   try { sum = (await SM.studentHwSummary(sid)) || []; } catch(e){}
 
-  const unitOpts = units.map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
   const kindOpts = '<option value="trainer">Тренажёр</option><option value="games">Игры</option><option value="worksheet">Лист</option>';
-  const cOpts = SPK.map(c => '<option value="'+c[0]+'"'+(c[0]===course?" selected":"")+'>'+c[1]+'</option>').join("");
-  const uOpts = [1,2,3,4,5,6,7,8].map(n => '<option value="'+n+'">Unit '+n+'</option>').join("");
   const note = (()=>{ try { return localStorage.getItem(noteKey(sid)) || ""; } catch(e){ return ""; } })();
+  const openHw = hw.filter(a=>!a.done).length + open;
 
   p.innerHTML =
     '<div class="pane-hd"><span>Шаг 2 · '+esc(s.name)+'</span><span>последняя активность: '+ago(s.updated_at)+'</span></div>' +
     '<div class="ink"><div><div class="k">Ученик / Student</div><h2>'+esc(s.name)+'</h2>' +
-      '<p>'+(open ? open+" заданий ждут выполнения" : "Открытых заданий нет")+'</p></div>' +
+      '<p>'+(openHw ? openHw+" заданий ждут выполнения" : "Открытых заданий нет")+'</p></div>' +
       '<a class="go" href="room.html">'+icon("play",15)+' Запустить доску</a></div>' +
 
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Прогресс курса</span><span class="n">'+(totalW?Math.round(lw/totalW*100):0)+'%</span>' +
         '<span class="d">'+lw+' из '+totalW+' слов</span></div>' +
-      '<div class="tile"><span class="k">Домашка</span><span class="n'+(open?" acc":"")+'">'+open+'</span>' +
+      '<div class="tile"><span class="k">Домашка</span><span class="n'+(openHw?" acc":"")+'">'+openHw+'</span>' +
         '<span class="d">открытых заданий</span></div>' +
       '<div class="tile"><span class="k">Звёзды · стрик</span><span class="n">'+(m.totalPoints||0)+'</span>' +
         '<span class="d">стрик '+(m.dayStreak||0)+' дней</span></div>' +
@@ -156,21 +170,27 @@ async function drawPane(){
         '<span class="d">раздел оплат ещё не заведён</span></div>' +
     '</div>' +
 
-    '<div class="sect"><span>Выдать домашку · Super Minds</span></div>' +
-    '<div class="form"><select id="afUnit">'+unitOpts+'</select><select id="afKind">'+kindOpts+'</select>' +
-      '<button class="go" id="afGo">Задать</button></div>' +
-    (list.length ? '<div class="chips">' + list.map(a =>
-        '<span class="chip'+(a.done?" done":"")+'">'+esc(KIND_L[a.kind]||a.kind)+' · '+esc(unitLabel(a.unit_id))+
-        (a.done?" ✓":"")+'<button data-del="'+a.id+'" title="Удалить">✕</button></span>').join("") + '</div>' : "") +
+    '<div class="sect"><span>Выдать домашнее задание</span><span>курс · юнит · части · срок</span></div>' +
+    '<div class="hwform">' +
+      '<div class="hf-row"><label>Курс</label><select id="hCourse">' +
+        '<option value="superminds-1">Super Minds 1</option>' +
+        '<option value="speakout-b1"'+(course==="speakout-b1"?" selected":"")+'>Speakout B1</option>' +
+        '<option value="speakout-b1plus"'+(course==="speakout-b1plus"?" selected":"")+'>Speakout B1+</option>' +
+      '</select></div>' +
+      '<div class="hf-row"><label>Юнит</label><select id="hUnit"></select></div>' +
+      '<div class="hf-row" id="hPartsRow"><label>Что задать</label><span class="parts">' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="lesson" checked> Урок · лексика/чанки</label>' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="grammar" checked> Грамматика</label>' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="workbook" checked> Workbook</label>' +
+      '</span></div>' +
+      '<div class="hf-row" id="hKindRow" style="display:none"><label>Формат</label><select id="hKind">'+kindOpts+'</select></div>' +
+      '<div class="hf-row"><label>Срок</label><input type="date" id="hDue"></div>' +
+      '<div class="hf-row"><label>Комментарий</label><input type="text" id="hMsg" placeholder="что сделать, на что обратить внимание (необязательно)"></div>' +
+      '<button class="go big" id="hGo">Выдать домашнее задание</button>' +
+    '</div>' +
+    hwChips(list, hw) +
 
-    '<div class="sect"><span>Speakout · курс, домашка, материалы</span></div>' +
-    '<div class="form"><select id="spCourse">'+cOpts+'</select>' +
-      '<button class="go" id="spSave">Назначить курс</button></div>' +
-    '<div class="form"><select id="spUnit">'+uOpts+'</select><input id="spNote" placeholder="заметка к заданию (необязательно)">' +
-      '<button class="go" id="spAdd">Задать ДЗ</button></div>' +
-    (hw.length ? '<div class="chips">' + hw.map(a =>
-        '<span class="chip'+(a.done?" done":"")+'">'+esc(SPK_L[a.course]||a.course)+' U'+a.unit+(a.done?" ✓":"")+
-        '<button data-delhw="'+a.id+'" title="Удалить">✕</button></span>').join("") + '</div>' : "") +
+    '<div class="sect"><span>Материалы · ссылки</span></div>' +
     '<div class="form"><input id="mTitle" placeholder="название материала"><input id="mUrl" placeholder="https://…">' +
       '<button class="go" id="mAdd">Добавить ссылку</button></div>' +
     (mats.length ? '<div class="chips">' + mats.map(x =>
@@ -196,27 +216,59 @@ async function drawPane(){
   bindStudent(sid);
 }
 
+function hwChips(list, hw){
+  let all = [];
+  list.forEach(a => all.push({ k:"sm", id:a.id, done:a.done,
+    txt:(KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id) }));
+  hw.forEach(a => {
+    const meta = parseNote(a.note);
+    const parts = (meta.parts||[]).map(p => PART_L[p]||p).join(", ");
+    all.push({ k:"spk", id:a.id, done:a.done,
+      txt:(SPK_L[a.course]||a.course)+" · Unit "+a.unit + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
+  });
+  if (!all.length) return "";
+  return '<div class="chips">' + all.map(x =>
+    '<span class="chip'+(x.done?" done":"")+'">'+esc(x.txt)+(x.done?" ✓":"") +
+    '<button data-'+(x.k==="sm"?"del":"delhw")+'="'+x.id+'" title="Удалить">✕</button></span>').join("") + '</div>';
+}
+
+function fillUnits(){
+  const course = document.getElementById("hCourse").value;
+  const uSel = document.getElementById("hUnit");
+  const isSM = course === "superminds-1";
+  document.getElementById("hPartsRow").style.display = isSM ? "none" : "flex";
+  document.getElementById("hKindRow").style.display = isSM ? "flex" : "none";
+  if (isSM){
+    uSel.innerHTML = (window.SM_UNITS||[]).map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
+  } else {
+    uSel.innerHTML = [1,2,3,4,5,6,7,8].map(n => '<option value="'+n+'">Unit '+n+'</option>').join("");
+  }
+}
+
 function bindStudent(sid){
   const $ = id => document.getElementById(id);
-  $("afGo").onclick = async e => {
+  fillUnits();
+  $("hCourse").onchange = fillUnits;
+  $("hGo").onclick = async e => {
+    const course = $("hCourse").value;
     e.target.textContent = "…";
-    const r = await SM.assignTo(sid, $("afUnit").value, $("afKind").value);
-    if (r.ok) load(); else { e.target.textContent = "Задать"; alert(r.error || "Ошибка"); }
+    let r;
+    if (course === "superminds-1"){
+      r = await SM.assignTo(sid, $("hUnit").value, $("hKind").value);
+    } else {
+      const parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
+      if (!parts.length){ e.target.textContent = "Выдать домашнее задание"; alert("Отметь хотя бы одну часть (Урок / Грамматика / Workbook)"); return; }
+      const note = JSON.stringify({ parts: parts, due: $("hDue").value || null, msg: $("hMsg").value || "" });
+      try { await SM.enrolCourse(sid, course); } catch(e2){}
+      r = await SM.addHW(sid, course, +$("hUnit").value, note);
+    }
+    if (r && r.ok) { drawPane(); load(); }
+    else { e.target.textContent = "Выдать домашнее задание"; alert((r && r.error) || "Ошибка"); }
   };
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
     if (!confirm("Удалить задание?")) return;
     await SM.deleteAssignment(b.dataset.del); load();
   });
-  $("spSave").onclick = async e => {
-    e.target.textContent = "…";
-    const r = await SM.enrolCourse(sid, $("spCourse").value);
-    e.target.textContent = r.ok ? "Готово" : "Назначить курс";
-  };
-  $("spAdd").onclick = async e => {
-    e.target.textContent = "…";
-    const r = await SM.addHW(sid, $("spCourse").value, +$("spUnit").value, $("spNote").value);
-    if (r.ok) drawPane(); else { e.target.textContent = "Задать ДЗ"; alert(r.error || "Ошибка"); }
-  };
   document.querySelectorAll("[data-delhw]").forEach(b => b.onclick = async () => {
     await SM.deleteHW(b.dataset.delhw); drawPane();
   });

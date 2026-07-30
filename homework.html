@@ -43,6 +43,10 @@ const KIND = {
   games:    { l:"Игры юнита",    d:"пройти игры юнита",                        href:"games.html?u=" },
   worksheet:{ l:"Рабочий лист",  d:"распечатать и сделать письменно",          href:"worksheet.html?u=" }
 };
+const PART_L = { lesson:"Лексика и чанки", grammar:"Грамматика", workbook:"Workbook" };
+const PART_D = { lesson:"слова и выражения юнита", grammar:"правила и упражнения", workbook:"рабочая тетрадь · закрепление" };
+function partHref(course, unit, part){ return course+"-u"+unit+(part==="grammar"?"-grammar":part==="workbook"?"-workbook":"")+".html"; }
+function parseNote(n){ try { const o=JSON.parse(n); if(o && (o.parts||o.due||o.msg!==undefined)) return o; } catch(e){} return { msg: n||"" }; }
 
 let ITEMS = [], sel = 0, MATS = [];
 
@@ -122,25 +126,21 @@ async function load(){
       desc: k.d, href: k.href + x.unit_id, blank: x.kind === "worksheet" });
   });
   spk.forEach(x => {
+    const meta = parseNote(x.note);
+    const parts = (meta.parts && meta.parts.length) ? meta.parts : ["lesson","grammar"];
+    const dueTxt = meta.due ? " · до " + meta.due : "";
+    const rows = parts.map((pt,i) =>
+      '<a class="row'+(i===0?" now":"")+'" href="'+partHref(x.course,x.unit,pt)+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+      '<span><span class="t">'+(PART_L[pt]||pt)+'</span><span class="d">'+(PART_D[pt]||"")+'</span></span>' +
+      '<span class="b '+(i===0?"pri ":"")+'sm">Открыть</span></a>').join("");
     ITEMS.push({ type:"spk", id:x.id, done:!!x.done,
-      title:(SPK_L[x.course]||x.course)+" · Unit "+x.unit, sub:"Speakout", kicker:"Задание / Homework",
-      desc: x.note || "Лексика и грамматика юнита "+x.unit,
-      href: x.course+"-u"+x.unit+".html",
-      extra:'<div class="sect"><span>Что открыть</span></div><div class="rows">' +
-        '<a class="row now" href="'+x.course+'-u'+x.unit+'.html"><span class="num">01</span>' +
-        '<span><span class="t">Лексика и чанки</span><span class="d">слова и выражения юнита</span></span>' +
-        '<span class="b pri sm">Учить</span></a>' +
-        '<a class="row" href="'+x.course+'-u'+x.unit+'-grammar.html"><span class="num">02</span>' +
-        '<span><span class="t">Грамматика</span><span class="d">правила и упражнения</span></span>' +
-        '<span class="b sm">Открыть</span></a></div>' });
+      title:(SPK_L[x.course]||x.course)+" · Unit "+x.unit, sub:"Speakout"+dueTxt, kicker:"Задание / Homework",
+      desc: meta.msg || ("Юнит "+x.unit+": "+parts.map(pt=>PART_L[pt]||pt).join(", ")),
+      href: partHref(x.course, x.unit, parts[0]),
+      extra:'<div class="sect"><span>Что открыть</span>'+(meta.due?'<span>срок: '+esc(meta.due)+'</span>':'')+'</div><div class="rows">'+rows+'</div>' });
   });
   ITEMS.sort((x,y) => (x.done?1:0) - (y.done?1:0));
   if (sel >= ITEMS.length) sel = 0;
-
-  /* нет учителя — предложим код класса */
-  if (prof && !prof.teacher_id){
-    document.getElementById("hwList").insertAdjacentHTML("afterbegin", "");
-  }
 
   drawList(); drawPane();
 
