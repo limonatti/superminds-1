@@ -9,218 +9,83 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
+<style>
+  .crs{display:grid;grid-template-columns:1fr;gap:0}
+  a.row.crs-row{text-decoration:none}
+  .crs-row .num{font-size:26px}
+  .crs-row.assigned{background:var(--color-accent-100);border-left:4px solid var(--color-accent)}
+  .tag{display:inline-block;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;
+    letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;margin-left:8px;vertical-align:middle}
+  .altbtns{display:flex;gap:8px;flex-wrap:wrap;padding:0 28px 18px}
+  .altbtns a{border:2px solid var(--color-text);padding:9px 14px;font:800 12px "Archivo",sans-serif;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--color-text)}
+  .altbtns a.acc{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+</style>
 </head>
 <body>
 <div class="app">
   <nav class="side" id="side"></nav>
   <div class="main">
-    <div class="cols">
-      <div class="list">
-        <div class="step">Шаг 1 · Выбери курс</div>
-        <div id="courseList"></div>
-      </div>
-      <div class="pane" id="pane"></div>
-    </div>
+    <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="words.js"></script>
-<script src="speakout-words.js"></script>
 <script src="sm-auth.js"></script>
 <script src="sm-shell.js"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
+const COURSES = [
+  { id:"speakout-b1plus", t:"Speakout B1+", d:"Курс по юнитам · грамматика, лексика, чанки, аудио", emoji:"🗣️",
+    hub:"speakout-b1plus-course.html", book:"speakout-book.html?course=speakout-b1plus" },
+  { id:"speakout-b1", t:"Speakout B1", d:"Курс по юнитам · грамматика, лексика, чанки", emoji:"💬",
+    hub:"speakout-b1-course.html", book:"speakout-book.html?course=speakout-b1" },
+  { id:"superminds-1", t:"Super Minds 1", d:"Для детей 6–8 · юниты, слова, игры", emoji:"🧸",
+    hub:"units.html", book:null }
+];
 
-/* ---------- реестр курсов ---------- */
-const SPK_UNITS = 8;
-function speakoutWords(course, unit){
-  const src = (window.SPEAKOUT_WORDS || {})[course] || {};
-  return (src[String(unit)] || []).map(p => ({ en: p[0], ru: p[1] }));
-}
-function speakoutTotal(course){
-  const src = (window.SPEAKOUT_WORDS || {})[course] || {};
-  return Object.keys(src).reduce((s,k) => s + src[k].length, 0);
-}
+async function load(){
+  const pane = document.getElementById("pane");
+  let user = null, assigned = null;
+  try { user = await SMUI.user(); } catch(e){}
+  if (user) { try { assigned = await SM.myCourse(); } catch(e){} }
 
-const CATALOG = [];
-/* учебники для детей из words.js (включая созданные в конструкторе) */
-(window.SM_COURSES || []).forEach(c => {
-  if (c.admin) return;
-  const units = (window.SM_COURSE_DATA || {})[c.id] || [];
-  if (!units.length) return;
-  CATALOG.push({
-    kind: "kids", id: c.id, title: c.title, sub: c.subtitle,
-    units: units.length, words: units.reduce((s,u)=>s+u.words.length,0), data: units
-  });
-});
-CATALOG.push({ kind: "phonics", id: "phonics", title: "Phonics Starter", sub: "звуки и чтение · 5–7 лет", units: 0, words: 0 });
-CATALOG.push({ kind: "spk", id: "speakout-b1plus", title: "Speakout B1+", sub: "подростки и взрослые", units: SPK_UNITS, words: speakoutTotal("speakout-b1plus") });
-CATALOG.push({ kind: "spk", id: "speakout-b1",     title: "Speakout B1",  sub: "подростки и взрослые", units: SPK_UNITS, words: speakoutTotal("speakout-b1") });
-CATALOG.push({ kind: "own", id: "own", title: "Свой учебник", sub: "собери в конструкторе", units: 0, words: 0 });
-/* «скоро» показываем только для тех учебников, которых ещё нет */
-const HAVE = CATALOG.map(c => c.title.toLowerCase().replace(/\s+/g,""));
-["Super Minds 2","Kid's Box 1","Playway 1","Family & Friends 1"].forEach(t => {
-  if (HAVE.indexOf(t.toLowerCase().replace(/\s+/g,"")) >= 0) return;
-  CATALOG.push({ kind: "soon", id: "soon-"+t, title: t, sub: "скоро", units: 0, words: 0 });
-});
+  const cur = assigned ? (COURSES.filter(c=>c.id===assigned)[0] || null) : null;
+  const ordered = COURSES.slice().sort((a,b)=> (b.id===assigned?1:0) - (a.id===assigned?1:0));
 
-/* ---------- прогресс ---------- */
-let PROG = {};
-function learnedIn(units){
-  let n = 0;
-  units.forEach(u => u.words.forEach((w,i) => {
-    const k = u.id + "-" + i;
-    if (PROG[k] && PROG[k].status === "learned") n++;
-  }));
-  return n;
-}
+  let html = '<div class="pane-hd"><span>Мои курсы / My courses</span><span>' +
+    (user ? esc(user.name) : "войди в меню слева") + '</span></div>';
 
-/* ---------- состояние ---------- */
-let sel = CATALOG[0];
-let selUnit = 0;
-
-/* ---------- список слева ---------- */
-function drawList(){
-  document.getElementById("courseList").innerHTML = CATALOG.map((c,i) => {
-    const on = c === sel ? " on" : "";
-    let pct = 0, sub = c.sub;
-    if (c.kind === "kids" && c.words) { pct = Math.round(learnedIn(c.data)/c.words*100); sub = SMUI.n(c.units, SMUI.UNITS) + " · " + SMUI.n(c.words, SMUI.WORDS); }
-    if (c.kind === "spk") sub = SMUI.n(c.units, SMUI.UNITS) + " · " + SMUI.n(c.words, SMUI.WORDS);
-    const bar = (c.kind === "kids" || c.kind === "spk")
-      ? '<span class="bar"><i style="width:'+pct+'%"></i></span>' : "";
-    return '<button class="li'+on+'" data-i="'+i+'"'+(c.kind==="soon"?" disabled":"")+'>' +
-      '<span class="t">'+esc(c.title)+'</span><span class="s">'+esc(sub)+'</span>'+bar+'</button>';
-  }).join("");
-  document.querySelectorAll("#courseList .li").forEach(b => b.onclick = () => {
-    sel = CATALOG[+b.dataset.i]; selUnit = 0;
-    if (sel.kind === "kids") { try { localStorage.setItem("sm-course", sel.id); } catch(e){} }
-    drawList(); drawPane();
-  });
-}
-
-/* ---------- правая часть ---------- */
-function unitStrip(labels, done, cur){
-  return '<div class="units">' + labels.map((l,i) => {
-    const cls = i === cur ? " now" : (done && i < done ? " done" : "");
-    return '<button class="unit'+cls+'" data-u="'+i+'"><span class="k">Unit '+(i+1)+'</span><span class="n">'+esc(l)+'</span></button>';
-  }).join("") + "</div>";
-}
-function rowsHtml(list){
-  return '<div class="rows">' + list.map((r,i) =>
-    '<a class="row'+(r.now?" now":"")+'" href="'+r.href+'"'+(r.blank?' target="_blank" rel="noopener"':'')+'>' +
-      '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-      '<span><span class="t">'+esc(r.t)+'</span><span class="d">'+esc(r.d)+'</span></span>' +
-      '<span class="b'+(r.now?" pri":"")+' sm">'+esc(r.act||"Открыть")+'</span></a>').join("") + "</div>";
-}
-function wordsHtml(words, title){
-  if (!words.length) return "";
-  return '<div class="sect"><span>'+esc(title)+'</span><span>'+words.length+'</span></div>' +
-    '<div class="wgrid">' + words.slice(0,60).map(w =>
-      '<div class="w"><div class="en">'+esc(w.en)+'</div><div class="ru">'+esc(w.ru||"")+'</div></div>').join("") + "</div>";
-}
-
-function drawPane(){
-  const p = document.getElementById("pane");
-  const c = sel;
-
-  if (c.kind === "soon"){
-    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · '+esc(c.title)+'</span></div>' +
-      SMUI.empty("Этого учебника пока нет",
-        "Ася его ещё не заводила. Когда появится — курс встанет в этот же список, и юниты откроются здесь.");
-    return;
+  if (cur){
+    html += '<div class="ink"><div><div class="k">Назначен тебе учителем</div><h2>' + esc(cur.t) + '</h2>' +
+      '<p>' + esc(cur.d) + '</p></div><a class="go" href="' + (cur.book || cur.hub) + '">' +
+      icon("play",15) + ' Продолжить</a></div>';
+    if (cur.book){
+      html += '<div class="altbtns"><a class="acc" href="' + cur.book + '">📖 Книга (презентация)</a>' +
+        '<a href="' + cur.hub + '">Список юнитов</a>' +
+        '<a href="homework.html">Домашка</a></div>';
+    }
+  } else if (user) {
+    html += '<div class="ink"><div><div class="k">Курс</div><h2>Курс ещё не назначен</h2>' +
+      '<p>Учитель назначит тебе курс — он появится здесь. Пока можешь открыть любой из списка.</p></div></div>';
   }
 
-  if (c.kind === "phonics"){
-    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · '+esc(c.title)+'</span><span>звуки / phonics</span></div>' +
-      '<div class="ink"><div><div class="k">Курс / Course</div><h2>'+esc(c.title)+'</h2>' +
-        '<p>Буквы, звуки и первые слова для чтения.</p></div>' +
-        '<a class="go" href="phonics.html">'+icon("play",15)+' Открыть</a></div>' +
-      rowsHtml([{ t:"Звуки и буквы", d:"тренажёр звуков, карточки и чтение по слогам", href:"phonics.html", act:"Открыть", now:true }]);
-    return;
-  }
+  html += '<div class="sect"><span>Все курсы</span><span>' + COURSES.length + '</span></div><div class="crs">' +
+    ordered.map(c => {
+      const on = (c.id===assigned) ? " assigned" : "";
+      return '<a class="row crs-row' + on + '" href="' + (c.book || c.hub) + '">' +
+        '<span class="num">' + c.emoji + '</span>' +
+        '<span><span class="t">' + esc(c.t) + (c.id===assigned ? '<span class="tag">назначен</span>' : '') + '</span>' +
+        '<span class="d">' + esc(c.d) + '</span></span>' +
+        '<span class="b sm">Открыть</span></a>';
+    }).join("") + '</div>';
 
-  if (c.kind === "own"){
-    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Свой учебник</span></div>' +
-      '<div class="ink"><div><div class="k">Конструктор / Builder</div><h2>Собери свой учебник</h2>' +
-        '<p>Юниты, слова и картинки. Появится в этом же списке рядом с остальными.</p></div>' +
-        '<a class="go" href="admin.html">'+icon("play",15)+' Открыть конструктор</a></div>' +
-      rowsHtml([
-        { t:"Учебники", d:"создать курс, юниты и слова", href:"admin.html", act:"Открыть", now:true },
-        { t:"Конструктор заданий", d:"собрать упражнения к уроку", href:"builder.html", act:"Открыть" }
-      ]);
-    return;
-  }
-
-  if (c.kind === "spk"){
-    const labels = Array.from({length:SPK_UNITS}, (_,i) => "Unit "+(i+1));
-    const w = speakoutWords(c.id, selUnit+1);
-    p.innerHTML =
-      '<div class="pane-hd"><span>Шаг 2 · '+esc(c.title)+'</span><span>'+c.units+' юнитов</span></div>' +
-      '<div class="ink"><div><div class="k">Курс / Course</div><h2>'+esc(c.title)+'</h2>' +
-        '<p>Лексика, чанки и грамматика по каждому юниту.</p></div>' +
-        '<a class="go" href="'+c.id+'-course.html">'+icon("play",15)+' Открыть курс</a></div>' +
-      unitStrip(labels.map((_,i)=>"U"+(i+1)), 0, selUnit) +
-      rowsHtml([
-        { t:"Учебник · интерактивные развороты", d:"страницы юнита, диалоги двумя голосами, упражнения с проверкой — только для учеников курса", href:"book.html?c="+c.id+"&u="+(selUnit+1), act:"Открыть", now:true },
-        { t:"Лексика и чанки", d:"слова и выражения юнита "+(selUnit+1), href:c.id+"-u"+(selUnit+1)+".html", act:"Учить" },
-        { t:"Грамматика", d:"правила и упражнения юнита "+(selUnit+1), href:c.id+"-u"+(selUnit+1)+"-grammar.html", act:"Открыть" },
-        { t:"Все чанки курса", d:"выражения из всех юнитов одним списком", href:c.id+"-chunks.html", act:"Открыть" }
-      ]) +
-      wordsHtml(w, "Слова юнита "+(selUnit+1)+" / Unit words");
-    bindUnits();
-    return;
-  }
-
-  /* детский курс с юнитами */
-  const units = c.data;
-  const u = units[selUnit] || units[0];
-  const learned = learnedIn(units);
-  const pct = c.words ? Math.round(learned/c.words*100) : 0;
-  const isSM1 = c.id === "sm1";
-  p.innerHTML =
-    '<div class="pane-hd"><span>Шаг 2 · '+esc(c.title)+'</span><span>'+esc(c.sub)+'</span></div>' +
-    '<div class="ink"><div><div class="k">Курс / Course</div><h2>'+esc(c.title)+'</h2>' +
-      '<p>Выучено '+learned+' из '+SMUI.n(c.words, SMUI.WORDS)+' · '+pct+'%</p></div>' +
-      '<a class="go" href="trainer.html">'+icon("play",15)+' Продолжить</a></div>' +
-    '<div class="tiles">' +
-      '<div class="tile"><span class="k">Юнитов</span><span class="n">'+c.units+'</span></div>' +
-      '<div class="tile"><span class="k">Слов в курсе</span><span class="n">'+c.words+'</span></div>' +
-      '<div class="tile"><span class="k">Выучено</span><span class="n acc">'+learned+'</span></div>' +
-    '</div>' +
-    '<div class="sect"><span>Юниты / Units</span><span>нажми — откроется юнит</span></div>' +
-    unitStrip(units.map(x => x.title), 0, selUnit) +
-    '<div class="sect"><span>Разделы / Sections</span></div>' +
-    rowsHtml([
-      { t:"Тренажёр слов", d:"карточки и квиз по всем юнитам", href:"trainer.html", act:"Учить", now:true },
-      { t:"Игры юнита", d:"колесо, мемори, гонка, молния и другие", href:"games.html?u="+u.id, act:"Играть" },
-      { t:"Кубический мир", d:"копалка, крафт, пещера, стройка и ферма — по словам юнита", href:"mine.html?u="+u.id, act:"Играть" },
-      { t:"Игротека", d:"анаграммы, поиск слов, «услышь и выбери»", href:"arcade.html", act:"Играть" },
-      { t:"Student Book", d:"задания и карточки по юнитам", href: isSM1 ? "studentbook.html" : "units.html", act:"Открыть" },
-      { t:"Work Book", d:"печатные листы с грамматикой", href: isSM1 ? "workbook.html" : "units.html", act:"Открыть" }
-    ]) +
-    wordsHtml(u.words, "Слова юнита «"+u.title+"» / Unit words");
-  bindUnits();
+  pane.innerHTML = html;
 }
 
-function bindUnits(){
-  document.querySelectorAll(".unit").forEach(b => b.onclick = () => { selUnit = +b.dataset.u; drawPane(); });
-}
-
-/* ---------- старт ---------- */
-(async function(){
-  try { const cid = localStorage.getItem("sm-course");
-    const f = CATALOG.filter(c => c.id === cid)[0]; if (f) sel = f; } catch(e){}
-  SMUI.mount({ role:"student", active:"courses" });
-  try { PROG = (await SM.loadProgress()) || {}; } catch(e){ PROG = {}; }
-  drawList(); drawPane();
-  try {
-    const hw = await SM.myAssignments();
-    const spk = await SM.myHW();
-    const n = (hw||[]).filter(a=>!a.done).length + (spk||[]).filter(a=>!a.done).length;
-    if (n) SMUI.mount({ role:"student", active:"courses", counts:{ homework:n } });
-  } catch(e){}
-})();
+SMUI.mount({ role:"student", active:"courses" });
+load();
 </script>
 </body>
 </html>
