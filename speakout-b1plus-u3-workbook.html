@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 must / have to / need to · conditionals · работа и собеседования</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 3 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["salary", "зарплата"], ["to apply for", "подать заявку на"], ["interview", "собеседование"], ["CV", "резюме"], ["overtime", "сверхурочные"], ["deadline", "крайний срок"], ["colleague", "коллега"], ["boss", "начальник"], ["to hire", "нанять"], ["to quit", "уволиться"], ["promotion", "повышение"], ["day off", "выходной"], ["to work from home", "работать из дома"], ["experience", "опыт"], ["employee", "сотрудник"], ["employer", "работодатель"], ["shift", "смена"], ["wage", "почасовая оплата"], ["to commute", "ездить на работу"], ["freelance", "фриланс"]];
 const PRONWORDS=["have to", "has to", "want to", "going to", "used to", "supposed to"];
 const CHUNKS=[["to apply for a job", "подать на работу"], ["to work overtime", "работать сверхурочно"], ["a nine-to-five", "работа с 9 до 5"], ["to be off sick", "быть на больничном"], ["to hand in your notice", "подать заявление об уходе"], ["a dream job", "работа мечты"], ["to get promoted", "получить повышение"], ["work-life balance", "баланс работы и жизни"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "You ___ wear a suit — the office is casual.", "o": ["mustn't"
 const GAPS=[{"q": "If I ___ (be) you, I'd ask for a pay rise.", "a": ["were", "was"]}, {"q": "We didn't ___ to work last Monday — it was a holiday.", "a": ["have"]}, {"q": "If she passes the interview, she ___ (start) in May.", "a": ["will start", "'ll start"]}, {"q": "You ___ (must + not) be late for the meeting.", "a": ["mustn't", "must not"]}, {"q": "You ___ (not/have to) come in on Saturday — it's optional.", "a": ["don't have to", "do not have to"]}, {"q": "If I had my own business, I ___ (work) from a beach.", "a": ["'d work", "would work"]}];
 const FX=[{"q": "Тебе нужна пара секунд подумать:", "o": ["That's a good question. Let me think.", "Next question!", "I don't know anything."], "a": 0}, {"q": "Ты не расслышал(а) вопрос:", "o": ["Speak louder!", "Could you repeat that, please?", "What?"], "a": 1}, {"q": "Хочешь уточнить свою мысль:", "o": ["Forget it.", "What I mean is…", "The end."], "a": 1}];
 const SPEAK=["Опиши работу мечты: что делаешь, где, почему (I'd love to… / My dream job would be…).", "Ролевая игра: собеседование. Ответь на 'Why should we hire you?' — 3 сильные стороны.", "Обсуди: четырёхдневная неделя — за и против. Скажи своё мнение.", "Расскажи о правилах на своей работе/учёбе (have to / mustn't / don't have to)."];
-const WBMC=[{"q": "We ___ to wear uniforms — the company gives them to us.", "o": ["have", "must", "need"], "a": 0}, {"q": "работать сверхурочно = work ___", "o": ["overtime", "overwork", "extra clock"], "a": 0}, {"q": "Она получила повышение = She got a ___ .", "o": ["promotion", "position", "permission"], "a": 0}];
-const WBGAPS=[{"q": "You needn't ___ (come) early tomorrow.", "a": ["come"]}, {"q": "If we ___ (miss) the deadline, the client will be angry.", "a": ["miss"]}, {"q": "I'd love this job if it ___ (not/be) so far away.", "a": ["weren't", "wasn't"]}];
+const WBMC=[{"q": "We ___ to wear uniforms — the company gives them to us.", "o": ["have", "must", "need"], "a": 0}, {"q": "работать сверхурочно = work ___", "o": ["overtime", "overwork", "extra clock"], "a": 0}, {"q": "Она получила повышение = She got a ___ .", "o": ["promotion", "position", "permission"], "a": 0}, {"q": "You ___ wear a helmet — it's the rule.", "o": ["have to", "have", "need"], "a": 0}, {"q": "You ___ come tomorrow — it's optional.", "o": ["don't have to", "mustn't", "have to"], "a": 0}, {"q": "If I ___ the job, I'll celebrate.", "o": ["get", "got", "will get"], "a": 0}, {"q": "собеседование = a job ___ .", "o": ["interview", "interval", "review"], "a": 0}];
+const WBGAPS=[{"q": "You needn't ___ (come) early tomorrow.", "a": ["come"]}, {"q": "If we ___ (miss) the deadline, the client will be angry.", "a": ["miss"]}, {"q": "I'd love this job if it ___ (not/be) so far away.", "a": ["weren't", "wasn't"]}, {"q": "We ___ (not/need to) book — there's space. (нет необходимости)", "a": ["don't need to", "do not need to"]}, {"q": "If she ___ (study) harder, she would pass. (2nd)", "a": ["studied"]}, {"q": "He got a ___ and now earns more. (повышение)", "a": ["promotion", "raise"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

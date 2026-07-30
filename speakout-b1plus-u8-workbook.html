@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 third conditional · should have · would (прошлые привычки) · советы и уроки жизни</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 8 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["advice", "совет (неисчисл.)"], ["to give advice", "дать совет"], ["to take advice", "прислушаться к совету"], ["wise", "мудрый"], ["mistake", "ошибка"], ["to regret", "сожалеть"], ["lesson", "урок (жизни)"], ["experience", "опыт"], ["to look back", "оглядываться назад"], ["proverb", "пословица"], ["generation", "поколение"], ["to pass on", "передать (опыт)"], ["patient", "терпеливый"], ["to appreciate", "ценить"], ["hindsight", "запоздалое понимание"], ["to reflect", "размышлять"], ["decision", "решение"], ["to warn", "предупреждать"], ["grateful", "благодарный"], ["to figure out", "понять, разобраться"]];
 const PRONWORDS=["would have", "should have", "could have", "might have", "must have", "I'd have"];
 const CHUNKS=[["with hindsight", "задним умом"], ["to learn your lesson", "извлечь урок"], ["if I'd known…", "если бы я знал…"], ["to look on the bright side", "смотреть позитивно"], ["easier said than done", "легче сказать, чем сделать"], ["to take my advice", "прислушаться к совету"], ["a blessing in disguise", "не было бы счастья…"], ["to have second thoughts", "засомневаться"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "If I ___ harder at school, I'd have gone to university.", "o": 
 const GAPS=[{"q": "If I'd known, I ___ have come earlier. (бы)", "a": ["would"]}, {"q": "You should ___ (listen) to me!", "a": ["have listened"]}, {"q": "If they ___ (not/miss) the bus, they'd have arrived on time.", "a": ["hadn't missed"]}, {"q": "My grandma ___ always bake pies on Sundays. (бывало)", "a": ["would"]}, {"q": "You should ___ (listen) to me! (сожаление)", "a": ["have listened"]}, {"q": "If I'd known, I ___ have come earlier. (бы)", "a": ["would"]}];
 const FX=[{"q": "Начни презентацию:", "o": ["Today I'm going to talk about my family's best advice.", "So. Words. Many words.", "The presentation is over."], "a": 0}, {"q": "Перейди к следующей части:", "o": ["Let's move on to the second lesson.", "Jump! Jump!", "Second part, why not."], "a": 0}, {"q": "Подведи итог:", "o": ["To sum up, small habits change big things.", "Numbers are summed.", "It is what it is."], "a": 0}];
 const SPEAK=["Напиши/скажи 5 советов себе в прошлое: два third conditional, два should have, один с Take my advice.", "Расскажи о решении, о котором жалеешь (I should have… / If I had…).", "Мини-презентация «Three lessons I've learned»: начни, перечисли, подведи итог.", "Дай мудрый совет младшему другу и объясни, почему это важно."];
-const WBMC=[{"q": "Учиться на ошибках = learn from your ___ .", "o": ["mistakes", "miscakes", "missings"], "a": 0}, {"q": "Мудрое решение = a ___ decision.", "o": ["wise", "wide", "wild"], "a": 0}, {"q": "Передать опыт внукам = to ___ on your experience.", "o": ["pass", "give", "move"], "a": 0}];
-const WBGAPS=[{"q": "If he'd taken the map, he ___ (not/get) lost. (бы не)", "a": ["wouldn't have got", "wouldn't have gotten"]}, {"q": "I regret ___ (not/travel) more when I was young.", "a": ["not travelling"]}, {"q": "You should have ___ (ask) for help earlier.", "a": ["asked"]}];
+const WBMC=[{"q": "Учиться на ошибках = learn from your ___ .", "o": ["mistakes", "miscakes", "missings"], "a": 0}, {"q": "Мудрое решение = a ___ decision.", "o": ["wise", "wide", "wild"], "a": 0}, {"q": "Передать опыт внукам = to ___ on your experience.", "o": ["pass", "give", "move"], "a": 0}, {"q": "If I'd known, I ___ come. (бы пришёл)", "o": ["would have", "would", "will have"], "a": 0}, {"q": "You ___ told me earlier! (упрёк)", "o": ["should have", "should", "must have"], "a": 0}, {"q": "When I was a kid, we ___ spend summers at the lake. (прошлая привычка)", "o": ["would", "used", "use to"], "a": 0}, {"q": "учиться на ошибках = learn from your ___ .", "o": ["mistakes", "faults", "misses"], "a": 0}];
+const WBGAPS=[{"q": "If he'd taken the map, he ___ (not/get) lost. (бы не)", "a": ["wouldn't have got", "wouldn't have gotten"]}, {"q": "I regret ___ (not/travel) more when I was young.", "a": ["not travelling"]}, {"q": "You should have ___ (ask) for help earlier.", "a": ["asked"]}, {"q": "If she had studied, she ___ (pass). (3rd — would have passed)", "a": ["would have passed"]}, {"q": "You should have ___ (listen) to her advice. (упрёк)", "a": ["listened"]}, {"q": "We ___ (spend → used to) hours playing outside as kids.", "a": ["used to spend"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 so / such · be & get used to · город, транспорт и любимые места</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 6 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["suburbs", "пригород"], ["commute", "дорога на работу"], ["rush hour", "час пик"], ["traffic jam", "пробка"], ["pedestrian", "пешеход"], ["crowded", "многолюдный"], ["lively", "оживлённый"], ["noisy", "шумный"], ["public transport", "общественный транспорт"], ["tram", "трамвай"], ["neighbourhood", "район"], ["local", "местный (житель)"], ["convenient", "удобный"], ["green spaces", "зелёные зоны"], ["skyscraper", "небоскрёб"], ["outskirts", "окраина"], ["cycle lane", "велодорожка"], ["district", "район"], ["landmark", "достопримечательность"], ["to get around", "передвигаться"]];
 const PRONWORDS=["car", "park", "hard", "water", "teacher", "better", "corner"];
 const CHUNKS=[["to get used to", "привыкать к"], ["off the beaten track", "вдали от туристов"], ["a stone's throw away", "в двух шагах"], ["the hustle and bustle", "городская суета"], ["a lively neighbourhood", "оживлённый район"], ["it's worth a visit", "стоит посетить"], ["to settle in", "обжиться"], ["a green space", "зелёная зона"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "The traffic was ___ bad that we missed the show.", "o": ["so", 
 const GAPS=[{"q": "I'm not used to ___ (drive) on the left.", "a": ["driving"]}, {"q": "The food was ___ good that we came back the next day.", "a": ["so"]}, {"q": "It was such ___ interesting museum! (артикль)", "a": ["an"]}, {"q": "You'll soon get ___ to the weather here.", "a": ["used"]}, {"q": "I'm not used ___ the cold weather yet.", "a": ["to"]}, {"q": "It was ___ an amazing view from the tower.", "a": ["such"]}];
 const FX=[{"q": "Посоветуй гостю старый город:", "o": ["You should definitely visit the old town.", "Old town is old.", "Stay home."], "a": 0}, {"q": "Отговори идти в субботу:", "o": ["Saturday is a day.", "I wouldn't go there on a Saturday — too crowded.", "Go, go, go!"], "a": 1}, {"q": "Спроси дорогу до вокзала:", "o": ["Where trains sleep?", "How do I get to the station?", "Station, please, now."], "a": 1}];
 const SPEAK=["Опиши свой район: что рядом, удобно ли, что изменилось (used to / getting used to).", "Посоветуй туристу, что посмотреть в твоём городе (You should… / It's worth…).", "Опиши идеальный город будущего: транспорт, зелень, дома (will / might).", "Сравни жизнь в центре и на окраине: плюсы и минусы (so/such)."];
-const WBMC=[{"q": "Мы застряли в пробке = We got stuck in a traffic ___ .", "o": ["jam", "cream", "stop"], "a": 0}, {"q": "Удобный район = a ___ neighbourhood.", "o": ["convenient", "comfortable food", "convincing"], "a": 0}, {"q": "Добираться на работу = to ___ to work.", "o": ["commute", "commit", "communicate"], "a": 0}];
-const WBGAPS=[{"q": "There was ___ much noise that I left early.", "a": ["so"]}, {"q": "He's used to ___ (live) alone.", "a": ["living"]}, {"q": "It was such ___ long journey that we slept all day after. (артикль)", "a": ["a"]}];
+const WBMC=[{"q": "Мы застряли в пробке = We got stuck in a traffic ___ .", "o": ["jam", "cream", "stop"], "a": 0}, {"q": "Удобный район = a ___ neighbourhood.", "o": ["convenient", "comfortable food", "convincing"], "a": 0}, {"q": "Добираться на работу = to ___ to work.", "o": ["commute", "commit", "communicate"], "a": 0}, {"q": "It was ___ a beautiful city!", "o": ["such", "so", "very"], "a": 0}, {"q": "The music was ___ loud that we left.", "o": ["so", "such", "too much"], "a": 0}, {"q": "I'm not used to ___ on the left.", "o": ["driving", "drive", "drove"], "a": 0}, {"q": "пробка = a traffic ___ .", "o": ["jam", "block", "stop"], "a": 0}];
+const WBGAPS=[{"q": "There was ___ much noise that I left early.", "a": ["so"]}, {"q": "He's used to ___ (live) alone.", "a": ["living"]}, {"q": "It was such ___ long journey that we slept all day after. (артикль)", "a": ["a"]}, {"q": "There were ___ many people that we couldn't move.", "a": ["so"]}, {"q": "He's getting used to ___ (work) nights.", "a": ["working"]}, {"q": "It was such ___ long trip! (артикль)", "a": ["a"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

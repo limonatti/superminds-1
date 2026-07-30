@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 цель: to / in order to / so that · сравнения · покупки и реклама</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 5 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["refund", "возврат денег"], ["receipt", "чек"], ["bargain", "выгодная покупка"], ["discount", "скидка"], ["to complain", "жаловаться"], ["customer", "покупатель"], ["advert", "реклама"], ["brand", "бренд"], ["to deliver", "доставлять"], ["out of stock", "нет в наличии"], ["to try on", "примерить"], ["size", "размер"], ["quality", "качество"], ["to overspend", "потратить лишнее"], ["to afford", "позволить себе"], ["warranty", "гарантия"], ["second-hand", "б/у"], ["to compare prices", "сравнивать цены"], ["cash", "наличные"], ["to return", "возвращать (товар)"]];
 const PRONWORDS=["record", "present", "object", "increase", "produce", "refund"];
 const CHUNKS=[["a good deal", "выгодная сделка"], ["to be on sale", "быть со скидкой"], ["value for money", "цена-качество"], ["to save up for", "копить на"], ["window shopping", "разглядывание витрин"], ["to splash out", "потратиться"], ["to take it back", "вернуть товар"], ["is it worth it?", "оно того стоит?"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I compare prices ___ save money.", "o": ["for", "to", "so"], "a
 const GAPS=[{"q": "I called the shop in ___ to complain.", "a": ["order"]}, {"q": "The ___ (early) you book, the cheaper it is.", "a": ["earlier"]}, {"q": "This café is far ___ (good) than the one near work.", "a": ["better"]}, {"q": "I muted the ads so ___ I could watch in peace.", "a": ["that"]}, {"q": "We left early ___ order not to miss the sale.", "a": ["in"]}, {"q": "This one is far ___ than the other. (good)", "a": ["better"]}];
 const FX=[{"q": "Спроси совета у продавца:", "o": ["Which one would you recommend?", "Give me all!", "You choose, I pay."], "a": 0}, {"q": "Узнай разницу между моделями:", "o": ["What's the difference between these two?", "Are they twins?", "Same or not same?"], "a": 0}, {"q": "Реши купить:", "o": ["I'll take it.", "I take you.", "It takes me."], "a": 0}];
 const SPEAK=["Расскажи о последней крупной покупке: зачем купил(а), стоило ли (Was it worth it?).", "Ролевая игра: в магазине — спроси совета продавца и реши купить (Which would you recommend?).", "Убеди друга, что вещь — хорошая сделка (It's great value for money because…).", "Опиши рекламу, которая на тебя подействовала, и почему."];
-const WBMC=[{"q": "Товара нет в наличии = It's out of ___ .", "o": ["stock", "shop", "store"], "a": 0}, {"q": "Можно примерить? = Can I ___ it on?", "o": ["try", "put", "take"], "a": 0}, {"q": "Жаловаться на сервис = to ___ about the service.", "o": ["complain", "cry", "argue"], "a": 0}];
-const WBGAPS=[{"q": "I saved money so that I ___ (can) travel in summer. (прош.)", "a": ["could"]}, {"q": "Online shops are ___ (cheap) than malls, as a rule.", "a": ["cheaper"]}, {"q": "Take cash in ___ the card machine doesn't work.", "a": ["case"]}];
+const WBMC=[{"q": "Товара нет в наличии = It's out of ___ .", "o": ["stock", "shop", "store"], "a": 0}, {"q": "Можно примерить? = Can I ___ it on?", "o": ["try", "put", "take"], "a": 0}, {"q": "Жаловаться на сервис = to ___ about the service.", "o": ["complain", "cry", "argue"], "a": 0}, {"q": "I went early ___ get a good seat. (цель)", "o": ["to", "for", "so"], "a": 0}, {"q": "I saved money ___ that I could buy it.", "o": ["so", "in order", "for"], "a": 0}, {"q": "This phone isn't ___ expensive as that one. (такой же)", "o": ["as", "so", "more"], "a": 0}, {"q": "нет в наличии = out of ___ .", "o": ["stock", "order", "store"], "a": 0}];
+const WBGAPS=[{"q": "I saved money so that I ___ (can) travel in summer. (прош.)", "a": ["could"]}, {"q": "Online shops are ___ (cheap) than malls, as a rule.", "a": ["cheaper"]}, {"q": "Take cash in ___ the card machine doesn't work.", "a": ["case"]}, {"q": "I whispered ___ that nobody could hear. (чтобы)", "a": ["so"]}, {"q": "Online shops are ___ (cheap) than malls, as a rule.", "a": ["cheaper"]}, {"q": "Can I ___ these jeans on? (примерить)", "a": ["try"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

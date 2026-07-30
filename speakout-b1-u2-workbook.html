@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 Narrative tenses · Past Simple vs Present Perfect · предлоги времени · истории и фильмы</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 2 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["plot", "сюжет"], ["character", "персонаж"], ["ending", "концовка"], ["to happen", "происходить"], ["suddenly", "вдруг"], ["to realise", "осознать"], ["novel", "роман"], ["to describe", "описывать"], ["event", "событие"], ["meanwhile", "тем временем"], ["scary", "страшный"], ["review", "рецензия, отзыв"], ["based on", "основан на"], ["twist", "поворот сюжета"], ["fairy tale", "сказка"], ["hero", "герой"], ["villain", "злодей"], ["to take place", "происходить (о действии)"], ["boring", "скучный"], ["exciting", "захватывающий"]];
 const PRONWORDS=["walked", "watched", "played", "opened", "started", "wanted", "happened"];
 const CHUNKS=[["once upon a time", "жили-были"], ["all of a sudden", "внезапно"], ["to be based on", "быть основанным на"], ["a plot twist", "поворот сюжета"], ["it turned out that…", "оказалось, что…"], ["in the end", "в конце концов"], ["to fall asleep", "заснуть"], ["a happy ending", "счастливый конец"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ TV when the lights went out.", "o": ["watched", "was watc
 const GAPS=[{"q": "While I ___ (cook), the smoke alarm went off.", "a": ["was cooking"]}, {"q": "By the time she called, I ___ (already/leave).", "a": ["had already left"]}, {"q": "I ___ (see) that film three times — I love it! (опыт)", "a": ["have seen", "'ve seen"]}, {"q": "They moved here two years ___ .", "a": ["ago"]}, {"q": "I've ___ seen this film — one minute ago. (только что)", "a": ["just"]}, {"q": "The sun was shining ___ we walked. (в то время как)", "a": ["while"]}];
 const FX=[{"q": "Ты опоздал. Извинись:", "o": ["I'm so sorry I'm late.", "You waited, so what?", "It's not my problem."], "a": 0}, {"q": "Признай вину:", "o": ["It was my fault, I forgot.", "The bus is guilty.", "Nobody is sorry."], "a": 0}, {"q": "Пообещай, что не повторится:", "o": ["It won't happen again.", "Maybe it will, maybe not.", "Deal with it."], "a": 0}];
 const SPEAK=["Расскажи короткую историю о странном или смешном случае. Используй narrative tenses (While I was…, I had…).", "Опиши любимый фильм: сюжет, главный герой, чем закончился (не спойлеря концовку сильно).", "Извинись: ты опоздал(а) на встречу. Скажи 3 фразы (I'm so sorry… / It was my fault… / It won't…).", "Продолжи: «Once upon a time there was…» — придумай 4 предложения."];
-const WBMC=[{"q": "Сюжет фильма = the ___ .", "o": ["plot", "place", "price"], "a": 0}, {"q": "Неожиданный поворот = a plot ___ .", "o": ["twist", "turn", "trick"], "a": 0}, {"q": "Основан на реальных событиях = ___ on a true story.", "o": ["based", "made", "put"], "a": 0}];
-const WBGAPS=[{"q": "Suddenly the door ___ (open) and a man walked in. (по очереди)", "a": ["opened"]}, {"q": "I've ___ finished the book — literally a minute ago. (только что)", "a": ["just"]}, {"q": "We stayed there ___ a week. (на срок)", "a": ["for"]}];
+const WBMC=[{"q": "Сюжет фильма = the ___ .", "o": ["plot", "place", "price"], "a": 0}, {"q": "Неожиданный поворот = a plot ___ .", "o": ["twist", "turn", "trick"], "a": 0}, {"q": "Основан на реальных событиях = ___ on a true story.", "o": ["based", "made", "put"], "a": 0}, {"q": "While I ___ , the phone rang.", "o": ["was cooking", "cooked", "have cooked"], "a": 0}, {"q": "I ___ this film three times so far.", "o": ["saw", "have seen", "was seeing"], "a": 1}, {"q": "We first met ___ 2019.", "o": ["in", "on", "at"], "a": 0}, {"q": "неожиданная концовка = a surprise ___ .", "o": ["ending", "end", "final"], "a": 0}];
+const WBGAPS=[{"q": "Suddenly the door ___ (open) and a man walked in. (по очереди)", "a": ["opened"]}, {"q": "I've ___ finished the book — literally a minute ago. (только что)", "a": ["just"]}, {"q": "We stayed there ___ a week. (на срок)", "a": ["for"]}, {"q": "The film had already ___ (start) when we arrived. (past perfect)", "a": ["started"]}, {"q": "I haven't seen her ___ Monday. (с — какого момента)", "a": ["since"]}, {"q": "He ___ (live) here since 2010. (present perfect)", "a": ["has lived", "'s lived"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

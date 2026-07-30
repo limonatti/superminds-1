@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 Question forms · планы: going to / Present Continuous / will · вежливые вопросы · phrasal verbs</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 3 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["to find out", "узнать"], ["to look for", "искать"], ["to give up", "сдаться"], ["to fill in", "заполнить"], ["to turn up", "появиться"], ["curious", "любопытный"], ["to wonder", "интересоваться, гадать"], ["survey", "опрос"], ["questionnaire", "анкета"], ["reply", "ответ"], ["downtown", "центр города"], ["direction", "направление"], ["on purpose", "нарочно"], ["to figure out", "сообразить"], ["to book", "бронировать"], ["ticket", "билет"], ["museum", "музей"], ["nearby", "поблизости"], ["entrance", "вход"], ["to recommend", "рекомендовать"]];
 const PRONWORDS=["Do you like it?", "Are you ready?", "Where do you live?", "What time is it?", "Can you help?", "How are you?"];
 const CHUNKS=[["could you tell me…?", "не подскажете…?"], ["do you know if…?", "вы не знаете, …?"], ["what are you up to?", "чем занимаешься?"], ["how's it going?", "как дела?"], ["to find out", "узнать"], ["to fill in a form", "заполнить бланк"], ["to turn up", "появиться, прийти"], ["on purpose", "нарочно"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "___ you like spicy food?", "o": ["Do", "Are", "Does"], "a": 0},
 const GAPS=[{"q": "___ you know the answer? (вспом. глагол в начале вопроса)", "a": ["do"]}, {"q": "I'm going ___ look for a new phone tomorrow.", "a": ["to"]}, {"q": "Could you ___ me where the bank is? (вежливо)", "a": ["tell"]}, {"q": "We need to fill ___ this form. (phrasal)", "a": ["in"]}, {"q": "Do you know ___ the station is? (косвенный вопрос)", "a": ["where"]}, {"q": "I'll ___ out the price and text you. (phrasal — узнать)", "a": ["find"]}];
 const FX=[{"q": "Вежливо спроси дорогу:", "o": ["Could you tell me where the station is?", "Where station?", "Station now!"], "a": 0}, {"q": "Осторожно уточни:", "o": ["Do you know if the shop is open?", "Shop open or not?", "Tell me fast."], "a": 0}, {"q": "Вежливо попроси:", "o": ["Would you mind closing the window?", "Close it.", "Window! Now!"], "a": 0}];
 const SPEAK=["Придумай 6 вопросов новому другу (Yes/No, Wh-, один subject question — «Who…?»).", "Ролевая игра: спроси у прохожего дорогу до вокзала — вежливо (Could you tell me…?).", "Расскажи 3 плана на выходные: going to / Present Continuous / will.", "Опиши свой город туристу: что посмотреть, где поесть, как добраться."];
-const WBMC=[{"q": "узнать = to ___ out.", "o": ["find", "look", "give"], "a": 0}, {"q": "заполнить анкету = to fill ___ a form.", "o": ["in", "on", "up"], "a": 0}, {"q": "любопытный = ___ .", "o": ["curious", "serious", "furious"], "a": 0}];
-const WBGAPS=[{"q": "Who ___ (make) this cake? It's delicious! (subject question, past)", "a": ["made"]}, {"q": "I ___ (meet) my dentist at nine tomorrow — it's arranged.", "a": ["'m meeting", "am meeting"]}, {"q": "Please fill ___ your name at the top. (phrasal)", "a": ["in"]}];
+const WBMC=[{"q": "узнать = to ___ out.", "o": ["find", "look", "give"], "a": 0}, {"q": "заполнить анкету = to fill ___ a form.", "o": ["in", "on", "up"], "a": 0}, {"q": "любопытный = ___ .", "o": ["curious", "serious", "furious"], "a": 0}, {"q": "___ do you usually get to work?", "o": ["How", "What", "Who"], "a": 0}, {"q": "Look at the clouds! It ___ rain.", "o": ["is going to", "will", "goes to"], "a": 0}, {"q": "I ___ John tonight — we arranged it.", "o": ["'m seeing", "see", "will see"], "a": 0}, {"q": "выключи свет = turn ___ the light.", "o": ["off", "in", "up"], "a": 0}];
+const WBGAPS=[{"q": "Who ___ (make) this cake? It's delicious! (subject question, past)", "a": ["made"]}, {"q": "I ___ (meet) my dentist at nine tomorrow — it's arranged.", "a": ["'m meeting", "am meeting"]}, {"q": "Please fill ___ your name at the top. (phrasal)", "a": ["in"]}, {"q": "___ you like some tea? (вежливое предложение)", "a": ["would"]}, {"q": "The train ___ (leave) at six tomorrow. (расписание)", "a": ["leaves"]}, {"q": "Look ___ this word in a dictionary. (phrasal — найди)", "a": ["up"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

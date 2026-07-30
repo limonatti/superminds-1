@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 1st & 2nd conditionals · quantifiers · рекомендации · reflexive pronouns</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 7 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["journey", "поездка, путь"], ["flight", "рейс, полёт"], ["luggage", "багаж"], ["to book", "бронировать"], ["destination", "пункт назначения"], ["sightseeing", "осмотр достопримечательностей"], ["abroad", "за границей"], ["souvenir", "сувенир"], ["delay", "задержка"], ["to pack", "паковать"], ["currency", "валюта"], ["guidebook", "путеводитель"], ["backpack", "рюкзак"], ["to check in", "зарегистрироваться"], ["passport", "паспорт"], ["boarding pass", "посадочный талон"], ["to get lost", "заблудиться"], ["accommodation", "жильё"], ["return ticket", "билет туда-обратно"], ["to sunbathe", "загорать"]];
 const PRONWORDS=["world", "first", "girl", "learn", "turn", "work", "journey"];
 const CHUNKS=[["to book a flight", "забронировать рейс"], ["to check in", "зарегистрироваться"], ["to get lost", "заблудиться"], ["it's worth seeing", "стоит увидеть"], ["I'd recommend…", "советую…"], ["to travel light", "путешествовать налегке"], ["off the beaten track", "вдали от туристов"], ["by myself", "самостоятельно"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "If it ___ tomorrow, we'll cancel the trip.", "o": ["rain", "rai
 const GAPS=[{"q": "If I ___ (have) more time, I would learn Spanish. (2nd)", "a": ["had"]}, {"q": "We won't get lost ___ we follow the map. (if not)", "a": ["unless"]}, {"q": "I don't have ___ cash on me. (отриц.)", "a": ["any"]}, {"q": "She travelled around Asia by ___ . (одна)", "a": ["herself"]}, {"q": "We won't get lost ___ we follow the map. (if not)", "a": ["unless"]}, {"q": "I don't have ___ cash with me. (отриц.)", "a": ["any"]}];
 const FX=[{"q": "Порекомендуй место:", "o": ["You should definitely visit the old town.", "Go nowhere.", "Stay in the hotel."], "a": 0}, {"q": "Скажи, что стоит увидеть:", "o": ["It's worth seeing the castle at sunset.", "The castle is a castle.", "Skip everything."], "a": 0}, {"q": "Предупреди не пропустить:", "o": ["Don't miss the view from the hill.", "Miss it, who cares.", "Nothing to see."], "a": 0}];
 const SPEAK=["Спланируй поездку мечты: 2 предложения в 1st conditional и 1 во 2nd conditional.", "Порекомендуй туристу свой город: 3 совета (You should… / It's worth… / I'd recommend…).", "Расскажи о поездке, где что-то пошло не так (задержка, потерялся) — narrative tenses.", "Обсуди: что лучше — быстрый тур или slow travel? Объясни своё мнение."];
-const WBMC=[{"q": "багаж = ___ .", "o": ["luggage", "message", "village"], "a": 0}, {"q": "забронировать = to ___ .", "o": ["book", "pack", "check"], "a": 0}, {"q": "за границу = ___ .", "o": ["abroad", "aboard", "around"], "a": 0}];
-const WBGAPS=[{"q": "If we ___ (miss) the bus, we'll take a taxi. (1st)", "a": ["miss"]}, {"q": "There are ___ few seats left — hurry! (немного)", "a": ["a"]}, {"q": "Help ___ to some food! (себе, ед.ч.)", "a": ["yourself"]}];
+const WBMC=[{"q": "багаж = ___ .", "o": ["luggage", "message", "village"], "a": 0}, {"q": "забронировать = to ___ .", "o": ["book", "pack", "check"], "a": 0}, {"q": "за границу = ___ .", "o": ["abroad", "aboard", "around"], "a": 0}, {"q": "If it rains, we ___ at home. (1st)", "o": ["will stay", "would stay", "stayed"], "a": 0}, {"q": "If I ___ rich, I'd travel the world. (2nd)", "o": ["were", "am", "will be"], "a": 0}, {"q": "There isn't ___ time left.", "o": ["much", "many", "a few"], "a": 0}, {"q": "отменить рейс = to ___ a flight.", "o": ["cancel", "delay", "miss"], "a": 0}];
+const WBGAPS=[{"q": "If we ___ (miss) the bus, we'll take a taxi. (1st)", "a": ["miss"]}, {"q": "There are ___ few seats left — hurry! (немного)", "a": ["a"]}, {"q": "Help ___ to some food! (себе, ед.ч.)", "a": ["yourself"]}, {"q": "If I ___ (have) more money, I'd buy a ticket. (2nd)", "a": ["had"]}, {"q": "How ___ suitcases have you got? (сколько — исчисл.)", "a": ["many"]}, {"q": "Help ___ to some food! (себе, ед.ч.)", "a": ["yourself"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

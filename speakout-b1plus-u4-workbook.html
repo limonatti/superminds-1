@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 was going to · косвенные вопросы · правда, ложь и новости</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 4 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["hoax", "розыгрыш, обман"], ["to lie", "лгать"], ["a lie", "ложь"], ["the truth", "правда"], ["to trust", "доверять"], ["headline", "заголовок"], ["source", "источник"], ["evidence", "доказательство"], ["to check facts", "проверять факты"], ["rumour", "слух"], ["to spread", "распространяться"], ["believable", "правдоподобный"], ["to deceive", "обмануть"], ["to make up", "выдумать"], ["to exaggerate", "преувеличивать"], ["to doubt", "сомневаться"], ["to confirm", "подтверждать"], ["genuine", "подлинный"], ["misleading", "вводящий в заблуждение"], ["gossip", "сплетни"]];
 const PRONWORDS=["Could you tell me…", "Do you know…", "I wonder if…", "Is it true?", "Where is it?", "What time is it?"];
 const CHUNKS=[["to make something up", "выдумать"], ["to spread a rumour", "распускать слух"], ["to check the facts", "проверять факты"], ["believe it or not", "хочешь верь, хочешь нет"], ["to fall for it", "повестись"], ["a white lie", "ложь во спасение"], ["as far as I know", "насколько я знаю"], ["to be taken in", "быть обманутым"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ tell you, honestly! But you were asleep.", "o": ["was goi
 const GAPS=[{"q": "I ___ going to order pizza, but the café had closed. (я)", "a": ["was"]}, {"q": "Do you know where ___ lives? (он)", "a": ["he"]}, {"q": "Could you tell me how much it ___ (cost)?", "a": ["costs"]}, {"q": "Don't spread rumours — first check the ___ . (факты)", "a": ["facts"]}, {"q": "She ___ (go) to apologise, but she changed her mind. (несбывшийся план)", "a": ["was going"]}, {"q": "Do you know ___ the shop is open? (whether/if)", "a": ["if", "whether"]}];
 const FX=[{"q": "Друг говорит, что видел НЛО. Твоя реакция-сомнение:", "o": ["That can't be true.", "Congratulations!", "Goodbye."], "a": 0}, {"q": "Удивись хорошей новости:", "o": ["No way! That's great!", "It is a fact.", "I must go."], "a": 0}, {"q": "Спроси об источнике слуха:", "o": ["Who told you that?", "Why are you here?", "What is a rumour?"], "a": 0}];
 const SPEAK=["Придумай безобидный розыгрыш (April Fools') и расскажи, как ты его устроишь.", "Вежливо усомнись в новости друга (косвенные вопросы: Do you know if…? Are you sure…?).", "Расскажи о случае, когда ты чему-то поверил(а), а это оказалось неправдой.", "Отреагируй на 3 удивительные новости (No way! / Really? / I don't believe it!)."];
-const WBMC=[{"q": "Он рассказал правду = He told the ___ .", "o": ["truth", "true", "fact"], "a": 0}, {"q": "Она выдумала всю историю = She ___ up the whole story.", "o": ["made", "did", "took"], "a": 0}, {"q": "Хранить секрет = ___ a secret.", "o": ["keep", "hold", "save"], "a": 0}];
-const WBGAPS=[{"q": "We were ___ (plan) to visit you, but the car broke down.", "a": ["planning"]}, {"q": "I wonder if this photo ___ real. (быть, наст.вр.)", "a": ["is"]}, {"q": "Do you know whether they ___ (live) here? (наст.вр.)", "a": ["live"]}];
+const WBMC=[{"q": "Он рассказал правду = He told the ___ .", "o": ["truth", "true", "fact"], "a": 0}, {"q": "Она выдумала всю историю = She ___ up the whole story.", "o": ["made", "did", "took"], "a": 0}, {"q": "Хранить секрет = ___ a secret.", "o": ["keep", "hold", "save"], "a": 0}, {"q": "I ___ call you, but I forgot. (собирался)", "o": ["was going to", "am going to", "will"], "a": 0}, {"q": "Do you know where ___ ? (косвенный вопрос)", "o": ["she lives", "does she live", "she does live"], "a": 0}, {"q": "выдумать историю = to ___ up a story.", "o": ["make", "do", "take"], "a": 0}, {"q": "Could you tell me what time ___ ?", "o": ["it is", "is it", "it does"], "a": 0}];
+const WBGAPS=[{"q": "We were ___ (plan) to visit you, but the car broke down.", "a": ["planning"]}, {"q": "I wonder if this photo ___ real. (быть, наст.вр.)", "a": ["is"]}, {"q": "Do you know whether they ___ (live) here? (наст.вр.)", "a": ["live"]}, {"q": "We ___ (go) to travel, but we changed our minds. (were going to)", "a": ["were going to"]}, {"q": "I wonder ___ this news is true. (ли)", "a": ["if", "whether"]}, {"q": "Can you tell me where the station ___ ? (быть, наст.)", "a": ["is"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

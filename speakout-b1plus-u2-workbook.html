@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 Present Perfect Simple vs Continuous · relative clauses · привычки · что нас бесит</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 2 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["habit", "привычка"], ["to give up", "бросить (привычку)"], ["to take up", "начать (хобби)"], ["pet hate", "то, что особенно бесит"], ["annoying", "раздражающий"], ["to chew", "жевать"], ["to interrupt", "перебивать"], ["punctual", "пунктуальный"], ["routine", "распорядок дня"], ["to get used to", "привыкать"], ["messy", "неаккуратный"], ["tidy", "аккуратный"], ["to bite your nails", "грызть ногти"], ["mood", "настроение"], ["annoyed", "раздражённый"], ["polite", "вежливый"], ["rude", "грубый"], ["to apologise", "извиняться"], ["behaviour", "поведение"], ["considerate", "внимательный к другим"]];
 const PRONWORDS=["works", "plays", "watches", "likes", "uses", "catches", "reads"];
 const CHUNKS=[["it drives me mad", "это меня бесит"], ["a pet hate", "что особенно бесит"], ["to be used to", "привыкнуть к"], ["to put up with", "мириться с"], ["good manners", "хорошие манеры"], ["on purpose", "нарочно"], ["to get on someone's nerves", "действовать на нервы"], ["I can't stand it", "терпеть не могу"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ my keys three times today!", "o": ["have lost", "have bee
 const GAPS=[{"q": "How long have you been ___ (wait) for me?", "a": ["waiting"]}, {"q": "I've ___ (know) her since childhood.", "a": ["known"]}, {"q": "He's the boy ___ broke the window. (кто?)", "a": ["who", "that"]}, {"q": "I've been ___ (try) to call you all day!", "a": ["trying"]}, {"q": "How long ___ you ___ (learn) English? (Perfect Continuous)", "a": ["have been learning"]}, {"q": "The habit ___ annoys me most is loud chewing. (that/which)", "a": ["that", "which"]}];
 const FX=[{"q": "Скажи, что опоздания тебя бесят:", "o": ["I can't stand it when people are late.", "Late is late.", "I am a clock."], "a": 0}, {"q": "Скажи, что шум тебя не напрягает:", "o": ["Noise is my enemy.", "It doesn't bother me at all.", "Stop the noise!"], "a": 1}, {"q": "Признай, что сам(а) так делаешь:", "o": ["I never do anything.", "To be fair, I sometimes do it too.", "You are wrong."], "a": 1}];
 const SPEAK=["Расскажи о своём pet hate: что раздражает и почему (It drives me mad when…).", "Вежливо пожалуйся соседу на шум — не грубя (I don't want to be rude, but…).", "Опиши свои привычки: что изменилось за год (Present Perfect: I've become more…).", "Ролевая игра: извинись перед другом за то, что перебивал(а) его."];
-const WBMC=[{"q": "Try not to ___ your temper in traffic.", "o": ["lose", "break", "drop"], "a": 0}, {"q": "Please ___ attention — this is important.", "o": ["pay", "take", "make"], "a": 0}, {"q": "He finds it hard to ___ calm before exams.", "o": ["keep", "hold", "save"], "a": 0}];
-const WBGAPS=[{"q": "I ___ been sleeping well lately. (не)", "a": ["haven't", "have not"]}, {"q": "She's the doctor ___ helped my grandad. (кто?)", "a": ["who", "that"]}, {"q": "They've been ___ (build) that house for two years.", "a": ["building"]}];
+const WBMC=[{"q": "Try not to ___ your temper in traffic.", "o": ["lose", "break", "drop"], "a": 0}, {"q": "Please ___ attention — this is important.", "o": ["pay", "take", "make"], "a": 0}, {"q": "He finds it hard to ___ calm before exams.", "o": ["keep", "hold", "save"], "a": 0}, {"q": "I've ___ this book twice. (результат)", "o": ["read", "been reading", "reading"], "a": 0}, {"q": "She's been ___ all morning; she's tired. (процесс)", "o": ["running", "run", "ran"], "a": 0}, {"q": "The man ___ car was stolen called the police.", "o": ["whose", "who", "which"], "a": 0}, {"q": "выйти из себя = to lose your ___ .", "o": ["temper", "mind", "head"], "a": 0}];
+const WBGAPS=[{"q": "I ___ been sleeping well lately. (не)", "a": ["haven't", "have not"]}, {"q": "She's the doctor ___ helped my grandad. (кто?)", "a": ["who", "that"]}, {"q": "They've been ___ (build) that house for two years.", "a": ["building"]}, {"q": "I've been ___ (learn) English for years. (perfect continuous)", "a": ["learning"]}, {"q": "She's the friend ___ always helps me. (кто)", "a": ["who", "that"]}, {"q": "They ___ (paint) the house all week. (perfect continuous)", "a": ["have been painting", "'ve been painting"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

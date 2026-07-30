@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 Narrative tenses · verb patterns · твои вещи и их истории · телефонные сообщения</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 1 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["leather", "кожа (материал)"], ["wooden", "деревянный"], ["silver", "серебряный"], ["plastic", "пластиковый"], ["belongings", "личные вещи"], ["possession", "имущество, вещь"], ["valuable", "ценный"], ["worthless", "ничего не стоящий"], ["damaged", "повреждённый"], ["in good condition", "в хорошем состоянии"], ["to inherit", "унаследовать"], ["to belong to", "принадлежать (кому-то)"], ["sentimental value", "дорог как память"], ["second-hand", "подержанный"], ["antique", "антиквариат"], ["to treasure", "дорожить"], ["heirloom", "семейная реликвия"], ["clutter", "хлам, беспорядок"], ["to declutter", "разбирать хлам"], ["keepsake", "памятная вещь"]];
 const PRONWORDS=["think", "thing", "three", "this", "that", "they", "together"];
 const CHUNKS=[["it belonged to…", "это принадлежало…"], ["to be worth a lot", "стоить много"], ["sentimental value", "дорог как память"], ["to hold onto something", "хранить, не расставаться"], ["to pass down", "передавать по наследству"], ["a one-off", "единственный в своём роде"], ["to come across", "случайно найти"], ["for as long as I can remember", "сколько себя помню"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ TV when my phone suddenly rang.", "o": ["watched", "was w
 const GAPS=[{"q": "This bag ___ (belong) to my sister — give it back!", "a": ["belongs"]}, {"q": "While I ___ (pack), I found my old diary.", "a": ["was packing"]}, {"q": "Nobody ___ (open) the box for years before we found it.", "a": ["had opened"]}, {"q": "I don't mind ___ (lend) you my camera.", "a": ["lending"]}, {"q": "Nobody ___ (open) the box for years before we found it.", "a": ["had opened"]}, {"q": "I don't mind ___ (lend) you my bike.", "a": ["lending"]}];
 const FX=[{"q": "Выбери фразу, чтобы начать голосовое сообщение:", "o": ["Hi, it's Max. I'm calling about Friday.", "The end. Goodbye.", "Who are you?"], "a": 0}, {"q": "Попроси перезвонить:", "o": ["Call me or else!", "Could you call me back when you get this?", "You never call me."], "a": 1}, {"q": "Оставь свой номер:", "o": ["My number is a secret.", "I have no phone.", "You can reach me on 555-0143."], "a": 2}];
 const SPEAK=["Выбери 3 свои вещи и расскажи историю каждой: что это, откуда, почему дорога (narrative tenses).", "Ты declutter'ишь комнату. Реши, что оставить, а что отдать, и объясни почему.", "Оставь голосовое сообщение другу: попроси вернуть вещь, которую одолжил(а).", "Опиши семейную реликвию (реальную или выдуманную): It belonged to… / It's worth…"];
-const WBMC=[{"q": "I gave ___ my old coat to charity.", "o": ["away", "up", "out of"], "a": 0}, {"q": "Everyone liked the film ___ me — I fell asleep.", "o": ["except for", "besides to", "instead"], "a": 0}, {"q": "She picked ___ the coin and put it in her pocket.", "o": ["up", "away", "off"], "a": 0}];
-const WBGAPS=[{"q": "By the time we arrived, the show ___ (start).", "a": ["had started"]}, {"q": "He refused ___ (sell) his guitar.", "a": ["to sell"]}, {"q": "Apart ___ the price, I love this jacket.", "a": ["from"]}];
+const WBMC=[{"q": "I gave ___ my old coat to charity.", "o": ["away", "up", "out of"], "a": 0}, {"q": "Everyone liked the film ___ me — I fell asleep.", "o": ["except for", "besides to", "instead"], "a": 0}, {"q": "She picked ___ the coin and put it in her pocket.", "o": ["up", "away", "off"], "a": 0}, {"q": "By the time I woke up, everyone ___ .", "o": ["had left", "left", "has left"], "a": 0}, {"q": "He avoided ___ to me.", "o": ["talking", "to talk", "talk"], "a": 0}, {"q": "give ___ = отдать безвозмездно", "o": ["away", "up", "in"], "a": 0}, {"q": "She promised ___ me later.", "o": ["to call", "calling", "call"], "a": 0}];
+const WBGAPS=[{"q": "By the time we arrived, the show ___ (start).", "a": ["had started"]}, {"q": "He refused ___ (sell) his guitar.", "a": ["to sell"]}, {"q": "Apart ___ the price, I love this jacket.", "a": ["from"]}, {"q": "The train had already ___ (leave) when we got there. (past perfect)", "a": ["left"]}, {"q": "I can't stand ___ (wait) in queues.", "a": ["waiting"]}, {"q": "Apart ___ the noise, the flat is perfect.", "a": ["from"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

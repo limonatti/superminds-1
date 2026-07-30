@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 can / could / be able to · active & passive · описать проблему · -ing form</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 8 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["device", "устройство"], ["screen", "экран"], ["to charge", "заряжать"], ["to download", "скачивать"], ["to update", "обновлять"], ["gadget", "гаджет"], ["to plug in", "подключить в розетку"], ["battery", "батарея"], ["wireless", "беспроводной"], ["to fix", "чинить"], ["instructions", "инструкция"], ["button", "кнопка"], ["to switch on", "включать"], ["useful", "полезный"], ["app", "приложение"], ["software", "ПО, программа"], ["to restart", "перезагрузить"], ["to solve", "решать"], ["broken", "сломанный"], ["handy", "удобный, под рукой"]];
 const PRONWORDS=["charge", "gadget", "digital", "message", "touch", "watch", "switch"];
 const CHUNKS=[["to plug in", "включить в розетку"], ["to run out of battery", "разрядиться"], ["there's something wrong with…", "что-то не так с…"], ["it won't turn on", "не включается"], ["to figure out", "разобраться"], ["user-friendly", "удобный в использовании"], ["to back up files", "делать резервную копию"], ["it keeps crashing", "постоянно виснет"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ swim when I was four. (past ability)", "o": ["can", "coul
 const GAPS=[{"q": "I've never been ___ to draw well. (ability)", "a": ["able"]}, {"q": "Coffee ___ (grow) in Brazil. (passive present)", "a": ["is grown"]}, {"q": "___ (repair) old radios is his hobby. (-ing подлежащее)", "a": ["repairing"]}, {"q": "He's very good at ___ (solve) problems.", "a": ["solving"]}, {"q": "I've never been ___ to draw well. (ability)", "a": ["able"]}, {"q": "This bridge ___ (build) in 1930. (passive past)", "a": ["was built"]}];
 const FX=[{"q": "Опиши поломку:", "o": ["There's something wrong with my phone.", "My phone is a phone.", "Phones exist."], "a": 0}, {"q": "Скажи, что не включается:", "o": ["It won't turn on.", "It turns on never maybe.", "On off on off."], "a": 0}, {"q": "Пожалуйся, что виснет:", "o": ["It keeps crashing.", "It crashes into walls.", "Crash party!"], "a": 0}];
 const SPEAK=["Опиши гаджет, которым пользуешься: что он умеет (can / be able to), закончи фразой с -ing.", "Ролевая игра: у тебя сломался телефон — опиши проблему в сервисе (There's something wrong with…).", "Объясни, как что-то делается (пассив): «Coffee is grown… / Cars are made…» — 3 предложения.", "Дай совет другу с ноутбуком, который виснет: 3 шага (Have you tried…? / You should…)."];
-const WBMC=[{"q": "зарядить = to ___ .", "o": ["charge", "change", "charity"], "a": 0}, {"q": "обновить = to ___ .", "o": ["update", "upset", "undo"], "a": 0}, {"q": "беспроводной = ___ .", "o": ["wireless", "careless", "useless"], "a": 0}];
-const WBGAPS=[{"q": "I ___ (be able to) speak French now. (present, утв., кратко 'm)", "a": ["'m able to", "am able to"]}, {"q": "These cars ___ (make) in Germany. (passive present)", "a": ["are made"]}, {"q": "I'm interested ___ learning to code. (предлог)", "a": ["in"]}];
+const WBMC=[{"q": "зарядить = to ___ .", "o": ["charge", "change", "charity"], "a": 0}, {"q": "обновить = to ___ .", "o": ["update", "upset", "undo"], "a": 0}, {"q": "беспроводной = ___ .", "o": ["wireless", "careless", "useless"], "a": 0}, {"q": "I ___ swim when I was five.", "o": ["could", "can", "am able"], "a": 0}, {"q": "This app ___ by millions of people. (passive)", "o": ["is used", "uses", "used"], "a": 0}, {"q": "___ a language takes time.", "o": ["Learning", "Learn", "To learning"], "a": 0}, {"q": "скачать приложение = to ___ an app.", "o": ["download", "upload", "reload"], "a": 0}];
+const WBGAPS=[{"q": "I ___ (be able to) speak French now. (present, утв., кратко 'm)", "a": ["'m able to", "am able to"]}, {"q": "These cars ___ (make) in Germany. (passive present)", "a": ["are made"]}, {"q": "I'm interested ___ learning to code. (предлог)", "a": ["in"]}, {"q": "I wasn't ___ (be able to) open the file. (прош., отриц.)", "a": ["able to"]}, {"q": "The bridge ___ (build) in 1990. (passive past)", "a": ["was built"]}, {"q": "I'm good ___ fixing computers. (предлог)", "a": ["at"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

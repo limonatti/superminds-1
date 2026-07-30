@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 reported speech · reporting verbs · пассив · общение и переписка</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1+ · Unit 7 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["to text", "написать сообщение"], ["voice message", "голосовое"], ["to reply", "ответить"], ["to ignore", "игнорировать"], ["group chat", "групповой чат"], ["notification", "уведомление"], ["to mute", "отключить звук"], ["to share", "поделиться"], ["password", "пароль"], ["to sign up", "зарегистрироваться"], ["misunderstanding", "недопонимание"], ["to hang up", "положить трубку"], ["to delete", "удалить"], ["by mistake", "по ошибке"], ["to reply all", "ответить всем"], ["emoji", "эмодзи"], ["typo", "опечатка"], ["to forward", "переслать"], ["contact", "контакт"], ["online", "в сети"]];
 const PRONWORDS=["an apple", "pick it up", "turn it off", "far away", "this evening", "come in"];
 const CHUNKS=[["to keep in touch", "поддерживать связь"], ["to get through to someone", "дозвониться"], ["to drop someone a line", "черкнуть пару строк"], ["face to face", "лицом к лицу"], ["to be on the same page", "быть заодно"], ["to catch up", "наверстать общение"], ["to hang up", "повесить трубку"], ["a group chat", "групповой чат"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "«I'm tired.» → She said she ___ tired.", "o": ["is", "was",
 const GAPS=[{"q": "«I can help.» → He said he ___ help.", "a": ["could"]}, {"q": "She asked me where I ___ . (жил/жила)", "a": ["lived"]}, {"q": "The first text message ___ (send) in 1992.", "a": ["was sent"]}, {"q": "He suggested ___ (create) a group chat.", "a": ["creating"]}, {"q": "He said he ___ (will) help me. (reported)", "a": ["would"]}, {"q": "English ___ (speak) all over the world. (passive present)", "a": ["is spoken"]}];
 const FX=[{"q": "Собеседник рассказывает историю. Поддержи:", "o": ["Really? Tell me more.", "Stop talking.", "I know everything."], "a": 0}, {"q": "Спроси, что было дальше:", "o": ["What happened next?", "When is lunch?", "Is it the end?"], "a": 0}, {"q": "Вернись к своей теме:", "o": ["Anyway, as I was saying…", "New topic, new life.", "Silence, please."], "a": 0}];
 const SPEAK=["Перескажи, что сказал друг в переписке (He said… / She told me…) — 3 предложения.", "Обсуди: общение в чатах vs вживую — что лучше и почему.", "Поддержи разговор: собеседник рассказывает историю (Really? / What happened next? / No way!).", "Объясни правило (passive): как отправляют/хранят сообщения — 2–3 предложения."];
-const WBMC=[{"q": "Ответить на сообщение = to ___ to a message.", "o": ["reply", "answer back", "return"], "a": 0}, {"q": "Уведомления можно ___ на ночь.", "o": ["mute", "delete forever", "eat"], "a": 0}, {"q": "Я удалил(а) фото по ошибке = I deleted it by ___ .", "o": ["mistake", "wrong", "fault"], "a": 0}];
-const WBGAPS=[{"q": "«I live nearby.» → She said she ___ nearby.", "a": ["lived"]}, {"q": "English ___ (speak) in more than 100 countries.", "a": ["is spoken"]}, {"q": "He refused ___ (share) his password.", "a": ["to share"]}];
+const WBMC=[{"q": "Ответить на сообщение = to ___ to a message.", "o": ["reply", "answer back", "return"], "a": 0}, {"q": "Уведомления можно ___ на ночь.", "o": ["mute", "delete forever", "eat"], "a": 0}, {"q": "Я удалил(а) фото по ошибке = I deleted it by ___ .", "o": ["mistake", "wrong", "fault"], "a": 0}, {"q": "«I'm busy» → He said he ___ busy.", "o": ["was", "is", "has been"], "a": 0}, {"q": "She ___ me to wait. (попросила)", "o": ["asked", "said", "told to"], "a": 0}, {"q": "The email ___ yesterday. (passive past)", "o": ["was sent", "sent", "is sent"], "a": 0}, {"q": "ответить на сообщение = to ___ to a message.", "o": ["reply", "answer to", "respond at"], "a": 0}];
+const WBGAPS=[{"q": "«I live nearby.» → She said she ___ nearby.", "a": ["lived"]}, {"q": "English ___ (speak) in more than 100 countries.", "a": ["is spoken"]}, {"q": "He refused ___ (share) his password.", "a": ["to share"]}, {"q": "«I'll help» → She promised ___ (help). (reporting verb + to)", "a": ["to help"]}, {"q": "Millions of messages ___ (send) every day. (passive present)", "a": ["are sent"]}, {"q": "He said he ___ (call) me the next day. (reported: would)", "a": ["would call"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>

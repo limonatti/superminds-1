@@ -33,6 +33,7 @@
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -48,7 +49,7 @@
   <div class="d">📚 used to · сравнительная и превосходная степень · спросить/дать мнение · Present Perfect for/since</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. B1 · Unit 6 · workbook</div>
@@ -56,6 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 const WORDS=[["painting", "картина"], ["artist", "художник"], ["gallery", "галерея"], ["sculpture", "скульптура"], ["talented", "талантливый"], ["creative", "творческий"], ["masterpiece", "шедевр"], ["exhibition", "выставка"], ["to draw", "рисовать"], ["style", "стиль"], ["colourful", "красочный"], ["to design", "создавать, проектировать"], ["inspiration", "вдохновение"], ["to admire", "восхищаться"], ["brush", "кисть"], ["canvas", "холст"], ["portrait", "портрет"], ["photograph", "фотография"], ["to imagine", "воображать"], ["original", "самобытный"]];
 const PRONWORDS=["interesting", "beautiful", "exhibition", "photograph", "creative", "original", "colourful"];
 const CHUNKS=[["what do you think of…?", "как тебе…?"], ["in my opinion", "по-моему"], ["I couldn't agree more", "полностью согласен"], ["a work of art", "произведение искусства"], ["to be into (art)", "увлекаться (искусством)"], ["not my cup of tea", "не моё, не по вкусу"], ["for ages", "целую вечность"], ["to grow on someone", "начать нравиться со временем"]];
@@ -66,8 +68,8 @@ const EX=[{"q": "I ___ play the piano when I was young.", "o": ["used to", "use 
 const GAPS=[{"q": "I ___ (use to) have long hair. (утвердит. форма)", "a": ["used to"]}, {"q": "Everest is the ___ mountain in the world. (high)", "a": ["highest"]}, {"q": "We've been friends ___ ten years.", "a": ["for"]}, {"q": "I've ___ arrived — literally a minute ago.", "a": ["just"]}, {"q": "___ you use to draw as a child? (вопрос)", "a": ["did"]}, {"q": "We've been here ___ two hours. (срок)", "a": ["for"]}];
 const FX=[{"q": "Спроси мнение:", "o": ["What do you think of this design?", "Design. Yes or no.", "Say something."], "a": 0}, {"q": "Вырази мнение:", "o": ["In my opinion, it's brilliant.", "It is what it is.", "No comment forever."], "a": 0}, {"q": "Мягко не согласись:", "o": ["I'm not sure about that.", "You're totally wrong.", "Nonsense!"], "a": 0}];
 const SPEAK=["Опиши, каким было место или ты сам(а) раньше и сейчас: 3 предложения с used to + 2 сравнения.", "Спроси мнение и вырази своё о картине/фильме (What do you think of…? / In my opinion…).", "Расскажи о хобби, которым занимаешься долго: Present Perfect с for/since.", "Опиши произведение искусства, которое тебе нравится, и объясни почему."];
-const WBMC=[{"q": "шедевр = a ___ .", "o": ["masterpiece", "masterclass", "mastermind"], "a": 0}, {"q": "талантливый = ___ .", "o": ["talented", "talkative", "tasty"], "a": 0}, {"q": "выставка = an ___ .", "o": ["exhibition", "expedition", "expression"], "a": 0}];
-const WBGAPS=[{"q": "She ___ (use to) paint when she was a child. (утвердит.)", "a": ["used to"]}, {"q": "This is the ___ (interesting) museum I've visited.", "a": ["most interesting"]}, {"q": "Have you eaten ___ ? — No, not yet.", "a": ["yet"]}];
+const WBMC=[{"q": "шедевр = a ___ .", "o": ["masterpiece", "masterclass", "mastermind"], "a": 0}, {"q": "талантливый = ___ .", "o": ["talented", "talkative", "tasty"], "a": 0}, {"q": "выставка = an ___ .", "o": ["exhibition", "expedition", "expression"], "a": 0}, {"q": "I ___ play the piano, but I stopped.", "o": ["used to", "use to", "am used to"], "a": 0}, {"q": "This painting is ___ than that one.", "o": ["more beautiful", "beautifuller", "most beautiful"], "a": 0}, {"q": "I've ___ finished it. (только что)", "o": ["just", "yet", "since"], "a": 0}, {"q": "художник = an ___ .", "o": ["artist", "artistic", "art"], "a": 0}];
+const WBGAPS=[{"q": "She ___ (use to) paint when she was a child. (утвердит.)", "a": ["used to"]}, {"q": "This is the ___ (interesting) museum I've visited.", "a": ["most interesting"]}, {"q": "Have you eaten ___ ? — No, not yet.", "a": ["yet"]}, {"q": "He didn't ___ (use to) like jazz. (отриц. — инфинитив)", "a": ["use to"]}, {"q": "She's the ___ (talented) person I know. (превосх.)", "a": ["most talented"]}, {"q": "I've known him ___ 2015. (с)", "a": ["since"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -162,7 +164,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
 </script>
