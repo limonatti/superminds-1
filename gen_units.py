@@ -194,8 +194,9 @@ TEMPLATE = r'''<!DOCTYPE html>
 
   <h2>📖 Грамматика юнита</h2>
   <div class="card" style="text-align:center">
-    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и упражнения этого юнита — отдельным заданием (ДЗ).</div>
-    <a href="@@HWCOURSE@@-u@@NUM@@-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none">✏️ Грамматика юнита →</a>
+    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и рабочая тетрадь этого юнита — отдельными заданиями (ДЗ).</div>
+    <a href="@@HWCOURSE@@-u@@NUM@@-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">✏️ Грамматика юнита →</a>
+    <a href="@@HWCOURSE@@-u@@NUM@@-workbook.html" style="display:inline-block;background:#2e6f4e;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">📒 Workbook →</a>
   </div>
 
   <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
@@ -237,6 +238,71 @@ TEMPLATE = r'''<!DOCTYPE html>
   <div class="hw">@@HW@@</div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+@@DATA@@
+@@RENDER@@
+</script>
+</body>
+</html>
+'''
+
+WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit @@NUM@@ · Workbook · Speakout @@LEVEL@@ · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">📒 Workbook · Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="@@HWCOURSE@@-u@@NUM@@.html">← Урок</a>
+    <a class="home" href="@@HWCOURSE@@-u@@NUM@@-grammar.html">✏️ Грамматика</a>
+    <a class="home" href="@@HUB@@">Все юниты</a>
+  </div>
+  <h1>Unit @@NUM@@ · Workbook</h1>
+  <div class="d">📚 @@DESC@@</div>
+
+  <h2>📒 Рабочая тетрадь · закрепление</h2>
+  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div id="wb"></div>
+
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · workbook</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
@@ -310,10 +376,6 @@ GRAMMAR_TEMPLATE = r'''<!DOCTYPE html>
   <h2>✏️ Упражнения</h2>
   <div id="ex"></div>
 
-  <h2>📝 Workbook · закрепление</h2>
-  <div class="wbband">Дополнительная практика по темам рабочей тетради этого юнита. Сначала реши здесь — потом сверься с бумажной Workbook.</div>
-  <div id="wb"></div>
-
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -376,6 +438,13 @@ def build(mod_name):
         gfn="%s-u%d-grammar.html" % (META["prefix"], u["n"])
         open(gfn,"w",encoding="utf-8").write(g)
         print("wrote",gfn)
+        # workbook-страница
+        wbp=WORKBOOK_TEMPLATE
+        for k,v in rep.items(): wbp=wbp.replace(k,v)
+        wbp=wbp.replace("@@HWCOURSE@@", META["prefix"]).replace("@@NUM@@", str(u["n"]))
+        wfn="%s-u%d-workbook.html" % (META["prefix"], u["n"])
+        open(wfn,"w",encoding="utf-8").write(wbp)
+        print("wrote",wfn)
 
 if __name__=="__main__":
     build(sys.argv[1])

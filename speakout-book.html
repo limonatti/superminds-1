@@ -39,6 +39,7 @@
     <div class="seg" id="mode">
       <button data-m="lesson" class="on">📚 Урок</button>
       <button data-m="grammar">✏️ Грамматика</button>
+      <button data-m="workbook">📒 Workbook</button>
     </div>
     <button class="ic" id="full" title="На весь экран">⛶</button>
   </div>
@@ -59,7 +60,7 @@
   document.getElementById("hub").href=HUB[course]||"index.html";
   var tabs=document.getElementById("tabs");
   for(var i=1;i<=8;i++){(function(u){var b=document.createElement("button");b.className="tab"+(u===n?" on":"");b.textContent="U"+u;b.onclick=function(){n=u;render(true);};tabs.appendChild(b);})(i);}
-  function src(){ return course+"-u"+n+(mode==="grammar"?"-grammar":"")+".html"; }
+  function src(){ var suf=mode==="grammar"?"-grammar":(mode==="workbook"?"-workbook":""); return course+"-u"+n+suf+".html"; }
   function render(turn){
     var f=document.getElementById("frame"),p=document.getElementById("page");
     function go(){ f.src=src();
@@ -67,7 +68,7 @@
       document.querySelectorAll("#mode button").forEach(function(b){b.classList.toggle("on",b.dataset.m===mode);});
       document.getElementById("prev").disabled=(n<=1);
       document.getElementById("next").disabled=(n>=8);
-      document.getElementById("foot").textContent=(LABEL[course]||"")+" · Unit "+n+" / 8 · "+(mode==="grammar"?"грамматика":"лексика и чанки");
+      document.getElementById("foot").textContent=(LABEL[course]||"")+" · Unit "+n+" / 8 · "+(mode==="grammar"?"грамматика":(mode==="workbook"?"workbook":"лексика и чанки"));
       var u=new URLSearchParams(location.search);u.set("course",course);u.set("u",n);history.replaceState(null,"","?"+u.toString());
     }
     if(turn){ p.classList.add("turn"); setTimeout(function(){go();p.classList.remove("turn");},160); } else go();
