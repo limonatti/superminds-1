@@ -42,6 +42,19 @@
   .hwform .go.big{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
     font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .hwform .go.big:hover{background:var(--color-accent-600)}
+  /* Чат с учеником */
+  .chatwrap{padding:0 28px 10px}
+  .chat-scroll{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:14px 0}
+  .bub{max-width:78%;padding:9px 13px;font:600 14px "Archivo",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word}
+  .bub.me{align-self:flex-end;background:var(--color-accent);color:#fff}
+  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:2px solid var(--color-divider)}
+  .bub .tm{display:block;font:700 10px "Archivo",sans-serif;opacity:.65;margin-top:3px}
+  .chat-empty{padding:14px 0;color:var(--color-neutral-700);font:600 13px "Archivo",sans-serif}
+  .chat-in{display:flex;gap:8px;padding:6px 0 4px}
+  .chat-in input{flex:1;border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Archivo",sans-serif}
+  .chat-in input:focus{outline:none;border-color:var(--color-accent)}
+  .chat-in .go{border:0;background:var(--color-accent);color:#fff;padding:0 20px;font-size:16px;font-weight:800;cursor:pointer}
+  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Archivo",sans-serif;padding:1px 7px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -69,7 +82,9 @@ const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
-let ME = null, CODE = "—", STUDENTS = [], ASG = {}, sel = 0;
+let ME = null, CODE = "—", STUDENTS = [], ASG = {}, sel = 0, UNREAD = {};
+let chatTimer = null, chatLast = null;
+function stopTeacherChat(){ if (chatTimer){ clearInterval(chatTimer); chatTimer = null; } chatLast = null; }
 
 function learned(data){ let n=0; for (const k in data){ if (k!=="__meta" && data[k] && data[k].status==="learned") n++; } return n; }
 function ago(ts){ if(!ts) return "—"; const d=(Date.now()-new Date(ts).getTime())/86400000;
@@ -88,8 +103,9 @@ function drawList(){
   }
   box.innerHTML = STUDENTS.map((s,i) => {
     const d = s.data || {}, m = d.__meta || {};
+    const un = UNREAD[s.student_id] || 0;
     return '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
-      '<span class="t">'+esc(s.name)+'</span>' +
+      '<span class="t">'+esc(s.name)+(un?'<span class="unread">'+un+'</span>':'')+'</span>' +
       '<span class="s">'+learned(d)+' слов · звёзд '+(m.totalPoints||0)+' · '+ago(s.updated_at)+'</span></button>';
   }).join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawPane(); drawList(); });
@@ -123,6 +139,7 @@ function bindInvite(){
 
 async function drawPane(){
   const p = document.getElementById("pane");
+  stopTeacherChat();
 
   if (!STUDENTS.length){
     p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Класс</span><span>учеников: 0</span></div>' +
@@ -205,6 +222,10 @@ async function drawPane(){
           '<span class="b sm">Ответы</span></button>').join("") + '</div>'
       : '<div class="empty"><div class="p">Ученик ещё не решал упражнения Speakout.</div></div>') +
     '<div id="det"></div>' +
+
+    '<div class="sect"><span>Сообщения ученику</span><span>чат · виден ученику в кабинете</span></div>' +
+    '<div class="chatwrap"><div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загрузка…</div></div>' +
+      '<div class="chat-in"><input id="chatText" placeholder="Написать '+esc(s.name)+'…" maxlength="2000"><button class="go" id="chatSend">➤</button></div></div>' +
 
     '<div class="sect"><span>Заметки по ученику</span><span>видны только тебе, на этом устройстве</span></div>' +
     '<div class="note"><textarea id="nt" placeholder="Что повторить, на чём споткнулись, что задать дальше…">'+esc(note)+'</textarea>' +
@@ -299,6 +320,49 @@ function bindStudent(sid){
     catch(err){ e.target.textContent = "Не вышло сохранить"; }
     setTimeout(()=>{ e.target.textContent = "Сохранить заметку"; }, 1500);
   };
+
+  startTeacherChat(sid);
+}
+
+/* ---------- Чат учителя с учеником ---------- */
+function chatBubble(mMsg, myId){
+  const mine = mMsg.sender_id === myId;
+  const d = new Date(mMsg.created_at);
+  const tm = (""+d.getHours()).padStart(2,"0")+":"+(""+d.getMinutes()).padStart(2,"0");
+  return '<div class="bub '+(mine?"me":"them")+'">'+esc(mMsg.body)+'<span class="tm">'+tm+'</span></div>';
+}
+async function refreshTeacherChat(sid, force){
+  const scroll = document.getElementById("chatScroll");
+  if (!scroll || !ME) { stopTeacherChat(); return; }
+  let msgs = []; try { msgs = await SM.chatMessages(ME.id, sid); } catch(e){ return; }
+  const sig = msgs.length ? (msgs[msgs.length-1].id+":"+msgs.length) : "0";
+  if (!force && sig === chatLast) return;
+  chatLast = sig;
+  scroll.innerHTML = msgs.length
+    ? msgs.map(mm => chatBubble(mm, ME.id)).join("")
+    : '<div class="chat-empty">Пока нет сообщений. Напиши ученику первым 👋</div>';
+  scroll.scrollTop = scroll.scrollHeight;
+  const unreadIn = msgs.some(mm => mm.sender_id !== ME.id && !mm.read_at);
+  if (unreadIn){
+    try { await SM.chatMarkRead(ME.id, sid); } catch(e){}
+    if (UNREAD[sid]){ UNREAD[sid] = 0; drawList(); }
+  }
+}
+function startTeacherChat(sid){
+  stopTeacherChat();
+  const inp = document.getElementById("chatText"), snd = document.getElementById("chatSend");
+  if (!inp || !snd) return;
+  async function send(){
+    const v = (inp.value||"").trim(); if (!v) return;
+    inp.value = ""; inp.focus();
+    const r = await SM.chatSend(ME.id, sid, v);
+    if (!r.ok){ inp.value = v; alert((r && r.error) || "Не отправилось. Проверь, что миграция supabase-chat.sql выполнена."); return; }
+    await refreshTeacherChat(sid, true);
+  }
+  snd.onclick = send;
+  inp.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); send(); } });
+  refreshTeacherChat(sid, true);
+  chatTimer = setInterval(() => refreshTeacherChat(sid, false), 5000);
 }
 
 async function load(){
@@ -308,6 +372,7 @@ async function load(){
 
   try { const r = await SM.ensureTeacherCode(ME.name); CODE = r.code || "—"; } catch(e){}
   try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
+  try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }
   ASG = {};
   try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id] || []).push(a); }); } catch(e){}
   if (sel >= STUDENTS.length) sel = 0;

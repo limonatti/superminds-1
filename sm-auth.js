@@ -50,29 +50,7 @@ const c = ensureClient(); if (!c) return null;
 const { data } = await c.auth.getUser();
 if (!data || !data.user) return null;
 const u = data.user;
-let nm = (u.user_metadata && u.user_metadata.name) || "";
-if (!nm) {
-try { const r = await c.from("profiles").select("name").eq("user_id", u.id).maybeSingle();
-if (r && r.data && r.data.name) nm = r.data.name; } catch (e) {}
-}
-if (!nm) nm = u.email || "";
-if (nm.indexOf("@") > 0) nm = nm.split("@")[0];   /* имя, а не почта */
-if (!nm) nm = "Ученик";
-return { id: u.id, email: u.email, name: nm };
-},
-
-/* Сменить отображаемое имя (метаданные + профиль) */
-async setName(name) {
-name = (name || "").trim();
-if (!name) return { ok: false, error: "Впиши имя" };
-if (!useCloud) { const lu = localUser() || { id: "local", email: "" }; lu.name = name; localSetUser(lu); return { ok: true }; }
-const c = ensureClient(); if (!c) return { ok: false, error: "Нет подключения" };
-const { error } = await c.auth.updateUser({ data: { name: name } });
-if (error) return { ok: false, error: error.message };
-const { data } = await c.auth.getUser();
-const u = data && data.user;
-if (u) { try { await c.from("profiles").upsert({ user_id: u.id, name: name }, { onConflict: "user_id" }); } catch (e) {} }
-return { ok: true };
+return { id: u.id, email: u.email, name: (u.user_metadata && u.user_metadata.name) || u.email };
 },
 
 async signUp(name, email, password) {
@@ -492,6 +470,70 @@ return data || [];
 		const { error } = await c.from("hw_attempts").insert(payload);
 		return { ok: !error, error: error && error.message };
 	},
+	/* ---------- Чат: учитель ↔ ученик ---------- */
+	/* Сообщения одной пары (учитель, ученик), по возрастанию времени.
+	   sinceIso — необязательно: только новее указанного времени (для опроса). */
+	async chatMessages(teacherId, studentId, sinceIso) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		let q = c.from("messages")
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at")
+			.eq("teacher_id", teacherId).eq("student_id", studentId)
+			.order("created_at", { ascending: true });
+		if (sinceIso) q = q.gt("created_at", sinceIso);
+		const { data, error } = await q;
+		if (error) { console.warn("chatMessages:", error.message); return []; }
+		return data || [];
+	},
+	async chatSend(teacherId, studentId, body) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const text = (body || "").trim(); if (!text) return { ok: false, error: "пусто" };
+		const { data, error } = await c.from("messages")
+			.insert({ teacher_id: teacherId, student_id: studentId, sender_id: u.id, body: text.slice(0, 2000) })
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at").single();
+		return { ok: !error, msg: data, error: error && error.message };
+	},
+	/* Получатель отмечает входящие сообщения пары прочитанными */
+	async chatMarkRead(teacherId, studentId) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false };
+		const { error } = await c.from("messages")
+			.update({ read_at: new Date().toISOString() })
+			.eq("teacher_id", teacherId).eq("student_id", studentId)
+			.neq("sender_id", u.id).is("read_at", null);
+		return { ok: !error, error: error && error.message };
+	},
+	/* Ученик: его учитель {teacher_id, name} или null */
+	async myTeacher() {
+		if (!useCloud) return null;
+		const c = ensureClient(); if (!c) return null;
+		const { data, error } = await c.rpc("my_teacher");
+		if (error) { console.warn("my_teacher:", error.message); return null; }
+		return (data && data[0]) || null;
+	},
+	/* Учитель: непрочитанные по ученикам { student_id: count } */
+	async teacherUnread() {
+		if (!useCloud) return {};
+		const c = ensureClient(); if (!c) return {};
+		const { data, error } = await c.rpc("teacher_unread");
+		if (error) { console.warn("teacher_unread:", error.message); return {}; }
+		const map = {}; (data || []).forEach(r => { map[r.student_id] = r.unread; });
+		return map;
+	},
+	/* Ученик: сколько непрочитанных сообщений от учителя */
+	async myUnread() {
+		if (!useCloud) return 0;
+		const c = ensureClient(); if (!c) return 0;
+		const u = await this.getUser(); if (!u) return 0;
+		const { count, error } = await c.from("messages")
+			.select("id", { count: "exact", head: true })
+			.eq("student_id", u.id).neq("sender_id", u.id).is("read_at", null);
+		return error ? 0 : (count || 0);
+	},
+
 	/* Учитель: детальные результаты ученика по юниту */
 	async studentHwResults(studentId, course, unit) {
 		if (!useCloud) return [];
@@ -499,57 +541,6 @@ return data || [];
 		const { data, error } = await c.rpc("student_hw_results", { p_student: studentId, p_course: course, p_unit: unit });
 		if (error) { console.warn("student_hw_results:", error.message); return []; }
 		return data || [];
-	},
-	/* ---------- Приглашения ученика (одноразовая ссылка) ---------- */
-	/* Учитель: создать одноразовое приглашение → {ok, code} */
-	async createInvite(note) {
-		if (!useCloud) return { ok: false, error: "нужен Supabase" };
-		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
-		const { data, error } = await c.rpc("create_invite", { p_note: note || null });
-		return { ok: !error, code: data, error: error && error.message };
-	},
-	/* Учитель: свои приглашения */
-	async myInvites() {
-		if (!useCloud) return [];
-		const c = ensureClient(); if (!c) return [];
-		const { data, error } = await c.rpc("my_invites");
-		if (error) { console.warn("my_invites:", error.message); return []; }
-		return data || [];
-	},
-	/* Любой: проверить код ДО создания аккаунта → {ok, teacher} */
-	async inviteCheck(code) {
-		if (!useCloud) return { ok: false, error: "нужен Supabase" };
-		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
-		const { data, error } = await c.rpc("invite_check", { p_code: (code || "").trim() });
-		return { ok: !error, teacher: data, error: error && error.message };
-	},
-	/* Ученик: активировать приглашение (после входа) */
-	async redeemInvite(code, name) {
-		if (!useCloud) return { ok: false, error: "нужен Supabase" };
-		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
-		const { data, error } = await c.rpc("redeem_invite", { p_code: (code || "").trim(), p_name: name || null });
-		return { ok: !error, status: data, error: error && error.message };
-	},
-	/* Регистрация ученика по приглашению: имя + пароль, email необязателен.
-	   Если email не указан — генерируем технический адрес, ученик его не видит.
-	   Логин потом: тот же экран, имя + пароль. */
-	studentLogin(name) {
-		return "s." + (name || "").trim().toLowerCase()
-			.replace(/[^a-zа-яё0-9]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 24);
-	},
-	async signUpStudent(name, password, email, code) {
-		if (!useCloud) return { ok: false, error: "нужен Supabase" };
-		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
-		const login = (email || "").trim() || (this.studentLogin(name) + "." +
-			Math.random().toString(36).slice(2, 6) + "@student.asya");
-		const { data, error } = await c.auth.signUp({
-			email: login, password: password, options: { data: { name: name, login: login } }
-		});
-		if (error) return { ok: false, error: error.message };
-		if (!data.session) return { ok: false, needConfirm: true, login: login, error: "Подтверждение email включено в Supabase. Выключи его: Authentication → Sign In / Providers → Email → Confirm email → off." };
-		const r = await this.redeemInvite(code, name);
-		if (!r.ok) return { ok: false, error: r.error || "Не удалось привязать к учителю" };
-		return { ok: true, login: login };
 	},
 	/* Учитель: сводка ДЗ ученика (юниты, попытки, верно, время) */
 	async studentHwSummary(studentId) {
