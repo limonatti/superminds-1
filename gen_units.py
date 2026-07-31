@@ -4,6 +4,159 @@
 # Данные юнита — в модуле DATA + META (prefix, level, hub, trainer, cover_base).
 import json, sys, importlib
 
+# --- Авторские дополнительные задания Workbook (сверх wbmc/wbgaps из данных юнита) ---
+# Ключи: prefix -> номер юнита -> {"mc":[...], "gaps":[...]}
+WB_EXTRA = {
+  "speakout-b1": {
+    1: {"mc":[
+        {"q":"Выбери предложение со state verb:","o":["I am knowing him","I know him well","I am know him"],"a":1},
+        {"q":"Порядок слов с наречием частоты:","o":["She usually gets up early","She gets usually up early","Usually she get up early"],"a":0},
+        {"q":"I don't mind ___ up early.","o":["to wake","waking","wake"],"a":1},
+        {"q":"He's ___ outgoing — everyone loves him. (усилитель)","o":["really","much","many"],"a":0}],
+      "gaps":[
+        {"q":"Listen! The baby ___ (cry).","a":["is crying"]},
+        {"q":"I ___ (not/understand) this rule. (present simple)","a":["don't understand","do not understand"]},
+        {"q":"They want ___ (meet) you.","a":["to meet"]}]},
+    2: {"mc":[
+        {"q":"While I ___ , the phone rang.","o":["was cooking","cooked","have cooked"],"a":0},
+        {"q":"I ___ this film three times so far.","o":["saw","have seen","was seeing"],"a":1},
+        {"q":"We first met ___ 2019.","o":["in","on","at"],"a":0},
+        {"q":"неожиданная концовка = a surprise ___ .","o":["ending","end","final"],"a":0}],
+      "gaps":[
+        {"q":"The film had already ___ (start) when we arrived. (past perfect)","a":["started"]},
+        {"q":"I haven't seen her ___ Monday. (с — какого момента)","a":["since"]},
+        {"q":"He ___ (live) here since 2010. (present perfect)","a":["has lived","'s lived"]}]},
+    3: {"mc":[
+        {"q":"___ do you usually get to work?","o":["How","What","Who"],"a":0},
+        {"q":"Look at the clouds! It ___ rain.","o":["is going to","will","goes to"],"a":0},
+        {"q":"I ___ John tonight — we arranged it.","o":["'m seeing","see","will see"],"a":0},
+        {"q":"выключи свет = turn ___ the light.","o":["off","in","up"],"a":0}],
+      "gaps":[
+        {"q":"___ you like some tea? (вежливое предложение)","a":["would"]},
+        {"q":"The train ___ (leave) at six tomorrow. (расписание)","a":["leaves"]},
+        {"q":"Look ___ this word in a dictionary. (phrasal — найди)","a":["up"]}]},
+    4: {"mc":[
+        {"q":"You ___ train hard to win.","o":["have to","haven't to","must to"],"a":0},
+        {"q":"It's ___ best match of the season.","o":["the","a","—"],"a":0},
+        {"q":"проиграть матч = to ___ a match.","o":["lose","loose","miss"],"a":0},
+        {"q":"This is the fastest time she ___ ever run.","o":["has","have","is"],"a":0}],
+      "gaps":[
+        {"q":"You ___ (not/have to) come if you're tired. (нет необходимости)","a":["don't have to","do not have to"]},
+        {"q":"I saw ___ amazing goal yesterday. (артикль)","a":["an"]},
+        {"q":"She has broken the world ___ . (рекорд)","a":["record"]}]},
+    5: {"mc":[
+        {"q":"The journalist ___ wrote it is famous.","o":["who","which","where"],"a":0},
+        {"q":"He said he ___ tired. (reported)","o":["was","is","will be"],"a":0},
+        {"q":"It ___ rain tomorrow, maybe. (прогноз-возможность)","o":["might","must","should"],"a":0},
+        {"q":"проверить факты = to ___ the facts.","o":["check","control","prove"],"a":0}],
+      "gaps":[
+        {"q":"That's the town ___ I was born. (место)","a":["where"]},
+        {"q":"She told me she ___ (finish) the report. (reported: past perfect)","a":["had finished"]},
+        {"q":"The story went ___ overnight. (вирусным)","a":["viral"]}]},
+    6: {"mc":[
+        {"q":"I ___ play the piano, but I stopped.","o":["used to","use to","am used to"],"a":0},
+        {"q":"This painting is ___ than that one.","o":["more beautiful","beautifuller","most beautiful"],"a":0},
+        {"q":"I've ___ finished it. (только что)","o":["just","yet","since"],"a":0},
+        {"q":"художник = an ___ .","o":["artist","artistic","art"],"a":0}],
+      "gaps":[
+        {"q":"He didn't ___ (use to) like jazz. (отриц. — инфинитив)","a":["use to"]},
+        {"q":"She's the ___ (talented) person I know. (превосх.)","a":["most talented"]},
+        {"q":"I've known him ___ 2015. (с)","a":["since"]}]},
+    7: {"mc":[
+        {"q":"If it rains, we ___ at home. (1st)","o":["will stay","would stay","stayed"],"a":0},
+        {"q":"If I ___ rich, I'd travel the world. (2nd)","o":["were","am","will be"],"a":0},
+        {"q":"There isn't ___ time left.","o":["much","many","a few"],"a":0},
+        {"q":"отменить рейс = to ___ a flight.","o":["cancel","delay","miss"],"a":0}],
+      "gaps":[
+        {"q":"If I ___ (have) more money, I'd buy a ticket. (2nd)","a":["had"]},
+        {"q":"How ___ suitcases have you got? (сколько — исчисл.)","a":["many"]},
+        {"q":"Help ___ to some food! (себе, ед.ч.)","a":["yourself"]}]},
+    8: {"mc":[
+        {"q":"I ___ swim when I was five.","o":["could","can","am able"],"a":0},
+        {"q":"This app ___ by millions of people. (passive)","o":["is used","uses","used"],"a":0},
+        {"q":"___ a language takes time.","o":["Learning","Learn","To learning"],"a":0},
+        {"q":"скачать приложение = to ___ an app.","o":["download","upload","reload"],"a":0}],
+      "gaps":[
+        {"q":"I wasn't ___ (be able to) open the file. (прош., отриц.)","a":["able to"]},
+        {"q":"The bridge ___ (build) in 1990. (passive past)","a":["was built"]},
+        {"q":"I'm good ___ fixing computers. (предлог)","a":["at"]}]},
+  },
+  "speakout-b1plus": {
+    1: {"mc":[
+        {"q":"By the time I woke up, everyone ___ .","o":["had left","left","has left"],"a":0},
+        {"q":"He avoided ___ to me.","o":["talking","to talk","talk"],"a":0},
+        {"q":"give ___ = отдать безвозмездно","o":["away","up","in"],"a":0},
+        {"q":"She promised ___ me later.","o":["to call","calling","call"],"a":0}],
+      "gaps":[
+        {"q":"The train had already ___ (leave) when we got there. (past perfect)","a":["left"]},
+        {"q":"I can't stand ___ (wait) in queues.","a":["waiting"]},
+        {"q":"Apart ___ the noise, the flat is perfect.","a":["from"]}]},
+    2: {"mc":[
+        {"q":"I've ___ this book twice. (результат)","o":["read","been reading","reading"],"a":0},
+        {"q":"She's been ___ all morning; she's tired. (процесс)","o":["running","run","ran"],"a":0},
+        {"q":"The man ___ car was stolen called the police.","o":["whose","who","which"],"a":0},
+        {"q":"выйти из себя = to lose your ___ .","o":["temper","mind","head"],"a":0}],
+      "gaps":[
+        {"q":"I've been ___ (learn) English for years. (perfect continuous)","a":["learning"]},
+        {"q":"She's the friend ___ always helps me. (кто)","a":["who","that"]},
+        {"q":"They ___ (paint) the house all week. (perfect continuous)","a":["have been painting","'ve been painting"]}]},
+    3: {"mc":[
+        {"q":"You ___ wear a helmet — it's the rule.","o":["have to","have","need"],"a":0},
+        {"q":"You ___ come tomorrow — it's optional.","o":["don't have to","mustn't","have to"],"a":0},
+        {"q":"If I ___ the job, I'll celebrate.","o":["get","got","will get"],"a":0},
+        {"q":"собеседование = a job ___ .","o":["interview","interval","review"],"a":0}],
+      "gaps":[
+        {"q":"We ___ (not/need to) book — there's space. (нет необходимости)","a":["don't need to","do not need to"]},
+        {"q":"If she ___ (study) harder, she would pass. (2nd)","a":["studied"]},
+        {"q":"He got a ___ and now earns more. (повышение)","a":["promotion","raise"]}]},
+    4: {"mc":[
+        {"q":"I ___ call you, but I forgot. (собирался)","o":["was going to","am going to","will"],"a":0},
+        {"q":"Do you know where ___ ? (косвенный вопрос)","o":["she lives","does she live","she does live"],"a":0},
+        {"q":"выдумать историю = to ___ up a story.","o":["make","do","take"],"a":0},
+        {"q":"Could you tell me what time ___ ?","o":["it is","is it","it does"],"a":0}],
+      "gaps":[
+        {"q":"We ___ (go) to travel, but we changed our minds. (were going to)","a":["were going to"]},
+        {"q":"I wonder ___ this news is true. (ли)","a":["if","whether"]},
+        {"q":"Can you tell me where the station ___ ? (быть, наст.)","a":["is"]}]},
+    5: {"mc":[
+        {"q":"I went early ___ get a good seat. (цель)","o":["to","for","so"],"a":0},
+        {"q":"I saved money ___ that I could buy it.","o":["so","in order","for"],"a":0},
+        {"q":"This phone isn't ___ expensive as that one. (такой же)","o":["as","so","more"],"a":0},
+        {"q":"нет в наличии = out of ___ .","o":["stock","order","store"],"a":0}],
+      "gaps":[
+        {"q":"I whispered ___ that nobody could hear. (чтобы)","a":["so"]},
+        {"q":"Online shops are ___ (cheap) than malls, as a rule.","a":["cheaper"]},
+        {"q":"Can I ___ these jeans on? (примерить)","a":["try"]}]},
+    6: {"mc":[
+        {"q":"It was ___ a beautiful city!","o":["such","so","very"],"a":0},
+        {"q":"The music was ___ loud that we left.","o":["so","such","too much"],"a":0},
+        {"q":"I'm not used to ___ on the left.","o":["driving","drive","drove"],"a":0},
+        {"q":"пробка = a traffic ___ .","o":["jam","block","stop"],"a":0}],
+      "gaps":[
+        {"q":"There were ___ many people that we couldn't move.","a":["so"]},
+        {"q":"He's getting used to ___ (work) nights.","a":["working"]},
+        {"q":"It was such ___ long trip! (артикль)","a":["a"]}]},
+    7: {"mc":[
+        {"q":"«I'm busy» → He said he ___ busy.","o":["was","is","has been"],"a":0},
+        {"q":"She ___ me to wait. (попросила)","o":["asked","said","told to"],"a":0},
+        {"q":"The email ___ yesterday. (passive past)","o":["was sent","sent","is sent"],"a":0},
+        {"q":"ответить на сообщение = to ___ to a message.","o":["reply","answer to","respond at"],"a":0}],
+      "gaps":[
+        {"q":"«I'll help» → She promised ___ (help). (reporting verb + to)","a":["to help"]},
+        {"q":"Millions of messages ___ (send) every day. (passive present)","a":["are sent"]},
+        {"q":"He said he ___ (call) me the next day. (reported: would)","a":["would call"]}]},
+    8: {"mc":[
+        {"q":"If I'd known, I ___ come. (бы пришёл)","o":["would have","would","will have"],"a":0},
+        {"q":"You ___ told me earlier! (упрёк)","o":["should have","should","must have"],"a":0},
+        {"q":"When I was a kid, we ___ spend summers at the lake. (прошлая привычка)","o":["would","used","use to"],"a":0},
+        {"q":"учиться на ошибках = learn from your ___ .","o":["mistakes","faults","misses"],"a":0}],
+      "gaps":[
+        {"q":"If she had studied, she ___ (pass). (3rd — would have passed)","a":["would have passed"]},
+        {"q":"You should have ___ (listen) to her advice. (упрёк)","a":["listened"]},
+        {"q":"We ___ (spend → used to) hours playing outside as kids.","a":["used to spend"]}]},
+  },
+}
+
 RENDER = r'''
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -98,7 +251,38 @@ const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
 /* Workbook */
-const wb=document.getElementById("wb");if(wb){WBMC.forEach((t,i)=>wb.appendChild(mcCard(t,i+1,"wb")));WBGAPS.forEach((t,i)=>wb.appendChild(gapCard(t,WBMC.length+i+1,"wb")));}
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 '''
 
@@ -153,6 +337,10 @@ TEMPLATE = r'''<!DOCTYPE html>
   #script b{color:#ffd27a}
   .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
   .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
   .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
@@ -220,7 +408,7 @@ TEMPLATE = r'''<!DOCTYPE html>
     <div id="script">@@SCRIPT@@</div>
   </div>
   <div id="lq" style="margin-top:14px"></div>
-
+@@VIDEO@@
   <h2>📕 Чтение</h2>
   <div class="read"><h3>@@READ_TITLE@@</h3>@@READ@@</div>
   <div id="rq" style="margin-top:14px"></div>
@@ -284,6 +472,7 @@ WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
   .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
   .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
   .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
@@ -299,7 +488,7 @@ WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
   <div class="d">📚 @@DESC@@</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
-  <div class="wbband">Авторская практика по темам рабочей тетради этого юнита. Реши здесь — ответы сохранятся учителю.</div>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · workbook</div>
@@ -307,6 +496,7 @@ WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
+window.__WB_FULL=true;
 @@DATA@@
 @@RENDER@@
 </script>
@@ -394,12 +584,19 @@ def script_html(dialog, names):
 def grammar_html(cards):
     return '\n'.join('  <div class="card">\n    <span class="gt">%s</span>\n%s\n  </div>' % (c['t'], c['h']) for c in cards)
 
-def data_js(u):
+def data_js(u, meta=None):
     j=lambda x: json.dumps(x, ensure_ascii=False)
+    prefix=(meta or {}).get("prefix","")
+    extra=WB_EXTRA.get(prefix,{}).get(u["n"],{})
+    wbmc=list(u["wbmc"])+list(extra.get("mc",[]))
+    wbgaps=list(u["wbgaps"])+list(extra.get("gaps",[]))
     keys=[("WORDS","words"),("PRONWORDS","pron_words"),("CHUNKS","chunks"),
           ("DIALOG","dialog"),("LQ","lq"),("RQ","rq"),("EX","ex"),("GAPS","gaps"),
-          ("FX","fx"),("SPEAK","speaking"),("WBMC","wbmc"),("WBGAPS","wbgaps")]
-    return '\n'.join('const %s=%s;'%(k,j(u[f])) for k,f in keys)
+          ("FX","fx"),("SPEAK","speaking")]
+    lines=['const %s=%s;'%(k,j(u[f])) for k,f in keys]
+    lines.append('const WBMC=%s;'%j(wbmc))
+    lines.append('const WBGAPS=%s;'%j(wbgaps))
+    return '\n'.join(lines)
 
 def cover_html(u, meta):
     img=u.get("cover_img")
@@ -408,6 +605,35 @@ def cover_html(u, meta):
         return '<img src="%s%s" alt="Unit %d · %s">' % (base, img, u["n"], u["title"])
     a,b=u["grad"]
     return '<div class="hcover" style="background:linear-gradient(135deg,%s,%s)"><span>%s</span></div>' % (a,b,u["emoji"])
+
+import re as _re, urllib.parse as _up
+def video_html(u, meta=None):
+    """Секция «Видео юнита». Если задан u['video'] (ссылка YouTube/Vimeo) — встраиваем плеер.
+    Иначе, если задан u['video_query'] — кнопка на поиск нужного видео. Если ничего нет — пусто
+    (страницы Speakout не меняются, у них поля video нет)."""
+    url = (u.get("video") or "").strip()
+    title = u.get("video_title") or "Видео учебника к юниту"
+    if url:
+        src = None
+        m = _re.search(r'(?:youtube\.com/(?:watch\?[^#]*v=|embed/|shorts/|live/)|youtu\.be/)([\w-]{6,})', url)
+        if m: src = "https://www.youtube-nocookie.com/embed/" + m.group(1)
+        else:
+            m = _re.search(r'vimeo\.com/(\d+)', url)
+            if m: src = "https://player.vimeo.com/video/" + m.group(1)
+        if not src: src = url
+        return ('\n  <h2>🎬 Видео юнита</h2>\n'
+                '  <div class="vidwrap"><iframe src="%s" title="%s" loading="lazy" '
+                'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
+                'allowfullscreen></iframe></div>\n' % (src, title.replace('"','&quot;')))
+    q = (u.get("video_query") or "").strip()
+    if not q and meta and meta.get("prefix") == "focus-1":
+        q = "Focus 1 Second Edition Unit %s %s video" % (u["n"], u["title"])
+    if q:
+        link = "https://www.youtube.com/results?search_query=" + _up.quote(q)
+        return ('\n  <h2>🎬 Видео юнита</h2>\n'
+                '  <div class="vidcard">📺 Официальное видео Focus к этому юниту.<br>'
+                '<a class="vidbtn" href="%s" target="_blank" rel="noopener">▶ Открыть видео на YouTube</a></div>\n' % link)
+    return ""
 
 def build(mod_name):
     mod=importlib.import_module(mod_name)
@@ -420,10 +646,11 @@ def build(mod_name):
           "@@COVER@@":cover_html(u,META),
           "@@GRAMMAR@@":u.get("grammar_html") or grammar_html(u["grammar"]),
           "@@PRONFOCUS@@":u["pron_focus"], "@@PRONNOTE@@":u["pron_note"],
+          "@@VIDEO@@":video_html(u, META),
           "@@LISTEN_TITLE@@":u["listen_title"], "@@SCRIPT@@":u.get("script_raw") or script_html(u["dialog"],u["names"]),
           "@@READ_TITLE@@":u["reading_title"], "@@READ@@":u["reading"],
           "@@HOWTO_TITLE@@":u["howto_title"], "@@HOWTO@@":u["howto"],
-          "@@HW@@":u["hw"], "@@HWCOURSE@@":META["prefix"], "@@DATA@@":data_js(u), "@@RENDER@@":RENDER,
+          "@@HW@@":u["hw"], "@@HWCOURSE@@":META["prefix"], "@@DATA@@":data_js(u, META), "@@RENDER@@":RENDER,
         }
         for k,v in rep.items(): h=h.replace(k,v)
         # финальная зачистка токенов, оказавшихся внутри RENDER

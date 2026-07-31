@@ -49,6 +49,10 @@
   #script b{color:#ffd27a}
   .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
   .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
   .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
@@ -124,6 +128,9 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
+  <h2>🎬 Видео юнита</h2>
+  <div class="vidcard">📺 Официальное видео Focus к этому юниту.<br><a class="vidbtn" href="https://www.youtube.com/results?search_query=Focus%201%20Second%20Edition%20Unit%203%20Work%20video" target="_blank" rel="noopener">▶ Открыть видео на YouTube</a></div>
+
   <h2>📕 Чтение</h2>
   <div class="read"><h3>Unusual jobs</h3><p>Most people work in offices, shops or schools, but some jobs are very unusual. A professional sleeper tests beds in hotels. A food taster tries new products and says if they are good.</p>
    <p>These workers usually don't wear a uniform and often work part-time. They say the best thing about their job is that every day is different.</p></div>
@@ -149,7 +156,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
-const WORDS=[["job", "работа (должность)"], ["work", "работа / работать"], ["teacher", "учитель"], ["doctor", "врач"], ["nurse", "медсестра"], ["driver", "водитель"], ["cook", "повар"], ["engineer", "инженер"], ["shop assistant", "продавец"], ["office", "офис"], ["factory", "завод"], ["hospital", "больница"], ["boss", "начальник"], ["colleague", "коллега"], ["salary", "зарплата"], ["uniform", "форма"], ["earn", "зарабатывать"], ["work hard", "усердно работать"], ["part-time", "на полставки"], ["full-time", "полная занятость"]];
+const WORDS=[["work hard", "усердно работать"], ["work long hours", "работать помногу часов"], ["full-time", "полный день"], ["part-time", "неполный день"], ["a well-paid job", "хорошо оплачиваемая работа"], ["a badly-paid job", "низкооплачиваемая работа"], ["work from home", "работать из дома"], ["work for a company", "работать в компании"], ["work in a team", "работать в команде"], ["work with your hands", "работать руками"], ["work on a project", "работать над проектом"], ["earn your living", "зарабатывать на жизнь"], ["earn a salary", "получать зарплату"], ["earn money", "зарабатывать деньги"], ["waiter", "официант"], ["waitress", "официантка"], ["actor", "актёр"], ["actress", "актриса"], ["builder", "строитель"], ["work eight hours a day", "работать восемь часов в день"]];
 const PRONWORDS=["doctor", "engineer", "colleague", "uniform", "salary", "office", "business"];
 const CHUNKS=[["work hard", "усердно работать"], ["earn money", "зарабатывать деньги"], ["work from home", "работать из дома"], ["a full-time job", "работа на полный день"], ["a part-time job", "подработка"], ["work in a team", "работать в команде"], ["What do you do?", "кем работаешь?"], ["I work as a…", "я работаю…"]];
 const DIALOG=[["f", "Hi Leo! You look busy. What are you doing?"], ["m", "I'm writing emails to new clients. I've got a new job!"], ["f", "Congratulations! What do you do now?"], ["m", "I work as a designer for a small company. I usually work from home."], ["f", "Nice. Do you like your boss?"], ["m", "Yes, she's great. Right now she's helping me with a difficult project."], ["f", "Is it a full-time job?"], ["m", "Part-time, actually — three days a week. It's perfect for me."]];

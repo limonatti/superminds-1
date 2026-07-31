@@ -263,7 +263,8 @@ function fillUnits(){
   if (isSM){
     uSel.innerHTML = (window.SM_UNITS||[]).map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
   } else {
-    uSel.innerHTML = [1,2,3,4,5,6,7,8].map(n => '<option value="'+n+'">Unit '+n+'</option>').join("");
+    const nums = (course === "focus-1") ? [0,1,2,3,4,5,6,7,8] : [1,2,3,4,5,6,7,8];
+    uSel.innerHTML = nums.map(n => '<option value="'+n+'">'+(n===0?"Unit 0 · Intro":"Unit "+n)+'</option>').join("");
   }
 }
 

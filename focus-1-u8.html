@@ -49,6 +49,10 @@
   #script b{color:#ffd27a}
   .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
   .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
   .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
@@ -124,6 +128,9 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
+  <h2>🎬 Видео юнита</h2>
+  <div class="vidcard">📺 Официальное видео Focus к этому юниту.<br><a class="vidbtn" href="https://www.youtube.com/results?search_query=Focus%201%20Second%20Edition%20Unit%208%20Nature%20video" target="_blank" rel="noopener">▶ Открыть видео на YouTube</a></div>
+
   <h2>📕 Чтение</h2>
   <div class="read"><h3>Our changing planet</h3><p>Our planet is beautiful, with high mountains, big forests and deep oceans. But nature is in danger. Scientists say that if we don't protect it, many animals will disappear.</p>
    <p>The good news is that everyone can help. If we use less plastic and plant more trees, the world will be a better place. Small actions today will make a big difference tomorrow.</p></div>
@@ -149,7 +156,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
-const WORDS=[["mountain", "гора"], ["river", "река"], ["lake", "озеро"], ["sea", "море"], ["forest", "лес"], ["island", "остров"], ["desert", "пустыня"], ["field", "поле"], ["animal", "животное"], ["bird", "птица"], ["fish", "рыба"], ["insect", "насекомое"], ["sunny", "солнечно"], ["rainy", "дождливо"], ["windy", "ветрено"], ["cloudy", "облачно"], ["snow", "снег"], ["storm", "шторм/гроза"], ["weather", "погода"], ["temperature", "температура"]];
+const WORDS=[["continent", "континент"], ["island", "остров"], ["lake", "озеро"], ["forest", "лес"], ["mountain", "гора"], ["river", "река"], ["sea", "море"], ["waterfall", "водопад"], ["jungle", "джунгли"], ["elephant", "слон"], ["lion", "лев"], ["tiger", "тигр"], ["bear", "медведь"], ["shark", "акула"], ["whale", "кит"], ["dolphin", "дельфин"], ["deer", "олень"], ["windy", "ветрено"], ["sunny", "солнечно"], ["foggy", "туманно"]];
 const PRONWORDS=["mountain", "island", "desert", "weather", "temperature", "forest", "animal"];
 const CHUNKS=[["go for a walk", "пойти на прогулку"], ["in the mountains", "в горах"], ["by the sea", "у моря"], ["a wild animal", "дикое животное"], ["What's the weather like?", "какая погода?"], ["it's sunny", "солнечно"], ["protect nature", "беречь природу"], ["climate change", "изменение климата"]];
 const DIALOG=[["f", "Sam, what's the weather like tomorrow? Let's go for a walk."], ["m", "The app says it will be sunny in the morning."], ["f", "Great! If it's sunny, we'll go to the lake."], ["m", "Good idea. But it might be windy in the afternoon."], ["f", "That's OK. If it gets windy, we'll come home early."], ["m", "Do you think we'll see any animals?"], ["f", "Maybe some birds and fish. I hope we won't see any snakes!"], ["m", "Don't worry. Let's take a map and some water."]];

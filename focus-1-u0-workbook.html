@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 1 · Workbook · Speakout A2 · English with Asya</title>
+<title>Unit 0 · Workbook · Speakout A2 · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -41,35 +41,35 @@
 <div class="wrap">
   <div class="scorebar">📒 Workbook · Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
   <div class="top">
-    <a class="home" href="focus-1-u1.html">← Урок</a>
-    <a class="home" href="focus-1-u1-grammar.html">✏️ Грамматика</a>
+    <a class="home" href="focus-1-u0.html">← Урок</a>
+    <a class="home" href="focus-1-u0-grammar.html">✏️ Грамматика</a>
     <a class="home" href="focus-1-course.html">Все юниты</a>
   </div>
-  <h1>Unit 1 · Workbook</h1>
-  <div class="d">📚 Present Simple · have/go/play · daily routine · семья, друзья и распорядок дня</div>
+  <h1>Unit 0 · Workbook</h1>
+  <div class="d">📚 to be · have got · this/that · страны и национальности · комнаты и мебель</div>
 
   <h2>📒 Рабочая тетрадь · закрепление</h2>
   <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. A2 · Unit 1 · workbook</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. A2 · Unit 0 · workbook</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
 window.__WB_FULL=true;
-const WORDS=[["have fun", "веселиться"], ["have a good time", "хорошо проводить время"], ["have a party", "устроить вечеринку"], ["go out with friends", "гулять с друзьями"], ["go to the cinema", "ходить в кино"], ["go to a party", "ходить на вечеринку"], ["go to a shopping centre", "ходить в торговый центр"], ["play video games", "играть в видеоигры"], ["play chess", "играть в шахматы"], ["play the guitar", "играть на гитаре"], ["play the piano", "играть на пианино"], ["play the drums", "играть на барабанах"], ["get out of bed", "вставать с кровати"], ["stay at home", "оставаться дома"], ["lie on the sofa", "лежать на диване"], ["go for a run", "ходить на пробежку"], ["go to the gym", "ходить в спортзал"], ["go to bed", "ложиться спать"], ["in the morning", "утром"], ["at the weekend", "на выходных"]];
-const PRONWORDS=["family", "brother", "mother", "usually", "breakfast", "homework", "friend"];
-const CHUNKS=[["get on well with", "хорошо ладить с"], ["have breakfast", "завтракать"], ["go shopping", "ходить за покупками"], ["play the guitar", "играть на гитаре"], ["do the homework", "делать домашнее задание"], ["at the weekend", "на выходных"], ["free time", "свободное время"], ["twice a week", "два раза в неделю"]];
-const DIALOG=[["f", "Hi Max! What time do you usually get up on school days?"], ["m", "At half past six. I have breakfast and then I go to school by bus."], ["f", "Do you have breakfast with your family?"], ["m", "Yes, with my mum and my little sister. My dad starts work early."], ["f", "What do you do after school?"], ["m", "I do my homework, and twice a week I play football with my friends."], ["f", "Nice! Do you watch TV in the evening?"], ["m", "Sometimes, but I usually go to bed at ten. I need my sleep!"]];
-const LQ=[{"q": "What time does Max get up?", "o": ["at 6:30", "at 7:00", "at 8:00"], "a": 0}, {"q": "How does he go to school?", "o": ["by car", "by bus", "on foot"], "a": 1}, {"q": "Who has breakfast with Max?", "o": ["his dad", "his mum and sister", "his friends"], "a": 1}, {"q": "How often does he play football?", "o": ["every day", "twice a week", "never"], "a": 1}, {"q": "When does Max usually go to bed?", "o": ["at nine", "at ten", "at eleven"], "a": 1}];
-const RQ=[{"q": "Who does Nadia live with?", "o": ["her grandparents", "her mum, dad and brother", "her friends"], "a": 1}, {"q": "When does Nadia's family go to the park?", "o": ["every morning", "at the weekend", "never"], "a": 1}, {"q": "How often does Ben see his parents?", "o": ["every day", "once a month", "once a year"], "a": 1}, {"q": "What do Ben and his grandad do together?", "o": ["play chess", "watch TV", "go shopping"], "a": 0}];
-const EX=[{"q": "She ___ in a small town.", "o": ["live", "lives", "living"], "a": 1}, {"q": "I ___ like fish.", "o": ["doesn't", "am not", "don't"], "a": 2}, {"q": "___ your brother play football?", "o": ["Do", "Does", "Is"], "a": 1}, {"q": "He ___ his homework every evening.", "o": ["do", "does", "doing"], "a": 1}, {"q": "My mum ___ TV in the morning.", "o": ["don't watch", "doesn't watch", "not watch"], "a": 1}, {"q": "Where ___ you live?", "o": ["do", "does", "are"], "a": 0}, {"q": "We ___ to school by bus.", "o": ["goes", "go", "going"], "a": 1}, {"q": "Choose the correct order:", "o": ["I get up usually early", "I usually get up early", "Usually I get up early wrong"], "a": 1}, {"q": "She ___ get up late at the weekend.", "o": ["usually", "is usually", "usual"], "a": 0}, {"q": "They ___ the guitar very well.", "o": ["play", "plays", "playing"], "a": 0}, {"q": "___ she have breakfast at home?", "o": ["Do", "Does", "Has"], "a": 1}, {"q": "My dad ___ early — he's a baker.", "o": ["start", "starts", "starting"], "a": 1}];
-const GAPS=[{"q": "He ___ (not/like) coffee. (present simple)", "a": ["doesn't like", "does not like"]}, {"q": "What time ___ (you/get up)? (вопрос)", "a": ["do you get up"]}, {"q": "She ___ (study) English at school.", "a": ["studies"]}, {"q": "We ___ (go) shopping on Saturdays.", "a": ["go"]}, {"q": "I ___ (usually) walk to school. (наречие — место в предложении: I ___ walk)", "a": ["usually"]}, {"q": "___ (he/play) tennis? — Yes, he does.", "a": ["does he play"]}];
-const FX=[{"q": "Спроси о распорядке:", "o": ["What time do you get up?", "Give me time.", "You are late."], "a": 0}, {"q": "Расскажи о хобби:", "o": ["In my free time I play the guitar.", "I hate you.", "Stop it."], "a": 0}, {"q": "Скажи, с кем живёшь:", "o": ["I live with my parents.", "I am a house.", "Go home."], "a": 0}];
-const SPEAK=["Расскажи о своей семье: кто есть, чем занимаются (5–6 предложений, Present Simple).", "Опиши свой обычный будний день по времени: get up → breakfast → school → free time → bed.", "Задай другу 4 вопроса о его распорядке (Do/Does…, What time…?).", "С кем ты хорошо ладишь и почему? 3–4 предложения."];
-const WBMC=[{"q": "Мамина сестра = your ___ .", "o": ["aunt", "uncle", "cousin"], "a": 0}, {"q": "Завтракать = to ___ breakfast.", "o": ["have", "do", "make"], "a": 0}, {"q": "Играть на гитаре = to ___ the guitar.", "o": ["play", "do", "go"], "a": 0}];
-const WBGAPS=[{"q": "She ___ (get) up at seven. (present simple, he/she)", "a": ["gets"]}, {"q": "They ___ (not/watch) TV in the morning.", "a": ["don't watch", "do not watch"]}, {"q": "I ___ football twice a week. (глагол-компаньон)", "a": ["play"]}];
+const WORDS=[["Russian", "русский"], ["German", "немецкий"], ["Italian", "итальянский"], ["Spanish", "испанский"], ["French", "французский"], ["Chinese", "китайский"], ["Japanese", "японский"], ["Polish", "польский"], ["Turkish", "турецкий"], ["Irish", "ирландский"], ["bedroom", "спальня"], ["bathroom", "ванная"], ["kitchen", "кухня"], ["living room", "гостиная"], ["armchair", "кресло"], ["fridge", "холодильник"], ["wardrobe", "шкаф для одежды"], ["cooker", "плита"], ["sink", "раковина"], ["desk", "письменный стол"]];
+const PRONWORDS=["Russian", "Australian", "Japanese", "Portuguese", "bathroom", "wardrobe", "furniture"];
+const CHUNKS=[["Where are you from?", "откуда ты?"], ["I'm from Russia", "я из России"], ["this is my room", "это моя комната"], ["there is / there are", "есть (наличие)"], ["have you got…?", "у тебя есть…?"], ["in the living room", "в гостиной"], ["on the wall", "на стене"], ["next to the bed", "рядом с кроватью"]];
+const DIALOG=[["f", "Hi! I'm Marta. What's your name?"], ["m", "I'm Alex. Nice to meet you. Where are you from, Marta?"], ["f", "I'm from Poland, but now I live here. Are you Italian?"], ["m", "No, I'm not. I'm Spanish. Have you got a big family?"], ["f", "Yes, I have. I've got two brothers and a sister."], ["m", "Cool! Is this your new flat?"], ["f", "Yes. There are three rooms. This is the living room."], ["m", "It's nice! There's a big sofa and a lovely armchair."]];
+const LQ=[{"q": "What's the girl's name?", "o": ["Marta", "Alex", "Anna"], "a": 0}, {"q": "Where is Marta from?", "o": ["Italy", "Poland", "Spain"], "a": 1}, {"q": "What nationality is Alex?", "o": ["Italian", "Polish", "Spanish"], "a": 2}, {"q": "How many brothers has Marta got?", "o": ["one", "two", "three"], "a": 1}, {"q": "What is in the living room?", "o": ["a sofa and an armchair", "a bed", "a cooker"], "a": 0}];
+const RQ=[{"q": "What nationality is Nadia?", "o": ["Russian", "Polish", "Turkish"], "a": 0}, {"q": "Has the family got a garden?", "o": ["yes", "no", "only a small one"], "a": 1}, {"q": "How many rooms are there?", "o": ["three", "four", "five"], "a": 1}, {"q": "What is next to the window?", "o": ["a sofa", "a lamp", "a fridge"], "a": 1}];
+const EX=[{"q": "I ___ from Spain.", "o": ["am", "is", "are"], "a": 0}, {"q": "She ___ my sister.", "o": ["am", "is", "are"], "a": 1}, {"q": "___ you from Italy?", "o": ["Am", "Is", "Are"], "a": 2}, {"q": "This is ___ bedroom. (моя)", "o": ["my", "me", "I"], "a": 0}, {"q": "I ___ got two brothers.", "o": ["have", "has", "am"], "a": 0}, {"q": "He ___ got a dog.", "o": ["have", "has", "is"], "a": 1}, {"q": "___ is my room, here.", "o": ["This", "That", "Those"], "a": 0}, {"q": "Look at ___ house over there!", "o": ["this", "that", "these"], "a": 1}, {"q": "There ___ a sofa in the room.", "o": ["is", "are", "am"], "a": 0}, {"q": "There ___ two chairs.", "o": ["is", "are", "be"], "a": 1}, {"q": "The lamp is ___ the desk.", "o": ["on", "in", "at"], "a": 0}, {"q": "one box → two ___", "o": ["boxs", "boxes", "boxies"], "a": 1}];
+const GAPS=[{"q": "They ___ (be) from Poland. (are)", "a": ["are"]}, {"q": "She ___ (have got) a big family. (has got)", "a": ["has got", "'s got"]}, {"q": "___ (this/these) are my books. (мн.ч.)", "a": ["these"]}, {"q": "There ___ (be) three rooms. (are)", "a": ["are"]}, {"q": "The cat is ___ the bed. (под)", "a": ["under"]}, {"q": "one country → two ___ (мн.ч.)", "a": ["countries"]}];
+const FX=[{"q": "Представься:", "o": ["Hi, I'm Anna.", "You Anna.", "Me name Anna do."], "a": 0}, {"q": "Спроси, откуда человек:", "o": ["Where are you from?", "From where you?", "You from where do?"], "a": 0}, {"q": "Ответь на знакомство:", "o": ["Nice to meet you!", "Meet nice you.", "You nice meet."], "a": 0}];
+const SPEAK=["Представься: имя, откуда ты, национальность (3–4 предложения).", "Опиши свою комнату: что в ней есть (there is / there are + мебель).", "Расскажи о семье: сколько братьев/сестёр (have got).", "Назови 5 стран и национальности к ним (I'm from… / …ish, …ese, …an)."];
+const WBMC=[{"q": "Человек из Японии = ___ .", "o": ["Japanese", "Japanish", "Japanan"], "a": 0}, {"q": "Где спят = the ___ .", "o": ["bedroom", "kitchen", "bathroom"], "a": 0}, {"q": "У тебя есть…? = ___ you got…?", "o": ["Have", "Has", "Are"], "a": 0}];
+const WBGAPS=[{"q": "I ___ (be) from Italy. (am/is/are)", "a": ["am", "'m"]}, {"q": "She ___ (have got) a sister. (has got)", "a": ["has got", "'s got"]}, {"q": "There ___ (be) two beds. (are)", "a": ["are"]}];
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
@@ -109,7 +109,7 @@ var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
 var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
 var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
-const HW={course:"focus-1",unit:1};
+const HW={course:"focus-1",unit:0};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
 function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
 async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}

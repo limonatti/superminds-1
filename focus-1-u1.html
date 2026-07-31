@@ -49,6 +49,10 @@
   #script b{color:#ffd27a}
   .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
   .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
   .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
@@ -124,6 +128,9 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
+  <h2>🎬 Видео юнита</h2>
+  <div class="vidcard">📺 Официальное видео Focus к этому юниту.<br><a class="vidbtn" href="https://www.youtube.com/results?search_query=Focus%201%20Second%20Edition%20Unit%201%20Family%20and%20friends%20video" target="_blank" rel="noopener">▶ Открыть видео на YouTube</a></div>
+
   <h2>📕 Чтение</h2>
   <div class="read"><h3>Two families, two homes</h3><p>Nadia lives in a small flat with her mum, her dad and her baby brother. Every morning her mum makes breakfast and they eat together before school. At the weekend the family often goes to the park.</p>
    <p>Ben lives in a house with his grandparents. His parents work in another city, so he only sees them once a month. Ben gets on really well with his grandad — they play chess every evening.</p></div>
@@ -150,7 +157,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
-const WORDS=[["mother", "мама"], ["father", "папа"], ["sister", "сестра"], ["brother", "брат"], ["grandmother", "бабушка"], ["grandfather", "дедушка"], ["aunt", "тётя"], ["uncle", "дядя"], ["cousin", "двоюродный брат/сестра"], ["parents", "родители"], ["friend", "друг"], ["neighbour", "сосед"], ["get up", "вставать"], ["have breakfast", "завтракать"], ["go to school", "ходить в школу"], ["do homework", "делать домашку"], ["watch TV", "смотреть телевизор"], ["go to bed", "ложиться спать"], ["free time", "свободное время"], ["best friend", "лучший друг"]];
+const WORDS=[["have fun", "веселиться"], ["have a good time", "хорошо проводить время"], ["have a party", "устроить вечеринку"], ["go out with friends", "гулять с друзьями"], ["go to the cinema", "ходить в кино"], ["go to a party", "ходить на вечеринку"], ["go to a shopping centre", "ходить в торговый центр"], ["play video games", "играть в видеоигры"], ["play chess", "играть в шахматы"], ["play the guitar", "играть на гитаре"], ["play the piano", "играть на пианино"], ["play the drums", "играть на барабанах"], ["get out of bed", "вставать с кровати"], ["stay at home", "оставаться дома"], ["lie on the sofa", "лежать на диване"], ["go for a run", "ходить на пробежку"], ["go to the gym", "ходить в спортзал"], ["go to bed", "ложиться спать"], ["in the morning", "утром"], ["at the weekend", "на выходных"]];
 const PRONWORDS=["family", "brother", "mother", "usually", "breakfast", "homework", "friend"];
 const CHUNKS=[["get on well with", "хорошо ладить с"], ["have breakfast", "завтракать"], ["go shopping", "ходить за покупками"], ["play the guitar", "играть на гитаре"], ["do the homework", "делать домашнее задание"], ["at the weekend", "на выходных"], ["free time", "свободное время"], ["twice a week", "два раза в неделю"]];
 const DIALOG=[["f", "Hi Max! What time do you usually get up on school days?"], ["m", "At half past six. I have breakfast and then I go to school by bus."], ["f", "Do you have breakfast with your family?"], ["m", "Yes, with my mum and my little sister. My dad starts work early."], ["f", "What do you do after school?"], ["m", "I do my homework, and twice a week I play football with my friends."], ["f", "Nice! Do you watch TV in the evening?"], ["m", "Sometimes, but I usually go to bed at ten. I need my sleep!"]];

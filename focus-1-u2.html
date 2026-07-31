@@ -49,6 +49,10 @@
   #script b{color:#ffd27a}
   .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
   .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
   .read b{color:#7c2340}
   .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
   .q .n{color:#b5654a;margin-right:6px}
@@ -124,6 +128,9 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
+  <h2>🎬 Видео юнита</h2>
+  <div class="vidcard">📺 Официальное видео Focus к этому юниту.<br><a class="vidbtn" href="https://www.youtube.com/results?search_query=Focus%201%20Second%20Edition%20Unit%202%20Food%20video" target="_blank" rel="noopener">▶ Открыть видео на YouTube</a></div>
+
   <h2>📕 Чтение</h2>
   <div class="read"><h3>Breakfast around the world</h3><p>People eat very different things for breakfast. In many countries people have bread with cheese or eggs, and a cup of tea or coffee. In some places a typical breakfast is rice and fish.</p>
    <p>Doctors say breakfast is important. A good breakfast gives you energy for the morning. It doesn't need a lot of sugar — some fruit, bread and milk are enough.</p></div>
@@ -149,7 +156,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
 <script>
-const WORDS=[["bread", "хлеб"], ["milk", "молоко"], ["cheese", "сыр"], ["rice", "рис"], ["meat", "мясо"], ["fish", "рыба"], ["egg", "яйцо"], ["apple", "яблоко"], ["tomato", "помидор"], ["potato", "картофель"], ["a bottle of", "бутылка"], ["a packet of", "пачка"], ["a can of", "банка (жестяная)"], ["a piece of", "кусок"], ["fry", "жарить"], ["boil", "варить"], ["bake", "печь"], ["fresh", "свежий"], ["tasty", "вкусный"], ["sweet", "сладкий"]];
+const WORDS=[["a bag of", "пакет"], ["a bar of chocolate", "плитка шоколада"], ["a bottle of", "бутылка"], ["a can of", "банка (жестяная)"], ["a carton of", "картонная упаковка"], ["a jar of", "банка (стеклянная)"], ["a packet of", "пачка"], ["a tin of", "консервная банка"], ["a tub of", "ведёрко/контейнер"], ["mayonnaise", "майонез"], ["onions", "лук"], ["peas", "горох"], ["sugar", "сахар"], ["flour", "мука"], ["boil", "варить"], ["chop", "рубить/крошить"], ["fry", "жарить"], ["mix", "смешивать"], ["slice", "нарезать ломтиками"], ["vegetarian", "вегетарианский"]];
 const PRONWORDS=["cheese", "potato", "tomato", "vegetable", "chocolate", "breakfast", "delicious"];
 const CHUNKS=[["a bottle of water", "бутылка воды"], ["a packet of crisps", "пачка чипсов"], ["a piece of cake", "кусок торта"], ["fast food", "фастфуд"], ["a healthy diet", "здоровое питание"], ["do the shopping", "делать покупки"], ["I'm hungry", "я голоден"], ["I'd like…", "я бы хотел…"]];
 const DIALOG=[["f", "Right, we need food for dinner. How many tomatoes have we got?"], ["m", "Only two. And there isn't any cheese."], ["f", "OK. Let's buy some tomatoes, a packet of pasta and some cheese."], ["m", "Do we need any bread?"], ["f", "Yes, a loaf. And how much milk have we got at home?"], ["m", "Not much. Let's get a bottle."], ["f", "Perfect. I'd like some apples too — they're really fresh here."], ["m", "Good idea. I'm hungry already!"]];
