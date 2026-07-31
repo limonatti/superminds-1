@@ -337,7 +337,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit @@NUM@@ · @@TITLE@@ · Speakout @@LEVEL@@ · English with Asya</title>
+<title>Unit @@NUM@@ · @@TITLE@@ · @@BRAND@@ @@LEVEL@@ · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -475,7 +475,7 @@ TEMPLATE = r'''<!DOCTYPE html>
   <h2>🏠 Домашнее задание</h2>
   <div class="hw">@@HW@@</div>
 
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе @@BRAND@@ @@LEVEL@@ · Unit @@NUM@@</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
@@ -492,7 +492,7 @@ WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit @@NUM@@ · Workbook · Speakout @@LEVEL@@ · English with Asya</title>
+<title>Unit @@NUM@@ · Workbook · @@BRAND@@ @@LEVEL@@ · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -541,7 +541,7 @@ WORKBOOK_TEMPLATE = r'''<!DOCTYPE html>
   <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
   <div id="wb"></div>
 
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · workbook</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе @@BRAND@@ @@LEVEL@@ · Unit @@NUM@@ · workbook</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
@@ -559,7 +559,7 @@ GRAMMAR_TEMPLATE = r'''<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit @@NUM@@ · Грамматика · Speakout @@LEVEL@@ · English with Asya</title>
+<title>Unit @@NUM@@ · Грамматика · @@BRAND@@ @@LEVEL@@ · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -616,7 +616,7 @@ GRAMMAR_TEMPLATE = r'''<!DOCTYPE html>
   <h2>✏️ Упражнения</h2>
   <div id="ex"></div>
 
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. @@LEVEL@@ · Unit @@NUM@@ · грамматика</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе @@BRAND@@ @@LEVEL@@ · Unit @@NUM@@ · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js"></script>
@@ -737,7 +737,7 @@ def build(mod_name):
     for u in DATA:
         h=TEMPLATE
         rep={
-          "@@NUM@@":str(u["n"]), "@@TITLE@@":u["title"], "@@LEVEL@@":META["level"],
+          "@@NUM@@":str(u["n"]), "@@TITLE@@":u["title"], "@@LEVEL@@":META["level"], "@@BRAND@@":META.get("brand","Speakout"),
           "@@EMOJI@@":u["emoji"], "@@DESC@@":u["desc"], "@@HUB@@":META["hub"], "@@TRAINER@@":META["trainer"],
           "@@COVER@@":cover_html(u,META),
           "@@GRAMMAR@@":u.get("grammar_html") or grammar_html(u["grammar"]),

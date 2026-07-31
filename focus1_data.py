@@ -994,6 +994,7 @@ DATA.append({
 
 META = {
  "prefix": "focus-1",
+ "brand": "Focus",
  "level": "A2",
  "hub": "focus-1-course.html",
  "trainer": "focus-1-course.html",
