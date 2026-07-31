@@ -117,16 +117,43 @@
     <button class="lbtn" id="lplay">▶ Слушать</button>
     <button class="lbtn sec" id="lstop">⏹ Стоп</button>
     <button class="lbtn sec" id="lscript">📜 Показать текст</button>
-    <div id="script"><b>Mia:</b> Hi Leo! You look worried. What's the matter?<br>
-      <b>Leo:</b> I'm really nervous. We're playing a concert tonight and I feel scared.<br>
-      <b>Mia:</b> Don't worry! You're a great guitarist. I'm sure it'll be fine.<br>
-      <b>Leo:</b> Thanks. Last time I was so embarrassed — I forgot the words!<br>
-      <b>Mia:</b> Ha! But everyone was still delighted. They loved it.<br>
-      <b>Leo:</b> Really? That's surprising. I felt terrible.<br>
-      <b>Mia:</b> Honestly, you should be proud. Just relax and enjoy it.<br>
-      <b>Leo:</b> OK, I'm feeling a bit calmer now. Thanks, Mia.</div>
+    <div id="script"><b>Mia:</b> Hi Leo! You look really worried. What's the matter?<br>
+      <b>Leo:</b> Hi Mia. I'm so nervous. We're playing a concert tonight and I feel scared.<br>
+      <b>Mia:</b> Scared? But you love being on stage!<br>
+      <b>Leo:</b> I know, but this time it's different. There are three hundred tickets and they're all sold.<br>
+      <b>Mia:</b> Wow, three hundred people! That's amazing, not scary.<br>
+      <b>Leo:</b> For you, maybe. Last time I was so embarrassed — I forgot the words in the first song!<br>
+      <b>Mia:</b> Ha! I remember. But honestly, everyone was still delighted. They were dancing and singing.<br>
+      <b>Leo:</b> Really? I felt terrible. I was sure they were disappointed.<br>
+      <b>Mia:</b> Not at all. My little brother said it was the best concert of his life.<br>
+      <b>Leo:</b> That's surprising. I didn't know that.<br>
+      <b>Mia:</b> See? You worry too much. Just breathe, relax and enjoy it.<br>
+      <b>Leo:</b> You're right. When I start playing, I usually forget I'm nervous.<br>
+      <b>Mia:</b> Exactly. And I'll be there in the front row, cheering for you.<br>
+      <b>Leo:</b> Thanks, Mia. I'm feeling a bit calmer now. Let's do this!</div>
   </div>
   <div id="lq" style="margin-top:14px"></div>
+
+  <h2>🎧 Аудирование 2 <span class="sec-i">(ещё один диалог)</span></h2>
+  <div class="lc">
+    <h3>Interview: How do you deal with stress?</h3>
+    <p>Послушай второй диалог и ответь на вопросы. Слушай сколько нужно.</p>
+    <button class="lbtn" id="lplay2">▶ Слушать</button>
+    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
+    <button class="lbtn sec" id="lscript2">📜 Показать текст</button>
+    <div id="script2"><b>Presenter:</b> Welcome back to the show. Today we're talking about stress with psychologist Dr Hill. Hello!<br>
+      <b>Dr Hill:</b> Hello, thanks for having me.<br>
+      <b>Presenter:</b> So, why do teenagers feel so stressed these days?<br>
+      <b>Dr Hill:</b> There are many reasons — exams, friends, social media. Feeling nervous sometimes is completely normal.<br>
+      <b>Presenter:</b> What can people do when they feel worried?<br>
+      <b>Dr Hill:</b> First, talk to someone. When you share a problem, you feel better immediately.<br>
+      <b>Presenter:</b> And if you're really stressed before a test?<br>
+      <b>Dr Hill:</b> Breathe slowly, go for a short walk, and get enough sleep. A tired brain feels everything more strongly.<br>
+      <b>Presenter:</b> Great advice. Any last tip?<br>
+      <b>Dr Hill:</b> Yes — be kind to yourself. Nobody feels confident all the time, and that's OK.</div>
+  </div>
+  <div id="lq2" style="margin-top:14px"></div>
+
 
 
   <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>
@@ -137,6 +164,13 @@
   <div class="read"><h3>A festival to remember</h3><p>Last summer I went to a music festival with my friends. Before the first concert I was really nervous, but I was also very excited. The weather was perfect and thousands of people were singing together.</p>
    <p>Suddenly it started to rain, but nobody was upset. We were dancing in the rain and laughing. It was the best weekend of my life, and I felt so happy and relaxed. I'll never forget it!</p></div>
   <div id="rq" style="margin-top:14px"></div>
+
+  <h2>📕 Чтение 2 <span class="sec-i">(The science of a smile)</span></h2>
+  <div class="read"><h3>The science of a smile</h3><p>Did you know that your face can change your mood? Scientists have found that when you smile — even a fake smile — your brain gets a small signal that says "I'm happy". After a few minutes, you often really do feel better.</p>
+   <p>It works the other way too. When we feel proud or excited, we stand taller and smile more. So feelings and the body are closely connected, like a two-way street.</p>
+   <p>Next time you feel a bit down, try this simple experiment: smile for thirty seconds. It won't solve big problems, but many people say it makes a stressful moment a little easier.</p></div>
+  <div id="rq2" style="margin-top:14px"></div>
+
 
   <h2>💬 How to… говорить о чувствах</h2>
   <div class="card">
@@ -163,7 +197,7 @@
 const WORDS=[["annoyed", "раздражённый"], ["bored", "скучающий"], ["confused", "растерянный"], ["delighted", "в восторге"], ["disappointed", "разочарованный"], ["embarrassed", "смущённый"], ["excited", "взволнованный (радостно)"], ["frightened", "испуганный"], ["jealous", "ревнующий/завистливый"], ["nervous", "нервничающий"], ["proud", "гордый"], ["relaxed", "расслабленный"], ["scared", "напуганный"], ["stressed", "в стрессе"], ["surprised", "удивлённый"], ["upset", "расстроенный"], ["worried", "обеспокоенный"], ["amazed", "поражённый"], ["ashamed", "пристыжённый"], ["confident", "уверенный"]];
 const PRONWORDS=["annoyed", "embarrassed", "jealous", "nervous", "delighted", "surprised", "frightened"];
 const CHUNKS=[["feel nervous", "нервничать"], ["be worried about", "переживать из-за"], ["get excited", "радоваться/волноваться"], ["cheer up", "приободриться"], ["calm down", "успокоиться"], ["be proud of", "гордиться"], ["What's the matter?", "что случилось?"], ["Don't worry", "не переживай"]];
-const DIALOG=[["f", "Hi Leo! You look worried. What's the matter?"], ["m", "I'm really nervous. We're playing a concert tonight and I feel scared."], ["f", "Don't worry! You're a great guitarist. I'm sure it'll be fine."], ["m", "Thanks. Last time I was so embarrassed — I forgot the words!"], ["f", "Ha! But everyone was still delighted. They loved it."], ["m", "Really? That's surprising. I felt terrible."], ["f", "Honestly, you should be proud. Just relax and enjoy it."], ["m", "OK, I'm feeling a bit calmer now. Thanks, Mia."]];
+const DIALOG=[["f", "Hi Leo! You look really worried. What's the matter?"], ["m", "Hi Mia. I'm so nervous. We're playing a concert tonight and I feel scared."], ["f", "Scared? But you love being on stage!"], ["m", "I know, but this time it's different. There are three hundred tickets and they're all sold."], ["f", "Wow, three hundred people! That's amazing, not scary."], ["m", "For you, maybe. Last time I was so embarrassed — I forgot the words in the first song!"], ["f", "Ha! I remember. But honestly, everyone was still delighted. They were dancing and singing."], ["m", "Really? I felt terrible. I was sure they were disappointed."], ["f", "Not at all. My little brother said it was the best concert of his life."], ["m", "That's surprising. I didn't know that."], ["f", "See? You worry too much. Just breathe, relax and enjoy it."], ["m", "You're right. When I start playing, I usually forget I'm nervous."], ["f", "Exactly. And I'll be there in the front row, cheering for you."], ["m", "Thanks, Mia. I'm feeling a bit calmer now. Let's do this!"]];
 const LQ=[{"q": "How does Leo feel now?", "o": ["bored", "nervous and scared", "angry"], "a": 1}, {"q": "What is happening tonight?", "o": ["a concert", "an exam", "a party"], "a": 0}, {"q": "What happened last time?", "o": ["he was late", "he forgot the words", "he was ill"], "a": 1}, {"q": "How did the audience feel last time?", "o": ["disappointed", "delighted", "bored"], "a": 1}, {"q": "How does Leo feel at the end?", "o": ["worse", "a bit calmer", "angry"], "a": 1}];
 const RQ=[{"q": "When did the writer go to the festival?", "o": ["last summer", "last winter", "last week"], "a": 0}, {"q": "How did the writer feel before the concert?", "o": ["bored", "nervous but excited", "angry"], "a": 1}, {"q": "What happened suddenly?", "o": ["it started to rain", "the power went off", "a fight started"], "a": 0}, {"q": "How did people react to the rain?", "o": ["they were upset", "they danced and laughed", "they left"], "a": 1}, {"q": "How did the writer feel at the end?", "o": ["happy and relaxed", "disappointed", "scared"], "a": 0}];
 const EX=[{"q": "Look! She ___ because of the exam. (сейчас)", "o": ["worries", "is worrying", "worry"], "a": 1}, {"q": "I usually ___ nervous before tests.", "o": ["feel", "am feeling", "feels"], "a": 0}, {"q": "He ___ really proud yesterday.", "o": ["feels", "felt", "is feeling"], "a": 1}, {"q": "They ___ to the festival last year.", "o": ["go", "went", "were going"], "a": 1}, {"q": "We ___ excited right now!", "o": ["are", "were", "is"], "a": 0}, {"q": "She ___ the words last time. (forget)", "o": ["forgot", "forget", "forgets"], "a": 0}, {"q": "___ you feel scared yesterday?", "o": ["Did", "Do", "Was"], "a": 0}, {"q": "I ___ happy every Friday.", "o": ["am feeling", "feel", "feels"], "a": 1}, {"q": "The film was so ___ — I nearly slept! (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "I was ___ by the news. (-ing/-ed)", "o": ["surprising", "surprised", "surprise"], "a": 1}, {"q": "He ___ his keys this morning. (find, past)", "o": ["found", "finded", "find"], "a": 0}, {"q": "Right now they ___ in the rain.", "o": ["dance", "are dancing", "danced"], "a": 1}, {"q": "She didn't ___ well yesterday.", "o": ["felt", "feel", "feels"], "a": 1}, {"q": "We ___ delighted with the result. (was/were)", "o": ["was", "were", "are being"], "a": 1}, {"q": "Choose the correct order:", "o": ["I always am nervous", "I am always nervous", "Always I am nervous"], "a": 1}, {"q": "He ___ a present to me. (give, past)", "o": ["gived", "gave", "give"], "a": 1}];
@@ -171,6 +205,9 @@ const GAPS=[{"q": "Right now I ___ (feel) nervous. (present continuous)", "a": [
 const FX=[{"q": "Спроси, что случилось:", "o": ["What's the matter?", "What matter you?", "Why you do?"], "a": 0}, {"q": "Поддержи друга:", "o": ["Don't worry, it'll be fine!", "You bad now.", "Stop feeling."], "a": 0}, {"q": "Скажи о своём чувстве:", "o": ["I feel a bit nervous.", "I nervous feel bit.", "Me nervous do."], "a": 0}, {"q": "Похвали:", "o": ["I'm really proud of you!", "You proud me.", "Proud I you of."], "a": 0}];
 const SPEAK=["Расскажи о ситуации, когда ты нервничал(а), и как справился(лась). 5–6 предложений (Past Simple).", "Как ты себя чувствуешь в разных ситуациях: перед экзаменом, на вечеринке, в дождь? (I feel…).", "Ролевая игра: друг расстроен — спроси What's the matter? и поддержи.", "Опиши -ed/-ing: назови 3 boring и 3 exciting вещи из своей жизни."];
 const WORDSKILLS=[{"q": "«скучный» (о вещи) = ___ (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "«мне скучно» = I'm ___ .", "o": ["boring", "bored", "bore"], "a": 1}, {"q": "«волнующий» (о событии) = ___", "o": ["excited", "exciting", "excite"], "a": 1}, {"q": "«я взволнован» = I'm ___ .", "o": ["exciting", "excited", "excite"], "a": 1}, {"q": "«пугающий» (о фильме) = ___", "o": ["frightened", "frightening", "fright"], "a": 1}, {"q": "Приставка «не-»: happy → ___ happy", "a": ["un"]}, {"q": "Прилагательное от «annoy»: I'm ___ .", "a": ["annoyed"]}, {"q": "Прилагательное от «interest» (о человеке): I'm ___ .", "a": ["interested"]}];
+const DIALOG2=[["m", "Welcome back to the show. Today we're talking about stress with psychologist Dr Hill. Hello!"], ["f", "Hello, thanks for having me."], ["m", "So, why do teenagers feel so stressed these days?"], ["f", "There are many reasons — exams, friends, social media. Feeling nervous sometimes is completely normal."], ["m", "What can people do when they feel worried?"], ["f", "First, talk to someone. When you share a problem, you feel better immediately."], ["m", "And if you're really stressed before a test?"], ["f", "Breathe slowly, go for a short walk, and get enough sleep. A tired brain feels everything more strongly."], ["m", "Great advice. Any last tip?"], ["f", "Yes — be kind to yourself. Nobody feels confident all the time, and that's OK."]];
+const LQ2=[{"q": "Who is Dr Hill?", "o": ["a teacher", "a psychologist", "a doctor of medicine"], "a": 1}, {"q": "According to Dr Hill, is feeling nervous normal?", "o": ["yes, completely", "no, never", "only for adults"], "a": 0}, {"q": "What should you do first when worried?", "o": ["talk to someone", "stay silent", "eat sweets"], "a": 0}, {"q": "What does a tired brain do?", "o": ["feels everything more strongly", "works better", "stops feeling"], "a": 0}, {"q": "What is her last tip?", "o": ["work harder", "be kind to yourself", "never rest"], "a": 1}];
+const RQ2=[{"q": "What can change your mood, according to the text?", "o": ["your face", "the weather", "your phone"], "a": 0}, {"q": "What signal does the brain get when you smile?", "o": ["\"I'm tired\"", "\"I'm happy\"", "\"I'm hungry\""], "a": 1}, {"q": "How are feelings and the body connected?", "o": ["not at all", "like a two-way street", "only in children"], "a": 1}, {"q": "What experiment does the text suggest?", "o": ["run fast", "smile for thirty seconds", "shout loudly"], "a": 1}, {"q": "Will smiling solve big problems?", "o": ["yes, always", "no, but it can help a stressful moment", "it makes things worse"], "a": 1}];
 const WBMC=[{"q": "Очень рад = ___ .", "o": ["delighted", "annoyed", "bored"], "a": 0}, {"q": "Гордиться кем-то = be ___ of somebody.", "o": ["proud", "jealous", "scared"], "a": 0}, {"q": "Успокойся = ___ down.", "o": ["calm", "cheer", "get"], "a": 0}, {"q": "Фильм скучный = a ___ film. (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "Past Simple от feel = ___ .", "o": ["felt", "feeled", "fell"], "a": 0}];
 const WBGAPS=[{"q": "I ___ (feel) scared last night. (past)", "a": ["felt"]}, {"q": "She ___ (not/go) to the party. (past neg)", "a": ["didn't go", "did not go"]}, {"q": "We ___ (watch) a film when he called. (past continuous)", "a": ["were watching"]}, {"q": "I'm ___ (interest) in music. (-ed прилагательное)", "a": ["interested"]}, {"q": "The news was ___ (surprise). (-ing прилагательное)", "a": ["surprising"]}];
 
@@ -211,6 +248,13 @@ var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
 };
 var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
 var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>{
+  speechSynthesis.cancel();const mv=enVoice("m"),fv=enVoice("f");
+  DIALOG2.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
+};
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"solutions-pi",unit:1};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -256,8 +300,10 @@ if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
 });
 /* Аудирование → вопросы */
 const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
 /* Чтение → вопросы */
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */

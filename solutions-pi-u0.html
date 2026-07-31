@@ -129,6 +129,7 @@
   <div id="lq" style="margin-top:14px"></div>
 
 
+
   <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>
   <div class="wbband" style="border-color:#2e6f4e">Формы Present Simple (he/she -s), числа и краткие формы be / have got.</div>
   <div id="ws"></div>
@@ -137,6 +138,7 @@
   <div class="read"><h3>My best friend</h3><p>This is my best friend, Marek. He's sixteen and he's from Poland. Marek is tall and good-looking, with short, dark, wavy hair.</p>
    <p>He's got one brother and a twin sister. Every day he goes to school by bike and after school he usually plays basketball. He's really friendly and I'm lucky to have him as a friend.</p></div>
   <div id="rq" style="margin-top:14px"></div>
+
 
   <h2>💬 How to… представиться</h2>
   <div class="card">
@@ -211,6 +213,13 @@ var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
 };
 var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
 var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>{
+  speechSynthesis.cancel();const mv=enVoice("m"),fv=enVoice("f");
+  DIALOG2.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
+};
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"solutions-pi",unit:0};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -256,8 +265,10 @@ if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
 });
 /* Аудирование → вопросы */
 const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
 /* Чтение → вопросы */
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */

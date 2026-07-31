@@ -195,6 +195,13 @@ var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
 };
 var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
 var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>{
+  speechSynthesis.cancel();const mv=enVoice("m"),fv=enVoice("f");
+  DIALOG2.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
+};
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"@@HWCOURSE@@",unit:@@NUM@@};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -240,8 +247,10 @@ if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
 });
 /* Аудирование → вопросы */
 const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
 /* Чтение → вопросы */
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
@@ -414,11 +423,13 @@ TEMPLATE = r'''<!DOCTYPE html>
     <div id="script">@@SCRIPT@@</div>
   </div>
   <div id="lq" style="margin-top:14px"></div>
+@@LISTEN2@@
 @@VIDEO@@
 @@WORDSKILLS@@
   <h2>📕 Чтение</h2>
   <div class="read"><h3>@@READ_TITLE@@</h3>@@READ@@</div>
   <div id="rq" style="margin-top:14px"></div>
+@@READ2@@
 
   <h2>@@HOWTO_TITLE@@</h2>
   <div class="card">
@@ -603,6 +614,11 @@ def data_js(u, meta=None):
     lines=['const %s=%s;'%(k,j(u[f])) for k,f in keys]
     if u.get("word_skills"):
         lines.append('const WORDSKILLS=%s;'%j(u["word_skills"]))
+    if u.get("dialog2"):
+        lines.append('const DIALOG2=%s;'%j(u["dialog2"]))
+        lines.append('const LQ2=%s;'%j(u.get("lq2",[])))
+    if u.get("reading2"):
+        lines.append('const RQ2=%s;'%j(u.get("rq2",[])))
     lines.append('const WBMC=%s;'%j(wbmc))
     lines.append('const WBGAPS=%s;'%j(wbgaps))
     return '\n'.join(lines)
@@ -617,6 +633,27 @@ def writing_html(u):
     w=u.get("writing")
     if not w: return ""
     return '\n  <h2>✍️ Writing</h2>\n  <div class="hw">%s</div>\n' % w
+
+def listen2_html(u):
+    if not u.get("dialog2"): return ""
+    names=u.get("names2") or u.get("names")
+    title=u.get("listen2_title") or "Второй диалог"
+    return ('\n  <h2>🎧 Аудирование 2 <span class="sec-i">(ещё один диалог)</span></h2>\n'
+            '  <div class="lc">\n    <h3>%s</h3>\n'
+            '    <p>Послушай второй диалог и ответь на вопросы. Слушай сколько нужно.</p>\n'
+            '    <button class="lbtn" id="lplay2">▶ Слушать</button>\n'
+            '    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>\n'
+            '    <button class="lbtn sec" id="lscript2">📜 Показать текст</button>\n'
+            '    <div id="script2">%s</div>\n  </div>\n'
+            '  <div id="lq2" style="margin-top:14px"></div>\n'
+            % (title, script_html(u["dialog2"], names)))
+
+def reading2_html(u):
+    if not u.get("reading2"): return ""
+    title=u.get("reading2_title") or "Второй текст"
+    return ('\n  <h2>📕 Чтение 2 <span class="sec-i">(%s)</span></h2>\n'
+            '  <div class="read"><h3>%s</h3>%s</div>\n'
+            '  <div id="rq2" style="margin-top:14px"></div>\n' % (title, title, u["reading2"]))
 
 def cover_html(u, meta):
     img=u.get("cover_img")
@@ -667,6 +704,7 @@ def build(mod_name):
           "@@GRAMMAR@@":u.get("grammar_html") or grammar_html(u["grammar"]),
           "@@PRONFOCUS@@":u["pron_focus"], "@@PRONNOTE@@":u["pron_note"],
           "@@VIDEO@@":video_html(u, META), "@@WORDSKILLS@@":wordskills_html(u), "@@WRITING@@":writing_html(u),
+          "@@LISTEN2@@":listen2_html(u), "@@READ2@@":reading2_html(u),
           "@@LISTEN_TITLE@@":u["listen_title"], "@@SCRIPT@@":u.get("script_raw") or script_html(u["dialog"],u["names"]),
           "@@READ_TITLE@@":u["reading_title"], "@@READ@@":u["reading"],
           "@@HOWTO_TITLE@@":u["howto_title"], "@@HOWTO@@":u["howto"],
