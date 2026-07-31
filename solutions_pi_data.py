@@ -260,6 +260,269 @@ DATA.append({
  "hw":r'''<b>Feelings diary.</b> Опиши свой вчерашний день: 3 момента и что ты чувствовал(а) в каждом (Past Simple + прилагательные чувств). Пример: <i>«In the morning I felt tired… After the test I was relaxed and proud.»</i><br><br>Затем реши <a href="solutions-pi-u1-workbook.html" style="color:#a5301f;font-weight:900;text-decoration:underline">Workbook Unit 1</a> 😀''',
 })
 
+# ===================== UNIT 2 · Adventure =====================
+DATA.append({
+ "n":2, "title":"Adventure", "emoji":"🧗", "grad":("#2a6f8f","#3aa0c9"),
+ "desc":"Past Continuous · Past Simple vs Continuous · приключения и природа",
+ "grammar":[
+  {"t":"2B · Past Continuous","h":r'''    <table>
+      <tr><th>Форма</th><th>Пример</th></tr>
+      <tr><td><b>was/were + -ing</b></td><td>I <b>was climbing</b>. They <b>were hiking</b>.</td></tr>
+    </table>
+    <div class="g-ex">Действие в процессе в прошлом: At 6 p.m. we <b>were walking</b> in the forest.</div>'''},
+  {"t":"2D · Past Simple vs Past Continuous","h":r'''    <div class="g-ex"><b>while</b> + Past Continuous — фон: <b>While</b> we <b>were sailing</b>, …</div>
+    <div class="g-ex"><b>when</b> + Past Simple — короткое событие: … a storm <b>started</b>.</div>
+    <div class="g-ex">I <b>was cooking</b> when the phone <b>rang</b>.</div>'''},
+ ],
+ "words":[
+  ["go camping","ходить с палаткой"],["rock climbing","скалолазание"],["rafting","рафтинг"],
+  ["scuba diving","дайвинг"],["hiking","поход/треккинг"],["sailing","парусный спорт"],["cave","пещера"],
+  ["cliff","утёс"],["waterfall","водопад"],["valley","долина"],["path","тропа"],["rope","верёвка"],
+  ["tent","палатка"],["torch","фонарик"],["compass","компас"],["backpack","рюкзак"],
+  ["explore","исследовать"],["survive","выживать"],["escape","спастись/сбежать"],["get lost","заблудиться"],
+ ],
+ "pron_words":["adventure","climbing","waterfall","survive","dangerous","equipment","mountain"],
+ "pron_focus":"Ударение в длинных словах",
+ "pron_note":"adVENture · EQuipment · DANgerous — ударный слог",
+ "chunks":[
+  ["go on an adventure","отправиться в приключение"],["set off early","выйти рано"],["run out of water","остаться без воды"],
+  ["put up a tent","поставить палатку"],["be in danger","быть в опасности"],["take a risk","рисковать"],
+  ["make it to the top","добраться до вершины"],["get lost","заблудиться"],
+ ],
+ "listen_title":"A day in the mountains",
+ "names":{"m":"Jack","f":"Sara"},
+ "dialog":[
+  ["f","Jack, what were you doing at six o'clock yesterday? I called you."],
+  ["m","Sorry, I was hiking in the mountains. There was no signal."],
+  ["f","Cool! Was it a hard walk?"],
+  ["m","Yes! While we were climbing, it suddenly started to rain."],
+  ["f","Oh no. What did you do?"],
+  ["m","We put up our tent quickly and waited. We nearly ran out of water!"],
+  ["f","Scary. Did you make it to the top?"],
+  ["m","We did, in the end. The view was amazing — it was a real adventure."],
+ ],
+ "lq":[
+  {"q":"What was Jack doing at six o'clock?","o":["sleeping","hiking in the mountains","swimming"],"a":1},
+  {"q":"Why didn't he answer the phone?","o":["it was broken","there was no signal","he was busy"],"a":1},
+  {"q":"What happened while they were climbing?","o":["it started to rain","they got lost","they fell"],"a":0},
+  {"q":"What did they nearly run out of?","o":["food","water","rope"],"a":1},
+  {"q":"Did they reach the top?","o":["yes","no","they gave up"],"a":0},
+ ],
+ "reading_title":"Lost in the cave",
+ "reading":r'''<p>Last year, two friends went exploring in a large cave. They were walking deep inside when their torch suddenly stopped working. It was completely dark and they couldn't find the path.</p>
+   <p>They didn't panic. While one friend was looking for the exit, the other was calling for help. After three hours, a rescue team found them. It was frightening, but they survived — and they will never go into a cave without two torches again!</p>''',
+ "rq":[
+  {"q":"Where were the friends exploring?","o":["a forest","a large cave","a mountain"],"a":1},
+  {"q":"What stopped working?","o":["their phone","their torch","their car"],"a":1},
+  {"q":"What was one friend doing while the other looked for the exit?","o":["sleeping","calling for help","eating"],"a":1},
+  {"q":"Who found them?","o":["a rescue team","the police","nobody"],"a":0},
+  {"q":"What will they always take now?","o":["two torches","a dog","a map"],"a":0},
+ ],
+ "ex":[
+  {"q":"At 8 p.m. we ___ dinner.","o":["were having","had","have"],"a":0},
+  {"q":"While I ___ , it started to rain.","o":["walked","was walking","walk"],"a":1},
+  {"q":"They ___ when the storm began.","o":["were sailing","sailed","sail"],"a":0},
+  {"q":"I ___ TV when you called.","o":["watched","was watching","watch"],"a":1},
+  {"q":"What ___ you doing at noon?","o":["was","were","did"],"a":1},
+  {"q":"The sun ___ while we were hiking.","o":["shone","was shining","shines"],"a":1},
+  {"q":"She ___ her leg while she was climbing.","o":["hurt","was hurting","hurts"],"a":0},
+  {"q":"We ___ the tent when it got dark.","o":["were putting up","put up","put"],"a":1},
+  {"q":"They weren't ___ attention.","o":["pay","paying","paid"],"a":1},
+  {"q":"I ___ lost while I was exploring.","o":["got","was getting","get"],"a":0},
+  {"q":"He fell ___ he was running.","o":["while","during","when"],"a":0},
+  {"q":"___ they camping last weekend?","o":["Was","Were","Did"],"a":1},
+  {"q":"We ___ a noise and stopped.","o":["were hearing","heard","hear"],"a":1},
+  {"q":"While she ___ , he cooked.","o":["rested","was resting","rests"],"a":1},
+  {"q":"It ___ heavily all night.","o":["was raining","rained","rains"],"a":0},
+  {"q":"When the guide arrived, we ___ for two hours.","o":["waited","had waited","were waiting"],"a":2},
+ ],
+ "gaps":[
+  {"q":"At 7 a.m. we ___ (hike). (past continuous)","a":["were hiking"]},
+  {"q":"While I ___ (climb), I saw an eagle. (past continuous)","a":["was climbing"]},
+  {"q":"The torch ___ (stop) working suddenly. (past simple)","a":["stopped"]},
+  {"q":"They ___ (not/panic) in the cave. (past neg)","a":["didn't panic","did not panic"]},
+  {"q":"What ___ (you/do) at midnight? (past continuous)","a":["were you doing"]},
+  {"q":"We ___ (put up) the tent when it started to rain.","a":["were putting up","put up"]},
+  {"q":"She ___ (fall) while she was running. (past simple)","a":["fell"]},
+  {"q":"___ (they/sail) when the storm began? (past continuous)","a":["were they sailing"]},
+ ],
+ "word_skills":[
+  {"q":"quick → наречие","o":["quick","quickly","quackly"],"a":1},
+  {"q":"careful → наречие","o":["carefuly","carefully","careful"],"a":1},
+  {"q":"good → наречие","o":["goodly","well","gooder"],"a":1},
+  {"q":"explore → человек (сущ.)","o":["explorer","exploration","exploring"],"a":0},
+  {"q":"«climb up» — движение…","o":["вверх","вниз","вокруг"],"a":0},
+  {"q":"Наречие от «easy»:","a":["easily"]},
+  {"q":"Существительное от «adventure» (человек): an ___","a":["adventurer"]},
+  {"q":"«run away» = ___ (по-русски одним словом)","a":["убежать"]},
+ ],
+ "word_skills_note":"Наречия образа действия (-ly), существительные-деятели (-er), фразовые глаголы движения.",
+ "howto_title":"💬 How to… рассказать историю",
+ "howto":r'''    <div class="g-ex"><b>It all started when…</b> / <b>Suddenly…</b></div>
+    <div class="g-ex"><b>While we were…, …</b> <span class="ru">— фон + событие</span></div>
+    <div class="g-ex"><b>In the end…</b> / <b>Luckily…</b></div>''',
+ "fx":[
+  {"q":"Начни историю:","o":["It all started when we set off.","Story I tell now.","Begin adventure do."],"a":0},
+  {"q":"Добавь неожиданность:","o":["Suddenly, it started to rain.","Rain suddenly do.","It rain when suddenly."],"a":0},
+  {"q":"Заверши историю:","o":["In the end, we made it home.","End we home.","Home end in we made."],"a":0},
+  {"q":"Скажи «к счастью»:","o":["Luckily, nobody was hurt.","Lucky nobody hurt.","Hurt nobody lucky."],"a":0},
+ ],
+ "speaking":[
+  "Расскажи о приключении или походе (Past Simple + Past Continuous, 6–7 предложений).",
+  "Что ты делал(а) вчера в 6 вечера, в 8 вечера, в 10 вечера? (Past Continuous).",
+  "Ролевая игра: опиши опасную ситуацию и как ты спасся(лась).",
+  "Опасные виды спорта: назови 3 и скажи, хотел бы ты попробовать и почему.",
+ ],
+ "writing":r'''<b>An adventure story.</b> Напиши историю (7–8 предложений) о приключении: где ты был(а), что делал(а) (Past Continuous как фон), что вдруг случилось (Past Simple), и чем всё закончилось. Используй <i>while, when, suddenly, in the end, luckily</i>.<br><br>Проверь: was/were + -ing, правильные Past Simple, связки времени.''',
+ "wbmc":[
+  {"q":"Заблудиться = to get ___ .","o":["lost","away","off"],"a":0},
+  {"q":"Поставить палатку = to put ___ a tent.","o":["up","on","in"],"a":0},
+  {"q":"Выживать = to ___ .","o":["survive","explore","escape"],"a":0},
+  {"q":"Past Continuous от «go»: were ___ ","o":["going","went","goes"],"a":0},
+  {"q":"Утёс = a ___ .","o":["cliff","cave","valley"],"a":0},
+ ],
+ "wbgaps":[
+  {"q":"We ___ (sail) at noon. (past continuous)","a":["were sailing"]},
+  {"q":"While he ___ (climb), he slipped. (past continuous)","a":["was climbing"]},
+  {"q":"The rain ___ (start) suddenly. (past simple)","a":["started"]},
+  {"q":"quick → ___ (наречие)","a":["quickly"]},
+  {"q":"They ___ (not/give up). (past neg)","a":["didn't give up","did not give up"]},
+ ],
+ "hw":r'''<b>My adventure.</b> Опиши реальное или выдуманное приключение в Past Simple/Continuous (6–7 предложений). Мин. 3 слова из юнита (cave, tent, explore…) и связки while/when/suddenly.<br><br>Затем реши <a href="solutions-pi-u2-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Unit 2</a> 🧗''',
+})
+
+# ===================== UNIT 3 · On screen =====================
+DATA.append({
+ "n":3, "title":"On screen", "emoji":"🎬", "grad":("#7c3aa0","#b06ed0"),
+ "desc":"Comparatives & superlatives · (not) as…as · too/enough · ТВ, кино и медиа",
+ "grammar":[
+  {"t":"3B · Comparative & superlative","h":r'''    <table>
+      <tr><th></th><th>Сравн.</th><th>Превосх.</th></tr>
+      <tr><td>funny</td><td>funn<b>ier than</b></td><td>the funn<b>iest</b></td></tr>
+      <tr><td>exciting</td><td><b>more</b> exciting than</td><td>the <b>most</b> exciting</td></tr>
+    </table>
+    <div class="g-ex">good → better/best; bad → worse/worst.</div>'''},
+  {"t":"3D · (not) as…as · too · enough","h":r'''    <div class="g-ex"><b>as … as</b>: This film is <b>as good as</b> the book.</div>
+    <div class="g-ex"><b>not as … as</b>: TV isn't <b>as exciting as</b> cinema.</div>
+    <div class="g-ex"><b>too</b> + прил.: too long. <b>enough</b>: not funny <b>enough</b>; not <b>enough</b> time.</div>'''},
+ ],
+ "words":[
+  ["reality show","реалити-шоу"],["chat show","ток-шоу"],["game show","телеигра"],["the news","новости"],
+  ["documentary","документальный фильм"],["sitcom","ситком"],["soap opera","мыльная опера"],["cartoon","мультфильм"],
+  ["action film","боевик"],["comedy","комедия"],["horror film","фильм ужасов"],["period drama","историческая драма"],
+  ["science fiction","научная фантастика"],["thriller","триллер"],["the audience","зрители/аудитория"],["episode","серия/эпизод"],
+  ["character","персонаж"],["plot","сюжет"],["scene","сцена"],["screen","экран"],
+ ],
+ "pron_words":["documentary","comedy","audience","science","character","episode","genre"],
+ "pron_focus":"Немые и «трудные» буквы",
+ "pron_note":"character /ˈkær/ (ch=/k/) · audience /ˈɔː/ · genre /ˈʒɒnrə/",
+ "chunks":[
+  ["watch a series","смотреть сериал"],["download a film","скачать фильм"],["based on a true story","основан на реальных событиях"],
+  ["a happy ending","счастливый конец"],["change the channel","переключить канал"],["turn up the volume","прибавить громкость"],
+  ["What's on TV?","что по телевизору?"],["I can't stand…","терпеть не могу…"],
+ ],
+ "listen_title":"What shall we watch?",
+ "names":{"m":"Tom","f":"Ella"},
+ "dialog":[
+  ["f","What's on TV tonight, Tom?"],
+  ["m","There's a new action film and a documentary about space."],
+  ["f","Hmm. I think documentaries are more interesting than action films."],
+  ["m","Really? I can't stand documentaries — they're too slow for me."],
+  ["f","The action film isn't as clever as a good documentary, though."],
+  ["m","Maybe, but it's the most exciting thing on tonight!"],
+  ["f","OK, let's watch the film. But the comedy after it is funnier."],
+  ["m","Deal. Comedy is the best way to end the evening."],
+ ],
+ "lq":[
+  {"q":"What two things are on TV?","o":["a film and a documentary","two films","the news"],"a":0},
+  {"q":"What does Ella think about documentaries?","o":["too slow","more interesting","boring"],"a":1},
+  {"q":"What does Tom think of documentaries?","o":["he loves them","he can't stand them","they're clever"],"a":1},
+  {"q":"What do they decide to watch first?","o":["the documentary","the action film","the comedy"],"a":1},
+  {"q":"How will they end the evening?","o":["with the news","with a comedy","with a horror film"],"a":1},
+ ],
+ "reading_title":"Too much screen time?",
+ "reading":r'''<p>These days, many teenagers spend more time on screens than ever before. They watch series, download films and play games for hours. Some people say this is bad, but it isn't as simple as that.</p>
+   <p>Good films and documentaries can teach us a lot, and they're often more exciting than a textbook. The problem is balance: if you spend too much time watching and not enough time sleeping or exercising, it isn't healthy. The best idea is to enjoy screens, but not too much.</p>''',
+ "rq":[
+  {"q":"What do many teenagers do more than before?","o":["read books","spend time on screens","play outside"],"a":1},
+  {"q":"What can good films and documentaries do?","o":["teach us a lot","waste our time","make us tired"],"a":0},
+  {"q":"What is the real problem, according to the text?","o":["balance","money","the internet"],"a":0},
+  {"q":"What is not healthy?","o":["watching a little","too much watching, not enough sleep","reading"],"a":1},
+  {"q":"What is the best idea?","o":["never watch screens","enjoy screens but not too much","watch all day"],"a":1},
+ ],
+ "ex":[
+  {"q":"This film is ___ than that one.","o":["funny","funnier","funniest"],"a":1},
+  {"q":"It's the ___ film of the year.","o":["exciting","more exciting","most exciting"],"a":2},
+  {"q":"A documentary is ___ interesting than a soap.","o":["more","most","much"],"a":0},
+  {"q":"He's the ___ actor in the show. (good)","o":["better","best","goodest"],"a":1},
+  {"q":"This series is ___ as the book.","o":["as good","gooder","best"],"a":0},
+  {"q":"TV isn't ___ exciting as cinema.","o":["as","so much","more"],"a":0},
+  {"q":"The film was ___ long — I fell asleep.","o":["too","enough","as"],"a":0},
+  {"q":"It wasn't funny ___ .","o":["too","enough","as"],"a":1},
+  {"q":"There isn't ___ time to watch it all.","o":["too","enough","as"],"a":1},
+  {"q":"horror is ___ than comedy for me. (bad)","o":["worse","worst","badder"],"a":0},
+  {"q":"the ___ episode ever! (bad)","o":["worse","worst","baddest"],"a":1},
+  {"q":"This chat show is ___ boring than the news.","o":["more","most","as"],"a":0},
+  {"q":"She's ___ talented actress in Britain.","o":["the most","most","more"],"a":0},
+  {"q":"A cartoon is ___ scary as a horror film. (не такой)","o":["not as","not too","no more"],"a":0},
+  {"q":"This phone is ___ expensive than that one.","o":["less","least","little"],"a":0},
+  {"q":"The plot was ___ complicated for kids.","o":["too","enough","as"],"a":0},
+ ],
+ "gaps":[
+  {"q":"This film is ___ (exciting) than the book. (сравн.)","a":["more exciting"]},
+  {"q":"It's the ___ (funny) show on TV. (превосх.)","a":["funniest"]},
+  {"q":"Comedy is ___ (good) than horror for me. (сравн.)","a":["better"]},
+  {"q":"TV isn't as ___ (interesting) as cinema. (as…as)","a":["interesting"]},
+  {"q":"The film was ___ (too/enough) long — three hours!","a":["too"]},
+  {"q":"It wasn't scary ___ (too/enough). (после прилагательного)","a":["enough"]},
+  {"q":"There isn't ___ (too/enough) time to watch it.","a":["enough"]},
+  {"q":"This is the ___ (bad) episode ever. (превосх.)","a":["worst"]},
+ ],
+ "word_skills":[
+  {"q":"«скучный» о фильме = ___ (-ing/-ed)","o":["boring","bored","bore"],"a":0},
+  {"q":"actor → жен. род","o":["actress","actered","actering"],"a":0},
+  {"q":"«entertain» → прилагательное","o":["entertaining","entertained","entertainment"],"a":0},
+  {"q":"«science» → прилагательное","o":["scientist","scientific","sciency"],"a":1},
+  {"q":"Существительное от «direct» (человек, кино): a ___","a":["director"]},
+  {"q":"Существительное от «act» (человек): an ___","a":["actor"]},
+  {"q":"«comedy» → человек, который смешит: a ___","a":["comedian"]},
+  {"q":"Прилагательное «funny» → превосходная: the ___","a":["funniest"]},
+ ],
+ "word_skills_note":"Жанры и люди в кино (actor/actress, director), прилагательные -ing/-ed, словообразование.",
+ "howto_title":"💬 How to… обсудить фильм/шоу",
+ "howto":r'''    <div class="g-ex"><b>What's it about?</b> — <b>It's about…</b></div>
+    <div class="g-ex"><b>I really recommend it.</b> / <b>I can't stand it.</b></div>
+    <div class="g-ex"><b>It's better/worse than…</b> / <b>not as good as…</b></div>''',
+ "fx":[
+  {"q":"Спроси о сюжете:","o":["What's it about?","About what it?","It about what do?"],"a":0},
+  {"q":"Порекомендуй:","o":["I really recommend it!","Recommend I it much.","It recommend do."],"a":0},
+  {"q":"Сравни два фильма:","o":["This one is better than that.","This better that more.","Better this that is more."],"a":0},
+  {"q":"Скажи, что не любишь жанр:","o":["I can't stand horror films.","I horror no stand.","Stand I can't horror do."],"a":0},
+ ],
+ "speaking":[
+  "Твой любимый фильм/сериал: жанр, сюжет, почему нравится (5–6 предложений).",
+  "Сравни ТВ и кино, книги и фильмы (comparatives, as…as).",
+  "Ролевая игра: выбери с другом, что посмотреть вечером (recommend, better than).",
+  "Слишком много экранного времени — за и против (too/enough).",
+ ],
+ "writing":r'''<b>A film review.</b> Напиши отзыв о фильме или сериале (7–8 предложений): название и жанр, о чём он (It's about…), что тебе понравилось/нет, сравнение с другим (better/worse/not as good as) и рекомендация. Используй превосходную степень хотя бы раз.<br><br>Проверь: -er/more, the …-est/the most, too/enough, as…as.''',
+ "wbmc":[
+  {"q":"Документальный фильм = a ___ .","o":["documentary","cartoon","sitcom"],"a":0},
+  {"q":"Сюжет = the ___ .","o":["plot","screen","scene"],"a":0},
+  {"q":"the ___ film ever (good, превосх.)","o":["best","goodest","better"],"a":0},
+  {"q":"«слишком длинный» = ___ long.","o":["too","enough","as"],"a":0},
+  {"q":"Терпеть не могу = I can't ___ it.","o":["stand","hold","keep"],"a":0},
+ ],
+ "wbgaps":[
+  {"q":"This film is ___ (funny) than that one. (сравн.)","a":["funnier"]},
+  {"q":"It's the ___ (exciting) show ever. (превосх.)","a":["most exciting"]},
+  {"q":"It wasn't good ___ . (too/enough)","a":["enough"]},
+  {"q":"Horror is ___ (bad) than comedy for me. (сравн.)","a":["worse"]},
+  {"q":"TV isn't as ___ (interesting) as cinema.","a":["interesting"]},
+ ],
+ "hw":r'''<b>My favourite show.</b> Напиши 6–7 предложений о любимом фильме/сериале: жанр, сюжет, сравнение с другим (better/more exciting than) и рекомендация.<br><br>Затем открой <a href="solutions-pi-u3-workbook.html" style="color:#6a2f8c;font-weight:900;text-decoration:underline">Workbook Unit 3</a> 🎬''',
+})
+
 META = {
  "prefix": "solutions-pi",
  "level": "Pre-Int",
