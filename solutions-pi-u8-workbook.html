@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 · Workbook · Solutions Pre-Int · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
+  .matchwrap{display:flex;gap:12px}
+  .mcol{flex:1;display:flex;flex-direction:column;gap:7px}
+  .mitem{border:2px solid #e3d3ba;background:#fdfaf0;border-radius:10px;padding:9px 11px;font:800 13.5px 'Nunito',sans-serif;color:#1c1310;cursor:pointer;text-align:left}
+  .mitem.sel{border-color:#2e6f4e;background:#eaf5ee}
+  .mitem.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20;cursor:default}
+  .mitem.bad{background:#ffc9c0;border-color:#c0392b}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">📒 Workbook · Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="solutions-pi-u8.html">← Урок</a>
+    <a class="home" href="solutions-pi-u8-grammar.html">✏️ Грамматика</a>
+    <a class="home" href="solutions-pi-course.html">Все юниты</a>
+  </div>
+  <h1>Unit 8 · Workbook</h1>
+  <div class="d">📚 Past Perfect · reported speech · преступления, расследования и свидетели</div>
+
+  <h2>📒 Рабочая тетрадь · закрепление</h2>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
+  <div id="wb"></div>
+
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Solutions Pre-Int · Unit 8 · workbook</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+window.__WB_FULL=true;
+const WORDS=[["crime", "преступление"], ["criminal", "преступник"], ["thief", "вор"], ["steal", "красть"], ["rob", "грабить"], ["burglar", "взломщик"], ["burglary", "кража со взломом"], ["robbery", "ограбление"], ["witness", "свидетель"], ["victim", "жертва"], ["suspect", "подозреваемый"], ["arrest", "арестовать"], ["prison", "тюрьма"], ["guilty", "виновный"], ["innocent", "невиновный"], ["break in", "вломиться"], ["escape", "сбежать"], ["catch", "поймать"], ["evidence", "улики"], ["detective", "детектив"]];
+const PRONWORDS=["criminal", "burglar", "witness", "evidence", "detective", "suspect", "innocent"];
+const CHUNKS=[["break into a house", "вломиться в дом"], ["commit a crime", "совершить преступление"], ["get caught", "попасться"], ["call the police", "вызвать полицию"], ["go to prison", "сесть в тюрьму"], ["catch a thief", "поймать вора"], ["a witness to a crime", "свидетель преступления"], ["report a crime", "заявить о преступлении"]];
+const DIALOG=[["m", "Thanks for calling us, Lucy. Can you tell me what you saw?"], ["f", "Yes. At about nine o'clock I saw a man near my neighbour's house."], ["m", "What was he doing?"], ["f", "He was looking through the window. When I looked again, he had disappeared."], ["m", "Did you see his face?"], ["f", "Not clearly. He was tall and he wore a dark hoodie."], ["m", "And what happened next?"], ["f", "I heard glass break, so I called you immediately."], ["m", "You did the right thing. By the time we arrived, he had already run away."], ["f", "Did he steal anything?"], ["m", "A laptop and some cash. But thanks to you, we have good evidence."], ["f", "I hope you catch him soon."], ["m", "We will. Your description is very helpful, Lucy."]];
+const LQ=[{"q": "What time did Lucy see the man?", "o": ["at eight", "at nine", "at ten"], "a": 1}, {"q": "What was the man doing?", "o": ["looking through a window", "running", "sleeping"], "a": 0}, {"q": "What was he wearing?", "o": ["a suit", "a dark hoodie", "a hat"], "a": 1}, {"q": "Why did Lucy call the police?", "o": ["she heard glass break", "she saw a car", "she was bored"], "a": 0}, {"q": "What had happened by the time the police arrived?", "o": ["the man had run away", "the man was arrested", "nothing"], "a": 0}];
+const RQ=[{"q": "What disappeared from the museum?", "o": ["money", "a valuable painting", "a statue"], "a": 1}, {"q": "What had the thieves NOT left?", "o": ["fingerprints", "footprints", "a note"], "a": 0}, {"q": "What small thing did Reed notice?", "o": ["a wet footprint", "a broken window", "a car"], "a": 0}, {"q": "Who was the thief?", "o": ["a tourist", "a guard", "a child"], "a": 1}, {"q": "What did the guard say?", "o": ["he was guilty", "he was innocent", "he was tired"], "a": 1}];
+const EX=[{"q": "When we arrived, the thief ___ escaped.", "o": ["has", "had", "was"], "a": 1}, {"q": "By the time she called, he ___ left.", "o": ["has", "had", "did"], "a": 1}, {"q": "Someone ___ broken the window before we got home.", "o": ["has", "had", "was"], "a": 1}, {"q": "He said he ___ near the park.", "o": ["lives", "lived", "will live"], "a": 1}, {"q": "She told ___ she had seen a man.", "o": ["to me", "me", "for me"], "a": 1}, {"q": "'I saw a car.' → She said she ___ a car.", "o": ["saw", "had seen", "sees"], "a": 1}, {"q": "'I live here.' → He said he ___ there.", "o": ["lives", "lived", "had lived"], "a": 1}, {"q": "The police ___ the burglar yesterday.", "o": ["caught", "had caught", "catch"], "a": 0}, {"q": "A person who steals is a ___ .", "o": ["witness", "thief", "victim"], "a": 1}, {"q": "A person who sees a crime is a ___ .", "o": ["suspect", "witness", "burglar"], "a": 1}, {"q": "They ___ into the house at night.", "o": ["broke", "break", "had broken yet"], "a": 0}, {"q": "He was found ___ and sent to prison.", "o": ["innocent", "guilty", "witness"], "a": 1}, {"q": "'I can't swim.' → She said she ___ swim.", "o": ["can't", "couldn't", "didn't"], "a": 1}, {"q": "By 8 p.m. the detective ___ the case.", "o": ["has solved", "had solved", "solves"], "a": 1}, {"q": "The police collected ___ at the scene.", "o": ["evidence", "budget", "receipt"], "a": 0}, {"q": "He told me he ___ tired.", "o": ["is", "was", "will be"], "a": 1}];
+const GAPS=[{"q": "When the police arrived, the thief ___ (escape). (past perfect)", "a": ["had escaped"]}, {"q": "By the time we got home, someone ___ (break) the window.", "a": ["had broken"]}, {"q": "'I saw a man.' → She said she ___ (see) a man. (reported)", "a": ["had seen"]}, {"q": "'I live here.' → He said he ___ (live) there. (reported)", "a": ["lived"]}, {"q": "She ___ (tell) me she was scared. (say/tell)", "a": ["told"]}, {"q": "He ___ (say) that he was innocent. (say/tell)", "a": ["said"]}, {"q": "The burglar ___ (already/leave) when the alarm rang. (past perfect)", "a": ["had already left"]}, {"q": "'I can't drive.' → He said he ___ (can/not) drive. (couldn't)", "a": ["couldn't", "could not"]}];
+const FX=[{"q": "Сообщи о преступлении:", "o": ["I'd like to report a burglary.", "Report I burglary want.", "Burglary I report do you."], "a": 0}, {"q": "Передай чужие слова:", "o": ["He said he had seen a man.", "He said he see a man had.", "Said he a man see he."], "a": 0}, {"q": "Опиши, что видел(а):", "o": ["I saw two people run out.", "Run out I two people saw.", "Two people out run I."], "a": 0}, {"q": "Позови на помощь:", "o": ["Call the police!", "Police the call you do!", "The police you call!"], "a": 0}];
+const SPEAK=["Расскажи историю о преступлении (реальную или выдуманную) в Past Simple + Past Perfect.", "Ты свидетель: опиши, что видел(а) (I saw…, he was wearing…).", "Передай чужие слова: перескажи, что сказал друг (He said…, She told me…).", "Как сделать район безопаснее? Дай 3 совета (If we…, …)."];
+const WORDSKILLS=[{"q": "crime → человек", "o": ["criminal", "crimer", "crimist"], "a": 0}, {"q": "rob → человек (грабитель)", "o": ["rober", "robber", "robbist"], "a": 1}, {"q": "burgle → человек", "o": ["burglar", "burgler", "burglist"], "a": 0}, {"q": "«виновный» ≠ ___", "o": ["innocent", "guiltless more", "not guilty man"], "a": 0}, {"q": "steal (украсть) — существительное «кража»: ___", "o": ["theft", "stealment", "stealing thing"], "a": 0}, {"q": "Глагол от «arrest» уже глагол; существительное: an ___", "a": ["arrest"]}, {"q": "Человек, который видел преступление: a ___", "a": ["witness"]}, {"q": "Человек, которого подозревают: a ___", "a": ["suspect"]}];
+const DIALOG2=[["m", "This is Tom Price with the local news. Last night, a café in the town centre was robbed. I'm here with a witness, Mrs Hall."], ["f", "Yes, I was walking my dog when I saw two people run out of the café."], ["m", "What did they look like?"], ["f", "They were young and they had covered their faces. One was carrying a bag."], ["m", "We also have Detective Cole. Detective, what can you tell us?"], ["m2", "We believe the thieves had watched the café for several days. They knew exactly when it was empty."], ["m", "Have you made any arrests?"], ["m2", "Not yet, but we have CCTV footage and a witness. We're confident we'll catch them."], ["f", "I told the police everything I remembered."], ["m2", "And that's a great help. If anyone has information, please call us."]];
+const LQ2=[{"q": "What happened last night?", "o": ["a café was robbed", "a fire started", "a car crashed"], "a": 0}, {"q": "What was Mrs Hall doing?", "o": ["walking her dog", "working", "shopping"], "a": 0}, {"q": "What had the thieves done to their faces?", "o": ["covered them", "painted them", "nothing"], "a": 0}, {"q": "What does Detective Cole believe?", "o": ["the thieves had watched the café for days", "it was an accident", "nobody saw them"], "a": 0}, {"q": "What evidence do the police have?", "o": ["CCTV footage and a witness", "only a photo", "nothing"], "a": 0}];
+const RQ2=[{"q": "What have people started in many towns?", "o": ["neighbourhood watch groups", "new shops", "clubs"], "a": 0}, {"q": "What do neighbours do?", "o": ["keep an eye on each other's homes", "cook together", "nothing"], "a": 0}, {"q": "How does technology help?", "o": ["cameras and street lighting", "free phones", "faster cars"], "a": 0}, {"q": "What is the most powerful tool, according to experts?", "o": ["money", "community", "fences"], "a": 1}, {"q": "What can you do?", "o": ["lock doors and report problems early", "ignore everything", "move away"], "a": 0}];
+const TF=[{"q": "Lucy saw a man looking through her neighbour's window.", "a": true}, {"q": "The police caught the man before he ran away.", "a": false}, {"q": "In the museum case, the thief was a guard.", "a": true}, {"q": "Mrs Hall saw the thieves' faces clearly.", "a": false}, {"q": "Neighbourhood watch groups help keep streets safe.", "a": true}, {"q": "Experts say technology is more important than community.", "a": false}];
+const WBMC=[{"q": "Вор = a ___ .", "o": ["thief", "witness", "victim"], "a": 0}, {"q": "Улики = ___ .", "o": ["evidence", "budget", "prison"], "a": 0}, {"q": "When we arrived, he ___ escaped. (past perfect)", "o": ["has", "had", "was"], "a": 1}, {"q": "She ___ me she was scared. (say/tell)", "o": ["said", "told", "says"], "a": 1}, {"q": "Виновный ≠ ___ .", "o": ["innocent", "guilty more", "suspect"], "a": 0}];
+const WBGAPS=[{"q": "By the time we came, the thief ___ (leave). (past perfect)", "a": ["had left"]}, {"q": "'I saw a man.' → She said she ___ (see) a man. (reported)", "a": ["had seen"]}, {"q": "He ___ (tell) me he lived nearby. (say/tell)", "a": ["told"]}, {"q": "crime → ___ (человек)", "a": ["criminal"]}, {"q": "'I live here.' → He said he ___ (live) there.", "a": ["lived"]}];
+
+const wbox=document.getElementById("words");
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
+/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
+function _voicePools(){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  const male=[],female=[];
+  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
+    v._score=s;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(mal&&!fem)male.push(v);else female.push(v);});
+  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
+  return {male:male,female:female};
+}
+let _POOLS=null;const _SPK={};
+function speakerStyle(who){
+  who=who||"m";if(_SPK[who])return _SPK[who];
+  if(!_POOLS)_POOLS=_voicePools();
+  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
+  const pool=isF?_POOLS.female:_POOLS.male;
+  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
+  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
+  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
+  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
+  _SPK[who]=st;return st;
+}
+function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"solutions-pi",unit:8};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let sc=0,tot=0;
+function bump(){sc++;document.getElementById("sc").textContent=sc;}
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  let done=false,logged=false;
+  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
+    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
+  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  return d;}
+/* Правда / Ложь */
+function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
+  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
+    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
+});
+/* Аудирование → вопросы */
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
+const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+/* Упражнения */
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
+/* How to */
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook — насыщенный, по секциям, разные типы заданий */
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* 4. Phrases: значение + соединение */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Phrases · выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
+    }
+    _wbHead("📖 Grammar · практика");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
+}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+</script>
+</body>
+</html>
