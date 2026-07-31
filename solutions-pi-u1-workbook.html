@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 · Workbook · Speakout Pre-Int · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  h1{font-family:'Fredoka',sans-serif;font-size:clamp(24px,5vw,34px);color:#7c2340;margin:6px 4px 2px}
+  .d{font-weight:800;font-size:14px;color:#5a4f47;margin:0 4px 8px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:28px 4px 12px}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#2e6f4e;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .wbband{background:#fff;border:2px solid #2e6f4e;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">📒 Workbook · Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="solutions-pi-u1.html">← Урок</a>
+    <a class="home" href="solutions-pi-u1-grammar.html">✏️ Грамматика</a>
+    <a class="home" href="solutions-pi-course.html">Все юниты</a>
+  </div>
+  <h1>Unit 1 · Workbook</h1>
+  <div class="d">📚 Present Simple/Continuous · Past Simple · -ed/-ing adjectives · чувства и эмоции</div>
+
+  <h2>📒 Рабочая тетрадь · закрепление</h2>
+  <div class="wbband">Расширенная практика юнита: слова, полезные фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
+  <div id="wb"></div>
+
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Speakout 3rd ed. Pre-Int · Unit 1 · workbook</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+window.__WB_FULL=true;
+const WORDS=[["annoyed", "раздражённый"], ["bored", "скучающий"], ["confused", "растерянный"], ["delighted", "в восторге"], ["disappointed", "разочарованный"], ["embarrassed", "смущённый"], ["excited", "взволнованный (радостно)"], ["frightened", "испуганный"], ["jealous", "ревнующий/завистливый"], ["nervous", "нервничающий"], ["proud", "гордый"], ["relaxed", "расслабленный"], ["scared", "напуганный"], ["stressed", "в стрессе"], ["surprised", "удивлённый"], ["upset", "расстроенный"], ["worried", "обеспокоенный"], ["amazed", "поражённый"], ["ashamed", "пристыжённый"], ["confident", "уверенный"]];
+const PRONWORDS=["annoyed", "embarrassed", "jealous", "nervous", "delighted", "surprised", "frightened"];
+const CHUNKS=[["feel nervous", "нервничать"], ["be worried about", "переживать из-за"], ["get excited", "радоваться/волноваться"], ["cheer up", "приободриться"], ["calm down", "успокоиться"], ["be proud of", "гордиться"], ["What's the matter?", "что случилось?"], ["Don't worry", "не переживай"]];
+const DIALOG=[["f", "Hi Leo! You look worried. What's the matter?"], ["m", "I'm really nervous. We're playing a concert tonight and I feel scared."], ["f", "Don't worry! You're a great guitarist. I'm sure it'll be fine."], ["m", "Thanks. Last time I was so embarrassed — I forgot the words!"], ["f", "Ha! But everyone was still delighted. They loved it."], ["m", "Really? That's surprising. I felt terrible."], ["f", "Honestly, you should be proud. Just relax and enjoy it."], ["m", "OK, I'm feeling a bit calmer now. Thanks, Mia."]];
+const LQ=[{"q": "How does Leo feel now?", "o": ["bored", "nervous and scared", "angry"], "a": 1}, {"q": "What is happening tonight?", "o": ["a concert", "an exam", "a party"], "a": 0}, {"q": "What happened last time?", "o": ["he was late", "he forgot the words", "he was ill"], "a": 1}, {"q": "How did the audience feel last time?", "o": ["disappointed", "delighted", "bored"], "a": 1}, {"q": "How does Leo feel at the end?", "o": ["worse", "a bit calmer", "angry"], "a": 1}];
+const RQ=[{"q": "When did the writer go to the festival?", "o": ["last summer", "last winter", "last week"], "a": 0}, {"q": "How did the writer feel before the concert?", "o": ["bored", "nervous but excited", "angry"], "a": 1}, {"q": "What happened suddenly?", "o": ["it started to rain", "the power went off", "a fight started"], "a": 0}, {"q": "How did people react to the rain?", "o": ["they were upset", "they danced and laughed", "they left"], "a": 1}, {"q": "How did the writer feel at the end?", "o": ["happy and relaxed", "disappointed", "scared"], "a": 0}];
+const EX=[{"q": "Look! She ___ because of the exam. (сейчас)", "o": ["worries", "is worrying", "worry"], "a": 1}, {"q": "I usually ___ nervous before tests.", "o": ["feel", "am feeling", "feels"], "a": 0}, {"q": "He ___ really proud yesterday.", "o": ["feels", "felt", "is feeling"], "a": 1}, {"q": "They ___ to the festival last year.", "o": ["go", "went", "were going"], "a": 1}, {"q": "We ___ excited right now!", "o": ["are", "were", "is"], "a": 0}, {"q": "She ___ the words last time. (forget)", "o": ["forgot", "forget", "forgets"], "a": 0}, {"q": "___ you feel scared yesterday?", "o": ["Did", "Do", "Was"], "a": 0}, {"q": "I ___ happy every Friday.", "o": ["am feeling", "feel", "feels"], "a": 1}, {"q": "The film was so ___ — I nearly slept! (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "I was ___ by the news. (-ing/-ed)", "o": ["surprising", "surprised", "surprise"], "a": 1}, {"q": "He ___ his keys this morning. (find, past)", "o": ["found", "finded", "find"], "a": 0}, {"q": "Right now they ___ in the rain.", "o": ["dance", "are dancing", "danced"], "a": 1}, {"q": "She didn't ___ well yesterday.", "o": ["felt", "feel", "feels"], "a": 1}, {"q": "We ___ delighted with the result. (was/were)", "o": ["was", "were", "are being"], "a": 1}, {"q": "Choose the correct order:", "o": ["I always am nervous", "I am always nervous", "Always I am nervous"], "a": 1}, {"q": "He ___ a present to me. (give, past)", "o": ["gived", "gave", "give"], "a": 1}];
+const GAPS=[{"q": "Right now I ___ (feel) nervous. (present continuous)", "a": ["am feeling", "'m feeling"]}, {"q": "She usually ___ (get) excited before a trip. (present simple)", "a": ["gets"]}, {"q": "We ___ (go) to a concert last night. (past)", "a": ["went"]}, {"q": "He ___ (not/feel) well yesterday. (past neg)", "a": ["didn't feel", "did not feel"]}, {"q": "___ (you/be) worried yesterday? (was/were вопрос)", "a": ["were you"]}, {"q": "They ___ (dance) when it started to rain. (past continuous)", "a": ["were dancing"]}, {"q": "I ___ (feel) proud when I passed. (past)", "a": ["felt"]}, {"q": "The lesson was ___ (bore). (-ing/-ed прилагательное)", "a": ["boring"]}];
+const FX=[{"q": "Спроси, что случилось:", "o": ["What's the matter?", "What matter you?", "Why you do?"], "a": 0}, {"q": "Поддержи друга:", "o": ["Don't worry, it'll be fine!", "You bad now.", "Stop feeling."], "a": 0}, {"q": "Скажи о своём чувстве:", "o": ["I feel a bit nervous.", "I nervous feel bit.", "Me nervous do."], "a": 0}, {"q": "Похвали:", "o": ["I'm really proud of you!", "You proud me.", "Proud I you of."], "a": 0}];
+const SPEAK=["Расскажи о ситуации, когда ты нервничал(а), и как справился(лась). 5–6 предложений (Past Simple).", "Как ты себя чувствуешь в разных ситуациях: перед экзаменом, на вечеринке, в дождь? (I feel…).", "Ролевая игра: друг расстроен — спроси What's the matter? и поддержи.", "Опиши -ed/-ing: назови 3 boring и 3 exciting вещи из своей жизни."];
+const WORDSKILLS=[{"q": "«скучный» (о вещи) = ___ (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "«мне скучно» = I'm ___ .", "o": ["boring", "bored", "bore"], "a": 1}, {"q": "«волнующий» (о событии) = ___", "o": ["excited", "exciting", "excite"], "a": 1}, {"q": "«я взволнован» = I'm ___ .", "o": ["exciting", "excited", "excite"], "a": 1}, {"q": "«пугающий» (о фильме) = ___", "o": ["frightened", "frightening", "fright"], "a": 1}, {"q": "Приставка «не-»: happy → ___ happy", "a": ["un"]}, {"q": "Прилагательное от «annoy»: I'm ___ .", "a": ["annoyed"]}, {"q": "Прилагательное от «interest» (о человеке): I'm ___ .", "a": ["interested"]}];
+const WBMC=[{"q": "Очень рад = ___ .", "o": ["delighted", "annoyed", "bored"], "a": 0}, {"q": "Гордиться кем-то = be ___ of somebody.", "o": ["proud", "jealous", "scared"], "a": 0}, {"q": "Успокойся = ___ down.", "o": ["calm", "cheer", "get"], "a": 0}, {"q": "Фильм скучный = a ___ film. (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "Past Simple от feel = ___ .", "o": ["felt", "feeled", "fell"], "a": 0}];
+const WBGAPS=[{"q": "I ___ (feel) scared last night. (past)", "a": ["felt"]}, {"q": "She ___ (not/go) to the party. (past neg)", "a": ["didn't go", "did not go"]}, {"q": "We ___ (watch) a film when he called. (past continuous)", "a": ["were watching"]}, {"q": "I'm ___ (interest) in music. (-ed прилагательное)", "a": ["interested"]}, {"q": "The news was ___ (surprise). (-ing прилагательное)", "a": ["surprising"]}];
+
+const wbox=document.getElementById("words");
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
+  speechSynthesis.cancel();
+  const mv=enVoice("m"),fv=enVoice("f");
+  DIALOG.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
+};
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"solutions-pi",unit:1};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let sc=0,tot=0;
+function bump(){sc++;document.getElementById("sc").textContent=sc;}
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  let done=false,logged=false;
+  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
+    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
+  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
+});
+/* Аудирование → вопросы */
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+/* Упражнения */
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
+/* How to */
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook */
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* авто: слова RU→EN */
+    _wbHead("🔤 Слова юнита — выбери перевод");
+    shuffle(WORDS).slice(0,10).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* авто: впиши слово */
+    _wbHead("✍️ Впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* авто: полезные фразы */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Полезные фразы — выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+    }
+    _wbHead("📝 Грамматика и лексика — закрепление");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+</script>
+</body>
+</html>

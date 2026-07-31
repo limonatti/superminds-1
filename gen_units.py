@@ -246,6 +246,12 @@ const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mc
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
 const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
 /* Speaking — карточки-подсказки (без проверки) */
 const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
@@ -409,6 +415,7 @@ TEMPLATE = r'''<!DOCTYPE html>
   </div>
   <div id="lq" style="margin-top:14px"></div>
 @@VIDEO@@
+@@WORDSKILLS@@
   <h2>📕 Чтение</h2>
   <div class="read"><h3>@@READ_TITLE@@</h3>@@READ@@</div>
   <div id="rq" style="margin-top:14px"></div>
@@ -421,7 +428,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 
   <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
   <div id="spk"></div>
-
+@@WRITING@@
   <h2>🏠 Домашнее задание</h2>
   <div class="hw">@@HW@@</div>
 
@@ -594,9 +601,22 @@ def data_js(u, meta=None):
           ("DIALOG","dialog"),("LQ","lq"),("RQ","rq"),("EX","ex"),("GAPS","gaps"),
           ("FX","fx"),("SPEAK","speaking")]
     lines=['const %s=%s;'%(k,j(u[f])) for k,f in keys]
+    if u.get("word_skills"):
+        lines.append('const WORDSKILLS=%s;'%j(u["word_skills"]))
     lines.append('const WBMC=%s;'%j(wbmc))
     lines.append('const WBGAPS=%s;'%j(wbgaps))
     return '\n'.join(lines)
+
+def wordskills_html(u):
+    if not u.get("word_skills"): return ""
+    note=u.get("word_skills_note","Работа со словом: приставки, суффиксы, словообразование.")
+    return ('\n  <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>\n'
+            '  <div class="wbband" style="border-color:#2e6f4e">%s</div>\n  <div id="ws"></div>\n' % note)
+
+def writing_html(u):
+    w=u.get("writing")
+    if not w: return ""
+    return '\n  <h2>✍️ Writing</h2>\n  <div class="hw">%s</div>\n' % w
 
 def cover_html(u, meta):
     img=u.get("cover_img")
@@ -646,7 +666,7 @@ def build(mod_name):
           "@@COVER@@":cover_html(u,META),
           "@@GRAMMAR@@":u.get("grammar_html") or grammar_html(u["grammar"]),
           "@@PRONFOCUS@@":u["pron_focus"], "@@PRONNOTE@@":u["pron_note"],
-          "@@VIDEO@@":video_html(u, META),
+          "@@VIDEO@@":video_html(u, META), "@@WORDSKILLS@@":wordskills_html(u), "@@WRITING@@":writing_html(u),
           "@@LISTEN_TITLE@@":u["listen_title"], "@@SCRIPT@@":u.get("script_raw") or script_html(u["dialog"],u["names"]),
           "@@READ_TITLE@@":u["reading_title"], "@@READ@@":u["reading"],
           "@@HOWTO_TITLE@@":u["howto_title"], "@@HOWTO@@":u["howto"],

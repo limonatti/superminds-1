@@ -77,8 +77,8 @@
 <script src="sm-shell.js"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"]];
-const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1" };
+const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
+const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-pi":"Solutions Pre-Int" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -194,6 +194,7 @@ async function drawPane(){
         '<option value="speakout-b1"'+(course==="speakout-b1"?" selected":"")+'>Speakout B1</option>' +
         '<option value="speakout-b1plus"'+(course==="speakout-b1plus"?" selected":"")+'>Speakout B1+</option>' +
         '<option value="focus-1"'+(course==="focus-1"?" selected":"")+'>Focus 1</option>' +
+        '<option value="solutions-pi"'+(course==="solutions-pi"?" selected":"")+'>Solutions Pre-Int</option>' +
       '</select></div>' +
       '<div class="hf-row"><label>Юнит</label><select id="hUnit"></select></div>' +
       '<div class="hf-row" id="hPartsRow"><label>Что задать</label><span class="parts">' +
@@ -263,7 +264,9 @@ function fillUnits(){
   if (isSM){
     uSel.innerHTML = (window.SM_UNITS||[]).map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
   } else {
-    const nums = (course === "focus-1") ? [0,1,2,3,4,5,6,7,8] : [1,2,3,4,5,6,7,8];
+    const nums = (course === "focus-1") ? [0,1,2,3,4,5,6,7,8]
+      : (course === "solutions-pi") ? [0,1,2,3,4,5,6,7,8,9]
+      : [1,2,3,4,5,6,7,8];
     uSel.innerHTML = nums.map(n => '<option value="'+n+'">'+(n===0?"Unit 0 · Intro":"Unit "+n)+'</option>').join("");
   }
 }

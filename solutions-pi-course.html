@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions Pre-Intermediate · Курс · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef2f6;font-family:'Nunito',sans-serif;color:#12233a;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  .home{background:#1f5c9e;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e67e22}
+  .head{text-align:center;margin:6px 0 26px}
+  h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(28px,6vw,46px);font-weight:700;color:#1f5c9e;letter-spacing:-1px}
+  .sub{font-weight:800;font-size:15px;color:#4a5a6a;margin:10px 0 0}
+  .lvl{display:inline-block;background:#e67e22;color:#fff;font:900 12px 'Nunito',sans-serif;padding:3px 12px;border-radius:999px;margin-top:10px;letter-spacing:1px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+  .u{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #d3dde7;display:block;transition:transform .14s,box-shadow .14s}
+  .u.ready:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(31,92,158,.16)}
+  .u.soon{opacity:.62}
+  .u .cover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center}
+  .u .cover span{font-size:clamp(46px,9vw,64px);filter:drop-shadow(0 5px 8px rgba(0,0,0,.28))}
+  .u .b{padding:13px 16px 16px}
+  .u .n{font:900 11px 'Nunito',sans-serif;color:#e67e22;letter-spacing:1px}
+  .u .t{font-family:'Fredoka',sans-serif;font-size:19px;font-weight:700;color:#1f5c9e;margin:2px 0 4px}
+  .u .d{font-size:12px;color:#6a7889;font-weight:700;line-height:1.4;min-height:34px}
+  .u .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .u .go{display:inline-block;background:#1f5c9e;color:#fff;font:800 11px 'Nunito',sans-serif;padding:7px 12px;border-radius:999px}
+  .u .go.g2{background:#3a4a5a}
+  .u .go.g3{background:#e67e22}
+  .u .soonbadge{display:inline-block;margin-top:8px;background:#e7edf3;color:#6a7889;font:800 11px 'Nunito',sans-serif;padding:7px 12px;border-radius:999px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#6a7889;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="index.html">🏠 Домой</a>
+    <a class="home alt" href="cabinet.html">👤 Кабинет ученика</a>
+  </div>
+  <div class="head">
+    <h1>📘 Solutions Pre-Intermediate</h1>
+    <div class="sub">Курс по юнитам · секции A–H · Vocabulary · Grammar · Listening · Reading · Speaking · Writing</div>
+    <div class="lvl">УРОВЕНЬ PRE-INTERMEDIATE · 3rd EDITION</div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Solutions Pre-Int (3rd ed.)</div>
+</div>
+<script>
+const UNITS=[
+ {n:0,t:"Introduction",e:"🧭",g:["#1f6f9c","#39b0c9"],d:"be · have got · внешность, личная информация",ready:true},
+ {n:1,t:"Feelings",e:"😀",g:["#c0392b","#e0642a"],d:"Present tenses · Past Simple · чувства",ready:true},
+ {n:2,t:"Free time",e:"🎮",g:["#2a6f8f","#3aa0c9"],d:"Past Continuous · свободное время",ready:false},
+ {n:3,t:"Entertainment",e:"🎬",g:["#7c3aa0","#b06ed0"],d:"comparatives · ТВ и кино",ready:false},
+ {n:4,t:"Our planet",e:"🌍",g:["#1f7a4d","#3ab06e"],d:"future forms · природа и планета",ready:false},
+ {n:5,t:"Work",e:"💼",g:["#b5651a","#e0a03a"],d:"present perfect · работа и профессии",ready:false},
+ {n:6,t:"Tourism",e:"✈️",g:["#1f6f9c","#39b0c9"],d:"used to · путешествия и туризм",ready:false},
+ {n:7,t:"Money",e:"💰",g:["#2f7a2f","#7cc23a"],d:"conditionals · деньги и покупки",ready:false},
+ {n:8,t:"Crime",e:"🚓",g:["#3a4a5a","#6a7889"],d:"passive · reported speech · преступления",ready:false},
+ {n:9,t:"Science",e:"🔬",g:["#7c2340","#b5654a"],d:"modals · relative clauses · наука",ready:false}
+];
+const grid=document.getElementById("grid");
+UNITS.forEach(u=>{const a=document.createElement("div");a.className="u "+(u.ready?"ready":"soon");
+  const label=(u.n===0?"INTRO":"UNIT "+u.n);
+  const cover='<div class="cover" style="background:linear-gradient(135deg,'+u.g[0]+','+u.g[1]+')"><span>'+u.e+'</span></div>';
+  if(u.ready){
+    a.innerHTML='<a href="solutions-pi-u'+u.n+'.html">'+cover+'</a>'+
+      '<div class="b"><div class="n">'+label+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div>'+
+      '<div class="links"><a class="go" href="solutions-pi-u'+u.n+'.html">Урок →</a>'+
+      '<a class="go g2" href="solutions-pi-u'+u.n+'-grammar.html">Грамматика</a>'+
+      '<a class="go g3" href="solutions-pi-u'+u.n+'-workbook.html">Workbook</a></div></div>';
+  } else {
+    a.innerHTML=cover+'<div class="b"><div class="n">'+label+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div>'+
+      '<div class="soonbadge">🔨 скоро</div></div>';
+  }
+  grid.appendChild(a);});
+</script>
+</body>
+</html>
