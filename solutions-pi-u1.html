@@ -136,7 +136,7 @@
 
   <h2>🎧 Аудирование 2 <span class="sec-i">(ещё один диалог)</span></h2>
   <div class="lc">
-    <h3>Interview: How do you deal with stress?</h3>
+    <h3>Radio phone-in: How do you deal with stress?</h3>
     <p>Послушай второй диалог и ответь на вопросы. Слушай сколько нужно.</p>
     <button class="lbtn" id="lplay2">▶ Слушать</button>
     <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
@@ -145,11 +145,13 @@
       <b>Dr Hill:</b> Hello, thanks for having me.<br>
       <b>Presenter:</b> So, why do teenagers feel so stressed these days?<br>
       <b>Dr Hill:</b> There are many reasons — exams, friends, social media. Feeling nervous sometimes is completely normal.<br>
-      <b>Presenter:</b> What can people do when they feel worried?<br>
-      <b>Dr Hill:</b> First, talk to someone. When you share a problem, you feel better immediately.<br>
-      <b>Presenter:</b> And if you're really stressed before a test?<br>
-      <b>Dr Hill:</b> Breathe slowly, go for a short walk, and get enough sleep. A tired brain feels everything more strongly.<br>
-      <b>Presenter:</b> Great advice. Any last tip?<br>
+      <b>Presenter:</b> We have a caller. Nina, you're on the air!<br>
+      <b>Nina (caller):</b> Hi! I get really nervous before exams and I can't sleep. What can I do?<br>
+      <b>Dr Hill:</b> Good question, Nina. Talk to someone, breathe slowly, and go to bed early. A tired brain feels everything more strongly.<br>
+      <b>Presenter:</b> Thanks, Nina. And we have Sam on line two.<br>
+      <b>Sam (caller):</b> Hi. When I feel stressed, I just play video games all night. Is that bad?<br>
+      <b>Dr Hill:</b> A little rest is fine, Sam, but too much screen time makes it worse. Try a short walk instead.<br>
+      <b>Presenter:</b> Great advice. Any last tip, Dr Hill?<br>
       <b>Dr Hill:</b> Yes — be kind to yourself. Nobody feels confident all the time, and that's OK.</div>
   </div>
   <div id="lq2" style="margin-top:14px"></div>
@@ -170,6 +172,10 @@
    <p>It works the other way too. When we feel proud or excited, we stand taller and smile more. So feelings and the body are closely connected, like a two-way street.</p>
    <p>Next time you feel a bit down, try this simple experiment: smile for thirty seconds. It won't solve big problems, but many people say it makes a stressful moment a little easier.</p></div>
   <div id="rq2" style="margin-top:14px"></div>
+
+
+  <h2>✅ True or False <span class="sec-i">(по текстам юнита)</span></h2>
+  <div id="tf"></div>
 
 
   <h2>💬 How to… говорить о чувствах</h2>
@@ -205,9 +211,10 @@ const GAPS=[{"q": "Right now I ___ (feel) nervous. (present continuous)", "a": [
 const FX=[{"q": "Спроси, что случилось:", "o": ["What's the matter?", "What matter you?", "Why you do?"], "a": 0}, {"q": "Поддержи друга:", "o": ["Don't worry, it'll be fine!", "You bad now.", "Stop feeling."], "a": 0}, {"q": "Скажи о своём чувстве:", "o": ["I feel a bit nervous.", "I nervous feel bit.", "Me nervous do."], "a": 0}, {"q": "Похвали:", "o": ["I'm really proud of you!", "You proud me.", "Proud I you of."], "a": 0}];
 const SPEAK=["Расскажи о ситуации, когда ты нервничал(а), и как справился(лась). 5–6 предложений (Past Simple).", "Как ты себя чувствуешь в разных ситуациях: перед экзаменом, на вечеринке, в дождь? (I feel…).", "Ролевая игра: друг расстроен — спроси What's the matter? и поддержи.", "Опиши -ed/-ing: назови 3 boring и 3 exciting вещи из своей жизни."];
 const WORDSKILLS=[{"q": "«скучный» (о вещи) = ___ (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "«мне скучно» = I'm ___ .", "o": ["boring", "bored", "bore"], "a": 1}, {"q": "«волнующий» (о событии) = ___", "o": ["excited", "exciting", "excite"], "a": 1}, {"q": "«я взволнован» = I'm ___ .", "o": ["exciting", "excited", "excite"], "a": 1}, {"q": "«пугающий» (о фильме) = ___", "o": ["frightened", "frightening", "fright"], "a": 1}, {"q": "Приставка «не-»: happy → ___ happy", "a": ["un"]}, {"q": "Прилагательное от «annoy»: I'm ___ .", "a": ["annoyed"]}, {"q": "Прилагательное от «interest» (о человеке): I'm ___ .", "a": ["interested"]}];
-const DIALOG2=[["m", "Welcome back to the show. Today we're talking about stress with psychologist Dr Hill. Hello!"], ["f", "Hello, thanks for having me."], ["m", "So, why do teenagers feel so stressed these days?"], ["f", "There are many reasons — exams, friends, social media. Feeling nervous sometimes is completely normal."], ["m", "What can people do when they feel worried?"], ["f", "First, talk to someone. When you share a problem, you feel better immediately."], ["m", "And if you're really stressed before a test?"], ["f", "Breathe slowly, go for a short walk, and get enough sleep. A tired brain feels everything more strongly."], ["m", "Great advice. Any last tip?"], ["f", "Yes — be kind to yourself. Nobody feels confident all the time, and that's OK."]];
-const LQ2=[{"q": "Who is Dr Hill?", "o": ["a teacher", "a psychologist", "a doctor of medicine"], "a": 1}, {"q": "According to Dr Hill, is feeling nervous normal?", "o": ["yes, completely", "no, never", "only for adults"], "a": 0}, {"q": "What should you do first when worried?", "o": ["talk to someone", "stay silent", "eat sweets"], "a": 0}, {"q": "What does a tired brain do?", "o": ["feels everything more strongly", "works better", "stops feeling"], "a": 0}, {"q": "What is her last tip?", "o": ["work harder", "be kind to yourself", "never rest"], "a": 1}];
+const DIALOG2=[["m", "Welcome back to the show. Today we're talking about stress with psychologist Dr Hill. Hello!"], ["f", "Hello, thanks for having me."], ["m", "So, why do teenagers feel so stressed these days?"], ["f", "There are many reasons — exams, friends, social media. Feeling nervous sometimes is completely normal."], ["m", "We have a caller. Nina, you're on the air!"], ["f2", "Hi! I get really nervous before exams and I can't sleep. What can I do?"], ["f", "Good question, Nina. Talk to someone, breathe slowly, and go to bed early. A tired brain feels everything more strongly."], ["m", "Thanks, Nina. And we have Sam on line two."], ["m2", "Hi. When I feel stressed, I just play video games all night. Is that bad?"], ["f", "A little rest is fine, Sam, but too much screen time makes it worse. Try a short walk instead."], ["m", "Great advice. Any last tip, Dr Hill?"], ["f", "Yes — be kind to yourself. Nobody feels confident all the time, and that's OK."]];
+const LQ2=[{"q": "Who is Dr Hill?", "o": ["a teacher", "a psychologist", "a doctor of medicine"], "a": 1}, {"q": "What is Nina's problem?", "o": ["she can't sleep before exams", "she has no friends", "she is bored"], "a": 0}, {"q": "What does Dr Hill tell Nina to do?", "o": ["talk, breathe, sleep early", "study all night", "stop eating"], "a": 0}, {"q": "What does Sam do when stressed?", "o": ["plays video games all night", "goes running", "reads"], "a": 0}, {"q": "What does Dr Hill suggest for Sam?", "o": ["more games", "a short walk", "more coffee"], "a": 1}, {"q": "What is her last tip?", "o": ["work harder", "be kind to yourself", "never rest"], "a": 1}];
 const RQ2=[{"q": "What can change your mood, according to the text?", "o": ["your face", "the weather", "your phone"], "a": 0}, {"q": "What signal does the brain get when you smile?", "o": ["\"I'm tired\"", "\"I'm happy\"", "\"I'm hungry\""], "a": 1}, {"q": "How are feelings and the body connected?", "o": ["not at all", "like a two-way street", "only in children"], "a": 1}, {"q": "What experiment does the text suggest?", "o": ["run fast", "smile for thirty seconds", "shout loudly"], "a": 1}, {"q": "Will smiling solve big problems?", "o": ["yes, always", "no, but it can help a stressful moment", "it makes things worse"], "a": 1}];
+const TF=[{"q": "Leo feels calm before the concert.", "a": false}, {"q": "Mia's brother enjoyed the last concert.", "a": true}, {"q": "Dr Hill says feeling nervous is completely normal.", "a": true}, {"q": "Nina sleeps very well before exams.", "a": false}, {"q": "A fake smile can send a 'happy' signal to the brain.", "a": true}, {"q": "Smiling solves all big problems.", "a": false}];
 const WBMC=[{"q": "Очень рад = ___ .", "o": ["delighted", "annoyed", "bored"], "a": 0}, {"q": "Гордиться кем-то = be ___ of somebody.", "o": ["proud", "jealous", "scared"], "a": 0}, {"q": "Успокойся = ___ down.", "o": ["calm", "cheer", "get"], "a": 0}, {"q": "Фильм скучный = a ___ film. (-ing/-ed)", "o": ["boring", "bored", "bore"], "a": 0}, {"q": "Past Simple от feel = ___ .", "o": ["felt", "feeled", "fell"], "a": 0}];
 const WBGAPS=[{"q": "I ___ (feel) scared last night. (past)", "a": ["felt"]}, {"q": "She ___ (not/go) to the party. (past neg)", "a": ["didn't go", "did not go"]}, {"q": "We ___ (watch) a film when he called. (past continuous)", "a": ["were watching"]}, {"q": "I'm ___ (interest) in music. (-ed прилагательное)", "a": ["interested"]}, {"q": "The news was ___ (surprise). (-ing прилагательное)", "a": ["surprising"]}];
 
@@ -241,18 +248,39 @@ function enVoice(g){
   return best;
 }
 function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
-var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>{
-  speechSynthesis.cancel();
-  const mv=enVoice("m"),fv=enVoice("f");
-  DIALOG.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
-};
+/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
+function _voicePools(){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  const male=[],female=[];
+  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
+    v._score=s;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(mal&&!fem)male.push(v);else female.push(v);});
+  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
+  return {male:male,female:female};
+}
+let _POOLS=null;const _SPK={};
+function speakerStyle(who){
+  who=who||"m";if(_SPK[who])return _SPK[who];
+  if(!_POOLS)_POOLS=_voicePools();
+  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
+  const pool=isF?_POOLS.female:_POOLS.male;
+  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
+  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
+  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
+  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
+  _SPK[who]=st;return st;
+}
+function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
 var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
 var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
 /* Второе аудирование (если есть DIALOG2) */
-var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>{
-  speechSynthesis.cancel();const mv=enVoice("m"),fv=enVoice("f");
-  DIALOG2.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const v=(who==="m")?mv:fv;if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);});
-};
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
 var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
 var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
@@ -281,6 +309,15 @@ function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("d
     else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
   btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   return d;}
+/* Правда / Ложь */
+function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
+  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
+    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -304,6 +341,7 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 /* Чтение → вопросы */
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
+const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
