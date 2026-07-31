@@ -77,8 +77,8 @@
 <script src="sm-shell.js"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"]];
-const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
+const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"]];
+const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -193,6 +193,7 @@ async function drawPane(){
         '<option value="superminds-1">Super Minds 1</option>' +
         '<option value="speakout-b1"'+(course==="speakout-b1"?" selected":"")+'>Speakout B1</option>' +
         '<option value="speakout-b1plus"'+(course==="speakout-b1plus"?" selected":"")+'>Speakout B1+</option>' +
+        '<option value="focus-1"'+(course==="focus-1"?" selected":"")+'>Focus 1</option>' +
       '</select></div>' +
       '<div class="hf-row"><label>Юнит</label><select id="hUnit"></select></div>' +
       '<div class="hf-row" id="hPartsRow"><label>Что задать</label><span class="parts">' +

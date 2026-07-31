@@ -201,7 +201,7 @@
         try{course=await SM.myCourse();}catch(e){}
         try{shw=await SM.myHW();}catch(e){}
         try{mats=await SM.myMaterials();}catch(e){}
-        const cL={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
+        const cL={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+","focus-1":"Focus 1"};
         if(course||shw.length||mats.length){
           let p="";
           if(course)p+='<div class="hwrow"><span class="hwt">📘 Курс: '+(cL[course]||course)+'</span><a class="hwopen" href="'+course+'-course.html">Открыть</a></div>';

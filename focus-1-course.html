@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus 1 · Курс · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4ecdd;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  .home{background:#d2601f;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#5a8f2a}
+  .head{text-align:center;margin:6px 0 26px}
+  h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,48px);font-weight:700;color:#d2601f;letter-spacing:-1px}
+  .sub{font-weight:800;font-size:15px;color:#5a4f47;margin:10px 0 0}
+  .lvl{display:inline-block;background:#5a8f2a;color:#fff;font:900 12px 'Nunito',sans-serif;padding:3px 12px;border-radius:999px;margin-top:10px;letter-spacing:1px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+  .u{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #e6d6bd;cursor:pointer;transition:transform .14s,box-shadow .14s;display:block}
+  .u:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(210,96,31,.16)}
+  .u .cover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center}
+  .u .cover span{font-size:clamp(48px,9vw,68px);filter:drop-shadow(0 5px 8px rgba(0,0,0,.28))}
+  .u .b{padding:13px 16px 16px}
+  .u .n{font:900 11px 'Nunito',sans-serif;color:#5a8f2a;letter-spacing:1px}
+  .u .t{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:#d2601f;margin:2px 0 4px}
+  .u .d{font-size:12px;color:#8a7a68;font-weight:700;line-height:1.4;min-height:34px}
+  .u .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .u .go{display:inline-block;background:#d2601f;color:#fff;font:800 11px 'Nunito',sans-serif;padding:7px 12px;border-radius:999px}
+  .u .go.g2{background:#7a4a1e}
+  .u .go.g3{background:#5a8f2a}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="index.html">🏠 Домой</a>
+    <a class="home alt" href="cabinet.html">👤 Кабинет ученика</a>
+  </div>
+  <div class="head">
+    <h1>🎯 Focus 1</h1>
+    <div class="sub">Курс по юнитам · лексика · грамматика · аудирование · чтение · Workbook</div>
+    <div class="lvl">УРОВЕНЬ A1–A2 · SECOND EDITION</div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Focus 1 (2nd ed.)</div>
+</div>
+<script>
+const UNITS=[
+ {n:1,t:"Family and friends",e:"👨‍👩‍👧‍👦",g:["#e0642a","#f0a03a"],d:"Present Simple · семья, друзья, распорядок дня"},
+ {n:2,t:"Food",e:"🍎",g:["#5a8f2a","#9ac93a"],d:"countable/uncountable · a/some/any · еда и готовка"},
+ {n:3,t:"Work",e:"💼",g:["#2a6f8f","#3aa0c9"],d:"Present Continuous · работа и профессии"},
+ {n:4,t:"People",e:"🧑",g:["#7c3aa0","#b06ed0"],d:"comparatives · have to · внешность и характер"},
+ {n:5,t:"Education",e:"🎓",g:["#b5651a","#e0a03a"],d:"must/should · Past Simple was/were · школа"},
+ {n:6,t:"Health and sport",e:"⚽",g:["#1f7a4d","#3ab06e"],d:"Past Simple · go/do/play · спорт и здоровье"},
+ {n:7,t:"Travel",e:"✈️",g:["#1f6f9c","#39b0c9"],d:"Present Perfect · be going to · путешествия"},
+ {n:8,t:"Nature",e:"🌍",g:["#2f7a2f","#7cc23a"],d:"will · first conditional · природа и погода"}
+];
+const grid=document.getElementById("grid");
+UNITS.forEach(u=>{const a=document.createElement("div");a.className="u";
+  a.innerHTML='<a href="focus-1-u'+u.n+'.html"><div class="cover" style="background:linear-gradient(135deg,'+u.g[0]+','+u.g[1]+')"><span>'+u.e+'</span></div></a>'+
+    '<div class="b"><div class="n">UNIT '+u.n+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div>'+
+    '<div class="links"><a class="go" href="focus-1-u'+u.n+'.html">Урок →</a>'+
+    '<a class="go g2" href="focus-1-u'+u.n+'-grammar.html">Грамматика</a>'+
+    '<a class="go g3" href="focus-1-u'+u.n+'-workbook.html">Workbook</a></div></div>';
+  grid.appendChild(a);});
+</script>
+</body>
+</html>
