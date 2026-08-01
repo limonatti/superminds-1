@@ -1581,6 +1581,183 @@ DATA.append({
  "hw":r'''<b>Report it!</b> Напиши 6–7 предложений: опиши преступление и расследование (Past Simple + Past Perfect) и передай слова одного свидетеля (reported speech). Мин. 4 слова из юнита (thief, evidence, witness, arrest…).<br><br>Затем открой <a href="solutions-pi-u8-workbook.html" style="color:#33475a;font-weight:900;text-decoration:underline">Workbook Unit 8</a> 🚓''',
 })
 
+# ===================== UNIT 9 · Science =====================
+DATA.append({
+ "n":9, "title":"Science", "emoji":"🔬", "grad":("#7c2340","#b5654a"),
+ "desc":"Relative clauses · modals of deduction · наука, изобретения и технологии",
+ "grammar":[
+  {"t":"9B · Relative clauses","h":r'''    <table>
+      <tr><th>Слово</th><th>Для чего</th><th>Пример</th></tr>
+      <tr><td><b>who / that</b></td><td>люди</td><td>A scientist is a person <b>who</b> does experiments.</td></tr>
+      <tr><td><b>which / that</b></td><td>вещи</td><td>This is the invention <b>which</b> changed the world.</td></tr>
+      <tr><td><b>where</b></td><td>места</td><td>A lab is a place <b>where</b> scientists work.</td></tr>
+      <tr><td><b>whose</b></td><td>принадлежность</td><td>The man <b>whose</b> robot won…</td></tr>
+    </table>'''},
+  {"t":"9D · Modals of deduction (must / might / can't)","h":r'''    <div class="g-ex"><b>must be</b> — уверен, что да: It <b>must be</b> a phone — it's got a screen.</div>
+    <div class="g-ex"><b>might / could be</b> — возможно: It <b>might be</b> a battery.</div>
+    <div class="g-ex"><b>can't be</b> — уверен, что нет: It <b>can't be</b> a camera — it's too small.</div>'''},
+ ],
+ "words":[
+  ["science","наука"],["scientist","учёный"],["experiment","эксперимент"],["invention","изобретение"],["invent","изобретать"],
+  ["discover","открывать"],["discovery","открытие"],["technology","технология"],["gadget","гаджет"],["device","устройство"],
+  ["laboratory","лаборатория"],["research","исследование"],["material","материал"],["machine","машина/механизм"],["robot","робот"],
+  ["screen","экран"],["battery","батарея"],["useful","полезный"],["powerful","мощный"],["wire","провод"],
+ ],
+ "pron_words":["science","experiment","technology","laboratory","invention","discovery","machine"],
+ "pron_focus":"Ударение и «трудные» слова",
+ "pron_note":"exPERiment · techNOLogy · laBORatory · maCHINE /məˈʃiːn/ — ударный слог",
+ "chunks":[
+  ["do an experiment","проводить эксперимент"],["make a discovery","сделать открытие"],["it's used for","это используется для"],
+  ["run out of battery","разрядиться"],["cutting-edge technology","передовые технологии"],["a big breakthrough","большой прорыв"],
+  ["What's it for?","для чего это?"],["It must be…","это, наверное,…"],
+ ],
+ "listen_title":"What's this gadget?",
+ "names":{"m":"Leo","f":"Zoe"},
+ "dialog":[
+  ["f","Leo, look at this strange thing I found in the science lab. What is it?"],
+  ["m","Hmm. It's got a small screen and some buttons. It must be some kind of device."],
+  ["f","Could it be a phone?"],
+  ["m","It can't be a phone — there's no camera and it's too heavy."],
+  ["f","Good point. It's got wires coming out of the back."],
+  ["m","Then it might be a machine that measures something."],
+  ["f","There's a label. It says 'used for measuring temperature'."],
+  ["m","So it's a thermometer — a device which scientists use in experiments!"],
+  ["f","Of course! The teacher whose class we're in probably left it here."],
+  ["m","Let's give it back before someone thinks we took it."],
+  ["f","Ha, good idea. Science is like solving a mystery, isn't it?"],
+  ["m","Exactly. Every experiment is a little puzzle to solve."],
+ ],
+ "lq":[
+  {"q":"Where did Zoe find the gadget?","o":["in the science lab","at home","in the library"],"a":0},
+  {"q":"Why can't it be a phone?","o":["no camera and too heavy","it's too small","it's broken"],"a":0},
+  {"q":"What is the gadget for?","o":["measuring temperature","taking photos","making calls"],"a":0},
+  {"q":"What is the device called?","o":["a battery","a thermometer","a robot"],"a":1},
+  {"q":"What does Zoe compare science to?","o":["a game of cards","solving a mystery","cooking"],"a":1},
+ ],
+ "reading_title":"The accident that helped the world",
+ "reading":r'''<p>Some of the greatest discoveries happened by accident. In 1928, a scientist called Alexander Fleming was doing experiments with bacteria. One day he went on holiday and forgot to clean his lab.</p>
+   <p>When he came back, he noticed something strange: a mould which had grown in one dish had killed the bacteria around it. This mould became penicillin, the medicine that has saved millions of lives. Fleming later said that he didn't plan the discovery — he was simply a scientist who never ignored the small, strange things.</p>''',
+ "rq":[
+  {"q":"When did this happen?","o":["1928","1968","2008"],"a":0},
+  {"q":"What was Fleming doing?","o":["experiments with bacteria","building a machine","teaching"],"a":0},
+  {"q":"What did he forget to do?","o":["lock the door","clean his lab","turn off the light"],"a":1},
+  {"q":"What did the mould do?","o":["killed the bacteria","made him ill","disappeared"],"a":0},
+  {"q":"What did the mould become?","o":["a poison","penicillin","a gadget"],"a":1},
+ ],
+ "listen2_title":"Interview: a teenage inventor",
+ "names2":{"m":"Host","f":"Dr Nova","m2":"Sam (caller)"},
+ "dialog2":[
+  ["m","Welcome! Today we're talking about young inventors with engineer Dr Nova. Hello!"],
+  ["f","Hi! It's exciting to be here."],
+  ["m","So, can teenagers really invent useful things?"],
+  ["f","Absolutely. Some of the best ideas come from young people who see problems adults ignore."],
+  ["m","We have a caller. Sam, go ahead."],
+  ["m2","Hi! I love science but I'm not good at maths. Can I still be an inventor?"],
+  ["f","Definitely, Sam. The most important skill is curiosity — the wish to ask 'why?' and 'what if?'."],
+  ["m","Any advice for a young person with an idea?"],
+  ["f","Start small. Build a simple model, test it, and don't be afraid to fail. Every failure is a lesson which brings you closer."],
+  ["m2","That's really encouraging. Thanks, Dr Nova!"],
+  ["f","Good luck, Sam. The world needs your ideas!"],
+ ],
+ "lq2":[
+  {"q":"What is Dr Nova?","o":["a teacher","an engineer","a doctor of medicine"],"a":1},
+  {"q":"Where do some of the best ideas come from?","o":["young people","old machines","books only"],"a":0},
+  {"q":"What is Sam worried about?","o":["he's not good at maths","he has no ideas","he's too old"],"a":0},
+  {"q":"What is the most important skill, according to Dr Nova?","o":["curiosity","money","strength"],"a":0},
+  {"q":"What is her advice?","o":["start small and don't fear failure","give up","copy others"],"a":0},
+ ],
+ "reading2_title":"Will robots take our jobs?",
+ "reading2":r'''<p>Robots and computers can already do many jobs. They build cars, answer phones and even help doctors. Some people are worried: will machines take all our jobs in the future?</p>
+   <p>Experts say the answer is complicated. Yes, robots will do many boring or dangerous tasks. But new technology also creates new jobs that didn't exist before. Someone has to design, build and repair the machines, and robots still can't do everything — they are not good at creativity or caring for people.</p>
+   <p>The best plan is to work with technology, not against it. If we learn new skills and stay curious, robots will be helpful tools, not enemies. The future belongs to people who keep learning.</p>''',
+ "rq2":[
+  {"q":"What can robots already do?","o":["build cars and help doctors","feel emotions","dream"],"a":0},
+  {"q":"What are some people worried about?","o":["robots taking all our jobs","robots getting tired","robots being slow"],"a":0},
+  {"q":"What does new technology also create?","o":["new jobs","more rain","less food"],"a":0},
+  {"q":"What are robots NOT good at?","o":["creativity and caring for people","lifting things","counting"],"a":0},
+  {"q":"Who does the future belong to?","o":["people who keep learning","only scientists","robots"],"a":0},
+ ],
+ "tf":[
+  {"q":"The gadget in the lab was a thermometer.","a":True},
+  {"q":"Zoe and Leo decided to keep the gadget.","a":False},
+  {"q":"Fleming discovered penicillin by accident.","a":True},
+  {"q":"Dr Nova says you must be great at maths to be an inventor.","a":False},
+  {"q":"New technology can create new jobs.","a":True},
+  {"q":"Robots are very good at caring for people.","a":False},
+ ],
+ "ex":[
+  {"q":"A scientist is a person ___ does experiments.","o":["which","who","where"],"a":1},
+  {"q":"This is the invention ___ changed the world.","o":["who","which","whose"],"a":1},
+  {"q":"A lab is a place ___ scientists work.","o":["which","where","who"],"a":1},
+  {"q":"That's the girl ___ robot won the prize.","o":["who","whose","which"],"a":1},
+  {"q":"It's got a screen, so it ___ be a device.","o":["must","can't","might not"],"a":0},
+  {"q":"It's too small — it ___ be a laptop.","o":["must","can't","might"],"a":1},
+  {"q":"I'm not sure. It ___ be a battery.","o":["must","can't","might"],"a":2},
+  {"q":"A thermometer is a device ___ measures temperature.","o":["who","that","where"],"a":1},
+  {"q":"He's the scientist ___ made the discovery.","o":["which","who","whose"],"a":1},
+  {"q":"This gadget is ___ for measuring light.","o":["use","used","using"],"a":1},
+  {"q":"She ___ be a genius — she solved it in a minute!","o":["must","can't","might not"],"a":0},
+  {"q":"The medicine ___ saved millions is penicillin.","o":["who","that","where"],"a":1},
+  {"q":"invent → an ___","o":["invention","inventer","inventing"],"a":0},
+  {"q":"A robot is a machine ___ can do tasks.","o":["who","which","where"],"a":1},
+  {"q":"He's the man ___ we met in the lab.","o":["which","who","whose"],"a":1},
+  {"q":"It's heavy and hot — it ___ be a small phone.","o":["must","can't","might"],"a":1},
+ ],
+ "gaps":[
+  {"q":"A scientist is a person ___ (who/which) does experiments.","a":["who","that"]},
+  {"q":"This is the machine ___ (who/which) makes the noise.","a":["which","that"]},
+  {"q":"A laboratory is a place ___ scientists work. (where)","a":["where"]},
+  {"q":"It's got a screen — it ___ (must) be a device. (уверенность)","a":["must"]},
+  {"q":"It's too small — it ___ (can't) be a laptop. (уверен, что нет)","a":["can't","cannot"]},
+  {"q":"I'm not sure — it ___ (might) be a battery. (возможно)","a":["might","could"]},
+  {"q":"That's the girl ___ (whose) invention won. (принадлежность)","a":["whose"]},
+  {"q":"invent → an ___ (существительное)","a":["invention"]},
+ ],
+ "word_skills":[
+  {"q":"invent → человек","o":["inventor","inventer","inventist"],"a":0},
+  {"q":"discover → существительное","o":["discovery","discoverment","discovering"],"a":0},
+  {"q":"«полезный» = use + ___","o":["ful","less","able"],"a":0},
+  {"q":"«мощный» = power + ___","o":["ful","less","ous"],"a":0},
+  {"q":"science → человек","o":["scientist","sciencer","scientician"],"a":0},
+  {"q":"Прилагательное от «danger»: ___","a":["dangerous"]},
+  {"q":"Существительное от «invent»: an ___","a":["invention"]},
+  {"q":"«бесполезный» = use + ___","a":["less"]},
+ ],
+ "word_skills_note":"invent→invention→inventor, discover→discovery; суффиксы -ful/-less (useful, useless).",
+ "howto_title":"💬 How to… строить догадки",
+ "howto":r'''    <div class="g-ex"><b>What's it for?</b> — <b>It's used for…</b></div>
+    <div class="g-ex"><b>It must be…</b> / <b>It might be…</b> / <b>It can't be…</b></div>
+    <div class="g-ex"><b>I think it's a device that…</b></div>''',
+ "fx":[
+  {"q":"Спроси о назначении:","o":["What's it for?","For it what?","It what for you?"],"a":0},
+  {"q":"Уверенная догадка:","o":["It must be a phone.","Phone it must a.","Must a phone it be."],"a":0},
+  {"q":"Скажи, что точно нет:","o":["It can't be a camera.","Camera it can't a.","Can't it camera a be."],"a":0},
+  {"q":"Опиши через relative clause:","o":["It's a device that measures heat.","Device measures heat that it.","That it device measures heat."],"a":0},
+ ],
+ "speaking":[
+  "Опиши гаджет, не называя его — пусть друг угадает (It's a device that…).",
+  "Догадки: покажи предмет и обсудите (It must/might/can't be…).",
+  "Изобретение, которое изменило мир: расскажи, что это и что оно делает.",
+  "Роботы в будущем: за и против (relative clauses, will).",
+ ],
+ "writing":r'''<b>Describe an invention.</b> Выбери изобретение (телефон, интернет, колесо…) и напиши 7–8 предложений: что это (a device/machine that/which…), для чего используется (it's used for…), кто его придумал и почему оно важно. Используй relative clauses минимум 3 раза.<br><br>Проверь: who/which/that/where/whose; used for + -ing; -ful/-less прилагательные.''',
+ "wbmc":[
+  {"q":"Учёный = a ___ .","o":["scientist","science","inventor thing"],"a":0},
+  {"q":"Изобретение = an ___ .","o":["invention","inventor","invent"],"a":0},
+  {"q":"Человек, который… = a person ___ …","o":["who","which","where"],"a":0},
+  {"q":"It's got a screen — it ___ be a device. (уверен)","o":["must","can't","might not"],"a":0},
+  {"q":"«полезный» = use + ___ .","o":["ful","less","able"],"a":0},
+ ],
+ "wbgaps":[
+  {"q":"A scientist is a person ___ does experiments. (who/that)","a":["who","that"]},
+  {"q":"A lab is a place ___ scientists work. (where)","a":["where"]},
+  {"q":"It's too small — it ___ (can't) be a laptop.","a":["can't","cannot"]},
+  {"q":"invent → an ___ (существительное)","a":["invention"]},
+  {"q":"It's got a screen — it ___ (must) be a device.","a":["must"]},
+ ],
+ "hw":r'''<b>My favourite invention.</b> Напиши 6–7 предложений о важном изобретении: что это (relative clause), для чего (used for…), и почему оно полезно. Мин. 4 слова из юнита (device, invention, technology, useful…).<br><br>Затем реши <a href="solutions-pi-u9-workbook.html" style="color:#7c2340;font-weight:900;text-decoration:underline">Workbook Unit 9</a> 🔬''',
+})
+
 META = {
  "prefix": "solutions-pi",
  "brand": "Solutions",
