@@ -981,6 +981,7 @@ DATA.append({
 # ===================== UNIT 5 · Ambition =====================
 DATA.append({
  "n":5, "title":"Ambition", "emoji":"💼", "grad":("#b5651a","#e0a03a"),
+ "cover_img":"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_064526_e571eb84-5397-49ec-b1d3-d8005a54ef6a.png",
  "desc":"Present Perfect (ever/never · just/already/yet) · Perfect vs Past · работа и амбиции",
  "grammar":[
   {"t":"5B · Present Perfect: ever/never · just/already/yet","h":r'''    <div class="g-ex"><b>have/has + 3-я форма</b>: I <b>have worked</b> here. She <b>has finished</b>.</div>
@@ -1134,6 +1135,28 @@ DATA.append({
   "Сравни: чем занимались твои родители/родственники? (Past Simple).",
  ],
  "writing":r'''<b>A job application.</b> Напиши короткое письмо-заявку (7–8 предложений): на какую работу подаёшь, какой у тебя опыт (Present Perfect: I've worked…, I've done…), твои сильные стороны и почему хочешь эту работу.<br><br>Проверь: Present Perfect для опыта, Past Simple с датами, apply for, good at + -ing.''',
+ "exam":{
+  "title":"Reading: The changing world of work",
+  "passage":r'''<p>A hundred years ago, most people did one job for their whole life. A person often worked in the same factory or on the same farm from the age of fifteen until they were old. Today, the world of work is very different.</p>
+   <p>Experts say that a young person starting work now may change jobs many times, and might do several jobs that do not even exist yet. Because of this, schools are trying to teach skills that will always be useful: how to solve problems, how to work in a team, and how to keep learning after school ends.</p>
+   <p>This can sound frightening, but it is also exciting. It means you are not stuck with one choice forever. If your first job is not right for you, there will be many other chances. The most important thing, experts say, is to stay curious and never stop learning.</p>''',
+  "tfng":[
+   {"q":"A hundred years ago, many people did one job for life.","a":"T"},
+   {"q":"Today, young people usually keep the same job forever.","a":"F"},
+   {"q":"Most future jobs will be in factories.","a":"NG"},
+   {"q":"Schools are trying to teach problem-solving and teamwork.","a":"T"},
+   {"q":"If your first job is wrong, you will have other chances.","a":"T"},
+   {"q":"Experts say you should stop learning after school.","a":"F"},
+  ],
+  "mc":[
+   {"q":"How did most people work a hundred years ago?","o":["one job for life","many different jobs","only from home"],"a":0},
+   {"q":"What may a young person do today?","o":["change jobs many times","never work","do only one job"],"a":0},
+   {"q":"What skills do schools try to teach now?","o":["problem-solving and teamwork","only maths","only typing"],"a":0},
+   {"q":"What is the most important thing, according to experts?","o":["stay curious and keep learning","choose one job forever","earn a lot of money"],"a":0},
+  ],
+  "writing":r'''Some people think it is better to have one job for your whole life; others think it is better to change jobs often. Which do you prefer? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>your dream job</b>. Say: what the job is · why you would like it · what skills you need · what you have already done to get closer to it.''',
+ },
  "wbmc":[
   {"q":"Подать на работу = to ___ for a job.","o":["apply","give","make"],"a":0},
   {"q":"Повышение = a ___ .","o":["promotion","position","permission"],"a":0},
@@ -1307,6 +1330,28 @@ DATA.append({
   "Ответственный туризм: 3 совета путешественнику (If you…, …).",
  ],
  "writing":r'''<b>A travel blog post.</b> Напиши пост о поездке (7–8 предложений): куда ездил(а), как долго был(а) там (for/since), что раньше было иначе или что ты раньше думал(а) (used to), и что понравилось. Используй Present Perfect и Past Simple.<br><br>Проверь: used to для прошлых привычек, for/since с Present Perfect.''',
+ "exam":{
+  "title":"Reading: The age of travel",
+  "passage":r'''<p>Not long ago, travelling to another country was rare and expensive. Most people spent their holidays close to home. Today, cheap flights and the internet have made the world feel much smaller, and millions of people travel abroad every year.</p>
+   <p>This has brought many good things. Travel helps people learn about other cultures, try new food and make friends from around the world. Tourism also brings money and jobs to many towns and cities that need it.</p>
+   <p>But there is another side. In some famous places, there are now so many tourists that local people find it hard to enjoy their own city. Long queues, high prices and crowded streets are common. Because of this, some experts say we should travel more slowly, visit quieter places, and always respect the people who live there.</p>''',
+  "tfng":[
+   {"q":"In the past, travelling abroad was rare and expensive.","a":"T"},
+   {"q":"Today very few people travel to other countries.","a":"F"},
+   {"q":"Cheap flights are mostly used by business people.","a":"NG"},
+   {"q":"Tourism can bring money and jobs to towns.","a":"T"},
+   {"q":"In some famous places there are too many tourists.","a":"T"},
+   {"q":"Experts say we should all travel faster and visit crowded places.","a":"F"},
+  ],
+  "mc":[
+   {"q":"What has made the world feel smaller?","o":["cheap flights and the internet","bad weather","expensive hotels"],"a":0},
+   {"q":"What is one good thing about travel?","o":["learning about other cultures","losing money","staying at home"],"a":0},
+   {"q":"What is a problem in some famous places?","o":["too many tourists","no hotels","no food"],"a":0},
+   {"q":"What do some experts suggest?","o":["travel slowly and respect local people","never travel","only visit big cities"],"a":0},
+  ],
+  "writing":r'''Some people think tourism does more harm than good to famous places. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>a place you have visited or would like to visit</b>. Say: where it is · why you want to go / went there · what you can do there · how long you would stay.''',
+ },
  "wbmc":[
   {"q":"Осмотр достопримечательностей = ___ .","o":["sightseeing","souvenir","luggage"],"a":0},
   {"q":"Жильё = ___ .","o":["accommodation","currency","landmark"],"a":0},
@@ -1480,6 +1525,28 @@ DATA.append({
   "Ролевая игра: друг просит денег в долг — договоритесь об условиях.",
  ],
  "writing":r'''<b>Advice about money.</b> Друг тратит все карманные деньги сразу и просит совет. Напиши ответ (7–8 предложений): 3 совета (If I were you, I'd… / You should…) и что бы ты сделал(а) на его месте. Используй second conditional и I wish минимум по разу.<br><br>Проверь: If + Past Simple, … would…; borrow vs lend; I wish + Past Simple.''',
+ "exam":{
+  "title":"Reading: Learning to be good with money",
+  "passage":r'''<p>Most schools teach maths, science and languages, but few teach one very useful skill: how to manage money. Many young people leave school without ever learning how to save, budget or avoid debt.</p>
+   <p>Experts say that good money habits start early. When children get a small amount of pocket money and decide how to spend it, they learn important lessons. If they spend it all in one day, they feel the result and often plan better next time. Saving up for something special teaches patience, and it feels great to buy something with your own money.</p>
+   <p>You do not need to be rich to be good with money. The most important habits are simple: spend less than you earn, save a little every week, and think before you buy. People who learn these habits when they are young usually worry much less about money when they are older.</p>''',
+  "tfng":[
+   {"q":"Most schools teach students how to manage money.","a":"F"},
+   {"q":"Many young people leave school without money skills.","a":"T"},
+   {"q":"Pocket money should always be exactly ten pounds.","a":"NG"},
+   {"q":"Saving up for something teaches patience.","a":"T"},
+   {"q":"You have to be rich to be good with money.","a":"F"},
+   {"q":"Good money habits usually start early.","a":"T"},
+  ],
+  "mc":[
+   {"q":"What useful skill do few schools teach?","o":["how to manage money","how to swim","how to cook"],"a":0},
+   {"q":"What do children learn from pocket money?","o":["important lessons about spending","how to drive","a new language"],"a":0},
+   {"q":"What does saving up for something teach?","o":["patience","fear","boredom"],"a":0},
+   {"q":"What is one of the most important money habits?","o":["spend less than you earn","borrow a lot","never save"],"a":0},
+  ],
+  "writing":r'''Some people think schools should teach students how to manage money. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>how you use your money</b>. Say: how you get money · whether you save or spend it · something you are saving for · one way you could be better with money.''',
+ },
  "wbmc":[
   {"q":"Занять У кого-то = to ___ .","o":["borrow","lend","earn"],"a":0},
   {"q":"Выгодная покупка = a ___ .","o":["bargain","budget","receipt"],"a":0},

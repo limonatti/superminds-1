@@ -189,6 +189,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>Advice about money.</b> Друг тратит все карманные деньги сразу и просит совет. Напиши ответ (7–8 предложений): 3 совета (If I were you, I'd… / You should…) и что бы ты сделал(а) на его месте. Используй second conditional и I wish минимум по разу.<br><br>Проверь: If + Past Simple, … would…; borrow vs lend; I wish + Past Simple.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: Learning to be good with money</h3><p>Most schools teach maths, science and languages, but few teach one very useful skill: how to manage money. Many young people leave school without ever learning how to save, budget or avoid debt.</p>
+   <p>Experts say that good money habits start early. When children get a small amount of pocket money and decide how to spend it, they learn important lessons. If they spend it all in one day, they feel the result and often plan better next time. Saving up for something special teaches patience, and it feels great to buy something with your own money.</p>
+   <p>You do not need to be rich to be good with money. The most important habits are simple: spend less than you earn, save a little every week, and think before you buy. People who learn these habits when they are young usually worry much less about money when they are older.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think schools should teach students how to manage money. Do you agree or disagree? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>how you use your money</b>. Say: how you get money · whether you save or spend it · something you are saving for · one way you could be better with money.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My money habits.</b> Напиши 6–7 предложений: как ты тратишь/копишь деньги, что бы ты сделал(а) с большой суммой (Second conditional), и одно желание (I wish…). Мин. 4 слова из юнита (save, spend, bargain, afford…).<br><br>Затем реши <a href="solutions-pi-u7-workbook.html" style="color:#256a25;font-weight:900;text-decoration:underline">Workbook Unit 7</a> 💰</div>
 
@@ -212,6 +224,8 @@ const DIALOG2=[["m", "Welcome back! Today money expert Ms Fox shares tips for te
 const LQ2=[{"q": "What is Ms Fox's number one tip?", "o": ["never spend", "save a little every time", "borrow more"], "a": 1}, {"q": "What is Jake's problem?", "o": ["he spends his money in one day", "he has no money", "he saves too much"], "a": 0}, {"q": "What does Ms Fox suggest for Jake?", "o": ["keep savings in a different place", "spend faster", "ask parents"], "a": 0}, {"q": "What does she say about borrowing?", "o": ["only borrow what you can pay back", "never pay back", "borrow a lot"], "a": 0}, {"q": "What makes a big difference?", "o": ["small habits", "luck", "expensive things"], "a": 0}];
 const RQ2=[{"q": "How did people pay 'not long ago'?", "o": ["with cards", "with coins and notes", "with gold"], "a": 1}, {"q": "What is one advantage of digital money?", "o": ["it's slow", "it's fast and harder to lose", "it's heavy"], "a": 1}, {"q": "Why do shops like it?", "o": ["counting money takes time", "it looks nice", "it's free"], "a": 0}, {"q": "What is one problem?", "o": ["it's easier to overspend", "it's too slow", "it's illegal"], "a": 0}, {"q": "What do experts recommend?", "o": ["only cash", "balance and knowing your budget", "spend freely"], "a": 1}];
 const TF=[{"q": "Nick is saving for a new bike.", "a": true}, {"q": "Nick spent all his money on a game.", "a": false}, {"q": "Grandma got a 70% discount on the coat.", "a": true}, {"q": "Ms Fox says you should never save money.", "a": false}, {"q": "Some countries are almost cashless today.", "a": true}, {"q": "It is harder to overspend with digital money.", "a": false}];
+const EXAM_TFNG=[{"q": "Most schools teach students how to manage money.", "a": "F"}, {"q": "Many young people leave school without money skills.", "a": "T"}, {"q": "Pocket money should always be exactly ten pounds.", "a": "NG"}, {"q": "Saving up for something teaches patience.", "a": "T"}, {"q": "You have to be rich to be good with money.", "a": "F"}, {"q": "Good money habits usually start early.", "a": "T"}];
+const EXAM_MC=[{"q": "What useful skill do few schools teach?", "o": ["how to manage money", "how to swim", "how to cook"], "a": 0}, {"q": "What do children learn from pocket money?", "o": ["important lessons about spending", "how to drive", "a new language"], "a": 0}, {"q": "What does saving up for something teach?", "o": ["patience", "fear", "boredom"], "a": 0}, {"q": "What is one of the most important money habits?", "o": ["spend less than you earn", "borrow a lot", "never save"], "a": 0}];
 const WBMC=[{"q": "Занять У кого-то = to ___ .", "o": ["borrow", "lend", "earn"], "a": 0}, {"q": "Выгодная покупка = a ___ .", "o": ["bargain", "budget", "receipt"], "a": 0}, {"q": "If I ___ rich, I'd travel. (2nd conditional)", "o": ["am", "were", "will be"], "a": 1}, {"q": "I wish I ___ more money.", "o": ["have", "had", "will have"], "a": 1}, {"q": "Мне не по карману = I can't ___ it.", "o": ["afford", "spend", "owe"], "a": 0}];
 const WBGAPS=[{"q": "If I ___ (have) time, I'd help. (2nd conditional)", "a": ["had"]}, {"q": "I wish I ___ (be) taller. (were)", "a": ["were", "was"]}, {"q": "Could you ___ (lend) me a pound? (одолжить мне)", "a": ["lend"]}, {"q": "She'd buy it if it ___ (be) cheaper. (were)", "a": ["were", "was"]}, {"q": "save → ___ (сбережения)", "a": ["savings"]}];
 
@@ -315,6 +329,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -355,6 +379,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */

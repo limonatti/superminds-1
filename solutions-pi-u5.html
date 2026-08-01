@@ -85,7 +85,7 @@
   </div>
 
   <div class="hero">
-    <div class="hcover" style="background:linear-gradient(135deg,#b5651a,#e0a03a)"><span>💼</span></div>
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_064526_e571eb84-5397-49ec-b1d3-d8005a54ef6a.png" alt="Unit 5 · Ambition">
     <div class="hb">
       <h1>Unit 5 · Ambition</h1>
       <div class="d">📚 Present Perfect (ever/never · just/already/yet) · Perfect vs Past · работа и амбиции</div>
@@ -188,6 +188,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>A job application.</b> Напиши короткое письмо-заявку (7–8 предложений): на какую работу подаёшь, какой у тебя опыт (Present Perfect: I've worked…, I've done…), твои сильные стороны и почему хочешь эту работу.<br><br>Проверь: Present Perfect для опыта, Past Simple с датами, apply for, good at + -ing.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: The changing world of work</h3><p>A hundred years ago, most people did one job for their whole life. A person often worked in the same factory or on the same farm from the age of fifteen until they were old. Today, the world of work is very different.</p>
+   <p>Experts say that a young person starting work now may change jobs many times, and might do several jobs that do not even exist yet. Because of this, schools are trying to teach skills that will always be useful: how to solve problems, how to work in a team, and how to keep learning after school ends.</p>
+   <p>This can sound frightening, but it is also exciting. It means you are not stuck with one choice forever. If your first job is not right for you, there will be many other chances. The most important thing, experts say, is to stay curious and never stop learning.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think it is better to have one job for your whole life; others think it is better to change jobs often. Which do you prefer? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>your dream job</b>. Say: what the job is · why you would like it · what skills you need · what you have already done to get closer to it.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My dream career.</b> Напиши 6–7 предложений: кем хочешь стать, что уже сделал(а) для этого (I've…), и один опыт из прошлого (Past Simple). Мин. 4 слова из юнита (interview, apply, experience, ambition…).<br><br>Затем реши <a href="solutions-pi-u5-workbook.html" style="color:#9a5615;font-weight:900;text-decoration:underline">Workbook Unit 5</a> 💼</div>
 
@@ -211,6 +223,8 @@ const DIALOG2=[["m", "OK, you two. Have you thought about jobs for the future?"]
 const LQ2=[{"q": "What might Ella become?", "o": ["a vet", "a chef", "a lawyer"], "a": 0}, {"q": "Where has Ella helped?", "o": ["a hospital", "an animal shelter", "a shop"], "a": 1}, {"q": "Has Sam got a dream job?", "o": ["yes", "no, not really", "he wants to be a vet"], "a": 1}, {"q": "What is Sam good at?", "o": ["cooking", "fixing things", "drawing"], "a": 1}, {"q": "What jobs does Mr Reed suggest for Sam?", "o": ["engineering or mechanic", "teacher", "doctor"], "a": 0}];
 const RQ2=[{"q": "What didn't exist twenty years ago?", "o": ["teachers", "social media managers", "doctors"], "a": 1}, {"q": "What will many students do in the future?", "o": ["jobs that don't exist yet", "the same jobs forever", "no jobs"], "a": 0}, {"q": "What skills do experts advise learning?", "o": ["teamwork, problem-solving, creativity", "only maths", "typing"], "a": 0}, {"q": "What is the simple message?", "o": ["choose one job for life", "stay curious and keep learning", "never change"], "a": 1}, {"q": "Your dream job might…", "o": ["not have a name yet", "be boring", "be easy"], "a": 0}];
 const TF=[{"q": "Sofia has worked in a café before.", "a": true}, {"q": "Sofia wants to become a chef.", "a": true}, {"q": "Marco went to university to learn cooking.", "a": false}, {"q": "Ella wants to work with animals.", "a": true}, {"q": "Sam has a clear dream job.", "a": false}, {"q": "Some of today's students will do jobs that don't exist yet.", "a": true}];
+const EXAM_TFNG=[{"q": "A hundred years ago, many people did one job for life.", "a": "T"}, {"q": "Today, young people usually keep the same job forever.", "a": "F"}, {"q": "Most future jobs will be in factories.", "a": "NG"}, {"q": "Schools are trying to teach problem-solving and teamwork.", "a": "T"}, {"q": "If your first job is wrong, you will have other chances.", "a": "T"}, {"q": "Experts say you should stop learning after school.", "a": "F"}];
+const EXAM_MC=[{"q": "How did most people work a hundred years ago?", "o": ["one job for life", "many different jobs", "only from home"], "a": 0}, {"q": "What may a young person do today?", "o": ["change jobs many times", "never work", "do only one job"], "a": 0}, {"q": "What skills do schools try to teach now?", "o": ["problem-solving and teamwork", "only maths", "only typing"], "a": 0}, {"q": "What is the most important thing, according to experts?", "o": ["stay curious and keep learning", "choose one job forever", "earn a lot of money"], "a": 0}];
 const WBMC=[{"q": "Подать на работу = to ___ for a job.", "o": ["apply", "give", "make"], "a": 0}, {"q": "Повышение = a ___ .", "o": ["promotion", "position", "permission"], "a": 0}, {"q": "Present Perfect от «be»: I've ___ .", "o": ["been", "was", "being"], "a": 0}, {"q": "«только что» = I've ___ arrived.", "o": ["yet", "just", "since"], "a": 1}, {"q": "Опыт работы = work ___ .", "o": ["experience", "experiment", "expert"], "a": 0}];
 const WBGAPS=[{"q": "I ___ (finish) just now. (present perfect — just)", "a": ["have just finished", "'ve just finished"]}, {"q": "She ___ (get) the job in 2020. (past simple)", "a": ["got"]}, {"q": "We've worked here ___ two years. (for/since)", "a": ["for"]}, {"q": "Have you finished ___ ? (yet)", "a": ["yet"]}, {"q": "teach → ___ (человек)", "a": ["teacher"]}];
 
@@ -314,6 +328,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -354,6 +378,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */

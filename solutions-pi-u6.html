@@ -188,6 +188,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>A travel blog post.</b> Напиши пост о поездке (7–8 предложений): куда ездил(а), как долго был(а) там (for/since), что раньше было иначе или что ты раньше думал(а) (used to), и что понравилось. Используй Present Perfect и Past Simple.<br><br>Проверь: used to для прошлых привычек, for/since с Present Perfect.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: The age of travel</h3><p>Not long ago, travelling to another country was rare and expensive. Most people spent their holidays close to home. Today, cheap flights and the internet have made the world feel much smaller, and millions of people travel abroad every year.</p>
+   <p>This has brought many good things. Travel helps people learn about other cultures, try new food and make friends from around the world. Tourism also brings money and jobs to many towns and cities that need it.</p>
+   <p>But there is another side. In some famous places, there are now so many tourists that local people find it hard to enjoy their own city. Long queues, high prices and crowded streets are common. Because of this, some experts say we should travel more slowly, visit quieter places, and always respect the people who live there.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think tourism does more harm than good to famous places. Do you agree or disagree? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>a place you have visited or would like to visit</b>. Say: where it is · why you want to go / went there · what you can do there · how long you would stay.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My travel story.</b> Напиши 6–7 предложений: место, куда ты ездил(а) или хочешь поехать; что раньше было иначе (used to); как долго ты чем-то занимаешься (for/since). Мин. 4 слова из юнита (sightseeing, landmark, accommodation, souvenir…).<br><br>Затем открой <a href="solutions-pi-u6-workbook.html" style="color:#166a86;font-weight:900;text-decoration:underline">Workbook Unit 6</a> ✈️</div>
 
@@ -211,6 +223,8 @@ const DIALOG2=[["m", "Good morning, everyone! Welcome to the old town. Has anyon
 const LQ2=[{"q": "Has Mia been to the old town before?", "o": ["yes", "no, it's her first time", "many times"], "a": 1}, {"q": "How long has the square been the city centre?", "o": ["over 600 years", "100 years", "20 years"], "a": 0}, {"q": "What is the clock tower?", "o": ["a hotel", "the most famous landmark", "a shop"], "a": 1}, {"q": "Why did people used to climb the tower?", "o": ["to watch for fires", "for fun", "to sleep"], "a": 0}, {"q": "How long has the guide worked there?", "o": ["five years", "fifteen years", "fifty years"], "a": 1}];
 const RQ2=[{"q": "What can too many tourists do?", "o": ["help nature", "damage nature and streets", "build schools"], "a": 1}, {"q": "What does 'responsible tourism' mean?", "o": ["never travelling", "travelling with small caring choices", "only luxury hotels"], "a": 1}, {"q": "What do many travellers now choose?", "o": ["crowded resorts", "quieter places", "no holidays"], "a": 1}, {"q": "What is one example of a caring choice?", "o": ["use less water", "waste food", "drop litter"], "a": 0}, {"q": "What is the simple idea?", "o": ["travel with care so places stay beautiful", "never leave home", "travel more"], "a": 0}];
 const TF=[{"q": "Lena has booked the hostel for two nights.", "a": true}, {"q": "The hostel building used to be a hospital.", "a": false}, {"q": "Rila used to be a quiet fishing village.", "a": true}, {"q": "The guide has worked in the city for fifteen years.", "a": true}, {"q": "Responsible tourism means travelling with care.", "a": true}, {"q": "Too many tourists never cause any problems.", "a": false}];
+const EXAM_TFNG=[{"q": "In the past, travelling abroad was rare and expensive.", "a": "T"}, {"q": "Today very few people travel to other countries.", "a": "F"}, {"q": "Cheap flights are mostly used by business people.", "a": "NG"}, {"q": "Tourism can bring money and jobs to towns.", "a": "T"}, {"q": "In some famous places there are too many tourists.", "a": "T"}, {"q": "Experts say we should all travel faster and visit crowded places.", "a": "F"}];
+const EXAM_MC=[{"q": "What has made the world feel smaller?", "o": ["cheap flights and the internet", "bad weather", "expensive hotels"], "a": 0}, {"q": "What is one good thing about travel?", "o": ["learning about other cultures", "losing money", "staying at home"], "a": 0}, {"q": "What is a problem in some famous places?", "o": ["too many tourists", "no hotels", "no food"], "a": 0}, {"q": "What do some experts suggest?", "o": ["travel slowly and respect local people", "never travel", "only visit big cities"], "a": 0}];
 const WBMC=[{"q": "Осмотр достопримечательностей = ___ .", "o": ["sightseeing", "souvenir", "luggage"], "a": 0}, {"q": "Жильё = ___ .", "o": ["accommodation", "currency", "landmark"], "a": 0}, {"q": "Раньше (привычка) = we ___ travel by train.", "o": ["used to", "use to", "are used to"], "a": 0}, {"q": "Я здесь ___ неделю. (for/since)", "o": ["for", "since", "ago"], "a": 0}, {"q": "С 2019 = ___ 2019.", "o": ["for", "since", "from"], "a": 1}];
 const WBGAPS=[{"q": "We ___ (used to) live abroad. (утвердит.)", "a": ["used to"]}, {"q": "I've been here ___ three days. (for/since)", "a": ["for"]}, {"q": "We've known each other ___ 2018. (for/since)", "a": ["since"]}, {"q": "___ (you/use to) play tennis? (вопрос)", "a": ["did you use to"]}, {"q": "tour → ___ (человек)", "a": ["tourist"]}];
 
@@ -314,6 +328,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -354,6 +378,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
