@@ -189,6 +189,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>A crime report / story.</b> Напиши историю о происшествии (7–8 предложений): что случилось (Past Simple), что произошло РАНЬШЕ (Past Perfect), и передай слова свидетеля (reported speech: He said…, She told me…). <br><br>Проверь: had + 3-я форма для более раннего события; say vs tell; сдвиг времён в косвенной речи.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: The science of catching criminals</h3><p>In the past, catching a criminal often depended on luck or on a witness who saw the crime. Today, science plays a huge part. Detectives use special tools and clever tests that did not exist a hundred years ago.</p>
+   <p>One of the most famous is the fingerprint. Every person's fingerprints are different, so a single print left at the scene can identify a thief. More recently, scientists have learned to test tiny pieces of skin or hair to find out who was there. Cameras in streets and shops also help the police to follow a suspect's movements.</p>
+   <p>However, technology is only a tool. Detectives still need to think carefully, ask the right questions and notice small details that a machine might miss. The best investigations happen when clever science and a curious human mind work together.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think there should be cameras on every street to reduce crime; others think this is bad for privacy. What is your opinion? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>keeping your area safe</b>. Say: whether your area is safe or not · what problems there are (if any) · what the police do · what people could do to help.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>Report it!</b> Напиши 6–7 предложений: опиши преступление и расследование (Past Simple + Past Perfect) и передай слова одного свидетеля (reported speech). Мин. 4 слова из юнита (thief, evidence, witness, arrest…).<br><br>Затем открой <a href="solutions-pi-u8-workbook.html" style="color:#33475a;font-weight:900;text-decoration:underline">Workbook Unit 8</a> 🚓</div>
 
@@ -212,6 +224,8 @@ const DIALOG2=[["m", "This is Tom Price with the local news. Last night, a café
 const LQ2=[{"q": "What happened last night?", "o": ["a café was robbed", "a fire started", "a car crashed"], "a": 0}, {"q": "What was Mrs Hall doing?", "o": ["walking her dog", "working", "shopping"], "a": 0}, {"q": "What had the thieves done to their faces?", "o": ["covered them", "painted them", "nothing"], "a": 0}, {"q": "What does Detective Cole believe?", "o": ["the thieves had watched the café for days", "it was an accident", "nobody saw them"], "a": 0}, {"q": "What evidence do the police have?", "o": ["CCTV footage and a witness", "only a photo", "nothing"], "a": 0}];
 const RQ2=[{"q": "What have people started in many towns?", "o": ["neighbourhood watch groups", "new shops", "clubs"], "a": 0}, {"q": "What do neighbours do?", "o": ["keep an eye on each other's homes", "cook together", "nothing"], "a": 0}, {"q": "How does technology help?", "o": ["cameras and street lighting", "free phones", "faster cars"], "a": 0}, {"q": "What is the most powerful tool, according to experts?", "o": ["money", "community", "fences"], "a": 1}, {"q": "What can you do?", "o": ["lock doors and report problems early", "ignore everything", "move away"], "a": 0}];
 const TF=[{"q": "Lucy saw a man looking through her neighbour's window.", "a": true}, {"q": "The police caught the man before he ran away.", "a": false}, {"q": "In the museum case, the thief was a guard.", "a": true}, {"q": "Mrs Hall saw the thieves' faces clearly.", "a": false}, {"q": "Neighbourhood watch groups help keep streets safe.", "a": true}, {"q": "Experts say technology is more important than community.", "a": false}];
+const EXAM_TFNG=[{"q": "In the past, catching a criminal sometimes depended on luck.", "a": "T"}, {"q": "Fingerprint tests are exactly the same for every person.", "a": "F"}, {"q": "Most criminals today are caught abroad.", "a": "NG"}, {"q": "Scientists can test tiny pieces of skin or hair.", "a": "T"}, {"q": "Cameras help the police follow a suspect.", "a": "T"}, {"q": "The text says machines can replace detectives completely.", "a": "F"}];
+const EXAM_MC=[{"q": "What did catching a criminal often depend on in the past?", "o": ["luck or a witness", "computers", "cameras"], "a": 0}, {"q": "Why can a fingerprint identify a thief?", "o": ["everyone's fingerprints are different", "they are always dirty", "they are very large"], "a": 0}, {"q": "What else helps the police follow a suspect?", "o": ["street and shop cameras", "the weather", "old maps"], "a": 0}, {"q": "When do the best investigations happen?", "o": ["when science and a curious mind work together", "when nobody helps", "when the criminal confesses"], "a": 0}];
 const WBMC=[{"q": "Вор = a ___ .", "o": ["thief", "witness", "victim"], "a": 0}, {"q": "Улики = ___ .", "o": ["evidence", "budget", "prison"], "a": 0}, {"q": "When we arrived, he ___ escaped. (past perfect)", "o": ["has", "had", "was"], "a": 1}, {"q": "She ___ me she was scared. (say/tell)", "o": ["said", "told", "says"], "a": 1}, {"q": "Виновный ≠ ___ .", "o": ["innocent", "guilty more", "suspect"], "a": 0}];
 const WBGAPS=[{"q": "By the time we came, the thief ___ (leave). (past perfect)", "a": ["had left"]}, {"q": "'I saw a man.' → She said she ___ (see) a man. (reported)", "a": ["had seen"]}, {"q": "He ___ (tell) me he lived nearby. (say/tell)", "a": ["told"]}, {"q": "crime → ___ (человек)", "a": ["criminal"]}, {"q": "'I live here.' → He said he ___ (live) there.", "a": ["lived"]}];
 
@@ -315,6 +329,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -355,6 +379,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */

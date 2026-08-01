@@ -188,6 +188,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>Personal profile.</b> Напиши короткий профиль о себе (5–6 предложений): имя, возраст, откуда ты, внешность (I've got…), семья и что ты обычно делаешь после школы (Present Simple). <br><br>Проверь себя: есть ли <i>-s</i> у he/she, правильные краткие формы (I'm, she's got), и заглавные буквы у имён и национальностей.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: A language that connects the world</h3><p>English is spoken by more people than almost any other language, but most of them did not learn it as babies. For millions of people around the world, English is a second or third language that they study at school.</p>
+   <p>Why is English so useful? One reason is history, but the main reason today is communication. When a person from Japan meets a person from Brazil, they often talk in English. It is used on the internet, in science, in business and in travel. Knowing English can help you make friends, find information and get a good job.</p>
+   <p>Of course, English is not the only important language, and every language is valuable. But because so many people share English, it has become a useful bridge between cultures. That is why students all over the world, including you, are learning it right now.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think everyone in the world should learn English. Do you agree or disagree? Write about 100–120 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>learning English</b>. Say: how long you have studied it · why you are learning it · what is easy or difficult for you · how you will use English in the future.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>О себе.</b> Заполни анкету о себе (имя, фамилия, возраст, дата рождения, национальность, внешность) и напиши 5 предложений о своём обычном дне.<br><br>Затем открой <a href="solutions-pi-u0-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Introduction</a> 🧭</div>
 
@@ -211,6 +223,8 @@ const DIALOG2=[["f", "Hi everyone! I'm Olga. I'm new here."], ["m", "Welcome, Ol
 const LQ2=[{"q": "Who is new at the school?", "o": ["Olga", "Mia", "Ravi"], "a": 0}, {"q": "Where is Ravi from?", "o": ["Russia", "India", "England"], "a": 1}, {"q": "How long has Ravi lived here?", "o": ["two years", "two months", "all his life"], "a": 0}, {"q": "Who is Mia?", "o": ["Tom's sister", "Olga's cousin", "the teacher"], "a": 0}, {"q": "Has Olga got any siblings?", "o": ["no", "a twin brother", "two sisters"], "a": 1}, {"q": "When do they have lunch?", "o": ["at twelve", "at one o'clock", "after school"], "a": 1}];
 const RQ2=[{"q": "Where is Lucas from?", "o": ["Brazil", "Portugal", "Spain"], "a": 0}, {"q": "How old is Lucas?", "o": ["thirteen", "fourteen", "fifteen"], "a": 1}, {"q": "What does Lucas look like?", "o": ["short with fair hair", "tall with short curly dark hair", "old with a beard"], "a": 1}, {"q": "What are his hobbies?", "o": ["football and photography", "cooking and reading", "music and dancing"], "a": 0}, {"q": "Why is Lucas writing?", "o": ["for homework", "English is his favourite subject and he wants a penfriend", "to sell something"], "a": 1}];
 const TF=[{"q": "Olga's surname is Petrova.", "a": true}, {"q": "Olga is from India.", "a": false}, {"q": "Ravi has lived here for two years.", "a": true}, {"q": "Mia is Tom's sister.", "a": true}, {"q": "Lucas is from Brazil.", "a": true}, {"q": "Lucas has got long, fair hair.", "a": false}];
+const EXAM_TFNG=[{"q": "Most people who speak English learned it as babies.", "a": "F"}, {"q": "For millions of people, English is a second or third language.", "a": "T"}, {"q": "English is the hardest language in the world.", "a": "NG"}, {"q": "English is often used when people from different countries meet.", "a": "T"}, {"q": "The text says English is the only important language.", "a": "F"}, {"q": "Knowing English can help you get a good job.", "a": "T"}];
+const EXAM_MC=[{"q": "What is the main reason English is useful today?", "o": ["communication", "the weather", "its age only"], "a": 0}, {"q": "When a person from Japan meets a person from Brazil, they often talk in…", "o": ["English", "Spanish", "Japanese"], "a": 0}, {"q": "According to the text, English has become…", "o": ["a bridge between cultures", "a secret code", "a dead language"], "a": 0}, {"q": "Who is learning English, according to the last sentence?", "o": ["students all over the world", "only adults", "nobody"], "a": 0}];
 const WBMC=[{"q": "Единственный ребёнок = an ___ child.", "o": ["only", "one", "single"], "a": 0}, {"q": "Фамилия = ___ .", "o": ["surname", "first name", "nickname"], "a": 0}, {"q": "Волнистые волосы = ___ hair.", "o": ["wavy", "curly", "straight"], "a": 0}, {"q": "У неё есть = She ___ got.", "o": ["has", "have", "is"], "a": 0}, {"q": "Он из Италии = He's ___ Italy.", "o": ["from", "of", "in"], "a": 0}];
 const WBGAPS=[{"q": "I ___ (be) fifteen. (am/is/are)", "a": ["am", "'m"]}, {"q": "She ___ (have got) long hair. (has got)", "a": ["has got", "'s got"]}, {"q": "He ___ (go) to school by bus. (present simple)", "a": ["goes"]}, {"q": "This is ___ (my brother) room. (притяжательный)", "a": ["my brother's"]}, {"q": "___ (they/be) from Poland? (вопрос)", "a": ["are they"]}];
 
@@ -314,6 +328,32 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -338,6 +378,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
@@ -352,38 +394,48 @@ if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
 const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
-/* Workbook */
+/* Workbook — насыщенный, по секциям, разные типы заданий */
 const wb=document.getElementById("wb");
 if(wb){
   let _wn=0;
   function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
   if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
-    /* авто: слова RU→EN */
-    _wbHead("🔤 Слова юнита — выбери перевод");
-    shuffle(WORDS).slice(0,10).forEach(w=>{
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
       const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
       const opts=shuffle([w[0]].concat(others));
       wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
     });
-    /* авто: впиши слово */
-    _wbHead("✍️ Впиши слово по-английски");
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
     shuffle(WORDS).slice(0,6).forEach(w=>{
       const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
       wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
     });
-    /* авто: полезные фразы */
+    /* 4. Phrases: значение + соединение */
     if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
-      _wbHead("🧩 Полезные фразы — выбери значение");
+      _wbHead("🧩 Phrases · выбери значение");
       shuffle(CHUNKS).forEach(c=>{
         const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
         const opts=shuffle([c[1]].concat(others));
         wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
       });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
     }
-    _wbHead("📝 Грамматика и лексика — закрепление");
+    _wbHead("📖 Grammar · практика");
   }
   WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
   WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 

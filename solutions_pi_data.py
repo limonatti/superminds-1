@@ -154,6 +154,28 @@ DATA.append({
   "Расскажи о своей семье: кто есть, чем занимаются (Present Simple).",
  ],
  "writing":r'''<b>Personal profile.</b> Напиши короткий профиль о себе (5–6 предложений): имя, возраст, откуда ты, внешность (I've got…), семья и что ты обычно делаешь после школы (Present Simple). <br><br>Проверь себя: есть ли <i>-s</i> у he/she, правильные краткие формы (I'm, she's got), и заглавные буквы у имён и национальностей.''',
+ "exam":{
+  "title":"Reading: A language that connects the world",
+  "passage":r'''<p>English is spoken by more people than almost any other language, but most of them did not learn it as babies. For millions of people around the world, English is a second or third language that they study at school.</p>
+   <p>Why is English so useful? One reason is history, but the main reason today is communication. When a person from Japan meets a person from Brazil, they often talk in English. It is used on the internet, in science, in business and in travel. Knowing English can help you make friends, find information and get a good job.</p>
+   <p>Of course, English is not the only important language, and every language is valuable. But because so many people share English, it has become a useful bridge between cultures. That is why students all over the world, including you, are learning it right now.</p>''',
+  "tfng":[
+   {"q":"Most people who speak English learned it as babies.","a":"F"},
+   {"q":"For millions of people, English is a second or third language.","a":"T"},
+   {"q":"English is the hardest language in the world.","a":"NG"},
+   {"q":"English is often used when people from different countries meet.","a":"T"},
+   {"q":"The text says English is the only important language.","a":"F"},
+   {"q":"Knowing English can help you get a good job.","a":"T"},
+  ],
+  "mc":[
+   {"q":"What is the main reason English is useful today?","o":["communication","the weather","its age only"],"a":0},
+   {"q":"When a person from Japan meets a person from Brazil, they often talk in…","o":["English","Spanish","Japanese"],"a":0},
+   {"q":"According to the text, English has become…","o":["a bridge between cultures","a secret code","a dead language"],"a":0},
+   {"q":"Who is learning English, according to the last sentence?","o":["students all over the world","only adults","nobody"],"a":0},
+  ],
+  "writing":r'''Some people think everyone in the world should learn English. Do you agree or disagree? Write about 100–120 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>learning English</b>. Say: how long you have studied it · why you are learning it · what is easy or difficult for you · how you will use English in the future.''',
+ },
  "wbmc":[
   {"q":"Единственный ребёнок = an ___ child.","o":["only","one","single"],"a":0},
   {"q":"Фамилия = ___ .","o":["surname","first name","nickname"],"a":0},
@@ -1723,6 +1745,28 @@ DATA.append({
   "Как сделать район безопаснее? Дай 3 совета (If we…, …).",
  ],
  "writing":r'''<b>A crime report / story.</b> Напиши историю о происшествии (7–8 предложений): что случилось (Past Simple), что произошло РАНЬШЕ (Past Perfect), и передай слова свидетеля (reported speech: He said…, She told me…). <br><br>Проверь: had + 3-я форма для более раннего события; say vs tell; сдвиг времён в косвенной речи.''',
+ "exam":{
+  "title":"Reading: The science of catching criminals",
+  "passage":r'''<p>In the past, catching a criminal often depended on luck or on a witness who saw the crime. Today, science plays a huge part. Detectives use special tools and clever tests that did not exist a hundred years ago.</p>
+   <p>One of the most famous is the fingerprint. Every person's fingerprints are different, so a single print left at the scene can identify a thief. More recently, scientists have learned to test tiny pieces of skin or hair to find out who was there. Cameras in streets and shops also help the police to follow a suspect's movements.</p>
+   <p>However, technology is only a tool. Detectives still need to think carefully, ask the right questions and notice small details that a machine might miss. The best investigations happen when clever science and a curious human mind work together.</p>''',
+  "tfng":[
+   {"q":"In the past, catching a criminal sometimes depended on luck.","a":"T"},
+   {"q":"Fingerprint tests are exactly the same for every person.","a":"F"},
+   {"q":"Most criminals today are caught abroad.","a":"NG"},
+   {"q":"Scientists can test tiny pieces of skin or hair.","a":"T"},
+   {"q":"Cameras help the police follow a suspect.","a":"T"},
+   {"q":"The text says machines can replace detectives completely.","a":"F"},
+  ],
+  "mc":[
+   {"q":"What did catching a criminal often depend on in the past?","o":["luck or a witness","computers","cameras"],"a":0},
+   {"q":"Why can a fingerprint identify a thief?","o":["everyone's fingerprints are different","they are always dirty","they are very large"],"a":0},
+   {"q":"What else helps the police follow a suspect?","o":["street and shop cameras","the weather","old maps"],"a":0},
+   {"q":"When do the best investigations happen?","o":["when science and a curious mind work together","when nobody helps","when the criminal confesses"],"a":0},
+  ],
+  "writing":r'''Some people think there should be cameras on every street to reduce crime; others think this is bad for privacy. What is your opinion? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>keeping your area safe</b>. Say: whether your area is safe or not · what problems there are (if any) · what the police do · what people could do to help.''',
+ },
  "wbmc":[
   {"q":"Вор = a ___ .","o":["thief","witness","victim"],"a":0},
   {"q":"Улики = ___ .","o":["evidence","budget","prison"],"a":0},
@@ -1900,6 +1944,28 @@ DATA.append({
   "Роботы в будущем: за и против (relative clauses, will).",
  ],
  "writing":r'''<b>Describe an invention.</b> Выбери изобретение (телефон, интернет, колесо…) и напиши 7–8 предложений: что это (a device/machine that/which…), для чего используется (it's used for…), кто его придумал и почему оно важно. Используй relative clauses минимум 3 раза.<br><br>Проверь: who/which/that/where/whose; used for + -ing; -ful/-less прилагательные.''',
+ "exam":{
+  "title":"Reading: Small ideas, big changes",
+  "passage":r'''<p>When we think of great inventions, we often imagine huge machines or powerful computers. But some of the ideas that changed the world most were surprisingly small and simple.</p>
+   <p>Take the humble pencil, or the paper clip, or clean drinking water. None of these are exciting, yet each one made millions of lives easier and safer. The wheel, invented thousands of years ago, is still one of the most important ideas in history. What these inventions share is that they solved a real, everyday problem.</p>
+   <p>Scientists say that the best inventors are not always the cleverest people, but the most curious ones. They ask simple questions like "Why does this happen?" and "Is there a better way?" So the next time you notice a small, annoying problem, remember: it might be the start of a big idea.</p>''',
+  "tfng":[
+   {"q":"Some world-changing ideas were small and simple.","a":"T"},
+   {"q":"The paper clip is described as an exciting invention.","a":"F"},
+   {"q":"The pencil was invented in China.","a":"NG"},
+   {"q":"The wheel is still one of the most important ideas in history.","a":"T"},
+   {"q":"These inventions all solved everyday problems.","a":"T"},
+   {"q":"Scientists say the best inventors are always the cleverest people.","a":"F"},
+  ],
+  "mc":[
+   {"q":"What do we often imagine when we think of great inventions?","o":["huge machines or computers","small pencils","clean water"],"a":0},
+   {"q":"What do the simple inventions in the text share?","o":["they solved everyday problems","they were very expensive","they were dangerous"],"a":0},
+   {"q":"According to scientists, the best inventors are…","o":["the most curious","the richest","the tallest"],"a":0},
+   {"q":"What might a small, annoying problem be?","o":["the start of a big idea","a waste of time","impossible to solve"],"a":0},
+  ],
+  "writing":r'''Some people think schools should spend more time teaching science and technology. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>an invention that is important to you</b>. Say: what it is · what it is used for · why it is important in your life · how life would be different without it.''',
+ },
  "wbmc":[
   {"q":"Учёный = a ___ .","o":["scientist","science","inventor thing"],"a":0},
   {"q":"Изобретение = an ___ .","o":["invention","inventor","invent"],"a":0},

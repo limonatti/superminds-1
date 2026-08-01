@@ -189,6 +189,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>Describe an invention.</b> Выбери изобретение (телефон, интернет, колесо…) и напиши 7–8 предложений: что это (a device/machine that/which…), для чего используется (it's used for…), кто его придумал и почему оно важно. Используй relative clauses минимум 3 раза.<br><br>Проверь: who/which/that/where/whose; used for + -ing; -ful/-less прилагательные.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: Small ideas, big changes</h3><p>When we think of great inventions, we often imagine huge machines or powerful computers. But some of the ideas that changed the world most were surprisingly small and simple.</p>
+   <p>Take the humble pencil, or the paper clip, or clean drinking water. None of these are exciting, yet each one made millions of lives easier and safer. The wheel, invented thousands of years ago, is still one of the most important ideas in history. What these inventions share is that they solved a real, everyday problem.</p>
+   <p>Scientists say that the best inventors are not always the cleverest people, but the most curious ones. They ask simple questions like "Why does this happen?" and "Is there a better way?" So the next time you notice a small, annoying problem, remember: it might be the start of a big idea.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think schools should spend more time teaching science and technology. Do you agree or disagree? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>an invention that is important to you</b>. Say: what it is · what it is used for · why it is important in your life · how life would be different without it.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My favourite invention.</b> Напиши 6–7 предложений о важном изобретении: что это (relative clause), для чего (used for…), и почему оно полезно. Мин. 4 слова из юнита (device, invention, technology, useful…).<br><br>Затем реши <a href="solutions-pi-u9-workbook.html" style="color:#7c2340;font-weight:900;text-decoration:underline">Workbook Unit 9</a> 🔬</div>
 
@@ -212,6 +224,8 @@ const DIALOG2=[["m", "Welcome! Today we're talking about young inventors with en
 const LQ2=[{"q": "What is Dr Nova?", "o": ["a teacher", "an engineer", "a doctor of medicine"], "a": 1}, {"q": "Where do some of the best ideas come from?", "o": ["young people", "old machines", "books only"], "a": 0}, {"q": "What is Sam worried about?", "o": ["he's not good at maths", "he has no ideas", "he's too old"], "a": 0}, {"q": "What is the most important skill, according to Dr Nova?", "o": ["curiosity", "money", "strength"], "a": 0}, {"q": "What is her advice?", "o": ["start small and don't fear failure", "give up", "copy others"], "a": 0}];
 const RQ2=[{"q": "What can robots already do?", "o": ["build cars and help doctors", "feel emotions", "dream"], "a": 0}, {"q": "What are some people worried about?", "o": ["robots taking all our jobs", "robots getting tired", "robots being slow"], "a": 0}, {"q": "What does new technology also create?", "o": ["new jobs", "more rain", "less food"], "a": 0}, {"q": "What are robots NOT good at?", "o": ["creativity and caring for people", "lifting things", "counting"], "a": 0}, {"q": "Who does the future belong to?", "o": ["people who keep learning", "only scientists", "robots"], "a": 0}];
 const TF=[{"q": "The gadget in the lab was a thermometer.", "a": true}, {"q": "Zoe and Leo decided to keep the gadget.", "a": false}, {"q": "Fleming discovered penicillin by accident.", "a": true}, {"q": "Dr Nova says you must be great at maths to be an inventor.", "a": false}, {"q": "New technology can create new jobs.", "a": true}, {"q": "Robots are very good at caring for people.", "a": false}];
+const EXAM_TFNG=[{"q": "Some world-changing ideas were small and simple.", "a": "T"}, {"q": "The paper clip is described as an exciting invention.", "a": "F"}, {"q": "The pencil was invented in China.", "a": "NG"}, {"q": "The wheel is still one of the most important ideas in history.", "a": "T"}, {"q": "These inventions all solved everyday problems.", "a": "T"}, {"q": "Scientists say the best inventors are always the cleverest people.", "a": "F"}];
+const EXAM_MC=[{"q": "What do we often imagine when we think of great inventions?", "o": ["huge machines or computers", "small pencils", "clean water"], "a": 0}, {"q": "What do the simple inventions in the text share?", "o": ["they solved everyday problems", "they were very expensive", "they were dangerous"], "a": 0}, {"q": "According to scientists, the best inventors are…", "o": ["the most curious", "the richest", "the tallest"], "a": 0}, {"q": "What might a small, annoying problem be?", "o": ["the start of a big idea", "a waste of time", "impossible to solve"], "a": 0}];
 const WBMC=[{"q": "Учёный = a ___ .", "o": ["scientist", "science", "inventor thing"], "a": 0}, {"q": "Изобретение = an ___ .", "o": ["invention", "inventor", "invent"], "a": 0}, {"q": "Человек, который… = a person ___ …", "o": ["who", "which", "where"], "a": 0}, {"q": "It's got a screen — it ___ be a device. (уверен)", "o": ["must", "can't", "might not"], "a": 0}, {"q": "«полезный» = use + ___ .", "o": ["ful", "less", "able"], "a": 0}];
 const WBGAPS=[{"q": "A scientist is a person ___ does experiments. (who/that)", "a": ["who", "that"]}, {"q": "A lab is a place ___ scientists work. (where)", "a": ["where"]}, {"q": "It's too small — it ___ (can't) be a laptop.", "a": ["can't", "cannot"]}, {"q": "invent → an ___ (существительное)", "a": ["invention"]}, {"q": "It's got a screen — it ___ (must) be a device.", "a": ["must"]}];
 
@@ -315,6 +329,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -355,6 +379,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
