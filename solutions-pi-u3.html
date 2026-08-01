@@ -85,7 +85,7 @@
   </div>
 
   <div class="hero">
-    <div class="hcover" style="background:linear-gradient(135deg,#7c3aa0,#b06ed0)"><span>🎬</span></div>
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_061453_ea0e7223-82ae-460c-9718-940ba93db434.png" alt="Unit 3 · On screen">
     <div class="hb">
       <h1>Unit 3 · On screen</h1>
       <div class="d">📚 Comparatives & superlatives · (not) as…as · too/enough · ТВ, кино и медиа</div>
@@ -191,6 +191,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>A film review.</b> Напиши отзыв о фильме или сериале (7–8 предложений): название и жанр, о чём он (It's about…), что тебе понравилось/нет, сравнение с другим (better/worse/not as good as) и рекомендация. Используй превосходную степень хотя бы раз.<br><br>Проверь: -er/more, the …-est/the most, too/enough, as…as.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: The story of television</h3><p>Today almost every home has a screen, but television is younger than you might think. The first regular TV broadcasts began less than a hundred years ago. At first, sets were expensive and the picture was black and white, so only rich families had one.</p>
+   <p>Everything changed in the 1950s and 1960s. Television became cheaper, and millions of families bought their first set. Suddenly, people all over a country could watch the same news, the same sport and the same shows at the same time. Some experts say television brought families together in the evenings; others say it stopped people talking to each other.</p>
+   <p>Now we watch on phones and laptops as well as TVs, and we choose exactly what and when to watch. Television has changed a lot, but one thing has stayed the same: people love a good story on a screen.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think young people today spend too much time watching screens. Do you agree or disagree? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>your favourite film or TV programme</b>. Say: what it is and what kind · what it is about · why you like it · who you watch it with.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My favourite show.</b> Напиши 6–7 предложений о любимом фильме/сериале: жанр, сюжет, сравнение с другим (better/more exciting than) и рекомендация.<br><br>Затем открой <a href="solutions-pi-u3-workbook.html" style="color:#6a2f8c;font-weight:900;text-decoration:underline">Workbook Unit 3</a> 🎬</div>
 
@@ -214,6 +226,8 @@ const DIALOG2=[["m", "Today we're chatting with Zara, one of the most popular vl
 const LQ2=[{"q": "What is Zara?", "o": ["an actress", "a popular vlogger", "a news reporter"], "a": 1}, {"q": "How long does a ten-minute video take her?", "o": ["ten minutes", "an hour", "a whole day"], "a": 2}, {"q": "What does Ben ask about?", "o": ["camera or idea", "money", "fans"], "a": 0}, {"q": "What is more important, according to Zara?", "o": ["a good camera", "a good idea", "a big screen"], "a": 1}, {"q": "What is her advice for beginners?", "o": ["buy expensive gear", "start now with your phone", "copy others"], "a": 1}];
 const RQ2=[{"q": "What do people watch in reality shows?", "o": ["ordinary people", "famous actors", "cartoons"], "a": 0}, {"q": "Why do we enjoy them, according to experts?", "o": ["the people seem real", "they are educational", "they are short"], "a": 0}, {"q": "Why do TV channels love reality shows?", "o": ["they are cheaper to make", "they are long", "they win prizes"], "a": 0}, {"q": "Is everything as real as it looks?", "o": ["yes, always", "no, producers plan the drama", "only the singing"], "a": 1}, {"q": "What should you remember?", "o": ["it's entertainment, not real life", "it's a documentary", "it's live"], "a": 0}];
 const TF=[{"q": "Tom loves documentaries.", "a": false}, {"q": "Tom and Ella both dislike the reality show.", "a": true}, {"q": "Zara says a ten-minute video takes a whole day.", "a": true}, {"q": "Zara thinks a good camera is more important than a good idea.", "a": false}, {"q": "Reality shows are cheaper to make than dramas.", "a": true}, {"q": "Everything in reality shows is completely real.", "a": false}];
+const EXAM_TFNG=[{"q": "Television is more than a thousand years old.", "a": "F"}, {"q": "At first, only rich families had a television.", "a": "T"}, {"q": "Colour television was invented in the 1920s.", "a": "NG"}, {"q": "In the 1950s and 1960s, TV became cheaper.", "a": "T"}, {"q": "All experts agree that television brought families together.", "a": "F"}, {"q": "Today people can choose what and when to watch.", "a": "T"}];
+const EXAM_MC=[{"q": "The first regular TV broadcasts began…", "o": ["less than 100 years ago", "500 years ago", "last year"], "a": 0}, {"q": "Why did only rich families have TV at first?", "o": ["sets were expensive", "there were no programmes", "it was illegal"], "a": 0}, {"q": "What did television let people do in the 1960s?", "o": ["watch the same shows at the same time", "travel abroad", "learn to drive"], "a": 0}, {"q": "According to the text, what has stayed the same?", "o": ["people love a good story on a screen", "the picture is black and white", "only rich people watch"], "a": 0}];
 const WBMC=[{"q": "Документальный фильм = a ___ .", "o": ["documentary", "cartoon", "sitcom"], "a": 0}, {"q": "Сюжет = the ___ .", "o": ["plot", "screen", "scene"], "a": 0}, {"q": "the ___ film ever (good, превосх.)", "o": ["best", "goodest", "better"], "a": 0}, {"q": "«слишком длинный» = ___ long.", "o": ["too", "enough", "as"], "a": 0}, {"q": "Терпеть не могу = I can't ___ it.", "o": ["stand", "hold", "keep"], "a": 0}];
 const WBGAPS=[{"q": "This film is ___ (funny) than that one. (сравн.)", "a": ["funnier"]}, {"q": "It's the ___ (exciting) show ever. (превосх.)", "a": ["most exciting"]}, {"q": "It wasn't good ___ . (too/enough)", "a": ["enough"]}, {"q": "Horror is ___ (bad) than comedy for me. (сравн.)", "a": ["worse"]}, {"q": "TV isn't as ___ (interesting) as cinema.", "a": ["interesting"]}];
 
@@ -317,6 +331,32 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -341,6 +381,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
@@ -355,38 +397,48 @@ if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
 const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
-/* Workbook */
+/* Workbook — насыщенный, по секциям, разные типы заданий */
 const wb=document.getElementById("wb");
 if(wb){
   let _wn=0;
   function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
   if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
-    /* авто: слова RU→EN */
-    _wbHead("🔤 Слова юнита — выбери перевод");
-    shuffle(WORDS).slice(0,10).forEach(w=>{
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
       const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
       const opts=shuffle([w[0]].concat(others));
       wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
     });
-    /* авто: впиши слово */
-    _wbHead("✍️ Впиши слово по-английски");
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
     shuffle(WORDS).slice(0,6).forEach(w=>{
       const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
       wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
     });
-    /* авто: полезные фразы */
+    /* 4. Phrases: значение + соединение */
     if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
-      _wbHead("🧩 Полезные фразы — выбери значение");
+      _wbHead("🧩 Phrases · выбери значение");
       shuffle(CHUNKS).forEach(c=>{
         const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
         const opts=shuffle([c[1]].concat(others));
         wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
       });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
     }
-    _wbHead("📝 Грамматика и лексика — закрепление");
+    _wbHead("📖 Grammar · практика");
   }
   WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
   WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 

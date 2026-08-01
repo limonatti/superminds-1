@@ -380,6 +380,7 @@ DATA.append({
 # ===================== UNIT 2 · Adventure =====================
 DATA.append({
  "n":2, "title":"Adventure", "emoji":"🧗", "grad":("#2a6f8f","#3aa0c9"),
+ "cover_img":"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_061436_930b4cb2-be9f-414d-ab91-383f40aa3495.png",
  "desc":"Past Continuous · Past Simple vs Continuous · приключения и природа",
  "grammar":[
   {"t":"2B · Past Continuous","h":r'''    <table>
@@ -539,6 +540,28 @@ DATA.append({
   "Опасные виды спорта: назови 3 и скажи, хотел бы ты попробовать и почему.",
  ],
  "writing":r'''<b>An adventure story.</b> Напиши историю (7–8 предложений) о приключении: где ты был(а), что делал(а) (Past Continuous как фон), что вдруг случилось (Past Simple), и чем всё закончилось. Используй <i>while, when, suddenly, in the end, luckily</i>.<br><br>Проверь: was/were + -ing, правильные Past Simple, связки времени.''',
+ "exam":{
+  "title":"Reading: Why do people love dangerous sports?",
+  "passage":r'''<p>Every year, millions of people around the world take part in dangerous sports such as rock climbing, skydiving and white-water rafting. To many people this seems crazy: why risk your life for fun? But scientists have some interesting answers.</p>
+   <p>One reason is a chemical in the brain that makes us feel excited and happy when we take a risk. After a difficult climb, many people feel a powerful sense of joy and success. Another reason is confidence. People who do adventure sports say that facing their fears in the mountains helps them feel braver in normal life too.</p>
+   <p>Of course, these sports can be dangerous, and accidents do happen. However, most serious climbers and divers train for years and follow strict safety rules. For them, adventure is not about being careless — it is about being well prepared and pushing their own limits.</p>''',
+  "tfng":[
+   {"q":"Millions of people do dangerous sports every year.","a":"T"},
+   {"q":"Scientists think dangerous sports are crazy.","a":"F"},
+   {"q":"Skydiving is the most popular adventure sport.","a":"NG"},
+   {"q":"Facing fears in the mountains can make people braver in daily life.","a":"T"},
+   {"q":"Most serious climbers train for years.","a":"T"},
+   {"q":"Adventure sports never cause accidents.","a":"F"},
+  ],
+  "mc":[
+   {"q":"According to the text, one reason people love risk is…","o":["a chemical in the brain","the cold weather","the price"],"a":0},
+   {"q":"People who do adventure sports say it helps them feel…","o":["more tired","braver in normal life","hungrier"],"a":1},
+   {"q":"For serious climbers, adventure is about…","o":["being careless","being well prepared","being famous"],"a":1},
+   {"q":"What does the text say about accidents?","o":["they never happen","they do happen sometimes","they happen every day"],"a":1},
+  ],
+  "writing":r'''Some people think dangerous sports should be banned because they are too risky. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>an adventurous or exciting thing you have done or would like to do</b>. Say: what it is · why it interests you · how you would feel · whether it is dangerous.''',
+ },
  "wbmc":[
   {"q":"Заблудиться = to get ___ .","o":["lost","away","off"],"a":0},
   {"q":"Поставить палатку = to put ___ a tent.","o":["up","on","in"],"a":0},
@@ -559,6 +582,7 @@ DATA.append({
 # ===================== UNIT 3 · On screen =====================
 DATA.append({
  "n":3, "title":"On screen", "emoji":"🎬", "grad":("#7c3aa0","#b06ed0"),
+ "cover_img":"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_061453_ea0e7223-82ae-460c-9718-940ba93db434.png",
  "desc":"Comparatives & superlatives · (not) as…as · too/enough · ТВ, кино и медиа",
  "grammar":[
   {"t":"3B · Comparative & superlative","h":r'''    <table>
@@ -718,6 +742,28 @@ DATA.append({
   "Слишком много экранного времени — за и против (too/enough).",
  ],
  "writing":r'''<b>A film review.</b> Напиши отзыв о фильме или сериале (7–8 предложений): название и жанр, о чём он (It's about…), что тебе понравилось/нет, сравнение с другим (better/worse/not as good as) и рекомендация. Используй превосходную степень хотя бы раз.<br><br>Проверь: -er/more, the …-est/the most, too/enough, as…as.''',
+ "exam":{
+  "title":"Reading: The story of television",
+  "passage":r'''<p>Today almost every home has a screen, but television is younger than you might think. The first regular TV broadcasts began less than a hundred years ago. At first, sets were expensive and the picture was black and white, so only rich families had one.</p>
+   <p>Everything changed in the 1950s and 1960s. Television became cheaper, and millions of families bought their first set. Suddenly, people all over a country could watch the same news, the same sport and the same shows at the same time. Some experts say television brought families together in the evenings; others say it stopped people talking to each other.</p>
+   <p>Now we watch on phones and laptops as well as TVs, and we choose exactly what and when to watch. Television has changed a lot, but one thing has stayed the same: people love a good story on a screen.</p>''',
+  "tfng":[
+   {"q":"Television is more than a thousand years old.","a":"F"},
+   {"q":"At first, only rich families had a television.","a":"T"},
+   {"q":"Colour television was invented in the 1920s.","a":"NG"},
+   {"q":"In the 1950s and 1960s, TV became cheaper.","a":"T"},
+   {"q":"All experts agree that television brought families together.","a":"F"},
+   {"q":"Today people can choose what and when to watch.","a":"T"},
+  ],
+  "mc":[
+   {"q":"The first regular TV broadcasts began…","o":["less than 100 years ago","500 years ago","last year"],"a":0},
+   {"q":"Why did only rich families have TV at first?","o":["sets were expensive","there were no programmes","it was illegal"],"a":0},
+   {"q":"What did television let people do in the 1960s?","o":["watch the same shows at the same time","travel abroad","learn to drive"],"a":0},
+   {"q":"According to the text, what has stayed the same?","o":["people love a good story on a screen","the picture is black and white","only rich people watch"],"a":0},
+  ],
+  "writing":r'''Some people think young people today spend too much time watching screens. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>your favourite film or TV programme</b>. Say: what it is and what kind · what it is about · why you like it · who you watch it with.''',
+ },
  "wbmc":[
   {"q":"Документальный фильм = a ___ .","o":["documentary","cartoon","sitcom"],"a":0},
   {"q":"Сюжет = the ___ .","o":["plot","screen","scene"],"a":0},
@@ -738,6 +784,7 @@ DATA.append({
 # ===================== UNIT 4 · Our planet =====================
 DATA.append({
  "n":4, "title":"Our planet", "emoji":"🌍", "grad":("#1f7a4d","#3ab06e"),
+ "cover_img":"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_061509_ae0ee2fc-593e-4f89-b2fd-4b5c439d5430.png",
  "desc":"be going to · will · Present Continuous for future · first conditional · природа и экология",
  "grammar":[
   {"t":"4B · Будущее: be going to / will / Present Continuous","h":r'''    <div class="g-ex"><b>be going to</b> — план/намерение: We <b>are going to</b> plant trees.</div>
@@ -892,6 +939,28 @@ DATA.append({
   "Ролевая игра: планируете эко-проект в классе (be going to, договорённости).",
  ],
  "writing":r'''<b>A plan to help the planet.</b> Напиши 7–8 предложений: какую эко-проблему ты видишь, что вы <i>going to</i> сделать в классе/дома, и 2 условия (If we…, we'll…). Используй will для прогноза и be going to для плана.<br><br>Проверь: после <i>if</i> — present simple; be going to для планов; связки because/so.''',
+ "exam":{
+  "title":"Reading: Power from nature",
+  "passage":r'''<p>For most of history, people have burned coal, oil and gas to make energy. These fuels are cheap and powerful, but they also cause pollution and make climate change worse. Today many countries are turning to a cleaner idea: renewable energy.</p>
+   <p>Renewable energy comes from natural sources that never run out, such as the sun, the wind and water. Solar panels turn sunlight into electricity, while huge wind turbines use moving air. In some sunny or windy places, this clean energy is now cheaper than energy from oil or gas.</p>
+   <p>Renewable energy is not perfect. The sun does not always shine and the wind does not always blow, so scientists are working on better batteries to store the power. But most experts agree that if we want a healthy planet, we must use much more energy from nature and much less from fossil fuels.</p>''',
+  "tfng":[
+   {"q":"Coal, oil and gas cause pollution.","a":"T"},
+   {"q":"Renewable energy comes from sources that run out quickly.","a":"F"},
+   {"q":"Solar panels are made mostly in China.","a":"NG"},
+   {"q":"In some places, clean energy is now cheaper than oil or gas.","a":"T"},
+   {"q":"The sun and wind are always available.","a":"F"},
+   {"q":"Scientists are working on better batteries to store power.","a":"T"},
+  ],
+  "mc":[
+   {"q":"What problem do coal, oil and gas cause?","o":["pollution and climate change","too much rain","cheap prices only"],"a":0},
+   {"q":"Where does renewable energy come from?","o":["natural sources that never run out","factories only","under the sea only"],"a":0},
+   {"q":"What do wind turbines use?","o":["moving air","hot water","coal"],"a":0},
+   {"q":"What do most experts agree about?","o":["we must use more energy from nature","we should burn more coal","energy doesn't matter"],"a":0},
+  ],
+  "writing":r'''Some people think governments should do more to fight climate change, even if it costs a lot of money. Do you agree or disagree? Write about 120–150 words with reasons and examples.''',
+  "speaking":r'''Talk for 1–2 minutes about <b>what you and your family do to help the environment</b>. Say: what you do now · what more you could do · why it is important · what governments should do.''',
+ },
  "wbmc":[
   {"q":"Изменение климата = climate ___ .","o":["change","weather","warm"],"a":0},
   {"q":"Перерабатывать = to ___ .","o":["recycle","waste","throw"],"a":0},

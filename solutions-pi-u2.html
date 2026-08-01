@@ -85,7 +85,7 @@
   </div>
 
   <div class="hero">
-    <div class="hcover" style="background:linear-gradient(135deg,#2a6f8f,#3aa0c9)"><span>🧗</span></div>
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_061436_930b4cb2-be9f-414d-ab91-383f40aa3495.png" alt="Unit 2 · Adventure">
     <div class="hb">
       <h1>Unit 2 · Adventure</h1>
       <div class="d">📚 Past Continuous · Past Simple vs Continuous · приключения и природа</div>
@@ -191,6 +191,18 @@
   <h2>✍️ Writing</h2>
   <div class="hw"><b>An adventure story.</b> Напиши историю (7–8 предложений) о приключении: где ты был(а), что делал(а) (Past Continuous как фон), что вдруг случилось (Past Simple), и чем всё закончилось. Используй <i>while, when, suddenly, in the end, luckily</i>.<br><br>Проверь: was/were + -ing, правильные Past Simple, связки времени.</div>
 
+
+  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: Why do people love dangerous sports?</h3><p>Every year, millions of people around the world take part in dangerous sports such as rock climbing, skydiving and white-water rafting. To many people this seems crazy: why risk your life for fun? But scientists have some interesting answers.</p>
+   <p>One reason is a chemical in the brain that makes us feel excited and happy when we take a risk. After a difficult climb, many people feel a powerful sense of joy and success. Another reason is confidence. People who do adventure sports say that facing their fears in the mountains helps them feel braver in normal life too.</p>
+   <p>Of course, these sports can be dangerous, and accidents do happen. However, most serious climbers and divers train for years and follow strict safety rules. For them, adventure is not about being careless — it is about being well prepared and pushing their own limits.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>
+  <div id="exammc"></div>
+  <div class="hw"><b>Writing · Task 2.</b> Some people think dangerous sports should be banned because they are too risky. Do you agree or disagree? Write about 120–150 words with reasons and examples.</div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> Talk for 1–2 minutes about <b>an adventurous or exciting thing you have done or would like to do</b>. Say: what it is · why it interests you · how you would feel · whether it is dangerous.</div>
+
   <h2>🏠 Домашнее задание</h2>
   <div class="hw"><b>My adventure.</b> Опиши реальное или выдуманное приключение в Past Simple/Continuous (6–7 предложений). Мин. 3 слова из юнита (cave, tent, explore…) и связки while/when/suddenly.<br><br>Затем реши <a href="solutions-pi-u2-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Unit 2</a> 🧗</div>
 
@@ -214,6 +226,8 @@ const DIALOG2=[["m", "Welcome back! Today we're speaking to Maya, who sailed acr
 const LQ2=[{"q": "What did Maya do?", "o": ["climbed a mountain", "sailed across the ocean alone", "explored a cave"], "a": 1}, {"q": "What was she doing when the storm hit?", "o": ["sleeping", "cooking", "swimming"], "a": 0}, {"q": "What was she doing while the storm was passing?", "o": ["checking the ropes and radio", "crying", "calling home"], "a": 0}, {"q": "What did Leo ask about?", "o": ["the food", "the animals in the ocean", "the money"], "a": 1}, {"q": "What was the real danger, according to Maya?", "o": ["the sharks", "the weather", "other boats"], "a": 1}, {"q": "What is her advice?", "o": ["never take risks", "prepare well and take a map", "travel alone"], "a": 1}];
 const RQ2=[{"q": "How old is Aisha?", "o": ["twelve", "fourteen", "sixteen"], "a": 1}, {"q": "How long did she train?", "o": ["two months", "two years", "two weeks"], "a": 1}, {"q": "What happened while she was going up?", "o": ["it started to snow", "she got lost", "she fell"], "a": 0}, {"q": "What did the team do in the bad weather?", "o": ["went home", "put up tents and waited", "kept climbing"], "a": 1}, {"q": "How did Aisha feel at the top?", "o": ["she forgot everything, it was the best moment", "disappointed", "bored"], "a": 0}];
 const TF=[{"q": "Jack was hiking when Sara called him.", "a": true}, {"q": "Jack and his friend had plenty of water on the mountain.", "a": false}, {"q": "A guide helped Jack and his friend.", "a": true}, {"q": "Maya sailed across the ocean with a big team.", "a": false}, {"q": "Aisha trained for two years before the climb.", "a": true}, {"q": "Aisha gave up before she reached the top.", "a": false}];
+const EXAM_TFNG=[{"q": "Millions of people do dangerous sports every year.", "a": "T"}, {"q": "Scientists think dangerous sports are crazy.", "a": "F"}, {"q": "Skydiving is the most popular adventure sport.", "a": "NG"}, {"q": "Facing fears in the mountains can make people braver in daily life.", "a": "T"}, {"q": "Most serious climbers train for years.", "a": "T"}, {"q": "Adventure sports never cause accidents.", "a": "F"}];
+const EXAM_MC=[{"q": "According to the text, one reason people love risk is…", "o": ["a chemical in the brain", "the cold weather", "the price"], "a": 0}, {"q": "People who do adventure sports say it helps them feel…", "o": ["more tired", "braver in normal life", "hungrier"], "a": 1}, {"q": "For serious climbers, adventure is about…", "o": ["being careless", "being well prepared", "being famous"], "a": 1}, {"q": "What does the text say about accidents?", "o": ["they never happen", "they do happen sometimes", "they happen every day"], "a": 1}];
 const WBMC=[{"q": "Заблудиться = to get ___ .", "o": ["lost", "away", "off"], "a": 0}, {"q": "Поставить палатку = to put ___ a tent.", "o": ["up", "on", "in"], "a": 0}, {"q": "Выживать = to ___ .", "o": ["survive", "explore", "escape"], "a": 0}, {"q": "Past Continuous от «go»: were ___ ", "o": ["going", "went", "goes"], "a": 0}, {"q": "Утёс = a ___ .", "o": ["cliff", "cave", "valley"], "a": 0}];
 const WBGAPS=[{"q": "We ___ (sail) at noon. (past continuous)", "a": ["were sailing"]}, {"q": "While he ___ (climb), he slipped. (past continuous)", "a": ["was climbing"]}, {"q": "The rain ___ (start) suddenly. (past simple)", "a": ["started"]}, {"q": "quick → ___ (наречие)", "a": ["quickly"]}, {"q": "They ___ (not/give up). (past neg)", "a": ["didn't give up", "did not give up"]}];
 
@@ -317,6 +331,32 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -341,6 +381,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
@@ -355,38 +397,48 @@ if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
 const spk=document.getElementById("spk");
 if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
   d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
-/* Workbook */
+/* Workbook — насыщенный, по секциям, разные типы заданий */
 const wb=document.getElementById("wb");
 if(wb){
   let _wn=0;
   function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
   if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
-    /* авто: слова RU→EN */
-    _wbHead("🔤 Слова юнита — выбери перевод");
-    shuffle(WORDS).slice(0,10).forEach(w=>{
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
       const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
       const opts=shuffle([w[0]].concat(others));
       wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
     });
-    /* авто: впиши слово */
-    _wbHead("✍️ Впиши слово по-английски");
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
     shuffle(WORDS).slice(0,6).forEach(w=>{
       const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
       wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
     });
-    /* авто: полезные фразы */
+    /* 4. Phrases: значение + соединение */
     if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
-      _wbHead("🧩 Полезные фразы — выбери значение");
+      _wbHead("🧩 Phrases · выбери значение");
       shuffle(CHUNKS).forEach(c=>{
         const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
         const opts=shuffle([c[1]].concat(others));
         wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
       });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
     }
-    _wbHead("📝 Грамматика и лексика — закрепление");
+    _wbHead("📖 Grammar · практика");
   }
   WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
   WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
