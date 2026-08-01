@@ -174,6 +174,7 @@ DATA.append({
 # ===================== UNIT 1 · Feelings =====================
 DATA.append({
  "n":1, "title":"Feelings", "emoji":"😀", "grad":("#c0392b","#e0642a"),
+ "cover_img":"https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260801_055318_082e45db-ee65-4767-bce8-91222f2318e9.png",
  "desc":"Present Simple/Continuous · Past Simple · -ed/-ing adjectives · чувства и эмоции",
  "grammar":[
   {"t":"1B · Present Simple vs Present Continuous","h":r'''    <table>
@@ -337,6 +338,28 @@ DATA.append({
   "Опиши -ed/-ing: назови 3 boring и 3 exciting вещи из своей жизни.",
  ],
  "writing":r'''<b>A message about your feelings.</b> Напиши другу сообщение (5–7 предложений) о событии на прошлой неделе: что случилось (Past Simple), как ты себя чувствовал(а) (I felt…, I was…) и почему. Используй минимум 4 прилагательных чувств и 2 неправильных глагола.<br><br>Проверь: правильные формы Past Simple, -ed/-ing прилагательные, связки (because, so, but).''',
+ "exam":{
+  "title":"Reading: Why do we have emotions?",
+  "passage":r'''<p>Emotions are a normal and useful part of being human. Scientists believe that feelings like fear and happiness developed to help our ancestors survive. Fear, for example, warned early people about danger, while happiness encouraged them to repeat safe, helpful actions.</p>
+   <p>Today, our lives are safer, but our emotions work in the same way. When teenagers feel nervous before an exam, their body is simply getting ready to focus. The problem is not the feeling itself, but what we do with it. Research shows that people who talk about their emotions usually feel calmer than those who hide them.</p>
+   <p>Interestingly, emotions are not the same in every culture. In some countries, showing strong feelings in public is normal; in others, people prefer to stay calm. However, every culture has words for basic feelings such as anger, joy and sadness, which suggests that these emotions are shared by all humans.</p>''',
+  "tfng":[
+   {"q":"Scientists think emotions helped early humans survive.","a":"T"},
+   {"q":"Fear was useless for our ancestors.","a":"F"},
+   {"q":"Most teenagers enjoy taking exams.","a":"NG"},
+   {"q":"People who talk about feelings often feel calmer.","a":"T"},
+   {"q":"Showing strong emotions in public is normal in every country.","a":"F"},
+   {"q":"All cultures have words for basic emotions.","a":"T"},
+  ],
+  "mc":[
+   {"q":"According to the text, fear developed to…","o":["warn people about danger","make people sad","stop people sleeping"],"a":0},
+   {"q":"The real problem with emotions is…","o":["the feeling itself","what we do with the feeling","having no feelings"],"a":1},
+   {"q":"When teenagers feel nervous before an exam, their body is…","o":["getting ready to focus","becoming ill","falling asleep"],"a":0},
+   {"q":"The fact that all cultures have words for basic feelings suggests that…","o":["emotions are shared by all humans","emotions are dangerous","only some people feel them"],"a":0},
+  ],
+  "writing":r'''Some people think teenagers today are more stressed than young people in the past. Do you agree or disagree? Write about 120–150 words. Give reasons and examples. (Plan: introduction · your opinion + 2 reasons · conclusion.)''',
+  "speaking":r'''Talk for 1–2 minutes about <b>a time you felt very nervous or very proud</b>. Say: what the situation was · how you felt and why · what you did · how you feel about it now.''',
+ },
  "wbmc":[
   {"q":"Очень рад = ___ .","o":["delighted","annoyed","bored"],"a":0},
   {"q":"Гордиться кем-то = be ___ of somebody.","o":["proud","jealous","scared"],"a":0},

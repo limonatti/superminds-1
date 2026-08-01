@@ -258,6 +258,16 @@ function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("di
     if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
     else{b.classList.add("bad");b.disabled=true;}});
   return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
 function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
   const d=document.createElement("div");d.className="card";
@@ -298,6 +308,8 @@ const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.fo
 const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
 const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
 const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
 /* Упражнения */
 const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
 /* How to */
@@ -498,6 +510,7 @@ TEMPLATE = r'''<!DOCTYPE html>
   <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
   <div id="spk"></div>
 @@WRITING@@
+@@EXAM@@
   <h2>🏠 Домашнее задание</h2>
   <div class="hw">@@HW@@</div>
 
@@ -685,6 +698,9 @@ def data_js(u, meta=None):
         lines.append('const RQ2=%s;'%j(u.get("rq2",[])))
     if u.get("tf"):
         lines.append('const TF=%s;'%j(u["tf"]))
+    if u.get("exam"):
+        lines.append('const EXAM_TFNG=%s;'%j(u["exam"].get("tfng",[])))
+        lines.append('const EXAM_MC=%s;'%j(u["exam"].get("mc",[])))
     lines.append('const WBMC=%s;'%j(wbmc))
     lines.append('const WBGAPS=%s;'%j(wbgaps))
     return '\n'.join(lines)
@@ -699,6 +715,21 @@ def writing_html(u):
     w=u.get("writing")
     if not w: return ""
     return '\n  <h2>✍️ Writing</h2>\n  <div class="hw">%s</div>\n' % w
+
+def exam_html(u):
+    e=u.get("exam")
+    if not e: return ""
+    parts=['\n  <h2>🎯 Exam skills · IELTS <span class="sec-i">(формат экзамена)</span></h2>']
+    parts.append('  <div class="read"><h3>%s</h3>%s</div>' % (e.get("title","Reading"), e.get("passage","")))
+    if e.get("tfng"):
+        parts.append('  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>\n  <div id="examtfng"></div>')
+    if e.get("mc"):
+        parts.append('  <div class="wbband" style="border-color:#c0392b">Multiple choice — выбери правильный вариант</div>\n  <div id="exammc"></div>')
+    if e.get("writing"):
+        parts.append('  <div class="hw"><b>Writing · Task 2.</b> %s</div>' % e["writing"])
+    if e.get("speaking"):
+        parts.append('  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking cue card:</b> %s</div>' % e["speaking"])
+    return "\n".join(parts)+"\n"
 
 def listen2_html(u):
     if not u.get("dialog2"): return ""
@@ -775,7 +806,7 @@ def build(mod_name):
           "@@GRAMMAR@@":u.get("grammar_html") or grammar_html(u["grammar"]),
           "@@PRONFOCUS@@":u["pron_focus"], "@@PRONNOTE@@":u["pron_note"],
           "@@VIDEO@@":video_html(u, META), "@@WORDSKILLS@@":wordskills_html(u), "@@WRITING@@":writing_html(u),
-          "@@LISTEN2@@":listen2_html(u), "@@READ2@@":reading2_html(u), "@@TF@@":tf_html(u),
+          "@@LISTEN2@@":listen2_html(u), "@@READ2@@":reading2_html(u), "@@TF@@":tf_html(u), "@@EXAM@@":exam_html(u),
           "@@LISTEN_TITLE@@":u["listen_title"], "@@SCRIPT@@":u.get("script_raw") or script_html(u["dialog"],u["names"]),
           "@@READ_TITLE@@":u["reading_title"], "@@READ@@":u["reading"],
           "@@HOWTO_TITLE@@":u["howto_title"], "@@HOWTO@@":u["howto"],
