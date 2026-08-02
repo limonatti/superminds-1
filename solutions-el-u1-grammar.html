@@ -1,4 +1,12 @@
-<!DOCTYPE html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>Unit 1 · Грамматика · Solutions Elementary · English with Asya</title>\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">\n<style>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 · Грамматика · Solutions Elementary · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
   *{box-sizing:border-box}
   body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
   a{color:inherit;text-decoration:none}
@@ -65,7 +73,9 @@
   .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
   .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
-</style>\n</head>\n<body><div class="wrap">
+</style>
+</head>
+<body><div class="wrap">
   <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
   <div class="top"><a class="home" href="solutions-el-u1.html">← Урок (лексика)</a><a class="home alt" href="solutions-el-course.html">🎯 Тренажёр</a><a class="home" href="solutions-el-course.html">Все юниты</a></div>
   <h1>Unit 1 · Грамматика</h1><div class="d">📚 Present simple · притяжательный 's · семья и внешность</div>
@@ -79,7 +89,10 @@
     <div class="g-ex">Мн. число на -s: my parents<b>'</b> car (только апостроф).</div></div>
   <h2>✏️ Упражнения</h2><div id="ex"></div>
   <div class="foot">Made for @english.with_asya · Solutions Elementary · Unit 1 · грамматика</div>
-</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>\n<script src="sm-auth.js"><\/script>\n<script>\nconst WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
+</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
 const PRONWORDS=["daughter","niece","cousin","grandmother","children","grandparents"];
 const CHUNKS=[["This is my…","это мой/моя…"],["I've got…","у меня есть…"],["He/She lives in…","он/она живёт в…"],["What does he do?","чем он занимается?"],["every day","каждый день"],["at the weekend","на выходных"],["Have you got…?","у тебя есть…?"],["my best friend","мой лучший друг"]];
 const DIALOG=[["m","Hi Anna! Is this a photo of your family?"],["f","Yes, it is. This is my mum, Elena, and my dad, Victor."],["m","And who's that? Your sister?"],["f","No, that's my aunt, Maria. She's my mum's sister."],["m","Have you got any brothers or sisters?"],["f","Yes, I've got one brother. His name's Pavel. He's twelve."],["m","What does your dad do?"],["f","He works in a hospital. He's a doctor."],["m","Cool! And your mum?"],["f","She's a teacher. She teaches maths at my school."],["m","You've got a nice family, Anna!"]];
@@ -96,7 +109,9 @@ const RQ2=[{"q":"Where does Marco live?","o":["Italy","Spain","France"],"a":0},{
 const TF=[{"q":"Kate is older than Sam.","a":false},{"q":"Sam plays football at the weekend.","a":true},{"q":"Ben's grandfather lives in the countryside.","a":true},{"q":"Robert is a doctor.","a":false},{"q":"Marco lives in Italy.","a":true},{"q":"Marco's family has got a cat.","a":false}];
 const EXAM_MC=[{"q":"How many children have Mr and Mrs Garcia got?","o":["six","fourteen","four"],"a":0},{"q":"When does the family meet?","o":["every Sunday","every day","at Christmas"],"a":0},{"q":"Where do they meet?","o":["the grandparents' house","a restaurant","school"],"a":0},{"q":"What does Grandma make?","o":["a cake","pizza","soup"],"a":0},{"q":"What does Grandpa think of Sundays?","o":["he loves them","he hates them","he's tired"],"a":0},{"q":"Use of English: «A big family ___ a happy family.»","o":["is","are","be"],"a":0}];
 const WBMC=[{"q":"Сестра моего отца = my ___ .","o":["aunt","uncle","cousin"],"a":0},{"q":"Сын моего брата = my ___ .","o":["nephew","niece","cousin"],"a":0},{"q":"Родители моих родителей = my ___ .","o":["grandparents","parents","cousins"],"a":0},{"q":"Она ___ в Лондоне. (жить)","o":["live","lives","living"],"a":1},{"q":"Муж = ___ .","o":["husband","wife","son"],"a":0}];
-const WBGAPS=[{"q":"He ___ (get up) early.","a":["gets up"]},{"q":"___ (she/like) music? (вопрос)","a":["does she like"]},{"q":"This is ___ (my brother) room.","a":["my brother's"]},{"q":"They ___ (not/live) here.","a":["don't live","do not live"]},{"q":"My aunt ___ (have got) two children.","a":["has got","'s got"]}];\n\nconst wbox=document.getElementById("words");
+const WBGAPS=[{"q":"He ___ (get up) early.","a":["gets up"]},{"q":"___ (she/like) music? (вопрос)","a":["does she like"]},{"q":"This is ___ (my brother) room.","a":["my brother's"]},{"q":"They ___ (not/live) here.","a":["don't live","do not live"]},{"q":"My aunt ___ (have got) two children.","a":["has got","'s got"]}];
+
+const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
   d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
   d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
@@ -305,4 +320,7 @@ if(wb){
     TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
   }
 }
-var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;\n<\/script>\n</body>\n</html>\n
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+</script>
+</body>
+</html>
