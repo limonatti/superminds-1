@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 · Style · Solutions Elementary · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  .hero{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-bottom:22px}
+  .hero img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
+  .hcover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;position:relative}
+  .hcover span{font-size:clamp(70px,18vw,130px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+  .hero .hb{padding:18px 22px}
+  .hero h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,38px);color:#7c2340}
+  .hero .d{font-weight:800;font-size:14px;color:#5a4f47;margin-top:6px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:30px 4px 12px}
+  .sec-i{font-size:13px;color:#8a7a68;font-weight:700}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .g-ex b{color:#7c2340}
+  .ru{color:#8a7a68;font-size:13px}
+  .gt{color:#7c2340;font-size:16px;font-weight:900}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+  td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
+  th{background:#f6ede0;color:#7c2340}
+  .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:620px){.words{grid-template-columns:1fr}}
+  .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
+  .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
+  .word .en{font-weight:900;font-size:15px}
+  .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
+  .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:8px 14px;border-radius:999px;color:#7c2340}
+  .chip:hover{background:#fdfaf0}
+  .lc{background:#7c2340;border-radius:22px;padding:20px 22px;color:#fff;box-shadow:0 6px 0 #4d1527}
+  .lc h3{margin:0 0 6px;font-family:'Fredoka',sans-serif;font-size:20px}
+  .lc p{margin:4px 0 12px;font-weight:700;font-size:13.5px;opacity:.9}
+  .lbtn{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;margin-right:8px}
+  .lbtn.sec{background:rgba(255,255,255,.18)}
+  #script{display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65}
+  #script b{color:#ffd27a}
+  .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
+  .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
+  .read b{color:#7c2340}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .hw{background:#fff7ea;border:2px dashed #e0952a;border-radius:18px;padding:16px 20px;font-size:14.5px}
+  .spkcard{background:#eef6ff00;background:#fbf4ff;border:2px solid #b98cc9;border-radius:16px;padding:12px 16px;margin-bottom:10px;font-size:14.5px;font-weight:700;color:#5a3a66}
+  .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
+  .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="solutions-el-course.html">← Все юниты</a>
+    <a class="home alt" href="solutions-el-course.html">🎯 Тренажёр</a>
+    <a class="home" href="index.html">🏠 Домой</a>
+  </div>
+  <div class="hero">
+    <div class="hcover" id="cover" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAsHCAoIBwsKCQoMDAsNEBsSEA8PECEYGRQbJyMpKScjJiUsMT81LC47LyUmNko3O0FDRkdGKjRNUkxEUj9FRkP/2wBDAQwMDBAOECASEiBDLSYtQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0P/wAARCAIwAjADASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAAAAEGBQcCAwQI/8QAThAAAgECAgQFEAcFBwQDAQAAAAECAwQFEQYSITEHE0FRshQiMjU2UlRhcXJ0gZGhwdEXQmKSk7HSIzNTouEVFiRjc/DxJTRDgiZkwoP/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAgEDBAX/xAAkEQEBAAICAgICAwEBAAAAAAAAAQIREjEDMgQhIkETUVKBQv/aAAwDAQACEQMRAD8A2oQCTmtAJIAAkAQCQBAJIAAkAQCQBAJAEAkAQCQBAJAEAkAQCQBAJAEAkAQCQBAJAEAkAQCQBAJAEAkAQCQBAJAEAkAQCQBAJAEAkAQCQBABIEAkAQCSAAJAEAkAQCQBAAAEkEgAAAAAAAAQSAAAAAEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgCQQSAAAAAACAABJBIAAAAAABBIAAACCSAAOq8rq1tatZrPUi2lzvkPNDDuNhr3NatKtJZtxqOKi/EkaPcSeOwqVVUrW9eTnKi1q1Guyi1ms/GeswSAAAAAAAAAQBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBIBAAAkAAAABAEkEkAACQABAAk1npzpZjGFaRV7Wyu+LoRjBqPFxeWcU3taO7RfhBlTtKv9tSr3FV1OslTpwWUct3JylcbrbNtiklS+kTCvB737kf1EfSJhXg979yP6hxpuLcCpfSJhXg979yP6h9ImFeD3v3I/qHGm4toKl9ImFeD3v3I/qH0h4X4Pefcj+ocabi0XNCNzb1KM+xnFp+I6bGvPWdtcJKvTjnmt0498jCWmm9leVNS2s76pLlyhDJeV6x7XiEJX0Lji5qKpOGrszzbT8nIc8vJjh9ZVePjyy+8YzIK3faZ2lhNRubO9hnuerBp+vWPM+ETCl/4Lz7kf1FycpuJv1dVbQVL6RMK8HvfuR/UPpEwrwe9+5H9RvGs3FtBUvpEwrwe9+5H9Q+kTCvB737kf1DjTcW0gqf0h4X4Pe/cj+ofSHhXg979yP6hxpuLYCpfSJhXg979yP6h9ImFeD3v3I/qHGm4twKl9ImFeD3v3I/qH0iYX4Pefcj+ocabi2gqX0h4X4Pefcj+ofSJhXg979yP6hxpuLaCpfSHhXg979yP6h9IeFeD3v3I/qHGm4toKl9IeF+D3v3I/qH0iYX4Pe/cj+ocabi2gqX0h4V4Pe/cj+ofSJhXg979yP6hxpuLaCoT4RMN1Jalvd6+XW60I5Z/eONrpxb2tpTnfQuKkq2coOEY7Fnlk9qHGm4uBJUfpEwrwe9+5H9RP0iYV4Pefcj+ocabi2gqX0h4V4Pefcj+ofSHhXg979yP6hxpuLaCpfSHhfg959yP6h9ImFeD3v3I/qHGm4toKl9ImFeD3v3I/qH0iYV4Pe/cj+ocabi2gqX0iYV4Pe/cj+oj6RMK8HvfuR/UONNxbgVL6RMK8HvfuR/UR9ImFeD3v3I/qHGm4txBU/pEwrwe9+5H9Rxq8IeHcXLire6c8ut1oxSz8fXDjTcW4kpeGabxuLri5KpPNN6jpqLeW16rT5uc73wh4V/AvPuR/UONNxbAVP6RML8HvPuR/UPpDwrwe9+5H9Q403FtBUvpDwrwe9+5H9Q+kTCvB737kf1DjTcWwkqX0iYV4Pe/cj+ofSJhfg979yP6hxpuLaCpfSJhXg979yP6iPpEwrwe9+5H9Q403FtBU/pEwrwe9+5H9Q+kTCvB737kf1DjTcWwkqX0iYV4Pe/cj+ofSJhXg979yP6hxpuLYDXmlHCBr2FNYNK4t6/GrWlUpwaccns3vlyPPoPpXjGKaR29re3fG0Jxm5R4uKzyi2tqXOhxujbZhABLUkAACSCQABAGm+E3uuufMp9BFeoW1zWg5UKNapFPJuEG1n6ix8Jyy0rrvnhDoItfBGv8AoV16S+jE7b1ijW61r1Df+C3X4cvkOob7wW5/DkfQOQyJ5t4vn7qG+8Fufw5DqG/8Fufw5fI+gchkOZxfP3UF/wCC3X4UvkezDsIuK1ZK4hUprPLUknGUmbe0ixqOF2+pTadzUXWR71d8yl4YnWxOnKbcpOTk2+V7zM/JZja3HDeUjNYbY0sOtY0aMUsuya5Weor+kGl1jhDlSptXN0v/ABweyL+0+Tybyky01xh36uePSitnEqP7PLmy+O8+Rh8by+beVfTy+R4/F+MbOxGypYjaTt66zjJbGt8Xzo1riGFXdrcOnCNSrta6xNvNeIuWj2ltljOrSm1b3T/8c3sk/svl8m87sTdWwxOndUHqyfXJrnW//fjPR8TLLxZ3x5OPypj5MJ5MWv8AqG/8Fufw5fIOwv8AwW6/Dl8jeeD4nRxS0VWm0prZUhyxfyPdkfQ5vDxfP3UN94Nc/hyHUN/4Lc/hyPoHIZDmcXz91DfeC3P4cvkOob7wa5/Dl8j6ByGQ5nF8/dQ3/gtz+HL5DqG/z/7W5/Dl8j6ByGQ5nF8/dQ3/AILc/hy+Q6hv/Bbn8KXyPoHIZDmcXz91Df8Agtz+HIdQ3/gtz+HL5H0DkMhzOL5+6hv/AAW5/Dl8h1Df+C3P4cj6ByGQ5nF8/dQ3/gtz+HL5EdQ33g1z+HI+gshkOZxfPvUN94Nc/hyHUN94Nc/hyPoLIZDmcXz8rG/8FuvwpfIyeL2l47TDqULevLUoZy1abeTbex+PcbtlOMFnKSiudvI8WHVIa1wnKOcq8mtu9GfyxvCtGdQ3/gt1+HL5DqK+8Fufw5H0DkMjebOL5+6hv/Bbn8OQdjf+C3X4cj6ByGQ5nF8+9Q33gtz+HL5E9Q3/AILc/hy+R9A5DIczi+fuob/wW5/Dl8h1Df8Agtz+HI+gchkOZxfPvUN/4Lc/hyJ6hv8AwW5/Dl8j6BA5nF8/dQ3/AILc/hy+RHUN/wCC3P4cvkfQWQHM4vn3qK+8Gufw5DqG/wDBbr8KXyPoI8t3fU7Z6rWtPmXITl5pjN1WPjuV1GmcGtLu0qTvZ0LjXpRapQ4uWcpNNbstyzPBKwv/AAS6/Cl8jc1PEtW4qVXT7NJZJ7ss/mZO2uqdzHOD2renvRGHysM7rGqz+PnhN2NCdQX/AILdfhy+Q6hv/Bbr8OXyPoEZHXm58Xz71DfeC3P4cieob/wW5/Dl8j6BA5nF8+9Q3/gtz+HL5E9QX/gtz+HL5H0DkMhzOL5+6hv/AAW5/Dl8iOob/wAFufw5fI+gsgOZxfPvUN/4Lc/hy+Q6hv8AwW5/DkfQWQHM4vn7qG/8Fufw5fIjqG/8Fufw5H0EBzOL56r29zRgpV6NaEW8k5waWfrLDwad11r5tToMtvC72gtfSl0ZFT4M1npXbPmjPoMre8Wa1W4wAcVpBBIEEkEgAABp3hO7qq/mw6ES1cEfaK69JfRiVXhO7qq/mw6ES1cEfaK79JfRidb6pna8EAHJQeTE8St8NtpVripGOzrY57ZvmRjsb0ko2GtRoZVrjlWfWx8vyKPfXVa+ulUuKjqT7Jt+5eL+hsjLXO8uqt5cTr1pOU5vN/IxWOXFW2wyrUoVJU57I60Xk8m8me88OOQVTDKqa2bH70XraVIb2kHrdtDPY2iY2cHGT1pbC9I28aeTzWxls0dx69vsrG7qcbCnFzhOW2a3LLPlW0rvU0OdmU0dpxp4jFxW1xaJyxl+6qZWfUXPDMQrYbdxr0X4pRe6S5mbItLiF3bU69J5wqRUl4jVplMD0hrYRXVKonVtJvbHlg+dfIixUrYYOizvKF7QjWt6inB8q5PE/Gd5KgAAAAAAAAAAAAAAAA6bu4jbUXN7XuS52dk5qEXKTSS3tmBv7p3VbNdhHZFHD5Hm/jx+u3bweL+TL76dVatOtNynJtnBNo9dph1WvlKXWQ53vZ6rjCVq50G81yS5T508HlznLT33zePC8duGGX0tdUarzT7Fvk8RlitThOjUyknGSM3YXkbmmk3lUS2r4nr+L5rfwy7eb5Pik/PHp6gAe14wAAAAAIAACUlCLlJ5JLNtkSkoxbk0ktrbMJi+IxrpUaE84b5NbmboeHFMRvbq+pwtKs6VHbm47NnOzslJybcm23vbPNxkaSc5PKKW08F3iU6mcaOcI8/K/keP5Hi8nlzmM6erweTDxYXK9sspxcnFSTa3rPcco1KlPN0puE8slJchWozlGWspNS58zIW2JtZKus/tI5Z/Dz8f5YXbrh8vDP8AHOaZnA8UuVXnSv6msnLJSa3P5FiKi2pbVymXwzFacYKjdVFFrZGcnsfibPoTdkteC6lsjMAhPNbNwAkEACQAAAAEEgAUfhd7Q2vpS6MiqcGXdVQ82fRZa+F3tFa+lLoyKpwZd1Vv5s+izrPVF7biABzWkEAwCSCQABAGnuE7uqr+bDoRLVwR9orv0l9GJVeE7uqr+bDoRLPwU1YUNHL6rUeUYXEpSfiUInW+qJ2u9etTt6UqtacYQis3KT2Ip2OaU1LrWoWOtTo7nU3Sl5OZGLxbG7jFazVWWrTTzhSW5L4s8BEjdpOMFtlLneXsJC2JJbkawOjEI69jXj9hs5V7mjbxzrVYw8r2nC2uI3lOUoQkqT2KUllreTxGipPec6fYT8hFSLhUlB74tpk0+wn5Do5usyOARzxBPmi2Y4y+jkG69aaXYwy287f9DL02ds+RJZrx8h5I4lQjVdGu3Qqr6tTYn5HuyPYmms000yFvVhuJXGHVlVtpuOfZRe6XiaL1guOW+K08o/s66XXU2/eudGu1seXOc6dSdKpGdOThOLzUovJoyzbZW1QVrR/SaNzKFtfNRrPJQqblN8z5mWUjTQABoAAAAAAGPxrGbPBLN3N7UcYJ5KMVnKT5kgMgea6vqVssm9afeoxdPGJ4nRpTsoSjCrBSj32TXuPXa4UovXuHrS71Hny8uWV4+Of9eieLHGcvJf8AjzSldYlPJLKnnu5Ee+0w6lb5SfXz53yHrjFRSUUklyIk3DwSXll91OfmtnHH6iCQDu4uuvQp3ENWpFNe9GKr4fWtpcZbycktuzejMg5eTw4599unj8uWHXTF2mKptQuFqvvl8TJxkpJOLTT3NHmu7ClcptrVn3yMa43eGy2baefli/kcufk8X1n9z+3Xhh5fT6v9M4DBYXpVY4hiVbD1rwuKW/Nda92eT9fKZw9Msrz2WAInOMIuUmopb2zDXuPJSdOzhxklscnuRTGYqVIU4uU5KMVyt5GJuseis42dPjX38nlH+piKzq3M9e5qOo+RPsV6iUktxumbcq9etdPO4qOfNHdFeo63sa8ZJEt3k2msRUip05RfKsjCzTjJp708jOIxuI0tSrrpbJfmGPGdtrS42tGL3b35DrMpY2/Ew1pdnL3Gj05kRWtF6yT1uR8xxntajz7/ACHMxrlb17mzf+GqtQ/hy2x9XMZWzx+lUahcwdKfPvRiBKEZrKSTXjM0bW2nUhUjrQkpRfKnmcin0pV7WWtbVZR+y3/v3mVs8fTahdRcZc6jl/v1GabtnAddKrCtBTpyUovlR2GNQSAAAIApHC72htfSl0ZFU4M+6q382fQZbOF3tDa+lLoyKnwZ91Vv5s+hI6z1Re24gAclhJBIEEkEgCCSANO8J3dVX82HQie/RS76n0Mu6UXlOveauXLkoxb+HtPBwnd1dfzYdCJ0aPKSsHm3quo2l6l8jr/5R+3qvJcTxdf6sJZT817H7Nj9R6ThVpxq0p05djOLi/WdGHVZVLWKqfvKbdOflWwwekhw1lk5PLxPI5ADxV8Ltq9WE5U45Rzz55Pxs9iSjFKKyS3JEkMCqYtT4rEKy53re3adFPsJ+QyWkdPVuqdTv45ewxtPsJ+QuIvbrM/o3DKhWn30kvYv6mALPgMNTDoPvm38PgMum49vRe2dK9pqNWO1bYyW9EW9pToRShnB/Zby9h6Cd5CkZbN4BJg6pVpQu6MKbylH9o3zZbvfl7DatlcRu7SjXjuqQUvIajsm61e4rvc56kfJH+uZsPQq647DJUW85UZ5Zcye1e/MzJsWAAEqAAAI3EnVc05VaE4QerKSyzMt1CfdY+7xZqThbpee/gYnSnCKmJYFfVdzdDjFFrbrRWeXuMxb4dVt560XRlLkck3kemcLqpCUJOg4yWT2M83jxzuXLyPVnlhJxwV/gyuYXGilGMf3lCpOnN8u/Ne6SLUao0Rxq40duMRw+NKNWMazz1pZZNNxfJ4kWX++tXltH6mvmerLcv1Hmk3PurkCmf33qLfZ1fUo/qH9+JeCV/ux/URyv+a3jP7i5gpn9+X4JX+5H9Q/vw/BK/3I/qHK/wCa3jP7i5gpn9+JeCV/ux/UP77z8Eq+yP6hyv8Ams4z+4uZ5MWu4WGGXV1VycKNKU2ny5Ld6yr/AN9q3JaP1tIwemeldzf4O7JUI01XnFSalm2lty3c6RU3bqxlkn7erg5wapd4dc4nOeVWvWcVmt6W1v2t+wtrv6trXdNxfFxyioyWTyXKMBw+6wvB7Szp8QlSppPPPPWe1+9s7sRp1pW0p1nRyis00nmefzY225Ybld/FlJJjn9xi8YvJXdaEVKSobslszfjPLFKKSSSS5EKuVSLhueWeZFKWvBPc9zXjO/iuVx/Oarj5ZjMvxv05AEHVzASAOEOxy5th5MQrdYoRimm8m2euUG29vWvfznXVpxyyyWq+TIDx3FCnawWU866ltSeaSyz+R7LWvx9PP6y2NHnq21PVzSy2rNrk2nrVKMVHUSjkGFPrnKXjyXqOYilGKityWQDQkgASRKKkspJNeMADlZ3NSwuoSpyk6b7OLfIWyMlKKaeaazRS89aMp981l5M/9+0tWE1eNsKeb2xWq/V/Qytj1kkAlqQABR+F3tFaekroyKpwZ91Vv5s+iy18LvaK19KXRkVTgz7qrfzZ9BnWeqL23EADksAAAkgkAQSQBp3hO7q6/mw6ETlhlLibCjHl1c369pPCTB1NMKkFvlxa/liehJRSS3I6/qIDyUVxOI1ofVqxVReVbH8D1nnullWoVV9Weq/I9n55GD0kZgiWxp+owSAAMVpFT1rSE0tsJe5/7RgqfYT8hacUpcdYVorfq5+zb8Cq0+wn5C8ek5duBb7CHF2VGL3qCz9hUaUHUqxgt8mki6pZLIZGISiBKShFyk0klm2+QhTz3F5GjdUKCi5Tqt7vqpcp2XVXibapU72LZ4MJi7qvWv6if7R6tJPkij2XkdeNOn39RZ+RbX+Ro5WVHqe0pUuWMdvl5feWfQi44vEqlFvKNWnu52v6ZlePbglfqbFrWrnklUSfkex/mZWxsoEEkKAAAAAAgkgDTGP1oWOm+IZ9bTlVet68n+ZkFk1mjDaerLS7Ef8AUXRRwwPEcsratL/Tk/yO36c2cABjQAAAA2ks2AbS2sxFK7hfaTYbTj11KN1Tj52c1mdON4lrZ29J7PrtfkebRpZ6RYYv/t0umjWN+mPx2pq2ij38jIGGx+edWlDmi37f+DlF1hk/8Rl9kQ62tOPJLrl+TOEnldR8aOdTZVpvxte7P4FMdgBAEgACCJbYkkS7F+QDhWS4may+qznHbFeQ53VSnKwUI0lGpDWcp570cV2KAAAAAABwrPKOqntlsR2HXLrq6+zHP2/8MDjV62MUt2aRn9H6n7OrTfI1Jf79RX7h7YL7RlsEqat4o99Fr4/AykZ8AEqAABSOF3tDa+lLoyKrwZ91Vv5s+iy1cLnaK19KXRkVXgz7qrfzZ9FnWeqL23CADmsAAAkgGCSCSANU6bQ4zTuSazSUH7IIg9WlcM9NLyXe0oL2xieU6IDhWhr0muXY15VtQqw4ylOGbWtFrNchXL/Hala3p0aOcJNLjZePlSGhZg9qafKABFN5pp74vJknVVfFVI1fqvKM/g/b+Z2mCJJSi09zKlVpulVr039VtFuK7jNLi72q19eKl8PgVizJ5sJp8ZiNBc0tb2bS1ld0dp617KXeQfvLEMuzHoMdjU51I0rKi8qlxLJvmjysyO5ZmNw3/F3Va+l2L/Z0fNXL6zI1kKVONGlGnBZRiskiJR1q0JckU/bs/qczCYziFXD8Uoyhtg6a1oPc9rAzhMXk81vRh7HEViGKvi81Sp0c0nztrMy6A2hZVuqbOjW/iU4y9qO8w+iVbjsEorPN03KD9ua9zRmDmsAAAAACCSANHaePPS7Ef9RdFGCTyMrpbU43SbE5f/ZmvY2vgYk7zpzWTBcSVxDia0v2sVsb+svmZQpMJyhJSg2pJ5potGFYhG9pZSyVWK65c/jMsHuAIlNR8pjUtqK2mIxjEuJjxVN/tH/KjtxO/ja0+erLsY83jK3UnKpNyk25N5tsqRiG83mzJaL90eGelUukjGGQ0elqY9h0ua6pP+ZG0b/RXcXnr31TbmlkvcWLkKrcz4yvUlySk37zhF14qzyuIPyHbW+o+aa+R03WyovId0+ujHzl+ZTHYCABJAAAS7F+QCXYsDhcfuKnmv8AI5rcjruf+3qeaztW4AAAIJBAEnXDbVqvmaXu/qdiOuHZTfPIDquH+1prxmQsJ8XeUZfaRjazzuI+LI9kXk01yAW0EQkpwjJbmsySVAAApHC52itfSl0ZFV4M+6m382fRZauF3tFa+lLoyKrwZ91Vv5s+izpPVF7bhABzWAAAAAJIAMGudKY//KL6XOqa/kXzMcZbSyOWP3T59R/yRMSWkKNfU+Kvq1Nbo1Gl7S8lQx+nxeLVeaWUvcVE1bluRJC3IkxqJxVSEoS3SWTOq1qOUHCb/aU3qy8fM/Wsmdx5LqXU11Tr7oTyp1PF3r9uz1gesxOkNP8AZQqZbs4v/ftMseLGqfGYdVy3x65CdsvTx6NU8qdapztR9n/JmTH4BDUw6D7+Tfvy+BkBe2zp4MZrSjbqhS/e3D1I+TlPZb0Y29CFKHYwWSPBbf43Fatxvp264un45crMkAKxpX/39P8A0l+bLOVfSr/v4f6S/Nmwrt0ShnWuJ80Uvb/wWQwWiUMrevPnml7F/UzplIt+gtbOhc0e9kpr1rL4FnKToRW1MUqU3uqUn7U1/UuxFVEgAxoAAID2LN7iTH6Q3TssDvrhb6dCbXly2e8DROJ11dYjdXC3Va05+1tnlJZB6HMOy3rzt6satN5SizrAFts7+F5QU6eyW6UeZnXfXcbSi5y2yfYrnZXLO5naVlUh61zoXVzO6rOpUe17lyJGaHGvVnXqSnUecmdYBoHba1XQuKdVb6c1Jep5nUSgPomdVdSyqrdqOS9hV2ZLC7x3Oh9pcSzUp20E8+fJJmNZxiq8l52cfId1J61OPkR03m+PkOy2f7OJo7QSQAAAAibyj61+ZJFTsV5y/MDhcfuJ+Q7Tlf2/E2tKfGRlxiTyT7HajiABBIAgkgCTi1ln42cjjU3IDyzedz60exHhW25/9j3AWbD58ZZUX9lL2bD0HhwWetYpd7Jr4/E9xKgAGCkcLvaK19KXRkVXgz7qbfzZ9Flq4Xe0Vr6UujIqvBn3U2/mz6LOs9UXtuEAHJYADQABgAEga60lqcbjd0+aWr7El8DGHrxeaqYpdzW51pte1nkLSFZ0pp6t7SnyShl7H/UsxgtLKedK3qckW4+3/g2MrOR7FeQk403nTi/EjkAOFxRjcUJ0p9jNZM5gDyYZXlVoOFV/tqL1KnlXL6z01aaqUpwe6UWjG3kuoMTpXG6lX/Z1PLyMygHTZUuItKVNrJxgk/LynVit11JY1Jp9e+th5WesxV0+rcZpUFtp264ye3l5PgB7MNtupLKnTfZZZy8r3npAAFW0p7YR/wBNfmy0lV0nf/Ul/pr4mwrLaMw1MLT7+bfw+BlTxYPT4vDLePPBP27fiewyjJ6NVuJxu1lySlqe1ZfE2Iaus6zt7qlWW+nNS9jzNoraTVRIAJaAAAdV1bwurarb1VnTqwcJLnTWTO0AfPOJ2dTD8RuLSr2dCpKD2ZZ5PeeUvfC1hXU+K0cRpx6y6hqzf24/0y9jKKd5dxzqE81mDhDZOUfWczQAAAN5LMHGe2UY+0Dkj1YXZVMSxG3s6XZ16igtmeWb2v1bzzF84JcK4/ErjEakc428dSm338t79Sz9pluoRfsRpU7LCKVtRWrTp6tOK8SWz8jCmZ0gllTox5237P8Akwxyiq8159X1kW088o8xyvV1sX4zhaLsmaPXyEBbgAHKSQ94EnGf1fKiSJb4+UDjcfuvWvzR2HXcfuv/AGj+aOYAEgAQSQBJ11XlHPmZze466qzpy8gHlo7a0X4z3nht/wB9E9wGawCX7KrHmkn/AL9hlDC4BLKvUjzxz9/9TNE1UAABSOF3tFa+lLoyKrwZ91NDzZ9Flq4Xe0Vp6UujIqvBn3U0PNn0WdJ6ovbcIAOawAkwQADQHIDqu6nFWtap3kJS9iA1fUk5zlJ728ziGCkBidKIa2Gp97UT/NfEyxj9IFnhNbxavSRsK9ls9a2pS54J+47Dz4dLWw+3f+VH8j0AAAB58RtVeWdSjytZxfM+Q6MFu+qrNKb/AGtPrJp7z3mEqa2HY9GUU+Ju9jX2s/n+YGYuK0aFCdWW6EWzH4DTk7edzU/eV5OTfi/3mRj85VIUbSm+urzSfkRkqVONKnGEFlGKSSA5AAxoVTSR54pJc0Ui1lSxzr8bqR8cV7kVGVaqEOKowprdGKj7EcwDBKNnYZVdfDrao98qUW/LkaxNg6LVeNwO3z3xzj7GyaqMsCCSWgAAAEAYHTvCv7W0auqUI61akuOp5LN5x5F5VmvWaPPoi+uFa2VxcSyypU5TefiWZ87zqKUm8ss3nkkdcE5OMl1yfqJC2ojWXOWlIGsudDWXOgBEV1zfqJzXOhmkBPKbx0Hwr+yNG7WlOOrWqLjqqayetLbk/Isl6jSNpXhSu6NScI1Ixmm4zT1Xt3PxH0WnsOedViwuPzzr04c0c/a/6GLPfjkta9a72KX+/aeAmFdF5+7XlONr2D8pzulnSfiZxtf3b8po74giO85ACHvJIe8AHyeUADhcfu150ekjmdl/bO3hSznGXGasute7ajrAAACQQSBxbIe1NEveQB5bb98j2HktP3j8h6wPfgstW+iu+TRYCs4dPUvaL+1l7dhZia2AADVI4Xe0Vp6UujIqvBn3U0PNn0WWrhd7RWvpS6Miq8GfdVb+bPos6T1Te24QAclBJAAAA0Dx41LVwi8f+TP8mewx2kc9TBLt88Mva0gNcsEsgpAeDH+1Nf8A9ekj3mO0heWE1VzuP5o2DngktbCrdvvWvY2e48uFU+Lw+hH7Cft2nqAAAAdde3hXdKUltpTU4vxnYDBj6dN3GMVa8tsaEVTh5Ws3+ZkDqoUo0Yaqebbcm+dt5s7TQABgFTxLrtIZf6sF+RbCq4jHV0i8tSD/ACKhVpRJBJgF20Hq62GVafLCq/Y0v6lJLXoHUWtd0s9rUZL3/wBDK2LYSAQoAAAgkAY3SW5Vpo/iFeSi9S3nkpLNN5ZJNeU0EzcXClc8RonUp55OvVhT9+t/+TTh1w6RkAAthkMgAAAA7rOpCjdUatSnGpCE4ylCSzUknuZ9ERalFNbmth85I37o1Xdzo9h1ZvOU7am2/HqrM55qxYzFXrX9V+PL3HkO+9lrXdZ/bf5nQSOFws6Mjqtf3b8p31FnTkvEdFr+7flNHccjico7gJIe8kh7wBJAfIBxq9ivOX5nI41Pq+cjkBIAAB7gRIDiHuAe5gdFmuuk/Eek6LNdbJ+M7wO23lqXFOXNJP3lqKiW2LzinzomtiQAGqRwu9orX0pdGRVeDPupt/Nn0WWrhd7RWnpS6MiqcGfdTQ82fRZ0nqm9txAA5KSQAAABoGI0tlq4FX8biv5kZcwemktXBcu+qxX5iFUVkEkFJDGaSP8A6Y1304oyZj8cjr0raHf3EF+ZsY9tGOpSjHvYpHMhEmAADQAAHhqQquu9j37Ge4AAADAK7jkdXHLWXPqZ/eZYjB6RQyurKou+yftRsKziAQAFg0IqKOLVIt9nRaXtTK+ZbRWWpj1tt2PWX8rMrY2ECCSFAAAAEAa94Y7jK1w63T7Kc5teRJL82ayLzwu1tfHrWknmqdsm1zNyfwSKMdsekXsABTAAAAAAN18HFd19ELPN7abnD2SeXuyNKm2OCSvr6O3FJvbSuXl5HGL+ZGfTce3qqvOpJ87ZwJe1kEtSee2WUGvGehHTTWTmvtMDmco7jico7gJIe8kh7wAe+PlA5UBxq76fnfBnM54jTpUq9KNGrxkM112XiZwAIBAARIkiQHEiXYvyEkS7F+QDjarKl5WdpwoLKlE5gSWuh+5h5qKoWyC1YRXMjK2OQAMapHC72itfSl0ZFU4M+6q382fRZa+F3tFaekroyKrwZ91Vv5s+izpPVF7bhABzWAAAAABXtOZZYZRjz1l+TLCVnTyWVrax55yfu/qJ2VTgAUgPJfrWuLKP+dn7IyPWeetHWvKC5YxnJe5fE0egEddzL2nCrVjRpyqVethFZuTA7ARvJAAAwAAAAONapGjSnUn2ME5PyGjkYrSOH+Fo1OWFVGQo1uPpRqU11slms3keXHKcp4ZV2rrcpZZczA94AMA9eD1HSxW0muStHPyZnkOdKbp1IzW+LTDW1ARF60U1yrM5EKAAAIJIA0twk1XU0wvVnmoKnFfcT/NsrJltLKzuNJcTnLwmcfUm0vyMSd5050ABoAAAAAJNkcDtbOGJ0M+WnJL7yfwNbF74IKjWN3lPklba3slH5k5dNnazNZPIHbdQ1LipHmk0dRDQ60uuk+dnYcOVgDlHccTktwEkcpJHKAIfZR8pJEuziBFbsqfn/BnM4Vd9PzvgzmAQAAESJIkBxIl2L8hIAmGyKXMSRHcSB2UIcZWpw76SXvLWVrDYa99RXNLP2bSyk1sAAGqRwu9orT0pdGRVeDLuqoebPostXC72itPSl0ZFU4M+6q382fRZ0nqm9txAA5qAAAAAAqmnsuts4+Ob/ItZT9PJZ3FrHmhJ+1/0E7ZVYABaQ6ZLO8hLmpyXta+R3HXvrySyzUV+b+QHYeLGFxlrGgt9apGHvz+B7NvN7GcXTU5xlJdhu8oHJIkAwAAaAAAHCtTVajUpvYpxcX60cwB4sG1o4fCE1lKDlFryNndfR17KvHe3B/kdsYKDk4pdc835SWm002twCDzhF86JOq0etaUZc8Iv3HaAJRAlOMFnOSis8tryA2hh0+MsLaffUov3I9BjdHJ8ZglpL7GXsbXwMkc1gAAgPYDov6vE2NxV7ylKXsTZo+f8QrdUX1xW/iVZT9rbPOSyDu5gAAAAAAABbOC6u6OllKC3VqU4P2a3/wCSplg0Aq8Tpdh0nyzcfbFr4mXojZ2MU9S+m+SaUjxGYx+lspVUueLf5fEw5yiqHBHM4I0DktxxOS3ABykkACJfvI+RkkPs4+R/ACKv1PORzOd/bVLWpThVS1m09jzOAAAACJEkSA4gBgTHcSRHccgPfgsda+T72Lfw+JnzC4BHOrVlzRS9/wDQzRNbAAGNUjhd7RWvpS6MiqcGfdVb+bPostfC72itfSV0ZFU4M+6q382fRZ1nqm9txAA5qAAAAAA1xwsU7uvd2kLVScVTzmovJ73kbHNacIeN07TSLiJ0pS1KMdsWuXN/E3HtmTHWsakbamqzzqKK1n4ztPLYYhSv1N0lNamWesuc9RSQ6Kbzu63ijBfn8zvPJbPWvbvxSiv5V8wPWADAAAaAA1jxXU5qtlm0luPXDNwjrb8tpyaT5AAABgAADpsXnaU0vqrV9mz4HcebDnnRmu9q1F/Mz0mgeDGMPqX8KapTUXBvNS3M95hsSxmra3c6FKjF6uXXNt57MxBtPQiPF6OW1HWc3S1oNvy5/EzpUeDG8r3eDXHVFPUlG4eXWtLJxXP6y3EXtU6SADGoMXpXV4jRrE581tNe1NfEyhgOECpxeh+IvnhGPtkkbOytIEAHdzAAAAAAAADJ6M1OK0iw2ae66p9JGMPThtXicQtqveVYy9jQo33itPjLGpzx65eorhbJpSpyUuxaeZVJLVk1mnk8s0cYuoZwRye44o1gc1uOBzAEEkAB9deR/AEPskBFeTcqebb674M5nVW7Oj5/wZ2gAAAIluJIluA4gB7gJhuORximt5yAzWARyo1Zc8kvYv6mUPBguqrJarTlrNyXMe8lUAABSOF3tFaekroyKpwZ91Vv5s+gy18LvaK09KXRkVXgz7qrfzZ9FnSeqL23CADmsAAAAADXemlrb3GPV3VoU5yUYLNxWfYrlNiFC0po1XjVxU4qeo9XKWq8n1qNjKwFC1o2utxFOMNbflynaS9jyYyKSg8OHPWuL1/52XsSR78jHYM9ZXc++uJP8gMgCCTAAAAAGgADAAAAAGjw4VLOV5HvbifvPcY3C3liOIQ/zFL8zKxpTn2MZPyIUcBks9yPVDDryp2FrXl5KbPRT0fxOpus6i87KP5mDN6Bz6y8p8icH+fyLUV7RXCLvDZ1p3KhFVIpKKlm80WEmqiQAY1BVeFCrxeiVeP8SpCP82fwLWUvhbllozRXfXUOjI3Htl6ajAB3QAAAAAAAAHKLyefMcSUB9D58bZZr69P80VhliwefHYPZT7+3pv2xRXpR1W0962HGLricfrM5nH6zNYg5nE5ACCQBAfI/GDruKnFwi+ecV70BNXs6Xn/BnYcKu6D5pL5fE5gAAAIluJIe4DiGByAckSQiQM3gC/w9R888vcZM8GCR1bLPvpNnvJVAAAUjhd7RWvpS6MiqcGfdVb+bPoMtfC72itfSl0ZFU4M+6qh5s+izpPVF7biAByWAA0AAABJBg1Bwmya0prZPLrIbvNRZeCmjTr4JdSrU4VGrlpOcU/qx5yscJ/dVX82HQiWvgj7RXXpT6MTrfVM7evTehRoULXiqNOm5Slm4RSz2IqMIQgmoRjFN5vJZbS3afS2WcfPfRKmTOigADAAAAAaAAMAABoEAaxcdB6dOVhXbpwclV3uKz3IsyWS2LIrGgb/w10uacX7mWciqgCQY1AJAAAACg8MNXLC7Cl31Zy9kf6l+Nb8Msu1Uf9V9ArHtl6a4IJIOyAAAAAAAAAlEADfeik+M0awyX/1qa9kUjvlhVtOcptSzk82tbYY/QWevojhr/wArL2Nr4GdOF7W8iwu0X/i9smU66u52eI3FCvHKMajy2bUs9nuL4eDF8HtsUpZVY6tVLrakVtXzXiNlLFcpzjUipQkpRe5o7DF3FreYFcataDlSk9kl2MvJ4zIW1xTuYa1OWfOuVGpdgADQ8OLT1YUVzzz9h7jE41P9vSjzRz/37AMlcbKaf2o/mjsOFx+5l4sn7zmAAAAh7iSJtRi3JpJcrA4nbZxVS8o0nk3KS63nXL7jHwrV8Qr9T4dBzm99RrZFc5asFwenhlNylJ1bma/aVXvfiXiMpHolh1rJ7aMfVmjrlhNq90ZR8kj3EmbU6qFGNvSjThnqx3ZnYCTBAAApHC72itfSl0ZFU4M+6q382fQZa+FztFa+lLoyKpwZ91Vv5s+izrPVN7biABzUAAwCSCQBBIA07wnd1VfzYdCJauCPtFdekvoxKrwnd1VfzYdCJauCPtFdelPoxOt9Uzt36eSzurWPNBv3/wBCsFk06f8A1Cgv8n/9MrZMKAAMAAAAAAAAAAAAAFt0CfWXi8cP/wBFqKnoE+uvF4ofEthNVAkAxoAAAAAGr+GGrrYlYUu9oyl7ZZfA2eal4W562klGPe2selIrDtl6Usgkg7ICSCQIAAAAACUQSBurg4nr6H2P2ddfzyLIVLgsnraKQXeVpx/J/Etxwy7XOgAGNddajTuKUqdaEZwlscZLNMrt7olGNR1sMuHQn3k9sfbv/MswN2xUVaYjR626tJPL/wAlHr0/UtqJcJR7KMo+VZFtOLSayazQ2aVSMJSeUU2+ZIx2J4TiFa5lOFpWlBJJNRL4oqKyikl4iTdmlWrWNy6M0qFRvLvWJWteCzlRqJeay0gzZpUchkWudGnUec6cJP7UUzjC2owecaVNPnUUbs0rHF1pbKVCrVfNGPx3HOlo5dX0lK/qqjS/hU3m/W935lpA2aeexsrewoqlbU1CPLlvflZ6ASS0AAAAACCQBR+F3tFa+lLoyKrwZ91Vv5s+gy1cLvaK09KXRkVXgz7qrfzZ9BnWeqb23CADkoAAAkgkAAANO8J3dVX82HQiWrgj7RXXpL6MSq8J3dVX82HQiWrgj7R3fpL6MTrfVM7TpxLPFaa5qK/NleM5ppLPGmuanFGCJhUggBiQQSAAAEEgAAAAAAatWgf7y882HxLaVHQP99d+bH4luJrYkAGNAAAAAEGnuFOpr6Vzj3lGEfdn8TcJpThFqcZphf8A2XCP8kS8O2ZdK4QAdUAAAAEgQAAAAA25wSSz0ZrLmu59GBdCh8D9TPCL2n3twpe2K+RfDjl2udAAJaAAAAAAAAEEgCASAAAAAAAAAAAAEEkAUjhd7RWnpS6Miq8GfdVb+bPostXC72itPSl0ZFU4M+6q382fRkdZ6pvbcQAOSgAACSCQAAA07wnd1VfzYdCJauCPtHd+kvoxKrwnd1VfzYdCJauCPtFd+kvoxOt9Uzt0aXvPHay5ox6KMKZjS1549c/+nRRiCYUIJAYgkAAAAAIk1GLk3kltZIAAAAAGrToH++u/Nj8S3FS0CX7S8fih8S3E1sAAY0AAAAAQaL03nr6V4m+au17NnwN6GhNKJ8ZpHicue6qdJnTDtOTFgA6JAAAJIAEkAAAABsrgbn+zxSHM6T6XyNjGtOByeVfE4crhTfscvmbKOOfa50kAEtAAAAAAAAAAAAAAAAAAAAAAAACCSAKRwu9orX0pdGRVODPuqt/Nn0ZFr4Xe0Vr6UujIqnBn3U2/mz6LOs9U3tuIAHJQADQJIBgkAgDT3Cd3VV/Nh0Ilr4I+0N16U+jEqnCd3VV/Nh0Ilr4JO0N16U+jE631TOzSnC7yWJ17mFvOdGeTUoLPcktuW7cV9preja55rqwtbv8A7i3pVHuzlFN+0jbdNYAvlxonhtXsI1KT+xPP88zwVdCof+K8kvFKnn8TdxmlSBZJaG3i7C4oPy5r4HTPRHEY7uJl5J/NDcGBBmnorif8KD//AKIwOPV44BeRtcQThWlTVRKPXbG2uTyMMdWJS1cOuWt6pS/JnKxr9U2dGryzgm/KYfENILStaVqVNVHKcHFZx2bTM6EYTe4ngaqW1JVIU6sqfZJZbnyv7Ro7gZynoniU310aUPOn8sz1UtDLhv8Aa3NKK+wnL5GbbpWSci6W+h1nB51q1Wp4llFGVs8HsbPJ0LampLapSWs/azNmmG0GtqtKlc1KlOUI1NTUcllrZZ7izgE1QAAAAAAEAD57xapxuKXdTv685e2TPoRvLafOleWvWnLnk2dME5OsAHRISQSBBJAAAAAAAL5wQVMsZvKffW+fskvmbTNScE0tXSaqu+tZL+aJts5Z9rnSQAQ0AAAAAAAAAAAAAAAAAAAAAAAAAAFH4Xe0Vr6UujIqnBn3U0PNn0WWvhd7RWnpS6Miq8GfdTb+bPos6z1Te24QAc1BJAMAAAASQBp7hO7qq/mw6ES18EfaG69KfRiVThO7qq/mw6ES18EfaG69KfRidb6pna7gA5KQCQBAJAEGmeGKWeldNd7aQX80jcxpLhanraY1V3tGmvdn8Sse2ZdKebf4GJ56PXcO9um/bGPyNQG1+BOeeH4lDmqwftT+RWXSce2xgCTmtBIAAAAAAAAIAkgADpvqnE2Vep3lOUvYj54kb+0glqYDiUua1qv+RmgGdME5IAB0SEggCSAAAAAAAC28F09TSyku/pTXuz+BuI0pwdT1NMLDxua/kkbrOWfasUgAhQAAAAAAAAAAAAAAAAAAAAAAAAAQBSOF3tFa+lLoyKrwZ91Nv5s+iy1cLvaK09KXRkVTgz7qbfzZ9FnWeqL23EADmsABgAEgCCQBp3hO7qq/mw6ES18EfaG69KfRiVThO7qq/mw6ES1cEfaK69KfRidb6pna8AA5KAQSAAAEGiuFCetptf8A2VTX8kTexoPhGlraa4m/txXshErHtOSuG0uBGf7PFoeOk+mauNk8CdTK8xOn31OnL2N/MvLpM7bUJIBydEggkAAAAB4sZxGnhWG17yr2NKOaXfPcl7cgPLeaT4RY3k7W5vY060MtaLhJ5ZrPelkei3xnDbrLiL+1m3uSqxz9mZpa6r1Lq5q160nKpVk5SfO2dR04I5t9pprNPNEmiqF5cWzzoV6tLzJuP5GSt9LMbt1lTxGs19vKfSTM4U5Nm6X1eJ0XxOXPbzj7Vl8TQ7LjiWmOJ4nhdawuuIlTrJKU1DKWxp8jy5OYq8rTml7i8Zplu3lJO52tRbsmcHRqL6jKY6wcnFremiA1AAAAAAAAM7oPPU0sw189bL2pr4m8jQmis+L0kwyXNdU+kjfZzz7VikAHNQAAAAAAAAAAAAAAAAAAAAAAAAQSAKPwu9obX0pdGRVODPupt/Nn0WWvhd7RWvpS6Miq8Ga/+U2/mz6DOs9U3tuEAHNQAABJBJgAADTvCd3VV/Nh0Ilr4I+0N16U+jEqnCd3VV/Nh0Ilr4JO0N16U+jE631TO13IZIZyUgkgkAAAIPn7Tuevphir5riS9mw+gj520tnxmlGKy57ur0mXgnJiTYPAvPLHb2HPa5+ycfma+L5wNS1dJrhd9Zy6cCr0mdtxAA5OiQAAAAA11wm4txt1Sw2m+to/tKvnNbF6k/ebENKaRSqPHr/jn1/VE0/ay8J9py6Y8gA6OYAAAAAAAAcXThLfFew5ADzXFCKhrQWWW88pk2s1kzGyWUmluTNbAgEhqAAB68JnxeJ2k+9rQf8AMj6EPnSjLVqwkuSSZ9FResk1ynPNWLkADmoAAAAAAAAAAAAAAAAAAAAAAAAAAFH4Xe0Vr6UujIqvBn3U2/mz6Ei1cLvaK19KXRkVTgz7qrfzZ9FnWeqL23EADmsAAAkgkwACANPcJ3dVX82HQiWvgj7Q3XpT6MSqcJ3dVX82HQiWvgj7Q3XpT6MTrfVM7XcAHJQAAAAAHzdjs+Mxu/n31zUf8zPpE0ti3BvpF1ZWq0rejcRqTlJOnWit7z+tkVjU5KUXHglqcXphSj/Eo1I+7P4GGutE8etJNVcJvNnLCk5r2xzRleDalWttOMPjWpVKbfGJqcWn+7lzl3pM7bwAJOToAAAQSQAKJwhaMqpxmMW9WnT1Yrj4TeWtyJrx7kXs15wmYxxlxSwulLraWVStlyya2L1Lb6yse2ZdKK01yHFyy+rL2HYDq5OrjF3s/us4uvBb9ZeWLO8Aefqml33uY6qpd/7j0HFwi98U/UB1dU0u/HVNLv0c3Rpv6kfYQ7ek/qR9hojqin38Qq9P+JH2h2lHvPeQrSkmnq+8BWrqMWovOX5HjLLo9ox/eO7q0oXlO3nCClqyg5OS3PLybPaZK94MMUowlK1uLa4y3RzcJP27PeZuRUikA92JYLiOFTcb6zrUcnlrSj1r8ktzPDkaAGR2UaFWvUUKNOdSb3RhFtv1AcEfQuG1ONw+2qd/SjL2pGm8M0Gx3ENVqzdCm32dw9TL1b/cbjwy3naYda29SSlOjRhCTjubSSZzzqsXqABzUAAAAQBIIAEgEASCABIIAEggkAAAAAAEEgCj8LvaK09JXRkVTgz7qbfzZ9Blr4Xe0Vp6SujIqvBn3U2/mz6LOs9UXtuEAHJYADQJIJMAgkgDT3Cd3VV/Nh0Ilr4I+0N16U+jEqnCd3VV/Nh0Ilq4I+0V16S+jE631TO14BAOSkgAAAABBIAgZEgAAAAAAEEgCDSmkiqQ0gxCNZtzVxPNvl27PdkbrNOaZYjSxXSG4r0FHi45U4yX19XZrf75Mi8O05MNmTmRqsZPmOjmnMZnF596yM33kgOeaGaOpzf8OfsI4x/w6nsA7s0Mzo45/wAKp7CHXf8ACqewD0ZjM8zuJfwansI6pl/BqewCyaFOr/eewVB5S13n5uTz92ZuE0dg2IVcLxGhe0s1KnLNx51yr1o3ba3FO7tqVei9anVgpxfiazOea8XOUVJOMkmnvTMfX0fwi4lrVcMs5Pn4mOf5GSIJ2ti6ejWC0nnDCrJPx0Yv4GQo29G3jq0KVOnHmhFRXuO0DYgkAwAAAAAAgkgDruK8belryUntUVGO9tvJJEUq+vJwnTnSmlnqzy2rn2No5V6Ma9PUnmtqkmt6aeaftMBic3XdazleVpylTcFOLUG3mnlsXqzy5cjZNsteiz0psLvFJ2MJNNPKnUb62o+VL4c5mjU93h9KlbTuKEqlJ09XVVSpGaqZ95KOWbS27vXyGxtG61zcYJa1Lz99KG18rXI348sispolZIAwmN6T22EXtK1qQlOc8nJp5KCb3kz7btmzzyvYRqyhxdWUYPKdRRzjF+Pl9x6N+4x2Ky6htri7hcSpJxzlDJNSaXJnuezLm8QhXDHcetcFpU5Vs5zqSyjCG9rlZ7rK7o31tC4t5qdOazTRQdJLKlXvePqXNxKTjGOcYRlGOxbMtZNN7Wly7cj0aDTurTG7iwi+Nt0m6jjnlFrc9u7m/wCCuP0na+AHXd3FO0tqletLVp04uUn4kSp2AxuBY3QxujVqUIzhxctVxnln4n/vmMkAABgpHC72itPSl0ZFU4M+6m382fRZbOF3tDa+lLoyKnwZ91Vv5s+hI6z1Te24gAc1AAMAkgASAANO8J3dVX82HQiWvgj7Q3XpT6MSqcJ3dVX82HQic9G9J54Lo5XtbTZd1rhyU2s1COrFZ+N7DrreKP228Saw0b0uxe90isrSveOpSqVMpx4uCzWT5kbOOdmlS7SADGgAAAAAAAAAAAAAAAINGYnZ1cNxCvaVllOlNxfjXI14nvN5mu+FGvZyurajClF3ijrVKqe1Q5Ivn5/+S8L9pyij5jMZEav2n7jo5uWY1jg4S5Kj9iOLp1OSr/KgO3WGZ0OlW/jfykcTX/j/AMoHfrDWPO6Nx/GXsIdK5/ixA9OYzPK6V1/Ej/v1EcXd9+gPYm5NJLNs3TozZ1MPwGytqv7yFNOS5m9uXqzyNYaAO0p47bxxOmqjk8qUm9kan1W/y8rRuEjO/peMSCCTmsAAAAAAAAAAEA8t5illZLO5uqVPxOW32byuX2m1GUpUsOinJJtVayyi2uTLPl537GbJazbN4xisbSFSjRhOtc8ROqqdNrWSWzPJ+N+MpFO+urnGqP8AZEXd05tVY0ZrOVHN9ctZ56ufPnuaz2mRqYHVvnCpfXVnZW1Kc5wnTq69RRk23HW2LLa/cdN7pFZYRbSsdHaEIZ7J3LW2T51zvxv2FyaTa9NbRnD0qdLEsVp29WKepRhOKVPN5vf434jlTssb0aWvY1I4hYPbqLbkufLk9WZSqk5VJuc5OUpPNtvNtmQwnHr/AAmX+FrPi97pT66D9XJ6itC1PT6hGk9axrKslti5rVz8u/3FcqWGLaR1bnE427nFvPZsTy2ZRz35IzEdNbKqlO8welOsltmlF5v1rNHTiWndzXp8VY0IWscstbPWl6tmSMk10bWvR296owC1uK3WONPVm5cji3Ft+wwWkmOxrU6tKjKtQbtoV7es4506sW1mvGmnFNPx8h48LnfXtpRoW86N1R1qjuI1K2o3r5bJL7zzXPyM7qOG4Xo/CNxjN6r24p7aNtB5xg/En8cl4jNGzCbS4xe1d1Wj/Z1Li1B1pT1Vs2KUNzWzKLz2NJb8jlT0UjS/xWj2LxqXFLk14tPxZr8mjAY9pDdYzV698XbxfWUYvYvG+dmOoXFW2qqpQqTp1FulCWTK0LtS0wucOn1PjdhUhVj9emstbx5PZ60zH6SaWRxi0VjYUKqVWS1nJLWlzJJZ8pNjptOVFUMXtKV5T3a2Sz9aex+49UNL8Gsc5YfhGpUe/KEKfvWZmjbo0NoXmD44rW9oTpdV0W4p8rW38sy9murbSW+xXSPD5VpRhTVeKjTgsks9nr2M2KTl2rEANZ6U6XYtYaR3lnb3jp0acoqEVTg8utT3teMyTbbdMtwudoLX0pdGRU+DPuqt/Nn0JHLSTSarjOj1C1vNtzSuFLjEslOOrJbfHtOPBn3VW/mz6DLk1ij9txAA5rAAYAANAAqummlkMJpys7OalfTW1raqS534+ZCTZVG4TJKWlVxk08lBP7kSuQralFxj2Te/mOy/qurUcpyc6jbbk3m23znv0W0cudIb9UaWcKEMnWqtbIL5vkR26jn27NCH/wDK8Of+b8GbvMLhGieFYRd9U2tB8aoKEZSeersybXjfKzNnLK7q5NIJIJJaAAAAAAAAAAAAAAAAg0bid7VxDEK91Xf7SrNya5uZercbzNV6Y6J3VjiNW4sreda0rSclxcW+Lb3ppcnMXhU5KuDv/s698DuPwpfIf2de+CXH4UvkdHN0A9H9nXvgdx+FL5D+zb3wO4/Cl8gPOD0f2be+B3P4UvkP7NvfA7n8KXyDXnB6P7NvvA7n8KXyH9mX3gVz+FL5AecZno/sy+8CufwZfIf2Zf8AgV1+DL5AdEJOMk4tpp5prkN1aO3tTEMEs7qssqlSmtbxtbM/XlmatwLRbEcVvY0pW9WhRTTqVakHFRXiz3s29a0Kdrb0qFGOrTpRUIrmSWRGdVi7QAc1gAAAAAAQAMNpDhdximrGhfVbaMU04RXWyz59qMycXTTZU7ZWvq2hF8m+Lr0J+XWXwOiGhmKuooyVCK751Ni+Jsji3zkcWy9oUu10E5brEYJ81OOfvb+BGIaCKNFzsbvXml2FRLrvI0XXipDiZeIDW1PQ/FZdlSpw86a+GZ6rfQe8lUhx1ejGGa1tVvPLly2F/wCJfOieJ+17htqg3WgtzCT6nuqU48inFxfuzPBU0QxaL2UKclzqrFfm0bNdJ8jRDpyGxru00MxCus607e3XKp1M37FmZKOgdLUynia1vFTWX5lx4uXMOKlzAa1xDRPEbS4VOjBXMJdjUp7vXzEQ0SxeW+3hHy1Y/M2XxUvETxMvENjXdPQrE5dlK3h5Zv4I7Y6C3v1rm2Xk1n8C/wDEy50OJlzobYp2FaGTtL+hcVbqL4mpGajGG9p578y6HFUcnm2ciMl4hpLT/uuxDz49FG7TD4torhWL30Lu7t9aqoOEsnkpprLb41yMY3VLNtIVK/GUVCW9PeWPg1ko6VWzk0tk0s+fVkeLS3Rmvo5f8XLOpbVG3Rq5b1zPxox1jU4uWcZOM08008jr3EdPoIFS0K0tjikI2N9JRvIrrZvdVXzLacbNOmwAGAADR5sTqyoYbdVabynCjOUXzNRbRo24qzqSqVaknOcs5OUnm2+c3fjXae+9HqdFmjKv7uXkZ08acnr0a0eu9Ir/AIqgtWlFp1qzWyC+L5kbnwfCrXBrCnZ2dPVpw3t75PlbfKymcD//AGWI/wCpD8mbAJzv3oxgASQoAAAAAAAAAAAAAAAAAAAgkAQCQBAJAEEgAQCQBAJAEAkAAAAAAAAAAABByzWW84g2Vl+06yCms+UgZG8jTmknuYeUVm2deRORvJmkqa8YUlmRkDOTdOTkkRrr/aIA5M05Rkny5HLV8Z15EZDkacpSUXkto4xeM45DJDkactdDXXOcckMhyNOeafKcWRltJMt22QABjXkxbDLXF7GpaXlNTpT9sXyNPkZpXSfR670cv+KrJypSbdGslsmvg+dG9jX/AAxf9hhy/wA2f5IvC/ek2KFb1Jx1KkZOM1k1JPJp85vHCKs6+FWdWq9adShCUnztxTZoyj+7j5EbwwLtJYejU+iiszF7gAc1AAA6L+g7qxuLeLUXVpSgm+TNNGvqnBnfSi0r622rvZGyCTZlYyzbEaM6P22juHK2t3rzl11Wq1k5y5/EuZGWAM21IAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgkgACQBAJAEAkAQCQBAJAEAkAQCQBABIEEkACTFaS4BbaQ4fK2uOtmttKqlm6cufxrnRlAbBrenwaXkYpO+t9i72RsHD7d2lhbW8pKUqNKMG1ubSSO8G22sk0AAxoAABJBJgAAAAAAAAAAAAAAIAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAJAAAAAAAAAAACASQAAAAAASCCQABAEggASCABIIAEggACSCQABAEggASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAEggASAAAIJAAEASCCQABAEkAAASQB//2Q==');background-size:cover;background-position:center"></div>
+    <div class="hb"><h1>Unit 3 · Style</h1><div class="d">📚 Present continuous · контраст с Present simple · одежда, цвета и аксессуары</div></div>
+  </div>
+  <h2>📖 Грамматика юнита</h2>
+  <div class="card" style="text-align:center">
+    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и рабочая тетрадь этого юнита — отдельными заданиями (ДЗ).</div>
+    <a href="solutions-el-u3-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">✏️ Грамматика юнита →</a>
+    <a href="solutions-el-u3-workbook.html" style="display:inline-block;background:#2e6f4e;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">📒 Workbook →</a>
+  </div>
+  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
+  <div class="words" id="words"></div>
+  <h2>🗣️ Произношение <span class="sec-i">Одежда и -ing</span></h2>
+  <div class="card"><div class="pronbox" id="pron"></div></div>
+  <h2>🧩 Фразы <span class="sec-i">(учи целиком)</span></h2>
+  <div class="words" id="chunks"></div>
+  <h2>🎯 Тренажёр фраз <span class="sec-i">(выбери перевод)</span></h2>
+  <div id="chpr"></div>
+  <h2>🎧 Аудирование</h2>
+  <div class="lc">
+    <h3>At the shopping centre</h3>
+    <p>Послушай диалог (озвучка прямо в браузере), потом ответь на вопросы.</p>
+    <button class="lbtn" id="lplay">▶ Слушать</button>
+    <button class="lbtn sec" id="lstop">⏹ Стоп</button>
+    <button class="lbtn sec" id="lscript">📜 Показать текст</button>
+    <div id="script"><b>Ella:</b> Look at this dress! Do you like it?<br>
+      <b>Sam:</b> Yes, it's nice. But you're wearing a lot of black today.<br>
+      <b>Ella:</b> I know. I want something with more colour. What about this red skirt?<br>
+      <b>Sam:</b> It suits you. Are you going to try it on?<br>
+      <b>Ella:</b> Yes. What size is it?<br>
+      <b>Sam:</b> It says medium. Here you are.<br>
+      <b>Ella:</b> Thanks. Oh, and I need new trainers for the party.<br>
+      <b>Sam:</b> The party? Everyone is wearing smart clothes, not trainers!<br>
+      <b>Ella:</b> Good point. Then I'm buying these shoes instead.</div>
+  </div>
+  <div id="lq" style="margin-top:14px"></div>
+  <h2>🎧 Аудирование 2</h2>
+  <div class="lc">
+    <h3>Making arrangements</h3>
+    <p>Послушай второй диалог и ответь на вопросы.</p>
+    <button class="lbtn" id="lplay2">▶ Слушать</button>
+    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
+    <button class="lbtn sec" id="lscript2">📜 Показать текст</button>
+    <div id="script2"><b>Sam:</b> Hi, Ella. Are you free on Saturday?<br>
+      <b>Ella:</b> I think so. Why?<br>
+      <b>Sam:</b> There's a new clothes shop in town. I'm meeting Ben there at eleven.<br>
+      <b>Ella:</b> Sounds good. Where exactly?<br>
+      <b>Sam:</b> Let's meet in front of the cinema, then we can walk together.<br>
+      <b>Ella:</b> OK. What are you wearing so I can find you?<br>
+      <b>Sam:</b> My grey jumper and blue jeans. See you Saturday!</div>
+  </div>
+  <div id="lq2" style="margin-top:14px"></div>
+  <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>
+  <div class="wbband" style="border-color:#2e6f4e">Прилагательные-противоположности: приставка un-.</div>
+  <div id="ws"></div>
+  <h2>📕 Чтение</h2>
+  <div class="read"><h3>Teenage pressures</h3><p>Many teenagers feel they have to wear the 'right' clothes. If everyone at school is wearing a certain brand, some students feel unhappy or left out without it.</p>
+   <p>But fashion is expensive, and the newest trainers or the coolest jacket can cost a lot of money. Some teenagers spend all their pocket money on clothes; others feel stressed because their families can't buy expensive brands.</p>
+   <p>Experts say that real style is about confidence, not price. You don't have to follow every trend. Wearing clothes that are comfortable and that you like is more important than wearing the most popular label.</p></div>
+  <div id="rq" style="margin-top:14px"></div>
+  <h2>📕 Чтение 2</h2>
+  <div class="read"><h3>My favourite clothes</h3><p>Hi! I'm Nadia and I love fashion, but I don't follow expensive brands. Right now I'm wearing my favourite outfit: black leggings, a long grey jumper and white trainers.</p>
+   <p>I usually wear casual clothes at the weekend, but today is special because I'm meeting my friends in town. In winter I always wear a warm coat and a colourful scarf. I never wear ties or smart shoes — they aren't comfortable for me!</p>
+   <p>My advice? Choose clothes that make you feel good. Today I feel great, and that's real style.</p></div>
+  <div id="rq2" style="margin-top:14px"></div>
+  <h2>✅ True or False <span class="sec-i">(по текстам юнита)</span></h2>
+  <div id="tf"></div>
+  <h2>💬 How to… договориться о встрече</h2>
+  <div class="card">
+    <div class="g-ex"><b>Are you free on…?</b> — ты свободен в…?</div>
+    <div class="g-ex"><b>Let's meet at / in front of…</b> — давай встретимся в / перед…</div>
+    <div class="g-ex"><b>What time?</b> — во сколько? · <b>See you then!</b> — до встречи!</div>
+  </div>
+  <div id="fx"></div>
+  <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
+  <div id="spk"></div>
+  <h2>✍️ Writing</h2>
+  <div class="hw"><b>An email.</b> Напиши другу неформальное письмо (5–6 предложений): пригласи в новый магазин одежды, напиши когда и где встретиться, что ты сейчас делаешь и что наденешь.<br><br>Проверь: Present continuous (I'm wearing / we're meeting), связки (and, but, because), начало и конец письма (Hi…, See you soon!).</div>
+  <h2>🎯 IELTS-style Exam Trainer <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Fast fashion and the planet</h3><p>'Fast fashion' means cheap clothes that are made very quickly and sold in huge amounts. Shops offer new styles every few weeks, so people buy more and more clothes.</p>
+   <p>But fast fashion is a big problem for the planet. Making clothes uses a lot of water and energy, and many people throw old clothes away after wearing them only a few times. These clothes often end up in huge piles of rubbish.</p>
+   <p>Today, more teenagers are choosing a different way. Some buy second-hand clothes, others swap clothes with friends or repair the clothes they already have. They believe that looking good and helping the planet can go together.</p></div>
+  <div class="wbband" style="border-color:#c0392b">True / False / Not Given — по тексту выше</div>
+  <div id="examtfng"></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice · Use of English</div>
+  <div id="exammc"></div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking task:</b> Опиши фотографию людей в разной одежде (1–2 минуты): что каждый носит, какие цвета, и что, по-твоему, они сейчас делают (present continuous).</div>
+  <h2>🏠 Домашнее задание</h2>
+  <div class="hw"><b>Мой стиль.</b> Опиши 3 своих любимых предмета одежды и напиши, что ты обычно носишь и что на тебе надето прямо сейчас (Present simple vs Present continuous).<br><br>Затем открой <a href="solutions-el-u3-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Unit 3</a> 👕</div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Solutions Elementary · Unit 3</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+const WORDS=[["cardigan","кардиган"],["coat","пальто"],["dress","платье"],["jacket","куртка / пиджак"],["jeans","джинсы"],["jumper","свитер"],["leggings","леггинсы"],["scarf","шарф"],["shirt","рубашка"],["shorts","шорты"],["skirt","юбка"],["sweatshirt","толстовка"],["tie","галстук"],["tracksuit","спортивный костюм"],["trainers","кроссовки"],["trousers","брюки"],["belt","ремень"],["gloves","перчатки"],["sunglasses","солнцезащитные очки"],["bracelet","браслет"]];
+const PRONWORDS=["cardigan","trousers","jewellery","sunglasses","wearing","comfortable"];
+const CHUNKS=[["What are you wearing?","что на тебе надето?"],["I'm wearing…","на мне…"],["It suits you","тебе идёт"],["try it on","примерь это"],["What size?","какой размер?"],["It's too small","это слишком мало"],["Are you free…?","ты свободен…?"],["Let's meet at…","давай встретимся в…"]];
+const DIALOG=[["f","Look at this dress! Do you like it?","Ella"],["m","Yes, it's nice. But you're wearing a lot of black today.","Sam"],["f","I know. I want something with more colour. What about this red skirt?","Ella"],["m","It suits you. Are you going to try it on?","Sam"],["f","Yes. What size is it?","Ella"],["m","It says medium. Here you are.","Sam"],["f","Thanks. Oh, and I need new trainers for the party.","Ella"],["m","The party? Everyone is wearing smart clothes, not trainers!","Sam"],["f","Good point. Then I'm buying these shoes instead.","Ella"]];
+const DIALOG2=[["m","Hi, Ella. Are you free on Saturday?","Sam"],["f","I think so. Why?","Ella"],["m","There's a new clothes shop in town. I'm meeting Ben there at eleven.","Sam"],["f","Sounds good. Where exactly?","Ella"],["m","Let's meet in front of the cinema, then we can walk together.","Sam"],["f","OK. What are you wearing so I can find you?","Ella"],["m","My grey jumper and blue jeans. See you Saturday!","Sam"]];
+const LQ=[{"q":"What colour is Ella wearing a lot of today?","o":["black","red","white"],"a":0},{"q":"What does Ella want to try on?","o":["a red skirt","a blue dress","jeans"],"a":0},{"q":"What size is the skirt?","o":["small","medium","large"],"a":1},{"q":"What are people wearing at the party?","o":["trainers","smart clothes","tracksuits"],"a":1},{"q":"What does Ella buy in the end?","o":["trainers","shoes","a scarf"],"a":1}];
+const LQ2=[{"q":"When are they meeting?","o":["Friday","Saturday","Sunday"],"a":1},{"q":"Who is Sam meeting at eleven?","o":["Ben","Ella's brother","a teacher"],"a":0},{"q":"Where are they meeting?","o":["in front of the cinema","at the shop","at home"],"a":0},{"q":"What is Sam wearing?","o":["a grey jumper and blue jeans","a red coat","a tracksuit"],"a":0},{"q":"Why does Ella ask what Sam is wearing?","o":["so she can find him","to buy the same","she is bored"],"a":0}];
+const RQ=[{"q":"Why do some students feel left out?","o":["they don't wear the right brand","they are new","they study hard"],"a":0},{"q":"What is a problem with fashion?","o":["it is expensive","it is boring","it is easy"],"a":0},{"q":"What do experts say real style is about?","o":["price","confidence","brands"],"a":1},{"q":"According to the text, you don't have to…","o":["follow every trend","wear clothes","be comfortable"],"a":0}];
+const RQ2=[{"q":"Does Nadia follow expensive brands?","o":["yes","no","sometimes"],"a":1},{"q":"What is Nadia wearing right now?","o":["a dress","leggings, a jumper and trainers","a tracksuit"],"a":1},{"q":"Why is today special?","o":["it's her birthday","she's meeting friends in town","it's winter"],"a":1},{"q":"What does Nadia never wear?","o":["ties or smart shoes","scarves","coats"],"a":0}];
+const EX=[{"q":"Look! She ___ a red dress.","o":["wear","is wearing","wears"],"a":1},{"q":"I ___ a uniform every day. (обычно)","o":["wear","am wearing","wearing"],"a":0},{"q":"Spelling: run → ___","o":["runing","running","runnning"],"a":1},{"q":"They ___ TV at the moment.","o":["watch","are watching","watches"],"a":1},{"q":"He ___ jeans now.","o":["wear","wears","is wearing"],"a":2},{"q":"We usually ___ trainers to school.","o":["wear","are wearing","wearing"],"a":0},{"q":"Spelling: make → ___","o":["makeing","making","makking"],"a":1},{"q":"___ you wearing a coat now?","o":["Do","Are","Is"],"a":1},{"q":"She ___ (not) wearing a scarf today.","o":["isn't","doesn't","don't"],"a":0},{"q":"Listen! The teacher ___ to us.","o":["talks","is talking","talk"],"a":1},{"q":"I ___ Ben at the cinema on Saturday. (договорённость)","o":["meet","am meeting","meets"],"a":1},{"q":"Every winter he ___ a warm coat.","o":["wears","is wearing","wear"],"a":0}];
+const GAPS=[{"q":"She ___ (wear) a blue jumper now.","a":["is wearing","'s wearing"]},{"q":"I usually ___ (go) to school by bus.","a":["go"]},{"q":"They ___ (not/wear) uniforms today.","a":["aren't wearing","are not wearing"]},{"q":"Spelling: sit → ___ (present continuous form)","a":["sitting"]},{"q":"___ (you/wear) trainers right now? (вопрос)","a":["are you wearing"]},{"q":"We ___ (meet) our friends on Saturday. (договорённость)","a":["are meeting","'re meeting"]}];
+const FX=[{"q":"Спроси, свободен ли друг в субботу:","o":["Are you free on Saturday?","You free Saturday is?","Free you Saturday?"],"a":0},{"q":"Предложи встретиться у кинотеатра:","o":["Let's meet in front of the cinema.","We meeting cinema.","Cinema meet we let."],"a":0},{"q":"Спроси, что человек делает сейчас:","o":["What are you doing?","What you do now?","What do you doing?"],"a":0},{"q":"Скажи «до встречи!»:","o":["See you then!","See then you!","You see then!"],"a":0}];
+const SPEAK=["Опиши, что на тебе надето сейчас (I'm wearing…).","Скажи, что ты обычно носишь в школу и на выходных (I usually wear…).","Опиши одежду друга на фото (He/She is wearing…).","Договорись с другом о встрече в торговом центре (время и место)."];
+const WORDSKILLS=[{"q":"Противоположность к «happy»:","o":["unhappy","dishappy","nohappy"],"a":0},{"q":"Противоположность к «friendly»:","o":["unfriendly","disfriendly","infriendly"],"a":0},{"q":"Противоположность к «comfortable»:","o":["uncomfortable","incomfortable","discomfortable"],"a":0},{"q":"Противоположность к «tidy»:","o":["untidy","distidy","nontidy"],"a":0},{"q":"Приставка «un-» значит…","o":["не- (отрицание)","очень","снова"],"a":0},{"q":"Впиши слово с un-: opposite of «popular» → ___","a":["unpopular"]},{"q":"Впиши слово с un-: opposite of «fair» → ___","a":["unfair"]},{"q":"Впиши слово с un-: opposite of «kind» → ___","a":["unkind"]}];
+const TF=[{"q":"Some teenagers feel unhappy without the right brand.","a":true},{"q":"Experts say style is about price.","a":false},{"q":"Nadia loves expensive brands.","a":false},{"q":"Nadia is wearing white trainers.","a":true},{"q":"Nadia often wears smart shoes.","a":false},{"q":"Real style is about feeling good, the text says.","a":true}];
+const EXAM_MC=[{"q":"What does 'fast fashion' mean?","o":["cheap clothes made quickly","expensive designer clothes","old clothes"],"a":0},{"q":"Why do people buy more clothes?","o":["shops offer new styles often","clothes last long","clothes are free"],"a":0},{"q":"What is a problem with old clothes?","o":["they become rubbish","they are warm","they are colourful"],"a":0},{"q":"What do some teenagers do instead?","o":["buy second-hand or repair clothes","buy more fast fashion","stop wearing clothes"],"a":0},{"q":"Use of English: Look! She ___ a new coat.","o":["is wearing","wears","wear"],"a":0},{"q":"Use of English: I ___ jeans every day.","o":["wear","am wearing","wearing"],"a":0}];
+const EXAM_TFNG=[{"q":"Fast fashion clothes are made very quickly.","a":"T"},{"q":"Shops offer new styles once a year.","a":"F"},{"q":"Making clothes uses a lot of water and energy.","a":"T"},{"q":"Second-hand clothes are more expensive than new clothes.","a":"NG"},{"q":"Some teenagers swap or repair their clothes.","a":"T"}];
+const WBMC=[{"q":"Кроссовки = ___ .","o":["trainers","gloves","belt"],"a":0},{"q":"Сейчас = маркер для ___ .","o":["Present continuous","Present simple","Past"],"a":0},{"q":"Свитер = ___ .","o":["jumper","scarf","tie"],"a":0},{"q":"«She ___ a dress now» →","o":["is wearing","wears","wear"],"a":0},{"q":"Приставка «не-» =","o":["un-","re-","over-"],"a":0}];
+const WBGAPS=[{"q":"They ___ (watch) TV now.","a":["are watching","'re watching"]},{"q":"I ___ (wear) a uniform every day.","a":["wear"]},{"q":"Spelling: run → ___ (-ing)","a":["running"]},{"q":"Opposite of «happy» = ___","a":["unhappy"]},{"q":"___ (she/wear) a coat now? (вопрос)","a":["is she wearing"]}];
+
+const wbox=document.getElementById("words");
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
+/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
+function _voicePools(){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  const male=[],female=[];
+  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
+    v._score=s;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(mal&&!fem)male.push(v);else female.push(v);});
+  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
+  return {male:male,female:female};
+}
+let _POOLS=null;const _SPK={};
+function speakerStyle(who){
+  who=who||"m";if(_SPK[who])return _SPK[who];
+  if(!_POOLS)_POOLS=_voicePools();
+  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
+  const pool=isF?_POOLS.female:_POOLS.male;
+  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
+  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
+  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
+  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
+  _SPK[who]=st;return st;
+}
+function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"solutions-el",unit:0};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let sc=0,tot=0;
+function bump(){sc++;document.getElementById("sc").textContent=sc;}
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  let done=false,logged=false;
+  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
+    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
+  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  return d;}
+/* Правда / Ложь */
+function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
+  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
+    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
+});
+/* Аудирование → вопросы */
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
+const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
+/* Упражнения */
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
+/* How to */
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook — насыщенный, по секциям, разные типы заданий */
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* 4. Phrases: значение + соединение */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Phrases · выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
+    }
+    _wbHead("📖 Grammar · практика");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
+}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+</script>
+</body>
+</html>
