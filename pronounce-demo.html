@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronunciation practice · demo</title>
+<style>
+  :root{--ink:#1a1d21;--muted:#5b6570;--line:#e6e9ee;--accent:#5b3df5;--card:#fff;--bg:#f6f7f9}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:640px;margin:0 auto;padding:28px 18px 80px}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 24px;font-size:14px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}
+  .word{font-size:20px;font-weight:650}
+  .say{border:0;background:#eef1f6;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:15px}
+  h2{font-size:16px;margin:30px 0 8px;color:var(--muted)}
+  .hint{font-size:13px;color:var(--muted);background:#eff8ff;border:1px solid #d3e6ff;
+    border-radius:12px;padding:12px 14px;margin:18px 0}
+  .cover{width:100%;height:170px;border-radius:14px;object-fit:cover;background:#e6e9ee;display:block;margin:10px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pronunciation practice</h1>
+  <p class="sub">Демо новых модулей: оценка произношения (sm-speech.js) + плавное появление и ленивые картинки (sm-reveal.js) поверх общего движка SMP.</p>
+
+  <div class="hint">Нажми 🎤 и произнеси слово. Движок распознаёт речь, сверяет с эталоном и ставит балл 0–100 с подсветкой по словам. Работает в Chrome и Edge (нужен доступ к микрофону).</div>
+
+  <h2>Words</h2>
+  <div id="words"></div>
+
+  <h2>Phrases</h2>
+  <div id="phrases"></div>
+
+  <h2>Плавное появление + ленивая картинка</h2>
+  <div class="sm-reveal">
+    <p>Этот блок мягко проявился при прокрутке. Картинка ниже подгрузилась только когда дошла до экрана — экономит трафик на телефоне.</p>
+    <img class="cover sm-lazy" data-src="img/covers/solutions-el-u3.jpg" alt="Cover" width="600" height="170">
+  </div>
+
+  <!-- общий движок реакций (звук/конфетти) — необязателен, но желателен -->
+  <script src="sm-play.js"></script>
+  <script src="sm-speech.js"></script>
+  <script src="sm-reveal.js"></script>
+  <script>
+    var WORDS = ["apple", "elephant", "beautiful", "Wednesday", "comfortable"];
+    var PHRASES = ["I would like a cup of tea", "See you tomorrow", "How much does it cost"];
+
+    function speak(t){ if(window.SMP&&SMP.say) SMP.say(t); else if(window.SM_speak) SM_speak(t); }
+
+    function make(list, host){
+      list.forEach(function(t){
+        var row=document.createElement("div"); row.className="row sm-reveal";
+        var left=document.createElement("div"); left.className="word"; left.textContent=t;
+        var right=document.createElement("div");
+        right.style.cssText="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end";
+        var say=document.createElement("button"); say.className="say"; say.textContent="🔊";
+        say.setAttribute("aria-label","Прослушать: "+t);
+        say.onclick=function(){ speak(t); };
+        right.appendChild(say);
+        right.appendChild(SMS.button(t,{threshold:80}));
+        row.appendChild(left); row.appendChild(right); host.appendChild(row);
+      });
+    }
+    make(WORDS, document.getElementById("words"));
+    make(PHRASES, document.getElementById("phrases"));
+    if(window.SM_reveal) SM_reveal.scan(document);   // подхватить новые блоки
+  </script>
+</div>
+</body>
+</html>
