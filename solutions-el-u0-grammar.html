@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction · Solutions Elementary · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  .hero{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-bottom:22px}
+  .hero img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
+  .hcover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;position:relative}
+  .hcover span{font-size:clamp(70px,18vw,130px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+  .hero .hb{padding:18px 22px}
+  .hero h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,38px);color:#7c2340}
+  .hero .d{font-weight:800;font-size:14px;color:#5a4f47;margin-top:6px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:30px 4px 12px}
+  .sec-i{font-size:13px;color:#8a7a68;font-weight:700}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .g-ex b{color:#7c2340}
+  .ru{color:#8a7a68;font-size:13px}
+  .gt{color:#7c2340;font-size:16px;font-weight:900}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+  td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
+  th{background:#f6ede0;color:#7c2340}
+  .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:620px){.words{grid-template-columns:1fr}}
+  .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
+  .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
+  .word .en{font-weight:900;font-size:15px}
+  .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
+  .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:8px 14px;border-radius:999px;color:#7c2340}
+  .chip:hover{background:#fdfaf0}
+  .lc{background:#7c2340;border-radius:22px;padding:20px 22px;color:#fff;box-shadow:0 6px 0 #4d1527}
+  .lc h3{margin:0 0 6px;font-family:'Fredoka',sans-serif;font-size:20px}
+  .lc p{margin:4px 0 12px;font-weight:700;font-size:13.5px;opacity:.9}
+  .lbtn{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;margin-right:8px}
+  .lbtn.sec{background:rgba(255,255,255,.18)}
+  #script{display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65}
+  #script b{color:#ffd27a}
+  .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
+  .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
+  .read b{color:#7c2340}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .hw{background:#fff7ea;border:2px dashed #e0952a;border-radius:18px;padding:16px 20px;font-size:14.5px}
+  .spkcard{background:#eef6ff00;background:#fbf4ff;border:2px solid #b98cc9;border-radius:16px;padding:12px 16px;margin-bottom:10px;font-size:14.5px;font-weight:700;color:#5a3a66}
+  .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
+  .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="solutions-el-course.html">← Все юниты</a>
+    <a class="home alt" href="solutions-el-course.html">🎯 Тренажёр</a>
+    <a class="home" href="index.html">🏠 Домой</a>
+  </div>
+
+  <div class="hero">
+    <div class="hcover" id="cover" style="background:linear-gradient(135deg,#1f6f9c,#39b0c9)"><span>🧭</span></div>
+    <div class="hb">
+      <h1>Introduction</h1>
+      <div class="d">📚 be · have got · can · a / an / some · this / that · личная информация</div>
+    </div>
+  </div>
+
+  <h2>📖 Грамматика юнита</h2>
+  <div class="card" style="text-align:center">
+    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и рабочая тетрадь этого юнита — отдельными заданиями (ДЗ).</div>
+    <a href="solutions-el-u0-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">✏️ Грамматика юнита →</a>
+    <a href="solutions-el-u0-workbook.html" style="display:inline-block;background:#2e6f4e;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">📒 Workbook →</a>
+  </div>
+
+  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
+  <div class="words" id="words"></div>
+
+  <h2>🗣️ Произношение <span class="sec-i">Числа и ударение</span></h2>
+  <div class="card"><div style="font-size:14px;margin-bottom:8px">thir<b>TEEN</b> · <b>THIR</b>ty · na·tio·NAL·i·ty</div><div class="pronbox" id="pron"></div></div>
+
+  <h2>🧩 Фразы <span class="sec-i">(учи целиком)</span></h2>
+  <div class="words" id="chunks"></div>
+  <h2>🎯 Тренажёр фраз <span class="sec-i">(выбери перевод)</span></h2>
+  <div id="chpr"></div>
+
+  <h2>🎧 Аудирование</h2>
+  <div class="lc">
+    <h3>A new student</h3>
+    <p>Послушай диалог (озвучка прямо в браузере), потом ответь на вопросы. Слушай сколько угодно.</p>
+    <button class="lbtn" id="lplay">▶ Слушать</button>
+    <button class="lbtn sec" id="lstop">⏹ Стоп</button>
+    <button class="lbtn sec" id="lscript">📜 Показать текст</button>
+    <div id="script"><b>Teacher:</b> Good morning! Are you a new student?<br>
+      <b>Sofia:</b> Yes, I am. My name's Sofia.<br>
+      <b>Teacher:</b> Nice to meet you, Sofia. What's your surname?<br>
+      <b>Sofia:</b> It's Marin. M-A-R-I-N.<br>
+      <b>Teacher:</b> Thank you. Where are you from?<br>
+      <b>Sofia:</b> I'm from Argentina, but I live here now.<br>
+      <b>Teacher:</b> How old are you?<br>
+      <b>Sofia:</b> I'm thirteen.<br>
+      <b>Teacher:</b> Have you got a phone number?<br>
+      <b>Sofia:</b> Yes. It's oh-two-one, four-five-six-seven.<br>
+      <b>Teacher:</b> Great. Have you got a pencil case and a dictionary?<br>
+      <b>Sofia:</b> I've got a pencil case, but I haven't got a dictionary.<br>
+      <b>Teacher:</b> No problem. Here's one for you. Welcome to our school!</div>
+  </div>
+  <div id="lq" style="margin-top:14px"></div>
+
+  <h2>🎧 Аудирование 2 <span class="sec-i">(в классе)</span></h2>
+  <div class="lc">
+    <h3>In the classroom</h3>
+    <p>Послушай второй диалог и ответь на вопросы.</p>
+    <button class="lbtn" id="lplay2">▶ Слушать</button>
+    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
+    <button class="lbtn sec" id="lscript2">📜 Показать текст</button>
+    <div id="script2"><b>Sofia:</b> Excuse me, Mr Brown. Can I ask a question?<br>
+      <b>Mr Brown:</b> Of course. Go ahead.<br>
+      <b>Sofia:</b> What's this in English?<br>
+      <b>Mr Brown:</b> That's a rubber. You use it with a pencil.<br>
+      <b>Sofia:</b> And can I borrow a dictionary, please?<br>
+      <b>Mr Brown:</b> Yes, sure. Here you are.<br>
+      <b>Sofia:</b> Thank you. Can I sit next to Mia?<br>
+      <b>Mr Brown:</b> Yes, you can. But please listen carefully today.<br>
+      <b>Sofia:</b> OK, I will. Thank you, Mr Brown.</div>
+  </div>
+  <div id="lq2" style="margin-top:14px"></div>
+
+  <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>
+  <div class="wbband" style="border-color:#2e6f4e">Множественное число, a / an, числа и краткие формы.</div>
+  <div id="ws"></div>
+
+  <h2>📕 Чтение</h2>
+  <div class="read"><h3>My new friend</h3><p>This is my new friend. Her name's Lena and she's from Turkey. She's fourteen years old. Lena has got long, dark hair and brown eyes.</p>
+   <p>She can speak three languages: Turkish, English and a little Russian. She can play the guitar and she can dance really well, but she can't ride a bike. Lena is friendly and funny, and I'm happy she's in my class.</p></div>
+  <div id="rq" style="margin-top:14px"></div>
+
+  <h2>📕 Чтение 2 <span class="sec-i">(A profile)</span></h2>
+  <div class="read"><h3>About me</h3><p>Hello! I'm Daniel and I'm from Mexico. I'm twelve years old. I've got one brother and two sisters.</p>
+   <p>I can play football and I can cook, but I can't swim. At school my favourite things are my tablet and my English dictionary. I haven't got a pet, but I want a dog! Please write to me and tell me about you.</p></div>
+  <div id="rq2" style="margin-top:14px"></div>
+
+  <h2>✅ True or False <span class="sec-i">(по текстам юнита)</span></h2>
+  <div id="tf"></div>
+
+  <h2>💬 How to… познакомиться и попросить разрешения</h2>
+  <div class="card">
+    <div class="g-ex"><b>Hi, I'm…</b> / <b>My name's…</b> · <b>Nice to meet you.</b></div>
+    <div class="g-ex"><b>Where are you from?</b> — <b>I'm from…</b></div>
+    <div class="g-ex"><b>Can I…?</b> (просьба) · <b>Can you…?</b> (умение)</div>
+  </div>
+  <div id="fx"></div>
+
+  <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
+  <div id="spk"></div>
+
+  <h2>✍️ Writing</h2>
+  <div class="hw"><b>All about me.</b> Напиши короткий профиль о себе (5–6 предложений): имя, возраст, страна, что у тебя есть (I've got…) и что ты умеешь/не умеешь (I can… / I can't…).<br><br>Проверь: краткие формы (I'm, I've got), a / an перед словом, заглавные буквы у имён и стран.</div>
+
+  <h2>🎯 Exam Skills Trainer <span class="sec-i">(формат экзамена)</span></h2>
+  <div class="read"><h3>Reading: Welcome to Greenwood School</h3><p>Welcome to Greenwood School! We are happy to have new students from many countries. In our school you can study English, maths, science and art.</p>
+   <p>You can also join clubs after lessons. There is a music club, a sports club and a computer club. Students can play the guitar or the drums in the music club. You can't use your phone in lessons, but you can use it at break time. We hope you enjoy your first year with us!</p></div>
+  <div class="wbband" style="border-color:#c0392b">Multiple choice · Use of English — по тексту выше</div>
+  <div id="exammc"></div>
+  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking task:</b> Расскажи 1–2 минуты о себе: имя · возраст · откуда ты · что ты умеешь делать.</div>
+
+  <h2>🏠 Домашнее задание</h2>
+  <div class="hw"><b>О себе.</b> Заполни анкету (имя, фамилия, возраст, страна, национальность) и напиши 3 предложения о том, что ты умеешь.<br><br>Затем открой <a href="solutions-el-u0-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Introduction</a> 🧭</div>
+
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Solutions Elementary · Introduction</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+const WORDS=[["name","имя"],["surname","фамилия"],["age","возраст"],["country","страна"],["nationality","национальность"],["address","адрес"],["phone number","номер телефона"],["email","электронная почта"],["pencil case","пенал"],["ruler","линейка"],["rubber","ластик"],["notebook","тетрадь"],["dictionary","словарь"],["desk","парта"],["board","доска"],["bag","сумка / рюкзак"],["ride a bike","кататься на велосипеде"],["play the guitar","играть на гитаре"],["swim","плавать"],["dance","танцевать"]];
+const PRONWORDS=["nationality","thirteen","thirty","email","guitar","address","Argentina"];
+const CHUNKS=[["What's your name?","как тебя зовут?"],["How do you spell it?","как это пишется?"],["Where are you from?","откуда ты?"],["I'm from…","я из…"],["Can I …?","можно мне …?"],["Can you …?","ты умеешь …?"],["Nice to meet you","приятно познакомиться"],["Here you are","вот, держи"]];
+const DIALOG=[["m","Good morning! Are you a new student?"],["f","Yes, I am. My name's Sofia."],["m","Nice to meet you, Sofia. What's your surname?"],["f","It's Marin. M-A-R-I-N."],["m","Thank you. Where are you from?"],["f","I'm from Argentina, but I live here now."],["m","How old are you?"],["f","I'm thirteen."],["m","Have you got a phone number?"],["f","Yes. It's oh-two-one, four-five-six-seven."],["m","Great. Have you got a pencil case and a dictionary?"],["f","I've got a pencil case, but I haven't got a dictionary."],["m","No problem. Here's one for you. Welcome to our school!"]];
+const LQ=[{"q":"What is Sofia's surname?","o":["Marin","Martin","Marini"],"a":0},{"q":"Where is Sofia from?","o":["Argentina","Spain","Italy"],"a":0},{"q":"How old is Sofia?","o":["twelve","thirteen","thirty"],"a":1},{"q":"Has Sofia got a dictionary?","o":["yes","no","she's got two"],"a":1},{"q":"What does the teacher give her?","o":["a dictionary","a pen","a bag"],"a":0}];
+const RQ=[{"q":"Where is Lena from?","o":["Turkey","Greece","Russia"],"a":0},{"q":"How old is Lena?","o":["thirteen","fourteen","forty"],"a":1},{"q":"How many languages can Lena speak?","o":["two","three","four"],"a":1},{"q":"What can't Lena do?","o":["dance","play the guitar","ride a bike"],"a":2}];
+const EX=[{"q":"I ___ a new student.","o":["am","is","are"],"a":0},{"q":"She ___ from Turkey.","o":["am","is","are"],"a":1},{"q":"They ___ got a big dictionary.","o":["has","have","is"],"a":1},{"q":"___ you speak French?","o":["Can","Are","Do"],"a":0},{"q":"He ___ swim very well.","o":["can","cans","is"],"a":0},{"q":"It's ___ email address.","o":["a","an","some"],"a":1},{"q":"I've got ___ pens in my bag.","o":["a","an","some"],"a":2},{"q":"___ is my pencil case. (рядом)","o":["This","That","Those"],"a":0},{"q":"___ are your books over there. (далеко)","o":["These","This","Those"],"a":2},{"q":"___ I open the window, please?","o":["Can","Am","Do"],"a":0},{"q":"We ___ got a car.","o":["hasn't","haven't","isn't"],"a":1},{"q":"She's got ___ umbrella.","o":["a","an","some"],"a":1}];
+const GAPS=[{"q":"___ (you/be) from Spain? (вопрос)","a":["are you"]},{"q":"He ___ (have got) a new bag.","a":["has got","'s got"]},{"q":"I ___ (can/not) play the piano.","a":["can't","cannot"]},{"q":"___ (I/can) borrow your ruler, please? (просьба)","a":["can i"]},{"q":"She ___ (be/not) from Italy.","a":["isn't","is not"]},{"q":"We ___ (have got) some notebooks.","a":["have got","'ve got"]}];
+const FX=[{"q":"Спроси, откуда человек:","o":["Where are you from?","Where you from?","From where you?"],"a":0},{"q":"Попроси разрешения выйти:","o":["Can I go out, please?","I go out?","Go out I can?"],"a":0},{"q":"Скажи, что умеешь плавать:","o":["I can swim.","I swim can.","I am swim."],"a":0},{"q":"Познакомься:","o":["Nice to meet you.","Nice you meet.","Meet you nice."],"a":0}];
+const SPEAK=["Представься: имя, фамилия (произнеси по буквам), возраст, страна.","Скажи 4 вещи, которые ты умеешь и не умеешь (I can… / I can't…).","Попроси разрешения (Can I…?) на три действия в классе.","Опиши, что у тебя в сумке (I've got… a / an / some)."];
+const WORDSKILLS=[{"q":"Множественное число от «box»:","o":["boxs","boxes","boxies"],"a":1},{"q":"Множественное число от «dictionary»:","o":["dictionarys","dictionaries","dictionary"],"a":1},{"q":"a или an? ___ apple","o":["a","an"],"a":1},{"q":"a или an? ___ ruler","o":["a","an"],"a":0},{"q":"«thirteen» — это…","o":["13","30","3"],"a":0},{"q":"«thirty» — это…","o":["13","30","3"],"a":1},{"q":"Впиши мн. число: one child → two ___","a":["children"]},{"q":"Впиши краткую форму: I can not → I ___","a":["can't","cannot"]}];
+const DIALOG2=[["f","Excuse me, Mr Brown. Can I ask a question?"],["m","Of course. Go ahead."],["f","What's this in English?"],["m","That's a rubber. You use it with a pencil."],["f","And can I borrow a dictionary, please?"],["m","Yes, sure. Here you are."],["f","Thank you. Can I sit next to Mia?"],["m","Yes, you can. But please listen carefully today."],["f","OK, I will. Thank you, Mr Brown."]];
+const LQ2=[{"q":"Who does Sofia talk to?","o":["Mr Brown","Mia","her mum"],"a":0},{"q":"What is 'this' in English?","o":["a rubber","a pencil","a book"],"a":0},{"q":"What does Sofia borrow?","o":["a dictionary","a pen","a bag"],"a":0},{"q":"Where does she want to sit?","o":["next to Mia","at home","near the door"],"a":0},{"q":"Can she sit there?","o":["yes","no","later"],"a":0}];
+const RQ2=[{"q":"Where is Daniel from?","o":["Mexico","Spain","Brazil"],"a":0},{"q":"How old is Daniel?","o":["twelve","twenty","two"],"a":0},{"q":"What can't Daniel do?","o":["cook","play football","swim"],"a":2},{"q":"Has Daniel got a pet?","o":["yes, a dog","no","yes, a cat"],"a":1},{"q":"What does Daniel want?","o":["a dog","a cat","a tablet"],"a":0}];
+const TF=[{"q":"Lena is from Turkey.","a":true},{"q":"Lena can ride a bike.","a":false},{"q":"Sofia is from Argentina.","a":true},{"q":"At the start, Sofia has got a dictionary.","a":false},{"q":"Daniel can swim.","a":false},{"q":"Daniel wants a dog.","a":true}];
+const EXAM_MC=[{"q":"What is Greenwood?","o":["a school","a shop","a club"],"a":0},{"q":"Where are the new students from?","o":["one country","many countries","the school"],"a":1},{"q":"Which club is NOT in the text?","o":["music","sports","dance"],"a":2},{"q":"In the music club you can play…","o":["the guitar or drums","football","chess"],"a":0},{"q":"When can you use your phone?","o":["in lessons","at break time","never"],"a":1},{"q":"Use of English: «We are happy ___ have new students.»","o":["to","for","of"],"a":0}];
+const WBMC=[{"q":"Пенал = a ___ .","o":["pencil case","ruler","rubber"],"a":0},{"q":"Я умею плавать = I ___ swim.","o":["can","am","have"],"a":0},{"q":"Это (рядом) = ___ .","o":["this","that","those"],"a":0},{"q":"У меня нет = I ___ got.","o":["haven't","hasn't","am not"],"a":0},{"q":"Словарь = a ___ .","o":["dictionary","notebook","board"],"a":0}];
+const WBGAPS=[{"q":"___ (she/can) dance? (вопрос)","a":["can she"]},{"q":"We ___ (have got/not) a car.","a":["haven't got","have not got"]},{"q":"It's ___ (a/an) old ruler.","a":["an"]},{"q":"___ (be) you from Spain?","a":["are"]},{"q":"I've got ___ (some/a) pens.","a":["some"]}];
+
+const wbox=document.getElementById("words");
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
+/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
+function _voicePools(){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  const male=[],female=[];
+  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
+    v._score=s;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(mal&&!fem)male.push(v);else female.push(v);});
+  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
+  return {male:male,female:female};
+}
+let _POOLS=null;const _SPK={};
+function speakerStyle(who){
+  who=who||"m";if(_SPK[who])return _SPK[who];
+  if(!_POOLS)_POOLS=_voicePools();
+  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
+  const pool=isF?_POOLS.female:_POOLS.male;
+  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
+  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
+  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
+  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
+  _SPK[who]=st;return st;
+}
+function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"solutions-el",unit:0};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let sc=0,tot=0;
+function bump(){sc++;document.getElementById("sc").textContent=sc;}
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  let done=false,logged=false;
+  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
+    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
+  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  return d;}
+/* Правда / Ложь */
+function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
+  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
+    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
+});
+/* Аудирование → вопросы */
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
+const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
+/* Упражнения */
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
+/* How to */
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook — насыщенный, по секциям, разные типы заданий */
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* 4. Phrases: значение + соединение */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Phrases · выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
+    }
+    _wbHead("📖 Grammar · практика");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
+}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+</script>
+</body>
+</html>
