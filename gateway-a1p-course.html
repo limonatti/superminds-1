@@ -54,15 +54,15 @@
 const UNITS=[
  {n:0,t:"Starter unit",e:"🎒",g:["#e8581c","#f5a623"],d:"класс · цвета · числа · дни · время · алфавит",ready:true},
  {n:1,t:"My ID",e:"🪪",g:["#e8581c","#f5a623"],d:"страны · национальности · семья · to be · have got",ready:true},
- {n:2,t:"School days",e:"⏰",g:["#2a6f8f","#3aa0c9"],d:"школьные предметы · this/that · Possessive 's",ready:false},
- {n:3,t:"24/7",e:"📱",g:["#7c4dff","#b39ddb"],d:"Present simple · наречия частоты · свободное время",ready:false},
- {n:4,t:"Home time",e:"🏠",g:["#2e7d32","#66bb6a"],d:"there is/are · some/any · дом и еда",ready:false},
- {n:5,t:"Connected",e:"💻",g:["#00838f","#4dd0e1"],d:"can · imperative · технологии · like + gerund",ready:false},
- {n:6,t:"Good buys",e:"🛍️",g:["#ef6c00","#ffb74d"],d:"Present continuous · магазины · одежда",ready:false},
- {n:7,t:"Teamwork",e:"⚽",g:["#1565c0","#64b5f6"],d:"Past simple (to be, regular/irregular) · спорт",ready:false},
- {n:8,t:"Great job!",e:"💼",g:["#455a64","#90a4ae"],d:"Past simple (вопросы, отрицание) · работа",ready:false},
- {n:9,t:"Mother nature",e:"🌿",g:["#6d4c41","#a1887f"],d:"comparatives · superlatives · Present perfect · природа",ready:false},
- {n:10,t:"Holiday planner",e:"✈️",g:["#0277bd","#4fc3f7"],d:"be going to · must/have to · погода · путешествия",ready:false}
+ {n:2,t:"School days",e:"⏰",g:["#2a6f8f","#3aa0c9"],d:"школьные предметы · this/that · Possessive 's",ready:true},
+ {n:3,t:"24/7",e:"📱",g:["#7c4dff","#b39ddb"],d:"Present simple · наречия частоты · свободное время",ready:true},
+ {n:4,t:"Home time",e:"🏠",g:["#2e7d32","#66bb6a"],d:"there is/are · some/any · дом и еда",ready:true},
+ {n:5,t:"Connected",e:"💻",g:["#00838f","#4dd0e1"],d:"can · imperative · технологии · like + gerund",ready:true},
+ {n:6,t:"Good buys",e:"🛍️",g:["#ef6c00","#ffb74d"],d:"Present continuous · магазины · одежда",ready:true},
+ {n:7,t:"Teamwork",e:"⚽",g:["#1565c0","#64b5f6"],d:"Past simple (to be, regular/irregular) · спорт",ready:true},
+ {n:8,t:"Great job!",e:"💼",g:["#455a64","#90a4ae"],d:"Past simple (вопросы, отрицание) · работа",ready:true},
+ {n:9,t:"Mother nature",e:"🌿",g:["#6d4c41","#a1887f"],d:"comparatives · superlatives · Present perfect · природа",ready:true},
+ {n:10,t:"Holiday planner",e:"✈️",g:["#0277bd","#4fc3f7"],d:"be going to · must/have to · погода · путешествия",ready:true}
 ];
 const grid=document.getElementById("grid");
 UNITS.forEach(u=>{const a=document.createElement("div");a.className="u "+(u.ready?"ready":"soon");
