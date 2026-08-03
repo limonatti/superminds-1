@@ -18,7 +18,8 @@ var I = {
   chev:  '<path d="M9 18l6-6-6-6"/>',
   sound: '<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>',
   check: '<path d="M20 6L9 17l-5-5"/>',
-  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  chat:  '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
 };
 
 function svg(name, size) {
@@ -35,6 +36,7 @@ function esc(s) {
 var STUDENT = [
   { id: "courses",  t: "Мои курсы",  i: "book",  href: "index.html" },
   { id: "homework", t: "Домашка",    i: "file",  href: "homework.html" },
+  { id: "chat",     t: "Сообщения",  i: "chat",  href: "chat.html" },
   { id: "schedule", t: "Расписание", i: "cal",   href: "schedule.html" },
   { id: "rewards",  t: "Награды",    i: "star",  href: "rewards.html" },
   { id: "vocab",    t: "Словарь",    i: "voc",   href: "vocabulary.html" },
@@ -45,6 +47,7 @@ var STUDENT = [
 var TEACHER = [
   { id: "class",    t: "Мой класс",        i: "users", href: "teacher-class.html" },
   { id: "review",   t: "Проверка домашки", i: "file",  href: "teacher-homework.html" },
+  { id: "chat",     t: "Сообщения",        i: "chat",  href: "chat.html" },
   { id: "tsched",   t: "Расписание",       i: "cal",   href: "teacher-schedule.html" },
   { id: "payments", t: "Оплаты",           i: "card",  href: "teacher-payments.html" },
   { id: "room",     t: "Комната урока",    i: "play",  href: "room.html" },
@@ -110,6 +113,33 @@ var SMUI = {
       '<div class="side-user" id="sideUser"></div>';
 
     this.paintUser(role);
+    this.refreshUnread(role);
+  },
+
+  /* Живой бейдж непрочитанных сообщений на пункте «Сообщения» (на любой странице) */
+  async refreshUnread(role) {
+    var self = this;
+    window.SM_shellRefreshUnread = function () { self.refreshUnread(role); };
+    if (!window.SM) return;
+    var n = 0;
+    try {
+      if (role === "teacher") {
+        var map = await SM.teacherUnread();
+        Object.keys(map || {}).forEach(function (k) { n += (+map[k] || 0); });
+      } else {
+        n = (await SM.myUnread()) || 0;
+      }
+    } catch (e) { n = 0; }
+    var link = document.querySelector('.navlist a[href="chat.html"]');
+    if (!link) return;
+    var old = link.querySelector(".badge");
+    if (old) old.parentNode.removeChild(old);
+    if (n > 0) {
+      var b = document.createElement("span");
+      b.className = "badge";
+      b.textContent = n > 99 ? "99+" : n;
+      link.appendChild(b);
+    }
   },
 
   async paintUser(role) {

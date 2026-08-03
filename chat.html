@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сообщения · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  /* Чат — те же классы, что в кабинете учителя, для единого вида */
+  .chatwrap{padding:0 28px 10px}
+  .chat-scroll{min-height:280px;max-height:min(60vh,520px);overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:14px 0}
+  .bub{max-width:78%;padding:9px 13px;font:600 14px "Archivo",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;border-radius:14px}
+  .bub.me{align-self:flex-end;background:var(--color-accent);color:#fff}
+  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:2px solid var(--color-divider)}
+  .bub .tm{display:block;font:700 10px "Archivo",sans-serif;opacity:.65;margin-top:3px}
+  .chat-empty{padding:18px 0;color:var(--color-neutral-700);font:600 13px "Archivo",sans-serif;text-align:center}
+  .chat-in{display:flex;gap:8px;padding:8px 0 4px}
+  .chat-in input{flex:1;border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Archivo",sans-serif;border-radius:12px}
+  .chat-in input:focus{outline:none;border-color:var(--color-accent)}
+  .chat-in .go{border:0;background:var(--color-accent);color:#fff;padding:0 20px;font-size:16px;font-weight:800;cursor:pointer;border-radius:12px}
+  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Archivo",sans-serif;padding:1px 7px;vertical-align:middle}
+  .chat-note{padding:2px 28px 14px;color:var(--color-neutral-700);font:600 12px "Archivo",sans-serif}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list" id="peopleWrap">
+        <div class="step">Шаг 1 · Выбери собеседника</div>
+        <div id="people"></div>
+      </div>
+      <div class="pane" id="pane"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+
+let ME = null, ROLE = "student";
+let PEOPLE = [];        // [{id, name, unread}]
+let sel = 0;
+let chatTimer = null, chatLast = null;
+
+function stopChat(){ if (chatTimer){ clearInterval(chatTimer); chatTimer = null; } chatLast = null; }
+
+function bubble(m){
+  const mine = m.sender_id === ME.id;
+  const d = new Date(m.created_at);
+  const tm = (""+d.getHours()).padStart(2,"0")+":"+(""+d.getMinutes()).padStart(2,"0");
+  return '<div class="bub '+(mine?"me":"them")+'">'+esc(m.body)+'<span class="tm">'+tm+'</span></div>';
+}
+
+/* teacherId/studentId для текущей пары — зависит от роли */
+function pairFor(person){
+  return ROLE === "teacher"
+    ? { teacherId: ME.id,   studentId: person.id }
+    : { teacherId: person.id, studentId: ME.id };
+}
+
+function drawPeople(){
+  const box = document.getElementById("people");
+  if (ROLE === "student"){
+    // ученику список не нужен — прячем колонку
+    document.getElementById("peopleWrap").style.display = "none";
+    return;
+  }
+  if (!PEOPLE.length){
+    box.innerHTML = '<div class="chat-empty" style="text-align:left;padding:14px 4px">Пока нет учеников. Позови их по коду на странице «Мой класс».</div>';
+    return;
+  }
+  box.innerHTML = PEOPLE.map((p,i) =>
+    '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
+      '<span class="t">'+esc(p.name)+(p.unread?'<span class="unread">'+p.unread+'</span>':'')+'</span>' +
+      '<span class="s">'+(p.unread?('новых: '+p.unread):'нет новых')+'</span></button>').join("");
+  box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawPane(); drawPeople(); });
+}
+
+function drawPane(){
+  const pane = document.getElementById("pane");
+  const person = PEOPLE[sel];
+  if (!person){
+    stopChat();
+    pane.innerHTML = '<div class="pane-hd"><span>Сообщения</span></div>' +
+      SMUI.empty(
+        ROLE === "teacher" ? "Выбери ученика" : "Учитель не привязан",
+        ROLE === "teacher"
+          ? "Слева выбери ученика, чтобы открыть переписку."
+          : "Чтобы написать учителю, сначала привяжись к нему по коду на странице «Мои курсы» (кнопка «У меня есть код учителя»).");
+    return;
+  }
+  const title = ROLE === "teacher" ? person.name : ("Учитель · " + person.name);
+  pane.innerHTML =
+    '<div class="pane-hd"><span>'+esc(title)+'</span><span id="chatState">онлайн-чат</span></div>' +
+    '<div class="chatwrap">' +
+      '<div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загружаю…</div></div>' +
+      '<div class="chat-in"><input id="chatText" placeholder="Написать '+esc(person.name)+'…" maxlength="2000"><button class="go" id="chatSend" aria-label="Отправить">➤</button></div>' +
+    '</div>' +
+    '<div class="chat-note">Сообщения приходят автоматически. Видит только ваша пара — переписка защищена.</div>';
+  startChat(person);
+}
+
+async function refreshChat(person, force){
+  const scroll = document.getElementById("chatScroll");
+  if (!scroll || !ME) { stopChat(); return; }
+  const { teacherId, studentId } = pairFor(person);
+  let msgs = [];
+  try { msgs = await SM.chatMessages(teacherId, studentId); } catch(e){ return; }
+  const sig = msgs.length ? (msgs[msgs.length-1].id+":"+msgs.length) : "0";
+  if (!force && sig === chatLast) return;
+  const atBottom = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 40;
+  chatLast = sig;
+  scroll.innerHTML = msgs.length
+    ? msgs.map(bubble).join("")
+    : '<div class="chat-empty">Сообщений пока нет. Напиши первым 👋</div>';
+  if (force || atBottom) scroll.scrollTop = scroll.scrollHeight;
+  // отметить входящие прочитанными
+  const unreadIn = msgs.some(m => m.sender_id !== ME.id && !m.read_at);
+  if (unreadIn){
+    try { await SM.chatMarkRead(teacherId, studentId); } catch(e){}
+    if (ROLE === "teacher" && person.unread){ person.unread = 0; drawPeople(); }
+    if (window.SM_shellRefreshUnread) SM_shellRefreshUnread();
+  }
+}
+
+function startChat(person){
+  stopChat();
+  const inp = document.getElementById("chatText"), snd = document.getElementById("chatSend");
+  if (!inp || !snd) return;
+  const { teacherId, studentId } = pairFor(person);
+  async function send(){
+    const v = (inp.value||"").trim(); if (!v) return;
+    inp.value = ""; inp.focus();
+    const r = await SM.chatSend(teacherId, studentId, v);
+    if (!r.ok){
+      inp.value = v;
+      alert((r && r.error) || "Не отправилось. Убедись, что в Supabase выполнена миграция supabase-chat.sql.");
+      return;
+    }
+    await refreshChat(person, true);
+  }
+  snd.onclick = send;
+  inp.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); send(); } });
+  refreshChat(person, true);
+  chatTimer = setInterval(() => refreshChat(person, false), 5000);
+}
+
+async function boot(){
+  const pane = document.getElementById("pane");
+  // роль определяем по профилю
+  let prof = null;
+  try { prof = await SM.myProfile(); } catch(e){}
+  ROLE = (prof && prof.role === "teacher") ? "teacher" : "student";
+
+  ME = await SMUI.requireAuth(pane, ROLE);
+  if (!ME){ SMUI.mount({ role: ROLE, active: "chat" }); return; }
+
+  SMUI.mount({ role: ROLE, active: "chat" });
+
+  if (ROLE === "teacher"){
+    let students = [], unread = {};
+    try { students = await SM.myStudents(); } catch(e){}
+    try { unread = await SM.teacherUnread(); } catch(e){}
+    PEOPLE = (students||[]).map(s => ({ id: s.student_id, name: s.name || "Ученик", unread: unread[s.student_id] || 0 }));
+    // сначала — у кого есть непрочитанные
+    PEOPLE.sort((a,b) => b.unread - a.unread);
+  } else {
+    let t = null;
+    try { t = await SM.myTeacher(); } catch(e){}
+    PEOPLE = t ? [{ id: t.teacher_id, name: t.name || "Учитель", unread: 0 }] : [];
+  }
+  drawPeople();
+  drawPane();
+}
+
+// перерисовать бейдж непрочитанных в меню при уходе со страницы
+window.addEventListener("beforeunload", stopChat);
+boot();
+</script>
+</body>
+</html>
