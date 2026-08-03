@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 7 · Workbook · Gateway A1+ · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4e9d8;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 70px}
+  .top{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .home{background:#7c2340;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
+  .home.alt{background:#e0952a}
+  .hero{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #e3d3ba;margin-bottom:22px}
+  .hero img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
+  .hcover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;position:relative}
+  .hcover span{font-size:clamp(70px,18vw,130px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+  .hero .hb{padding:18px 22px}
+  .hero h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,38px);color:#7c2340}
+  .hero .d{font-weight:800;font-size:14px;color:#5a4f47;margin-top:6px}
+  h2{font-family:'Fredoka',sans-serif;font-size:24px;color:#7c2340;margin:30px 4px 12px}
+  .sec-i{font-size:13px;color:#8a7a68;font-weight:700}
+  .card{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;margin-bottom:12px}
+  .g-ex{background:#fdfaf0;border-left:4px solid #7c2340;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .g-ex b{color:#7c2340}
+  .ru{color:#8a7a68;font-size:13px}
+  .gt{color:#7c2340;font-size:16px;font-weight:900}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+  td,th{border:2px solid #eee3d2;padding:8px 10px;text-align:left}
+  th{background:#f6ede0;color:#7c2340}
+  .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:620px){.words{grid-template-columns:1fr}}
+  .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
+  .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
+  .word .en{font-weight:900;font-size:15px}
+  .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
+  .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{border:2px solid #e3d3ba;background:#fff;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:8px 14px;border-radius:999px;color:#7c2340}
+  .chip:hover{background:#fdfaf0}
+  .lc{background:#7c2340;border-radius:22px;padding:20px 22px;color:#fff;box-shadow:0 6px 0 #4d1527}
+  .lc h3{margin:0 0 6px;font-family:'Fredoka',sans-serif;font-size:20px}
+  .lc p{margin:4px 0 12px;font-weight:700;font-size:13.5px;opacity:.9}
+  .lbtn{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;margin-right:8px}
+  .lbtn.sec{background:rgba(255,255,255,.18)}
+  #script{display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65}
+  #script b{color:#ffd27a}
+  .read{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 4px 0 #e3d3ba;font-size:15px;line-height:1.7}
+  .read h3{margin:0 0 8px;font-family:'Fredoka',sans-serif;color:#7c2340;font-size:19px}
+  .vidwrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 #e3d3ba;background:#000}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #e3d3ba;font:800 14.5px 'Nunito',sans-serif;color:#5a4f47;line-height:1.6}
+  .vidbtn{display:inline-block;margin-top:10px;background:#c0392b;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none}
+  .read b{color:#7c2340}
+  .q{font-weight:800;font-size:15.5px;margin-bottom:10px}
+  .q .n{color:#b5654a;margin-right:6px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 16px;border-radius:12px}
+  .opt.ok{background:#c8efc0;border-color:#27ae60;color:#1b5e20}
+  .opt.bad{background:#ffc9c0;border-color:#c0392b;color:#7b190d}
+  .opt:disabled{cursor:default;opacity:.85}
+  .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .gap-in{border:2px solid #e3d3ba;border-radius:12px;padding:9px 12px;font:800 14px 'Nunito',sans-serif;min-width:170px;background:#fdfaf0;outline:none}
+  .gap-in.ok{background:#c8efc0;border-color:#27ae60}
+  .gap-in.bad{background:#ffc9c0;border-color:#c0392b}
+  .chk{border:none;cursor:pointer;background:#e0952a;color:#fff;font:800 13px 'Nunito',sans-serif;padding:10px 16px;border-radius:12px}
+  .ans{font-weight:800;font-size:13px;color:#27632a;margin-top:8px;display:none}
+  .scorebar{position:sticky;top:0;z-index:10;background:#7c2340;color:#fff;border-radius:0 0 16px 16px;padding:10px 18px;font-weight:900;font-size:14px;margin:-24px -18px 18px;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+  .hw{background:#fff7ea;border:2px dashed #e0952a;border-radius:18px;padding:16px 20px;font-size:14.5px}
+  .spkcard{background:#eef6ff00;background:#fbf4ff;border:2px solid #b98cc9;border-radius:16px;padding:12px 16px;margin-bottom:10px;font-size:14.5px;font-weight:700;color:#5a3a66}
+  .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
+  .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
+  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
+  .wbhead{font-family:'Fredoka',sans-serif;font-size:19px;color:#2e6f4e;margin:24px 4px 10px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="scorebar">📒 Workbook · Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
+  <div class="top">
+    <a class="home" href="gateway-a1p-u7.html">← Урок</a>
+    <a class="home" href="gateway-a1p-u7-grammar.html">✏️ Грамматика</a>
+    <a class="home" href="gateway-a1p-course.html">Все юниты</a>
+  </div>
+  <h1>Unit 7 · Workbook</h1>
+  <div class="d">🏆 виды спорта · соревнования · спортсмены · Past simple of to be · there was/were · Past simple (regular/irregular)</div>
+  <h2>📒 Рабочая тетрадь · закрепление</h2>
+  <div class="wbband">Расширенная практика юнита: слова, фразы, грамматика и лексика. Реши здесь — ответы сохранятся учителю.</div>
+  <div id="wb"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Gateway A1+ (2nd edition) · Unit 7 · workbook</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
+<script>
+window.__WB_FULL=true;
+const WORDS=[["baseball","бейсбол"],["basketball","баскетбол"],["cycling","велоспорт"],["football","футбол"],["golf","гольф"],["gymnastics","гимнастика"],["ice hockey","хоккей"],["judo","дзюдо"],["rugby","регби"],["skiing","лыжи"],["swimming","плавание"],["tennis","теннис"],["volleyball","волейбол"],["champion","чемпион"],["competition","соревнование"],["cup","кубок"],["final","финал"],["match","матч"],["medal","медаль"],["player","игрок"],["prize","приз"],["race","гонка"],["referee","судья"],["team","команда"],["winner","победитель"],["cyclist","велосипедист"],["runner","бегун"],["swimmer","пловец"]];
+const PRONWORDS=["gymnastics","referee","champion","cyclist","competition","volleyball"];
+const CHUNKS=[["There was…","был/была…"],["There were…","были…"],["Who won?","кто выиграл?"],["What was the score?","какой был счёт?"],["I was born in…","я родился в…"],["last year","в прошлом году"],["Well done!","молодец!"],["My favourite team is…","моя любимая команда…"]];
+const DIALOG=[["m","Did you watch the basketball final last night, Zoe?","Ben"],["f","Yes, I did! It was amazing. Who won?","Zoe"],["m","The Eagles won. The score was 88 to 85. It was very close!","Ben"],["f","Was Marco Silva in the team?","Zoe"],["m","Yes, he was. He was the best player. He scored 30 points!","Ben"],["f","Wow! Were there a lot of people at the match?","Zoe"],["m","Yes, there were. The stadium was full. It was a great atmosphere.","Ben"],["f","I'm sad I missed it. When is the next match?","Zoe"],["m","Next Saturday. Let's watch it together!","Ben"]];
+const DIALOG2=[["f","We're doing a project about a famous champion. Who did you choose, Sam?","Lily"],["m","I chose a swimmer. She won five gold medals at the Olympics.","Sam"],["f","Amazing! When did she start swimming?","Lily"],["m","She started when she was six. She trained every day for years.","Sam"],["f","Was it difficult for her?","Lily"],["m","Yes, it was. But she never gave up. She said, 'I wanted to be the best.'","Sam"],["f","That's a great story. Did she win any other prizes?","Lily"],["m","Yes, she got lots of cups and medals. She was a real champion!","Sam"]];
+const LQ=[{"q":"What sport did they talk about?","o":["basketball","football","tennis"],"a":0},{"q":"Who won the final?","o":["the Eagles","Marco Silva","Zoe's team"],"a":0},{"q":"What was the score?","o":["88 to 85","85 to 88","80 to 85"],"a":0},{"q":"Who was the best player?","o":["Marco Silva","Ben","the referee"],"a":0},{"q":"Were there many people at the match?","o":["yes, the stadium was full","no","only a few"],"a":0}];
+const LQ2=[{"q":"What sport did the champion do?","o":["swimming","running","cycling"],"a":0},{"q":"How many gold medals did she win?","o":["five","three","ten"],"a":0},{"q":"When did she start?","o":["when she was six","when she was ten","last year"],"a":0},{"q":"Was it difficult?","o":["yes","no","a little"],"a":0},{"q":"What did she never do?","o":["give up","train","win"],"a":0}];
+const RQ=[{"q":"Where were the first modern Olympics?","o":["Athens","London","Paris"],"a":0},{"q":"How many athletes were there?","o":["about 240","about 2,000","about 50"],"a":0},{"q":"Were there any women?","o":["no","yes","only two"],"a":0},{"q":"What did the winners get?","o":["silver medals and an olive branch","gold medals","money"],"a":0},{"q":"Who won the marathon?","o":["Spyridon Louis","a British runner","nobody"],"a":0}];
+const RQ2=[{"q":"Where is sepak takraw popular?","o":["South-East Asia","Europe","America"],"a":0},{"q":"What can't players use?","o":["their hands","their feet","their head"],"a":0},{"q":"What do players use to hit the ball?","o":["feet, knees and head","only hands","a bat"],"a":0},{"q":"Why is it exciting?","o":["players jump high and do amazing kicks","it is slow","it is quiet"],"a":0},{"q":"What happened in Thailand last year?","o":["a big competition","a football match","nothing"],"a":0}];
+const EX=[{"q":"I ___ at the match yesterday.","o":["was","were","am"],"a":0},{"q":"They ___ very happy after the game.","o":["was","were","are"],"a":1},{"q":"___ she a good player?","o":["Was","Were","Did"],"a":0},{"q":"There ___ a lot of people at the final.","o":["was","were","is"],"a":1},{"q":"He ___ (play) football last Saturday.","o":["play","played","plaid"],"a":1},{"q":"She ___ (win) a gold medal.","o":["winned","won","win"],"a":1},{"q":"We ___ (go) to the stadium last week.","o":["goed","went","gone"],"a":1},{"q":"They ___ (stop) at half-time.","o":["stoped","stopped","stopt"],"a":1},{"q":"There ___ any women at the first Olympics. (отриц.)","o":["wasn't","weren't","didn't"],"a":1},{"q":"He ___ (have) a great season.","o":["haved","had","has"],"a":1},{"q":"The runner ___ (run) very fast.","o":["runned","ran","run"],"a":1},{"q":"She ___ (study) hard for the test.","o":["studyed","studied","studed"],"a":1}];
+const GAPS=[{"q":"I ___ (be) at the match yesterday.","a":["was"]},{"q":"They ___ (be) very happy.","a":["were"]},{"q":"There ___ (be, мн.) many fans.","a":["were"]},{"q":"He ___ (play) tennis last week.","a":["played"]},{"q":"She ___ (win) the race.","a":["won"]},{"q":"We ___ (go) to the final.","a":["went"]}];
+const FX=[{"q":"Спроси, кто выиграл:","o":["Who won?","Who win?","Who did win it?"],"a":0},{"q":"Скажи, что вчера был матч:","o":["There was a match yesterday.","There were a match.","Yesterday was there match."],"a":0},{"q":"Спроси про счёт:","o":["What was the score?","What is score?","How score was?"],"a":0},{"q":"Поздравь друга:","o":["Well done!","Good job you!","You well!"],"a":0}];
+const SPEAK=["Расскажи о матче или соревновании, которое ты видел (There was… / … won).","Назови 5 видов спорта и скажи, какие тебе нравятся.","Расскажи о знаменитом спортсмене в прошедшем времени (He/She was… won…).","Скажи, что ты делал в прошлые выходные (Past simple)."];
+const WORDSKILLS=[{"q":"play → ___ (past)","o":["played","plaid","playd"],"a":0},{"q":"go → ___ (past)","o":["goed","went","gone"],"a":1},{"q":"win → ___ (past)","o":["winned","won","wan"],"a":1},{"q":"stop → ___ (past)","o":["stoped","stopped","stopt"],"a":1},{"q":"Past of 'have': She ___ a medal.","a":["had"]},{"q":"Past of 'run': He ___ fast.","a":["ran"]},{"q":"Past of 'start': They ___ young.","a":["started"]},{"q":"Past of 'be' (мн.): There ___ many fans.","a":["were"]}];
+const TF=[{"q":"The first modern Olympics were in Athens.","a":true},{"q":"There were many women at the first Olympics.","a":false},{"q":"In sepak takraw you can't use your hands.","a":true},{"q":"The winners of the first Olympics got gold medals.","a":false},{"q":"Spyridon Louis won the marathon.","a":true},{"q":"Sepak takraw is popular in South-East Asia.","a":true}];
+const EXAM_MC=[{"q":"Why did women start playing football?","o":["many men were away in the war","they wanted medals","schools asked them"],"a":0},{"q":"How many people watched the 1920 match?","o":["53,000","5,000","530"],"a":0},{"q":"What happened in 1921?","o":["women couldn't play on the pitches","women won a cup","the team grew"],"a":0},{"q":"What is true about women's football today?","o":["it is popular again","it is banned","nobody watches"],"a":0},{"q":"Use of English: There ___ many fans at the game.","o":["were","was","are"],"a":0},{"q":"Use of English: She ___ a gold medal last year.","o":["won","win","winned"],"a":0}];
+const EXAM_TFNG=[{"q":"A hundred years ago, football was only for men.","a":"T"},{"q":"The Dick, Kerr Ladies became very famous.","a":"T"},{"q":"The team played in other countries too.","a":"NG"},{"q":"In 1921 women were allowed to play everywhere.","a":"F"},{"q":"Today women's football is popular again.","a":"T"}];
+const WBMC=[{"q":"Судья = ___ .","o":["referee","player","winner"],"a":0},{"q":"Плавание = ___ .","o":["swimming","cycling","skiing"],"a":0},{"q":"Past of 'go' = ___ .","o":["went","goed","gone"],"a":0},{"q":"Был (ед.) = ___ .","o":["was","were","is"],"a":0},{"q":"Кубок = ___ .","o":["cup","medal","race"],"a":0}];
+const WBGAPS=[{"q":"I ___ (be) at the game.","a":["was"]},{"q":"There ___ (be, мн.) lots of fans.","a":["were"]},{"q":"He ___ (play) rugby yesterday.","a":["played"]},{"q":"She ___ (win) the race.","a":["won"]},{"q":"We ___ (go) to the stadium.","a":["went"]}];
+
+const wbox=document.getElementById("words");
+if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
+/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
+let SM_VOICES=[];
+function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
+SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
+const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
+const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
+function enVoice(g){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  let best=null,bs=-1;
+  list.forEach(v=>{
+    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);
+    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
+    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
+    if(n.indexOf("google")>=0)s+=20;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
+    if(n.indexOf("compact")>=0)s-=15;
+    if(s>bs){bs=s;best=v;}
+  });
+  return best;
+}
+function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
+/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
+function _voicePools(){
+  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
+  const male=[],female=[];
+  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
+    if(lang.slice(0,2)!=="en")return;
+    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
+    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
+    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
+    v._score=s;
+    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
+    if(mal&&!fem)male.push(v);else female.push(v);});
+  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
+  return {male:male,female:female};
+}
+let _POOLS=null;const _SPK={};
+function speakerStyle(who){
+  who=who||"m";if(_SPK[who])return _SPK[who];
+  if(!_POOLS)_POOLS=_voicePools();
+  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
+  const pool=isF?_POOLS.female:_POOLS.male;
+  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
+  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
+  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
+  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
+  _SPK[who]=st;return st;
+}
+function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
+var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
+var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
+var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
+/* Второе аудирование (если есть DIALOG2) */
+var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
+var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
+var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+/* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
+const HW={course:"solutions-el",unit:0};
+const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
+function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
+async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let sc=0,tot=0;
+function bump(){sc++;document.getElementById("sc").textContent=sc;}
+function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
+  let done=false,logged=false;
+  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
+    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
+    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
+  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
+  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
+    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
+  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  return d;}
+/* Правда / Ложь */
+function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
+  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
+    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* True / False / Not Given (IELTS) */
+function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
+    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
+  let done=false,logged=false;const want=String(t.a).toUpperCase();
+  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
+    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
+    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
+    else{b.classList.add("bad");b.disabled=true;}});
+  return d;}
+/* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
+function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
+  const d=document.createElement("div");d.className="card";
+  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
+    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
+  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
+  let sel=-1,matched=0;
+  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
+    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
+  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
+    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
+      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
+      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
+      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
+  return d;}
+/* Произношение */
+const pbox=document.getElementById("pron");
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
+/* Чанки — учим (с озвучкой) */
+const cbox=document.getElementById("chunks");
+if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
+  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+/* Чанки — тренажёр: выбери перевод */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const chpr=document.getElementById("chpr");
+if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
+  const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+  const opts=shuffle([c[1],...others]);
+  const t={q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])};
+  chpr.appendChild(mcCard(t,i+1,"chunk"));
+});
+/* Аудирование → вопросы */
+const lq=document.getElementById("lq");if(lq)LQ.forEach((t,i)=>lq.appendChild(mcCard(t,i+1,"listening")));
+const lq2=document.getElementById("lq2");if(lq2&&typeof LQ2!=="undefined")LQ2.forEach((t,i)=>lq2.appendChild(mcCard(t,i+1,"listening2")));
+/* Чтение → вопросы */
+const rq=document.getElementById("rq");if(rq)RQ.forEach((t,i)=>rq.appendChild(mcCard(t,i+1,"reading")));
+const rq2=document.getElementById("rq2");if(rq2&&typeof RQ2!=="undefined")RQ2.forEach((t,i)=>rq2.appendChild(mcCard(t,i+1,"reading2")));
+const tfb=document.getElementById("tf");if(tfb&&typeof TF!=="undefined")TF.forEach((t,i)=>tfb.appendChild(tfCard(t,i+1,"truefalse")));
+const extf=document.getElementById("examtfng");if(extf&&typeof EXAM_TFNG!=="undefined")EXAM_TFNG.forEach((t,i)=>extf.appendChild(tfngCard(t,i+1,"exam-tfng")));
+const exmc=document.getElementById("exammc");if(exmc&&typeof EXAM_MC!=="undefined")EXAM_MC.forEach((t,i)=>exmc.appendChild(mcCard(t,i+1,"exam-mc")));
+/* Упражнения */
+const ex=document.getElementById("ex");if(ex){EX.forEach((t,i)=>ex.appendChild(mcCard(t,i+1,"grammar")));GAPS.forEach((t,i)=>ex.appendChild(gapCard(t,EX.length+i+1,"gap")));}
+/* How to */
+const fx=document.getElementById("fx");if(fx)FX.forEach((t,i)=>fx.appendChild(mcCard(t,i+1,"howto")));
+/* Word Skills (Solutions) — mc или gap по полю type */
+const wsb=document.getElementById("ws");
+if(wsb&&typeof WORDSKILLS!=="undefined")WORDSKILLS.forEach((t,i)=>{
+  if(t.a!==undefined&&Array.isArray(t.o)) wsb.appendChild(mcCard(t,i+1,"wordskills"));
+  else wsb.appendChild(gapCard(t,i+1,"wordskills"));
+});
+/* Speaking — карточки-подсказки (без проверки) */
+const spk=document.getElementById("spk");
+if(spk)SPEAK.forEach((p,i)=>{const d=document.createElement("div");d.className="spkcard";
+  d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;spk.appendChild(d);});
+/* Workbook — насыщенный, по секциям, разные типы заданий */
+const wb=document.getElementById("wb");
+if(wb){
+  let _wn=0;
+  function _wbHead(txt){const h=document.createElement("div");h.className="wbhead";h.textContent=txt;wb.appendChild(h);}
+  if(window.__WB_FULL&&typeof WORDS!=="undefined"&&WORDS.length){
+    /* 1. Vocabulary: выбери перевод */
+    _wbHead("🔤 Vocabulary · выбери перевод");
+    shuffle(WORDS).slice(0,8).forEach(w=>{
+      const others=shuffle(WORDS.filter(x=>x[0]!==w[0])).slice(0,2).map(x=>x[0]);
+      const opts=shuffle([w[0]].concat(others));
+      wb.appendChild(mcCard({q:'«'+w[1]+'» — это…',o:opts,a:opts.indexOf(w[0])},++_wn,"wb-voc"));
+    });
+    /* 2. Vocabulary: соедини пары (matching) */
+    _wbHead("🔗 Vocabulary · соедини слово и перевод");
+    wb.appendChild(matchCard(shuffle(WORDS).slice(0,6),++_wn,"wb-match"));
+    /* 3. Vocabulary: впиши слово */
+    _wbHead("✍️ Vocabulary · впиши слово по-английски");
+    shuffle(WORDS).slice(0,6).forEach(w=>{
+      const en=w[0],alt=en.replace(/^to\s+/,"");const ans=(alt!==en)?[en,alt]:[en];
+      wb.appendChild(gapCard({q:'«'+w[1]+'» — впиши по-английски:',a:ans},++_wn,"wb-spell"));
+    });
+    /* 4. Phrases: значение + соединение */
+    if(typeof CHUNKS!=="undefined"&&CHUNKS.length){
+      _wbHead("🧩 Phrases · выбери значение");
+      shuffle(CHUNKS).forEach(c=>{
+        const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
+        const opts=shuffle([c[1]].concat(others));
+        wb.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},++_wn,"wb-chunk"));
+      });
+      _wbHead("🔗 Phrases · соедини фразу и перевод");
+      wb.appendChild(matchCard(shuffle(CHUNKS).slice(0,6),++_wn,"wb-match"));
+    }
+    _wbHead("📖 Grammar · практика");
+  }
+  WBMC.forEach(t=>wb.appendChild(mcCard(t,++_wn,"wb")));
+  WBGAPS.forEach(t=>wb.appendChild(gapCard(t,++_wn,"wb")));
+  /* 5. Reading: True/False по текстам юнита */
+  if(window.__WB_FULL&&typeof TF!=="undefined"&&TF.length){
+    _wbHead("✅ Reading · True or False");
+    TF.forEach(t=>wb.appendChild(tfCard(t,++_wn,"wb-tf")));
+  }
+}
+var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+</script>
+</body>
+</html>
