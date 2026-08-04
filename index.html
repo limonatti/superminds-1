@@ -10,16 +10,39 @@
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
 <style>
-  .crs{display:grid;grid-template-columns:1fr;gap:0}
-  a.row.crs-row{text-decoration:none}
-  .crs-row .num{font-size:26px}
-  .crs-row.assigned{background:var(--color-accent-100);border-left:4px solid var(--color-accent)}
-  .tag{display:inline-block;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;
-    letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;margin-left:8px;vertical-align:middle}
-  .altbtns{display:flex;gap:8px;flex-wrap:wrap;padding:0 28px 18px}
-  .altbtns a{border:2px solid var(--color-text);padding:9px 14px;font:800 12px "Archivo",sans-serif;
-    text-transform:uppercase;letter-spacing:.06em;color:var(--color-text)}
-  .altbtns a.acc{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  /* ===== Главная: учитель по центру + курсы в колонке сбоку ===== */
+  .home-hero{display:grid;grid-template-columns:minmax(0,1fr) 372px;min-height:100vh}
+  .home-hero .rail{border-left:2px solid var(--color-divider);background:var(--color-surface);
+    display:flex;flex-direction:column;overflow-y:auto;max-height:100vh}
+  .rail .rail-hd{padding:18px 22px 14px;border-bottom:2px solid var(--color-divider);
+    font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);
+    display:flex;justify-content:space-between;gap:12px;align-items:center;position:sticky;top:0;
+    background:var(--color-surface);z-index:2}
+  .rail .rail-assigned{padding:18px 22px;background:var(--color-text);color:#fff}
+  .rail .rail-assigned .k{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-300)}
+  .rail .rail-assigned h3{margin:7px 0 0;font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .rail .rail-assigned p{margin:6px 0 12px;font-size:13px;font-weight:500;color:var(--color-neutral-400)}
+  .rail .rail-assigned .go{display:inline-flex;align-items:center;gap:8px;background:var(--color-accent);color:#fff;
+    padding:11px 16px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .rail .rail-assigned .go:hover{background:var(--color-accent-600)}
+  .rail .sect{padding:20px 22px 12px}
+  .rail .crs{display:flex;flex-direction:column}
+  .rail .crs-row{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;
+    padding:14px 22px;border-bottom:2px solid var(--color-divider);border-left:5px solid transparent;
+    transition:background .16s ease-out;text-decoration:none}
+  .rail .crs-row:hover{background:var(--color-accent-100)}
+  .rail .crs-row.assigned{background:var(--color-accent-100);border-left-color:var(--color-accent)}
+  .rail .crs-row .num{font-size:24px;line-height:1}
+  .rail .crs-row .t{font-size:15px;font-weight:800;letter-spacing:-.01em;display:block}
+  .rail .crs-row .d{font-size:12px;font-weight:600;color:var(--color-neutral-700);display:block;margin-top:2px}
+  .rail .crs-row .tag{display:inline-block;background:var(--color-accent);color:#fff;font-size:10px;font-weight:800;
+    letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;margin-left:6px;vertical-align:middle}
+  /* адаптив: на узком экране курсы уходят под сцену */
+  @media(max-width:960px){
+    .home-hero{grid-template-columns:minmax(0,1fr)}
+    .home-hero .rail{border-left:0;border-top:2px solid var(--color-divider);max-height:none}
+    .rail .rail-hd{position:static}
+  }
 </style>
 </head>
 <body>
@@ -62,40 +85,37 @@ async function load(){
   const cur = assigned ? (COURSES.filter(c=>c.id===assigned)[0] || null) : null;
   const ordered = COURSES.slice().sort((a,b)=> (b.id===assigned?1:0) - (a.id===assigned?1:0));
 
-  let html = '<div class="pane-hd"><span>Мои курсы / My courses</span><span>' +
+  // --- правая колонка: назначенный курс + список всех курсов ---
+  let rail = '<div class="rail-hd"><span>Мои курсы / My courses</span><span>' +
     (user ? esc(user.name) : "войди в меню слева") + '</span></div>';
 
   if (cur){
-    html += '<div class="ink"><div><div class="k">Назначен тебе учителем</div><h2>' + esc(cur.t) + '</h2>' +
-      '<p>' + esc(cur.d) + '</p></div><a class="go" href="' + (cur.book || cur.hub) + '">' +
-      icon("play",15) + ' Продолжить</a></div>';
-    if (cur.book){
-      html += '<div class="altbtns"><a class="acc" href="' + cur.book + '">📖 Книга (презентация)</a>' +
-        '<a href="' + cur.hub + '">Список юнитов</a>' +
-        '<a href="homework.html">Домашка</a></div>';
-    }
-  } else if (user) {
-    html += '<div class="ink"><div><div class="k">Курс</div><h2>Курс ещё не назначен</h2>' +
-      '<p>Учитель назначит тебе курс — он появится здесь. Пока можешь открыть любой из списка.</p></div></div>';
+    rail += '<div class="rail-assigned"><div class="k">Назначен тебе учителем</div><h3>' + esc(cur.t) + '</h3>' +
+      '<p>' + esc(cur.d) + '</p><a class="go" href="' + (cur.book || cur.hub) + '">' +
+      icon("play",14) + ' Продолжить</a></div>';
   }
 
-  html += '<div class="sect"><span>Все курсы</span><span>' + COURSES.length + '</span></div><div class="crs">' +
+  rail += '<div class="sect"><span>Все курсы</span><span>' + COURSES.length + '</span></div><div class="crs">' +
     ordered.map(c => {
       const on = (c.id===assigned) ? " assigned" : "";
-      return '<a class="row crs-row' + on + '" href="' + (c.book || c.hub) + '">' +
+      return '<a class="crs-row' + on + '" href="' + (c.book || c.hub) + '">' +
         '<span class="num">' + c.emoji + '</span>' +
         '<span><span class="t">' + esc(c.t) + (c.id===assigned ? '<span class="tag">назначен</span>' : '') + '</span>' +
-        '<span class="d">' + esc(c.d) + '</span></span>' +
-        '<span class="b sm">Открыть</span></a>';
+        '<span class="d">' + esc(c.d) + '</span></span></a>';
     }).join("") + '</div>';
 
-  pane.innerHTML = html;
+  // --- сцена учителя (слева) + колонка курсов (справа) ---
+  pane.innerHTML =
+    '<div class="home-hero">' +
+      '<section class="teacher-stage" id="mascotStage" data-name="' + (user ? esc(user.name) : "") + '"></section>' +
+      '<aside class="rail">' + rail + '</aside>' +
+    '</div>';
 }
 
 SMUI.mount({ role:"student", active:"courses" });
 load();
 </script>
-<!-- Анимированный маскот-учитель на главной (добавочный слой, ничего не меняет в логике). -->
+<!-- Анимированный маскот-учитель: заполняет сцену #mascotStage, следит за курсором. -->
 <script src="sm-mascot.js"></script>
 </body>
 </html>
