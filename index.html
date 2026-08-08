@@ -27,16 +27,42 @@
   .rail .rail-assigned .go:hover{background:var(--color-accent-600)}
   .rail .sect{padding:20px 22px 12px}
   .rail .crs{display:flex;flex-direction:column}
-  .rail .crs-row{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;
-    padding:14px 22px;border-bottom:2px solid var(--color-divider);border-left:5px solid transparent;
+  .rail .crs-row{display:grid;grid-template-columns:44px minmax(0,1fr);gap:13px;align-items:center;
+    padding:13px 22px;border-bottom:2px solid var(--color-divider);border-left:5px solid transparent;
     transition:background .16s ease-out;text-decoration:none}
   .rail .crs-row:hover{background:var(--color-accent-100)}
   .rail .crs-row.assigned{background:var(--color-accent-100);border-left-color:var(--color-accent)}
-  .rail .crs-row .num{font-size:24px;line-height:1}
+  .rail .crs-row .num{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    background:var(--color-accent-100);border-radius:13px;overflow:hidden}
+  .rail .crs-row .num img{width:34px;height:34px;display:block;object-fit:contain}
   .rail .crs-row .t{font-size:15px;font-weight:800;letter-spacing:-.01em;display:block}
   .rail .crs-row .d{font-size:12px;font-weight:600;color:var(--color-neutral-700);display:block;margin-top:2px}
   .rail .crs-row .tag{display:inline-block;background:var(--color-accent);color:#fff;font-size:10px;font-weight:800;
     letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;margin-left:6px;vertical-align:middle}
+  /* ===== Оживление карточек курсов ===== */
+  @keyframes crsIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes railIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+  .rail .rail-assigned{animation:railIn .5s cubic-bezier(.16,1,.3,1) both}
+  .rail .crs-row{opacity:0;animation:crsIn .5s cubic-bezier(.16,1,.3,1) forwards;
+    transition:background .18s ease-out,transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s ease-out}
+  .rail .crs-row:nth-child(1){animation-delay:.05s}
+  .rail .crs-row:nth-child(2){animation-delay:.10s}
+  .rail .crs-row:nth-child(3){animation-delay:.15s}
+  .rail .crs-row:nth-child(4){animation-delay:.20s}
+  .rail .crs-row:nth-child(5){animation-delay:.25s}
+  .rail .crs-row:nth-child(6){animation-delay:.30s}
+  .rail .crs-row:nth-child(7){animation-delay:.35s}
+  .rail .crs-row:nth-child(8){animation-delay:.40s}
+  .rail .crs-row:nth-child(n+9){animation-delay:.45s}
+  .rail .crs-row .num{transition:transform .22s cubic-bezier(.34,1.56,.64,1),background .18s ease-out;will-change:transform}
+  .rail .crs-row:hover{transform:translateX(4px);box-shadow:0 6px 18px rgba(0,0,0,.08);position:relative;z-index:1}
+  .rail .crs-row:hover .num{transform:scale(1.1) rotate(-5deg);background:#fff}
+  .rail .crs-row:hover .t{color:var(--color-accent-600)}
+  .rail .crs-row:active{transform:translateX(2px) scale(.995)}
+  @media(prefers-reduced-motion:reduce){
+    .rail .rail-assigned,.rail .crs-row{animation:none;opacity:1;transform:none}
+    .rail .crs-row,.rail .crs-row .num,.rail .crs-row:hover{transition:none;transform:none}
+  }
   /* адаптив: на узком экране курсы уходят под сцену */
   @media(max-width:960px){
     .home-hero{grid-template-columns:minmax(0,1fr)}
@@ -60,21 +86,21 @@
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const COURSES = [
-  { id:"speakout-b1plus", t:"Speakout B1+", d:"Курс по юнитам · грамматика, лексика, чанки, аудио", emoji:"🗣️",
+  { id:"speakout-b1plus", t:"Speakout B1+", d:"Курс по юнитам · грамматика, лексика, чанки, аудио", icon:"img/course-icons/speakout-b1plus.png",
     hub:"speakout-b1plus-course.html", book:"speakout-book.html?course=speakout-b1plus" },
-  { id:"speakout-b1", t:"Speakout B1", d:"Курс по юнитам · грамматика, лексика, чанки", emoji:"💬",
+  { id:"speakout-b1", t:"Speakout B1", d:"Курс по юнитам · грамматика, лексика, чанки", icon:"img/course-icons/speakout-b1.png",
     hub:"speakout-b1-course.html", book:"speakout-book.html?course=speakout-b1" },
-  { id:"focus-1", t:"Focus 1", d:"A1–A2 · 8 юнитов · грамматика, лексика, аудио, Workbook", emoji:"🎯",
+  { id:"focus-1", t:"Focus 1", d:"A1–A2 · 8 юнитов · грамматика, лексика, аудио, Workbook", icon:"img/course-icons/focus-1.png",
     hub:"focus-1-course.html", book:null },
-  { id:"solutions-el", t:"Solutions Elementary", d:"Elementary · секции A–H · грамматика, лексика, Workbook", emoji:"📗",
+  { id:"solutions-el", t:"Solutions Elementary", d:"Elementary · секции A–H · грамматика, лексика, Workbook", icon:"img/course-icons/solutions-el.png",
     hub:"solutions-el-course.html", book:null },
-  { id:"solutions-pi", t:"Solutions Pre-Int", d:"Pre-Intermediate · секции A–H · грамматика, лексика, Workbook", emoji:"📘",
+  { id:"solutions-pi", t:"Solutions Pre-Int", d:"Pre-Intermediate · секции A–H · грамматика, лексика, Workbook", icon:"img/course-icons/solutions-pi.png",
     hub:"solutions-pi-course.html", book:null },
-  { id:"gateway-a1p", t:"Gateway A1+", d:"A1+ · 2nd edition · юниты, лексика, грамматика, видео, IELTS", emoji:"🚪",
+  { id:"gateway-a1p", t:"Gateway A1+", d:"A1+ · 2nd edition · юниты, лексика, грамматика, видео, IELTS", icon:"img/course-icons/gateway-a1p.png",
     hub:"gateway-a1p-course.html", book:null },
-  { id:"superminds-1", t:"Super Minds 1", d:"Для детей 6–8 · юниты, слова, игры", emoji:"🧸",
+  { id:"superminds-1", t:"Super Minds 1", d:"Для детей 6–8 · юниты, слова, игры", icon:"img/course-icons/superminds-1.png",
     hub:"units.html", book:null },
-  { id:"phonics", t:"Чтение · Phonics", d:"English Sounds · 42 звука Jolly Phonics · игры, worksheets, видео", emoji:"🔤",
+  { id:"phonics", t:"Чтение · Phonics", d:"English Sounds · 42 звука Jolly Phonics · игры, worksheets, видео", icon:"img/course-icons/phonics.png",
     hub:"phonics.html", book:null }
 ];
 
@@ -101,7 +127,7 @@ async function load(){
     ordered.map(c => {
       const on = (c.id===assigned) ? " assigned" : "";
       return '<a class="crs-row' + on + '" href="' + (c.book || c.hub) + '">' +
-        '<span class="num">' + c.emoji + '</span>' +
+        '<span class="num"><img src="' + c.icon + '" alt="" loading="lazy" width="34" height="34"></span>' +
         '<span><span class="t">' + esc(c.t) + (c.id===assigned ? '<span class="tag">назначен</span>' : '') + '</span>' +
         '<span class="d">' + esc(c.d) + '</span></span></a>';
     }).join("") + '</div>';
