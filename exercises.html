@@ -45,9 +45,58 @@
   .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:30px}
   .sechead{display:flex;align-items:center;gap:12px;margin:28px 4px 14px;font:900 14px 'Archivo',sans-serif;color:#ec3013;letter-spacing:1.5px;text-transform:uppercase}
   .sechead::after{content:"";flex:1;height:3px;background:#cfcecd;border-radius:2px}
-  .tbar{display:flex;justify-content:flex-end;gap:6px;margin:0 2px 6px}
+  .tbar{display:flex;justify-content:flex-end;gap:6px;margin:0 2px 6px;align-items:center}
   .tbar button,.tbar a{background:#fff;border:2px solid #cfcecd;border-radius:10px;padding:4px 12px;font:800 14px 'Archivo',sans-serif;color:#4a4644;text-decoration:none;cursor:pointer}
   .tbar button:hover,.tbar a:hover{border-color:#ec3013;color:#ec3013}
+  /* Выбор блоков в домашку */
+  .pick{margin-right:auto;display:inline-flex;align-items:center;gap:7px;font:800 13px 'Archivo',sans-serif;color:#4a4644;cursor:pointer}
+  .pick input{width:19px;height:19px;accent-color:#ec3013;cursor:pointer}
+  .exwrap.on{outline:3px solid #ec3013;outline-offset:6px;border-radius:24px}
+  .sechead .sec-all{margin-left:auto;background:#fff;border:2px solid #cfcecd;border-radius:10px;
+    padding:3px 11px;font:800 11px 'Archivo',sans-serif;color:#4a4644;letter-spacing:.5px;cursor:pointer}
+  .sechead .sec-all:hover{border-color:#ec3013;color:#ec3013}
+  .sechead::after{order:9}
+  /* Нижняя панель выбора */
+  .picker{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#201e1d;color:#fff;
+    padding:13px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    box-shadow:0 -6px 24px rgba(0,0,0,.22);transform:translateY(110%);transition:transform .22s cubic-bezier(.16,1,.3,1)}
+  .picker.show{transform:translateY(0)}
+  .picker .n{font:900 15px 'Archivo',sans-serif}
+  .picker .sp{flex:1}
+  .picker .go{background:#ec3013;color:#fff;border-radius:999px;padding:11px 20px;font:800 14px 'Archivo',sans-serif}
+  .picker .clr{background:transparent;color:#cfcecd;border:2px solid #6a6664;border-radius:999px;padding:9px 16px;font:800 13px 'Archivo',sans-serif}
+  .picker .clr:hover{color:#fff;border-color:#fff}
+  @media(prefers-reduced-motion:reduce){.picker{transition:none}}
+  /* Окно отправки в домашку */
+  .ovl{position:fixed;inset:0;z-index:30;background:rgba(32,30,29,.55);display:flex;
+    align-items:center;justify-content:center;padding:18px}
+  .dlg{background:#fff;border-radius:22px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;
+    padding:24px;box-shadow:0 14px 0 #cfcecd}
+  .dlg h3{margin:0 0 4px;font:800 21px 'Archivo',sans-serif;color:#201e1d}
+  .dlg .lead{margin:0 0 16px;font:600 14px 'Archivo',sans-serif;color:#4a4644}
+  .dlg .lb{display:block;font:900 10px 'Archivo',sans-serif;letter-spacing:1.2px;
+    text-transform:uppercase;color:#8a8280;margin:15px 0 7px}
+  .dlg .stu{display:flex;flex-wrap:wrap;gap:9px}
+  .dlg .stu label{display:inline-flex;align-items:center;gap:7px;background:#f3f2f2;border:2px solid #cfcecd;
+    border-radius:12px;padding:8px 12px;font:700 14px 'Archivo',sans-serif;cursor:pointer}
+  .dlg .stu label:has(input:checked){border-color:#ec3013;background:#fbeef1}
+  .dlg .stu input{width:17px;height:17px;accent-color:#ec3013}
+  .dlg input[type=date],.dlg input[type=text]{width:100%;border:2px solid #cfcecd;border-radius:12px;
+    padding:11px 13px;font:700 15px 'Archivo',sans-serif;background:#f3f2f2}
+  .dlg input:focus{outline:none;border-color:#ec3013}
+  .dlg .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .dlg .quick button{background:#f3f2f2;border:2px solid #cfcecd;border-radius:999px;padding:7px 13px;
+    font:800 12px 'Archivo',sans-serif;color:#4a4644}
+  .dlg .quick button.on{background:#ec3013;border-color:#ec3013;color:#fff}
+  .dlg .acts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .dlg .send{flex:1;background:#ec3013;color:#fff;border-radius:14px;padding:14px;font:800 15px 'Archivo',sans-serif}
+  .dlg .send:disabled{opacity:.55}
+  .dlg .cancel{background:#f3f2f2;border:2px solid #cfcecd;border-radius:14px;padding:13px 20px;
+    font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .dlg .out{margin-top:13px;font:700 13.5px 'Archivo',sans-serif;min-height:18px}
+  .dlg .out.bad{color:#ae1800}
+  .dlg .out.ok{color:#4a8b34}
+  .dlg .exlist{margin:0;padding-left:19px;font:600 13.5px 'Archivo',sans-serif;color:#4a4644;line-height:1.6}
 </style>
 <link rel="stylesheet" href="sm-skin.css">
 </head>
@@ -371,6 +420,10 @@
     const R={embed:renderEmbed,shadow:renderShadow,reading:renderReading,tfns:renderTFNS,wordform:renderWordform,headings:renderHeadings,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
     let IS_TEACHER=false;
+    /* Домашка блоками: учитель отмечает упражнения и отправляет ученикам.
+       hwOnly — ученик открыл задание, показываем только заданные блоки. */
+    const HW_ID = q.get("hw") || null;
+    let HW_REC = null, HW_ONLY = null, PICKED = new Set(), EX_ALL = [];
     function warnCard(html){return card(html);}
     async function moveEx(ex,idx,d){
       const j=idx+d; if(j<0||j>=ex.length) return;
@@ -384,16 +437,52 @@
       if(loadErr){ root.innerHTML='<div class="empty">Не удалось загрузить упражнения (нет связи с базой). Обнови страницу.</div>'; return; }
       if(!SM.isCloud){ root.innerHTML='<div class="empty">Упражнения работают с настоящими аккаунтами (Supabase).</div>'; return; }
       if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html?u='+encodeURIComponent(uid)+'">Конструкторе</a>.</div>'; return; }
+
+      EX_ALL = ex;
+      /* Ученик пришёл по заданию — оставляем только заданные блоки, в порядке урока */
+      if(HW_ONLY && HW_ONLY.length){
+        const keep = new Set(HW_ONLY);
+        ex = ex.filter(e => keep.has(e.id));
+        if(!ex.length){
+          root.innerHTML='<div class="empty">Упражнений из этого задания больше нет в уроке — похоже, учитель их изменил. Напиши ему в чат.</div>';
+          return;
+        }
+      }
+
       root.innerHTML="";
       let lastSection=null;
       ex.forEach((e,idx)=>{
-        if(e.section&&e.section!==lastSection){ const sh=document.createElement("div"); sh.className="sechead"; sh.textContent=e.section; root.appendChild(sh); lastSection=e.section; }
+        if(e.section&&e.section!==lastSection){
+          const sh=document.createElement("div"); sh.className="sechead";
+          sh.appendChild(document.createTextNode(e.section));
+          if(IS_TEACHER && !HW_ONLY){
+            const sa=document.createElement("button"); sa.className="sec-all"; sa.type="button";
+            sa.textContent="выбрать всё"; sa.dataset.sec=e.section;
+            sa.onclick=()=>toggleSection(e.section, sa);
+            sh.appendChild(sa);
+          }
+          root.appendChild(sh); lastSection=e.section;
+        }
         if(!e.section) lastSection=null;
-        const wrap=document.createElement("div"); root.appendChild(wrap);
+        /* data-exid и data-extype читает sm-progress.js, чтобы записать результат упражнения */
+        const wrap=document.createElement("div"); wrap.className="exwrap";
+        wrap.dataset.ex=e.id; wrap.setAttribute("data-exid",e.id); wrap.setAttribute("data-extype",e.type);
+        root.appendChild(wrap);
         if(IS_TEACHER){
           const bar=document.createElement("div"); bar.className="tbar";
-          bar.innerHTML='<button data-d="-1" title="переместить выше">↑</button><button data-d="1" title="переместить ниже">↓</button><a href="builder.html?u='+encodeURIComponent(uid)+'&edit='+e.id+'" title="редактировать в конструкторе">✎</a>';
-          bar.querySelectorAll("button").forEach(b=>b.onclick=()=>moveEx(ex,idx,parseInt(b.dataset.d,10)));
+          if(!HW_ONLY){
+            const lab=document.createElement("label"); lab.className="pick";
+            const cb=document.createElement("input"); cb.type="checkbox"; cb.dataset.ex=e.id;
+            cb.checked=PICKED.has(e.id);
+            cb.onchange=()=>{ cb.checked ? PICKED.add(e.id) : PICKED.delete(e.id); wrap.classList.toggle("on",cb.checked); drawPicker(); };
+            lab.appendChild(cb); lab.appendChild(document.createTextNode("в домашку"));
+            bar.appendChild(lab);
+            wrap.classList.toggle("on", PICKED.has(e.id));
+          }
+          const btns=document.createElement("span");
+          btns.innerHTML='<button data-d="-1" title="переместить выше">↑</button><button data-d="1" title="переместить ниже">↓</button><a href="builder.html?u='+encodeURIComponent(uid)+'&edit='+e.id+'" title="редактировать в конструкторе">✎</a>';
+          btns.querySelectorAll("button").forEach(b=>b.onclick=()=>moveEx(ex,idx,parseInt(b.dataset.d,10)));
+          bar.appendChild(btns);
           wrap.appendChild(bar);
         }
         if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Archivo',sans-serif;color:#4a4644;margin:4px 4px 8px";hd.textContent=e.title;wrap.appendChild(hd);}
@@ -405,16 +494,172 @@
           wrap.appendChild(el); }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
       });
     }
+    /* ---------- Выбор блоков и отправка в домашку ---------- */
+
+    function exLabel(e){
+      return (e.title && e.title.trim()) ? e.title.trim() : (KIND[e.type] || e.type);
+    }
+    function plural(n, forms){
+      const t=n%100, o=n%10;
+      return n+" "+((t>10&&t<20)?forms[2]:(o===1)?forms[0]:(o>=2&&o<=4)?forms[1]:forms[2]);
+    }
+    function toggleSection(sec, btn){
+      const ids = EX_ALL.filter(e => e.section === sec).map(e => e.id);
+      const allOn = ids.every(id => PICKED.has(id));
+      ids.forEach(id => allOn ? PICKED.delete(id) : PICKED.add(id));
+      btn.textContent = allOn ? "выбрать всё" : "снять всё";
+      document.querySelectorAll(".pick input").forEach(cb => {
+        cb.checked = PICKED.has(cb.dataset.ex);
+        const w = cb.closest(".exwrap"); if (w) w.classList.toggle("on", cb.checked);
+      });
+      drawPicker();
+    }
+    function clearPicked(){
+      PICKED.clear();
+      document.querySelectorAll(".pick input").forEach(cb => { cb.checked=false; const w=cb.closest(".exwrap"); if(w) w.classList.remove("on"); });
+      document.querySelectorAll(".sec-all").forEach(b => b.textContent="выбрать всё");
+      drawPicker();
+    }
+    function drawPicker(){
+      let bar = document.getElementById("picker");
+      if(!bar){
+        bar = document.createElement("div"); bar.id="picker"; bar.className="picker";
+        bar.innerHTML = '<span class="n" id="pickN"></span><span class="sp"></span>' +
+          '<button class="clr" id="pickClr">Снять выбор</button>' +
+          '<button class="go" id="pickGo">В домашнюю работу</button>';
+        document.body.appendChild(bar);
+        document.getElementById("pickClr").onclick = clearPicked;
+        document.getElementById("pickGo").onclick = openSendDialog;
+      }
+      const n = PICKED.size;
+      document.getElementById("pickN").textContent = "Выбрано " + plural(n, ["упражнение","упражнения","упражнений"]);
+      bar.classList.toggle("show", n > 0);
+    }
+
+    function dateAfter(days){
+      const d=new Date(); d.setDate(d.getDate()+days);
+      return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    }
+
+    async function openSendDialog(){
+      if(!PICKED.size) return;
+      const ids = EX_ALL.filter(e => PICKED.has(e.id)).map(e => e.id); /* порядок как в уроке */
+      const picked = EX_ALL.filter(e => PICKED.has(e.id));
+
+      let students=[]; try{ students = (await SM.myStudents())||[]; }catch(e){}
+
+      const ovl=document.createElement("div"); ovl.className="ovl"; ovl.id="sendOvl";
+      ovl.innerHTML =
+        '<div class="dlg">' +
+          '<h3>В домашнюю работу</h3>' +
+          '<p class="lead">'+plural(picked.length,["упражнение","упражнения","упражнений"])+' из урока «'+esc(unit?unit.title:uid)+'»</p>' +
+          '<ol class="exlist">'+picked.map(e=>'<li>'+esc(exLabel(e))+'</li>').join("")+'</ol>' +
+          '<span class="lb">Кому</span>' +
+          (students.length
+            ? '<div class="stu">'+students.map(s=>'<label><input type="checkbox" class="sStu" value="'+esc(s.student_id)+'" checked> '+esc(s.name)+'</label>').join("")+'</div>'
+            : '<div class="lead">В классе пока нет учеников — пригласи их в разделе «Мой класс».</div>') +
+          '<span class="lb">Срок</span>' +
+          '<input type="date" id="sDue">' +
+          '<div class="quick">' +
+            '<button type="button" data-d="1">Завтра</button>' +
+            '<button type="button" data-d="3">Через 3 дня</button>' +
+            '<button type="button" data-d="7">Через неделю</button>' +
+            '<button type="button" data-d="">Без срока</button>' +
+          '</div>' +
+          '<span class="lb">Комментарий</span>' +
+          '<input type="text" id="sMsg" maxlength="300" placeholder="на что обратить внимание (необязательно)">' +
+          '<div class="acts">' +
+            '<button class="send" id="sGo"'+(students.length?'':' disabled')+'>Отправить</button>' +
+            '<button class="cancel" id="sNo">Отмена</button>' +
+          '</div>' +
+          '<div class="out" id="sOut"></div>' +
+        '</div>';
+      document.body.appendChild(ovl);
+
+      const close=()=>ovl.remove();
+      ovl.onclick=e=>{ if(e.target===ovl) close(); };
+      document.getElementById("sNo").onclick=close;
+
+      ovl.querySelectorAll(".quick button").forEach(b=>b.onclick=()=>{
+        const d=b.dataset.d;
+        document.getElementById("sDue").value = d==="" ? "" : dateAfter(+d);
+        ovl.querySelectorAll(".quick button").forEach(x=>x.classList.remove("on"));
+        b.classList.add("on");
+      });
+
+      document.getElementById("sGo").onclick=async ()=>{
+        const go=document.getElementById("sGo"), out=document.getElementById("sOut");
+        const targets=[].slice.call(ovl.querySelectorAll(".sStu")).filter(c=>c.checked).map(c=>c.value);
+        if(!targets.length){ out.className="out bad"; out.textContent="Отметь, кому отправить."; return; }
+
+        const note=JSON.stringify({
+          ex: ids,
+          unitId: uid,
+          due: document.getElementById("sDue").value||null,
+          msg: document.getElementById("sMsg").value||""
+        });
+
+        go.disabled=true;
+        const ok=[], bad=[];
+        for(let i=0;i<targets.length;i++){
+          go.textContent="Отправляю… "+(i+1)+" из "+targets.length;
+          let r;
+          try{ r = await SM.addHW(targets[i], SM_COURSE.id, 0, note); }
+          catch(err){ r={ok:false,error:String(err&&err.message||err)}; }
+          const nm=(students.filter(s=>s.student_id===targets[i])[0]||{}).name||"ученик";
+          if(r&&r.ok) ok.push(nm); else bad.push(nm+" — "+((r&&r.error)||"ошибка"));
+        }
+        go.disabled=false; go.textContent="Отправить";
+        out.className = bad.length ? "out bad" : "out ok";
+        out.textContent = (ok.length?"Отправлено: "+ok.join(", "):"") + (bad.length?(ok.length?" · ":"")+"Не вышло: "+bad.join("; "):"");
+        if(ok.length && !bad.length){ setTimeout(()=>{ close(); clearPicked(); }, 1200); }
+      };
+    }
+
+    /* ---------- Ученик: работа по конкретному заданию ---------- */
+    async function loadHwContext(){
+      if(!HW_ID) return;
+      let rows=[]; try{ rows = (await SM.myHW())||[]; }catch(e){}
+      HW_REC = rows.filter(r=>r.id===HW_ID)[0] || null;
+      if(!HW_REC) return;
+      let meta={}; try{ meta=JSON.parse(HW_REC.note||"{}"); }catch(e){}
+      if(meta && Array.isArray(meta.ex) && meta.ex.length) HW_ONLY = meta.ex;
+    }
+
+    function drawHwFooter(){
+      if(!HW_REC || !HW_ONLY) return;
+      const st = HW_REC.status || (HW_REC.done ? "done" : "new");
+      const bar=document.createElement("div"); bar.className="picker show"; bar.id="hwbar";
+      const label = st==="submitted" ? "Работа у учителя на проверке"
+                  : st==="done"      ? "Работа принята"
+                  : st==="rework"    ? "Возвращено на доработку — исправь и отправь снова"
+                  : "Реши упражнения и отправь работу";
+      bar.innerHTML='<span class="n">'+esc(label)+'</span><span class="sp"></span>' +
+        '<a class="clr" href="homework.html" style="text-decoration:none">К списку домашки</a>' +
+        (st==="submitted"||st==="done" ? "" : '<button class="go" id="hwSend">Отправить на проверку</button>');
+      document.body.appendChild(bar);
+      const b=document.getElementById("hwSend");
+      if(b) b.onclick=async ()=>{
+        b.disabled=true; b.textContent="Отправляю…";
+        const r=await SM.hwSubmit(HW_REC.id);
+        if(r&&r.ok) location.href="homework.html";
+        else { b.disabled=false; b.textContent="Отправить на проверку"; alert((r&&r.error)||"Не получилось отправить"); }
+      };
+    }
+
     (async function(){
+      await loadHwContext();
       try{ const p=await SM.myProfile();
         if(p&&p.role==="teacher"){
           IS_TEACHER=true;
           const w=document.createElement("div"); w.style.cssText="text-align:center;margin:-6px 0 16px";
-          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #cfcecd">🛠 Добавить упражнение в этот урок</a>';
+          w.innerHTML='<a href="builder.html?u='+encodeURIComponent(uid)+'" style="display:inline-block;background:#2980b9;color:#fff;border-radius:999px;padding:9px 18px;font:800 13px \'Nunito\',sans-serif;text-decoration:none;box-shadow:0 4px 0 #cfcecd">🛠 Добавить упражнение в этот урок</a>' +
+            (HW_ONLY ? "" : '<div style="margin-top:9px;font:700 13px \'Archivo\',sans-serif;color:#4a4644">Отметь упражнения галочкой — и отправь их ученикам в домашнюю работу.</div>');
           document.getElementById("sub").insertAdjacentElement("afterend",w);
         }
       }catch(e){}
-      loadAndRender();
+      await loadAndRender();
+      if(HW_REC && HW_ONLY) drawHwFooter();
     })();
   </script>
 </body>

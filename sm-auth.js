@@ -9,6 +9,10 @@ const SM_SUPABASE_URL = "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
 const SM_SUPABASE_ANON_KEY = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG"; // публичный ключ (безопасно хранить в коде)
 /* ------------------------------------------------------------------ */
 
+/* Поля домашки. status: new (выдано) → submitted (сдано) → done (принято) | rework (на доработку).
+   Колонка done оставлена для старого кода — база держит её в согласии со status. */
+const HW_COLS = "id,course,unit,note,done,status,feedback,submitted_at,reviewed_at,created_at";
+
 window.SM = (function () {
 const useCloud = !!(SM_SUPABASE_URL && SM_SUPABASE_ANON_KEY);
 let sb = null;
@@ -406,14 +410,14 @@ return data || [];
 	async listHW(studentId) { /* учитель */
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
-		const { data } = await c.from("hw").select("id,course,unit,note,done,created_at").eq("student_id", studentId).order("created_at", { ascending: false });
+		const { data } = await c.from("hw").select(HW_COLS).eq("student_id", studentId).order("created_at", { ascending: false });
 		return data || [];
 	},
 	async myHW() { /* ученик */
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
 		const u = await this.getUser(); if (!u) return [];
-		const { data } = await c.from("hw").select("id,course,unit,note,done,created_at").eq("student_id", u.id).order("created_at", { ascending: false });
+		const { data } = await c.from("hw").select(HW_COLS).eq("student_id", u.id).order("created_at", { ascending: false });
 		return data || [];
 	},
 	async setHWDone(id, done) {
@@ -421,6 +425,70 @@ return data || [];
 		const c = ensureClient(); if (!c) return { ok: false };
 		const { error } = await c.from("hw").update({ done: !!done }).eq("id", id);
 		return { ok: !error, error: error && error.message };
+	},
+
+	/* --- Цикл проверки: new → submitted → done | rework → submitted --- */
+
+	/* Ученик отправляет работу учителю. Больше он ничего изменить не может — это стережёт база. */
+	async hwSubmit(id) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("hw").update({ status: "submitted" }).eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+
+	/* Учитель принимает работу */
+	async hwAccept(id, feedback) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const patch = { status: "done" };
+		if (feedback !== undefined) patch.feedback = feedback || null;
+		const { error } = await c.from("hw").update(patch).eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+
+	/* Учитель возвращает на доработку — комментарий обязателен, иначе ученик не поймёт, что чинить */
+	async hwRework(id, feedback) {
+		if (!useCloud) return { ok: false };
+		const text = String(feedback || "").trim();
+		if (!text) return { ok: false, error: "напиши, что нужно доработать" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("hw").update({ status: "rework", feedback: text }).eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+
+	/* Результаты ученика по конкретным упражнениям урока (для блочной домашки) */
+	async attemptsFor(studentId, exerciseIds) {
+		if (!useCloud || !exerciseIds || !exerciseIds.length) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.from("attempts")
+			.select("exercise_id,ex_type,correct,created_at")
+			.eq("student_id", studentId).in("exercise_id", exerciseIds)
+			.order("created_at", { ascending: false });
+		if (error) { console.warn("attemptsFor:", error.message); return []; }
+		return data || [];
+	},
+
+	/* Названия упражнений по списку id — чтобы учитель видел, что именно задал */
+	async exercisesByIds(ids) {
+		if (!useCloud || !ids || !ids.length) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.from("exercises")
+			.select("id,type,title,section,position").in("id", ids)
+			.order("position", { ascending: true });
+		if (error) { console.warn("exercisesByIds:", error.message); return []; }
+		return data || [];
+	},
+
+	/* Работы всего класса, ждущие проверки */
+	async hwToReview() {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data } = await c.from("hw").select(HW_COLS)
+			.eq("teacher_id", u.id).eq("status", "submitted")
+			.order("submitted_at", { ascending: true });
+		return data || [];
 	},
 	async deleteHW(id) {
 		if (!useCloud) return { ok: false };

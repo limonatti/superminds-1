@@ -15,6 +15,19 @@
     padding:12px 14px;font:800 15px "Archivo",sans-serif;text-transform:uppercase;width:180px}
   .code button{border:0;background:var(--color-accent);color:#fff;padding:14px 18px;
     font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  /* Статусы работы */
+  .badge{display:inline-block;padding:3px 9px;font:800 10px "Archivo",sans-serif;
+    letter-spacing:.08em;text-transform:uppercase;border:2px solid currentColor}
+  .badge.b-new{color:var(--color-neutral-700)}
+  .badge.b-sub{color:#8a6d00}
+  .badge.b-done{color:#1f7a3d}
+  .badge.b-rework{color:var(--color-accent)}
+  .fb{margin:0 28px 4px;padding:14px 16px;border-left:5px solid var(--color-accent);
+    background:var(--color-accent-100);font:600 14px "Archivo",sans-serif;line-height:1.45}
+  .fb .k{display:block;font:800 10px "Archivo",sans-serif;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--color-accent-600);margin-bottom:5px}
+  .due-soon{color:#8a6d00;font-weight:800}
+  .due-late{color:var(--color-accent);font-weight:800}
 </style>
 </head>
 <body>
@@ -48,6 +61,43 @@ const PART_D = { lesson:"слова и выражения юнита", grammar:"
 function partHref(course, unit, part){ return course+"-u"+unit+(part==="grammar"?"-grammar":part==="workbook"?"-workbook":"")+".html"; }
 function parseNote(n){ try { const o=JSON.parse(n); if(o && (o.parts||o.due||o.msg!==undefined)) return o; } catch(e){} return { msg: n||"" }; }
 
+/* Статусы работы: выдано → отправлено → принято | на доработку */
+const ST = {
+  new:      { l:"Новое",         cls:"b-new",    act:"Отправить на проверку" },
+  submitted:{ l:"На проверке",   cls:"b-sub",    act:null },
+  done:     { l:"Принято",       cls:"b-done",   act:null },
+  rework:   { l:"На доработку",  cls:"b-rework", act:"Отправить снова" }
+};
+/* Старые записи знали только галочку done */
+function statusOf(x){ return x.status || (x.done ? "done" : "new"); }
+
+const MONTHS = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+
+/* «до 14 августа · осталось 3 дня» вместо «до 2026-08-14» */
+function dueInfo(iso){
+  if (!iso) return null;
+  const d = new Date(iso + "T23:59:59");
+  if (isNaN(d)) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const day = new Date(iso + "T00:00:00"); day.setHours(0,0,0,0);
+  const diff = Math.round((day - today) / 86400000);
+  const date = d.getDate() + " " + MONTHS[d.getMonth()];
+  let tail, cls = "";
+  if (diff < 0)       { tail = "просрочено на " + plural(-diff, ["день","дня","дней"]); cls = "due-late"; }
+  else if (diff === 0){ tail = "сегодня последний день";                                 cls = "due-late"; }
+  else if (diff === 1){ tail = "остался 1 день";                                         cls = "due-soon"; }
+  else if (diff <= 3) { tail = "осталось " + plural(diff, ["день","дня","дней"]);        cls = "due-soon"; }
+  else                { tail = "осталось " + plural(diff, ["день","дня","дней"]); }
+  return { text: "до " + date + " · " + tail, cls: cls, diff: diff };
+}
+
+function plural(n, forms){
+  n = Math.abs(n);
+  const t = n % 100, o = n % 10;
+  const w = (t > 10 && t < 20) ? forms[2] : (o === 1) ? forms[0] : (o >= 2 && o <= 4) ? forms[1] : forms[2];
+  return n + " " + w;
+}
+
 let ITEMS = [], sel = 0, MATS = [];
 
 function unitLabel(id){
@@ -58,10 +108,16 @@ function unitLabel(id){
 function drawList(){
   const box = document.getElementById("hwList");
   if (!ITEMS.length){ box.innerHTML = '<div class="step" style="border:0;color:var(--color-neutral-700);text-transform:none;letter-spacing:0;font-weight:600;font-size:14px">Заданий пока нет.</div>'; return; }
-  box.innerHTML = ITEMS.map((it,i) =>
-    '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
+  box.innerHTML = ITEMS.map((it,i) => {
+    const st = ST[it.st] || ST.new;
+    const due = it.due ? dueInfo(it.due) : null;
+    const tail = (due && it.st !== "done")
+      ? ' · <span class="'+due.cls+'">'+esc(due.text)+'</span>'
+      : "";
+    return '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
       '<span class="t">'+esc(it.title)+'</span>' +
-      '<span class="s">'+esc(it.sub)+' · '+(it.done?"сделано":"ждёт")+'</span></button>').join("");
+      '<span class="s">'+esc(it.sub)+' · '+esc(st.l)+tail+'</span></button>';
+  }).join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
 }
 
@@ -75,26 +131,52 @@ function drawPane(){
     return;
   }
   const it = ITEMS[sel];
+  const st = ST[it.st] || ST.new;
+  const due = it.due ? dueInfo(it.due) : null;
+
+  /* Комментарий учителя показываем, когда работу вернули или приняли с пояснением */
+  const fbHtml = (it.feedback && (it.st === "rework" || it.st === "done"))
+    ? '<div class="fb"><span class="k">' +
+        (it.st === "rework" ? "Что доработать · от учителя" : "Комментарий учителя") +
+      '</span>' + esc(it.feedback) + '</div>'
+    : "";
+
   p.innerHTML =
-    '<div class="pane-hd"><span>Шаг 2 · '+esc(it.title)+'</span><span>'+(it.done?"выполнено":"нужно сделать")+'</span></div>' +
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(it.title)+'</span>' +
+      '<span class="badge '+st.cls+'">'+esc(st.l)+'</span></div>' +
     '<div class="ink"><div><div class="k">'+esc(it.kicker)+'</div><h2>'+esc(it.title)+'</h2>' +
       '<p>'+esc(it.desc)+'</p></div>' +
       '<a class="go" href="'+it.href+'"'+(it.blank?' target="_blank" rel="noopener"':'')+'>'+icon("play",15)+' Начать</a></div>' +
+    fbHtml +
     '<div class="tiles">' +
-      '<div class="tile"><span class="k">Статус</span><span class="n'+(it.done?"":" acc")+'">'+(it.done?"Готово":"Ждёт")+'</span></div>' +
-      '<div class="tile"><span class="k">Раздел</span><span class="d" style="font-size:17px;font-weight:800;color:var(--color-text)">'+esc(it.sub)+'</span></div>' +
-      '<div class="tile"><span class="k">Отметить</span>' +
-        (it.done ? '<span class="d">уже отмечено</span>'
-                 : '<button class="b pri sm" id="mark">'+icon("check",14)+' Выполнено</button>') + '</div>' +
+      '<div class="tile"><span class="k">Статус</span>' +
+        '<span class="n'+(it.st === "done" ? "" : " acc")+'" style="font-size:20px">'+esc(st.l)+'</span>' +
+        '<span class="d">'+esc(statusHint(it.st))+'</span></div>' +
+      '<div class="tile"><span class="k">Срок</span>' +
+        (due ? '<span class="d '+due.cls+'" style="font-size:15px;font-weight:800">'+esc(due.text)+'</span>'
+             : '<span class="d">без срока</span>') + '</div>' +
+      '<div class="tile"><span class="k">Действие</span>' +
+        (st.act ? '<button class="b pri sm" id="mark">'+icon("check",14)+' '+esc(st.act)+'</button>'
+                : '<span class="d">'+(it.st === "submitted" ? "ждём учителя" : "работа принята")+'</span>') + '</div>' +
     '</div>' +
     (it.extra || "") +
     matsHtml();
+
   const mk = document.getElementById("mark");
   if (mk) mk.onclick = async () => {
-    mk.textContent = "…";
-    const r = it.type === "spk" ? await SM.setHWDone(it.id, true) : await SM.markAssignment(it.id, true);
-    if (r && r.ok) load(); else mk.textContent = "Выполнено";
+    const old = mk.textContent;
+    mk.disabled = true; mk.textContent = "Отправляю…";
+    const r = it.type === "spk" ? await SM.hwSubmit(it.id) : await SM.markAssignment(it.id, true);
+    if (r && r.ok) load();
+    else { mk.disabled = false; mk.textContent = old; alert((r && r.error) || "Не получилось отправить"); }
   };
+}
+
+function statusHint(s){
+  return s === "submitted" ? "учитель проверяет"
+       : s === "done"      ? "всё зачтено"
+       : s === "rework"    ? "исправь и отправь снова"
+       : "выполни и отправь";
 }
 
 function matsHtml(){
@@ -121,25 +203,56 @@ async function load(){
   ITEMS = [];
   a.forEach(x => {
     const k = KIND[x.kind] || KIND.trainer;
-    ITEMS.push({ type:"unit", id:x.id, done:!!x.done,
+    ITEMS.push({ type:"unit", id:x.id, done:!!x.done, st: x.done ? "done" : "new", due:null,
       title: k.l + " · " + unitLabel(x.unit_id), sub:"Super Minds", kicker:"Задание / Homework",
       desc: k.d, href: k.href + x.unit_id, blank: x.kind === "worksheet" });
   });
   spk.forEach(x => {
     const meta = parseNote(x.note);
+
+    /* Домашка блоками: учитель отметил конкретные упражнения урока */
+    if (Array.isArray(meta.ex) && meta.ex.length){
+      const href = "exercises.html?u=" + encodeURIComponent(meta.unitId || "") + "&hw=" + encodeURIComponent(x.id);
+      const dd = meta.due ? dueInfo(meta.due) : null;
+      const n = meta.ex.length;
+      ITEMS.push({ type:"spk", id:x.id, done:!!x.done, st: statusOf(x), due: meta.due || null,
+        feedback: x.feedback || "",
+        title: "Урок · " + unitLabel(meta.unitId || ""),
+        sub: plural(n, ["упражнение","упражнения","упражнений"]),
+        kicker:"Задание / Homework",
+        desc: meta.msg || ("Учитель отметил " + plural(n, ["упражнение","упражнения","упражнений"]) + " из этого урока."),
+        href: href,
+        extra:'<div class="sect"><span>Что решать</span>'+(dd?'<span class="'+dd.cls+'">'+esc(dd.text)+'</span>':'')+'</div>' +
+          '<div class="rows"><a class="row now" href="'+href+'"><span class="num">01</span>' +
+          '<span><span class="t">Открыть задание</span>' +
+          '<span class="d">только отмеченные учителем упражнения</span></span>' +
+          '<span class="b pri sm">Открыть</span></a></div>' });
+      return;
+    }
+
     const parts = (meta.parts && meta.parts.length) ? meta.parts : ["lesson","grammar"];
-    const dueTxt = meta.due ? " · до " + meta.due : "";
     const rows = parts.map((pt,i) =>
       '<a class="row'+(i===0?" now":"")+'" href="'+partHref(x.course,x.unit,pt)+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
       '<span><span class="t">'+(PART_L[pt]||pt)+'</span><span class="d">'+(PART_D[pt]||"")+'</span></span>' +
       '<span class="b '+(i===0?"pri ":"")+'sm">Открыть</span></a>').join("");
-    ITEMS.push({ type:"spk", id:x.id, done:!!x.done,
-      title:(SPK_L[x.course]||x.course)+" · Unit "+x.unit, sub:(SPK_L[x.course]||"Курс")+dueTxt, kicker:"Задание / Homework",
+    const dd = meta.due ? dueInfo(meta.due) : null;
+    ITEMS.push({ type:"spk", id:x.id, done:!!x.done, st: statusOf(x), due: meta.due || null,
+      feedback: x.feedback || "",
+      title:(SPK_L[x.course]||x.course)+" · Unit "+x.unit, sub:(SPK_L[x.course]||"Курс"), kicker:"Задание / Homework",
       desc: meta.msg || ("Юнит "+x.unit+": "+parts.map(pt=>PART_L[pt]||pt).join(", ")),
       href: partHref(x.course, x.unit, parts[0]),
-      extra:'<div class="sect"><span>Что открыть</span>'+(meta.due?'<span>срок: '+esc(meta.due)+'</span>':'')+'</div><div class="rows">'+rows+'</div>' });
+      extra:'<div class="sect"><span>Что открыть</span>'+(dd?'<span class="'+dd.cls+'">'+esc(dd.text)+'</span>':'')+'</div><div class="rows">'+rows+'</div>' });
   });
-  ITEMS.sort((x,y) => (x.done?1:0) - (y.done?1:0));
+
+  /* Сначала то, что требует действий, внутри — ближайший срок. Принятое уходит вниз. */
+  const rank = s => s === "rework" ? 0 : s === "new" ? 1 : s === "submitted" ? 2 : 3;
+  ITEMS.sort((x,y) => {
+    const d = rank(x.st) - rank(y.st);
+    if (d) return d;
+    const dx = x.due ? new Date(x.due).getTime() : Infinity;
+    const dy = y.due ? new Date(y.due).getTime() : Infinity;
+    return dx - dy;
+  });
   if (sel >= ITEMS.length) sel = 0;
 
   drawList(); drawPane();
@@ -157,7 +270,8 @@ async function load(){
     };
   }
 
-  const n = ITEMS.filter(x=>!x.done).length;
+  /* В значке меню считаем только то, что ждёт ученика: новое и возвращённое */
+  const n = ITEMS.filter(x => x.st === "new" || x.st === "rework").length;
   SMUI.mount({ role:"student", active:"homework", counts: n ? { homework:n } : {} });
 }
 

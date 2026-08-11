@@ -36,9 +36,17 @@
   .hf-row select,.hf-row input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
     padding:11px 12px;font:700 13px "Archivo",sans-serif}
   .hf-row input[type=text],.hf-row input#hMsg{flex:1;min-width:220px}
-  .parts{display:flex;gap:14px;flex-wrap:wrap}
+  .parts{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .parts .cb{display:inline-flex;align-items:center;gap:6px;font:700 13px "Archivo",sans-serif;cursor:pointer}
   .parts .cb input{width:17px;height:17px;accent-color:var(--color-accent)}
+  /* Кому задать + быстрые сроки */
+  .mini{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:6px 11px;font:800 11px "Archivo",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+  .mini:hover{background:var(--color-text);color:var(--color-bg)}
+  .mini.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .hf-row .hint{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .hwform .res{font:700 13px "Archivo",sans-serif;padding:10px 12px;border:2px dashed var(--color-neutral-500)}
+  .hwform .res.ok{border-color:var(--color-accent);color:var(--color-accent-600)}
   .hwform .go.big{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
     font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .hwform .go.big:hover{background:var(--color-accent-600)}
@@ -187,8 +195,9 @@ async function drawPane(){
         '<span class="d">раздел оплат ещё не заведён</span></div>' +
     '</div>' +
 
-    '<div class="sect"><span>Выдать домашнее задание</span><span>курс · юнит · части · срок</span></div>' +
+    '<div class="sect"><span>Выдать домашнее задание</span><span>кому · курс · юнит · части · срок</span></div>' +
     '<div class="hwform">' +
+      whoRow(sid) +
       '<div class="hf-row"><label>Курс</label><select id="hCourse">' +
         '<option value="superminds-1">Super Minds 1</option>' +
         '<option value="speakout-b1"'+(course==="speakout-b1"?" selected":"")+'>Speakout B1</option>' +
@@ -203,9 +212,16 @@ async function drawPane(){
         '<label class="cb"><input type="checkbox" class="hPart" value="workbook" checked> Workbook</label>' +
       '</span></div>' +
       '<div class="hf-row" id="hKindRow" style="display:none"><label>Формат</label><select id="hKind">'+kindOpts+'</select></div>' +
-      '<div class="hf-row"><label>Срок</label><input type="date" id="hDue"></div>' +
+      '<div class="hf-row"><label>Срок</label><input type="date" id="hDue">' +
+        '<span class="parts">' +
+          '<button type="button" class="mini" data-due="1">Завтра</button>' +
+          '<button type="button" class="mini" data-due="3">Через 3 дня</button>' +
+          '<button type="button" class="mini" data-due="7">Через неделю</button>' +
+          '<button type="button" class="mini" data-due="">Без срока</button>' +
+        '</span></div>' +
       '<div class="hf-row"><label>Комментарий</label><input type="text" id="hMsg" placeholder="что сделать, на что обратить внимание (необязательно)"></div>' +
       '<button class="go big" id="hGo">Выдать домашнее задание</button>' +
+      '<div class="res" id="hRes" style="display:none"></div>' +
     '</div>' +
     hwChips(list, hw) +
 
@@ -237,6 +253,34 @@ async function drawPane(){
 
   bindInvite();
   bindStudent(sid);
+}
+
+/* Кому задать: если в классе больше одного ученика — показываем галочки */
+function whoRow(sid){
+  if (STUDENTS.length < 2) return "";
+  return '<div class="hf-row"><label>Кому</label><span class="parts" id="hWhoBox">' +
+    STUDENTS.map(st =>
+      '<label class="cb"><input type="checkbox" class="hStu" value="'+esc(st.student_id)+'"' +
+      (st.student_id === sid ? " checked" : "") + '> ' + esc(st.name) + '</label>').join("") +
+    '<button type="button" class="mini" id="hWhoAll">Всем</button>' +
+    '<button type="button" class="mini" id="hWhoOne">Только этому</button>' +
+    '</span></div>';
+}
+
+/* Кому уходит задание прямо сейчас: отмеченные галочки, иначе — открытый ученик */
+function pickedStudents(sid){
+  if (STUDENTS.length < 2) return [sid];
+  return [].slice.call(document.querySelectorAll(".hStu")).filter(c => c.checked).map(c => c.value);
+}
+
+function nameById(id){ const s = STUDENTS.filter(x => x.student_id === id)[0]; return s ? s.name : "ученик"; }
+
+/* 1 ученику · 2 ученикам · 5 ученикам */
+function studentsWord(n){
+  const t = n % 100, o = n % 10;
+  if (t > 10 && t < 20) return "ученикам";
+  if (o === 1) return "ученику";
+  return "ученикам";
 }
 
 function hwChips(list, hw){
@@ -275,21 +319,80 @@ function bindStudent(sid){
   const $ = id => document.getElementById(id);
   fillUnits();
   $("hCourse").onchange = fillUnits;
+  /* Кому задать: «Всем» / «Только этому» */
+  const whoAll = $("hWhoAll"), whoOne = $("hWhoOne");
+  if (whoAll) whoAll.onclick = () => {
+    document.querySelectorAll(".hStu").forEach(c => { c.checked = true; });
+  };
+  if (whoOne) whoOne.onclick = () => {
+    document.querySelectorAll(".hStu").forEach(c => { c.checked = (c.value === sid); });
+  };
+
+  /* Быстрые кнопки срока */
+  document.querySelectorAll("[data-due]").forEach(b => b.onclick = () => {
+    const days = b.dataset.due;
+    if (days === ""){ $("hDue").value = ""; }
+    else {
+      const d = new Date();
+      d.setDate(d.getDate() + (+days));
+      $("hDue").value = d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
+    }
+    document.querySelectorAll("[data-due]").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+  });
+
   $("hGo").onclick = async e => {
     const course = $("hCourse").value;
-    e.target.textContent = "…";
-    let r;
-    if (course === "superminds-1"){
-      r = await SM.assignTo(sid, $("hUnit").value, $("hKind").value);
-    } else {
-      const parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
-      if (!parts.length){ e.target.textContent = "Выдать домашнее задание"; alert("Отметь хотя бы одну часть (Урок / Грамматика / Workbook)"); return; }
-      const note = JSON.stringify({ parts: parts, due: $("hDue").value || null, msg: $("hMsg").value || "" });
-      try { await SM.enrolCourse(sid, course); } catch(e2){}
-      r = await SM.addHW(sid, course, +$("hUnit").value, note);
+    const res = $("hRes");
+    const targets = pickedStudents(sid);
+
+    if (!targets.length){
+      res.style.display = "block"; res.className = "res";
+      res.textContent = "Отметь, кому задать — ни один ученик не выбран.";
+      return;
     }
-    if (r && r.ok) { drawPane(); load(); }
-    else { e.target.textContent = "Выдать домашнее задание"; alert((r && r.error) || "Ошибка"); }
+
+    let parts = null, note = null;
+    if (course !== "superminds-1"){
+      parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
+      if (!parts.length){
+        res.style.display = "block"; res.className = "res";
+        res.textContent = "Отметь хотя бы одну часть: Урок, Грамматика или Workbook.";
+        return;
+      }
+      note = JSON.stringify({ parts: parts, due: $("hDue").value || null, msg: $("hMsg").value || "" });
+    }
+
+    e.target.disabled = true;
+    const okList = [], failList = [];
+
+    for (let i = 0; i < targets.length; i++){
+      const t = targets[i];
+      e.target.textContent = "Выдаю… " + (i + 1) + " из " + targets.length;
+      let r;
+      try {
+        if (course === "superminds-1"){
+          r = await SM.assignTo(t, $("hUnit").value, $("hKind").value);
+        } else {
+          try { await SM.enrolCourse(t, course); } catch(e2){}
+          r = await SM.addHW(t, course, +$("hUnit").value, note);
+        }
+      } catch(err){ r = { ok:false, error: String(err && err.message || err) }; }
+      if (r && r.ok) okList.push(nameById(t));
+      else failList.push(nameById(t) + " — " + ((r && r.error) || "ошибка"));
+    }
+
+    e.target.disabled = false;
+    e.target.textContent = "Выдать домашнее задание";
+    res.style.display = "block";
+    res.className = failList.length ? "res" : "res ok";
+    res.textContent =
+      (okList.length ? "Выдано " + okList.length + " " + studentsWord(okList.length) + ": " + okList.join(", ") : "") +
+      (failList.length ? (okList.length ? " · " : "") + "Не получилось: " + failList.join("; ") : "");
+
+    if (okList.length){ drawPane(); load(); }
   };
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
     if (!confirm("Удалить задание?")) return;

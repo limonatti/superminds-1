@@ -9,6 +9,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
+<style>
+  .badge{display:inline-block;padding:3px 9px;font:800 10px "Archivo",sans-serif;
+    letter-spacing:.08em;text-transform:uppercase;border:2px solid currentColor}
+  .badge.b-sub{color:#8a6d00}
+  .badge.b-done{color:#1f7a3d}
+  .badge.b-rework{color:var(--color-accent)}
+  .badge.b-new{color:var(--color-neutral-700)}
+  .verdict{padding:16px 28px;border-bottom:2px solid var(--color-divider);display:grid;gap:11px}
+  .verdict textarea{width:100%;min-height:74px;resize:vertical;border:2px solid var(--color-text);
+    background:var(--color-bg);color:var(--color-text);padding:11px 12px;font:600 14px "Archivo",sans-serif}
+  .verdict textarea:focus{outline:none;border-color:var(--color-accent)}
+  .verdict .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .verdict .ok{border:0;background:#1f7a3d;color:#fff;padding:13px 20px;cursor:pointer;
+    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+  .verdict .back{border:2px solid var(--color-accent);background:var(--color-bg);color:var(--color-accent);
+    padding:11px 18px;cursor:pointer;font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+  .verdict .back:hover{background:var(--color-accent);color:#fff}
+  .verdict .msg{font:700 13px "Archivo",sans-serif}
+  .verdict .msg.bad{color:var(--color-accent)}
+  .verdict .hint{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+</style>
 </head>
 <body>
 <div class="app">
@@ -31,12 +52,31 @@
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const KIND_L = { trainer:"Тренажёр слов", games:"Игры юнита", worksheet:"Рабочий лист" };
-const SPK_L  = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+" };
+const SPK_L  = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+",
+                 "focus-1":"Focus 1", "solutions-pi":"Solutions Pre-Int" };
+const ST_L   = { new:["Новое","b-new"], submitted:["На проверке","b-sub"],
+                 done:["Принято","b-done"], rework:["На доработку","b-rework"] };
+const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
-let ME = null, STUDENTS = [], QUEUE = [], ALL = [], sel = 0;
+let ME = null, STUDENTS = [], QUEUE = [], ALL = [], HW = [], sel = 0;
 
 function unitLabel(id){ const u=(window.SM_UNITS||[]).filter(x=>x.id===id)[0]; return u?u.title:id; }
 function nameOf(sid){ const s=STUDENTS.filter(x=>x.student_id===sid)[0]; return s?s.name:"ученик"; }
+function parseNote(n){ try { const o=JSON.parse(n); if(o && (o.parts||o.due||o.msg!==undefined)) return o; } catch(e){} return { msg: n||"" }; }
+function statusOf(x){ return x.status || (x.done ? "done" : "new"); }
+function badge(s){ const b = ST_L[s] || ST_L.new; return '<span class="badge '+b[1]+'">'+b[0]+'</span>'; }
+
+/* «сдано 2 часа назад» — понятнее точного времени */
+function since(ts){
+  if (!ts) return "";
+  const m = Math.round((Date.now() - new Date(ts).getTime()) / 60000);
+  if (m < 1)  return "только что";
+  if (m < 60) return m + " мин назад";
+  const h = Math.round(m / 60);
+  if (h < 24) return h + " ч назад";
+  const d = Math.round(h / 24);
+  return d + " дн. назад";
+}
 
 function drawList(){
   const box = document.getElementById("qList");
@@ -48,35 +88,55 @@ function drawList(){
   box.innerHTML = QUEUE.map((q,i) =>
     '<button class="li'+(i===sel?" on":"")+'" data-i="'+i+'">' +
       '<span class="t">'+esc(q.who)+'</span>' +
-      '<span class="s">'+esc(q.title)+'</span></button>').join("");
+      '<span class="s">'+esc(q.title)+(q.when?' · '+esc(q.when):'')+'</span></button>').join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
 }
 
 async function drawPane(){
   const p = document.getElementById("pane");
-  const openN = ALL.filter(a => !a.done).length;
-  const doneN = ALL.filter(a => a.done).length;
+  const waitN   = HW.filter(h => statusOf(h) === "submitted").length;
+  const openN   = HW.filter(h => ["new","rework"].indexOf(statusOf(h)) >= 0).length
+                + ALL.filter(a => !a.done).length;
+  const doneN   = HW.filter(h => statusOf(h) === "done").length
+                + ALL.filter(a => a.done).length;
 
   const tiles =
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Учеников</span><span class="n">'+STUDENTS.length+'</span></div>' +
-      '<div class="tile"><span class="k">Ждут выполнения</span><span class="n acc">'+openN+'</span></div>' +
-      '<div class="tile"><span class="k">Отмечено готовыми</span><span class="n">'+doneN+'</span></div>' +
+      '<div class="tile"><span class="k">Ждут проверки</span><span class="n'+(waitN?" acc":"")+'">'+waitN+'</span>' +
+        '<span class="d">ученик сдал работу</span></div>' +
+      '<div class="tile"><span class="k">У учеников в работе</span><span class="n">'+openN+'</span></div>' +
+      '<div class="tile"><span class="k">Принято</span><span class="n">'+doneN+'</span></div>' +
     '</div>';
 
-  const table = ALL.length
-    ? '<div class="sect"><span>Все выданные задания</span><span>'+ALL.length+'</span></div>' +
+  /* Общая таблица: и домашка по курсам, и задания Super Minds */
+  const rowsHw = HW.map(h => {
+    const meta = parseNote(h.note);
+    const isBlocks = Array.isArray(meta.ex) && meta.ex.length;
+    const parts = (meta.parts||[]).map(x => PART_L[x]||x).join(", ");
+    const what = isBlocks
+      ? "Урок " + (meta.unitId||"") + " · " + meta.ex.length + " упр."
+      : (SPK_L[h.course]||h.course)+" · Unit "+h.unit+(parts?" · "+parts:"");
+    return '<tr><td><b>'+esc(nameOf(h.student_id))+'</b></td>' +
+      '<td>'+esc(what)+'</td>' +
+      '<td>'+badge(statusOf(h))+'</td></tr>';
+  });
+  const rowsAsg = ALL.map(a =>
+    '<tr><td><b>'+esc(nameOf(a.student_id))+'</b></td>' +
+    '<td>'+esc((KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id))+'</td>' +
+    '<td>'+badge(a.done?"done":"new")+'</td></tr>');
+  const allRows = rowsHw.concat(rowsAsg);
+
+  const table = allRows.length
+    ? '<div class="sect"><span>Все выданные задания</span><span>'+allRows.length+'</span></div>' +
       '<table class="tb"><thead><tr><th>Ученик</th><th>Задание</th><th>Статус</th></tr></thead><tbody>' +
-      ALL.map(a => '<tr><td><b>'+esc(nameOf(a.student_id))+'</b></td>' +
-        '<td>'+esc((KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id))+'</td>' +
-        '<td'+(a.done?'':' class="late"')+'>'+(a.done?"готово":"ждёт")+'</td></tr>').join("") +
-      '</tbody></table>'
+      allRows.join("") + '</tbody></table>'
     : "";
 
   if (!QUEUE.length){
     p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Очередь проверки</span><span>работ: 0</span></div>' +
       '<div class="ink calm"><div><div class="k">Проверка / Review</div><h2>Проверять пока нечего</h2>' +
-        '<p>Сюда попадают задания, которые ученик отметил выполненными. Выдать новое можно в разделе «Мой класс».</p></div>' +
+        '<p>Сюда попадают работы, которые ученик отправил на проверку. Выдать новое задание можно в разделе «Мой класс».</p></div>' +
         '<a class="go" href="teacher-class.html">'+icon("play",15)+' Выдать домашку</a></div>' +
       tiles + table;
     return;
@@ -84,7 +144,45 @@ async function drawPane(){
 
   const q = QUEUE[sel];
   let detail = "";
-  if (q.type === "spk"){
+
+  /* Блочная домашка: показываем каждое заданное упражнение и результат по нему */
+  if (q.type === "spk" && q.ex && q.ex.length){
+    let list = [], tries = [];
+    try { list  = (await SM.exercisesByIds(q.ex)) || []; } catch(e){}
+    try { tries = (await SM.attemptsFor(q.sid, q.ex)) || []; } catch(e){}
+
+    const KIND_EX = { choice:"Выбор ответа", gap:"Впиши слово", match:"Найди пару", order:"Порядок слов",
+      tf:"Верно / неверно", cloze:"Пропуски", letters:"Собери слово", fillbox:"Впиши из банка",
+      multi:"Несколько ответов", categorize:"Категории", listen:"Аудирование", open:"Открытый вопрос" };
+
+    /* последняя попытка по каждому упражнению */
+    const last = {};
+    tries.forEach(t => { if (!(t.exercise_id in last)) last[t.exercise_id] = t; });
+
+    const byId = {}; list.forEach(e => byId[e.id] = e);
+    const ordered = q.ex.map(id => byId[id]).filter(Boolean);
+    const solved = q.ex.filter(id => last[id]).length;
+    const right  = q.ex.filter(id => last[id] && last[id].correct).length;
+
+    detail = '<div class="sect"><span>Заданные упражнения</span>' +
+        '<span>решено '+solved+' из '+q.ex.length+' · верно '+right+'</span></div>' +
+      (ordered.length
+        ? '<div class="rows">' + ordered.map((e,i) => {
+            const t = last[e.id];
+            const mark = !t ? "не решено" : (t.correct ? "верно" : "с ошибкой");
+            return '<div class="row'+(t && !t.correct ? " now" : "")+'" style="cursor:default">' +
+              '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+              '<span><span class="t">'+esc(e.title || KIND_EX[e.type] || e.type)+'</span>' +
+              '<span class="d">'+esc((e.section? e.section+" · " : "") + (KIND_EX[e.type] || e.type))+'</span></span>' +
+              '<span class="b sm">'+mark+'</span></div>';
+          }).join("") + '</div>'
+        : '<div class="empty"><div class="p">Упражнения из задания не найдены — возможно, их изменили в конструкторе.</div></div>') +
+      (q.unitId ? '<div class="rows" style="margin-top:10px">' +
+        '<a class="row" href="exercises.html?u='+encodeURIComponent(q.unitId)+'"><span class="num">→</span>' +
+        '<span><span class="t">Открыть урок целиком</span><span class="d">посмотреть все упражнения юнита</span></span>' +
+        '<span class="b sm">Открыть</span></a></div>' : "");
+  }
+  else if (q.type === "spk"){
     let rows = [];
     try { rows = (await SM.studentHwResults(q.sid, q.course, q.unit)) || []; } catch(e){}
     detail = '<div class="sect"><span>Ответы ученика</span><span>'+rows.length+'</span></div>' +
@@ -107,12 +205,60 @@ async function drawPane(){
         '<span class="b sm">Открыть</span></a></div>';
   }
 
+  /* Вердикт доступен только для настоящей сданной работы (не для сводки по упражнениям) */
+  const verdict = q.hwId
+    ? '<div class="sect"><span>Вердикт</span><span>ученик увидит его сразу</span></div>' +
+      '<div class="verdict">' +
+        '<textarea id="fbText" maxlength="1000" placeholder="Что получилось, что доработать. При возврате на доработку — обязательно."></textarea>' +
+        '<div class="btns">' +
+          '<button class="ok" id="btnOk">'+icon("check",14)+' Принять работу</button>' +
+          '<button class="back" id="btnBack">Вернуть на доработку</button>' +
+        '</div>' +
+        '<div class="hint">Принять можно и без комментария. Вернуть — только с пояснением, что исправить.</div>' +
+        '<div class="msg" id="fbMsg"></div>' +
+      '</div>'
+    : "";
+
   p.innerHTML =
     '<div class="pane-hd"><span>Шаг 2 · '+esc(q.who)+'</span><span>работ в очереди: '+QUEUE.length+'</span></div>' +
     '<div class="ink"><div><div class="k">На проверку / To review</div><h2>'+esc(q.title)+'</h2>' +
-      '<p>'+esc(q.who)+' отметил задание выполненным. Посмотри и обсудите на уроке.</p></div>' +
+      '<p>'+esc(q.who)+' отправил работу на проверку'+(q.when?" — "+esc(q.when):"")+'.</p></div>' +
       '<a class="go" href="room.html">'+icon("play",15)+' Открыть комнату урока</a></div>' +
-    tiles + detail + table;
+    verdict + tiles + detail + table;
+
+  if (q.hwId) bindVerdict(q);
+}
+
+function bindVerdict(q){
+  const txt = document.getElementById("fbText");
+  const msg = document.getElementById("fbMsg");
+  const ok  = document.getElementById("btnOk");
+  const back= document.getElementById("btnBack");
+
+  const run = async (fn, working) => {
+    ok.disabled = back.disabled = true;
+    const oldOk = ok.textContent, oldBack = back.textContent;
+    (working === "ok" ? ok : back).textContent = "…";
+    msg.className = "msg"; msg.textContent = "";
+    const r = await fn();
+    if (r && r.ok){ sel = 0; await load(); return; }
+    ok.disabled = back.disabled = false;
+    ok.textContent = oldOk; back.textContent = oldBack;
+    msg.className = "msg bad";
+    msg.textContent = (r && r.error) || "Не получилось сохранить";
+  };
+
+  ok.onclick   = () => run(() => SM.hwAccept(q.hwId, txt.value.trim()), "ok");
+  back.onclick = () => {
+    const t = txt.value.trim();
+    if (!t){
+      msg.className = "msg bad";
+      msg.textContent = "Напиши, что нужно доработать — иначе ученик не поймёт, что исправлять.";
+      txt.focus();
+      return;
+    }
+    run(() => SM.hwRework(q.hwId, t), "back");
+  };
 }
 
 async function load(){
@@ -123,21 +269,40 @@ async function load(){
   try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
   try { ALL = (await SM.classAssignments()) || []; } catch(e){ ALL = []; }
 
-  QUEUE = ALL.filter(a => a.done).map(a => ({
+  /* Вся домашка класса — для сводки и таблицы */
+  HW = [];
+  for (const s of STUDENTS){
+    let rows = [];
+    try { rows = (await SM.listHW(s.student_id)) || []; } catch(e){}
+    rows.forEach(r => { r.student_id = s.student_id; HW.push(r); });
+  }
+
+  /* В очередь берём только то, что ученик действительно сдал */
+  QUEUE = HW.filter(h => statusOf(h) === "submitted")
+    .sort((a,b) => new Date(a.submitted_at||a.created_at) - new Date(b.submitted_at||b.created_at))
+    .map(h => {
+      const meta = parseNote(h.note);
+      const isBlocks = Array.isArray(meta.ex) && meta.ex.length;
+      const parts = (meta.parts||[]).map(x => PART_L[x]||x).join(", ");
+      return {
+        type:"spk", hwId:h.id, sid:h.student_id, who:nameOf(h.student_id),
+        course:h.course, unit:h.unit,
+        ex: isBlocks ? meta.ex : null,
+        unitId: meta.unitId || null,
+        title: isBlocks
+          ? "Урок " + (meta.unitId || "") + " · " + meta.ex.length + " упр."
+          : (SPK_L[h.course]||h.course)+" · Unit "+h.unit+(parts?" · "+parts:""),
+        when: since(h.submitted_at)
+      };
+    });
+
+  /* Задания Super Minds пока живут на старой галочке — их тоже показываем */
+  ALL.filter(a => a.done).forEach(a => QUEUE.push({
     type:"unit", sid:a.student_id, who:nameOf(a.student_id),
     title:(KIND_L[a.kind]||a.kind)+" · "+unitLabel(a.unit_id),
     href:(a.kind==="games" ? "games.html?u=" : a.kind==="worksheet" ? "worksheet.html?u=" : "trainer.html?unit=")+a.unit_id
   }));
 
-  /* Speakout: юниты, где ученик уже что-то решал */
-  for (const s of STUDENTS){
-    let sum = [];
-    try { sum = (await SM.studentHwSummary(s.student_id)) || []; } catch(e){}
-    sum.forEach(r => QUEUE.push({
-      type:"spk", sid:s.student_id, who:s.name, course:r.course, unit:r.unit,
-      title:(SPK_L[r.course]||r.course)+" · Unit "+r.unit+" — "+r.correct+" из "+r.attempts+" верно"
-    }));
-  }
   if (sel >= QUEUE.length) sel = 0;
 
   drawList();
