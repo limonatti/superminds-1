@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadowing · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  /* Звуки слева в списке */
+  .snd{display:block;width:100%;text-align:left;border:0;border-bottom:2px solid var(--color-divider);
+    background:var(--color-surface);padding:14px 20px;cursor:pointer}
+  .snd:hover{background:var(--color-accent-100)}
+  .snd.on{background:var(--color-accent-100);box-shadow:inset 5px 0 0 var(--color-accent)}
+  .snd .ipa{display:inline-block;min-width:34px;font:800 19px "Archivo",sans-serif;color:var(--color-accent)}
+  .snd .t{font:800 14.5px "Archivo",sans-serif}
+  .snd .d{display:block;margin-top:2px;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+
+  /* Карточка фразы */
+  .ph{padding:20px 28px;border-bottom:2px solid var(--color-divider)}
+  .ph .en{font:800 clamp(22px,3.4vw,32px) "Archivo",sans-serif;letter-spacing:-.02em;margin:0 0 6px}
+  .ph .ipa{font:600 15px "Archivo",sans-serif;color:var(--color-accent-600);margin:0 0 4px}
+  .ph .ru{font:600 14px "Archivo",sans-serif;color:var(--color-neutral-700);margin:0}
+
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:16px 28px;
+    border-bottom:2px solid var(--color-divider)}
+  .bar button{border:0;padding:13px 19px;font:800 13px "Archivo",sans-serif;letter-spacing:.06em;
+    text-transform:uppercase;cursor:pointer}
+  .bar .listen{background:var(--color-text);color:#fff}
+  .bar .mic{background:var(--color-accent);color:#fff;min-width:186px}
+  .bar .mic.rec{background:#8a1400}
+  .bar .play{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-text)}
+  .bar .play:disabled{opacity:.4;cursor:default}
+  .bar .slow{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-divider)}
+  .bar .slow.on{border-color:var(--color-accent);color:var(--color-accent)}
+  .bar .hint{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+
+  /* Пульсация во время записи */
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+  .bar .mic.rec{animation:pulse 1.1s ease-in-out infinite}
+  @media(prefers-reduced-motion:reduce){.bar .mic.rec{animation:none}}
+
+  .chart{padding:10px 28px 4px}
+  .chart canvas{width:100%;height:200px;display:block}
+  .chart .cap{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700);padding:2px 0 10px}
+
+  .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));border-bottom:2px solid var(--color-divider)}
+  .grade{padding:16px 20px;border-right:2px solid var(--color-divider)}
+  .grade:last-child{border-right:0}
+  .grade .k{font:800 10px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .grade .n{display:block;margin-top:4px;font:900 30px "Archivo",sans-serif;letter-spacing:-.02em}
+  .grade .n.good{color:#1f7a3d}.grade .n.mid{color:#8a6d00}.grade .n.bad{color:var(--color-accent)}
+  .grade .d{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+
+  .notes{padding:16px 28px;border-bottom:2px solid var(--color-divider)}
+  .notes li{font:600 14.5px "Archivo",sans-serif;line-height:1.55;margin-bottom:6px}
+  .notes .who{font:800 10px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--color-accent-600);margin-bottom:8px;display:block}
+
+  .words{padding:0 28px 16px;font:800 19px "Archivo",sans-serif;line-height:1.7}
+  .words span{padding:2px 5px;margin-right:3px}
+  .words .ok{background:#dff0d2;color:#2b6b1f}
+  .words .near{background:#fdf2cf;color:#7a5c00}
+  .words .no{background:#fbe4de;color:#9c2200}
+
+  .yt{padding:14px 28px 20px}
+  .yt iframe{width:100%;aspect-ratio:16/9;border:0;background:#000}
+  .yt .cap{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:7px}
+
+  .warn{margin:14px 28px;padding:13px 15px;border-left:5px solid #8a6d00;background:#fdf6e3;
+    font:600 13.5px "Archivo",sans-serif;line-height:1.5}
+  .best{padding:12px 28px;font:700 13px "Archivo",sans-serif;color:var(--color-neutral-700);
+    border-bottom:2px solid var(--color-divider)}
+  .best b{color:var(--color-text)}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери звук</div>
+        <div id="sndList"></div>
+      </div>
+      <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script src="sm-speech.js"></script>
+<script src="sm-voice-lab.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+
+let SOUNDS = [], PHRASES = [], sndSel = 0, phSel = 0;
+let refTrack = null, myTrack = null, myUrl = null, refAudio = null, slow = false;
+let lastCompare = null, lastWords = null, BEST = {};
+
+/* ---------- список звуков ---------- */
+function drawSounds(){
+  const box = document.getElementById("sndList");
+  if (!SOUNDS.length){
+    box.innerHTML = '<div class="step" style="border:0;text-transform:none;letter-spacing:0;font:600 14px \'Archivo\',sans-serif;color:var(--color-neutral-700)">Библиотека звуков пуста.</div>';
+    return;
+  }
+  box.innerHTML = SOUNDS.map((s,i) =>
+    '<button class="snd'+(i===sndSel?" on":"")+'" data-i="'+i+'">' +
+      '<span class="ipa">/'+esc(s.ipa)+'/</span><span class="t">'+esc(s.title)+'</span>' +
+      '<span class="d">'+esc(s.examples||"")+'</span></button>').join("");
+  box.querySelectorAll(".snd").forEach(b => b.onclick = async () => {
+    sndSel = +b.dataset.i; phSel = 0; resetTake();
+    drawSounds(); await loadPhrases();
+  });
+}
+
+/* ---------- фразы выбранного звука ---------- */
+async function loadPhrases(){
+  const s = SOUNDS[sndSel];
+  if (!s) return;
+  try { PHRASES = (await SM.shPhrases(s.id)) || []; } catch(e){ PHRASES = []; }
+  await loadBest();
+  drawPane();
+}
+
+async function loadBest(){
+  BEST = {};
+  if (!PHRASES.length) return;
+  let rows = [];
+  try { rows = (await SM.shMyBest(PHRASES.map(p=>p.id))) || []; } catch(e){}
+  rows.forEach(r => {
+    const cur = BEST[r.phrase_id];
+    if (!cur || (r.score||0) > cur) BEST[r.phrase_id] = r.score||0;
+  });
+}
+
+function resetTake(){
+  refTrack = null; myTrack = null; lastCompare = null; lastWords = null;
+  if (myUrl){ URL.revokeObjectURL(myUrl); myUrl = null; }
+}
+
+/* ---------- эталон ---------- */
+function speakRef(){
+  const p = PHRASES[phSel]; if (!p) return;
+  if (p.audio_url){
+    if (!refAudio) refAudio = new Audio();
+    refAudio.src = p.audio_url;
+    refAudio.playbackRate = slow ? 0.7 : 1;
+    refAudio.play().catch(()=>{});
+    return;
+  }
+  /* файла нет — читает браузер */
+  try {
+    const u = new SpeechSynthesisUtterance(p.text);
+    u.lang = "en-GB"; u.rate = slow ? 0.65 : 0.92;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+/* ---------- рисуем экран ---------- */
+function drawPane(){
+  const p = document.getElementById("pane");
+  const s = SOUNDS[sndSel];
+
+  if (!PHRASES.length){
+    p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · '+esc(s?s.title:"")+'</span></div>' +
+      '<div class="ink"><div><div class="k">Shadowing</div><h2>Фраз для этого звука пока нет</h2>' +
+      '<p>'+esc(s&&s.hint||"")+'</p></div></div>' +
+      (s ? '<div class="notes"><span class="who">Как ставить звук</span><div style="font:600 15px \'Archivo\',sans-serif;line-height:1.6">'+esc(s.hint||"")+'</div></div>' : "");
+    return;
+  }
+
+  const ph = PHRASES[phSel];
+  const canGraph = !!ph.audio_url;
+  const best = BEST[ph.id];
+
+  p.innerHTML =
+    '<div class="pane-hd"><span>Шаг 2 · /'+esc(s.ipa)+'/ · фраза '+(phSel+1)+' из '+PHRASES.length+'</span>' +
+      '<span>'+(best!=null?'лучший результат '+best:'ещё не пробовал')+'</span></div>' +
+
+    '<div class="ph"><p class="en">'+esc(ph.text)+'</p>' +
+      (ph.ipa ? '<p class="ipa">'+esc(ph.ipa)+'</p>' : "") +
+      (ph.translation ? '<p class="ru">'+esc(ph.translation)+'</p>' : "") + '</div>' +
+
+    '<div class="bar">' +
+      '<button class="listen" id="bListen">'+icon("sound",14)+' Слушать образец</button>' +
+      '<button class="slow'+(slow?" on":"")+'" id="bSlow">'+(slow?"замедленно":"обычная скорость")+'</button>' +
+      '<button class="mic" id="bMic">🎤 Записать себя</button>' +
+      '<button class="play" id="bMine" disabled>▶ Моя запись</button>' +
+      '<span class="hint" id="hint">Послушай, потом запиши свою версию.</span>' +
+    '</div>' +
+
+    (canGraph ? "" :
+      '<div class="warn">У этой фразы нет аудиофайла носителя — образец читает браузер, ' +
+      'а его голос нельзя разобрать по частотам. Поэтому график сравнения недоступен: ' +
+      'покажу только твою кривую и точность слов. Добавь аудио к фразе, чтобы включить сравнение.</div>') +
+
+    '<div class="chart"><canvas id="cv"></canvas>' +
+      '<div class="cap" id="cap">График появится после записи: пунктир — носитель, сплошная — ты.</div></div>' +
+
+    '<div id="res"></div>' +
+
+    (ph.yt_id ? '<div class="yt"><div class="sect" style="padding-left:0"><span>Живой пример</span><span>как звучит в речи</span></div>' +
+      '<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(ph.yt_id)+
+        '?start='+(ph.yt_start||0)+(ph.yt_end?'&end='+ph.yt_end:'')+'&rel=0" ' +
+        'title="Пример произношения" allow="accelerometer; encrypted-media; picture-in-picture" ' +
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>' +
+      '<div class="cap">Видео открывается с сервера YouTube — оно не хранится на платформе.</div></div>' : "") +
+
+    '<div class="sect"><span>Все фразы звука</span><span>'+PHRASES.length+'</span></div>' +
+    '<div class="rows">' + PHRASES.map((x,i) => {
+      const b = BEST[x.id];
+      return '<button class="row'+(i===phSel?" now":"")+'" data-p="'+i+'">' +
+        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(x.text)+'</span>' +
+        '<span class="d">'+esc(x.translation||"")+'</span></span>' +
+        '<span class="b sm">'+(b!=null? b+" / 100" : "открыть")+'</span></button>';
+    }).join("") + '</div>';
+
+  bind();
+  if (myTrack || refTrack) redraw();
+}
+
+function bind(){
+  const $ = id => document.getElementById(id);
+  $("bListen").onclick = speakRef;
+  $("bSlow").onclick = () => { slow = !slow; drawPane(); };
+  $("bMic").onclick = toggleRec;
+  const mine = $("bMine");
+  if (myUrl){ mine.disabled = false; mine.onclick = () => { const a = new Audio(myUrl); a.play().catch(()=>{}); }; }
+  document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => {
+    phSel = +b.dataset.p; resetTake(); drawPane();
+  });
+}
+
+/* ---------- запись и разбор ---------- */
+async function toggleRec(){
+  const btn = document.getElementById("bMic"), hint = document.getElementById("hint");
+
+  if (!VL.supported()){
+    hint.textContent = "Этот браузер не умеет записывать звук. Попробуй Chrome или Safari посвежее.";
+    return;
+  }
+
+  if (VL.recording()){ VL.stop(); btn.textContent = "🎤 Записать себя"; btn.classList.remove("rec"); return; }
+
+  btn.textContent = "■ Стоп — идёт запись"; btn.classList.add("rec");
+  hint.textContent = "Говори фразу целиком, потом нажми «Стоп».";
+
+  let take;
+  try { take = await VL.record(); }
+  catch(err){
+    btn.textContent = "🎤 Записать себя"; btn.classList.remove("rec");
+    hint.textContent = err && err.message ? err.message : "Не получилось записать";
+    return;
+  }
+
+  btn.textContent = "🎤 Записать снова"; btn.classList.remove("rec");
+  hint.textContent = "Считаю…";
+
+  if (myUrl) URL.revokeObjectURL(myUrl);
+  myUrl = take.url;
+
+  const ph = PHRASES[phSel];
+
+  try { myTrack = await VL.analyse(take.blob); }
+  catch(e){ hint.textContent = "Не удалось разобрать запись: " + (e.message||""); return; }
+
+  /* эталон разбираем только если есть настоящий файл */
+  if (ph.audio_url && !refTrack){
+    try { refTrack = await VL.analyse(ph.audio_url); }
+    catch(e){ refTrack = null; }
+  }
+
+  lastCompare = VL.compare(refTrack, myTrack);
+
+  /* точность слов — через распознавание браузера, если оно есть */
+  lastWords = null;
+  hint.textContent = "Готово. Послушай себя и сравни график.";
+
+  redraw();
+  drawResult();
+  saveTake();
+}
+
+function redraw(){
+  const cv = document.getElementById("cv"); if (!cv) return;
+  VL.draw(cv, refTrack, myTrack);
+  const cap = document.getElementById("cap");
+  if (cap){
+    cap.textContent = refTrack
+      ? "Пунктир — носитель, сплошная — ты. Заливка снизу показывает громкость: там, где выше, стоит ударение."
+      : (myTrack ? "Твоя интонация. Кривую носителя показать не могу — у фразы нет аудиофайла."
+                 : "График появится после записи.");
+  }
+}
+
+function cls(n){ return n==null?"":(n>=80?"good":n>=60?"mid":"bad"); }
+
+function drawResult(){
+  const box = document.getElementById("res"); if (!box || !lastCompare) return;
+  const c = lastCompare;
+  const g = (k, n, d) => '<div class="grade"><span class="k">'+k+'</span>' +
+    '<span class="n '+cls(n)+'">'+(n==null?"—":n)+'</span><span class="d">'+d+'</span></div>';
+
+  box.innerHTML =
+    '<div class="grades">' +
+      g("Итог", c.total, "среднее по трём") +
+      g("Интонация", c.pitch, "движение голоса") +
+      g("Темп", c.tempo, "скорость и длина") +
+      g("Ударения", c.stress, "где громче") +
+    '</div>' +
+    (c.notes.length
+      ? '<div class="notes"><span class="who">Разбор</span><ul style="margin:0;padding-left:19px">' +
+        c.notes.map(n => '<li>'+esc(n)+'</li>').join("") + '</ul></div>'
+      : "");
+}
+
+async function saveTake(){
+  const ph = PHRASES[phSel]; if (!ph || !lastCompare) return;
+  const c = lastCompare;
+  try {
+    await SM.shSaveTake({
+      phrase_id: ph.id, score: c.total, pitch_score: c.pitch,
+      tempo_score: c.tempo, words_score: null,
+      metrics: { dur: myTrack ? +myTrack.dur.toFixed(2) : null, hasRef: !!refTrack }
+    });
+  } catch(e){}
+  if (c.total != null && (BEST[ph.id] == null || c.total > BEST[ph.id])){
+    BEST[ph.id] = c.total;
+  }
+}
+
+/* ---------- запуск ---------- */
+async function load(){
+  const pane = document.getElementById("pane");
+  const u = await SMUI.requireAuth(pane, "student");
+  if (!u) return;
+  try { SOUNDS = (await SM.shSounds()) || []; } catch(e){ SOUNDS = []; }
+  drawSounds();
+  await loadPhrases();
+  SMUI.mount({ role:"student", active:"shadowing" });
+}
+
+SMUI.mount({ role:"student", active:"shadowing" });
+load();
+</script>
+</body>
+</html>

@@ -457,6 +457,78 @@ return data || [];
 		return { ok: !error, error: error && error.message };
 	},
 
+	/* ---------- Shadowing: библиотека звуков и попытки ---------- */
+
+	async shSounds() {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.from("sh_sounds")
+			.select("id,ipa,title,hint,examples,position").order("position", { ascending: true });
+		if (error) { console.warn("shSounds:", error.message); return []; }
+		return data || [];
+	},
+
+	async shPhrases(soundId) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.from("sh_phrases")
+			.select("id,sound_id,text,ipa,translation,level,audio_url,audio_credit,yt_id,yt_start,yt_end,position")
+			.eq("sound_id", soundId).order("position", { ascending: true });
+		if (error) { console.warn("shPhrases:", error.message); return []; }
+		return data || [];
+	},
+
+	/* Учитель добавляет фразу в библиотеку */
+	async shAddPhrase(p) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const { error } = await c.from("sh_phrases").insert({
+			author_id: u.id, sound_id: p.sound_id, text: p.text, ipa: p.ipa || null,
+			translation: p.translation || null, level: p.level || "A2",
+			audio_url: p.audio_url || null, audio_credit: p.audio_credit || null,
+			yt_id: p.yt_id || null, yt_start: p.yt_start || null, yt_end: p.yt_end || null,
+			position: p.position || 100
+		});
+		return { ok: !error, error: error && error.message };
+	},
+
+	async shSaveTake(t) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false };
+		const { error } = await c.from("sh_takes").insert({
+			student_id: u.id, phrase_id: t.phrase_id, score: t.score,
+			words_score: t.words_score, pitch_score: t.pitch_score, tempo_score: t.tempo_score,
+			heard: t.heard || null, metrics: t.metrics || null
+		});
+		return { ok: !error, error: error && error.message };
+	},
+
+	/* Лучшие попытки ученика по списку фраз */
+	async shMyBest(phraseIds) {
+		if (!useCloud || !phraseIds || !phraseIds.length) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data, error } = await c.from("sh_takes")
+			.select("phrase_id,score,created_at")
+			.eq("student_id", u.id).in("phrase_id", phraseIds)
+			.order("score", { ascending: false });
+		if (error) { console.warn("shMyBest:", error.message); return []; }
+		return data || [];
+	},
+
+	/* Прогресс ученика по shadowing — для учителя */
+	async shStudentProgress(studentId) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.from("sh_takes")
+			.select("phrase_id,score,pitch_score,tempo_score,created_at")
+			.eq("student_id", studentId).order("created_at", { ascending: false }).limit(200);
+		if (error) { console.warn("shStudentProgress:", error.message); return []; }
+		return data || [];
+	},
+
 	/* Результаты ученика по конкретным упражнениям урока (для блочной домашки) */
 	async attemptsFor(studentId, exerciseIds) {
 		if (!useCloud || !exerciseIds || !exerciseIds.length) return [];
