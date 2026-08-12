@@ -232,23 +232,68 @@ window.SM_refreshCloudCourses = function () {
         data: data
       }));
     } catch (e) {}
+    /* Свежие данные пришли — подмешиваем курсы, которых ещё нет в списке */
+    courses.forEach(function (c) {
+      if (window.SM_COURSE_DATA[c.slug]) return;
+      window.SM_COURSE_DATA[c.slug] = data[c.slug] || [];
+      window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+        id: c.slug, title: c.title, subtitle: c.subtitle || "мой учебник",
+        emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true
+      });
+    });
+    /* Данные могли обновиться и для уже известных курсов */
+    Object.keys(data).forEach(function (slug) { window.SM_COURSE_DATA[slug] = data[slug]; });
   }).catch(function (e) {});
 };
-window.SM_refreshCloudCourses();
 
-/* ---- Выбор текущего курса (localStorage, по умолчанию sm1) ---- */
-(function () {
-  var cid;
-  try { cid = localStorage.getItem("sm-course"); } catch (e) {}
-  if (!cid || !window.SM_COURSE_DATA[cid]) cid = "sm1";
+/* ---- Текущий курс ----------------------------------------------------------
+   Раньше выбор происходил один раз, сразу при загрузке файла. Курсы из базы
+   приходят позже, поэтому выбранный учеником курс часто ещё не был известен —
+   и молча подменялся на sm1. Тренажёр после этого не находил нужный юнит и
+   показывал все юниты чужого учебника.
+   Теперь: сначала выбираем из того, что есть (чтобы страница не пустовала),
+   а после загрузки из базы пересобираем. Страницы, которым важен точный курс,
+   ждут window.SM_ready.
+---------------------------------------------------------------------------- */
+
+window.SM_useCourse = function (cid) {
+  var known = cid && window.SM_COURSE_DATA[cid];
+  if (!known) cid = window.SM_COURSE_DATA["sm1"] ? "sm1" : Object.keys(window.SM_COURSE_DATA)[0];
   window.SM_COURSE = window.SM_COURSES.filter(function (c) { return c.id === cid; })[0] || window.SM_COURSES[0];
-  window.SM_UNITS = window.SM_COURSE_DATA[cid];
+  window.SM_UNITS = window.SM_COURSE_DATA[cid] || [];
   window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
-    return u.words.map(function (w, i) {
+    return (u.words || []).map(function (w, i) {
       return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji, img: w.img || null };
     });
   });
+  return cid;
+};
+
+/* Какой курс просил ученик — до всякой подмены */
+window.SM_wantedCourse = (function () {
+  try { return localStorage.getItem("sm-course") || null; } catch (e) { return null; }
 })();
+
+/* Найти курс, в котором есть такой юнит (когда ссылка ведёт в чужой учебник) */
+window.SM_courseOfUnit = function (unitId) {
+  var d = window.SM_COURSE_DATA;
+  for (var slug in d) {
+    if (!Object.prototype.hasOwnProperty.call(d, slug)) continue;
+    if ((d[slug] || []).some(function (u) { return u.id === unitId; })) return slug;
+  }
+  return null;
+};
+
+/* Первый проход — по тому, что уже есть в кэше */
+window.SM_useCourse(window.SM_wantedCourse);
+
+/* Второй проход — после ответа базы. Страницы ждут этот промис. */
+window.SM_ready = window.SM_refreshCloudCourses().then(function () {
+  window.SM_useCourse(window.SM_wantedCourse);
+  return { course: window.SM_COURSE, units: window.SM_UNITS };
+}).catch(function () {
+  return { course: window.SM_COURSE, units: window.SM_UNITS };
+});
 
 /* Отрисовать «лицо» слова: картинка если есть, иначе эмодзи. px — размер. */
 window.SM_face = function (w, px) {

@@ -364,26 +364,65 @@
     document.getElementById("badgeOk").onclick=()=>document.getElementById("badgeToast").classList.remove("show");
     document.getElementById("badgeToast").onclick=e=>{ if(e.target.id==="badgeToast") document.getElementById("badgeToast").classList.remove("show"); };
 
-    // предвыбор юнита из ссылки: ?unit=u4  или  ?units=u4,u5
-    (function(){
+    /* Предвыбор юнита из ссылки: ?unit=u4 или ?units=u4,u5
+       Вызывается ПОСЛЕ загрузки курсов из базы — иначе нужного юнита ещё нет
+       в списке, он отсеивается, и остаются отмечены все юниты подряд. */
+    function applyLinkParams(){
       const q=new URLSearchParams(location.search);
       let ids=[];
       if(q.get("unit")) ids=[q.get("unit")];
-      else if(q.get("units")) ids=q.get("units").split(",");
-      ids=ids.filter(id=>SM_UNITS.some(u=>u.id===id));
-      if(ids.length) selectedUnits=ids;
+      else if(q.get("units")) ids=q.get("units").split(",").filter(Boolean);
+
+      /* Ссылка ведёт в юнит другого учебника — переключаем курс на нужный */
+      if(ids.length && !ids.some(id=>SM_UNITS.some(u=>u.id===id)) && window.SM_courseOfUnit){
+        const slug = window.SM_courseOfUnit(ids[0]);
+        if(slug && slug !== (window.SM_COURSE && window.SM_COURSE.id)){
+          window.SM_useCourse(slug);
+          try { localStorage.setItem("sm-course", slug); } catch(e){}
+        }
+      }
+
+      const found = ids.filter(id=>SM_UNITS.some(u=>u.id===id));
+      selectedUnits = found.length ? found : SM_UNITS.map(u=>u.id);
+
       const m=q.get("mode");
       if(m && MODES.some(x=>x.id===m)) mode=m;
-    })();
+
+      /* Юнит просили, но его нигде нет — честно говорим, а не молчим */
+      return (ids.length && !found.length) ? ids[0] : null;
+    }
 
     (async function(){
+      /* Ждём курсы из базы: без этого выбранный учеником учебник подменяется */
+      try { await (window.SM_ready || Promise.resolve()); } catch(e){}
+      const missing = applyLinkParams();
+      const courseTitle = (window.SM_COURSE && SM_COURSE.title) || "";
+
       if(!SM_ALL_WORDS.length){
-        document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#6e6a68"><div style="font-size:52px">📭</div><h2 style="color:#ec3013;margin:8px 0">В этом учебнике пока нет слов</h2>Добавь слова в юниты через 📚 Конструктор учебников — и тренажёр заработает!</div>';
+        document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#6e6a68"><div style="font-size:52px">📭</div><h2 style="color:#ec3013;margin:8px 0">В учебнике «'+courseTitle+'» пока нет слов</h2>Слова добавляются в юниты через Конструктор учебников — после этого тренажёр заработает.</div>';
         return;
       }
+
       const user=await SM.getUser();
-      if(user)document.getElementById("greet").textContent="Привет, "+user.name+"! Учим слова 💪";
-      if(SM.isCloud&&!user){const b=document.getElementById("banner");b.style.display="block";b.innerHTML='Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>';}
+
+      /* Подпись под заголовком: имя и какой учебник сейчас открыт */
+      const unitsPicked = selectedUnits.length, unitsAll = SM_UNITS.length;
+      const whatUnits = unitsPicked >= unitsAll ? "все юниты"
+                      : unitsPicked === 1
+                        ? ((SM_UNITS.filter(u=>u.id===selectedUnits[0])[0]||{}).title || "выбранный юнит")
+                        : unitsPicked + " юнита";
+      document.getElementById("greet").textContent =
+        (user ? "Привет, "+user.name+"! " : "") + courseTitle + " · " + whatUnits;
+
+      /* Один баннер на все предупреждения */
+      const warns = [];
+      if(missing) warns.push("Юнит «"+missing+"» не найден в твоих учебниках — показываю все слова курса «"+courseTitle+"».");
+      if(SM.isCloud && !user) warns.push('Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>');
+      if(warns.length){
+        const b=document.getElementById("banner");
+        b.style.display="block"; b.innerHTML = warns.join("<br>");
+      }
+
       progress=await SM.loadProgress()||{};
       touchDay();
       renderChips();renderModes();nextRound();

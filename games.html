@@ -111,12 +111,28 @@
     /* ---- выбор юнита: Super Minds + Speakout B1 и B1+ ---- */
     const sel=document.getElementById("unitSel");
     const SPK_L={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
-    (function(){
+    /* Список юнитов собираем после загрузки курсов из базы — иначе нужного
+       юнита ещё нет в списке и ссылка ?u=... молча игнорируется. */
+    function fillUnits(){
+      sel.innerHTML = "";
       (window.SM_UNITS||[]).forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
       if(window.SPEAKOUT_WORDS) Object.keys(SPEAKOUT_WORDS).forEach(c=>Object.keys(SPEAKOUT_WORDS[c]).forEach(u=>{
         const o=document.createElement("option");o.value=c+"|"+u;o.textContent="🗣️ "+(SPK_L[c]||c)+" · Unit "+u;sel.appendChild(o);}));
-      const want=q.get("u"); if(want&&[...sel.options].some(o=>o.value===want)) sel.value=want;
-    })();
+
+      const want=q.get("u");
+      if(!want) return;
+      /* Юнит из другого учебника — переключаем курс и пересобираем список */
+      if(![...sel.options].some(o=>o.value===want) && window.SM_courseOfUnit){
+        const slug = window.SM_courseOfUnit(want);
+        if(slug && slug !== (window.SM_COURSE && window.SM_COURSE.id)){
+          window.SM_useCourse(slug);
+          try { localStorage.setItem("sm-course", slug); } catch(e){}
+          return fillUnits();
+        }
+      }
+      if([...sel.options].some(o=>o.value===want)) sel.value=want;
+    }
+    fillUnits();
     let WORDS=[];
     function loadUnit(){
       const key=sel.value;
@@ -386,7 +402,12 @@
 
     addEventListener("pagehide",()=>{try{SM.srsFlush();}catch(e){}});
     setInterval(()=>{try{SM.srsFlush();}catch(e){}},15000);
-    loadUnit();renderGames();start();
+    (async function(){
+      /* Ждём курсы из базы, потом пересобираем список юнитов и стартуем */
+      try { await (window.SM_ready || Promise.resolve()); } catch(e){}
+      fillUnits();
+      loadUnit(); renderGames(); start();
+    })();
   </script>
 </body>
 </html>
