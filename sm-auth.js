@@ -769,18 +769,30 @@ return { src: url, h: 620, name: "сайт" };
     /* Speakout мог подключиться позже words.js */
     if (window.SM_absorbSpeakout) window.SM_absorbSpeakout();
 
-    let picked = null, assigned = null;
-    try { assigned = await window.SM.myCourse(); } catch (e) {}
-    try {
-      const prof = await window.SM.myProfile();
-      if (prof && prof.course) picked = prof.course;
-    } catch (e) {}
+    let picked = null, assigned = null, signedIn = false;
+    try { signedIn = !!(await window.SM.getUser()); } catch (e) {}
+    if (signedIn) {
+      try { assigned = await window.SM.myCourse(); } catch (e) {}
+      try {
+        const prof = await window.SM.myProfile();
+        if (prof && prof.course) picked = prof.course;
+      } catch (e) {}
+    }
 
-    /* Свой выбор важнее назначения — ученик мог сознательно взять другой курс */
-    apply(picked) || apply(assigned) || window.SM_useCourse(window.SM_wantedCourse);
+    /* Выбор ученика — главный. Назначение учителя идёт следом.
+       Если не выбрано ничего, курс НЕ придумываем: страница сама предложит
+       ученику выбрать учебник. Флаг picked показывает, был ли явный выбор. */
+    const ok = apply(picked) || apply(assigned);
+    if (!ok) window.SM_useCourse(window.SM_wantedCourse);
 
-    return { course: window.SM_COURSE, units: window.SM_UNITS };
+    return {
+      course: window.SM_COURSE,
+      units: window.SM_UNITS,
+      picked: !!picked,                 /* ученик выбирал сам */
+      assigned: assigned || null,       /* что назначил учитель */
+      needsChoice: signedIn && !picked  /* пора показать выбор учебника */
+    };
   }).catch(function () {
-    return { course: window.SM_COURSE, units: window.SM_UNITS };
+    return { course: window.SM_COURSE, units: window.SM_UNITS, picked: false, needsChoice: false };
   });
 })();
