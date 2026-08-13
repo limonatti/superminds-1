@@ -33,6 +33,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="words.js"></script>
+<script src="speakout-words.js"></script>
 <script src="sm-auth.js"></script>
 <script src="sm-shell.js"></script>
 <script>
@@ -47,9 +48,25 @@ function isRepeat(id){ const p = st(id); return !!(p && p.status !== "learned" &
 function units(){ return window.SM_UNITS || []; }
 function allWords(){ return window.SM_ALL_WORDS || []; }
 
+/* Переключатель учебника: ученик может держать несколько курсов */
+function courseSwitch(){
+  const list = (window.SM_COURSES||[]).filter(c => c.ready && (window.SM_COURSE_DATA[c.id]||[]).length);
+  const cur = (window.SM_COURSE||{}).id;
+  if (list.length < 2) return "";
+  return '<div class="step" style="border-bottom:2px solid var(--color-divider)">Учебник</div>' +
+    '<div style="padding:10px 14px;border-bottom:2px solid var(--color-divider)">' +
+    '<select id="crsSel" style="width:100%;border:2px solid var(--color-text);background:var(--color-bg);' +
+      'color:var(--color-text);padding:10px 11px;font:700 13.5px \'Archivo\',sans-serif">' +
+    list.map(c => '<option value="'+esc(c.id)+'"'+(c.id===cur?" selected":"")+'>' +
+      esc((c.emoji?c.emoji+" ":"")+c.title)+'</option>').join("") +
+    '</select></div>';
+}
+
 function drawList(){
   const us = units();
-  const rows = ['<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
+  const rows = [courseSwitch(),
+    '<div class="step">Шаг 1 · Выбери юнит</div>',
+    '<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
     '<span class="t">Все слова курса</span><span class="s">'+allWords().length+' слов</span></button>'];
   us.forEach((u,i) => {
     const ids = u.words.map((w,j) => u.id+"-"+j);
@@ -62,6 +79,14 @@ function drawList(){
   const box = document.getElementById("uList");
   box.innerHTML = rows.join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
+
+  const cs = document.getElementById("crsSel");
+  if (cs) cs.onchange = async () => {
+    cs.disabled = true;
+    await SM.pickCourse(cs.value);   /* выбор запоминается на сервере */
+    sel = -1; cs.disabled = false;
+    drawList(); drawPane();
+  };
 }
 
 function say(text){
@@ -107,6 +132,9 @@ function drawPane(){
 
 (async function(){
   SMUI.mount({ role:"student", active:"vocab" });
+  /* Ждём, пока определится учебник ученика: назначенный учителем или его выбор.
+     Без этого страница успевает нарисоваться на Super Minds по умолчанию. */
+  try { await (window.SM_ready || Promise.resolve()); } catch(e){}
   try { PROG = (await SM.loadProgress()) || {}; } catch(e){ PROG = {}; }
   drawList(); drawPane();
 })();

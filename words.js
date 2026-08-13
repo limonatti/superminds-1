@@ -284,6 +284,43 @@ window.SM_courseOfUnit = function (unitId) {
   return null;
 };
 
+/* ---- Курсы Speakout: их слова лежат в speakout-words.js ------------------
+   Раньше они были видны только на доске урока и в играх, поэтому словарь и
+   тренажёр не могли показать курс ученика. Здесь приводим их к тому же виду,
+   что и учебники из конструктора, — и они работают везде наравне.
+-------------------------------------------------------------------------- */
+window.SM_absorbSpeakout = function () {
+  var S = window.SPEAKOUT_WORDS;
+  if (!S) return;                      // файл не подключён на этой странице
+  var META = {
+    "speakout-b1":     { title: "Speakout B1",  subtitle: "разговорный курс · 8 юнитов", emoji: "🗣️", color: "#dfe7f2" },
+    "speakout-b1plus": { title: "Speakout B1+", subtitle: "разговорный курс · 8 юнитов", emoji: "🗣️", color: "#e7dff2" }
+  };
+  Object.keys(S).forEach(function (slug) {
+    if (window.SM_COURSE_DATA[slug]) return;
+    var meta = META[slug] || { title: slug, subtitle: "курс", emoji: "🗣️", color: "#e4ebf2" };
+    var prefix = slug === "speakout-b1plus" ? "sbp-u" : "sb1-u";
+    var units = Object.keys(S[slug]).sort(function (a, b) { return (+a) - (+b); }).map(function (n) {
+      return {
+        id: prefix + n,
+        unit: "Unit " + n,
+        title: "Unit " + n,
+        emoji: meta.emoji,
+        color: meta.color,
+        words: (S[slug][n] || []).map(function (pair) {
+          return { en: pair[0], ru: pair[1], emoji: "💬" };
+        })
+      };
+    });
+    window.SM_COURSE_DATA[slug] = units;
+    window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+      id: slug, title: meta.title, subtitle: meta.subtitle,
+      emoji: meta.emoji, color: meta.color, ready: true, speakout: true
+    });
+  });
+};
+window.SM_absorbSpeakout();
+
 /* Первый проход — по тому, что уже есть в кэше */
 window.SM_useCourse(window.SM_wantedCourse);
 

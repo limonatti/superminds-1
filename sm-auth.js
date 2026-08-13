@@ -131,8 +131,17 @@ async myProfile() {
 if (!useCloud) return null;
 const c = ensureClient(); if (!c) return null;
 const u = await this.getUser(); if (!u) return null;
-const { data } = await c.from("profiles").select("role,teacher_id,teacher_code,name").eq("user_id", u.id).maybeSingle();
+const { data } = await c.from("profiles").select("role,teacher_id,teacher_code,name,course").eq("user_id", u.id).maybeSingle();
 return data || null;
+},
+/* Запомнить выбранный учеником учебник — чтобы он пережил смену браузера */
+async setMyCourse(slug) {
+if (!useCloud) return { ok: true };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false };
+const { error } = await c.from("profiles").upsert(
+{ user_id: u.id, course: slug }, { onConflict: "user_id" });
+return { ok: !error, error: error && error.message };
 },
 /* Учитель: гарантировать профиль и получить свой код */
 async ensureTeacherCode(name) {
@@ -728,3 +737,50 @@ if (/docs\.google\.com/i.test(url))
 return { src: url.replace(/\/edit[^\/]*$/, "/preview"), h: 620, name: "Google Docs" };
 return { src: url, h: 620, name: "сайт" };
 };
+
+/* ===========================================================================
+   Курс ученика — из базы, а не из настроек браузера.
+   Раньше активный учебник хранился только в localStorage и записывался лишь
+   в админке. Поэтому ученик, которому назначен, скажем, Speakout B1, всюду
+   видел Super Minds: его курс просто негде было взять.
+   Теперь порядок такой: назначенный учителем курс → выбор, сохранённый
+   учеником ранее → то, что осталось в браузере. Результат кладём и в
+   localStorage, чтобы страницы без сети открывались сразу правильными.
+   =========================================================================== */
+(function () {
+  if (!window.SM_useCourse) return;   // words.js не подключён — нечего настраивать
+
+  function apply(slug) {
+    if (!slug || !window.SM_COURSE_DATA[slug]) return false;
+    window.SM_useCourse(slug);
+    try { localStorage.setItem("sm-course", slug); } catch (e) {}
+    return true;
+  }
+
+  /* Ученик сам переключил учебник — запоминаем выбор на сервере,
+     чтобы он пережил другой браузер и очистку кэша. */
+  window.SM.pickCourse = async function (slug) {
+    if (!apply(slug)) return { ok: false, error: "неизвестный курс" };
+    try { await window.SM.setMyCourse(slug); } catch (e) {}
+    return { ok: true };
+  };
+
+  window.SM_ready = Promise.resolve(window.SM_ready).then(async function () {
+    /* Speakout мог подключиться позже words.js */
+    if (window.SM_absorbSpeakout) window.SM_absorbSpeakout();
+
+    let picked = null, assigned = null;
+    try { assigned = await window.SM.myCourse(); } catch (e) {}
+    try {
+      const prof = await window.SM.myProfile();
+      if (prof && prof.course) picked = prof.course;
+    } catch (e) {}
+
+    /* Свой выбор важнее назначения — ученик мог сознательно взять другой курс */
+    apply(picked) || apply(assigned) || window.SM_useCourse(window.SM_wantedCourse);
+
+    return { course: window.SM_COURSE, units: window.SM_UNITS };
+  }).catch(function () {
+    return { course: window.SM_COURSE, units: window.SM_UNITS };
+  });
+})();
