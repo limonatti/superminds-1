@@ -319,7 +319,37 @@ window.SM_absorbSpeakout = function () {
     });
   });
 };
+/* ---- Остальные курсы: Focus, Solutions, Gateway --------------------------
+   Их слова живут в course-words.js (собирается gen_course_words.py).
+   Раньше они были только внутри страниц юнитов, поэтому словарь и тренажёр
+   этих курсов не видели.
+-------------------------------------------------------------------------- */
+window.SM_absorbCourseWords = function () {
+  var C = window.COURSE_WORDS;
+  if (!C) return;
+  var PREFIX = { "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
+  Object.keys(C).forEach(function (slug) {
+    if (window.SM_COURSE_DATA[slug]) return;
+    var c = C[slug], pre = PREFIX[slug] || (slug.replace(/[^a-z0-9]/g, "").slice(0, 4) + "-u");
+    window.SM_COURSE_DATA[slug] = (c.units || []).map(function (u) {
+      return {
+        id: pre + u.n,
+        unit: "Unit " + u.n,
+        title: u.title || ("Unit " + u.n),
+        emoji: u.emoji || c.emoji || "📘",
+        color: c.color || "#e4ebf2",
+        words: (u.words || []).map(function (p) { return { en: p[0], ru: p[1], emoji: "📖" }; })
+      };
+    });
+    window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+      id: slug, title: c.title || slug, subtitle: c.subtitle || "курс",
+      emoji: c.emoji || "📘", color: c.color || "#e4ebf2", ready: true
+    });
+  });
+};
+
 window.SM_absorbSpeakout();
+window.SM_absorbCourseWords();
 
 /* Первый проход — по тому, что уже есть в кэше */
 window.SM_useCourse(window.SM_wantedCourse);

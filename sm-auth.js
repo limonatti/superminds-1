@@ -768,6 +768,7 @@ return { src: url, h: 620, name: "сайт" };
   window.SM_ready = Promise.resolve(window.SM_ready).then(async function () {
     /* Speakout мог подключиться позже words.js */
     if (window.SM_absorbSpeakout) window.SM_absorbSpeakout();
+    if (window.SM_absorbCourseWords) window.SM_absorbCourseWords();
 
     let picked = null, assigned = null, signedIn = false;
     try { signedIn = !!(await window.SM.getUser()); } catch (e) {}
