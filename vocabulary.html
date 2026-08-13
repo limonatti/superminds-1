@@ -48,25 +48,24 @@ function isRepeat(id){ const p = st(id); return !!(p && p.status !== "learned" &
 function units(){ return window.SM_UNITS || []; }
 function allWords(){ return window.SM_ALL_WORDS || []; }
 
-/* Переключатель учебника: ученик может держать несколько курсов */
+/* Переключатель учебника — в шапке правой панели, там же где имя курса.
+   В левой ленте юнитов ему не место: на широком экране она горизонтальная
+   и выпадающий список в ней схлопывается. */
 function courseSwitch(){
   const list = (window.SM_COURSES||[]).filter(c => c.ready && (window.SM_COURSE_DATA[c.id]||[]).length);
   const cur = (window.SM_COURSE||{}).id;
-  if (list.length < 2) return "";
-  return '<div class="step" style="border-bottom:2px solid var(--color-divider)">Учебник</div>' +
-    '<div style="padding:10px 14px;border-bottom:2px solid var(--color-divider)">' +
-    '<select id="crsSel" style="width:100%;border:2px solid var(--color-text);background:var(--color-bg);' +
-      'color:var(--color-text);padding:10px 11px;font:700 13.5px \'Archivo\',sans-serif">' +
+  if (list.length < 2) return '<span>'+esc((window.SM_COURSE||{}).title||"")+'</span>';
+  return '<select id="crsSel" title="Мой учебник" style="border:2px solid var(--color-text);' +
+      'background:var(--color-bg);color:var(--color-text);padding:6px 9px;' +
+      'font:800 11px \'Archivo\',sans-serif;letter-spacing:.06em;text-transform:uppercase;max-width:230px">' +
     list.map(c => '<option value="'+esc(c.id)+'"'+(c.id===cur?" selected":"")+'>' +
       esc((c.emoji?c.emoji+" ":"")+c.title)+'</option>').join("") +
-    '</select></div>';
+    '</select>';
 }
 
 function drawList(){
   const us = units();
-  const rows = [courseSwitch(),
-    '<div class="step">Шаг 1 · Выбери юнит</div>',
-    '<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
+  const rows = ['<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
     '<span class="t">Все слова курса</span><span class="s">'+allWords().length+' слов</span></button>'];
   us.forEach((u,i) => {
     const ids = u.words.map((w,j) => u.id+"-"+j);
@@ -79,12 +78,16 @@ function drawList(){
   const box = document.getElementById("uList");
   box.innerHTML = rows.join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawList(); drawPane(); });
+}
 
+/* Вешаем обработчик на выпадающий список курса (он живёт в шапке правой панели) */
+function bindCourseSwitch(){
   const cs = document.getElementById("crsSel");
-  if (cs) cs.onchange = async () => {
+  if (!cs) return;
+  cs.onchange = async () => {
     cs.disabled = true;
     await SM.pickCourse(cs.value);   /* выбор запоминается на сервере */
-    sel = -1; cs.disabled = false;
+    sel = -1;
     drawList(); drawPane();
   };
 }
@@ -105,7 +108,7 @@ function drawPane(){
   const done = list.filter(w => isLearned(w.id));
 
   p.innerHTML =
-    '<div class="pane-hd"><span>Шаг 2 · '+esc(title)+'</span><span>'+esc((window.SM_COURSE||{}).title||"")+'</span></div>' +
+    '<div class="pane-hd"><span>Шаг 2 · '+esc(title)+'</span>'+courseSwitch()+'</div>' +
     '<div class="ink"><div><div class="k">Словарь / Vocabulary</div>' +
       '<h2>'+(rep.length ? rep.length+" слов ждут повторения" : "Всё повторено")+'</h2>' +
       '<p>'+(rep.length ? "Красным отмечены слова, которые ты уже видел, но ещё не закрепил."
@@ -128,6 +131,7 @@ function drawPane(){
     }).join("") + '</div>';
 
   p.querySelectorAll(".say").forEach(b => b.onclick = () => say(b.dataset.w));
+  bindCourseSwitch();
 }
 
 (async function(){
