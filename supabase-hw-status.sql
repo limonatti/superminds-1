@@ -127,3 +127,11 @@ for select using (
 );
 
 create index if not exists attempts_student_ex_idx on public.attempts (student_id, exercise_id);
+
+-- ---------- 5. Учебник ученика (добавлено 14 августа) ----------
+-- Курс, выбранный самим учеником, — на случай, когда учитель ещё не назначил.
+alter table public.profiles add column if not exists course text;
+
+-- «Курс не назначен» — нормальное состояние: ученик привязан к учителю,
+-- но учебник ещё не выбран. Раньше колонка этого не допускала.
+alter table public.enrolments alter column course drop not null;
