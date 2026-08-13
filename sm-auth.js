@@ -779,18 +779,17 @@ return { src: url, h: 620, name: "сайт" };
       } catch (e) {}
     }
 
-    /* Выбор ученика — главный. Назначение учителя идёт следом.
-       Если не выбрано ничего, курс НЕ придумываем: страница сама предложит
-       ученику выбрать учебник. Флаг picked показывает, был ли явный выбор. */
-    const ok = apply(picked) || apply(assigned);
+    /* Главный — курс, назначенный учителем в разделе «Мой класс».
+       Свой выбор ученика работает только там, где учитель ничего не назначил. */
+    const ok = apply(assigned) || apply(picked);
     if (!ok) window.SM_useCourse(window.SM_wantedCourse);
 
     return {
       course: window.SM_COURSE,
       units: window.SM_UNITS,
-      picked: !!picked,                 /* ученик выбирал сам */
-      assigned: assigned || null,       /* что назначил учитель */
-      needsChoice: signedIn && !picked  /* пора показать выбор учебника */
+      assigned: assigned || null,                  /* что назначил учитель */
+      picked: !!picked,                            /* ученик выбирал сам */
+      needsChoice: signedIn && !assigned && !picked /* назначения нет — пусть выберет сам */
     };
   }).catch(function () {
     return { course: window.SM_COURSE, units: window.SM_UNITS, picked: false, needsChoice: false };

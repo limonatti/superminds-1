@@ -72,6 +72,8 @@ function allWords(){ return window.SM_ALL_WORDS || []; }
 function courseSwitch(){
   const list = (window.SM_COURSES||[]).filter(c => c.ready && (window.SM_COURSE_DATA[c.id]||[]).length);
   const cur = (window.SM_COURSE||{}).id;
+  /* Курс назначен учителем — менять его ученик не должен */
+  if (ASSIGNED) return '<span>'+esc((window.SM_COURSE||{}).title||"")+' · от учителя</span>';
   if (list.length < 2) return '<span>'+esc((window.SM_COURSE||{}).title||"")+'</span>';
   return '<select id="crsSel" title="Мой учебник" style="border:2px solid var(--color-text);' +
       'background:var(--color-bg);color:var(--color-text);padding:6px 9px;' +
@@ -118,14 +120,14 @@ function drawPick(){
   document.getElementById("uList").innerHTML = "";
 
   p.innerHTML =
-    '<div class="pane-hd"><span>Шаг 1 · Твой учебник</span><span>выбор сохранится</span></div>' +
-    '<div class="pick"><h2>С каким учебником занимаешься?</h2>' +
-    '<p class="lead">Выбери курс — в словаре будут его слова. Переключиться можно в любой момент, ' +
-    'а выбор запомнится и на других устройствах.</p>' +
+    '<div class="pane-hd"><span>Шаг 1 · Твой учебник</span><span>учитель ещё не назначил курс</span></div>' +
+    '<div class="pick"><h2>Учитель пока не назначил тебе курс</h2>' +
+    '<p class="lead">Можешь выбрать учебник сам — в словаре появятся его слова. ' +
+    'Когда учитель назначит курс, словарь переключится на него.</p>' +
     '<div class="grid">' + list.map(c => {
       const words = (window.SM_COURSE_DATA[c.id]||[]).reduce((a,u)=>a+(u.words||[]).length, 0);
       const units = (window.SM_COURSE_DATA[c.id]||[]).length;
-      const rec = ASSIGNED && c.id === ASSIGNED;
+      const rec = false;
       return '<button class="crd'+(rec?" rec":"")+'" data-c="'+esc(c.id)+'">' +
         '<span class="em">'+esc(c.emoji||"📘")+'</span>' +
         '<span class="t">'+esc(c.title)+'</span>' +
