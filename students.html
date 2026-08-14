@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мои ученики · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modernist.css">
+<link rel="stylesheet" href="sm-ui.css">
+<style>
+  .full{padding:0}
+  .tbl{width:100%;border-collapse:collapse}
+  .tbl th{text-align:left;padding:12px 16px;font:800 10px "Archivo",sans-serif;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--color-neutral-700);border-bottom:2px solid var(--color-divider);
+    white-space:nowrap;background:var(--color-surface);position:sticky;top:0;z-index:1}
+  .tbl td{padding:14px 16px;border-bottom:2px solid var(--color-divider);font:600 14px "Archivo",sans-serif;
+    vertical-align:middle}
+  .tbl tr:hover td{background:var(--color-accent-100)}
+  .tbl .nm{font:800 15.5px "Archivo",sans-serif;letter-spacing:-.01em;display:block}
+  .tbl .em{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:2px}
+  .tbl .num{font:900 19px "Archivo",sans-serif;letter-spacing:-.02em}
+  .tbl .sub{display:block;font:600 11.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .pill{display:inline-block;padding:3px 9px;font:800 10px "Archivo",sans-serif;letter-spacing:.07em;
+    text-transform:uppercase;border:2px solid currentColor;white-space:nowrap}
+  .pill.wait{color:#8a6d00}.pill.ok{color:#1f7a3d}.pill.none{color:var(--color-neutral-600)}
+  .pill.late{color:var(--color-accent)}
+  .prog{height:6px;background:var(--color-neutral-300);margin-top:6px;min-width:90px}
+  .prog i{display:block;height:100%;background:var(--color-accent)}
+  .open{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .open:hover{background:var(--color-text);color:var(--color-bg)}
+  .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;
+    font:800 11px "Archivo",sans-serif;padding:1px 7px}
+  .scroll{overflow-x:auto}
+  .nc{padding:14px 28px;border-bottom:2px solid var(--color-divider)}
+  .nc .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 0;
+    border-bottom:2px dashed var(--color-divider)}
+  .nc .row:last-child{border-bottom:0}
+  .nc .who{flex:1;min-width:190px}
+  .nc .who b{font:800 14.5px "Archivo",sans-serif}
+  .nc .who span{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .nc .add{border:0;background:var(--color-accent);color:#fff;padding:9px 15px;cursor:pointer;
+    font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .nc .add:hover{background:var(--color-accent-600)}
+  .msg{padding:12px 28px;font:700 13px "Archivo",sans-serif}
+  .msg.ok{color:#1f7a3d}.msg.bad{color:var(--color-accent)}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js"></script>
+<script src="speakout-words.js"></script>
+<script src="course-words.js"></script>
+<script src="sm-auth.js"></script>
+<script src="sm-shell.js"></script>
+<script>
+const esc = SMUI.esc, icon = SMUI.icon;
+
+let ME = null, STUDENTS = [], NEWCOMERS = [], UNREAD = {}, HW = {}, ASG = {}, COURSE = {};
+
+function learned(data){
+  let n = 0;
+  for (const k in data){ if (k !== "__meta" && data[k] && data[k].status === "learned") n++; }
+  return n;
+}
+function ago(ts){
+  if (!ts) return "не заходил";
+  const d = (Date.now() - new Date(ts).getTime()) / 86400000;
+  if (d < 1) return "сегодня";
+  if (d < 2) return "вчера";
+  const n = Math.floor(d);
+  const w = (n % 100 > 10 && n % 100 < 20) ? "дней" : (n % 10 === 1) ? "день" : (n % 10 >= 2 && n % 10 <= 4) ? "дня" : "дней";
+  return n + " " + w + " назад";
+}
+function courseTitle(slug){
+  if (!slug) return null;
+  const c = (window.SM_COURSES||[]).filter(x => x.id === slug)[0];
+  return c ? c.title : slug;
+}
+function wordsIn(slug){
+  return (window.SM_COURSE_DATA[slug]||[]).reduce((a,u)=>a+(u.words||[]).length, 0);
+}
+
+/* Состояние домашки одного ученика */
+function hwState(sid){
+  const rows = HW[sid] || [];
+  const asg  = (ASG[sid] || []);
+  const wait = rows.filter(h => (h.status || (h.done?"done":"new")) === "submitted").length;
+  const open = rows.filter(h => ["new","rework"].indexOf(h.status || (h.done?"done":"new")) >= 0).length
+             + asg.filter(a => !a.done).length;
+  const done = rows.filter(h => (h.status || (h.done?"done":"new")) === "done").length
+             + asg.filter(a => a.done).length;
+  return { wait, open, done, total: rows.length + asg.length };
+}
+
+function newcomersHtml(){
+  if (!NEWCOMERS.length) return "";
+  return '<div class="sect"><span>Новые регистрации</span><span>' + NEWCOMERS.length + ' ждут добавления</span></div>' +
+    '<div class="nc">' +
+    '<div style="font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700);margin-bottom:6px">' +
+      'Эти люди завели аккаунт сами, без твоей ссылки. Пока ты их не добавишь, они не в классе.</div>' +
+    NEWCOMERS.map(n =>
+      '<div class="row"><span class="who"><b>'+esc(n.name || "Без имени")+'</b>' +
+      '<span>'+esc(n.email)+' · с '+new Date(n.created_at).toLocaleDateString("ru-RU")+
+        (n.has_progress ? ' · уже занимался' : '')+'</span></span>' +
+      '<button class="add" data-add="'+esc(n.user_id)+'" data-nm="'+esc(n.name||"")+'">В класс</button></div>'
+    ).join("") + '</div>' +
+    '<div class="msg" id="ncMsg" style="display:none"></div>';
+}
+
+function tableHtml(){
+  if (!STUDENTS.length){
+    return SMUI.empty("В классе пока никого",
+      NEWCOMERS.length ? "Ниже — те, кто зарегистрировался сам. Добавь их в класс."
+                       : "Создай ссылку-приглашение в карточке класса — по ней ученик сразу попадёт к тебе.");
+  }
+
+  const rows = STUDENTS.map(s => {
+    const sid = s.student_id, d = s.data || {}, m = d.__meta || {};
+    const slug = COURSE[sid];
+    const total = slug ? wordsIn(slug) : 0;
+    const lw = learned(d);
+    const pct = total ? Math.round(lw / total * 100) : 0;
+    const h = hwState(sid);
+    const un = UNREAD[sid] || 0;
+
+    const hwPill = h.wait ? '<span class="pill wait">'+h.wait+' на проверку</span>'
+                 : h.open ? '<span class="pill late">'+h.open+' не сделано</span>'
+                 : h.total ? '<span class="pill ok">всё сдано</span>'
+                 : '<span class="pill none">не задано</span>';
+
+    return '<tr>' +
+      '<td><span class="nm">'+esc(s.name || "Ученик")+(un?'<span class="unread">'+un+'</span>':'')+'</span></td>' +
+      '<td>'+(slug
+        ? '<span>'+esc(courseTitle(slug))+'</span><span class="sub">'+total+' слов в курсе</span>'
+        : '<span class="pill none">курс не назначен</span>')+'</td>' +
+      '<td><span class="num">'+lw+'</span><span class="sub">'+(total?('из '+total+' · '+pct+'%'):'слов выучено')+'</span>' +
+        (total?'<span class="prog"><i style="width:'+pct+'%"></i></span>':'')+'</td>' +
+      '<td>'+hwPill+'<span class="sub">'+(h.total? h.done+' из '+h.total+' принято' : '—')+'</span></td>' +
+      '<td><span class="num" style="font-size:15px">'+(m.totalPoints||0)+'</span><span class="sub">звёзд · стрик '+(m.dayStreak||0)+'</span></td>' +
+      '<td><span>'+esc(ago(s.updated_at))+'</span></td>' +
+      '<td><button class="open" data-s="'+esc(sid)+'">Открыть</button></td>' +
+    '</tr>';
+  }).join("");
+
+  const waitAll = STUDENTS.reduce((a,s)=>a+hwState(s.student_id).wait, 0);
+
+  return '<div class="tiles">' +
+      '<div class="tile"><span class="k">Учеников</span><span class="n">'+STUDENTS.length+'</span></div>' +
+      '<div class="tile"><span class="k">Ждут проверки</span><span class="n'+(waitAll?" acc":"")+'">'+waitAll+'</span>' +
+        '<span class="d">сданные работы</span></div>' +
+      '<div class="tile"><span class="k">Новых регистраций</span><span class="n'+(NEWCOMERS.length?" acc":"")+'">'+NEWCOMERS.length+'</span>' +
+        '<span class="d">ещё не в классе</span></div>' +
+    '</div>' +
+    '<div class="sect"><span>Мои ученики</span><span>нажми «Открыть» — карточка ученика</span></div>' +
+    '<div class="scroll"><table class="tbl"><thead><tr>' +
+      '<th>Ученик</th><th>Учебник</th><th>Слова</th><th>Домашка</th><th>Награды</th><th>Активность</th><th></th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+
+function draw(){
+  const p = document.getElementById("pane");
+  p.innerHTML =
+    '<div class="pane-hd"><span>Мои ученики</span><span>'+STUDENTS.length+' в классе</span></div>' +
+    tableHtml() + newcomersHtml();
+
+  p.querySelectorAll("[data-s]").forEach(b => b.onclick = () => {
+    location.href = "teacher-class.html?s=" + encodeURIComponent(b.dataset.s);
+  });
+
+  p.querySelectorAll("[data-add]").forEach(b => b.onclick = async () => {
+    const msg = document.getElementById("ncMsg");
+    b.disabled = true; b.textContent = "…";
+    const r = await SM.attachStudent(b.dataset.add, b.dataset.nm);
+    if (r && r.ok){ await load(); }
+    else {
+      b.disabled = false; b.textContent = "В класс";
+      if (msg){ msg.style.display = "block"; msg.className = "msg bad";
+        msg.textContent = (r && r.error) || "Не получилось добавить"; }
+    }
+  });
+}
+
+async function load(){
+  const pane = document.getElementById("pane");
+  ME = await SMUI.requireAuth(pane, "teacher");
+  if (!ME) return;
+
+  try { await (window.SM_ready || Promise.resolve()); } catch(e){}
+
+  try { STUDENTS  = (await SM.myStudents()) || []; }         catch(e){ STUDENTS = []; }
+  try { NEWCOMERS = (await SM.unassignedStudents()) || []; }  catch(e){ NEWCOMERS = []; }
+
+  /* teacherUnread отдаёт готовую карту { student_id: сколько непрочитанных } */
+  try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }
+
+  ASG = {};
+  try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id]||[]).push(a); }); } catch(e){}
+
+  /* Домашка и назначенный курс — по каждому ученику */
+  HW = {}; COURSE = {};
+  for (const s of STUDENTS){
+    try { HW[s.student_id] = (await SM.listHW(s.student_id)) || []; } catch(e){ HW[s.student_id] = []; }
+    try { COURSE[s.student_id] = await SM.studentCourse(s.student_id); } catch(e){ COURSE[s.student_id] = null; }
+  }
+
+  draw();
+  const waitAll = STUDENTS.reduce((a,s)=>a+hwState(s.student_id).wait, 0);
+  SMUI.mount({ role:"teacher", active:"students",
+    counts: waitAll ? { review: waitAll } : {} });
+}
+
+SMUI.mount({ role:"teacher", active:"students" });
+load();
+</script>
+</body>
+</html>

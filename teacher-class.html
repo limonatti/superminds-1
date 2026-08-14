@@ -588,6 +588,12 @@ async function load(){
   try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }
   ASG = {};
   try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id] || []).push(a); }); } catch(e){}
+  /* Пришли из раздела «Мои ученики» по ссылке на конкретного ученика */
+  const want = new URLSearchParams(location.search).get("s");
+  if (want){
+    const i = STUDENTS.findIndex(s => s.student_id === want);
+    if (i >= 0) sel = i;
+  }
   if (sel >= STUDENTS.length) sel = 0;
 
   drawList();

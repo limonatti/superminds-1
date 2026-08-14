@@ -47,8 +47,9 @@ var STUDENT = [
   { id: "board",    t: "Доска",      i: "board", href: "board.html" }
 ];
 var TEACHER = [
-  { id: "class",    t: "Мой класс",        i: "users", href: "teacher-class.html" },
-{ id: "builder",  t: "Конструктор",      i: "build", href: "builder.html" },
+  { id: "students", t: "Мои ученики",      i: "users", href: "students.html" },
+  { id: "class",    t: "Карточка ученика", i: "file",  href: "teacher-class.html" },
+  { id: "builder",  t: "Конструктор",      i: "build", href: "builder.html" },
   { id: "review",   t: "Проверка домашки", i: "file",  href: "teacher-homework.html" },
   { id: "chat",     t: "Сообщения",        i: "chat",  href: "chat.html" },
   { id: "tsched",   t: "Расписание",       i: "cal",   href: "teacher-schedule.html" },
