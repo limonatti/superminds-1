@@ -141,3 +141,8 @@ alter table public.enrolments alter column course drop not null;
 -- через приглашение или код. Кто регистрировался сам — был не виден никому.
 -- unassigned_students() показывает таких учителю, attach_student() добавляет.
 -- Полный текст функций — в миграции unassigned_students_for_teacher.
+
+-- ---------- 7. Скрытые аккаунты (14 августа) ----------
+-- Свои тестовые и дубли не должны висеть в списке новых регистраций.
+alter table public.profiles add column if not exists hidden boolean not null default false;
+-- unassigned_students() пропускает hidden; hide_account() ставит/снимает флаг.

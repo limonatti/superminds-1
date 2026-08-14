@@ -226,6 +226,14 @@ const { data, error } = await c.rpc("unassigned_students");
 if (error) { console.warn("unassigned_students:", error.message); return []; }
 return data || [];
 },
+/* Убрать аккаунт из списка новых регистраций (свои тестовые, дубли).
+   Аккаунт не удаляется — просто перестаёт показываться. */
+async hideAccount(userId, hidden) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false };
+const { error } = await c.rpc("hide_account", { p_user: userId, p_hidden: hidden !== false });
+return { ok: !error, error: error && error.message };
+},
 /* Добавить такого человека к себе в класс */
 async attachStudent(userId, name) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };

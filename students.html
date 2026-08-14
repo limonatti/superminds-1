@@ -44,6 +44,9 @@
   .nc .add{border:0;background:var(--color-accent);color:#fff;padding:9px 15px;cursor:pointer;
     font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase}
   .nc .add:hover{background:var(--color-accent-600)}
+  .nc .skip{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-neutral-700);
+    padding:7px 13px;cursor:pointer;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .nc .skip:hover{border-color:var(--color-neutral-600);color:var(--color-text)}
   .msg{padding:12px 28px;font:700 13px "Archivo",sans-serif}
   .msg.ok{color:#1f7a3d}.msg.bad{color:var(--color-accent)}
 </style>
@@ -112,7 +115,8 @@ function newcomersHtml(){
       '<div class="row"><span class="who"><b>'+esc(n.name || "Без имени")+'</b>' +
       '<span>'+esc(n.email)+' · с '+new Date(n.created_at).toLocaleDateString("ru-RU")+
         (n.has_progress ? ' · уже занимался' : '')+'</span></span>' +
-      '<button class="add" data-add="'+esc(n.user_id)+'" data-nm="'+esc(n.name||"")+'">В класс</button></div>'
+      '<button class="add" data-add="'+esc(n.user_id)+'" data-nm="'+esc(n.name||"")+'">В класс</button>' +
+      '<button class="skip" data-hide="'+esc(n.user_id)+'" title="Убрать из списка — аккаунт останется">Скрыть</button></div>'
     ).join("") + '</div>' +
     '<div class="msg" id="ncMsg" style="display:none"></div>';
 }
@@ -186,6 +190,19 @@ function draw(){
       b.disabled = false; b.textContent = "В класс";
       if (msg){ msg.style.display = "block"; msg.className = "msg bad";
         msg.textContent = (r && r.error) || "Не получилось добавить"; }
+    }
+  });
+
+  /* Скрыть — для своих тестовых аккаунтов и дублей. Аккаунт остаётся жив. */
+  p.querySelectorAll("[data-hide]").forEach(b => b.onclick = async () => {
+    const msg = document.getElementById("ncMsg");
+    b.disabled = true; b.textContent = "…";
+    const r = await SM.hideAccount(b.dataset.hide, true);
+    if (r && r.ok){ await load(); }
+    else {
+      b.disabled = false; b.textContent = "Скрыть";
+      if (msg){ msg.style.display = "block"; msg.className = "msg bad";
+        msg.textContent = (r && r.error) || "Не получилось скрыть"; }
     }
   });
 }
