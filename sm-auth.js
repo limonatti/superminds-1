@@ -876,8 +876,21 @@ return { src: url, h: 620, name: "сайт" };
 
     /* Главный — курс, назначенный учителем в разделе «Мой класс».
        Свой выбор ученика работает только там, где учитель ничего не назначил. */
+    const before = window.SM_COURSE && window.SM_COURSE.id;
     const ok = apply(assigned) || apply(picked);
     if (!ok) window.SM_useCourse(window.SM_wantedCourse);
+    const after = window.SM_COURSE && window.SM_COURSE.id;
+
+    /* Курс уточнился уже после отрисовки страницы. Страницы, которые ждут
+       SM_ready, разберутся сами (они ставят SM_HANDLES_COURSE). Остальные
+       успели нарисоваться на курсе по умолчанию и показали бы чужие слова —
+       их обновляем один раз. */
+    if (after !== before && !window.SM_HANDLES_COURSE){
+      let key = "sm-reload-" + location.pathname + "-" + after;
+      let already = false;
+      try { already = sessionStorage.getItem(key) === "1"; sessionStorage.setItem(key, "1"); } catch (e) {}
+      if (!already) { location.reload(); return { course: window.SM_COURSE, units: window.SM_UNITS }; }
+    }
 
     return {
       course: window.SM_COURSE,

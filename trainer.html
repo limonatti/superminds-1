@@ -135,6 +135,9 @@
   <script src="speakout-words.js"></script>
 <script src="course-words.js"></script>
   <script src="sm-auth.js"></script>
+<script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
+window.SM_HANDLES_COURSE = true;
+</script>
   <script src="sm-play.js"></script>
   <script>
     const TARGET = 4;
