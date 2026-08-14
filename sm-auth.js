@@ -560,6 +560,95 @@ return data || [];
 		return { ok: !error, error: error && error.message };
 	},
 
+	/* ---------- Расписание ----------
+	   Постоянные уроки по дням недели. Время хранится московское:
+	   учитель ставит его в своём поясе, ученику страница пересчитает. */
+
+	async myLessons() {              /* учитель: всё своё расписание */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data, error } = await c.from("lessons")
+			.select("id,student_id,weekday,at_msk,minutes,note,active")
+			.eq("teacher_id", u.id).eq("active", true)
+			.order("weekday", { ascending: true }).order("at_msk", { ascending: true });
+		if (error) { console.warn("myLessons:", error.message); return []; }
+		return data || [];
+	},
+
+	async myLessonsAsStudent() {     /* ученик: свои уроки */
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const u = await this.getUser(); if (!u) return [];
+		const { data, error } = await c.from("lessons")
+			.select("id,teacher_id,weekday,at_msk,minutes,note")
+			.eq("student_id", u.id).eq("active", true)
+			.order("weekday", { ascending: true }).order("at_msk", { ascending: true });
+		if (error) { console.warn("myLessonsAsStudent:", error.message); return []; }
+		return data || [];
+	},
+
+	/* Поставить урок. days — массив номеров дней (1 = понедельник). */
+	async addLessons(studentId, days, atMsk, minutes, note) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		if (!days || !days.length) return { ok: false, error: "выбери хотя бы один день" };
+		if (!atMsk) return { ok: false, error: "укажи время" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		const rows = days.map(d => ({
+			teacher_id: u.id, student_id: studentId, weekday: +d,
+			at_msk: atMsk, minutes: minutes || 50, note: note || null
+		}));
+		const { error } = await c.from("lessons").insert(rows);
+		return { ok: !error, error: error && error.message, added: rows.length };
+	},
+
+	async removeLesson(id) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("lessons").delete().eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+
+	/* Отмены и переносы отдельных занятий */
+	async lessonChanges(fromDate, toDate) {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		let q = c.from("lesson_changes").select("id,lesson_id,on_date,status,new_date,new_at_msk,reason");
+		if (fromDate) q = q.gte("on_date", fromDate);
+		if (toDate)   q = q.lte("on_date", toDate);
+		const { data, error } = await q;
+		if (error) { console.warn("lessonChanges:", error.message); return []; }
+		return data || [];
+	},
+
+	async cancelLesson(lessonId, onDate, reason) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("lesson_changes").upsert(
+			{ lesson_id: lessonId, on_date: onDate, status: "cancelled", reason: reason || null },
+			{ onConflict: "lesson_id,on_date" });
+		return { ok: !error, error: error && error.message };
+	},
+
+	async moveLesson(lessonId, onDate, newDate, newAtMsk, reason) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("lesson_changes").upsert(
+			{ lesson_id: lessonId, on_date: onDate, status: "moved",
+			  new_date: newDate || onDate, new_at_msk: newAtMsk || null, reason: reason || null },
+			{ onConflict: "lesson_id,on_date" });
+		return { ok: !error, error: error && error.message };
+	},
+
+	async undoLessonChange(lessonId, onDate) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const { error } = await c.from("lesson_changes").delete()
+			.eq("lesson_id", lessonId).eq("on_date", onDate);
+		return { ok: !error, error: error && error.message };
+	},
+
 	/* ---------- Shadowing: библиотека звуков и попытки ---------- */
 
 	async shSounds() {

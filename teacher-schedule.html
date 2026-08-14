@@ -10,15 +10,52 @@
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
 <style>
-  .week{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px solid var(--color-divider);
+  /* Форма постановки урока */
+  .lform{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:grid;gap:12px}
+  .lf-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .lf-row>label{width:120px;flex:none;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--color-neutral-700)}
+  .lf-row select,.lf-row input{border:2px solid var(--color-text);background:var(--color-bg);
+    color:var(--color-text);padding:11px 12px;font:700 13px "Archivo",sans-serif}
+  .lf-row input[type=text]{flex:1;min-width:200px}
+  .daybox{display:flex;gap:7px;flex-wrap:wrap}
+  .daybox label{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--color-divider);
+    background:var(--color-bg);padding:8px 12px;font:800 12px "Archivo",sans-serif;cursor:pointer}
+  .daybox label:has(input:checked){border-color:var(--color-accent);background:var(--color-accent-100);
+    color:var(--color-accent-600)}
+  .daybox input{width:16px;height:16px;accent-color:var(--color-accent)}
+  .lform .go{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
+    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .lform .go:hover{background:var(--color-accent-600)}
+  .lform .res{font:700 13px "Archivo",sans-serif;padding:10px 12px;border:2px dashed var(--color-neutral-500)}
+  .lform .res.ok{border-color:var(--color-accent);color:var(--color-accent-600)}
+  .lform .hint{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+
+  /* Сетка недели */
+  .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:2px solid var(--color-divider);
     border-bottom:2px solid var(--color-divider)}
-  .day{border-right:2px solid var(--color-divider);min-height:200px;display:flex;flex-direction:column}
+  .day{border-right:2px solid var(--color-divider);min-height:190px;display:flex;flex-direction:column}
   .day:last-child{border-right:0}
-  .day .h{padding:14px 16px;border-bottom:2px solid var(--color-divider);
-    font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)}
+  .day .h{padding:12px 14px;border-bottom:2px solid var(--color-divider);font:800 11px "Archivo",sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);display:flex;
+    justify-content:space-between;gap:6px}
   .day.today .h{background:var(--color-accent);color:#fff}
-  .day .b{padding:16px;font-size:13px;font-weight:600;color:var(--color-neutral-600)}
-  @media(max-width:900px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}.day{min-height:120px}}
+  .day .b{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+  .day .none{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-600);padding:4px 2px}
+  .les{border:2px solid var(--color-divider);padding:9px 10px;background:var(--color-surface)}
+  .les.off{opacity:.5;border-style:dashed}
+  .les .t{display:block;font:900 15px "Archivo",sans-serif;letter-spacing:-.01em}
+  .les .who{display:block;font:700 12.5px "Archivo",sans-serif;margin-top:2px}
+  .les .m{display:block;font:600 11.5px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:3px}
+  .les .acts{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+  .les .acts button{border:2px solid var(--color-divider);background:var(--color-bg);
+    color:var(--color-neutral-700);padding:3px 8px;font:800 10px "Archivo",sans-serif;
+    letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+  .les .acts button:hover{border-color:var(--color-accent);color:var(--color-accent)}
+  @media(max-width:1000px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}.day{min-height:auto}}
+
+  .stu-row .cnt{font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--color-accent-600)}
 </style>
 </head>
 <body>
@@ -26,7 +63,7 @@
   <nav class="side" id="side"></nav>
   <div class="main">
     <div class="cols solo">
-      <div class="pane" id="pane"></div>
+      <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
     </div>
   </div>
 </div>
@@ -36,46 +73,225 @@
 <script src="sm-shell.js"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const DAYS = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"];
+const DAYS  = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+const SHORT = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
 
-function london(){
-  try { return new Intl.DateTimeFormat("ru-RU",{ timeZone:"Europe/London", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
+let ME = null, STUDENTS = [], LESSONS = [], CHANGES = [];
+
+/* Время по Москве — в нём учитель ставит уроки */
+function mskNow(){
+  try { return new Intl.DateTimeFormat("ru-RU",
+    { timeZone:"Europe/Moscow", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
   catch(e){ return "—"; }
 }
+/* Какой сегодня день недели по Москве: 1 = понедельник */
+function mskWeekday(){
+  try {
+    const s = new Intl.DateTimeFormat("en-GB", { timeZone:"Europe/Moscow", weekday:"short" }).format(new Date());
+    const m = { Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6, Sun:7 };
+    return m[s] || 1;
+  } catch(e){ return ((new Date().getDay() + 6) % 7) + 1; }
+}
+function hhmm(t){ return String(t || "").slice(0,5); }
+function nameOf(sid){ const s = STUDENTS.filter(x => x.student_id === sid)[0]; return s ? s.name : "ученик"; }
 
-(async function(){
-  SMUI.mount({ role:"teacher", active:"tsched" });
+/* Даты текущей недели: понедельник — воскресенье */
+function weekDates(){
+  const now = new Date();
+  const wd = (now.getDay() + 6) % 7;           /* 0 = понедельник */
+  const mon = new Date(now); mon.setDate(now.getDate() - wd); mon.setHours(0,0,0,0);
+  return Array.from({length:7}, (_,i) => {
+    const d = new Date(mon); d.setDate(mon.getDate() + i);
+    return d;
+  });
+}
+function iso(d){
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function changeFor(lessonId, dateIso){
+  return CHANGES.filter(c => c.lesson_id === lessonId && c.on_date === dateIso)[0] || null;
+}
+
+/* ---------- форма постановки урока ---------- */
+function formHtml(){
+  if (!STUDENTS.length){
+    return SMUI.empty("В классе пока никого",
+      "Добавь учеников в разделе «Мои ученики» — и здесь можно будет ставить им уроки.");
+  }
+  return '<div class="sect"><span>Поставить урок</span><span>время московское</span></div>' +
+    '<div class="lform">' +
+      '<div class="lf-row"><label>Ученик</label><select id="lStu">' +
+        STUDENTS.map(s => '<option value="'+esc(s.student_id)+'">'+esc(s.name)+'</option>').join("") +
+      '</select></div>' +
+      '<div class="lf-row"><label>Дни недели</label><span class="daybox">' +
+        SHORT.map((d,i) => '<label><input type="checkbox" class="lDay" value="'+(i+1)+'"> '+d+'</label>').join("") +
+      '</span></div>' +
+      '<div class="lf-row"><label>Время (МСК)</label><input type="time" id="lTime" value="18:00" step="300">' +
+        '<label style="width:auto">Длительность</label>' +
+        '<select id="lMin">' +
+          [30,45,50,60,90].map(m => '<option value="'+m+'"'+(m===50?" selected":"")+'>'+m+' мин</option>').join("") +
+        '</select></div>' +
+      '<div class="lf-row"><label>Заметка</label>' +
+        '<input type="text" id="lNote" maxlength="120" placeholder="например: занятие по Speakout (необязательно)"></div>' +
+      '<button class="go" id="lGo">Поставить в расписание</button>' +
+      '<div class="hint">Урок повторяется каждую неделю. Отдельное занятие можно отменить или перенести в сетке ниже.</div>' +
+      '<div class="res" id="lRes" style="display:none"></div>' +
+    '</div>';
+}
+
+/* ---------- сетка недели ---------- */
+function weekHtml(){
+  const dates = weekDates();
+  const todayWd = mskWeekday();
+
+  return '<div class="sect"><span>Неделя</span><span>' +
+      dates[0].getDate() + "–" + dates[6].getDate() + " " +
+      dates[6].toLocaleDateString("ru-RU", { month:"long" }) + '</span></div>' +
+    '<div class="week">' + DAYS.map((dayName, i) => {
+      const wd = i + 1;
+      const date = dates[i], dIso = iso(date);
+      const list = LESSONS.filter(l => l.weekday === wd)
+        .sort((a,b) => hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
+
+      const body = list.length
+        ? list.map(l => {
+            const ch = changeFor(l.id, dIso);
+            const off = ch && ch.status === "cancelled";
+            const moved = ch && ch.status === "moved";
+            return '<div class="les'+(off?" off":"")+'">' +
+              '<span class="t">'+esc(hhmm(l.at_msk))+'</span>' +
+              '<span class="who">'+esc(nameOf(l.student_id))+'</span>' +
+              '<span class="m">'+l.minutes+' мин'+(l.note?' · '+esc(l.note):'')+'</span>' +
+              (off   ? '<span class="m" style="color:var(--color-accent)">отменён'+(ch.reason?': '+esc(ch.reason):'')+'</span>' : '') +
+              (moved ? '<span class="m" style="color:#8a6d00">перенесён на '+esc(ch.new_date||'')+
+                       (ch.new_at_msk?' в '+esc(hhmm(ch.new_at_msk)):'')+'</span>' : '') +
+              '<span class="acts">' +
+                (ch
+                  ? '<button data-undo="'+esc(l.id)+'" data-date="'+dIso+'">вернуть</button>'
+                  : '<button data-cancel="'+esc(l.id)+'" data-date="'+dIso+'">отменить</button>' +
+                    '<button data-move="'+esc(l.id)+'" data-date="'+dIso+'">перенести</button>') +
+                '<button data-del="'+esc(l.id)+'" title="убрать из постоянного расписания">убрать</button>' +
+              '</span>' +
+            '</div>';
+          }).join("")
+        : '<div class="none">уроков нет</div>';
+
+      return '<div class="day'+(wd===todayWd?" today":"")+'">' +
+        '<div class="h"><span>'+SHORT[i]+'</span><span>'+date.getDate()+'</span></div>' +
+        '<div class="b">'+body+'</div></div>';
+    }).join("") + '</div>';
+}
+
+/* ---------- расписание по ученикам ---------- */
+function byStudentHtml(){
+  if (!STUDENTS.length) return "";
+  return '<div class="sect"><span>По ученикам</span><span>' + LESSONS.length + ' занятий в неделю</span></div>' +
+    '<div class="rows">' + STUDENTS.map((s,i) => {
+      const mine = LESSONS.filter(l => l.student_id === s.student_id)
+        .sort((a,b) => a.weekday - b.weekday || hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
+      const txt = mine.length
+        ? mine.map(l => SHORT[l.weekday-1] + " " + hhmm(l.at_msk)).join(" · ")
+        : "время не назначено";
+      return '<div class="row stu-row" style="cursor:default">' +
+        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(txt)+'</span></span>' +
+        '<span class="cnt">'+(mine.length ? mine.length+" в неделю" : "—")+'</span></div>';
+    }).join("") + '</div>';
+}
+
+/* ---------- сборка страницы ---------- */
+function draw(){
   const pane = document.getElementById("pane");
-  const me = await SMUI.requireAuth(pane, "teacher");
-  if (!me) return;
-
-  let students = [];
-  try { students = (await SM.myStudents()) || []; } catch(e){}
-  const today = (new Date().getDay() + 6) % 7;
+  const perWeek = LESSONS.length;
+  const hours = Math.round(LESSONS.reduce((a,l) => a + (l.minutes||0), 0) / 6) / 10;
 
   pane.innerHTML =
-    '<div class="pane-hd"><span>Расписание / Schedule</span><span>Лондон · '+london()+'</span></div>' +
-    '<div class="ink calm"><div><div class="k">Неделя / Week</div><h2>Расписание ещё не заведено</h2>' +
-      '<p>Здесь будут уроки по дням: ученик, время, кнопка входа в комнату. Пока уроки можно вести из комнаты напрямую.</p></div>' +
-      '<a class="go" href="room.html">'+icon("play",15)+' Открыть комнату урока</a></div>' +
+    '<div class="pane-hd"><span>Расписание</span><span>Москва · '+mskNow()+'</span></div>' +
     '<div class="tiles">' +
-      '<div class="tile"><span class="k">Учеников в классе</span><span class="n">'+students.length+'</span></div>' +
-      '<div class="tile"><span class="k">Уроков на неделе</span><span class="n">—</span><span class="d">расписание не заведено</span></div>' +
-      '<div class="tile"><span class="k">Время по Лондону</span><span class="n">'+london()+'</span></div>' +
+      '<div class="tile"><span class="k">Учеников</span><span class="n">'+STUDENTS.length+'</span></div>' +
+      '<div class="tile"><span class="k">Занятий в неделю</span><span class="n'+(perWeek?" acc":"")+'">'+perWeek+'</span></div>' +
+      '<div class="tile"><span class="k">Часов в неделю</span><span class="n">'+(perWeek?hours:"—")+'</span>' +
+        '<span class="d">по длительности уроков</span></div>' +
+      '<div class="tile"><span class="k">Время в Москве</span><span class="n">'+mskNow()+'</span>' +
+        '<span class="d">в нём ставится расписание</span></div>' +
     '</div>' +
-    '<div class="sect"><span>Неделя / Week</span><span>сегодня выделен</span></div>' +
-    '<div class="week">' + DAYS.map((d,i) =>
-      '<div class="day'+(i===today?" today":"")+'"><div class="h">'+d+'</div>' +
-      '<div class="b">уроков нет</div></div>').join("") + '</div>' +
-    '<div class="sect"><span>Ученики / Students</span><span>'+students.length+'</span></div>' +
-    (students.length
-      ? '<div class="rows">' + students.map((s,i) =>
-          '<a class="row" href="teacher-class.html"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-          '<span><span class="t">'+esc(s.name)+'</span><span class="d">время урока не назначено</span></span>' +
-          '<span class="b sm">Открыть</span></a>').join("") + '</div>'
-      : SMUI.empty("В классе пока никого",
-          "Пригласи ученика в разделе «Мой класс» — он появится здесь, и можно будет ставить уроки."));
-})();
+    formHtml() + weekHtml() + byStudentHtml();
+
+  bind();
+}
+
+function bind(){
+  const $ = id => document.getElementById(id);
+  const go = $("lGo");
+
+  if (go) go.onclick = async () => {
+    const res = $("lRes");
+    const days = [].slice.call(document.querySelectorAll(".lDay")).filter(c => c.checked).map(c => c.value);
+    const show = (text, ok) => { res.style.display = "block"; res.className = ok ? "res ok" : "res"; res.textContent = text; };
+
+    if (!days.length){ show("Отметь дни недели — в какие дни идёт урок."); return; }
+    if (!$("lTime").value){ show("Укажи время урока."); return; }
+
+    go.disabled = true; go.textContent = "Ставлю…";
+    const r = await SM.addLessons($("lStu").value, days, $("lTime").value, +$("lMin").value, $("lNote").value.trim());
+    go.disabled = false; go.textContent = "Поставить в расписание";
+
+    if (r && r.ok){
+      const who = nameOf($("lStu").value);
+      show("Готово: " + who + " — " + days.map(d => SHORT[d-1]).join(", ") +
+           " в " + $("lTime").value + " по Москве.", true);
+      $("lNote").value = "";
+      document.querySelectorAll(".lDay").forEach(c => c.checked = false);
+      await load();
+    } else {
+      show((r && r.error) || "Не получилось поставить урок");
+    }
+  };
+
+  document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    if (!confirm("Убрать это занятие из постоянного расписания?")) return;
+    await SM.removeLesson(b.dataset.del);
+    await load();
+  });
+
+  document.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => {
+    const why = prompt("Отменить занятие " + b.dataset.date + ". Причина (необязательно):", "");
+    if (why === null) return;
+    await SM.cancelLesson(b.dataset.cancel, b.dataset.date, why);
+    await load();
+  });
+
+  document.querySelectorAll("[data-move]").forEach(b => b.onclick = async () => {
+    const nd = prompt("Перенести занятие " + b.dataset.date + " на дату (ГГГГ-ММ-ДД):", b.dataset.date);
+    if (!nd) return;
+    const nt = prompt("Новое время по Москве (ЧЧ:ММ), пусто — оставить прежнее:", "");
+    await SM.moveLesson(b.dataset.move, b.dataset.date, nd, nt || null, null);
+    await load();
+  });
+
+  document.querySelectorAll("[data-undo]").forEach(b => b.onclick = async () => {
+    await SM.undoLessonChange(b.dataset.undo, b.dataset.date);
+    await load();
+  });
+}
+
+async function load(){
+  const pane = document.getElementById("pane");
+  ME = await SMUI.requireAuth(pane, "teacher");
+  if (!ME) return;
+
+  try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
+  try { LESSONS  = (await SM.myLessons()) || []; }  catch(e){ LESSONS = []; }
+
+  const dates = weekDates();
+  try { CHANGES = (await SM.lessonChanges(iso(dates[0]), iso(dates[6]))) || []; } catch(e){ CHANGES = []; }
+
+  draw();
+  SMUI.mount({ role:"teacher", active:"tsched" });
+}
+
+SMUI.mount({ role:"teacher", active:"tsched" });
+load();
 </script>
 </body>
 </html>

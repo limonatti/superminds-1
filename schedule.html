@@ -9,13 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
+<style>
+  .row.off .t{color:var(--color-neutral-600)}
+  .row .when{font:900 17px "Archivo",sans-serif;letter-spacing:-.01em;white-space:nowrap}
+  .row .when.gone{opacity:.45;text-decoration:line-through}
+  .local{display:block;font:600 11.5px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:2px}
+  .tzline{padding:12px 28px;border-bottom:2px solid var(--color-divider);
+    font:600 13px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .tzline b{color:var(--color-text)}
+</style>
 </head>
 <body>
 <div class="app">
   <nav class="side" id="side"></nav>
   <div class="main">
     <div class="cols solo">
-      <div class="pane" id="pane"></div>
+      <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
     </div>
   </div>
 </div>
@@ -24,35 +33,157 @@
 <script src="sm-auth.js"></script>
 <script src="sm-shell.js"></script>
 <script>
-const icon = SMUI.icon;
-const DAYS = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+const esc = SMUI.esc, icon = SMUI.icon;
+const DAYS  = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+const SHORT = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
 
-function londonNow(){
-  try { return new Intl.DateTimeFormat("ru-RU",{ timeZone:"Europe/London", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
+let LESSONS = [], CHANGES = [];
+
+/* Часовой пояс ученика определяем сами — спрашивать не нужно */
+const MY_TZ = (function(){
+  try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Moscow"; }
+  catch(e){ return "Europe/Moscow"; }
+})();
+const SAME_TZ = (function(){
+  try {
+    const now = new Date();
+    const f = tz => new Intl.DateTimeFormat("ru-RU", { timeZone: tz, hour:"2-digit", minute:"2-digit" }).format(now);
+    return f("Europe/Moscow") === f(MY_TZ);
+  } catch(e){ return true; }
+})();
+
+function mskNow(){
+  try { return new Intl.DateTimeFormat("ru-RU",
+    { timeZone:"Europe/Moscow", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
   catch(e){ return "—"; }
 }
+function hhmm(t){ return String(t || "").slice(0,5); }
 
-(async function(){
-  SMUI.mount({ role:"student", active:"schedule" });
+/* Момент занятия: берём дату недели и московское время */
+function whenOf(dateObj, atMsk){
+  const [h,m] = hhmm(atMsk).split(":").map(Number);
+  /* Москва — UTC+3 круглый год, перехода на летнее время нет */
+  return new Date(Date.UTC(
+    dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate(), (h||0) - 3, m||0, 0));
+}
+/* Это же время в поясе ученика */
+function localOf(dateObj, atMsk){
+  try {
+    return new Intl.DateTimeFormat("ru-RU",
+      { timeZone: MY_TZ, hour:"2-digit", minute:"2-digit" }).format(whenOf(dateObj, atMsk));
+  } catch(e){ return hhmm(atMsk); }
+}
+
+function weekDates(){
+  const now = new Date();
+  const wd = (now.getDay() + 6) % 7;
+  const mon = new Date(now); mon.setDate(now.getDate() - wd); mon.setHours(0,0,0,0);
+  return Array.from({length:7}, (_,i) => { const d = new Date(mon); d.setDate(mon.getDate()+i); return d; });
+}
+function iso(d){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function changeFor(lessonId, dateIso){
+  return CHANGES.filter(c => c.lesson_id === lessonId && c.on_date === dateIso)[0] || null;
+}
+
+/* Ближайшее занятие, которое ещё не прошло и не отменено */
+function nextLesson(){
+  const dates = weekDates(), now = new Date();
+  let best = null;
+  for (let i = 0; i < 14; i++){                    /* смотрим на две недели вперёд */
+    const d = new Date(dates[0]); d.setDate(dates[0].getDate() + i);
+    const wd = ((d.getDay() + 6) % 7) + 1;
+    LESSONS.filter(l => l.weekday === wd).forEach(l => {
+      const ch = changeFor(l.id, iso(d));
+      if (ch && ch.status === "cancelled") return;
+      const useDate = (ch && ch.status === "moved" && ch.new_date) ? new Date(ch.new_date + "T00:00:00") : d;
+      const useTime = (ch && ch.status === "moved" && ch.new_at_msk) ? ch.new_at_msk : l.at_msk;
+      const when = whenOf(useDate, useTime);
+      if (when > now && (!best || when < best.when)) best = { lesson: l, when: when, date: useDate, at: useTime };
+    });
+    if (best) break;
+  }
+  return best;
+}
+
+function untilText(when){
+  const min = Math.round((when - new Date()) / 60000);
+  if (min < 60) return "через " + min + " мин";
+  const h = Math.floor(min / 60), d = Math.floor(h / 24);
+  if (h < 24) return "через " + h + " ч " + (min % 60 ? (min % 60) + " мин" : "");
+  return "через " + d + (d === 1 ? " день" : d < 5 ? " дня" : " дней");
+}
+
+function draw(){
   const pane = document.getElementById("pane");
-  const today = (new Date().getDay() + 6) % 7;
+  const dates = weekDates();
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  const nxt = nextLesson();
+  const perWeek = LESSONS.length;
+
+  const hero = nxt
+    ? '<div class="ink"><div><div class="k">Ближайший урок</div>' +
+        '<h2>' + SHORT[((nxt.date.getDay()+6)%7)] + ", " + nxt.date.getDate() + " " +
+          nxt.date.toLocaleDateString("ru-RU",{month:"long"}) + " · " + hhmm(nxt.at) + " МСК</h2>" +
+        '<p>' + untilText(nxt.when) +
+          (SAME_TZ ? "" : " · у тебя это " + localOf(nxt.date, nxt.at)) + '</p></div>' +
+        '<a class="go" href="room.html">'+icon("play",15)+' Войти в комнату</a></div>'
+    : '<div class="ink calm"><div><div class="k">Урок / Lesson</div>' +
+        '<h2>' + (perWeek ? "На ближайшие дни уроков нет" : "Расписания пока нет") + '</h2>' +
+        '<p>' + (perWeek
+          ? "Занятия отменены или перенесены — загляни в неделю ниже."
+          : "Учитель ещё не поставил уроки. Как только поставит, они появятся здесь.") + '</p></div>' +
+        '<a class="go" href="room.html">'+icon("play",15)+' Войти в комнату</a></div>';
+
+  const rows = DAYS.map((dayName, i) => {
+    const wd = i + 1, date = dates[i], dIso = iso(date);
+    const list = LESSONS.filter(l => l.weekday === wd)
+      .sort((a,b) => hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
+
+    if (!list.length){
+      return '<div class="row off" style="cursor:default">' +
+        '<span class="num">'+SHORT[i]+'</span>' +
+        '<span><span class="t">'+dayName+'</span>' +
+        '<span class="d">'+(i===todayIdx ? "сегодня — уроков нет" : "уроков нет")+'</span></span>' +
+        '<span class="when" style="opacity:.35">—</span></div>';
+    }
+
+    return list.map(l => {
+      const ch = changeFor(l.id, dIso);
+      const off = ch && ch.status === "cancelled";
+      const moved = ch && ch.status === "moved";
+      const at = moved && ch.new_at_msk ? ch.new_at_msk : l.at_msk;
+
+      let sub = l.minutes + " мин";
+      if (l.note) sub += " · " + l.note;
+      if (off) sub = "отменён" + (ch.reason ? ": " + ch.reason : "");
+      if (moved) sub = "перенесён на " + (ch.new_date || dIso) + (ch.new_at_msk ? " в " + hhmm(ch.new_at_msk) : "");
+
+      return '<div class="row'+(i===todayIdx && !off ? " now" : off ? " off" : "")+'" style="cursor:default">' +
+        '<span class="num">'+SHORT[i]+'</span>' +
+        '<span><span class="t">'+dayName+'</span><span class="d">'+esc(sub)+'</span></span>' +
+        '<span class="when'+(off?" gone":"")+'">'+esc(hhmm(at))+' МСК' +
+          (SAME_TZ ? "" : '<span class="local">у тебя '+esc(localOf(date, at))+'</span>') +
+        '</span></div>';
+    }).join("");
+  }).join("");
 
   pane.innerHTML =
-    '<div class="pane-hd"><span>Расписание / Schedule</span><span>Лондон · '+londonNow()+'</span></div>' +
-    '<div class="ink calm"><div><div class="k">Урок / Lesson</div><h2>Расписания пока нет</h2>' +
-      '<p>Учитель ещё не завёл уроки. Когда заведёт — здесь будет неделя, ближайший урок и кнопка входа.</p></div>' +
-      '<a class="go" href="room.html">'+icon("play",15)+' Войти в комнату урока</a></div>' +
+    '<div class="pane-hd"><span>Расписание</span><span>Москва · '+mskNow()+'</span></div>' +
+    hero +
+    (SAME_TZ ? "" :
+      '<div class="tzline">Учитель ставит время по Москве. Рядом показано, сколько это будет ' +
+      'на твоих часах — <b>'+esc(MY_TZ)+'</b>.</div>') +
     '<div class="tiles">' +
-      '<div class="tile"><span class="k">Уроков в месяц</span><span class="n">—</span><span class="d">появится с расписанием</span></div>' +
-      '<div class="tile"><span class="k">Пропущено</span><span class="n">—</span><span class="d">появится с расписанием</span></div>' +
-      '<div class="tile"><span class="k">Оплачено до</span><span class="n">—</span><span class="d">появится с оплатами</span></div>' +
+      '<div class="tile"><span class="k">Занятий в неделю</span><span class="n'+(perWeek?" acc":"")+'">'+(perWeek||"—")+'</span></div>' +
+      '<div class="tile"><span class="k">Ближайший</span><span class="n" style="font-size:20px">' +
+        (nxt ? SHORT[((nxt.date.getDay()+6)%7)]+" "+hhmm(nxt.at) : "—") + '</span>' +
+        '<span class="d">'+(nxt ? untilText(nxt.when) : "уроков не назначено")+'</span></div>' +
+      '<div class="tile"><span class="k">Время в Москве</span><span class="n">'+mskNow()+'</span></div>' +
     '</div>' +
-    '<div class="sect"><span>Неделя / Week</span><span>сегодня выделен</span></div>' +
-    '<div class="rows">' + DAYS.map((d,i) =>
-      '<div class="row'+(i===today?" now":" off")+'" style="cursor:default">' +
-        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-        '<span><span class="t">'+d+'</span><span class="d">'+(i===today?"сегодня — уроков не назначено":"уроков не назначено")+'</span></span>' +
-        '<span class="b sm" style="opacity:.5">—</span></div>').join("") + '</div>' +
+    '<div class="sect"><span>Неделя</span><span>сегодня выделен</span></div>' +
+    '<div class="rows">' + rows + '</div>' +
     '<div class="sect"><span>Что подготовить к уроку</span></div>' +
     '<div class="rows">' +
       '<a class="row" href="homework.html"><span class="num">01</span>' +
@@ -65,6 +196,21 @@ function londonNow(){
         '<span><span class="t">Проверить камеру и микрофон</span><span class="d">в комнате урока</span></span>' +
         '<span class="b sm">Открыть</span></a>' +
     '</div>';
+}
+
+(async function(){
+  SMUI.mount({ role:"student", active:"schedule" });
+  const pane = document.getElementById("pane");
+  const me = await SMUI.requireAuth(pane, "student");
+  if (!me) return;
+
+  try { LESSONS = (await SM.myLessonsAsStudent()) || []; } catch(e){ LESSONS = []; }
+
+  const dates = weekDates();
+  const till = new Date(dates[6]); till.setDate(till.getDate() + 7);
+  try { CHANGES = (await SM.lessonChanges(iso(dates[0]), iso(till))) || []; } catch(e){ CHANGES = []; }
+
+  draw();
 })();
 </script>
 </body>

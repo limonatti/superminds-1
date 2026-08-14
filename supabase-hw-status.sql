@@ -146,3 +146,8 @@ alter table public.enrolments alter column course drop not null;
 -- Свои тестовые и дубли не должны висеть в списке новых регистраций.
 alter table public.profiles add column if not exists hidden boolean not null default false;
 -- unassigned_students() пропускает hidden; hide_account() ставит/снимает флаг.
+
+-- ---------- 8. Расписание (14 августа) ----------
+-- lessons: постоянные уроки по дням недели, время московское.
+-- lesson_changes: отмены и переносы отдельных занятий.
+-- Ученик видит свои уроки, учитель ведёт своё расписание.
