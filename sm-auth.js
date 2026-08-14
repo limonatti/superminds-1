@@ -86,6 +86,27 @@ if (!useCloud) { localStorage.removeItem(LKEY_USER); return; }
 const c = ensureClient(); if (c) await c.auth.signOut();
 },
 
+/* Забыли пароль: письмо со ссылкой на ту почту, с которой регистрировались */
+async resetPassword(email) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const mail = (email || "").trim();
+if (!mail || mail.indexOf("@") < 1) return { ok: false, error: "впиши почту, с которой регистрировался" };
+const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+const back = location.origin + location.pathname.replace(/[^\/]*$/, "new-password.html");
+const { error } = await c.auth.resetPasswordForEmail(mail, { redirectTo: back });
+/* Не подсказываем, есть ли такой ящик в базе — это чужая тайна */
+return { ok: !error, error: error && error.message };
+},
+
+/* Задать новый пароль — работает по ссылке из письма */
+async setNewPassword(password) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+if (!password || password.length < 6) return { ok: false, error: "пароль от 6 символов" };
+const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+const { error } = await c.auth.updateUser({ password: password });
+return { ok: !error, error: error && error.message };
+},
+
 /* Прогресс: объект { wordId: {status:"learned"|"learning", correct, seen} } */
 async loadProgress() {
 if (!useCloud) return localProgress();

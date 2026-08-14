@@ -54,11 +54,13 @@ MUST_HAVE = {
     "board.html":      ["Ручка", "Стикер", "Таймер"],
     "index.html":      ["Мои курсы"],
     "students.html":   ["Мои ученики", "Новые регистрации", "Учебник", "Домашка"],
+    "new-password.html": ["Новый пароль", "Сохранить пароль"],
 }
 
 # страницы, которые обязаны существовать
 PAGES = sorted(set(list(MUST_HAVE) + [
     "chat.html", "games.html", "review.html", "builder.html", "students.html",
+    "new-password.html", "join.html",
     "teacher-schedule.html", "schedule.html", "rewards.html",
 ]))
 

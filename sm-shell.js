@@ -154,7 +154,10 @@ var SMUI = {
       el.innerHTML = '<span class="av">?</span><div class="who"><b>Не вошёл</b><span>прогресс не сохранится</span></div>';
       return;
     }
-    var sub = role === "teacher" ? "учитель" : "ученик";
+    /* Учителю показываем почту: у одного человека может быть несколько
+       аккаунтов, и по имени не понять, в каком он сейчас — ученики
+       привязываются к тому, под кем вошёл. */
+    var sub = role === "teacher" ? (u.email || "учитель") : "ученик";
     try {
       var p = (window.SM && await SM.loadProgress()) || {};
       var m = p.__meta || {};
@@ -189,6 +192,11 @@ var SMUI = {
           "<label>Email</label><input id=\"aMail\" type=\"email\" placeholder=\"mail@example.com\">" +
           "<label>Пароль</label><input id=\"aPass\" type=\"password\" placeholder=\"минимум 6 символов\">" +
           '<button class="go" id="aGo">' + (tab === "in" ? "Войти" : "Создать аккаунт") + "</button>" +
+          (tab === "in"
+            ? '<button type="button" id="aForgot" style="background:none;border:0;padding:8px 0 0;' +
+              'font:700 13px \'Archivo\',sans-serif;color:var(--color-accent);text-decoration:underline;' +
+              'cursor:pointer;text-align:left">Забыл пароль</button>'
+            : "") +
           '<div class="msg" id="aMsg"></div>' +
         "</div>";
       pane.querySelectorAll(".tabs button").forEach(function (b) {
@@ -205,6 +213,30 @@ var SMUI = {
         if (r.needConfirm) { msg.textContent = "Аккаунт создан. Подтверди почту и войди."; return; }
         self._user = undefined;
         location.reload();
+      };
+
+      /* Забыл пароль — письмо на почту регистрации, для учителя и ученика одинаково */
+      var forgot = document.getElementById("aForgot");
+      if (forgot) forgot.onclick = async function () {
+        var msg = document.getElementById("aMsg");
+        var em = (document.getElementById("aMail") || {}).value || "";
+        if (!em.trim()) {
+          msg.className = "msg err";
+          msg.textContent = "Впиши сверху почту, с которой регистрировался, и нажми ещё раз.";
+          return;
+        }
+        forgot.disabled = true;
+        msg.className = "msg"; msg.textContent = "Отправляю письмо…";
+        var r = await SM.resetPassword(em);
+        forgot.disabled = false;
+        if (r.ok) {
+          msg.className = "msg";
+          msg.textContent = "Письмо ушло на " + em + ". Открой ссылку из письма и задай новый пароль. " +
+            "Если письма нет — посмотри в «Спам».";
+        } else {
+          msg.className = "msg err";
+          msg.textContent = r.error || "Не получилось отправить письмо";
+        }
       };
     }
     draw();
