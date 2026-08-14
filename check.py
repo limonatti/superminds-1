@@ -149,7 +149,12 @@ else:
 
 head("Вызовы SM.* определены в sm-auth.js")
 auth = open("sm-auth.js", encoding="utf-8").read()
-defined = set(re.findall(r'async\s+(\w+)\s*\(', auth)) | set(re.findall(r'SM\.(\w+)\s*=', auth))
+defined = (
+    set(re.findall(r'async\s+(\w+)\s*\(', auth))        # async myStudents() {...}
+    | set(re.findall(r'SM\.(\w+)\s*=', auth))           # SM.pickCourse = ...
+    | set(re.findall(r'^\s*(\w+)\s*\([^)]*\)\s*\{', auth, re.M))  # обычные методы объекта
+    | set(re.findall(r'^\s*(\w+)\s*:', auth, re.M))     # поля вида srsQ: []
+)
 used = set()
 for page in PAGES + ["sm-shell.js", "sm-progress.js", "sm-voice-lab.js"]:
     if not os.path.exists(page):
