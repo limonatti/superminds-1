@@ -93,6 +93,7 @@ const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лис
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
 let ME = null, CODE = "—", STUDENTS = [], ASG = {}, sel = 0, UNREAD = {};
+let NEWCOMERS = [], NOT_TEACHER = false;
 let chatTimer = null, chatLast = null;
 function stopTeacherChat(){ if (chatTimer){ clearInterval(chatTimer); chatTimer = null; } chatLast = null; }
 
@@ -119,6 +120,45 @@ function drawList(){
       '<span class="s">'+learned(d)+' слов · звёзд '+(m.totalPoints||0)+' · '+ago(s.updated_at)+'</span></button>';
   }).join("");
   box.querySelectorAll(".li").forEach(b => b.onclick = () => { sel = +b.dataset.i; drawPane(); drawList(); });
+}
+
+/* Зарегистрировались сами, но ни к кому не привязаны.
+   Без этого блока учитель о них просто не знает. */
+function newcomersHtml(){
+  if (!NEWCOMERS.length){
+    return '<div class="sect"><span>Новые регистрации</span><span>нет новых</span></div>' +
+      '<div style="padding:16px 28px;font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700)">' +
+      'Все, кто зарегистрировался, уже добавлены в класс.</div>';
+  }
+  return '<div class="sect"><span>Новые регистрации</span><span>' + NEWCOMERS.length + ' ждут добавления</span></div>' +
+    '<div style="padding:12px 28px 4px;font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700)">' +
+    'Эти люди завели аккаунт сами, без твоей ссылки. Добавь их — и они появятся в классе.</div>' +
+    '<div class="rows">' + NEWCOMERS.map((n,i) =>
+      '<div class="row" style="cursor:default">' +
+        '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(n.name || "Без имени")+'</span>' +
+        '<span class="d">'+esc(n.email)+' · с '+new Date(n.created_at).toLocaleDateString("ru-RU")+
+          (n.has_progress ? ' · уже занимался' : '')+'</span></span>' +
+        '<button class="b sm" data-add="'+esc(n.user_id)+'" data-nm="'+esc(n.name||"")+'">В класс</button>' +
+      '</div>').join("") + '</div>' +
+    '<div class="res" id="ncRes" style="display:none;margin:10px 28px"></div>';
+}
+
+function bindNewcomers(){
+  document.querySelectorAll("[data-add]").forEach(b => b.onclick = async () => {
+    const res = document.getElementById("ncRes");
+    b.disabled = true; b.textContent = "…";
+    const r = await SM.attachStudent(b.dataset.add, b.dataset.nm);
+    if (r && r.ok){
+      if (res){ res.style.display = "block"; res.className = "res ok";
+        res.textContent = "Добавлен: " + (b.dataset.nm || "ученик") + ". Обновляю класс…"; }
+      await load();
+    } else {
+      b.disabled = false; b.textContent = "В класс";
+      if (res){ res.style.display = "block"; res.className = "res";
+        res.textContent = (r && r.error) || "Не получилось добавить"; }
+    }
+  });
 }
 
 function inviteHtml(){
@@ -153,10 +193,15 @@ async function drawPane(){
 
   if (!STUDENTS.length){
     p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · Класс</span><span>учеников: 0</span></div>' +
-      '<div class="ink"><div><div class="k">Класс / Class</div><h2>В классе пока никого</h2>' +
-        '<p>Создай ссылку — по ней ученик заведёт аккаунт и сразу попадёт к тебе в класс.</p></div>' +
+      '<div class="ink"><div><div class="k">Класс / Class</div>' +
+        '<h2>'+(NEWCOMERS.length ? NEWCOMERS.length+" ждут добавления в класс" : "В классе пока никого")+'</h2>' +
+        '<p>'+(NEWCOMERS.length
+          ? "Эти люди зарегистрировались сами — добавь их ниже, и они появятся в классе."
+          : "Создай ссылку — по ней ученик заведёт аккаунт и сразу попадёт к тебе в класс.")+'</p></div>' +
         '<a class="go" href="board.html">'+icon("play",15)+' Запустить доску</a></div>' +
+      newcomersHtml() +
       inviteHtml();
+    bindNewcomers();
     bindInvite();
     return;
   }
@@ -269,8 +314,10 @@ async function drawPane(){
     '<div class="note"><textarea id="nt" placeholder="Что повторить, на чём споткнулись, что задать дальше…">'+esc(note)+'</textarea>' +
       '<div style="margin-top:10px"><button class="b" id="ntSave">Сохранить заметку</button></div></div>' +
 
+    newcomersHtml() +
     inviteHtml();
 
+  bindNewcomers();
   bindInvite();
   bindStudent(sid);
 }
@@ -524,8 +571,20 @@ async function load(){
   /* Ждём список курсов — из него собирается выбор учебника для ученика */
   try { await (window.SM_ready || Promise.resolve()); } catch(e){}
 
-  try { const r = await SM.ensureTeacherCode(ME.name); CODE = r.code || "—"; } catch(e){}
+  /* Код класса заводим только тому, кто уже учитель. Раньше он выдавался
+     всякому, кто открыл эту страницу, — поэтому ученики, нажавшие «Учитель»
+     в переключателе ролей, превращались в учителей с собственным классом. */
+  try {
+    const prof = await SM.myProfile();
+    if (prof && prof.role === "teacher") {
+      const r = await SM.ensureTeacherCode(ME.name); CODE = r.code || "—";
+    } else {
+      CODE = "—";
+      NOT_TEACHER = true;
+    }
+  } catch(e){}
   try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
+  try { NEWCOMERS = (await SM.unassignedStudents()) || []; } catch(e){ NEWCOMERS = []; }
   try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }
   ASG = {};
   try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id] || []).push(a); }); } catch(e){}

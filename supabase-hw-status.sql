@@ -135,3 +135,9 @@ alter table public.profiles add column if not exists course text;
 -- «Курс не назначен» — нормальное состояние: ученик привязан к учителю,
 -- но учебник ещё не выбран. Раньше колонка этого не допускала.
 alter table public.enrolments alter column course drop not null;
+
+-- ---------- 6. Видимость учеников (14 августа) ----------
+-- Список класса строится по profiles.teacher_id, а он заполняется только
+-- через приглашение или код. Кто регистрировался сам — был не виден никому.
+-- unassigned_students() показывает таких учителю, attach_student() добавляет.
+-- Полный текст функций — в миграции unassigned_students_for_teacher.

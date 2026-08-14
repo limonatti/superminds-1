@@ -168,6 +168,71 @@ const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
 const { error } = await c.rpc("join_teacher", { p_code: (code || "").trim() });
 return { ok: !error, error: error && error.message };
 },
+/* ---------- Приглашения учеников ----------
+   Эти методы пропали из файла в июле, при добавлении чата,
+   и с тех пор кнопка «Создать ссылку-приглашение» молча не работала:
+   ученики регистрировались сами и оставались непривязанными.
+   Восстановлены из коммита d3d08b8. */
+	async createInvite(note) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("create_invite", { p_note: note || null });
+		return { ok: !error, code: data, error: error && error.message };
+	},
+	async myInvites() {
+		if (!useCloud) return [];
+		const c = ensureClient(); if (!c) return [];
+		const { data, error } = await c.rpc("my_invites");
+		if (error) { console.warn("my_invites:", error.message); return []; }
+		return data || [];
+	},
+	async inviteCheck(code) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("invite_check", { p_code: (code || "").trim() });
+		return { ok: !error, teacher: data, error: error && error.message };
+	},
+	async redeemInvite(code, name) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const { data, error } = await c.rpc("redeem_invite", { p_code: (code || "").trim(), p_name: name || null });
+		return { ok: !error, status: data, error: error && error.message };
+	},
+	studentLogin(name) {
+		return "s." + (name || "").trim().toLowerCase()
+			.replace(/[^a-zа-яё0-9]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 24);
+	},
+	async signUpStudent(name, password, email, code) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false, error: "no client" };
+		const login = (email || "").trim() || (this.studentLogin(name) + "." +
+			Math.random().toString(36).slice(2, 6) + "@student.asya");
+		const { data, error } = await c.auth.signUp({
+			email: login, password: password, options: { data: { name: name, login: login } }
+		});
+		if (error) return { ok: false, error: error.message };
+		if (!data.session) return { ok: false, needConfirm: true, login: login, error: "Подтверждение email включено в Supabase. Выключи его: Authentication → Sign In / Providers → Email → Confirm email → off." };
+		const r = await this.redeemInvite(code, name);
+		if (!r.ok) return { ok: false, error: r.error || "Не удалось привязать к учителю" };
+		return { ok: true, login: login };
+	},
+/* Кто зарегистрировался, но не привязан ни к одному учителю.
+   Раньше такие люди были не видны никому: список класса строится по
+   profiles.teacher_id, а он заполняется только при входе по коду или ссылке. */
+async unassignedStudents() {
+if (!useCloud) return [];
+const c = ensureClient(); if (!c) return [];
+const { data, error } = await c.rpc("unassigned_students");
+if (error) { console.warn("unassigned_students:", error.message); return []; }
+return data || [];
+},
+/* Добавить такого человека к себе в класс */
+async attachStudent(userId, name) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false };
+const { error } = await c.rpc("attach_student", { p_student: userId, p_name: name || null });
+return { ok: !error, error: error && error.message };
+},
 /* Учитель: список учеников с прогрессом */
 async myStudents() {
 if (!useCloud) return [];
