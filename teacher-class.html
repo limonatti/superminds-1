@@ -91,7 +91,7 @@ window.SM_HANDLES_COURSE = true;
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
-const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-pi":"Solutions Pre-Int" };
+const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -267,11 +267,7 @@ async function drawPane(){
     '<div class="hwform">' +
       whoRow(sid) +
       '<div class="hf-row"><label>Курс</label><select id="hCourse">' +
-        '<option value="superminds-1">Super Minds 1</option>' +
-        '<option value="speakout-b1"'+(course==="speakout-b1"?" selected":"")+'>Speakout B1</option>' +
-        '<option value="speakout-b1plus"'+(course==="speakout-b1plus"?" selected":"")+'>Speakout B1+</option>' +
-        '<option value="focus-1"'+(course==="focus-1"?" selected":"")+'>Focus 1</option>' +
-        '<option value="solutions-pi"'+(course==="solutions-pi"?" selected":"")+'>Solutions Pre-Int</option>' +
+        hwCourseOptions(course) +
       '</select></div>' +
       '<div class="hf-row"><label>Юнит</label><select id="hUnit"></select></div>' +
       '<div class="hf-row" id="hPartsRow"><label>Что задать</label><span class="parts">' +
@@ -369,20 +365,72 @@ function hwChips(list, hw){
     '<button data-'+(x.k==="sm"?"del":"delhw")+'="'+x.id+'" title="Удалить">✕</button></span>').join("") + '</div>';
 }
 
+/* Курсы с готовыми страницами юнитов: им задаём части урока
+   (Урок / Грамматика / Workbook), ссылки вида solutions-el-u3-grammar.html.
+   Номера юнитов — какие страницы реально лежат в проекте. */
+const PAGE_COURSES = {
+  "speakout-b1":     { title: "Speakout B1",           units: [1,2,3,4,5,6,7,8] },
+  "speakout-b1plus": { title: "Speakout B1+",          units: [1,2,3,4,5,6,7,8] },
+  "focus-1":         { title: "Focus 1",               units: [0,1,2,3,4,5,6,7,8] },
+  "solutions-el":    { title: "Solutions Elementary",  units: [0,1,2,3,4,5,6,7,8,9] },
+  "solutions-pi":    { title: "Solutions Pre-Int",     units: [0,1,2,3,4,5,6,7,8,9] },
+  "gateway-a1p":     { title: "Gateway A1+",           units: [0,1,2,3,4,5,6,7,8,9,10] }
+};
+
+/* Список курсов в форме выдачи: страничные курсы плюс учебники из
+   конструктора (у них задаются тренажёр, игры или рабочий лист).
+   Раньше список был вписан руками и отставал от платформы. */
+function hwCourseOptions(current){
+  const out = [];
+  /* sm1 и superminds-1 — один и тот же учебник под двумя именами:
+     в данных он sm1, а в выдаче заданий исторически superminds-1. */
+  const seen = { "sm1": true };
+
+  Object.keys(PAGE_COURSES).forEach(slug => {
+    seen[slug] = true;
+    out.push('<option value="'+esc(slug)+'"'+(current===slug?" selected":"")+'>' +
+      esc(PAGE_COURSES[slug].title) + '</option>');
+  });
+
+  /* Super Minds и другие учебники конструктора — по ним есть юниты со словами */
+  (window.SM_COURSES||[]).forEach(c => {
+    if (seen[c.id] || !c.ready) return;
+    if (!(window.SM_COURSE_DATA[c.id]||[]).length) return;
+    seen[c.id] = true;
+    out.push('<option value="'+esc(c.id)+'"'+(current===c.id?" selected":"")+'>' +
+      esc((c.emoji?c.emoji+" ":"")+c.title) + '</option>');
+  });
+
+  /* Super Minds 1 живёт под своим слагом в выдаче заданий */
+  if (!seen["superminds-1"])
+    out.unshift('<option value="superminds-1"'+(current==="superminds-1"?" selected":"")+'>Super Minds 1</option>');
+
+  return out.join("");
+}
+
 function fillUnits(){
   const course = document.getElementById("hCourse").value;
   const uSel = document.getElementById("hUnit");
-  const isSM = course === "superminds-1";
-  document.getElementById("hPartsRow").style.display = isSM ? "none" : "flex";
-  document.getElementById("hKindRow").style.display = isSM ? "flex" : "none";
-  if (isSM){
-    uSel.innerHTML = (window.SM_UNITS||[]).map(u => '<option value="'+u.id+'">'+esc(u.title)+'</option>').join("");
-  } else {
-    const nums = (course === "focus-1") ? [0,1,2,3,4,5,6,7,8]
-      : (course === "solutions-pi") ? [0,1,2,3,4,5,6,7,8,9]
-      : [1,2,3,4,5,6,7,8];
-    uSel.innerHTML = nums.map(n => '<option value="'+n+'">'+(n===0?"Unit 0 · Intro":"Unit "+n)+'</option>').join("");
+  const page = PAGE_COURSES[course];
+
+  /* Страничный курс — части урока; учебник конструктора — формат задания */
+  document.getElementById("hPartsRow").style.display = page ? "flex" : "none";
+  document.getElementById("hKindRow").style.display  = page ? "none" : "flex";
+
+  if (page){
+    uSel.innerHTML = page.units.map(n =>
+      '<option value="'+n+'">'+(n===0 ? "Unit 0 · Intro" : "Unit "+n)+'</option>').join("");
+    return;
   }
+
+  /* Юниты учебника из конструктора: берём из данных этого курса,
+     а не из курса, открытого у учителя. */
+  const units = (course === "superminds-1")
+    ? (window.SM_COURSE_DATA["sm1"] || window.SM_UNITS || [])
+    : (window.SM_COURSE_DATA[course] || []);
+  uSel.innerHTML = units.length
+    ? units.map(u => '<option value="'+esc(u.id)+'">'+esc(u.title)+'</option>').join("")
+    : '<option value="">в этом учебнике нет юнитов</option>';
 }
 
 function bindStudent(sid){
@@ -447,8 +495,17 @@ function bindStudent(sid){
       return;
     }
 
+    /* Страничный курс — задаём части урока. Учебник конструктора — формат задания. */
+    const isPage = !!PAGE_COURSES[course];
+
+    if (!isPage && !$("hUnit").value){
+      res.style.display = "block"; res.className = "res";
+      res.textContent = "В этом учебнике пока нет юнитов — добавь их в Конструкторе.";
+      return;
+    }
+
     let parts = null, note = null;
-    if (course !== "superminds-1"){
+    if (isPage){
       parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
       if (!parts.length){
         res.style.display = "block"; res.className = "res";
@@ -466,11 +523,12 @@ function bindStudent(sid){
       e.target.textContent = "Выдаю… " + (i + 1) + " из " + targets.length;
       let r;
       try {
-        if (course === "superminds-1"){
-          r = await SM.assignTo(t, $("hUnit").value, $("hKind").value);
-        } else {
+        if (isPage){
           try { await SM.enrolCourse(t, course); } catch(e2){}
           r = await SM.addHW(t, course, +$("hUnit").value, note);
+        } else {
+          /* Учебник из конструктора: тренажёр, игры или рабочий лист по юниту */
+          r = await SM.assignTo(t, $("hUnit").value, $("hKind").value);
         }
       } catch(err){ r = { ok:false, error: String(err && err.message || err) }; }
       if (r && r.ok) okList.push(nameById(t));

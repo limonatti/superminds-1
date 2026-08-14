@@ -713,6 +713,30 @@ return data || [];
 		const { error } = await c.from("hw_attempts").insert(payload);
 		return { ok: !error, error: error && error.message };
 	},
+	/* Ученик: своя сводка по курсу — сколько верных ответов в каждой части юнита.
+	   Возвращает { "<unit>|<part>": {attempts, correct} }, например {"0|workbook":{...}}.
+	   Часть берётся из префикса section ("workbook:gap"); строки без префикса
+	   считаются уроком. Читает свои строки по политике ha_student_read. */
+	async myHwSummary(course) {
+		if (!useCloud) return {};
+		const c = ensureClient(); if (!c) return {};
+		const u = await this.getUser(); if (!u) return {};
+		let q = c.from("hw_attempts").select("unit,section,correct").eq("student_id", u.id).limit(5000);
+		if (course) q = q.eq("course", course);
+		const { data, error } = await q;
+		if (error || !data) { if (error) console.warn("myHwSummary:", error.message); return {}; }
+		const out = {};
+		data.forEach(r => {
+			const raw = String(r.section || "");
+			const i = raw.indexOf(":");
+			const part = i > 0 ? raw.slice(0, i) : "lesson";
+			const k = r.unit + "|" + part;
+			if (!out[k]) out[k] = { attempts: 0, correct: 0 };
+			out[k].attempts++;
+			if (r.correct) out[k].correct++;
+		});
+		return out;
+	},
 	/* ---------- Чат: учитель ↔ ученик ---------- */
 	/* Сообщения одной пары (учитель, ученик), по возрастанию времени.
 	   sinceIso — необязательно: только новее указанного времени (для опроса). */

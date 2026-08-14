@@ -7,67 +7,220 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
+  /* Палитра и формы — как на страницах юнитов focus-1-u*.html.
+     Один акцент #7c2340, один радиус карточек 18px, вторичный текст #5a4f47
+     (даёт 6.6:1 на этом фоне; прежний #8a7a68 давал 3.5:1 и не проходил норму). */
+  :root{
+    --bg:#f4e9d8; --surface:#fff; --ink:#1c1310;
+    --accent:#7c2340; --accent-soft:#a8737f; --accent-deep:#4d1527;
+    --muted:#5a4f47; --line:#e3d3ba; --line-soft:#e8dcc8;
+    --done:#2e6f4e; --started:#e0952a; --tint:#fdfaf0;
+    --r:18px; --r-pill:999px;
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:#f4ecdd;font-family:'Nunito',sans-serif;color:#1c1310;min-height:100vh}
+  body{margin:0;background:var(--bg);font-family:'Nunito',sans-serif;color:var(--ink);min-height:100vh}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:960px;margin:0 auto;padding:24px 18px 70px}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 18px 70px}
+
   .top{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-  .home{background:#d2601f;color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:999px}
-  .home.alt{background:#5a8f2a}
-  .head{text-align:center;margin:6px 0 26px}
-  h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(30px,6vw,48px);font-weight:700;color:#d2601f;letter-spacing:-1px}
-  .sub{font-weight:800;font-size:15px;color:#5a4f47;margin:10px 0 0}
-  .lvl{display:inline-block;background:#5a8f2a;color:#fff;font:900 12px 'Nunito',sans-serif;padding:3px 12px;border-radius:999px;margin-top:10px;letter-spacing:1px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
-  .u{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #e6d6bd;cursor:pointer;transition:transform .14s,box-shadow .14s;display:block}
-  .u:hover{transform:translateY(-6px);box-shadow:0 16px 22px rgba(210,96,31,.16)}
-  .u .cover{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center}
-  .u .cover span{font-size:clamp(48px,9vw,68px);filter:drop-shadow(0 5px 8px rgba(0,0,0,.28))}
-  .u .b{padding:13px 16px 16px}
-  .u .n{font:900 11px 'Nunito',sans-serif;color:#5a8f2a;letter-spacing:1px}
-  .u .t{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:#d2601f;margin:2px 0 4px}
-  .u .d{font-size:12px;color:#8a7a68;font-weight:700;line-height:1.4;min-height:34px}
-  .u .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-  .u .go{display:inline-block;background:#d2601f;color:#fff;font:800 11px 'Nunito',sans-serif;padding:7px 12px;border-radius:999px}
-  .u .go.g2{background:#7a4a1e}
-  .u .go.g3{background:#5a8f2a}
-  .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:40px}
+  .home{background:var(--accent);color:#fff;font:800 13px 'Nunito',sans-serif;padding:9px 16px;border-radius:var(--r-pill)}
+  .home.alt{background:var(--started);color:var(--accent-deep)}
+
+  .head{margin:6px 0 18px}
+  h1{margin:0;font-family:'Fredoka',sans-serif;font-size:clamp(28px,5.5vw,42px);font-weight:700;color:var(--accent);letter-spacing:-1px}
+  .sub{font-weight:800;font-size:14px;color:var(--muted);margin:6px 0 0}
+  .lvl{display:inline-block;background:var(--accent);color:#fff;font:900 11px 'Nunito',sans-serif;padding:4px 12px;border-radius:var(--r-pill);margin-top:10px;letter-spacing:1px}
+
+  /* строка состояния: единственный «фокальный момент» страницы */
+  .status{background:var(--surface);border-radius:var(--r);padding:13px 16px;box-shadow:0 3px 0 var(--line);margin-bottom:16px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .status .big{font-family:'Fredoka',sans-serif;font-size:19px;font-weight:700;color:var(--accent);line-height:1.15}
+  .status .note{font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.45;flex:1;min-width:180px}
+  .status .cta{background:var(--accent);color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 15px;border-radius:var(--r-pill);flex:none}
+
+  /* табло */
+  .board{background:var(--surface);border-radius:var(--r);padding:6px 14px 12px;box-shadow:0 3px 0 var(--line);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:330px}
+  th{font-size:9.5px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+     padding:11px 0 7px;text-align:center;border-bottom:2px solid var(--line)}
+  th.u{text-align:left}
+  td{padding:0;border-bottom:1px solid var(--line-soft)}
+  tr:last-child td{border-bottom:0}
+  tr.row:hover{background:var(--tint)}
+  .ucell{padding:9px 8px 9px 0}
+  .un{font-size:9px;font-weight:900;letter-spacing:.08em;color:var(--accent-soft)}
+  .ut{font-size:13.5px;font-weight:900;color:var(--accent);line-height:1.2}
+  .ud{font-size:11px;font-weight:700;color:var(--muted);line-height:1.35;margin-top:1px}
+  .c{width:38px;text-align:center}
+  .cell{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:var(--r-pill);
+    font:900 11px 'Nunito',sans-serif;transition:transform .14s cubic-bezier(.16,1,.3,1)}
+  .cell:hover{transform:scale(1.12)}
+  .cell.none{background:var(--surface);border:2px solid var(--line);color:#c9b49b}
+  .cell.started{background:var(--started);color:var(--accent-deep)}
+  .cell.done{background:var(--done);color:#fff}
+  .pg{width:44px;text-align:right;font-size:11px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;padding-right:2px}
+
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11px;font-weight:800;color:var(--muted)}
+  .lg{display:flex;align-items:center;gap:5px}
+  .sw{width:11px;height:11px;border-radius:var(--r-pill);flex:none}
+  .foot{text-align:center;font-weight:700;font-size:12.5px;color:var(--muted);margin-top:32px;line-height:1.5}
+
+  /* появление табло после загрузки данных — 200 мс, единственная анимация */
+  .fade{opacity:0;transform:translateY(6px);transition:opacity .2s cubic-bezier(.16,1,.3,1),transform .2s cubic-bezier(.16,1,.3,1)}
+  .fade.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .fade{transition:none;opacity:1;transform:none}
+    .cell{transition:none}
+    .cell:hover{transform:none}
+  }
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top">
+  <nav class="top">
     <a class="home" href="index.html">🏠 Домой</a>
     <a class="home alt" href="cabinet.html">👤 Кабинет ученика</a>
-  </div>
-  <div class="head">
-    <h1>🎯 Focus 1</h1>
-    <div class="sub">Курс по юнитам · лексика · грамматика · аудирование · чтение · Workbook</div>
-    <div class="lvl">УРОВЕНЬ A1–A2 · SECOND EDITION</div>
-  </div>
-  <div class="grid" id="grid"></div>
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Focus 1 (2nd ed.)</div>
+  </nav>
+
+  <header class="head">
+    <h1>Focus 1</h1>
+    <p class="sub">Курс по юнитам · лексика · грамматика · аудирование · чтение · Workbook</p>
+    <span class="lvl">УРОВЕНЬ A1–A2 · SECOND EDITION</span>
+  </header>
+
+  <section class="status" id="status" aria-live="polite">
+    <p class="note" id="statusNote">Загружаю твой прогресс…</p>
+  </section>
+
+  <section class="board fade" id="board">
+    <h2 class="sr">Табло курса: юниты и материалы</h2>
+    <table>
+      <thead>
+        <tr>
+          <th class="u" scope="col">Юнит</th>
+          <th class="c" scope="col" title="Урок">Ур</th>
+          <th class="c" scope="col" title="Грамматика">Гр</th>
+          <th class="c" scope="col" title="Workbook">WB</th>
+          <th class="pg" scope="col" id="pgHead"></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="legend">
+      <span class="lg"><span class="sw" style="background:var(--done)"></span>верных 5 и больше</span>
+      <span class="lg"><span class="sw" style="background:var(--started)"></span>есть ответы</span>
+      <span class="lg"><span class="sw" style="background:#fff;border:2px solid var(--line)"></span>не открывали</span>
+    </div>
+  </section>
+
+  <p class="foot">Made for @english.with_asya · авторские материалы по программе Focus 1 (2nd ed.)</p>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js"></script>
 <script>
 const UNITS=[
- {n:0,t:"Intro Unit",e:"🚀",g:["#c0392b","#e0642a"],d:"to be · have got · страны, национальности, комнаты"},
- {n:1,t:"Family and friends",e:"👨‍👩‍👧‍👦",g:["#e0642a","#f0a03a"],d:"Present Simple · семья, друзья, распорядок дня"},
- {n:2,t:"Food",e:"🍎",g:["#5a8f2a","#9ac93a"],d:"countable/uncountable · a/some/any · еда и готовка"},
- {n:3,t:"Work",e:"💼",g:["#2a6f8f","#3aa0c9"],d:"Present Continuous · работа и профессии"},
- {n:4,t:"People",e:"🧑",g:["#7c3aa0","#b06ed0"],d:"comparatives · have to · внешность и характер"},
- {n:5,t:"Education",e:"🎓",g:["#b5651a","#e0a03a"],d:"must/should · Past Simple was/were · школа"},
- {n:6,t:"Health and sport",e:"⚽",g:["#1f7a4d","#3ab06e"],d:"Past Simple · go/do/play · спорт и здоровье"},
- {n:7,t:"Travel",e:"✈️",g:["#1f6f9c","#39b0c9"],d:"Present Perfect · be going to · путешествия"},
- {n:8,t:"Nature",e:"🌍",g:["#2f7a2f","#7cc23a"],d:"will · first conditional · природа и погода"}
+ {n:0,t:"Intro Unit",d:"to be · have got · страны, национальности, комнаты"},
+ {n:1,t:"Family and friends",d:"Present Simple · семья, друзья, распорядок дня"},
+ {n:2,t:"Food",d:"countable/uncountable · a/some/any · еда и готовка"},
+ {n:3,t:"Work",d:"Present Continuous · работа и профессии"},
+ {n:4,t:"People",d:"comparatives · have to · внешность и характер"},
+ {n:5,t:"Education",d:"must/should · Past Simple was/were · школа"},
+ {n:6,t:"Health and sport",d:"Past Simple · go/do/play · спорт и здоровье"},
+ {n:7,t:"Travel",d:"Present Perfect · be going to · путешествия"},
+ {n:8,t:"Nature",d:"will · first conditional · природа и погода"}
 ];
-const grid=document.getElementById("grid");
-UNITS.forEach(u=>{const a=document.createElement("div");a.className="u";
-  a.innerHTML='<a href="focus-1-u'+u.n+'.html"><div class="cover" style="background:linear-gradient(135deg,'+u.g[0]+','+u.g[1]+')"><span>'+u.e+'</span></div></a>'+
-    '<div class="b"><div class="n">UNIT '+u.n+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div>'+
-    '<div class="links"><a class="go" href="focus-1-u'+u.n+'.html">Урок →</a>'+
-    '<a class="go g2" href="focus-1-u'+u.n+'-grammar.html">Грамматика</a>'+
-    '<a class="go g3" href="focus-1-u'+u.n+'-workbook.html">Workbook</a></div></div>';
-  grid.appendChild(a);});
+
+/* Страницы бумажного учебника Focus 1 (2nd ed.), начало юнита.
+   Заполни числами из своей книги — колонка появится сама.
+   Оставленные null не показываются: выдуманные номера хуже отсутствующих. */
+const PAGES={0:null,1:null,2:null,3:null,4:null,5:null,6:null,7:null,8:null};
+
+const PARTS=[
+  {key:"lesson",   suffix:"",           label:"Урок"},
+  {key:"grammar",  suffix:"-grammar",   label:"Грамматика"},
+  {key:"workbook", suffix:"-workbook",  label:"Workbook"}
+];
+const DONE_AT=5; // сколько верных ответов считаем «освоено»
+
+function href(n,suffix){return "focus-1-u"+n+suffix+".html";}
+
+/* stats: { "<unit>|<part>": {attempts, correct} } */
+function cellFor(n,part,stats){
+  const s=stats && stats[n+"|"+part.key];
+  const correct=s?s.correct:0;
+  const a=document.createElement("a");
+  a.href=href(n,part.suffix);
+  a.className="cell "+(correct>=DONE_AT?"done":correct>0?"started":"none");
+  a.textContent=correct>=DONE_AT?"✓":correct>0?String(correct):"·";
+  a.setAttribute("aria-label",
+    "Unit "+n+", "+part.label+" — "+
+    (correct>=DONE_AT?"освоено, верных ответов "+correct
+      :correct>0?"начато, верных ответов "+correct
+      :"ещё не открывали"));
+  return a;
+}
+
+function render(stats){
+  const rows=document.getElementById("rows");
+  const showPages=Object.values(PAGES).some(v=>v!=null);
+  if(showPages) document.getElementById("pgHead").textContent="Стр.";
+  rows.textContent="";
+
+  UNITS.forEach(u=>{
+    const tr=document.createElement("tr"); tr.className="row";
+
+    const tdU=document.createElement("td"); tdU.className="ucell";
+    const link=document.createElement("a"); link.href=href(u.n,"");
+    link.innerHTML='<span class="un">UNIT '+u.n+'</span>'+
+                   '<span class="ut" style="display:block">'+u.t+'</span>'+
+                   '<span class="ud" style="display:block">'+u.d+'</span>';
+    tdU.appendChild(link); tr.appendChild(tdU);
+
+    PARTS.forEach(p=>{
+      const td=document.createElement("td"); td.className="c";
+      td.appendChild(cellFor(u.n,p,stats)); tr.appendChild(td);
+    });
+
+    const tdP=document.createElement("td"); tdP.className="pg";
+    tdP.textContent=showPages&&PAGES[u.n]!=null?PAGES[u.n]:"";
+    tr.appendChild(tdP);
+
+    rows.appendChild(tr);
+  });
+
+  requestAnimationFrame(()=>document.getElementById("board").classList.add("in"));
+}
+
+function setStatus(html){document.getElementById("status").innerHTML=html;}
+
+(async function(){
+  let stats=null,signedIn=false;
+  try{
+    if(typeof SM!=="undefined"&&SM.getUser){
+      signedIn=!!(await SM.getUser());
+      if(signedIn) stats=await SM.myHwSummary("focus-1");
+    }
+  }catch(e){ /* прогресс не критичен: страница остаётся навигацией */ }
+
+  if(!signedIn){
+    setStatus('<p class="note">Войди в кабинет, и на этой странице появится твой прогресс по каждому юниту.</p>'+
+              '<a class="cta" href="cabinet.html">Войти →</a>');
+  }else if(!stats||!Object.keys(stats).length){
+    setStatus('<p class="note">Прогресса пока нет. Начни с нулевого юнита — ответы сохраняются сами.</p>'+
+              '<a class="cta" href="'+href(0,"")+'">Начать Unit 0 →</a>');
+  }else{
+    let next=UNITS.find(u=>PARTS.some(p=>{const s=stats[u.n+"|"+p.key];return !s||s.correct<DONE_AT;}))||UNITS[UNITS.length-1];
+    const totalCorrect=Object.values(stats).reduce((a,s)=>a+s.correct,0);
+    const closed=UNITS.filter(u=>PARTS.every(p=>{const s=stats[u.n+"|"+p.key];return s&&s.correct>=DONE_AT;})).length;
+    setStatus('<div><div class="big">Unit '+next.n+' · '+next.t+'</div></div>'+
+              '<p class="note">Пройдено юнитов целиком: '+closed+' из '+UNITS.length+'. Верных ответов всего: '+totalCorrect+'.</p>'+
+              '<a class="cta" href="'+href(next.n,"")+'">Продолжить →</a>');
+  }
+  render(stats);
+})();
 </script>
 </body>
 </html>
