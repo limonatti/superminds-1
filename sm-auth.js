@@ -610,6 +610,22 @@ return data || [];
 		return { ok: !error, error: error && error.message };
 	},
 
+	/* Изменить постоянный урок: день, время, длительность, заметку.
+	   Передавай только те поля, которые меняешь. */
+	async updateLesson(id, patch) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		if (!id || !patch) return { ok: false, error: "нечего менять" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const row = {};
+		if (patch.weekday != null) row.weekday = +patch.weekday;
+		if (patch.at_msk)          row.at_msk  = patch.at_msk;
+		if (patch.minutes != null) row.minutes = +patch.minutes;
+		if ("note" in patch)       row.note    = patch.note || null;
+		if (!Object.keys(row).length) return { ok: false, error: "нечего менять" };
+		const { error } = await c.from("lessons").update(row).eq("id", id);
+		return { ok: !error, error: error && error.message };
+	},
+
 	/* Отмены и переносы отдельных занятий */
 	async lessonChanges(fromDate, toDate) {
 		if (!useCloud) return [];

@@ -10,52 +10,122 @@
 <link rel="stylesheet" href="modernist.css">
 <link rel="stylesheet" href="sm-ui.css">
 <style>
-  /* Форма постановки урока */
-  .lform{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:grid;gap:12px}
-  .lf-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .lf-row>label{width:120px;flex:none;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;
-    text-transform:uppercase;color:var(--color-neutral-700)}
-  .lf-row select,.lf-row input{border:2px solid var(--color-text);background:var(--color-bg);
-    color:var(--color-text);padding:11px 12px;font:700 13px "Archivo",sans-serif}
-  .lf-row input[type=text]{flex:1;min-width:200px}
-  .daybox{display:flex;gap:7px;flex-wrap:wrap}
-  .daybox label{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--color-divider);
-    background:var(--color-bg);padding:8px 12px;font:800 12px "Archivo",sans-serif;cursor:pointer}
-  .daybox label:has(input:checked){border-color:var(--color-accent);background:var(--color-accent-100);
-    color:var(--color-accent-600)}
-  .daybox input{width:16px;height:16px;accent-color:var(--color-accent)}
-  .lform .go{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
-    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-  .lform .go:hover{background:var(--color-accent-600)}
-  .lform .res{font:700 13px "Archivo",sans-serif;padding:10px 12px;border:2px dashed var(--color-neutral-500)}
-  .lform .res.ok{border-color:var(--color-accent);color:var(--color-accent-600)}
-  .lform .hint{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  /* ---------- полоса «кого записываем» ---------- */
+  .pick{padding:14px 28px;border-bottom:2px solid var(--color-divider);display:flex;
+    align-items:center;gap:10px;flex-wrap:wrap}
+  .pick .lbl{font:800 11px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--color-neutral-600);margin-right:4px}
+  .chip{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 12.5px "Archivo",sans-serif;cursor:pointer;white-space:nowrap}
+  .chip:hover{border-color:var(--color-accent);color:var(--color-accent-600)}
+  .chip.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .chip .n{opacity:.65;font-weight:700;margin-left:5px}
 
-  /* Сетка недели */
-  .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:2px solid var(--color-divider);
-    border-bottom:2px solid var(--color-divider)}
-  .day{border-right:2px solid var(--color-divider);min-height:190px;display:flex;flex-direction:column}
-  .day:last-child{border-right:0}
-  .day .h{padding:12px 14px;border-bottom:2px solid var(--color-divider);font:800 11px "Archivo",sans-serif;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);display:flex;
-    justify-content:space-between;gap:6px}
-  .day.today .h{background:var(--color-accent);color:#fff}
-  .day .b{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
-  .day .none{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-600);padding:4px 2px}
-  .les{border:2px solid var(--color-divider);padding:9px 10px;background:var(--color-surface)}
-  .les.off{opacity:.5;border-style:dashed}
-  .les .t{display:block;font:900 15px "Archivo",sans-serif;letter-spacing:-.01em}
-  .les .who{display:block;font:700 12.5px "Archivo",sans-serif;margin-top:2px}
-  .les .m{display:block;font:600 11.5px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:3px}
-  .les .acts{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
-  .les .acts button{border:2px solid var(--color-divider);background:var(--color-bg);
-    color:var(--color-neutral-700);padding:3px 8px;font:800 10px "Archivo",sans-serif;
-    letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
-  .les .acts button:hover{border-color:var(--color-accent);color:var(--color-accent)}
-  @media(max-width:1000px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}.day{min-height:auto}}
+  .armed{padding:12px 28px;background:var(--color-accent-100);border-bottom:2px solid var(--color-accent);
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    font:700 13px "Archivo",sans-serif;color:var(--color-accent-700)}
+  .armed b{font-weight:900}
+  .armed select{border:2px solid var(--color-accent);background:var(--color-bg);color:var(--color-text);
+    padding:5px 8px;font:800 12px "Archivo",sans-serif}
+  .armed .off{margin-left:auto;border:2px solid var(--color-accent);background:transparent;
+    color:var(--color-accent-700);padding:5px 12px;font:800 11px "Archivo",sans-serif;
+    letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+
+  /* ---------- шапка недели ---------- */
+  .wknav{padding:22px 28px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .wknav .ttl{font:900 20px "Archivo",sans-serif;letter-spacing:-.01em}
+  .wknav .sp{flex:1}
+  .wknav button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .wknav button:hover{border-color:var(--color-accent);color:var(--color-accent)}
+
+  /* ---------- сетка дни × часы ---------- */
+  .gridwrap{border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);
+    overflow:auto;max-height:66vh}
+  .grid{display:grid;grid-template-columns:64px repeat(7,minmax(104px,1fr));min-width:820px}
+  .gh{position:sticky;top:0;z-index:5;background:var(--color-bg);
+    border-bottom:2px solid var(--color-divider);border-right:2px solid var(--color-divider);
+    padding:9px 10px;text-align:center}
+  .gh:last-child{border-right:0}
+  .gh .dn{display:block;font:800 11px "Archivo",sans-serif;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--color-neutral-600)}
+  .gh .dd{display:block;font:900 17px "Archivo",sans-serif;margin-top:2px}
+  .gh.today{background:var(--color-accent);border-bottom-color:var(--color-accent)}
+  .gh.today .dn,.gh.today .dd{color:#fff}
+
+  .tcol{border-right:2px solid var(--color-divider);position:relative}
+  .tcol .tm{height:26px;font:700 10.5px "Archivo",sans-serif;color:var(--color-neutral-600);
+    text-align:right;padding-right:7px;line-height:1;transform:translateY(-5px)}
+  .tcol .tm.half{color:var(--color-neutral-400)}
+
+  .dcol{position:relative;border-right:2px solid var(--color-divider)}
+  .dcol:last-child{border-right:0}
+  .dcol.today{background:var(--color-accent-100)}
+  .slot{height:26px;border-bottom:1px solid var(--color-divider);cursor:pointer;position:relative}
+  .slot.hour{border-bottom-color:var(--color-neutral-300)}
+  .slot:hover{background:var(--color-accent-100)}
+  .slot:hover::after{content:"+";position:absolute;inset:0;display:flex;align-items:center;
+    justify-content:center;font:900 15px "Archivo",sans-serif;color:var(--color-accent)}
+  .slot.drop{background:var(--color-accent-200);outline:2px solid var(--color-accent);outline-offset:-2px}
+  body.arming .slot{background:var(--color-accent-100)}
+  body.arming .slot:hover{background:var(--color-accent-200)}
+
+  .les{position:absolute;left:3px;right:3px;z-index:2;border:2px solid var(--color-accent);
+    background:var(--color-accent);color:#fff;padding:4px 6px;overflow:hidden;cursor:grab;
+    display:flex;flex-direction:column;gap:1px}
+  .les:active{cursor:grabbing}
+  .les .w{font:900 12.5px "Archivo",sans-serif;letter-spacing:-.01em;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .les .h{font:700 10.5px "Archivo",sans-serif;opacity:.85}
+  .les.off{background:var(--color-bg);color:var(--color-neutral-600);border-style:dashed;
+    border-color:var(--color-neutral-500)}
+  .les.moved{background:var(--color-accent-2);border-color:var(--color-accent-2)}
+  .les.dragging{opacity:.35}
+
+  /* ---------- поповер ---------- */
+  .pop{position:absolute;z-index:60;width:284px;background:var(--color-bg);
+    border:2px solid var(--color-text);box-shadow:6px 6px 0 var(--color-divider);padding:14px}
+  .pop h4{margin:0 0 10px;font:900 14px "Archivo",sans-serif;letter-spacing:-.01em}
+  .pop .sub{font:700 11.5px "Archivo",sans-serif;color:var(--color-neutral-700);margin:-6px 0 10px}
+  .pop label.f{display:block;font:800 10.5px "Archivo",sans-serif;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--color-neutral-600);margin:10px 0 5px}
+  .pop select,.pop input[type=text],.pop input[type=time]{width:100%;border:2px solid var(--color-text);
+    background:var(--color-bg);color:var(--color-text);padding:8px 9px;font:700 13px "Archivo",sans-serif}
+  .pop .two{display:flex;gap:8px}
+  .pop .two>*{flex:1;min-width:0}
+  .daybox{display:flex;gap:5px;flex-wrap:wrap}
+  .daybox label{display:inline-flex;align-items:center;justify-content:center;width:34px;height:30px;
+    border:2px solid var(--color-divider);font:800 11px "Archivo",sans-serif;cursor:pointer}
+  .daybox label:has(input:checked){border-color:var(--color-accent);background:var(--color-accent);color:#fff}
+  .daybox input{position:absolute;opacity:0;width:0;height:0}
+  .pop .go{width:100%;margin-top:13px;border:0;background:var(--color-accent);color:#fff;padding:11px;
+    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .pop .go:hover{background:var(--color-accent-600)}
+  .pop .acts{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .pop .acts button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:9px;font:800 11.5px "Archivo",sans-serif;letter-spacing:.05em;text-transform:uppercase;
+    cursor:pointer;text-align:left}
+  .pop .acts button:hover{border-color:var(--color-accent);color:var(--color-accent)}
+  .pop .acts button.warn:hover{border-color:#c0392b;color:#c0392b}
+  .pop .err{margin-top:9px;font:700 12px "Archivo",sans-serif;color:#c0392b}
+  .popbg{position:fixed;inset:0;z-index:55}
 
   .stu-row .cnt{font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;
     color:var(--color-accent-600)}
+  .stu-row .cnt.zero{color:var(--color-neutral-500)}
+
+  .legend{padding:12px 28px 22px;display:flex;gap:16px;flex-wrap:wrap;
+    font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .legend i{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px}
+  .legend .a{background:var(--color-accent)}
+  .legend .b{background:var(--color-accent-2)}
+  .legend .c{border:2px dashed var(--color-neutral-500)}
+
+  @media(max-width:760px){
+    .gridwrap{max-height:none}
+    .wknav{padding:18px 18px 10px}
+    .pick,.armed{padding:12px 18px}
+  }
 </style>
 </head>
 <body>
@@ -72,38 +142,56 @@
 <script src="sm-auth.js"></script>
 <script src="sm-shell.js"></script>
 <script>
-const esc = SMUI.esc, icon = SMUI.icon;
+const esc = SMUI.esc;
 const DAYS  = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
 const SHORT = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
 
-let ME = null, STUDENTS = [], LESSONS = [], CHANGES = [];
+const HOUR_FROM = 8;    /* сетка обычно с 08:00 */
+const HOUR_TO   = 22;   /* и до 22:00 — но раздвинется, если урок стоит вне этих часов */
+const ROW       = 26;   /* высота получаса в пикселях */
+let DAY_START = HOUR_FROM, DAY_END = HOUR_TO;
 
-/* Время по Москве — в нём учитель ставит уроки */
+/* Границы сетки: расширяем так, чтобы ни один урок не потерялся */
+function fitBounds(){
+  DAY_START = HOUR_FROM; DAY_END = HOUR_TO;
+  LESSONS.forEach(l => {
+    const s = toMin(l.at_msk), e = s + (l.minutes || 50);
+    DAY_START = Math.min(DAY_START, Math.floor(s / 60));
+    DAY_END   = Math.max(DAY_END,   Math.ceil(e / 60));
+  });
+  DAY_START = Math.max(0, DAY_START);
+  DAY_END   = Math.min(24, Math.max(DAY_END, DAY_START + 1));
+}
+
+let ME = null, STUDENTS = [], LESSONS = [], CHANGES = [];
+let weekOffset = 0;              /* 0 = текущая неделя */
+let armed = null;                /* {id, minutes} — кого ставим кликом */
+let dragId = null;
+
+/* ---------- время ---------- */
 function mskNow(){
   try { return new Intl.DateTimeFormat("ru-RU",
     { timeZone:"Europe/Moscow", hour:"2-digit", minute:"2-digit" }).format(new Date()); }
   catch(e){ return "—"; }
 }
-/* Какой сегодня день недели по Москве: 1 = понедельник */
 function mskWeekday(){
   try {
     const s = new Intl.DateTimeFormat("en-GB", { timeZone:"Europe/Moscow", weekday:"short" }).format(new Date());
-    const m = { Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6, Sun:7 };
-    return m[s] || 1;
+    return ({ Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6, Sun:7 })[s] || 1;
   } catch(e){ return ((new Date().getDay() + 6) % 7) + 1; }
 }
 function hhmm(t){ return String(t || "").slice(0,5); }
+function toMin(t){ const p = hhmm(t).split(":"); return (+p[0]||0)*60 + (+p[1]||0); }
+function fromMin(m){ return String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0"); }
 function nameOf(sid){ const s = STUDENTS.filter(x => x.student_id === sid)[0]; return s ? s.name : "ученик"; }
 
-/* Даты текущей недели: понедельник — воскресенье */
 function weekDates(){
   const now = new Date();
-  const wd = (now.getDay() + 6) % 7;           /* 0 = понедельник */
-  const mon = new Date(now); mon.setDate(now.getDate() - wd); mon.setHours(0,0,0,0);
-  return Array.from({length:7}, (_,i) => {
-    const d = new Date(mon); d.setDate(mon.getDate() + i);
-    return d;
-  });
+  const wd = (now.getDay() + 6) % 7;
+  const mon = new Date(now);
+  mon.setDate(now.getDate() - wd + weekOffset*7);
+  mon.setHours(0,0,0,0);
+  return Array.from({length:7}, (_,i) => { const d = new Date(mon); d.setDate(mon.getDate()+i); return d; });
 }
 function iso(d){
   return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
@@ -111,175 +199,346 @@ function iso(d){
 function changeFor(lessonId, dateIso){
   return CHANGES.filter(c => c.lesson_id === lessonId && c.on_date === dateIso)[0] || null;
 }
+function lessonsOf(sid){ return LESSONS.filter(l => l.student_id === sid); }
+function hoursOf(list){ return Math.round(list.reduce((a,l)=>a+(l.minutes||0),0)/6)/10; }
 
-/* ---------- форма постановки урока ---------- */
-function formHtml(){
+/* ---------- поповер ---------- */
+function closePop(){
+  const p = document.getElementById("pop"), b = document.getElementById("popbg");
+  if (p) p.remove(); if (b) b.remove();
+}
+function openPop(anchor, html, wire){
+  closePop();
+  const bg = document.createElement("div");
+  bg.id = "popbg"; bg.className = "popbg"; bg.onclick = closePop;
+  document.body.appendChild(bg);
+
+  const pop = document.createElement("div");
+  pop.id = "pop"; pop.className = "pop"; pop.innerHTML = html;
+  document.body.appendChild(pop);
+
+  const r = anchor.getBoundingClientRect();
+  const w = pop.offsetWidth, h = pop.offsetHeight;
+  let left = r.left + window.scrollX + r.width + 8;
+  if (left + w > window.scrollX + document.documentElement.clientWidth - 10)
+    left = r.left + window.scrollX - w - 8;
+  if (left < window.scrollX + 8) left = window.scrollX + 8;
+  let top = r.top + window.scrollY - 6;
+  const maxTop = window.scrollY + document.documentElement.clientHeight - h - 10;
+  if (top > maxTop) top = Math.max(window.scrollY + 8, maxTop);
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+
+  if (wire) wire(pop);
+  const first = pop.querySelector("select,input,button");
+  if (first) first.focus();
+}
+
+/* ---------- поповер: новый урок ---------- */
+function popNew(cell, wd, time){
   if (!STUDENTS.length){
-    return SMUI.empty("В классе пока никого",
-      "Добавь учеников в разделе «Мои ученики» — и здесь можно будет ставить им уроки.");
+    openPop(cell, '<h4>Пока некого записывать</h4><div class="sub">Добавь учеников в разделе «Мои ученики».</div>');
+    return;
   }
-  return '<div class="sect"><span>Поставить урок</span><span>время московское</span></div>' +
-    '<div class="lform">' +
-      '<div class="lf-row"><label>Ученик</label><select id="lStu">' +
-        STUDENTS.map(s => '<option value="'+esc(s.student_id)+'">'+esc(s.name)+'</option>').join("") +
-      '</select></div>' +
-      '<div class="lf-row"><label>Дни недели</label><span class="daybox">' +
-        SHORT.map((d,i) => '<label><input type="checkbox" class="lDay" value="'+(i+1)+'"> '+d+'</label>').join("") +
-      '</span></div>' +
-      '<div class="lf-row"><label>Время (МСК)</label><input type="time" id="lTime" value="18:00" step="300">' +
-        '<label style="width:auto">Длительность</label>' +
-        '<select id="lMin">' +
-          [30,45,50,60,90].map(m => '<option value="'+m+'"'+(m===50?" selected":"")+'>'+m+' мин</option>').join("") +
-        '</select></div>' +
-      '<div class="lf-row"><label>Заметка</label>' +
-        '<input type="text" id="lNote" maxlength="120" placeholder="например: занятие по Speakout (необязательно)"></div>' +
-      '<button class="go" id="lGo">Поставить в расписание</button>' +
-      '<div class="hint">Урок повторяется каждую неделю. Отдельное занятие можно отменить или перенести в сетке ниже.</div>' +
-      '<div class="res" id="lRes" style="display:none"></div>' +
+  const preset = armed ? armed.id : STUDENTS[0].student_id;
+  const html =
+    '<h4>Поставить урок</h4>' +
+    '<div class="sub">' + SHORT[wd-1] + ', ' + esc(time) + ' по Москве</div>' +
+    '<label class="f">Ученик</label>' +
+    '<select id="pStu">' + STUDENTS.map(s =>
+      '<option value="'+esc(s.student_id)+'"'+(s.student_id===preset?" selected":"")+'>'+esc(s.name)+'</option>').join("") +
+    '</select>' +
+    '<div class="two"><div><label class="f">Время</label>' +
+      '<input type="time" id="pTime" step="300" value="'+esc(time)+'"></div>' +
+      '<div><label class="f">Длительность</label><select id="pMin">' +
+      [30,45,50,60,90].map(m => '<option value="'+m+'"'+(m===(armed?armed.minutes:50)?" selected":"")+'>'+m+' мин</option>').join("") +
+      '</select></div></div>' +
+    '<label class="f">Дни недели — повторять каждую неделю</label>' +
+    '<div class="daybox">' + SHORT.map((d,i) =>
+      '<label><input type="checkbox" class="pDay" value="'+(i+1)+'"'+((i+1)===wd?" checked":"")+'>'+d+'</label>').join("") +
+    '</div>' +
+    '<label class="f">Заметка</label>' +
+    '<input type="text" id="pNote" maxlength="120" placeholder="необязательно">' +
+    '<button class="go" id="pGo">Поставить</button>' +
+    '<div class="err" id="pErr" style="display:none"></div>';
+
+  openPop(cell, html, pop => {
+    pop.querySelector("#pGo").onclick = async () => {
+      const btn = pop.querySelector("#pGo"), err = pop.querySelector("#pErr");
+      const days = [].slice.call(pop.querySelectorAll(".pDay")).filter(c=>c.checked).map(c=>+c.value);
+      if (!days.length){ err.style.display="block"; err.textContent="Отметь хотя бы один день."; return; }
+      btn.disabled = true; btn.textContent = "Ставлю…";
+      const r = await SM.addLessons(
+        pop.querySelector("#pStu").value, days,
+        pop.querySelector("#pTime").value, +pop.querySelector("#pMin").value,
+        pop.querySelector("#pNote").value.trim());
+      if (r && r.ok){ closePop(); await load(); }
+      else { btn.disabled=false; btn.textContent="Поставить";
+             err.style.display="block"; err.textContent=(r&&r.error)||"Не получилось поставить урок"; }
+    };
+  });
+}
+
+/* ---------- поповер: существующий урок ---------- */
+function popLesson(chip, lesson, dIso){
+  const ch = changeFor(lesson.id, dIso);
+  let html =
+    '<h4>' + esc(nameOf(lesson.student_id)) + '</h4>' +
+    '<div class="sub">' + SHORT[lesson.weekday-1] + ', ' + esc(hhmm(lesson.at_msk)) +
+      ' · ' + lesson.minutes + ' мин' + (lesson.note ? ' · ' + esc(lesson.note) : '') + '</div>';
+
+  if (ch && ch.status === "cancelled")
+    html += '<div class="sub" style="color:var(--color-accent-600)">Отменён' + (ch.reason ? ': '+esc(ch.reason) : '') + '</div>';
+  if (ch && ch.status === "moved")
+    html += '<div class="sub" style="color:var(--color-accent-600)">Перенесён на ' + esc(ch.new_date||'') +
+            (ch.new_at_msk ? ' в '+esc(hhmm(ch.new_at_msk)) : '') + '</div>';
+
+  html += '<label class="f">Постоянное время</label>' +
+    '<div class="two">' +
+      '<input type="time" id="eTime" step="300" value="'+esc(hhmm(lesson.at_msk))+'">' +
+      '<select id="eMin">' + [30,45,50,60,90].map(m =>
+        '<option value="'+m+'"'+(m===lesson.minutes?" selected":"")+'>'+m+' мин</option>').join("") + '</select>' +
+    '</div>' +
+    '<button class="go" id="eSave">Сохранить</button>' +
+    '<label class="f">Это занятие ' + esc(dIso.split("-").reverse().join(".")) + '</label>' +
+    '<div class="acts">' +
+      (ch ? '<button id="aUndo">Вернуть как было</button>'
+          : '<button id="aCancel">Отменить это занятие</button>' +
+            '<button id="aMove">Перенести это занятие</button>') +
+      '<button id="aDel" class="warn">Убрать из расписания совсем</button>' +
+    '</div>' +
+    '<div class="err" id="eErr" style="display:none"></div>';
+
+  openPop(chip, html, pop => {
+    const err = pop.querySelector("#eErr");
+    const fail = m => { err.style.display="block"; err.textContent=m; };
+
+    pop.querySelector("#eSave").onclick = async () => {
+      const r = await SM.updateLesson(lesson.id, {
+        at_msk: pop.querySelector("#eTime").value,
+        minutes: +pop.querySelector("#eMin").value });
+      if (r && r.ok){ closePop(); await load(); } else fail((r&&r.error)||"Не сохранилось");
+    };
+    const del = pop.querySelector("#aDel");
+    if (del) del.onclick = async () => {
+      if (!confirm("Убрать занятие из постоянного расписания?")) return;
+      await SM.removeLesson(lesson.id); closePop(); await load();
+    };
+    const can = pop.querySelector("#aCancel");
+    if (can) can.onclick = async () => {
+      const why = prompt("Отменить занятие " + dIso + ". Причина (необязательно):", "");
+      if (why === null) return;
+      await SM.cancelLesson(lesson.id, dIso, why); closePop(); await load();
+    };
+    const mov = pop.querySelector("#aMove");
+    if (mov) mov.onclick = async () => {
+      const nd = prompt("Перенести занятие " + dIso + " на дату (ГГГГ-ММ-ДД):", dIso);
+      if (!nd) return;
+      const nt = prompt("Новое время по Москве (ЧЧ:ММ), пусто — оставить прежнее:", "");
+      await SM.moveLesson(lesson.id, dIso, nd, nt || null, null); closePop(); await load();
+    };
+    const und = pop.querySelector("#aUndo");
+    if (und) und.onclick = async () => {
+      await SM.undoLessonChange(lesson.id, dIso); closePop(); await load();
+    };
+  });
+}
+
+/* ---------- разметка ---------- */
+function pickHtml(){
+  if (!STUDENTS.length) return "";
+  const none = STUDENTS.filter(s => !lessonsOf(s.student_id).length);
+  let h = '<div class="pick"><span class="lbl">' +
+    (none.length ? 'Без расписания' : 'Записать') + '</span>';
+  const list = none.length ? none : STUDENTS;
+  h += list.map(s => {
+    const n = lessonsOf(s.student_id).length;
+    return '<button class="chip'+(armed&&armed.id===s.student_id?" on":"")+'" data-arm="'+esc(s.student_id)+'">' +
+      esc(s.name) + (n ? '<span class="n">'+n+'</span>' : '') + '</button>';
+  }).join("");
+  if (none.length && none.length < STUDENTS.length)
+    h += '<button class="chip" data-armall="1">все ученики…</button>';
+  h += '</div>';
+
+  if (armed){
+    h += '<div class="armed">Ставим <b>'+esc(nameOf(armed.id))+'</b> — кликай по свободным клеткам. ' +
+      '<select id="aMinutes">' + [30,45,50,60,90].map(m =>
+        '<option value="'+m+'"'+(m===armed.minutes?" selected":"")+'>'+m+' мин</option>').join("") + '</select>' +
+      '<button class="off" id="aStop">Закончить</button></div>';
+  }
+  return h;
+}
+
+function gridHtml(){
+  fitBounds();
+  const dates = weekDates();
+  const todayWd = mskWeekday();
+  const isThisWeek = weekOffset === 0;
+  const slots = (DAY_END - DAY_START) * 2;
+  const colH = slots * ROW;
+
+  /* колонка времени */
+  let times = '<div class="tcol">';
+  for (let i = 0; i < slots; i++){
+    const m = DAY_START*60 + i*30;
+    times += '<div class="tm'+(m%60?" half":"")+'">' + (m%60 ? "" : fromMin(m)) + '</div>';
+  }
+  times += '</div>';
+
+  /* дни */
+  let cols = "";
+  for (let i = 0; i < 7; i++){
+    const wd = i+1, dIso = iso(dates[i]);
+    const today = isThisWeek && wd === todayWd;
+    let inner = "";
+    for (let s = 0; s < slots; s++){
+      const m = DAY_START*60 + s*30;
+      inner += '<div class="slot'+(m%60?"":" hour")+'" data-wd="'+wd+'" data-t="'+fromMin(m)+'"></div>';
+    }
+    LESSONS.filter(l => l.weekday === wd).forEach(l => {
+      const start = toMin(l.at_msk);
+      const top = Math.max(0, (start - DAY_START*60) / 30 * ROW);
+      let h = Math.max(ROW - 2, (l.minutes||50) / 30 * ROW - 2);
+      if (top + h > colH) h = Math.max(ROW - 2, colH - top);   /* не вылезать за низ */
+      const ch = changeFor(l.id, dIso);
+      const cls = ch ? (ch.status === "cancelled" ? " off" : " moved") : "";
+      inner += '<div class="les'+cls+'" draggable="true" data-les="'+esc(l.id)+'" data-date="'+dIso+'" ' +
+        'style="top:'+top+'px;height:'+h+'px">' +
+        '<span class="w">'+esc(nameOf(l.student_id))+'</span>' +
+        '<span class="h">'+esc(hhmm(l.at_msk))+' · '+l.minutes+' мин' +
+          (ch && ch.status==="cancelled" ? ' · отменён' : '') +
+          (ch && ch.status==="moved" ? ' · перенесён' : '') + '</span></div>';
+    });
+    cols += '<div class="dcol'+(today?" today":"")+'" style="height:'+colH+'px">'+inner+'</div>';
+  }
+
+  /* заголовки */
+  let head = '<div class="gh"></div>';
+  for (let i = 0; i < 7; i++){
+    const today = isThisWeek && (i+1) === todayWd;
+    head += '<div class="gh'+(today?" today":"")+'"><span class="dn">'+SHORT[i]+'</span>' +
+      '<span class="dd">'+dates[i].getDate()+'</span></div>';
+  }
+
+  const label = dates[0].getDate() + "–" + dates[6].getDate() + " " +
+    dates[6].toLocaleDateString("ru-RU", { month:"long" });
+
+  return '<div class="wknav">' +
+      '<span class="ttl">Неделя ' + esc(label) + '</span><span class="sp"></span>' +
+      '<button data-wk="-1">← раньше</button>' +
+      '<button data-wk="0">сегодня</button>' +
+      '<button data-wk="1">позже →</button>' +
+    '</div>' +
+    '<div class="gridwrap"><div class="grid">' + head + times + cols + '</div></div>' +
+    '<div class="legend">' +
+      '<span><i class="a"></i>занятие</span>' +
+      '<span><i class="b"></i>перенесено</span>' +
+      '<span><i class="c"></i>отменено</span>' +
+      '<span>клик по пустой клетке — поставить урок · перетащи занятие, чтобы сменить время</span>' +
     '</div>';
 }
 
-/* ---------- сетка недели ---------- */
-function weekHtml(){
-  const dates = weekDates();
-  const todayWd = mskWeekday();
-
-  return '<div class="sect"><span>Неделя</span><span>' +
-      dates[0].getDate() + "–" + dates[6].getDate() + " " +
-      dates[6].toLocaleDateString("ru-RU", { month:"long" }) + '</span></div>' +
-    '<div class="week">' + DAYS.map((dayName, i) => {
-      const wd = i + 1;
-      const date = dates[i], dIso = iso(date);
-      const list = LESSONS.filter(l => l.weekday === wd)
-        .sort((a,b) => hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
-
-      const body = list.length
-        ? list.map(l => {
-            const ch = changeFor(l.id, dIso);
-            const off = ch && ch.status === "cancelled";
-            const moved = ch && ch.status === "moved";
-            return '<div class="les'+(off?" off":"")+'">' +
-              '<span class="t">'+esc(hhmm(l.at_msk))+'</span>' +
-              '<span class="who">'+esc(nameOf(l.student_id))+'</span>' +
-              '<span class="m">'+l.minutes+' мин'+(l.note?' · '+esc(l.note):'')+'</span>' +
-              (off   ? '<span class="m" style="color:var(--color-accent)">отменён'+(ch.reason?': '+esc(ch.reason):'')+'</span>' : '') +
-              (moved ? '<span class="m" style="color:#8a6d00">перенесён на '+esc(ch.new_date||'')+
-                       (ch.new_at_msk?' в '+esc(hhmm(ch.new_at_msk)):'')+'</span>' : '') +
-              '<span class="acts">' +
-                (ch
-                  ? '<button data-undo="'+esc(l.id)+'" data-date="'+dIso+'">вернуть</button>'
-                  : '<button data-cancel="'+esc(l.id)+'" data-date="'+dIso+'">отменить</button>' +
-                    '<button data-move="'+esc(l.id)+'" data-date="'+dIso+'">перенести</button>') +
-                '<button data-del="'+esc(l.id)+'" title="убрать из постоянного расписания">убрать</button>' +
-              '</span>' +
-            '</div>';
-          }).join("")
-        : '<div class="none">уроков нет</div>';
-
-      return '<div class="day'+(wd===todayWd?" today":"")+'">' +
-        '<div class="h"><span>'+SHORT[i]+'</span><span>'+date.getDate()+'</span></div>' +
-        '<div class="b">'+body+'</div></div>';
-    }).join("") + '</div>';
-}
-
-/* ---------- расписание по ученикам ---------- */
 function byStudentHtml(){
   if (!STUDENTS.length) return "";
   return '<div class="sect"><span>По ученикам</span><span>' + LESSONS.length + ' занятий в неделю</span></div>' +
     '<div class="rows">' + STUDENTS.map((s,i) => {
-      const mine = LESSONS.filter(l => l.student_id === s.student_id)
+      const mine = lessonsOf(s.student_id)
         .sort((a,b) => a.weekday - b.weekday || hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
       const txt = mine.length
         ? mine.map(l => SHORT[l.weekday-1] + " " + hhmm(l.at_msk)).join(" · ")
         : "время не назначено";
+      const cnt = mine.length ? hoursOf(mine) + " ч/нед" : "—";
       return '<div class="row stu-row" style="cursor:default">' +
         '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
         '<span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(txt)+'</span></span>' +
-        '<span class="cnt">'+(mine.length ? mine.length+" в неделю" : "—")+'</span></div>';
+        '<span class="cnt'+(mine.length?"":" zero")+'">'+cnt+'</span></div>';
     }).join("") + '</div>';
 }
 
-/* ---------- сборка страницы ---------- */
 function draw(){
   const pane = document.getElementById("pane");
-  const perWeek = LESSONS.length;
-  const hours = Math.round(LESSONS.reduce((a,l) => a + (l.minutes||0), 0) / 6) / 10;
+  const noSched = STUDENTS.filter(s => !lessonsOf(s.student_id).length).length;
 
   pane.innerHTML =
     '<div class="pane-hd"><span>Расписание</span><span>Москва · '+mskNow()+'</span></div>' +
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Учеников</span><span class="n">'+STUDENTS.length+'</span></div>' +
-      '<div class="tile"><span class="k">Занятий в неделю</span><span class="n'+(perWeek?" acc":"")+'">'+perWeek+'</span></div>' +
-      '<div class="tile"><span class="k">Часов в неделю</span><span class="n">'+(perWeek?hours:"—")+'</span>' +
+      '<div class="tile"><span class="k">Занятий в неделю</span><span class="n'+(LESSONS.length?" acc":"")+'">'+LESSONS.length+'</span></div>' +
+      '<div class="tile"><span class="k">Часов в неделю</span><span class="n">'+(LESSONS.length?hoursOf(LESSONS):"—")+'</span>' +
         '<span class="d">по длительности уроков</span></div>' +
-      '<div class="tile"><span class="k">Время в Москве</span><span class="n">'+mskNow()+'</span>' +
-        '<span class="d">в нём ставится расписание</span></div>' +
+      '<div class="tile"><span class="k">Без расписания</span><span class="n'+(noSched?" acc":"")+'">'+noSched+'</span>' +
+        '<span class="d">'+(noSched?"им ещё не назначено время":"у всех есть время")+'</span></div>' +
     '</div>' +
-    formHtml() + weekHtml() + byStudentHtml();
+    pickHtml() + gridHtml() + byStudentHtml();
 
+  document.body.classList.toggle("arming", !!armed);
   bind();
 }
 
+/* ---------- события ---------- */
 function bind(){
-  const $ = id => document.getElementById(id);
-  const go = $("lGo");
+  document.querySelectorAll("[data-arm]").forEach(b => b.onclick = () => {
+    armed = (armed && armed.id === b.dataset.arm) ? null : { id: b.dataset.arm, minutes: 50 };
+    draw();
+  });
+  const all = document.querySelector("[data-armall]");
+  if (all) all.onclick = () => { armed = { id: STUDENTS[0].student_id, minutes: 50 }; draw(); };
+  const stop = document.getElementById("aStop");
+  if (stop) stop.onclick = () => { armed = null; draw(); };
+  const mins = document.getElementById("aMinutes");
+  if (mins) mins.onchange = () => { if (armed) armed.minutes = +mins.value; };
 
-  if (go) go.onclick = async () => {
-    const res = $("lRes");
-    const days = [].slice.call(document.querySelectorAll(".lDay")).filter(c => c.checked).map(c => c.value);
-    const show = (text, ok) => { res.style.display = "block"; res.className = ok ? "res ok" : "res"; res.textContent = text; };
-
-    if (!days.length){ show("Отметь дни недели — в какие дни идёт урок."); return; }
-    if (!$("lTime").value){ show("Укажи время урока."); return; }
-
-    go.disabled = true; go.textContent = "Ставлю…";
-    const r = await SM.addLessons($("lStu").value, days, $("lTime").value, +$("lMin").value, $("lNote").value.trim());
-    go.disabled = false; go.textContent = "Поставить в расписание";
-
-    if (r && r.ok){
-      const who = nameOf($("lStu").value);
-      show("Готово: " + who + " — " + days.map(d => SHORT[d-1]).join(", ") +
-           " в " + $("lTime").value + " по Москве.", true);
-      $("lNote").value = "";
-      document.querySelectorAll(".lDay").forEach(c => c.checked = false);
-      await load();
-    } else {
-      show((r && r.error) || "Не получилось поставить урок");
-    }
-  };
-
-  document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
-    if (!confirm("Убрать это занятие из постоянного расписания?")) return;
-    await SM.removeLesson(b.dataset.del);
-    await load();
+  document.querySelectorAll("[data-wk]").forEach(b => b.onclick = () => {
+    const v = +b.dataset.wk;
+    weekOffset = v === 0 ? 0 : weekOffset + v;
+    load();
   });
 
-  document.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => {
-    const why = prompt("Отменить занятие " + b.dataset.date + ". Причина (необязательно):", "");
-    if (why === null) return;
-    await SM.cancelLesson(b.dataset.cancel, b.dataset.date, why);
-    await load();
+  /* пустая клетка */
+  document.querySelectorAll(".slot").forEach(cell => {
+    cell.onclick = async () => {
+      const wd = +cell.dataset.wd, t = cell.dataset.t;
+      if (armed){
+        const r = await SM.addLessons(armed.id, [wd], t, armed.minutes, null);
+        if (r && r.ok) await load();
+        else alert((r && r.error) || "Не получилось поставить урок");
+        return;
+      }
+      popNew(cell, wd, t);
+    };
+    cell.ondragover = e => { e.preventDefault(); cell.classList.add("drop"); };
+    cell.ondragleave = () => cell.classList.remove("drop");
+    cell.ondrop = async e => {
+      e.preventDefault(); cell.classList.remove("drop");
+      if (!dragId) return;
+      const r = await SM.updateLesson(dragId, { weekday:+cell.dataset.wd, at_msk: cell.dataset.t });
+      dragId = null;
+      if (r && r.ok) await load(); else alert((r && r.error) || "Не получилось перенести");
+    };
   });
 
-  document.querySelectorAll("[data-move]").forEach(b => b.onclick = async () => {
-    const nd = prompt("Перенести занятие " + b.dataset.date + " на дату (ГГГГ-ММ-ДД):", b.dataset.date);
-    if (!nd) return;
-    const nt = prompt("Новое время по Москве (ЧЧ:ММ), пусто — оставить прежнее:", "");
-    await SM.moveLesson(b.dataset.move, b.dataset.date, nd, nt || null, null);
-    await load();
-  });
-
-  document.querySelectorAll("[data-undo]").forEach(b => b.onclick = async () => {
-    await SM.undoLessonChange(b.dataset.undo, b.dataset.date);
-    await load();
+  /* существующий урок */
+  document.querySelectorAll("[data-les]").forEach(chip => {
+    const lesson = LESSONS.filter(l => l.id === chip.dataset.les)[0];
+    if (!lesson) return;
+    chip.onclick = e => { e.stopPropagation(); popLesson(chip, lesson, chip.dataset.date); };
+    chip.ondragstart = e => {
+      dragId = lesson.id; chip.classList.add("dragging");
+      try { e.dataTransfer.setData("text/plain", lesson.id); } catch(err){}
+      e.dataTransfer.effectAllowed = "move";
+    };
+    chip.ondragend = () => chip.classList.remove("dragging");
   });
 }
 
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ closePop(); if (armed){ armed = null; draw(); } } });
+
+/* ---------- загрузка ---------- */
 async function load(){
   const pane = document.getElementById("pane");
   ME = await SMUI.requireAuth(pane, "teacher");
   if (!ME) return;
 
+  closePop();
   try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
   try { LESSONS  = (await SM.myLessons()) || []; }  catch(e){ LESSONS = []; }
 
