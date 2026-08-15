@@ -171,7 +171,7 @@ const WBGAPS=[{"q": "You ___ (should) sleep before the exam. (совет)", "a":
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<img class="wimg" loading="lazy" alt="" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(w[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div></div>';
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(w[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div></div>';
   d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
 /* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
 let SM_VOICES=[];
@@ -238,7 +238,7 @@ if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.classNa
 /* Чанки — учим (с озвучкой) */
 const cbox=document.getElementById("chunks");
 if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<img class="wimg" loading="lazy" alt="" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
   d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
