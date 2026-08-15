@@ -371,9 +371,11 @@ window.SM_CARD_EP = "https://img-gen.limonatti.workers.dev/card?w=";
 window.SM_face = function (w, px) {
   px = px || 64;
   if (w && w.img) return '<img src="' + w.img + '" alt="" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;vertical-align:middle;border-radius:12px">';
-  if (w && w.en) {
+  /* Фото весит сотни килобайт, поэтому грузим его только там, где картинка
+     действительно крупная. На мелких плитках (12 штук на экране) остаётся эмодзи. */
+  if (w && w.en && px >= 56) {
     var st;
-    if (px >= 56) {
+    if (px >= 80) {
       var bw = Math.round(px * 1.9);
       st = 'width:' + bw + 'px;max-width:100%;height:' + Math.round(bw * 0.72) + 'px;'
          + 'object-fit:cover;border-radius:16px;background:#f4e7db;display:block;margin:0 auto';
