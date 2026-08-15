@@ -56,6 +56,7 @@
   .tcol{border-right:2px solid var(--color-divider);position:relative}
   .tcol .tm{height:26px;font:700 10.5px "Archivo",sans-serif;color:var(--color-neutral-600);
     text-align:right;padding-right:7px;line-height:1;transform:translateY(-5px)}
+  .tcol .tm:first-child{transform:none;padding-top:2px}   /* первая метка не уезжает под шапку */
   .tcol .tm.half{color:var(--color-neutral-400)}
 
   .dcol{position:relative;border-right:2px solid var(--color-divider)}
@@ -458,6 +459,10 @@ function draw(){
   const pane = document.getElementById("pane");
   const noSched = STUDENTS.filter(s => !lessonsOf(s.student_id).length).length;
 
+  /* запомнить, куда была прокручена сетка — чтобы не прыгать наверх после каждой правки */
+  const old = document.querySelector(".gridwrap");
+  const keepScroll = old ? old.scrollTop : null;
+
   pane.innerHTML =
     '<div class="pane-hd"><span>Расписание</span><span>Москва · '+mskNow()+'</span></div>' +
     '<div class="tiles">' +
@@ -471,7 +476,20 @@ function draw(){
     pickHtml() + gridHtml() + byStudentHtml();
 
   document.body.classList.toggle("arming", !!armed);
+
+  const box = document.querySelector(".gridwrap");
+  if (box) box.scrollTop = keepScroll != null ? keepScroll : scrollToWork(box);
+
   bind();
+}
+
+/* При первом открытии показываем рабочие часы, а не 8 утра:
+   прокручиваем к самому раннему уроку, а если уроков нет — к 15:00. */
+function scrollToWork(box){
+  const first = LESSONS.length
+    ? Math.min.apply(null, LESSONS.map(l => toMin(l.at_msk)))
+    : 15*60;
+  return Math.max(0, (first - DAY_START*60) / 30 * ROW - ROW*2);
 }
 
 /* ---------- события ---------- */
