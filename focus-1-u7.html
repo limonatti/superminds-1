@@ -33,7 +33,7 @@
   th{background:#f6ede0;color:#7c2340}
   .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   @media(max-width:620px){.words{grid-template-columns:1fr}}
-  .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
+  .word{display:flex;flex-direction:column;align-items:stretch;gap:8px;background:#fff;border-radius:14px;padding:10px;box-shadow:0 3px 0 #e3d3ba}.word .wimg{width:100%;height:120px;object-fit:cover;border-radius:10px;background:#f4e7db;display:block}.word .wrow{display:flex;align-items:center;gap:10px}
   .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
   .word .en{font-weight:900;font-size:15px}
   .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
@@ -171,7 +171,7 @@ const WBGAPS=[{"q": "I ___ (never/be) abroad. (present perfect)", "a": ["have ne
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(w[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div></div>';
   d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
 /* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
 let SM_VOICES=[];
@@ -238,7 +238,7 @@ if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.classNa
 /* Чанки — учим (с озвучкой) */
 const cbox=document.getElementById("chunks");
 if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
   d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
