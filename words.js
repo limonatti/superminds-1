@@ -367,14 +367,21 @@ window.SM_ready = window.SM_refreshCloudCourses().then(function () {
 window.SM_CARD_EP = "https://img-gen.limonatti.workers.dev/card?w=";
 
 /* Отрисовать «лицо» слова: авторская картинка, иначе фото по слову, иначе эмодзи.
-   На мелких размерах (плитки игр) остаётся эмодзи — фото там не разглядеть. */
+   Крупно (от 56px) — широкая карточка, мелко — квадратная плитка. */
 window.SM_face = function (w, px) {
   px = px || 64;
   if (w && w.img) return '<img src="' + w.img + '" alt="" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;vertical-align:middle;border-radius:12px">';
-  if (w && w.en && px >= 56) {
-    var bw = Math.round(px * 1.9);
-    var st = 'width:' + bw + 'px;max-width:100%;height:' + Math.round(bw * 0.72) + 'px;'
-           + 'object-fit:cover;border-radius:16px;background:#f4e7db;display:block;margin:0 auto';
+  if (w && w.en) {
+    var st;
+    if (px >= 56) {
+      var bw = Math.round(px * 1.9);
+      st = 'width:' + bw + 'px;max-width:100%;height:' + Math.round(bw * 0.72) + 'px;'
+         + 'object-fit:cover;border-radius:16px;background:#f4e7db;display:block;margin:0 auto';
+    } else {
+      var sq = Math.round(px * 1.35);
+      st = 'width:' + sq + 'px;height:' + sq + 'px;object-fit:cover;border-radius:10px;'
+         + 'background:#f4e7db;vertical-align:middle;display:inline-block';
+    }
     return '<img src="' + window.SM_CARD_EP + encodeURIComponent(w.en) + '" alt="" loading="lazy"'
          + ' data-emo="' + (w.emoji || "") + '" data-px="' + px + '" style="' + st + '"'
          + ' onerror="SM_faceFallback(this)">';
