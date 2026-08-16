@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Видео для главной — подбор варианта</title>
+<style>
+  :root{ --ink:#201e1d; --bg:#f3f2f2; --line:#d7d3d3; --acc:#ec3013; --hero:#5d1930; }
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 20px 60px;background:var(--bg);color:var(--ink);
+    font:400 15px/1.55 "Archivo",system-ui,-apple-system,sans-serif}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:22px;font-weight:800;letter-spacing:-.015em;margin:0 0 4px}
+  .sub{font-size:13px;color:#605d5d;margin:0 0 22px}
+  .grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:start}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .panel{background:#fff;border:2px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px}
+  label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#605d5d;margin-bottom:4px}
+  select,input,textarea{width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  textarea{min-height:120px;resize:vertical;line-height:1.45}
+  button{font:inherit;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    padding:11px 16px;border:0;background:var(--acc);color:#fff;cursor:pointer}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+  .stage{background:var(--hero);min-height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .stage video,.stage img{max-width:100%;max-height:70vh;display:block}
+  .status{font-size:12.5px;color:#605d5d;min-height:18px}
+  .status.err{color:var(--acc);font-weight:700}
+  .hint{font-size:12px;color:#605d5d;line-height:1.5;border-top:2px solid var(--line);padding-top:11px}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:#eae9e9;padding:1px 4px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Видео для главной</h1>
+  <p class="sub">Ася читает книгу и поднимает взгляд на вошедшего. Маршрут <code>/video</code> в воркере <code>statue</code>, Cloudflare Workers AI.</p>
+
+  <div class="grid">
+    <form class="panel" id="f">
+      <div>
+        <label for="base">Адрес воркера</label>
+        <input id="base" value="https://statue.limonatti.workers.dev" spellcheck="false">
+      </div>
+      <div>
+        <label for="m">Модель</label>
+        <select id="m">
+          <option value="vidu">vidu q3-turbo — дешёвая, для проверки</option>
+          <option value="wan">wan 2.7 — без водяного знака</option>
+          <option value="grok">grok imagine 1.5</option>
+          <option value="runway">runway gen-4.5 — дорогая</option>
+        </select>
+      </div>
+      <div class="row">
+        <div>
+          <label for="d">Секунд</label>
+          <input id="d" type="number" min="2" max="15" value="5">
+        </div>
+        <div>
+          <label for="res">Качество</label>
+          <select id="res">
+            <option>540p</option><option selected>720p</option><option>1080p</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="seed">Seed <span style="text-transform:none;letter-spacing:0">(пусто — случайный)</span></label>
+        <input id="seed" placeholder="например 7">
+      </div>
+      <div>
+        <label for="p">Промпт</label>
+        <textarea id="p"></textarea>
+      </div>
+      <button type="submit" id="go">Сгенерировать</button>
+      <button type="button" class="ghost" id="reset">Вернуть промпт по умолчанию</button>
+      <p class="status" id="st"></p>
+      <p class="hint">Генерация занимает от 30 секунд до двух минут — вкладку не закрывай.
+        Модели тарифицируются Cloudflare, стоимость видна в дашборде. Начинай с <code>vidu</code>.</p>
+    </form>
+
+    <div>
+      <div class="stage" id="stage">
+        <img src="img/asya-photo.jpg" alt="Стартовый кадр">
+      </div>
+      <p class="status" id="link"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+var DEFAULT_PROMPT =
+  "The same woman in the navy blazer, in the exact same position against the same plain " +
+  "crimson background. She is holding an open book, looking down at its pages and reading. " +
+  "After about two seconds she lifts her head, looks straight into the camera and gives a warm, " +
+  "welcoming smile, as if she just noticed someone walking in. Motion is subtle and natural: " +
+  "head lift, eyes meeting the camera, gentle smile, quiet breathing. The camera is completely " +
+  "static, no zoom, no pan. The background stays flat crimson and unchanged. Photorealistic, " +
+  "same lighting and same face as in the source photo.";
+
+var $ = function (id) { return document.getElementById(id); };
+$("p").value = DEFAULT_PROMPT;
+$("reset").onclick = function () { $("p").value = DEFAULT_PROMPT; };
+
+$("f").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  var base = $("base").value.replace(/\/+$/, "");
+  var q = new URLSearchParams({
+    m: $("m").value,
+    d: $("d").value,
+    res: $("res").value,
+    p: $("p").value
+  });
+  if ($("seed").value.trim()) q.set("seed", $("seed").value.trim());
+
+  $("go").disabled = true;
+  $("st").className = "status";
+  $("st").textContent = "Генерирую… это до двух минут.";
+  $("link").textContent = "";
+  var t0 = Date.now();
+  var tick = setInterval(function () {
+    $("st").textContent = "Генерирую… " + Math.round((Date.now() - t0) / 1000) + " с";
+  }, 1000);
+
+  try {
+    var r = await fetch(base + "/video?" + q.toString());
+    var data = await r.json();
+    clearInterval(tick);
+    if (!r.ok || !data.video) {
+      $("st").className = "status err";
+      $("st").textContent = "Ошибка: " + (data.details || data.error || r.status);
+      return;
+    }
+    $("stage").innerHTML = '<video src="' + data.video + '" controls autoplay muted playsinline></video>';
+    $("st").textContent = "Готово за " + Math.round((data.took_ms || 0) / 1000) + " с · " + data.model;
+    $("link").innerHTML = '<a href="' + data.video + '" target="_blank" rel="noopener">Скачать файл</a>';
+  } catch (err) {
+    clearInterval(tick);
+    $("st").className = "status err";
+    $("st").textContent = "Не достучалась до воркера: " + err.message;
+  } finally {
+    $("go").disabled = false;
+  }
+});
+</script>
+</body>
+</html>
