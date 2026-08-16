@@ -20,7 +20,8 @@ var I = {
   check: '<path d="M20 6L9 17l-5-5"/>',
   clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
   chat:  '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
-build: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
+build: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  menu:  '<path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>'
 };
 
 function svg(name, size) {
@@ -117,7 +118,111 @@ var SMUI = {
       '<div class="side-user" id="sideUser"></div>';
 
     this.paintUser(role);
+    this.mountBar(box);
     this.refreshUnread(role);
+  },
+
+  /* Верхняя полоса с бургером и выезжающее меню на узком экране.
+     Содержимое меню то же самое, что на десктопе, — меняется только способ открыть. */
+  mountBar(side) {
+    if (document.querySelector(".sm-bar")) return;
+    var app = document.querySelector(".app") || document.body;
+
+    var bar = document.createElement("div");
+    bar.className = "sm-bar";
+    bar.innerHTML =
+      '<button class="sm-burger" id="smBurger" type="button" aria-label="Открыть меню" ' +
+      'aria-expanded="false" aria-controls="side">' + svg("menu", 22) + "</button>" +
+      '<span class="flag"><i></i><b></b><s></s></span>' +
+      '<span class="sm-bar-name">With Asya</span>';
+
+    var scrim = document.createElement("button");
+    scrim.className = "sm-scrim";
+    scrim.id = "smScrim";
+    scrim.type = "button";
+    scrim.setAttribute("aria-label", "Закрыть меню");
+    scrim.tabIndex = -1;
+
+    app.parentNode.insertBefore(bar, app);
+    app.parentNode.insertBefore(scrim, app);
+
+    var burger = bar.querySelector("#smBurger");
+    var main = document.querySelector(".main");
+    var lastFocus = null;
+
+    function focusables() {
+      return [].slice.call(side.querySelectorAll(
+        'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
+      )).filter(function (el) { return el.offsetParent !== null; });
+    }
+
+    function open() {
+      lastFocus = document.activeElement;
+      side.classList.add("open");
+      scrim.classList.add("open");
+      scrim.tabIndex = 0;
+      burger.setAttribute("aria-expanded", "true");
+      burger.setAttribute("aria-label", "Закрыть меню");
+      document.body.style.overflow = "hidden";
+      if (main) main.setAttribute("inert", "");
+      var f = focusables();
+      if (f.length) f[0].focus();
+    }
+
+    function close() {
+      side.classList.remove("open");
+      scrim.classList.remove("open");
+      scrim.tabIndex = -1;
+      burger.setAttribute("aria-expanded", "false");
+      burger.setAttribute("aria-label", "Открыть меню");
+      document.body.style.overflow = "";
+      if (main) main.removeAttribute("inert");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function isOpen() { return side.classList.contains("open"); }
+
+    burger.addEventListener("click", function () { isOpen() ? close() : open(); });
+    scrim.addEventListener("click", close);
+
+    /* по ссылке уходим — меню закрываем */
+    side.addEventListener("click", function (e) {
+      if (isOpen() && e.target.closest("a,.roles button")) close();
+    });
+
+    /* Escape закрывает, Tab не убегает из панели */
+    document.addEventListener("keydown", function (e) {
+      if (!isOpen()) return;
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key !== "Tab") return;
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    /* вернулись на широкий экран — состояние сбрасываем */
+    var wide = window.matchMedia("(min-width:821px)");
+    var onWide = function (m) { if (m.matches && isOpen()) close(); };
+    wide.addEventListener ? wide.addEventListener("change", onWide) : wide.addListener(onWide);
+
+    this._syncBarBadge();
+  },
+
+  /* дублирует счётчик непрочитанных на бургер, когда меню закрыто */
+  _syncBarBadge() {
+    var burger = document.getElementById("smBurger");
+    if (!burger) return;
+    var src = document.querySelector('.navlist a[href="chat.html"] .badge');
+    var old = burger.querySelector(".badge");
+    if (old) old.parentNode.removeChild(old);
+    if (src) {
+      var b = document.createElement("span");
+      b.className = "badge";
+      b.textContent = src.textContent;
+      burger.appendChild(b);
+    }
   },
 
   /* Живой бейдж непрочитанных сообщений на пункте «Сообщения» (на любой странице) */
@@ -144,6 +249,7 @@ var SMUI = {
       b.textContent = n > 99 ? "99+" : n;
       link.appendChild(b);
     }
+    this._syncBarBadge();
   },
 
   async paintUser(role) {
