@@ -182,25 +182,36 @@ function playOnce(stage){
   if (!v) return;
   if (REDUCED){ v.removeAttribute("autoplay"); return; }
 
-  var done = false, started = false;
-  v.addEventListener("ended", function(){ done = true; });
+  /* Отметку «доиграл» держим НА ЭЛЕМЕНТЕ, а не в замыкании: play() на
+     доигравшем видео перематывает его в начало, и любой повторный вызов
+     из наблюдателя запускал ролик по кругу. */
+  var io = null;
+
+  v.addEventListener("ended", function(){
+    v.dataset.played = "1";
+    v.pause();
+    try { v.currentTime = Math.max(0, (v.duration || 0) - 0.04); } catch (e) {}
+    if (io) { io.disconnect(); io = null; }
+  });
+
+  function finished(){ return v.dataset.played === "1" || v.ended; }
 
   function tryPlay(){
-    if (done || document.hidden) return;
+    if (finished() || document.hidden || !v.paused) return;
     var p = v.play();
     if (p && p.catch) p.catch(function(){ /* автозапуск запретили — остаётся постер */ });
-    started = true;
   }
-  function halt(){ if (!done && started) v.pause(); }
+  function halt(){ if (!finished() && !v.paused) v.pause(); }
 
   document.addEventListener("visibilitychange", function(){
     document.hidden ? halt() : tryPlay();
   });
 
   if (window.IntersectionObserver){
-    new IntersectionObserver(function(es){
+    io = new IntersectionObserver(function(es){
       es[0].isIntersecting ? tryPlay() : halt();
-    }, { threshold: 0.25 }).observe(v);
+    }, { threshold: 0.25 });
+    io.observe(v);
   } else {
     tryPlay();
   }
