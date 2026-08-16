@@ -31,19 +31,40 @@ const DEFAULT_PROMPT = "Take the exact face of the woman in image 1 and give it 
 const DEFAULT_VIDEO_IMAGE = "https://english-with-asya.com/img/asya-photo.jpg";
 
 const DEFAULT_VIDEO_PROMPT =
-  "The same woman in the navy blazer, in the exact same position against the same plain " +
-  "crimson background. She is holding an open book, looking down at its pages and reading. " +
-  "After about two seconds she lifts her head, looks straight into the camera and gives a warm, " +
-  "welcoming smile, as if she just noticed someone walking in. Motion is subtle and natural: " +
-  "head lift, eyes meeting the camera, gentle smile, quiet breathing. The camera is completely " +
-  "static, no zoom, no pan. The background stays flat crimson and unchanged. Photorealistic, " +
-  "same lighting and same face as in the source photo.";
+  "She is reading the open book. She lowers the book away from her face, lifts her head and " +
+  "shifts her gaze from the page to the viewer, meeting the camera with a warm welcoming smile, " +
+  "as if she just noticed someone walking in. One single continuous motion, calm and unhurried. " +
+  "The camera is completely static, no zoom, no pan. Same woman, same navy blazer, same plain " +
+  "crimson background throughout. Photorealistic, natural movement.";
+
+/* Готовые кадры для сцены на главной: /statue с этими промптами и seed=7.
+   Первый — читает, второй — смотрит на вошедшего. Оба кэшируются по seed. */
+const FRAME_READING =
+  "/statue?u=https%3A%2F%2Fenglish-with-asya.com%2Fimg%2Fasya-photo.jpg&seed=7&w=768&h=1152" +
+  "&p=The%20same%20woman%20from%20image%200%2C%20exactly%20the%20same%20face%20and%20likeness%2C%20same%20navy%20blazer%20and%20white%20shirt%2C%20same%20plain%20crimson%20background%2C%20same%20lighting.%20She%20is%20holding%20an%20open%20book%20raised%20close%20in%20front%20of%20her%20chest%20with%20both%20hands%2C%20her%20head%20tilted%20down%20and%20her%20eyes%20lowered%20onto%20the%20page%2C%20absorbed%20in%20reading%2C%20NOT%20looking%20at%20the%20camera.%20Calm%20neutral%20expression%2C%20lips%20closed.%20Photorealistic%20portrait%2C%20high%20detail%2C%20no%20text%2C%20no%20watermark";
+
+const FRAME_LOOKING =
+  "/statue?u=https%3A%2F%2Fenglish-with-asya.com%2Fimg%2Fasya-photo.jpg&seed=21&w=768&h=1152" +
+  "&p=The%20same%20woman%20from%20image%200%2C%20exactly%20the%20same%20face%20and%20likeness%2C%20same%20navy%20blazer%20and%20white%20shirt%2C%20same%20plain%20crimson%20background%2C%20same%20lighting.%20She%20is%20now%20holding%20an%20open%20book%20in%20both%20hands%20at%20chest%20height%2C%20and%20she%20is%20looking%20straight%20at%20the%20viewer%20with%20a%20warm%20welcoming%20smile%2C%20as%20if%20greeting%20someone%20who%20just%20walked%20in.%20Photorealistic%20portrait%2C%20high%20detail%2C%20no%20text%2C%20no%20watermark";
 
 const VIDEO_MODELS = {
+  /* Умеет start+end: даём кадр «читает» и кадр «смотрит на тебя»,
+     модель достраивает движение между ними. Самый предсказуемый вариант. */
   vidu: {
     id: "vidu/q3-turbo",
-    note: "самая дешёвая, для проверки композиции",
-    build: (o) => ({ prompt: o.prompt, start_image: o.image, duration: o.duration, resolution: o.res }),
+    note: "дешёвая, принимает начальный и конечный кадр",
+    build: (o) => Object.assign(
+      { prompt: o.prompt, start_image: o.image, duration: o.duration, resolution: o.res },
+      o.endImage ? { end_image: o.endImage } : {}
+    ),
+  },
+  vidupro: {
+    id: "vidu/q3-pro",
+    note: "то же самое, но качественнее",
+    build: (o) => Object.assign(
+      { prompt: o.prompt, start_image: o.image, duration: o.duration, resolution: o.res },
+      o.endImage ? { end_image: o.endImage } : {}
+    ),
   },
   wan: {
     id: "alibaba/wan-2.7-i2v",
@@ -116,6 +137,9 @@ async function grab(env, src, box) {
    разворачиваем в /f/имя — этот маршрут уже отдаёт файл наружу. */
 function publicUrl(origin, src) {
   if (!src) return DEFAULT_VIDEO_IMAGE;
+  /* готовые кадры сцены — короткими именами вместо простыни из промпта */
+  if (src === "frame:reading") return origin + FRAME_READING;
+  if (src === "frame:looking") return origin + FRAME_LOOKING;
   if (src.indexOf("kv:") === 0) {
     return origin + "/f/" + src.slice(3).replace(/[^a-z0-9_-]/gi, "");
   }
@@ -148,9 +172,14 @@ async function handleVideo(url, env, redirect) {
   const image = publicUrl(url.origin, url.searchParams.get("u"));
   if (!/^https:\/\//i.test(image)) return json({ error: "u must be an https url or kv:name" }, 400);
 
+  /* u2 — конечный кадр. Если задан, модель идёт от первого кадра ко второму. */
+  const rawEnd = url.searchParams.get("u2");
+  const endImage = rawEnd ? publicUrl(url.origin, rawEnd) : null;
+
   const rawSeed = url.searchParams.get("seed");
   const opts = {
     image,
+    endImage,
     prompt: (url.searchParams.get("p") || DEFAULT_VIDEO_PROMPT).slice(0, 2000),
     duration: clampInt(url.searchParams.get("d"), 2, 15, 5),
     res: pickOpt(url.searchParams.get("res"), ["540p", "720p", "1080p"], "720p"),

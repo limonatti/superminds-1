@@ -45,7 +45,8 @@
       <div>
         <label for="m">Модель</label>
         <select id="m">
-          <option value="vidu">vidu q3-turbo — дешёвая, для проверки</option>
+          <option value="vidu">vidu q3-turbo — два кадра, дёшево</option>
+          <option value="vidupro">vidu q3-pro — два кадра, качественнее</option>
           <option value="wan">wan 2.7 — без водяного знака</option>
           <option value="grok">grok imagine 1.5</option>
           <option value="runway">runway gen-4.5 — дорогая</option>
@@ -62,6 +63,20 @@
             <option>540p</option><option selected>720p</option><option>1080p</option>
           </select>
         </div>
+      </div>
+      <div>
+        <label for="u">Начальный кадр</label>
+        <select id="u">
+          <option value="frame:reading">frame:reading — читает книгу</option>
+          <option value="">фото без книги</option>
+        </select>
+      </div>
+      <div>
+        <label for="u2">Конечный кадр</label>
+        <select id="u2">
+          <option value="frame:looking">frame:looking — смотрит на вошедшего</option>
+          <option value="">без конечного кадра</option>
+        </select>
       </div>
       <div>
         <label for="seed">Seed <span style="text-transform:none;letter-spacing:0">(пусто — случайный)</span></label>
@@ -89,13 +104,11 @@
 
 <script>
 var DEFAULT_PROMPT =
-  "The same woman in the navy blazer, in the exact same position against the same plain " +
-  "crimson background. She is holding an open book, looking down at its pages and reading. " +
-  "After about two seconds she lifts her head, looks straight into the camera and gives a warm, " +
-  "welcoming smile, as if she just noticed someone walking in. Motion is subtle and natural: " +
-  "head lift, eyes meeting the camera, gentle smile, quiet breathing. The camera is completely " +
-  "static, no zoom, no pan. The background stays flat crimson and unchanged. Photorealistic, " +
-  "same lighting and same face as in the source photo.";
+  "She is reading the open book. She lowers the book away from her face, lifts her head and " +
+  "shifts her gaze from the page to the viewer, meeting the camera with a warm welcoming smile, " +
+  "as if she just noticed someone walking in. One single continuous motion, calm and unhurried. " +
+  "The camera is completely static, no zoom, no pan. Same woman, same navy blazer, same plain " +
+  "crimson background throughout. Photorealistic, natural movement.";
 
 var $ = function (id) { return document.getElementById(id); };
 $("p").value = DEFAULT_PROMPT;
@@ -111,6 +124,8 @@ $("f").addEventListener("submit", async function (e) {
     p: $("p").value
   });
   if ($("seed").value.trim()) q.set("seed", $("seed").value.trim());
+  if ($("u").value) q.set("u", $("u").value);
+  if ($("u2").value) q.set("u2", $("u2").value);
 
   $("go").disabled = true;
   $("st").className = "status";
