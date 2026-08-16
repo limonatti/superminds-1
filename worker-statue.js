@@ -186,9 +186,16 @@ async function handleVideo(url, env, redirect) {
     seed: rawSeed === null ? null : clampInt(rawSeed, 0, 2147483647, 0),
   };
 
+  /* Сторонние модели идут только через AI Gateway: без третьего аргумента
+     Cloudflare отвечает «2021: Invalid User Credentials». Оплата — предоплаченными
+     кредитами AI Gateway (Unified Billing). Список поддерживаемых провайдеров
+     ограничен: OpenAI, Anthropic, Google AI Studio, xAI, Groq. Из наших моделей
+     туда попадает только grok; для vidu, wan и runway нужен свой ключ провайдера. */
+  const gateway = url.searchParams.get("g") || "default";
+
   const started = Date.now();
   try {
-    const result = await env.AI.run(model.id, model.build(opts));
+    const result = await env.AI.run(model.id, model.build(opts), { gateway: { id: gateway } });
     const video = extractVideoUrl(result);
     if (!video) {
       return json({ error: "model returned no video", model: model.id, raw: JSON.stringify(result).slice(0, 600) }, 502);
@@ -198,7 +205,11 @@ async function handleVideo(url, env, redirect) {
     }
     return json({ video, model: model.id, took_ms: Date.now() - started, params: opts });
   } catch (err) {
-    return json({ error: "video generation failed", model: model.id, details: String((err && err.message) || err).slice(0, 400) }, 500);
+    const msg = String((err && err.message) || err);
+    const hint = /credential|2021|unauthor/i.test(msg)
+      ? "Провайдер не оплачен. Unified Billing в AI Gateway покрывает OpenAI, Anthropic, Google AI Studio, xAI и Groq — из видеомоделей это только m=grok. Для остальных нужен свой ключ провайдера в разделе Provider Keys."
+      : undefined;
+    return json({ error: "video generation failed", model: model.id, gateway, details: msg.slice(0, 400), hint }, 500);
   }
 }
 
