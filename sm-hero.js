@@ -52,6 +52,7 @@ var CSS = "" +
 ".hs-panel{position:absolute;left:50%;bottom:0;width:min(76%,340px);height:86%;" +
 "margin-left:calc(min(76%,340px) / -2);border-radius:999px 999px 0 0;" +
 "background:rgba(255,255,255,.15);opacity:0;transform:scale(.94)}" +
+".hs-figwrap{position:relative;display:inline-block;height:100%}" +
 ".hs-fig{position:relative;height:100%;width:auto;max-width:none;display:block;" +
 "filter:drop-shadow(0 8px 44px rgba(20,4,10,.55));opacity:0;transform:translateY(26px)}" +
 ".hs-pill{position:absolute;display:inline-flex;align-items:center;white-space:nowrap;" +
@@ -110,9 +111,9 @@ function build(stage){
     '<div class="hs">' +
       '<span class="hs-par" data-d="0.008" style="position:absolute;inset:0">' +
         '<span class="hs-panel"></span></span>' +
-      '<span class="hs-par" data-d="0.016" style="position:relative;height:100%">' +
-        '<img class="hs-fig" src="img/asya-sticker.webp" alt="Ася, преподаватель английского" ' +
-        'draggable="false" width="716" height="1242" fetchpriority="high">' +
+      '<span class="hs-par hs-figwrap" data-d="0.016">' +
+        '<img class="hs-fig" src="img/asya-statue.webp" alt="Ася в образе античной статуи с ноутбуком" ' +
+        'draggable="false" width="816" height="1280" fetchpriority="high">' +
       '</span>' +
       pills +
     '</div>';
