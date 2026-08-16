@@ -52,7 +52,9 @@ var CSS = "" +
 ".hs-panel{position:absolute;left:50%;bottom:0;width:min(76%,340px);height:86%;" +
 "margin-left:calc(min(76%,340px) / -2);border-radius:999px 999px 0 0;" +
 "background:rgba(255,255,255,.15);opacity:0;transform:scale(.94)}" +
-".hs-figwrap{position:relative;display:inline-block;height:100%}" +
+/* Потолок на размер фигуры: без него на высоком мониторе кадр разрастался
+   и лицо занимало пол-экрана. Низ всё равно прижат к краю сцены. */
+".hs-figwrap{position:relative;display:inline-block;height:100%;max-height:min(56vh,520px)}" +
 ".hs-fig{position:relative;height:100%;width:auto;max-width:none;display:block;" +
 "filter:drop-shadow(0 8px 44px rgba(20,4,10,.55));opacity:0;transform:translateY(26px)}" +
 ".hs-pill{position:absolute;display:inline-flex;align-items:center;white-space:nowrap;" +
@@ -94,8 +96,10 @@ function esc(v){
 }
 
 function build(stage){
-  var name = (stage.getAttribute("data-name") || "").trim();
-  var hi = name ? esc(name.split(" ")[0]) + ", г" : "Г";
+  /* В data-name может прилететь почта вместо имени — тогда здороваемся без имени. */
+  var raw = (stage.getAttribute("data-name") || "").trim();
+  var name = raw.indexOf("@") >= 0 ? "" : raw.split(" ")[0];
+  var hi = name ? esc(name) + ", г" : "Г";
 
   var pills = PILLS.map(function(p, i){
     return '<span class="hs-par" style="position:absolute;left:' + p.x + '%;top:' + p.y + '%" data-d="' + p.d + '">' +
@@ -112,8 +116,8 @@ function build(stage){
       '<span class="hs-par" data-d="0.008" style="position:absolute;inset:0">' +
         '<span class="hs-panel"></span></span>' +
       '<span class="hs-par hs-figwrap" data-d="0.016">' +
-        '<img class="hs-fig" src="img/asya-statue.webp" alt="Ася в образе античной статуи с ноутбуком" ' +
-        'draggable="false" width="816" height="1280" fetchpriority="high">' +
+        '<img class="hs-fig" src="img/asya-sticker.webp" alt="Ася, преподаватель английского" ' +
+        'draggable="false" width="730" height="1121" fetchpriority="high">' +
       '</span>' +
       pills +
     '</div>';
@@ -169,9 +173,12 @@ function init(){
   stage.setAttribute("data-hero","1");
   build(stage);
   parallax(stage);
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){ stage.classList.add("in"); });
-  });
+  /* Появление. Только на requestAnimationFrame полагаться нельзя: если вкладка
+     в этот момент неактивна, кадр не наступает и сцена остаётся на opacity:0.
+     Поэтому дублируем таймером — classList.add повторный вызов переживает. */
+  function reveal(){ stage.classList.add("in"); }
+  requestAnimationFrame(function(){ requestAnimationFrame(reveal); });
+  setTimeout(reveal, 400);
 }
 
 css();
