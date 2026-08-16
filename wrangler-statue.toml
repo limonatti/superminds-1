@@ -7,8 +7,15 @@
 
 name = "statue"
 main = "worker-statue.js"
-compatibility_date = "2026-08-16"
+
+# Совпадает с тем, что уже стоит у воркера в дашборде.
+# Не двигаем заодно с деплоем: смена даты меняет поведение рантайма.
+compatibility_date = "2026-08-02"
 compatibility_flags = ["nodejs_compat"]
+
+# У воркера они выключены. Без этой строки wrangler включил бы их сам,
+# и у каждой версии появился бы публичный адрес.
+preview_urls = false
 
 # Workers AI — генерация картинок и видео
 [ai]
