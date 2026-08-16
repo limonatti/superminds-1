@@ -53,10 +53,14 @@ var CSS = "" +
 "margin-left:calc(min(76%,340px) / -2);border-radius:999px 999px 0 0;" +
 "background:rgba(255,255,255,.15);opacity:0;transform:scale(.94)}" +
 /* Потолок на размер фигуры: без него на высоком мониторе кадр разрастался
-   и лицо занимало пол-экрана. Низ всё равно прижат к краю сцены. */
-".hs-figwrap{position:relative;display:inline-block;height:100%;max-height:min(56vh,520px)}" +
+   и лицо занимало пол-экрана. */
+".hs-figwrap{position:relative;display:inline-block;height:100%;max-height:min(58vh,540px)}" +
+/* Ролик в скруглённой рамке. Фон внутри кадра — свой красный #652634;
+   вырезать его покадрово не стали: webm с альфой весил 6,7 МБ против 258 КБ. */
 ".hs-fig{position:relative;height:100%;width:auto;max-width:none;display:block;" +
-"filter:drop-shadow(0 8px 44px rgba(20,4,10,.55));opacity:0;transform:translateY(26px)}" +
+"border-radius:26px;background:#652634;object-fit:cover;" +
+"box-shadow:0 20px 50px rgba(20,4,10,.55),0 0 0 1px rgba(255,255,255,.10) inset;" +
+"opacity:0;transform:translateY(26px)}" +
 ".hs-pill{position:absolute;display:inline-flex;align-items:center;white-space:nowrap;" +
 "font-size:clamp(10px,1vw,12.5px);font-weight:800;letter-spacing:.01em;padding:8px 14px;" +
 "border-radius:999px;background:#fff;color:#3a1120;" +
@@ -116,8 +120,10 @@ function build(stage){
       '<span class="hs-par" data-d="0.008" style="position:absolute;inset:0">' +
         '<span class="hs-panel"></span></span>' +
       '<span class="hs-par hs-figwrap" data-d="0.016">' +
-        '<img class="hs-fig" src="img/asya-sticker.webp" alt="Ася, преподаватель английского" ' +
-        'draggable="false" width="730" height="1121" fetchpriority="high">' +
+        '<video class="hs-fig" id="hsVideo" src="img/asya-video.mp4" ' +
+        'poster="img/asya-video-poster.webp" width="672" height="1222" ' +
+        'muted playsinline preload="metadata" disablepictureinpicture ' +
+        'aria-label="Ася с книгой смотрит на вошедшего"></video>' +
       '</span>' +
       pills +
     '</div>';
@@ -166,6 +172,40 @@ function parallax(stage){
   }
 }
 
+/* Ролик проигрывается РОВНО ОДИН РАЗ и замирает на последнем кадре.
+   Петли нет намеренно: на главную ученик заходит перед каждым уроком,
+   и бесконечное движение через неделю начнёт мешать, а не радовать.
+   При выключенных анимациях играть не начинаем — остаётся постер.
+   Пока сцена вне экрана или вкладка скрыта, ролик тоже стоит. */
+function playOnce(stage){
+  var v = stage.querySelector("#hsVideo");
+  if (!v) return;
+  if (REDUCED){ v.removeAttribute("autoplay"); return; }
+
+  var done = false, started = false;
+  v.addEventListener("ended", function(){ done = true; });
+
+  function tryPlay(){
+    if (done || document.hidden) return;
+    var p = v.play();
+    if (p && p.catch) p.catch(function(){ /* автозапуск запретили — остаётся постер */ });
+    started = true;
+  }
+  function halt(){ if (!done && started) v.pause(); }
+
+  document.addEventListener("visibilitychange", function(){
+    document.hidden ? halt() : tryPlay();
+  });
+
+  if (window.IntersectionObserver){
+    new IntersectionObserver(function(es){
+      es[0].isIntersecting ? tryPlay() : halt();
+    }, { threshold: 0.25 }).observe(v);
+  } else {
+    tryPlay();
+  }
+}
+
 function init(){
   var stage = document.getElementById("mascotStage") ||
               document.querySelector(".teacher-stage");
@@ -179,6 +219,8 @@ function init(){
   function reveal(){ stage.classList.add("in"); }
   requestAnimationFrame(function(){ requestAnimationFrame(reveal); });
   setTimeout(reveal, 400);
+
+  playOnce(stage);
 }
 
 css();
