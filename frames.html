@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кадры A и B — скачать для видео</title>
+<style>
+  :root{ --ink:#201e1d; --bg:#f3f2f2; --line:#d7d3d3; --acc:#ec3013; --hero:#5d1930; }
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 20px 60px;background:var(--bg);color:var(--ink);
+    font:400 15px/1.55 "Archivo",system-ui,-apple-system,sans-serif}
+  .wrap{max-width:980px;margin:0 auto}
+  h1{font-size:22px;font-weight:800;letter-spacing:-.015em;margin:0 0 4px}
+  .sub{font-size:13px;color:#605d5d;margin:0 0 22px;max-width:70ch}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:2px solid var(--line);display:flex;flex-direction:column}
+  .card h2{font-size:14px;font-weight:800;margin:0;padding:12px 14px;border-bottom:2px solid var(--line)}
+  .card h2 span{font-weight:600;color:#605d5d}
+  .shot{background:var(--hero);min-height:320px;display:flex;align-items:center;justify-content:center;padding:14px}
+  .shot img{max-width:100%;max-height:60vh;display:block}
+  .foot{padding:12px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:2px solid var(--line)}
+  a.btn,button{font:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    padding:9px 13px;border:0;background:var(--acc);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+  a.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+  .note{font-size:12px;color:#605d5d;padding:0 14px 12px;line-height:1.5}
+  .prompt{margin-top:26px;background:#fff;border:2px solid var(--line);padding:16px}
+  .prompt h2{font-size:14px;font-weight:800;margin:0 0 10px}
+  textarea{width:100%;min-height:150px;font:400 12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+    padding:11px;border:1px solid var(--line);resize:vertical;background:var(--bg);color:var(--ink)}
+  .row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .ok{font-size:12.5px;color:#2e6f4e;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Кадры для видео</h1>
+  <p class="sub">Правый клик по картинке → «Сохранить изображение как…». Первая загрузка занимает
+    10–20 секунд: кадр рисуется заново. Дальше отдаётся из кэша мгновенно.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Кадр A <span>— начальный, читает книгу</span></h2>
+      <div class="shot"><img id="a" alt="Ася читает книгу"></div>
+      <div class="foot">
+        <a class="btn" id="aOpen" target="_blank" rel="noopener">Открыть оригинал</a>
+        <a class="btn ghost" id="aCopy" href="#">Скопировать ссылку</a>
+      </div>
+      <p class="note">Сохрани как <code>frame-a-reading.jpg</code></p>
+    </div>
+
+    <div class="card">
+      <h2>Кадр B <span>— конечный, смотрит на вошедшего</span></h2>
+      <div class="shot"><img id="b" alt="Ася смотрит на вошедшего"></div>
+      <div class="foot">
+        <a class="btn" id="bOpen" target="_blank" rel="noopener">Открыть оригинал</a>
+        <a class="btn ghost" id="bCopy" href="#">Скопировать ссылку</a>
+      </div>
+      <p class="note">Сохрани как <code>frame-b-looking.jpg</code></p>
+    </div>
+  </div>
+
+  <div class="prompt">
+    <h2>Промпт для сервиса</h2>
+    <textarea id="p" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="copy">Скопировать промпт</button>
+      <span class="ok" id="done"></span>
+    </div>
+    <p class="note" style="padding:10px 0 0">
+      Если сервис принимает два кадра — ставь A стартовым, B конечным.
+      Если только один — бери A, движение задаст промпт.
+      Длительность 4–5 секунд, вертикаль, звук выключить, камера статична.
+    </p>
+  </div>
+</div>
+
+<script>
+var BASE = "https://statue.limonatti.workers.dev/statue";
+var SRC  = "https://english-with-asya.com/img/asya-photo.jpg";
+
+var P_A = "The same woman from image 0, exactly the same face and likeness, same navy blazer and white shirt, same plain crimson background, same lighting. She is holding an open book raised close in front of her chest with both hands, her head tilted down and her eyes lowered onto the page, absorbed in reading, NOT looking at the camera. Calm neutral expression, lips closed. Photorealistic portrait, high detail, no text, no watermark";
+
+var P_B = "The same woman from image 0, exactly the same face and likeness, same navy blazer and white shirt, same plain crimson background, same lighting. She is now holding an open book in both hands at chest height, and she is looking straight at the viewer with a warm welcoming smile, as if greeting someone who just walked in. Photorealistic portrait, high detail, no text, no watermark";
+
+var PROMPT =
+  "She is reading the open book. She lowers the book away from her face, lifts her head " +
+  "and shifts her gaze from the page to the viewer, meeting the camera with a warm " +
+  "welcoming smile, as if she just noticed someone walking in. One single continuous " +
+  "motion, calm and unhurried. The camera is completely static, no zoom, no pan. " +
+  "Same woman, same navy blazer, same plain crimson background throughout. " +
+  "Photorealistic, natural movement.";
+
+function url(seed, prompt) {
+  return BASE + "?u=" + encodeURIComponent(SRC) + "&seed=" + seed +
+         "&w=768&h=1152&p=" + encodeURIComponent(prompt);
+}
+
+var uA = url(7, P_A), uB = url(21, P_B);
+document.getElementById("a").src = uA;
+document.getElementById("b").src = uB;
+document.getElementById("aOpen").href = uA;
+document.getElementById("bOpen").href = uB;
+document.getElementById("p").value = PROMPT;
+
+function copier(btn, getText, label) {
+  document.getElementById(btn).addEventListener("click", function (e) {
+    e.preventDefault();
+    navigator.clipboard.writeText(getText()).then(function () {
+      document.getElementById("done").textContent = label + " скопирован";
+      setTimeout(function () { document.getElementById("done").textContent = ""; }, 2500);
+    });
+  });
+}
+copier("copy",  function () { return document.getElementById("p").value; }, "Промпт");
+copier("aCopy", function () { return uA; }, "Адрес кадра A");
+copier("bCopy", function () { return uB; }, "Адрес кадра B");
+</script>
+</body>
+</html>
