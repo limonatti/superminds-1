@@ -1,0 +1,25 @@
+# Конфиг для деплоя воркера `statue` из терминала.
+#
+#   npx wrangler deploy --config wrangler-statue.toml
+#
+# Без этого файла `wrangler deploy` снёс бы привязки, настроенные в дашборде,
+# и рабочий /statue перестал бы находить AI, KV и Images.
+
+name = "statue"
+main = "worker-statue.js"
+compatibility_date = "2026-08-16"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers AI — генерация картинок и видео
+[ai]
+binding = "AI"
+
+# KV с референсами: сюда кладёт /put, отдаёт /f/<имя>
+[[kv_namespaces]]
+binding = "REFS"
+id = "a60cb7294fde451ab3d736ae821fa818"
+
+# Images — уменьшает референсы до 480 px перед отправкой в модель.
+# Привязка не обязательная: без неё воркер шлёт картинку как есть.
+[images]
+binding = "IMAGES"
