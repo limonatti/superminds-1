@@ -741,7 +741,13 @@
       const m=document.getElementById("msg");m.className="msg ok";m.textContent="Редактируешь упражнение — измени и сохрани";
     }
 
-    (async function(){ const u=await SM.getUser(); if(u&&SM.isCloud) renderBuilder(u); else renderLogin(); })();
+    (async function(){
+      /* Курсы Speakout, Solutions, Focus, Gateway подтягиваются асинхронно.
+         Без этого ожидания в списке оказывались только Super Minds. */
+      try { await (window.SM_ready || Promise.resolve()); } catch(e){}
+      const u=await SM.getUser();
+      if(u&&SM.isCloud) renderBuilder(u); else renderLogin();
+    })();
   </script>
 </body>
 </html>
