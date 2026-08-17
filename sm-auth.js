@@ -346,7 +346,7 @@ async saveExercise(ex) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };
 const c = ensureClient(); if (!c) return { ok: false };
 const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
-const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, type: ex.type, title: ex.title || null, section: ex.section || null, data: ex.data || {} };
+const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, book: ex.book || "sb", type: ex.type, title: ex.title || null, section: ex.section || null, data: ex.data || {} };
 if (ex.id) {
 const { data, error } = await c.from("exercises").update(row).eq("id", ex.id).select("id");
 if (error) return { ok: false, error: error.message };
@@ -361,14 +361,14 @@ async myExercises(course) {
 if (!useCloud) return [];
 const c = ensureClient(); if (!c) return [];
 const u = await this.getUser(); if (!u) return [];
-let q = c.from("exercises").select("id,course,unit_id,type,title,section,position,data,created_at").eq("author_id", u.id).order("created_at", { ascending: false });
+let q = c.from("exercises").select("id,course,unit_id,book,type,title,section,position,data,created_at").eq("author_id", u.id).order("created_at", { ascending: false });
 if (course) q = q.eq("course", course);
 const { data } = await q; return data || [];
 },
 async exercisesFor(course, unit) {
 if (!useCloud) return [];
 const c = ensureClient(); if (!c) return [];
-const { data, error } = await c.from("exercises").select("id,type,title,section,position,data,created_at").eq("course", course).eq("unit_id", unit).order("position", { ascending: true }).order("created_at", { ascending: true });
+const { data, error } = await c.from("exercises").select("id,type,title,section,book,position,data,created_at").eq("course", course).eq("unit_id", unit).order("position", { ascending: true }).order("created_at", { ascending: true });
 if (error) { console.warn("exercisesFor:", error.message); return []; }
 return data || [];
 },
@@ -462,6 +462,31 @@ const { error } = await c.storage.from("word-images").upload(path, blob, { conte
 if (error) return { ok: false, error: error.message };
 const { data } = c.storage.from("word-images").getPublicUrl(path);
 return { ok: true, url: data && data.publicUrl };
+} catch (e) { return { ok: false, error: String(e) }; }
+},
+
+/* Загрузить любой файл упражнения (картинку, аудио, видео) в хранилище ex-media.
+   Принимает File или Blob. Возвращает {ok, url}. Максимум 25 МБ — ограничение бакета. */
+async uploadMedia(file, kind) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+if (!file) return { ok: false, error: "нет файла" };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false, error: "войди в кабинет" };
+if (file.size > 25 * 1024 * 1024) return { ok: false, error: "файл больше 25 МБ — сожми или залей ссылкой" };
+try {
+const mime = file.type || "application/octet-stream";
+const named = (file.name || "").match(/\.([a-z0-9]{2,5})$/i);
+const byMime = { "audio/mpeg": "mp3", "audio/mp3": "mp3", "audio/wav": "wav", "audio/ogg": "ogg",
+"audio/webm": "webm", "audio/mp4": "m4a", "audio/x-m4a": "m4a", "audio/aac": "aac",
+"video/mp4": "mp4", "video/webm": "webm", "video/quicktime": "mov",
+"image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif" };
+const ext = (named ? named[1].toLowerCase() : null) || byMime[mime] || "bin";
+const folder = kind || (mime.indexOf("audio") === 0 ? "audio" : mime.indexOf("video") === 0 ? "video" : "img");
+const path = u.id + "/" + folder + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 7) + "." + ext;
+const { error } = await c.storage.from("ex-media").upload(path, file, { contentType: mime, upsert: false });
+if (error) return { ok: false, error: error.message };
+const { data } = c.storage.from("ex-media").getPublicUrl(path);
+return { ok: true, url: data && data.publicUrl, path: path };
 } catch (e) { return { ok: false, error: String(e) }; }
 },
 

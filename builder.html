@@ -30,6 +30,11 @@
   .imgrow{display:flex;gap:8px}
   .imgrow .img{flex:1}
   .upl{background:#eae9e9;color:#4a8b34;border-radius:12px;padding:0 14px;font:800 13px 'Archivo',sans-serif;flex:none;white-space:nowrap}
+  .upl:disabled{opacity:.6;cursor:progress}
+  .upl.rec{background:#ec3013;color:#fff;animation:recpulse 1.1s ease-in-out infinite}
+  @keyframes recpulse{0%,100%{box-shadow:0 0 0 0 rgba(236,48,19,.45)}50%{box-shadow:0 0 0 7px rgba(236,48,19,0)}}
+  @media(prefers-reduced-motion:reduce){.upl.rec{animation:none}}
+  .audprev audio{width:100%;margin-top:8px}
   .imgprev img{max-width:130px;border-radius:10px;margin-top:8px;border:2px solid #cfcecd}
   .addbig{display:block;width:100%;margin-top:6px;background:#4a8b34;color:#fff;border-radius:12px;padding:11px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #2c5716}
   .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Archivo',sans-serif;color:#4a8b34;flex:none}
@@ -97,32 +102,97 @@
     const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open"]);
     let editId=null;
 
-    /* ---- загрузка картинки с компьютера (сжатие в браузере, без сервера) ---- */
-    function pickImage(input,cb){
+    /* ---- медиа: файл с компьютера → хранилище ex-media, в упражнение идёт ссылка ----
+       Раньше картинка сохранялась как base64 прямо в базу и раздувала упражнение
+       на 100–200 КБ. Теперь файл лежит в хранилище, кэшируется браузером,
+       а в базе только короткая ссылка. Аудио и видео иначе хранить и нельзя. */
+    function busy(btn,on,txt){ if(!btn)return; btn.disabled=on; btn.textContent=on?(txt||"загружаю…"):(btn.dataset.lbl||btn.textContent); }
+    function fail(m){ const el=document.getElementById("msg"); if(el){el.className="msg err";el.textContent=m;} else alert(m); }
+
+    async function putFile(file,kind,btn){
+      busy(btn,true);
+      const r=await SM.uploadMedia(file,kind);
+      busy(btn,false);
+      if(!r.ok){ fail("Не удалось загрузить файл: "+(r.error||"попробуй ещё раз")); return null; }
+      return r.url;
+    }
+
+    /* Картинка: сначала ужимаем до 1000px, потом кладём в хранилище */
+    function pickImage(input,cb,btn){
       const fi=document.createElement("input");fi.type="file";fi.accept="image/*";
       fi.onchange=()=>{const file=fi.files&&fi.files[0];if(!file)return;
         const rd=new FileReader();
         rd.onload=()=>{const img=new Image();
-          img.onload=()=>{const max=800;let w=img.width,h=img.height;
+          img.onload=()=>{const max=1000;let w=img.width,h=img.height;
             if(w>max||h>max){const s=Math.min(max/w,max/h);w=Math.round(w*s);h=Math.round(h*s);}
             const cv=document.createElement("canvas");cv.width=w;cv.height=h;cv.getContext("2d").drawImage(img,0,0,w,h);
-            input.value=cv.toDataURL("image/jpeg",0.82);if(cb)cb();};
-          img.onerror=()=>{input.value=rd.result;if(cb)cb();};
+            cv.toBlob(async blob=>{
+              const url=await putFile(new File([blob],(file.name||"img").replace(/\.\w+$/,"")+".jpg",{type:"image/jpeg"}),"img",btn);
+              if(url){ input.value=url; if(cb)cb(); }
+            },"image/jpeg",0.85);};
+          img.onerror=async()=>{ const url=await putFile(file,"img",btn); if(url){input.value=url;if(cb)cb();} };
           img.src=rd.result;};
         rd.readAsDataURL(file);};
       fi.click();
+    }
+
+    /* Аудио или видео: кладём как есть */
+    function pickMedia(input,accept,kind,cb,btn){
+      const fi=document.createElement("input");fi.type="file";fi.accept=accept;
+      fi.onchange=async()=>{const file=fi.files&&fi.files[0];if(!file)return;
+        const url=await putFile(file,kind,btn); if(url){ input.value=url; if(cb)cb(); }};
+      fi.click();
+    }
+
+    /* Запись голосом с микрофона — для своей озвучки и образцов произношения */
+    let REC=null;
+    async function toggleRecord(input,btn,cb){
+      if(REC){ REC.stop(); return; }
+      if(!navigator.mediaDevices||!window.MediaRecorder){ fail("Браузер не умеет записывать звук — загрузи файл."); return; }
+      let stream;
+      try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); }
+      catch(e){ fail("Не дали доступ к микрофону."); return; }
+      const chunks=[];
+      REC=new MediaRecorder(stream);
+      REC.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+      REC.onstop=async()=>{
+        stream.getTracks().forEach(t=>t.stop());
+        const type=REC.mimeType||"audio/webm"; REC=null;
+        btn.classList.remove("rec"); btn.textContent="🎙 записать";
+        const blob=new Blob(chunks,{type});
+        const url=await putFile(new File([blob],"voice.webm",{type}),"audio",btn);
+        if(url){ input.value=url; if(cb)cb(); }
+      };
+      REC.start();
+      btn.classList.add("rec"); btn.textContent="⏹ остановить";
     }
     function wireImageIn(scope){
       const inp=scope.querySelector(".img");if(!inp)return;
       const btn=scope.querySelector(".upl"),prev=scope.querySelector(".imgprev");
       function showPrev(){ if(prev) prev.innerHTML=inp.value?('<img src="'+inp.value.replace(/"/g,"&quot;")+'" alt="">'):""; }
-      if(btn)btn.onclick=()=>pickImage(inp,showPrev);
+      if(btn){ btn.dataset.lbl=btn.textContent; btn.onclick=()=>pickImage(inp,showPrev,btn); }
       inp.addEventListener("input",showPrev);showPrev();
     }
     function imageFieldHTML(val,idAttr){
       return '<label>🖼 КАРТИНКА (необязательно — можно вместо текста)</label>'+
         '<div class="imgrow"><input '+(idAttr?'id="'+idAttr+'" ':'')+'class="img" placeholder="вставь ссылку или загрузи файл →" value="'+esc(val||"")+'"><button class="upl" type="button">📁 файл</button></div>'+
         '<div class="imgprev"></div>';
+    }
+
+    /* Поле аудио: ссылка, файл с компьютера или запись голосом */
+    function audioFieldHTML(val,idAttr,label){
+      return '<label>'+(label||"🔊 АУДИОФАЙЛ")+'</label>'+
+        '<div class="imgrow"><input '+(idAttr?'id="'+idAttr+'" ':'')+'class="aud" placeholder="ссылка на mp3, файл или запись →" value="'+esc(val||"")+'">'+
+        '<button class="upl aupl" type="button">📁 файл</button><button class="upl arec" type="button">🎙 записать</button></div>'+
+        '<div class="audprev"></div>';
+    }
+    function wireAudioIn(scope){
+      const inp=scope.querySelector(".aud");if(!inp)return;
+      const up=scope.querySelector(".aupl"),rec=scope.querySelector(".arec"),prev=scope.querySelector(".audprev");
+      function showPrev(){ if(prev) prev.innerHTML=inp.value?('<audio controls src="'+inp.value.replace(/"/g,"&quot;")+'" style="width:100%;margin-top:8px"></audio>'):""; }
+      if(up){ up.dataset.lbl=up.textContent; up.onclick=()=>pickMedia(inp,"audio/*","audio",showPrev,up); }
+      if(rec){ rec.dataset.lbl=rec.textContent; rec.onclick=()=>toggleRecord(inp,rec,showPrev); }
+      inp.addEventListener("input",showPrev);showPrev();
     }
 
     /* ---------- ряды для под-элементов (по контейнеру, не по id) ---------- */
@@ -185,7 +255,10 @@
       } else if(type==="tf"){
         bf.innerHTML='<label>УТВЕРЖДЕНИЕ</label><input class="statement" placeholder="A dog is an animal." value="'+esc(d.statement||"")+'"><label>ПРАВИЛЬНЫЙ ОТВЕТ</label><select class="correct"><option value="true"'+(d.correct!==false?" selected":"")+'>Верно</option><option value="false"'+(d.correct===false?" selected":"")+'>Неверно</option></select>';
       } else if(type==="listen"){
-        bf.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><input class="audio" placeholder="It is a red ball" value="'+esc(d.audio||"")+'"><label>ОТВЕТ УЧЕНИКА (варианты через запятую)</label><input class="answer" placeholder="ball, a ball" value="'+esc(d.answer||"")+'">';
+        bf.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><input class="audio" placeholder="It is a red ball" value="'+esc(d.audio||"")+'">'+
+          audioFieldHTML(d.src,null,"🔊 ИЛИ СВОЙ АУДИОФАЙЛ (Class Audio, своя запись) — необязательно")+
+          '<label>ОТВЕТ УЧЕНИКА (варианты через запятую)</label><input class="answer" placeholder="ball, a ball" value="'+esc(d.answer||"")+'">';
+        wireAudioIn(bf);
       } else if(type==="cloze"){
         bf.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ</label><textarea class="q" rows="3" placeholder="I [[am|is|are]] happy. She [[likes|like]] cats.">'+esc(d.q||"")+'</textarea><div class="hinttext">Пропуск: [[правильный|неправильный|неправильный]]. Первый вариант — правильный.</div>';
       } else if(type==="letters"){
@@ -287,11 +360,31 @@
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="A cat" value="'+esc(data.caption||"")+'">';
         wireImageIn(f);
       } else if(type==="video"){
-        f.innerHTML='<label>ССЫЛКА НА YOUTUBE</label><input id="url" placeholder="https://youtu.be/…" value="'+esc(data.url||"")+'">'+
+        f.innerHTML='<label>ССЫЛКА НА ВИДЕО — YouTube, Vimeo, RuTube, VK, или прямой файл .mp4</label>'+
+          '<div class="imgrow"><input id="url" class="vid" placeholder="https://youtu.be/… или ссылка на mp4" value="'+esc(data.url||"")+'">'+
+          '<button class="upl vupl" type="button">📁 файл</button></div>'+
+          '<div id="vidPrev"></div>'+
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Песенка про цвета" value="'+esc(data.caption||"")+'">';
+        const vi=f.querySelector(".vid"), vb=f.querySelector(".vupl"), vp=f.querySelector("#vidPrev");
+        function vprev(){
+          const u=vi.value.trim();
+          if(!u){ vp.innerHTML=""; return; }
+          if(/\.(mp4|webm|ogg|mov)(\?|$)/i.test(u)){
+            vp.innerHTML='<video controls src="'+u.replace(/"/g,"&quot;")+'" style="width:100%;border-radius:14px;margin-top:8px;background:#000"></video>'; return; }
+          const e=window.SM_embed(u);
+          vp.innerHTML=e?('<div style="margin-top:8px;font:800 12px \'Archivo\',sans-serif;color:#6e6a68">ПРЕДПРОСМОТР · '+e.name+'</div>'+
+            '<iframe src="'+e.src+'" style="width:100%;height:260px;border:2px solid #cfcecd;border-radius:14px;margin-top:6px;background:#000" allowfullscreen></iframe>'):"";
+        }
+        vb.dataset.lbl=vb.textContent;
+        vb.onclick=()=>pickMedia(vi,"video/*","video",vprev,vb);
+        vi.addEventListener("input",vprev); vprev();
       } else if(type==="audio"){
-        f.innerHTML='<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (английский)</label><textarea id="body" rows="3" placeholder="Listen and repeat: red, blue, green">'+esc(data.body||"")+'</textarea>'+
+        f.innerHTML='<div class="hinttext" style="margin:0 0 8px">Можно взять готовый аудиофайл (Class Audio из учебника, своя запись) — или оставить пустым, и тогда фразу прочитает синтез речи.</div>'+
+          audioFieldHTML(data.src,"asrc","🔊 АУДИОФАЙЛ — ссылка, файл с компьютера или запись голосом")+
+          '<label>ТЕКСТ ДЛЯ ОЗВУЧКИ (если файла нет — прочитает синтез речи)</label>'+
+          '<textarea id="body" rows="3" placeholder="Listen and repeat: red, blue, green">'+esc(data.body||"")+'</textarea>'+
           '<label>ПОДПИСЬ (необязательно)</label><input id="caption" placeholder="Слушай и повторяй" value="'+esc(data.caption||"")+'">';
+        wireAudioIn(f);
       } else if(type==="note"){
         f.innerHTML='<label>ЗАМЕТКА / ПРАВИЛО</label><textarea id="body" rows="4" placeholder="my / his / her — притяжательные местоимения…">'+esc(data.body||"")+'</textarea>';
       }
@@ -345,9 +438,11 @@
       }
       if(type==="listen"){
         const audio=b.querySelector(".audio").value.trim();const answer=b.querySelector(".answer").value.trim();
-        if(!audio) return {err:"впиши текст для озвучки"};
+        const sEl=b.querySelector(".aud"); const src=sEl?sEl.value.trim():"";
+        if(!audio&&!src) return {err:"впиши текст для озвучки или загрузи аудиофайл"};
         if(!answer) return {err:"впиши ответ"};
-        return ret({audio,answer});
+        const o={audio,answer}; if(src) o.src=src;
+        return ret(o);
       }
       if(type==="cloze"){
         const q=b.querySelector(".q").value.trim();
@@ -368,36 +463,6 @@
     }
 
     function readForm(type){
-      if(type==="reading"){
-        const ql=(data.qs||[]).map(x=>x.q+" | "+x.opts.map((o,i)=>i===x.correct?o+"*":o).join(" | ")).join("\n");
-        f.innerHTML='<label>ТЕКСТ ДЛЯ ЧТЕНИЯ</label><textarea id="rtext" rows="7" placeholder="Впиши или вставь текст…">'+esc(data.text||"")+'</textarea>'+
-          '<label>ВОПРОСЫ — по одному в строке: Вопрос? | вариант | верный вариант* | вариант</label>'+
-          '<textarea id="rqs" rows="6" placeholder="Where is the cat? | in the bag | under the bed* | at school">'+esc(ql)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Верный вариант помечай звёздочкой *. Формат как в ОГЭ/ЕГЭ/TOEFL: чтение + множественный выбор.</div>';
-        return;
-      }
-      if(type==="tfns"){
-        const tl=(data.sts||[]).map(x=>x.s+" | "+x.a).join("\n");
-        f.innerHTML='<label>ТЕКСТ</label><textarea id="ttext" rows="6">'+esc(data.text||"")+'</textarea>'+
-          '<label>УТВЕРЖДЕНИЯ — по одному в строке: утверждение | T, F или N</label>'+
-          '<textarea id="tsts" rows="5" placeholder="The dog is big. | T&#10;The cat can swim. | N">'+esc(tl)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">T = True (верно), F = False (неверно), N = Not stated (в тексте не сказано)</div>';
-        return;
-      }
-      if(type==="wordform"){
-        const wl=(data.items||[]).map(x=>x.q+" | "+x.base+" | "+x.answer).join("\n");
-        f.innerHTML='<label>СТРОКИ — предложение с ___ | СЛОВО-ОСНОВА | ответ</label>'+
-          '<textarea id="wlines" rows="6" placeholder="He is a good ___ . | TEACH | teacher&#10;She sings ___ . | BEAUTIFUL | beautifully">'+esc(wl)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Как в ЕГЭ: ученик образует нужную форму слова, написанного заглавными буквами.</div>';
-        return;
-      }
-      if(type==="headings"){
-        f.innerHTML='<label>АБЗАЦЫ — разделяй ПУСТОЙ строкой</label><textarea id="hparas" rows="8" placeholder="Первый абзац…&#10;&#10;Второй абзац…">'+esc((data.paras||[]).join("\n\n"))+'</textarea>'+
-          '<label>ЗАГОЛОВКИ — по одному в строке, в том же порядке, что абзацы; лишние — в конце</label>'+
-          '<textarea id="hheads" rows="5" placeholder="Заголовок к абзацу 1&#10;Заголовок к абзацу 2&#10;Лишний заголовок">'+esc((data.heads||[]).join("\n"))+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Как в ОГЭ/IELTS: ученику заголовки покажутся перемешанными.</div>';
-        return;
-      }
       if(type==="reading"){
         const text=document.getElementById("rtext").value.trim();
         if(!text) return {err:"Впиши текст"};
@@ -501,13 +566,18 @@
       }
       if(type==="video"){
         const url=document.getElementById("url").value.trim();
-        if(!/youtu/.test(url)) return {err:"Вставь ссылку на YouTube"};
-        return {data:{url,caption:document.getElementById("caption").value.trim()}};
+        if(!url) return {err:"Вставь ссылку на видео или загрузи файл"};
+        const caption=document.getElementById("caption").value.trim();
+        if(/\.(mp4|webm|ogg|mov)(\?|$)/i.test(url)) return {data:{url,file:url,caption}};
+        const e=window.SM_embed(url);
+        if(!e) return {err:"Ссылка на видео не распознана"};
+        return {data:{url,src:e.src,name:e.name,caption}};
       }
       if(type==="audio"){
+        const src=document.getElementById("asrc").value.trim();
         const body=document.getElementById("body").value.trim();
-        if(!body) return {err:"Впиши текст для озвучки"};
-        return {data:{body,caption:document.getElementById("caption").value.trim()}};
+        if(!src&&!body) return {err:"Загрузи аудиофайл или впиши текст для озвучки"};
+        return {data:{src,body,caption:document.getElementById("caption").value.trim()}};
       }
       if(type==="note"){
         const body=document.getElementById("body").value.trim();
@@ -532,27 +602,65 @@
       document.getElementById("sub").textContent="войди как учитель, чтобы создавать упражнения";
       document.getElementById("root").innerHTML='<div class="panel"><div class="empty">Сначала войди в <a href="teacher.html" style="color:#ec3013;text-decoration:underline">кабинет учителя</a>, потом вернись сюда.</div></div>';
     }
+    /* Курс, на котором сейчас работает конструктор. Раньше он молча брался из
+       последнего открытого учебника и сменить его было нельзя. */
+    let CID=(window.SM_COURSE&&SM_COURSE.id)||null;
+    const BOOKS=[["sb","📗 Student Book"],["wb","📒 Workbook"],["extra","➕ Доп. материал"]];
+
+    function courseList(){
+      return (window.SM_COURSES||[]).filter(c=>c.id!=="own"&&(window.SM_COURSE_DATA||{})[c.id]);
+    }
+    function unitsOf(cid){ return (window.SM_COURSE_DATA||{})[cid]||[]; }
+
+    function fillUnits(){
+      const sel=document.getElementById("unit");
+      const us=unitsOf(CID);
+      sel.innerHTML=us.length
+        ? us.map(u=>'<option value="'+esc(u.id)+'">'+(u.emoji||"")+' '+esc(u.title)+'</option>').join("")
+        : '<option value="">— в этом курсе нет юнитов —</option>';
+    }
+
     async function renderBuilder(user){
-      document.getElementById("sub").textContent=SM_COURSE.emoji+" "+SM_COURSE.title+" · создавай упражнения";
-      const unitOpts=SM_UNITS.map(u=>'<option value="'+u.id+'">'+u.emoji+' '+esc(u.title)+'</option>').join("");
+      const cs=courseList();
+      if(!CID||!unitsOf(CID).length) CID=(cs[0]||{}).id||CID;
+      const cur=cs.filter(c=>c.id===CID)[0]||SM_COURSE||{};
+      document.getElementById("sub").textContent="выбери курс, юнит и книгу — и собирай упражнения";
+      const courseOpts=cs.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===CID?" selected":"")+'>'+(c.emoji||"📘")+' '+esc(c.title)+'</option>').join("");
+      const bookOpts=BOOKS.map(b=>'<option value="'+b[0]+'">'+b[1]+'</option>').join("");
       const typeOpts=Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].label+'</option>').join("");
       document.getElementById("root").innerHTML=
         '<div class="panel">'+
-          '<div class="row2"><div style="flex:1"><label>ЮНИТ</label><select id="unit">'+unitOpts+'</select></div>'+
-          '<div style="flex:1"><label>ТИП</label><select id="type">'+typeOpts+'</select></div></div>'+
+          '<label>КУРС</label><select id="course">'+courseOpts+'</select>'+
+          '<div class="row2"><div style="flex:1"><label>ЮНИТ</label><select id="unit"></select></div>'+
+          '<div style="flex:1"><label>КНИГА</label><select id="book">'+bookOpts+'</select></div></div>'+
+          '<label>ТИП УПРАЖНЕНИЯ</label><select id="type">'+typeOpts+'</select>'+
           '<label>НАЗВАНИЕ / ИНСТРУКЦИЯ (необязательно)</label><input id="title" placeholder="Прочитай и выбери ответ">'+
           '<label>РАЗДЕЛ УРОКА (необязательно)</label><input id="section" list="seclist" placeholder="Лексика / Грамматика / Видео…"><datalist id="seclist"><option>Лексика</option><option>Грамматика</option><option>Аудирование</option><option>Чтение</option><option>Видео</option><option>Говорение</option><option>Игры</option><option>Домашка</option></datalist>'+
           '<div id="fields"></div>'+
-          '<button class="primary" id="save">💾 Сохранить упражнение</button>'+
+          '<div class="row2" style="margin-top:16px"><button class="primary" id="prev" style="flex:1;margin:0;background:#eae9e9;color:#4a4644;box-shadow:0 5px 0 #cfcecd">👁 Как увидит ученик</button>'+
+          '<button class="primary" id="save" style="flex:1;margin:0">💾 Сохранить</button></div>'+
           '<div class="msg" id="msg"></div>'+
         '</div>'+
         '<div class="sec-title">МОИ УПРАЖНЕНИЯ</div><div id="list"><div class="empty">Загрузка…</div></div>';
+
+      fillUnits();
+      const courseSel=document.getElementById("course");
+      courseSel.onchange=()=>{
+        CID=courseSel.value; editId=null;
+        if(window.SM_useCourse){ try{ SM_useCourse(CID); }catch(e){} }
+        fillUnits(); loadList();
+        const m=document.getElementById("msg"); m.className="msg ok";
+        m.textContent="Курс: "+courseSel.options[courseSel.selectedIndex].text.trim()+" · юнитов "+unitsOf(CID).length;
+      };
       const typeSel=document.getElementById("type");
       typeSel.onchange=()=>{editId=null;document.getElementById("title").value="";renderForm(typeSel.value);};
       renderForm(typeSel.value);
-      const pu=new URLSearchParams(location.search).get("u");
-      if(pu&&SM_UNITS.some(x=>x.id===pu)) document.getElementById("unit").value=pu;
+      const q=new URLSearchParams(location.search);
+      const pu=q.get("u");
+      if(pu&&unitsOf(CID).some(x=>x.id===pu)) document.getElementById("unit").value=pu;
+      if(q.get("book")) document.getElementById("book").value=q.get("book");
       document.getElementById("save").onclick=save;
+      document.getElementById("prev").onclick=preview;
       loadList();
     }
     async function save(){
@@ -561,16 +669,57 @@
       const r=readForm(type); if(r.err){msg.className="msg err";msg.textContent=r.err;return;}
       const exImg=document.getElementById("exImg");
       if(exImg&&exImg.value.trim()&&r.data&&!r.data.items) r.data.img=exImg.value.trim();
-      const res=await SM.saveExercise({id:editId,course:SM_COURSE.id,unit_id:document.getElementById("unit").value,type,title:document.getElementById("title").value.trim(),section:document.getElementById("section").value.trim(),data:r.data});
+      const uidSel=document.getElementById("unit").value;
+      if(!uidSel){msg.className="msg err";msg.textContent="В этом курсе нет юнитов — выбери другой курс.";return;}
+      const res=await SM.saveExercise({id:editId,course:CID,unit_id:uidSel,book:document.getElementById("book").value,type,title:document.getElementById("title").value.trim(),section:document.getElementById("section").value.trim(),data:r.data});
       if(res.ok){const uid=document.getElementById("unit").value;msg.className="msg ok";msg.innerHTML=(editId?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';editId=null;document.getElementById("title").value="";document.getElementById("section").value="";renderForm(type);loadList();}
       else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
     }
+    /* ---------- предпросмотр: показать упражнение так, как увидит ученик ----------
+       Показываем ДО сохранения, чтобы не бегать между вкладками. Внутри iframe
+       живёт настоящая страница exercises.html — значит видно ровно то же, что и ученик. */
+    function preview(){
+      const msg=document.getElementById("msg"); msg.className="msg"; msg.textContent="";
+      const type=document.getElementById("type").value;
+      const r=readForm(type);
+      if(r.err){ msg.className="msg err"; msg.textContent=r.err; return; }
+      const exImg=document.getElementById("exImg");
+      if(exImg&&exImg.value.trim()&&r.data&&!r.data.items) r.data.img=exImg.value.trim();
+
+      const ex={id:"preview",type:type,title:document.getElementById("title").value.trim(),
+                section:document.getElementById("section").value.trim(),data:r.data};
+
+      let ov=document.getElementById("prevOv");
+      if(ov) ov.remove();
+      ov=document.createElement("div"); ov.id="prevOv";
+      ov.style.cssText="position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
+      ov.innerHTML='<div style="background:#f3f2f2;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">'+
+        '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:2px solid #cfcecd">'+
+          '<b style="font:900 15px \'Archivo\',sans-serif">👁 Как увидит ученик</b>'+
+          '<span style="flex:1"></span>'+
+          '<button id="prevClose" style="background:#ec3013;color:#fff;border-radius:999px;padding:7px 15px;font:800 13px \'Archivo\',sans-serif">закрыть</button>'+
+        '</div>'+
+        '<iframe id="prevFrame" style="flex:1;width:100%;border:0;background:#f3f2f2" src="exercises.html?preview=1"></iframe>'+
+      '</div>';
+      document.body.appendChild(ov);
+      ov.onclick=e=>{ if(e.target===ov) ov.remove(); };
+      ov.querySelector("#prevClose").onclick=()=>ov.remove();
+      document.addEventListener("keydown",function esc2(e){ if(e.key==="Escape"){ const o=document.getElementById("prevOv"); if(o)o.remove(); document.removeEventListener("keydown",esc2); } });
+
+      const fr=ov.querySelector("#prevFrame");
+      fr.onload=()=>{ try{ fr.contentWindow.postMessage({smPreview:ex},"*"); }
+        catch(err){ msg.className="msg err"; msg.textContent="Предпросмотр не открылся — сохрани и проверь в юните."; } };
+    }
+
     async function loadList(){
       const list=document.getElementById("list");
-      const ex=await SM.myExercises(SM_COURSE.id);
-      if(!ex.length){list.innerHTML='<div class="empty">Пока нет упражнений. Создай первое 👆</div>';return;}
-      list.innerHTML=ex.map(e=>{const uu=SM_UNITS.find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;const n=itemCount(e);
-        return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+(e.section?'<span class="cnt">'+esc(e.section)+'</span>':'')+
+      const ex=await SM.myExercises(CID);
+      if(!ex.length){list.innerHTML='<div class="empty">В этом курсе упражнений пока нет. Создай первое 👆</div>';return;}
+      const bookName={sb:"📗 SB",wb:"📒 WB",extra:"➕ доп"};
+      list.innerHTML=ex.map(e=>{const uu=unitsOf(CID).find(x=>x.id===e.unit_id);const un=uu?uu.title:e.unit_id;const n=itemCount(e);
+        return '<div class="exrow"><span class="badge">'+(TYPES[e.type]?TYPES[e.type].label:e.type)+'</span>'+
+          '<span class="cnt">'+(bookName[e.book]||bookName.sb)+'</span>'+
+          (e.section?'<span class="cnt">'+esc(e.section)+'</span>':'')+
           (n>1?'<span class="cnt">'+n+' заданий</span>':'')+
           '<span class="t">'+esc(e.title||un)+' · '+esc(un)+'</span>'+
           '<button class="ed" data-id="'+e.id+'">✎</button><button class="de" data-id="'+e.id+'">🗑</button></div>';
@@ -583,6 +732,7 @@
     function loadForEdit(e){
       editId=e.id;
       document.getElementById("unit").value=e.unit_id;
+      document.getElementById("book").value=e.book||"sb";
       document.getElementById("type").value=e.type;
       document.getElementById("title").value=e.title||"";
       document.getElementById("section").value=e.section||"";

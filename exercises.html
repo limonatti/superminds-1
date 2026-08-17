@@ -188,7 +188,11 @@
       const c=card('<div class="kind">'+KIND.listen+'</div><div style="text-align:center;margin:6px 0"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div><div class="qt" style="text-align:center;font-size:15px;color:#8a8785">послушай и впиши</div><div class="field"><input placeholder="впиши, что услышал"><button class="check ok2">OK</button></div><div class="fb"></div>');
       const btn=c.querySelector(".check"),inp=c.querySelector("input"),fb=c.querySelector(".fb");
       const ans=e.data.answer.split(",").map(norm);
-      btn.onclick=()=>speak(e.data.audio); setTimeout(()=>speak(e.data.audio),400);
+      /* если учитель приложил свой файл — играем его, иначе читает синтез речи */
+      let au=null;
+      if(e.data.src){ au=new Audio(e.data.src); au.preload="metadata"; }
+      const play=()=>{ if(au){ try{au.currentTime=0;}catch(x){} au.play().catch(()=>speak(e.data.audio)); } else speak(e.data.audio); };
+      btn.onclick=play; setTimeout(play,400);
       function go(){const ok=ans.includes(norm(inp.value));inp.style.borderColor=ok?"#7cb342":"#ec3013";inp.style.background=ok?"#dff0d2":"#fff2ef";fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"Верно! 🎉":"Ответ: "+esc(e.data.answer.split(",")[0].trim());}
       c.querySelector(".ok2").onclick=go;inp.addEventListener("keydown",ev=>{if(ev.key==="Enter")go();});
       return c;
@@ -249,13 +253,27 @@
       return card('<div class="kind">'+KIND.image+'</div><img src="'+esc(e.data.url)+'" alt="" style="max-width:100%;border-radius:14px;display:block">'+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
     }
     function renderVideo(e){
-      const id=ytId(e.data.url);
-      const emb=id?'<div style="position:relative;padding-top:56%;border-radius:14px;overflow:hidden"><iframe src="https://www.youtube.com/embed/'+id+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>':'<div class="qt">Ссылка на видео не распознана</div>';
-      return card('<div class="kind">'+KIND.video+'</div>'+emb+(e.data.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
+      const d=e.data||{}, url=d.url||"";
+      let emb;
+      if(d.file||/\.(mp4|webm|ogg|mov)(\?|$)/i.test(url)){
+        emb='<video controls preload="metadata" src="'+esc(d.file||url)+'" style="width:100%;border-radius:14px;background:#000"></video>';
+      } else {
+        /* src кладёт конструктор; для старых упражнений разбираем ссылку на месте */
+        const src=d.src||(window.SM_embed?(window.SM_embed(url)||{}).src:null)||(ytId(url)?"https://www.youtube-nocookie.com/embed/"+ytId(url):null);
+        emb=src?'<div style="position:relative;padding-top:56%;border-radius:14px;overflow:hidden"><iframe src="'+esc(src)+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>'
+               :'<div class="qt">Ссылка на видео не распознана</div>';
+      }
+      return card('<div class="kind">'+KIND.video+'</div>'+emb+(d.caption?'<div style="text-align:center;font:700 13px \'Nunito\',sans-serif;color:#6e6a68;margin-top:8px">'+esc(d.caption)+'</div>':''));
     }
     function renderAudio(e){
-      const c=card('<div class="kind">'+KIND.audio+'</div><div style="text-align:center"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div>'+(e.data.caption?'<div style="text-align:center;font:800 14px \'Nunito\',sans-serif;color:#4a4644;margin-top:8px">'+esc(e.data.caption)+'</div>':''));
-      c.querySelector(".check").onclick=()=>speak(e.data.body);
+      const d=e.data||{};
+      const cap=d.caption?'<div style="text-align:center;font:800 14px \'Nunito\',sans-serif;color:#4a4644;margin-top:8px">'+esc(d.caption)+'</div>':'';
+      /* есть настоящий файл — играем его; нет — читает синтез речи, как раньше */
+      if(d.src){
+        return card('<div class="kind">'+KIND.audio+'</div><audio controls preload="metadata" src="'+esc(d.src)+'" style="width:100%"></audio>'+cap);
+      }
+      const c=card('<div class="kind">'+KIND.audio+'</div><div style="text-align:center"><button class="check" style="font-size:26px;padding:14px 22px;border-radius:50%">🔊</button></div>'+cap);
+      c.querySelector(".check").onclick=()=>speak(d.body);
       return c;
     }
     function renderDialogue(e){
@@ -649,6 +667,28 @@
       };
     }
 
+    /* Режим предпросмотра: страницу открыл конструктор в окошке и сейчас пришлёт
+       одно несохранённое упражнение. Ничего из базы не грузим. */
+    if(q.get("preview")){
+      window.addEventListener("message",ev=>{
+        const ex=ev.data&&ev.data.smPreview; if(!ex) return;
+        const root=document.getElementById("root");
+        if(!root) return;
+        root.innerHTML="";
+        const wrap=document.createElement("div"); wrap.className="exwrap"; root.appendChild(wrap);
+        if(ex.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Archivo',sans-serif;color:#4a4644;margin:4px 4px 8px";hd.textContent=ex.title;wrap.appendChild(hd);}
+        const fn=R[ex.type];
+        if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️</div><div class="qt">Тип «'+esc(ex.type)+'» не поддерживается.</div>')); return; }
+        const items=(ex.data&&ex.data.items&&ex.data.items.length)?ex.data.items:[ex.data];
+        items.forEach(item=>{ try{
+          const el=fn({type:ex.type,data:item});
+          if(item&&item.img){const im=document.createElement("img");im.src=item.img;im.alt="";im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px";const k=el.querySelector(".kind");if(k)k.insertAdjacentElement("afterend",im);else el.insertBefore(im,el.firstChild);}
+          wrap.appendChild(el);
+        }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Не удалось показать: '+esc(String(err.message||err))+'</div>')); } });
+      });
+      const sub=document.getElementById("sub"); if(sub) sub.textContent="предпросмотр — так упражнение увидит ученик";
+      const rt=document.getElementById("root"); if(rt) rt.innerHTML='<div class="empty" style="padding:30px;text-align:center">Готовлю предпросмотр…</div>';
+    } else
     (async function(){
       await loadHwContext();
       try{ const p=await SM.myProfile();
