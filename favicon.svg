@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="English with Asya">
+  <!-- Знак из шапки сайта, упрощённый до креста. Диагонали убраны намеренно:
+       на 16 px они превращались в кашу. Поле — акцент платформы #ec3013. -->
+  <rect width="64" height="64" rx="14" fill="#ec3013"/>
+  <g stroke="#fdf7f5" stroke-width="14">
+    <path d="M32 0 V64"/>
+    <path d="M0 32 H64"/>
+  </g>
+</svg>
