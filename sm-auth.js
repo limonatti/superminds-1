@@ -1057,3 +1057,29 @@ return { src: url, h: 620, name: "сайт" };
     return { course: window.SM_COURSE, units: window.SM_UNITS, picked: false, needsChoice: false };
   });
 })();
+
+/* ---------------------------------------------------------------------------
+   Подстраховка для loading="lazy".
+   Часть браузеров и расширений не запускает нативную ленивую загрузку для
+   картинок, вставленных скриптом: запрос не уходит вовсе, и на месте фото
+   остаётся пустота. Догружаем вручную только то, что уже близко к экрану, —
+   ленивость сохраняется, дальние картинки по-прежнему ждут прокрутки.
+--------------------------------------------------------------------------- */
+(function () {
+  var t;
+  function unstick() {
+    var list = document.querySelectorAll('img[loading="lazy"]');
+    for (var i = 0; i < list.length; i++) {
+      var img = list[i];
+      if (img.complete && img.naturalWidth > 0) continue;
+      var r = img.getBoundingClientRect();
+      if (r.top > innerHeight * 1.5 || r.bottom < -innerHeight * 0.5) continue;
+      img.loading = "eager";
+      img.src = img.src;
+    }
+  }
+  function schedule() { clearTimeout(t); t = setTimeout(unstick, 300); }
+  addEventListener("load", function () { setTimeout(unstick, 1500); });
+  addEventListener("scroll", schedule, { passive: true });
+  addEventListener("resize", schedule);
+})();

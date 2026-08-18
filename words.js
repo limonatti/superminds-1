@@ -362,11 +362,45 @@ window.SM_ready = window.SM_refreshCloudCourses().then(function () {
   return { course: window.SM_COURSE, units: window.SM_UNITS };
 });
 
-/* Отрисовать «лицо» слова: картинка если есть, иначе эмодзи. px — размер. */
+/* Эндпоинт карточек: сам рисует фото по слову и навсегда кладёт его в кеш.
+   Параметр f=1 в адресе заставляет перерисовать картинку заново. */
+window.SM_CARD_EP = "https://img-gen.limonatti.workers.dev/card?w=";
+
+/* Отрисовать «лицо» слова: авторская картинка, иначе фото по слову, иначе эмодзи.
+   Крупно (от 56px) — широкая карточка, мелко — квадратная плитка. */
 window.SM_face = function (w, px) {
   px = px || 64;
   if (w && w.img) return '<img src="' + w.img + '" alt="" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;vertical-align:middle;border-radius:12px">';
+  /* Фото весит сотни килобайт, поэтому грузим его только там, где картинка
+     действительно крупная. На мелких плитках (12 штук на экране) остаётся эмодзи. */
+  if (w && w.en && px >= 56) {
+    var st;
+    if (px >= 80) {
+      var bw = Math.round(px * 1.9);
+      st = 'width:' + bw + 'px;max-width:100%;height:' + Math.round(bw * 0.72) + 'px;'
+         + 'object-fit:cover;border-radius:16px;background:#f4e7db;display:block;margin:0 auto';
+    } else {
+      var sq = Math.round(px * 1.35);
+      st = 'width:' + sq + 'px;height:' + sq + 'px;object-fit:cover;border-radius:10px;'
+         + 'background:#f4e7db;vertical-align:middle;display:inline-block';
+    }
+    /* Без loading="lazy": карточки вставляются в DOM уже готовыми, и браузеры
+       (в том числе Safari на телефоне) в этом случае ленивую загрузку часто
+       не запускают вовсе — картинка так и остаётся пустой. */
+    return '<img src="' + window.SM_CARD_EP + encodeURIComponent(w.en) + '" alt="" decoding="async"'
+         + ' data-emo="' + (w.emoji || "") + '" data-px="' + px + '" style="' + st + '"'
+         + ' onerror="SM_faceFallback(this)">';
+  }
   return '<span style="font-size:' + px + 'px;line-height:1">' + (w ? w.emoji : "") + '</span>';
+};
+
+/* Если фото не сгенерировалось — тихо возвращаем эмодзи, без битой иконки. */
+window.SM_faceFallback = function (img) {
+  var s = document.createElement("span");
+  s.style.fontSize = (img.getAttribute("data-px") || 64) + "px";
+  s.style.lineHeight = "1";
+  s.textContent = img.getAttribute("data-emo") || "";
+  img.replaceWith(s);
 };
 
 /* ---- Голосовой движок: US/GB, женский/мужской. Выбор хранится в localStorage ---- */

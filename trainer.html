@@ -310,7 +310,7 @@ window.SM_HANDLES_COURSE = true;
       stage.innerHTML='<div class="card"><button class="bigspeak" id="big">🔊</button><div class="prompt">послушай и выбери картинку</div></div><div class="opts" id="opts"></div>';
       speak(w.en); document.getElementById("big").onclick=()=>speak(w.en);
       const box=document.getElementById("opts");
-      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+SM_face(o,40)+'</span>'+esc(o.en);
+      opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+SM_face(o,64)+'</span>'+esc(o.en);
         b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent.includes(w.en));
           if(ok)b.classList.add("correct");else{b.classList.add("wrong");if(cb)cb.classList.add("correct");}
           beep(ok);speak(w.en);record(w,ok);autoNext(ok?900:1500);};box.appendChild(b);});
