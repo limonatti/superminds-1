@@ -24,6 +24,25 @@ build: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6
   menu:  '<path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>'
 };
 
+/* Union Jack. Пропорции настоящие, 2:1, поэтому viewBox 60×30.
+   Порядок слоёв как у оригинала: синее поле, белый косой крест, красный косой
+   поверх него со срезом по четвертям, затем белый прямой крест и красный внутри.
+   clipPath получает свой номер: знак рисуется дважды на странице (в меню и в
+   верхней полосе), а два одинаковых id в документе — уже невалидная разметка. */
+var _flagN = 0;
+function flagSvg(title) {
+  var id = "uj" + (++_flagN);
+  return '<svg class="flag" viewBox="0 0 60 30" role="img" aria-label="' +
+    esc(title || "Британский флаг") + '">' +
+    '<clipPath id="' + id + '"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>' +
+    '<rect width="60" height="30" fill="#012169"/>' +
+    '<path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>' +
+    '<path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#' + id + ')" stroke="#c8102e" stroke-width="4"/>' +
+    '<path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>' +
+    '<path d="M30,0 V30 M0,15 H60" stroke="#c8102e" stroke-width="6"/>' +
+    '</svg>';
+}
+
 function svg(name, size) {
   return '<svg width="' + (size || 17) + '" height="' + (size || 17) + '" viewBox="0 0 24 24" fill="none" ' +
     'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (I[name] || "") + '</svg>';
@@ -107,7 +126,7 @@ var SMUI = {
 
     box.innerHTML =
       '<div class="side-top">' +
-        '<span class="flag"><i></i><b></b><s></s></span>' +
+        flagSvg("English with Asya") +
         '<span class="side-name"><span>With Asya</span><span>British English</span></span>' +
       "</div>" +
       '<div class="roles">' +
@@ -133,7 +152,7 @@ var SMUI = {
     bar.innerHTML =
       '<button class="sm-burger" id="smBurger" type="button" aria-label="Открыть меню" ' +
       'aria-expanded="false" aria-controls="side">' + svg("menu", 22) + "</button>" +
-      '<span class="flag"><i></i><b></b><s></s></span>' +
+      flagSvg("English with Asya") +
       '<span class="sm-bar-name">With Asya</span>';
 
     var scrim = document.createElement("button");
