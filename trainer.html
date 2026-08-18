@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Super Minds 1 · Тренажёр слов</title>
+<title>Тренажёр слов · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -402,6 +402,9 @@ window.SM_HANDLES_COURSE = true;
       try { await (window.SM_ready || Promise.resolve()); } catch(e){}
       const missing = applyLinkParams();
       const courseTitle = (window.SM_COURSE && SM_COURSE.title) || "";
+      /* Заголовок вкладки — по реально выбранному учебнику, иначе кажется,
+         что тренажёр показывает слова чужого курса. */
+      if (courseTitle) document.title = courseTitle + " · Тренажёр слов";
 
       if(!SM_ALL_WORDS.length){
         document.getElementById("stage").innerHTML='<div style="background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:30px;text-align:center;font:700 14px \'Nunito\',sans-serif;color:#6e6a68"><div style="font-size:52px">📭</div><h2 style="color:#ec3013;margin:8px 0">В учебнике «'+courseTitle+'» пока нет слов</h2>Слова добавляются в юниты через Конструктор учебников — после этого тренажёр заработает.</div>';

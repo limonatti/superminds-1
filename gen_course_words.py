@@ -51,10 +51,22 @@ def from_pages(pattern):
         if not pairs:
             continue
         num = re.search(r'-u(\d+)', base)
-        title = re.search(r'<title>([^<·]+)', src)
+        # Заголовок страницы: "Unit 5 · In the city · Solutions Elementary · ...".
+        # Нужна тема юнита (второй кусок), иначе в тренажёре все юниты
+        # называются одинаково — «Unit 1», «Unit 2» — и курс не узнать.
+        tm = re.search(r'<title>([^<]*)</title>', src)
+        title = base
+        if tm:
+            parts = [p.strip() for p in tm.group(1).split("·") if p.strip()]
+            # У части страниц первый кусок — сама тема («Introduction»),
+            # у части — номер юнита, и тема идёт следом («Unit 5 · In the city»).
+            if parts:
+                title = parts[0]
+                if len(parts) > 1 and re.fullmatch(r'(?i)unit\s*\d+', parts[0]):
+                    title = parts[1]
         out.append({
             "n": int(num.group(1)) if num else len(out),
-            "title": (title.group(1).strip() if title else base),
+            "title": title,
             "emoji": "📘",
             "words": pairs,
         })
