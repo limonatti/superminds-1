@@ -338,7 +338,10 @@ window.SM_absorbCourseWords = function () {
         title: u.title || ("Unit " + u.n),
         emoji: u.emoji || c.emoji || "📘",
         color: c.color || "#e4ebf2",
-        words: (u.words || []).map(function (p) { return { en: p[0], ru: p[1], emoji: "📖" }; })
+        /* Третий элемент "c" — словосочетание из юнита, а не отдельное слово. */
+        words: (u.words || []).map(function (p) {
+          return { en: p[0], ru: p[1], emoji: p[2] === "c" ? "🗣️" : "📖" };
+        })
       };
     });
     window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {

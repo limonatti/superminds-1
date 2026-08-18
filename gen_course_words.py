@@ -22,6 +22,9 @@ def from_generator(py, name):
     out = []
     for u in mod.DATA:
         pairs = [[str(a), str(b)] for a, b, *_ in (w for w in (u.get("words") or []) if len(w) >= 2)]
+        # Словосочетания юнита идут следом за словами и помечаются "c",
+        # чтобы тренажёр показывал их с другой иконкой.
+        pairs += [[str(a), str(b), "c"] for a, b, *_ in (c for c in (u.get("chunks") or []) if len(c) >= 2)]
         if not pairs:
             continue
         out.append({
@@ -48,6 +51,15 @@ def from_pages(pattern):
         except Exception:
             continue
         pairs = [[str(p[0]), str(p[1])] for p in arr if isinstance(p, list) and len(p) >= 2]
+        # Словосочетания юнита: тот же формат, помечаем "c".
+        mc = re.search(r'const CHUNKS\s*=\s*(\[.*?\]);\s*\n', src, re.S)
+        if mc:
+            try:
+                for p in json.loads(mc.group(1)):
+                    if isinstance(p, list) and len(p) >= 2:
+                        pairs.append([str(p[0]), str(p[1]), "c"])
+            except Exception:
+                pass
         if not pairs:
             continue
         num = re.search(r'-u(\d+)', base)
