@@ -1067,19 +1067,51 @@ return { src: url, h: 620, name: "сайт" };
 --------------------------------------------------------------------------- */
 (function () {
   var t;
-  function unstick() {
+  function fix(img) {
+    if (img.complete && img.naturalWidth > 0) return;
+    img.loading = "eager";
+    img.src = img.src;
+  }
+  function sweep() {
     var list = document.querySelectorAll('img[loading="lazy"]');
     for (var i = 0; i < list.length; i++) {
-      var img = list[i];
-      if (img.complete && img.naturalWidth > 0) continue;
-      var r = img.getBoundingClientRect();
+      var img = list[i], r = img.getBoundingClientRect();
       if (r.top > innerHeight * 1.5 || r.bottom < -innerHeight * 0.5) continue;
-      img.loading = "eager";
-      img.src = img.src;
+      fix(img);
     }
   }
-  function schedule() { clearTimeout(t); t = setTimeout(unstick, 300); }
-  addEventListener("load", function () { setTimeout(unstick, 1500); });
+  function schedule() { clearTimeout(t); t = setTimeout(sweep, 250); }
   addEventListener("scroll", schedule, { passive: true });
   addEventListener("resize", schedule);
+  addEventListener("load", function () { setTimeout(sweep, 1200); setTimeout(sweep, 3000); });
+
+  /* Основной механизм: следим за появлением картинки в поле зрения сами.
+     Карточки вставляются скриптом уже после загрузки страницы, поэтому за
+     новыми узлами тоже наблюдаем. */
+  if (window.IntersectionObserver && window.MutationObserver) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        fix(e.target);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "300px" });
+
+    function watch(root) {
+      if (!root || !root.querySelectorAll) return;
+      var l = root.querySelectorAll('img[loading="lazy"]');
+      for (var i = 0; i < l.length; i++) io.observe(l[i]);
+    }
+    new MutationObserver(function (muts) {
+      muts.forEach(function (m) {
+        for (var i = 0; i < m.addedNodes.length; i++) {
+          var n = m.addedNodes[i];
+          if (n.nodeType !== 1) continue;
+          if (n.matches && n.matches('img[loading="lazy"]')) io.observe(n); else watch(n);
+        }
+      });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === "loading") addEventListener("DOMContentLoaded", function () { watch(document); });
+    else watch(document);
+  }
 })();
