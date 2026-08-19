@@ -134,6 +134,20 @@
       });
       cs.forEach(c=>{
         const el=id=>document.getElementById(id+"-"+c.id);
+        /* У встроенных учебников юниты лежат в файлах сайта, а не в базе,
+           поэтому обычная кнопка копирования их не видит. Здесь копия
+           собирается из того, что уже загружено в браузер. */
+        if(el("copyb")) el("copyb").onclick=async()=>{
+          if(!confirm("Сделать свою версию «"+c.title+"»? Приедут юниты, слова и упражнения. Оригинал останется как есть."))return;
+          const b=el("copyb"); b.disabled=true; b.textContent="копирую…";
+          const r=await SM.copyCourseFrom(c.slug,{});
+          b.disabled=false; b.textContent="⧉ скопировать себе";
+          if(!r.ok){ alert(r.error||"Не получилось скопировать"); return; }
+          alert("Готово: «"+c.title+"».\n\nЮнитов: "+r.units+" из "+r.total+
+                "\nУпражнений: "+r.exercises+(r.skipped?" (пропущено "+r.skipped+")":"")+
+                "\n\nКопия в «Моих учебниках», её можно менять.");
+          await refresh(); showCourses();
+        };
         if(el("pub")) el("pub").onclick=async()=>{
           const on=!c.published;
           const msg=on
@@ -169,7 +183,8 @@
           ' · '+(pub?'открыт другим учителям':'только мой')+'</small></span>'+
         '<button id="pub-'+c.id+'" class="bt" title="'+(pub?'закрыть от других учителей':'открыть другим учителям')+'">'+(pub?'👁 открыт':'🔒 закрыт')+'</button>'+
         (builtin
-          ? '<button id="open-'+c.id+'" class="bt main">открыть</button>'
+          ? '<button id="copyb-'+c.id+'" class="bt main" title="сделать свою версию — юниты, слова и упражнения">⧉ скопировать себе</button>'+
+            '<button id="open-'+c.id+'" class="bt">открыть</button>'
           : '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+
             '<button id="open-'+c.id+'" class="bt">открыть</button>'+
             '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
