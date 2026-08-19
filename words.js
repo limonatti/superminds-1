@@ -212,14 +212,13 @@ window.SM_COURSES = [
 
 /* Обновить кэш облачных учебников (вызывается при загрузке и из admin.html) */
 window.SM_refreshCloudCourses = function () {
-  var URL_ = "https://kdzpmbuohfjbtjpqrdfx.supabase.co";
-  var KEY_ = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
-  function j(u) { return fetch(u, { headers: { apikey: KEY_, Authorization: "Bearer " + KEY_ } }).then(function (r) { return r.json(); }); }
-  return Promise.all([
-    j(URL_ + "/rest/v1/courses?select=slug,title,subtitle,emoji,color,img&order=created_at.asc"),
-    j(URL_ + "/rest/v1/units?select=course_slug,slug,unit_label,title,emoji,color,position,words&order=position.asc,created_at.asc")
-  ]).then(function (res) {
-    var courses = res[0] || [], units = res[1] || [];
+  /* Раньше список тянулся анонимным запросом и забирал ВСЕ курсы из базы.
+     С одним учителем это было незаметно, но чужие черновики попадали бы
+     к чужим ученикам. Теперь запрос идёт от имени вошедшего пользователя,
+     а база сама отдаёт только своё, курсы своего учителя и опубликованное. */
+  if (!window.SM || !window.SM.listCourses) return Promise.resolve();
+  return window.SM.listCourses().then(function (res) {
+    var courses = res.courses || [], units = res.units || [];
     if (!Array.isArray(courses) || !Array.isArray(units)) return;
     var data = {};
     units.forEach(function (u) {
@@ -379,13 +378,25 @@ window.SM_absorbCourseWords();
 /* Первый проход — по тому, что уже есть в кэше */
 window.SM_useCourse(window.SM_wantedCourse);
 
-/* Второй проход — после ответа базы. Страницы ждут этот промис. */
-window.SM_ready = window.SM_refreshCloudCourses().then(function () {
-  window.SM_useCourse(window.SM_wantedCourse);
-  return { course: window.SM_COURSE, units: window.SM_UNITS };
-}).catch(function () {
-  return { course: window.SM_COURSE, units: window.SM_UNITS };
-});
+/* Второй проход — после ответа базы. Страницы ждут этот промис.
+   words.js подключается раньше sm-auth.js, поэтому ждём появления SM:
+   без этого запрос ушёл бы до входа и вернул пустоту. */
+function SM_waitForApi(ms) {
+  if (window.SM && window.SM.listCourses) return Promise.resolve(true);
+  if ((ms || 0) > 5000) return Promise.resolve(false);
+  return new Promise(function (r) { setTimeout(r, 60); })
+    .then(function () { return SM_waitForApi((ms || 0) + 60); });
+}
+
+window.SM_ready = SM_waitForApi()
+  .then(function (ok) { return ok ? window.SM_refreshCloudCourses() : null; })
+  .then(function () {
+    window.SM_useCourse(window.SM_wantedCourse);
+    return { course: window.SM_COURSE, units: window.SM_UNITS };
+  })
+  .catch(function () {
+    return { course: window.SM_COURSE, units: window.SM_UNITS };
+  });
 
 /* Эндпоинт карточек: сам рисует фото по слову и навсегда кладёт его в кеш.
    Параметр f=1 в адресе заставляет перерисовать картинку заново. */

@@ -165,22 +165,46 @@ const { error } = await c.from("profiles").upsert(
 return { ok: !error, error: error && error.message };
 },
 /* Учитель: гарантировать профиль и получить свой код */
+/* Код класса выдаёт база, а не браузер: колонки role и teacher_code закрыты
+   на запись, иначе любой ученик мог назначить себя учителем. */
 async ensureTeacherCode(name) {
 if (!useCloud) return { code: "LOCAL", error: null };
 const c = ensureClient(); if (!c) return { error: "no client" };
 const u = await this.getUser(); if (!u) return { error: "not signed in" };
 const prof = await this.myProfile();
 if (prof && prof.teacher_code) return { code: prof.teacher_code };
-for (let i = 0; i < 4; i++) {
-const code = Math.random().toString(36).slice(2, 8).toUpperCase();
-const { error } = await c.from("profiles").upsert(
-{ user_id: u.id, name: name || u.name, role: "teacher", teacher_code: code },
-{ onConflict: "user_id" }
-);
-if (!error) return { code: code };
-if (!(error.message || "").toLowerCase().includes("teacher_code")) return { error: error.message };
-}
-return { error: "не удалось создать код" };
+const { data, error } = await c.rpc("ensure_teacher_code", { p_name: name || null });
+if (error) return { error: error.message };
+return { code: data };
+},
+
+/* Курсы, доступные вошедшему: свои, курсы своего учителя, опубликованные.
+   Что именно отдать — решает база, здесь фильтров нет. */
+async listCourses() {
+if (!useCloud) return { courses: [], units: [] };
+const c = ensureClient(); if (!c) return { courses: [], units: [] };
+const [co, un] = await Promise.all([
+c.from("courses").select("slug,title,subtitle,emoji,color,img,owner_id,published").order("created_at", { ascending: true }),
+c.from("units").select("course_slug,slug,unit_label,title,emoji,color,position,words").order("position", { ascending: true }).order("created_at", { ascending: true })
+]);
+if (co.error) console.warn("listCourses:", co.error.message);
+return { courses: co.data || [], units: un.data || [] };
+},
+
+/* Владелец платформы выдаёт или снимает роль учителя */
+async setRole(userId, role) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false };
+const { error } = await c.rpc("set_role", { p_user: userId, p_role: role });
+return { ok: !error, error: error && error.message };
+},
+
+/* Я владелец платформы? От этого зависят разделы модерации */
+async isOwner() {
+if (!useCloud) return false;
+const c = ensureClient(); if (!c) return false;
+const { data, error } = await c.rpc("is_platform_owner");
+return !error && !!data;
 },
 /* Ученик: привязаться к учителю по коду */
 async joinTeacher(code) {
