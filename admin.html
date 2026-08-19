@@ -126,12 +126,27 @@
           const r=await SM.copyCourseFrom(c.slug,{});
           k.disabled=false; k.textContent="скопировать себе";
           if(!r.ok){ alert(r.error||"Не получилось скопировать"); return; }
-          alert("Готово: «"+c.title+"» скопирован, юнитов "+r.units+" из "+r.total+". Теперь он в «Моих учебниках» и его можно менять.");
+          alert("Готово: «"+c.title+"» скопирован.\n\nЮнитов: "+r.units+" из "+r.total+
+                "\nУпражнений: "+r.exercises+(r.skipped?" (пропущено "+r.skipped+")":"")+
+                "\n\nКопия в «Моих учебниках», её можно менять. Оригинал автора не тронут.");
           await refresh(); showCourses();
         };
       });
       cs.forEach(c=>{
         const el=id=>document.getElementById(id+"-"+c.id);
+        if(el("pub")) el("pub").onclick=async()=>{
+          const on=!c.published;
+          const msg=on
+            ? "Открыть «"+c.title+"» другим учителям? Они смогут вести по нему и скопировать себе. Твой оригинал останется нетронутым."
+            : "Закрыть «"+c.title+"» от других учителей?";
+          if(!confirm(msg)) return;
+          el("pub").disabled=true;
+          const r=await SM.setCoursePublished(c.slug,on);
+          if(!r.ok){ el("pub").disabled=false; alert(r.error||"Не получилось"); return; }
+          /* упражнения курса открываем и закрываем вместе с учебником */
+          await SM.setCourseExercisesVisibility(c.slug, on?"library":"private");
+          showCourses();
+        };
         if(el("units")) el("units").onclick=()=>showUnits(c);
         if(el("open"))  el("open").onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
         if(!el("edit")) return;
@@ -147,9 +162,12 @@
       /* Учебники, собранные в файлах сайта (Speakout, Solutions, Super Minds и др.),
          числятся за владельцем, но правятся не здесь — только открываются. */
       const builtin = c.kind === "builtin";
+      const pub = c.published;
       return '<div class="crow"><span class="ce" style="background:'+(c.color||"#eee")+'">'+(c.img?'<img src="'+esc(c.img)+'" alt="">':(c.emoji||"📘"))+'</span>'+
         '<span class="ct">'+esc(c.title)+
-          '<small>'+esc(c.subtitle||"")+(builtin?' · собран в файлах сайта':'')+'</small></span>'+
+          '<small>'+esc(c.subtitle||"")+(builtin?' · собран в файлах сайта':'')+
+          ' · '+(pub?'открыт другим учителям':'только мой')+'</small></span>'+
+        '<button id="pub-'+c.id+'" class="bt" title="'+(pub?'закрыть от других учителей':'открыть другим учителям')+'">'+(pub?'👁 открыт':'🔒 закрыт')+'</button>'+
         (builtin
           ? '<button id="open-'+c.id+'" class="bt main">открыть</button>'
           : '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+

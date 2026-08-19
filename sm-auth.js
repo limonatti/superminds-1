@@ -205,31 +205,87 @@ if (error) { console.warn("libraryCourses:", error.message); return []; }
 return data || [];
 },
 
-/* Взять учебник из библиотеки себе. Делается копия: оригинал остаётся
-   нетронутым у автора, дальше учитель правит только свою версию.
-   Слова берём из того, что уже загружено в браузер (SM_COURSE_DATA). */
+/* Все упражнения курса, которые мне видны (своё, библиотека, курс моего учителя) */
+async courseExercises(courseSlug) {
+if (!useCloud) return [];
+const c = ensureClient(); if (!c) return [];
+const { data, error } = await c.from("exercises")
+.select("unit_id,book,type,title,section,position,data")
+.eq("course", courseSlug)
+.order("position", { ascending: true });
+if (error) { console.warn("courseExercises:", error.message); return []; }
+return data || [];
+},
+
+/* Открыть или закрыть свои упражнения курса для других учителей */
+async setCourseExercisesVisibility(courseSlug, visibility) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false };
+const { error } = await c.from("exercises")
+.update({ visibility: visibility })
+.eq("course", courseSlug).eq("author_id", u.id);
+return { ok: !error, error: error && error.message };
+},
+
+/* Открыть или закрыть свой учебник для других учителей */
+async setCoursePublished(slug, on) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false };
+const { error } = await c.from("courses")
+.update({ published: !!on }).eq("slug", slug).eq("owner_id", u.id);
+return { ok: !error, error: error && error.message };
+},
+
+/* Взять учебник из библиотеки себе. Делается полная копия — юниты, слова
+   и упражнения. Оригинал остаётся нетронутым у автора: копия принадлежит
+   тому, кто копировал, и правится только им. */
 async copyCourseFrom(slug, opts) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };
 opts = opts || {};
 const src = (window.SM_COURSE_DATA || {})[slug];
 if (!src || !src.length) return { ok: false, error: "у этого учебника нет юнитов для копирования" };
 const meta = ((window.SM_COURSES || []).filter(function (c) { return c.id === slug; })[0]) || {};
+
 const made = await this.saveCourse({
 title: opts.title || ((meta.title || slug) + " — моя версия"),
 subtitle: opts.subtitle || meta.subtitle || "копия из библиотеки",
 emoji: meta.emoji || "📘", color: meta.color || "#e4ebf2", img: meta.img || null
 });
 if (!made.ok) return made;
-let done = 0;
+
+/* Юниты со словами. Запоминаем, какой новый юнит какому старому соответствует —
+   без этой карты упражнения не легли бы в свои разделы. */
+const map = {};
+let units = 0;
 for (let i = 0; i < src.length; i++) {
 const u = src[i];
 const r = await this.saveUnit({
 course_slug: made.slug, unit_label: u.unit || null, title: u.title,
 emoji: u.emoji || "📖", color: u.color || "#f6e2cf", words: u.words || []
 });
-if (r.ok) done++;
+if (r.ok) { units++; if (r.slug) map[u.id] = r.slug; }
 }
-return { ok: true, slug: made.slug, id: made.id, units: done, total: src.length };
+
+/* Упражнения — только те, что автор открыл. Закрытые просто не приедут. */
+let exOk = 0, exSkip = 0;
+try {
+const list = await this.courseExercises(slug);
+for (let i = 0; i < list.length; i++) {
+const e = list[i];
+const newUnit = map[e.unit_id];
+if (!newUnit) { exSkip++; continue; }
+const r = await this.saveExercise({
+course: made.slug, unit_id: newUnit, book: e.book || "sb", type: e.type,
+title: e.title, section: e.section, data: e.data
+});
+if (r.ok) exOk++; else exSkip++;
+}
+} catch (err) { console.warn("copy exercises:", err); }
+
+return { ok: true, slug: made.slug, id: made.id,
+units: units, total: src.length, exercises: exOk, skipped: exSkip };
 },
 
 /* Владелец платформы выдаёт или снимает роль учителя */
@@ -385,10 +441,10 @@ if (error) return { ok: false, error: error.message };
 if (!data || !data.length) return { ok: false, error: "Нет прав на изменение" };
 return { ok: true };
 }
-row.slug = "u" + Date.now().toString(36);
+row.slug = "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
 row.position = Math.floor(Date.now() / 1000);
-const { data, error } = await c.from("units").insert(row).select("id").single();
-return { ok: !error, id: data && data.id, error: error && error.message };
+const { data, error } = await c.from("units").insert(row).select("id,slug").single();
+return { ok: !error, id: data && data.id, slug: data && data.slug, error: error && error.message };
 },
 async deleteUnit(id) {
 if (!useCloud) return { ok: false };
