@@ -255,32 +255,42 @@ emoji: meta.emoji || "📘", color: meta.color || "#e4ebf2", img: meta.img || nu
 });
 if (!made.ok) return made;
 
-/* Юниты со словами. Запоминаем, какой новый юнит какому старому соответствует —
-   без этой карты упражнения не легли бы в свои разделы. */
+/* Пишем пакетами, а не по одной строке: учебник на 11 юнитов и 77 заданий
+   при построчной записи требовал под сотню обращений к базе и минуту
+   ожидания. Здесь два запроса. */
+const c = ensureClient();
+const me = await this.getUser();
+const stamp = Date.now().toString(36);
+
 const map = {};
-let units = 0;
-for (let i = 0; i < src.length; i++) {
-const u = src[i];
-const r = await this.saveUnit({
-course_slug: made.slug, unit_label: u.unit || null, title: u.title,
-emoji: u.emoji || "📖", color: u.color || "#f6e2cf", words: u.words || []
+const unitRows = src.map(function (u, i) {
+const newSlug = "u" + stamp + i.toString(36);
+map[u.id] = newSlug;
+return { owner_id: me.id, course_slug: made.slug, slug: newSlug,
+unit_label: u.unit || null, title: u.title, emoji: u.emoji || "📖",
+color: u.color || "#f6e2cf", words: u.words || [], position: i };
 });
-if (r.ok) { units++; if (r.slug) map[u.id] = r.slug; }
-}
+const insUnits = await c.from("units").insert(unitRows).select("slug");
+if (insUnits.error) return { ok: false, error: "юниты не скопировались: " + insUnits.error.message };
+const units = (insUnits.data || []).length;
 
 /* Упражнения — только те, что автор открыл. Закрытые просто не приедут. */
 let exOk = 0, exSkip = 0;
 try {
 const list = await this.courseExercises(slug);
-for (let i = 0; i < list.length; i++) {
-const e = list[i];
+const rows = [];
+list.forEach(function (e) {
 const newUnit = map[e.unit_id];
-if (!newUnit) { exSkip++; continue; }
-const r = await this.saveExercise({
-course: made.slug, unit_id: newUnit, book: e.book || "sb", type: e.type,
-title: e.title, section: e.section, data: e.data
+if (!newUnit) { exSkip++; return; }
+rows.push({ author_id: me.id, course: made.slug, unit_id: newUnit,
+book: e.book || "sb", type: e.type, title: e.title || null,
+section: e.section || null, data: e.data || {},
+position: e.position || 0, visibility: "private" });
 });
-if (r.ok) exOk++; else exSkip++;
+if (rows.length) {
+const insEx = await c.from("exercises").insert(rows).select("id");
+if (insEx.error) { exSkip += rows.length; console.warn("copy exercises:", insEx.error.message); }
+else exOk = (insEx.data || []).length;
 }
 } catch (err) { console.warn("copy exercises:", err); }
 
