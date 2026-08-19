@@ -490,6 +490,64 @@ return { ok: true, url: data && data.publicUrl, path: path };
 } catch (e) { return { ok: false, error: String(e) }; }
 },
 
+/* ---------- Личный словарь ученика ----------
+   Ученик сам добавляет слова и словосочетания, которые встретил; учитель может
+   докинуть незнакомое слово прямо во время урока. Слова живут отдельным
+   юнитом «Мои слова» — и в словаре, и в тренажёре. */
+
+async myWords(studentId) {
+if (!useCloud) return [];
+const c = ensureClient(); if (!c) return [];
+const u = await this.getUser(); if (!u) return [];
+const { data, error } = await c.from("my_words")
+.select("id,student_id,en,ru,note,ipa,meaning,img,audio,source,created_at")
+.eq("student_id", studentId || u.id)
+.order("created_at", { ascending: false });
+if (error) { console.warn("myWords:", error.message); return []; }
+return data || [];
+},
+
+/* w: {en, ru, note, ipa, meaning, img, audio, source}. studentId — если добавляет учитель. */
+async addWord(w, studentId) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const en = (w && w.en || "").trim();
+if (!en) return { ok: false, error: "впиши слово или фразу" };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false, error: "войди в кабинет" };
+const row = {
+student_id: studentId || u.id, added_by: u.id, en: en,
+ru: (w.ru || "").trim(), note: w.note || null, ipa: w.ipa || null,
+meaning: w.meaning || null, img: w.img || null, audio: w.audio || null,
+source: w.source || "search"
+};
+const { data, error } = await c.from("my_words").insert(row).select("id").single();
+if (error) {
+if ((error.message || "").indexOf("my_words_uniq") >= 0)
+return { ok: false, error: "«" + en + "» уже есть в словаре", dup: true };
+return { ok: false, error: error.message };
+}
+return { ok: true, id: data && data.id };
+},
+
+async updateWord(id, patch) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const row = {};
+["en", "ru", "note", "ipa", "meaning", "img", "audio"].forEach(function (k) {
+if (patch && k in patch) row[k] = patch[k];
+});
+if (!Object.keys(row).length) return { ok: false, error: "нечего менять" };
+const { error } = await c.from("my_words").update(row).eq("id", id);
+return { ok: !error, error: error && error.message };
+},
+
+async removeWord(id) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const { error } = await c.from("my_words").delete().eq("id", id);
+return { ok: !error, error: error && error.message };
+},
+
 /* Таблица лидеров: [{name, week_points, total_points}] (только облако) */
 async leaderboard() {
 if (!useCloud) return [];

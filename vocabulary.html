@@ -32,6 +32,47 @@
   .pick .crd .tag{display:inline-block;margin-top:9px;background:var(--color-accent);color:#fff;
     font:800 10px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
   .pick .note{margin-top:18px;font:600 13px "Archivo",sans-serif;color:var(--color-neutral-700)}
+
+  /* ---------- Поиск и добавление своих слов ---------- */
+  .add{padding:16px 28px;border-bottom:2px solid var(--color-divider);background:var(--color-surface)}
+  .add .fr{display:flex;gap:8px;flex-wrap:wrap}
+  .add input.q{flex:1;min-width:190px;border:2px solid var(--color-text);background:var(--color-bg);
+    color:var(--color-text);padding:11px 12px;font:700 14.5px "Archivo",sans-serif}
+  .add .find{border:0;background:var(--color-accent);color:#fff;padding:11px 20px;
+    font:800 12px "Archivo",sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer}
+  .add .find:hover{background:var(--color-accent-600)}
+  .add .find:disabled{opacity:.6;cursor:progress}
+  .add .hint{margin-top:7px;font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .sug{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+  .sug button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:5px 10px;font:700 12.5px "Archivo",sans-serif;cursor:pointer}
+  .sug button:hover{border-color:var(--color-accent);color:var(--color-accent-600)}
+  .card{margin-top:13px;border:2px solid var(--color-text);background:var(--color-bg);padding:15px}
+  .card .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .card .en{font:900 21px "Archivo",sans-serif;letter-spacing:-.01em}
+  .card .ipa{font:600 14px "Archivo",sans-serif;color:var(--color-neutral-600)}
+  .card .pos{font:800 10px "Archivo",sans-serif;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--color-accent-600);border:2px solid var(--color-accent);padding:2px 7px}
+  .card .snd{border:2px solid var(--color-divider);background:var(--color-bg);padding:4px 9px;cursor:pointer;
+    font:700 13px "Archivo",sans-serif}
+  .card .snd:hover{border-color:var(--color-accent)}
+  .card label{display:block;margin:11px 0 5px;font:800 10.5px "Archivo",sans-serif;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--color-neutral-600)}
+  .card input,.card textarea{width:100%;border:2px solid var(--color-divider);background:var(--color-bg);
+    color:var(--color-text);padding:9px 10px;font:700 14px "Archivo",sans-serif}
+  .card .mean{margin-top:10px;font:600 13.5px "Archivo",sans-serif;color:var(--color-neutral-700);line-height:1.5}
+  .card .mean b{color:var(--color-text)}
+  .card .src{margin-top:9px;font:700 11px "Archivo",sans-serif;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--color-neutral-600)}
+  .card .save{margin-top:13px;width:100%;border:0;background:var(--color-accent);color:#fff;padding:12px;
+    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .card .save:hover{background:var(--color-accent-600)}
+  .card .err{margin-top:9px;font:700 13px "Archivo",sans-serif;color:#c0392b}
+  .card img.pic{max-width:130px;border:2px solid var(--color-divider);display:block;margin-top:10px}
+  .w .del{position:absolute;right:12px;top:40px;border:0;background:none;color:var(--color-neutral-500);
+    padding:4px;cursor:pointer;font:800 13px "Archivo",sans-serif}
+  .w .del:hover{color:#c0392b}
+  .w .mynote{margin-top:6px;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-600);line-height:1.4}
 </style>
 </head>
 <body>
@@ -56,6 +97,8 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
+<script src="sm-lookup.js"></script>
+<script src="sm-mywords.js"></script>
 <script src="sm-shell.js"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -156,6 +199,98 @@ function say(text){
   } catch(e){}
 }
 
+/* ---------- Поиск слова и добавление в «Мои слова» ---------- */
+let FOUND = null;
+
+function addPanelHtml(){
+  return '<div class="add">' +
+    '<div class="fr">' +
+      '<input class="q" id="qw" placeholder="слово или фраза — например: stubborn, get along with" autocomplete="off">' +
+      '<button class="find" id="qgo">Найти</button>' +
+    '</div>' +
+    '<div class="hint">Впиши что угодно на английском — покажу перевод, произношение и значение. Работают и словосочетания.</div>' +
+    '<div class="sug" id="qsug"></div>' +
+    '<div id="qcard"></div>' +
+  '</div>';
+}
+
+function cardHtml(r){
+  const varHtml = (r.variants||[]).filter(v => v.en.toLowerCase() !== (r.en||"").toLowerCase())
+    .slice(0,5).map(v => '<button data-v="'+esc(v.en)+'">'+esc(v.en)+' — '+esc(v.ru)+'</button>').join("");
+  return '<div class="card">' +
+    '<div class="top"><span class="en">'+esc(r.en)+'</span>' +
+      (r.ipa ? '<span class="ipa">'+esc(r.ipa)+'</span>' : '') +
+      (r.pos ? '<span class="pos">'+esc(r.pos)+'</span>' : '') +
+      '<button class="snd" id="qsay">'+icon("sound",14)+' послушать</button></div>' +
+    (r.img ? '<img class="pic" src="'+esc(r.img)+'" alt="">' : '') +
+    '<label>Перевод — можно поправить</label>' +
+    '<input id="qru" value="'+esc(r.ru||"")+'" placeholder="впиши перевод">' +
+    (r.meaning ? '<div class="mean"><b>Значение:</b> '+esc(r.meaning)+'</div>' : '') +
+    (r.example ? '<div class="mean"><b>Пример:</b> '+esc(r.example)+'</div>' : '') +
+    '<label>Своя заметка — где встретил, свой пример</label>' +
+    '<input id="qnote" placeholder="необязательно">' +
+    '<div class="src">' + (r.source==="course" ? "нашлось в словах твоего курса"
+                         : r.source==="auto" ? "перевод автоматический — проверь и поправь"
+                         : "перевод не нашёлся — впиши сам") + '</div>' +
+    (varHtml ? '<label>Похожее в курсе</label><div class="sug">'+varHtml+'</div>' : '') +
+    '<button class="save" id="qsave">Добавить в мои слова</button>' +
+    '<div class="err" id="qerr" style="display:none"></div>' +
+  '</div>';
+}
+
+function bindAddPanel(){
+  const q = document.getElementById("qw"), go = document.getElementById("qgo");
+  if (!q || !go) return;
+  const sug = document.getElementById("qsug"), card = document.getElementById("qcard");
+
+  q.oninput = () => {
+    const hits = (window.SM_lookupSuggest ? SM_lookupSuggest(q.value) : []).slice(0,6);
+    sug.innerHTML = q.value.trim().length < 2 ? "" :
+      hits.map(h => '<button data-v="'+esc(h.en)+'">'+esc(h.en)+' — '+esc(h.ru)+'</button>').join("");
+    sug.querySelectorAll("button").forEach(b => b.onclick = () => { q.value = b.dataset.v; run(); });
+  };
+  q.onkeydown = e => { if (e.key === "Enter") run(); };
+  go.onclick = run;
+
+  async function run(){
+    const text = q.value.trim();
+    if (!text) return;
+    go.disabled = true; go.textContent = "ищу…";
+    card.innerHTML = '<div class="hint" style="margin-top:12px">Ищу «'+esc(text)+'»…</div>';
+    try { FOUND = await SM_lookup(text); } catch(e){ FOUND = null; }
+    go.disabled = false; go.textContent = "Найти";
+    if (!FOUND){ card.innerHTML = '<div class="hint" style="margin-top:12px">Ничего не нашлось. Попробуй ещё раз.</div>'; return; }
+    card.innerHTML = cardHtml(FOUND);
+    wireCard();
+  }
+
+  function wireCard(){
+    const sayBtn = document.getElementById("qsay");
+    if (sayBtn) sayBtn.onclick = () => {
+      if (FOUND.audio){ try { new Audio(FOUND.audio).play(); return; } catch(e){} }
+      say(FOUND.en);
+    };
+    card.querySelectorAll(".sug button").forEach(b => b.onclick = () => { q.value = b.dataset.v; run(); });
+    const save = document.getElementById("qsave");
+    save.onclick = async () => {
+      const err = document.getElementById("qerr");
+      const ru = document.getElementById("qru").value.trim();
+      if (!ru){ err.style.display="block"; err.textContent="Впиши перевод — без него слово не потренируешь."; return; }
+      save.disabled = true; save.textContent = "добавляю…";
+      const r = await SM_addMyWord({
+        en: FOUND.en, ru: ru, note: document.getElementById("qnote").value.trim() || null,
+        ipa: FOUND.ipa, meaning: FOUND.meaning, img: FOUND.img, audio: FOUND.audio,
+        source: FOUND.source
+      });
+      save.disabled = false; save.textContent = "Добавить в мои слова";
+      if (!r.ok){ err.style.display="block"; err.textContent = r.error || "Не получилось добавить"; return; }
+      q.value = ""; FOUND = null;
+      sel = units().findIndex(u => u.id === "own");
+      drawList(); drawPane();
+    };
+  }
+}
+
 function drawPane(){
   const p = document.getElementById("pane");
   const us = units();
@@ -177,18 +312,33 @@ function drawPane(){
       '<div class="tile"><span class="k">Выучено</span><span class="n">'+done.length+'</span></div>' +
       '<div class="tile"><span class="k">На повторение</span><span class="n acc">'+rep.length+'</span></div>' +
     '</div>' +
+    addPanelHtml() +
     '<div class="sect"><span>Слова / Words</span><span>красным — на повторение</span></div>' +
-    '<div class="wgrid">' + list.map(w => {
+    (list.length ? '<div class="wgrid">' + list.map(w => {
       const p2 = st(w.id) || {};
       const lvl = Math.min(100, Math.round((p2.level||0)/TARGET*100));
+      const own = String(w.id||"").indexOf("own-") === 0;
       return '<div class="w'+(isRepeat(w.id)?" rep":"")+'">' +
         '<button class="say" data-w="'+esc(w.en)+'" title="Послушать">'+icon("sound",15)+'</button>' +
+        (own ? '<button class="del" data-del="'+esc(String(w.id).slice(4))+'" title="Убрать из моих слов">✕</button>' : '') +
         '<div class="en">'+esc(w.en)+'</div><div class="ru">'+esc(w.ru||"")+'</div>' +
+        (own && w.note ? '<div class="mynote">'+esc(w.note)+'</div>' : '') +
         (p2.seen ? '<div class="lvl"><i style="width:'+lvl+'%"></i></div>' : "") +
         '</div>';
-    }).join("") + '</div>';
+    }).join("") + '</div>'
+    : '<div class="pick" style="padding:22px 28px"><p class="lead" style="margin:0">'+
+      (sel !== -1 && us[sel] && us[sel].id === "own"
+        ? 'Здесь будут слова, которые ты добавишь сам или пришлёт учитель. Найди первое через поиск выше.'
+        : 'В этом юните пока нет слов.')+'</p></div>');
 
   p.querySelectorAll(".say").forEach(b => b.onclick = () => say(b.dataset.w));
+  p.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    if (!confirm("Убрать слово из твоего словаря?")) return;
+    await SM_removeMyWord(b.dataset.del);
+    if (sel >= units().length) sel = -1;
+    drawList(); drawPane();
+  });
+  bindAddPanel();
   bindCourseSwitch();
 }
 

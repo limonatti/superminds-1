@@ -256,14 +256,36 @@ window.SM_refreshCloudCourses = function () {
    ждут window.SM_ready.
 ---------------------------------------------------------------------------- */
 
+/* Личный словарь ученика: слова, которые он добавил сам или получил от учителя.
+   Заполняется из базы (sm-mywords.js) и подмешивается сюда отдельным юнитом
+   «Мои слова» — чтобы словарь и тренажёр работали с ним как с обычным юнитом.
+   Идентификатор слова берём из базы, а не из порядкового номера: иначе после
+   удаления одного слова у всех остальных «съезжал» бы прогресс. */
+window.SM_MY_WORDS = window.SM_MY_WORDS || [];
+
+window.SM_ownUnit = function () {
+  var list = window.SM_MY_WORDS || [];
+  return {
+    id: "own", unit: 0, title: "Мои слова", emoji: "⭐", color: "#efe6f7", own: true,
+    words: list.map(function (w) {
+      return { id: "own-" + w.id, en: w.en, ru: w.ru, emoji: "⭐", img: w.img || null,
+               note: w.note || null, ipa: w.ipa || null, meaning: w.meaning || null, audio: w.audio || null };
+    })
+  };
+};
+
 window.SM_useCourse = function (cid) {
   var known = cid && window.SM_COURSE_DATA[cid];
   if (!known) cid = window.SM_COURSE_DATA["sm1"] ? "sm1" : Object.keys(window.SM_COURSE_DATA)[0];
   window.SM_COURSE = window.SM_COURSES.filter(function (c) { return c.id === cid; })[0] || window.SM_COURSES[0];
-  window.SM_UNITS = window.SM_COURSE_DATA[cid] || [];
+  var units = (window.SM_COURSE_DATA[cid] || []).slice();
+  if ((window.SM_MY_WORDS || []).length) units.push(window.SM_ownUnit());
+  window.SM_UNITS = units;
   window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
     return (u.words || []).map(function (w, i) {
-      return { id: u.id + "-" + i, unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color, en: w.en, ru: w.ru, emoji: w.emoji, img: w.img || null };
+      return { id: w.id || (u.id + "-" + i), unitId: u.id, unit: u.unit, unitTitle: u.title, unitColor: u.color,
+               en: w.en, ru: w.ru, emoji: w.emoji, img: w.img || null, own: !!u.own,
+               note: w.note || null, ipa: w.ipa || null, meaning: w.meaning || null };
     });
   });
   return cid;

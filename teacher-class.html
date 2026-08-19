@@ -84,6 +84,7 @@
 <script src="speakout-words.js"></script>
 <script src="course-words.js"></script>
 <script src="sm-auth.js"></script>
+<script src="sm-lookup.js"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
@@ -288,6 +289,13 @@ async function drawPane(){
       '<div class="res" id="hRes" style="display:none"></div>' +
     '</div>' +
     hwChips(list, hw) +
+
+    '<div class="sect"><span>Слова ученику</span><span>попадут в его словарь и тренажёр</span></div>' +
+    '<div class="form"><input id="wEn" placeholder="слово или фраза по-английски" autocomplete="off">' +
+      '<input id="wRu" placeholder="перевод — подставится сам, можно поправить">' +
+      '<button class="go" id="wAdd">Добавить в словарь</button></div>' +
+    '<div class="res" id="wRes" style="display:none"></div>' +
+    '<div id="wList"></div>' +
 
     '<div class="sect"><span>Материалы · ссылки</span></div>' +
     '<div class="form"><input id="mTitle" placeholder="название материала"><input id="mUrl" placeholder="https://…">' +
@@ -552,6 +560,63 @@ function bindStudent(sid){
   document.querySelectorAll("[data-delhw]").forEach(b => b.onclick = async () => {
     await SM.deleteHW(b.dataset.delhw); drawPane();
   });
+  /* ---------- слова ученику ----------
+     Перевод подставляется сам, как только учитель дописал слово: искать его
+     руками во время урока некогда. Всё равно можно поправить перед добавлением. */
+  (function(){
+    const en = $("wEn"), ru = $("wRu"), btn = $("wAdd"), res = $("wRes");
+    if (!en || !btn) return;
+    let lastLooked = "";
+    const show = (t, ok) => { res.style.display="block"; res.className = ok ? "res ok" : "res"; res.textContent = t; };
+
+    async function autofill(){
+      const t = en.value.trim();
+      if (!t || t === lastLooked) return;
+      lastLooked = t;
+      if (ru.value.trim()) return;          /* учитель уже вписал свой перевод */
+      try {
+        const r = await SM_lookup(t);
+        if (r && r.ru && !ru.value.trim() && en.value.trim() === t) {
+          ru.value = r.ru;
+          show(r.source === "course" ? "Перевод из слов курса — проверь." : "Перевод автоматический — проверь.", true);
+        }
+      } catch(e){}
+    }
+    en.onblur = autofill;
+    en.onkeydown = e => { if (e.key === "Enter"){ autofill(); ru.focus(); } };
+    ru.onkeydown = e => { if (e.key === "Enter") btn.click(); };
+
+    btn.onclick = async () => {
+      const t = en.value.trim();
+      if (!t){ show("Впиши слово или фразу."); return; }
+      if (!ru.value.trim()) await autofill();
+      if (!ru.value.trim()){ show("Впиши перевод — без него слово не потренировать."); return; }
+      btn.disabled = true; btn.textContent = "…";
+      let extra = {};
+      try { const r = await SM_lookup(t); if (r) extra = { ipa:r.ipa, meaning:r.meaning, img:r.img, audio:r.audio }; } catch(e){}
+      const r2 = await SM.addWord(Object.assign({ en:t, ru:ru.value.trim(), source:"teacher" }, extra), sid);
+      btn.disabled = false; btn.textContent = "Добавить в словарь";
+      if (!r2.ok){ show(r2.error || "Не получилось добавить"); return; }
+      show("«"+t+"» — добавлено ученику.", true);
+      en.value = ""; ru.value = ""; lastLooked = "";
+      drawStudentWords();
+    };
+
+    drawStudentWords();
+    async function drawStudentWords(){
+      const box = $("wList"); if (!box) return;
+      let ws = [];
+      try { ws = await SM.myWords(sid); } catch(e){ ws = []; }
+      if (!ws.length){ box.innerHTML = '<div class="empty"><div class="p">Личных слов пока нет.</div></div>'; return; }
+      box.innerHTML = '<div class="chips">' + ws.slice(0,40).map(w =>
+        '<span class="chip done">'+esc(w.en)+' — '+esc(w.ru)+'<button data-delw="'+w.id+'" title="Убрать">✕</button></span>'
+      ).join("") + '</div>';
+      box.querySelectorAll("[data-delw]").forEach(b => b.onclick = async () => {
+        await SM.removeWord(b.dataset.delw); drawStudentWords();
+      });
+    }
+  })();
+
   $("mAdd").onclick = async e => {
     const t = $("mTitle").value.trim(), u = $("mUrl").value.trim();
     if (!t || !u) { alert("Впиши название и ссылку"); return; }
