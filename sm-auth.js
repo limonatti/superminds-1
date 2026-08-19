@@ -300,7 +300,7 @@ async myCourses() {
 if (!useCloud) return [];
 const c = ensureClient(); if (!c) return [];
 const u = await this.getUser(); if (!u) return [];
-const { data } = await c.from("courses").select("id,slug,title,subtitle,emoji,color,img,created_at").eq("owner_id", u.id).order("created_at", { ascending: true });
+const { data } = await c.from("courses").select("id,slug,title,subtitle,emoji,color,img,kind,published,created_at").eq("owner_id", u.id).order("kind", { ascending: true }).order("created_at", { ascending: true });
 return data || [];
 },
 async saveCourse(cr) {

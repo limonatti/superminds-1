@@ -104,10 +104,12 @@
         '<div class="hint">Учебник появится на главной странице сайта. Внутри — юниты со словами: они автоматически работают в тренажёре слов, играх, листах и упражнениях.</div>';
       document.getElementById("newC").onclick=()=>courseForm(null);
       cs.forEach(c=>{
-        document.getElementById("units-"+c.id).onclick=()=>showUnits(c);
-        document.getElementById("open-"+c.id).onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
-        document.getElementById("edit-"+c.id).onclick=()=>courseForm(c);
-        document.getElementById("del-"+c.id).onclick=async()=>{
+        const el=id=>document.getElementById(id+"-"+c.id);
+        if(el("units")) el("units").onclick=()=>showUnits(c);
+        if(el("open"))  el("open").onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
+        if(!el("edit")) return;
+        el("edit").onclick=()=>courseForm(c);
+        el("del").onclick=async()=>{
           if(!confirm("Удалить учебник «"+c.title+"» со всеми юнитами и упражнениями?"))return;
           const r=await SM.deleteCourse(c.id,c.slug);
           if(r.ok){await refresh();showCourses();}else alert(r.error||"Ошибка");
@@ -115,12 +117,19 @@
       });
     }
     function courseRow(c){
+      /* Учебники, собранные в файлах сайта (Speakout, Solutions, Super Minds и др.),
+         числятся за владельцем, но правятся не здесь — только открываются. */
+      const builtin = c.kind === "builtin";
       return '<div class="crow"><span class="ce" style="background:'+(c.color||"#eee")+'">'+(c.img?'<img src="'+esc(c.img)+'" alt="">':(c.emoji||"📘"))+'</span>'+
-        '<span class="ct">'+esc(c.title)+'<small>'+esc(c.subtitle||"")+'</small></span>'+
-        '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+
-        '<button id="open-'+c.id+'" class="bt">открыть</button>'+
-        '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
-        '<button id="del-'+c.id+'" class="bt" title="удалить">🗑</button></div>';
+        '<span class="ct">'+esc(c.title)+
+          '<small>'+esc(c.subtitle||"")+(builtin?' · собран в файлах сайта':'')+'</small></span>'+
+        (builtin
+          ? '<button id="open-'+c.id+'" class="bt main">открыть</button>'
+          : '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+
+            '<button id="open-'+c.id+'" class="bt">открыть</button>'+
+            '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
+            '<button id="del-'+c.id+'" class="bt" title="удалить">🗑</button>')+
+        '</div>';
     }
     function courseForm(c){
       root.innerHTML='<div class="panel"><div class="sec-title">'+(c?"Настройки учебника":"Новый учебник")+'</div>'+
