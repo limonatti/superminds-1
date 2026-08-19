@@ -55,25 +55,39 @@
     return out.slice(0, 8);
   }
 
-  /* ---------- 2. Толковый словарь ---------- */
+  /* ---------- 2. Толковый словарь ----------
+     Сервис бесплатный и отвечает через раз: из трёх запросов подряд один
+     падает с сетевой ошибкой. Поэтому один повтор — и честный признак
+     «не ответил», чтобы не запоминать пустышку на полсуток. */
+  async function dictOnce(word) {
+    var r = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encodeURIComponent(word));
+    if (r.status === 404) return { ok: true, empty: true };   /* слова нет — это ответ, а не сбой */
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    var j = await r.json();
+    var e = j && j[0];
+    if (!e) return { ok: true, empty: true };
+    var ipa = e.phonetic || (e.phonetics || []).map(function (p) { return p.text; }).filter(Boolean)[0] || null;
+    var au = (e.phonetics || []).filter(function (p) { return p.audio; })[0];
+    var m = (e.meanings || [])[0], d = m && (m.definitions || [])[0];
+    return {
+      ok: true,
+      ipa: ipa,
+      audio: au ? au.audio : null,
+      meaning: d ? d.definition : null,
+      example: d && d.example ? d.example : null,
+      pos: m ? m.partOfSpeech : null
+    };
+  }
+
   async function dictInfo(word) {
-    if (isPhrase(word)) return {};                 /* фразы этот словарь не знает */
-    try {
-      var r = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encodeURIComponent(norm(word)));
-      if (!r.ok) return {};
-      var j = await r.json();
-      var e = j && j[0]; if (!e) return {};
-      var ipa = e.phonetic || (e.phonetics || []).map(function (p) { return p.text; }).filter(Boolean)[0] || null;
-      var au = (e.phonetics || []).filter(function (p) { return p.audio; })[0];
-      var m = (e.meanings || [])[0], d = m && (m.definitions || [])[0];
-      return {
-        ipa: ipa,
-        audio: au ? au.audio : null,
-        meaning: d ? d.definition : null,
-        example: d && d.example ? d.example : null,
-        pos: m ? m.partOfSpeech : null
-      };
-    } catch (e) { return {}; }
+    if (isPhrase(word)) return { ok: true, empty: true };   /* фразы этот словарь не знает */
+    var w = norm(word);
+    try { return await dictOnce(w); }
+    catch (e1) {
+      await new Promise(function (r) { setTimeout(r, 600); });
+      try { return await dictOnce(w); }
+      catch (e2) { return { ok: false }; }                  /* не ответил — не кэшируем */
+    }
   }
 
   /* ---------- 3. Автоперевод ---------- */
@@ -119,9 +133,12 @@
       img: exact ? exact.img : null,
       variants: local,
       source: exact ? "course" : (auto ? "auto" : "none"),
-      phrase: isPhrase(q)
+      phrase: isPhrase(q),
+      dictDown: info.ok === false        /* толковый словарь не ответил */
     };
-    cacheSet(key, res);
+    /* Запоминаем только полный результат. Если словарь отвалился, следующий
+       поиск того же слова попробует снова, а не отдаст пустую карточку из кэша. */
+    if (!res.dictDown) cacheSet(key, res);
     return res;
   };
 

@@ -231,7 +231,8 @@ function cardHtml(r){
     '<input id="qnote" placeholder="необязательно">' +
     '<div class="src">' + (r.source==="course" ? "нашлось в словах твоего курса"
                          : r.source==="auto" ? "перевод автоматический — проверь и поправь"
-                         : "перевод не нашёлся — впиши сам") + '</div>' +
+                         : "перевод не нашёлся — впиши сам") +
+      (r.dictDown ? ' · словарь произношения не ответил, попробуй поискать ещё раз' : '') + '</div>' +
     (varHtml ? '<label>Похожее в курсе</label><div class="sug">'+varHtml+'</div>' : '') +
     '<button class="save" id="qsave">Добавить в мои слова</button>' +
     '<div class="err" id="qerr" style="display:none"></div>' +
