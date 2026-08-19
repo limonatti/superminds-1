@@ -191,6 +191,47 @@ if (co.error) console.warn("listCourses:", co.error.message);
 return { courses: co.data || [], units: un.data || [] };
 },
 
+/* Библиотека: чужие учебники, открытые для всех учителей.
+   Свои сюда не попадают — они и так в «Моих учебниках». */
+async libraryCourses() {
+if (!useCloud) return [];
+const c = ensureClient(); if (!c) return [];
+const u = await this.getUser(); if (!u) return [];
+const { data, error } = await c.from("courses")
+.select("id,slug,title,subtitle,emoji,color,img,kind,owner_id")
+.eq("published", true).neq("owner_id", u.id)
+.order("title", { ascending: true });
+if (error) { console.warn("libraryCourses:", error.message); return []; }
+return data || [];
+},
+
+/* Взять учебник из библиотеки себе. Делается копия: оригинал остаётся
+   нетронутым у автора, дальше учитель правит только свою версию.
+   Слова берём из того, что уже загружено в браузер (SM_COURSE_DATA). */
+async copyCourseFrom(slug, opts) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+opts = opts || {};
+const src = (window.SM_COURSE_DATA || {})[slug];
+if (!src || !src.length) return { ok: false, error: "у этого учебника нет юнитов для копирования" };
+const meta = ((window.SM_COURSES || []).filter(function (c) { return c.id === slug; })[0]) || {};
+const made = await this.saveCourse({
+title: opts.title || ((meta.title || slug) + " — моя версия"),
+subtitle: opts.subtitle || meta.subtitle || "копия из библиотеки",
+emoji: meta.emoji || "📘", color: meta.color || "#e4ebf2", img: meta.img || null
+});
+if (!made.ok) return made;
+let done = 0;
+for (let i = 0; i < src.length; i++) {
+const u = src[i];
+const r = await this.saveUnit({
+course_slug: made.slug, unit_label: u.unit || null, title: u.title,
+emoji: u.emoji || "📖", color: u.color || "#f6e2cf", words: u.words || []
+});
+if (r.ok) done++;
+}
+return { ok: true, slug: made.slug, id: made.id, units: done, total: src.length };
+},
+
 /* Владелец платформы выдаёт или снимает роль учителя */
 async setRole(userId, role) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };

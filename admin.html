@@ -98,11 +98,38 @@
       curCourse=null;
       root.innerHTML='<div class="empty">Загрузка…</div>';
       const cs=await SM.myCourses();
-      root.innerHTML='<div class="sec-title">Мои учебники</div>'+
-        (cs.length?cs.map(courseRow).join(""):'<div class="empty">Пока нет своих учебников. Создай первый 👇</div>')+
-        '<button class="primary" id="newC">＋ Новый учебник</button><div class="msg" id="msg"></div>'+
-        '<div class="hint">Учебник появится на главной странице сайта. Внутри — юниты со словами: они автоматически работают в тренажёре слов, играх, листах и упражнениях.</div>';
+      let lib=[]; try{ lib=await SM.libraryCourses(); }catch(e){}
+      const mine=cs.filter(c=>c.kind!=="builtin"), built=cs.filter(c=>c.kind==="builtin");
+
+      root.innerHTML=
+        (cs.length?"":
+          '<div class="panel" style="margin-bottom:16px"><div class="sec-title">С чего начать</div>'+
+          '<div class="hint" style="margin:0 0 10px">Два пути, можно совмещать: взять готовый учебник из библиотеки и вести по нему уже завтра — или собрать свой с нуля под своего ученика.</div></div>')+
+
+        '<div class="sec-title">Мои учебники</div>'+
+        (mine.length?mine.map(courseRow).join(""):'<div class="empty">Своих учебников пока нет — создай первый или скопируй готовый из библиотеки.</div>')+
+        '<button class="primary" id="newC">＋ Новый учебник с нуля</button><div class="msg" id="msg"></div>'+
+        '<div class="hint">Внутри — юниты со словами: они сами работают в тренажёре, играх и упражнениях.</div>'+
+
+        (built.length?'<div class="sec-title">Собраны в файлах сайта</div>'+built.map(courseRow).join(""):"")+
+
+        (lib.length?'<div class="sec-title">Библиотека платформы</div>'+
+          '<div class="hint" style="margin:-6px 0 10px">Готовые учебники. «Открыть» — посмотреть и вести по нему как есть. «Скопировать» — сделать свою версию, которую можно менять; оригинал останется нетронутым.</div>'+
+          lib.map(libRow).join(""):"");
+
       document.getElementById("newC").onclick=()=>courseForm(null);
+      lib.forEach(c=>{
+        const o=document.getElementById("libopen-"+c.id), k=document.getElementById("libcopy-"+c.id);
+        if(o) o.onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
+        if(k) k.onclick=async()=>{
+          k.disabled=true; k.textContent="копирую…";
+          const r=await SM.copyCourseFrom(c.slug,{});
+          k.disabled=false; k.textContent="скопировать себе";
+          if(!r.ok){ alert(r.error||"Не получилось скопировать"); return; }
+          alert("Готово: «"+c.title+"» скопирован, юнитов "+r.units+" из "+r.total+". Теперь он в «Моих учебниках» и его можно менять.");
+          await refresh(); showCourses();
+        };
+      });
       cs.forEach(c=>{
         const el=id=>document.getElementById(id+"-"+c.id);
         if(el("units")) el("units").onclick=()=>showUnits(c);
@@ -130,6 +157,12 @@
             '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
             '<button id="del-'+c.id+'" class="bt" title="удалить">🗑</button>')+
         '</div>';
+    }
+    function libRow(c){
+      return '<div class="crow"><span class="ce" style="background:'+(c.color||"#eee")+'">'+(c.img?'<img src="'+esc(c.img)+'" alt="">':(c.emoji||"📘"))+'</span>'+
+        '<span class="ct">'+esc(c.title)+'<small>'+esc(c.subtitle||"")+'</small></span>'+
+        '<button id="libopen-'+c.id+'" class="bt">открыть</button>'+
+        '<button id="libcopy-'+c.id+'" class="bt main">скопировать себе</button></div>';
     }
     function courseForm(c){
       root.innerHTML='<div class="panel"><div class="sec-title">'+(c?"Настройки учебника":"Новый учебник")+'</div>'+
