@@ -173,6 +173,21 @@ else:
     ok(f"все {len(used)} вызовов SM.* определены")
 
 
+# --- Метки версий: чтобы браузер ученика не показывал вчерашний код ---
+head("Метки версий у своих js и css")
+try:
+    import subprocess
+    r = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "stamp.py"), "--check"],
+                       capture_output=True, text=True)
+    if r.returncode == 0:
+        ok("метки версий на месте")
+    else:
+        for line in r.stdout.strip().splitlines():
+            warn(line)
+except Exception as e:
+    warn(f"не удалось проверить метки версий: {e}")
+
+
 print()
 if fail_n:
     print(f"{RED}Провалено проверок: {fail_n}{OFF}   пройдено: {ok_n}"
