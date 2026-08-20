@@ -170,16 +170,50 @@
       REC.start();
       btn.classList.add("rec"); btn.textContent="⏹ остановить";
     }
+    /* dataURL → File, чтобы нарисованную картинку положить в то же хранилище,
+       что и загруженную с компьютера. В базе останется короткая ссылка. */
+    function dataUrlToFile(durl,name){
+      const [head,b64]=durl.split(",");
+      const mime=(head.match(/data:([^;]+)/)||[])[1]||"image/png";
+      const bin=atob(b64); const arr=new Uint8Array(bin.length);
+      for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+      return new File([arr],name||"drawn.png",{type:mime});
+    }
+
+    /* Нарисовать картинку по описанию. Описание подставляется из вопроса,
+       который учитель уже написал — чаще всего править не придётся. */
+    async function genImage(inp,cb,btn){
+      if(typeof SM_AI==="undefined"||!SM_AI.call){ fail("Ассистент недоступен — обнови страницу"); return; }
+      const scope=btn.closest(".qblock")||document.getElementById("fields");
+      let hint="";
+      const src=scope&&scope.querySelector(".q,.statement,.word,.answer");
+      if(src) hint=(src.value||"").trim();
+      const desc=prompt("Что нарисовать? Можно по-русски.\n\nНапример: мальчик кормит кота","(hint)".replace("(hint)",hint));
+      if(!desc||!desc.trim()) return;
+      busy(btn,true,"🎨 рисую…");
+      let res=null;
+      try{ res=await SM_AI.call("image",{en:desc.trim(),ru:""}); }catch(e){ res={ok:false,error:"не получилось"}; }
+      if(!res||!res.ok||!res.image){ busy(btn,false); fail(res&&res.error?res.error:"Картинка не нарисовалась — попробуй ещё раз"); return; }
+      /* сжимаем перед загрузкой, иначе в хранилище уедет мегабайт */
+      const small=await new Promise(ok=>{ try{ SM_AI.compress(res.image,ok); }catch(e){ ok(res.image); } });
+      /* compress отдаёт jpeg — расширение должно совпасть, uploadMedia берёт его из имени */
+      const ext=(small.indexOf("data:image/png")===0)?"png":"jpg";
+      const url=await putFile(dataUrlToFile(small,"drawn-"+Date.now()+"."+ext),"img",btn);
+      busy(btn,false);
+      if(url){ inp.value=url; if(cb)cb(); const m=document.getElementById("msg"); if(m){m.className="msg ok";m.textContent="Картинка готова — если не нравится, нарисуй ещё раз";} }
+    }
+
     function wireImageIn(scope){
       const inp=scope.querySelector(".img");if(!inp)return;
-      const btn=scope.querySelector(".upl"),prev=scope.querySelector(".imgprev");
+      const btn=scope.querySelector(".upl"),gen=scope.querySelector(".gen"),prev=scope.querySelector(".imgprev");
       function showPrev(){ if(prev) prev.innerHTML=inp.value?('<img src="'+inp.value.replace(/"/g,"&quot;")+'" alt="">'):""; }
       if(btn){ btn.dataset.lbl=btn.textContent; btn.onclick=()=>pickImage(inp,showPrev,btn); }
+      if(gen){ gen.dataset.lbl=gen.textContent; gen.onclick=()=>genImage(inp,showPrev,gen); }
       inp.addEventListener("input",showPrev);showPrev();
     }
     function imageFieldHTML(val,idAttr){
       return '<label>🖼 КАРТИНКА (необязательно — можно вместо текста)</label>'+
-        '<div class="imgrow"><input '+(idAttr?'id="'+idAttr+'" ':'')+'class="img" placeholder="вставь ссылку или загрузи файл →" value="'+esc(val||"")+'"><button class="upl" type="button">📁 файл</button></div>'+
+        '<div class="imgrow"><input '+(idAttr?'id="'+idAttr+'" ':'')+'class="img" placeholder="вставь ссылку, загрузи или нарисуй →" value="'+esc(val||"")+'"><button class="upl" type="button">📁 файл</button><button class="upl gen" type="button">🎨 нарисовать</button></div>'+
         '<div class="imgprev"></div>';
     }
 
