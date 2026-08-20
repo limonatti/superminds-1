@@ -460,7 +460,20 @@
     }
     async function loadAndRender(){
       const root=document.getElementById("root");
-      let ex=[],loadErr=null; try{ ex=await SM.exercisesFor(SM_COURSE.id, uid); }catch(e){ loadErr=e; }
+      /* Юнит в ссылке может быть из другого учебника, чем выбран сейчас.
+         Раньше упражнения искались в текущем курсе, не находились, и страница
+         говорила «пока нет упражнений», хотя они есть. Определяем курс по юниту. */
+      let cid = SM_COURSE.id;
+      try{
+        const own = window.SM_courseOfUnit && SM_courseOfUnit(uid);
+        if(own && own !== cid){
+          cid = own;
+          if(window.SM_useCourse){ SM_useCourse(cid); }
+          const u2 = SM_UNITS.find(x=>x.id===uid);
+          if(u2) document.getElementById("sub").textContent = u2.emoji+" "+u2.title+" · упражнения";
+        }
+      }catch(e){}
+      let ex=[],loadErr=null; try{ ex=await SM.exercisesFor(cid, uid); }catch(e){ loadErr=e; }
       if(loadErr){ root.innerHTML='<div class="empty">Не удалось загрузить упражнения (нет связи с базой). Обнови страницу.</div>'; return; }
       if(!SM.isCloud){ root.innerHTML='<div class="empty">Упражнения работают с настоящими аккаунтами (Supabase).</div>'; return; }
       if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html?u='+encodeURIComponent(uid)+'">Конструкторе</a>.</div>'; return; }
@@ -697,6 +710,9 @@
       const rt=document.getElementById("root"); if(rt) rt.innerHTML='<div class="empty" style="padding:30px;text-align:center">Готовлю предпросмотр…</div>';
     } else
     (async function(){
+      /* Юниты облачных учебников подтягиваются асинхронно. Без ожидания
+         SM_courseOfUnit не найдёт юнит из своего учебника. */
+      try { await (window.SM_ready || Promise.resolve()); } catch(e){}
       await loadHwContext();
       try{ const p=await SM.myProfile();
         if(p&&p.role==="teacher"){
