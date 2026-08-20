@@ -66,6 +66,10 @@
       return r;
     };
     async function addDupButtons() {
+      /* Копию учебника теперь делает кнопка «⧉ копия» в самом admin.html —
+         она умеет и встроенные учебники, юниты которых лежат в файлах сайта.
+         Здесь оставляем только копирование юнитов, чтобы не было двух кнопок. */
+      return;
       var cs = await SM.myCourses();
       cs.forEach(function (c) {
         var del = document.getElementById("del-" + c.id);

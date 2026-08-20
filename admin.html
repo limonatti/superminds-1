@@ -141,7 +141,7 @@
           if(!confirm("Сделать свою версию «"+c.title+"»? Приедут юниты, слова и упражнения. Оригинал останется как есть."))return;
           const b=el("copyb"); b.disabled=true; b.textContent="копирую…";
           const r=await SM.copyCourseFrom(c.slug,{});
-          b.disabled=false; b.textContent="⧉ скопировать себе";
+          b.disabled=false; b.textContent="⧉ копия";
           if(!r.ok){ alert(r.error||"Не получилось скопировать"); return; }
           alert("Готово: «"+c.title+"».\n\nЮнитов: "+r.units+" из "+r.total+
                 "\nУпражнений: "+r.exercises+(r.skipped?" (пропущено "+r.skipped+")":"")+
@@ -182,9 +182,9 @@
           '<small>'+esc(c.subtitle||"")+(builtin?' · собран в файлах сайта':'')+
           ' · '+(pub?'открыт другим учителям':'только мой')+'</small></span>'+
         '<button id="pub-'+c.id+'" class="bt" title="'+(pub?'закрыть от других учителей':'открыть другим учителям')+'">'+(pub?'👁 открыт':'🔒 закрыт')+'</button>'+
+        '<button id="copyb-'+c.id+'" class="bt" title="сделать свою версию — юниты, слова и упражнения">⧉ копия</button>'+
         (builtin
-          ? '<button id="copyb-'+c.id+'" class="bt main" title="сделать свою версию — юниты, слова и упражнения">⧉ скопировать себе</button>'+
-            '<button id="open-'+c.id+'" class="bt">открыть</button>'
+          ? '<button id="open-'+c.id+'" class="bt main">открыть</button>'
           : '<button id="units-'+c.id+'" class="bt main">Юниты →</button>'+
             '<button id="open-'+c.id+'" class="bt">открыть</button>'+
             '<button id="edit-'+c.id+'" class="bt" title="настройки">✎</button>'+
