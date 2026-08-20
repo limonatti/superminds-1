@@ -58,7 +58,7 @@
   <script src="words.js?v=f01c1435"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=1cacc582"></script>
+  <script src="sm-auth.js?v=c5daa258"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     const COLORS=["#eae9e9","#eae9e9","#eae9e9","#fbe6de","#efe0e6","#faf1d8","#eae9e9"];
@@ -120,7 +120,7 @@
       document.getElementById("newC").onclick=()=>courseForm(null);
       lib.forEach(c=>{
         const o=document.getElementById("libopen-"+c.id), k=document.getElementById("libcopy-"+c.id);
-        if(o) o.onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
+        if(o) o.onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="units.html";};
         if(k) k.onclick=async()=>{
           k.disabled=true; k.textContent="копирую…";
           const r=await SM.copyCourseFrom(c.slug,{});
@@ -162,11 +162,38 @@
           showCourses();
         };
         if(el("units")) el("units").onclick=()=>showUnits(c);
-        if(el("open"))  el("open").onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="course.html";};
+        /* course.html — заглушка с редиректом на главную, раздел давно переехал.
+           Юниты курса живут в units.html, он читает выбранный курс из sm-course. */
+        if(el("open"))  el("open").onclick=()=>{try{localStorage.setItem("sm-course",c.slug);}catch(e){}location.href="units.html";};
         if(!el("edit")) return;
         el("edit").onclick=()=>courseForm(c);
+        /* Удаление необратимо и уносит юниты с упражнениями. Поэтому сначала
+           показываем, сколько именно пропадёт, а для непустого учебника просим
+           впечатать название — от случайного клика по похожему пункту. */
         el("del").onclick=async()=>{
-          if(!confirm("Удалить учебник «"+c.title+"» со всеми юнитами и упражнениями?"))return;
+          const btn=el("del"), was=btn.textContent;
+          btn.disabled=true; btn.textContent="считаю…";
+          let s={units:0,exercises:0,words:0};
+          try{ s=await SM.courseStats(c.slug); }catch(e){}
+          btn.disabled=false; btn.textContent=was;
+
+          const empty=!s.units&&!s.exercises;
+          if(empty){
+            if(!confirm("Удалить пустой учебник «"+c.title+"»?\n\nВ нём нет ни юнитов, ни упражнений."))return;
+          }else{
+            const what=[];
+            if(s.units) what.push("юнитов: "+s.units);
+            if(s.words) what.push("слов: "+s.words);
+            if(s.exercises) what.push("упражнений: "+s.exercises);
+            const answer=prompt(
+              "⚠️ УДАЛЕНИЕ НАВСЕГДА\n\n"+
+              "Учебник «"+c.title+"» (ключ "+c.slug+")\n"+
+              "Вместе с ним пропадёт — "+what.join(", ")+".\n\n"+
+              "Восстановить будет нельзя.\n"+
+              "Чтобы подтвердить, впиши название учебника точно так, как оно написано выше:","");
+            if(answer===null) return;
+            if(answer.trim()!==c.title.trim()){ alert("Название не совпало — ничего не удалено."); return; }
+          }
           const r=await SM.deleteCourse(c.id,c.slug);
           if(r.ok){await refresh();showCourses();}else alert(r.error||"Ошибка");
         };
@@ -180,7 +207,9 @@
       return '<div class="crow"><span class="ce" style="background:'+(c.color||"#eee")+'">'+(c.img?'<img src="'+esc(c.img)+'" alt="">':(c.emoji||"📘"))+'</span>'+
         '<span class="ct">'+esc(c.title)+
           '<small>'+esc(c.subtitle||"")+(builtin?' · собран в файлах сайта':'')+
-          ' · '+(pub?'открыт другим учителям':'только мой')+'</small></span>'+
+          ' · '+(pub?'открыт другим учителям':'только мой')+
+          /* ключ учебника — единственное, чем различаются одноимённые */
+          ' · ключ '+esc(c.slug||c.id)+'</small></span>'+
         '<button id="pub-'+c.id+'" class="bt" title="'+(pub?'закрыть от других учителей':'открыть другим учителям')+'">'+(pub?'👁 открыт':'🔒 закрыт')+'</button>'+
         '<button id="copyb-'+c.id+'" class="bt" title="сделать свою версию — юниты, слова и упражнения">⧉ копия</button>'+
         (builtin

@@ -447,6 +447,16 @@ row.slug = "c" + Math.random().toString(36).slice(2, 8);
 const { data, error } = await c.from("courses").insert(row).select("id,slug").single();
 return { ok: !error, id: data && data.id, slug: data && data.slug, error: error && error.message };
 },
+/* Что именно пропадёт вместе с учебником. Считать ОБЯЗАТЕЛЬНО до удаления:
+   deleteCourse сносит юниты и упражнения молча, и вернуть их неоткуда. */
+async courseStats(slug) {
+if (!useCloud) return { units: 0, exercises: 0, words: 0 };
+const c = ensureClient(); if (!c) return { units: 0, exercises: 0, words: 0 };
+const { data: us } = await c.from("units").select("words").eq("course_slug", slug);
+const { count: ex } = await c.from("exercises").select("id", { count: "exact", head: true }).eq("course", slug);
+const words = (us || []).reduce(function (n, u) { return n + ((u.words || []).length); }, 0);
+return { units: (us || []).length, exercises: ex || 0, words: words };
+},
 async deleteCourse(id, slug) {
 if (!useCloud) return { ok: false };
 const c = ensureClient(); if (!c) return { ok: false };

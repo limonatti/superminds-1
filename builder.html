@@ -76,7 +76,7 @@
   <script src="words.js?v=f01c1435"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=1cacc582"></script>
+  <script src="sm-auth.js?v=c5daa258"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     const TYPES={
@@ -695,7 +695,15 @@
       if(!CID||!unitsOf(CID).length) CID=(cs[0]||{}).id||CID;
       const cur=cs.filter(c=>c.id===CID)[0]||SM_COURSE||{};
       document.getElementById("sub").textContent="выбери курс, юнит и книгу — и собирай упражнения";
-      const courseOpts=cs.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===CID?" selected":"")+'>'+(c.emoji||"📘")+' '+esc(c.title)+'</option>').join("");
+      /* Два учебника могут называться одинаково. Тогда к названию добавляем
+         ключ и число юнитов — иначе не отличить, куда сохраняешь. */
+      const titleCount={};
+      cs.forEach(c=>{const t=(c.title||"").trim();titleCount[t]=(titleCount[t]||0)+1;});
+      const courseOpts=cs.map(c=>{
+        const t=(c.title||"").trim();
+        const extra=titleCount[t]>1?(" · "+c.id+" · юнитов "+unitsOf(c.id).length):"";
+        return '<option value="'+esc(c.id)+'"'+(c.id===CID?" selected":"")+'>'+(c.emoji||"📘")+' '+esc(t)+esc(extra)+'</option>';
+      }).join("");
       const bookOpts=BOOKS.map(b=>'<option value="'+b[0]+'">'+b[1]+'</option>').join("");
       const typeOpts=Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].label+'</option>').join("");
       document.getElementById("root").innerHTML=
