@@ -114,7 +114,11 @@
 
   /* ---------- список юнитов ---------- */
   window.unitRow = function (u, i, n) {
-    return '<div class="crow"><span class="ce" style="background:' + (u.color || "#eee") + '">' + (u.emoji || "📖") + "</span>" +
+    /* обложка вытесняет эмодзи, если она задана */
+    var face = u.img
+      ? '<img src="' + esc(u.img) + '" alt="" style="width:100%;height:100%;object-fit:cover">'
+      : (u.emoji || "📖");
+    return '<div class="crow"><span class="ce" style="background:' + (u.color || "#eee") + ';overflow:hidden">' + face + "</span>" +
       '<span class="ct">' + esc((u.unit_label ? u.unit_label + " · " : "") + u.title) + "<small>" + ((u.words && u.words.length) || 0) + " слов</small></span>" +
       '<button id="ux-' + u.id + '" class="bt main">🧩 Упражнения</button>' +
       (i > 0 ? '<button id="uu-' + u.id + '" class="bt">↑</button>' : "") +
@@ -253,16 +257,75 @@
       '<div class="row2" style="margin-top:0"><div style="flex:1"><label>Номер</label><input id="lb" value="' + esc(u && u.unit_label || "") + '" placeholder="Unit 1"></div>' +
       '<div style="width:110px"><label>Эмодзи</label><input id="em" value="' + esc(u && u.emoji || "📖") + '" maxlength="4" style="text-align:center;font-size:22px"></div></div>' +
       "<label>Название юнита</label><input id=\"t\" value=\"" + esc(u && u.title || "") + "\" placeholder=\"At school\">" +
+      /* обложка юнита: если задана, показывается вместо эмодзи */
+      '<label>Обложка юнита (необязательно — заменит эмодзи)</label>' +
+      '<div class="imgrow"><input id="uimg" placeholder="ссылка на картинку, файл или нарисовать →" value="' + esc(u && u.img || "") + '">' +
+        '<button type="button" class="bt" id="uimgFile" title="картинка с компьютера">📁</button>' +
+        '<button type="button" class="bt" id="uimgGen" title="нарисовать картинку" style="background:#eafaf0;border-color:#b6e0c7">🎨</button>' +
+        '<button type="button" class="bt" id="uimgClr" title="убрать обложку">✕</button></div>' +
+      '<div class="imgprev" id="uimgPrev"></div>' +
       "<label>Цвет</label>" + colorPicker("usw", u && u.color || COLORS[2]) +
       '<label>Слова юнита</label><div id="wlist"></div>' +
       '<div class="wbar"><button type="button" class="bt" id="addW">＋ слово</button>' +
       '<button type="button" class="bt" id="mode">⇄ ввести списком</button>' +
       '<button type="button" class="bt" id="aiFill" style="background:#2980b9;border-color:#2980b9;color:#fff">🤖 Заполнить переводы и эмодзи</button>' +
-      '<button type="button" class="bt" id="aiImgAll" style="background:#3f7a20;border-color:#3f7a20;color:#fff">🎨 Картинки ко всем словам</button></div>' +
+      '<button type="button" class="bt" id="aiImgAll" style="background:#3f7a20;border-color:#3f7a20;color:#fff">🎨 Картинки ко всем словам</button>' +
+      /* стиль рисунка: детям и подросткам нужны разные картинки */
+      '<select id="imgStyle" style="width:auto;padding:8px 12px;border:2px solid #cfcecd;border-radius:12px;font:800 13px \'Archivo\',sans-serif;background:#fff">' +
+        '<option value="kids">детская картинка</option>' +
+        '<option value="modern">современная иллюстрация</option>' +
+        '<option value="photo">фотореалистично</option>' +
+        '<option value="soft">мягкая акварель</option>' +
+      "</select></div>" +
       '<div class="hint" id="whint">У каждого слова: эмодзи, английское, перевод. <b>📁</b> — загрузить картинку с компьютера (сожмётся автоматически), <b>🔗</b> — вставить ссылку на картинку.</div>' +
       '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить юнит</button><button class="bt" id="cancel">Отмена</button></div>' +
       '<div class="msg" id="msg"></div></div>';
     bindSw("usw");
+
+    /* ---------- обложка юнита ---------- */
+    (function () {
+      var inp = document.getElementById("uimg");
+      var prev = document.getElementById("uimgPrev");
+      if (!inp) return;
+      function show() {
+        prev.innerHTML = inp.value ? '<img src="' + esc(inp.value) + '" alt="">' : "";
+      }
+      inp.addEventListener("input", show);
+      show();
+
+      document.getElementById("uimgClr").onclick = function () { inp.value = ""; show(); };
+
+      document.getElementById("uimgFile").onclick = function () {
+        /* pickImage живёт в admin.html: сжимает файл в браузере до data-URL */
+        pickImage(inp, async function () {
+          var url = await toStoredUrl(inp.value);
+          inp.value = url; show();
+        });
+      };
+
+      document.getElementById("uimgGen").onclick = async function () {
+        var b = this;
+        var name = (document.getElementById("t").value || "").trim();
+        var desc = prompt("Что нарисовать на обложке юнита?\n\nМожно по-русски.", name);
+        if (!desc || !desc.trim()) return;
+        b.disabled = true; b.textContent = "…";
+        m("", "🎨 Рисую обложку… это ~20 секунд");
+        var res = null;
+        try { res = await SM_AI.call("image", { en: desc.trim(), ru: "", style: imgStyle() }); }
+        catch (e) { res = { ok: false, error: "не получилось" }; }
+        if (!res || !res.ok || !res.image) {
+          b.disabled = false; b.textContent = "🎨";
+          m("err", (res && res.error) || "Не удалось нарисовать");
+          return;
+        }
+        SM_AI.compress(res.image, async function (small) {
+          var url = await toStoredUrl(small);
+          inp.value = url; show();
+          b.disabled = false; b.textContent = "🎨";
+          m("ok", "Обложка готова. Не забудь сохранить юнит.");
+        });
+      };
+    })();
 
     var box = document.getElementById("wlist");
 
@@ -318,7 +381,7 @@
         if (typeof SM_AI === "undefined") { alert("Модуль ассистента не загрузился, обнови страницу"); return; }
         b.textContent = "⏳"; b.disabled = true;
         m("", "🎨 Рисую картинку для «" + en + "»… это ~20 секунд, не закрывай страницу");
-        SM_AI.call("image", { en: en, ru: (W[i].ru || "").trim() }).then(function (res) {
+        SM_AI.call("image", { en: en, ru: (W[i].ru || "").trim(), style: imgStyle() }).then(function (res) {
           if (!res.ok || !res.image) { b.disabled = false; b.textContent = "🎨"; m("err", res.error || "Не удалось нарисовать"); return; }
           SM_AI.compress(res.image, function (small) {
             toStoredUrl(small).then(function (url) {
@@ -370,6 +433,13 @@
       m("ok", "Готово: заполнено переводов — " + filled + ". Проверь и поправь, если нужно.");
     };
 
+
+  /* какой стиль картинок выбран в панели юнита */
+  function imgStyle() {
+    var s = document.getElementById("imgStyle");
+    return (s && s.value) || "kids";
+  }
+
     // 🎨 массовая генерация картинок ко всем словам без картинки
     var aiImgAll = document.getElementById("aiImgAll");
     if (aiImgAll) aiImgAll.onclick = async function () {
@@ -388,7 +458,7 @@
         var en = (W[idx].en || "").trim();
         m("", "🎨 Рисую " + (k + 1) + " из " + need.length + ": «" + en + "»…");
         try {
-          var res = await SM_AI.call("image", { en: en, ru: (W[idx].ru || "").trim() });
+          var res = await SM_AI.call("image", { en: en, ru: (W[idx].ru || "").trim(), style: imgStyle() });
           if (res.ok && res.image) {
             await new Promise(function (resolve) { SM_AI.compress(res.image, function (small) { toStoredUrl(small).then(function (url) { W[idx].img = url; resolve(); }); }); });
             done++;
@@ -415,6 +485,7 @@
         id: u && u.id, course_slug: curCourse.slug,
         unit_label: document.getElementById("lb").value.trim(), title: t,
         emoji: document.getElementById("em").value.trim() || "📖",
+        img: (document.getElementById("uimg") || {}).value || "",
         color: swVal("usw"), words: ws
       });
       if (!r.ok) { m("err", r.error || "Ошибка"); return; }

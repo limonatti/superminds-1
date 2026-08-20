@@ -226,7 +226,8 @@ window.SM_refreshCloudCourses = function () {
     var data = {};
     units.forEach(function (u) {
       var w = Array.isArray(u.words) ? u.words : [];
-      (data[u.course_slug] = data[u.course_slug] || []).push({ id: u.slug, unit: u.unit_label || "", title: u.title, emoji: u.emoji || "📖", color: u.color || "#f6e2cf", words: w });
+      /* img — обложка юнита, показывается вместо эмодзи, если задана */
+      (data[u.course_slug] = data[u.course_slug] || []).push({ id: u.slug, unit: u.unit_label || "", title: u.title, emoji: u.emoji || "📖", img: u.img || null, color: u.color || "#f6e2cf", words: w });
     });
     try {
       localStorage.setItem("sm-cloud-cache", JSON.stringify({

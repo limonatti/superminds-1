@@ -61,7 +61,7 @@
     <div class="foot">Made for @english.with_asya · англ + рус · для детей 6–8</div>
   </div>
 
-  <script src="words.js?v=f01c1435"></script>
+  <script src="words.js?v=c350045e"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
   <script>
@@ -75,7 +75,10 @@
     SM_UNITS.forEach(u=>{
       const el=document.createElement("div");el.className="unit";
       el.innerHTML=
-        '<div class="ue" style="background:'+(u.color||"#eae9e9")+'">'+u.emoji+'</div>'+
+        /* обложка юнита вытесняет эмодзи, если учитель её задал */
+        '<div class="ue" style="background:'+(u.color||"#eae9e9")+(u.img?';overflow:hidden;padding:0':'')+'">'+
+          (u.img?'<img src="'+esc(u.img)+'" alt="" style="width:100%;height:100%;object-fit:cover;display:block">':u.emoji)+
+        '</div>'+
         '<div class="info"><div class="u">'+esc(u.unit)+'</div><div class="n">'+esc(u.title)+'</div></div>'+
         '<div class="acts">'+
           '<a class="act a-tr" href="trainer.html?unit='+u.id+'">🎯 Тренажёр</a>'+

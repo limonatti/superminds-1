@@ -185,7 +185,7 @@ if (!useCloud) return { courses: [], units: [] };
 const c = ensureClient(); if (!c) return { courses: [], units: [] };
 const [co, un] = await Promise.all([
 c.from("courses").select("slug,title,subtitle,emoji,color,img,owner_id,published").order("created_at", { ascending: true }),
-c.from("units").select("course_slug,slug,unit_label,title,emoji,color,position,words").order("position", { ascending: true }).order("created_at", { ascending: true })
+c.from("units").select("course_slug,slug,unit_label,title,emoji,color,img,position,words").order("position", { ascending: true }).order("created_at", { ascending: true })
 ]);
 if (co.error) console.warn("listCourses:", co.error.message);
 return { courses: co.data || [], units: un.data || [] };
@@ -469,14 +469,15 @@ async myUnits(courseSlug) {
 if (!useCloud) return [];
 const c = ensureClient(); if (!c) return [];
 const u = await this.getUser(); if (!u) return [];
-const { data } = await c.from("units").select("id,course_slug,slug,unit_label,title,emoji,color,position,words,created_at").eq("owner_id", u.id).eq("course_slug", courseSlug).order("position", { ascending: true }).order("created_at", { ascending: true });
+const { data } = await c.from("units").select("id,course_slug,slug,unit_label,title,emoji,color,img,position,words,created_at").eq("owner_id", u.id).eq("course_slug", courseSlug).order("position", { ascending: true }).order("created_at", { ascending: true });
 return data || [];
 },
 async saveUnit(un) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };
 const c = ensureClient(); if (!c) return { ok: false };
 const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
-const row = { owner_id: u.id, course_slug: un.course_slug, unit_label: un.unit_label || null, title: un.title, emoji: un.emoji || "📖", color: un.color || "#f6e2cf", words: un.words || [] };
+/* img — обложка юнита; когда она есть, показывается вместо эмодзи */
+const row = { owner_id: u.id, course_slug: un.course_slug, unit_label: un.unit_label || null, title: un.title, emoji: un.emoji || "📖", color: un.color || "#f6e2cf", img: un.img || null, words: un.words || [] };
 if (un.id) {
 const { data, error } = await c.from("units").update(row).eq("id", un.id).select("id");
 if (error) return { ok: false, error: error.message };
