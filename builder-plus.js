@@ -17,7 +17,7 @@
       var name = sel.options[sel.selectedIndex].text;
 
       var b = document.createElement("div");
-      b.style.cssText = "background:#fff;border:3px solid #2980b9;border-radius:18px;padding:13px 16px;margin:0 0 14px;font:800 14px 'Nunito',sans-serif;color:#1c1310;line-height:1.6";
+      b.style.cssText = "background:#fff;border:3px solid #2980b9;border-radius:18px;padding:13px 16px;margin:0 0 14px;font:800 14px 'Archivo',sans-serif;color:#1c1310;line-height:1.6";
       b.innerHTML = "Юнит <b>" + name.replace(/[<>]/g, "") + "</b> выбран автоматически. " +
         "Выбери тип упражнения ниже, заполни и нажми «Сохранить» — задание встанет в этот урок. " +
         "Так можно добавить сколько угодно упражнений подряд." +
@@ -35,19 +35,30 @@
 
 /* ============================================================
    🤖 Ассистент: «Собрать задания из слов юнита»
-   Заполняет те же поля формы, что учитель заполняет вручную.
-   Учитель проверяет и жмёт «Сохранить». Поддержка: choice, gap, tf, order, match.
+
+   Раньше он притворялся пользователем: жал addOpt/rm, подсовывал значения
+   через хак с value-сеттером и ждал появления элементов в цикле по 200 мс.
+   Если вёрстка отрисовывалась медленно — молча ничего не происходило,
+   а принять можно было только всё разом.
+
+   Теперь проще и надёжнее: ассистент отдаёт готовый JSON, мы показываем
+   задания списком, учитель отмечает нужные — и форма строится через
+   renderForm(type, data), который сам создаёт столько блоков, сколько надо.
    ============================================================ */
 (function () {
-  var SUPPORTED = { choice: 1, gap: 1, tf: 1, order: 1, match: 1 };
+  "use strict";
 
-  function setVal(el, v) {
-    if (!el) return;
-    var proto = el.tagName === "SELECT" ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
-    var setter = Object.getOwnPropertyDescriptor(proto, "value").set;
-    setter.call(el, v == null ? "" : String(v));
-    el.dispatchEvent(new Event("input", { bubbles: true }));
-    el.dispatchEvent(new Event("change", { bubbles: true }));
+  var SUPPORTED = { choice: 1, gap: 1, tf: 1, order: 1, match: 1 };
+  var cand = [];      // что придумал ассистент
+  var keep = [];      // отмеченные галочкой
+  var curType = null;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return (s == null ? "" : String(s)).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+
+  function status(txt, cls) {
+    var m = $("msg");
+    if (m) { m.className = "msg " + (cls || ""); m.textContent = txt; }
   }
 
   function unitWords(unitId) {
@@ -57,7 +68,6 @@
         if (w.unitId === unitId && w.en) out.push(w.en);
       });
     } catch (e) {}
-    // запасной путь — из SM_UNITS
     if (!out.length) {
       try {
         (window.SM_UNITS || []).forEach(function (u) {
@@ -65,88 +75,134 @@
         });
       } catch (e) {}
     }
+    /* запасной путь — словарь курса, который уже загружен на странице */
+    if (!out.length) {
+      try {
+        var cid = $("course") && $("course").value;
+        ((window.SM_COURSE_DATA || {})[cid] || []).forEach(function (u) {
+          if (u.id === unitId) (u.words || []).forEach(function (w) { if (w.en) out.push(w.en); });
+        });
+      } catch (e) {}
+    }
     return out;
   }
 
-  function status(txt, cls) {
-    var m = document.getElementById("msg");
-    if (m) { m.className = "msg " + (cls || ""); m.textContent = txt; }
-  }
-
-  /* ---- заполнение блоков по типам ---- */
-  function fillChoice(blk, it) {
-    setVal(blk.querySelector(".q"), it.q || "");
-    var opts = it.opts || [];
-    var addBtn = blk.querySelector(".addOpt");
-    while (blk.querySelectorAll(".optrow").length < opts.length && addBtn) addBtn.click();
-    // лишние строки убираем (если их больше, чем вариантов)
-    var rows = [].slice.call(blk.querySelectorAll(".optrow"));
-    for (var k = rows.length - 1; k >= opts.length && k >= 2; k--) { var rm = rows[k].querySelector(".rm"); if (rm) rm.click(); }
-    rows = blk.querySelectorAll(".optrow");
-    opts.forEach(function (o, i) {
-      if (!rows[i]) return;
-      setVal(rows[i].querySelector(".otext"), o);
-      var radio = rows[i].querySelector(".corr input");
-      if (radio) { radio.checked = (i === (it.correct || 0)); radio.dispatchEvent(new Event("change", { bubbles: true })); }
-    });
-  }
-  function fillGap(blk, it) { setVal(blk.querySelector(".q"), it.q || ""); setVal(blk.querySelector(".answer"), it.answer || ""); }
-  function fillTf(blk, it) {
-    setVal(blk.querySelector(".statement"), it.q || it.statement || "");
-    var val = (it.answer === true || it.answer === "true" || it.answer === 1) ? "true" : "false";
-    setVal(blk.querySelector("select.correct"), val);
-  }
-  function fillOrder(blk, it) { setVal(blk.querySelector(".answer"), it.answer || it.q || ""); }
-
-  function fillBlockTypes(type, items) {
-    var addBlock = document.getElementById("addBlock");
-    if (!addBlock) return 0;
-    // переиспользуем уже существующие блоки (первый пустой удалить нельзя),
-    // недостающие — добавляем
-    var existing = [].slice.call(document.querySelectorAll("#blocks .qblock"));
-    var n = 0;
-    items.forEach(function (it, i) {
-      var blk;
-      if (i < existing.length) { blk = existing[i]; }
-      else { addBlock.click(); var all = document.querySelectorAll("#blocks .qblock"); blk = all[all.length - 1]; }
-      if (!blk) return;
-      if (type === "choice") fillChoice(blk, it);
-      else if (type === "gap") fillGap(blk, it);
-      else if (type === "tf") fillTf(blk, it);
-      else if (type === "order") fillOrder(blk, it);
-      n++;
-    });
-    // удалить лишние блоки, если их было больше, чем заданий
-    var blocks = [].slice.call(document.querySelectorAll("#blocks .qblock"));
-    for (var k = blocks.length - 1; k >= items.length && k >= 1; k--) {
-      var rm = blocks[k].querySelector(".rmq"); if (rm) rm.click();
+  /* ---------- как показать задание одной строкой ---------- */
+  function preview(type, it) {
+    if (type === "choice") {
+      var opts = it.opts || [];
+      var right = opts[it.correct || 0] || "";
+      return esc(it.q || "") + '<br><span class="cand-a">верно: ' + esc(right) +
+        (opts.length > 1 ? " · из " + opts.length : "") + "</span>";
     }
-    return n;
+    if (type === "gap") return esc(it.q || "") + '<br><span class="cand-a">ответ: ' + esc(it.answer || "") + "</span>";
+    if (type === "tf") {
+      var yes = (it.answer === true || it.answer === "true" || it.answer === 1);
+      return esc(it.q || it.statement || "") + '<br><span class="cand-a">' + (yes ? "верно" : "неверно") + "</span>";
+    }
+    if (type === "order") return esc(it.answer || it.q || "");
+    if (type === "match") return esc(it.l || it.a || it.en || "") + " — " + esc(it.r || it.b || it.ru || "");
+    return esc(JSON.stringify(it).slice(0, 80));
   }
 
-  function fillMatch(pairs) {
-    var pairsBox = document.getElementById("pairs");
-    var addPair = document.getElementById("addPair");
-    if (!pairsBox) return 0;
-    while (pairsBox.querySelectorAll(".optrow").length < pairs.length && addPair) addPair.click();
-    var rows = pairsBox.querySelectorAll(".optrow");
-    var n = 0;
-    pairs.forEach(function (p, i) {
-      if (!rows[i]) return;
-      setVal(rows[i].querySelector(".pa"), p.l || p.en || "");
-      setVal(rows[i].querySelector(".pb"), p.r || p.ru || "");
-      n++;
+  /* ---------- панель выбора ---------- */
+  function css() {
+    if ($("candCss")) return;
+    var st = document.createElement("style");
+    st.id = "candCss";
+    st.textContent =
+      "#candBox{background:#fff;border:3px solid #2980b9;border-radius:18px;padding:14px 15px;margin:0 0 14px}" +
+      "#candBox .hd{font:900 13px 'Archivo',sans-serif;color:#1c5a85;margin-bottom:4px}" +
+      "#candBox .sub{font:700 12px 'Archivo',sans-serif;color:#6e6a68;margin-bottom:10px;line-height:1.5}" +
+      ".cand{display:flex;gap:10px;align-items:flex-start;background:#f3f2f2;border-radius:12px;padding:10px 12px;margin-bottom:7px;cursor:pointer}" +
+      ".cand.off{opacity:.45}" +
+      ".cand .bx{width:20px;height:20px;border-radius:6px;border:2px solid #2980b9;background:#fff;flex:none;color:#fff;font:900 13px 'Archivo',sans-serif;text-align:center;line-height:17px;margin-top:1px}" +
+      ".cand.on .bx{background:#2980b9}" +
+      ".cand .tx{flex:1;font:700 13.5px 'Archivo',sans-serif;line-height:1.45;min-width:0}" +
+      ".cand .cand-a{font:800 12px 'Archivo',sans-serif;color:#4a8b34}" +
+      "#candBox .foot{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}" +
+      "#candBox .go{background:#2980b9;color:#fff;border:0;border-radius:12px;padding:11px 17px;font:800 14px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1c5a85}" +
+      "#candBox .go:disabled{opacity:.5;box-shadow:none;cursor:default}" +
+      "#candBox .gh{background:#eae9e9;color:#4a4644;border:0;border-radius:12px;padding:11px 15px;font:800 13px 'Archivo',sans-serif;cursor:pointer}" +
+      "#candBox .cnt{font:800 12px 'Archivo',sans-serif;color:#6e6a68;margin-left:auto}";
+    document.head.appendChild(st);
+  }
+
+  function drawCands() {
+    var box = $("candBox"); if (!box) return;
+    var list = box.querySelector(".list");
+    list.innerHTML = cand.map(function (it, i) {
+      return '<div class="cand ' + (keep[i] ? "on" : "off") + '" data-i="' + i + '">' +
+        '<span class="bx">' + (keep[i] ? "✓" : "") + "</span>" +
+        '<span class="tx">' + preview(curType, it) + "</span></div>";
+    }).join("");
+    list.querySelectorAll(".cand").forEach(function (el) {
+      el.onclick = function () { var i = +el.dataset.i; keep[i] = !keep[i]; drawCands(); };
     });
-    // убрать лишние пустые пары
-    rows = [].slice.call(pairsBox.querySelectorAll(".optrow"));
-    for (var k = rows.length - 1; k >= pairs.length && k >= 2; k--) { var rm = rows[k].querySelector(".rm"); if (rm) rm.click(); }
-    return n;
+    var n = keep.filter(Boolean).length;
+    box.querySelector(".cnt").textContent = "отмечено " + n + " из " + cand.length;
+    box.querySelector(".go").disabled = !n;
+    box.querySelector(".go").textContent = n ? ("Добавить в форму — " + n) : "Ничего не отмечено";
   }
 
+  function showCands(type, items) {
+    css();
+    curType = type;
+    cand = items;
+    keep = items.map(function () { return true; });
+
+    var old = $("candBox"); if (old) old.remove();
+    var box = document.createElement("div");
+    box.id = "candBox";
+    box.innerHTML =
+      '<div class="hd">🤖 Ассистент придумал ' + items.length + " " + (type === "match" ? "пар" : "заданий") + "</div>" +
+      '<div class="sub">Нажми на строку, чтобы убрать её или вернуть. Останутся только отмеченные — форма заполнится ими, а ты проверишь и сохранишь.</div>' +
+      '<div class="list"></div>' +
+      '<div class="foot"><button type="button" class="go"></button>' +
+      '<button type="button" class="gh">отменить</button>' +
+      '<span class="cnt"></span></div>';
+
+    var fields = $("fields");
+    fields.parentNode.insertBefore(box, fields);
+    box.querySelector(".gh").onclick = function () { box.remove(); status("", ""); };
+    box.querySelector(".go").onclick = function () { applyKept(); };
+    drawCands();
+    try { box.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
+  }
+
+  /* ---------- перенос в форму ---------- */
+  function applyKept() {
+    var chosen = cand.filter(function (_, i) { return keep[i]; });
+    if (!chosen.length) return;
+    if (typeof window.renderForm !== "function") { status("Форма не готова — обнови страницу", "err"); return; }
+
+    var data;
+    if (curType === "match") {
+      /* ассистент отдаёт {l,r}, форма ждёт {a,b} */
+      data = { pairs: chosen.map(function (p) { return { a: p.l || p.a || p.en || "", b: p.r || p.b || p.ru || "" }; }) };
+    } else {
+      data = { items: chosen.map(function (it) {
+        if (curType === "tf") {
+          return { statement: it.q || it.statement || "",
+                   correct: (it.answer === true || it.answer === "true" || it.answer === 1) };
+        }
+        return it;
+      }) };
+    }
+
+    /* renderForm сам создаст нужное число блоков и заполнит их —
+       никаких кликов по кнопкам и ожиданий DOM */
+    window.renderForm(curType, data);
+    var box = $("candBox"); if (box) box.remove();
+    status("Перенесено заданий: " + chosen.length + ". Проверь и нажми «Сохранить».", "ok");
+    try { $("save").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
+  }
+
+  /* ---------- запрос к ассистенту ---------- */
   async function generate(btn) {
-    var type = document.getElementById("type").value;
+    var type = $("type").value;
     if (!SUPPORTED[type]) { status("Для этого типа автосборка пока недоступна", "err"); return; }
-    var unitSel = document.getElementById("unit");
+    var unitSel = $("unit");
     var unitId = unitSel && unitSel.value;
     if (!unitId) { status("Сначала выбери юнит вверху", "err"); return; }
     var words = unitWords(unitId);
@@ -154,28 +210,30 @@
     var title = unitSel.options[unitSel.selectedIndex].text.replace(/^📖\s*/, "");
 
     var old = btn.textContent;
-    btn.disabled = true; btn.textContent = "🤖 собираю задания…"; status("Ассистент придумывает задания из слов юнита…", "");
+    btn.disabled = true; btn.textContent = "🤖 собираю задания…";
+    status("Ассистент придумывает задания из слов юнита…", "");
 
-    var task = (type === "match") ? "exercise" : "exercise";
-    var res = await SM_AI.call("exercise", { type: type, words: words, title: title, count: Math.min(6, Math.max(4, words.length)) });
+    var res;
+    try { res = await SM_AI.call("exercise", { type: type, words: words, title: title, count: Math.min(6, Math.max(4, words.length)) }); }
+    catch (e) { res = { ok: false, error: "не получилось — попробуй ещё раз" }; }
     btn.disabled = false; btn.textContent = old;
 
-    if (!res.ok) { status(res.error, "err"); return; }
+    if (!res || !res.ok) { status((res && res.error) || "Ассистент не ответил", "err"); return; }
     var data = res.data || {};
-    var made = 0;
-    if (type === "match") made = fillMatch(data.pairs || []);
-    else made = fillBlockTypes(type, data.items || []);
+    var items = (type === "match") ? (data.pairs || []) : (data.items || []);
+    if (!items.length) { status("Ассистент не вернул задания — попробуй ещё раз", "err"); return; }
 
-    if (!made) { status("Ассистент не вернул задания — попробуй ещё раз", "err"); return; }
-    status("Готово: собрано заданий — " + made + ". Проверь, поправь и нажми «Сохранить». 👇", "ok");
-    try { document.getElementById("save").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
+    status("", "");
+    showCands(type, items);
   }
 
+  /* ---------- кнопка ---------- */
   function injectButton(type) {
-    var fields = document.getElementById("fields");
+    var fields = $("fields");
     if (!fields) return;
-    var existing = document.getElementById("aiGenWrap");
+    var existing = $("aiGenWrap");
     if (existing) existing.remove();
+    var oldBox = $("candBox"); if (oldBox) oldBox.remove();
     if (!SUPPORTED[type]) return;
 
     var wrap = document.createElement("div");
@@ -184,11 +242,11 @@
     var btn = document.createElement("button");
     btn.type = "button";
     btn.textContent = "🤖 Собрать задания из слов юнита";
-    btn.style.cssText = "width:100%;background:#2980b9;color:#fff;border:0;border-radius:14px;padding:13px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1c5a85";
+    btn.style.cssText = "width:100%;background:#2980b9;color:#fff;border:0;border-radius:14px;padding:13px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1c5a85";
     btn.onclick = function () { generate(btn); };
     var hint = document.createElement("div");
-    hint.style.cssText = "font:700 12px 'Nunito',sans-serif;color:#8a7a68;margin:7px 2px 0;line-height:1.5";
-    hint.textContent = "Claude придумает задания из слов выбранного юнита и заполнит форму. Ты проверяешь и сохраняешь.";
+    hint.style.cssText = "font:700 12px 'Archivo',sans-serif;color:#8a7a68;margin:7px 2px 0;line-height:1.5";
+    hint.textContent = "Ассистент придумает задания из слов юнита и покажет списком. Отметишь нужные — они попадут в форму.";
     wrap.appendChild(btn); wrap.appendChild(hint);
     fields.insertBefore(wrap, fields.firstChild);
   }
@@ -202,9 +260,8 @@
       try { injectButton(type); } catch (e) {}
       return r;
     };
-    // и сразу для текущего типа
-    var t = document.getElementById("type");
-    if (t && document.getElementById("fields")) { try { injectButton(t.value); } catch (e) {} }
+    var t = $("type");
+    if (t && $("fields")) { try { injectButton(t.value); } catch (e) {} }
     return true;
   }
 
