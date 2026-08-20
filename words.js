@@ -202,7 +202,7 @@ window.SM_COURSES = [
     var cc = JSON.parse(localStorage.getItem("sm-cloud-cache") || "null");
     if (cc && cc.courses && cc.data) {
       cc.courses.forEach(function (c) {
-        if (window.SM_COURSE_DATA[c.id]) return;
+        if ((window.SM_COURSE_DATA[c.id] || []).length) return;
         window.SM_COURSE_DATA[c.id] = cc.data[c.id] || [];
         window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, { id: c.id, title: c.title, subtitle: c.subtitle || "мой учебник", emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true });
       });
@@ -233,7 +233,7 @@ window.SM_refreshCloudCourses = function () {
     } catch (e) {}
     /* Свежие данные пришли — подмешиваем курсы, которых ещё нет в списке */
     courses.forEach(function (c) {
-      if (window.SM_COURSE_DATA[c.slug]) return;
+      if ((window.SM_COURSE_DATA[c.slug] || []).length) return;
       window.SM_COURSE_DATA[c.slug] = data[c.slug] || [];
       window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
         id: c.slug, title: c.title, subtitle: c.subtitle || "мой учебник",
@@ -241,7 +241,10 @@ window.SM_refreshCloudCourses = function () {
       });
     });
     /* Данные могли обновиться и для уже известных курсов */
-    Object.keys(data).forEach(function (slug) { window.SM_COURSE_DATA[slug] = data[slug]; });
+    /* Не затираем слова, приехавшие из файлов, пустым списком из базы */
+    Object.keys(data).forEach(function (slug) {
+      if ((data[slug] || []).length) window.SM_COURSE_DATA[slug] = data[slug];
+    });
   }).catch(function (e) {});
 };
 
@@ -318,7 +321,7 @@ window.SM_absorbSpeakout = function () {
     "speakout-b1plus": { title: "Speakout B1+", subtitle: "разговорный курс · 8 юнитов", emoji: "🗣️", color: "#e7dff2" }
   };
   Object.keys(S).forEach(function (slug) {
-    if (window.SM_COURSE_DATA[slug]) return;
+    if ((window.SM_COURSE_DATA[slug] || []).length) return;
     var meta = META[slug] || { title: slug, subtitle: "курс", emoji: "🗣️", color: "#e4ebf2" };
     var prefix = slug === "speakout-b1plus" ? "sbp-u" : "sb1-u";
     var units = Object.keys(S[slug]).sort(function (a, b) { return (+a) - (+b); }).map(function (n) {
@@ -350,7 +353,7 @@ window.SM_absorbCourseWords = function () {
   if (!C) return;
   var PREFIX = { "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
   Object.keys(C).forEach(function (slug) {
-    if (window.SM_COURSE_DATA[slug]) return;
+    if ((window.SM_COURSE_DATA[slug] || []).length) return;
     var c = C[slug], pre = PREFIX[slug] || (slug.replace(/[^a-z0-9]/g, "").slice(0, 4) + "-u");
     window.SM_COURSE_DATA[slug] = (c.units || []).map(function (u) {
       return {
