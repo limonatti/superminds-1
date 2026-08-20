@@ -66,6 +66,8 @@
 <script src="speakout-words.js?v=3094c556"></script>
   <script>
     document.getElementById("title").textContent = SM_COURSE.emoji + " " + SM_COURSE.title;
+    /* в вкладке был жёстко зашит Super Minds 1 — какой бы учебник ни открыли */
+    document.title = SM_COURSE.title + " — English with Asya";
     document.getElementById("sub").textContent = "Юниты · выбери занятие";
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     const list=document.getElementById("list");
