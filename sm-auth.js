@@ -244,6 +244,19 @@ return { ok: !error, error: error && error.message };
 async copyCourseFrom(slug, opts) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };
 opts = opts || {};
+
+/* Слова курсов лежат в отдельных файлах и подмешиваются позже загрузки
+   страницы. На страницах, которые не ждут SM_ready (например конструктор
+   учебников), к этому моменту загружен только курс по умолчанию — поэтому
+   дожидаемся и подмешиваем сами, иначе копировать окажется нечего. */
+try {
+if (window.SM_absorbSpeakout) window.SM_absorbSpeakout();
+if (window.SM_absorbCourseWords) window.SM_absorbCourseWords();
+await (window.SM_ready || Promise.resolve());
+if (window.SM_absorbSpeakout) window.SM_absorbSpeakout();
+if (window.SM_absorbCourseWords) window.SM_absorbCourseWords();
+} catch (e) {}
+
 const src = (window.SM_COURSE_DATA || {})[slug];
 if (!src || !src.length) return { ok: false, error: "у этого учебника нет юнитов для копирования" };
 const meta = ((window.SM_COURSES || []).filter(function (c) { return c.id === slug; })[0]) || {};
