@@ -209,14 +209,33 @@ async function handle(req: Request): Promise<Response> {
   if (body.task === "image") {
     if (!OPENAI_KEY) return json({ error: "OPENAI_API_KEY не задан в Secrets" }, 500);
     const p = body.payload || {};
-    const word = (p.en || "").toString().slice(0, 60);
+    // до 200 знаков — чтобы можно было описать сцену, а не только одно слово
+    const word = (p.en || "").toString().slice(0, 200);
     const ru = (p.ru || "").toString().slice(0, 60);
     if (!word) return json({ error: "нет слова для картинки" }, 400);
-    const prompt =
-      "A simple, friendly, colorful flat vector illustration of \"" + word + "\"" +
-      (ru ? " (" + ru + ")" : "") +
-      " for a children's English flashcard. Single clear object, centered, plain white background, " +
-      "no text, no letters, soft rounded shapes, bright cheerful colors, suitable for kids aged 6-10.";
+
+    /* Стиль задаёт тот, кто зовёт. Super Minds и Gateway — детям, Solutions,
+       Focus и Speakout — подросткам и взрослым, и детские картинки там неуместны.
+       Значение по умолчанию оставлено детским, чтобы не менять поведение
+       конструктора учебников, который зовёт эту задачу без указания стиля. */
+    const STYLES: Record<string, string> = {
+      kids:
+        "A simple, friendly, colorful flat vector illustration for a children's English flashcard. " +
+        "Single clear object, centered, plain white background, no text, no letters, " +
+        "soft rounded shapes, bright cheerful colors, suitable for kids aged 6-10.",
+      modern:
+        "A clean modern flat illustration for a language textbook. Single clear subject, centered, " +
+        "plain light background, no text, no letters, muted balanced colours, confident simple shapes, " +
+        "generous negative space, restrained and grown-up. Not cartoonish, not childish, no bright primary colours.",
+      photo:
+        "A realistic photograph. Single clear subject, centered, plain uncluttered background, natural soft lighting, " +
+        "no text, no letters, no watermark, editorial documentary style, suitable for a language textbook.",
+      soft:
+        "A soft watercolour illustration in gentle warm tones on a cream background. Single clear subject, centered, " +
+        "no text, no letters, hand-painted feel, calm and tasteful. Not cartoonish, not childish.",
+    };
+    const style = STYLES[(p.style || "").toString()] || STYLES.kids;
+    const prompt = "Subject: \"" + word + "\"" + (ru ? " (" + ru + ")" : "") + ". " + style;
     const ir = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: { "Authorization": "Bearer " + OPENAI_KEY, "Content-Type": "application/json" },

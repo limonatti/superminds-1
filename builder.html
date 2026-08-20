@@ -185,6 +185,25 @@
       return new File([arr],name||"drawn.png",{type:mime});
     }
 
+    /* Стиль картинок. Детские курсы и взрослые рисуются по-разному, поэтому
+       стиль предлагается по курсу, но его можно сменить перед генерацией. */
+    const IMG_STYLES=[["modern","современная иллюстрация"],["kids","детская картинка"],["photo","фотореалистично"],["soft","мягкая акварель"]];
+    const KIDS_COURSES=["sm1","sm2","gateway-a1p"];
+    function defaultStyle(){
+      const cid=(document.getElementById("course")||{}).value||"";
+      return KIDS_COURSES.indexOf(cid)>=0?"kids":"modern";
+    }
+    function currentStyle(){
+      const s=document.getElementById("imgStyle");
+      return (s&&s.value)||defaultStyle();
+    }
+    function styleSelectHTML(){
+      const cur=defaultStyle();
+      return '<label style="margin-top:10px">🎨 СТИЛЬ КАРТИНОК</label>'+
+        '<select id="imgStyle">'+IMG_STYLES.map(s=>'<option value="'+s[0]+'"'+(s[0]===cur?" selected":"")+'>'+s[1]+'</option>').join("")+'</select>'+
+        '<div class="hinttext">Подставлен по курсу. Для Super Minds и Gateway — детский, для остальных — взрослый.</div>';
+    }
+
     /* Нарисовать картинку по описанию. Описание подставляется из вопроса,
        который учитель уже написал — чаще всего править не придётся. */
     async function genImage(inp,cb,btn){
@@ -197,7 +216,7 @@
       if(!desc||!desc.trim()) return;
       busy(btn,true,"🎨 рисую…");
       let res=null;
-      try{ res=await SM_AI.call("image",{en:desc.trim(),ru:""}); }catch(e){ res={ok:false,error:"не получилось"}; }
+      try{ res=await SM_AI.call("image",{en:desc.trim(),ru:"",style:currentStyle()}); }catch(e){ res={ok:false,error:"не получилось"}; }
       if(!res||!res.ok||!res.image){ busy(btn,false); fail(res&&res.error?res.error:"Картинка не нарисовалась — попробуй ещё раз"); return; }
       /* сжимаем перед загрузкой, иначе в хранилище уедет мегабайт */
       const small=await new Promise(ok=>{ try{ SM_AI.compress(res.image,ok); }catch(e){ ok(res.image); } });
@@ -714,6 +733,7 @@
           '<label>ТИП УПРАЖНЕНИЯ</label><select id="type">'+typeOpts+'</select>'+
           '<label>НАЗВАНИЕ / ИНСТРУКЦИЯ (необязательно)</label><input id="title" placeholder="Прочитай и выбери ответ">'+
           '<label>РАЗДЕЛ УРОКА (необязательно)</label><input id="section" list="seclist" placeholder="Лексика / Грамматика / Видео…"><datalist id="seclist"><option>Лексика</option><option>Грамматика</option><option>Аудирование</option><option>Чтение</option><option>Видео</option><option>Говорение</option><option>Игры</option><option>Домашка</option></datalist>'+
+          styleSelectHTML()+
           '<div id="fields"></div>'+
           '<div class="row2" style="margin-top:16px"><button class="primary" id="prev" style="flex:1;margin:0;background:#eae9e9;color:#4a4644;box-shadow:0 5px 0 #cfcecd">👁 Как увидит ученик</button>'+
           '<button class="primary" id="save" style="flex:1;margin:0">💾 Сохранить</button></div>'+
@@ -726,6 +746,9 @@
       courseSel.onchange=()=>{
         CID=courseSel.value; editId=null;
         if(window.SM_useCourse){ try{ SM_useCourse(CID); }catch(e){} }
+        /* стиль картинок зависит от курса — пересобираем предложение */
+        const st=document.getElementById("imgStyle");
+        if(st) st.value=defaultStyle();
         fillUnits(); loadList();
         const m=document.getElementById("msg"); m.className="msg ok";
         m.textContent="Курс: "+courseSel.options[courseSel.selectedIndex].text.trim()+" · юнитов "+unitsOf(CID).length;
