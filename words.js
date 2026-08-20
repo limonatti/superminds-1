@@ -202,9 +202,12 @@ window.SM_COURSES = [
     var cc = JSON.parse(localStorage.getItem("sm-cloud-cache") || "null");
     if (cc && cc.courses && cc.data) {
       cc.courses.forEach(function (c) {
-        if ((window.SM_COURSE_DATA[c.id] || []).length) return;
-        window.SM_COURSE_DATA[c.id] = cc.data[c.id] || [];
-        window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, { id: c.id, title: c.title, subtitle: c.subtitle || "мой учебник", emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true });
+        /* та же ловушка, что и в SM_refreshCloudCourses: пустой курс проходил
+           проверку по словам и добавлялся повторно */
+        if (!window.SM_COURSES.some(function (x) { return x.id === c.id; })) {
+          window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, { id: c.id, title: c.title, subtitle: c.subtitle || "мой учебник", emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true });
+        }
+        if (!(window.SM_COURSE_DATA[c.id] || []).length) window.SM_COURSE_DATA[c.id] = cc.data[c.id] || [];
       });
     }
   } catch (e) {}
@@ -231,14 +234,22 @@ window.SM_refreshCloudCourses = function () {
         data: data
       }));
     } catch (e) {}
-    /* Свежие данные пришли — подмешиваем курсы, которых ещё нет в списке */
+    /* Свежие данные пришли — подмешиваем курсы, которых ещё нет в списке.
+       Раньше проверка была на количество слов: у пустого курса оно равно нулю,
+       поэтому такой курс добавлялся заново при каждом вызове, и в выпадающем
+       списке появлялись две-три копии одного учебника с разными ключами.
+       Проверяем наличие самого курса, а слова — отдельно. */
     courses.forEach(function (c) {
-      if ((window.SM_COURSE_DATA[c.slug] || []).length) return;
-      window.SM_COURSE_DATA[c.slug] = data[c.slug] || [];
-      window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
-        id: c.slug, title: c.title, subtitle: c.subtitle || "мой учебник",
-        emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true
-      });
+      var known = window.SM_COURSES.some(function (x) { return x.id === c.slug; });
+      if (!known) {
+        window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+          id: c.slug, title: c.title, subtitle: c.subtitle || "мой учебник",
+          emoji: c.emoji || "📘", color: c.color || "#e4ebf2", img: c.img || null, ready: true, cloud: true
+        });
+      }
+      if (!(window.SM_COURSE_DATA[c.slug] || []).length) {
+        window.SM_COURSE_DATA[c.slug] = data[c.slug] || [];
+      }
     });
     /* Данные могли обновиться и для уже известных курсов */
     /* Не затираем слова, приехавшие из файлов, пустым списком из базы */
@@ -337,10 +348,15 @@ window.SM_absorbSpeakout = function () {
       };
     });
     window.SM_COURSE_DATA[slug] = units;
-    window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
-      id: slug, title: meta.title, subtitle: meta.subtitle,
-      emoji: meta.emoji, color: meta.color, ready: true, speakout: true
-    });
+    /* Курс мог уже прийти из базового списка или из облака — тогда добавлять
+       его второй раз нельзя, иначе в выпадающем списке будет два одинаковых
+       пункта с разными данными, и упражнения начнут теряться между ними. */
+    if (!window.SM_COURSES.some(function (x) { return x.id === slug; })) {
+      window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+        id: slug, title: meta.title, subtitle: meta.subtitle,
+        emoji: meta.emoji, color: meta.color, ready: true, speakout: true
+      });
+    }
   });
 };
 /* ---- Остальные курсы: Focus, Solutions, Gateway --------------------------
@@ -368,10 +384,13 @@ window.SM_absorbCourseWords = function () {
         })
       };
     });
-    window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
-      id: slug, title: c.title || slug, subtitle: c.subtitle || "курс",
-      emoji: c.emoji || "📘", color: c.color || "#e4ebf2", ready: true
-    });
+    /* см. комментарий в SM_absorbSpeakout — дубль в списке ломает выбор курса */
+    if (!window.SM_COURSES.some(function (x) { return x.id === slug; })) {
+      window.SM_COURSES.splice(window.SM_COURSES.length - 1, 0, {
+        id: slug, title: c.title || slug, subtitle: c.subtitle || "курс",
+        emoji: c.emoji || "📘", color: c.color || "#e4ebf2", ready: true
+      });
+    }
   });
 };
 
