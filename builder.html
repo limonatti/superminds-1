@@ -30,6 +30,11 @@
   .add{background:#eae9e9;color:#4a8b34;border-radius:999px;padding:8px 14px;font:800 13px 'Archivo',sans-serif;margin-top:4px}
   .imgrow{display:flex;gap:8px}
   .imgrow .img{flex:1}
+  .pairwrap{border:2px solid #cfcecd;border-radius:12px;padding:9px;margin-bottom:9px;background:#faf9f9}
+  .pairwrap .pimg{background:#eae9e9;color:#4a4644;border-radius:10px;padding:9px 11px;font-size:14px;flex:none;line-height:1}
+  .pimgbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .pimgbox label{margin-top:6px;font-size:11px}
+  @media(max-width:620px){.pimgbox{grid-template-columns:1fr}}
   .upl{background:#eae9e9;color:#4a8b34;border-radius:12px;padding:0 14px;font:800 13px 'Archivo',sans-serif;flex:none;white-space:nowrap}
   .upl:disabled{opacity:.6;cursor:progress}
   .upl.rec{background:#ec3013;color:#fff;animation:recpulse 1.1s ease-in-out infinite}
@@ -246,10 +251,30 @@
       d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
       box.appendChild(d);
     }
-    function pairRow(box,a,b){
-      const d=document.createElement("div");d.className="optrow";
-      d.innerHTML='<input type="text" class="pa" placeholder="dog" value="'+esc(a)+'"><input type="text" class="pb" placeholder="собака" value="'+esc(b)+'"><button class="rm" type="button">✕</button>';
+    /* Пара может быть не только «слово ↔ перевод», но и «картинка ↔ слово».
+       Поля картинок скрыты, пока не нажали 🖼 — чтобы список пар не разбухал. */
+    function pairRow(box,a,b,ia,ib){
+      const d=document.createElement("div");d.className="pairwrap";
+      const open=!!(ia||ib);
+      d.innerHTML=
+        '<div class="optrow" style="margin-bottom:0">'+
+          '<input type="text" class="pa" placeholder="dog" value="'+esc(a)+'">'+
+          '<input type="text" class="pb" placeholder="собака" value="'+esc(b)+'">'+
+          '<button class="pimg" type="button" title="картинки к паре">🖼</button>'+
+          '<button class="rm" type="button">✕</button>'+
+        '</div>'+
+        '<div class="pimgbox"'+(open?"":' style="display:none"')+'>'+
+          '<div class="pimg-a">'+imageFieldHTML(ia)+'</div>'+
+          '<div class="pimg-b">'+imageFieldHTML(ib)+'</div>'+
+        '</div>';
       d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
+      const bx=d.querySelector(".pimgbox");
+      d.querySelector(".pimg").onclick=()=>{ bx.style.display=bx.style.display==="none"?"block":"none"; };
+      /* каждой стороне — своё поле картинки со своими кнопками */
+      wireImageIn(d.querySelector(".pimg-a"));
+      wireImageIn(d.querySelector(".pimg-b"));
+      const la=d.querySelector(".pimg-a label"); if(la) la.textContent="🖼 КАРТИНКА К ЛЕВОЙ СТОРОНЕ";
+      const lb=d.querySelector(".pimg-b label"); if(lb) lb.textContent="🖼 КАРТИНКА К ПРАВОЙ СТОРОНЕ";
       box.appendChild(d);
     }
     function catRow(box,name,items){
@@ -374,8 +399,8 @@
       if(type==="match"){
         f.innerHTML='<label>ПАРЫ (слово ↔ перевод)</label><div id="pairs"></div><button class="add" id="addPair" type="button">＋ добавить пару</button>';
         const box=document.getElementById("pairs");const pairs=data.pairs||[{a:"",b:""},{a:"",b:""},{a:"",b:""}];
-        pairs.forEach(p=>pairRow(box,p.a,p.b));
-        document.getElementById("addPair").onclick=()=>pairRow(box,"","");
+        pairs.forEach(p=>pairRow(box,p.a,p.b,p.ia,p.ib));
+        document.getElementById("addPair").onclick=()=>pairRow(box,"","","","");
       } else if(type==="categorize"){
         f.innerHTML='<label>КАТЕГОРИИ (слова — по одному в строке)</label><div id="cats"></div><button class="add" id="addCat" type="button">＋ добавить категорию</button>';
         const box=document.getElementById("cats");const cats=data.cats||[{name:"",items:[]},{name:"",items:[]}];
@@ -568,8 +593,15 @@
         return {data:{items}};
       }
       if(type==="match"){
-        const rows=[...document.querySelectorAll("#pairs .optrow")];
-        const pairs=rows.map(r=>({a:r.querySelector(".pa").value.trim(),b:r.querySelector(".pb").value.trim()})).filter(p=>p.a&&p.b);
+        const rows=[...document.querySelectorAll("#pairs .pairwrap")];
+        const pairs=rows.map(r=>{
+          const ia=r.querySelector(".pimg-a .img"), ib=r.querySelector(".pimg-b .img");
+          const p={a:r.querySelector(".pa").value.trim(),b:r.querySelector(".pb").value.trim()};
+          if(ia&&ia.value.trim()) p.ia=ia.value.trim();
+          if(ib&&ib.value.trim()) p.ib=ib.value.trim();
+          return p;
+        /* сторона считается заполненной, если есть текст ИЛИ картинка */
+        }).filter(p=>(p.a||p.ia)&&(p.b||p.ib));
         if(pairs.length<2) return {err:"Нужно минимум 2 пары"};
         return {data:{pairs}};
       }
@@ -794,6 +826,6 @@
 
 <script src=sm-ai.js?v=d431e1bb></script>
 
-<script src=sm-draft.js?v=86212104></script>
+<script src=sm-draft.js?v=dcbd3027></script>
 
 <script src=sm-lesson.js?v=b55ab387></script>

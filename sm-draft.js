@@ -173,6 +173,13 @@
       el.dispatchEvent(new Event("input", { bubbles: true }));
       el.dispatchEvent(new Event("change", { bubbles: true }));
     });
+
+    /* Картинки к парам свёрнуты по умолчанию — раскрываем те, где что-то есть,
+       иначе восстановленная картинка останется невидимой. */
+    [].forEach.call(f.querySelectorAll(".pimgbox"), function (bx) {
+      var has = [].some.call(bx.querySelectorAll(".img"), function (i) { return (i.value || "").trim(); });
+      if (has) bx.style.display = "block";
+    });
     return true;
   }
 

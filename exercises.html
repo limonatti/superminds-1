@@ -31,6 +31,9 @@
   .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
   .pc{background:#f3f2f2;border:2px solid #cfcecd;border-radius:12px;padding:13px 10px;font-size:17px;font-weight:600;text-align:center}
   .pc.sel{border-color:#ec3013;background:#fbeef1}
+  .pc.pcimg{padding:8px;display:flex;flex-direction:column;align-items:center;gap:5px}
+  .pc.pcimg img{width:100%;max-height:108px;object-fit:contain;border-radius:8px;display:block}
+  .pc.pcimg span{font-size:15px;line-height:1.2}
   .pc.done{opacity:0;pointer-events:none;transition:opacity .35s}
   .words{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .word{background:#fff;border:2px solid #cfcecd;border-radius:12px;padding:9px 13px;font-size:17px;font-weight:600}
@@ -152,11 +155,15 @@
     function renderMatch(e){
       const c=card('<div class="kind">'+KIND.match+'</div><div class="qt">Соедини пары</div><div class="pairs"></div><div class="fb"></div>');
       const box=c.querySelector(".pairs"),fb=c.querySelector(".fb");
-      const left=shuffle(e.data.pairs.map((p,i)=>({t:p.a,i}))),right=shuffle(e.data.pairs.map((p,i)=>({t:p.b,i})));
+      const left=shuffle(e.data.pairs.map((p,i)=>({t:p.a,img:p.ia,i}))),right=shuffle(e.data.pairs.map((p,i)=>({t:p.b,img:p.ib,i})));
       const rows=Math.max(left.length,right.length);let sel=null,left_n=e.data.pairs.length;
-      for(let r=0;r<rows;r++){[left[r],right[r]].forEach((it,col)=>{const b=document.createElement("button");b.className="pc";b.textContent=it?it.t:"";b.dataset.i=it?it.i:"-";b.dataset.side=col;if(!it)b.style.visibility="hidden";
+      for(let r=0;r<rows;r++){[left[r],right[r]].forEach((it,col)=>{const b=document.createElement("button");b.className="pc";b.dataset.i=it?it.i:"-";b.dataset.side=col;if(!it)b.style.visibility="hidden";
+        /* у стороны может быть картинка, текст или и то и другое */
+        if(it&&it.img){ b.classList.add("pcimg");
+          b.innerHTML='<img src="'+esc(it.img)+'" alt="'+esc(it.t||"")+'">'+(it.t?'<span>'+esc(it.t)+'</span>':""); }
+        else b.textContent=it?it.t:"";
         b.onclick=()=>{ if(b.classList.contains("done"))return;
-          if(!sel){sel=b;b.classList.add("sel");if(col===0)speak(it.t);return;}
+          if(!sel){sel=b;b.classList.add("sel");if(col===0&&it.t)speak(it.t);return;}
           if(sel===b){b.classList.remove("sel");sel=null;return;}
           if(sel.dataset.side===b.dataset.side){sel.classList.remove("sel");sel=b;b.classList.add("sel");return;}
           if(sel.dataset.i===b.dataset.i){sel.classList.add("done");b.classList.add("done");sel.classList.remove("sel");sel=null;left_n--;if(left_n===0){fb.className="fb ok";fb.textContent="Все пары найдены! 🎉";}}
