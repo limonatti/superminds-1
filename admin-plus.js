@@ -277,7 +277,7 @@
         '<option value="photo">фотореалистично</option>' +
         '<option value="soft">мягкая акварель</option>' +
       "</select></div>" +
-      '<div class="hint" id="whint">У каждого слова: эмодзи, английское, перевод. <b>📁</b> — загрузить картинку с компьютера (сожмётся автоматически), <b>🔗</b> — вставить ссылку на картинку.</div>' +
+      '<div class="hint" id="whint">Впиши английское слово и перейди к следующему полю — <b>перевод и эмодзи подставятся сами</b>. Работает и наоборот: с русского на английский. Уже вписанное вручную не перезаписывается. <b>📁</b> — картинка с компьютера, <b>🔗</b> — по ссылке, <b>🎨</b> — нарисовать.</div>' +
       '<div class="row2"><button class="primary" id="save" style="margin-top:0">💾 Сохранить юнит</button><button class="bt" id="cancel">Отмена</button></div>' +
       '<div class="msg" id="msg"></div></div>';
     bindSw("usw");
@@ -361,6 +361,59 @@
     box.addEventListener("input", function (e) {
       var el = e.target;
       if (el.dataset && el.dataset.k) W[+el.dataset.i][el.dataset.k] = el.value;
+    });
+
+    /* ---------- автоперевод строки ----------
+       Ушли из поля — вторая половина пары заполняется сама.
+       Работает в обе стороны: вписал english → появится перевод,
+       вписал русское → появится английское. Уже введённое не трогаем,
+       перерисовку не делаем, иначе слетит фокус со следующего поля. */
+    var trCache = {};
+    function fieldOf(i, k) { return box.querySelector("." + k + '[data-i="' + i + '"]'); }
+
+    function applyTr(i, it, want) {
+      if (!it) return;
+      if (!(W[i][want] || "").trim() && it[want]) {
+        W[i][want] = it[want];
+        var el = fieldOf(i, want === "ru" ? "w-ru" : "w-en");
+        if (el) el.value = it[want];
+      }
+      if (!(W[i].emoji || "").trim() && it.emoji) {
+        W[i].emoji = it.emoji;
+        var em = fieldOf(i, "w-em");
+        if (em) em.value = it.emoji;
+      }
+    }
+
+    box.addEventListener("focusout", async function (e) {
+      var el = e.target;
+      if (!el.dataset || !el.dataset.k) return;
+      var from = el.dataset.k;                    // что заполнили
+      if (from !== "en" && from !== "ru") return;
+      var want = from === "en" ? "ru" : "en";     // что подставить
+      var i = +el.dataset.i;
+      if (!W[i]) return;
+      var src = (el.value || "").trim();
+      if (!src) return;
+      if ((W[i][want] || "").trim()) return;      // уже заполнено — не мешаем
+      if (typeof SM_AI === "undefined" || !SM_AI.call) return;
+
+      var key = from + ":" + src.toLowerCase();
+      if (trCache[key]) { applyTr(i, trCache[key], want); return; }
+
+      var target = fieldOf(i, want === "ru" ? "w-ru" : "w-en");
+      var ph = target ? target.placeholder : "";
+      if (target) target.placeholder = "перевожу…";
+
+      var res = null;
+      try { res = await SM_AI.call("translate", { words: [src], dir: from === "ru" ? "toEn" : "toRu" }); }
+      catch (err) { res = null; }
+
+      if (target) target.placeholder = ph;
+      var it = res && res.ok && res.data && (res.data.items || [])[0];
+      if (!it) return;
+      trCache[key] = it;
+      applyTr(i, it, want);
     });
     box.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-act]");
