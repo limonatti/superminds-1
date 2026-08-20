@@ -71,7 +71,7 @@
   <script src="words.js?v=6c8c2070"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=3b456779"></script>
+  <script src="sm-auth.js?v=1cacc582"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     const TYPES={
@@ -100,6 +100,8 @@
       note:{label:"🗒 Заметка / правило"},
       open:{label:"📝 Открытый вопрос"}
     };
+    // const на верхнем уровне скрипта не попадает в window — а модулям он нужен
+    window.TYPES=TYPES;
     // типы, где в одном упражнении можно добавлять несколько заданий-вопросов
     const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open"]);
     let editId=null;
@@ -757,3 +759,7 @@
 <script src=builder-plus.js?v=06420b9c></script>
 
 <script src=sm-ai.js?v=d431e1bb></script>
+
+<script src=sm-draft.js?v=86212104></script>
+
+<script src=sm-lesson.js?v=b55ab387></script>

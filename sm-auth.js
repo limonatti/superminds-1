@@ -500,6 +500,7 @@ if (!useCloud) return { ok: false, error: "нужен Supabase" };
 const c = ensureClient(); if (!c) return { ok: false };
 const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
 const row = { author_id: u.id, course: ex.course, unit_id: ex.unit_id, book: ex.book || "sb", type: ex.type, title: ex.title || null, section: ex.section || null, data: ex.data || {} };
+if (ex.status === "draft" || ex.status === "published") row.status = ex.status;
 if (ex.id) {
 const { data, error } = await c.from("exercises").update(row).eq("id", ex.id).select("id");
 if (error) return { ok: false, error: error.message };
@@ -521,19 +522,47 @@ const { data } = await q; return data || [];
 async exercisesFor(course, unit) {
 if (!useCloud) return [];
 const c = ensureClient(); if (!c) return [];
-const { data, error } = await c.from("exercises").select("id,type,title,section,book,position,data,created_at").eq("course", course).eq("unit_id", unit).order("position", { ascending: true }).order("created_at", { ascending: true });
+const { data, error } = await c.from("exercises").select("id,course,unit_id,type,title,section,book,position,status,data,created_at").eq("course", course).eq("unit_id", unit).order("position", { ascending: true }).order("created_at", { ascending: true });
 if (error) { console.warn("exercisesFor:", error.message); return []; }
 return data || [];
 },
-/* Сохранить порядок упражнений в уроке: [{id, position}, …] */
+/* Сохранить порядок упражнений в уроке: [{id, position, section?}, …]
+   section передаётся, когда задание перетащили в другой раздел. */
 async setPositions(list) {
 if (!useCloud) return { ok: false };
 const c = ensureClient(); if (!c) return { ok: false };
 for (const it of list) {
-const { error } = await c.from("exercises").update({ position: it.position }).eq("id", it.id);
+const patch = { position: it.position };
+if (Object.prototype.hasOwnProperty.call(it, "section")) patch.section = it.section || null;
+const { error } = await c.from("exercises").update(patch).eq("id", it.id);
 if (error) return { ok: false, error: error.message };
 }
 return { ok: true };
+},
+/* Черновик / публикация. Ученик видит только published — это задано в RLS. */
+async setExerciseStatus(id, status) {
+if (!useCloud) return { ok: false };
+const c = ensureClient(); if (!c) return { ok: false };
+const s = status === "draft" ? "draft" : "published";
+const { error } = await c.from("exercises").update({ status: s }).eq("id", id);
+return { ok: !error, error: error && error.message };
+},
+/* Копия упражнения — встаёт следом за оригиналом в том же разделе. */
+async duplicateExercise(id) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false };
+const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+const { data: src, error: e1 } = await c.from("exercises")
+.select("course,unit_id,book,type,title,section,data,position").eq("id", id).single();
+if (e1 || !src) return { ok: false, error: (e1 && e1.message) || "упражнение не найдено" };
+const row = {
+author_id: u.id, course: src.course, unit_id: src.unit_id, book: src.book,
+type: src.type, title: (src.title ? src.title + " — копия" : null),
+section: src.section, data: src.data || {},
+position: (src.position || 0) + 1, status: "draft"
+};
+const { data, error } = await c.from("exercises").insert(row).select("id").single();
+return { ok: !error, id: data && data.id, error: error && error.message };
 },
 async deleteExercise(id) {
 if (!useCloud) return { ok: false };
