@@ -49,6 +49,10 @@
   .nc .skip:hover{border-color:var(--color-neutral-600);color:var(--color-text)}
   .msg{padding:12px 28px;font:700 13px "Archivo",sans-serif}
   .msg.ok{color:#1f7a3d}.msg.bad{color:var(--color-accent)}
+  /* Раздел «Учителя платформы» */
+  .tbl .sub2{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-600);margin-top:2px}
+  .tag{display:inline-block;background:var(--color-accent);color:#fff;font:800 9.5px "Archivo",sans-serif;
+    letter-spacing:.09em;text-transform:uppercase;padding:2px 7px;vertical-align:1px}
 </style>
 </head>
 <body>
@@ -63,7 +67,7 @@
 <script src="words.js?v=6c8c2070"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=442908de"></script>
-<script src="sm-auth.js?v=ddfcc994"></script>
+<script src="sm-auth.js?v=3b456779"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
@@ -174,11 +178,60 @@ function tableHtml(){
     '</tr></thead><tbody>' + rows + '</tbody></table></div>';
 }
 
+/* ---------- Учителя платформы (видит только владелец) ----------
+   Человек регистрируется как обычно, а роль учителя выдаёшь ты.
+   Так на платформу не попадёт случайный прохожий. */
+let PEOPLE = [], IS_OWNER = false;
+
+function peopleHtml(){
+  if (!IS_OWNER) return "";
+  const teachers = PEOPLE.filter(x => x.role === "teacher");
+  const others   = PEOPLE.filter(x => x.role !== "teacher");
+
+  const trow = t =>
+    '<tr><td><b>'+esc(t.name || t.email)+'</b>'+(t.is_owner?' <span class="tag">владелец</span>':'')+
+      '<div class="sub2">'+esc(t.email)+'</div></td>' +
+    '<td>'+t.students+'</td><td>'+t.courses+'</td><td>'+t.exercises+'</td>' +
+    '<td>'+(t.last_seen || "—")+'</td>' +
+    '<td>'+(t.is_owner ? '' : '<button class="b sm" data-role="student" data-u="'+t.user_id+'" data-nm="'+esc(t.name||t.email)+'">снять роль</button>')+'</td></tr>';
+
+  const orow = t =>
+    '<tr><td><b>'+esc(t.name || t.email)+'</b><div class="sub2">'+esc(t.email)+'</div></td>' +
+    '<td colspan="3">'+(t.role === "student" ? "ученик" : "без роли")+' · с '+t.registered+'</td>' +
+    '<td>'+(t.last_seen || "—")+'</td>' +
+    '<td><button class="b sm" data-role="teacher" data-u="'+t.user_id+'" data-nm="'+esc(t.name||t.email)+'">сделать учителем</button></td></tr>';
+
+  return '<div class="sect"><span>Учителя платформы</span><span>'+teachers.length+' · роль выдаёшь только ты</span></div>' +
+    '<div class="scroll"><table class="tbl"><thead><tr>' +
+      '<th>Кто</th><th>Учеников</th><th>Учебников</th><th>Упражнений</th><th>Последний вход</th><th></th>' +
+    '</tr></thead><tbody>' + teachers.map(trow).join("") + '</tbody></table></div>' +
+    '<div class="msg" id="roleMsg" style="display:none"></div>' +
+    (others.length
+      ? '<div class="sect"><span>Все зарегистрированные</span><span>кого-то можно позвать вести уроки</span></div>' +
+        '<div class="scroll"><table class="tbl"><tbody>' + others.map(orow).join("") + '</tbody></table></div>'
+      : "");
+}
+
 function draw(){
   const p = document.getElementById("pane");
   p.innerHTML =
     '<div class="pane-hd"><span>Мои ученики</span><span>'+STUDENTS.length+' в классе</span></div>' +
-    tableHtml() + newcomersHtml();
+    tableHtml() + newcomersHtml() + peopleHtml();
+
+  p.querySelectorAll("[data-role]").forEach(b => b.onclick = async () => {
+    const to = b.dataset.role, who = b.dataset.nm;
+    const q = to === "teacher"
+      ? "Сделать «"+who+"» учителем? Он сможет вести своих учеников, создавать учебники и упражнения. К твоим ученикам и материалам доступа не получит."
+      : "Снять роль учителя у «"+who+"»? Его ученики и материалы останутся в базе, но вести он их не сможет.";
+    if (!confirm(q)) return;
+    const msg = document.getElementById("roleMsg");
+    b.disabled = true; b.textContent = "…";
+    const r = await SM.setRole(b.dataset.u, to);
+    if (r && r.ok) { await load(); return; }
+    b.disabled = false; b.textContent = to === "teacher" ? "сделать учителем" : "снять роль";
+    if (msg) { msg.style.display = "block"; msg.className = "msg bad";
+               msg.textContent = (r && r.error) || "Не получилось изменить роль"; }
+  });
 
   p.querySelectorAll("[data-s]").forEach(b => b.onclick = () => {
     location.href = "teacher-class.html?s=" + encodeURIComponent(b.dataset.s);
@@ -219,6 +272,10 @@ async function load(){
 
   try { STUDENTS  = (await SM.myStudents()) || []; }         catch(e){ STUDENTS = []; }
   try { NEWCOMERS = (await SM.unassignedStudents()) || []; }  catch(e){ NEWCOMERS = []; }
+
+  /* Раздел с учителями появляется только у владельца платформы */
+  try { IS_OWNER = await SM.isOwner(); } catch(e){ IS_OWNER = false; }
+  try { PEOPLE = IS_OWNER ? ((await SM.platformPeople()) || []) : []; } catch(e){ PEOPLE = []; }
 
   /* teacherUnread отдаёт готовую карту { student_id: сколько непрочитанных } */
   try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }

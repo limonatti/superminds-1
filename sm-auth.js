@@ -319,6 +319,15 @@ const { error } = await c.rpc("set_role", { p_user: userId, p_role: role });
 return { ok: !error, error: error && error.message };
 },
 
+/* Все люди платформы — только для владельца. База сама вернёт пустоту остальным. */
+async platformPeople() {
+if (!useCloud) return [];
+const c = ensureClient(); if (!c) return [];
+const { data, error } = await c.rpc("platform_people");
+if (error) { console.warn("platformPeople:", error.message); return []; }
+return data || [];
+},
+
 /* Я владелец платформы? От этого зависят разделы модерации */
 async isOwner() {
 if (!useCloud) return false;
