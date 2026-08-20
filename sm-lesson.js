@@ -51,8 +51,11 @@
       ".lsec{background:#fff;border-radius:18px;box-shadow:0 5px 0 #cfcecd;padding:14px 15px;margin-bottom:14px}" +
       ".lsec.over{box-shadow:0 5px 0 #ec3013}" +
       ".lsec-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}" +
-      ".lsec-hd .nm{font:900 12px 'Archivo',sans-serif;color:#6e6a68;letter-spacing:.6px;text-transform:uppercase;flex:1;border:0;background:none;padding:2px 0}" +
-      ".lsec-hd .nm:focus{outline:none;color:#ec3013}" +
+      /* sm-skin.css задаёт полям рамку через !important — заголовок раздела
+         должен читаться как заголовок, поэтому перебиваем тем же весом */
+      ".lsec-hd .nm{font:900 12px 'Archivo',sans-serif !important;color:#6e6a68 !important;letter-spacing:.6px;text-transform:uppercase;flex:1;width:auto !important;border:0 !important;background:transparent !important;padding:2px 0 !important;box-shadow:none !important}" +
+      ".lsec-hd .nm:hover{color:#201e1d !important}" +
+      ".lsec-hd .nm:focus{outline:none;color:#ec3013 !important;border-bottom:2px solid #ec3013 !important}" +
       ".lrow{display:flex;align-items:center;gap:9px;background:#f3f2f2;border-radius:12px;padding:9px 11px;margin-bottom:7px;cursor:grab}" +
       ".lrow:last-child{margin-bottom:0}" +
       ".lrow.drag{opacity:.4}" +
