@@ -99,8 +99,10 @@
           '<span class="tt">' + esc(r.title || typeLabel(r.type)) + '</span>' +
           (r.status === "draft" ? '<span class="dr">черновик</span>' : "") +
           '<button class="ac st" data-id="' + r.id + '" title="' + (r.status === "draft" ? "опубликовать" : "убрать в черновики") + '">' + (r.status === "draft" ? "☁" : "✓") + '</button>' +
+          '<button class="ac pv" data-id="' + r.id + '" title="посмотреть глазами ученика">👁</button>' +
           '<button class="ac ed" data-id="' + r.id + '" title="изменить">✎</button>' +
           '<button class="ac du" data-id="' + r.id + '" title="дублировать">⧉</button>' +
+          '<button class="ac mv" data-id="' + r.id + '" title="перенести в другой юнит">↗</button>' +
           '<button class="ac de" data-id="' + r.id + '" title="удалить">🗑</button>' +
           '</div>';
       });
@@ -141,9 +143,33 @@
       b.onclick = async function (e) {
         e.stopPropagation();
         var r = rows.filter(function (x) { return x.id === b.dataset.id; })[0];
-        if (!confirm("Удалить «" + ((r && r.title) || "задание") + "»?")) return;
-        await SM.deleteExercise(b.dataset.id);
+        if (!r) return;
+        /* Удаляем сразу, но держим копию — десять секунд можно передумать.
+           Спрашивать подтверждение при этом уже не нужно. */
+        var backup = {
+          course: r.course, unit_id: r.unit_id, book: r.book, type: r.type,
+          title: r.title, section: r.section, data: r.data, status: r.status
+        };
+        var res = await SM.deleteExercise(r.id);
+        if (!res.ok) { note(res.error || "Не удалось удалить", true); return; }
         load();
+        offerUndo(backup);
+      };
+    });
+
+    host.querySelectorAll(".pv").forEach(function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        var r = rows.filter(function (x) { return x.id === b.dataset.id; })[0];
+        if (r) showPreview(r);
+      };
+    });
+
+    host.querySelectorAll(".mv").forEach(function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        var r = rows.filter(function (x) { return x.id === b.dataset.id; })[0];
+        if (r) showMove(r);
       };
     });
 
@@ -248,6 +274,129 @@
       if (r) { r.position = p.position; r.section = p.section; }
     });
     rows.sort(function (a, b) { return a.position - b.position; });
+  }
+
+  /* ---------- отмена удаления ---------- */
+
+  var undoTimer = null;
+  function offerUndo(backup) {
+    var host = $("list"); if (!host) return;
+    var old = $("undoBar"); if (old) old.remove();
+    clearTimeout(undoTimer);
+
+    var bar = document.createElement("div");
+    bar.id = "undoBar";
+    bar.style.cssText = "display:flex;align-items:center;gap:10px;background:#fff2ef;border:2px solid #ffc9c0;border-radius:12px;padding:10px 13px;margin:0 0 12px;font:800 13px 'Archivo',sans-serif;color:#7b190d";
+    bar.innerHTML = '<span style="flex:1">Задание «' + esc(backup.title || typeLabel(backup.type)) + '» удалено</span>';
+
+    var back = document.createElement("button");
+    back.type = "button"; back.textContent = "вернуть";
+    back.style.cssText = "background:#7b190d;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px 'Archivo',sans-serif;cursor:pointer";
+    back.onclick = async function () {
+      back.disabled = true; back.textContent = "возвращаю…";
+      var r = await SM.saveExercise(backup);
+      bar.remove();
+      if (!r.ok) { note(r.error || "Не вышло вернуть", true); return; }
+      note("Задание возвращено");
+      load();
+    };
+    bar.appendChild(back);
+    host.parentNode.insertBefore(bar, host);
+    undoTimer = setTimeout(function () { var b = $("undoBar"); if (b) b.remove(); }, 12000);
+  }
+
+  /* ---------- просмотр задания глазами ученика ---------- */
+
+  function showPreview(r) {
+    var old = $("lsnPrev"); if (old) old.remove();
+    var ov = document.createElement("div");
+    ov.id = "lsnPrev";
+    ov.style.cssText = "position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
+    ov.innerHTML = '<div style="background:#f3f2f2;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">' +
+      '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:2px solid #cfcecd">' +
+        '<b style="font:900 15px \'Archivo\',sans-serif">👁 ' + esc(r.title || typeLabel(r.type)) + "</b>" +
+        '<span style="flex:1"></span>' +
+        '<button id="lsnPrevClose" style="background:#ec3013;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px \'Archivo\',sans-serif;cursor:pointer">закрыть</button>' +
+      "</div>" +
+      '<iframe id="lsnPrevFrame" style="flex:1;width:100%;border:0;background:#f3f2f2;min-height:420px" src="exercises.html?preview=1"></iframe>' +
+    "</div>";
+    document.body.appendChild(ov);
+    ov.onclick = function (e) { if (e.target === ov) ov.remove(); };
+    ov.querySelector("#lsnPrevClose").onclick = function () { ov.remove(); };
+    document.addEventListener("keydown", function esc2(e) {
+      if (e.key === "Escape") { var o = $("lsnPrev"); if (o) o.remove(); document.removeEventListener("keydown", esc2); }
+    });
+    /* exercises.html в режиме preview ждёт задание сообщением — тем же, что и кнопка «Как увидит ученик» */
+    var fr = ov.querySelector("#lsnPrevFrame");
+    fr.onload = function () {
+      try { fr.contentWindow.postMessage({ smPreview: { id: r.id, type: r.type, title: r.title, section: r.section, data: r.data } }, "*"); }
+      catch (err) { note("Предпросмотр не открылся", true); }
+    };
+  }
+
+  /* ---------- перенос в другой юнит ---------- */
+
+  function showMove(r) {
+    var old = $("lsnMove"); if (old) old.remove();
+
+    /* курсы и юниты берём из тех же данных, что и селекты вверху страницы */
+    var courses = (window.SM_COURSES || []).filter(function (c) {
+      return c.id !== "own" && ((window.SM_COURSE_DATA || {})[c.id] || []).length;
+    });
+    if (!courses.length) { note("Список учебников ещё не загрузился", true); return; }
+
+    var ov = document.createElement("div");
+    ov.id = "lsnMove";
+    ov.style.cssText = "position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
+    ov.innerHTML = '<div style="background:#fff;border-radius:20px;max-width:460px;width:100%;padding:20px;box-shadow:0 12px 0 rgba(0,0,0,.2)">' +
+      '<div style="font:900 15px \'Archivo\',sans-serif;margin-bottom:4px">↗ Перенести задание</div>' +
+      '<div style="font:700 13px \'Archivo\',sans-serif;color:#6e6a68;margin-bottom:14px;line-height:1.5">«' + esc(r.title || typeLabel(r.type)) + '» — куда положить копию?</div>' +
+      '<label style="display:block;font:800 11px \'Archivo\',sans-serif;color:#6e6a68;letter-spacing:.08em;margin-bottom:5px">УЧЕБНИК</label>' +
+      '<select id="mvCourse" style="width:100%;border:2px solid #cfcecd;border-radius:12px;padding:10px 12px;font:600 15px \'Archivo\',sans-serif;background:#f3f2f2;margin-bottom:12px">' +
+        courses.map(function (c) { return '<option value="' + esc(c.id) + '"' + (c.id === $("course").value ? " selected" : "") + ">" + esc((c.emoji || "📘") + " " + c.title) + "</option>"; }).join("") +
+      "</select>" +
+      '<label style="display:block;font:800 11px \'Archivo\',sans-serif;color:#6e6a68;letter-spacing:.08em;margin-bottom:5px">ЮНИТ</label>' +
+      '<select id="mvUnit" style="width:100%;border:2px solid #cfcecd;border-radius:12px;padding:10px 12px;font:600 15px \'Archivo\',sans-serif;background:#f3f2f2;margin-bottom:6px"></select>' +
+      '<label style="display:flex;align-items:center;gap:8px;font:700 13px \'Archivo\',sans-serif;color:#4a4644;margin:12px 0 16px;cursor:pointer">' +
+        '<input type="checkbox" id="mvCut" style="width:auto"> убрать из этого юнита (перенести, а не копировать)</label>' +
+      '<div style="display:flex;gap:8px">' +
+        '<button id="mvGo" style="flex:1;background:#ec3013;color:#fff;border:0;border-radius:12px;padding:12px;font:800 14px \'Archivo\',sans-serif;cursor:pointer;box-shadow:0 4px 0 #ae1800">Перенести</button>' +
+        '<button id="mvNo" style="background:#eae9e9;color:#4a4644;border:0;border-radius:12px;padding:12px 16px;font:800 13px \'Archivo\',sans-serif;cursor:pointer">отмена</button>' +
+      "</div></div>";
+    document.body.appendChild(ov);
+
+    function fillUnits() {
+      var cid = ov.querySelector("#mvCourse").value;
+      var us = (window.SM_COURSE_DATA || {})[cid] || [];
+      ov.querySelector("#mvUnit").innerHTML = us.length
+        ? us.map(function (u) { return '<option value="' + esc(u.id) + '">' + esc((u.emoji || "📖") + " " + u.title) + "</option>"; }).join("")
+        : '<option value="">— в этом учебнике нет юнитов —</option>';
+    }
+    fillUnits();
+    ov.querySelector("#mvCourse").onchange = fillUnits;
+    ov.onclick = function (e) { if (e.target === ov) ov.remove(); };
+    ov.querySelector("#mvNo").onclick = function () { ov.remove(); };
+
+    ov.querySelector("#mvGo").onclick = async function () {
+      var go = this;
+      var cid = ov.querySelector("#mvCourse").value;
+      var uid = ov.querySelector("#mvUnit").value;
+      var cut = ov.querySelector("#mvCut").checked;
+      if (!uid) { note("В этом учебнике нет юнитов", true); return; }
+      if (cid === $("course").value && uid === $("unit").value) { note("Это тот же юнит", true); return; }
+
+      go.disabled = true; go.textContent = "переношу…";
+      /* копия создаётся черновиком: в новом юните её надо проверить и опубликовать */
+      var res = await SM.saveExercise({
+        course: cid, unit_id: uid, book: r.book || "sb", type: r.type,
+        title: r.title, section: r.section, data: r.data, status: "draft"
+      });
+      if (!res.ok) { go.disabled = false; go.textContent = "Перенести"; note(res.error || "Не получилось", true); return; }
+      if (cut) { try { await SM.deleteExercise(r.id); } catch (e) {} }
+      ov.remove();
+      note(cut ? "Задание перенесено — в новом юните лежит черновиком" : "Копия создана — в новом юните лежит черновиком");
+      load();
+    };
   }
 
   /* ---------- загрузка ---------- */

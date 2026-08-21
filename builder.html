@@ -737,6 +737,9 @@
           '<div id="fields"></div>'+
           '<div class="row2" style="margin-top:16px"><button class="primary" id="prev" style="flex:1;margin:0;background:#eae9e9;color:#4a4644;box-shadow:0 5px 0 #cfcecd">👁 Как увидит ученик</button>'+
           '<button class="primary" id="save" style="flex:1;margin:0">💾 Сохранить</button></div>'+
+          /* Задания обычно делают пачкой в один раздел — эта кнопка не сбрасывает
+             тип и раздел, чтобы не выбирать их заново на каждом заходе. */
+          '<button class="primary" id="saveMore" style="width:100%;margin-top:10px;background:#4a8b34;box-shadow:0 5px 0 #2c5716">💾 Сохранить и создать ещё</button>'+
           '<div class="msg" id="msg"></div>'+
         '</div>'+
         '<div class="sec-title">МОИ УПРАЖНЕНИЯ</div><div id="list"><div class="empty">Загрузка…</div></div>';
@@ -760,11 +763,12 @@
       const pu=q.get("u");
       if(pu&&unitsOf(CID).some(x=>x.id===pu)) document.getElementById("unit").value=pu;
       if(q.get("book")) document.getElementById("book").value=q.get("book");
-      document.getElementById("save").onclick=save;
+      document.getElementById("save").onclick=()=>save(false);
+      document.getElementById("saveMore").onclick=()=>save(true);
       document.getElementById("prev").onclick=preview;
       loadList();
     }
-    async function save(){
+    async function save(keepGoing){
       const msg=document.getElementById("msg");msg.className="msg";msg.textContent="…";
       const type=document.getElementById("type").value;
       const r=readForm(type); if(r.err){msg.className="msg err";msg.textContent=r.err;return;}
@@ -773,7 +777,21 @@
       const uidSel=document.getElementById("unit").value;
       if(!uidSel){msg.className="msg err";msg.textContent="В этом курсе нет юнитов — выбери другой курс.";return;}
       const res=await SM.saveExercise({id:editId,course:CID,unit_id:uidSel,book:document.getElementById("book").value,type,title:document.getElementById("title").value.trim(),section:document.getElementById("section").value.trim(),data:r.data});
-      if(res.ok){const uid=document.getElementById("unit").value;msg.className="msg ok";msg.innerHTML=(editId?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';editId=null;document.getElementById("title").value="";document.getElementById("section").value="";renderForm(type);loadList();}
+      if(res.ok){
+        const uid=document.getElementById("unit").value;
+        const wasEdit=!!editId;
+        editId=null;
+        document.getElementById("title").value="";
+        /* при «создать ещё» раздел остаётся — следующее задание чаще всего в него же */
+        if(!keepGoing) document.getElementById("section").value="";
+        renderForm(type);
+        loadList();
+        msg.className="msg ok";
+        msg.innerHTML=keepGoing
+          ? "Сохранено ✓ — форма готова к следующему заданию"+(document.getElementById("section").value?(', раздел «'+esc(document.getElementById("section").value)+'»'):"")
+          : (wasEdit?"Обновлено ✓":"Сохранено ✓")+' — <a href="exercises.html?u='+uid+'" target="_blank" style="color:inherit;font-weight:800">открыть юнит и проверить →</a>';
+        if(keepGoing){ const f=document.getElementById("fields"); if(f) f.scrollIntoView({behavior:"smooth",block:"start"}); }
+      }
       else{msg.className="msg err";msg.textContent=res.error||"Ошибка";}
     }
     /* ---------- предпросмотр: показать упражнение так, как увидит ученик ----------
@@ -853,10 +871,10 @@
 </body>
 </html>
 
-<script src=builder-plus.js?v=bcf53145></script>
+<script src=builder-plus.js?v=7849b140></script>
 
 <script src=sm-ai.js?v=d431e1bb></script>
 
 <script src=sm-draft.js?v=dcbd3027></script>
 
-<script src=sm-lesson.js?v=fe5670aa></script>
+<script src=sm-lesson.js?v=34f2949b></script>

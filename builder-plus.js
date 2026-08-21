@@ -48,7 +48,7 @@
 (function () {
   "use strict";
 
-  var SUPPORTED = { choice: 1, gap: 1, tf: 1, order: 1, match: 1 };
+  var SUPPORTED = { choice: 1, gap: 1, tf: 1, order: 1, match: 1, letters: 1, cloze: 1, multi: 1, categorize: 1 };
   var cand = [];      // что придумал ассистент
   var keep = [];      // отмеченные галочкой
   var curType = null;
@@ -102,6 +102,14 @@
     }
     if (type === "order") return esc(it.answer || it.q || "");
     if (type === "match") return esc(it.l || it.a || it.en || "") + " — " + esc(it.r || it.b || it.ru || "");
+    if (type === "letters") return esc(it.word || "") + (it.hint ? '<br><span class="cand-a">' + esc(it.hint) + "</span>" : "");
+    if (type === "multi") {
+      var o = it.opts || [], c = it.correct || [];
+      var right = c.map(function (i) { return o[i]; }).filter(Boolean).join(", ");
+      return esc(it.q || "") + '<br><span class="cand-a">верно: ' + esc(right) + "</span>";
+    }
+    if (type === "cloze") return esc((it.q || "").replace(/\[\[([^|\]]+)[^\]]*\]\]/g, "[$1]"));
+    if (type === "categorize") return "<b>" + esc(it.name || "") + "</b><br><span class=\"cand-a\">" + esc((it.items || []).join(", ")) + "</span>";
     return esc(JSON.stringify(it).slice(0, 80));
   }
 
@@ -177,7 +185,9 @@
     if (typeof window.renderForm !== "function") { status("Форма не готова — обнови страницу", "err"); return; }
 
     var data;
-    if (curType === "match") {
+    if (curType === "categorize") {
+      data = { cats: chosen.map(function (c) { return { name: c.name || "", items: c.items || [] }; }) };
+    } else if (curType === "match") {
       /* ассистент отдаёт {l,r}, форма ждёт {a,b} */
       data = { pairs: chosen.map(function (p) { return { a: p.l || p.a || p.en || "", b: p.r || p.b || p.ru || "" }; }) };
     } else {
@@ -220,7 +230,9 @@
 
     if (!res || !res.ok) { status((res && res.error) || "Ассистент не ответил", "err"); return; }
     var data = res.data || {};
-    var items = (type === "match") ? (data.pairs || []) : (data.items || []);
+    var items = (type === "match") ? (data.pairs || [])
+      : (type === "categorize") ? (data.cats || [])
+      : (data.items || []);
     if (!items.length) { status("Ассистент не вернул задания — попробуй ещё раз", "err"); return; }
 
     status("", "");
