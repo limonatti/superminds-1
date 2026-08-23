@@ -32,6 +32,33 @@
   .chat-note{padding:2px 28px 14px;color:var(--color-neutral-700);font:600 12px "Archivo",sans-serif}
   .chat-err{margin:0 28px 10px;background:#fff2ef;border:2px solid #ffc9c0;color:#7b190d;border-radius:12px;padding:9px 12px;font:700 12px "Archivo",sans-serif}
   #chatState{font:700 11px "Archivo",sans-serif}
+  /* вложения */
+  .bub .att{display:block;margin:2px 0 4px;max-width:100%}
+  .bub .att img,.bub .att video{max-width:100%;max-height:260px;border-radius:10px;display:block;cursor:pointer}
+  .bub .att audio{width:220px;display:block}
+  .bub .file{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.08);border-radius:10px;padding:8px 10px;text-decoration:underline}
+  .bub.me .file{background:rgba(255,255,255,.2);color:#fff}
+  .bub .fsz{opacity:.7;font-size:11px}
+  /* реакции — кнопка и панель висят у края пузырька, поэтому он должен быть точкой отсчёта */
+  .bub{position:relative}
+  .rx{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+  .rx span{background:rgba(0,0,0,.1);border-radius:999px;padding:1px 7px;font-size:12px;line-height:1.5}
+  .bub.me .rx span{background:rgba(255,255,255,.25)}
+  .rxbtn{position:absolute;top:-11px;opacity:0;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;width:24px;height:24px;font-size:12px;cursor:pointer;line-height:1;padding:0}
+  .bub.me .rxbtn{left:-12px}
+  .bub.them .rxbtn{right:-12px}
+  .bub:hover .rxbtn{opacity:1}
+  .rxpick{position:absolute;top:-40px;display:flex;gap:2px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;padding:3px 6px;z-index:5;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  .bub.me .rxpick{left:-12px}
+  .bub.them .rxpick{right:-12px}
+  .rxpick button{background:none;border:0;font-size:18px;cursor:pointer;padding:1px 3px;line-height:1}
+  /* панель смайлов и скрепка */
+  .chat-in .tool{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:0 12px;font-size:17px;cursor:pointer;border-radius:12px;flex:none}
+  .emopan{display:none;flex-wrap:wrap;gap:3px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px;max-height:170px;overflow-y:auto}
+  .emopan.on{display:flex}
+  .emopan button{background:none;border:0;font-size:21px;cursor:pointer;padding:2px 4px;line-height:1;border-radius:8px}
+  .emopan button:hover{background:var(--color-neutral-200,#eee)}
+  .upbar{font:700 12px "Archivo",sans-serif;color:var(--color-neutral-700);padding:0 0 6px}
 </style>
 </head>
 <body>
@@ -49,7 +76,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=7a245cdd"></script>
+<script src="sm-auth.js?v=479e337a"></script>
 <script src="sm-shell.js?v=4b1f197b"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -92,17 +119,115 @@ function hhmm(iso){ const d=new Date(iso); return String(d.getHours()).padStart(
 /* Один пузырёк. Раньше вся переписка перерисовывалась через innerHTML на
    каждом цикле опроса — из-за этого слетало выделение текста и дёргалась
    прокрутка. Теперь узлы добавляются по одному и живут дальше сами. */
+function human(n){
+  if (!n) return "";
+  if (n < 1024) return n + " Б";
+  if (n < 1024*1024) return Math.round(n/1024) + " КБ";
+  return (n/1024/1024).toFixed(1) + " МБ";
+}
+
+/* Вложение внутри пузырька: картинку и видео показываем сразу,
+   остальное — строкой со ссылкой на скачивание. */
+function attEl(m){
+  const wrap = document.createElement("div");
+  wrap.className = "att";
+  if (m.att_kind === "image"){
+    const img = document.createElement("img");
+    img.src = m.att_url; img.alt = m.att_name || "";
+    img.loading = "lazy";
+    img.onclick = () => openLink(m.att_url);
+    wrap.appendChild(img);
+  } else if (m.att_kind === "video"){
+    const v = document.createElement("video");
+    v.src = m.att_url; v.controls = true; v.preload = "metadata";
+    wrap.appendChild(v);
+  } else if (m.att_kind === "audio"){
+    const a = document.createElement("audio");
+    a.src = m.att_url; a.controls = true; a.preload = "metadata";
+    wrap.appendChild(a);
+  } else {
+    const a = document.createElement("a");
+    a.className = "file"; a.href = m.att_url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "📄 " + (m.att_name || "файл");
+    const sz = document.createElement("span");
+    sz.className = "fsz"; sz.textContent = human(m.att_size);
+    a.appendChild(sz);
+    wrap.appendChild(a);
+  }
+  return wrap;
+}
+function openLink(u){ window.open(u, "_blank", "noopener"); }
+
+const RX = ["👍","❤️","😂","👏","🔥","😮","😢","🎉"];
+
 function bubbleEl(m){
   const mine = m.sender_id === ME.id;
   const el = document.createElement("div");
   el.className = "bub " + (mine ? "me" : "them") + (m.__pending ? " pending" : "");
   el.dataset.id = m.id;
-  el.textContent = m.body;
+
+  if (m.att_url) el.appendChild(attEl(m));
+  if (m.body){
+    const txt = document.createElement("span");
+    txt.textContent = m.body;
+    el.appendChild(txt);
+  }
+
   const tm = document.createElement("span");
   tm.className = "tm";
   tm.textContent = m.__pending ? "отправляю…" : (hhmm(m.created_at) + (mine ? (m.read_at ? " ✓✓" : " ✓") : ""));
   el.appendChild(tm);
+
+  const rx = document.createElement("div");
+  rx.className = "rx";
+  el.appendChild(rx);
+
+  /* реакцию можно поставить только на сохранённое сообщение */
+  if (!m.__pending){
+    const btn = document.createElement("button");
+    btn.className = "rxbtn"; btn.type = "button"; btn.title = "реакция"; btn.textContent = "☺";
+    btn.onclick = (e) => { e.stopPropagation(); openPicker(el, m.id); };
+    el.appendChild(btn);
+  }
   return el;
+}
+
+function openPicker(bubble, msgId){
+  const old = document.querySelector(".rxpick"); if (old) old.remove();
+  const pick = document.createElement("div");
+  pick.className = "rxpick";
+  RX.forEach(r => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = r;
+    b.onclick = async (e) => {
+      e.stopPropagation(); pick.remove();
+      await SM.chatReact(msgId, r);
+      await loadReactions([msgId]);
+    };
+    pick.appendChild(b);
+  });
+  bubble.appendChild(pick);
+  setTimeout(() => document.addEventListener("click", function once(){ pick.remove(); document.removeEventListener("click", once); }), 0);
+}
+
+/* Сводка реакций под сообщением: смайлик и сколько раз поставили */
+async function loadReactions(ids){
+  if (!ids || !ids.length) return;
+  let map = {};
+  try { map = await SM.chatReactions(ids); } catch(e){ return; }
+  ids.forEach(id => {
+    const box = document.querySelector('.bub[data-id="'+id+'"] .rx');
+    if (!box) return;
+    const list = map[id] || [];
+    const counts = {};
+    list.forEach(x => { counts[x.r] = (counts[x.r] || 0) + 1; });
+    box.innerHTML = "";
+    Object.keys(counts).forEach(r => {
+      const s = document.createElement("span");
+      s.textContent = r + (counts[r] > 1 ? " " + counts[r] : "");
+      box.appendChild(s);
+    });
+  });
 }
 
 function atBottom(scroll){ return scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 60; }
@@ -180,7 +305,13 @@ function drawPane(){
     '<div class="pane-hd"><span>'+esc(title)+'</span><span id="chatState">подключаюсь…</span></div>' +
     '<div class="chatwrap">' +
       '<div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загружаю…</div></div>' +
-      '<div class="chat-in"><input id="chatText" placeholder="Написать '+esc(person.name)+'…" maxlength="2000"><button class="go" id="chatSend" aria-label="Отправить">➤</button></div>' +
+      '<div class="emopan" id="emoPan"></div>' +
+      '<div class="upbar" id="upBar"></div>' +
+      '<div class="chat-in">' +
+        '<button class="tool" id="btnEmo" type="button" title="смайлы">🙂</button>' +
+        '<button class="tool" id="btnClip" type="button" title="фото, видео или файл">📎</button>' +
+        '<input id="chatText" placeholder="Написать '+esc(person.name)+'…" maxlength="2000">' +
+        '<button class="go" id="chatSend" aria-label="Отправить">➤</button></div>' +
     '</div>' +
     '<div class="chat-note">Сообщения приходят сразу. Видит только ваша пара — переписка защищена.</div>';
   startChat(person);
@@ -202,6 +333,7 @@ async function firstLoad(person){
     scroll.innerHTML = '<div class="chat-empty">Сообщений пока нет. Напиши первым</div>';
   } else {
     msgs.forEach(m => appendMsg(m, true));
+    loadReactions(msgs.map(m => m.id));
   }
   await markIncomingRead(person);
 }
@@ -249,16 +381,60 @@ function startChat(person){
     }, 10000);
   }
 
-  async function send(){
-    const v = (inp.value||"").trim(); if (!v) return;
+  /* ---------- смайлы ---------- */
+  const EMO = ["😀","😃","😄","😁","😊","🙂","😉","😍","🥰","😘","😎","🤓","🤗","🤔","😐","😴","😅","😂","🤣","😭",
+               "😢","😳","😱","🤯","🥳","😇","🙃","😜","🤪","😬","👍","👎","👏","🙌","🙏","💪","✌️","🤝","👋","🤞",
+               "❤️","💛","💚","💙","💜","🧡","✨","⭐","🌟","🔥","🎉","🎊","🏆","🥇","💯","✅","❌","❗","❓","💡",
+               "📚","📖","✏️","📝","🎒","🍎","🐱","🐶","🦊","🐻","🌞","🌈","🌸","🍀","⚽","🎵","🎨","🚀","🎁","☕"];
+  const emoPan = document.getElementById("emoPan"), btnEmo = document.getElementById("btnEmo");
+  if (emoPan && !emoPan.dataset.built){
+    emoPan.dataset.built = "1";
+    EMO.forEach(e => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = e;
+      b.onclick = () => {
+        const pos = inp.selectionStart || inp.value.length;
+        inp.value = inp.value.slice(0, pos) + e + inp.value.slice(pos);
+        inp.focus(); inp.selectionStart = inp.selectionEnd = pos + e.length;
+      };
+      emoPan.appendChild(b);
+    });
+  }
+  if (btnEmo) btnEmo.onclick = () => emoPan.classList.toggle("on");
+
+  /* ---------- скрепка ---------- */
+  const upBar = document.getElementById("upBar"), btnClip = document.getElementById("btnClip");
+  function say(t){ if (upBar) upBar.textContent = t || ""; }
+  if (btnClip) btnClip.onclick = () => {
+    const fi = document.createElement("input");
+    fi.type = "file";
+    fi.accept = "image/*,video/*,audio/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip";
+    fi.onchange = async () => {
+      const file = fi.files && fi.files[0]; if (!file) return;
+      clearError();
+      say("Загружаю «" + file.name + "»…");
+      btnClip.disabled = true;
+      const up = await SM.chatUpload(file);
+      btnClip.disabled = false; say("");
+      if (!up.ok){ showError(up.error || "Файл не загрузился"); return; }
+      send(up);
+    };
+    fi.click();
+  };
+
+  async function send(att){
+    const v = (inp.value||"").trim();
+    if (!v && !att) return;
     inp.value = ""; inp.focus();
+    if (emoPan) emoPan.classList.remove("on");
     clearError();
 
     /* Оптимистичная отправка: пузырёк виден сразу, не дожидаясь сервера */
     const tempId = "tmp-" + Date.now();
-    appendMsg({ id: tempId, sender_id: ME.id, body: v, created_at: new Date().toISOString(), __pending: true }, true);
+    appendMsg({ id: tempId, sender_id: ME.id, body: v, created_at: new Date().toISOString(), __pending: true,
+                att_url: att && att.url, att_kind: att && att.kind, att_name: att && att.name, att_size: att && att.size }, true);
 
-    const r = await SM.chatSend(teacherId, studentId, v);
+    const r = await SM.chatSend(teacherId, studentId, v, att);
     const el = document.querySelector('.bub[data-id="'+tempId+'"]');
 
     if (!r.ok){
@@ -273,7 +449,7 @@ function startChat(person){
             el.remove();
             MSGS = MSGS.filter(x => x.id !== tempId);
             SEEN.delete(tempId);
-            inp.value = v; send();
+            inp.value = v; send(att);
           };
           tm.appendChild(again);
         }
@@ -292,10 +468,17 @@ function startChat(person){
       SEEN.delete(tempId); SEEN.add(real.id);
       const i = MSGS.findIndex(x => x.id === tempId);
       if (i >= 0) MSGS[i] = real;
+      /* черновик рисовался без кнопки реакции — теперь id настоящий, добавляем */
+      if (!el.querySelector(".rxbtn")){
+        const rb = document.createElement("button");
+        rb.className = "rxbtn"; rb.type = "button"; rb.title = "реакция"; rb.textContent = "☺";
+        rb.onclick = (e) => { e.stopPropagation(); openPicker(el, real.id); };
+        el.appendChild(rb);
+      }
     }
   }
 
-  snd.onclick = send;
+  snd.onclick = () => send();
   inp.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); send(); } });
 }
 

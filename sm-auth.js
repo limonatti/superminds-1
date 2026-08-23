@@ -1125,7 +1125,7 @@ return data || [];
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
 		let q = c.from("messages")
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at")
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size")
 			.eq("teacher_id", teacherId).eq("student_id", studentId)
 			.order("created_at", { ascending: true });
 		if (sinceIso) q = q.gt("created_at", sinceIso);
@@ -1133,15 +1133,79 @@ return data || [];
 		if (error) { console.warn("chatMessages:", error.message); return []; }
 		return data || [];
 	},
-	async chatSend(teacherId, studentId, body) {
+	/* att — необязательное вложение: { url, kind, name, size } */
+	async chatSend(teacherId, studentId, body, att) {
 		if (!useCloud) return { ok: false, error: "нужен Supabase" };
 		const c = ensureClient(); if (!c) return { ok: false };
 		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
-		const text = (body || "").trim(); if (!text) return { ok: false, error: "пусто" };
+		const text = (body || "").trim();
+		if (!text && !(att && att.url)) return { ok: false, error: "пусто" };
+		const row = { teacher_id: teacherId, student_id: studentId, sender_id: u.id, body: text.slice(0, 2000) };
+		if (att && att.url) {
+			row.att_url = att.url;
+			row.att_kind = att.kind || "file";
+			row.att_name = (att.name || "").slice(0, 200);
+			row.att_size = att.size || null;
+		}
 		const { data, error } = await c.from("messages")
-			.insert({ teacher_id: teacherId, student_id: studentId, sender_id: u.id, body: text.slice(0, 2000) })
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at").single();
+			.insert(row)
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size").single();
 		return { ok: !error, msg: data, error: error && error.message };
+	},
+	/* Файл в переписку. Лежит в отдельном хранилище chat-media,
+	   путь случайный — по прямой ссылке чужой файл не угадать. */
+	async chatUpload(file) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		if (!file) return { ok: false, error: "нет файла" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false, error: "войди заново" };
+		if (file.size > 25 * 1024 * 1024) return { ok: false, error: "файл больше 25 МБ" };
+		try {
+			const mime = file.type || "application/octet-stream";
+			const named = (file.name || "").match(/\.([a-z0-9]{1,6})$/i);
+			const ext = named ? named[1].toLowerCase() : "bin";
+			const path = u.id + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 9) + "." + ext;
+			const { error } = await c.storage.from("chat-media").upload(path, file, { contentType: mime, upsert: false });
+			if (error) return { ok: false, error: error.message };
+			const { data } = c.storage.from("chat-media").getPublicUrl(path);
+			const kind = mime.indexOf("image") === 0 ? "image"
+				: mime.indexOf("video") === 0 ? "video"
+				: mime.indexOf("audio") === 0 ? "audio" : "file";
+			return { ok: true, url: data.publicUrl, kind: kind, name: file.name || ("файл." + ext), size: file.size };
+		} catch (e) { return { ok: false, error: "не удалось загрузить" }; }
+	},
+	/* ---------- реакции на сообщения ---------- */
+	async chatReactions(ids) {
+		if (!useCloud || !ids || !ids.length) return {};
+		const c = ensureClient(); if (!c) return {};
+		const { data } = await c.from("message_reactions")
+			.select("message_id,user_id,reaction").in("message_id", ids);
+		const out = {};
+		(data || []).forEach(function (r) {
+			(out[r.message_id] = out[r.message_id] || []).push({ user: r.user_id, r: r.reaction });
+		});
+		return out;
+	},
+	/* Одна реакция от человека на сообщение: повторный клик по той же — снимает */
+	async chatReact(messageId, reaction) {
+		if (!useCloud) return { ok: false };
+		const c = ensureClient(); if (!c) return { ok: false };
+		const u = await this.getUser(); if (!u) return { ok: false };
+		const { data: has } = await c.from("message_reactions")
+			.select("reaction").eq("message_id", messageId).eq("user_id", u.id).maybeSingle();
+		if (has && has.reaction === reaction) {
+			const { error } = await c.from("message_reactions")
+				.delete().eq("message_id", messageId).eq("user_id", u.id);
+			return { ok: !error, removed: true, error: error && error.message };
+		}
+		if (has) {
+			const { error } = await c.from("message_reactions")
+				.update({ reaction: reaction }).eq("message_id", messageId).eq("user_id", u.id);
+			return { ok: !error, error: error && error.message };
+		}
+		const { error } = await c.from("message_reactions")
+			.insert({ message_id: messageId, user_id: u.id, reaction: reaction });
+		return { ok: !error, error: error && error.message };
 	},
 	/* Живая подписка на переписку пары.
 	   Раньше чат опрашивал сервер раз в 5 секунд — отсюда задержка доставки
