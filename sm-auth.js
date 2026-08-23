@@ -1143,6 +1143,28 @@ return data || [];
 			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at").single();
 		return { ok: !error, msg: data, error: error && error.message };
 	},
+	/* Живая подписка на переписку пары.
+	   Раньше чат опрашивал сервер раз в 5 секунд — отсюда задержка доставки
+	   и лишние запросы. Теперь база сама присылает событие, как только
+	   появилось новое сообщение или входящее отметили прочитанным.
+	   Возвращает функцию отписки; на неудачу — null, тогда вызывающий
+	   код остаётся на опросе. */
+	chatSubscribe(teacherId, studentId, onInsert, onUpdate) {
+		if (!useCloud) return null;
+		const c = ensureClient(); if (!c || !c.channel) return null;
+		const pair = "and(teacher_id=eq." + teacherId + ",student_id=eq." + studentId + ")";
+		try {
+			const ch = c.channel("chat:" + teacherId + ":" + studentId)
+				.on("postgres_changes",
+					{ event: "INSERT", schema: "public", table: "messages", filter: pair },
+					function (p) { if (onInsert) onInsert(p.new); })
+				.on("postgres_changes",
+					{ event: "UPDATE", schema: "public", table: "messages", filter: pair },
+					function (p) { if (onUpdate) onUpdate(p.new); })
+				.subscribe();
+			return function () { try { c.removeChannel(ch); } catch (e) {} };
+		} catch (e) { return null; }
+	},
 	/* Получатель отмечает входящие сообщения пары прочитанными */
 	async chatMarkRead(teacherId, studentId) {
 		if (!useCloud) return { ok: false };
