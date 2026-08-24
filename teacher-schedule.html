@@ -6,78 +6,77 @@
 <title>Расписание · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   /* ---------- полоса «кого записываем» ---------- */
-  .pick{padding:14px 28px;border-bottom:2px solid var(--color-divider);display:flex;
+  .pick{padding:14px 28px;border-bottom:1px solid var(--color-divider);display:flex;
     align-items:center;gap:10px;flex-wrap:wrap}
-  .pick .lbl{font:800 11px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  .pick .lbl{font:800 11px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;
     color:var(--color-neutral-600);margin-right:4px}
-  .chip{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
-    padding:7px 13px;font:800 12.5px "Archivo",sans-serif;cursor:pointer;white-space:nowrap}
+  .chip{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 12.5px "Nunito",sans-serif;cursor:pointer;white-space:nowrap}
   .chip:hover{border-color:var(--color-accent);color:var(--color-accent-600)}
   .chip.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
   .chip .n{opacity:.65;font-weight:700;margin-left:5px}
 
-  .armed{padding:12px 28px;background:var(--color-accent-100);border-bottom:2px solid var(--color-accent);
+  .armed{padding:12px 28px;background:var(--color-accent-100);border-bottom:1px solid var(--color-accent);
     display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-    font:700 13px "Archivo",sans-serif;color:var(--color-accent-700)}
+    font:700 13px "Nunito",sans-serif;color:var(--color-accent-700)}
   .armed b{font-weight:900}
-  .armed select{border:2px solid var(--color-accent);background:var(--color-bg);color:var(--color-text);
-    padding:5px 8px;font:800 12px "Archivo",sans-serif}
-  .armed .off{margin-left:auto;border:2px solid var(--color-accent);background:transparent;
-    color:var(--color-accent-700);padding:5px 12px;font:800 11px "Archivo",sans-serif;
+  .armed select{border:1px solid var(--color-accent);background:var(--color-bg);color:var(--color-text);
+    padding:5px 8px;font:800 12px "Nunito",sans-serif}
+  .armed .off{margin-left:auto;border:1px solid var(--color-accent);background:transparent;
+    color:var(--color-accent-700);padding:5px 12px;font:800 11px "Nunito",sans-serif;
     letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 
   /* ---------- шапка недели ---------- */
   .wknav{padding:22px 28px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .wknav .ttl{font:900 20px "Archivo",sans-serif;letter-spacing:-.01em}
+  .wknav .ttl{font:900 20px "Nunito",sans-serif;letter-spacing:-.01em}
   .wknav .sp{flex:1}
-  .wknav button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
-    padding:7px 13px;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .wknav button{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
   .wknav button:hover{border-color:var(--color-accent);color:var(--color-accent)}
 
   /* ---------- сетка дни × часы ---------- */
-  .gridwrap{border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);
+  .gridwrap{border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);
     overflow:auto;max-height:66vh}
   .grid{display:grid;grid-template-columns:64px repeat(7,minmax(104px,1fr));min-width:820px}
   .gh{position:sticky;top:0;z-index:5;background:var(--color-bg);
-    border-bottom:2px solid var(--color-divider);border-right:2px solid var(--color-divider);
+    border-bottom:1px solid var(--color-divider);border-right:1px solid var(--color-divider);
     padding:9px 10px;text-align:center}
   .gh:last-child{border-right:0}
-  .gh .dn{display:block;font:800 11px "Archivo",sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  .gh .dn{display:block;font:800 11px "Nunito",sans-serif;letter-spacing:.12em;text-transform:uppercase;
     color:var(--color-neutral-600)}
-  .gh .dd{display:block;font:900 17px "Archivo",sans-serif;margin-top:2px}
+  .gh .dd{display:block;font:900 17px "Nunito",sans-serif;margin-top:2px}
   .gh.today{background:var(--color-accent);border-bottom-color:var(--color-accent)}
   .gh.today .dn,.gh.today .dd{color:#fff}
 
-  .tcol{border-right:2px solid var(--color-divider);position:relative}
-  .tcol .tm{height:26px;font:700 10.5px "Archivo",sans-serif;color:var(--color-neutral-600);
+  .tcol{border-right:1px solid var(--color-divider);position:relative}
+  .tcol .tm{height:26px;font:700 10.5px "Nunito",sans-serif;color:var(--color-neutral-600);
     text-align:right;padding-right:7px;line-height:1;transform:translateY(-5px)}
   .tcol .tm:first-child{transform:none;padding-top:2px}   /* первая метка не уезжает под шапку */
   .tcol .tm.half{color:var(--color-neutral-400)}
 
-  .dcol{position:relative;border-right:2px solid var(--color-divider)}
+  .dcol{position:relative;border-right:1px solid var(--color-divider)}
   .dcol:last-child{border-right:0}
   .dcol.today{background:var(--color-accent-100)}
   .slot{height:26px;border-bottom:1px solid var(--color-divider);cursor:pointer;position:relative}
   .slot.hour{border-bottom-color:var(--color-neutral-300)}
   .slot:hover{background:var(--color-accent-100)}
   .slot:hover::after{content:"+";position:absolute;inset:0;display:flex;align-items:center;
-    justify-content:center;font:900 15px "Archivo",sans-serif;color:var(--color-accent)}
-  .slot.drop{background:var(--color-accent-200);outline:2px solid var(--color-accent);outline-offset:-2px}
+    justify-content:center;font:900 15px "Nunito",sans-serif;color:var(--color-accent)}
+  .slot.drop{background:var(--color-accent-200);outline:1px solid var(--color-accent);outline-offset:-2px}
   body.arming .slot{background:var(--color-accent-100)}
   body.arming .slot:hover{background:var(--color-accent-200)}
 
-  .les{position:absolute;left:3px;right:3px;z-index:2;border:2px solid var(--color-accent);
+  .les{position:absolute;left:3px;right:3px;z-index:2;border:1px solid var(--color-accent);
     background:var(--color-accent);color:#fff;padding:4px 6px;overflow:hidden;cursor:grab;
     display:flex;flex-direction:column;gap:1px}
   .les:active{cursor:grabbing}
-  .les .w{font:900 12.5px "Archivo",sans-serif;letter-spacing:-.01em;white-space:nowrap;
+  .les .w{font:900 12.5px "Nunito",sans-serif;letter-spacing:-.01em;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis}
-  .les .h{font:700 10.5px "Archivo",sans-serif;opacity:.85}
+  .les .h{font:700 10.5px "Nunito",sans-serif;opacity:.85}
   .les.off{background:var(--color-bg);color:var(--color-neutral-600);border-style:dashed;
     border-color:var(--color-neutral-500)}
   .les.moved{background:var(--color-accent-2);border-color:var(--color-accent-2)}
@@ -85,38 +84,38 @@
 
   /* ---------- поповер ---------- */
   .pop{position:absolute;z-index:60;width:284px;background:var(--color-bg);
-    border:2px solid var(--color-text);box-shadow:6px 6px 0 var(--color-divider);padding:14px}
-  .pop h4{margin:0 0 10px;font:900 14px "Archivo",sans-serif;letter-spacing:-.01em}
-  .pop .sub{font:700 11.5px "Archivo",sans-serif;color:var(--color-neutral-700);margin:-6px 0 10px}
-  .pop label.f{display:block;font:800 10.5px "Archivo",sans-serif;letter-spacing:.1em;
+    border:1px solid var(--color-divider);box-shadow:6px 6px 0 var(--color-divider);padding:14px}
+  .pop h4{margin:0 0 10px;font:900 14px "Nunito",sans-serif;letter-spacing:-.01em}
+  .pop .sub{font:700 11.5px "Nunito",sans-serif;color:var(--color-neutral-700);margin:-6px 0 10px}
+  .pop label.f{display:block;font:800 10.5px "Nunito",sans-serif;letter-spacing:.1em;
     text-transform:uppercase;color:var(--color-neutral-600);margin:10px 0 5px}
-  .pop select,.pop input[type=text],.pop input[type=time]{width:100%;border:2px solid var(--color-text);
-    background:var(--color-bg);color:var(--color-text);padding:8px 9px;font:700 13px "Archivo",sans-serif}
+  .pop select,.pop input[type=text],.pop input[type=time]{width:100%;border:1px solid var(--color-divider);
+    background:var(--color-bg);color:var(--color-text);padding:8px 9px;font:700 13px "Nunito",sans-serif}
   .pop .two{display:flex;gap:8px}
   .pop .two>*{flex:1;min-width:0}
   .daybox{display:flex;gap:5px;flex-wrap:wrap}
   .daybox label{display:inline-flex;align-items:center;justify-content:center;width:34px;height:30px;
-    border:2px solid var(--color-divider);font:800 11px "Archivo",sans-serif;cursor:pointer}
+    border:1px solid var(--color-divider);font:800 11px "Nunito",sans-serif;cursor:pointer}
   .daybox label:has(input:checked){border-color:var(--color-accent);background:var(--color-accent);color:#fff}
   .daybox input{position:absolute;opacity:0;width:0;height:0}
   .pop .go{width:100%;margin-top:13px;border:0;background:var(--color-accent);color:#fff;padding:11px;
-    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    font:800 12px "Nunito",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .pop .go:hover{background:var(--color-accent-600)}
   .pop .acts{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-  .pop .acts button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
-    padding:9px;font:800 11.5px "Archivo",sans-serif;letter-spacing:.05em;text-transform:uppercase;
+  .pop .acts button{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:9px;font:800 11.5px "Nunito",sans-serif;letter-spacing:.05em;text-transform:uppercase;
     cursor:pointer;text-align:left}
   .pop .acts button:hover{border-color:var(--color-accent);color:var(--color-accent)}
   .pop .acts button.warn:hover{border-color:#c0392b;color:#c0392b}
-  .pop .err{margin-top:9px;font:700 12px "Archivo",sans-serif;color:#c0392b}
+  .pop .err{margin-top:9px;font:700 12px "Nunito",sans-serif;color:#c0392b}
   .popbg{position:fixed;inset:0;z-index:55}
 
-  .stu-row .cnt{font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;
+  .stu-row .cnt{font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;
     color:var(--color-accent-600)}
   .stu-row .cnt.zero{color:var(--color-neutral-500)}
 
   .legend{padding:12px 28px 22px;display:flex;gap:16px;flex-wrap:wrap;
-    font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+    font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
   .legend i{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px}
   .legend .a{background:var(--color-accent)}
   .legend .b{background:var(--color-accent-2)}

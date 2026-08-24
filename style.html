@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Образец стиля · English with Asya</title>
+<meta name="robots" content="noindex">
+
+<!-- Страница-образец. Не входит в меню и не связана с данными:
+     здесь только вид. Переключатель сверху меняет тему на лету,
+     чтобы можно было сравнить старое и новое на одном и том же экране. -->
+<link rel="stylesheet" id="theme1" href="sm-warm.css?v=b4490901">
+<link rel="stylesheet" id="theme2" href="">
+
+<style>
+  /* ---- панель сравнения, к теме отношения не имеет ---- */
+  #swap{position:fixed;right:18px;bottom:18px;z-index:200;display:flex;gap:6px;
+    background:#fff;border:2px solid #1c1310;border-radius:999px;padding:5px;
+    box-shadow:0 6px 22px rgba(0,0,0,.25);font-family:system-ui,sans-serif}
+  #swap button{border:0;background:none;padding:9px 16px;border-radius:999px;
+    font:800 13px system-ui,sans-serif;color:#1c1310;cursor:pointer}
+  #swap button.on{background:#1c1310;color:#fff}
+
+  /* ---- сетка витрины компонентов ---- */
+  .demo{padding:0 28px 40px}
+  .demo h3{margin:30px 0 4px}
+  .demo .hint{font-size:13px;font-weight:700;color:var(--color-neutral-600);margin:0 0 14px}
+  .strip{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:6px}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .formrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;align-items:end}
+  @media(max-width:820px){ .demo{padding:0 16px 40px} }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ─────────── меню слева ─────────── -->
+  <nav class="side">
+    <div class="side-top">
+      <span class="flag" style="background:#5c4a45"></span>
+      <span class="side-name">
+        <span>with Asya</span>
+        <span>British English</span>
+      </span>
+    </div>
+
+    <div class="roles">
+      <button type="button">Ученик</button>
+      <button type="button" class="on">Учитель</button>
+    </div>
+
+    <div class="navlist">
+      <button class="navItem" type="button"><span class="t">Мои ученики</span></button>
+      <button class="navItem" type="button"><span class="t">Карточка ученика</span></button>
+      <button class="navItem" type="button"><span class="t">Мои учебники</span></button>
+      <button class="navItem on" type="button"><span class="t">Конструктор</span></button>
+      <button class="navItem" type="button"><span class="t">Проверка домашки</span><span class="badge">3</span></button>
+      <button class="navItem" type="button"><span class="t">Сообщения</span><span class="badge">1</span></button>
+      <button class="navItem" type="button"><span class="t">Расписание</span></button>
+      <button class="navItem" type="button" disabled><span class="t">Оплаты</span><span class="soon">скоро</span></button>
+    </div>
+
+    <div class="side-user">
+      <span class="av">А</span>
+      <span class="who"><b>Ася</b><span>учитель</span></span>
+      <button class="out" type="button" title="выйти">→]</button>
+    </div>
+  </nav>
+
+  <!-- ─────────── содержимое ─────────── -->
+  <div class="main">
+    <div class="cols">
+
+      <!-- колонка списка -->
+      <div class="list">
+        <div class="step">Шаг 1 · Выбери учебник</div>
+        <div>
+          <button class="li on" type="button">
+            <span class="t">Solutions Intermediate</span>
+            <span class="s">9 юнитов · 42 задания</span>
+            <span class="bar"><i style="width:64%"></i></span>
+          </button>
+          <button class="li" type="button">
+            <span class="t">Speakout B1+</span>
+            <span class="s">8 юнитов · 30 заданий</span>
+            <span class="bar"><i style="width:38%"></i></span>
+          </button>
+          <button class="li" type="button">
+            <span class="t">Focus 1</span>
+            <span class="s">9 юнитов · 6 заданий</span>
+            <span class="bar"><i style="width:12%"></i></span>
+          </button>
+          <button class="li" type="button" disabled>
+            <span class="t">Gateway A1+</span>
+            <span class="s">черновик</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- правая часть -->
+      <div class="pane">
+
+        <div class="pane-hd">
+          <span>Solutions Intermediate · Unit 3</span>
+          <span>черновик сохранён</span>
+        </div>
+
+        <div class="ink">
+          <div>
+            <div class="k">Следующий шаг</div>
+            <h2>Собери задания из слов юнита</h2>
+            <p>В юните 24 слова. Ассистент предложит варианты — отметишь нужные.</p>
+          </div>
+          <button class="go" type="button">Собрать задания</button>
+        </div>
+
+        <div class="tiles">
+          <div class="tile"><span class="k">Заданий</span><span class="n acc">42</span><span class="d">опубликовано 38</span></div>
+          <div class="tile"><span class="k">Слов</span><span class="n">216</span><span class="d">с переводом 209</span></div>
+          <div class="tile"><span class="k">Учеников</span><span class="n">5</span><span class="d">активны на неделе 4</span></div>
+          <div class="tile"><span class="k">Домашка</span><span class="n">3</span><span class="d">ждут проверки</span></div>
+        </div>
+
+        <div class="sect">
+          <span>Задания юнита</span>
+          <button class="b sm pri" type="button">+ Добавить</button>
+        </div>
+
+        <div class="rows">
+          <button class="row" type="button">
+            <span class="num">1</span>
+            <span><span class="t">Выбери правильный вариант</span><span class="d">Тест · 8 вопросов</span></span>
+            <span class="tag tag-accent-2">черновик</span>
+          </button>
+          <button class="row now" type="button">
+            <span class="num">2</span>
+            <span><span class="t">Соедини слово и перевод</span><span class="d">Пары · 12 слов · с картинками</span></span>
+            <span class="tag tag-accent">сейчас</span>
+          </button>
+          <button class="row" type="button">
+            <span class="num">3</span>
+            <span><span class="t">Вставь пропущенное слово</span><span class="d">Пропуски · 10 предложений</span></span>
+            <span class="tag tag-neutral">опубликовано</span>
+          </button>
+          <button class="row off" type="button">
+            <span class="num">4</span>
+            <span><span class="t">Собери предложение</span><span class="d">Порядок слов · скрыто от учеников</span></span>
+            <span class="tag tag-outline">скрыто</span>
+          </button>
+        </div>
+
+        <div class="sect"><span>Юниты</span></div>
+        <div class="units">
+          <button class="unit done" type="button"><span class="k">Unit</span><span class="n">1</span></button>
+          <button class="unit done" type="button"><span class="k">Unit</span><span class="n">2</span></button>
+          <button class="unit now" type="button"><span class="k">Unit</span><span class="n">3</span></button>
+          <button class="unit" type="button"><span class="k">Unit</span><span class="n">4</span></button>
+          <button class="unit" type="button"><span class="k">Unit</span><span class="n">5</span></button>
+          <button class="unit" type="button"><span class="k">Unit</span><span class="n">6</span></button>
+          <button class="unit" type="button"><span class="k">Unit</span><span class="n">7</span></button>
+        </div>
+
+        <div class="sect"><span>Слова юнита</span></div>
+        <div class="wgrid">
+          <div class="w"><div class="en">achievement</div><div class="ru">достижение</div></div>
+          <div class="w rep"><div class="en">borrow</div><div class="ru">одалживать · повтор</div></div>
+          <div class="w"><div class="en">confident</div><div class="ru">уверенный</div></div>
+          <div class="w"><div class="en">deadline</div><div class="ru">срок сдачи</div></div>
+          <div class="w"><div class="en">encourage</div><div class="ru">поощрять</div></div>
+          <div class="w"><div class="en">fortunately</div><div class="ru">к счастью</div></div>
+        </div>
+
+        <div class="sect"><span>Домашка на проверке</span></div>
+        <table class="tb">
+          <thead><tr><th>Ученик</th><th>Задание</th><th>Сдано</th><th>Результат</th></tr></thead>
+          <tbody>
+            <tr><td><b>Айзана</b></td><td>Unit 3 · Пары</td><td>вчера</td><td>11 из 12</td></tr>
+            <tr><td><b>Айша</b></td><td>Unit 3 · Пропуски</td><td class="late">просрочено</td><td>—</td></tr>
+            <tr><td><b>Хадиджа</b></td><td>Unit 2 · Тест</td><td>3 дня назад</td><td>8 из 8</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ─────────── витрина частей ─────────── -->
+        <div class="demo">
+
+          <h3>Кнопки</h3>
+          <p class="hint">Нажатие опускает кнопку на высоту подушки — как настоящую клавишу.</p>
+          <div class="strip">
+            <button class="btn btn-primary" type="button">Сохранить</button>
+            <button class="btn btn-secondary" type="button">Сохранить и создать ещё</button>
+            <button class="btn btn-quiet" type="button">Предпросмотр</button>
+            <button class="btn btn-danger" type="button">Удалить</button>
+            <button class="btn btn-ghost" type="button">Отмена</button>
+            <button class="btn btn-primary" type="button" disabled>Недоступно</button>
+          </div>
+          <div class="strip">
+            <button class="btn btn-primary btn-sm" type="button">Мелкая</button>
+            <button class="btn btn-quiet btn-icon" type="button">✎</button>
+            <button class="btn btn-quiet btn-icon" type="button">⧉</button>
+            <button class="btn btn-quiet btn-icon" type="button">🗑</button>
+            <span class="b">Старая кнопка .b</span>
+            <span class="b pri">Старая .b.pri</span>
+          </div>
+
+          <h3>Поля</h3>
+          <p class="hint">Высота 44 пикселя — попасть пальцем на телефоне.</p>
+          <div class="formrow">
+            <div class="field"><label>Название задания</label><input class="input" value="Соедини слово и перевод"></div>
+            <div class="field"><label>Тип</label>
+              <select class="input"><option>Пары</option><option>Тест</option><option>Пропуски</option></select></div>
+            <div class="field"><label>Юнит</label><input class="input" placeholder="Выбери юнит"></div>
+          </div>
+          <div class="formrow" style="margin-top:14px">
+            <div class="field" style="grid-column:1/-1"><label>Пояснение для ученика</label>
+              <textarea class="input">Соедини английское слово с переводом. Можно перетаскивать.</textarea></div>
+          </div>
+          <div class="strip" style="margin-top:14px">
+            <label class="radio"><input type="radio" name="r" checked><span class="dot"></span>Опубликовать сразу</label>
+            <label class="radio"><input type="radio" name="r"><span class="dot"></span>Оставить черновиком</label>
+            <span class="seg">
+              <label class="seg-opt"><input type="radio" name="s"> Детский</label>
+              <label class="seg-opt"><input type="radio" name="s" checked> Современный</label>
+              <label class="seg-opt"><input type="radio" name="s"> Фото</label>
+            </span>
+          </div>
+
+          <h3>Карточки и метки</h3>
+          <div class="grid3">
+            <div class="card">
+              <span class="card-kicker">Учебник</span>
+              <span class="card-title">Solutions Intermediate</span>
+              <p class="card-body">9 юнитов, 42 задания. Последняя правка сегодня.</p>
+              <span class="card-meta">Открыт · 5 учеников</span>
+            </div>
+            <div class="card">
+              <span class="card-kicker">Черновик</span>
+              <span class="card-title">Gateway A1+</span>
+              <p class="card-body">Пока пусто. Добавь первый юнит, чтобы начать.</p>
+              <span class="card-meta">Виден только тебе</span>
+            </div>
+            <div class="card">
+              <span class="card-kicker">Ответы</span>
+              <span class="card-title">Как выглядит проверка</span>
+              <div class="strip">
+                <span class="input ans-ok" style="width:auto;min-height:0;padding:8px 14px">confident ✓</span>
+                <span class="input ans-bad" style="width:auto;min-height:0;padding:8px 14px">borrow ✗</span>
+              </div>
+            </div>
+          </div>
+          <div class="strip" style="margin-top:14px">
+            <span class="tag tag-accent">бордо</span>
+            <span class="tag tag-accent-2">охра</span>
+            <span class="tag tag-neutral">спокойная</span>
+            <span class="tag tag-outline">контурная</span>
+          </div>
+
+          <h3>Пустое состояние</h3>
+          <div class="card" style="padding:0">
+            <div class="empty">
+              <span class="h">Заданий пока нет</span>
+              <span class="p">Выбери юнит слева и нажми «Добавить» — задание встанет в этот урок. Так можно добавить сколько угодно подряд.</span>
+              <button class="btn btn-primary" type="button">Добавить задание</button>
+            </div>
+          </div>
+
+          <h3>Окно поверх страницы</h3>
+          <div class="card" style="background:var(--color-surface-deep);padding:24px;align-items:center">
+            <div class="dialog" style="margin:0">
+              <div class="dialog-title">Удалить задание?</div>
+              <div class="dialog-body">«Соедини слово и перевод» исчезнет у всех учеников. Отменить это будет нельзя.</div>
+              <div class="dialog-actions">
+                <button class="btn btn-ghost" type="button">Оставить</button>
+                <button class="btn btn-danger" type="button">Удалить</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="swap">
+  <button type="button" class="on" data-t="new">Новая</button>
+  <button type="button" data-t="old">Старая</button>
+</div>
+
+<script>
+/* Переключатель тем. Новая — один файл sm-warm.css; старая — пара
+   modernist.css + sm-ui.css, как сейчас на боевых страницах. */
+var L1 = document.getElementById("theme1"),
+    L2 = document.getElementById("theme2");
+
+function setTheme(t){
+  if (t === "old"){ L1.href = "modernist.css?v=6f7808f9"; L2.href = "sm-ui.css?v=073c02c6"; }
+  else            { L1.href = "sm-warm.css?v=b4490901";   L2.href = ""; }
+  document.querySelectorAll("#swap button").forEach(function(b){
+    b.classList.toggle("on", b.dataset.t === t);
+  });
+}
+document.querySelectorAll("#swap button").forEach(function(b){
+  b.onclick = function(){ setTheme(b.dataset.t); };
+});
+</script>
+</body>
+</html>

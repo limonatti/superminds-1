@@ -6,32 +6,31 @@
 <title>Сообщения · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   /* Чат — те же классы, что в кабинете учителя, для единого вида */
   .chatwrap{padding:0 28px 10px}
   .chat-scroll{min-height:280px;max-height:min(60vh,520px);overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:14px 0}
-  .bub{max-width:78%;padding:9px 13px;font:600 14px "Archivo",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;border-radius:14px}
+  .bub{max-width:78%;padding:9px 13px;font:600 14px "Nunito",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;border-radius:14px}
   .bub.me{align-self:flex-end;background:var(--color-accent);color:#fff}
-  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:2px solid var(--color-divider)}
-  .bub .tm{display:block;font:700 10px "Archivo",sans-serif;opacity:.65;margin-top:3px;text-align:right}
+  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:1px solid var(--color-divider)}
+  .bub .tm{display:block;font:700 10px "Nunito",sans-serif;opacity:.65;margin-top:3px;text-align:right}
   .bub.them .tm{text-align:left}
   /* сообщение ещё летит на сервер — показываем блёклым */
   .bub.pending{opacity:.55}
   .bub.failed{background:var(--color-neutral-200,#eee);color:var(--color-text);border:2px solid #c0392b}
-  .bub .again{margin-left:8px;background:none;border:0;color:#c0392b;font:800 11px "Archivo",sans-serif;cursor:pointer;text-decoration:underline;padding:0}
-  .daysep{align-self:center;background:var(--color-neutral-200,#eee);color:var(--color-neutral-700);border-radius:999px;padding:3px 12px;font:800 11px "Archivo",sans-serif;margin:6px 0}
-  .chat-empty{padding:18px 0;color:var(--color-neutral-700);font:600 13px "Archivo",sans-serif;text-align:center}
+  .bub .again{margin-left:8px;background:none;border:0;color:#c0392b;font:800 11px "Nunito",sans-serif;cursor:pointer;text-decoration:underline;padding:0}
+  .daysep{align-self:center;background:var(--color-neutral-200,#eee);color:var(--color-neutral-700);border-radius:999px;padding:3px 12px;font:800 11px "Nunito",sans-serif;margin:6px 0}
+  .chat-empty{padding:18px 0;color:var(--color-neutral-700);font:600 13px "Nunito",sans-serif;text-align:center}
   .chat-in{display:flex;gap:8px;padding:8px 0 4px}
-  .chat-in input{flex:1;border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Archivo",sans-serif;border-radius:12px}
+  .chat-in input{flex:1;border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Nunito",sans-serif;border-radius:12px}
   .chat-in input:focus{outline:none;border-color:var(--color-accent)}
   .chat-in .go{border:0;background:var(--color-accent);color:#fff;padding:0 20px;font-size:16px;font-weight:800;cursor:pointer;border-radius:12px}
-  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Archivo",sans-serif;padding:1px 7px;vertical-align:middle}
-  .chat-note{padding:2px 28px 14px;color:var(--color-neutral-700);font:600 12px "Archivo",sans-serif}
-  .chat-err{margin:0 28px 10px;background:#fff2ef;border:2px solid #ffc9c0;color:#7b190d;border-radius:12px;padding:9px 12px;font:700 12px "Archivo",sans-serif}
-  #chatState{font:700 11px "Archivo",sans-serif}
+  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Nunito",sans-serif;padding:1px 7px;vertical-align:middle}
+  .chat-note{padding:2px 28px 14px;color:var(--color-neutral-700);font:600 12px "Nunito",sans-serif}
+  .chat-err{margin:0 28px 10px;background:#fff2ef;border:2px solid #ffc9c0;color:#7b190d;border-radius:12px;padding:9px 12px;font:700 12px "Nunito",sans-serif}
+  #chatState{font:700 11px "Nunito",sans-serif}
   /* вложения */
   .bub .att{display:block;margin:2px 0 4px;max-width:100%}
   .bub .att img,.bub .att video{max-width:100%;max-height:260px;border-radius:10px;display:block;cursor:pointer}
@@ -48,32 +47,32 @@
   .bub.me .tools{left:-12px}
   .bub.them .tools{right:-12px}
   .bub:hover .tools,.tools:focus-within{opacity:1}
-  .tools button{background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;width:24px;height:24px;font-size:12px;cursor:pointer;line-height:1;padding:0;color:var(--color-text)}
+  .tools button{background:var(--color-bg);border:1px solid var(--color-divider);border-radius:999px;width:24px;height:24px;font-size:12px;cursor:pointer;line-height:1;padding:0;color:var(--color-text)}
   .tools button.del:hover{border-color:#c0392b;color:#c0392b}
   /* удалённое сообщение — след остаётся, содержимое стёрто */
   .bub.gone{background:transparent;border:2px dashed var(--color-divider);color:var(--color-neutral-700);font-style:italic;font-weight:700}
   .bub.gone .tm{opacity:.6}
-  .rxpick{position:absolute;top:-40px;display:flex;gap:2px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;padding:3px 6px;z-index:5;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  .rxpick{position:absolute;top:-40px;display:flex;gap:2px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:999px;padding:3px 6px;z-index:5;box-shadow:0 4px 0 rgba(0,0,0,.08)}
   .bub.me .rxpick{left:-12px}
   .bub.them .rxpick{right:-12px}
   .rxpick button{background:none;border:0;font-size:18px;cursor:pointer;padding:1px 3px;line-height:1}
   /* панель смайлов и скрепка */
-  .chat-in .tool{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:0 12px;font-size:17px;cursor:pointer;border-radius:12px;flex:none}
-  .emopan{display:none;flex-wrap:wrap;gap:3px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px;max-height:170px;overflow-y:auto}
+  .chat-in .tool{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:0 12px;font-size:17px;cursor:pointer;border-radius:12px;flex:none}
+  .emopan{display:none;flex-wrap:wrap;gap:3px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px;max-height:170px;overflow-y:auto}
   .emopan.on{display:flex}
   .emopan button{background:none;border:0;font-size:21px;cursor:pointer;padding:2px 4px;line-height:1;border-radius:8px}
   .emopan button:hover{background:var(--color-neutral-200,#eee)}
-  .upbar{font:700 12px "Archivo",sans-serif;color:var(--color-neutral-700);padding:0 0 6px}
+  .upbar{font:700 12px "Nunito",sans-serif;color:var(--color-neutral-700);padding:0 0 6px}
   /* каталог гифок */
-  .chat-in .tool.gif{font:900 12px "Archivo",sans-serif;letter-spacing:.03em}
-  .gifpan{display:none;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px}
+  .chat-in .tool.gif{font:900 12px "Nunito",sans-serif;letter-spacing:.03em}
+  .gifpan{display:none;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px}
   .gifpan.on{display:block}
-  .gifpan input{width:100%;border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:9px 11px;font:600 13px "Archivo",sans-serif;border-radius:10px;margin-bottom:7px}
+  .gifpan input{width:100%;border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:9px 11px;font:600 13px "Nunito",sans-serif;border-radius:10px;margin-bottom:7px}
   .gifpan input:focus{outline:none;border-color:var(--color-accent)}
   .gifgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:5px;max-height:210px;overflow-y:auto}
   .gifgrid button{border:0;padding:0;background:var(--color-neutral-200,#eee);border-radius:9px;overflow:hidden;cursor:pointer;aspect-ratio:1/1}
   .gifgrid img{width:100%;height:100%;object-fit:cover;display:block}
-  .gifmsg{font:700 12px "Archivo",sans-serif;color:var(--color-neutral-700);padding:8px 2px}
+  .gifmsg{font:700 12px "Nunito",sans-serif;color:var(--color-neutral-700);padding:8px 2px}
 </style>
 </head>
 <body>
@@ -231,11 +230,11 @@ function askDelete(bubble, m){
   box.className = "rxpick";
   box.style.fontSize = "12px";
   const q = document.createElement("span");
-  q.style.cssText = "font:800 12px 'Archivo',sans-serif;padding:2px 4px;white-space:nowrap";
+  q.style.cssText = "font:800 12px 'Nunito',sans-serif;padding:2px 4px;white-space:nowrap";
   q.textContent = "Удалить у обоих?";
   const yes = document.createElement("button"); yes.type = "button"; yes.textContent = "да";
   const no  = document.createElement("button"); no.type  = "button"; no.textContent = "нет";
-  yes.style.cssText = no.style.cssText = "font:800 12px 'Archivo',sans-serif;padding:2px 6px";
+  yes.style.cssText = no.style.cssText = "font:800 12px 'Nunito',sans-serif;padding:2px 6px";
   yes.style.color = "#c0392b";
   no.onclick = (e) => { e.stopPropagation(); box.remove(); };
   yes.onclick = async (e) => {

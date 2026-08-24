@@ -320,7 +320,7 @@ var SMUI = {
           '<button class="go" id="aGo">' + (tab === "in" ? "Войти" : "Создать аккаунт") + "</button>" +
           (tab === "in"
             ? '<button type="button" id="aForgot" style="background:none;border:0;padding:8px 0 0;' +
-              'font:700 13px \'Archivo\',sans-serif;color:var(--color-accent);text-decoration:underline;' +
+              'font:700 13px \'Nunito\',sans-serif;color:var(--color-accent);text-decoration:underline;' +
               'cursor:pointer;text-align:left">Забыл пароль</button>'
             : "") +
           '<div class="msg" id="aMsg"></div>' +

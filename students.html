@@ -6,52 +6,51 @@
 <title>Мои ученики · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   .full{padding:0}
   .tbl{width:100%;border-collapse:collapse}
-  .tbl th{text-align:left;padding:12px 16px;font:800 10px "Archivo",sans-serif;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--color-neutral-700);border-bottom:2px solid var(--color-divider);
+  .tbl th{text-align:left;padding:12px 16px;font:800 10px "Nunito",sans-serif;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--color-neutral-700);border-bottom:1px solid var(--color-divider);
     white-space:nowrap;background:var(--color-surface);position:sticky;top:0;z-index:1}
-  .tbl td{padding:14px 16px;border-bottom:2px solid var(--color-divider);font:600 14px "Archivo",sans-serif;
+  .tbl td{padding:14px 16px;border-bottom:1px solid var(--color-divider);font:600 14px "Nunito",sans-serif;
     vertical-align:middle}
   .tbl tr:hover td{background:var(--color-accent-100)}
-  .tbl .nm{font:800 15.5px "Archivo",sans-serif;letter-spacing:-.01em;display:block}
-  .tbl .em{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:2px}
-  .tbl .num{font:900 19px "Archivo",sans-serif;letter-spacing:-.02em}
-  .tbl .sub{display:block;font:600 11.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
-  .pill{display:inline-block;padding:3px 9px;font:800 10px "Archivo",sans-serif;letter-spacing:.07em;
+  .tbl .nm{font:800 15.5px "Nunito",sans-serif;letter-spacing:-.01em;display:block}
+  .tbl .em{display:block;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:2px}
+  .tbl .num{font:900 19px "Nunito",sans-serif;letter-spacing:-.02em}
+  .tbl .sub{display:block;font:600 11.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .pill{display:inline-block;padding:3px 9px;font:800 10px "Nunito",sans-serif;letter-spacing:.07em;
     text-transform:uppercase;border:2px solid currentColor;white-space:nowrap}
   .pill.wait{color:#8a6d00}.pill.ok{color:#1f7a3d}.pill.none{color:var(--color-neutral-600)}
   .pill.late{color:var(--color-accent)}
   .prog{height:6px;background:var(--color-neutral-300);margin-top:6px;min-width:90px}
   .prog i{display:block;height:100%;background:var(--color-accent)}
-  .open{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
-    padding:7px 13px;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .open{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:7px 13px;font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
   .open:hover{background:var(--color-text);color:var(--color-bg)}
   .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;
-    font:800 11px "Archivo",sans-serif;padding:1px 7px}
+    font:800 11px "Nunito",sans-serif;padding:1px 7px}
   .scroll{overflow-x:auto}
-  .nc{padding:14px 28px;border-bottom:2px solid var(--color-divider)}
+  .nc{padding:14px 28px;border-bottom:1px solid var(--color-divider)}
   .nc .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 0;
     border-bottom:2px dashed var(--color-divider)}
   .nc .row:last-child{border-bottom:0}
   .nc .who{flex:1;min-width:190px}
-  .nc .who b{font:800 14.5px "Archivo",sans-serif}
-  .nc .who span{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .nc .who b{font:800 14.5px "Nunito",sans-serif}
+  .nc .who span{display:block;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
   .nc .add{border:0;background:var(--color-accent);color:#fff;padding:9px 15px;cursor:pointer;
-    font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+    font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase}
   .nc .add:hover{background:var(--color-accent-600)}
-  .nc .skip{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-neutral-700);
-    padding:7px 13px;cursor:pointer;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .nc .skip{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-neutral-700);
+    padding:7px 13px;cursor:pointer;font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase}
   .nc .skip:hover{border-color:var(--color-neutral-600);color:var(--color-text)}
-  .msg{padding:12px 28px;font:700 13px "Archivo",sans-serif}
+  .msg{padding:12px 28px;font:700 13px "Nunito",sans-serif}
   .msg.ok{color:#1f7a3d}.msg.bad{color:var(--color-accent)}
   /* Раздел «Учителя платформы» */
-  .tbl .sub2{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-600);margin-top:2px}
-  .tag{display:inline-block;background:var(--color-accent);color:#fff;font:800 9.5px "Archivo",sans-serif;
+  .tbl .sub2{font:600 12px "Nunito",sans-serif;color:var(--color-neutral-600);margin-top:2px}
+  .tag{display:inline-block;background:var(--color-accent);color:#fff;font:800 9.5px "Nunito",sans-serif;
     letter-spacing:.09em;text-transform:uppercase;padding:2px 7px;vertical-align:1px}
 </style>
 </head>

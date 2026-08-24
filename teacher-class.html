@@ -6,46 +6,45 @@
 <title>Мой класс · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
-  .form{padding:20px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .form select,.form input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
-    padding:11px 12px;font:700 13px "Archivo",sans-serif;min-width:150px}
+  .form{padding:20px 28px;border-bottom:1px solid var(--color-divider);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .form select,.form input{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:11px 12px;font:700 13px "Nunito",sans-serif;min-width:150px}
   .form input{flex:1;min-width:180px}
   .form .go{border:0;background:var(--color-accent);color:#fff;padding:13px 18px;
     font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
   .form .go:hover{background:var(--color-accent-600)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:16px 28px;border-bottom:2px solid var(--color-divider)}
-  .chip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--color-accent);background:var(--color-accent-100);
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:16px 28px;border-bottom:1px solid var(--color-divider)}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--color-accent);background:var(--color-accent-100);
     padding:6px 10px;font-size:12px;font-weight:800}
   .chip.done{border-color:var(--color-neutral-400);background:var(--color-neutral-200);color:var(--color-neutral-700)}
   .chip button{border:0;background:none;color:var(--color-accent);padding:0;font-size:13px}
-  .note{padding:20px 28px;border-bottom:2px solid var(--color-divider)}
-  .note textarea{width:100%;min-height:110px;border:2px solid var(--color-text);background:var(--color-bg);
-    color:var(--color-text);padding:12px 14px;font:600 14px "Archivo",sans-serif;resize:vertical}
+  .note{padding:20px 28px;border-bottom:1px solid var(--color-divider)}
+  .note textarea{width:100%;min-height:110px;border:1px solid var(--color-divider);background:var(--color-bg);
+    color:var(--color-text);padding:12px 14px;font:600 14px "Nunito",sans-serif;resize:vertical}
   .note textarea:focus{outline:none;border-color:var(--color-accent)}
-  .inv{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .inv{padding:18px 28px;border-bottom:1px solid var(--color-divider);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .inv .lnk{flex:1;min-width:240px;border:2px dashed var(--color-neutral-500);padding:11px 12px;
     font-size:12.5px;font-weight:600;word-break:break-all}
   /* Выдача ДЗ — карточка */
-  .hwform{padding:18px 28px;border-bottom:2px solid var(--color-divider);display:grid;gap:12px}
+  .hwform{padding:18px 28px;border-bottom:1px solid var(--color-divider);display:grid;gap:12px}
   .hf-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .hf-row>label{width:120px;flex:none;font:800 11px "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700)}
-  .hf-row select,.hf-row input{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
-    padding:11px 12px;font:700 13px "Archivo",sans-serif}
+  .hf-row>label{width:120px;flex:none;font:800 11px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .hf-row select,.hf-row input{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:11px 12px;font:700 13px "Nunito",sans-serif}
   .hf-row input[type=text],.hf-row input#hMsg{flex:1;min-width:220px}
   .parts{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .parts .cb{display:inline-flex;align-items:center;gap:6px;font:700 13px "Archivo",sans-serif;cursor:pointer}
+  .parts .cb{display:inline-flex;align-items:center;gap:6px;font:700 13px "Nunito",sans-serif;cursor:pointer}
   .parts .cb input{width:17px;height:17px;accent-color:var(--color-accent)}
   /* Кому задать + быстрые сроки */
-  .mini{border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);
-    padding:6px 11px;font:800 11px "Archivo",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+  .mini{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:6px 11px;font:800 11px "Nunito",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
   .mini:hover{background:var(--color-text);color:var(--color-bg)}
   .mini.on{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
-  .hf-row .hint{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
-  .hwform .res{font:700 13px "Archivo",sans-serif;padding:10px 12px;border:2px dashed var(--color-neutral-500)}
+  .hf-row .hint{font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .hwform .res{font:700 13px "Nunito",sans-serif;padding:10px 12px;border:2px dashed var(--color-neutral-500)}
   .hwform .res.ok{border-color:var(--color-accent);color:var(--color-accent-600)}
   .hwform .go.big{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:14px 22px;
     font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
@@ -53,16 +52,16 @@
   /* Чат с учеником */
   .chatwrap{padding:0 28px 10px}
   .chat-scroll{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:14px 0}
-  .bub{max-width:78%;padding:9px 13px;font:600 14px "Archivo",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word}
+  .bub{max-width:78%;padding:9px 13px;font:600 14px "Nunito",sans-serif;line-height:1.4;white-space:pre-wrap;word-wrap:break-word}
   .bub.me{align-self:flex-end;background:var(--color-accent);color:#fff}
-  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:2px solid var(--color-divider)}
-  .bub .tm{display:block;font:700 10px "Archivo",sans-serif;opacity:.65;margin-top:3px}
-  .chat-empty{padding:14px 0;color:var(--color-neutral-700);font:600 13px "Archivo",sans-serif}
+  .bub.them{align-self:flex-start;background:var(--color-neutral-200,#eee);color:var(--color-text);border:1px solid var(--color-divider)}
+  .bub .tm{display:block;font:700 10px "Nunito",sans-serif;opacity:.65;margin-top:3px}
+  .chat-empty{padding:14px 0;color:var(--color-neutral-700);font:600 13px "Nunito",sans-serif}
   .chat-in{display:flex;gap:8px;padding:6px 0 4px}
-  .chat-in input{flex:1;border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Archivo",sans-serif}
+  .chat-in input{flex:1;border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:12px 13px;font:600 14px "Nunito",sans-serif}
   .chat-in input:focus{outline:none;border-color:var(--color-accent)}
   .chat-in .go{border:0;background:var(--color-accent);color:#fff;padding:0 20px;font-size:16px;font-weight:800;cursor:pointer}
-  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Archivo",sans-serif;padding:1px 7px;vertical-align:middle}
+  .li .unread{display:inline-block;margin-left:6px;background:var(--color-accent);color:#fff;border-radius:999px;font:800 11px "Nunito",sans-serif;padding:1px 7px;vertical-align:middle}
 </style>
 </head>
 <body>
