@@ -9,12 +9,12 @@
   body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
   .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e0d5c2;text-decoration:none}
-  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#16a085}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#7c2340}
   .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
   .map{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;background:linear-gradient(#ece2d3,#f6f9f2);border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:18px 10px;margin-bottom:16px}
   .stp{width:58px;height:58px;border-radius:50%;background:#fffdf8;border:1px solid #e0d5c2;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;transition:transform .2s}
   .stp.done{border-color:#7cb342;background:#dff0d2}
-  .stp.cur{border-color:#16a085;transform:scale(1.15);box-shadow:0 0 0 4px rgba(22,160,133,.2)}
+  .stp.cur{border-color:#7c2340;transform:scale(1.15);box-shadow:0 0 0 4px rgba(22,160,133,.2)}
   .dash{width:18px;height:4px;background:#e0d5c2;border-radius:2px}
   .dash.done{background:#7cb342}
   .hero{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:22px;animation:hop 1s ease-in-out infinite}
@@ -29,9 +29,9 @@
   .letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
   .lt{background:#fffdf8;border:1px solid #e0d5c2;border-radius:12px;padding:10px 14px;font-size:20px;font-weight:700;cursor:pointer}
   .lt.used{opacity:.25;pointer-events:none}
-  .built{min-height:40px;border-bottom:3px dashed #e0d5c2;margin:8px auto;max-width:300px;padding:6px;font-size:24px;font-weight:700;color:#16a085;letter-spacing:2px}
+  .built{min-height:40px;border-bottom:3px dashed #e0d5c2;margin:8px auto;max-width:300px;padding:6px;font-size:24px;font-weight:700;color:#7c2340;letter-spacing:2px}
   .prog{font:900 14px 'Nunito',sans-serif;color:#5c534d;text-align:center;margin-bottom:8px}
-  .primary{background:#16a085;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e0d5c2;margin-top:12px}
+  .primary{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e0d5c2;margin-top:12px}
   .empty{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#7d726a}
   .chest{font-size:90px;animation:shake .6s ease-in-out infinite}
   @keyframes shake{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
@@ -151,7 +151,7 @@
       root.innerHTML='<div class="card"><div class="chest" id="ch">🎁</div><div class="qt">Ты дошёл до сундука!<br>Нажми, чтобы открыть</div></div>';
       document.getElementById("ch").onclick=async()=>{
         fanfare();confetti();
-        root.innerHTML='<div class="card"><div class="big">🏆</div><h2 style="color:#16a085;margin:6px 0">Квест пройден!</h2>'+
+        root.innerHTML='<div class="card"><div class="big">🏆</div><h2 style="color:#7c2340;margin:6px 0">Квест пройден!</h2>'+
           '<div style="font-size:34px;margin:6px 0">'+"⭐".repeat(stars)+"☆".repeat(3-stars)+'</div>'+
           '<div style="font:800 13px \'Nunito\',sans-serif;color:#7d726a">'+(mistakes===0?"Без единой ошибки — вау!":"Ошибок: "+mistakes)+'</div>'+
           '<button class="primary" onclick="location.reload()">Пройти ещё раз</button></div>';
