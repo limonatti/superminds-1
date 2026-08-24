@@ -269,25 +269,38 @@ async function load(){
 
   try { await (window.SM_ready || Promise.resolve()); } catch(e){}
 
-  try { STUDENTS  = (await SM.myStudents()) || []; }         catch(e){ STUDENTS = []; }
-  try { NEWCOMERS = (await SM.unassignedStudents()) || []; }  catch(e){ NEWCOMERS = []; }
+  /* Запросы друг от друга не зависят, поэтому уходят разом.
+     Раньше они шли цепочкой — при пяти учениках это дюжина обращений
+     одно за другим, и страница открывалась около десяти секунд.
+     safe() гасит ошибку каждого запроса по отдельности: упавший
+     кусок отдаёт пустоту, остальные догружаются как ни в чём не бывало. */
+  const safe = (p, fallback) =>
+    Promise.resolve(p).then(v => (v == null ? fallback : v), () => fallback);
 
-  /* Раздел с учителями появляется только у владельца платформы */
-  try { IS_OWNER = await SM.isOwner(); } catch(e){ IS_OWNER = false; }
-  try { PEOPLE = IS_OWNER ? ((await SM.platformPeople()) || []) : []; } catch(e){ PEOPLE = []; }
-
-  /* teacherUnread отдаёт готовую карту { student_id: сколько непрочитанных } */
-  try { UNREAD = (await SM.teacherUnread()) || {}; } catch(e){ UNREAD = {}; }
+  const [students, newcomers, isOwner, unread, assigns] = await Promise.all([
+    safe(SM.myStudents(), []),
+    safe(SM.unassignedStudents(), []),
+    safe(SM.isOwner(), false),
+    safe(SM.teacherUnread(), {}),          /* готовая карта { ученик: непрочитанных } */
+    safe(SM.classAssignments(), []),
+  ]);
+  STUDENTS = students; NEWCOMERS = newcomers; IS_OWNER = isOwner; UNREAD = unread;
 
   ASG = {};
-  try { ((await SM.classAssignments()) || []).forEach(a => { (ASG[a.student_id] = ASG[a.student_id]||[]).push(a); }); } catch(e){}
+  assigns.forEach(a => { (ASG[a.student_id] = ASG[a.student_id] || []).push(a); });
 
-  /* Домашка и назначенный курс — по каждому ученику */
+  /* Домашка и назначенный курс по каждому ученику — тоже одной волной.
+     Раздел владельца грузится рядом, а не после: он никого не ждёт. */
   HW = {}; COURSE = {};
-  for (const s of STUDENTS){
-    try { HW[s.student_id] = (await SM.listHW(s.student_id)) || []; } catch(e){ HW[s.student_id] = []; }
-    try { COURSE[s.student_id] = await SM.studentCourse(s.student_id); } catch(e){ COURSE[s.student_id] = null; }
-  }
+  const perStudent = STUDENTS.map(s =>
+    Promise.all([ safe(SM.listHW(s.student_id), []), safe(SM.studentCourse(s.student_id), null) ])
+      .then(([hw, course]) => { HW[s.student_id] = hw; COURSE[s.student_id] = course; }));
+
+  const [people] = await Promise.all([
+    IS_OWNER ? safe(SM.platformPeople(), []) : Promise.resolve([]),
+    Promise.all(perStudent),
+  ]);
+  PEOPLE = people;
 
   draw();
   const waitAll = STUDENTS.reduce((a,s)=>a+hwState(s.student_id).wait, 0);
