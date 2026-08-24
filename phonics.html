@@ -27,7 +27,7 @@
 <meta name="description" content="Jolly Phonics — 42 звука английского языка. Игры, worksheets и видео для детей.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fff7ef; --card:#ffffff; --ink:#2b2140; --muted:#7a7192;
@@ -38,14 +38,14 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
-    font-family:'Archivo',system-ui,sans-serif; color:var(--ink);
+    font-family:'Nunito',system-ui,sans-serif; color:var(--ink);
     background:
       radial-gradient(1200px 500px at 10% -10%, #ffe9d6 0, transparent 60%),
       radial-gradient(1000px 500px at 110% 0%, #dff6f3 0, transparent 55%),
       var(--bg);
     min-height:100vh;
   }
-  h1,h2,h3,.f{font-family:'Archivo',sans-serif;font-weight:600}
+  h1,h2,h3,.f{font-family:'Nunito',sans-serif;font-weight:600}
   a{color:inherit}
   .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
 
@@ -55,21 +55,21 @@
   .logo{font-size:40px}
   .brand h1{margin:0;font-size:clamp(24px,4vw,38px);line-height:1.05}
   .brand .sub{color:var(--muted);font-weight:700;font-size:14px;margin-top:2px}
-  .progwrap{margin:18px 0 6px;background:#fff;border-radius:18px;padding:14px 18px;box-shadow:var(--shadow)}
+  .progwrap{margin:18px 0 6px;background:#fffdf8;border-radius:18px;padding:14px 18px;box-shadow:var(--shadow)}
   .progwrap .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
   .progbar{height:16px;border-radius:20px;background:#eee5f2;overflow:hidden;margin-top:10px}
   .progbar > span{display:block;height:100%;width:0;border-radius:20px;
     background:linear-gradient(90deg,var(--p1),var(--p3),var(--p2));transition:width .5s}
-  .btn{cursor:pointer;border:none;border-radius:14px;padding:10px 16px;font-family:'Archivo';font-size:16px;
+  .btn{cursor:pointer;border:none;border-radius:14px;padding:10px 16px;font-family:'Nunito';font-size:16px;
     font-weight:600;color:#fff;background:var(--p4);box-shadow:var(--shadow);transition:transform .1s}
   .btn:active{transform:scale(.96)}
-  .btn.ghost{background:#fff;color:var(--ink);border:2px solid #eee}
+  .btn.ghost{background:#fffdf8;color:var(--ink);border:2px solid #eee}
   .btn.small{padding:7px 12px;font-size:14px;border-radius:11px}
 
   /* Groups */
   .group{margin:34px 0}
   .group-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-  .chip{font-family:'Archivo';font-weight:600;color:#fff;border-radius:14px;padding:6px 14px;font-size:15px}
+  .chip{font-family:'Nunito';font-weight:600;color:#fff;border-radius:14px;padding:6px 14px;font-size:15px}
   .group-h h2{margin:0;font-size:22px}
   .group-h .en{color:var(--muted);font-weight:700;font-size:14px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
@@ -77,7 +77,7 @@
   .card{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow);
     cursor:pointer;position:relative;transition:transform .12s, box-shadow .12s;text-align:center;border:3px solid transparent}
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-  .card .big{font-family:'Archivo';font-weight:700;font-size:46px;line-height:1;margin:6px 0 4px}
+  .card .big{font-family:'Nunito';font-weight:700;font-size:46px;line-height:1;margin:6px 0 4px}
   .card .emos{font-size:22px;letter-spacing:2px}
   .card .lbl{color:var(--muted);font-weight:700;font-size:13px;margin-top:6px}
   .card .done{position:absolute;top:10px;right:10px;font-size:20px;opacity:0;transition:.2s}
@@ -88,13 +88,13 @@
   .overlay{position:fixed;inset:0;background:rgba(43,33,64,.55);backdrop-filter:blur(3px);
     display:none;align-items:flex-start;justify-content:center;z-index:50;padding:20px;overflow:auto}
   .overlay.open{display:flex}
-  .modal{background:#fff;border-radius:26px;max-width:820px;width:100%;box-shadow:var(--shadow-lg);
+  .modal{background:#fffdf8;border-radius:26px;max-width:820px;width:100%;box-shadow:var(--shadow-lg);
     overflow:hidden;margin:auto}
   .modal .top{padding:22px 24px;color:#fff;position:relative}
   .modal .close{position:absolute;top:16px;right:18px;font-size:26px;cursor:pointer;background:rgba(255,255,255,.25);
     border:none;color:#fff;width:40px;height:40px;border-radius:12px;line-height:1}
   .hero{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .hero .letter{font-family:'Archivo';font-weight:700;font-size:74px;line-height:.9;
+  .hero .letter{font-family:'Nunito';font-weight:700;font-size:74px;line-height:.9;
     background:rgba(255,255,255,.25);border-radius:20px;padding:6px 22px}
   .hero .meta h2{margin:0;font-size:26px}
   .hero .meta .ipa{font-weight:800;opacity:.95}
@@ -107,7 +107,7 @@
   .word{background:#faf6ff;border:2px solid #efe7fb;border-radius:16px;padding:12px 8px;text-align:center;cursor:pointer}
   .word:hover{border-color:var(--p4)}
   .word .e{font-size:34px}
-  .word .w{font-family:'Archivo';font-weight:600;font-size:18px;margin-top:2px}
+  .word .w{font-family:'Nunito';font-weight:600;font-size:18px;margin-top:2px}
   .word .r{color:var(--muted);font-size:12px;font-weight:700}
   .videoBox{position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
   .videoBox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -118,29 +118,29 @@
   /* Games */
   .game{min-height:220px}
   .gTabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-  .gTab{cursor:pointer;border:2px solid #eee;background:#fff;border-radius:12px;padding:8px 14px;font-family:'Archivo';font-weight:600}
+  .gTab{cursor:pointer;border:2px solid #eee;background:#fffdf8;border-radius:12px;padding:8px 14px;font-family:'Nunito';font-weight:600}
   .gTab.on{background:var(--p2);color:#fff;border-color:var(--p2)}
-  .gPrompt{font-family:'Archivo';font-weight:600;font-size:18px;margin-bottom:12px}
+  .gPrompt{font-family:'Nunito';font-weight:600;font-size:18px;margin-bottom:12px}
   .gPrompt .en{color:var(--muted);font-size:13px;font-weight:700;display:block}
   .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px}
-  .tile{aspect-ratio:1;border-radius:18px;border:3px solid #eee;background:#fff;cursor:pointer;
+  .tile{aspect-ratio:1;border-radius:18px;border:3px solid #eee;background:#fffdf8;cursor:pointer;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-    font-family:'Archivo';font-weight:700;font-size:34px;transition:transform .1s}
-  .tile .cap{font-size:12px;font-family:'Archivo';color:var(--muted);font-weight:700}
+    font-family:'Nunito';font-weight:700;font-size:34px;transition:transform .1s}
+  .tile .cap{font-size:12px;font-family:'Nunito';color:var(--muted);font-weight:700}
   .tile:active{transform:scale(.94)}
   .tile.right{background:#e9fbec;border-color:var(--p7);animation:pop .3s}
   .tile.wrong{background:#ffecec;border-color:var(--p1);animation:shake .3s}
   @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-  .score{font-family:'Archivo';font-weight:600;color:var(--p7)}
-  .celebrate{text-align:center;padding:16px;font-family:'Archivo';font-weight:600;font-size:20px;color:var(--p7)}
+  .score{font-family:'Nunito';font-weight:600;color:var(--p7)}
+  .celebrate{text-align:center;padding:16px;font-family:'Nunito';font-weight:600;font-size:20px;color:var(--p7)}
 
   /* Worksheet (screen preview + print) */
   #sheet{display:none}
   @media print{
     body *{visibility:hidden}
     #sheet, #sheet *{visibility:visible}
-    #sheet{display:block !important;position:absolute;inset:0;padding:0;background:#fff}
+    #sheet{display:block !important;position:absolute;inset:0;padding:0;background:#fffdf8}
     .noprint{display:none !important}
   }
   .ws{padding:26px;max-width:800px;margin:auto}
@@ -148,7 +148,7 @@
   .ws .wsSub{color:#666;font-weight:700;margin-bottom:18px}
   .ws .wsSec{margin:20px 0;page-break-inside:avoid}
   .ws .wsSec h3{font-size:18px;margin:0 0 10px;border-bottom:3px dotted #bbb;padding-bottom:4px}
-  .trace{font-family:'Archivo';font-weight:700;font-size:80px;color:#dcdcdc;letter-spacing:24px;
+  .trace{font-family:'Nunito';font-weight:700;font-size:80px;color:#dcdcdc;letter-spacing:24px;
     -webkit-text-stroke:2px #c9c9c9;user-select:none;line-height:1.1}
   .writeline{height:70px;border-bottom:3px dashed #ccc;border-top:3px solid #eee;margin:10px 0;position:relative}
   .writeline:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dotted #ddd}
@@ -158,7 +158,7 @@
 
   footer{color:var(--muted);text-align:center;padding:30px 0;font-weight:700;font-size:13px}
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
-    padding:12px 20px;border-radius:14px;font-family:'Archivo';font-weight:600;box-shadow:var(--shadow-lg);
+    padding:12px 20px;border-radius:14px;font-family:'Nunito';font-weight:600;box-shadow:var(--shadow-lg);
     opacity:0;pointer-events:none;transition:.3s;z-index:99}
   .toast.show{opacity:1}
 
@@ -169,13 +169,13 @@
   .vbanner .angry{background:#ffe9e9;border:2px solid #ffc9c9;color:#a23b3b}
   .vbanner .happy{background:#e7fbf1;border:2px solid #b6ecd2;color:#1f7a51}
   .vbanner .vh .face{font-size:34px}
-  .vbanner .vh b{font-family:'Archivo'}
+  .vbanner .vh b{font-family:'Nunito'}
   .vbanner .vh .en{display:block;color:var(--muted);font-weight:700;font-size:12px;margin-top:4px}
   .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-  .vcard{background:#fff;border-radius:20px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+  .vcard{background:#fffdf8;border-radius:20px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
     border:3px solid transparent;transition:transform .12s}
   .vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-  .vcard .vl{font-family:'Archivo';font-weight:700;font-size:44px;color:#a685e2;line-height:1}
+  .vcard .vl{font-family:'Nunito';font-weight:700;font-size:44px;color:#a685e2;line-height:1}
   .vcard .faces{font-size:26px;margin-top:4px}
   .vcard .cap{color:var(--muted);font-weight:700;font-size:12px;margin-top:4px}
   .vExplain{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px}
@@ -183,18 +183,18 @@
   .vExplain .angry{background:#ffe9e9;border:2px solid #ffc9c9;color:#a23b3b}
   .vExplain .happy{background:#e7fbf1;border:2px solid #b6ecd2;color:#1f7a51}
   .vExplain .face{font-size:30px}
-  .secTitle.angry{color:#ec3013}
+  .secTitle.angry{color:#7c2340}
   .secTitle.happy{color:#1f7a51}
   .bigChoices{display:flex;gap:14px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-  .bigChoice{cursor:pointer;border:3px solid #eee;border-radius:20px;padding:14px 26px;background:#fff;
-    font-family:'Archivo';font-weight:600;font-size:18px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bigChoice{cursor:pointer;border:3px solid #eee;border-radius:20px;padding:14px 26px;background:#fffdf8;
+    font-family:'Nunito';font-weight:600;font-size:18px;display:flex;flex-direction:column;align-items:center;gap:4px}
   .bigChoice .f{font-size:40px}
   .bigChoice.angry:hover{border-color:#ffb3b3;background:#fff4f4}
   .bigChoice.happy:hover{border-color:#a7e6c7;background:#f2fdf7}
-  .qword{font-family:'Archivo';font-weight:700;font-size:52px;text-align:center;margin:6px 0}
+  .qword{font-family:'Nunito';font-weight:700;font-size:52px;text-align:center;margin:6px 0}
   .qword .hl{color:#a685e2}
   .magicBox{text-align:center;padding:10px}
-  .magicWord{font-family:'Archivo';font-weight:700;font-size:60px;letter-spacing:2px}
+  .magicWord{font-family:'Nunito';font-weight:700;font-size:60px;letter-spacing:2px}
   .magicWord .v{transition:color .3s}
   .magicWord .e{color:#ff6b6b;opacity:0;transition:opacity .4s}
   .magicWord.on .v{color:#1f7a51}
@@ -204,7 +204,7 @@
   .vsheetCol h4{margin:2px 0 8px;font-size:18px}
   .vsheetWord{border-bottom:2px dotted #ccc;padding:8px 4px;font-size:20px}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
 
@@ -732,7 +732,7 @@ function openWorksheet(){
 
       <div class="wsSec">
         <h3>5. Найди и обведи букву «${target}» · Find and circle «${target}»</h3>
-        <div style="font-family:'Archivo';font-size:30px;letter-spacing:14px;word-spacing:6px">
+        <div style="font-family:'Nunito';font-size:30px;letter-spacing:14px;word-spacing:6px">
           ${shuffle([target[0],target[0].toLowerCase(),...pick(ALL.map(x=>x.disp[0]),10)]).concat(shuffle([target[0].toLowerCase(),...pick(ALL.map(x=>x.disp[0].toLowerCase()),10)])).join(' ')}
         </div>
       </div>

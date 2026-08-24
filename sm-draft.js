@@ -212,7 +212,7 @@
     yes.style.cssText = "background:#7c2340;color:#fff;border:0;border-radius:999px;padding:5px 13px;font:800 12px 'Nunito',sans-serif;cursor:pointer";
     var no = document.createElement("button");
     no.type = "button"; no.textContent = "удалить";
-    no.style.cssText = "background:#eae9e9;color:#5a4f47;border:0;border-radius:999px;padding:5px 13px;font:800 12px 'Nunito',sans-serif;cursor:pointer";
+    no.style.cssText = "background:#ece2d3;color:#5a4f47;border:0;border-radius:999px;padding:5px 13px;font:800 12px 'Nunito',sans-serif;cursor:pointer";
     yes.onclick = function () { restore(snap); say("черновик восстановлен"); };
     no.onclick = function () { drop(); };
     b.appendChild(t); b.appendChild(yes); b.appendChild(no);

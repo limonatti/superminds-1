@@ -5,37 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Приглашение · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   a{color:inherit}
   button{font-family:inherit;cursor:pointer;border:none}
   .wrap{max-width:460px;margin:0 auto;padding:48px 18px 48px}
-  h1{margin:0;text-align:center;font-size:clamp(26px,7vw,38px);font-weight:700;color:#ec3013;letter-spacing:-1px}
-  .sub{text-align:center;margin:10px 0 22px;font:800 15px 'Archivo',sans-serif;color:#4a4644;line-height:1.5}
-  .panel{background:#fff;border-radius:26px;box-shadow:0 8px 0 #cfcecd;padding:24px 20px}
+  h1{margin:0;text-align:center;font-size:clamp(26px,7vw,38px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:10px 0 22px;font:800 15px 'Nunito',sans-serif;color:#5c534d;line-height:1.5}
+  .panel{background:#fffdf8;border-radius:26px;box-shadow:0 8px 0 #e0d5c2;padding:24px 20px}
   .tabs{display:flex;gap:8px;margin-bottom:16px}
-  .tab{flex:1;background:#f3f2f2;border-radius:14px;padding:11px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
-  .tab.on{background:#ec3013;color:#fff}
-  label{display:block;font:800 12px 'Archivo',sans-serif;color:#6e6a68;margin:14px 2px 6px;letter-spacing:.5px}
-  input{width:100%;border:2px solid #cfcecd;border-radius:14px;padding:13px 14px;font:600 16px 'Archivo',sans-serif;color:#201e1d;background:#f3f2f2}
-  input:focus{outline:none;border-color:#ec3013}
-  .primary{width:100%;margin-top:20px;background:#ec3013;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Archivo',sans-serif;box-shadow:0 5px 0 #ae1800}
+  .tab{flex:1;background:#f4ece0;border-radius:14px;padding:11px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
+  .tab.on{background:#7c2340;color:#fff}
+  label{display:block;font:800 12px 'Nunito',sans-serif;color:#7d726a;margin:14px 2px 6px;letter-spacing:.5px}
+  input{width:100%;border:1px solid #e0d5c2;border-radius:14px;padding:13px 14px;font:600 16px 'Nunito',sans-serif;color:#241a18;background:#f4ece0}
+  input:focus{outline:none;border-color:#7c2340}
+  .primary{width:100%;margin-top:20px;background:#7c2340;color:#fff;border-radius:16px;padding:15px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5f1a31}
   .primary[disabled]{opacity:.55;box-shadow:none;cursor:default}
-  .msg{margin-top:14px;font:700 13.5px 'Archivo',sans-serif;text-align:center;min-height:18px;line-height:1.5}
-  .msg.err{color:#ae1800}.msg.ok{color:#4a8b34}
-  .note{font:700 12px 'Archivo',sans-serif;color:#8a8785;text-align:center;margin-top:14px;line-height:1.6}
-  .from{background:#eae9e9;border-radius:18px;padding:14px;text-align:center;margin-bottom:16px;font:800 14px 'Archivo',sans-serif;color:#4a8b34}
+  .msg{margin-top:14px;font:700 13.5px 'Nunito',sans-serif;text-align:center;min-height:18px;line-height:1.5}
+  .msg.err{color:#7b2412}.msg.ok{color:#3f8f5c}
+  .note{font:700 12px 'Nunito',sans-serif;color:#a3968a;text-align:center;margin-top:14px;line-height:1.6}
+  .from{background:#ece2d3;border-radius:18px;padding:14px;text-align:center;margin-bottom:16px;font:800 14px 'Nunito',sans-serif;color:#3f8f5c}
   .from b{display:block;font-size:19px;margin-top:2px;color:#2e6f4e}
-  .bad{background:#ffe3dc;border-radius:18px;padding:16px;text-align:center;font:800 14px 'Archivo',sans-serif;color:#ae1800;line-height:1.5}
-  .opt{font:700 12.5px 'Archivo',sans-serif;color:#ec3013;text-align:center;margin-top:12px;cursor:pointer;text-decoration:underline}
+  .bad{background:#ffe3dc;border-radius:18px;padding:16px;text-align:center;font:800 14px 'Nunito',sans-serif;color:#7b2412;line-height:1.5}
+  .opt{font:700 12.5px 'Nunito',sans-serif;color:#7c2340;text-align:center;margin-top:12px;cursor:pointer;text-decoration:underline}
   .hidden{display:none}
-  .loginbox{background:#fff7e8;border:2px solid #cfcecd;border-radius:16px;padding:14px;margin-top:14px;font:700 13px 'Archivo',sans-serif;color:#4a4644;line-height:1.6;text-align:center}
-  .loginbox b{display:block;font-size:16px;color:#201e1d;word-break:break-all;margin-top:4px}
-  .foot{text-align:center;font:700 12.5px 'Archivo',sans-serif;color:#6e6a68;margin-top:28px}
+  .loginbox{background:#fff7e8;border:1px solid #e0d5c2;border-radius:16px;padding:14px;margin-top:14px;font:700 13px 'Nunito',sans-serif;color:#5c534d;line-height:1.6;text-align:center}
+  .loginbox b{display:block;font-size:16px;color:#241a18;word-break:break-all;margin-top:4px}
+  .foot{text-align:center;font:700 12.5px 'Nunito',sans-serif;color:#7d726a;margin-top:28px}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
 <div class="wrap">

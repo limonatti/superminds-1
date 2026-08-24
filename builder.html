@@ -5,62 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Конструктор упражнений · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd}
-  .home.books{left:auto;right:12px;background:#4a8b34;box-shadow:0 4px 0 #2c5716}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e0d5c2}
+  .home.books{left:auto;right:12px;background:#3f8f5c;box-shadow:0 4px 0 #235c37}
   .wrap{max-width:680px;margin:0 auto;padding:64px 20px 60px}
-  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#ec3013;letter-spacing:-1px}
-  .sub{text-align:center;margin:8px 0 22px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
-  .panel{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:22px}
-  label{display:block;font:800 12px 'Archivo',sans-serif;color:#6e6a68;margin:12px 2px 6px;letter-spacing:.5px}
-  input,select,textarea{width:100%;border:2px solid #cfcecd;border-radius:12px;padding:11px 12px;font:600 15px 'Archivo',sans-serif;color:#201e1d;background:#f3f2f2}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:#ec3013}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 22px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
+  .panel{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:22px}
+  label{display:block;font:800 12px 'Nunito',sans-serif;color:#7d726a;margin:12px 2px 6px;letter-spacing:.5px}
+  input,select,textarea{width:100%;border:1px solid #e0d5c2;border-radius:12px;padding:11px 12px;font:600 15px 'Nunito',sans-serif;color:#241a18;background:#f4ece0}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:#7c2340}
   .row2{display:flex;gap:10px}
-  .primary{width:100%;margin-top:16px;background:#ec3013;color:#fff;border-radius:14px;padding:14px;font:800 16px 'Archivo',sans-serif;box-shadow:0 5px 0 #ae1800}
-  .msg{margin-top:12px;font:700 13px 'Archivo',sans-serif;text-align:center;min-height:16px}
-  .msg.err{color:#ae1800}.msg.ok{color:#4a8b34}
+  .primary{width:100%;margin-top:16px;background:#7c2340;color:#fff;border-radius:14px;padding:14px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5f1a31}
+  .msg{margin-top:12px;font:700 13px 'Nunito',sans-serif;text-align:center;min-height:16px}
+  .msg.err{color:#7b2412}.msg.ok{color:#3f8f5c}
   .optrow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .optrow input[type=text]{flex:1}
-  .optrow .rm{background:#fff2ef;color:#ae1800;border-radius:10px;padding:8px 11px;font:800 13px 'Archivo',sans-serif;flex:none}
-  .add{background:#eae9e9;color:#4a8b34;border-radius:999px;padding:8px 14px;font:800 13px 'Archivo',sans-serif;margin-top:4px}
+  .optrow .rm{background:#fbeae4;color:#7b2412;border-radius:10px;padding:8px 11px;font:800 13px 'Nunito',sans-serif;flex:none}
+  .add{background:#ece2d3;color:#3f8f5c;border-radius:999px;padding:8px 14px;font:800 13px 'Nunito',sans-serif;margin-top:4px}
   .imgrow{display:flex;gap:8px}
   .imgrow .img{flex:1}
-  .pairwrap{border:2px solid #cfcecd;border-radius:12px;padding:9px;margin-bottom:9px;background:#faf9f9}
-  .pairwrap .pimg{background:#eae9e9;color:#4a4644;border-radius:10px;padding:9px 11px;font-size:14px;flex:none;line-height:1}
+  .pairwrap{border:1px solid #e0d5c2;border-radius:12px;padding:9px;margin-bottom:9px;background:#fffdf8}
+  .pairwrap .pimg{background:#ece2d3;color:#5c534d;border-radius:10px;padding:9px 11px;font-size:14px;flex:none;line-height:1}
   .pimgbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
   .pimgbox label{margin-top:6px;font-size:11px}
   @media(max-width:620px){.pimgbox{grid-template-columns:1fr}}
-  .upl{background:#eae9e9;color:#4a8b34;border-radius:12px;padding:0 14px;font:800 13px 'Archivo',sans-serif;flex:none;white-space:nowrap}
+  .upl{background:#ece2d3;color:#3f8f5c;border-radius:12px;padding:0 14px;font:800 13px 'Nunito',sans-serif;flex:none;white-space:nowrap}
   .upl:disabled{opacity:.6;cursor:progress}
-  .upl.rec{background:#ec3013;color:#fff;animation:recpulse 1.1s ease-in-out infinite}
+  .upl.rec{background:#7c2340;color:#fff;animation:recpulse 1.1s ease-in-out infinite}
   @keyframes recpulse{0%,100%{box-shadow:0 0 0 0 rgba(236,48,19,.45)}50%{box-shadow:0 0 0 7px rgba(236,48,19,0)}}
   @media(prefers-reduced-motion:reduce){.upl.rec{animation:none}}
   .audprev audio{width:100%;margin-top:8px}
-  .imgprev img{max-width:130px;border-radius:10px;margin-top:8px;border:2px solid #cfcecd}
-  .addbig{display:block;width:100%;margin-top:6px;background:#4a8b34;color:#fff;border-radius:12px;padding:11px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #2c5716}
-  .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Archivo',sans-serif;color:#4a8b34;flex:none}
-  .qblock{border:2px solid #cfcecd;border-radius:14px;padding:12px 12px 14px;margin-bottom:12px;background:#f3f2f2}
+  .imgprev img{max-width:130px;border-radius:10px;margin-top:8px;border:1px solid #e0d5c2}
+  .addbig{display:block;width:100%;margin-top:6px;background:#3f8f5c;color:#fff;border-radius:12px;padding:11px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #235c37}
+  .corr{display:flex;align-items:center;gap:4px;font:800 11px 'Nunito',sans-serif;color:#3f8f5c;flex:none}
+  .qblock{border:1px solid #e0d5c2;border-radius:14px;padding:12px 12px 14px;margin-bottom:12px;background:#f4ece0}
   .qblock .bh{display:flex;justify-content:space-between;align-items:center}
-  .qblock .bh .n{font:900 11px 'Archivo',sans-serif;color:#b5654a;letter-spacing:.6px}
-  .qblock .bh .rmq{background:#fff2ef;color:#ae1800;border-radius:999px;padding:5px 11px;font:800 12px 'Archivo',sans-serif}
+  .qblock .bh .n{font:900 11px 'Nunito',sans-serif;color:#b5654a;letter-spacing:.6px}
+  .qblock .bh .rmq{background:#fbeae4;color:#7b2412;border-radius:999px;padding:5px 11px;font:800 12px 'Nunito',sans-serif}
   .qblock label:first-child{margin-top:4px}
-  .hinttext{font:700 12px 'Archivo',sans-serif;color:#8a8785;margin-top:6px}
-  .sec-title{font:900 12px 'Archivo',sans-serif;color:#6e6a68;letter-spacing:.6px;margin:26px 2px 12px}
-  .exrow{display:flex;align-items:center;gap:10px;background:#eae9e9;border-radius:12px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
-  .exrow .t{flex:1;font:800 13.5px 'Archivo',sans-serif;min-width:130px}
-  .exrow .badge{background:#cfcecd;color:#4a4644;border-radius:999px;padding:3px 8px;font:900 10px 'Archivo',sans-serif}
-  .exrow .cnt{background:#dbe8f5;color:#2a5f8f;border-radius:999px;padding:3px 8px;font:900 10px 'Archivo',sans-serif}
-  .exrow .ed{background:#ec3013;color:#fff;border-radius:999px;padding:6px 12px;font:800 12px 'Archivo',sans-serif}
-  .exrow .de{background:#fff2ef;color:#ae1800;border-radius:999px;padding:6px 10px;font:800 12px 'Archivo',sans-serif}
-  .empty{font:700 13px 'Archivo',sans-serif;color:#8a8785;text-align:center;padding:12px}
-  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:30px}
+  .hinttext{font:700 12px 'Nunito',sans-serif;color:#a3968a;margin-top:6px}
+  .sec-title{font:900 12px 'Nunito',sans-serif;color:#7d726a;letter-spacing:.6px;margin:26px 2px 12px}
+  .exrow{display:flex;align-items:center;gap:10px;background:#ece2d3;border-radius:12px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
+  .exrow .t{flex:1;font:800 13.5px 'Nunito',sans-serif;min-width:130px}
+  .exrow .badge{background:#e0d5c2;color:#5c534d;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif}
+  .exrow .cnt{background:#f3dbd0;color:#763d2c;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif}
+  .exrow .ed{background:#7c2340;color:#fff;border-radius:999px;padding:6px 12px;font:800 12px 'Nunito',sans-serif}
+  .exrow .de{background:#fbeae4;color:#7b2412;border-radius:999px;padding:6px 10px;font:800 12px 'Nunito',sans-serif}
+  .empty{font:700 13px 'Nunito',sans-serif;color:#a3968a;text-align:center;padding:12px}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#7d726a;margin-top:30px}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
   <a class="home" href="teacher.html">← Кабинет</a>
@@ -297,7 +297,7 @@
       box.appendChild(d);
     }
     function catRow(box,name,items){
-      const d=document.createElement("div");d.style.cssText="border:2px solid #cfcecd;border-radius:12px;padding:10px;margin-bottom:8px";
+      const d=document.createElement("div");d.style.cssText="border:1px solid #e0d5c2;border-radius:12px;padding:10px;margin-bottom:8px";
       d.innerHTML='<div style="display:flex;gap:8px;align-items:center"><input class="cname" type="text" placeholder="Название (напр. Животные)" value="'+esc(name)+'"><button class="rm" type="button">✕</button></div>'+
         '<textarea class="citems" rows="3" placeholder="dog\ncat\nbird" style="margin-top:6px">'+esc(items)+'</textarea>';
       d.querySelector(".rm").onclick=()=>{ if(box.children.length>2) d.remove(); };
@@ -362,7 +362,7 @@
         f.innerHTML='<label>ТЕКСТ ДЛЯ ЧТЕНИЯ</label><textarea id="rtext" rows="7" placeholder="Впиши или вставь текст…">'+esc(data.text||"")+'</textarea>'+
           '<label>ВОПРОСЫ — по одному в строке: Вопрос? | вариант | верный вариант* | вариант</label>'+
           '<textarea id="rqs" rows="6" placeholder="Where is the cat? | in the bag | under the bed* | at school">'+esc(ql)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Верный вариант помечай звёздочкой *. Формат как в ОГЭ/ЕГЭ/TOEFL: чтение + множественный выбор.</div>';
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#7d726a;margin-top:6px">Верный вариант помечай звёздочкой *. Формат как в ОГЭ/ЕГЭ/TOEFL: чтение + множественный выбор.</div>';
         return;
       }
       if(type==="tfns"){
@@ -370,21 +370,21 @@
         f.innerHTML='<label>ТЕКСТ</label><textarea id="ttext" rows="6">'+esc(data.text||"")+'</textarea>'+
           '<label>УТВЕРЖДЕНИЯ — по одному в строке: утверждение | T, F или N</label>'+
           '<textarea id="tsts" rows="5" placeholder="The dog is big. | T&#10;The cat can swim. | N">'+esc(tl)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">T = True (верно), F = False (неверно), N = Not stated (в тексте не сказано)</div>';
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#7d726a;margin-top:6px">T = True (верно), F = False (неверно), N = Not stated (в тексте не сказано)</div>';
         return;
       }
       if(type==="wordform"){
         const wl=(data.items||[]).map(x=>x.q+" | "+x.base+" | "+x.answer).join("\n");
         f.innerHTML='<label>СТРОКИ — предложение с ___ | СЛОВО-ОСНОВА | ответ</label>'+
           '<textarea id="wlines" rows="6" placeholder="He is a good ___ . | TEACH | teacher&#10;She sings ___ . | BEAUTIFUL | beautifully">'+esc(wl)+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Как в ЕГЭ: ученик образует нужную форму слова, написанного заглавными буквами.</div>';
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#7d726a;margin-top:6px">Как в ЕГЭ: ученик образует нужную форму слова, написанного заглавными буквами.</div>';
         return;
       }
       if(type==="headings"){
         f.innerHTML='<label>АБЗАЦЫ — разделяй ПУСТОЙ строкой</label><textarea id="hparas" rows="8" placeholder="Первый абзац…&#10;&#10;Второй абзац…">'+esc((data.paras||[]).join("\n\n"))+'</textarea>'+
           '<label>ЗАГОЛОВКИ — по одному в строке, в том же порядке, что абзацы; лишние — в конце</label>'+
           '<textarea id="hheads" rows="5" placeholder="Заголовок к абзацу 1&#10;Заголовок к абзацу 2&#10;Лишний заголовок">'+esc((data.heads||[]).join("\n"))+'</textarea>'+
-          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#6e6a68;margin-top:6px">Как в ОГЭ/IELTS: ученику заголовки покажутся перемешанными.</div>';
+          '<div class="hint" style="font:700 12px \'Nunito\',sans-serif;color:#7d726a;margin-top:6px">Как в ОГЭ/IELTS: ученику заголовки покажутся перемешанными.</div>';
         return;
       }
       if(type==="shadow"){
@@ -400,8 +400,8 @@
         const u=document.getElementById("url");
         const prev=()=>{const p=document.getElementById("embPrev");const e=window.SM_embed(u.value);
           if(!u.value.trim()||!e){p.innerHTML="";return;}
-          p.innerHTML='<div style="margin-top:10px;font:800 12px \'Nunito\',sans-serif;color:#6e6a68">ПРЕДПРОСМОТР · '+e.name+'</div>'+
-            '<iframe src="'+e.src+'" style="width:100%;height:300px;border:2px solid #cfcecd;border-radius:14px;background:#fff;margin-top:6px" allowfullscreen></iframe>';};
+          p.innerHTML='<div style="margin-top:10px;font:800 12px \'Nunito\',sans-serif;color:#7d726a">ПРЕДПРОСМОТР · '+e.name+'</div>'+
+            '<iframe src="'+e.src+'" style="width:100%;height:300px;border:1px solid #e0d5c2;border-radius:14px;background:#fffdf8;margin-top:6px" allowfullscreen></iframe>';};
         u.onchange=prev; u.onpaste=()=>setTimeout(prev,50); if(data.url) prev();
         return;
       }
@@ -454,8 +454,8 @@
           if(/\.(mp4|webm|ogg|mov)(\?|$)/i.test(u)){
             vp.innerHTML='<video controls src="'+u.replace(/"/g,"&quot;")+'" style="width:100%;border-radius:14px;margin-top:8px;background:#000"></video>'; return; }
           const e=window.SM_embed(u);
-          vp.innerHTML=e?('<div style="margin-top:8px;font:800 12px \'Archivo\',sans-serif;color:#6e6a68">ПРЕДПРОСМОТР · '+e.name+'</div>'+
-            '<iframe src="'+e.src+'" style="width:100%;height:260px;border:2px solid #cfcecd;border-radius:14px;margin-top:6px;background:#000" allowfullscreen></iframe>'):"";
+          vp.innerHTML=e?('<div style="margin-top:8px;font:800 12px \'Nunito\',sans-serif;color:#7d726a">ПРЕДПРОСМОТР · '+e.name+'</div>'+
+            '<iframe src="'+e.src+'" style="width:100%;height:260px;border:1px solid #e0d5c2;border-radius:14px;margin-top:6px;background:#000" allowfullscreen></iframe>'):"";
         }
         vb.dataset.lbl=vb.textContent;
         vb.onclick=()=>pickMedia(vi,"video/*","video",vprev,vb);
@@ -689,7 +689,7 @@
     /* ---------- экраны ---------- */
     function renderLogin(){
       document.getElementById("sub").textContent="войди как учитель, чтобы создавать упражнения";
-      document.getElementById("root").innerHTML='<div class="panel"><div class="empty">Сначала войди в <a href="teacher.html" style="color:#ec3013;text-decoration:underline">кабинет учителя</a>, потом вернись сюда.</div></div>';
+      document.getElementById("root").innerHTML='<div class="panel"><div class="empty">Сначала войди в <a href="teacher.html" style="color:#7c2340;text-decoration:underline">кабинет учителя</a>, потом вернись сюда.</div></div>';
     }
     /* Курс, на котором сейчас работает конструктор. Раньше он молча брался из
        последнего открытого учебника и сменить его было нельзя. */
@@ -735,11 +735,11 @@
           '<label>РАЗДЕЛ УРОКА (необязательно)</label><input id="section" list="seclist" placeholder="Лексика / Грамматика / Видео…"><datalist id="seclist"><option>Лексика</option><option>Грамматика</option><option>Аудирование</option><option>Чтение</option><option>Видео</option><option>Говорение</option><option>Игры</option><option>Домашка</option></datalist>'+
           styleSelectHTML()+
           '<div id="fields"></div>'+
-          '<div class="row2" style="margin-top:16px"><button class="primary" id="prev" style="flex:1;margin:0;background:#eae9e9;color:#4a4644;box-shadow:0 5px 0 #cfcecd">👁 Как увидит ученик</button>'+
+          '<div class="row2" style="margin-top:16px"><button class="primary" id="prev" style="flex:1;margin:0;background:#ece2d3;color:#5c534d;box-shadow:0 5px 0 #e0d5c2">👁 Как увидит ученик</button>'+
           '<button class="primary" id="save" style="flex:1;margin:0">💾 Сохранить</button></div>'+
           /* Задания обычно делают пачкой в один раздел — эта кнопка не сбрасывает
              тип и раздел, чтобы не выбирать их заново на каждом заходе. */
-          '<button class="primary" id="saveMore" style="width:100%;margin-top:10px;background:#4a8b34;box-shadow:0 5px 0 #2c5716">💾 Сохранить и создать ещё</button>'+
+          '<button class="primary" id="saveMore" style="width:100%;margin-top:10px;background:#3f8f5c;box-shadow:0 5px 0 #235c37">💾 Сохранить и создать ещё</button>'+
           '<div class="msg" id="msg"></div>'+
         '</div>'+
         '<div class="sec-title">МОИ УПРАЖНЕНИЯ</div><div id="list"><div class="empty">Загрузка…</div></div>';
@@ -812,13 +812,13 @@
       if(ov) ov.remove();
       ov=document.createElement("div"); ov.id="prevOv";
       ov.style.cssText="position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
-      ov.innerHTML='<div style="background:#f3f2f2;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">'+
-        '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:2px solid #cfcecd">'+
-          '<b style="font:900 15px \'Archivo\',sans-serif">👁 Как увидит ученик</b>'+
+      ov.innerHTML='<div style="background:#f4ece0;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">'+
+        '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fffdf8;border-bottom:1px solid #e0d5c2">'+
+          '<b style="font:900 15px \'Nunito\',sans-serif">👁 Как увидит ученик</b>'+
           '<span style="flex:1"></span>'+
-          '<button id="prevClose" style="background:#ec3013;color:#fff;border-radius:999px;padding:7px 15px;font:800 13px \'Archivo\',sans-serif">закрыть</button>'+
+          '<button id="prevClose" style="background:#7c2340;color:#fff;border-radius:999px;padding:7px 15px;font:800 13px \'Nunito\',sans-serif">закрыть</button>'+
         '</div>'+
-        '<iframe id="prevFrame" style="flex:1;width:100%;border:0;background:#f3f2f2" src="exercises.html?preview=1"></iframe>'+
+        '<iframe id="prevFrame" style="flex:1;width:100%;border:0;background:#f4ece0" src="exercises.html?preview=1"></iframe>'+
       '</div>';
       document.body.appendChild(ov);
       ov.onclick=e=>{ if(e.target===ov) ov.remove(); };
@@ -871,10 +871,10 @@
 </body>
 </html>
 
-<script src=builder-plus.js?v=7849b140></script>
+<script src=builder-plus.js?v=9e1a5d55></script>
 
 <script src=sm-ai.js?v=d431e1bb></script>
 
-<script src=sm-draft.js?v=dcbd3027></script>
+<script src=sm-draft.js?v=c763c6c3></script>
 
-<script src=sm-lesson.js?v=34f2949b></script>
+<script src=sm-lesson.js?v=7cf334ba></script>

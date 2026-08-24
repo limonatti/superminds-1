@@ -17,7 +17,7 @@
       var name = sel.options[sel.selectedIndex].text;
 
       var b = document.createElement("div");
-      b.style.cssText = "background:#fff;border:3px solid #2980b9;border-radius:18px;padding:13px 16px;margin:0 0 14px;font:800 14px 'Archivo',sans-serif;color:#1c1310;line-height:1.6";
+      b.style.cssText = "background:#fff;border:3px solid #b5654a;border-radius:18px;padding:13px 16px;margin:0 0 14px;font:800 14px 'Nunito',sans-serif;color:#1c1310;line-height:1.6";
       b.innerHTML = "Юнит <b>" + name.replace(/[<>]/g, "") + "</b> выбран автоматически. " +
         "Выбери тип упражнения ниже, заполни и нажми «Сохранить» — задание встанет в этот урок. " +
         "Так можно добавить сколько угодно упражнений подряд." +
@@ -25,7 +25,7 @@
 
       var host = sel.closest(".panel") || sel.parentNode;
       host.parentNode.insertBefore(b, host);
-      sel.style.outline = "3px solid #2980b9";
+      sel.style.outline = "3px solid #b5654a";
       setTimeout(function () { sel.style.outline = ""; }, 2500);
       try { b.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
     }
@@ -119,20 +119,20 @@
     var st = document.createElement("style");
     st.id = "candCss";
     st.textContent =
-      "#candBox{background:#fff;border:3px solid #2980b9;border-radius:18px;padding:14px 15px;margin:0 0 14px}" +
-      "#candBox .hd{font:900 13px 'Archivo',sans-serif;color:#1c5a85;margin-bottom:4px}" +
-      "#candBox .sub{font:700 12px 'Archivo',sans-serif;color:#6e6a68;margin-bottom:10px;line-height:1.5}" +
-      ".cand{display:flex;gap:10px;align-items:flex-start;background:#f3f2f2;border-radius:12px;padding:10px 12px;margin-bottom:7px;cursor:pointer}" +
+      "#candBox{background:#fff;border:3px solid #b5654a;border-radius:18px;padding:14px 15px;margin:0 0 14px}" +
+      "#candBox .hd{font:900 13px 'Nunito',sans-serif;color:#763d2c;margin-bottom:4px}" +
+      "#candBox .sub{font:700 12px 'Nunito',sans-serif;color:#7d726a;margin-bottom:10px;line-height:1.5}" +
+      ".cand{display:flex;gap:10px;align-items:flex-start;background:#f4ece0;border-radius:12px;padding:10px 12px;margin-bottom:7px;cursor:pointer}" +
       ".cand.off{opacity:.45}" +
-      ".cand .bx{width:20px;height:20px;border-radius:6px;border:2px solid #2980b9;background:#fff;flex:none;color:#fff;font:900 13px 'Archivo',sans-serif;text-align:center;line-height:17px;margin-top:1px}" +
-      ".cand.on .bx{background:#2980b9}" +
-      ".cand .tx{flex:1;font:700 13.5px 'Archivo',sans-serif;line-height:1.45;min-width:0}" +
-      ".cand .cand-a{font:800 12px 'Archivo',sans-serif;color:#4a8b34}" +
+      ".cand .bx{width:20px;height:20px;border-radius:6px;border:2px solid #b5654a;background:#fff;flex:none;color:#fff;font:900 13px 'Nunito',sans-serif;text-align:center;line-height:17px;margin-top:1px}" +
+      ".cand.on .bx{background:#b5654a}" +
+      ".cand .tx{flex:1;font:700 13.5px 'Nunito',sans-serif;line-height:1.45;min-width:0}" +
+      ".cand .cand-a{font:800 12px 'Nunito',sans-serif;color:#3f8f5c}" +
       "#candBox .foot{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}" +
-      "#candBox .go{background:#2980b9;color:#fff;border:0;border-radius:12px;padding:11px 17px;font:800 14px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1c5a85}" +
+      "#candBox .go{background:#b5654a;color:#fff;border:0;border-radius:12px;padding:11px 17px;font:800 14px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #763d2c}" +
       "#candBox .go:disabled{opacity:.5;box-shadow:none;cursor:default}" +
-      "#candBox .gh{background:#eae9e9;color:#4a4644;border:0;border-radius:12px;padding:11px 15px;font:800 13px 'Archivo',sans-serif;cursor:pointer}" +
-      "#candBox .cnt{font:800 12px 'Archivo',sans-serif;color:#6e6a68;margin-left:auto}";
+      "#candBox .gh{background:#ece2d3;color:#5c534d;border:0;border-radius:12px;padding:11px 15px;font:800 13px 'Nunito',sans-serif;cursor:pointer}" +
+      "#candBox .cnt{font:800 12px 'Nunito',sans-serif;color:#7d726a;margin-left:auto}";
     document.head.appendChild(st);
   }
 
@@ -254,10 +254,10 @@
     var btn = document.createElement("button");
     btn.type = "button";
     btn.textContent = "🤖 Собрать задания из слов юнита";
-    btn.style.cssText = "width:100%;background:#2980b9;color:#fff;border:0;border-radius:14px;padding:13px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1c5a85";
+    btn.style.cssText = "width:100%;background:#b5654a;color:#fff;border:0;border-radius:14px;padding:13px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #763d2c";
     btn.onclick = function () { generate(btn); };
     var hint = document.createElement("div");
-    hint.style.cssText = "font:700 12px 'Archivo',sans-serif;color:#8a7a68;margin:7px 2px 0;line-height:1.5";
+    hint.style.cssText = "font:700 12px 'Nunito',sans-serif;color:#8a7a68;margin:7px 2px 0;line-height:1.5";
     hint.textContent = "Ассистент придумает задания из слов юнита и покажет списком. Отметишь нужные — они попадут в форму.";
     wrap.appendChild(btn); wrap.appendChild(hint);
     fields.insertBefore(wrap, fields.firstChild);

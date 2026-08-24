@@ -6,37 +6,36 @@
 <title>Shadowing · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   /* Звуки слева в списке */
-  .snd{display:block;width:100%;text-align:left;border:0;border-bottom:2px solid var(--color-divider);
+  .snd{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--color-divider);
     background:var(--color-surface);padding:14px 20px;cursor:pointer}
   .snd:hover{background:var(--color-accent-100)}
   .snd.on{background:var(--color-accent-100);box-shadow:inset 5px 0 0 var(--color-accent)}
-  .snd .ipa{display:inline-block;min-width:34px;font:800 19px "Archivo",sans-serif;color:var(--color-accent)}
-  .snd .t{font:800 14.5px "Archivo",sans-serif}
-  .snd .d{display:block;margin-top:2px;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .snd .ipa{display:inline-block;min-width:34px;font:800 19px "Nunito",sans-serif;color:var(--color-accent)}
+  .snd .t{font:800 14.5px "Nunito",sans-serif}
+  .snd .d{display:block;margin-top:2px;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
 
   /* Карточка фразы */
-  .ph{padding:20px 28px;border-bottom:2px solid var(--color-divider)}
-  .ph .en{font:800 clamp(22px,3.4vw,32px) "Archivo",sans-serif;letter-spacing:-.02em;margin:0 0 6px}
-  .ph .ipa{font:600 15px "Archivo",sans-serif;color:var(--color-accent-600);margin:0 0 4px}
-  .ph .ru{font:600 14px "Archivo",sans-serif;color:var(--color-neutral-700);margin:0}
+  .ph{padding:20px 28px;border-bottom:1px solid var(--color-divider)}
+  .ph .en{font:800 clamp(22px,3.4vw,32px) "Nunito",sans-serif;letter-spacing:-.02em;margin:0 0 6px}
+  .ph .ipa{font:600 15px "Nunito",sans-serif;color:var(--color-accent-600);margin:0 0 4px}
+  .ph .ru{font:600 14px "Nunito",sans-serif;color:var(--color-neutral-700);margin:0}
 
   .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:16px 28px;
-    border-bottom:2px solid var(--color-divider)}
-  .bar button{border:0;padding:13px 19px;font:800 13px "Archivo",sans-serif;letter-spacing:.06em;
+    border-bottom:1px solid var(--color-divider)}
+  .bar button{border:0;padding:13px 19px;font:800 13px "Nunito",sans-serif;letter-spacing:.06em;
     text-transform:uppercase;cursor:pointer}
   .bar .listen{background:var(--color-text);color:#fff}
   .bar .mic{background:var(--color-accent);color:#fff;min-width:186px}
   .bar .mic.rec{background:#8a1400}
-  .bar .play{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-text)}
+  .bar .play{background:var(--color-bg);color:var(--color-text);border:1px solid var(--color-divider)}
   .bar .play:disabled{opacity:.4;cursor:default}
-  .bar .slow{background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-divider)}
+  .bar .slow{background:var(--color-bg);color:var(--color-text);border:1px solid var(--color-divider)}
   .bar .slow.on{border-color:var(--color-accent);color:var(--color-accent)}
-  .bar .hint{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .bar .hint{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
 
   /* Пульсация во время записи */
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
@@ -45,22 +44,22 @@
 
   .chart{padding:10px 28px 4px}
   .chart canvas{width:100%;height:200px;display:block}
-  .chart .cap{font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700);padding:2px 0 10px}
+  .chart .cap{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);padding:2px 0 10px}
 
-  .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));border-bottom:2px solid var(--color-divider)}
-  .grade{padding:16px 20px;border-right:2px solid var(--color-divider)}
+  .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));border-bottom:1px solid var(--color-divider)}
+  .grade{padding:16px 20px;border-right:1px solid var(--color-divider)}
   .grade:last-child{border-right:0}
-  .grade .k{font:800 10px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700)}
-  .grade .n{display:block;margin-top:4px;font:900 30px "Archivo",sans-serif;letter-spacing:-.02em}
+  .grade .k{font:800 10px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .grade .n{display:block;margin-top:4px;font:900 30px "Nunito",sans-serif;letter-spacing:-.02em}
   .grade .n.good{color:#1f7a3d}.grade .n.mid{color:#8a6d00}.grade .n.bad{color:var(--color-accent)}
-  .grade .d{display:block;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .grade .d{display:block;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
 
-  .notes{padding:16px 28px;border-bottom:2px solid var(--color-divider)}
-  .notes li{font:600 14.5px "Archivo",sans-serif;line-height:1.55;margin-bottom:6px}
-  .notes .who{font:800 10px "Archivo",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  .notes{padding:16px 28px;border-bottom:1px solid var(--color-divider)}
+  .notes li{font:600 14.5px "Nunito",sans-serif;line-height:1.55;margin-bottom:6px}
+  .notes .who{font:800 10px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;
     color:var(--color-accent-600);margin-bottom:8px;display:block}
 
-  .words{padding:0 28px 16px;font:800 19px "Archivo",sans-serif;line-height:1.7}
+  .words{padding:0 28px 16px;font:800 19px "Nunito",sans-serif;line-height:1.7}
   .words span{padding:2px 5px;margin-right:3px}
   .words .ok{background:#dff0d2;color:#2b6b1f}
   .words .near{background:#fdf2cf;color:#7a5c00}
@@ -68,12 +67,12 @@
 
   .yt{padding:14px 28px 20px}
   .yt iframe{width:100%;aspect-ratio:16/9;border:0;background:#000}
-  .yt .cap{font:600 12px "Archivo",sans-serif;color:var(--color-neutral-700);margin-top:7px}
+  .yt .cap{font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:7px}
 
   .warn{margin:14px 28px;padding:13px 15px;border-left:5px solid #8a6d00;background:#fdf6e3;
-    font:600 13.5px "Archivo",sans-serif;line-height:1.5}
-  .best{padding:12px 28px;font:700 13px "Archivo",sans-serif;color:var(--color-neutral-700);
-    border-bottom:2px solid var(--color-divider)}
+    font:600 13.5px "Nunito",sans-serif;line-height:1.5}
+  .best{padding:12px 28px;font:700 13px "Nunito",sans-serif;color:var(--color-neutral-700);
+    border-bottom:1px solid var(--color-divider)}
   .best b{color:var(--color-text)}
 </style>
 </head>
@@ -96,9 +95,9 @@
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=f191dd29"></script>
-<script src="sm-shell.js?v=4b1f197b"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
 <script src="sm-speech.js?v=6a1ba88b"></script>
-<script src="sm-voice-lab.js?v=a33b97b1"></script>
+<script src="sm-voice-lab.js?v=7d8c1e9f"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 
@@ -110,7 +109,7 @@ let lastCompare = null, lastWords = null, BEST = {};
 function drawSounds(){
   const box = document.getElementById("sndList");
   if (!SOUNDS.length){
-    box.innerHTML = '<div class="step" style="border:0;text-transform:none;letter-spacing:0;font:600 14px \'Archivo\',sans-serif;color:var(--color-neutral-700)">Библиотека звуков пуста.</div>';
+    box.innerHTML = '<div class="step" style="border:0;text-transform:none;letter-spacing:0;font:600 14px \'Nunito\',sans-serif;color:var(--color-neutral-700)">Библиотека звуков пуста.</div>';
     return;
   }
   box.innerHTML = SOUNDS.map((s,i) =>
@@ -175,7 +174,7 @@ function drawPane(){
     p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · '+esc(s?s.title:"")+'</span></div>' +
       '<div class="ink"><div><div class="k">Shadowing</div><h2>Фраз для этого звука пока нет</h2>' +
       '<p>'+esc(s&&s.hint||"")+'</p></div></div>' +
-      (s ? '<div class="notes"><span class="who">Как ставить звук</span><div style="font:600 15px \'Archivo\',sans-serif;line-height:1.6">'+esc(s.hint||"")+'</div></div>' : "");
+      (s ? '<div class="notes"><span class="who">Как ставить звук</span><div style="font:600 15px \'Nunito\',sans-serif;line-height:1.6">'+esc(s.hint||"")+'</div></div>' : "");
     return;
   }
 

@@ -1,65 +1,72 @@
-/* sm-skin.css — общая «шкура» для страниц, написанных до редизайна.
-   Подключается одной строкой и подтягивает старые экраны к стилю Modernist:
-   плоско, нулевой радиус, линейки 2px, шрифт Archivo, красный акцент.
-   Цвета в самих страницах уже заменены; здесь — то, что нельзя было заменить текстом. */
+/* sm-skin.css — общая «шкура» для страниц с собственной вёрсткой.
+
+   Раньше этот файл подтягивал старые экраны к плоскому стилю Modernist:
+   он принудительно обнулял скругления (`border-radius:0 !important`) и
+   гасил все тени (`box-shadow:none !important`). Отсюда и брался
+   «квадратный» вид внутренних страниц.
+
+   Теперь задача обратная — привести те же экраны к тёплой теме
+   (см. sm-warm.css): кремовая бумага, бордо, мягкие скругления.
+   Поэтому здесь почти не осталось `!important`: файл задаёт разумные
+   значения по умолчанию, а страница вправе их переопределить. Единственное
+   исключение — шрифт: он прописан внутри страниц сокращённой записью
+   `font:700 13px ...`, перебить которую иначе нельзя.
+
+   Цвета в самих страницах заменены на тёплые по месту; здесь — то,
+   что нельзя было заменить текстом. */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
 :root{
-  --sk-bg:#f3f2f2; --sk-surface:#eae9e9; --sk-text:#201e1d;
-  --sk-accent:#ec3013; --sk-accent-100:#fff2ef; --sk-accent-700:#ae1800;
-  --sk-divider:#cfcecd; --sk-muted:#4a4644; --sk-muted2:#6e6a68;
+  --sk-canvas:#211a19;
+  --sk-bg:#f4ece0; --sk-surface:#fffdf8; --sk-text:#241a18;
+  --sk-accent:#7c2340; --sk-accent-100:#fbeef1; --sk-accent-700:#5f1a31;
+  --sk-divider:#e0d5c2; --sk-muted:#5c534d; --sk-muted2:#7d726a;
+  --sk-ok:#3f8f5c; --sk-bad:#7b2412; --sk-bad-bg:#fbeae4;
 }
 
 /* --- типографика --- */
 body, button, input, select, textarea, h1, h2, h3, h4{
-  font-family:"Archivo", system-ui, -apple-system, sans-serif !important;
+  font-family:"Nunito", system-ui, -apple-system, sans-serif !important;
 }
-h1,h2,h3{ letter-spacing:-.02em !important; font-weight:800 !important }
+h1,h2,h3{ letter-spacing:0; font-weight:700 }
 
-/* --- никаких скруглений, кроме настоящих кругов --- */
-body *{ border-radius:0 !important }
-.medal, .av, .ue, .cur, .dot, .badge .m, .m,
-[style*="border-radius:50%"], [style*="border-radius: 50%"]{
-  border-radius:50% !important;
-}
+/* --- скругления по умолчанию ---
+   Правила на уровне элемента: любая величина, заданная самой страницей,
+   по-прежнему сильнее и продолжает работать. */
+input, select, textarea, button{ border-radius:12px }
+.panel, .card, .stage, .sec, .box{ border-radius:18px }
+.pill, .home, .primary, .ghost, .cta, .tab, .key{ border-radius:999px }
+.medal, .av, .ue, .cur, .dot, .badge .m, .m{ border-radius:50% }
 
-/* --- убираем «игрушечные» тени, вместо них линейки --- */
-*{ box-shadow:none !important }
-
-/* контейнеры, которые держались на тени, получают рамку */
+/* --- поверхности --- */
+.panel, .card, .stage, .box{ background:var(--sk-surface) }
 .panel, .card, .stage, .sec, .tile, .box, .wrap > .card, .lbtn, .g-ex{
-  border:2px solid var(--sk-divider);
+  border:1px solid var(--sk-divider);
 }
-.panel, .card, .stage, .box{ background:var(--sk-bg) }
 
 /* --- кнопки --- */
-button, .pill, .home, .primary, .ghost, .tbtn, .lbtn, .gbtn, .key, .lt, .opt, .tab, .cta{
-  border-radius:0 !important;
-  letter-spacing:.02em;
-}
-.home, .pill{
-  border:2px solid var(--sk-text) !important;
-  font-weight:800 !important;
-}
+.home, .pill{ border:1px solid var(--sk-divider); font-weight:700 }
 .primary, .cta{
-  background:var(--sk-accent) !important; color:#fff !important;
-  border:2px solid var(--sk-accent) !important; font-weight:800 !important;
+  background:var(--sk-accent); color:#fff;
+  border:1px solid var(--sk-accent); font-weight:700;
 }
-.primary:hover, .cta:hover{ background:var(--sk-accent-700) !important; border-color:var(--sk-accent-700) !important }
+.primary:hover, .cta:hover{ background:var(--sk-accent-700); border-color:var(--sk-accent-700) }
 .ghost{
-  background:transparent !important; color:var(--sk-text) !important;
-  border:2px solid var(--sk-text) !important; font-weight:800 !important;
+  background:transparent; color:var(--sk-text);
+  border:1px solid var(--sk-divider); font-weight:700;
 }
-.ghost:hover{ background:var(--sk-text) !important; color:var(--sk-bg) !important }
-button:active{ transform:scale(.98) }
+.ghost:hover{ background:var(--sk-bg) }
+button:active{ transform:translateY(1px) }
 
 /* --- поля --- */
 input, select, textarea{
-  border:2px solid var(--sk-text) !important;
-  background:var(--sk-bg) !important; color:var(--sk-text) !important;
+  border:1px solid var(--sk-divider);
+  background:var(--sk-surface); color:var(--sk-text);
 }
-input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--sk-accent) !important }
+input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--sk-accent) }
 *:focus-visible{ outline:2px solid var(--sk-accent); outline-offset:2px }
 
 /* --- служебные подписи --- */
-.sub, .foot, .note, .hint{ color:var(--sk-muted2) !important }
-.foot{ letter-spacing:.1em; text-transform:uppercase; font-size:12px !important }
+.sub, .foot, .note, .hint{ color:var(--sk-muted2) }
+.foot{ letter-spacing:.08em; text-transform:uppercase; font-size:12px }

@@ -24,20 +24,20 @@ var CSS = "" +
 "background:" +
 "radial-gradient(120% 110% at 50% 6%, #fff6f0 0%, transparent 55%)," +
 "radial-gradient(90% 90% at 84% 96%, var(--color-accent-100,#ffe7df) 0%, transparent 52%)," +
-"linear-gradient(180deg,#fbf7f3 0%,var(--color-surface,#eae9e9) 100%)}" +
+"linear-gradient(180deg,#fbf7f3 0%,var(--color-surface,#ece2d3) 100%)}" +
 ".teacher-stage::before,.teacher-stage::after{content:'';position:absolute;border-radius:50%;" +
 "border:2px solid #20201e14;pointer-events:none}" +
 ".teacher-stage::before{width:560px;height:560px;top:-180px;right:-190px}" +
 ".teacher-stage::after{width:360px;height:360px;bottom:-140px;left:-130px}" +
 ".ts-k{position:relative;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;" +
-"color:var(--color-accent,#ec3013);display:inline-flex;align-items:center;gap:9px;" +
+"color:var(--color-accent,#7c2340);display:inline-flex;align-items:center;gap:9px;" +
 "opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}" +
-".ts-k::before{content:'';width:8px;height:8px;background:var(--color-accent,#ec3013);border-radius:50%;" +
+".ts-k::before{content:'';width:8px;height:8px;background:var(--color-accent,#7c2340);border-radius:50%;" +
 "box-shadow:0 0 0 4px var(--color-accent-200,#ffd9cf)}" +
-".ts-h{position:relative;margin:8px 0 0;font-family:'Archivo',system-ui,sans-serif;font-weight:800;" +
-"font-size:clamp(24px,3vw,40px);line-height:1.04;letter-spacing:-.02em;color:var(--color-text,#201e1d);" +
+".ts-h{position:relative;margin:8px 0 0;font-family:'Nunito',system-ui,sans-serif;font-weight:800;" +
+"font-size:clamp(24px,3vw,40px);line-height:1.04;letter-spacing:-.02em;color:var(--color-text,#241a18);" +
 "opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .05s,transform .6s cubic-bezier(.16,1,.3,1) .05s}" +
-".ts-h em{font-style:normal;color:var(--color-accent,#ec3013)}" +
+".ts-h em{font-style:normal;color:var(--color-accent,#7c2340)}" +
 ".ts-sub{position:relative;margin:10px 0 0;font-size:clamp(13px,1.2vw,15px);font-weight:600;max-width:40ch;" +
 "color:var(--color-neutral-700,#605d5d);opacity:0;transform:translateY(16px);" +
 "transition:opacity .6s cubic-bezier(.16,1,.3,1) .1s,transform .6s cubic-bezier(.16,1,.3,1) .1s}" +

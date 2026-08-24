@@ -273,7 +273,7 @@
     opts = opts || {};
     var css = getComputedStyle(document.documentElement);
     var colRef = opts.colorRef || (css.getPropertyValue("--color-neutral-700") || "#6a6664").trim();
-    var colMy  = opts.colorMy  || (css.getPropertyValue("--color-accent") || "#ec3013").trim();
+    var colMy  = opts.colorMy  || (css.getPropertyValue("--color-accent") || "#7c2340").trim();
     var colBg  = opts.colorBg  || "transparent";
 
     var dpr = window.devicePixelRatio || 1;
@@ -291,7 +291,7 @@
     g.strokeStyle = "rgba(0,0,0,.12)"; g.lineWidth = 1;
     g.beginPath(); g.moveTo(padL, padT + ih / 2); g.lineTo(padL + iw, padT + ih / 2); g.stroke();
 
-    g.font = "700 10px Archivo, sans-serif";
+    g.font = "700 10px Nunito, sans-serif";
     g.fillStyle = "rgba(0,0,0,.45)";
     g.fillText("выше", 2, padT + 10);
     g.fillText("ниже", 2, padT + ih - 2);
@@ -339,7 +339,7 @@
     line(my,  colMy,  false);
 
     /* подпись */
-    g.font = "800 11px Archivo, sans-serif";
+    g.font = "800 11px Nunito, sans-serif";
     g.fillStyle = colRef; g.fillText("— — носитель", padL, h - 8);
     g.fillStyle = colMy;  g.fillText("——— ты", padL + 96, h - 8);
   }

@@ -87,7 +87,7 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-<script src="sm-shell.js?v=4b1f197b"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
@@ -130,11 +130,11 @@ function drawList(){
 function newcomersHtml(){
   if (!NEWCOMERS.length){
     return '<div class="sect"><span>Новые регистрации</span><span>нет новых</span></div>' +
-      '<div style="padding:16px 28px;font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700)">' +
+      '<div style="padding:16px 28px;font:600 13.5px \'Nunito\',sans-serif;color:var(--color-neutral-700)">' +
       'Все, кто зарегистрировался, уже добавлены в класс.</div>';
   }
   return '<div class="sect"><span>Новые регистрации</span><span>' + NEWCOMERS.length + ' ждут добавления</span></div>' +
-    '<div style="padding:12px 28px 4px;font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700)">' +
+    '<div style="padding:12px 28px 4px;font:600 13.5px \'Nunito\',sans-serif;color:var(--color-neutral-700)">' +
     'Эти люди завели аккаунт сами, без твоей ссылки. Добавь их — и они появятся в классе.</div>' +
     '<div class="rows">' + NEWCOMERS.map((n,i) =>
       '<div class="row" style="cursor:default">' +

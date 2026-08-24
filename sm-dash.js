@@ -49,7 +49,7 @@
       '<div id="smActivity">' +
       '<div class="sec-title">🧩 АКТИВНОСТЬ ПО УПРАЖНЕНИЯМ</div>' +
       '<div class="cards2">' +
-      '<div class="bigcard" style="background:#e4ebf2"><div class="n" style="color:#2980b9">' + week + '</div><div class="l">заданий за 7 дней</div></div>' +
+      '<div class="bigcard" style="background:#e4ebf2"><div class="n" style="color:#b5654a">' + week + '</div><div class="l">заданий за 7 дней</div></div>' +
       '<div class="bigcard" style="background:#f6e2cf"><div class="n" style="color:#b5654a">' + pct + '%</div><div class="l">верных ответов</div></div>' +
       '</div>' +
       '<div style="background:#fdfbf7;border:2px solid #e3d3ba;border-radius:16px;padding:14px 12px 10px;margin-bottom:16px">' +

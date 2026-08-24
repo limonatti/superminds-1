@@ -4,38 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Мой питомец · English with Asya</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   .wrap{max-width:560px;margin:0 auto;padding:64px 16px 60px}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd;text-decoration:none}
-  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#ec3013}
-  .sub{text-align:center;margin:6px 0 18px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:24px;text-align:center;margin-bottom:16px}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e0d5c2;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#7c2340}
+  .sub{text-align:center;margin:6px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
+  .card{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:24px;text-align:center;margin-bottom:16px}
   .pet{font-size:110px;line-height:1.1;display:inline-block}
   .pet.happy{animation:bounce .7s ease-in-out 3}
   @keyframes bounce{50%{transform:translateY(-16px) scale(1.06)}}
-  .pname{border:0;border-bottom:3px dashed #cfcecd;background:none;font:700 22px 'Archivo',sans-serif;color:#ec3013;text-align:center;width:220px;outline:none;margin-top:6px}
-  .stage{font:800 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:4px}
+  .pname{border:0;border-bottom:3px dashed #e0d5c2;background:none;font:700 22px 'Nunito',sans-serif;color:#7c2340;text-align:center;width:220px;outline:none;margin-top:6px}
+  .stage{font:800 13px 'Nunito',sans-serif;color:#7d726a;margin-top:4px}
   .bar{height:16px;background:#f0e6d8;border-radius:999px;overflow:hidden;margin:12px auto 4px;max-width:320px}
-  .bar i{display:block;height:100%;background:linear-gradient(90deg,#ec3013,#7cb342);border-radius:999px;transition:width .6s}
-  .xp{font:800 12px 'Archivo',sans-serif;color:#6e6a68}
-  .feed{background:#ec3013;color:#fff;border:0;border-radius:14px;padding:14px 26px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #cfcecd;margin-top:14px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#7c2340,#7cb342);border-radius:999px;transition:width .6s}
+  .xp{font:800 12px 'Nunito',sans-serif;color:#7d726a}
+  .feed{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 26px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e0d5c2;margin-top:14px}
   .feed:disabled{opacity:.5;cursor:default}
   .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-  .stat{background:#f3f2f2;border:2px solid #cfcecd;border-radius:16px;padding:10px 16px;font:800 13px 'Archivo',sans-serif;color:#4a4644}
-  .stat b{display:block;font-size:20px;color:#ec3013}
+  .stat{background:#f4ece0;border:1px solid #e0d5c2;border-radius:16px;padding:10px 16px;font:800 13px 'Nunito',sans-serif;color:#5c534d}
+  .stat b{display:block;font-size:20px;color:#7c2340}
   .sticks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-  .stick{width:64px;height:64px;border-radius:16px;background:#f3f2f2;border:2px solid #cfcecd;display:flex;align-items:center;justify-content:center;font-size:32px}
+  .stick{width:64px;height:64px;border-radius:16px;background:#f4ece0;border:1px solid #e0d5c2;display:flex;align-items:center;justify-content:center;font-size:32px}
   .stick.locked{filter:grayscale(1);opacity:.35}
-  .sec-title{font:900 13px 'Archivo',sans-serif;color:#ec3013;letter-spacing:1.5px;text-transform:uppercase;margin:4px 0 12px}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:26px;text-align:center;font:700 14px 'Archivo',sans-serif;color:#6e6a68}
-  .empty a{color:#ec3013;font-weight:900}
+  .sec-title{font:900 13px 'Nunito',sans-serif;color:#7c2340;letter-spacing:1.5px;text-transform:uppercase;margin:4px 0 12px}
+  .empty{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#7d726a}
+  .empty a{color:#7c2340;font-weight:900}
   .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
-  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#7d726a;margin-top:26px}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>

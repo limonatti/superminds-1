@@ -6,12 +6,11 @@
 <title>Игротека · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   /* кнопки игр в колонке списка — тот же вид, что и .li */
-  .gbtn{border:0;border-bottom:2px solid var(--color-divider);border-left:6px solid transparent;background:transparent;
+  .gbtn{border:0;border-bottom:1px solid var(--color-divider);border-left:6px solid transparent;background:transparent;
     text-align:left;width:100%;display:block;padding:16px 18px;font-size:15px;font-weight:800;letter-spacing:-.01em;
     color:var(--color-text);transition:background .16s ease-out}
   .gbtn:hover{background:var(--color-accent-100)}
@@ -24,10 +23,10 @@
   .hintru{font-size:20px;font-weight:700;color:var(--color-text)}
   .em{font-size:64px;line-height:1;text-align:center}
   .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .primary{background:var(--color-accent);color:#fff;border:0;border-radius:0;padding:14px 22px;
+  .primary{background:var(--color-accent);color:#fff;border:0;border-radius:9px;padding:14px 22px;
     font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
   .primary:hover{background:var(--color-accent-600)}
-  .ghost{background:none;color:var(--color-text);border:2px solid var(--color-text);border-radius:0;padding:12px 20px;
+  .ghost{background:none;color:var(--color-text);border:1px solid var(--color-divider);border-radius:9px;padding:12px 20px;
     font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
   .ghost:hover{background:var(--color-text);color:var(--color-bg)}
 
@@ -36,14 +35,14 @@
   .slot{width:48px;height:58px;border-bottom:4px solid var(--color-text);display:flex;align-items:center;justify-content:center;
     font-size:30px;font-weight:800}
   .letters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-  .lt{width:52px;height:58px;background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;
+  .lt{width:52px;height:58px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:9px;
     font-size:26px;font-weight:800;color:var(--color-text)}
   .lt:hover{background:var(--color-accent-100)}
   .lt.used{opacity:.2;pointer-events:none}
 
   /* варианты ответа */
   .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
-  .opt{background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;padding:16px;
+  .opt{background:var(--color-bg);border:1px solid var(--color-divider);border-radius:9px;padding:16px;
     font-size:18px;font-weight:700;text-align:center;color:var(--color-text)}
   .opt:hover{background:var(--color-accent-100)}
   .opt .oem{font-size:32px;display:block;margin-bottom:4px}
@@ -52,7 +51,7 @@
 
   /* верно-неверно */
   .tf{display:flex;gap:12px;justify-content:center;margin-top:20px}
-  .tf button{border:2px solid var(--color-text);border-radius:0;padding:16px 34px;
+  .tf button{border:1px solid var(--color-divider);border-radius:9px;padding:16px 34px;
     font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--color-bg);color:var(--color-text)}
   .yes:hover{background:#6ab04c;border-color:#4a8b34;color:#fff}
   .no:hover{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
@@ -61,13 +60,13 @@
 
   /* поиск слов */
   .grid{display:grid;gap:4px;justify-content:center;margin:10px auto 0}
-  .cell{width:34px;height:34px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:0;
+  .cell{width:34px;height:34px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:9px;
     display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;
     color:var(--color-neutral-800);cursor:pointer;user-select:none}
   .cell.pick{background:var(--color-accent-200);border-color:var(--color-accent)}
   .cell.found{background:#6ab04c;border-color:#4a8b34;color:#fff;cursor:default}
   .wlist{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
-  .wtag{border:2px solid var(--color-divider);padding:6px 12px;font-size:12px;font-weight:800;
+  .wtag{border:1px solid var(--color-divider);padding:6px 12px;font-size:12px;font-weight:800;
     letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-700)}
   .wtag.done{background:#6ab04c;border-color:#4a8b34;color:#fff;text-decoration:line-through}
 
@@ -76,7 +75,7 @@
   .hl{width:34px;border-bottom:4px solid var(--color-text);font-size:27px;font-weight:800;
     text-align:center;min-height:40px}
   .keys{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px auto 0;max-width:540px}
-  .key{width:40px;height:44px;background:var(--color-bg);border:2px solid var(--color-text);border-radius:0;
+  .key{width:40px;height:44px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:9px;
     font-size:15px;font-weight:800;color:var(--color-text)}
   .key:hover{background:var(--color-accent-100)}
   .key.miss{background:var(--color-neutral-200);border-color:var(--color-neutral-400);color:var(--color-neutral-500);pointer-events:none}
@@ -84,21 +83,21 @@
   .gallow{font-size:52px;text-align:center;letter-spacing:6px;min-height:62px}
 
   /* впиши слово */
-  .inp{display:block;margin:18px auto 0;width:min(340px,92%);border:2px solid var(--color-text);border-radius:0;
-    padding:14px;font:700 22px "Archivo",sans-serif;text-align:center;background:var(--color-bg);color:var(--color-text)}
+  .inp{display:block;margin:18px auto 0;width:min(340px,92%);border:1px solid var(--color-divider);border-radius:9px;
+    padding:14px;font:700 22px "Nunito",sans-serif;text-align:center;background:var(--color-bg);color:var(--color-text)}
   .inp:focus{outline:none;border-color:var(--color-accent)}
   .inp.bad{border-color:var(--color-accent);background:var(--color-accent-100)}
 
   @media(max-width:1160px){
     .gbtn,.mclink{flex:0 0 auto;width:auto;min-width:180px;border-bottom:0;border-left:0;
-      border-right:2px solid var(--color-divider);border-top:6px solid transparent}
+      border-right:1px solid var(--color-divider);border-top:6px solid transparent}
     .gbtn.on{border-top-color:var(--color-accent)}
     .mcbox{display:contents}
   }
 
   /* блок с кубическими играми */
-  .mcbox{border-top:2px solid var(--color-divider)}
-  .mclink{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:2px solid var(--color-divider);
+  .mcbox{border-top:1px solid var(--color-divider)}
+  .mclink{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--color-divider);
     color:var(--color-text);text-decoration:none;transition:background .16s ease-out}
   .mclink:hover{background:var(--color-accent-100)}
   .mclink i{width:22px;height:22px;flex:none;display:block;
@@ -126,7 +125,7 @@
       <div class="pane">
         <div class="pane-hd">
           <span>Шаг 2 · Игра</span>
-          <select id="unitSel" style="border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);border-radius:0;padding:8px 10px;font:700 12px 'Archivo',sans-serif;max-width:240px"></select>
+          <select id="unitSel" style="border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);border-radius:9px;padding:8px 10px;font:700 12px 'Nunito',sans-serif;max-width:240px"></select>
         </div>
         <div class="ink">
           <div><div class="k">Игротека / Arcade</div><h2>Слова юнита в игре</h2>
@@ -144,8 +143,8 @@
 <script src="course-words.js?v=442908de"></script>
   <script src="speakout-words.js?v=3094c556"></script>
   <script src="sm-auth.js?v=f191dd29"></script>
-  <script src="sm-shell.js?v=4b1f197b"></script>
-  <script src="sm-play.js?v=8b786156"></script>
+  <script src="sm-shell.js?v=29cfb3d6"></script>
+  <script src="sm-play.js?v=dd356834"></script>
   <script>
     SMUI.mount({ role:"student", active:"courses" });
     const q=new URLSearchParams(location.search);

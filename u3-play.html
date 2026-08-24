@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Карточки и игры · Pet show</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{--accent:#ec3013;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
-    --ink:#201e1d;--muted:#4a4644;--line:#cfcecd}
-  body{font-family:'Archivo','Segoe UI',sans-serif;background:#f3f2f2;color:var(--ink);min-height:100vh;padding:16px}
+  :root{--accent:#7c2340;--terra:#b5654a;--olive:#5f8f5a;--mustard:#c9843b;--teal:#6fa8a0;--plum:#9a5b7a;
+    --ink:#241a18;--muted:#5c534d;--line:#e0d5c2}
+  body{font-family:'Nunito','Segoe UI',sans-serif;background:#f4ece0;color:var(--ink);min-height:100vh;padding:16px}
   a.home{position:fixed;top:10px;left:10px;z-index:99;background:var(--accent);color:#fff;padding:9px 16px;
-    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #cfcecd}
-  h1{text-align:center;font-family:'Archivo',sans-serif;font-size:clamp(26px,5vw,42px);color:var(--accent);margin-bottom:2px}
+    border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 4px 0 #e0d5c2}
+  h1{text-align:center;font-family:'Nunito',sans-serif;font-size:clamp(26px,5vw,42px);color:var(--accent);margin-bottom:2px}
   .sub{text-align:center;color:var(--muted);font-weight:700;margin-bottom:16px;font-size:15px}
   .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
   .tab{border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:800;font-size:14px;
-    padding:11px 16px;border-radius:14px;color:var(--ink);background:#fff;box-shadow:0 3px 8px rgba(150,120,90,.08)}
+    padding:11px 16px;border-radius:14px;color:var(--ink);background:#fffdf8;box-shadow:0 3px 8px rgba(150,120,90,.08)}
   .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
   .panel{display:none;max-width:920px;margin:0 auto}
   .panel.active{display:block}
@@ -27,7 +27,7 @@
   .card.flip .inner{transform:rotateY(180deg)}
   .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;
     align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12);border:4px solid #fff}
-  .front{background:#fff}
+  .front{background:#fffdf8}
   .front .emo{font-size:64px} .front .en{font-size:22px;font-weight:800;margin-top:6px}
   .front .hint{font-size:12px;color:#b9ad9c;margin-top:6px}
   .back{transform:rotateY(180deg);color:#fff;flex-direction:column;gap:4px}
@@ -38,7 +38,7 @@
   .board{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
   .col{display:flex;flex-direction:column;gap:10px}
   .colh{text-align:center;font-weight:800;color:var(--accent);margin-bottom:2px}
-  .chip{padding:14px;border-radius:16px;background:#fff;border:3px solid #eee;font-size:20px;font-weight:800;
+  .chip{padding:14px;border-radius:16px;background:#fffdf8;border:3px solid #eee;font-size:20px;font-weight:800;
     text-align:center;cursor:pointer;transition:.15s;box-shadow:0 3px 8px rgba(0,0,0,.08)}
   .chip .big{font-size:34px}
   .chip.sel{border-color:var(--accent);transform:scale(1.04);background:#f7ecef}
@@ -47,7 +47,7 @@
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
   .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .score{font-weight:800;color:var(--mustard);font-size:18px}
-  .q{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 16px rgba(0,0,0,.1);text-align:center;border:4px solid #fff}
+  .q{background:#fffdf8;border-radius:22px;padding:22px;box-shadow:0 6px 16px rgba(0,0,0,.1);text-align:center;border:4px solid #fff}
   .scene{position:relative;width:150px;height:150px;margin:6px auto 8px}
   .scene .box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:66px}
   .scene .an{position:absolute;left:50%;transform:translateX(-50%);font-size:40px}
@@ -57,7 +57,7 @@
   .opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .opt{border:none;font-family:inherit;font-weight:800;font-size:19px;cursor:pointer;padding:13px 22px;border-radius:16px;
     background:var(--terra);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s}
-  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#ec3013!important}
+  .opt:active{transform:translateY(3px)} .opt.ok{background:var(--olive)!important} .opt.no{background:#7c2340!important}
   .fb{min-height:26px;font-weight:800;margin-top:12px;font-size:18px}
   .next{margin-top:14px;background:var(--accent);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:16px;
     padding:11px 24px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15)}
@@ -65,8 +65,8 @@
   .footer{text-align:center;color:#c3b8a6;font-size:12px;margin-top:26px;font-weight:700}
 </style>
 <script src="sm-voice.js?v=761e90eb"></script>
-  <script src="sm-play.js?v=8b786156"></script>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+  <script src="sm-play.js?v=dd356834"></script>
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
 <a class="home" href="unit3.html">← Меню</a>
@@ -167,7 +167,7 @@ function wRender(){
     b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
       if(o[0]===p[0]){b.classList.add('ok');wScore++;document.getElementById('wScore').textContent='⭐ '+wScore;sfxOK();
         fb.textContent='✅ The '+a.en+' is '+p[0]+' the box.';fb.style.color='#5f8f5a';say('The '+a.en+' is '+p[0]+' the box');}
-      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+p[0];fb.style.color='#ec3013';
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+p[0];fb.style.color='#7c2340';
         Array.from(opts.children).forEach(x=>{if(x.textContent===p[0])x.classList.add('ok');});}
       var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=wRender;fb.after(n);};
     opts.appendChild(b);});
@@ -189,7 +189,7 @@ function lRender(){
   shuffle([ans,wrong]).forEach(function(o){var b=document.createElement('button');b.className='opt';b.style.fontSize='16px';b.textContent=o;
     b.onclick=function(){Array.from(opts.children).forEach(x=>x.disabled=true);
       if(o===ans){b.classList.add('ok');lScore++;document.getElementById('lScore').textContent='⭐ '+lScore;sfxOK();fb.textContent='✅ '+ans;fb.style.color='#5f8f5a';say(ans);}
-      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+ans;fb.style.color='#ec3013';Array.from(opts.children).forEach(x=>{if(x.textContent===ans)x.classList.add('ok');});}
+      else{b.classList.add('no');sfxNo();fb.textContent='❌ Правильно: '+ans;fb.style.color='#7c2340';Array.from(opts.children).forEach(x=>{if(x.textContent===ans)x.classList.add('ok');});}
       var n=document.createElement('button');n.className='next';n.textContent='Дальше →';n.onclick=lRender;fb.after(n);};
     opts.appendChild(b);});
 }

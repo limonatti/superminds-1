@@ -6,9 +6,8 @@
 <title>Кубический мир · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   /* ---- кубический мир: своя пиксельная палитра ---- */
   .mc{--grass:#6ab04c;--grass2:#4a8b34;--dirt:#9c6b43;--dirt2:#7b5230;--stone:#9aa0a6;
@@ -80,7 +79,7 @@
   .brick.roof{background:var(--lava)}
   .brick.door{background:var(--wood)}
   .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
-  .opt{background:var(--color-bg);border:2px solid var(--color-text);padding:16px;text-align:center;
+  .opt{background:var(--color-bg);border:1px solid var(--color-divider);padding:16px;text-align:center;
     font-size:17px;font-weight:700}
   .opt:hover{background:var(--color-accent-100)}
   .opt.ok{background:var(--grass);border-color:var(--grass2);color:#fff}
@@ -115,7 +114,7 @@
       <div class="pane">
         <div class="pane-hd">
           <span>Шаг 2 · <span id="gName">Копалка</span></span>
-          <select id="unitSel" style="border:2px solid var(--color-text);background:var(--color-bg);color:var(--color-text);border-radius:0;padding:8px 10px;font:700 12px 'Archivo',sans-serif;max-width:230px"></select>
+          <select id="unitSel" style="border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);border-radius:9px;padding:8px 10px;font:700 12px 'Nunito',sans-serif;max-width:230px"></select>
         </div>
         <div class="ink">
           <div><div class="k">Кубический мир / Blocks</div>
@@ -134,8 +133,8 @@
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=f191dd29"></script>
-<script src="sm-shell.js?v=4b1f197b"></script>
-<script src="sm-play.js?v=8b786156"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
+<script src="sm-play.js?v=dd356834"></script>
 <script>
 const esc = SMUI.esc;
 const stage = document.getElementById("stage");

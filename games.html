@@ -5,88 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Игры · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e0d5c2}
   .wrap{max-width:720px;margin:0 auto;padding:60px 16px 50px}
-  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#ec3013;letter-spacing:-1px}
-  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  h1{margin:0;text-align:center;font-size:clamp(26px,6vw,40px);font-weight:700;color:#7c2340;letter-spacing:-1px}
+  .sub{text-align:center;margin:8px 0 18px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
   .games{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
-  .gbtn{background:#fff;border:2px solid #cfcecd;border-radius:14px;padding:10px 16px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
-  .gbtn.on{background:#ec3013;border-color:#ec3013;color:#fff}
-  .stage{background:#fff;border-radius:26px;box-shadow:0 8px 0 #cfcecd;padding:24px;min-height:360px}
+  .gbtn{background:#fffdf8;border:1px solid #e0d5c2;border-radius:14px;padding:10px 16px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
+  .gbtn.on{background:#7c2340;border-color:#7c2340;color:#fff}
+  .stage{background:#fffdf8;border-radius:26px;box-shadow:0 8px 0 #e0d5c2;padding:24px;min-height:360px}
   .center{text-align:center}
   .big{font-size:64px;line-height:1}
-  .speak{margin-top:10px;background:#eae9e9;border-radius:999px;padding:9px 20px;font:800 14px 'Archivo',sans-serif;color:#ec3013}
-  .primary{background:#ec3013;color:#fff;border-radius:16px;padding:14px 26px;font:800 16px 'Archivo',sans-serif;box-shadow:0 5px 0 #ae1800}
-  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
+  .speak{margin-top:10px;background:#ece2d3;border-radius:999px;padding:9px 20px;font:800 14px 'Nunito',sans-serif;color:#7c2340}
+  .primary{background:#7c2340;color:#fff;border-radius:16px;padding:14px 26px;font:800 16px 'Nunito',sans-serif;box-shadow:0 5px 0 #5f1a31}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#7d726a;margin-top:26px}
 
   /* wheel */
   .wheelwrap{position:relative;width:300px;height:300px;margin:6px auto 4px}
   .pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:32px;z-index:3;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
   #wheel{transition:transform 4s cubic-bezier(.17,.67,.24,1)}
-  .result{margin-top:12px;font-size:24px;font-weight:700;color:#ec3013;min-height:30px}
-  .phrase{font:800 15px 'Archivo',sans-serif;color:#4a4644;margin-top:2px}
+  .result{margin-top:12px;font-size:24px;font-weight:700;color:#7c2340;min-height:30px}
+  .phrase{font:800 15px 'Nunito',sans-serif;color:#5c534d;margin-top:2px}
 
   /* memory */
   .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;margin:0 auto}
-  .mcard{aspect-ratio:1;border-radius:16px;background:#ec3013;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer;transition:transform .12s;padding:4px;text-align:center;word-break:break-word}
+  .mcard{aspect-ratio:1;border-radius:16px;background:#7c2340;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer;transition:transform .12s;padding:4px;text-align:center;word-break:break-word}
   .mcard .q{font-size:30px}
-  .mcard.open{background:#fff;border:2px solid #cfcecd;color:#201e1d}
-  .mcard.done{background:#dff0d2;border:2px solid #7cb342;color:#4a8b34;cursor:default}
+  .mcard.open{background:#fffdf8;border:1px solid #e0d5c2;color:#241a18}
+  .mcard.done{background:#dff0d2;border:2px solid #7cb342;color:#3f8f5c;cursor:default}
   .mcard.en{font-size:16px}
-  .mstat{text-align:center;font:800 14px 'Archivo',sans-serif;color:#4a4644;margin-bottom:12px}
+  .mstat{text-align:center;font:800 14px 'Nunito',sans-serif;color:#5c534d;margin-bottom:12px}
 
   /* race */
-  .lane{position:relative;background:#eae9e9;border-radius:14px;height:56px;margin-bottom:10px;overflow:hidden;border:2px solid #eae9e9}
+  .lane{position:relative;background:#ece2d3;border-radius:14px;height:56px;margin-bottom:10px;overflow:hidden;border:2px solid #ece2d3}
   .lane.red{background:#fbeef0;border-color:#f3d4da}
   .lane .car{position:absolute;top:8px;left:2%;font-size:30px;transition:left .4s ease}
   .lane .flag{position:absolute;right:6px;top:12px;font-size:24px}
-  .turn{text-align:center;font:900 16px 'Archivo',sans-serif;margin:6px 0 12px}
-  .turn.green{color:#4a8b34} .turn.red{color:#ec3013}
+  .turn{text-align:center;font:900 16px 'Nunito',sans-serif;margin:6px 0 12px}
+  .turn.green{color:#3f8f5c} .turn.red{color:#7c2340}
 
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-  .opt{background:#fff;border:2px solid #cfcecd;border-radius:16px;padding:15px;font-size:20px;font-weight:600}
+  .opt{background:#fffdf8;border:1px solid #e0d5c2;border-radius:16px;padding:15px;font-size:20px;font-weight:600}
   .opt .oem{font-size:28px;display:block;margin-bottom:2px}
-  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#4a8b34}
-  .opt.wrong{background:#fff2ef;border-color:#ec3013;color:#ae1800}
+  .opt.correct{background:#dff0d2;border-color:#7cb342;color:#3f8f5c}
+  .opt.wrong{background:#fbeae4;border-color:#7c2340;color:#7b2412}
 
-  .timer{font:900 22px 'Archivo',sans-serif;color:#ec3013;text-align:center}
-  .score{font:900 16px 'Archivo',sans-serif;color:#4a8b34;text-align:center;margin-top:4px}
+  .timer{font:900 22px 'Nunito',sans-serif;color:#7c2340;text-align:center}
+  .score{font:900 16px 'Nunito',sans-serif;color:#3f8f5c;text-align:center;margin-top:4px}
 
   /* шарики */
-  .balar{position:relative;height:340px;background:linear-gradient(#e8f3fb,#f9fcff);border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #cfcecd;margin-top:10px}
+  .balar{position:relative;height:340px;background:linear-gradient(#e8f3fb,#f9fcff);border-radius:22px;overflow:hidden;box-shadow:0 8px 0 #e0d5c2;margin-top:10px}
   .bal{position:absolute;width:92px;text-align:center;cursor:pointer;user-select:none}
   .bal .bb{font-size:58px;line-height:1;transition:transform .22s}
   .bal.pop .bb{transform:scale(0)}
-  .bal .bw{font:800 13px 'Archivo',sans-serif;background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:3px 9px;display:inline-block}
+  .bal .bw{font:800 13px 'Nunito',sans-serif;background:#fffdf8;border:1px solid #e0d5c2;border-radius:999px;padding:3px 9px;display:inline-block}
   @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
 
   /* кроты */
   .holes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:470px;margin:14px auto 0}
-  .hole{position:relative;height:112px;background:#f3f2f2;border-radius:18px;border:2px solid #cfcecd;overflow:hidden}
+  .hole{position:relative;height:112px;background:#f4ece0;border-radius:18px;border:1px solid #e0d5c2;overflow:hidden}
   .hole .dirt{position:absolute;bottom:0;left:8%;right:8%;height:22px;background:#c9a27a;border-radius:50% 50% 0 0}
   .mole{position:absolute;left:0;right:0;bottom:-110px;text-align:center;transition:bottom .25s;cursor:pointer}
   .mole.up{bottom:8px}
   .mole .mm{font-size:42px;line-height:1}
-  .mole .mw{font:800 12px 'Archivo',sans-serif;background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:2px 8px;display:inline-block}
+  .mole .mw{font:800 12px 'Nunito',sans-serif;background:#fffdf8;border:1px solid #e0d5c2;border-radius:999px;padding:2px 8px;display:inline-block}
 
   /* коробки */
   .gifts{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px;max-width:520px;margin:14px auto 0}
-  .gift{background:#fff;border:2px solid #cfcecd;border-radius:18px;min-height:96px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:42px;cursor:pointer;box-shadow:0 5px 0 #cfcecd;transition:transform .12s}
+  .gift{background:#fffdf8;border:1px solid #e0d5c2;border-radius:18px;min-height:96px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:42px;cursor:pointer;box-shadow:0 5px 0 #e0d5c2;transition:transform .12s}
   .gift:hover{transform:scale(1.05)}
-  .gift.open{background:#f3f2f2;cursor:default;font-size:28px;transform:none}
-  .gift .gw{font:800 13px 'Archivo',sans-serif;margin-top:4px}
+  .gift.open{background:#f4ece0;cursor:default;font-size:28px;transform:none}
+  .gift .gw{font:800 13px 'Nunito',sans-serif;margin-top:4px}
 
   /* конфетти */
   .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
   <a class="home" href="course.html">← Домой</a>
@@ -94,7 +94,7 @@
     <h1 id="title">🎮 Игры</h1>
     <div class="sub" id="sub"></div>
     <div style="display:flex;justify-content:center;margin-bottom:12px">
-      <select id="unitSel" style="background:#fff;border:2px solid #cfcecd;border-radius:14px;padding:10px 12px;font:800 14px 'Archivo',sans-serif;color:#4a4644"></select>
+      <select id="unitSel" style="background:#fffdf8;border:1px solid #e0d5c2;border-radius:14px;padding:10px 12px;font:800 14px 'Nunito',sans-serif;color:#5c534d"></select>
     </div>
     <div class="games" id="games"></div>
     <div class="stage" id="stage"></div>
@@ -109,7 +109,7 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-  <script src="sm-play.js?v=8b786156"></script>
+  <script src="sm-play.js?v=dd356834"></script>
   <script>
     const q=new URLSearchParams(location.search);
     /* ---- выбор юнита: Super Minds + Speakout B1 и B1+ ---- */
@@ -197,14 +197,14 @@ window.SM_HANDLES_COURSE = true;
       GAMES.forEach(g=>{const b=document.createElement("button");b.className="gbtn"+(game===g.id?" on":"");b.textContent=g.label;
         b.onclick=()=>{game=g.id;renderGames();start();};box.appendChild(b);});}
     function start(){
-      if(!WORDS.length){document.getElementById("stage").innerHTML='<div class="center" style="padding:34px 12px"><div class="big">📭</div><h2 style="color:#ec3013;margin:8px 0">В этом юните пока нет слов</h2><div class="phrase">Добавь слова в «📚 Конструкторе учебников» — и все игры заработают!</div></div>';return;}
+      if(!WORDS.length){document.getElementById("stage").innerHTML='<div class="center" style="padding:34px 12px"><div class="big">📭</div><h2 style="color:#7c2340;margin:8px 0">В этом юните пока нет слов</h2><div class="phrase">Добавь слова в «📚 Конструкторе учебников» — и все игры заработают!</div></div>';return;}
       if(game==="wheel")wheel(); else if(game==="memory")memory(); else if(game==="race")race(); else if(game==="balloon")balloon(); else if(game==="mole")mole(); else if(game==="box")box(); else flash(); }
 
     /* ---------- Колесо ---------- */
     function wheel(){
       const items=WORDS.slice(0,10);
       const n=items.length, sec=360/n, R=150, cx=150, cy=150;
-      const cols=["#eae9e9","#eae9e9","#eae9e9","#fbe6de","#efe0e6","#faf1d8"];
+      const cols=["#ece2d3","#ece2d3","#ece2d3","#fbe6de","#efe0e6","#faf1d8"];
       function pt(ang){const a=(ang-90)*Math.PI/180;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];}
       let paths="",labels="";
       items.forEach((w,i)=>{const a0=i*sec,a1=(i+1)*sec;const[p0x,p0y]=pt(a0),[p1x,p1y]=pt(a1);
@@ -214,7 +214,7 @@ window.SM_HANDLES_COURSE = true;
       document.getElementById("stage").innerHTML=
         '<div class="center"><div class="wheelwrap"><div class="pointer">🔻</div>'+
         '<svg id="wheel" width="300" height="300" viewBox="0 0 300 300">'+paths+labels+
-        '<circle cx="150" cy="150" r="26" fill="#ec3013"/><text x="150" y="158" font-size="22" text-anchor="middle">🎡</text></svg></div>'+
+        '<circle cx="150" cy="150" r="26" fill="#7c2340"/><text x="150" y="158" font-size="22" text-anchor="middle">🎡</text></svg></div>'+
         '<div class="result" id="res">Крути колесо!</div><div class="phrase" id="phr"></div>'+
         '<button class="primary" id="spin" style="margin-top:10px">Крутить 🎡</button></div>';
       let rot=0, spinning=false;
@@ -275,7 +275,7 @@ window.SM_HANDLES_COURSE = true;
             if(ok){b.classList.add("correct");beep(true);speak(w.en);if(turn==="green")posG++;else posR++;place();}
             else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
             if(posG>=STEPS||posR>=STEPS){const win=posG>=STEPS?"Зелёные":"Красные";setTimeout(()=>{fanfare();confetti();
-              document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:20px"><div class="big">🏆</div><h2 style="color:#ec3013;margin:6px 0">'+win+' победили!</h2><button class="primary" onclick="location.reload()">Ещё раз</button></div>';
+              document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:20px"><div class="big">🏆</div><h2 style="color:#7c2340;margin:6px 0">'+win+' победили!</h2><button class="primary" onclick="location.reload()">Ещё раз</button></div>';
               document.getElementById("turn").textContent="";},700);return;}
             setTimeout(()=>{turn=turn==="green"?"red":"green";const t=document.getElementById("turn");
               t.className="turn "+turn;t.textContent=turn==="green"?"Зелёные, ваш ход! 💚":"Красные, ваш ход! ❤️";ask();},1100);};
@@ -299,7 +299,7 @@ window.SM_HANDLES_COURSE = true;
             if(ok){b.classList.add("correct");beep(true);score++;document.getElementById("sc").textContent="Очки: "+score;}
             else{b.classList.add("wrong");beep(false);const cb=[...box.children].find(x=>x.textContent===w.en);if(cb)cb.classList.add("correct");}
             speak(w.en);setTimeout(ask,ok?350:700);};box.appendChild(b);});}
-      function end(){document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:16px"><div class="big">'+(score>=10?"🌟":"⚡")+'</div><h2 style="color:#ec3013;margin:6px 0">Очки: '+score+'</h2><button class="primary" onclick="(function(){location.reload();})()">Ещё раз</button></div>';fanfare();}
+      function end(){document.getElementById("qbox").innerHTML='<div class="center" style="margin-top:16px"><div class="big">'+(score>=10?"🌟":"⚡")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+'</h2><button class="primary" onclick="(function(){location.reload();})()">Ещё раз</button></div>';fanfare();}
       timer=setInterval(tick,1000);ask();
     }
 
@@ -329,7 +329,7 @@ window.SM_HANDLES_COURSE = true;
           ar.appendChild(d);});
       }
       function end(){const ar=document.getElementById("ar");if(!ar)return;
-        ar.innerHTML='<div class="center" style="padding-top:96px"><div class="big">'+(score>=6?"🌟":"🎈")+'</div><h2 style="color:#ec3013;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="balloon()">Ещё раз</button></div>';
+        ar.innerHTML='<div class="center" style="padding-top:96px"><div class="big">'+(score>=6?"🌟":"🎈")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="balloon()">Ещё раз</button></div>';
         fanfare();if(score>=6)confetti();}
       roundGo();
     }
@@ -367,7 +367,7 @@ window.SM_HANDLES_COURSE = true;
         moleTimer=setTimeout(()=>{if(!busy&&hz.isConnected){busy=true;moles.forEach(m=>m.classList.remove("up"));beep(false);setTimeout(roundGo,450);}},3400);
       }
       function end(){clearTimeout(moleTimer);
-        document.getElementById("stage").innerHTML='<div class="center" style="margin-top:34px"><div class="big">'+(score>=7?"🏆":"🐹")+'</div><h2 style="color:#ec3013;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="mole()">Ещё раз</button></div>';
+        document.getElementById("stage").innerHTML='<div class="center" style="margin-top:34px"><div class="big">'+(score>=7?"🏆":"🐹")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+total+'</h2><button class="primary" onclick="mole()">Ещё раз</button></div>';
         fanfare();if(score>=7)confetti();}
       roundGo();
     }
@@ -400,7 +400,7 @@ window.SM_HANDLES_COURSE = true;
             bo.appendChild(b);});
         };
         gf.appendChild(g);});
-      function end(){document.getElementById("bq").innerHTML='<div class="center" style="margin-top:14px"><div class="big">'+(score>=6?"🏆":"🎁")+'</div><h2 style="color:#ec3013;margin:6px 0">Очки: '+score+' из '+pick.length+'</h2><button class="primary" onclick="box()">Ещё раз</button></div>';
+      function end(){document.getElementById("bq").innerHTML='<div class="center" style="margin-top:14px"><div class="big">'+(score>=6?"🏆":"🎁")+'</div><h2 style="color:#7c2340;margin:6px 0">Очки: '+score+' из '+pick.length+'</h2><button class="primary" onclick="box()">Ещё раз</button></div>';
         fanfare();if(score>=6)confetti();}
     }
 

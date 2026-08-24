@@ -136,7 +136,7 @@
       '<div class="sec-title" style="margin-top:14px">' + esc((c.emoji || "📘") + " " + c.title) + " · юниты</div>" +
       (us.length ? us.map(function (u, i) { return unitRow(u, i, us.length); }).join("") : '<div class="empty">Пока нет юнитов. Добавь первый 👇</div>') +
       '<button class="primary" id="newU">＋ Новый юнит</button>' +
-      '<button class="primary" id="aiLesson" style="background:#2980b9;box-shadow:0 4px 0 #1c5a85">🤖 Собрать урок по теме</button>' +
+      '<button class="primary" id="aiLesson" style="background:#b5654a;box-shadow:0 4px 0 #763d2c">🤖 Собрать урок по теме</button>' +
       '<div class="msg" id="msg"></div>' +
       '<div class="hint">У каждого юнита две кнопки: <b>✎ Слова</b> — список слов, картинки и настройки; <b>🧩 Упражнения</b> — конструктор заданий именно для этого юнита (выбор ответа, пропуски, пары, аудио и остальные типы). Слова автоматически попадают в тренажёр, игры и листы.</div>';
     document.getElementById("back").onclick = showCourses;
@@ -268,10 +268,10 @@
       '<label>Слова юнита</label><div id="wlist"></div>' +
       '<div class="wbar"><button type="button" class="bt" id="addW">＋ слово</button>' +
       '<button type="button" class="bt" id="mode">⇄ ввести списком</button>' +
-      '<button type="button" class="bt" id="aiFill" style="background:#2980b9;border-color:#2980b9;color:#fff">🤖 Заполнить переводы и эмодзи</button>' +
+      '<button type="button" class="bt" id="aiFill" style="background:#b5654a;border-color:#b5654a;color:#fff">🤖 Заполнить переводы и эмодзи</button>' +
       '<button type="button" class="bt" id="aiImgAll" style="background:#3f7a20;border-color:#3f7a20;color:#fff">🎨 Картинки ко всем словам</button>' +
       /* стиль рисунка: детям и подросткам нужны разные картинки */
-      '<select id="imgStyle" style="width:auto;padding:8px 12px;border:2px solid #cfcecd;border-radius:12px;font:800 13px \'Archivo\',sans-serif;background:#fff">' +
+      '<select id="imgStyle" style="width:auto;padding:8px 12px;border:1px solid #e0d5c2;border-radius:12px;font:800 13px \'Nunito\',sans-serif;background:#fff">' +
         '<option value="kids">детская картинка</option>' +
         '<option value="modern">современная иллюстрация</option>' +
         '<option value="photo">фотореалистично</option>' +

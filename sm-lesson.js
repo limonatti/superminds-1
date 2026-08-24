@@ -48,26 +48,26 @@
     var st = document.createElement("style");
     st.id = "lessonCss";
     st.textContent =
-      ".lsec{background:#fff;border-radius:18px;box-shadow:0 5px 0 #cfcecd;padding:14px 15px;margin-bottom:14px}" +
-      ".lsec.over{box-shadow:0 5px 0 #ec3013}" +
+      ".lsec{background:#fff;border-radius:18px;box-shadow:0 5px 0 #e0d5c2;padding:14px 15px;margin-bottom:14px}" +
+      ".lsec.over{box-shadow:0 5px 0 #7c2340}" +
       ".lsec-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}" +
       /* sm-skin.css задаёт полям рамку через !important — заголовок раздела
          должен читаться как заголовок, поэтому перебиваем тем же весом */
-      ".lsec-hd .nm{font:900 12px 'Archivo',sans-serif !important;color:#6e6a68 !important;letter-spacing:.6px;text-transform:uppercase;flex:1;width:auto !important;border:0 !important;background:transparent !important;padding:2px 0 !important;box-shadow:none !important}" +
-      ".lsec-hd .nm:hover{color:#201e1d !important}" +
-      ".lsec-hd .nm:focus{outline:none;color:#ec3013 !important;border-bottom:2px solid #ec3013 !important}" +
-      ".lrow{display:flex;align-items:center;gap:9px;background:#f3f2f2;border-radius:12px;padding:9px 11px;margin-bottom:7px;cursor:grab}" +
+      ".lsec-hd .nm{font:900 12px 'Nunito',sans-serif !important;color:#7d726a !important;letter-spacing:.6px;text-transform:uppercase;flex:1;width:auto !important;border:0 !important;background:transparent !important;padding:2px 0 !important;box-shadow:none !important}" +
+      ".lsec-hd .nm:hover{color:#241a18 !important}" +
+      ".lsec-hd .nm:focus{outline:none;color:#7c2340 !important;border-bottom:2px solid #7c2340 !important}" +
+      ".lrow{display:flex;align-items:center;gap:9px;background:#f4ece0;border-radius:12px;padding:9px 11px;margin-bottom:7px;cursor:grab}" +
       ".lrow:last-child{margin-bottom:0}" +
       ".lrow.drag{opacity:.4}" +
       ".lrow .gr{color:#b8b4b2;font-size:15px;flex:none;line-height:1}" +
-      ".lrow .tt{flex:1;font:800 13.5px 'Archivo',sans-serif;min-width:100px;color:#201e1d}" +
-      ".lrow .bg{background:#cfcecd;color:#4a4644;border-radius:999px;padding:3px 8px;font:900 10px 'Archivo',sans-serif;flex:none}" +
-      ".lrow .dr{background:#ffe9c9;color:#8a5a12;border-radius:999px;padding:3px 8px;font:900 10px 'Archivo',sans-serif;flex:none}" +
-      ".lrow .ac{background:none;color:#8a8785;font-size:14px;padding:4px 5px;border-radius:8px;flex:none;line-height:1}" +
-      ".lrow .ac:hover{background:#e4e2e0;color:#201e1d}" +
-      ".lempty{font:700 12px 'Archivo',sans-serif;color:#a8a4a2;padding:8px 2px}" +
-      ".ladd{background:#eae9e9;color:#4a8b34;border-radius:999px;padding:8px 15px;font:800 13px 'Archivo',sans-serif;margin-top:4px}" +
-      ".lbar{display:flex;align-items:center;gap:10px;margin:0 2px 12px;font:700 12px 'Archivo',sans-serif;color:#6e6a68}";
+      ".lrow .tt{flex:1;font:800 13.5px 'Nunito',sans-serif;min-width:100px;color:#241a18}" +
+      ".lrow .bg{background:#e0d5c2;color:#5c534d;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif;flex:none}" +
+      ".lrow .dr{background:#ffe9c9;color:#8a5a12;border-radius:999px;padding:3px 8px;font:900 10px 'Nunito',sans-serif;flex:none}" +
+      ".lrow .ac{background:none;color:#a3968a;font-size:14px;padding:4px 5px;border-radius:8px;flex:none;line-height:1}" +
+      ".lrow .ac:hover{background:#e4e2e0;color:#241a18}" +
+      ".lempty{font:700 12px 'Nunito',sans-serif;color:#a8a4a2;padding:8px 2px}" +
+      ".ladd{background:#ece2d3;color:#3f8f5c;border-radius:999px;padding:8px 15px;font:800 13px 'Nunito',sans-serif;margin-top:4px}" +
+      ".lbar{display:flex;align-items:center;gap:10px;margin:0 2px 12px;font:700 12px 'Nunito',sans-serif;color:#7d726a}";
     document.head.appendChild(st);
   }
 
@@ -286,12 +286,12 @@
 
     var bar = document.createElement("div");
     bar.id = "undoBar";
-    bar.style.cssText = "display:flex;align-items:center;gap:10px;background:#fff2ef;border:2px solid #ffc9c0;border-radius:12px;padding:10px 13px;margin:0 0 12px;font:800 13px 'Archivo',sans-serif;color:#7b190d";
+    bar.style.cssText = "display:flex;align-items:center;gap:10px;background:#fbeae4;border:2px solid #ffc9c0;border-radius:12px;padding:10px 13px;margin:0 0 12px;font:800 13px 'Nunito',sans-serif;color:#7b190d";
     bar.innerHTML = '<span style="flex:1">Задание «' + esc(backup.title || typeLabel(backup.type)) + '» удалено</span>';
 
     var back = document.createElement("button");
     back.type = "button"; back.textContent = "вернуть";
-    back.style.cssText = "background:#7b190d;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px 'Archivo',sans-serif;cursor:pointer";
+    back.style.cssText = "background:#7b190d;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px 'Nunito',sans-serif;cursor:pointer";
     back.onclick = async function () {
       back.disabled = true; back.textContent = "возвращаю…";
       var r = await SM.saveExercise(backup);
@@ -312,13 +312,13 @@
     var ov = document.createElement("div");
     ov.id = "lsnPrev";
     ov.style.cssText = "position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
-    ov.innerHTML = '<div style="background:#f3f2f2;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">' +
-      '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:2px solid #cfcecd">' +
-        '<b style="font:900 15px \'Archivo\',sans-serif">👁 ' + esc(r.title || typeLabel(r.type)) + "</b>" +
+    ov.innerHTML = '<div style="background:#f4ece0;border-radius:20px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 0 rgba(0,0,0,.2)">' +
+      '<div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:1px solid #e0d5c2">' +
+        '<b style="font:900 15px \'Nunito\',sans-serif">👁 ' + esc(r.title || typeLabel(r.type)) + "</b>" +
         '<span style="flex:1"></span>' +
-        '<button id="lsnPrevClose" style="background:#ec3013;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px \'Archivo\',sans-serif;cursor:pointer">закрыть</button>' +
+        '<button id="lsnPrevClose" style="background:#7c2340;color:#fff;border:0;border-radius:999px;padding:7px 15px;font:800 13px \'Nunito\',sans-serif;cursor:pointer">закрыть</button>' +
       "</div>" +
-      '<iframe id="lsnPrevFrame" style="flex:1;width:100%;border:0;background:#f3f2f2;min-height:420px" src="exercises.html?preview=1"></iframe>' +
+      '<iframe id="lsnPrevFrame" style="flex:1;width:100%;border:0;background:#f4ece0;min-height:420px" src="exercises.html?preview=1"></iframe>' +
     "</div>";
     document.body.appendChild(ov);
     ov.onclick = function (e) { if (e.target === ov) ov.remove(); };
@@ -349,19 +349,19 @@
     ov.id = "lsnMove";
     ov.style.cssText = "position:fixed;inset:0;z-index:80;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;padding:18px";
     ov.innerHTML = '<div style="background:#fff;border-radius:20px;max-width:460px;width:100%;padding:20px;box-shadow:0 12px 0 rgba(0,0,0,.2)">' +
-      '<div style="font:900 15px \'Archivo\',sans-serif;margin-bottom:4px">↗ Перенести задание</div>' +
-      '<div style="font:700 13px \'Archivo\',sans-serif;color:#6e6a68;margin-bottom:14px;line-height:1.5">«' + esc(r.title || typeLabel(r.type)) + '» — куда положить копию?</div>' +
-      '<label style="display:block;font:800 11px \'Archivo\',sans-serif;color:#6e6a68;letter-spacing:.08em;margin-bottom:5px">УЧЕБНИК</label>' +
-      '<select id="mvCourse" style="width:100%;border:2px solid #cfcecd;border-radius:12px;padding:10px 12px;font:600 15px \'Archivo\',sans-serif;background:#f3f2f2;margin-bottom:12px">' +
+      '<div style="font:900 15px \'Nunito\',sans-serif;margin-bottom:4px">↗ Перенести задание</div>' +
+      '<div style="font:700 13px \'Nunito\',sans-serif;color:#7d726a;margin-bottom:14px;line-height:1.5">«' + esc(r.title || typeLabel(r.type)) + '» — куда положить копию?</div>' +
+      '<label style="display:block;font:800 11px \'Nunito\',sans-serif;color:#7d726a;letter-spacing:.08em;margin-bottom:5px">УЧЕБНИК</label>' +
+      '<select id="mvCourse" style="width:100%;border:1px solid #e0d5c2;border-radius:12px;padding:10px 12px;font:600 15px \'Nunito\',sans-serif;background:#f4ece0;margin-bottom:12px">' +
         courses.map(function (c) { return '<option value="' + esc(c.id) + '"' + (c.id === $("course").value ? " selected" : "") + ">" + esc((c.emoji || "📘") + " " + c.title) + "</option>"; }).join("") +
       "</select>" +
-      '<label style="display:block;font:800 11px \'Archivo\',sans-serif;color:#6e6a68;letter-spacing:.08em;margin-bottom:5px">ЮНИТ</label>' +
-      '<select id="mvUnit" style="width:100%;border:2px solid #cfcecd;border-radius:12px;padding:10px 12px;font:600 15px \'Archivo\',sans-serif;background:#f3f2f2;margin-bottom:6px"></select>' +
-      '<label style="display:flex;align-items:center;gap:8px;font:700 13px \'Archivo\',sans-serif;color:#4a4644;margin:12px 0 16px;cursor:pointer">' +
+      '<label style="display:block;font:800 11px \'Nunito\',sans-serif;color:#7d726a;letter-spacing:.08em;margin-bottom:5px">ЮНИТ</label>' +
+      '<select id="mvUnit" style="width:100%;border:1px solid #e0d5c2;border-radius:12px;padding:10px 12px;font:600 15px \'Nunito\',sans-serif;background:#f4ece0;margin-bottom:6px"></select>' +
+      '<label style="display:flex;align-items:center;gap:8px;font:700 13px \'Nunito\',sans-serif;color:#5c534d;margin:12px 0 16px;cursor:pointer">' +
         '<input type="checkbox" id="mvCut" style="width:auto"> убрать из этого юнита (перенести, а не копировать)</label>' +
       '<div style="display:flex;gap:8px">' +
-        '<button id="mvGo" style="flex:1;background:#ec3013;color:#fff;border:0;border-radius:12px;padding:12px;font:800 14px \'Archivo\',sans-serif;cursor:pointer;box-shadow:0 4px 0 #ae1800">Перенести</button>' +
-        '<button id="mvNo" style="background:#eae9e9;color:#4a4644;border:0;border-radius:12px;padding:12px 16px;font:800 13px \'Archivo\',sans-serif;cursor:pointer">отмена</button>' +
+        '<button id="mvGo" style="flex:1;background:#7c2340;color:#fff;border:0;border-radius:12px;padding:12px;font:800 14px \'Nunito\',sans-serif;cursor:pointer;box-shadow:0 4px 0 #5f1a31">Перенести</button>' +
+        '<button id="mvNo" style="background:#ece2d3;color:#5c534d;border:0;border-radius:12px;padding:12px 16px;font:800 13px \'Nunito\',sans-serif;cursor:pointer">отмена</button>' +
       "</div></div>";
     document.body.appendChild(ov);
 

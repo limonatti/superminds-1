@@ -111,35 +111,35 @@
   @keyframes smp-spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
   .smp-sp{position:fixed;width:10px;height:10px;border-radius:50%;z-index:9999;pointer-events:none;animation:smp-spark .6s ease-out forwards}
   @keyframes smp-up{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-46px);opacity:0}}
-  .smp-pop{position:fixed;z-index:9999;pointer-events:none;font:800 22px 'Archivo',system-ui,sans-serif;color:#4a8b34;text-shadow:0 2px 0 #fff;animation:smp-up .9s ease-out forwards}
-  .smp-pop.bad{color:#ec3013}
+  .smp-pop{position:fixed;z-index:9999;pointer-events:none;font:800 22px 'Nunito',system-ui,sans-serif;color:#3f8f5c;text-shadow:0 2px 0 #fff;animation:smp-up .9s ease-out forwards}
+  .smp-pop.bad{color:#7c2340}
   @keyframes smp-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
   @keyframes smp-bump{0%{transform:scale(1)}45%{transform:scale(1.14)}100%{transform:scale(1)}}
   .smp-shake{animation:smp-shake .38s}
   .smp-bump{animation:smp-bump .38s}
-  #smp-hud{position:fixed;top:12px;right:14px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Archivo',system-ui,sans-serif}
-  #smp-hud .p{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;padding:8px 13px;
-    font:800 13px 'Archivo',system-ui,sans-serif;letter-spacing:.04em;color:#201e1d;white-space:nowrap}
-  #smp-hud .p.time{color:#201e1d}
-  #smp-hud .p.time.low{color:#ec3013;animation:smp-bump .6s infinite}
-  #smp-hud button{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;width:38px;height:38px;font-size:15px;cursor:pointer}
-  #smp-hud button:hover{background:#201e1d;color:#f3f2f2}
+  #smp-hud{position:fixed;top:12px;right:14px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Nunito',system-ui,sans-serif}
+  #smp-hud .p{background:#f4ece0;border:1px solid #e0d5c2;border-radius:0;padding:8px 13px;
+    font:800 13px 'Nunito',system-ui,sans-serif;letter-spacing:.04em;color:#241a18;white-space:nowrap}
+  #smp-hud .p.time{color:#241a18}
+  #smp-hud .p.time.low{color:#7c2340;animation:smp-bump .6s infinite}
+  #smp-hud button{background:#f4ece0;border:1px solid #e0d5c2;border-radius:0;width:38px;height:38px;font-size:15px;cursor:pointer}
+  #smp-hud button:hover{background:#241a18;color:#f4ece0}
   #smp-res{position:fixed;inset:0;z-index:9998;background:rgba(32,30,29,.72);display:flex;align-items:center;justify-content:center;padding:18px}
-  #smp-res .box{background:#f3f2f2;border:2px solid #201e1d;border-radius:0;padding:30px 28px;text-align:left;
-    max-width:420px;width:100%;font-family:'Archivo',system-ui,sans-serif}
-  #smp-res h2{margin:0 0 6px;font-size:30px;font-weight:800;letter-spacing:-.02em;color:#201e1d}
+  #smp-res .box{background:#f4ece0;border:1px solid #e0d5c2;border-radius:0;padding:30px 28px;text-align:left;
+    max-width:420px;width:100%;font-family:'Nunito',system-ui,sans-serif}
+  #smp-res h2{margin:0 0 6px;font-size:30px;font-weight:800;letter-spacing:-.02em;color:#241a18}
   #smp-res .stars{font-size:36px;letter-spacing:6px;margin:6px 0 4px}
-  #smp-res .sc{font:700 15px 'Archivo',system-ui,sans-serif;color:#4a4644;margin-bottom:20px}
-  #smp-res button{border:2px solid #201e1d;border-radius:0;padding:13px 20px;
-    font:800 12px 'Archivo',system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin:0 8px 0 0}
-  #smp-res .again{background:#ec3013;border-color:#ec3013;color:#fff}
+  #smp-res .sc{font:700 15px 'Nunito',system-ui,sans-serif;color:#5c534d;margin-bottom:20px}
+  #smp-res button{border:1px solid #e0d5c2;border-radius:0;padding:13px 20px;
+    font:800 12px 'Nunito',system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin:0 8px 0 0}
+  #smp-res .again{background:#7c2340;border-color:#7c2340;color:#fff}
   #smp-res .again:hover{background:#dd2b0f;border-color:#dd2b0f}
-  #smp-res .home{background:none;color:#201e1d}
-  #smp-res .home:hover{background:#201e1d;color:#f3f2f2}`;
+  #smp-res .home{background:none;color:#241a18}
+  #smp-res .home:hover{background:#241a18;color:#f4ece0}`;
   (function () { const s = document.createElement("style"); s.textContent = CSS; document.head.appendChild(s); })();
 
   /* ---------------- анимации ---------------- */
-  const COLORS = ["#7c2340", "#e0952a", "#27ae60", "#2980b9", "#8e44ad", "#c0392b", "#ffd27a"];
+  const COLORS = ["#7c2340", "#e0952a", "#27ae60", "#b5654a", "#8e44ad", "#c0392b", "#ffd27a"];
   SMP.confetti = function (n) {
     n = n || 70;
     for (let i = 0; i < n; i++) {

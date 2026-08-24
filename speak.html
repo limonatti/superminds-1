@@ -4,41 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Говорилка · English with Asya</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f3f2f2;font-family:'Archivo',sans-serif;color:#201e1d;min-height:100vh}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
   .wrap{max-width:640px;margin:0 auto;padding:64px 16px 60px}
-  .home{position:fixed;top:12px;left:12px;z-index:9;background:#ec3013;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Archivo',sans-serif;box-shadow:0 4px 0 #cfcecd;text-decoration:none}
-  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#ec3013}
-  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Archivo',sans-serif;color:#4a4644}
+  .home{position:fixed;top:12px;left:12px;z-index:9;background:#7c2340;color:#fff;padding:9px 16px;border-radius:999px;font:800 14px 'Nunito',sans-serif;box-shadow:0 4px 0 #e0d5c2;text-decoration:none}
+  h1{text-align:center;font-size:30px;margin:6px 0 2px;color:#7c2340}
+  .sub{text-align:center;margin:6px 0 16px;font:800 14px 'Nunito',sans-serif;color:#5c534d}
   .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
-  .tab{background:#fff;border:2px solid #cfcecd;border-radius:999px;padding:10px 20px;font:800 14px 'Archivo',sans-serif;color:#4a4644;cursor:pointer}
+  .tab{background:#fffdf8;border:1px solid #e0d5c2;border-radius:999px;padding:10px 20px;font:800 14px 'Nunito',sans-serif;color:#5c534d;cursor:pointer}
   .tab.on{background:#8e44ad;border-color:#8e44ad;color:#fff}
-  .card{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:24px;text-align:center}
+  .card{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:24px;text-align:center}
   .big{font-size:72px;line-height:1;margin:6px 0}
-  .word{font-size:34px;font-weight:700;color:#ec3013;margin:4px 0}
-  .ru{font:800 15px 'Archivo',sans-serif;color:#6e6a68;margin-bottom:14px}
+  .word{font-size:34px;font-weight:700;color:#7c2340;margin:4px 0}
+  .ru{font:800 15px 'Nunito',sans-serif;color:#7d726a;margin-bottom:14px}
   .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  .b{border:0;border-radius:14px;padding:14px 22px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #cfcecd}
-  .b.listen{background:#eae9e9;color:#201e1d}
+  .b{border:0;border-radius:14px;padding:14px 22px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e0d5c2}
+  .b.listen{background:#ece2d3;color:#241a18}
   .b.mic{background:#8e44ad;color:#fff}
-  .b.mic.rec{background:#ec3013;animation:pulse 1s infinite}
+  .b.mic.rec{background:#7c2340;animation:pulse 1s infinite}
   @keyframes pulse{50%{transform:scale(1.06)}}
   .stars{font-size:30px;min-height:40px;margin-top:10px}
-  .heard{font:700 13px 'Archivo',sans-serif;color:#6e6a68;min-height:18px;margin-top:6px}
-  .prog{font:900 14px 'Archivo',sans-serif;color:#4a4644;text-align:center;margin:12px 0}
-  .primary{background:#ec3013;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 4px 0 #cfcecd}
-  .empty{background:#fff;border-radius:22px;box-shadow:0 8px 0 #cfcecd;padding:26px;text-align:center;font:700 14px 'Archivo',sans-serif;color:#6e6a68}
+  .heard{font:700 13px 'Nunito',sans-serif;color:#7d726a;min-height:18px;margin-top:6px}
+  .prog{font:900 14px 'Nunito',sans-serif;color:#5c534d;text-align:center;margin:12px 0}
+  .primary{background:#7c2340;color:#fff;border:0;border-radius:14px;padding:14px 24px;font:800 15px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 4px 0 #e0d5c2}
+  .empty{background:#fffdf8;border-radius:22px;box-shadow:0 8px 0 #e0d5c2;padding:26px;text-align:center;font:700 14px 'Nunito',sans-serif;color:#7d726a}
   .shrow{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:2px dashed #f0e6d8;flex-wrap:wrap;text-align:left}
-  .shrow .sb{border:2px solid #cfcecd;background:#f3f2f2;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
+  .shrow .sb{border:1px solid #e0d5c2;background:#f4ece0;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
   .shrow .tx{flex:1;font-size:17px;font-weight:600;min-width:150px}
-  .rate{font:700 13px 'Archivo',sans-serif;color:#6e6a68;text-align:left;margin-bottom:6px}
-  .rate select{font:inherit;border:2px solid #cfcecd;border-radius:8px;padding:3px 8px}
+  .rate{font:700 13px 'Nunito',sans-serif;color:#7d726a;text-align:left;margin-bottom:6px}
+  .rate select{font:inherit;border:1px solid #e0d5c2;border-radius:8px;padding:3px 8px}
   .cfp{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(115vh) rotate(720deg)}}
-  .foot{text-align:center;font:700 13px 'Archivo',sans-serif;color:#6e6a68;margin-top:26px}
+  .foot{text-align:center;font:700 13px 'Nunito',sans-serif;color:#7d726a;margin-top:26px}
 </style>
-<link rel="stylesheet" href="sm-skin.css?v=d34a86f4">
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>
@@ -135,7 +135,7 @@
       try{SM.srsFlush();}catch(e){}
       const max=deck.length*3;
       root.innerHTML='<div class="card"><div class="big">'+(stars>=max*0.7?"🏆":"🗣")+'</div>'+
-        '<h2 style="color:#ec3013;margin:6px 0">⭐ '+stars+' из '+max+'</h2>'+
+        '<h2 style="color:#7c2340;margin:6px 0">⭐ '+stars+' из '+max+'</h2>'+
         '<div class="ru">Отличная тренировка произношения!</div>'+
         '<button class="primary" id="again">Ещё раз</button></div>';
       document.getElementById("again").onclick=speakGame;

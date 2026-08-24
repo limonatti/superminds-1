@@ -35,7 +35,7 @@ var CSS = "" +
 "color:var(--hero-gold);display:inline-flex;align-items:center;gap:9px;" +
 "opacity:0;transform:translateY(12px)}" +
 ".hs-k::before{content:'';width:8px;height:8px;background:var(--hero-gold);border-radius:50%}" +
-".hs-h{margin:10px 0 0;font-family:'Archivo',system-ui,sans-serif;font-weight:800;" +
+".hs-h{margin:10px 0 0;font-family:'Nunito',system-ui,sans-serif;font-weight:800;" +
 "font-size:clamp(24px,3vw,40px);line-height:1.04;letter-spacing:-.02em;color:#fff;" +
 "opacity:0;transform:translateY(14px)}" +
 ".hs-h em{font-style:normal;color:var(--hero-gold)}" +

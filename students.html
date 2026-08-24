@@ -70,7 +70,7 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-<script src="sm-shell.js?v=4b1f197b"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 
@@ -115,7 +115,7 @@ function newcomersHtml(){
   if (!NEWCOMERS.length) return "";
   return '<div class="sect"><span>Новые регистрации</span><span>' + NEWCOMERS.length + ' ждут добавления</span></div>' +
     '<div class="nc">' +
-    '<div style="font:600 13.5px \'Archivo\',sans-serif;color:var(--color-neutral-700);margin-bottom:6px">' +
+    '<div style="font:600 13.5px \'Nunito\',sans-serif;color:var(--color-neutral-700);margin-bottom:6px">' +
       'Эти люди завели аккаунт сами, без твоей ссылки. Пока ты их не добавишь, они не в классе.</div>' +
     NEWCOMERS.map(n =>
       '<div class="row"><span class="who"><b>'+esc(n.name || "Без имени")+'</b>' +

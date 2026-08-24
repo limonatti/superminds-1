@@ -6,9 +6,8 @@
 <title>Словарь · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="modernist.css?v=6f7808f9">
-<link rel="stylesheet" href="sm-ui.css?v=073c02c6">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
 <style>
   .w{position:relative;padding-right:44px}
   .w .say{position:absolute;right:12px;top:14px;border:0;background:none;color:var(--color-neutral-600);padding:4px}
@@ -17,62 +16,62 @@
   .w .lvl i{display:block;height:100%;background:var(--color-accent)}
   /* Первый вход: выбор учебника */
   .pick{padding:24px 28px}
-  .pick h2{margin:0 0 6px;font:800 clamp(22px,3vw,30px) "Archivo",sans-serif;letter-spacing:-.02em}
-  .pick .lead{margin:0 0 20px;font:600 14.5px "Archivo",sans-serif;color:var(--color-neutral-700);line-height:1.55}
+  .pick h2{margin:0 0 6px;font:800 clamp(22px,3vw,30px) "Nunito",sans-serif;letter-spacing:-.02em}
+  .pick .lead{margin:0 0 20px;font:600 14.5px "Nunito",sans-serif;color:var(--color-neutral-700);line-height:1.55}
   .pick .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-  .pick .crd{text-align:left;border:2px solid var(--color-divider);background:var(--color-surface);
+  .pick .crd{text-align:left;border:1px solid var(--color-divider);background:var(--color-surface);
     padding:17px 18px;cursor:pointer;transition:border-color .15s,transform .15s}
   .pick .crd:hover{border-color:var(--color-accent);transform:translateY(-2px)}
   .pick .crd .em{font-size:30px;line-height:1;display:block;margin-bottom:9px}
-  .pick .crd .t{display:block;font:800 17px "Archivo",sans-serif;letter-spacing:-.01em}
-  .pick .crd .d{display:block;margin-top:4px;font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
-  .pick .crd .n{display:block;margin-top:9px;font:800 11px "Archivo",sans-serif;letter-spacing:.08em;
+  .pick .crd .t{display:block;font:800 17px "Nunito",sans-serif;letter-spacing:-.01em}
+  .pick .crd .d{display:block;margin-top:4px;font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .pick .crd .n{display:block;margin-top:9px;font:800 11px "Nunito",sans-serif;letter-spacing:.08em;
     text-transform:uppercase;color:var(--color-accent-600)}
   .pick .crd.rec{border-color:var(--color-accent)}
   .pick .crd .tag{display:inline-block;margin-top:9px;background:var(--color-accent);color:#fff;
-    font:800 10px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
-  .pick .note{margin-top:18px;font:600 13px "Archivo",sans-serif;color:var(--color-neutral-700)}
+    font:800 10px "Nunito",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
+  .pick .note{margin-top:18px;font:600 13px "Nunito",sans-serif;color:var(--color-neutral-700)}
 
   /* ---------- Поиск и добавление своих слов ---------- */
-  .add{padding:16px 28px;border-bottom:2px solid var(--color-divider);background:var(--color-surface)}
+  .add{padding:16px 28px;border-bottom:1px solid var(--color-divider);background:var(--color-surface)}
   .add .fr{display:flex;gap:8px;flex-wrap:wrap}
-  .add input.q{flex:1;min-width:190px;border:2px solid var(--color-text);background:var(--color-bg);
-    color:var(--color-text);padding:11px 12px;font:700 14.5px "Archivo",sans-serif}
+  .add input.q{flex:1;min-width:190px;border:1px solid var(--color-divider);background:var(--color-bg);
+    color:var(--color-text);padding:11px 12px;font:700 14.5px "Nunito",sans-serif}
   .add .find{border:0;background:var(--color-accent);color:#fff;padding:11px 20px;
-    font:800 12px "Archivo",sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer}
+    font:800 12px "Nunito",sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer}
   .add .find:hover{background:var(--color-accent-600)}
   .add .find:disabled{opacity:.6;cursor:progress}
-  .add .hint{margin-top:7px;font:600 12.5px "Archivo",sans-serif;color:var(--color-neutral-700)}
+  .add .hint{margin-top:7px;font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
   .sug{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
-  .sug button{border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
-    padding:5px 10px;font:700 12.5px "Archivo",sans-serif;cursor:pointer}
+  .sug button{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);
+    padding:5px 10px;font:700 12.5px "Nunito",sans-serif;cursor:pointer}
   .sug button:hover{border-color:var(--color-accent);color:var(--color-accent-600)}
-  .card{margin-top:13px;border:2px solid var(--color-text);background:var(--color-bg);padding:15px}
+  .card{margin-top:13px;border:1px solid var(--color-divider);background:var(--color-bg);padding:15px}
   .card .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .card .en{font:900 21px "Archivo",sans-serif;letter-spacing:-.01em}
-  .card .ipa{font:600 14px "Archivo",sans-serif;color:var(--color-neutral-600)}
-  .card .pos{font:800 10px "Archivo",sans-serif;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--color-accent-600);border:2px solid var(--color-accent);padding:2px 7px}
-  .card .snd{border:2px solid var(--color-divider);background:var(--color-bg);padding:4px 9px;cursor:pointer;
-    font:700 13px "Archivo",sans-serif}
+  .card .en{font:900 21px "Nunito",sans-serif;letter-spacing:-.01em}
+  .card .ipa{font:600 14px "Nunito",sans-serif;color:var(--color-neutral-600)}
+  .card .pos{font:800 10px "Nunito",sans-serif;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--color-accent-600);border:1px solid var(--color-accent);padding:2px 7px}
+  .card .snd{border:1px solid var(--color-divider);background:var(--color-bg);padding:4px 9px;cursor:pointer;
+    font:700 13px "Nunito",sans-serif}
   .card .snd:hover{border-color:var(--color-accent)}
-  .card label{display:block;margin:11px 0 5px;font:800 10.5px "Archivo",sans-serif;letter-spacing:.1em;
+  .card label{display:block;margin:11px 0 5px;font:800 10.5px "Nunito",sans-serif;letter-spacing:.1em;
     text-transform:uppercase;color:var(--color-neutral-600)}
-  .card input,.card textarea{width:100%;border:2px solid var(--color-divider);background:var(--color-bg);
-    color:var(--color-text);padding:9px 10px;font:700 14px "Archivo",sans-serif}
-  .card .mean{margin-top:10px;font:600 13.5px "Archivo",sans-serif;color:var(--color-neutral-700);line-height:1.5}
+  .card input,.card textarea{width:100%;border:1px solid var(--color-divider);background:var(--color-bg);
+    color:var(--color-text);padding:9px 10px;font:700 14px "Nunito",sans-serif}
+  .card .mean{margin-top:10px;font:600 13.5px "Nunito",sans-serif;color:var(--color-neutral-700);line-height:1.5}
   .card .mean b{color:var(--color-text)}
-  .card .src{margin-top:9px;font:700 11px "Archivo",sans-serif;letter-spacing:.05em;
+  .card .src{margin-top:9px;font:700 11px "Nunito",sans-serif;letter-spacing:.05em;
     text-transform:uppercase;color:var(--color-neutral-600)}
   .card .save{margin-top:13px;width:100%;border:0;background:var(--color-accent);color:#fff;padding:12px;
-    font:800 12px "Archivo",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    font:800 12px "Nunito",sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .card .save:hover{background:var(--color-accent-600)}
-  .card .err{margin-top:9px;font:700 13px "Archivo",sans-serif;color:#c0392b}
-  .card img.pic{max-width:130px;border:2px solid var(--color-divider);display:block;margin-top:10px}
+  .card .err{margin-top:9px;font:700 13px "Nunito",sans-serif;color:#c0392b}
+  .card img.pic{max-width:130px;border:1px solid var(--color-divider);display:block;margin-top:10px}
   .w .del{position:absolute;right:12px;top:40px;border:0;background:none;color:var(--color-neutral-500);
-    padding:4px;cursor:pointer;font:800 13px "Archivo",sans-serif}
+    padding:4px;cursor:pointer;font:800 13px "Nunito",sans-serif}
   .w .del:hover{color:#c0392b}
-  .w .mynote{margin-top:6px;font:600 12px "Archivo",sans-serif;color:var(--color-neutral-600);line-height:1.4}
+  .w .mynote{margin-top:6px;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-600);line-height:1.4}
 </style>
 </head>
 <body>
@@ -99,7 +98,7 @@ window.SM_HANDLES_COURSE = true;
 </script>
 <script src="sm-lookup.js?v=949d163e"></script>
 <script src="sm-mywords.js?v=906f5097"></script>
-<script src="sm-shell.js?v=4b1f197b"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const TARGET = 4;
@@ -122,9 +121,9 @@ function courseSwitch(){
   /* Курс назначен учителем — менять его ученик не должен */
   if (ASSIGNED) return '<span>'+esc((window.SM_COURSE||{}).title||"")+' · от учителя</span>';
   if (list.length < 2) return '<span>'+esc((window.SM_COURSE||{}).title||"")+'</span>';
-  return '<select id="crsSel" title="Мой учебник" style="border:2px solid var(--color-text);' +
+  return '<select id="crsSel" title="Мой учебник" style="border:1px solid var(--color-divider);' +
       'background:var(--color-bg);color:var(--color-text);padding:6px 9px;' +
-      'font:800 11px \'Archivo\',sans-serif;letter-spacing:.06em;text-transform:uppercase;max-width:230px">' +
+      'font:800 11px \'Nunito\',sans-serif;letter-spacing:.06em;text-transform:uppercase;max-width:230px">' +
     list.map(c => '<option value="'+esc(c.id)+'"'+(c.id===cur?" selected":"")+'>' +
       esc((c.emoji?c.emoji+" ":"")+c.title)+'</option>').join("") +
     '</select>';
