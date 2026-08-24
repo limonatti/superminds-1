@@ -42,19 +42,37 @@ catch (e) { return {}; }
 }
 function localSetProgress(p) { localStorage.setItem(LKEY_PROG, JSON.stringify(p)); }
 
+
+/* ---------- Кто вошёл: один запрос на страницу ----------
+   c.auth.getUser() каждый раз ходит на сервер, а внутри этого файла он
+   вызывается почти из каждого метода — на странице учеников набегало
+   семь одинаковых запросов подряд, и все до единого блокировали работу.
+   Держим ответ в памяти вкладки и склеиваем одновременные вызовы в один:
+   личность посреди страницы не меняется, а права всё равно проверяет
+   база своими правилами, так что клиентский слепок ничего не решает. */
+const USER_TTL = 5 * 60 * 1000;
+let userCache = null, userCacheAt = 0, userPending = null;
+
+function forgetUser() { userCache = null; userCacheAt = 0; userPending = null; }
+
 /* ---------- Публичное API ---------- */
 
 const api = {
 isCloud: useCloud,
 
 /* Текущий пользователь: {id, name, email} или null */
-async getUser() {
+async getUser(force) {
 if (!useCloud) return localUser();
 const c = ensureClient(); if (!c) return null;
-const { data } = await c.auth.getUser();
-if (!data || !data.user) return null;
-const u = data.user;
-return { id: u.id, email: u.email, name: (u.user_metadata && u.user_metadata.name) || u.email };
+if (!force && userCache && Date.now() - userCacheAt < USER_TTL) return userCache;
+if (!force && userPending) return userPending;          /* уже спросили — ждём тот же ответ */
+userPending = c.auth.getUser().then(function (r) {
+const u = r && r.data && r.data.user;
+userCache = u ? { id: u.id, email: u.email, name: (u.user_metadata && u.user_metadata.name) || u.email } : null;
+userCacheAt = Date.now(); userPending = null;
+return userCache;
+}, function () { userPending = null; return null; });
+return userPending;
 },
 
 async signUp(name, email, password) {
@@ -67,6 +85,7 @@ const { data, error } = await c.auth.signUp({
 email: email, password: password, options: { data: { name: name } }
 });
 if (error) return { ok: false, error: error.message };
+forgetUser();
 return { ok: true, needConfirm: !data.session };
 },
 
@@ -78,10 +97,12 @@ localSetUser(u); return { ok: true };
 const c = ensureClient(); if (!c) return { ok: false, error: "Supabase не настроен" };
 const { error } = await c.auth.signInWithPassword({ email: email, password: password });
 if (error) return { ok: false, error: error.message };
+forgetUser();
 return { ok: true };
 },
 
 async signOut() {
+forgetUser();
 if (!useCloud) { localStorage.removeItem(LKEY_USER); return; }
 const c = ensureClient(); if (c) await c.auth.signOut();
 },
