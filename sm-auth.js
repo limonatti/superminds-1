@@ -1125,7 +1125,7 @@ return data || [];
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
 		let q = c.from("messages")
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size")
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at")
 			.eq("teacher_id", teacherId).eq("student_id", studentId)
 			.order("created_at", { ascending: true });
 		if (sinceIso) q = q.gt("created_at", sinceIso);
@@ -1149,8 +1149,48 @@ return data || [];
 		}
 		const { data, error } = await c.from("messages")
 			.insert(row)
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size").single();
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at").single();
 		return { ok: !error, msg: data, error: error && error.message };
+	},
+	/* Удалить своё сообщение. Строка остаётся надгробием («сообщение удалено»),
+	   но текст и вложение стираются: из базы, из хранилища и из реакций.
+	   Файл убираем первым — если после этого что-то сорвётся, ссылка на него
+	   всё равно исчезнет вместе со строкой при повторной попытке. */
+	async chatDelete(messageId, attUrl) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c) return { ok: false };
+		if (attUrl) {
+			try {
+				const mark = "/chat-media/";
+				const i = attUrl.indexOf(mark);
+				if (i > -1) {
+					const path = decodeURIComponent(attUrl.slice(i + mark.length).split("?")[0]);
+					await c.storage.from("chat-media").remove([path]);
+				}
+			} catch (e) { /* файл мог быть уже удалён — не повод срывать удаление */ }
+		}
+		const { data, error } = await c.rpc("delete_message", { msg_id: messageId });
+		if (error) return { ok: false, error: error.message };
+		if (data === false) return { ok: false, error: "можно удалять только свои сообщения" };
+		return { ok: true };
+	},
+	/* Поиск гифок. Ключ GIPHY живёт в секретах проекта, в браузер не попадает;
+	   пустой запрос отдаёт популярное. */
+	async gifSearch(q, pos) {
+		if (!useCloud) return { ok: false, error: "нужен Supabase" };
+		const c = ensureClient(); if (!c || !c.functions) return { ok: false, error: "нет связи" };
+		try {
+			const { data, error } = await c.functions.invoke("gif-search", {
+				body: { q: q || "", pos: pos || "", limit: 24 },
+			});
+			if (error) {
+				let msg = "Каталог гифок недоступен";
+				try { const j = await error.context.json(); if (j && j.error) msg = j.error; } catch (e) {}
+				return { ok: false, error: msg };
+			}
+			if (data && data.error) return { ok: false, error: data.error };
+			return { ok: true, items: (data && data.items) || [], next: (data && data.next) || "" };
+		} catch (e) { return { ok: false, error: "Каталог гифок не отвечает" }; }
 	},
 	/* Файл в переписку. Лежит в отдельном хранилище chat-media,
 	   путь случайный — по прямой ссылке чужой файл не угадать. */

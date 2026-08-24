@@ -44,10 +44,15 @@
   .rx{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
   .rx span{background:rgba(0,0,0,.1);border-radius:999px;padding:1px 7px;font-size:12px;line-height:1.5}
   .bub.me .rx span{background:rgba(255,255,255,.25)}
-  .rxbtn{position:absolute;top:-11px;opacity:0;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;width:24px;height:24px;font-size:12px;cursor:pointer;line-height:1;padding:0}
-  .bub.me .rxbtn{left:-12px}
-  .bub.them .rxbtn{right:-12px}
-  .bub:hover .rxbtn{opacity:1}
+  .tools{position:absolute;top:-11px;display:flex;gap:3px;opacity:0;transition:opacity .12s}
+  .bub.me .tools{left:-12px}
+  .bub.them .tools{right:-12px}
+  .bub:hover .tools,.tools:focus-within{opacity:1}
+  .tools button{background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;width:24px;height:24px;font-size:12px;cursor:pointer;line-height:1;padding:0;color:var(--color-text)}
+  .tools button.del:hover{border-color:#c0392b;color:#c0392b}
+  /* удалённое сообщение — след остаётся, содержимое стёрто */
+  .bub.gone{background:transparent;border:2px dashed var(--color-divider);color:var(--color-neutral-700);font-style:italic;font-weight:700}
+  .bub.gone .tm{opacity:.6}
   .rxpick{position:absolute;top:-40px;display:flex;gap:2px;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:999px;padding:3px 6px;z-index:5;box-shadow:0 4px 0 rgba(0,0,0,.08)}
   .bub.me .rxpick{left:-12px}
   .bub.them .rxpick{right:-12px}
@@ -59,6 +64,16 @@
   .emopan button{background:none;border:0;font-size:21px;cursor:pointer;padding:2px 4px;line-height:1;border-radius:8px}
   .emopan button:hover{background:var(--color-neutral-200,#eee)}
   .upbar{font:700 12px "Archivo",sans-serif;color:var(--color-neutral-700);padding:0 0 6px}
+  /* каталог гифок */
+  .chat-in .tool.gif{font:900 12px "Archivo",sans-serif;letter-spacing:.03em}
+  .gifpan{display:none;background:var(--color-bg);border:2px solid var(--color-divider);border-radius:12px;padding:8px;margin-bottom:6px}
+  .gifpan.on{display:block}
+  .gifpan input{width:100%;border:2px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:9px 11px;font:600 13px "Archivo",sans-serif;border-radius:10px;margin-bottom:7px}
+  .gifpan input:focus{outline:none;border-color:var(--color-accent)}
+  .gifgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:5px;max-height:210px;overflow-y:auto}
+  .gifgrid button{border:0;padding:0;background:var(--color-neutral-200,#eee);border-radius:9px;overflow:hidden;cursor:pointer;aspect-ratio:1/1}
+  .gifgrid img{width:100%;height:100%;object-fit:cover;display:block}
+  .gifmsg{font:700 12px "Archivo",sans-serif;color:var(--color-neutral-700);padding:8px 2px}
 </style>
 </head>
 <body>
@@ -76,7 +91,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=479e337a"></script>
+<script src="sm-auth.js?v=f191dd29"></script>
 <script src="sm-shell.js?v=4b1f197b"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -166,6 +181,8 @@ function bubbleEl(m){
   el.className = "bub " + (mine ? "me" : "them") + (m.__pending ? " pending" : "");
   el.dataset.id = m.id;
 
+  if (m.deleted_at){ fillGone(el, m); return el; }
+
   if (m.att_url) el.appendChild(attEl(m));
   if (m.body){
     const txt = document.createElement("span");
@@ -182,14 +199,79 @@ function bubbleEl(m){
   rx.className = "rx";
   el.appendChild(rx);
 
-  /* реакцию можно поставить только на сохранённое сообщение */
-  if (!m.__pending){
-    const btn = document.createElement("button");
-    btn.className = "rxbtn"; btn.type = "button"; btn.title = "реакция"; btn.textContent = "☺";
-    btn.onclick = (e) => { e.stopPropagation(); openPicker(el, m.id); };
-    el.appendChild(btn);
-  }
+  /* реакцию и удаление можно навесить только на сохранённое сообщение */
+  if (!m.__pending) el.appendChild(toolsEl(el, m, mine));
   return el;
+}
+
+/* Кнопки у края пузырька: реакция всем, корзина — только автору */
+function toolsEl(bubble, m, mine){
+  const box = document.createElement("div");
+  box.className = "tools";
+
+  const rb = document.createElement("button");
+  rb.className = "rx-open"; rb.type = "button"; rb.title = "реакция"; rb.textContent = "☺";
+  rb.onclick = (e) => { e.stopPropagation(); openPicker(bubble, m.id); };
+  box.appendChild(rb);
+
+  if (mine){
+    const db = document.createElement("button");
+    db.className = "del"; db.type = "button"; db.title = "удалить"; db.textContent = "🗑";
+    db.onclick = (e) => { e.stopPropagation(); askDelete(bubble, m); };
+    box.appendChild(db);
+  }
+  return box;
+}
+
+/* Спрашиваем прямо у пузырька, а не системным окном:
+   удаление видно обоим, поэтому лучше не промахнуться мимо кнопки. */
+function askDelete(bubble, m){
+  const old = document.querySelector(".rxpick"); if (old) old.remove();
+  const box = document.createElement("div");
+  box.className = "rxpick";
+  box.style.fontSize = "12px";
+  const q = document.createElement("span");
+  q.style.cssText = "font:800 12px 'Archivo',sans-serif;padding:2px 4px;white-space:nowrap";
+  q.textContent = "Удалить у обоих?";
+  const yes = document.createElement("button"); yes.type = "button"; yes.textContent = "да";
+  const no  = document.createElement("button"); no.type  = "button"; no.textContent = "нет";
+  yes.style.cssText = no.style.cssText = "font:800 12px 'Archivo',sans-serif;padding:2px 6px";
+  yes.style.color = "#c0392b";
+  no.onclick = (e) => { e.stopPropagation(); box.remove(); };
+  yes.onclick = async (e) => {
+    e.stopPropagation();
+    yes.disabled = no.disabled = true; yes.textContent = "…";
+    const r = await SM.chatDelete(m.id, m.att_url);
+    box.remove();
+    if (!r.ok){ showError(r.error || "Не удалось удалить сообщение"); return; }
+    clearError();
+    applyDeleted(m.id);
+  };
+  box.appendChild(q); box.appendChild(yes); box.appendChild(no);
+  bubble.appendChild(box);
+  setTimeout(() => document.addEventListener("click", function once(){ box.remove(); document.removeEventListener("click", once); }), 0);
+}
+
+/* Превращаем пузырёк в надгробие: содержимое стёрто и на сервере тоже */
+function fillGone(el, m){
+  el.className = "bub " + (m.sender_id === ME.id ? "me" : "them") + " gone";
+  el.innerHTML = "";
+  const t = document.createElement("span");
+  t.textContent = "сообщение удалено";
+  el.appendChild(t);
+  const tm = document.createElement("span");
+  tm.className = "tm"; tm.textContent = hhmm(m.created_at);
+  el.appendChild(tm);
+}
+
+function applyDeleted(id){
+  const i = MSGS.findIndex(x => x.id === id);
+  if (i >= 0){
+    MSGS[i].deleted_at = new Date().toISOString();
+    MSGS[i].body = ""; MSGS[i].att_url = null;
+  }
+  const el = document.querySelector('.bub[data-id="'+id+'"]');
+  if (el) fillGone(el, MSGS[i] || { id: id, sender_id: ME.id, created_at: new Date().toISOString() });
 }
 
 function openPicker(bubble, msgId){
@@ -254,11 +336,19 @@ function appendMsg(m, force){
   if (stick) scroll.scrollTop = scroll.scrollHeight;
 }
 
-/* Пришло подтверждение чтения — меняем галочку, не трогая остальное */
-function markReadInPlace(m){
+/* Строка изменилась: либо её прочитали, либо автор удалил сообщение */
+function applyUpdate(m){
+  const bub = document.querySelector('.bub[data-id="'+m.id+'"]');
+  if (!bub) return;
+  if (m.deleted_at){
+    const i = MSGS.findIndex(x => x.id === m.id);
+    if (i >= 0) MSGS[i] = m;
+    fillGone(bub, m);
+    return;
+  }
   if (m.sender_id !== ME.id || !m.read_at) return;
-  const el = document.querySelector('.bub[data-id="'+m.id+'"] .tm');
-  if (el) el.textContent = hhmm(m.created_at) + " ✓✓";
+  const tm = bub.querySelector(".tm");
+  if (tm) tm.textContent = hhmm(m.created_at) + " ✓✓";
 }
 
 function showError(txt){
@@ -306,9 +396,15 @@ function drawPane(){
     '<div class="chatwrap">' +
       '<div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загружаю…</div></div>' +
       '<div class="emopan" id="emoPan"></div>' +
+      '<div class="gifpan" id="gifPan">' +
+        '<input id="gifQ" placeholder="Поиск гифок по-английски: hello, well done, thanks…" maxlength="60">' +
+        '<div class="gifgrid" id="gifGrid"></div>' +
+        '<div class="gifmsg" id="gifMsg">Загружаю популярные…</div>' +
+        '<div class="gifmsg" style="opacity:.6;font-size:11px">Powered by GIPHY</div></div>' +
       '<div class="upbar" id="upBar"></div>' +
       '<div class="chat-in">' +
         '<button class="tool" id="btnEmo" type="button" title="смайлы">🙂</button>' +
+        '<button class="tool gif" id="btnGif" type="button" title="гифки">GIF</button>' +
         '<button class="tool" id="btnClip" type="button" title="фото, видео или файл">📎</button>' +
         '<input id="chatText" placeholder="Написать '+esc(person.name)+'…" maxlength="2000">' +
         '<button class="go" id="chatSend" aria-label="Отправить">➤</button></div>' +
@@ -364,7 +460,7 @@ function startChat(person){
       appendMsg(m);
       if (m.sender_id !== ME.id) markIncomingRead(person);
     },
-    function(m){ markReadInPlace(m); }
+    function(m){ applyUpdate(m); }
   );
 
   if (unsub){
@@ -400,7 +496,54 @@ function startChat(person){
       emoPan.appendChild(b);
     });
   }
-  if (btnEmo) btnEmo.onclick = () => emoPan.classList.toggle("on");
+
+  /* ---------- гифки ---------- */
+  const gifPan = document.getElementById("gifPan"), btnGif = document.getElementById("btnGif");
+  const gifQ = document.getElementById("gifQ"), gifGrid = document.getElementById("gifGrid"), gifMsg = document.getElementById("gifMsg");
+  let gifTimer = null, gifSeq = 0, gifLoaded = false;
+
+  function gifSay(t){ if (gifMsg){ gifMsg.textContent = t || ""; gifMsg.style.display = t ? "block" : "none"; } }
+
+  async function gifLoad(q){
+    if (!gifGrid) return;
+    const seq = ++gifSeq;                 /* ответ на устаревший запрос не рисуем */
+    gifSay(q ? "Ищу…" : "Загружаю популярные…");
+    const r = await SM.gifSearch(q);
+    if (seq !== gifSeq || !document.body.contains(gifGrid)) return;
+    if (!r.ok){ gifGrid.innerHTML = ""; gifSay(r.error); return; }
+    if (!r.items.length){ gifGrid.innerHTML = ""; gifSay("Ничего не нашлось. Попробуй другое слово — каталог англоязычный."); return; }
+    gifSay("");
+    gifGrid.innerHTML = "";
+    r.items.forEach(g => {
+      const b = document.createElement("button");
+      b.type = "button"; b.title = g.alt;
+      const im = document.createElement("img");
+      im.src = g.preview; im.alt = g.alt; im.loading = "lazy";
+      b.appendChild(im);
+      b.onclick = () => {
+        gifPan.classList.remove("on");
+        send({ url: g.url, kind: "image", name: (g.alt || "gif") + ".gif", size: g.size || null });
+      };
+      gifGrid.appendChild(b);
+    });
+  }
+
+  if (gifQ) gifQ.oninput = () => {
+    clearTimeout(gifTimer);
+    gifTimer = setTimeout(() => gifLoad(gifQ.value.trim()), 400);
+  };
+
+  /* панели смайлов и гифок не открываем разом — вдвоём они закрывают переписку */
+  if (btnEmo) btnEmo.onclick = () => {
+    if (gifPan) gifPan.classList.remove("on");
+    emoPan.classList.toggle("on");
+  };
+  if (btnGif) btnGif.onclick = () => {
+    if (emoPan) emoPan.classList.remove("on");
+    const on = gifPan.classList.toggle("on");
+    if (on && !gifLoaded){ gifLoaded = true; gifLoad(""); }
+    if (on && gifQ) gifQ.focus();
+  };
 
   /* ---------- скрепка ---------- */
   const upBar = document.getElementById("upBar"), btnClip = document.getElementById("btnClip");
@@ -427,6 +570,7 @@ function startChat(person){
     if (!v && !att) return;
     inp.value = ""; inp.focus();
     if (emoPan) emoPan.classList.remove("on");
+    if (gifPan) gifPan.classList.remove("on");
     clearError();
 
     /* Оптимистичная отправка: пузырёк виден сразу, не дожидаясь сервера */
@@ -468,13 +612,8 @@ function startChat(person){
       SEEN.delete(tempId); SEEN.add(real.id);
       const i = MSGS.findIndex(x => x.id === tempId);
       if (i >= 0) MSGS[i] = real;
-      /* черновик рисовался без кнопки реакции — теперь id настоящий, добавляем */
-      if (!el.querySelector(".rxbtn")){
-        const rb = document.createElement("button");
-        rb.className = "rxbtn"; rb.type = "button"; rb.title = "реакция"; rb.textContent = "☺";
-        rb.onclick = (e) => { e.stopPropagation(); openPicker(el, real.id); };
-        el.appendChild(rb);
-      }
+      /* черновик рисовался без кнопок — теперь id настоящий, добавляем */
+      if (!el.querySelector(".tools")) el.appendChild(toolsEl(el, real, true));
     }
   }
 
