@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Картинки для игр · English with Asya</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
+<style>
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px}
+  .head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .head h1{margin:0;font-size:26px}
+  .head .st{font-size:13px;color:var(--color-neutral-600)}
+  .lead{font-size:14px;line-height:1.6;color:var(--color-neutral-700);max-width:680px;margin:0 0 18px}
+
+  .panel{background:var(--color-bg);border:1px solid var(--color-divider);border-radius:var(--radius-md);
+    padding:16px 18px;margin-bottom:16px}
+  .panel h3{margin:0 0 8px;font-size:16px}
+  textarea{width:100%;min-height:118px;resize:vertical;line-height:1.6;
+    border:1px solid var(--color-divider);border-radius:var(--radius-sm);
+    background:var(--color-bg);color:var(--color-text);padding:11px 13px;
+    font:400 14px "Nunito",sans-serif}
+  textarea:focus{outline:none;border-color:var(--color-accent)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+  .hint{font-size:13px;color:var(--color-neutral-600)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:8px}
+  .cell{border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:10px;
+    background:var(--color-bg);text-align:center;position:relative}
+  .cell img{width:100%;aspect-ratio:1/1;object-fit:contain;
+    background:repeating-conic-gradient(#f0ece4 0 25%,#fff 0 50%) 0 0/16px 16px}
+  .cell .w{margin-top:6px;font:600 13px "Nunito",sans-serif}
+  .cell .s{font-size:12px;color:var(--color-neutral-600)}
+  .cell.wait{opacity:.55}
+  .cell.bad{border-color:var(--color-bad)}
+  .cell .again{margin-top:6px;font-size:12px}
+
+  .bar{height:10px;border-radius:999px;background:var(--color-surface-deep);overflow:hidden;margin-top:12px}
+  .bar i{display:block;height:100%;width:0;background:var(--color-accent);transition:width .3s}
+  .msg{margin-top:10px;font-size:14px;font-weight:600;min-height:20px}
+  .msg.bad{color:var(--color-bad)}
+  .msg.ok{color:var(--color-ok-text)}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="pane">
+      <div class="wrap" id="wrap">
+        <div class="head">
+          <h1>Картинки для игр</h1>
+          <span class="st" id="st"></span>
+        </div>
+        <p class="lead">Рисует набор картинок в одном стиле — том же, что у кота и предметов из алфавитного набора.
+        Каждая приходит с прозрачным фоном, вырезать ничего не нужно. Готовое скачивается одним архивом.</p>
+
+        <div class="panel">
+          <h3>Что нарисовать</h3>
+          <textarea id="words"></textarea>
+          <div class="row">
+            <button class="btn btn-primary" id="go">Нарисовать</button>
+            <button class="btn btn-quiet" id="zip" disabled>Скачать архивом</button>
+            <span class="hint" id="cnt"></span>
+          </div>
+          <div class="bar"><i id="bar"></i></div>
+          <div class="msg" id="msg"></div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="sm-auth.js?v=1a8f02f9"></script>
+<script src="sm-shell.js?v=29cfb3d6"></script>
+<script>
+const esc = SMUI.esc;
+
+/* Слова, которых не хватает фониксу: буквосочетания и частые CVC.
+   Через двоеточие — уточнение для художника, если слово многозначное. */
+const DEFAULT_WORDS = [
+  "ship", "shell", "chair", "cheese", "thumb: a hand showing thumbs up",
+  "ring: a golden finger ring", "rain: a rain cloud with droplets", "sheep", "bee",
+  "boat", "coat", "pie", "glue: a glue bottle", "hammer", "shark",
+  "fork", "horse", "book", "spoon", "cow", "crown", "coin",
+  "bed", "bus", "cup", "duck", "fish", "hen", "sock", "pig", "van", "jam: a jar of jam", "box"
+].join("\n");
+
+const wordsEl = document.getElementById("words"),
+      grid = document.getElementById("grid"),
+      bar = document.getElementById("bar"),
+      msg = document.getElementById("msg"),
+      cnt = document.getElementById("cnt"),
+      btnGo = document.getElementById("go"),
+      btnZip = document.getElementById("zip"),
+      st = document.getElementById("st");
+
+wordsEl.value = DEFAULT_WORDS;
+
+const URL_FN = "https://kdzpmbuohfjbtjpqrdfx.supabase.co/functions/v1/asset-gen";
+const ANON = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+function token(){
+  try { return JSON.parse(localStorage.getItem("sb-kdzpmbuohfjbtjpqrdfx-auth-token")).access_token; }
+  catch(e){ return null; }
+}
+
+let DONE = {};   /* slug -> dataUrl */
+
+function parseList(){
+  return wordsEl.value.split("\n").map(s => s.trim()).filter(Boolean).map(line => {
+    const i = line.indexOf(":");
+    const word = (i > -1 ? line.slice(0, i) : line).trim();
+    const hint = i > -1 ? line.slice(i + 1).trim() : "";
+    return { word, hint, slug: word.toLowerCase().replace(/[^a-z0-9]+/g, "-") };
+  });
+}
+
+function drawGrid(list){
+  grid.innerHTML = list.map(it =>
+    '<div class="cell wait" id="c-' + it.slug + '">' +
+      '<img alt="" id="i-' + it.slug + '">' +
+      '<div class="w">' + esc(it.word) + '</div>' +
+      '<div class="s" id="s-' + it.slug + '">в очереди</div>' +
+    '</div>').join("");
+}
+
+async function one(it){
+  const t = token();
+  if (!t) throw new Error("Войди в кабинет заново");
+  const r = await fetch(URL_FN, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + t, "apikey": ANON },
+    body: JSON.stringify({ word: it.word, hint: it.hint, style: "phonics" }),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || j.error) throw new Error(j.error || ("ошибка " + r.status));
+  return j.image;
+}
+
+async function run(){
+  const list = parseList();
+  if (!list.length) { msg.className = "msg bad"; msg.textContent = "Список пуст"; return; }
+
+  btnGo.disabled = true; btnZip.disabled = true;
+  msg.className = "msg"; msg.textContent = "Рисую…";
+  drawGrid(list);
+
+  let ok = 0, bad = 0;
+  for (let i = 0; i < list.length; i++){
+    const it = list[i];
+    const cell = document.getElementById("c-" + it.slug);
+    const sub = document.getElementById("s-" + it.slug);
+    if (sub) sub.textContent = "рисую…";
+    try {
+      const img = await one(it);
+      DONE[it.slug] = img;
+      document.getElementById("i-" + it.slug).src = img;
+      cell.classList.remove("wait"); if (sub) sub.textContent = "готово";
+      ok++;
+    } catch(e){
+      cell.classList.remove("wait"); cell.classList.add("bad");
+      if (sub) sub.textContent = e.message || "не вышло";
+      bad++;
+    }
+    bar.style.width = Math.round((i + 1) / list.length * 100) + "%";
+    cnt.textContent = (i + 1) + " из " + list.length;
+  }
+
+  btnGo.disabled = false;
+  btnZip.disabled = ok === 0;
+  msg.className = "msg " + (bad ? "bad" : "ok");
+  msg.textContent = bad
+    ? ("Готово: " + ok + ", не вышло: " + bad + ". Неудачные можно запустить ещё раз — просто нажми «Нарисовать».")
+    : ("Готово: " + ok + " картинок. Жми «Скачать архивом».");
+}
+
+async function zipAll(){
+  const z = new JSZip();
+  Object.keys(DONE).forEach(slug => {
+    const b64 = DONE[slug].split(",")[1];
+    z.file(slug + ".png", b64, { base64: true });
+  });
+  const blob = await z.generateAsync({ type: "blob" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "phonics-assets.zip";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+btnGo.onclick = run;
+btnZip.onclick = zipAll;
+
+(async function boot(){
+  const pane = document.querySelector(".pane");
+  const me = await SMUI.requireAuth(pane, "teacher");
+  SMUI.mount({ role: "teacher", active: "" });
+  if (!me) return;
+  st.textContent = "рисует gpt-image-1 · прозрачный фон";
+})();
+</script>
+</body>
+</html>
