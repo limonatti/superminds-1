@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игры фоникса · English with Asya</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#efeaf6;font-family:'Nunito',system-ui,sans-serif;color:#2b2450}
+  .page{max-width:1100px;margin:0 auto;padding:20px 16px 50px}
+  .home{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
+    background:#fff;border-radius:999px;padding:9px 18px;text-decoration:none;
+    font:700 14px 'Nunito',sans-serif;color:#5b3fa0;box-shadow:0 4px 0 #d8cdf0}
+
+  .g{position:relative;height:620px;border-radius:24px;overflow:hidden;
+     box-shadow:0 14px 36px rgba(50,30,90,.26);
+     background:#2b2a55 center/cover no-repeat url("game/bg.jpg")}
+
+  .hud{position:absolute;inset:16px 16px auto 16px;display:flex;gap:10px;align-items:center;z-index:9}
+  .chip{padding:10px 18px;border-radius:999px;font:800 18px 'Baloo 2',sans-serif;color:#3b2a5e;
+    background:rgba(255,255,255,.93);box-shadow:0 4px 0 rgba(60,40,110,.28);white-space:nowrap}
+  .chip.combo{background:#ffb02e;color:#5b2c00;box-shadow:0 4px 0 #c97d0e;
+    transform:scale(0);transition:transform .2s cubic-bezier(.3,1.7,.5,1)}
+  .chip.combo.on{transform:scale(1)}
+  .grow{flex:1}
+  .clock{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 18px;border-radius:999px;
+    background:rgba(255,255,255,.93);box-shadow:0 4px 0 rgba(60,40,110,.28)}
+  .clock b{font:800 22px 'Baloo 2',sans-serif;color:#3b2a5e;min-width:34px;text-align:right}
+  .tbar{width:140px;height:12px;border-radius:999px;background:#ded8f0;overflow:hidden}
+  .tbar i{display:block;height:100%;width:100%;border-radius:999px;background:#6b4fd0;
+    transition:width .25s linear,background .3s}
+  .clock.warn b{color:#c23b12} .clock.warn .tbar i{background:#e8562a}
+  .clock.warn{animation:pulse .55s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+  .quest{position:absolute;left:50%;top:74px;transform:translateX(-50%);z-index:8;
+    display:flex;flex-direction:column;align-items:center;gap:8px}
+  .cap{font:700 18px 'Baloo 2',sans-serif;color:#fff;background:rgba(45,30,90,.55);
+    padding:7px 22px;border-radius:999px;backdrop-filter:blur(6px)}
+  .letter{width:126px;height:126px;object-fit:contain;
+    filter:drop-shadow(0 8px 14px rgba(30,10,60,.45));animation:bnc 1.5s ease-in-out infinite}
+  @keyframes bnc{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-15px) rotate(3deg)}}
+  .bigword{width:200px;height:200px;object-fit:contain;
+    filter:drop-shadow(0 10px 16px rgba(30,10,60,.4));animation:bnc 2.6s ease-in-out infinite}
+  .sounds{display:flex;gap:10px}
+  .sounds span{background:#fff;border-radius:16px;padding:10px 20px;
+    font:700 30px 'Baloo 2',sans-serif;color:#5b3fa0;box-shadow:0 5px 0 #d8cdf0;
+    transition:transform .15s,background .15s}
+  .sounds span.lit{background:#ffe08a;transform:translateY(-8px) scale(1.1)}
+
+  /* ─── «Собери слово»: пустые клетки и буквы под ними ─── */
+  .slots{display:flex;gap:10px}
+  .slot{width:78px;height:88px;border-radius:16px;background:rgba(255,255,255,.22);
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center}
+  .slot img{width:64px;height:64px;object-fit:contain}
+  .slot.full{background:#fff;box-shadow:0 5px 0 #d8cdf0}
+  .tile{width:104px;height:118px;border-radius:22px;cursor:pointer;background:rgba(255,255,255,.95);
+    box-shadow:0 7px 0 rgba(60,40,110,.32);display:flex;align-items:center;justify-content:center;
+    transition:transform .13s;animation:pop .3s cubic-bezier(.3,1.6,.5,1) both}
+  .tile:hover{transform:translateY(-6px) scale(1.05)}
+  .tile img{width:84px;height:84px;object-fit:contain}
+  .tile.used{opacity:0;pointer-events:none;transform:scale(.5)}
+  .tile.no{background:#ffd9d2;box-shadow:0 7px 0 #d98b7a}
+
+  .row{position:absolute;left:290px;right:30px;bottom:48px;z-index:7;
+    display:flex;gap:20px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
+  .card{width:180px;height:190px;border-radius:26px;cursor:pointer;position:relative;
+    background:rgba(255,255,255,.95);box-shadow:0 8px 0 rgba(60,40,110,.32);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    transition:transform .14s;animation:pop .34s cubic-bezier(.3,1.6,.5,1) both}
+  @keyframes pop{0%{transform:scale(.4) translateY(30px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+  .card:hover{transform:translateY(-6px) scale(1.04)}
+  .card img{width:120px;height:120px;object-fit:contain}
+  .card span{font:700 19px 'Baloo 2',sans-serif;color:#4a3a7a}
+  .card.big{width:150px;height:150px}
+  .card.big img{width:96px;height:96px}
+  .card.ltr{width:130px;height:150px}
+  .card.ltr img{width:104px;height:104px}
+  .card.right{background:#d9f7c9;box-shadow:0 8px 0 #7cb95c}
+  .card.wrong{background:#ffd9d2;box-shadow:0 8px 0 #d98b7a}
+
+  /* ─── «Поймай звук»: предметы едут справа налево ─── */
+  .fly{position:absolute;z-index:5;cursor:pointer;width:118px;text-align:center;
+       transition:transform .12s}
+  .fly:hover{transform:scale(1.07)}
+  .fly img{width:104px;height:104px;object-fit:contain;
+    filter:drop-shadow(0 6px 10px rgba(30,10,60,.35))}
+  .fly span{display:block;margin-top:2px;font:700 17px 'Baloo 2',sans-serif;color:#fff;
+    text-shadow:0 2px 4px rgba(20,8,50,.75)}
+  .fly.gone{pointer-events:none}
+  .belt{position:absolute;left:0;right:0;bottom:120px;height:2px;z-index:3;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)}
+  .miss{position:absolute;z-index:9;font:800 22px 'Baloo 2',sans-serif;color:#ffb8c8;
+    pointer-events:none;animation:pl 900ms ease-out forwards}
+
+  .cat{position:absolute;left:18px;bottom:18px;width:290px;height:290px;z-index:6;
+    background-repeat:no-repeat;background-size:2048px 256px;background-position:0 0;
+    background-image:url("game/cat/idle.png")}
+  .say{position:absolute;left:238px;bottom:250px;z-index:9;padding:12px 20px;border-radius:20px;
+    font:700 19px 'Baloo 2',sans-serif;color:#3b2a5e;background:#fff;white-space:nowrap;
+    box-shadow:0 6px 0 rgba(60,40,110,.3);transition:opacity .2s,transform .2s}
+  .say::after{content:"";position:absolute;left:-10px;bottom:14px;border:10px solid transparent;border-right-color:#fff}
+  .say.off{opacity:0;transform:translateY(8px)}
+
+  .plus{position:absolute;z-index:10;font:800 28px 'Baloo 2',sans-serif;color:#fff;
+    text-shadow:0 3px 0 #6b4fd0;pointer-events:none;animation:pl 1000ms ease-out forwards}
+  @keyframes pl{0%{transform:translateY(0) scale(.5);opacity:0}
+    25%{transform:translateY(-12px) scale(1.2);opacity:1}
+    100%{transform:translateY(-74px) scale(1);opacity:0}}
+  .star{position:absolute;width:42px;height:42px;z-index:10;pointer-events:none;animation:fly 900ms ease-out forwards}
+  @keyframes fly{0%{transform:translate(0,0) scale(.4) rotate(0);opacity:1}
+    100%{transform:translate(var(--dx),var(--dy)) scale(1) rotate(220deg);opacity:0}}
+
+  .screen{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:16px;text-align:center;
+    background:rgba(38,26,74,.74);backdrop-filter:blur(4px);color:#fff;padding:20px}
+  .screen.off{display:none}
+  .screen h2{margin:0;font:700 40px 'Baloo 2',sans-serif}
+  .screen p{margin:0;font:700 17px 'Nunito',sans-serif;color:#ddd6f5;max-width:520px}
+  .games{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+  .gcard{width:210px;background:rgba(255,255,255,.96);border-radius:20px;padding:16px 14px;
+    color:#3b2a5e;cursor:pointer;border:0;text-align:left;box-shadow:0 6px 0 rgba(20,10,40,.3);
+    transition:transform .14s}
+  .gcard:hover{transform:translateY(-5px)}
+  .gcard b{display:block;font:700 19px 'Baloo 2',sans-serif;margin-bottom:4px}
+  .gcard span{font:600 13px 'Nunito',sans-serif;color:#6b6390;line-height:1.5}
+  .res{display:flex;gap:14px;margin:4px 0 2px}
+  .res div{background:rgba(255,255,255,.96);border-radius:20px;padding:14px 26px;color:#3b2a5e}
+  .res b{display:block;font:800 32px 'Baloo 2',sans-serif;color:#6b4fd0}
+  .res span{font:700 13px 'Nunito',sans-serif;color:#7c78a0}
+  .go{border:0;border-radius:999px;padding:15px 40px;cursor:pointer;
+    font:700 22px 'Baloo 2',sans-serif;background:#ffb02e;color:#4a2c00;box-shadow:0 6px 0 #c97d0e}
+  .go:active{transform:translateY(4px);box-shadow:0 2px 0 #c97d0e}
+  .go.ghost{background:rgba(255,255,255,.9);color:#3b2a5e;box-shadow:0 6px 0 rgba(20,10,40,.3)}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="home" href="phonics.html">← К звукам</a>
+
+  <div class="g" id="g">
+    <div class="hud">
+      <span class="chip">⭐ <span id="pts">0</span></span>
+      <span class="chip combo" id="combo">🔥 ×2</span>
+      <span class="grow"></span>
+      <span class="clock" id="clock"><span class="tbar"><i id="tbar"></i></span><b id="secs">45</b></span>
+    </div>
+
+    <div class="quest" id="quest"></div>
+    <div class="row" id="row"></div>
+
+    <div class="cat" id="cat"></div>
+    <div class="say off" id="say"></div>
+
+    <div class="screen" id="menu">
+      <h2>Игры фоникса</h2>
+      <p>Выбери игру. Везде на время: за верный ответ время прибавляется, три подряд — двойные очки.</p>
+      <div class="games">
+        <button class="gcard" data-g="first">
+          <b>Первая буква</b>
+          <span>Буква наверху — найди предмет, который на неё начинается.</span>
+        </button>
+        <button class="gcard" data-g="which">
+          <b>Какая буква?</b>
+          <span>Предмет в центре — выбери букву, с которой он начинается.</span>
+        </button>
+        <button class="gcard" data-g="catch">
+          <b>Поймай звук</b>
+          <span>Предметы едут мимо — успей поймать те, что на нужную букву. Чем дальше, тем быстрее.</span>
+        </button>
+        <button class="gcard" data-g="build">
+          <b>Собери слово</b>
+          <span>Картинка есть — выложи слово из букв по порядку. Кот произносит каждую.</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="screen off" id="over">
+      <h2 id="overTitle">Время вышло!</h2>
+      <div class="res">
+        <div><b id="rPts">0</b><span>очков</span></div>
+        <div><b id="rStreak">0</b><span>лучшая серия</span></div>
+        <div><b id="rBest">0</b><span>рекорд</span></div>
+      </div>
+      <div class="games" style="gap:10px">
+        <button class="go" id="again">Ещё раз 🔁</button>
+        <button class="go ghost" id="toMenu">Другая игра</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- материал ----------
+   Предметы: 52 из алфавитного набора + 33 дорисованных, все в одном стиле.
+   Для игр на первую букву берём только те, где буква и звук совпадают. */
+var OBJ = ["ant","apple","ball","bear","bed","bee","boat","book","box","bus","car","cat","chair",
+"cheese","coat","coin","cow","crown","cup","dog","donut","duck","egg","elephant","fish","flower",
+"fork","frog","gift","glue","grape","hammer","hat","hen","horse","house","ice-cream","igloo","jam",
+"jelly","juice","key","kite","leaf","lion","mango","moon","nest","notebook","octopus","orange",
+"panda","pencil","pie","pig","queen","quill","rain","rainbow","ring","rocket","shark","sheep",
+"shell","ship","sock","spoon","star","sun","thumb","train","tree","umbrella","unicorn","van","vase",
+"volcano","watermelone","whale","x-ray","xylophone","yacht","yo-yo","zebra","zipper"];
+
+var NICE = {"ice-cream":"ice cream","x-ray":"x-ray","yo-yo":"yo-yo","watermelone":"watermelon"};
+
+/* слова, которые начинаются с буквосочетания — в игре на первую букву их не берём */
+var DIGRAPH = {"ship":1,"shell":1,"sheep":1,"shark":1,"chair":1,"cheese":1,"thumb":1};
+
+/* Слова из трёх-четырёх звуков для игры на слияние.
+   Разбивка именно по ЗВУКАМ, а не по буквам: fish это f-i-sh, duck это d-u-ck. */
+var BLEND = [
+  {w:"cat", s:["c","a","t"]},   {w:"dog", s:["d","o","g"]},
+  {w:"pig", s:["p","i","g"]},   {w:"hen", s:["h","e","n"]},
+  {w:"bed", s:["b","e","d"]},   {w:"bus", s:["b","u","s"]},
+  {w:"cup", s:["c","u","p"]},   {w:"sun", s:["s","u","n"]},
+  {w:"box", s:["b","o","x"]},   {w:"van", s:["v","a","n"]},
+  {w:"jam", s:["j","a","m"]},   {w:"hat", s:["h","a","t"]},
+  {w:"fish",s:["f","i","sh"]},  {w:"ship",s:["sh","i","p"]},
+  {w:"duck",s:["d","u","ck"]},  {w:"sock",s:["s","o","ck"]}
+];
+
+var ROUND=45, ADD=4, FRAMES=8, FW=256;
+
+var byLetter={};
+OBJ.forEach(function(o){ if(!DIGRAPH[o]) (byLetter[o[0]]=byLetter[o[0]]||[]).push(o); });
+var LETTERS=Object.keys(byLetter).filter(function(L){ return byLetter[L].length>=1; });
+
+var g=document.getElementById("g"), cat=document.getElementById("cat"), say=document.getElementById("say"),
+    row=document.getElementById("row"), quest=document.getElementById("quest"),
+    ptsEl=document.getElementById("pts"), comboEl=document.getElementById("combo"),
+    secsEl=document.getElementById("secs"), tbar=document.getElementById("tbar"),
+    clock=document.getElementById("clock"),
+    menuS=document.getElementById("menu"), overS=document.getElementById("over");
+
+var mode="first", pts=0, streak=0, bestStreak=0, best={}, playing=false,
+    left=ROUND, tick=null, want=null, locked=false, idleAt=Date.now();
+
+/* ---------- кот ---------- */
+var frame=0, fps=10, acc=0, last=0, once=false, nextClip="idle";
+function setCat(name, playOnce, back){
+  frame=0; once=!!playOnce; nextClip=back||"idle";
+  cat.style.backgroundImage='url("game/cat/'+name+'.png")';
+}
+function anim(ts){
+  if(!last) last=ts;
+  acc+=ts-last; last=ts;
+  var step=1000/fps;
+  while(acc>=step){
+    acc-=step; frame++;
+    if(frame>=FRAMES){ if(once){ once=false; setCat(nextClip); } else frame=0; }
+  }
+  cat.style.backgroundPosition=(-frame*FW)+"px 0";
+  requestAnimationFrame(anim);
+}
+requestAnimationFrame(anim);
+
+/* ---------- звук и голос ---------- */
+var AC=null;
+function ac(){ if(!AC){var C=window.AudioContext||window.webkitAudioContext; if(C) AC=new C();}
+  if(AC&&AC.state==="suspended") AC.resume(); return AC; }
+function tone(fr,dur,type,v,delay){
+  var a=ac(); if(!a) return; var t0=a.currentTime+(delay||0);
+  var o=a.createOscillator(), gg=a.createGain();
+  o.type=type||"sine"; o.frequency.value=fr;
+  gg.gain.setValueAtTime(0,t0); gg.gain.linearRampToValueAtTime(v||.2,t0+.012);
+  gg.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+  o.connect(gg); gg.connect(a.destination); o.start(t0); o.stop(t0+dur+.02);
+}
+function sndOk(n){ [523,659,784].forEach(function(f,i){ tone(f*(1+(n||0)*.03),.16,"triangle",.16,i*.06); }); }
+function sndNo(){ tone(300,.18,"sine",.14); tone(220,.22,"sine",.11,.07); }
+function sndWin(){ [660,830,990,1320].forEach(function(f,i){ tone(f,.24,"triangle",.16,i*.08); }); }
+function sndTick(){ tone(1200,.05,"square",.06); }
+function sndEnd(){ [520,430,330].forEach(function(f,i){ tone(f,.32,"sine",.16,i*.16); }); }
+
+var VOICE=null;
+function pickVoice(){
+  var vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  if(!vs.length) return;
+  var pref=["samantha","karen","moira","tessa","google uk english female","zira"];
+  for(var i=0;i<pref.length;i++){
+    var m=vs.filter(function(v){ return /en/i.test(v.lang) && v.name.toLowerCase().indexOf(pref[i])>-1; });
+    if(m.length){ VOICE=m[0]; return; }
+  }
+  var en=vs.filter(function(v){ return /^en/i.test(v.lang); });
+  VOICE=en[0]||vs[0];
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+/* Речь и подсветка ставились через setTimeout и продолжали срабатывать уже
+   после перехода к следующему слову — отсюда «звук от прошлого задания».
+   Теперь у каждого задания свой номер: всё отложенное сверяется с ним
+   и молча отменяется, если задание успело смениться. */
+var ROUND_ID = 0, TIMERS = [];
+function stopPending(){
+  ROUND_ID++;
+  TIMERS.forEach(clearTimeout); TIMERS = [];
+  if(window.speechSynthesis){ try{ speechSynthesis.cancel(); }catch(e){} }
+}
+function later(fn, ms){
+  var id = ROUND_ID;
+  var t = setTimeout(function(){ if(id === ROUND_ID) fn(); }, ms || 0);
+  TIMERS.push(t); return t;
+}
+function voiceSay(txt,pitch,rate,delay){
+  if(!window.speechSynthesis) return;
+  later(function(){
+    try{
+      var u=new SpeechSynthesisUtterance(txt);
+      if(VOICE) u.voice=VOICE;
+      u.lang=(VOICE&&VOICE.lang)||"en-US";
+      u.pitch=pitch==null?1.5:pitch; u.rate=rate==null?.95:rate;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }, delay||0);
+}
+function speak(txt,ms){
+  say.innerHTML=txt; say.classList.remove("off");
+  clearTimeout(speak.t); speak.t=setTimeout(function(){ say.classList.add("off"); },ms||2000);
+}
+function nice(o){ return NICE[o]||o; }
+
+/* ---------- общий раунд ---------- */
+function setClock(){
+  secsEl.textContent=Math.max(0,Math.ceil(left));
+  tbar.style.width=Math.max(0,Math.min(100,left/ROUND*100))+"%";
+  clock.classList.toggle("warn",left<=10);
+}
+function start(which){
+  mode=which; pts=0; streak=0; bestStreak=0; left=ROUND; playing=true; locked=false;
+  ptsEl.textContent=0; comboEl.classList.remove("on");
+  menuS.classList.add("off"); overS.classList.add("off");
+  clearCatch(); setClock(); setCat("idle"); deal();
+  clearInterval(tick);
+  tick=setInterval(function(){
+    if(!playing) return;
+    left-=.1;
+    if(left<=10 && Math.abs(left-Math.round(left))<.06 && left>0) sndTick();
+    if(left<=0){ left=0; setClock(); finish(); return; }
+    setClock();
+  },100);
+}
+function finish(){
+  stopPending();
+  playing=false; clearInterval(tick); clearCatch();
+  row.innerHTML=""; quest.innerHTML="";
+  if(!best[mode] || pts>best[mode]) best[mode]=pts;
+  document.getElementById("rPts").textContent=pts;
+  document.getElementById("rStreak").textContent=bestStreak;
+  document.getElementById("rBest").textContent=best[mode];
+  document.getElementById("overTitle").textContent = pts>=10 ? "Отлично!" : "Время вышло!";
+  overS.classList.remove("off"); sndEnd(); setCat(pts>=10?"celebrate":"idle");
+}
+
+function reward(x,y,mult){
+  var p=document.createElement("div");
+  p.className="plus"; p.style.left=(x-26)+"px"; p.style.top=(y-20)+"px";
+  p.textContent="+"+mult+"  ⏱+"+ADD; p.style.fontSize="21px"; g.appendChild(p);
+  for(var i=0;i<6;i++){
+    var s=document.createElement("img");
+    s.className="star"; s.src="game/obj/star.png";
+    s.style.left=(x-21)+"px"; s.style.top=(y-10)+"px";
+    var a=(-30-Math.random()*120)*Math.PI/180, d=60+Math.random()*90;
+    s.style.setProperty("--dx",(Math.cos(a)*d).toFixed(0)+"px");
+    s.style.setProperty("--dy",(Math.sin(a)*d).toFixed(0)+"px");
+    g.appendChild(s);
+    (function(el){ setTimeout(function(){ el.remove(); },950); })(s);
+  }
+  setTimeout(function(){ p.remove(); },1000);
+}
+
+function good(card,x,y,word){
+  locked=true; card.classList.add("right");
+  streak++; if(streak>bestStreak) bestStreak=streak;
+  var mult=streak>=3?2:1;
+  comboEl.classList.toggle("on",streak>=3);
+  pts+=mult; ptsEl.textContent=pts;
+  left=Math.min(ROUND,left+ADD); setClock();
+  reward(x,y,mult); sndOk(streak);
+  if(mult>1){ sndWin(); setCat("celebrate",true,"idle"); } else setCat("happy",true,"idle");
+  if(word) voiceSay(nice(word),1.5,.9,120);
+  voiceSay(mult>1?"Hooray! Amazing!":"Hooray!",1.7,1,900);
+  speak(mult>1?("Серия "+streak+"! 🔥"):"Молодец!",1800);
+  setTimeout(function(){ if(playing) deal(); },1800);
+}
+function bad(card,msg,voice){
+  streak=0; comboEl.classList.remove("on");
+  card.classList.add("wrong");
+  setTimeout(function(){ card.classList.remove("wrong"); },700);
+  card.animate([{transform:"translateX(0)"},{transform:"translateX(-10px)"},
+                {transform:"translateX(10px)"},{transform:"translateX(0)"}],{duration:280});
+  sndNo(); setCat("sad",true,"idle");
+  voiceSay("Oops!",1.4,.95);
+  if(voice) voiceSay(voice,1.4,.9,800);
+  speak(msg,2300); idleAt=Date.now();
+}
+function pos(el){
+  var r=el.getBoundingClientRect(), gr=g.getBoundingClientRect();
+  return [r.left-gr.left+r.width/2, r.top-gr.top+40];
+}
+function shuffle(a){ return a.slice().sort(function(){ return Math.random()-.5; }); }
+
+/* ---------- игра 1: первая буква ---------- */
+function dealFirst(){
+  var L=LETTERS[Math.floor(Math.random()*LETTERS.length)];
+  want=byLetter[L][Math.floor(Math.random()*byLetter[L].length)];
+  quest.innerHTML='<span class="cap">Что начинается на эту букву?</span>' +
+    '<img class="letter" src="game/ltr/'+L+'0.png" alt="">';
+  var others=shuffle(OBJ.filter(function(o){ return o[0]!==L && !DIGRAPH[o]; })).slice(0,2);
+  row.innerHTML="";
+  shuffle(others.concat([want])).forEach(function(o,i){
+    var c=document.createElement("div");
+    c.className="card"; c.style.animationDelay=(i*.08)+"s";
+    c.innerHTML='<img src="game/obj/'+o+'.png" alt=""><span>'+nice(o)+'</span>';
+    c.onclick=function(){
+      if(!playing||locked) return;
+      var p=pos(c);
+      if(o===want) good(c,p[0],p[1],o);
+      else bad(c,"Это «"+nice(o)+"» — на букву "+o[0].toUpperCase(),
+                 nice(o)+" starts with "+o[0].toUpperCase());
+    };
+    row.appendChild(c);
+  });
+  voiceSay(L.toUpperCase(),1.4,.8,200);
+  setCat("thinking",true,"idle");
+}
+
+/* ---------- игра 2: какая буква ---------- */
+function dealWhich(){
+  want=null;
+  var pool=OBJ.filter(function(o){ return !DIGRAPH[o]; });
+  var o=pool[Math.floor(Math.random()*pool.length)];
+  var L=o[0];
+  quest.innerHTML='<span class="cap">С какой буквы начинается?</span>' +
+    '<img class="bigword" src="game/obj/'+o+'.png" alt="">';
+  var others=shuffle(LETTERS.filter(function(x){ return x!==L; })).slice(0,2);
+  row.innerHTML="";
+  shuffle(others.concat([L])).forEach(function(x,i){
+    var c=document.createElement("div");
+    c.className="card ltr"; c.style.animationDelay=(i*.08)+"s";
+    c.innerHTML='<img src="game/ltr/'+x+'0.png" alt="">';
+    c.onclick=function(){
+      if(!playing||locked) return;
+      var p=pos(c);
+      if(x===L) good(c,p[0],p[1],o);
+      else bad(c,"Это буква "+x.toUpperCase()+", а «"+nice(o)+"» на "+L.toUpperCase(),
+                 nice(o)+" starts with "+L.toUpperCase());
+    };
+    row.appendChild(c);
+  });
+  voiceSay(nice(o),1.5,.9,200);
+  setCat("thinking",true,"idle");
+}
+
+/* ---------- игра 3: собери слово ----------
+   Раньше здесь давали готовые варианты на выбор — ребёнок угадывал, а не читал.
+   Теперь он выкладывает слово буква за буквой: это и письмо, и чтение сразу.
+   Лишние буквы в наборе не дают собрать наугад. */
+var buildWord="", buildStep=0;
+
+function dealBuild(){
+  var it = BLEND[Math.floor(Math.random()*BLEND.length)];
+  buildWord = it.w; buildStep = 0; want = it.w;
+
+  quest.innerHTML =
+    '<span class="cap">Собери слово</span>' +
+    '<img class="bigword" src="game/obj/'+it.w+'.png" alt="" style="width:150px;height:150px">' +
+    '<div class="slots">' + it.w.split("").map(function(_,i){
+        return '<div class="slot" id="slot'+i+'"></div>'; }).join("") + '</div>';
+
+  /* буквы слова плюс две лишние, чтобы нельзя было тыкать подряд */
+  var need = it.w.split("");
+  var extra = shuffle(LETTERS.filter(function(L){ return need.indexOf(L)<0; })).slice(0,2);
+  row.innerHTML = "";
+  shuffle(need.concat(extra)).forEach(function(L,i){
+    var t=document.createElement("div");
+    t.className="tile"; t.style.animationDelay=(i*.06)+"s";
+    t.innerHTML='<img src="game/ltr/'+L+'0.png" alt="">';
+    t.onclick=function(){ tapLetter(t,L); };
+    row.appendChild(t);
+  });
+
+  voiceSay(nice(it.w),1.5,.85,300);
+  setCat("thinking",true,"idle");
+}
+
+function tapLetter(tile, L){
+  if(!playing || locked) return;
+  var need = buildWord[buildStep];
+  if(L === need){
+    var slot=document.getElementById("slot"+buildStep);
+    if(slot){
+      slot.innerHTML='<img src="game/ltr/'+L+'0.png" alt="">';
+      slot.classList.add("full");
+      slot.animate([{transform:"scale(.5)"},{transform:"scale(1.18)",offset:.6},
+                    {transform:"scale(1)"}],{duration:280});
+    }
+    tile.classList.add("used");
+    voiceSay(L, 1.4, .8);
+    tone(600 + buildStep*120, .12, "triangle", .16);
+    buildStep++;
+    if(buildStep >= buildWord.length){
+      var p = pos(quest);
+      later(function(){ good(quest, p[0], p[1]+120, buildWord); }, 260);
+    }
+  } else {
+    streak=0; comboEl.classList.remove("on");
+    tile.classList.add("no");
+    setTimeout(function(){ tile.classList.remove("no"); },600);
+    tile.animate([{transform:"translateX(0)"},{transform:"translateX(-9px)"},
+                  {transform:"translateX(9px)"},{transform:"translateX(0)"}],{duration:250});
+    sndNo(); setCat("sad",true,"idle");
+    voiceSay("Oops!",1.4,.95);
+    voiceSay(buildWord[buildStep], 1.4, .75, 700);   /* подсказываем нужную букву */
+    speak("Сейчас нужна другая буква", 1800);
+    idleAt=Date.now();
+  }
+}
+
+/* ---------- игра 4: поймай звук ----------
+   Единственная игра с движением. Предметы едут справа налево, ловить нужно
+   только те, что на заданную букву. Пропущенный правильный не наказывается
+   очками — только кот огорчается: в шесть лет штраф за медлительность
+   отбивает желание играть быстрее, а не учит. */
+var flyers=[], spawnT=null, catchLetter="", rafOn=false, caught=0, letterT=null;
+
+/* Для ловли годятся только буквы, у которых хватает предметов: на Q весь
+   набор это queen и quill, и игра вырождалась в две картинки. */
+var CATCH_LETTERS = LETTERS.filter(function(L){ return byLetter[L].length >= 3; });
+
+function clearCatch(){
+  flyers.forEach(function(f){ f.el.remove(); }); flyers=[];
+  if(spawnT){ clearInterval(spawnT); spawnT=null; }
+  if(letterT){ clearTimeout(letterT); letterT=null; }
+}
+
+/* Буква меняется сама: после пяти пойманных или через 15 секунд,
+   что наступит раньше. Иначе ребёнок всю игру ловит одну и ту же. */
+function newLetter(announce){
+  var prev = catchLetter;
+  do { catchLetter = CATCH_LETTERS[Math.floor(Math.random()*CATCH_LETTERS.length)]; }
+  while (CATCH_LETTERS.length > 1 && catchLetter === prev);
+  caught = 0;
+  quest.innerHTML='<span class="cap">Лови всё на букву</span>' +
+    '<img class="letter" src="game/ltr/'+catchLetter+'0.png" alt="">';
+  var img = quest.querySelector(".letter");
+  if(img) img.animate([{transform:"scale(.5) rotate(-12deg)",opacity:0},
+                       {transform:"scale(1.15)",opacity:1,offset:.6},
+                       {transform:"scale(1)"}],{duration:420});
+  if(announce){
+    voiceSay(catchLetter.toUpperCase(),1.4,.8,120);
+    speak("Теперь лови на "+catchLetter.toUpperCase()+"!",1800);
+  }
+  if(letterT) clearTimeout(letterT);
+  letterT = setTimeout(function(){ if(playing && mode==="catch") newLetter(true); }, 15000);
+}
+
+function dealCatch(){
+  clearCatch();
+  row.innerHTML="";
+  newLetter(false);
+  if(!document.querySelector(".belt")){
+    var b=document.createElement("div"); b.className="belt"; g.appendChild(b);
+  }
+  voiceSay(catchLetter.toUpperCase(),1.4,.8,200);
+  speak("Лови всё на "+catchLetter.toUpperCase()+"!",2000);
+  setCat("pointing",true,"idle");
+
+  spawn();
+  spawnT=setInterval(spawn, 1150);
+  if(!rafOn){ rafOn=true; requestAnimationFrame(flyLoop); }
+}
+
+function spawn(){
+  if(!playing || mode!=="catch") return;
+  /* примерно каждый третий — нужный, иначе ловить нечего или слишком легко */
+  var wantOne = Math.random() < .38 && byLetter[catchLetter].length;
+  var pool = wantOne ? byLetter[catchLetter]
+                     : OBJ.filter(function(o){ return o[0]!==catchLetter && !DIGRAPH[o]; });
+  var o = pool[Math.floor(Math.random()*pool.length)];
+
+  var el=document.createElement("div");
+  el.className="fly";
+  el.innerHTML='<img src="game/obj/'+o+'.png" alt=""><span>'+nice(o)+'</span>';
+  var gh=g.clientHeight;
+  var y = 150 + Math.random()*(gh-150-260);
+  el.style.top=y+"px"; el.style.left=g.clientWidth+"px";
+  g.appendChild(el);
+
+  var f={el:el, x:g.clientWidth, y:y, o:o, ok:(o[0]===catchLetter), dead:false};
+  el.onclick=function(){ hitFly(f); };
+  flyers.push(f);
+}
+
+function hitFly(f){
+  if(!playing || f.dead) return;
+  f.dead=true; f.el.classList.add("gone");
+  var r=f.el.getBoundingClientRect(), gr=g.getBoundingClientRect();
+  var x=r.left-gr.left+r.width/2, y=r.top-gr.top+30;
+
+  if(f.ok){
+    streak++; if(streak>bestStreak) bestStreak=streak;
+    var mult=streak>=3?2:1;
+    comboEl.classList.toggle("on",streak>=3);
+    pts+=mult; ptsEl.textContent=pts;
+    left=Math.min(ROUND,left+2); setClock();
+    reward(x,y,mult); sndOk(streak);
+    setCat(mult>1?"celebrate":"happy",true,"idle");
+    voiceSay(nice(f.o),1.5,.95,60);
+    if(mult>1){ sndWin(); speak("Серия "+streak+"! 🔥",1500); }
+    caught++;
+    if(caught>=5) setTimeout(function(){ if(playing && mode==="catch") newLetter(true); },700);
+    f.el.animate([{transform:"scale(1)",opacity:1},{transform:"scale(1.5)",opacity:0}],
+                 {duration:280,fill:"forwards"});
+  } else {
+    streak=0; comboEl.classList.remove("on");
+    sndNo(); setCat("sad",true,"idle");
+    voiceSay("Oops!",1.4,.95);
+    speak("«"+nice(f.o)+"» на "+f.o[0].toUpperCase()+", не на "+catchLetter.toUpperCase(),2000);
+    f.el.animate([{transform:"translateX(0)"},{transform:"translateX(-9px)"},
+                  {transform:"translateX(9px)"},{transform:"translateX(0)"}],{duration:260});
+  }
+  setTimeout(function(){ f.el.remove(); }, f.ok?300:400);
+  flyers=flyers.filter(function(z){ return z!==f; });
+  idleAt=Date.now();
+}
+
+function flyLoop(ts){
+  if(!flyLoop.t) flyLoop.t=ts;
+  var dt=Math.min(60, ts-flyLoop.t); flyLoop.t=ts;
+  if(playing && mode==="catch"){
+    var speed = 92 + pts*4;                 /* чем больше поймал, тем быстрее едут */
+    for(var i=flyers.length-1;i>=0;i--){
+      var f=flyers[i];
+      f.x -= speed*dt/1000;
+      f.el.style.left=f.x+"px";
+      if(f.x < -130){
+        if(f.ok && !f.dead){                /* нужный уехал — только огорчение */
+          streak=0; comboEl.classList.remove("on");
+          setCat("sad",true,"idle");
+          var m=document.createElement("div");
+          m.className="miss"; m.style.left="20px"; m.style.top=(f.y+20)+"px";
+          m.textContent="уехал…"; g.appendChild(m);
+          setTimeout(function(){ m.remove(); },900);
+        }
+        f.el.remove(); flyers.splice(i,1);
+      }
+    }
+  }
+  requestAnimationFrame(flyLoop);
+}
+
+function deal(){
+  stopPending();
+  locked=false; idleAt=Date.now();
+  if(mode==="catch"){ dealCatch(); return; }
+  clearCatch();
+  if(mode==="first") dealFirst();
+  else if(mode==="which") dealWhich();
+  else dealBuild();
+}
+
+/* подсказка, если ребёнок завис */
+setInterval(function(){
+  if(!playing||locked||mode==="catch") return;
+  if(Date.now()-idleAt>8000){
+    idleAt=Date.now();
+    setCat("pointing",true,"idle");
+    speak("Смотри сюда 👀",2000);
+    row.querySelectorAll(".card").forEach(function(c){
+      var img=c.querySelector("img");
+      var isWant = want && img && img.src.indexOf("/"+want+".png")>-1;
+      if(isWant) c.animate([{transform:"scale(1)"},{transform:"scale(1.12)",offset:.5},
+                            {transform:"scale(1)"}],{duration:700,iterations:2});
+    });
+  }
+},1200);
+
+document.querySelectorAll(".gcard").forEach(function(b){
+  b.onclick=function(){ start(b.dataset.g); };
+});
+document.getElementById("again").onclick=function(){ start(mode); };
+document.getElementById("toMenu").onclick=function(){
+  clearCatch();
+  overS.classList.add("off"); menuS.classList.remove("off"); setCat("idle");
+};
+setClock();
+</script>
+</body>
+</html>
