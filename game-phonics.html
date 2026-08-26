@@ -63,6 +63,25 @@
   .tile.used{opacity:0;pointer-events:none;transform:scale(.5)}
   .tile.no{background:#ffd9d2;box-shadow:0 7px 0 #d98b7a}
 
+  /* ─── игры гласных: написание слова и корзины ─── */
+  .wordbig{display:flex;gap:3px;background:rgba(255,255,255,.94);border-radius:16px;
+    padding:8px 20px;box-shadow:0 5px 0 rgba(60,40,110,.28);
+    font:800 40px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:2px}
+  .wordbig i{font-style:normal;color:#d1483c}
+  .wordbig i.beat{animation:beat .5s ease-in-out 2}
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+  .card.bin{width:230px;height:198px;gap:6px}
+  .card.bin img{width:84px;height:84px}
+  .card.bin b{font:800 21px 'Baloo 2',sans-serif;color:#3b2a5e}
+  .card.bin span{font:600 14px 'Nunito',sans-serif;color:#6b6390;line-height:1.4}
+  .card.spell{width:230px;height:130px}
+  .card.spell b{font:800 42px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:2px}
+  .card.spell b i{font-style:normal;color:#d1483c}
+  .card.pic span{font:800 22px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:1px}
+  .rep{border:0;cursor:pointer;background:#fff;border-radius:999px;padding:11px 24px;
+    font:700 17px 'Baloo 2',sans-serif;color:#5b3fa0;box-shadow:0 5px 0 #d8cdf0}
+  .rep:hover{transform:translateY(-2px)}
+
   .row{position:absolute;left:290px;right:30px;bottom:48px;z-index:7;
     display:flex;gap:20px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
   .card{width:180px;height:190px;border-radius:26px;cursor:pointer;position:relative;
@@ -94,6 +113,7 @@
   .miss{position:absolute;z-index:9;font:800 22px 'Baloo 2',sans-serif;color:#ffb8c8;
     pointer-events:none;animation:pl 900ms ease-out forwards}
 
+  /* background-size задаёт скрипт: у кота 8 кадров, у девочки 10 */
   .cat{position:absolute;left:18px;bottom:18px;width:290px;height:290px;z-index:6;
     background-repeat:no-repeat;background-size:2048px 256px;background-position:0 0;
     background-image:url("game/cat/idle.png")}
@@ -173,6 +193,18 @@
           <b>Собери слово</b>
           <span>Картинка есть — выложи слово из букв по порядку. Кот произносит каждую.</span>
         </button>
+        <button class="gcard" data-g="sort">
+          <b>Короткий или долгий</b>
+          <span>Слово и картинка — реши, гласная звучит коротко или называет своё имя.</span>
+        </button>
+        <button class="gcard" data-g="pair">
+          <b>Слушай и выбирай</b>
+          <span>Слово звучит вслух. Cap или cape? Разница в одном звуке.</span>
+        </button>
+        <button class="gcard" data-g="magic">
+          <b>Волшебная e</b>
+          <span>Картинка есть — выбери верное написание. Хвостовая e меняет всё слово.</span>
+        </button>
       </div>
     </div>
 
@@ -221,7 +253,10 @@ var BLEND = [
   {w:"duck",s:["d","u","ck"]},  {w:"sock",s:["s","o","ck"]}
 ];
 
-var ROUND=45, ADD=4, FRAMES=8, FW=256;
+var ROUND=45, ADD=4, FW=256;
+
+/* какие игры ведёт девочка, а не кот */
+var VOWEL_GAMES={sort:1,pair:1,magic:1};
 
 var byLetter={};
 OBJ.forEach(function(o){ if(!DIGRAPH[o]) (byLetter[o[0]]=byLetter[o[0]]||[]).push(o); });
@@ -237,11 +272,31 @@ var g=document.getElementById("g"), cat=document.getElementById("cat"), say=docu
 var mode="first", pts=0, streak=0, bestStreak=0, best={}, playing=false,
     left=ROUND, tick=null, want=null, locked=false, idleAt=Date.now();
 
-/* ---------- кот ---------- */
+/* ---------- ведущий ----------
+   Два персонажа с разной раскадровкой: у кота восемь кадров, у девочки десять.
+   Игры зовут состояния по смыслу — happy, sad, celebrate — а каждый персонаж
+   сам решает, каким своим клипом это показать. У девочки нет «грустного»
+   и «показывает пальцем», поэтому берём ближайшее по настроению. */
+var CHARS = {
+  cat:  {dir:"game/cat/",  frames:8,  fps:10, clips:{
+           idle:"idle", happy:"happy", sad:"sad", thinking:"thinking",
+           pointing:"pointing", celebrate:"celebrate"}},
+  girl: {dir:"game/girl/", frames:10, fps:12, clips:{
+           idle:"idle", happy:"fun", sad:"hit", thinking:"idle",
+           pointing:"jump", celebrate:"gift"}}
+};
+var CH = CHARS.cat;
 var frame=0, fps=10, acc=0, last=0, once=false, nextClip="idle";
+
+function useChar(key){
+  CH = CHARS[key] || CHARS.cat;
+  fps = CH.fps;
+  cat.style.backgroundSize = (CH.frames*FW)+"px "+FW+"px";
+  setCat("idle");
+}
 function setCat(name, playOnce, back){
   frame=0; once=!!playOnce; nextClip=back||"idle";
-  cat.style.backgroundImage='url("game/cat/'+name+'.png")';
+  cat.style.backgroundImage='url("'+CH.dir+(CH.clips[name]||name)+'.png")';
 }
 function anim(ts){
   if(!last) last=ts;
@@ -249,7 +304,7 @@ function anim(ts){
   var step=1000/fps;
   while(acc>=step){
     acc-=step; frame++;
-    if(frame>=FRAMES){ if(once){ once=false; setCat(nextClip); } else frame=0; }
+    if(frame>=CH.frames){ if(once){ once=false; setCat(nextClip); } else frame=0; }
   }
   cat.style.backgroundPosition=(-frame*FW)+"px 0";
   requestAnimationFrame(anim);
@@ -330,7 +385,9 @@ function start(which){
   mode=which; pts=0; streak=0; bestStreak=0; left=ROUND; playing=true; locked=false;
   ptsEl.textContent=0; comboEl.classList.remove("on");
   menuS.classList.add("off"); overS.classList.add("off");
-  clearCatch(); setClock(); setCat("idle"); deal();
+  /* игры гласных ведёт девочка, игры на буквы — кот */
+  useChar(VOWEL_GAMES[which] ? "girl" : "cat");
+  clearCatch(); setClock(); deal();
   clearInterval(tick);
   tick=setInterval(function(){
     if(!playing) return;
@@ -650,6 +707,144 @@ function flyLoop(ts){
   requestAnimationFrame(flyLoop);
 }
 
+/* ================= ГЛАСНЫЕ: короткие и долгие =================
+   Здесь, в отличие от игр на первую букву, написание слова показывать НУЖНО:
+   ребёнок как раз и учится видеть, что одна и та же буква читается по-разному.
+   Якорные слова (cat / cake) стоят на корзинах постоянно — это опора,
+   а не подсказка: их звук надо ещё узнать в новом слове. */
+var VOW = [
+ {v:"a", ipaS:"/æ/", ipaL:"/eɪ/", aS:"cat", aL:"cake",
+  sh:["cat","hat","apple","bag","can","cap","jam","van","tap","ant","hammer"],
+  lo:["cake","rain","snake","gate","cape","cane","tape","train"]},
+ {v:"e", ipaS:"/e/", ipaL:"/iː/", aS:"bed", aL:"tree",
+  sh:["bed","hen","egg","net","shell"],
+  lo:["tree","bee","cheese","sheep","three","green","key"]},
+ {v:"i", ipaS:"/ɪ/", ipaL:"/aɪ/", aS:"pig", aL:"kite",
+  sh:["pig","fish","ink","six","ship","zipper","pin","rip","kit"],
+  lo:["kite","ice","five","pine","ripe"]},
+ {v:"o", ipaS:"/ɒ/", ipaL:"/əʊ/", aS:"dog", aL:"bone",
+  sh:["dog","box","frog","pot","sock","octopus"],
+  lo:["bone","nose","boat","rope","coat"]},
+ {v:"u", ipaS:"/ʌ/", ipaL:"/juː/", aS:"sun", aL:"cube",
+  sh:["sun","cup","bus","duck","cub","tub","umbrella"],
+  lo:["cube","unicorn","tube","mule"]}
+];
+
+/* Пары, где обе стороны нарисованы: на слух и на глаз разница только в хвостовой e. */
+var PAIRS = [["cap","cape"],["tap","tape"],["can","cane"],
+             ["kit","kite"],["pin","pine"],["rip","ripe"],
+             ["cub","cube"],["tub","tube"]];
+
+function vowPick(){ return VOW[Math.floor(Math.random()*VOW.length)]; }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+/* написание слова: гласная выделена цветом */
+function spell(w,v){
+  return w.split("").map(function(ch){
+    return ch===v ? '<i>'+ch+'</i>' : ch;
+  }).join("");
+}
+
+/* ---------- игра 5: короткий или долгий ---------- */
+function dealSort(){
+  var V=vowPick(), isLong=Math.random()<.5;
+  var w=pick(isLong?V.lo:V.sh);
+  want=w;
+
+  quest.innerHTML='<span class="cap">Гласная звучит коротко или называет своё имя?</span>'+
+    '<img class="bigword" src="game/obj/'+w+'.png" alt="" style="width:132px;height:132px">'+
+    '<div class="wordbig">'+spell(w,V.v)+'</div>';
+
+  row.innerHTML="";
+  [[false,V.aS,V.ipaS,"короткий","как "+V.aS],
+   [true, V.aL,V.ipaL,"долгий",  "как "+V.aL]].forEach(function(b,i){
+    var c=document.createElement("div");
+    c.className="card bin"; c.style.animationDelay=(i*.09)+"s";
+    c.innerHTML='<img src="game/obj/'+b[1]+'.png" alt="">'+
+                '<b>'+b[3]+' '+b[2]+'</b><span>'+b[4]+'</span>';
+    c.onclick=function(){
+      if(!playing||locked) return;
+      var p=pos(c);
+      if(b[0]===isLong) good(c,p[0],p[1],w);
+      else bad(c, isLong ? ('В «'+w+'» буква '+V.v+' называет своё имя — как в '+V.aL)
+                         : ('В «'+w+'» буква '+V.v+' звучит коротко — как в '+V.aS),
+                 w);
+    };
+    row.appendChild(c);
+  });
+
+  voiceSay(nice(w),1.5,.85,250);
+  setCat("thinking",true,"idle");
+}
+
+/* ---------- игра 6: слушай и выбирай ---------- */
+function dealPair(){
+  var p=pick(PAIRS), idx=Math.random()<.5?0:1;
+  want=p[idx];
+
+  quest.innerHTML='<span class="cap">Какое слово прозвучало?</span>'+
+    '<button class="rep" id="rep">🔊 Ещё раз</button>';
+  document.getElementById("rep").onclick=function(){
+    if(playing) voiceSay(want,1.4,.7);
+  };
+
+  row.innerHTML="";
+  shuffle([p[0],p[1]]).forEach(function(w,i){
+    var c=document.createElement("div");
+    c.className="card pic"; c.style.animationDelay=(i*.09)+"s";
+    c.innerHTML='<img src="game/obj/'+w+'.png" alt=""><span>'+w+'</span>';
+    c.onclick=function(){
+      if(!playing||locked) return;
+      var q=pos(c);
+      if(w===want) good(c,q[0],q[1],w);
+      else bad(c,"Это «"+w+"». Послушай ещё раз",want);
+    };
+    row.appendChild(c);
+  });
+
+  voiceSay(want,1.4,.7,450);
+  setCat("pointing",true,"idle");
+}
+
+/* ---------- игра 7: волшебная e ----------
+   Картинка одна, написаний два. Ребёнок не угадывает на слух, а читает:
+   хвостовая e не читается сама, но заставляет гласную назвать своё имя. */
+function dealMagic(){
+  var p=pick(PAIRS), idx=Math.random()<.5?0:1;
+  var w=p[idx], v=p[0][1];       /* гласная — вторая буква короткого слова */
+  want=w;
+
+  quest.innerHTML='<span class="cap">Что здесь нарисовано?</span>'+
+    '<img class="bigword" src="game/obj/'+w+'.png" alt="" style="width:158px;height:158px">';
+
+  row.innerHTML="";
+  shuffle([p[0],p[1]]).forEach(function(s,i){
+    var c=document.createElement("div");
+    c.className="card spell"; c.style.animationDelay=(i*.09)+"s";
+    c.innerHTML='<b>'+spell(s,v)+'</b>';
+    c.onclick=function(){
+      if(!playing||locked) return;
+      var q=pos(c);
+      if(s===w){
+        good(c,q[0],q[1],w);
+        var bt=c.querySelector("i"); if(bt) bt.classList.add("beat");
+        later(function(){
+          speak(idx ? ('«'+p[0]+'» → «'+p[1]+'»: e сделала '+v+' долгой')
+                    : ('«'+p[0]+'»: без e гласная звучит коротко'), 2400);
+        }, 700);
+      } else {
+        bad(c, s.length>w.length ? ('«'+s+'» — с e на конце. Здесь её нет')
+                                 : ('«'+s+'» — без e. Здесь она есть'),
+               w);
+      }
+    };
+    row.appendChild(c);
+  });
+
+  voiceSay(nice(w),1.5,.8,300);
+  setCat("thinking",true,"idle");
+}
+
 function deal(){
   stopPending();
   locked=false; idleAt=Date.now();
@@ -657,6 +852,9 @@ function deal(){
   clearCatch();
   if(mode==="first") dealFirst();
   else if(mode==="which") dealWhich();
+  else if(mode==="sort") dealSort();
+  else if(mode==="pair") dealPair();
+  else if(mode==="magic") dealMagic();
   else dealBuild();
 }
 
@@ -682,9 +880,22 @@ document.querySelectorAll(".gcard").forEach(function(b){
 document.getElementById("again").onclick=function(){ start(mode); };
 document.getElementById("toMenu").onclick=function(){
   clearCatch();
-  overS.classList.add("off"); menuS.classList.remove("off"); setCat("idle");
+  overS.classList.add("off"); menuS.classList.remove("off"); useChar("cat");
 };
 setClock();
+
+/* С карточки гласной приходят сразу в нужную игру: game-phonics.html?g=sort.
+   Автозапуск не делаем — браузер не даёт звук до первого клика по странице,
+   и ребёнок остался бы без голоса. Просто подсвечиваем нужную кнопку. */
+(function fromLink(){
+  var m=location.search.match(/[?&]g=([a-z]+)/);
+  if(!m) return;
+  var b=document.querySelector('.gcard[data-g="'+m[1]+'"]');
+  if(!b) return;
+  b.style.boxShadow="0 0 0 4px #ffb02e";
+  b.animate([{transform:"scale(1)"},{transform:"scale(1.06)",offset:.5},{transform:"scale(1)"}],
+            {duration:600,iterations:2});
+})();
 </script>
 </body>
 </html>
