@@ -73,6 +73,9 @@
   .card.bin{width:230px;height:198px;gap:6px}
   .card.bin img{width:84px;height:84px}
   .card.bin b{font:800 21px 'Baloo 2',sans-serif;color:#3b2a5e}
+  /* транскрипцию — обычным шрифтом: в округлом Baloo одноэтажная «a»
+     читается как «ə», и /aɪ/ выглядит как /əɪ/ */
+  .card.bin b em{font:600 19px 'Nunito',system-ui,sans-serif;font-style:normal;color:#5b4a8a}
   .card.bin span{font:600 14px 'Nunito',sans-serif;color:#6b6390;line-height:1.4}
   .card.spell{width:230px;height:130px}
   .card.spell b{font:800 42px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:2px}
@@ -761,7 +764,7 @@ function dealSort(){
     var c=document.createElement("div");
     c.className="card bin"; c.style.animationDelay=(i*.09)+"s";
     c.innerHTML='<img src="game/obj/'+b[1]+'.png" alt="">'+
-                '<b>'+b[3]+' '+b[2]+'</b><span>'+b[4]+'</span>';
+                '<b>'+b[3]+' <em>'+b[2]+'</em></b><span>'+b[4]+'</span>';
     c.onclick=function(){
       if(!playing||locked) return;
       var p=pos(c);
