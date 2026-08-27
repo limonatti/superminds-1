@@ -175,7 +175,10 @@
     transition:transform .15s,border-color .15s,box-shadow .15s}
   .gtile:hover{transform:translateY(-4px);border-color:#7a5ad8;
     box-shadow:0 10px 22px rgba(90,60,160,.18)}
-  .gtile img{width:auto;height:58px;object-fit:contain;display:block;margin-bottom:9px}
+  /* плитки букв белые, и на белой карточке у них пропадал низ —
+     тень возвращает форму, не трогая сами картинки */
+  .gtile img{width:auto;height:58px;object-fit:contain;display:block;margin-bottom:9px;
+    filter:drop-shadow(0 3px 5px rgba(60,40,110,.22))}
   .gtile b{display:block;font-family:'Nunito';font-size:16px;color:#3b2a5e;margin-bottom:3px}
   .gtile i{display:block;font-style:normal;font-size:12.5px;line-height:1.45;color:#7a7396}
   .who{position:absolute;top:12px;right:12px;border-radius:999px;padding:3px 10px;
