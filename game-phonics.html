@@ -32,13 +32,16 @@
     transition:width .25s linear,background .3s}
   .clock.warn b{color:#c23b12} .clock.warn .tbar i{background:#e8562a}
   .clock.warn{animation:pulse .55s ease-in-out infinite}
+  .clock.count .tbar{display:none}
+  .clock.count{animation:none}
+  .clock.count b{min-width:auto;font-size:19px;color:#5b3fa0}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
   .quest{position:absolute;left:50%;top:74px;transform:translateX(-50%);z-index:8;
     display:flex;flex-direction:column;align-items:center;gap:8px}
   .cap{font:700 18px 'Baloo 2',sans-serif;color:#fff;background:rgba(45,30,90,.55);
     padding:7px 22px;border-radius:999px;backdrop-filter:blur(6px)}
-  .letter{width:126px;height:126px;object-fit:contain;
+  .letter{width:auto;height:132px;object-fit:contain;
     filter:drop-shadow(0 8px 14px rgba(30,10,60,.45));animation:bnc 1.5s ease-in-out infinite}
   @keyframes bnc{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-15px) rotate(3deg)}}
   .bigword{width:200px;height:200px;object-fit:contain;
@@ -53,15 +56,17 @@
   .slots{display:flex;gap:10px}
   .slot{width:78px;height:88px;border-radius:16px;background:rgba(255,255,255,.22);
     box-shadow:inset 0 0 0 3px rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center}
-  .slot img{width:64px;height:64px;object-fit:contain}
-  .slot.full{background:#fff;box-shadow:0 5px 0 #d8cdf0}
-  .tile{width:104px;height:118px;border-radius:22px;cursor:pointer;background:rgba(255,255,255,.95);
-    box-shadow:0 7px 0 rgba(60,40,110,.32);display:flex;align-items:center;justify-content:center;
+  .slot img{width:auto;height:80px;object-fit:contain}
+  .slot.full{background:transparent;box-shadow:none}
+  /* плитка уже белая с тенью — своя карточка под ней дала бы двойной фон */
+  .tile{width:104px;height:124px;cursor:pointer;background:none;
+    display:flex;align-items:center;justify-content:center;
     transition:transform .13s;animation:pop .3s cubic-bezier(.3,1.6,.5,1) both}
-  .tile:hover{transform:translateY(-6px) scale(1.05)}
-  .tile img{width:84px;height:84px;object-fit:contain}
+  .tile:hover{transform:translateY(-6px) scale(1.06)}
+  .tile img{width:auto;height:112px;object-fit:contain;
+    filter:drop-shadow(0 6px 0 rgba(60,40,110,.28))}
   .tile.used{opacity:0;pointer-events:none;transform:scale(.5)}
-  .tile.no{background:#ffd9d2;box-shadow:0 7px 0 #d98b7a}
+  .tile.no img{filter:drop-shadow(0 0 10px #d98b7a) drop-shadow(0 0 20px #d98b7a)}
 
   /* ─── игры гласных: написание слова и корзины ─── */
   .wordbig{display:flex;gap:3px;background:rgba(255,255,255,.94);border-radius:16px;
@@ -85,6 +90,64 @@
     font:700 17px 'Baloo 2',sans-serif;color:#5b3fa0;box-shadow:0 5px 0 #d8cdf0}
   .rep:hover{transform:translateY(-2px)}
 
+  /* ─── «Лопни звук»: шарики всплывают снизу ─── */
+  .target{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.94);
+    border-radius:20px;padding:8px 20px 8px 10px;box-shadow:0 5px 0 rgba(60,40,110,.28)}
+  .target img{width:64px;height:64px;object-fit:contain}
+  .target b{font:800 24px 'Baloo 2',sans-serif;color:#3b2a5e}
+  .target b em{font:700 20px 'Nunito',system-ui,sans-serif;font-style:normal;color:#5b4a8a}
+  .pop{position:absolute;z-index:5;cursor:pointer;width:124px;text-align:center;
+    transition:transform .12s}
+  .pop:hover{transform:scale(1.06)}
+  /* шарик непрозрачный, поэтому под картинку кладём белый кружок —
+     иначе пастельный предмет теряется на насыщенном шаре */
+  .pop .b{position:relative;width:112px;height:112px;margin:0 auto;
+    background:center/contain no-repeat;display:flex;align-items:center;justify-content:center;
+    filter:drop-shadow(0 6px 12px rgba(30,10,60,.34))}
+  .pop .b::before{content:"";position:absolute;width:76px;height:76px;border-radius:50%;
+    background:rgba(255,255,255,.92)}
+  .pop .b img{position:relative;width:62px;height:62px;object-fit:contain}
+  .pop u{display:block;margin-top:1px;text-decoration:none;
+    font:800 20px 'Baloo 2',sans-serif;color:#fff;letter-spacing:1px;
+    text-shadow:0 2px 5px rgba(20,8,50,.85)}
+  .pop.gone{pointer-events:none}
+
+  /* ─── «Разложи по корзинам»: слово тащат мышью или пальцем ─── */
+  .drag{position:absolute;left:50%;top:230px;transform:translateX(-50%);z-index:12;
+    cursor:grab;touch-action:none;user-select:none;
+    background:rgba(255,255,255,.96);border-radius:22px;padding:12px 26px 14px;
+    box-shadow:0 8px 0 rgba(60,40,110,.32);text-align:center}
+  .drag.hold{cursor:grabbing;box-shadow:0 14px 24px rgba(30,10,60,.4);transition:none}
+  .drag img{width:96px;height:96px;object-fit:contain;display:block;margin:0 auto}
+  .drag b{display:block;margin-top:2px;font:800 34px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:2px}
+  .drag b i{font-style:normal;color:#d1483c}
+  .card.bin.hot{transform:translateY(-8px) scale(1.06);background:#fff8e0;
+    box-shadow:0 8px 0 #d9ac3f,0 0 0 4px #ffb02e}
+
+  /* ─── «Найди пару»: карточки рубашкой вверх ─── */
+  .row.memo{left:300px;right:26px;bottom:26px;top:150px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch}
+  .mc{position:relative;border-radius:20px;cursor:pointer;
+    background:rgba(255,255,255,.95);box-shadow:0 6px 0 rgba(60,40,110,.3);
+    display:flex;align-items:center;justify-content:center;padding:6px;
+    transition:transform .15s;animation:pop .3s cubic-bezier(.3,1.6,.5,1) both}
+  .mc:hover{transform:translateY(-4px)}
+  .mc.down{background:linear-gradient(145deg,#7a5ad8,#5b3fa0);box-shadow:0 6px 0 #3f2a75}
+  .mc.down::after{content:"?";font:800 40px 'Baloo 2',sans-serif;color:rgba(255,255,255,.6)}
+  .mc img{max-width:100%;max-height:100%;object-fit:contain}
+  .mc b{font:800 24px 'Baloo 2',sans-serif;color:#3b2a5e;letter-spacing:1px}
+  .mc.done{background:#d9f7c9;box-shadow:0 6px 0 #7cb95c;pointer-events:none}
+  .mc.miss{background:#ffd9d2;box-shadow:0 6px 0 #d98b7a}
+
+  /* ─── «Слово с пропуском»: пустая клетка внутри слова ─── */
+  .gapw{display:flex;gap:8px;align-items:center}
+  .gapw img{width:auto;height:86px}
+  .gapw .hole{width:66px;height:86px;border-radius:14px;background:rgba(255,255,255,.25);
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,.65);
+    animation:glow 1.3s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:inset 0 0 0 3px rgba(255,255,255,.65)}
+                  50%{box-shadow:inset 0 0 0 3px #ffd66b,0 0 16px rgba(255,214,107,.7)}}
+
   .row{position:absolute;left:290px;right:30px;bottom:48px;z-index:7;
     display:flex;gap:20px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
   .card{width:180px;height:190px;border-radius:26px;cursor:pointer;position:relative;
@@ -97,8 +160,12 @@
   .card span{font:700 19px 'Baloo 2',sans-serif;color:#4a3a7a}
   .card.big{width:150px;height:150px}
   .card.big img{width:96px;height:96px}
-  .card.ltr{width:130px;height:150px}
-  .card.ltr img{width:104px;height:104px}
+  .card.ltr{width:132px;height:164px;background:none;box-shadow:none}
+  .card.ltr img{width:auto;height:150px;filter:drop-shadow(0 7px 0 rgba(60,40,110,.3))}
+  .card.ltr.right{background:none;box-shadow:none}
+  .card.ltr.right img{filter:drop-shadow(0 0 12px #7cb95c) drop-shadow(0 0 24px #7cb95c)}
+  .card.ltr.wrong{background:none;box-shadow:none}
+  .card.ltr.wrong img{filter:drop-shadow(0 0 12px #d98b7a) drop-shadow(0 0 24px #d98b7a)}
   .card.right{background:#d9f7c9;box-shadow:0 8px 0 #7cb95c}
   .card.wrong{background:#ffd9d2;box-shadow:0 8px 0 #d98b7a}
 
@@ -208,6 +275,18 @@
           <b>Волшебная e</b>
           <span>Картинка есть — выбери верное написание. Хвостовая e меняет всё слово.</span>
         </button>
+        <button class="gcard" data-g="pop">
+          <b>Лопни звук</b>
+          <span>Шарики всплывают снизу. Лопай те, где гласная звучит как в образце.</span>
+        </button>
+        <button class="gcard" data-g="memo">
+          <b>Найди пару</b>
+          <span>Карточки рубашкой вверх. Открой картинку и её слово. Без спешки.</span>
+        </button>
+        <button class="gcard" data-g="gap">
+          <b>Какой буквы не хватает</b>
+          <span>В слове дырка: c_t. Подставь нужную плитку из трёх.</span>
+        </button>
       </div>
     </div>
 
@@ -259,7 +338,16 @@ var BLEND = [
 var ROUND=45, ADD=4, FW=256;
 
 /* какие игры ведёт девочка, а не кот */
-var VOWEL_GAMES={sort:1,pair:1,magic:1};
+var VOWEL_GAMES={sort:1,pair:1,magic:1,pop:1,gap:1};
+
+/* игры без обратного отсчёта */
+var NO_TIMER={memo:1};
+
+/* у каждой игры своё место: одна и та же поляна на все игры делала их
+   неразличимыми, хотя занятия внутри совершенно разные */
+var BG={first:"meadow", which:"meadow", catch:"park",  build:"sky",
+        sort:"town",    pair:"meadow",  magic:"sky",   pop:"water",
+        memo:"town",    gap:"city"};
 
 var byLetter={};
 OBJ.forEach(function(o){ if(!DIGRAPH[o]) (byLetter[o[0]]=byLetter[o[0]]||[]).push(o); });
@@ -380,6 +468,7 @@ function nice(o){ return NICE[o]||o; }
 
 /* ---------- общий раунд ---------- */
 function setClock(){
+  if(NO_TIMER[mode]) return;
   secsEl.textContent=Math.max(0,Math.ceil(left));
   tbar.style.width=Math.max(0,Math.min(100,left/ROUND*100))+"%";
   clock.classList.toggle("warn",left<=10);
@@ -390,8 +479,15 @@ function start(which){
   menuS.classList.add("off"); overS.classList.add("off");
   /* игры гласных ведёт девочка, игры на буквы — кот */
   useChar(VOWEL_GAMES[which] ? "girl" : "cat");
-  clearCatch(); setClock(); deal();
+  g.style.backgroundImage='url("game/bg/'+(BG[which]||"meadow")+'.jpg")';
+  row.className="row" + (which==="memo" ? " memo" : "");
+  memoBoard=0;
+  /* мемори — игра на память, а не на скорость: под тиканье часов ребёнок
+     перестаёт запоминать и начинает тыкать наугад. Вместо таймера — счётчик досок. */
+  clock.classList.toggle("count", !!NO_TIMER[which]);
+  clearCatch(); clearPop(); clearDrag(); setClock(); deal();
   clearInterval(tick);
+  if(NO_TIMER[which]) return;
   tick=setInterval(function(){
     if(!playing) return;
     left-=.1;
@@ -402,13 +498,14 @@ function start(which){
 }
 function finish(){
   stopPending();
-  playing=false; clearInterval(tick); clearCatch();
+  playing=false; clearInterval(tick); clearCatch(); clearPop(); clearDrag();
   row.innerHTML=""; quest.innerHTML="";
   if(!best[mode] || pts>best[mode]) best[mode]=pts;
   document.getElementById("rPts").textContent=pts;
   document.getElementById("rStreak").textContent=bestStreak;
   document.getElementById("rBest").textContent=best[mode];
-  document.getElementById("overTitle").textContent = pts>=10 ? "Отлично!" : "Время вышло!";
+  document.getElementById("overTitle").textContent =
+    NO_TIMER[mode] ? "Все пары собраны!" : (pts>=10 ? "Отлично!" : "Время вышло!");
   overS.classList.remove("off"); sndEnd(); setCat(pts>=10?"celebrate":"idle");
 }
 
@@ -465,7 +562,7 @@ function dealFirst(){
   var L=LETTERS[Math.floor(Math.random()*LETTERS.length)];
   want=byLetter[L][Math.floor(Math.random()*byLetter[L].length)];
   quest.innerHTML='<span class="cap">Что начинается на эту букву?</span>' +
-    '<img class="letter" src="game/ltr/'+L+'0.png" alt="">';
+    '<img class="letter" src="game/tile/'+L+'.png" alt="">';
   var others=shuffle(OBJ.filter(function(o){ return o[0]!==L && !DIGRAPH[o]; })).slice(0,2);
   row.innerHTML="";
   shuffle(others.concat([want])).forEach(function(o,i){
@@ -498,7 +595,7 @@ function dealWhich(){
   shuffle(others.concat([L])).forEach(function(x,i){
     var c=document.createElement("div");
     c.className="card ltr"; c.style.animationDelay=(i*.08)+"s";
-    c.innerHTML='<img src="game/ltr/'+x+'0.png" alt="">';
+    c.innerHTML='<img src="game/tile/'+x+'.png" alt="">';
     c.onclick=function(){
       if(!playing||locked) return;
       var p=pos(c);
@@ -535,7 +632,7 @@ function dealBuild(){
   shuffle(need.concat(extra)).forEach(function(L,i){
     var t=document.createElement("div");
     t.className="tile"; t.style.animationDelay=(i*.06)+"s";
-    t.innerHTML='<img src="game/ltr/'+L+'0.png" alt="">';
+    t.innerHTML='<img src="game/tile/'+L+'.png" alt="">';
     t.onclick=function(){ tapLetter(t,L); };
     row.appendChild(t);
   });
@@ -550,7 +647,7 @@ function tapLetter(tile, L){
   if(L === need){
     var slot=document.getElementById("slot"+buildStep);
     if(slot){
-      slot.innerHTML='<img src="game/ltr/'+L+'0.png" alt="">';
+      slot.innerHTML='<img src="game/tile/'+L+'.png" alt="">';
       slot.classList.add("full");
       slot.animate([{transform:"scale(.5)"},{transform:"scale(1.18)",offset:.6},
                     {transform:"scale(1)"}],{duration:280});
@@ -602,7 +699,7 @@ function newLetter(announce){
   while (CATCH_LETTERS.length > 1 && catchLetter === prev);
   caught = 0;
   quest.innerHTML='<span class="cap">Лови всё на букву</span>' +
-    '<img class="letter" src="game/ltr/'+catchLetter+'0.png" alt="">';
+    '<img class="letter" src="game/tile/'+catchLetter+'.png" alt="">';
   var img = quest.querySelector(".letter");
   if(img) img.animate([{transform:"scale(.5) rotate(-12deg)",opacity:0},
                        {transform:"scale(1.15)",opacity:1,offset:.6},
@@ -748,35 +845,245 @@ function spell(w,v){
   }).join("");
 }
 
-/* ---------- игра 5: короткий или долгий ---------- */
+/* ---------- игра 5 (переделана): разложи по корзинам ----------
+   Раньше здесь тыкали в карточку, как и в пяти других играх. Теперь слово
+   тащат рукой: движение другое, и ошибку видно до того, как отпустил —
+   корзина подсвечивается заранее, можно передумать на лету. */
+var dragEl=null, dragBins=[], dragData=null;
+
+function clearDrag(){
+  if(dragEl){ dragEl.remove(); dragEl=null; }
+  dragBins=[]; dragData=null;
+}
+
 function dealSort(){
+  clearDrag();
   var V=vowPick(), isLong=Math.random()<.5;
   var w=pick(isLong?V.lo:V.sh);
-  want=w;
+  want=w; dragData={w:w, long:isLong, V:V};
 
-  quest.innerHTML='<span class="cap">Гласная звучит коротко или называет своё имя?</span>'+
-    '<img class="bigword" src="game/obj/'+w+'.png" alt="" style="width:132px;height:132px">'+
-    '<div class="wordbig">'+spell(w,V.v)+'</div>';
+  quest.innerHTML='<span class="cap">Отнеси слово в нужную корзину</span>';
 
   row.innerHTML="";
+  dragBins=[];
   [[false,V.aS,V.ipaS,"короткий","как "+V.aS],
    [true, V.aL,V.ipaL,"долгий",  "как "+V.aL]].forEach(function(b,i){
     var c=document.createElement("div");
     c.className="card bin"; c.style.animationDelay=(i*.09)+"s";
     c.innerHTML='<img src="game/obj/'+b[1]+'.png" alt="">'+
                 '<b>'+b[3]+' <em>'+b[2]+'</em></b><span>'+b[4]+'</span>';
-    c.onclick=function(){
-      if(!playing||locked) return;
-      var p=pos(c);
-      if(b[0]===isLong) good(c,p[0],p[1],w);
-      else bad(c, isLong ? ('В «'+w+'» буква '+V.v+' называет своё имя — как в '+V.aL)
-                         : ('В «'+w+'» буква '+V.v+' звучит коротко — как в '+V.aS),
-                 w);
-    };
     row.appendChild(c);
+    dragBins.push({el:c, long:b[0]});
   });
 
+  dragEl=document.createElement("div");
+  dragEl.className="drag";
+  dragEl.innerHTML='<img src="game/obj/'+w+'.png" alt=""><b>'+spell(w,V.v)+'</b>';
+  g.appendChild(dragEl);
+  startDrag(dragEl);
+
   voiceSay(nice(w),1.5,.85,250);
+  setCat("thinking",true,"idle");
+}
+
+function startDrag(el){
+  var dx=0, dy=0, sx=0, sy=0, moved=false, held=false;
+
+  el.addEventListener("pointerdown", function(e){
+    if(!playing || locked) return;
+    held=true; moved=false;
+    var r=el.getBoundingClientRect();
+    sx=e.clientX; sy=e.clientY; dx=0; dy=0;
+    el.setPointerCapture(e.pointerId);
+    el.classList.add("hold");
+    e.preventDefault();
+  });
+
+  el.addEventListener("pointermove", function(e){
+    if(!held) return;
+    dx=e.clientX-sx; dy=e.clientY-sy;
+    if(Math.abs(dx)+Math.abs(dy)>8) moved=true;
+    el.style.transform="translateX(-50%) translate("+dx+"px,"+dy+"px) rotate("+(dx*.03)+"deg)";
+    var over=binUnder(e.clientX, e.clientY);
+    dragBins.forEach(function(b){ b.el.classList.toggle("hot", b===over); });
+  });
+
+  function finish(e){
+    if(!held) return;
+    held=false;
+    el.classList.remove("hold");
+    el.releasePointerCapture && el.releasePointerCapture(e.pointerId);
+    var over=binUnder(e.clientX, e.clientY);
+    dragBins.forEach(function(b){ b.el.classList.remove("hot"); });
+
+    if(!moved){ voiceSay(nice(dragData.w),1.5,.8); back(); return; }
+    if(!over){ back(); return; }
+
+    var p=pos(over.el);
+    if(over.long===dragData.long){
+      el.style.opacity="0";
+      good(over.el, p[0], p[1], dragData.w);
+    } else {
+      bad(over.el, dragData.long
+            ? ('В «'+dragData.w+'» буква '+dragData.V.v+' называет своё имя')
+            : ('В «'+dragData.w+'» буква '+dragData.V.v+' звучит коротко'),
+          dragData.w);
+      back();
+    }
+  }
+  function back(){
+    el.style.transition="transform .25s cubic-bezier(.3,1.5,.5,1)";
+    el.style.transform="translateX(-50%)";
+    setTimeout(function(){ if(el) el.style.transition=""; },260);
+  }
+  el.addEventListener("pointerup", finish);
+  el.addEventListener("pointercancel", finish);
+}
+
+function binUnder(x,y){
+  for(var i=0;i<dragBins.length;i++){
+    var r=dragBins[i].el.getBoundingClientRect();
+    if(x>=r.left && x<=r.right && y>=r.top && y<=r.bottom) return dragBins[i];
+  }
+  return null;
+}
+
+/* ---------- игра 9: найди пару ----------
+   Единственная игра без гонки: тут не узнавание, а память. Карточек восемь,
+   четыре пары «картинка — слово». Время идёт, но за каждую пару прибавляется
+   столько же, сколько за верный ответ в других играх. */
+var memoOpen=[], memoLeft=0, memoBusy=false, memoBoard=0;
+var MEMO_BOARDS=3;
+
+function dealMemo(){
+  var pool=shuffle(OBJ.filter(function(o){ return o.length<=7 && !NICE[o]; })).slice(0,4);
+  memoOpen=[]; memoLeft=4; memoBusy=false; memoBoard++;
+  quest.innerHTML='<span class="cap">Открой картинку и её слово</span>';
+  secsEl.textContent=memoBoard+" / "+MEMO_BOARDS;
+
+  var cards=[];
+  pool.forEach(function(w){
+    cards.push({w:w, kind:"img"});
+    cards.push({w:w, kind:"word"});
+  });
+  row.innerHTML="";
+  shuffle(cards).forEach(function(c,i){
+    var el=document.createElement("div");
+    el.className="mc down"; el.style.animationDelay=(i*.045)+"s";
+    el.onclick=function(){ flipMemo(el,c); };
+    row.appendChild(el);
+    c.el=el;
+  });
+  setCat("thinking",true,"idle");
+}
+
+function flipMemo(el, c){
+  if(!playing || memoBusy || el.classList.contains("done")) return;
+  if(memoOpen.indexOf(c)>-1) return;
+
+  el.classList.remove("down");
+  el.innerHTML = c.kind==="img"
+    ? '<img src="game/obj/'+c.w+'.png" alt="">'
+    : '<b>'+c.w+'</b>';
+  el.animate([{transform:"rotateY(80deg)"},{transform:"rotateY(0)"}],{duration:220});
+  memoOpen.push(c);
+
+  if(memoOpen.length<2) return;
+  memoBusy=true;
+  var a=memoOpen[0], b=memoOpen[1];
+
+  if(a.w===b.w && a.kind!==b.kind){
+    a.el.classList.add("done"); b.el.classList.add("done");
+    var p=pos(b.el);
+    memoOpen=[]; memoBusy=false; memoLeft--;
+    good2(b.el, p[0], p[1], a.w);
+    if(memoLeft===0) later(function(){
+      if(!playing) return;
+      if(memoBoard>=MEMO_BOARDS){ speak("Все доски собраны! 🎉",1600); finish(); }
+      else { speak("Доска собрана! 🎉",1500); dealMemo(); }
+    }, 1400);
+  } else {
+    sndNo(); setCat("sad",true,"idle");
+    voiceSay(a.w,1.4,.85); voiceSay(b.w,1.4,.85,750);
+    a.el.classList.add("miss"); b.el.classList.add("miss");
+    streak=0; comboEl.classList.remove("on");
+    later(function(){
+      [a,b].forEach(function(x){
+        x.el.classList.remove("miss"); x.el.classList.add("down"); x.el.innerHTML="";
+      });
+      memoOpen=[]; memoBusy=false;
+    }, 1100);
+  }
+}
+
+/* награда без перехода к следующему заданию: в мемори доска остаётся на месте */
+function good2(el,x,y,word){
+  streak++; if(streak>bestStreak) bestStreak=streak;
+  var mult=streak>=3?2:1;
+  comboEl.classList.toggle("on",streak>=3);
+  pts+=mult; ptsEl.textContent=pts;
+  reward(x,y,mult); sndOk(streak);
+  setCat(mult>1?"celebrate":"happy",true,"idle");
+  if(word) voiceSay(nice(word),1.5,.9,100);
+  if(mult>1){ sndWin(); speak("Серия "+streak+"! 🔥",1500); }
+  else speak("Пара! 👏",1400);
+}
+
+/* ---------- игра 10: какой буквы не хватает ----------
+   Слово почти собрано, выпала одна гласная. Ребёнок не выкладывает слово
+   заново, а решает единственный вопрос: какая гласная тут звучит. */
+function dealGap(){
+  var V=vowPick(), isLong=Math.random()<.5;
+  var pool=(isLong?V.lo:V.sh).filter(function(w){ return w.indexOf(V.v)>-1; });
+  if(!pool.length){ dealGap(); return; }
+  var w=pick(pool), at=w.indexOf(V.v);
+  want=w;
+
+  var letters=w.split("").map(function(ch,i){
+    return i===at ? '<span class="hole"></span>'
+                  : '<img src="game/tile/'+ch+'.png" alt="'+ch+'">';
+  }).join("");
+
+  quest.innerHTML='<span class="cap">Какой буквы не хватает?</span>'+
+    '<img class="bigword" src="game/obj/'+w+'.png" alt="" style="width:140px;height:140px">'+
+    '<div class="gapw">'+letters+'</div>';
+
+  var wrong=shuffle("aeiou".split("").filter(function(x){ return x!==V.v; })).slice(0,2);
+  row.innerHTML="";
+  shuffle(wrong.concat([V.v])).forEach(function(L,i){
+    var t=document.createElement("div");
+    t.className="tile"; t.style.animationDelay=(i*.08)+"s";
+    t.innerHTML='<img src="game/tile/'+L+'.png" alt="">';
+    t.onclick=function(){
+      if(!playing||locked) return;
+      if(L===V.v){
+        var hole=quest.querySelector(".hole");
+        if(hole){
+          hole.outerHTML='<img src="game/tile/'+L+'.png" alt="" style="height:86px">';
+          var ins=quest.querySelectorAll(".gapw img")[at];
+          if(ins) ins.animate([{transform:"scale(.4)",opacity:0},
+                               {transform:"scale(1.2)",opacity:1,offset:.6},
+                               {transform:"scale(1)"}],{duration:340});
+        }
+        t.classList.add("used");
+        var p=pos(quest);
+        later(function(){ good(quest,p[0],p[1]+110,w); },320);
+      } else {
+        t.classList.add("no");
+        setTimeout(function(){ t.classList.remove("no"); },600);
+        t.animate([{transform:"translateX(0)"},{transform:"translateX(-9px)"},
+                   {transform:"translateX(9px)"},{transform:"translateX(0)"}],{duration:250});
+        streak=0; comboEl.classList.remove("on");
+        sndNo(); setCat("sad",true,"idle");
+        voiceSay(nice(w),1.4,.75,300);
+        speak("Послушай слово ещё раз",1800);
+        idleAt=Date.now();
+      }
+    };
+    row.appendChild(t);
+  });
+
+  voiceSay(nice(w),1.5,.8,300);
   setCat("thinking",true,"idle");
 }
 
@@ -848,22 +1155,179 @@ function dealMagic(){
   setCat("thinking",true,"idle");
 }
 
+/* ---------- игра 8: лопни звук ----------
+   Единственная игра гласных с движением. Сверху стоит образец — картинка
+   и транскрипция, — а снизу всплывают шарики со словами. Лопать нужно те,
+   где гласная звучит так же. Половина лишних шариков берётся из той же
+   гласной, но другой длины: именно эта пара и есть настоящая трудность,
+   а слова с чужой гласной нужны, чтобы игра не превратилась в «да/нет». */
+var pops=[], popSpawn=null, popRaf=false, popped=0, popSwitch=null, popTarget=null;
+var popSince=0, popOkSince=0;   /* сколько шариков вышло с новой цели и сколько из них нужных */
+
+function clearPop(){
+  pops.forEach(function(p){ p.el.remove(); }); pops=[];
+  if(popSpawn){ clearInterval(popSpawn); popSpawn=null; }
+  if(popSwitch){ clearTimeout(popSwitch); popSwitch=null; }
+}
+
+function newTarget(announce){
+  var prev=popTarget, V, isLong;
+  do{
+    V=vowPick(); isLong=Math.random()<.5;
+  } while(prev && prev.v===V.v && prev.long===isLong);
+  popTarget={v:V.v, V:V, long:isLong, list:isLong?V.lo:V.sh,
+             anchor:isLong?V.aL:V.aS, ipa:isLong?V.ipaL:V.ipaS};
+  popped=0; popSince=0; popOkSince=0;
+
+  quest.innerHTML='<span class="cap">Лопай слова, где гласная звучит так же</span>'+
+    '<div class="target"><img src="game/obj/'+popTarget.anchor+'.png" alt="">'+
+    '<b>'+popTarget.anchor+' <em>'+popTarget.ipa+'</em></b></div>';
+  var t=quest.querySelector(".target");
+  if(t) t.animate([{transform:"scale(.6)",opacity:0},
+                   {transform:"scale(1.1)",opacity:1,offset:.6},
+                   {transform:"scale(1)"}],{duration:420});
+  if(announce){
+    voiceSay(popTarget.anchor,1.4,.8,120);
+    speak("Теперь как в «"+popTarget.anchor+"»",1900);
+  }
+  if(popSwitch) clearTimeout(popSwitch);
+  popSwitch=setTimeout(function(){ if(playing && mode==="pop") newTarget(true); }, 18000);
+}
+
+function dealPop(){
+  clearPop(); row.innerHTML="";
+  newTarget(false);
+  voiceSay(popTarget.anchor,1.4,.8,250);
+  speak("Лопай как в «"+popTarget.anchor+"»",2100);
+  setCat("pointing",true,"idle");
+
+  popSpawn=setInterval(spawnPop, 1600);
+  spawnPop();
+  if(!popRaf){ popRaf=true; requestAnimationFrame(popLoop); }
+}
+
+function spawnPop(){
+  if(!playing || mode!=="pop") return;
+  /* Считаем только живые. Раньше здесь стояло pops.length, а лопнутые шарики
+     из массива не удалялись — после трёх попаданий счётчик навсегда упирался
+     в потолок и новые шарики переставали появляться вовсе. */
+  var live=pops.filter(function(z){ return !z.dead; });
+  if(live.length>=3) return;
+  var t=popTarget, w, ok;
+  /* Правило простое: на экране всегда должен быть хотя бы один нужный шарик.
+     Раньше я гарантировал это только на старте задания — но стоило ребёнку
+     лопнуть единственный верный, и дальше опять могла пойти полоса пустых.
+     Теперь как только верных не осталось, следующий выходит верным. */
+  var hasOk = live.some(function(z){ return z.ok; });
+  var force = !hasOk;
+  var r=Math.random();
+  if(force || r<.5){ w=pick(t.list); ok=true; }
+  else if(r<.7){ w=pick(t.long ? t.V.sh : t.V.lo); ok=false; }   /* та же буква, другая длина */
+  else {
+    var other=VOW.filter(function(x){ return x.v!==t.v; });
+    var o=pick(other); w=pick(Math.random()<.5 ? o.sh : o.lo); ok=false;
+  }
+
+  var el=document.createElement("div");
+  el.className="pop";
+  el.innerHTML='<div class="b" style="background-image:url(\'game/ui/b'+
+    (1+Math.floor(Math.random()*6))+'.png\')"><img src="game/obj/'+w+'.png" alt=""></div>'+
+    '<u>'+w+'</u>';
+  var gw=g.clientWidth;
+  var x=40+Math.random()*(gw-200);
+  el.style.left=x+"px"; el.style.top=g.clientHeight+"px";
+  g.appendChild(el);
+
+  var p={el:el, x:x, y:g.clientHeight, w:w, ok:ok, dead:false,
+         sway:Math.random()*6.28, x0:x};
+  el.onclick=function(){ hitPop(p); };
+  pops.push(p);
+  popSince++; if(ok) popOkSince++;
+}
+
+function hitPop(p){
+  if(!playing || p.dead) return;
+  p.dead=true; p.el.classList.add("gone");
+  var r=p.el.getBoundingClientRect(), gr=g.getBoundingClientRect();
+  var x=r.left-gr.left+r.width/2, y=r.top-gr.top+40;
+
+  if(p.ok){
+    streak++; if(streak>bestStreak) bestStreak=streak;
+    var mult=streak>=3?2:1;
+    comboEl.classList.toggle("on",streak>=3);
+    pts+=mult; ptsEl.textContent=pts;
+    left=Math.min(ROUND,left+2); setClock();
+    reward(x,y,mult); sndOk(streak);
+    setCat(mult>1?"celebrate":"happy",true,"idle");
+    voiceSay(nice(p.w),1.5,.95,60);
+    if(mult>1){ sndWin(); speak("Серия "+streak+"! 🔥",1500); }
+    popped++;
+    if(popped>=6) setTimeout(function(){ if(playing && mode==="pop") newTarget(true); },800);
+    p.el.animate([{transform:"scale(1)",opacity:1},{transform:"scale(1.6)",opacity:0}],
+                 {duration:260,fill:"forwards"});
+    pops=pops.filter(function(z){ return z!==p; });   /* сразу освобождаем место */
+    setTimeout(function(){ p.el.remove(); },280);
+  } else {
+    streak=0; comboEl.classList.remove("on");
+    sndNo(); setCat("sad",true,"idle");
+    voiceSay("Oops!",1.4,.95);
+    voiceSay(nice(p.w),1.4,.8,700);
+    speak("В «"+p.w+"» гласная звучит иначе",2000);
+    p.el.animate([{transform:"translateX(0)"},{transform:"translateX(-10px)"},
+                  {transform:"translateX(10px)"},{transform:"translateX(0)"}],{duration:270});
+    p.dead=false; p.el.classList.remove("gone");   /* шарик остаётся плыть дальше */
+  }
+  idleAt=Date.now();
+}
+
+function popLoop(ts){
+  if(!popLoop.t) popLoop.t=ts;
+  var dt=Math.min(60, ts-popLoop.t); popLoop.t=ts;
+  if(playing && mode==="pop"){
+    var speed=72+pts*3;
+    for(var i=pops.length-1;i>=0;i--){
+      var p=pops[i];
+      p.y -= speed*dt/1000;
+      p.sway += dt/420;
+      p.el.style.top=p.y+"px";
+      p.el.style.left=(p.x0 + Math.sin(p.sway)*16)+"px";
+      if(p.y < -140){
+        if(p.ok && !p.dead){
+          streak=0; comboEl.classList.remove("on");
+          setCat("sad",true,"idle");
+          var m=document.createElement("div");
+          m.className="miss"; m.style.left=Math.max(10,p.x0)+"px"; m.style.top="120px";
+          m.textContent="уплыл…"; g.appendChild(m);
+          (function(el){ setTimeout(function(){ el.remove(); },900); })(m);
+        }
+        p.el.remove(); pops.splice(i,1);
+      }
+    }
+  }
+  requestAnimationFrame(popLoop);
+}
+
 function deal(){
   stopPending();
   locked=false; idleAt=Date.now();
   if(mode==="catch"){ dealCatch(); return; }
-  clearCatch();
+  if(mode==="pop"){ clearCatch(); dealPop(); return; }
+  clearCatch(); clearPop(); clearDrag();
   if(mode==="first") dealFirst();
   else if(mode==="which") dealWhich();
   else if(mode==="sort") dealSort();
   else if(mode==="pair") dealPair();
   else if(mode==="magic") dealMagic();
+  else if(mode==="memo") dealMemo();
+  else if(mode==="gap") dealGap();
   else dealBuild();
 }
 
+/* шарики живут независимо от заданий, поэтому чистим их и при старте, и в конце */
+
 /* подсказка, если ребёнок завис */
 setInterval(function(){
-  if(!playing||locked||mode==="catch") return;
+  if(!playing||locked||mode==="catch"||mode==="pop"||mode==="memo") return;
   if(Date.now()-idleAt>8000){
     idleAt=Date.now();
     setCat("pointing",true,"idle");
@@ -882,8 +1346,10 @@ document.querySelectorAll(".gcard").forEach(function(b){
 });
 document.getElementById("again").onclick=function(){ start(mode); };
 document.getElementById("toMenu").onclick=function(){
-  clearCatch();
+  clearCatch(); clearPop(); clearDrag();
   overS.classList.add("off"); menuS.classList.remove("off"); useChar("cat");
+  row.className="row"; quest.innerHTML="";
+  g.style.backgroundImage='url("game/bg/meadow.jpg")';
 };
 setClock();
 
