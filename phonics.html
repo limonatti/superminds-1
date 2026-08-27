@@ -168,6 +168,22 @@
     opacity:0;pointer-events:none;transition:.3s;z-index:99}
   .toast.show{opacity:1}
 
+  /* ===== Раздел с играми ===== */
+  .ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+  .gtile{position:relative;display:block;text-decoration:none;background:#fff;
+    border:2px solid #ece6f8;border-radius:18px;padding:16px 15px 14px;
+    transition:transform .15s,border-color .15s,box-shadow .15s}
+  .gtile:hover{transform:translateY(-4px);border-color:#7a5ad8;
+    box-shadow:0 10px 22px rgba(90,60,160,.18)}
+  .gtile img{width:auto;height:58px;object-fit:contain;display:block;margin-bottom:9px}
+  .gtile b{display:block;font-family:'Nunito';font-size:16px;color:#3b2a5e;margin-bottom:3px}
+  .gtile i{display:block;font-style:normal;font-size:12.5px;line-height:1.45;color:#7a7396}
+  .who{position:absolute;top:12px;right:12px;border-radius:999px;padding:3px 10px;
+    font:700 11px 'Nunito',sans-serif}
+  .who.cat{background:#e8f1ff;color:#3c63a8}
+  .who.girl{background:#ffe9f0;color:#b0416b}
+  @media print{ #gamesHost{display:none} }
+
   /* ===== Vowels section ===== */
   .vbanner{background:linear-gradient(135deg,#fff2f2,#eefcf7);border:3px solid #ffe3d6;border-radius:22px;
     padding:18px 20px;margin:6px 0 16px;display:flex;gap:18px;flex-wrap:wrap;align-items:stretch}
@@ -235,6 +251,56 @@
       <div class="progbar"><span id="progFill"></span></div>
     </div>
   </header>
+
+  <section class="group" id="gamesHost">
+    <div class="group-h">
+      <span class="chip" style="background:linear-gradient(135deg,#7a5ad8,#3fb6d8)">Игры</span>
+      <div><h2>Десять игр фоникса · Play &amp; learn</h2>
+      <div class="en">Ведут кот и девочка. Везде очки, серия и разные места действия</div></div>
+    </div>
+
+    <div class="ggrid">
+      <a class="gtile" href="game-phonics.html?g=first">
+        <img src="game/tile/b.png" alt=""><span class="who cat">кот</span>
+        <b>Первая буква</b><i>Буква наверху — найди предмет, который на неё начинается</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=which">
+        <img src="game/obj/panda.png" alt=""><span class="who cat">кот</span>
+        <b>Какая буква?</b><i>Предмет в центре — выбери букву, с которой он начинается</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=catch">
+        <img src="game/obj/rocket.png" alt=""><span class="who cat">кот</span>
+        <b>Поймай звук</b><i>Предметы едут мимо — успей поймать нужные. Чем дальше, тем быстрее</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=build">
+        <img src="game/tile/c.png" alt=""><span class="who cat">кот</span>
+        <b>Собери слово</b><i>Картинка есть — выложи слово из букв по порядку</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=memo">
+        <img src="game/obj/key.png" alt=""><span class="who cat">кот</span>
+        <b>Найди пару</b><i>Карточки рубашкой вверх: картинка и её слово. Без таймера</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=sort">
+        <img src="game/obj/cake.png" alt=""><span class="who girl">девочка</span>
+        <b>Разложи по корзинам</b><i>Тащи слово в корзину: гласная короткая или долгая</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=pair">
+        <img src="game/obj/cape.png" alt=""><span class="who girl">девочка</span>
+        <b>Слушай и выбирай</b><i>Слово звучит вслух. Cap или cape? Разница в одном звуке</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=magic">
+        <img src="game/tile/e.png" alt=""><span class="who girl">девочка</span>
+        <b>Волшебная e</b><i>Картинка есть — выбери верное написание из двух</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=pop">
+        <img src="game/ui/b3.png" alt=""><span class="who girl">девочка</span>
+        <b>Лопни звук</b><i>Шарики всплывают снизу — лопай те, где гласная звучит так же</i></a>
+
+      <a class="gtile" href="game-phonics.html?g=gap">
+        <img src="game/tile/i.png" alt=""><span class="who girl">девочка</span>
+        <b>Какой буквы не хватает</b><i>В слове дырка: c_t. Подставь нужную плитку</i></a>
+    </div>
+  </section>
 
   <section id="vowelHost" class="group"></section>
 
