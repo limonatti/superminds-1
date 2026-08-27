@@ -1179,6 +1179,18 @@ function newTarget(announce){
              anchor:isLong?V.aL:V.aS, ipa:isLong?V.ipaL:V.ipaS};
   popped=0; popSince=0; popOkSince=0;
 
+  /* Шарик получает признак «нужный» в момент рождения, по той цели, что была
+     тогда. При смене цели старые шарики остаются висеть с чужим признаком —
+     ребёнок читает новый образец, а на экране слова от предыдущего. Поэтому
+     при смене цели экран очищаем и тут же выпускаем первый шарик под новую. */
+  pops.forEach(function(z){
+    z.dead=true;
+    z.el.animate([{opacity:1},{opacity:0,transform:"scale(.7)"}],
+                 {duration:260,fill:"forwards"});
+    (function(el){ setTimeout(function(){ el.remove(); },270); })(z.el);
+  });
+  pops=[];
+
   quest.innerHTML='<span class="cap">Лопай слова, где гласная звучит так же</span>'+
     '<div class="target"><img src="game/obj/'+popTarget.anchor+'.png" alt="">'+
     '<b>'+popTarget.anchor+' <em>'+popTarget.ipa+'</em></b></div>';
@@ -1190,8 +1202,12 @@ function newTarget(announce){
     voiceSay(popTarget.anchor,1.4,.8,120);
     speak("Теперь как в «"+popTarget.anchor+"»",1900);
   }
+  if(playing && mode==="pop") setTimeout(spawnPop, 320);
+
   if(popSwitch) clearTimeout(popSwitch);
-  popSwitch=setTimeout(function(){ if(playing && mode==="pop") newTarget(true); }, 18000);
+  /* цель держится дольше: под старые восемнадцать секунд ребёнок едва успевал
+     разобраться с образцом, как он уже менялся */
+  popSwitch=setTimeout(function(){ if(playing && mode==="pop") newTarget(true); }, 26000);
 }
 
 function dealPop(){
@@ -1262,7 +1278,7 @@ function hitPop(p){
     voiceSay(nice(p.w),1.5,.95,60);
     if(mult>1){ sndWin(); speak("Серия "+streak+"! 🔥",1500); }
     popped++;
-    if(popped>=6) setTimeout(function(){ if(playing && mode==="pop") newTarget(true); },800);
+    if(popped>=8) setTimeout(function(){ if(playing && mode==="pop") newTarget(true); },800);
     p.el.animate([{transform:"scale(1)",opacity:1},{transform:"scale(1.6)",opacity:0}],
                  {duration:260,fill:"forwards"});
     pops=pops.filter(function(z){ return z!==p; });   /* сразу освобождаем место */
