@@ -218,8 +218,30 @@ function fillUnits(){
   /* принимаем и ?u=, и ?unit= — по платформе встречаются оба написания */
   var qs=new URLSearchParams(location.search);
   var q=qs.get("unit")||qs.get("u");
-  var want=prev||q;
-  if(want && [].some.call(sel.options,function(o){ return o.value===want; })) sel.value=want;
+
+  /* Ссылка может вести в юнит другого учебника. Раньше игра искала его
+     только в текущем курсе и, не найдя, молча открывала первый попавшийся:
+     просишь Gateway Unit 5, получаешь Solutions Introduction. */
+  if(q && !(window.SM_UNITS||[]).some(function(u){ return u.id===q; }) && window.SM_courseOfUnit){
+    var slug=SM_courseOfUnit(q);
+    if(slug && window.SM_useCourse){
+      SM_useCourse(slug);
+      try{ localStorage.setItem("sm-course", slug); }catch(e){}
+      if([].some.call(csel.options,function(o){ return o.value===slug; })) csel.value=slug;
+      sel.innerHTML="";
+      (window.SM_UNITS||[]).forEach(function(u){
+        var o=document.createElement("option");
+        o.value=u.id; o.textContent=(u.emoji||"📘")+" "+u.title;
+        sel.appendChild(o);
+      });
+    }
+  }
+  /* Курсы догружаются из базы, поэтому fillUnits зовётся дважды. Со второго
+     раза юнит из ссылки уже должен найтись — и он важнее того, что успело
+     выбраться на первом, неполном списке. */
+  var есть=function(v){ return v && [].some.call(sel.options,function(o){ return o.value===v; }); };
+  var want = есть(q) ? q : (есть(prev) ? prev : null);
+  if(want) sel.value=want;
   loadWords();
 }
 function loadWords(){
