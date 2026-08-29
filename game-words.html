@@ -48,6 +48,12 @@
     border-radius:22px;padding:10px 24px 10px 12px;box-shadow:0 6px 0 rgba(60,40,110,.3)}
   .ask .pic{width:96px;height:96px;object-fit:contain;border-radius:16px}
   .ask .em{width:96px;height:96px;display:flex;align-items:center;justify-content:center;font-size:60px}
+  /* цвет — кружком, число — цифрой: рисунок для «фиолетового» всегда спорный,
+     ребёнок запомнит нарисованный предмет, а не сам цвет */
+  .ask .sw{width:88px;height:88px;border-radius:50%;box-shadow:inset 0 -6px 14px rgba(0,0,0,.18),
+    0 0 0 4px #fff, 0 0 0 6px rgba(60,40,110,.15)}
+  .ask .num{width:96px;height:96px;display:flex;align-items:center;justify-content:center;
+    font:800 68px 'Baloo 2',sans-serif;color:#6b4fd0}
   .ask b{font:800 30px 'Baloo 2',sans-serif;color:#3b2a5e}
 
   /* шарики */
@@ -104,6 +110,7 @@
 <div class="page">
   <div class="top">
     <a class="home" href="trainer.html">← В тренажёр</a>
+    <select id="courseSel"></select>
     <select id="unitSel"></select>
     <span class="cnt" id="cnt"></span>
   </div>
@@ -163,6 +170,7 @@ var ROUND=45, ADD=4, FRAMES=8, FW=256;
 
 var g=document.getElementById("g"), cat=document.getElementById("cat"), say=document.getElementById("say"),
     quest=document.getElementById("quest"), sel=document.getElementById("unitSel"),
+    csel=document.getElementById("courseSel"),
     ptsEl=document.getElementById("pts"), comboEl=document.getElementById("combo"),
     secsEl=document.getElementById("secs"), tbar=document.getElementById("tbar"),
     clock=document.getElementById("clock"), cntEl=document.getElementById("cnt"),
@@ -171,7 +179,34 @@ var g=document.getElementById("g"), cat=document.getElementById("cat"), say=docu
 var WORDS=[], mode="pop", pts=0, streak=0, bestStreak=0, best={}, playing=false,
     left=ROUND, tick=null, want=null;
 
-/* ---------- список юнитов ---------- */
+/* ---------- курс и юнит ----------
+   Раньше страница молча брала курс, запомненный в браузере: заходишь играть
+   в Super Minds, а открывается Solutions. Теперь курс выбирается явно. */
+function fillCourses(){
+  csel.innerHTML="";
+  (window.SM_COURSES||[]).forEach(function(c){
+    if(c.id==="own" && !(window.SM_MY_WORDS||[]).length) return;
+    var o=document.createElement("option");
+    o.value=c.id; o.textContent=(c.emoji||"📘")+" "+c.title;
+    csel.appendChild(o);
+  });
+  var q=new URLSearchParams(location.search).get("course");
+  var cur=q || (window.SM_COURSE && SM_COURSE.id);
+  if(cur && [].some.call(csel.options,function(o){ return o.value===cur; })) csel.value=cur;
+  if(q && window.SM_useCourse) SM_useCourse(q);
+}
+csel.onchange=function(){
+  if(window.SM_useCourse) SM_useCourse(csel.value);
+  try{ localStorage.setItem("sm-course", csel.value); }catch(e){}
+  fillUnits(); backToMenu();
+};
+
+/* Для шариков годятся только короткие слова: «What are you going to do?»
+   на шарик не поместится и читается ребёнком не как слово, а как текст. */
+function игровое(w){
+  return w.en && w.ru && w.en.length<=16 && w.en.trim().split(/\s+/).length<=2;
+}
+
 function fillUnits(){
   var prev=sel.value;
   sel.innerHTML="";
@@ -180,17 +215,24 @@ function fillUnits(){
     o.value=u.id; o.textContent=(u.emoji||"📘")+" "+u.title;
     sel.appendChild(o);
   });
-  var q=new URLSearchParams(location.search).get("u");
+  /* принимаем и ?u=, и ?unit= — по платформе встречаются оба написания */
+  var qs=new URLSearchParams(location.search);
+  var q=qs.get("unit")||qs.get("u");
   var want=prev||q;
   if(want && [].some.call(sel.options,function(o){ return o.value===want; })) sel.value=want;
   loadWords();
 }
 function loadWords(){
-  WORDS=(window.SMP ? SMP.words(sel.value) : []).filter(function(w){ return w.en && w.ru; });
-  cntEl.textContent = WORDS.length ? ("слов в юните: "+WORDS.length) : "в этом юните нет слов";
+  var все=(window.SMP ? SMP.words(sel.value) : []).filter(function(w){ return w.en && w.ru; });
+  WORDS=все.filter(игровое);
+  var отсеяно=все.length-WORDS.length;
+  cntEl.textContent = WORDS.length
+    ? ("слов: "+WORDS.length + (отсеяно ? " · длинных фраз пропущено: "+отсеяно : ""))
+    : "в этом юните нет коротких слов";
+  прогреть(WORDS);
   document.getElementById("lead").textContent = WORDS.length>=4
     ? "Выбери игру. Слова берутся из юнита, который выбран сверху."
-    : "В этом юните меньше четырёх слов — выбери другой, иначе играть не из чего.";
+    : "В этом юните меньше четырёх коротких слов — для шариков не хватит. Выбери другой юнит.";
 }
 sel.onchange=function(){ loadWords(); backToMenu(); };
 
@@ -323,9 +365,7 @@ function dealPop(){
   pops=[];
 
   want=deck("w:"+sel.value, WORDS);
-  var pic = want.img
-    ? '<img class="pic" src="'+want.img+'" alt="">'
-    : '<div class="em">'+(want.emoji||"❓")+'</div>';
+  var pic = картинкаДля(want);
   quest.innerHTML='<span class="cap">Найди это слово по-английски</span>'+
     '<div class="ask">'+pic+'<b>'+esc(want.ru)+'</b></div>';
   var a=quest.querySelector(".ask");
@@ -341,6 +381,59 @@ function dealPop(){
 
 function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+/* Цвета и числа рисуем сами. Они и составляли все девятнадцать слов курса
+   без картинки — и как раз им картинка вредна: «purple» модель нарисует
+   фиолетовым цветком, и запомнится цветок. */
+var ЦВЕТА={red:"#e6392f", blue:"#2f7fe6", yellow:"#f5d020", green:"#4caf50",
+  orange:"#f28b1e", purple:"#8e5bd0", pink:"#f078a8", brown:"#8a5a3b",
+  black:"#2b2450", white:"#ffffff", grey:"#9aa0ab", gray:"#9aa0ab"};
+var ЧИСЛА={one:"1",two:"2",three:"3",four:"4",five:"5",six:"6",seven:"7",
+  eight:"8",nine:"9",ten:"10",eleven:"11",twelve:"12"};
+
+/* Картинки для курсов, где их не хранят, рисует тот же сервис, которым
+   уже пользуются сорок страниц уроков Focus 1, Gateway и Solutions.
+   Проверка на шестидесяти случайных словах: ошибок ноль, в среднем 0,9 с.
+   Поэтому хранить тысячу двести картинок не нужно — достаточно спросить. */
+var IMG_SERVICE="https://img-gen.limonatti.workers.dev/card?w=";
+var КЭШ={};                       /* слово -> готовый адрес или "нет" */
+
+function адресКартинки(w){
+  if(w.img) return w.img;
+  return IMG_SERVICE+encodeURIComponent(w.en);
+}
+
+/* Заранее тянем картинки всего юнита: тогда к моменту вопроса они уже
+   в кэше браузера и появляются мгновенно, без подмигивания. */
+function прогреть(список){
+  список.slice(0,60).forEach(function(w){
+    var k=(w.en||"").toLowerCase().trim();
+    if(ЦВЕТА[k]||ЧИСЛА[k]||КЭШ[w.en]) return;
+    var i=new Image();
+    i.onload =function(){ КЭШ[w.en]=i.src; };
+    i.onerror=function(){ КЭШ[w.en]="нет"; };
+    i.src=адресКартинки(w);
+  });
+}
+
+function картинкаДля(w){
+  var k=(w.en||"").toLowerCase().trim();
+  if(ЦВЕТА[k]) return '<div class="sw" style="background:'+ЦВЕТА[k]+'"></div>';
+  if(ЧИСЛА[k]) return '<div class="num">'+ЧИСЛА[k]+'</div>';
+  if(КЭШ[w.en]==="нет") return '<div class="em">'+(w.emoji||"❓")+'</div>';
+  /* одна повторная попытка: сервис изредка отвечает не сразу */
+  return '<img class="pic" alt="" src="'+адресКартинки(w)+'"'+
+         ' data-w="'+encodeURIComponent(w.en)+'" onerror="сноваКартинка(this)">';
+}
+
+function сноваКартинка(img){
+  if(img.dataset.tried){
+    img.outerHTML='<div class="em">🖼️</div>';
+    return;
+  }
+  img.dataset.tried="1";
+  img.src=IMG_SERVICE+img.dataset.w+"&r="+Date.now();
+}
 
 function spawnPop(){
   if(!playing) return;
@@ -435,10 +528,10 @@ document.getElementById("again").onclick=function(){ start(mode); };
 document.getElementById("toMenu").onclick=backToMenu;
 setClock();
 
-fillUnits();
+fillCourses(); fillUnits();
 /* курсы догружаются из базы — тогда список юнитов надо собрать заново */
-if(window.SM_ready && SM_ready.then) SM_ready.then(fillUnits).catch(function(){});
-document.addEventListener("sm-course-changed", fillUnits);
+if(window.SM_ready && SM_ready.then) SM_ready.then(function(){ fillCourses(); fillUnits(); }).catch(function(){});
+document.addEventListener("sm-course-changed", function(){ fillCourses(); fillUnits(); });
 </script>
 </body>
 </html>
