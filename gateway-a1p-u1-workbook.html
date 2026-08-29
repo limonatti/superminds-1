@@ -181,7 +181,7 @@ var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(D
 var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
 var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
-const HW={course:"solutions-el",unit:0};
+const HW={course:"gateway-a1p",unit:1};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
 function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
 async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}

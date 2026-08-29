@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction · Solutions Elementary · English with Asya</title>
+<title>Introduction · Грамматика · Solutions Elementary · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -75,125 +75,33 @@
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 </style>
 </head>
-<body>
-<div class="wrap">
+<body><div class="wrap">
   <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
-  <div class="top">
-    <a class="home" href="solutions-el-course.html">← Все юниты</a>
-    <a class="home alt" href="trainer.html?unit=sel-u0">🎯 Тренажёр</a>
-    <a class="home" href="index.html">🏠 Домой</a>
-  </div>
-
-  <div class="hero">
-    <div class="hcover" id="cover" style="background:linear-gradient(135deg,#1f6f9c,#39b0c9)"><span>🧭</span></div>
-    <div class="hb">
-      <h1>Introduction</h1>
-      <div class="d">📚 be · have got · can · a / an / some · this / that · личная информация</div>
-    </div>
-  </div>
-
-  <h2>📖 Грамматика юнита</h2>
-  <div class="card" style="text-align:center">
-    <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и рабочая тетрадь этого юнита — отдельными заданиями (ДЗ).</div>
-    <a href="solutions-el-u0-grammar.html" style="display:inline-block;background:#7c2340;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">✏️ Грамматика юнита →</a>
-    <a href="solutions-el-u0-workbook.html" style="display:inline-block;background:#2e6f4e;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">📒 Workbook →</a>
-  </div>
-
-  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
-  <div class="words" id="words"></div>
-
-  <h2>🗣️ Произношение <span class="sec-i">Числа и ударение</span></h2>
-  <div class="card"><div style="font-size:14px;margin-bottom:8px">thir<b>TEEN</b> · <b>THIR</b>ty · na·tio·NAL·i·ty</div><div class="pronbox" id="pron"></div></div>
-
-  <h2>🧩 Фразы <span class="sec-i">(учи целиком)</span></h2>
-  <div class="words" id="chunks"></div>
-  <h2>🎯 Тренажёр фраз <span class="sec-i">(выбери перевод)</span></h2>
-  <div id="chpr"></div>
-
-  <h2>🎧 Аудирование</h2>
-  <div class="lc">
-    <h3>A new student</h3>
-    <p>Послушай диалог (озвучка прямо в браузере), потом ответь на вопросы. Слушай сколько угодно.</p>
-    <button class="lbtn" id="lplay">▶ Слушать</button>
-    <button class="lbtn sec" id="lstop">⏹ Стоп</button>
-    <button class="lbtn sec" id="lscript">📜 Показать текст</button>
-    <div id="script"><b>Teacher:</b> Good morning! Are you a new student?<br>
-      <b>Sofia:</b> Yes, I am. My name's Sofia.<br>
-      <b>Teacher:</b> Nice to meet you, Sofia. What's your surname?<br>
-      <b>Sofia:</b> It's Marin. M-A-R-I-N.<br>
-      <b>Teacher:</b> Thank you. Where are you from?<br>
-      <b>Sofia:</b> I'm from Argentina, but I live here now.<br>
-      <b>Teacher:</b> How old are you?<br>
-      <b>Sofia:</b> I'm thirteen.<br>
-      <b>Teacher:</b> Have you got a phone number?<br>
-      <b>Sofia:</b> Yes. It's oh-two-one, four-five-six-seven.<br>
-      <b>Teacher:</b> Great. Have you got a pencil case and a dictionary?<br>
-      <b>Sofia:</b> I've got a pencil case, but I haven't got a dictionary.<br>
-      <b>Teacher:</b> No problem. Here's one for you. Welcome to our school!</div>
-  </div>
-  <div id="lq" style="margin-top:14px"></div>
-
-  <h2>🎧 Аудирование 2 <span class="sec-i">(в классе)</span></h2>
-  <div class="lc">
-    <h3>In the classroom</h3>
-    <p>Послушай второй диалог и ответь на вопросы.</p>
-    <button class="lbtn" id="lplay2">▶ Слушать</button>
-    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
-    <button class="lbtn sec" id="lscript2">📜 Показать текст</button>
-    <div id="script2"><b>Sofia:</b> Excuse me, Mr Brown. Can I ask a question?<br>
-      <b>Mr Brown:</b> Of course. Go ahead.<br>
-      <b>Sofia:</b> What's this in English?<br>
-      <b>Mr Brown:</b> That's a rubber. You use it with a pencil.<br>
-      <b>Sofia:</b> And can I borrow a dictionary, please?<br>
-      <b>Mr Brown:</b> Yes, sure. Here you are.<br>
-      <b>Sofia:</b> Thank you. Can I sit next to Mia?<br>
-      <b>Mr Brown:</b> Yes, you can. But please listen carefully today.<br>
-      <b>Sofia:</b> OK, I will. Thank you, Mr Brown.</div>
-  </div>
-  <div id="lq2" style="margin-top:14px"></div>
-
-  <h2>🔤 Word Skills <span class="sec-i">(работа со словом)</span></h2>
-  <div class="wbband" style="border-color:#2e6f4e">Множественное число, a / an, числа и краткие формы.</div>
-  <div id="ws"></div>
-
-  <h2>📕 Чтение</h2>
-  <div class="read"><h3>My new friend</h3><p>This is my new friend. Her name's Lena and she's from Turkey. She's fourteen years old. Lena has got long, dark hair and brown eyes.</p>
-   <p>She can speak three languages: Turkish, English and a little Russian. She can play the guitar and she can dance really well, but she can't ride a bike. Lena is friendly and funny, and I'm happy she's in my class.</p></div>
-  <div id="rq" style="margin-top:14px"></div>
-
-  <h2>📕 Чтение 2 <span class="sec-i">(A profile)</span></h2>
-  <div class="read"><h3>About me</h3><p>Hello! I'm Daniel and I'm from Mexico. I'm twelve years old. I've got one brother and two sisters.</p>
-   <p>I can play football and I can cook, but I can't swim. At school my favourite things are my tablet and my English dictionary. I haven't got a pet, but I want a dog! Please write to me and tell me about you.</p></div>
-  <div id="rq2" style="margin-top:14px"></div>
-
-  <h2>✅ True or False <span class="sec-i">(по текстам юнита)</span></h2>
-  <div id="tf"></div>
-
-  <h2>💬 How to… познакомиться и попросить разрешения</h2>
-  <div class="card">
-    <div class="g-ex"><b>Hi, I'm…</b> / <b>My name's…</b> · <b>Nice to meet you.</b></div>
-    <div class="g-ex"><b>Where are you from?</b> — <b>I'm from…</b></div>
-    <div class="g-ex"><b>Can I…?</b> (просьба) · <b>Can you…?</b> (умение)</div>
-  </div>
-  <div id="fx"></div>
-
-  <h2>💬 Говорим <span class="sec-i">(скажи вслух — по-английски)</span></h2>
-  <div id="spk"></div>
-
-  <h2>✍️ Writing</h2>
-  <div class="hw"><b>All about me.</b> Напиши короткий профиль о себе (5–6 предложений): имя, возраст, страна, что у тебя есть (I've got…) и что ты умеешь/не умеешь (I can… / I can't…).<br><br>Проверь: краткие формы (I'm, I've got), a / an перед словом, заглавные буквы у имён и стран.</div>
-
-  <h2>🎯 Exam Skills Trainer <span class="sec-i">(формат экзамена)</span></h2>
-  <div class="read"><h3>Reading: Welcome to Greenwood School</h3><p>Welcome to Greenwood School! We are happy to have new students from many countries. In our school you can study English, maths, science and art.</p>
-   <p>You can also join clubs after lessons. There is a music club, a sports club and a computer club. Students can play the guitar or the drums in the music club. You can't use your phone in lessons, but you can use it at break time. We hope you enjoy your first year with us!</p></div>
-  <div class="wbband" style="border-color:#c0392b">Multiple choice · Use of English — по тексту выше</div>
-  <div id="exammc"></div>
-  <div class="spkcard"><span class="spn">🎤</span> <b>Speaking task:</b> Расскажи 1–2 минуты о себе: имя · возраст · откуда ты · что ты умеешь делать.</div>
-
-  <h2>🏠 Домашнее задание</h2>
-  <div class="hw"><b>О себе.</b> Заполни анкету (имя, фамилия, возраст, страна, национальность) и напиши 3 предложения о том, что ты умеешь.<br><br>Затем открой <a href="solutions-el-u0-workbook.html" style="color:#1f6a86;font-weight:900;text-decoration:underline">Workbook Introduction</a> 🧭</div>
-
-  <div class="foot">Made for @english.with_asya · авторские материалы по программе Solutions Elementary · Introduction</div>
+  <div class="top"><a class="home" href="solutions-el-u0.html">← Урок (лексика)</a><a class="home alt" href="trainer.html?unit=sel-u0">🎯 Тренажёр</a><a class="home" href="solutions-el-course.html">Все юниты</a></div>
+  <h1>Introduction · Грамматика</h1><div class="d">📚 be · have got · can · a / an / some · this / that</div>
+  <h2>📖 Разбор грамматики</h2>
+  <div class="card"><span class="gt">Глагол to be</span>
+    <div class="g-ex">I <b>am</b> (I'm) · he/she/it <b>is</b> ('s) · you/we/they <b>are</b> ('re).</div>
+    <div class="g-ex">Отрицание: I'm <b>not</b>, he <b>isn't</b>, they <b>aren't</b>.</div>
+    <div class="g-ex">Вопрос — глагол вперёд: <b>Are</b> you from Spain? — Yes, I am. / No, I'm not.</div></div>
+  <div class="card"><span class="gt">have got — «у меня есть»</span>
+    <div class="g-ex">I/you/we/they <b>have got</b> ('ve got) · he/she/it <b>has got</b> ('s got).</div>
+    <div class="g-ex">Отрицание: <b>haven't got</b> / <b>hasn't got</b>.</div>
+    <div class="g-ex">Вопрос: <b>Have</b> you got a pen? · <b>Has</b> she got a dog?</div></div>
+  <div class="card"><span class="gt">can — умение и просьба</span>
+    <div class="g-ex">После <b>can</b> — глагол без to и без -s: She <b>can swim</b>.</div>
+    <div class="g-ex">Отрицание: <b>can't</b> (cannot). Вопрос: <b>Can</b> you dance?</div>
+    <div class="g-ex"><b>Can I…?</b> — просьба · <b>Can you…?</b> — умение или просьба о помощи.</div></div>
+  <div class="card"><span class="gt">a / an / some</span>
+    <div class="g-ex"><b>a</b> — перед согласным звуком: <b>a</b> pen, <b>a</b> ruler.</div>
+    <div class="g-ex"><b>an</b> — перед гласным звуком: <b>an</b> eraser, <b>an</b> old calculator.</div>
+    <div class="g-ex"><b>some</b> — с множественным числом: <b>some</b> pens, <b>some</b> books.</div></div>
+  <div class="card"><span class="gt">this / that · these / those</span>
+    <div class="g-ex">Рядом: <b>this</b> (один) · <b>these</b> (много).</div>
+    <div class="g-ex">Далеко: <b>that</b> (один) · <b>those</b> (много).</div>
+    <div class="g-ex"><b>This</b> is my pencil case. · <b>Those</b> are your books over there.</div></div>
+  <h2>✏️ Упражнения</h2><div id="ex"></div>
+  <div class="foot">Made for @english.with_asya · Solutions Elementary · Introduction · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
