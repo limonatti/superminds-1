@@ -266,6 +266,13 @@ window.SM_HANDLES_COURSE = true;
       const box=document.getElementById("modes"); box.innerHTML="";
       MODES.forEach(m=>{const b=document.createElement("button");b.className="mode "+(m.cls||"")+(mode===m.id?" on":"");b.textContent=m.label;
         b.onclick=()=>{mode=m.id;renderModes();nextRound();};box.appendChild(b);});
+      /* аркадные игры живут отдельной страницей: там полноэкранное поле,
+         фон и кот-ведущий, в узкую карточку тренажёра это не помещается */
+      const a=document.createElement("a");
+      a.className="mode"; a.textContent="🎈 Игры";
+      a.style.textDecoration="none";
+      a.href="game-words.html?u="+encodeURIComponent(selectedUnits[0]||"");
+      box.appendChild(a);
     }
 
     function nextRound(){
