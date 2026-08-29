@@ -37,6 +37,8 @@
     transition:width .25s linear,background .3s}
   .clock.warn b{color:#c23b12} .clock.warn .tbar i{background:#e8562a}
   .clock.warn{animation:pulse .55s ease-in-out infinite}
+  .clock.count .tbar{display:none} .clock.count{animation:none}
+  .clock.count b{min-width:auto;font-size:19px}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
   /* задание: картинка слова и перевод */
@@ -55,6 +57,25 @@
   .ask .num{width:96px;height:96px;display:flex;align-items:center;justify-content:center;
     font:800 68px 'Baloo 2',sans-serif;color:#6b4fd0}
   .ask b{font:800 30px 'Baloo 2',sans-serif;color:#3b2a5e}
+
+  /* ─── «Найди пару»: доска карточек ─── */
+  .board{position:absolute;left:300px;right:26px;top:150px;bottom:26px;z-index:7;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .mc{position:relative;border-radius:18px;cursor:pointer;overflow:hidden;
+    background:rgba(255,255,255,.95);box-shadow:0 6px 0 rgba(60,40,110,.3);
+    display:flex;align-items:center;justify-content:center;padding:6px;
+    transition:transform .15s;animation:pop .3s cubic-bezier(.3,1.6,.5,1) both}
+  .mc:hover{transform:translateY(-4px)}
+  /* рубашка — деревянная плашка из набора, а не плоская заливка */
+  .mc.down{background:#7a5ad8 center/cover no-repeat url("game/tw/panel.png")}
+  .mc.down::after{content:"?";font:800 40px 'Baloo 2',sans-serif;color:#b9aee0}
+  .mc img{max-width:100%;max-height:100%;object-fit:contain}
+  .mc b{font:800 22px 'Baloo 2',sans-serif;color:#3b2a5e;text-align:center;line-height:1.2}
+  .mc .sw{width:62px;height:62px}
+  .mc .num{width:auto;height:auto;font-size:46px}
+  .mc .em{width:auto;height:auto;font-size:44px}
+  .mc.done{background:#d9f7c9;box-shadow:0 6px 0 #7cb95c;pointer-events:none}
+  .mc.miss{background:#ffd9d2;box-shadow:0 6px 0 #d98b7a}
 
   /* шарики */
   .pop{position:absolute;z-index:5;cursor:pointer;text-align:center;transition:transform .12s}
@@ -101,9 +122,24 @@
   .res div{background:rgba(255,255,255,.96);border-radius:18px;padding:14px 24px;min-width:110px}
   .res b{display:block;font:800 34px 'Baloo 2',sans-serif;color:#6b4fd0}
   .res span{font:700 13px 'Nunito',sans-serif;color:#6b6390}
-  .go{border:0;cursor:pointer;border-radius:999px;padding:14px 34px;
-    font:700 18px 'Baloo 2',sans-serif;background:#ffb02e;color:#5b2c00;box-shadow:0 6px 0 #c97d0e}
-  .go.ghost{background:rgba(255,255,255,.92);color:#3b2a5e;box-shadow:0 6px 0 rgba(60,40,110,.3)}
+  /* Кнопки и значки — настоящие файлы из набора Words Twister, а не их
+     приближение стилями: нарисованные объём и блики так не повторить. */
+  .imgbtn{border:0;background:none;padding:0;cursor:pointer;transition:transform .13s}
+  .imgbtn:hover{transform:translateY(-3px) scale(1.04)}
+  .imgbtn:active{transform:translateY(1px) scale(.99)}
+  .imgbtn img{display:block;height:64px}
+  .imgbtn.sm img{height:52px}
+  .coin{height:30px;vertical-align:-7px;margin-right:2px}
+  .mark{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(.4);
+    z-index:15;opacity:0;pointer-events:none;height:150px}
+  .mark.on{animation:markPop .85s ease-out forwards}
+  @keyframes markPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+    30%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}
+    70%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.05)}}
+  .badges{display:flex;gap:10px;justify-content:center;margin:2px 0 4px}
+  .badges img{height:76px;filter:drop-shadow(0 6px 10px rgba(20,8,50,.4))}
+  .badges img.off{filter:grayscale(1);opacity:.32}
 </style>
 </head>
 <body>
@@ -117,12 +153,13 @@
 
   <div class="g" id="g">
     <div class="hud">
-      <span class="chip">⭐ <span id="pts">0</span></span>
+      <span class="chip"><img class="coin" src="game/tw/coin.png" alt=""><span id="pts">0</span></span>
       <span class="chip combo" id="combo">🔥 ×2</span>
       <span class="grow"></span>
       <span class="clock" id="clock"><span class="tbar"><i id="tbar"></i></span><b id="secs">45</b></span>
     </div>
 
+    <img class="mark" id="mark" alt="">
     <div class="quest" id="quest"></div>
     <div class="cat" id="cat"></div>
     <div class="say off" id="say"></div>
@@ -135,6 +172,10 @@
           <b>🎈 Лопни слово</b>
           <span>Наверху картинка и перевод. Снизу всплывают английские слова — лопай нужное.</span>
         </button>
+        <button class="gcard" data-g="memo">
+          <b>🧠 Найди пару</b>
+          <span>Карточки рубашкой вверх: картинка и её английское слово. Слова выбранного юнита, без таймера, три доски.</span>
+        </button>
       </div>
     </div>
 
@@ -145,9 +186,10 @@
         <div><b id="rStreak">0</b><span>лучшая серия</span></div>
         <div><b id="rBest">0</b><span>рекорд</span></div>
       </div>
-      <div class="games" style="gap:10px">
-        <button class="go" id="again">Ещё раз 🔁</button>
-        <button class="go ghost" id="toMenu">В меню</button>
+      <div class="badges" id="badges"></div>
+      <div class="games" style="gap:16px">
+        <button class="imgbtn" id="again"><img src="game/tw/playnew.png" alt="Ещё раз"></button>
+        <button class="imgbtn sm" id="toMenu"><img src="game/tw/back.png" alt="В меню"></button>
       </div>
     </div>
   </div>
@@ -176,6 +218,7 @@ var g=document.getElementById("g"), cat=document.getElementById("cat"), say=docu
     clock=document.getElementById("clock"), cntEl=document.getElementById("cnt"),
     menuS=document.getElementById("menu"), overS=document.getElementById("over");
 
+var NO_TIMER={memo:1};
 var WORDS=[], mode="pop", pts=0, streak=0, bestStreak=0, best={}, playing=false,
     left=ROUND, tick=null, want=null;
 
@@ -312,6 +355,7 @@ function deck(key, list){
 
 /* ---------- общий раунд ---------- */
 function setClock(){
+  if(NO_TIMER[mode]) return;                 /* там счётчик досок, а не часы */
   secsEl.textContent=Math.max(0,Math.ceil(left));
   tbar.style.width=Math.max(0,Math.min(100,left/ROUND*100))+"%";
   clock.classList.toggle("warn", left<=10);
@@ -321,9 +365,12 @@ function start(which){
   mode=which; pts=0; streak=0; bestStreak=0; left=ROUND; playing=true;
   ptsEl.textContent=0; comboEl.classList.remove("on");
   menuS.classList.add("off"); overS.classList.add("off");
-  DECKS={};
-  clearPop(); setClock(); setCat("idle"); dealPop();
+  DECKS={}; memoBoard=0;
+  clock.classList.toggle("count", !!NO_TIMER[which]);
+  clearPop(); clearMemo(); setClock(); setCat("idle");
+  if(ВИДЫ[which]) dealMemo(); else dealPop();
   clearInterval(tick);
+  if(NO_TIMER[which]) return;
   tick=setInterval(function(){
     if(!playing) return;
     left-=.1;
@@ -334,19 +381,34 @@ function start(which){
 }
 function finish(){
   stopPending();
-  playing=false; clearInterval(tick); clearPop();
+  playing=false; clearInterval(tick); clearPop(); clearMemo();
   quest.innerHTML="";
   if(!best[mode] || pts>best[mode]) best[mode]=pts;
   document.getElementById("rPts").textContent=pts;
   document.getElementById("rStreak").textContent=bestStreak;
   document.getElementById("rBest").textContent=best[mode];
-  document.getElementById("overTitle").textContent = pts>=10 ? "Отлично!" : "Время вышло!";
+  document.getElementById("overTitle").textContent =
+    NO_TIMER[mode] ? "Все пары собраны!" : (pts>=10 ? "Отлично!" : "Время вышло!");
+  /* три ступени: пять очков, десять, двадцать — видно, до чего дотянулся */
+  var box=document.getElementById("badges");
+  if(box) box.innerHTML=[5,10,20].map(function(порог,i){
+    return '<img src="game/tw/b'+(i+2)+'.png" class="'+(pts>=порог?"":"off")+'" alt="">';
+  }).join("");
   overS.classList.remove("off"); SMP.sfx("lose"); setCat(pts>=10?"celebrate":"idle");
 }
 function backToMenu(){
   stopPending(); playing=false; clearInterval(tick); clearPop();
   quest.innerHTML=""; setCat("idle");
   overS.classList.add("off"); menuS.classList.remove("off");
+}
+
+/* Крупный знак поверх поля: нарисованные галочка и крест из набора
+   читаются мгновенно, ребёнку не нужно вчитываться в подпись. */
+var markEl=document.getElementById("mark");
+function знак(ok){
+  if(ВИДЫ[mode]) return;        /* в мемори отклик живёт на самих карточках */
+  markEl.src = ok ? "game/tw/check.png" : "game/tw/close.png";
+  markEl.classList.remove("on"); void markEl.offsetWidth; markEl.classList.add("on");
 }
 
 function reward(x,y,mult){
@@ -495,7 +557,7 @@ function hitPop(p){
     comboEl.classList.toggle("on", streak>=3);
     pts+=mult; ptsEl.textContent=pts;
     left=Math.min(ROUND,left+ADD); setClock();
-    reward(x,y,mult); SMP.sfx("ok");
+    reward(x,y,mult); знак(true); SMP.sfx("ok");
     setCat(mult>1?"celebrate":"happy",true,"idle");
     voice(p.w.en, 80);
     if(mult>1){ SMP.sfx("streak"); speak("Серия "+streak+"! 🔥",1500); }
@@ -508,7 +570,7 @@ function hitPop(p){
     later(function(){ if(playing) dealPop(); }, 1100);
   } else {
     streak=0; comboEl.classList.remove("on");
-    SMP.sfx("no"); setCat("sad",true,"idle");
+    знак(false); SMP.sfx("no"); setCat("sad",true,"idle");
     voice(p.w.en, 60);
     speak("«"+esc(p.w.en)+"» — это "+esc(p.w.ru), 2100);
     saveTry(false);
@@ -540,6 +602,134 @@ function popLoop(ts){
     }
   }
   requestAnimationFrame(popLoop);
+}
+
+/* ---------- игра 2: найди пару ----------
+   Без таймера: под тикающие часы ребёнок перестаёт запоминать и начинает
+   тыкать наугад, а это ровно то, чего игра на память поощрять не должна. */
+var memoOpen=[], memoLeft=0, memoBusy=false, memoBoard=0, MEMO_BOARDS=3, доска=null;
+
+
+function clearMemo(){
+  if(доска){ доска.remove(); доска=null; }
+  memoOpen=[]; memoBusy=false; ждутЗакрытия=null;
+}
+
+/* Слова берём из выбранного юнита — игра идёт к уроку, а не вместо него.
+   Во вступительном юните Super Minds все слова цвета, и это не сбой: там
+   и урок про цвета. К учебнику целиком отступаем, только если в юните
+   не набирается четырёх пар. */
+function словаКурса(){
+  var все=[];
+  (window.SM_UNITS||[]).forEach(function(u){
+    (u.words||[]).forEach(function(w,i){
+      if(w.en && w.ru) все.push({id:u.id+"-"+i, en:w.en, ru:w.ru, emoji:w.emoji, img:w.img||null});
+    });
+  });
+  return все.filter(игровое);
+}
+
+function dealMemo(){
+  clearMemo();
+  var банк = WORDS.length>=4 ? WORDS : словаКурса();
+  var ключ = WORDS.length>=4 ? ("memo:"+sel.value) : "memoAll";
+  var пул=[], попыток=0;
+  while(пул.length<4 && попыток<200){
+    попыток++;
+    var w=deck(ключ, банк);
+    if(!w) break;
+    /* Не берём на одну доску слова с одинаковым написанием или одинаковым
+       переводом: «orange» в учебнике дважды — цвет и фрукт, и пару из них
+       не различить ни по картинке, ни по слову. */
+    var столкновение=пул.some(function(x){
+      return x.en.toLowerCase()===w.en.toLowerCase() ||
+             (x.ru && w.ru && x.ru.toLowerCase()===w.ru.toLowerCase());
+    });
+    if(!столкновение) пул.push(w);
+  }
+  if(пул.length<4){ speak("Мало слов в юните",2000); return; }
+
+  memoOpen=[]; memoLeft=4; memoBusy=true; memoBoard++;
+  secsEl.textContent=memoBoard+" / "+MEMO_BOARDS;
+  var виды=ВИДЫ[mode]||ВИДЫ.memo;
+  quest.innerHTML='<span class="cap">Открой картинку и её слово</span>';
+  setCat("thinking",true,"idle");
+
+  var номер=memoBoard;
+  готовитьКартинки(виды.indexOf("img")>-1 ? пул : []).then(function(){
+    if(!playing || номер!==memoBoard) return;     /* доску успели сменить */
+    var карты=[];
+    пул.forEach(function(w){
+      карты.push({w:w,вид:виды[0]}); карты.push({w:w,вид:виды[1]});
+    });
+    доска=document.createElement("div"); доска.className="board";
+    shuffle(карты).forEach(function(c,i){
+      var el=document.createElement("div");
+      el.className="mc down"; el.style.animationDelay=(i*.045)+"s";
+      el.onclick=function(){ flipMemo(el,c); };
+      доска.appendChild(el); c.el=el;
+    });
+    g.appendChild(доска);
+    memoBusy=false;
+  });
+}
+
+var ждутЗакрытия=null;
+function закрытьПару(){
+  if(!ждутЗакрытия) return;
+  ждутЗакрытия.forEach(function(x){
+    x.el.classList.remove("miss"); x.el.classList.add("down"); x.el.innerHTML="";
+  });
+  ждутЗакрытия=null; memoOpen=[];
+}
+
+function flipMemo(el,c){
+  if(!playing || memoBusy) return;
+  if(el.classList.contains("done")) return;
+  if(ждутЗакрытия){                      /* сначала убираем прошлую пару */
+    if(ждутЗакрытия.indexOf(c)>-1) return;
+    закрытьПару();
+  }
+  if(memoOpen.indexOf(c)>-1) return;
+  el.classList.remove("down");
+  el.innerHTML = c.вид==="img" ? картинкаДля(c.w) : '<b>'+esc(c.w.en)+'</b>';
+  el.animate([{transform:"rotateY(80deg)"},{transform:"rotateY(0)"}],{duration:220});
+  memoOpen.push(c);
+  if(memoOpen.length<2) return;
+
+  memoBusy=true;
+  var a=memoOpen[0], b=memoOpen[1];
+  if(a.w.en===b.w.en && a.вид!==b.вид){
+    a.el.classList.add("done"); b.el.classList.add("done");
+    memoOpen=[]; memoBusy=false; memoLeft--;
+    streak++; if(streak>bestStreak) bestStreak=streak;
+    var mult=streak>=3?2:1;
+    comboEl.classList.toggle("on", streak>=3);
+    pts+=mult; ptsEl.textContent=pts;
+    /* без знака во весь экран: он закрывал бы собранную пару */
+    SMP.sfx("ok"); setCat(mult>1?"celebrate":"happy",true,"idle");
+    voice(a.w.en, 80); speak("Пара! 👏",1300); saveTry(true);
+    if(memoLeft===0) later(function(){
+      if(!playing) return;
+      if(memoBoard>=MEMO_BOARDS){ speak("Все доски собраны! 🎉",1500); finish(); }
+      else { speak("Доска собрана! 🎉",1400); dealMemo(); }
+    },1300);
+  } else {
+    /* Порядок важен. Сначала ребёнок молча смотрит на то, что открыл:
+       ни звука, ни красного, ни знака во весь экран — иначе он реагирует
+       на сигнал, а не разглядывает две карточки. Через полторы секунды
+       приходит отклик, и только потом доска закрывается под новый выбор. */
+    streak=0; comboEl.classList.remove("on"); saveTry(false);
+    memoBusy=true;
+    later(function(){
+      a.el.classList.add("miss"); b.el.classList.add("miss");
+      SMP.sfx("no"); setCat("sad",true,"idle");
+      voice(a.w.en); voice(b.w.en, 750);
+      later(function(){
+        ждутЗакрытия=[a,b]; закрытьПару(); memoBusy=false;
+      }, 1500);
+    }, 1500);
+  }
 }
 
 /* ---------- запуск ---------- */

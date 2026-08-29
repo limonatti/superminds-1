@@ -268,10 +268,14 @@ window.SM_HANDLES_COURSE = true;
         b.onclick=()=>{mode=m.id;renderModes();nextRound();};box.appendChild(b);});
       /* аркадные игры живут отдельной страницей: там полноэкранное поле,
          фон и кот-ведущий, в узкую карточку тренажёра это не помещается */
+      /* Детские курсы ведут в игры с котом и картинками, старшие — в игры на
+         порядок слов и слух: детское оформление подростка отталкивает. */
+      const малыши = ["sm1","sm2"].includes((window.SM_COURSE||{}).id);
       const a=document.createElement("a");
-      a.className="mode"; a.textContent="🎈 Игры";
+      a.className="mode"; a.textContent = малыши ? "🎈 Игры" : "🎮 Игры";
       a.style.textDecoration="none";
-      a.href="game-words.html?u="+encodeURIComponent(selectedUnits[0]||"");
+      a.href=(малыши ? "game-words.html?unit=" : "game-words-teen.html?unit=")
+             + encodeURIComponent(selectedUnits[0]||"");
       box.appendChild(a);
     }
 

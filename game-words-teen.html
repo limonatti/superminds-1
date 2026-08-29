@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игры со словами · старшие курсы · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Тема сайта: тёмный уголь и бордо. Ни персонажа, ни мультяшных теней —
+     подросток и взрослый воспринимают детское оформление как несерьёзное. */
+  :root{
+    --canvas:#211a19; --sheet:#fffdf8; --surface:#f8f2e8; --deep:#ece2d3;
+    --text:#241a18; --accent:#7c2340; --divider:#e9e2d6;
+    --n600:#7d726a; --n700:#5c534d;
+    --ok:#3f8f5c; --ok-bg:#e4f2e5; --ok-text:#235c37;
+    --bad:#b23a20; --bad-bg:#fbeae4; --bad-text:#7b2412;
+    /* Палитра снята пипеткой с набора Match Duo. Берём цвета и форму,
+       а не сами картинки: плашки там 463×327, а варианты у нас разной
+       ширины — растянутый PNG выглядел бы хуже, чем та же форма стилями. */
+    --md1:#b6add6; --md2:#c7e3f7; --md3:#e8b295; --md4:#f1b4df;
+    --md-panel:#e3e1fd; --md-ok:#8cc919;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--canvas);color:var(--text);
+    font-family:'Nunito',system-ui,sans-serif}
+  .page{max-width:1000px;margin:0 auto;padding:22px 18px 60px}
+
+  .top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .home{display:inline-flex;align-items:center;gap:7px;background:rgba(255,253,248,.1);
+    border:1px solid rgba(255,253,248,.2);border-radius:999px;padding:9px 17px;
+    text-decoration:none;font:700 14px 'Nunito',sans-serif;color:#f5efe9}
+  .home:hover{background:rgba(255,253,248,.18)}
+  select{border:1px solid rgba(255,253,248,.2);border-radius:999px;padding:9px 15px;
+    background:rgba(255,253,248,.1);color:#f5efe9;font:700 14px 'Nunito',sans-serif;cursor:pointer}
+  select option{background:#2c2321;color:#f5efe9}
+  .cnt{font:600 13px 'Nunito',sans-serif;color:#a99c93}
+
+  .stage{position:relative;min-height:560px;background:var(--sheet);
+    border-radius:18px;padding:26px 28px 30px;
+    box-shadow:0 20px 50px rgba(0,0,0,.34)}
+
+  .hud{display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .pill{border:1px solid var(--divider);border-radius:999px;padding:7px 15px;
+    font:800 15px 'Nunito',sans-serif;color:var(--n700);background:var(--surface)}
+  .pill b{color:var(--accent)}
+  .pill.hot{background:var(--accent);border-color:var(--accent);color:#fff}
+  .pill.hot b{color:#fff}
+  .grow{flex:1}
+  .bar{height:5px;border-radius:999px;background:var(--deep);overflow:hidden;
+    margin:0 0 24px}
+  .bar i{display:block;height:100%;width:100%;background:var(--accent);
+    transition:width .25s linear,background .3s}
+  .bar.warn i{background:var(--bad)}
+
+  .ask{font:800 15px 'Nunito',sans-serif;color:var(--n600);
+    letter-spacing:.02em;text-transform:uppercase;margin-bottom:10px}
+  .ru{font:700 26px 'Nunito',sans-serif;color:var(--text);margin-bottom:22px;line-height:1.3}
+  .ru small{display:block;font:600 15px 'Nunito',sans-serif;color:var(--n600);margin-top:5px}
+
+  /* Крупные карточки вариантов — форма из Match Duo. Четыре цвета, чтобы
+     взгляд различал их до чтения: так выбор быстрее, чем среди одинаковых. */
+  .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-top:4px}
+  .opt{position:relative;border:0;cursor:pointer;border-radius:22px;
+    min-height:104px;padding:20px 22px;text-align:left;
+    font:800 22px 'Nunito',sans-serif;color:#2f2a3d;
+    box-shadow:0 6px 0 rgba(70,60,110,.18);transition:transform .13s,box-shadow .13s}
+  .opt:hover{transform:translateY(-4px);box-shadow:0 10px 0 rgba(70,60,110,.18)}
+  .opt:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(70,60,110,.18)}
+  .opt.c1{background:var(--md1)} .opt.c2{background:var(--md2)}
+  .opt.c3{background:var(--md3)} .opt.c4{background:var(--md4)}
+  .opt.yes{background:var(--md-ok);color:#20340a;box-shadow:0 6px 0 #6d9c12}
+  .opt.no{background:#d9d4d0;color:#6b635e;box-shadow:0 6px 0 #b3aca7}
+  .opt.dim{opacity:.5;pointer-events:none}
+
+  /* фишки со словами: и для сборки фразы, и для вариантов ответа */
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{border:0;background:var(--md-panel);color:#2f2a3d;
+    border-radius:14px;padding:12px 18px;font:800 19px 'Nunito',sans-serif;cursor:pointer;
+    box-shadow:0 4px 0 rgba(70,60,110,.16);
+    transition:background .12s,transform .12s,box-shadow .12s}
+  .chip:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(70,60,110,.16)}
+  .chip.used{opacity:.28;pointer-events:none}
+  .chip.no{background:#efd6cd;color:var(--bad-text);box-shadow:0 4px 0 #cbA697}
+  .chip.yes{background:var(--md-ok);color:#20340a;box-shadow:0 4px 0 #6d9c12}
+
+  /* строка, куда собирается фраза */
+  .line{min-height:68px;border:2px dashed #d6d1ea;border-radius:16px;
+    padding:10px 12px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+    margin-bottom:20px;background:#fffefb}
+  .line:empty::before{content:"нажимай слова по порядку";color:var(--n600);
+    font:600 15px 'Nunito',sans-serif}
+  .line .chip{cursor:pointer}
+
+  /* поле ввода для «услышь и запиши» */
+  .typed{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+  input[type=text]{flex:1;min-width:260px;border:1px solid var(--divider);border-radius:10px;
+    padding:14px 16px;font:700 20px 'Nunito',sans-serif;color:var(--text);background:#fffefb}
+  input[type=text]:focus{outline:none;border-color:var(--accent)}
+  .btn{border:0;cursor:pointer;border-radius:10px;padding:14px 24px;
+    font:800 16px 'Nunito',sans-serif;background:var(--accent);color:#fff}
+  .btn.quiet{background:var(--surface);color:var(--n700);border:1px solid var(--divider)}
+  .btn:disabled{opacity:.45;cursor:default}
+
+  .gapline{font:700 26px 'Nunito',sans-serif;color:var(--text);margin-bottom:22px;line-height:1.5}
+  .gapline u{text-decoration:none;display:inline-block;min-width:96px;
+    border-bottom:3px solid var(--accent);margin:0 4px}
+
+  .note{margin-top:16px;font:700 16px 'Nunito',sans-serif;min-height:26px}
+  .note.ok{color:var(--ok-text)} .note.bad{color:var(--bad-text)}
+  .note small{display:block;font:600 14px 'Nunito',sans-serif;color:var(--n600);margin-top:3px}
+
+  /* меню и итог */
+  .menu h2{margin:0 0 6px;font:800 27px 'Nunito',sans-serif}
+  .menu p{margin:0 0 20px;font:600 15px 'Nunito',sans-serif;color:var(--n600);max-width:560px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+  .card{text-align:left;border:1px solid var(--divider);background:var(--surface);
+    border-radius:14px;padding:16px 17px;cursor:pointer;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card b{display:block;font:800 17px 'Nunito',sans-serif;color:var(--text);margin-bottom:5px}
+  .card span{font:600 13.5px 'Nunito',sans-serif;color:var(--n600);line-height:1.5}
+  .res{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 22px}
+  .res div{border:1px solid var(--divider);border-radius:14px;padding:14px 22px;min-width:120px;
+    background:var(--surface)}
+  .res b{display:block;font:800 30px 'Nunito',sans-serif;color:var(--accent)}
+  .res span{font:600 13px 'Nunito',sans-serif;color:var(--n600)}
+  .hide{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <a class="home" href="trainer.html">← В тренажёр</a>
+    <select id="courseSel"></select>
+    <select id="unitSel"></select>
+    <span class="cnt" id="cnt"></span>
+  </div>
+
+  <div class="stage">
+    <div class="hud" id="hud">
+      <span class="pill">Очки <b id="pts">0</b></span>
+      <span class="pill" id="streakPill">Серия <b id="streak">0</b></span>
+      <span class="grow"></span>
+      <span class="pill" id="clock">Время <b id="secs">60</b></span>
+    </div>
+    <div class="bar" id="barWrap"><i id="bar"></i></div>
+
+    <div id="play" class="hide"></div>
+    <div class="note" id="note"></div>
+
+    <div class="menu" id="menu">
+      <h2>Игры со словами</h2>
+      <p id="lead">Здесь тренируют не картинки, а язык: порядок слов, сочетаемость и слух.
+        Материал берётся из юнита, выбранного сверху.</p>
+      <div class="cards">
+        <button class="card" data-g="order">
+          <b>Собери фразу</b>
+          <span>Слова вразброс — выложи верный порядок. Работает на длинных фразах, которых нет в детских играх.</span>
+        </button>
+        <button class="card" data-g="dictation">
+          <b>Услышь и запиши</b>
+          <span>Фраза звучит вслух — впиши её. Можно переслушать. Опечатки в одну букву засчитываются.</span>
+        </button>
+        <button class="card" data-g="odd">
+          <b>Найди лишнее</b>
+          <span>Четыре слова, три из одной темы. Найди чужое — тренирует значения, а не перевод.</span>
+        </button>
+        <button class="card" data-g="gap">
+          <b>Вставь пропущенное</b>
+          <span>Во фразе спрятано слово, три варианта. Предлоги и сочетаемость — где ошибаются чаще всего.</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="menu hide" id="over">
+      <h2 id="overTitle">Время вышло</h2>
+      <div class="res">
+        <div><b id="rPts">0</b><span>очков</span></div>
+        <div><b id="rStreak">0</b><span>лучшая серия</span></div>
+        <div><b id="rAcc">0%</b><span>точность</span></div>
+      </div>
+      <button class="btn" id="again">Ещё раз</button>
+      <button class="btn quiet" id="toMenu">В меню</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="words.js?v=c350045e"></script>
+<script src="speakout-words.js?v=3094c556"></script>
+<script src="course-words.js?v=442908de"></script>
+<script src="sm-auth.js?v=1a8f02f9"></script>
+<script src="sm-play.js?v=dd356834"></script>
+<script>
+/* ===========================================================================
+   Игры для подростков и взрослых. Отличие от детской версии не в перекраске:
+   там вопрос «какая картинка», здесь — порядок слов, сочетаемость и слух.
+   Персонажа нет намеренно: отвечает сам интерфейс.
+   =========================================================================== */
+
+var ROUND=60;
+var csel=document.getElementById("courseSel"), sel=document.getElementById("unitSel"),
+    cntEl=document.getElementById("cnt"), playEl=document.getElementById("play"),
+    noteEl=document.getElementById("note"), menuEl=document.getElementById("menu"),
+    overEl=document.getElementById("over"), hud=document.getElementById("hud"),
+    barWrap=document.getElementById("barWrap"), bar=document.getElementById("bar"),
+    secsEl=document.getElementById("secs"), ptsEl=document.getElementById("pts"),
+    streakEl=document.getElementById("streak"), streakPill=document.getElementById("streakPill"),
+    leadEl=document.getElementById("lead");
+
+var ВСЕ=[], ФРАЗЫ=[], СЛОВА=[], mode="order",
+    pts=0, streak=0, bestStreak=0, задано=0, верно=0,
+    left=ROUND, tick=null, playing=false, locked=false, want=null;
+
+function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function shuffle(a){ return a.slice().sort(function(){ return Math.random()-.5; }); }
+
+/* колода: слово не повторится, пока не выйдут остальные */
+var DECKS={};
+function deck(key,list){
+  if(!list||!list.length) return null;
+  var d=DECKS[key];
+  if(!d||d.size!==list.length){ d=DECKS[key]={size:list.length,left:[],last:null}; }
+  if(!d.left.length) d.left=shuffle(list);
+  var w=d.left.pop();
+  if(list.length>1 && w===d.last && d.left.length){ var a=d.left.pop(); d.left.push(w); w=a; }
+  d.last=w; return w;
+}
+
+/* ---------- курс и юнит ---------- */
+function fillCourses(){
+  csel.innerHTML="";
+  (window.SM_COURSES||[]).forEach(function(c){
+    if(c.id==="own" && !(window.SM_MY_WORDS||[]).length) return;
+    var o=document.createElement("option");
+    o.value=c.id; o.textContent=(c.emoji||"📘")+" "+c.title;
+    csel.appendChild(o);
+  });
+  var q=new URLSearchParams(location.search).get("course");
+  var cur=q || (window.SM_COURSE && SM_COURSE.id);
+  if(cur && [].some.call(csel.options,function(o){ return o.value===cur; })) csel.value=cur;
+  if(q && window.SM_useCourse) SM_useCourse(q);
+}
+csel.onchange=function(){
+  if(window.SM_useCourse) SM_useCourse(csel.value);
+  try{ localStorage.setItem("sm-course", csel.value); }catch(e){}
+  fillUnits(); toMenu();
+};
+
+function списокЮнитов(){
+  sel.innerHTML="";
+  (window.SM_UNITS||[]).forEach(function(u){
+    var o=document.createElement("option");
+    o.value=u.id; o.textContent=(u.emoji||"📘")+" "+u.title;
+    sel.appendChild(o);
+  });
+}
+function fillUnits(){
+  var prev=sel.value;
+  списокЮнитов();
+  var qs=new URLSearchParams(location.search);
+  var q=qs.get("unit")||qs.get("u");
+  /* ссылка может вести в юнит другого учебника — переключаем курс */
+  if(q && !(window.SM_UNITS||[]).some(function(u){ return u.id===q; }) && window.SM_courseOfUnit){
+    var slug=SM_courseOfUnit(q);
+    if(slug && window.SM_useCourse){
+      SM_useCourse(slug);
+      try{ localStorage.setItem("sm-course", slug); }catch(e){}
+      if([].some.call(csel.options,function(o){ return o.value===slug; })) csel.value=slug;
+      списокЮнитов();
+    }
+  }
+  var есть=function(v){ return v && [].some.call(sel.options,function(o){ return o.value===v; }); };
+  var want = есть(q) ? q : (есть(prev) ? prev : null);
+  if(want) sel.value=want;
+  loadWords();
+}
+sel.onchange=function(){ loadWords(); toMenu(); };
+
+function loadWords(){
+  ВСЕ=(window.SMP ? SMP.words(sel.value) : []).filter(function(w){ return w.en && w.ru; });
+  /* Фразы — то, что детские игры выбрасывают: как раз здесь они и нужны. */
+  ФРАЗЫ=ВСЕ.filter(function(w){ return w.en.trim().split(/\s+/).length>=3; });
+  СЛОВА=ВСЕ.filter(function(w){ return w.en.trim().split(/\s+/).length<=2; });
+  DECKS={};
+  cntEl.textContent="слов "+СЛОВА.length+" · фраз "+ФРАЗЫ.length;
+  проверитьДоступность();
+}
+
+/* Честно гасим то, для чего в юните не хватает материала, вместо того чтобы
+   запускать игру и показывать пустой экран. */
+function проверитьДоступность(){
+  var хватает={
+    order: ФРАЗЫ.length>=3,
+    dictation: ВСЕ.length>=4,
+    odd: СЛОВА.length>=3 && другиеЮниты().length>=1,
+    gap: ФРАЗЫ.length>=3
+  };
+  document.querySelectorAll(".card").forEach(function(b){
+    var ok=хватает[b.dataset.g];
+    b.disabled=!ok; b.style.opacity=ok?"":".45"; b.style.cursor=ok?"":"default";
+  });
+  var сколько=Object.keys(хватает).filter(function(k){ return хватает[k]; }).length;
+  leadEl.textContent = сколько
+    ? "Здесь тренируют не картинки, а язык: порядок слов, сочетаемость и слух. Материал берётся из юнита, выбранного сверху."
+    : "В этом юните слишком мало материала для этих игр — выбери другой.";
+}
+
+function другиеЮниты(){
+  return (window.SM_UNITS||[]).filter(function(u){ return u.id!==sel.value; });
+}
+
+/* ---------- общий раунд ---------- */
+function setClock(){
+  secsEl.textContent=Math.max(0,Math.ceil(left));
+  bar.style.width=Math.max(0,Math.min(100,left/ROUND*100))+"%";
+  barWrap.classList.toggle("warn", left<=12);
+}
+function start(which){
+  mode=which; pts=0; streak=0; bestStreak=0; задано=0; верно=0;
+  left=ROUND; playing=true; locked=false;
+  ptsEl.textContent=0; streakEl.textContent=0; streakPill.classList.remove("hot");
+  menuEl.classList.add("hide"); overEl.classList.add("hide"); playEl.classList.remove("hide");
+  noteEl.textContent=""; noteEl.className="note";
+  setClock(); deal();
+  clearInterval(tick);
+  tick=setInterval(function(){
+    if(!playing) return;
+    left-=.1;
+    if(left<=0){ left=0; setClock(); finish(); return; }
+    setClock();
+  },100);
+}
+function finish(){
+  playing=false; clearInterval(tick);
+  playEl.classList.add("hide"); playEl.innerHTML=""; noteEl.textContent="";
+  document.getElementById("rPts").textContent=pts;
+  document.getElementById("rStreak").textContent=bestStreak;
+  document.getElementById("rAcc").textContent=(задано?Math.round(верно/задано*100):0)+"%";
+  document.getElementById("overTitle").textContent = верно && верно===задано ? "Без единой ошибки" : "Время вышло";
+  overEl.classList.remove("hide");
+  try{ SMP.sfx("lose"); }catch(e){}
+}
+function toMenu(){
+  playing=false; clearInterval(tick);
+  playEl.classList.add("hide"); playEl.innerHTML="";
+  overEl.classList.add("hide"); menuEl.classList.remove("hide");
+  noteEl.textContent=""; noteEl.className="note";
+  setClock();
+}
+
+function сохранить(ok){
+  if(window.SM && SM.isCloud){
+    try{ SM.saveAttempt({course:sel.value, unit_id:sel.value, ex_type:"game-"+mode, correct:ok}); }catch(e){}
+  }
+}
+function верный(текст, подпись){
+  задано++; верно++;
+  streak++; if(streak>bestStreak) bestStreak=streak;
+  var mult=streak>=3?2:1;
+  pts+=mult; ptsEl.textContent=pts; streakEl.textContent=streak;
+  streakPill.classList.toggle("hot", streak>=3);
+  left=Math.min(ROUND, left+4); setClock();
+  noteEl.className="note ok";
+  noteEl.innerHTML=(текст||"Верно")+(подпись?"<small>"+подпись+"</small>":"");
+  try{ SMP.sfx("ok"); }catch(e){}
+  сохранить(true);
+  locked=true;
+  setTimeout(function(){ if(playing) deal(); }, 1100);
+}
+function неверный(текст, подпись){
+  задано++;
+  streak=0; streakEl.textContent=0; streakPill.classList.remove("hot");
+  noteEl.className="note bad";
+  noteEl.innerHTML=(текст||"Не то")+(подпись?"<small>"+подпись+"</small>":"");
+  try{ SMP.sfx("no"); }catch(e){}
+  сохранить(false);
+}
+function сказать(t){ try{ SMP.say(t); }catch(e){} }
+
+/* ---------- 1. Собери фразу ---------- */
+function dealOrder(){
+  var it=deck("order:"+sel.value, ФРАЗЫ);
+  want=it; var слова=it.en.trim().split(/\s+/);
+  var порядок=0;
+  playEl.innerHTML=
+    '<div class="ask">Собери фразу</div>'+
+    '<div class="ru">'+esc(it.ru)+'</div>'+
+    '<div class="line" id="line"></div>'+
+    '<div class="chips" id="pool"></div>';
+  var line=document.getElementById("line"), pool=document.getElementById("pool");
+  shuffle(слова.map(function(w,i){ return {w:w,i:i}; })).forEach(function(x){
+    var b=document.createElement("button");
+    b.className="chip"; b.textContent=x.w;
+    b.onclick=function(){
+      if(locked) return;
+      if(x.w===слова[порядок]){
+        b.classList.add("used");
+        var c=document.createElement("span");
+        c.className="chip"; c.textContent=x.w; line.appendChild(c);
+        порядок++;
+        if(порядок>=слова.length){ сказать(it.en); верный("Верно", esc(it.en)); }
+      } else {
+        b.classList.add("no");
+        setTimeout(function(){ b.classList.remove("no"); },500);
+        неверный("Другое слово идёт раньше");
+      }
+    };
+    pool.appendChild(b);
+  });
+}
+
+/* ---------- 2. Услышь и запиши ---------- */
+function расстояние(a,b){                 /* сколько правок отличают строки */
+  a=a.toLowerCase().replace(/[^a-z' ]/g,"").trim();
+  b=b.toLowerCase().replace(/[^a-z' ]/g,"").trim();
+  var m=a.length, n=b.length, d=[];
+  for(var i=0;i<=m;i++){ d[i]=[i]; }
+  for(var j=0;j<=n;j++){ d[0][j]=j; }
+  for(i=1;i<=m;i++) for(j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function dealDictation(){
+  var it=deck("dict:"+sel.value, ВСЕ);
+  want=it;
+  playEl.innerHTML=
+    '<div class="ask">Услышь и запиши</div>'+
+    '<div class="ru">'+esc(it.ru)+'<small>перевод дан, чтобы не гадать по звуку вслепую</small></div>'+
+    '<div class="typed">'+
+      '<button class="btn quiet" id="again2">🔊 Ещё раз</button>'+
+      '<input type="text" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="напиши по-английски">'+
+      '<button class="btn" id="chk">Проверить</button>'+
+    '</div>';
+  var inp=document.getElementById("inp");
+  document.getElementById("again2").onclick=function(){ сказать(it.en); inp.focus(); };
+  document.getElementById("chk").onclick=проверить;
+  inp.onkeydown=function(e){ if(e.key==="Enter") проверить(); };
+  setTimeout(function(){ сказать(it.en); inp.focus(); },200);
+
+  function проверить(){
+    if(locked) return;
+    var d=расстояние(inp.value, it.en);
+    /* одна опечатка на длинном слове — не повод считать ошибкой */
+    if(d===0) верный("Верно", esc(it.en));
+    else if(d<=1 && it.en.length>=5) верный("Почти точно, засчитано", esc(it.en));
+    else неверный("Не совпало", "правильно: "+esc(it.en));
+  }
+}
+
+/* ---------- 3. Найди лишнее ----------
+   Три слова из текущего юнита, одно из другого: юнит здесь и есть тема,
+   поэтому «лишнее» определено честно, а не на глазок. */
+function dealOdd(){
+  var свои=shuffle(СЛОВА).slice(0,3);
+  var чужойЮнит=deck("oddU:"+sel.value, другиеЮниты());
+  var чужие=(чужойЮнит && чужойЮнит.words || []).filter(function(w){
+    return w.en && w.en.trim().split(/\s+/).length<=2 &&
+           !свои.some(function(s){ return s.en===w.en; });
+  });
+  if(свои.length<3 || !чужие.length){ deal(); return; }
+  var лишнее=чужие[Math.floor(Math.random()*чужие.length)];
+  want=лишнее;
+
+  playEl.innerHTML=
+    '<div class="ask">Найди лишнее</div>'+
+    '<div class="ru">Три слова из темы «'+esc((window.SM_UNITS.find(function(u){return u.id===sel.value;})||{}).title||"")+'», одно из другой'+
+    '<small>нажми чужое</small></div>'+
+    '<div class="opts" id="pool"></div>';
+  var pool=document.getElementById("pool");
+  shuffle(свои.concat([лишнее])).forEach(function(w,i){
+    var b=document.createElement("button");
+    b.className="opt c"+(i+1); b.textContent=w.en;
+    b.onclick=function(){
+      if(locked) return;
+      if(w.en===лишнее.en){
+        b.className="opt yes";
+        [].forEach.call(pool.children,function(x){ if(x!==b) x.classList.add("dim"); });
+        верный("Верно", esc(лишнее.en)+" — из темы «"+esc(чужойЮнит.title)+"»");
+      } else {
+        b.className="opt no";
+        setTimeout(function(){ b.className="opt c"+(i+1); },600);
+        неверный("«"+esc(w.en)+"» из этой же темы");
+      }
+    };
+    pool.appendChild(b);
+  });
+}
+
+/* ---------- 4. Вставь пропущенное ---------- */
+function dealGap(){
+  var it=deck("gap:"+sel.value, ФРАЗЫ);
+  want=it;
+  var слова=it.en.trim().split(/\s+/);
+  var i=Math.floor(Math.random()*слова.length);
+  var нужное=слова[i];
+
+  /* Отвлекающие берём из других фраз юнита, той же длины позиции —
+     тогда выбор идёт по смыслу, а не по длине слова. */
+  var запас=[];
+  ФРАЗЫ.concat(СЛОВА).forEach(function(w){
+    w.en.trim().split(/\s+/).forEach(function(x){
+      if(x.toLowerCase()!==нужное.toLowerCase() && запас.indexOf(x)<0) запас.push(x);
+    });
+  });
+  var лишние=shuffle(запас).slice(0,2);
+  if(лишние.length<2){ deal(); return; }
+
+  playEl.innerHTML=
+    '<div class="ask">Вставь пропущенное</div>'+
+    '<div class="gapline">'+ слова.map(function(w,k){
+        return k===i ? '<u id="hole">&nbsp;</u>' : esc(w);
+      }).join(" ") +'</div>'+
+    '<div class="ru" style="font-size:19px;color:var(--n600)">'+esc(it.ru)+'</div>'+
+    '<div class="opts" id="pool"></div>';
+  var pool=document.getElementById("pool");
+  shuffle(лишние.concat([нужное])).forEach(function(w,k){
+    var b=document.createElement("button");
+    b.className="opt c"+(k+1); b.textContent=w;
+    b.onclick=function(){
+      if(locked) return;
+      if(w===нужное){
+        b.className="opt yes";
+        [].forEach.call(pool.children,function(x){ if(x!==b) x.classList.add("dim"); });
+        var h=document.getElementById("hole"); if(h) h.textContent=w;
+        сказать(it.en);
+        верный("Верно", esc(it.en));
+      } else {
+        b.className="opt no";
+        setTimeout(function(){ b.className="opt c"+(k+1); },600);
+        неверный("Не подходит по смыслу");
+      }
+    };
+    pool.appendChild(b);
+  });
+}
+
+function deal(){
+  locked=false;
+  noteEl.textContent=""; noteEl.className="note";
+  if(mode==="order") dealOrder();
+  else if(mode==="dictation") dealDictation();
+  else if(mode==="odd") dealOdd();
+  else dealGap();
+}
+
+document.querySelectorAll(".card").forEach(function(b){
+  b.onclick=function(){ if(!b.disabled) start(b.dataset.g); };
+});
+document.getElementById("again").onclick=function(){ start(mode); };
+document.getElementById("toMenu").onclick=toMenu;
+setClock();
+
+fillCourses(); fillUnits();
+if(window.SM_ready && SM_ready.then) SM_ready.then(function(){ fillCourses(); fillUnits(); }).catch(function(){});
+document.addEventListener("sm-course-changed", function(){ fillCourses(); fillUnits(); });
+</script>
+</body>
+</html>
