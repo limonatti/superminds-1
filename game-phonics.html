@@ -559,10 +559,29 @@ function pos(el){
 }
 function shuffle(a){ return a.slice().sort(function(){ return Math.random()-.5; }); }
 
+/* ---------- колода вместо кубика ----------
+   Math.random выдавал по три «rain» подряд: на буквах, где предметов мало,
+   это особенно заметно. Теперь каждый список — перемешанная колода: слово
+   не повторится, пока не выйдут все остальные. Плюс отдельная защита от
+   повтора на стыке колод, когда последняя карта совпала с первой новой. */
+var DECKS = {};
+function deck(key, list){
+  if(!list || !list.length) return null;
+  var d = DECKS[key];
+  if(!d || d.size !== list.length){ d = DECKS[key] = {size:list.length, left:[], last:null}; }
+  if(!d.left.length) d.left = shuffle(list);
+  var w = d.left.pop();
+  if(list.length > 1 && w === d.last && d.left.length){
+    var alt = d.left.pop(); d.left.push(w); w = alt;
+  }
+  d.last = w;
+  return w;
+}
+
 /* ---------- игра 1: первая буква ---------- */
 function dealFirst(){
-  var L=LETTERS[Math.floor(Math.random()*LETTERS.length)];
-  want=byLetter[L][Math.floor(Math.random()*byLetter[L].length)];
+  var L=deck("ltr", LETTERS);
+  want=deck("obj:"+L, byLetter[L]);
   quest.innerHTML='<span class="cap">Что начинается на эту букву?</span>' +
     '<img class="letter" src="game/tile/'+L+'.png" alt="">';
   var others=shuffle(OBJ.filter(function(o){ return o[0]!==L && !DIGRAPH[o]; })).slice(0,2);
@@ -588,7 +607,7 @@ function dealFirst(){
 function dealWhich(){
   want=null;
   var pool=OBJ.filter(function(o){ return !DIGRAPH[o]; });
-  var o=pool[Math.floor(Math.random()*pool.length)];
+  var o=deck("which", pool);
   var L=o[0];
   quest.innerHTML='<span class="cap">С какой буквы начинается?</span>' +
     '<img class="bigword" src="game/obj/'+o+'.png" alt="">';
@@ -618,7 +637,7 @@ function dealWhich(){
 var buildWord="", buildStep=0;
 
 function dealBuild(){
-  var it = BLEND[Math.floor(Math.random()*BLEND.length)];
+  var it = deck("build", BLEND);
   buildWord = it.w; buildStep = 0; want = it.w;
 
   quest.innerHTML =
@@ -697,8 +716,8 @@ function clearCatch(){
    что наступит раньше. Иначе ребёнок всю игру ловит одну и ту же. */
 function newLetter(announce){
   var prev = catchLetter;
-  do { catchLetter = CATCH_LETTERS[Math.floor(Math.random()*CATCH_LETTERS.length)]; }
-  while (CATCH_LETTERS.length > 1 && catchLetter === prev);
+  catchLetter = deck("catchL", CATCH_LETTERS);
+  if (CATCH_LETTERS.length > 1 && catchLetter === prev) catchLetter = deck("catchL", CATCH_LETTERS);
   caught = 0;
   /* Предмет получает признак «нужный» при рождении. При смене буквы старые
      остаются с чужим признаком — ребёнок читает новую букву, а едут слова
@@ -746,9 +765,10 @@ function spawn(){
      Без этой гарантии ребёнок слышал букву, а ловить было нечего. */
   var hasOk = flyers.some(function(f){ return f.ok && !f.dead; });
   var wantOne = hasOk ? (Math.random() < .38 && byLetter[catchLetter].length) : true;
-  var pool = wantOne ? byLetter[catchLetter]
-                     : OBJ.filter(function(o){ return o[0]!==catchLetter && !DIGRAPH[o]; });
-  var o = pool[Math.floor(Math.random()*pool.length)];
+  var o = wantOne
+    ? deck("catch:"+catchLetter, byLetter[catchLetter])
+    : deck("catchX:"+catchLetter,
+           OBJ.filter(function(x){ return x[0]!==catchLetter && !DIGRAPH[x]; }));
 
   var el=document.createElement("div");
   el.className="fly";
@@ -849,7 +869,7 @@ var PAIRS = [["cap","cape"],["tap","tape"],["can","cane"],
              ["kit","kite"],["pin","pine"],["rip","ripe"],
              ["cub","cube"],["tub","tube"]];
 
-function vowPick(){ return VOW[Math.floor(Math.random()*VOW.length)]; }
+function vowPick(){ return deck("vow", VOW); }
 function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
 
 /* написание слова: гласная выделена цветом */
@@ -873,7 +893,7 @@ function clearDrag(){
 function dealSort(){
   clearDrag();
   var V=vowPick(), isLong=Math.random()<.5;
-  var w=pick(isLong?V.lo:V.sh);
+  var w=deck("v:"+V.v+(isLong?"L":"S"), isLong?V.lo:V.sh);
   want=w; dragData={w:w, long:isLong, V:V};
 
   quest.innerHTML='<span class="cap">Отнеси слово в нужную корзину</span>';
@@ -970,7 +990,8 @@ var memoOpen=[], memoLeft=0, memoBusy=false, memoBoard=0;
 var MEMO_BOARDS=3;
 
 function dealMemo(){
-  var pool=shuffle(OBJ.filter(function(o){ return o.length<=7 && !NICE[o]; })).slice(0,4);
+  var годные=OBJ.filter(function(o){ return o.length<=7 && !NICE[o]; });
+  var pool=[]; while(pool.length<4){ var w=deck("memo", годные); if(pool.indexOf(w)<0) pool.push(w); }
   memoOpen=[]; memoLeft=4; memoBusy=false; memoBoard++;
   quest.innerHTML='<span class="cap">Открой картинку и её слово</span>';
   secsEl.textContent=memoBoard+" / "+MEMO_BOARDS;
@@ -1050,7 +1071,7 @@ function dealGap(){
   var V=vowPick(), isLong=Math.random()<.5;
   var pool=(isLong?V.lo:V.sh).filter(function(w){ return w.indexOf(V.v)>-1; });
   if(!pool.length){ dealGap(); return; }
-  var w=pick(pool), at=w.indexOf(V.v);
+  var w=deck("gap:"+V.v+(isLong?"L":"S"), pool), at=w.indexOf(V.v);
   want=w;
 
   var letters=w.split("").map(function(ch,i){
@@ -1103,7 +1124,7 @@ function dealGap(){
 
 /* ---------- игра 6: слушай и выбирай ---------- */
 function dealPair(){
-  var p=pick(PAIRS), idx=Math.random()<.5?0:1;
+  var p=deck("pairs", PAIRS), idx=Math.random()<.5?0:1;
   want=p[idx];
 
   quest.innerHTML='<span class="cap">Какое слово прозвучало?</span>'+
@@ -1134,7 +1155,7 @@ function dealPair(){
    Картинка одна, написаний два. Ребёнок не угадывает на слух, а читает:
    хвостовая e не читается сама, но заставляет гласную назвать своё имя. */
 function dealMagic(){
-  var p=pick(PAIRS), idx=Math.random()<.5?0:1;
+  var p=deck("pairsM", PAIRS), idx=Math.random()<.5?0:1;
   var w=p[idx], v=p[0][1];       /* гласная — вторая буква короткого слова */
   want=w;
 
@@ -1251,8 +1272,8 @@ function spawnPop(){
   var hasOk = live.some(function(z){ return z.ok; });
   var force = !hasOk;
   var r=Math.random();
-  if(force || r<.5){ w=pick(t.list); ok=true; }
-  else if(r<.7){ w=pick(t.long ? t.V.sh : t.V.lo); ok=false; }   /* та же буква, другая длина */
+  if(force || r<.5){ w=deck("pop:"+t.v+(t.long?"L":"S"), t.list); ok=true; }
+  else if(r<.7){ w=deck("popX:"+t.v+(t.long?"S":"L"), t.long ? t.V.sh : t.V.lo); ok=false; }   /* та же буква, другая длина */
   else {
     var other=VOW.filter(function(x){ return x.v!==t.v; });
     var o=pick(other); w=pick(Math.random()<.5 ? o.sh : o.lo); ok=false;
