@@ -538,7 +538,9 @@ function good(card,x,y,word){
   if(word) voiceSay(nice(word),1.5,.9,120);
   voiceSay(mult>1?"Hooray! Amazing!":"Hooray!",1.7,1,900);
   speak(mult>1?("Серия "+streak+"! 🔥"):"Молодец!",1800);
-  setTimeout(function(){ if(playing) deal(); },1800);
+  /* через later, а не голым setTimeout: если ребёнок сразу уйдёт в меню и
+     возьмёт другую игру, отложенный переход выдал бы лишнее задание уже там */
+  later(function(){ if(playing) deal(); },1800);
 }
 function bad(card,msg,voice){
   streak=0; comboEl.classList.remove("on");
@@ -698,6 +700,16 @@ function newLetter(announce){
   do { catchLetter = CATCH_LETTERS[Math.floor(Math.random()*CATCH_LETTERS.length)]; }
   while (CATCH_LETTERS.length > 1 && catchLetter === prev);
   caught = 0;
+  /* Предмет получает признак «нужный» при рождении. При смене буквы старые
+     остаются с чужим признаком — ребёнок читает новую букву, а едут слова
+     от предыдущей. Поэтому ленту очищаем вместе с буквой. */
+  flyers.forEach(function(f){
+    f.dead=true;
+    f.el.animate([{opacity:1},{opacity:0}],{duration:240,fill:"forwards"});
+    (function(el){ setTimeout(function(){ el.remove(); },250); })(f.el);
+  });
+  flyers=[];
+
   quest.innerHTML='<span class="cap">Лови всё на букву</span>' +
     '<img class="letter" src="game/tile/'+catchLetter+'.png" alt="">';
   var img = quest.querySelector(".letter");
@@ -730,8 +742,10 @@ function dealCatch(){
 
 function spawn(){
   if(!playing || mode!=="catch") return;
-  /* примерно каждый третий — нужный, иначе ловить нечего или слишком легко */
-  var wantOne = Math.random() < .38 && byLetter[catchLetter].length;
+  /* Как и у шариков: на ленте всегда должен ехать хотя бы один нужный.
+     Без этой гарантии ребёнок слышал букву, а ловить было нечего. */
+  var hasOk = flyers.some(function(f){ return f.ok && !f.dead; });
+  var wantOne = hasOk ? (Math.random() < .38 && byLetter[catchLetter].length) : true;
   var pool = wantOne ? byLetter[catchLetter]
                      : OBJ.filter(function(o){ return o[0]!==catchLetter && !DIGRAPH[o]; });
   var o = pool[Math.floor(Math.random()*pool.length)];
