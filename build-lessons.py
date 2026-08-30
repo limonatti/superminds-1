@@ -55,6 +55,54 @@ EXTRA_CSS = (
     ".mitem.ok{background:#c8efc0;border-color:#27ae60}"
     ".mitem.bad{background:#ffc9c0;border-color:#c0392b}"
     ".wbhead{font:900 15px 'Fredoka',sans-serif;color:#7c2340;margin:22px 4px 8px}"
+    # построчный плеер
+    ".lcimg{width:100%;display:block;border-radius:18px;box-shadow:0 6px 0 #e3d3ba;margin-bottom:12px;aspect-ratio:3/2;object-fit:cover}"
+    ".pl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0 4px}"
+    ".plbtn{border:none;cursor:pointer;background:rgba(255,255,255,.18);color:#fff;"
+    "font:800 15px 'Nunito',sans-serif;min-width:40px;height:40px;border-radius:12px}"
+    ".plbtn:hover{background:rgba(255,255,255,.3)}"
+    ".plbtn.main{background:#e0952a;min-width:52px;font-size:17px}"
+    ".plbtn.wide{padding:0 14px;font-size:13px}"
+    ".plpos{font:800 13px 'Nunito',sans-serif;color:#ffd27a;margin-left:4px;font-variant-numeric:tabular-nums}"
+    ".plsp{display:inline-flex;align-items:center;gap:4px;font:800 12px 'Nunito',sans-serif;"
+    "color:rgba(255,255,255,.75);margin-left:auto}"
+    ".plrate{border:none;cursor:pointer;background:rgba(255,255,255,.18);color:#fff;"
+    "font:800 12px 'Nunito',sans-serif;padding:6px 9px;border-radius:9px}"
+    ".plrate.on{background:#e0952a}"
+    ".pllines{display:flex;flex-direction:column;gap:4px;margin-top:10px}"
+    ".pllines.hid{display:none}"
+    ".plline{display:flex;gap:9px;align-items:baseline;text-align:left;cursor:pointer;border:none;"
+    "background:rgba(255,255,255,.07);border-left:3px solid transparent;border-radius:10px;"
+    "padding:9px 12px;color:#fff;font:700 14px 'Nunito',sans-serif;line-height:1.5}"
+    ".plline:hover{background:rgba(255,255,255,.15)}"
+    ".plline.on{background:rgba(255,255,255,.22);border-left-color:#ffd27a}"
+    ".plwho{flex:none;font-weight:900;color:#ffd27a;font-size:12.5px;min-width:62px}"
+    "@media(max-width:520px){.plline{flex-direction:column;gap:2px}.plwho{min-width:0}"
+    ".plsp{margin-left:0;width:100%}}"
+    # вкладки «Урок» / «Рабочая тетрадь»
+    ".tabs{display:flex;gap:8px;margin:0 0 18px}"
+    ".tab{flex:1;border:2px solid #e3d3ba;background:#fff;color:#7c2340;cursor:pointer;"
+    "font:900 14.5px 'Nunito',sans-serif;padding:12px 16px;border-radius:14px;box-shadow:0 3px 0 #e3d3ba}"
+    ".tab.on{background:#7c2340;border-color:#7c2340;color:#fff;box-shadow:0 3px 0 #4d1527}"
+    ".pane{display:none}.pane.on{display:block}"
+    ".wbintro{background:#fff7ea;border:2px dashed #e0952a;border-radius:14px;padding:11px 16px;"
+    "font:800 13.5px 'Nunito',sans-serif;color:#5a4f47;margin-bottom:16px}"
+    # связный текст с пропусками
+    ".cloze .bank{background:#f6ede0;border-radius:10px;padding:9px 13px;margin-bottom:12px;"
+    "font-size:13.5px;font-weight:700;color:#5a4f47}"
+    ".clozetext{font-size:15.5px;line-height:2.5}"
+    ".cin{min-width:0;width:auto;padding:5px 9px;font-size:14px;margin:0 2px}"
+    # сортировка по группам
+    ".pool{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}"
+    ".ptoken{border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;"
+    "font:800 13.5px 'Nunito',sans-serif;padding:7px 12px;border-radius:10px}"
+    ".ptoken.sel{border-color:#7c2340;background:#fff;box-shadow:0 0 0 3px rgba(124,35,64,.15)}"
+    ".ptoken.ok{background:#c8efc0;border-color:#27ae60;cursor:default}"
+    ".ptoken.bad{background:#ffc9c0;border-color:#c0392b}"
+    ".sortcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}"
+    ".sortcol{background:#fdfaf0;border:2px solid #eee3d2;border-radius:12px;padding:9px}"
+    ".sorth{font:900 13px 'Nunito',sans-serif;color:#7c2340;margin-bottom:7px;text-align:center}"
+    ".sortdrop{min-height:64px;display:flex;flex-wrap:wrap;gap:5px;align-content:flex-start;cursor:pointer}"
 )
 
 
@@ -100,16 +148,26 @@ def html_blocks(blocks):
                 html += "  </div>\n"
             out.append(html)
         elif t == "listen":
-            out.append(sec + '  <div class="lc"><h3>%s</h3><p>%s</p>'
-                       '<button class="lbtn" id="%s_play">▶ Слушать</button>'
-                       '<button class="lbtn sec" id="%s_stop">⏹ Стоп</button>'
-                       '<button class="lbtn sec" id="%s_txt">📜 Показать текст</button>'
-                       '<div id="%s_sc" style="display:none;background:rgba(255,255,255,.1);'
-                       'border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;'
-                       'line-height:1.65">%s</div></div>\n'
+            img = ('<img class="lcimg" src="%s" alt="%s">' % (b["image"], b.get("image_alt", ""))
+                   if b.get("image") else "")
+            out.append(sec + img + '  <div class="lc"><h3>%s</h3><p>%s</p>\n'
+                       '    <div class="pl">\n'
+                       '      <button class="plbtn main" id="%s_play">▶</button>\n'
+                       '      <button class="plbtn" id="%s_prev" title="Предыдущая реплика">⏮</button>\n'
+                       '      <button class="plbtn" id="%s_rep" title="Повторить эту реплику">↻</button>\n'
+                       '      <button class="plbtn" id="%s_next" title="Следующая реплика">⏭</button>\n'
+                       '      <span class="plpos" id="%s_pos">— / —</span>\n'
+                       '      <span class="plsp">скорость'
+                       '<button class="plrate" data-r="0.7">0.7×</button>'
+                       '<button class="plrate on" data-r="0.85">0.85×</button>'
+                       '<button class="plrate" data-r="1">1×</button></span>\n'
+                       '      <button class="plbtn wide" id="%s_txt">📜 Текст</button>\n'
+                       '    </div>\n'
+                       '    <div class="pllines" id="%s_lines"></div>\n'
+                       '  </div>\n'
                        '  <div id="%s" style="margin-top:14px"></div>\n'
-                       % (b.get("h3", ""), b.get("intro", "Послушай и ответь на вопросы."),
-                          bid, bid, bid, bid, b.get("script_html", ""), bid))
+                       % (b.get("h3", ""), b.get("intro", "Нажми ▶ или кликни на любую реплику, чтобы слушать с неё."),
+                          bid, bid, bid, bid, bid, bid, bid, bid))
         elif t == "read":
             out.append(sec + '  <div class="read"><h3>%s</h3>%s</div>\n'
                        '  <div id="%s" style="margin-top:14px"></div>\n'
@@ -119,6 +177,14 @@ def html_blocks(blocks):
         elif t == "note":
             out.append(sec + '  <div class="card">%s</div>\n' % b.get("html", ""))
         elif t == "writing":
+            out.append(sec + '  <div class="hw">%s</div>\n' % b.get("html", ""))
+        elif t == "cloze":
+            out.append(sec + (('  <div class="wbband">%s</div>\n' % note) if note else "")
+                       + '  <div class="clozebox" id="%s"></div>\n' % bid)
+        elif t == "sort":
+            out.append(sec + (('  <div class="wbband">%s</div>\n' % note) if note else "")
+                       + '  <div id="%s"></div>\n' % bid)
+        elif t == "free":
             out.append(sec + '  <div class="hw">%s</div>\n' % b.get("html", ""))
     return "".join(out)
 
@@ -153,6 +219,12 @@ def js_blocks(blocks):
         elif t == "wb":
             js.append('SMrenderWB(%s,%s,%s,%s);'
                       % (J(bid), J(b.get("mc", [])), J(b.get("gap", [])), J(b.get("tf", []))))
+        elif t == "cloze":
+            js.append('SMrenderCloze(%s,%s,%s,%s);'
+                      % (J(bid), J(b["parts"]), J(b.get("bank", [])), J(b.get("sec", "cloze"))))
+        elif t == "sort":
+            js.append('SMrenderSort(%s,%s,%s,%s);'
+                      % (J(bid), J(b["groups"]), J(b["words"]), J(b.get("sec", "sort"))))
     js.append('var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;')
     return "\n".join(js)
 
@@ -183,12 +255,100 @@ function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
     var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
     var opts=shuffle([c[1]].concat(others));
     box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+/* Построчный плеер: клик по реплике — слушать с неё, шаг назад/вперёд,
+   повтор строки, скорость. Перемотки по секундам нет: речь синтезируется
+   браузером на лету, таймлайна у неё не существует. */
 function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  var box=SMel(id+"_lines"),pos=SMel(id+"_pos");
+  if(!box)return SMrenderMC(id,qs,sec);
+  var idx=-1,playing=false,rate=0.85,names={};
+  var order=[];script.forEach(function(l){if(order.indexOf(l[0])<0)order.push(l[0]);});
+  script.forEach(function(l,i){
+    var d=document.createElement("button");d.className="plline";d.dataset.i=i;
+    var who=l[2]||("Speaker "+(order.indexOf(l[0])+1));
+    d.innerHTML='<span class="plwho">'+who+'</span><span class="pltxt">'+l[1]+'</span>';
+    d.onclick=function(){play(i);};box.appendChild(d);});
+  var lines=box.querySelectorAll(".plline");
+  function mark(i){lines.forEach(function(x,k){x.classList.toggle("on",k===i);});
+    if(pos)pos.textContent=(i<0?"—":(i+1))+" / "+script.length;
+    if(i>=0&&lines[i])lines[i].scrollIntoView({block:"nearest"});}
+  function speak(i,then){
+    var l=script[i],u=new SpeechSynthesisUtterance(l[1]),st=speakerStyle(l[0]);
+    if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";
+    u.rate=rate*(st.rate||1);u.pitch=st.pitch||1;
+    u.onend=function(){if(then)then();};
+    speechSynthesis.speak(u);}
+  function play(i){speechSynthesis.cancel();idx=i;playing=true;setBtn();mark(idx);
+    (function step(){
+      if(!playing||idx>=script.length){playing=false;setBtn();mark(-1);return;}
+      var cur=idx;mark(cur);
+      speak(cur,function(){if(!playing||idx!==cur)return;idx=cur+1;
+        setTimeout(step,320);});})();}
+  function setBtn(){var p=SMel(id+"_play");if(p)p.textContent=playing?"⏸":"▶";}
+  var pb=SMel(id+"_play");
+  if(pb)pb.onclick=function(){
+    if(playing){playing=false;speechSynthesis.cancel();setBtn();}
+    else play(idx<0||idx>=script.length?0:idx);};
+  var pv=SMel(id+"_prev");if(pv)pv.onclick=function(){play(Math.max(0,(idx<0?0:idx)-1));};
+  var nx=SMel(id+"_next");if(nx)nx.onclick=function(){play(Math.min(script.length-1,(idx<0?-1:idx)+1));};
+  var rp=SMel(id+"_rep");if(rp)rp.onclick=function(){play(idx<0?0:idx);};
+  var tx=SMel(id+"_txt");if(tx)tx.onclick=function(){box.classList.toggle("hid");};
+  var wrap=box.parentNode;
+  wrap.querySelectorAll(".plrate").forEach(function(b){b.onclick=function(){
+    wrap.querySelectorAll(".plrate").forEach(function(x){x.classList.remove("on");});
+    b.classList.add("on");rate=parseFloat(b.dataset.r);
+    if(playing)play(idx<0?0:idx);};});
+  mark(-1);
   SMrenderMC(id,qs,sec);}
+/* Связный текст с пропусками: parts — куски текста, между ними поля.
+   Каждый пропуск: {a:["варианты"], hint:"подсказка в скобках"} */
+function SMrenderCloze(id,parts,bank,sec){var box=SMel(id);if(!box)return;
+  var gi=++_GI, wrap=document.createElement("div");wrap.className="card cloze";
+  if(bank&&bank.length){var bb=document.createElement("div");bb.className="bank";
+    bb.innerHTML='<b>Слова:</b> '+bank.join(" · ");wrap.appendChild(bb);}
+  var p=document.createElement("div");p.className="clozetext";
+  parts.forEach(function(seg,i){
+    if(typeof seg==="string"){p.appendChild(document.createTextNode(seg));return;}
+    tot++;
+    var inp=document.createElement("input");inp.className="gap-in cin";
+    inp.placeholder=seg.hint||"…";inp.size=Math.max(6,(seg.a[0]||"").length+2);
+    var done=false,logged=false;
+    function chk(){if(done)return;var raw=inp.value.trim();
+      var v=raw.toLowerCase().replace(/\s+/g," ").replace(/[’]/g,"'");
+      var ok=seg.a.some(function(x){return x.toLowerCase().replace(/[’]/g,"'")===v;});
+      if(!logged){logged=true;_log(sec,gi,seg.hint||("gap"+i),raw,ok);}
+      if(ok){inp.classList.remove("bad");inp.classList.add("ok");inp.disabled=true;done=true;bump();}
+      else{inp.classList.add("bad");inp.title="Подсказка: "+seg.a[0];}}
+    inp.addEventListener("blur",chk);
+    inp.addEventListener("keydown",function(e){if(e.key==="Enter")chk();});
+    p.appendChild(inp);});
+  wrap.appendChild(p);
+  var b=document.createElement("button");b.className="chk";b.textContent="Проверить всё";
+  b.onclick=function(){wrap.querySelectorAll(".cin").forEach(function(x){
+    if(!x.disabled){x.blur();var ev=new Event("blur");x.dispatchEvent(ev);}});};
+  wrap.appendChild(b);box.appendChild(wrap);}
+/* Сортировка слов по группам (например, по звуку) */
+function SMrenderSort(id,groups,words,sec){var box=SMel(id);if(!box)return;
+  var gi=++_GI, card=document.createElement("div");card.className="card";
+  var pool=document.createElement("div");pool.className="pool";
+  var cols=document.createElement("div");cols.className="sortcols";
+  var sel=null;
+  groups.forEach(function(g,gi2){
+    var c=document.createElement("div");c.className="sortcol";
+    c.innerHTML='<div class="sorth">'+g.label+'</div>';
+    var drop=document.createElement("div");drop.className="sortdrop";drop.dataset.g=gi2;
+    drop.onclick=function(){if(!sel)return;
+      var w=sel.textContent, ok=(g.words.indexOf(w)>=0);
+      _log(sec,gi,"sort:"+w,g.label,ok);
+      if(ok){sel.classList.add("ok");sel.disabled=true;drop.appendChild(sel);sel=null;bump();}
+      else{sel.classList.add("bad");var s2=sel;setTimeout(function(){s2.classList.remove("bad");},450);}};
+    c.appendChild(drop);cols.appendChild(c);});
+  shuffle(words).forEach(function(w){tot++;
+    var b=document.createElement("button");b.className="ptoken";b.textContent=w;
+    b.onclick=function(){if(b.disabled)return;
+      pool.querySelectorAll(".ptoken").forEach(function(x){x.classList.remove("sel");});
+      b.classList.add("sel");sel=b;};pool.appendChild(b);});
+  card.appendChild(pool);card.appendChild(cols);box.appendChild(card);}
 function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
   function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
   if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
@@ -220,7 +380,19 @@ def build_unit(course, unit, data, letters_all):
                        % (cls, course, unit, x.lower(), unit, x))
         nav.append("</div>")
 
-        body_html = html_blocks(L["blocks"])
+        lesson_blocks = L["blocks"]
+        wb_blocks = L.get("workbook", [])
+        if wb_blocks:
+            body_html = (
+                '  <div class="tabs">'
+                '<button class="tab on" data-p="lesson">📘 Урок</button>'
+                '<button class="tab" data-p="wb">📒 Рабочая тетрадь</button></div>\n'
+                '  <div class="pane on" id="pane-lesson">\n' + html_blocks(lesson_blocks) +
+                '  </div>\n  <div class="pane" id="pane-wb">\n'
+                '  <div class="wbintro">Задания к уроку %d%s. Реши здесь — результат увидит учитель.</div>\n'
+                % (unit, letter) + html_blocks(wb_blocks) + '  </div>\n')
+        else:
+            body_html = html_blocks(lesson_blocks)
         title = "%d%s · %s · %s · English with Asya" % (unit, letter, L.get("topic", role), data["title"])
         h = re.sub(r"<title>.*?</title>", "<title>%s</title>" % title, head, count=1, flags=re.S)
 
@@ -248,7 +420,15 @@ def build_unit(course, unit, data, letters_all):
         cut = eng.rfind("</script>")
         if cut < 0:
             raise SystemExit("не найден закрывающий </script> в движке")
-        eng = eng[:cut] + HELPERS + js_blocks(L["blocks"]) + "\n</script>" + eng[cut + len("</script>"):]
+        tabs_js = ("""
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
+  speechSynthesis.cancel();
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+  document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on');});
+  b.classList.add('on');document.getElementById('pane-'+b.dataset.p).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});};});""" if wb_blocks else "")
+        eng = (eng[:cut] + HELPERS + js_blocks(lesson_blocks + wb_blocks) + tabs_js
+               + "\n</script>" + eng[cut + len("</script>"):])
 
         out = "%s-u%d%s.html" % (course, unit, letter.lower())
         open(out, "w", encoding="utf-8").write(page + eng)
