@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img"
+     aria-label="Family tree: Rob and Ellie are married; their children are Sam, Joanna and Mark; Joanna is married to Andy and they have Lucy and Zak; Mark is married to Anna and they have Ben">
+  <style>
+    .card { stroke-width:2; }
+    .m    { fill:#e9f1fb; stroke:#8fb0d9; }
+    .f    { fill:#fdeef3; stroke:#d99ab0; }
+    .name { font:700 16px 'Nunito',system-ui,sans-serif; fill:#1c1310; text-anchor:middle; }
+    .gen  { font:800 11px 'Nunito',system-ui,sans-serif; fill:#a2937f; letter-spacing:.08em; }
+    .key  { font:700 12px 'Nunito',system-ui,sans-serif; fill:#a2937f; }
+    .line { stroke:#c9b79c; stroke-width:2.5; fill:none; stroke-linecap:round; }
+    .marr { stroke:#7c2340; stroke-width:2.5; fill:none; }
+    .hrt  { font:13px sans-serif; fill:#7c2340; text-anchor:middle; }
+  </style>
+
+  <text class="gen" x="14" y="52">ПОКОЛЕНИЕ 1</text>
+  <text class="gen" x="14" y="192">ПОКОЛЕНИЕ 2</text>
+  <text class="gen" x="14" y="332">ПОКОЛЕНИЕ 3</text>
+
+  <!-- ── поколение 1 ── -->
+  <path class="marr" d="M415 62 H 505"/>
+  <text class="hrt" x="460" y="57">♥</text>
+  <rect class="card m" x="325" y="40" width="90" height="44" rx="13"/>
+  <text class="name" x="370" y="69">Rob</text>
+  <rect class="card f" x="505" y="40" width="90" height="44" rx="13"/>
+  <text class="name" x="550" y="69">Ellie</text>
+
+  <!-- спуск к троим детям -->
+  <path class="line" d="M460 66 V 112"/>
+  <path class="line" d="M150 112 H 750"/>
+  <path class="line" d="M150 112 V 150 M470 112 V 150 M750 112 V 150"/>
+
+  <!-- ── поколение 2 ── -->
+  <rect class="card m" x="105" y="150" width="90" height="44" rx="13"/>
+  <text class="name" x="150" y="179">Sam</text>
+
+  <path class="marr" d="M515 172 H 565"/>
+  <text class="hrt" x="540" y="167">♥</text>
+  <rect class="card f" x="425" y="150" width="90" height="44" rx="13"/>
+  <text class="name" x="470" y="179">Joanna</text>
+  <rect class="card m" x="565" y="150" width="90" height="44" rx="13"/>
+  <text class="name" x="610" y="179">Andy</text>
+
+  <path class="marr" d="M795 172 H 845"/>
+  <text class="hrt" x="820" y="167">♥</text>
+  <rect class="card m" x="705" y="150" width="90" height="44" rx="13"/>
+  <text class="name" x="750" y="179">Mark</text>
+  <rect class="card f" x="845" y="150" width="90" height="44" rx="13"/>
+  <text class="name" x="890" y="179">Anna</text>
+
+  <!-- дети Joanna и Andy -->
+  <path class="line" d="M540 176 V 250"/>
+  <path class="line" d="M370 250 H 640"/>
+  <path class="line" d="M370 250 V 290 M640 250 V 290"/>
+  <rect class="card f" x="325" y="290" width="90" height="44" rx="13"/>
+  <text class="name" x="370" y="319">Lucy</text>
+  <rect class="card m" x="595" y="290" width="90" height="44" rx="13"/>
+  <text class="name" x="640" y="319">Zak</text>
+
+  <!-- ребёнок Mark и Anna -->
+  <path class="line" d="M820 176 V 290"/>
+  <rect class="card m" x="775" y="290" width="90" height="44" rx="13"/>
+  <text class="name" x="820" y="319">Ben</text>
+
+  <!-- легенда -->
+  <path class="marr" d="M20 388 H 44"/>
+  <text class="key" x="52" y="392">в браке</text>
+  <path class="line" d="M132 378 V 398"/>
+  <text class="key" x="142" y="392">дети</text>
+  <rect class="card m" x="205" y="380" width="18" height="14" rx="4"/>
+  <text class="key" x="229" y="392">мужчина</text>
+  <rect class="card f" x="305" y="380" width="18" height="14" rx="4"/>
+  <text class="key" x="329" y="392">женщина</text>
+</svg>

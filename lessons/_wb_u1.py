@@ -50,12 +50,10 @@ WB["A"] = [
    {"q":"Выбери верное:","o":["That is my wife’s sister’s car.","That is my wifes’ sister’s car.","That is my wife’s sisters car."],"a":0},
    {"q":"Выбери верное:","o":["My nephew’s mother is my brother’s wife.","My nephews’ mother is my brothers wife.","My nephew mother is my brother wife."],"a":0}]},
 
- {"type":"note","title":"5 · Семейное древо",
-  "html":"<b>Поколение 1:</b> Rob и Ellie — женаты.<br>"
-         "<b>Поколение 2:</b> их дети — Sam, Joanna и Mark. Joanna замужем за Andy. "
-         "Mark женат на Anna.<br>"
-         "<b>Поколение 3:</b> у Joanna и Andy — Lucy и Zak. У Mark и Anna — Ben.<br><br>"
-         "Смотри на древо и отвечай в упражнении ниже."},
+ {"type":"image","title":"5 · Семейное древо",
+  "src":"img/lessons/u1a-family-tree.svg",
+  "alt":"Семейное древо: Роб и Элли, их дети Сэм, Джоанна и Марк, внуки Люси, Зак и Бен",
+  "caption":"Смотри на древо и отвечай в упражнении ниже."},
 
  {"type":"gap","title":"6 · Кто кому кто по древу","sec":"wb-voc",
   "items":[
