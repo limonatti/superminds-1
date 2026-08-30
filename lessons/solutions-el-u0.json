@@ -758,7 +758,7 @@
           "type": "listen",
           "title": "🎧 Диалог",
           "h3": "Is that your dog?",
-          "intro": "Послушай и найди все формы be и have got.",
+          "intro": "Посмотри на фотографию, потом слушай. Кликни на реплику, чтобы слушать с неё.",
           "script": [
             [
               "m",
@@ -767,7 +767,7 @@
             ],
             [
               "f",
-              "No, I haven’t. But I’ve got a sister. Here’s a photo of us — I’m on the right.",
+              "No, I haven’t. But I’ve got a sister. Here’s a photo of us — I’m on the left.",
               "Joanna"
             ],
             [
@@ -813,6 +813,15 @@
           ],
           "q": [
             {
+              "q": "Look at the photo. Which girl has got brown eyes?",
+              "o": [
+                "the girl on the left",
+                "the girl on the right",
+                "both of them"
+              ],
+              "a": 0
+            },
+            {
               "q": "Has Joanna got a brother?",
               "o": [
                 "no",
@@ -857,7 +866,9 @@
               ],
               "a": 0
             }
-          ]
+          ],
+          "image": "img/lessons/u0b-twins.jpg",
+          "image_alt": "Две сестры-близнеца на диване, между ними старый терьер Рози"
         },
         {
           "type": "rules",
