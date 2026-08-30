@@ -111,56 +111,7 @@
   <div id="b11"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1C</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderMC("b2",[{"q": "1  school · too · look · cool", "o": ["look", "school", "too"], "a": 0}, {"q": "2  grandson · class · father · grandma", "o": ["grandson", "class", "father"], "a": 0}, {"q": "3  wife · China · Italy · like", "o": ["Italy", "wife", "like"], "a": 0}, {"q": "4  go · son · photo · hello", "o": ["son", "go", "photo"], "a": 0}, {"q": "5  eat · meat · seat · great", "o": ["great", "meat", "seat"], "a": 0}, {"q": "6  university · uncle · mum · Hungary", "o": ["university", "uncle", "mum"], "a": 0}],"sounds");
-SMrenderPron("b3",["school", "look", "father", "grandson", "wife", "Italy", "go", "son", "great", "meat", "university", "uncle"]);
-SMrenderPron("b5",["men", "man", "cap", "cup", "far", "for", "wet", "wait", "live", "leave", "match", "March"]);
-SMrenderMC("b6",[{"q": "Three ___ are waiting outside.", "o": ["men", "man"], "a": 0}, {"q": "Can I have a ___ of tea?", "o": ["cup", "cap"], "a": 0}, {"q": "We ___ in a small village.", "o": ["live", "leave"], "a": 0}, {"q": "This present is ___ you.", "o": ["for", "far"], "a": 0}, {"q": "___ a minute, please!", "o": ["Wait", "Wet"], "a": 0}, {"q": "My birthday is in ___ .", "o": ["March", "match"], "a": 0}],"sounds");
-SMrenderWords("b7",[["do the washing", "стирать"], ["do the ironing", "гладить"], ["load the dishwasher", "загружать посудомойку"], ["set the table", "накрывать на стол"], ["clear the table", "убирать со стола"], ["tidy your room", "убирать в комнате"], ["make your bed", "заправлять кровать"], ["take out the rubbish", "выносить мусор"], ["do the shopping", "ходить за покупками"], ["walk the dog", "выгуливать собаку"], ["hoover", "пылесосить"], ["share the housework", "делить домашние дела"]]);
-SMrenderListen("b8",[["m", "My mum says I never help at home. That’s not true!"], ["f", "Really? What do you do, then?"], ["m", "I take out the rubbish. And I walk the dog every morning before school."], ["f", "That’s two things, Ryan. My list is longer."], ["m", "Go on, then."], ["f", "I make my bed, I set the table, and on Saturdays I do the ironing with my dad."], ["m", "The ironing? Seriously?"], ["f", "It’s not so bad. We talk while we do it. My brother loads the dishwasher, but he always forgets."], ["m", "Does your mum do the washing?"], ["f", "Yes, but she says we share the housework. I think she does about half of it."], ["m", "So do I. Mums always do more."]],[{"q": "What does Ryan do every morning?", "o": ["walks the dog", "makes his bed", "does the ironing"], "a": 0}, {"q": "How many jobs does Ryan mention?", "o": ["two", "three", "four"], "a": 0}, {"q": "When does Joanna do the ironing?", "o": ["on Saturdays", "every morning", "on Sundays"], "a": 0}, {"q": "Who does Joanna do the ironing with?", "o": ["her dad", "her mum", "her brother"], "a": 0}, {"q": "What does Joanna’s brother often forget?", "o": ["the dishwasher", "the rubbish", "the dog"], "a": 0}],"listening");
-SMrenderTF("b9",[{"q": "Ryan thinks he helps at home.", "a": true}, {"q": "Joanna does fewer jobs than Ryan.", "a": false}, {"q": "Joanna enjoys doing the ironing with her dad.", "a": true}, {"q": "Joanna’s brother always remembers the dishwasher.", "a": false}, {"q": "Joanna thinks her mum does about half the housework.", "a": true}],"truefalse");
-SMrenderSpeak("b10",["Расскажи, кто что делает по дому у тебя: <b>I take out the rubbish. My brother walks the dog.</b>", "Справедливо ли распределены дела в твоей семье? Почему?", "Какое домашнее дело ты ненавидишь больше всего и почему?"]);
-SMrenderWB("b11",[{"q": "«стирать» =", "o": ["do the washing", "do the washing-up", "do the ironing"], "a": 0}, {"q": "«накрывать на стол» =", "o": ["set the table", "clear the table", "load the table"], "a": 0}, {"q": "В каком слове звук /ʌ/?", "o": ["uncle", "school", "father"], "a": 0}, {"q": "«Please ___ here» — жди здесь.", "o": ["wait", "wet", "what"], "a": 0}, {"q": "«выносить мусор» =", "o": ["take out the rubbish", "make the rubbish", "do the rubbish"], "a": 0}],[{"q": "I ___ my bed every morning. (заправляю)", "a": ["make"]}, {"q": "We ___ the housework in our family. (делим)", "a": ["share"]}, {"q": "Впиши слово: My birthday is in M___ .", "a": ["March"]}, {"q": "Впиши слово: Can I have a c___ of tea?", "a": ["cup"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -392,6 +343,55 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderMC("b2",[{"q": "1  school · too · look · cool", "o": ["look", "school", "too"], "a": 0}, {"q": "2  grandson · class · father · grandma", "o": ["grandson", "class", "father"], "a": 0}, {"q": "3  wife · China · Italy · like", "o": ["Italy", "wife", "like"], "a": 0}, {"q": "4  go · son · photo · hello", "o": ["son", "go", "photo"], "a": 0}, {"q": "5  eat · meat · seat · great", "o": ["great", "meat", "seat"], "a": 0}, {"q": "6  university · uncle · mum · Hungary", "o": ["university", "uncle", "mum"], "a": 0}],"sounds");
+SMrenderPron("b3",["school", "look", "father", "grandson", "wife", "Italy", "go", "son", "great", "meat", "university", "uncle"]);
+SMrenderPron("b5",["men", "man", "cap", "cup", "far", "for", "wet", "wait", "live", "leave", "match", "March"]);
+SMrenderMC("b6",[{"q": "Three ___ are waiting outside.", "o": ["men", "man"], "a": 0}, {"q": "Can I have a ___ of tea?", "o": ["cup", "cap"], "a": 0}, {"q": "We ___ in a small village.", "o": ["live", "leave"], "a": 0}, {"q": "This present is ___ you.", "o": ["for", "far"], "a": 0}, {"q": "___ a minute, please!", "o": ["Wait", "Wet"], "a": 0}, {"q": "My birthday is in ___ .", "o": ["March", "match"], "a": 0}],"sounds");
+SMrenderWords("b7",[["do the washing", "стирать"], ["do the ironing", "гладить"], ["load the dishwasher", "загружать посудомойку"], ["set the table", "накрывать на стол"], ["clear the table", "убирать со стола"], ["tidy your room", "убирать в комнате"], ["make your bed", "заправлять кровать"], ["take out the rubbish", "выносить мусор"], ["do the shopping", "ходить за покупками"], ["walk the dog", "выгуливать собаку"], ["hoover", "пылесосить"], ["share the housework", "делить домашние дела"]]);
+SMrenderListen("b8",[["m", "My mum says I never help at home. That’s not true!"], ["f", "Really? What do you do, then?"], ["m", "I take out the rubbish. And I walk the dog every morning before school."], ["f", "That’s two things, Ryan. My list is longer."], ["m", "Go on, then."], ["f", "I make my bed, I set the table, and on Saturdays I do the ironing with my dad."], ["m", "The ironing? Seriously?"], ["f", "It’s not so bad. We talk while we do it. My brother loads the dishwasher, but he always forgets."], ["m", "Does your mum do the washing?"], ["f", "Yes, but she says we share the housework. I think she does about half of it."], ["m", "So do I. Mums always do more."]],[{"q": "What does Ryan do every morning?", "o": ["walks the dog", "makes his bed", "does the ironing"], "a": 0}, {"q": "How many jobs does Ryan mention?", "o": ["two", "three", "four"], "a": 0}, {"q": "When does Joanna do the ironing?", "o": ["on Saturdays", "every morning", "on Sundays"], "a": 0}, {"q": "Who does Joanna do the ironing with?", "o": ["her dad", "her mum", "her brother"], "a": 0}, {"q": "What does Joanna’s brother often forget?", "o": ["the dishwasher", "the rubbish", "the dog"], "a": 0}],"listening");
+SMrenderTF("b9",[{"q": "Ryan thinks he helps at home.", "a": true}, {"q": "Joanna does fewer jobs than Ryan.", "a": false}, {"q": "Joanna enjoys doing the ironing with her dad.", "a": true}, {"q": "Joanna’s brother always remembers the dishwasher.", "a": false}, {"q": "Joanna thinks her mum does about half the housework.", "a": true}],"truefalse");
+SMrenderSpeak("b10",["Расскажи, кто что делает по дому у тебя: <b>I take out the rubbish. My brother walks the dog.</b>", "Справедливо ли распределены дела в твоей семье? Почему?", "Какое домашнее дело ты ненавидишь больше всего и почему?"]);
+SMrenderWB("b11",[{"q": "«стирать» =", "o": ["do the washing", "do the washing-up", "do the ironing"], "a": 0}, {"q": "«накрывать на стол» =", "o": ["set the table", "clear the table", "load the table"], "a": 0}, {"q": "В каком слове звук /ʌ/?", "o": ["uncle", "school", "father"], "a": 0}, {"q": "«Please ___ here» — жди здесь.", "o": ["wait", "wet", "what"], "a": 0}, {"q": "«выносить мусор» =", "o": ["take out the rubbish", "make the rubbish", "do the rubbish"], "a": 0}],[{"q": "I ___ my bed every morning. (заправляю)", "a": ["make"]}, {"q": "We ___ the housework in our family. (делим)", "a": ["share"]}, {"q": "Впиши слово: My birthday is in M___ .", "a": ["March"]}, {"q": "Впиши слово: Can I have a c___ of tea?", "a": ["cup"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>

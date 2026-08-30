@@ -132,56 +132,7 @@
   <div id="b11"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1A</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderWords("b1",[["mother (mum)", "мама"], ["father (dad)", "папа"], ["parents", "родители"], ["sister", "сестра"], ["brother", "брат"], ["daughter", "дочь"], ["son", "сын"], ["grandmother (grandma)", "бабушка"], ["grandfather (grandad)", "дедушка"], ["grandparents", "бабушка и дедушка"], ["granddaughter", "внучка"], ["grandson", "внук"], ["aunt", "тётя"], ["uncle", "дядя"], ["cousin", "двоюродный брат/сестра"], ["nephew", "племянник"], ["niece", "племянница"], ["husband", "муж"], ["wife", "жена"], ["child / children", "ребёнок / дети"], ["relatives", "родственники"], ["only child", "единственный ребёнок"]]);
-SMrenderWords("b3",[["stepmother", "мачеха"], ["stepfather", "отчим"], ["stepbrother", "сводный брат"], ["stepsister", "сводная сестра"], ["half-brother", "брат по одному родителю"], ["half-sister", "сестра по одному родителю"], ["mother-in-law", "свекровь / тёща"], ["father-in-law", "свёкор / тесть"], ["brother-in-law", "зять / деверь / шурин"], ["sister-in-law", "невестка / золовка"], ["son-in-law", "зять"], ["daughter-in-law", "невестка"], ["great-grandmother", "прабабушка"], ["great-grandfather", "прадедушка"], ["great-aunt", "двоюродная бабушка"], ["great-uncle", "двоюродный дедушка"]]);
-SMrenderPron("b4",["mother-in-law", "stepdaughter", "great-grandfather", "niece", "nephew", "relatives", "cousin"]);
-SMrenderMC("b6",[{"q": "Комната моей сестры:", "o": ["my sister’s room", "my sisters room", "my sister room"], "a": 0}, {"q": "Друзья моих родителей:", "o": ["my parents’ friends", "my parent’s friends", "my parents friends"], "a": 0}, {"q": "Школа его детей:", "o": ["his children’s school", "his childrens’ school", "his childrens school"], "a": 0}, {"q": "Дом Тома и Анны (общий):", "o": ["Tom and Anna’s house", "Tom’s and Anna’s house", "Tom and Annas house"], "a": 0}, {"q": "Дверь дома:", "o": ["the door of the house", "the house’s door", "the houses door"], "a": 0}, {"q": "Мама моей жены — это моя ___ .", "o": ["mother-in-law", "stepmother", "great-aunt"], "a": 0}, {"q": "Новая жена моего отца — это моя ___ .", "o": ["stepmother", "mother-in-law", "half-sister"], "a": 0}, {"q": "У нас общая только мама. Она моя ___ .", "o": ["half-sister", "stepsister", "sister-in-law"], "a": 0}, {"q": "Бабушка моей мамы — моя ___ .", "o": ["great-grandmother", "grandmother", "great-aunt"], "a": 0}, {"q": "___ he got a stepbrother?", "o": ["Has", "Have", "Does"], "a": 0}, {"q": "They ___ got any cousins.", "o": ["haven’t", "hasn’t", "aren’t"], "a": 0}, {"q": "У меня нет братьев и сестёр. Я ___ .", "o": ["an only child", "a twin", "a relative"], "a": 0}],"grammar");
-SMrenderGap("b7",[{"q": "___ (my brother) wife is my sister-in-law.", "a": ["my brother’s", "my brother's"]}, {"q": "These are my ___ (grandparents) photos.", "a": ["grandparents’", "grandparents'"]}, {"q": "That’s the ___ (women) changing room.", "a": ["women’s", "women's"]}, {"q": "She ___ (have got) three cousins.", "a": ["has got", "’s got", "'s got"]}, {"q": "Муж моей дочери — мой ___ .", "a": ["son-in-law"]}, {"q": "Дядя моего отца — мой ___ .", "a": ["great-uncle"]}],"gap");
-SMrenderListen("b8",[["f", "Is this an old photo, Ella?"], ["f2", "Yes, it’s from my cousin’s wedding. That’s me on the left."], ["f", "And who’s the woman next to you?"], ["f2", "That’s Irina. She’s my father’s second wife, so she’s my stepmother."], ["f", "She looks really friendly."], ["f2", "She is. We get on well. And the little boy is Sasha, my half-brother. We’ve got the same dad."], ["f", "He’s sweet! And the old lady in the blue dress?"], ["f2", "That’s my great-grandmother, Vera. She’s ninety-one in that photo."], ["f", "Ninety-one! Has she got a big family?"], ["f2", "Enormous. Four children, eleven grandchildren and she can’t remember all our names!"]],[{"q": "Whose wedding is in the photo?", "o": ["Ella’s cousin’s", "Ella’s sister’s", "Ella’s aunt’s"], "a": 0}, {"q": "Who is Irina?", "o": ["Ella’s stepmother", "Ella’s mother", "Ella’s aunt"], "a": 0}, {"q": "Sasha is Ella’s…", "o": ["half-brother", "stepbrother", "cousin"], "a": 0}, {"q": "What do Ella and Sasha share?", "o": ["the same dad", "the same mum", "the same school"], "a": 0}, {"q": "How old is Vera in the photo?", "o": ["ninety-one", "nineteen", "seventy-one"], "a": 0}, {"q": "How many grandchildren has Vera got?", "o": ["eleven", "four", "ninety"], "a": 0}],"listening");
-SMrenderMC("b9",[{"q": "Solange Knowles is Beyoncé’s…", "o": ["sister", "cousin", "aunt"], "a": 0}, {"q": "Jaden Smith is Will Smith’s…", "o": ["son", "brother", "nephew"], "a": 0}, {"q": "Liam and Chris Hemsworth are…", "o": ["brothers", "cousins", "father and son"], "a": 0}, {"q": "Jon Voight is Angelina Jolie’s…", "o": ["father", "uncle", "grandfather"], "a": 0}, {"q": "Prince William is King Charles III’s…", "o": ["son", "brother", "nephew"], "a": 0}, {"q": "Melanie Griffith is Dakota Johnson’s…", "o": ["mother", "sister", "aunt"], "a": 0}, {"q": "Prince George is Queen Elizabeth II’s…", "o": ["great-grandson", "grandson", "nephew"], "a": 0}],"quiz");
-SMrenderSpeak("b10",["Спроси собеседника про шесть родственников: <b>Have you got a stepbrother? …a great-uncle? …a brother-in-law?</b>", "Если ответ «yes» — узнай больше: How old is he? Where does he live? Do you get on well?", "Опиши семейную фотографию: кто где стоит и кто кому кем приходится.", "Назови трёх родственников через ’s: <b>my mother’s cousin</b>, <b>my parents’ friends</b>…"]);
-SMrenderWB("b11",[{"q": "Муж моей сестры — мой ___ .", "o": ["brother-in-law", "stepbrother", "half-brother"], "a": 0}, {"q": "Дочь моей мачехи — моя ___ .", "o": ["stepsister", "half-sister", "sister-in-law"], "a": 0}, {"q": "Отец моего мужа — мой ___ .", "o": ["father-in-law", "stepfather", "great-uncle"], "a": 0}, {"q": "Телефоны моих двоюродных братьев:", "o": ["my cousins’ phones", "my cousin’s phones", "my cousins phones"], "a": 0}, {"q": "___ they got a big family?", "o": ["Have", "Has", "Do"], "a": 0}, {"q": "Сын моей дочери — мой ___ .", "o": ["grandson", "nephew", "son-in-law"], "a": 0}],[{"q": "This is my ___ (aunt) house.", "a": ["aunt’s", "aunt's"]}, {"q": "Those are the ___ (children) books.", "a": ["children’s", "children's"]}, {"q": "Мать моей жены — my ___ .", "a": ["mother-in-law"]}, {"q": "Прадедушка — одним словом:", "a": ["great-grandfather"]}, {"q": "He ___ (have got) two nieces.", "a": ["has got", "’s got", "'s got"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -413,6 +364,55 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderWords("b1",[["mother (mum)", "мама"], ["father (dad)", "папа"], ["parents", "родители"], ["sister", "сестра"], ["brother", "брат"], ["daughter", "дочь"], ["son", "сын"], ["grandmother (grandma)", "бабушка"], ["grandfather (grandad)", "дедушка"], ["grandparents", "бабушка и дедушка"], ["granddaughter", "внучка"], ["grandson", "внук"], ["aunt", "тётя"], ["uncle", "дядя"], ["cousin", "двоюродный брат/сестра"], ["nephew", "племянник"], ["niece", "племянница"], ["husband", "муж"], ["wife", "жена"], ["child / children", "ребёнок / дети"], ["relatives", "родственники"], ["only child", "единственный ребёнок"]]);
+SMrenderWords("b3",[["stepmother", "мачеха"], ["stepfather", "отчим"], ["stepbrother", "сводный брат"], ["stepsister", "сводная сестра"], ["half-brother", "брат по одному родителю"], ["half-sister", "сестра по одному родителю"], ["mother-in-law", "свекровь / тёща"], ["father-in-law", "свёкор / тесть"], ["brother-in-law", "зять / деверь / шурин"], ["sister-in-law", "невестка / золовка"], ["son-in-law", "зять"], ["daughter-in-law", "невестка"], ["great-grandmother", "прабабушка"], ["great-grandfather", "прадедушка"], ["great-aunt", "двоюродная бабушка"], ["great-uncle", "двоюродный дедушка"]]);
+SMrenderPron("b4",["mother-in-law", "stepdaughter", "great-grandfather", "niece", "nephew", "relatives", "cousin"]);
+SMrenderMC("b6",[{"q": "Комната моей сестры:", "o": ["my sister’s room", "my sisters room", "my sister room"], "a": 0}, {"q": "Друзья моих родителей:", "o": ["my parents’ friends", "my parent’s friends", "my parents friends"], "a": 0}, {"q": "Школа его детей:", "o": ["his children’s school", "his childrens’ school", "his childrens school"], "a": 0}, {"q": "Дом Тома и Анны (общий):", "o": ["Tom and Anna’s house", "Tom’s and Anna’s house", "Tom and Annas house"], "a": 0}, {"q": "Дверь дома:", "o": ["the door of the house", "the house’s door", "the houses door"], "a": 0}, {"q": "Мама моей жены — это моя ___ .", "o": ["mother-in-law", "stepmother", "great-aunt"], "a": 0}, {"q": "Новая жена моего отца — это моя ___ .", "o": ["stepmother", "mother-in-law", "half-sister"], "a": 0}, {"q": "У нас общая только мама. Она моя ___ .", "o": ["half-sister", "stepsister", "sister-in-law"], "a": 0}, {"q": "Бабушка моей мамы — моя ___ .", "o": ["great-grandmother", "grandmother", "great-aunt"], "a": 0}, {"q": "___ he got a stepbrother?", "o": ["Has", "Have", "Does"], "a": 0}, {"q": "They ___ got any cousins.", "o": ["haven’t", "hasn’t", "aren’t"], "a": 0}, {"q": "У меня нет братьев и сестёр. Я ___ .", "o": ["an only child", "a twin", "a relative"], "a": 0}],"grammar");
+SMrenderGap("b7",[{"q": "___ (my brother) wife is my sister-in-law.", "a": ["my brother’s", "my brother's"]}, {"q": "These are my ___ (grandparents) photos.", "a": ["grandparents’", "grandparents'"]}, {"q": "That’s the ___ (women) changing room.", "a": ["women’s", "women's"]}, {"q": "She ___ (have got) three cousins.", "a": ["has got", "’s got", "'s got"]}, {"q": "Муж моей дочери — мой ___ .", "a": ["son-in-law"]}, {"q": "Дядя моего отца — мой ___ .", "a": ["great-uncle"]}],"gap");
+SMrenderListen("b8",[["f", "Is this an old photo, Ella?"], ["f2", "Yes, it’s from my cousin’s wedding. That’s me on the left."], ["f", "And who’s the woman next to you?"], ["f2", "That’s Irina. She’s my father’s second wife, so she’s my stepmother."], ["f", "She looks really friendly."], ["f2", "She is. We get on well. And the little boy is Sasha, my half-brother. We’ve got the same dad."], ["f", "He’s sweet! And the old lady in the blue dress?"], ["f2", "That’s my great-grandmother, Vera. She’s ninety-one in that photo."], ["f", "Ninety-one! Has she got a big family?"], ["f2", "Enormous. Four children, eleven grandchildren and she can’t remember all our names!"]],[{"q": "Whose wedding is in the photo?", "o": ["Ella’s cousin’s", "Ella’s sister’s", "Ella’s aunt’s"], "a": 0}, {"q": "Who is Irina?", "o": ["Ella’s stepmother", "Ella’s mother", "Ella’s aunt"], "a": 0}, {"q": "Sasha is Ella’s…", "o": ["half-brother", "stepbrother", "cousin"], "a": 0}, {"q": "What do Ella and Sasha share?", "o": ["the same dad", "the same mum", "the same school"], "a": 0}, {"q": "How old is Vera in the photo?", "o": ["ninety-one", "nineteen", "seventy-one"], "a": 0}, {"q": "How many grandchildren has Vera got?", "o": ["eleven", "four", "ninety"], "a": 0}],"listening");
+SMrenderMC("b9",[{"q": "Solange Knowles is Beyoncé’s…", "o": ["sister", "cousin", "aunt"], "a": 0}, {"q": "Jaden Smith is Will Smith’s…", "o": ["son", "brother", "nephew"], "a": 0}, {"q": "Liam and Chris Hemsworth are…", "o": ["brothers", "cousins", "father and son"], "a": 0}, {"q": "Jon Voight is Angelina Jolie’s…", "o": ["father", "uncle", "grandfather"], "a": 0}, {"q": "Prince William is King Charles III’s…", "o": ["son", "brother", "nephew"], "a": 0}, {"q": "Melanie Griffith is Dakota Johnson’s…", "o": ["mother", "sister", "aunt"], "a": 0}, {"q": "Prince George is Queen Elizabeth II’s…", "o": ["great-grandson", "grandson", "nephew"], "a": 0}],"quiz");
+SMrenderSpeak("b10",["Спроси собеседника про шесть родственников: <b>Have you got a stepbrother? …a great-uncle? …a brother-in-law?</b>", "Если ответ «yes» — узнай больше: How old is he? Where does he live? Do you get on well?", "Опиши семейную фотографию: кто где стоит и кто кому кем приходится.", "Назови трёх родственников через ’s: <b>my mother’s cousin</b>, <b>my parents’ friends</b>…"]);
+SMrenderWB("b11",[{"q": "Муж моей сестры — мой ___ .", "o": ["brother-in-law", "stepbrother", "half-brother"], "a": 0}, {"q": "Дочь моей мачехи — моя ___ .", "o": ["stepsister", "half-sister", "sister-in-law"], "a": 0}, {"q": "Отец моего мужа — мой ___ .", "o": ["father-in-law", "stepfather", "great-uncle"], "a": 0}, {"q": "Телефоны моих двоюродных братьев:", "o": ["my cousins’ phones", "my cousin’s phones", "my cousins phones"], "a": 0}, {"q": "___ they got a big family?", "o": ["Have", "Has", "Do"], "a": 0}, {"q": "Сын моей дочери — мой ___ .", "o": ["grandson", "nephew", "son-in-law"], "a": 0}],[{"q": "This is my ___ (aunt) house.", "a": ["aunt’s", "aunt's"]}, {"q": "Those are the ___ (children) books.", "a": ["children’s", "children's"]}, {"q": "Мать моей жены — my ___ .", "a": ["mother-in-law"]}, {"q": "Прадедушка — одним словом:", "a": ["great-grandfather"]}, {"q": "He ___ (have got) two nieces.", "a": ["has got", "’s got", "'s got"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>

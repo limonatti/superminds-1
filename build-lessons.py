@@ -243,7 +243,12 @@ def build_unit(course, unit, data, letters_all):
         eng = eng.replace('const HW={course:"%s",unit:%d}' % (course, unit),
                           'const HW={course:"%s",unit:%d,sub:"%d%s"}' % (course, unit, unit, letter))
         eng = eng.replace("section:sec,", 'section:(HW.sub?HW.sub+"-"+sec:sec),')
-        eng = eng.replace("</script>", HELPERS + js_blocks(L["blocks"]) + "\n</script>", 1)
+        # вставлять только в ПОСЛЕДНИЙ </script> — первые закрывают внешние
+        # <script src=...>, и всё, что попадёт внутрь них, браузер игнорирует
+        cut = eng.rfind("</script>")
+        if cut < 0:
+            raise SystemExit("не найден закрывающий </script> в движке")
+        eng = eng[:cut] + HELPERS + js_blocks(L["blocks"]) + "\n</script>" + eng[cut + len("</script>"):]
 
         out = "%s-u%d%s.html" % (course, unit, letter.lower())
         open(out, "w", encoding="utf-8").write(page + eng)

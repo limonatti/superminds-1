@@ -108,53 +108,7 @@
   <div id="b8"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1F</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderMC("b2",[{"q": "Пропуск [1]", "o": ["Most teenagers have a difficult relationship with their brothers and sisters.", "We get on well and we never argue.", "Give your brother some time alone."], "a": 0}, {"q": "Пропуск [2]", "o": ["Research suggests the answer is around the age of 25.", "But other families are much smaller.", "He doesn’t ask me first."], "a": 0}, {"q": "Пропуск [3]", "o": ["We get on well and we don’t argue any more.", "Teenagers are not proud of their siblings.", "I want to be alone."], "a": 0}, {"q": "Пропуск [4]", "o": ["And the other answer is simple: just wait ten years.", "Most teenagers argue about space and noise.", "Adults are keen on their brothers and sisters."], "a": 0}],"reading");
-SMrenderMC("b3",[{"q": "Какое резюме подходит лучше всего?", "o": ["Многие подростки плохо ладят с братьями и сёстрами, но во взрослом возрасте отношения обычно налаживаются.", "Все подростки прекрасно ладят с братьями и сёстрами.", "Отношения остаются плохими и во взрослом возрасте."], "a": 0}, {"q": "How old is Leo?", "o": ["26", "28", "25"], "a": 0}, {"q": "How often do Maya and Leo meet now?", "o": ["two or three times a month", "every day", "once a year"], "a": 0}, {"q": "Согласно тексту, отношения обычно меняются…", "o": ["около 25 лет", "в 15 лет", "никогда"], "a": 0}],"reading");
-SMrenderGap("b5",[{"q": "She’s very proud ___ her little brother.", "a": ["of"]}, {"q": "I’m worried ___ the exam.", "a": ["about"]}, {"q": "He’s keen ___ football.", "a": ["on"]}, {"q": "Are you interested ___ history?", "a": ["in"]}, {"q": "My sister is good ___ maths.", "a": ["at"]}, {"q": "Please be nice ___ your cousin.", "a": ["to"]}, {"q": "I’m tired ___ this argument.", "a": ["of"]}, {"q": "My aunt is married ___ a musician.", "a": ["to"]}],"wordskills");
-SMrenderTF("b6",[{"q": "Teenagers in the text argue about space and noise.", "a": true}, {"q": "Maya and Leo never argued as children.", "a": false}, {"q": "Most adults get on well with their siblings.", "a": true}, {"q": "The text advises telling your sibling’s secrets.", "a": false}, {"q": "Maya is older than Leo.", "a": true}],"truefalse");
-SMrenderSpeak("b7",["Возьми интервью у одноклассника, у которого есть брат или сестра: Do you argue? What about? Do you share a room?", "Что из четырёх советов в конце текста работает, по-твоему, лучше всего?", "Опиши свои отношения с братом, сестрой или близким другом. Используй <b>keen on, interested in, proud of, worried about</b>."]);
-SMrenderWB("b8",[{"q": "I’m not very keen ___ horror films.", "o": ["on", "of", "in"], "a": 0}, {"q": "She’s proud ___ her results.", "o": ["of", "about", "at"], "a": 0}, {"q": "He’s angry ___ his sister.", "o": ["with", "of", "in"], "a": 0}, {"q": "Are you good ___ drawing?", "o": ["at", "in", "on"], "a": 0}, {"q": "«sibling» — это…", "o": ["брат или сестра", "двоюродный брат", "родитель"], "a": 0}],[{"q": "I’m interested ___ languages.", "a": ["in"]}, {"q": "Don’t be afraid ___ the dog.", "a": ["of"]}, {"q": "My mum is worried ___ me.", "a": ["about"]}, {"q": "Be kind ___ your stepsister.", "a": ["to"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -386,6 +340,52 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderMC("b2",[{"q": "Пропуск [1]", "o": ["Most teenagers have a difficult relationship with their brothers and sisters.", "We get on well and we never argue.", "Give your brother some time alone."], "a": 0}, {"q": "Пропуск [2]", "o": ["Research suggests the answer is around the age of 25.", "But other families are much smaller.", "He doesn’t ask me first."], "a": 0}, {"q": "Пропуск [3]", "o": ["We get on well and we don’t argue any more.", "Teenagers are not proud of their siblings.", "I want to be alone."], "a": 0}, {"q": "Пропуск [4]", "o": ["And the other answer is simple: just wait ten years.", "Most teenagers argue about space and noise.", "Adults are keen on their brothers and sisters."], "a": 0}],"reading");
+SMrenderMC("b3",[{"q": "Какое резюме подходит лучше всего?", "o": ["Многие подростки плохо ладят с братьями и сёстрами, но во взрослом возрасте отношения обычно налаживаются.", "Все подростки прекрасно ладят с братьями и сёстрами.", "Отношения остаются плохими и во взрослом возрасте."], "a": 0}, {"q": "How old is Leo?", "o": ["26", "28", "25"], "a": 0}, {"q": "How often do Maya and Leo meet now?", "o": ["two or three times a month", "every day", "once a year"], "a": 0}, {"q": "Согласно тексту, отношения обычно меняются…", "o": ["около 25 лет", "в 15 лет", "никогда"], "a": 0}],"reading");
+SMrenderGap("b5",[{"q": "She’s very proud ___ her little brother.", "a": ["of"]}, {"q": "I’m worried ___ the exam.", "a": ["about"]}, {"q": "He’s keen ___ football.", "a": ["on"]}, {"q": "Are you interested ___ history?", "a": ["in"]}, {"q": "My sister is good ___ maths.", "a": ["at"]}, {"q": "Please be nice ___ your cousin.", "a": ["to"]}, {"q": "I’m tired ___ this argument.", "a": ["of"]}, {"q": "My aunt is married ___ a musician.", "a": ["to"]}],"wordskills");
+SMrenderTF("b6",[{"q": "Teenagers in the text argue about space and noise.", "a": true}, {"q": "Maya and Leo never argued as children.", "a": false}, {"q": "Most adults get on well with their siblings.", "a": true}, {"q": "The text advises telling your sibling’s secrets.", "a": false}, {"q": "Maya is older than Leo.", "a": true}],"truefalse");
+SMrenderSpeak("b7",["Возьми интервью у одноклассника, у которого есть брат или сестра: Do you argue? What about? Do you share a room?", "Что из четырёх советов в конце текста работает, по-твоему, лучше всего?", "Опиши свои отношения с братом, сестрой или близким другом. Используй <b>keen on, interested in, proud of, worried about</b>."]);
+SMrenderWB("b8",[{"q": "I’m not very keen ___ horror films.", "o": ["on", "of", "in"], "a": 0}, {"q": "She’s proud ___ her results.", "o": ["of", "about", "at"], "a": 0}, {"q": "He’s angry ___ his sister.", "o": ["with", "of", "in"], "a": 0}, {"q": "Are you good ___ drawing?", "o": ["at", "in", "on"], "a": 0}, {"q": "«sibling» — это…", "o": ["брат или сестра", "двоюродный брат", "родитель"], "a": 0}],[{"q": "I’m interested ___ languages.", "a": ["in"]}, {"q": "Don’t be afraid ___ the dog.", "a": ["of"]}, {"q": "My mum is worried ___ me.", "a": ["about"]}, {"q": "Be kind ___ your stepsister.", "a": ["to"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>

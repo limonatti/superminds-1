@@ -118,53 +118,7 @@
   <div id="b8"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1H</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderMC("b1",[{"q": "Which subjects does Lauren like?", "o": ["science and art", "maths and history", "music and sport"], "a": 0}, {"q": "How does Lauren get to school?", "o": ["she walks", "by bus", "by bike"], "a": 0}, {"q": "Who is at university?", "o": ["James’s stepsister", "James’s brother", "Lauren’s sister"], "a": 0}, {"q": "What does James say about himself?", "o": ["he’s not very patient", "he’s very patient", "he’s shy"], "a": 0}, {"q": "What is Lauren’s ambition?", "o": ["to be a vet", "to be a dancer", "to study music"], "a": 0}],"reading");
-SMrenderGap("b3",[{"q": "I’m ___ Year twelve.", "a": ["in"]}, {"q": "I walk ___ school.", "a": ["to"]}, {"q": "I watch DVDs ___ my friends.", "a": ["with"]}, {"q": "She’s ___ university.", "a": ["at"]}, {"q": "I listen ___ music.", "a": ["to"]}, {"q": "___ the weekend I play football.", "a": ["at", "At"]}],"gap");
-SMrenderMC("b4",[{"q": "Как лучше в личном профиле?", "o": ["I’m sixteen and I’ve got a brother.", "I am sixteen and I have got a brother.", "I sixteen and I have brother."], "a": 0}, {"q": "«She’s at university» — полная форма:", "o": ["She is at university", "She has at university", "She was at university"], "a": 0}, {"q": "«I’ve got a dog» — полная форма:", "o": ["I have got a dog", "I has got a dog", "I had got a dog"], "a": 0}, {"q": "Сколько предложений минимум в абзаце?", "o": ["два", "одно", "пять"], "a": 0}, {"q": "Новый абзац нужен, когда…", "o": ["меняется тема", "закончилась строка", "прошло три предложения"], "a": 0}, {"q": "Какое предложение лишнее в абзаце про хобби?", "o": ["My favourite subject is chemistry.", "I play the guitar.", "I read a lot at the weekend."], "a": 0}],"grammar");
-SMrenderWords("b5",[["creative", "творческий"], ["friendly", "дружелюбный"], ["hard-working", "трудолюбивый"], ["honest", "честный"], ["patient", "терпеливый"], ["polite", "вежливый"], ["sensible", "здравомыслящий"], ["talkative", "разговорчивый"], ["shy", "стеснительный"], ["funny", "весёлый"]]);
-SMrenderSpeak("b7",["Расскажи свой профиль вслух по плану, не записывая. Потом садись писать — так текст выйдет живее.", "Прочитай написанное вслух. Там, где спотыкаешься, — там и надо править."]);
-SMrenderWB("b8",[{"q": "«I am» сокращённо:", "o": ["I’m", "Im", "I’am"], "a": 0}, {"q": "«do not» сокращённо:", "o": ["don’t", "dont", "do’nt"], "a": 0}, {"q": "«She has got» сокращённо:", "o": ["She’s got", "She has’t", "Shes got"], "a": 0}, {"q": "«терпеливый» =", "o": ["patient", "polite", "patiently"], "a": 0}, {"q": "«здравомыслящий» =", "o": ["sensible", "sensitive", "senseless"], "a": 0}],[{"q": "Сокращённо: I have got → ___ got", "a": ["I’ve", "I've"]}, {"q": "Сокращённо: he is not → he ___", "a": ["isn’t", "isn't"]}, {"q": "«творческий» по-английски:", "a": ["creative"]}, {"q": "«честный» по-английски:", "a": ["honest"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -396,6 +350,52 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderMC("b1",[{"q": "Which subjects does Lauren like?", "o": ["science and art", "maths and history", "music and sport"], "a": 0}, {"q": "How does Lauren get to school?", "o": ["she walks", "by bus", "by bike"], "a": 0}, {"q": "Who is at university?", "o": ["James’s stepsister", "James’s brother", "Lauren’s sister"], "a": 0}, {"q": "What does James say about himself?", "o": ["he’s not very patient", "he’s very patient", "he’s shy"], "a": 0}, {"q": "What is Lauren’s ambition?", "o": ["to be a vet", "to be a dancer", "to study music"], "a": 0}],"reading");
+SMrenderGap("b3",[{"q": "I’m ___ Year twelve.", "a": ["in"]}, {"q": "I walk ___ school.", "a": ["to"]}, {"q": "I watch DVDs ___ my friends.", "a": ["with"]}, {"q": "She’s ___ university.", "a": ["at"]}, {"q": "I listen ___ music.", "a": ["to"]}, {"q": "___ the weekend I play football.", "a": ["at", "At"]}],"gap");
+SMrenderMC("b4",[{"q": "Как лучше в личном профиле?", "o": ["I’m sixteen and I’ve got a brother.", "I am sixteen and I have got a brother.", "I sixteen and I have brother."], "a": 0}, {"q": "«She’s at university» — полная форма:", "o": ["She is at university", "She has at university", "She was at university"], "a": 0}, {"q": "«I’ve got a dog» — полная форма:", "o": ["I have got a dog", "I has got a dog", "I had got a dog"], "a": 0}, {"q": "Сколько предложений минимум в абзаце?", "o": ["два", "одно", "пять"], "a": 0}, {"q": "Новый абзац нужен, когда…", "o": ["меняется тема", "закончилась строка", "прошло три предложения"], "a": 0}, {"q": "Какое предложение лишнее в абзаце про хобби?", "o": ["My favourite subject is chemistry.", "I play the guitar.", "I read a lot at the weekend."], "a": 0}],"grammar");
+SMrenderWords("b5",[["creative", "творческий"], ["friendly", "дружелюбный"], ["hard-working", "трудолюбивый"], ["honest", "честный"], ["patient", "терпеливый"], ["polite", "вежливый"], ["sensible", "здравомыслящий"], ["talkative", "разговорчивый"], ["shy", "стеснительный"], ["funny", "весёлый"]]);
+SMrenderSpeak("b7",["Расскажи свой профиль вслух по плану, не записывая. Потом садись писать — так текст выйдет живее.", "Прочитай написанное вслух. Там, где спотыкаешься, — там и надо править."]);
+SMrenderWB("b8",[{"q": "«I am» сокращённо:", "o": ["I’m", "Im", "I’am"], "a": 0}, {"q": "«do not» сокращённо:", "o": ["don’t", "dont", "do’nt"], "a": 0}, {"q": "«She has got» сокращённо:", "o": ["She’s got", "She has’t", "Shes got"], "a": 0}, {"q": "«терпеливый» =", "o": ["patient", "polite", "patiently"], "a": 0}, {"q": "«здравомыслящий» =", "o": ["sensible", "sensitive", "senseless"], "a": 0}],[{"q": "Сокращённо: I have got → ___ got", "a": ["I’ve", "I've"]}, {"q": "Сокращённо: he is not → he ___", "a": ["isn’t", "isn't"]}, {"q": "«творческий» по-английски:", "a": ["creative"]}, {"q": "«честный» по-английски:", "a": ["honest"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>

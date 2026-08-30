@@ -123,54 +123,7 @@
   <div id="b8"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1B</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderMC("b1",[{"q": "When does the family watch the sitcom?", "o": ["every Friday evening", "every morning", "on Sundays"], "a": 0}, {"q": "Who makes the popcorn?", "o": ["Marek", "Ela", "their mum"], "a": 0}, {"q": "Who chooses the episode?", "o": ["Ela", "Marek", "their dad"], "a": 0}, {"q": "Why does Ela like the show?", "o": ["the characters", "the jokes", "the family scenes"], "a": 0}, {"q": "What does their dad do before the show?", "o": ["turns off his phone", "makes tea", "chooses the episode"], "a": 0}, {"q": "How long do they talk after the episode?", "o": ["twenty minutes", "nine minutes", "an hour"], "a": 0}],"reading");
-SMrenderMC("b3",[{"q": "Marek ___ popcorn every Friday.", "o": ["make", "makes", "making"], "a": 1}, {"q": "Ela ___ the episode.", "o": ["choose", "chooses", "choosing"], "a": 1}, {"q": "The episode ___ at nine.", "o": ["finish", "finishes", "finishs"], "a": 1}, {"q": "My sister ___ biology at university.", "o": ["study", "studies", "studys"], "a": 1}, {"q": "He ___ football at the weekend.", "o": ["plays", "plaies", "play"], "a": 0}, {"q": "She ___ two brothers.", "o": ["have", "has", "haves"], "a": 1}, {"q": "They ___ TV every evening.", "o": ["watch", "watches", "watchs"], "a": 0}, {"q": "My dad ___ to work by bus.", "o": ["go", "goes", "gos"], "a": 1}, {"q": "My cousin ___ photos of everything.", "o": ["takes", "take", "taks"], "a": 0}, {"q": "He ___ makes popcorn. (всегда)", "o": ["always", "every", "usual"], "a": 0}, {"q": "She ___ late. (всегда, с глаголом be)", "o": ["is always", "always is", "always"], "a": 0}, {"q": "Water ___ at 100 degrees.", "o": ["boils", "boil", "boiles"], "a": 0}],"grammar");
-SMrenderGap("b4",[{"q": "Their mum ___ (bring) tea.", "a": ["brings"]}, {"q": "Their dad ___ (laugh) at everything.", "a": ["laughs"]}, {"q": "Marek ___ (enjoy) the clever jokes.", "a": ["enjoys"]}, {"q": "The family ___ (talk) about the episode.", "a": ["talks"]}, {"q": "My brother ___ (try) to cook every Sunday.", "a": ["tries"]}, {"q": "She ___ (have) three cousins.", "a": ["has"]}, {"q": "He ___ (finish) work at six.", "a": ["finishes"]}, {"q": "My aunt ___ (fly) to Spain every summer.", "a": ["flies"]}],"gap");
-SMrenderPron("b5",["makes", "laughs", "takes", "lives", "plays", "brings", "watches", "finishes", "chooses"]);
-SMrenderMC("b6",[{"q": "watches", "o": ["/ɪz/", "/s/", "/z/"], "a": 0}, {"q": "makes", "o": ["/s/", "/z/", "/ɪz/"], "a": 0}, {"q": "lives", "o": ["/z/", "/s/", "/ɪz/"], "a": 0}, {"q": "finishes", "o": ["/ɪz/", "/s/", "/z/"], "a": 0}, {"q": "plays", "o": ["/z/", "/s/", "/ɪz/"], "a": 0}, {"q": "laughs", "o": ["/s/", "/z/", "/ɪz/"], "a": 0}],"pron");
-SMrenderSpeak("b7",["Опиши вечер пятницы в своей семье: кто что делает. Минимум шесть глаголов в третьем лице.", "Расскажи про любимый сериал: <b>It starts… The main character works… She lives…</b>", "Опиши обычный день брата, сестры или друга — только he/she, следи за -s."]);
-SMrenderWB("b8",[{"q": "She ___ in a hospital.", "o": ["work", "works", "working"], "a": 1}, {"q": "We ___ sitcoms.", "o": ["love", "loves", "loving"], "a": 0}, {"q": "He ___ his homework after school.", "o": ["do", "does", "dos"], "a": 1}, {"q": "My mum ___ the dishes every evening.", "o": ["washes", "washs", "wash"], "a": 0}, {"q": "Anna ___ never late.", "o": ["is", "are", "be"], "a": 0}, {"q": "My cousins ___ in Poland.", "o": ["live", "lives", "living"], "a": 0}],[{"q": "He ___ (watch) a film every Friday.", "a": ["watches"]}, {"q": "My sister ___ (study) maths.", "a": ["studies"]}, {"q": "They ___ (play) tennis at the weekend.", "a": ["play"]}, {"q": "It ___ (finish) at ten o’clock.", "a": ["finishes"]}, {"q": "She ___ (go) to school by bike.", "a": ["goes"]}, {"q": "My dad ___ (have) a new phone.", "a": ["has"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -402,6 +355,53 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderMC("b1",[{"q": "When does the family watch the sitcom?", "o": ["every Friday evening", "every morning", "on Sundays"], "a": 0}, {"q": "Who makes the popcorn?", "o": ["Marek", "Ela", "their mum"], "a": 0}, {"q": "Who chooses the episode?", "o": ["Ela", "Marek", "their dad"], "a": 0}, {"q": "Why does Ela like the show?", "o": ["the characters", "the jokes", "the family scenes"], "a": 0}, {"q": "What does their dad do before the show?", "o": ["turns off his phone", "makes tea", "chooses the episode"], "a": 0}, {"q": "How long do they talk after the episode?", "o": ["twenty minutes", "nine minutes", "an hour"], "a": 0}],"reading");
+SMrenderMC("b3",[{"q": "Marek ___ popcorn every Friday.", "o": ["make", "makes", "making"], "a": 1}, {"q": "Ela ___ the episode.", "o": ["choose", "chooses", "choosing"], "a": 1}, {"q": "The episode ___ at nine.", "o": ["finish", "finishes", "finishs"], "a": 1}, {"q": "My sister ___ biology at university.", "o": ["study", "studies", "studys"], "a": 1}, {"q": "He ___ football at the weekend.", "o": ["plays", "plaies", "play"], "a": 0}, {"q": "She ___ two brothers.", "o": ["have", "has", "haves"], "a": 1}, {"q": "They ___ TV every evening.", "o": ["watch", "watches", "watchs"], "a": 0}, {"q": "My dad ___ to work by bus.", "o": ["go", "goes", "gos"], "a": 1}, {"q": "My cousin ___ photos of everything.", "o": ["takes", "take", "taks"], "a": 0}, {"q": "He ___ makes popcorn. (всегда)", "o": ["always", "every", "usual"], "a": 0}, {"q": "She ___ late. (всегда, с глаголом be)", "o": ["is always", "always is", "always"], "a": 0}, {"q": "Water ___ at 100 degrees.", "o": ["boils", "boil", "boiles"], "a": 0}],"grammar");
+SMrenderGap("b4",[{"q": "Their mum ___ (bring) tea.", "a": ["brings"]}, {"q": "Their dad ___ (laugh) at everything.", "a": ["laughs"]}, {"q": "Marek ___ (enjoy) the clever jokes.", "a": ["enjoys"]}, {"q": "The family ___ (talk) about the episode.", "a": ["talks"]}, {"q": "My brother ___ (try) to cook every Sunday.", "a": ["tries"]}, {"q": "She ___ (have) three cousins.", "a": ["has"]}, {"q": "He ___ (finish) work at six.", "a": ["finishes"]}, {"q": "My aunt ___ (fly) to Spain every summer.", "a": ["flies"]}],"gap");
+SMrenderPron("b5",["makes", "laughs", "takes", "lives", "plays", "brings", "watches", "finishes", "chooses"]);
+SMrenderMC("b6",[{"q": "watches", "o": ["/ɪz/", "/s/", "/z/"], "a": 0}, {"q": "makes", "o": ["/s/", "/z/", "/ɪz/"], "a": 0}, {"q": "lives", "o": ["/z/", "/s/", "/ɪz/"], "a": 0}, {"q": "finishes", "o": ["/ɪz/", "/s/", "/z/"], "a": 0}, {"q": "plays", "o": ["/z/", "/s/", "/ɪz/"], "a": 0}, {"q": "laughs", "o": ["/s/", "/z/", "/ɪz/"], "a": 0}],"pron");
+SMrenderSpeak("b7",["Опиши вечер пятницы в своей семье: кто что делает. Минимум шесть глаголов в третьем лице.", "Расскажи про любимый сериал: <b>It starts… The main character works… She lives…</b>", "Опиши обычный день брата, сестры или друга — только he/she, следи за -s."]);
+SMrenderWB("b8",[{"q": "She ___ in a hospital.", "o": ["work", "works", "working"], "a": 1}, {"q": "We ___ sitcoms.", "o": ["love", "loves", "loving"], "a": 0}, {"q": "He ___ his homework after school.", "o": ["do", "does", "dos"], "a": 1}, {"q": "My mum ___ the dishes every evening.", "o": ["washes", "washs", "wash"], "a": 0}, {"q": "Anna ___ never late.", "o": ["is", "are", "be"], "a": 0}, {"q": "My cousins ___ in Poland.", "o": ["live", "lives", "living"], "a": 0}],[{"q": "He ___ (watch) a film every Friday.", "a": ["watches"]}, {"q": "My sister ___ (study) maths.", "a": ["studies"]}, {"q": "They ___ (play) tennis at the weekend.", "a": ["play"]}, {"q": "It ___ (finish) at ten o’clock.", "a": ["finishes"]}, {"q": "She ___ (go) to school by bike.", "a": ["goes"]}, {"q": "My dad ___ (have) a new phone.", "a": ["has"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>

@@ -113,52 +113,7 @@
   <div id="b6"></div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1D</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-/* ── помощники рендера подуроков ── */
-function SMel(id){return document.getElementById(id);}
-function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var d=document.createElement("div");d.className="word";
-    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
-function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
-    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
-function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
-function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
-function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
-function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
-  box.appendChild(matchCard(pairs,1,sec));}
-function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
-  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
-    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
-function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  shuffle(items).forEach(function(c,i){
-    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
-    var opts=shuffle([c[1]].concat(others));
-    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
-function SMrenderListen(id,script,qs,sec){
-  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
-  if(p)p.onclick=function(){playDialog(script);};
-  if(s)s.onclick=function(){speechSynthesis.cancel();};
-  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
-  SMrenderMC(id,qs,sec);}
-function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
-  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
-  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
-  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
-  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
-
-/* ── содержимое урока ── */
-SMrenderListen("b1",[["f", "What’s this on TV?"], ["m", "I don’t know. It’s a sitcom, I think. It’s really funny."], ["m2", "But Sarah and I want to watch the football! Barcelona against Chelsea."], ["m", "I don’t like football."], ["f", "But I hate sitcoms! And Tom doesn’t like sitcoms either."], ["m", "Do you want to record the football, then?"], ["f", "We don’t want to record it, we want to watch it live! Give me the remote."], ["m", "I haven’t got it. Does Mum know where it is?"], ["m2", "It doesn’t matter. The match starts in two minutes."], ["f", "Found it! Right — football."]],[{"q": "What is on TV at the start?", "o": ["a sitcom", "the football", "the news"], "a": 0}, {"q": "Who likes the sitcom?", "o": ["Jake", "Sarah", "Tom"], "a": 0}, {"q": "What does Jake suggest?", "o": ["recording the football", "watching the news", "turning off the TV"], "a": 0}, {"q": "Why doesn’t Sarah want to record it?", "o": ["she wants to watch it live", "she hates football", "the TV is broken"], "a": 0}, {"q": "Who finds the remote?", "o": ["Sarah", "Jake", "Tom"], "a": 0}],"listening");
-SMrenderMC("b3",[{"q": "My aunt ___ in London.", "o": ["doesn’t work", "don’t work", "doesn’t works"], "a": 0}, {"q": "I ___ rap music.", "o": ["don’t like", "doesn’t like", "not like"], "a": 0}, {"q": "My cousins ___ Spanish.", "o": ["don’t speak", "doesn’t speak", "don’t speaks"], "a": 0}, {"q": "___ your parents both work?", "o": ["Do", "Does", "Are"], "a": 0}, {"q": "___ your best friend like football?", "o": ["Does", "Do", "Is"], "a": 0}, {"q": "Where ___ she live?", "o": ["does", "do", "is"], "a": 0}, {"q": "«Do you wear jeans to school?» — «Yes, I ___ .»", "o": ["do", "am", "does"], "a": 0}, {"q": "«Does he play volleyball?» — «No, he ___ .»", "o": ["doesn’t", "don’t", "isn’t"], "a": 0}, {"q": "My stepbrother ___ at the weekend.", "o": ["doesn’t study", "doesn’t studies", "don’t study"], "a": 0}, {"q": "What time ___ the match start?", "o": ["does", "do", "is"], "a": 0}],"grammar");
-SMrenderGap("b4",[{"q": "My aunt works in London. → Отрицание: My aunt ___ in London.", "a": ["doesn’t work", "doesn't work", "does not work"]}, {"q": "Joe and I walk to school. → Отрицание: Joe and I ___ to school.", "a": ["don’t walk", "don't walk", "do not walk"]}, {"q": "Вопрос: ___ near the school? (you / live)", "a": ["do you live"]}, {"q": "Вопрос: ___ football? (your best friend / like)", "a": ["does your best friend like"]}, {"q": "Вопрос: ___ jeans to school? (you / wear)", "a": ["do you wear"]}, {"q": "Отрицание: She ___ (not / get up) early on Saturdays.", "a": ["doesn’t get up", "doesn't get up", "does not get up"]}],"gap");
-SMrenderSpeak("b5",["Задай собеседнику пять вопросов с Do/Does и запиши ответы.", "Скажи три правдивых предложения о себе с <b>don’t</b>: <i>I don’t get up early on Saturdays.</i>", "Расскажи, чего <b>не</b> делает твой брат, сестра или друг: <i>He doesn’t…</i>", "Разыграй спор из диалога: кто что хочет смотреть и почему."]);
-SMrenderWB("b6",[{"q": "He ___ TV in the morning.", "o": ["doesn’t watch", "don’t watch", "doesn’t watches"], "a": 0}, {"q": "___ they live in Moscow?", "o": ["Do", "Does", "Are"], "a": 0}, {"q": "«Does she like maths?» — «Yes, she ___ .»", "o": ["does", "do", "is"], "a": 0}, {"q": "We ___ a car.", "o": ["haven’t got", "hasn’t got", "don’t got"], "a": 0}, {"q": "What ___ your dad do?", "o": ["does", "do", "is"], "a": 0}],[{"q": "She ___ (not / speak) French.", "a": ["doesn’t speak", "doesn't speak", "does not speak"]}, {"q": "___ (you / play) the guitar?", "a": ["do you play"]}, {"q": "___ (he / go) to school by bus?", "a": ["does he go"]}, {"q": "They ___ (not / argue) a lot.", "a": ["don’t argue", "don't argue", "do not argue"]}],[]);
-var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];
@@ -390,6 +345,51 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderListen("b1",[["f", "What’s this on TV?"], ["m", "I don’t know. It’s a sitcom, I think. It’s really funny."], ["m2", "But Sarah and I want to watch the football! Barcelona against Chelsea."], ["m", "I don’t like football."], ["f", "But I hate sitcoms! And Tom doesn’t like sitcoms either."], ["m", "Do you want to record the football, then?"], ["f", "We don’t want to record it, we want to watch it live! Give me the remote."], ["m", "I haven’t got it. Does Mum know where it is?"], ["m2", "It doesn’t matter. The match starts in two minutes."], ["f", "Found it! Right — football."]],[{"q": "What is on TV at the start?", "o": ["a sitcom", "the football", "the news"], "a": 0}, {"q": "Who likes the sitcom?", "o": ["Jake", "Sarah", "Tom"], "a": 0}, {"q": "What does Jake suggest?", "o": ["recording the football", "watching the news", "turning off the TV"], "a": 0}, {"q": "Why doesn’t Sarah want to record it?", "o": ["she wants to watch it live", "she hates football", "the TV is broken"], "a": 0}, {"q": "Who finds the remote?", "o": ["Sarah", "Jake", "Tom"], "a": 0}],"listening");
+SMrenderMC("b3",[{"q": "My aunt ___ in London.", "o": ["doesn’t work", "don’t work", "doesn’t works"], "a": 0}, {"q": "I ___ rap music.", "o": ["don’t like", "doesn’t like", "not like"], "a": 0}, {"q": "My cousins ___ Spanish.", "o": ["don’t speak", "doesn’t speak", "don’t speaks"], "a": 0}, {"q": "___ your parents both work?", "o": ["Do", "Does", "Are"], "a": 0}, {"q": "___ your best friend like football?", "o": ["Does", "Do", "Is"], "a": 0}, {"q": "Where ___ she live?", "o": ["does", "do", "is"], "a": 0}, {"q": "«Do you wear jeans to school?» — «Yes, I ___ .»", "o": ["do", "am", "does"], "a": 0}, {"q": "«Does he play volleyball?» — «No, he ___ .»", "o": ["doesn’t", "don’t", "isn’t"], "a": 0}, {"q": "My stepbrother ___ at the weekend.", "o": ["doesn’t study", "doesn’t studies", "don’t study"], "a": 0}, {"q": "What time ___ the match start?", "o": ["does", "do", "is"], "a": 0}],"grammar");
+SMrenderGap("b4",[{"q": "My aunt works in London. → Отрицание: My aunt ___ in London.", "a": ["doesn’t work", "doesn't work", "does not work"]}, {"q": "Joe and I walk to school. → Отрицание: Joe and I ___ to school.", "a": ["don’t walk", "don't walk", "do not walk"]}, {"q": "Вопрос: ___ near the school? (you / live)", "a": ["do you live"]}, {"q": "Вопрос: ___ football? (your best friend / like)", "a": ["does your best friend like"]}, {"q": "Вопрос: ___ jeans to school? (you / wear)", "a": ["do you wear"]}, {"q": "Отрицание: She ___ (not / get up) early on Saturdays.", "a": ["doesn’t get up", "doesn't get up", "does not get up"]}],"gap");
+SMrenderSpeak("b5",["Задай собеседнику пять вопросов с Do/Does и запиши ответы.", "Скажи три правдивых предложения о себе с <b>don’t</b>: <i>I don’t get up early on Saturdays.</i>", "Расскажи, чего <b>не</b> делает твой брат, сестра или друг: <i>He doesn’t…</i>", "Разыграй спор из диалога: кто что хочет смотреть и почему."]);
+SMrenderWB("b6",[{"q": "He ___ TV in the morning.", "o": ["doesn’t watch", "don’t watch", "doesn’t watches"], "a": 0}, {"q": "___ they live in Moscow?", "o": ["Do", "Does", "Are"], "a": 0}, {"q": "«Does she like maths?» — «Yes, she ___ .»", "o": ["does", "do", "is"], "a": 0}, {"q": "We ___ a car.", "o": ["haven’t got", "hasn’t got", "don’t got"], "a": 0}, {"q": "What ___ your dad do?", "o": ["does", "do", "is"], "a": 0}],[{"q": "She ___ (not / speak) French.", "a": ["doesn’t speak", "doesn't speak", "does not speak"]}, {"q": "___ (you / play) the guitar?", "a": ["do you play"]}, {"q": "___ (he / go) to school by bus?", "a": ["does he go"]}, {"q": "They ___ (not / argue) a lot.", "a": ["don’t argue", "don't argue", "do not argue"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 </script>
 </body>
 </html>
