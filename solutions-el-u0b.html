@@ -138,17 +138,17 @@
   <div class="wbintro">Задания к уроку 0B. Реши здесь — результат увидит учитель.</div>
 <h2>1 · Впиши форму be</h2>
   <div class="wbband">Утверждение или отрицание — смотри на ✓ и ✗.</div>
-  <div id="b1"></div>
+  <div id="b7"></div>
 <h2>2 · Собери вопрос</h2>
-  <div id="b2"></div>
+  <div id="b8"></div>
 <h2>3 · Таблица: что у кого есть</h2>
   <div class="card"><table><tr><th></th><th>Liam</th><th>Zoe</th></tr><tr><td>skateboard</td><td>✓</td><td>✗</td></tr><tr><td>smartphone</td><td>✓</td><td>✓</td></tr><tr><td>dictionary</td><td>✗</td><td>✓</td></tr><tr><td>bike</td><td>✓</td><td>✓</td></tr></table></div>
 <h2>4 · Вопрос и короткий ответ по таблице</h2>
   <div class="wbband">Формат ответа: <i>Yes, he has.</i> или <i>No, she hasn’t.</i></div>
-  <div id="b4"></div>
+  <div id="b10"></div>
 <h2>5 · Письмо другу по переписке</h2>
   <div class="wbband">Впиши формы be и have got — утверждение, отрицание или вопрос.</div>
-  <div class="clozebox" id="b5"></div>
+  <div class="clozebox" id="b11"></div>
 <h2>6 · Ответь Эмили</h2>
   <div class="hw">Напиши ответное письмо (5–6 предложений): имя, возраст, откуда ты, что у тебя есть, есть ли братья и сёстры. Используй <b>be</b> и <b>have got</b> в утверждении, отрицании и вопросе.</div>
   </div>
@@ -517,10 +517,10 @@ SMrenderListen("b1",[["m", "Have you got a brother, Joanna?", "Max"], ["f", "No,
 SMrenderMC("b4",[{"q": "I ___ a new student.", "o": ["am", "is", "are"], "a": 0}, {"q": "She ___ from Croatia.", "o": ["is", "am", "are"], "a": 0}, {"q": "They ___ got a big schoolbag.", "o": ["have", "has", "is"], "a": 0}, {"q": "___ you seventeen?", "o": ["Are", "Is", "Have"], "a": 0}, {"q": "___ she got a dog?", "o": ["Has", "Have", "Is"], "a": 0}, {"q": "«Are you twins?» — «Yes, we ___ .»", "o": ["are", "have", "is"], "a": 0}, {"q": "«Has he got a bike?» — «No, he ___ .»", "o": ["hasn’t", "haven’t", "isn’t"], "a": 0}, {"q": "We ___ got an eraser.", "o": ["haven’t", "hasn’t", "aren’t"], "a": 0}, {"q": "My sister ___ sixteen.", "o": ["is", "has", "have"], "a": 0}, {"q": "It ___ cold today.", "o": ["isn’t", "aren’t", "hasn’t"], "a": 0}],"grammar");
 SMrenderGap("b5",[{"q": "___ (you / be) from Spain? (вопрос)", "a": ["are you"]}, {"q": "He ___ (have got) a new schoolbag.", "a": ["has got", "’s got", "'s got"]}, {"q": "She ___ (be / not) from Italy.", "a": ["isn’t", "isn't", "is not"]}, {"q": "We ___ (have got) some pencils.", "a": ["have got", "’ve got", "'ve got"]}, {"q": "They ___ (have got / not) a car.", "a": ["haven’t got", "haven't got", "have not got"]}, {"q": "___ (it / be) your dog? (вопрос)", "a": ["is it"]}],"gap");
 SMrenderSpeak("b6",["Опиши фотографию своей семьи: кто есть, сколько лет, что у кого есть.", "Задай пять вопросов с Have you got…? и пять с Are you…?", "Скажи три правды и одну ложь о себе через be и have got — пусть собеседник найдёт ложь."]);
-SMrenderGap("b1",[{"q": "They ___ cousins. ✗", "a": ["aren’t", "aren't", "are not"]}, {"q": "She ___ from Croatia. ✗", "a": ["isn’t", "isn't", "is not"]}, {"q": "You ___ at school. ✓", "a": ["are", "’re", "'re"]}, {"q": "I ___ a student. ✓", "a": ["am", "’m", "'m"]}, {"q": "We ___ hungry. ✗", "a": ["aren’t", "aren't", "are not"]}, {"q": "He ___ from Spain. ✗", "a": ["isn’t", "isn't", "is not"]}],"wb-gram");
-SMrenderGap("b2",[{"q": "seventeen / are / you", "a": ["are you seventeen"]}, {"q": "they / from / are / Britain", "a": ["are they from britain"]}, {"q": "cold / today / it / is", "a": ["is it cold today"]}, {"q": "in / we / an English lesson / are", "a": ["are we in an english lesson"]}, {"q": "she / is / very tall", "a": ["is she very tall"]}],"wb-gram");
-SMrenderGap("b4",[{"q": "Has Liam got a skateboard?", "a": ["yes, he has", "yes he has"]}, {"q": "Has Zoe got a skateboard?", "a": ["no, she hasn’t", "no she hasn't", "no, she hasn't"]}, {"q": "Have Liam and Zoe got smartphones?", "a": ["yes, they have", "yes they have"]}, {"q": "Has Liam got a dictionary?", "a": ["no, he hasn’t", "no he hasn't", "no, he hasn't"]}, {"q": "Have Liam and Zoe got bikes?", "a": ["yes, they have", "yes they have"]}],"wb-gram");
-SMrenderCloze("b5",["Hi Lucy,\nMy name ", {"a": ["is", "’s", "'s"], "hint": "be"}, " Emily. I ", {"a": ["am", "’m", "'m"], "hint": "be"}, " seventeen years old. How old ", {"a": ["are"], "hint": "be"}, " you?\nMy home town is Bristol, in England. But I ", {"a": ["am not", "’m not", "'m not"], "hint": "be, отриц."}, " English — I’m American. My parents ", {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"}, " a house here.\nI ", {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"}, " one brother, but I ", {"a": ["haven't got", "haven’t got"], "hint": "have got, отриц."}, " a sister. ", {"a": ["have"], "hint": "вопрос"}, " you got any brothers or sisters?\nWrite soon!\nEmily"],[],"wb-cloze");
+SMrenderGap("b7",[{"q": "They ___ cousins. ✗", "a": ["aren’t", "aren't", "are not"]}, {"q": "She ___ from Croatia. ✗", "a": ["isn’t", "isn't", "is not"]}, {"q": "You ___ at school. ✓", "a": ["are", "’re", "'re"]}, {"q": "I ___ a student. ✓", "a": ["am", "’m", "'m"]}, {"q": "We ___ hungry. ✗", "a": ["aren’t", "aren't", "are not"]}, {"q": "He ___ from Spain. ✗", "a": ["isn’t", "isn't", "is not"]}],"wb-gram");
+SMrenderGap("b8",[{"q": "seventeen / are / you", "a": ["are you seventeen"]}, {"q": "they / from / are / Britain", "a": ["are they from britain"]}, {"q": "cold / today / it / is", "a": ["is it cold today"]}, {"q": "in / we / an English lesson / are", "a": ["are we in an english lesson"]}, {"q": "she / is / very tall", "a": ["is she very tall"]}],"wb-gram");
+SMrenderGap("b10",[{"q": "Has Liam got a skateboard?", "a": ["yes, he has", "yes he has"]}, {"q": "Has Zoe got a skateboard?", "a": ["no, she hasn’t", "no she hasn't", "no, she hasn't"]}, {"q": "Have Liam and Zoe got smartphones?", "a": ["yes, they have", "yes they have"]}, {"q": "Has Liam got a dictionary?", "a": ["no, he hasn’t", "no he hasn't", "no, he hasn't"]}, {"q": "Have Liam and Zoe got bikes?", "a": ["yes, they have", "yes they have"]}],"wb-gram");
+SMrenderCloze("b11",["Hi Lucy,\nMy name ", {"a": ["is", "’s", "'s"], "hint": "be"}, " Emily. I ", {"a": ["am", "’m", "'m"], "hint": "be"}, " seventeen years old. How old ", {"a": ["are"], "hint": "be"}, " you?\nMy home town is Bristol, in England. But I ", {"a": ["am not", "’m not", "'m not"], "hint": "be, отриц."}, " English — I’m American. My parents ", {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"}, " a house here.\nI ", {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"}, " one brother, but I ", {"a": ["haven't got", "haven’t got"], "hint": "have got, отриц."}, " a sister. ", {"a": ["have"], "hint": "вопрос"}, " you got any brothers or sisters?\nWrite soon!\nEmily"],[],"wb-cloze");
 var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
   speechSynthesis.cancel();

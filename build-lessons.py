@@ -114,9 +114,14 @@ def esc(t):
     return (t or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def html_blocks(blocks):
-    """HTML-часть: заголовки и контейнеры. Данные уходят в JS."""
-    out, n = [], 0
+def html_blocks(blocks, start=0):
+    """HTML-часть: заголовки и контейнеры. Данные уходят в JS.
+
+    `start` — с какого номера продолжать нумерацию контейнеров. Урок и
+    рабочая тетрадь живут на одной странице, поэтому нумерация должна быть
+    сквозной: иначе id совпадут и getElementById вернёт чужой контейнер.
+    """
+    out, n = [], start
     for b in blocks:
         n += 1
         bid = "b%d" % n
@@ -401,7 +406,8 @@ def build_unit(course, unit, data, letters_all):
                 '  <div class="pane on" id="pane-lesson">\n' + html_blocks(lesson_blocks) +
                 '  </div>\n  <div class="pane" id="pane-wb">\n'
                 '  <div class="wbintro">Задания к уроку %d%s. Реши здесь — результат увидит учитель.</div>\n'
-                % (unit, letter) + html_blocks(wb_blocks) + '  </div>\n')
+                % (unit, letter)
+                + html_blocks(wb_blocks, start=len(lesson_blocks)) + '  </div>\n')
         else:
             body_html = html_blocks(lesson_blocks)
         title = "%d%s · %s · %s · English with Asya" % (unit, letter, L.get("topic", role), data["title"])
