@@ -159,10 +159,10 @@ WB["C"] = [
 
  {"type":"sort","title":"2 · Разложи по звуку","sec":"wb-sound",
   "note":"Нажми на слово, потом на нужную колонку. Ориентируйся на звук, а не на написание.",
-  "groups":[{"label":"как в school /uː/","words":["cool","June","pool","music"]},
+  "groups":[{"label":"как в school /uː/","words":["cool","June","pool","food"]},
             {"label":"как в foot /ʊ/","words":["good","book","look","put"]},
             {"label":"как в bus /ʌ/","words":["run","month","mother","much"]}],
-  "words":["cool","June","pool","music","good","book","look","put","run","month","mother","much"]},
+  "words":["cool","June","pool","food","good","book","look","put","run","month","mother","much"]},
 
  {"type":"mc","title":"3 · Найди лишнее по гласному","sec":"wb-sound",
   "items":[

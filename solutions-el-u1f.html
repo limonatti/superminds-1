@@ -364,10 +364,57 @@ function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
 function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
   items.forEach(function(w){var b=document.createElement("button");b.className="chip";
     b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+/* Варианты перемешиваются при каждой загрузке: иначе правильный ответ
+   всегда стоит первым и задание проверяет память о порядке, а не язык. */
+function SMshuffleOpts(t){
+  if(!t||!Array.isArray(t.o)||typeof t.a!=="number")return t;
+  var right=t.o[t.a], opts=shuffle(t.o);
+  return {q:t.q,o:opts,a:opts.indexOf(right)};}
 function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+  items.forEach(function(t,i){box.appendChild(mcCard(SMshuffleOpts(t),i+1,sec));});}
+/* Своя проверка вписанного ответа. Базовая сравнивает строки буквально,
+   поэтому точка в конце, кривой апостроф или двойной пробел засчитываются
+   как ошибка — ученик получает «неверно» за верный ответ. */
+var SM_CONTR=[[/\bdon't\b/g,"do not"],[/\bdoesn't\b/g,"does not"],
+  [/\bdidn't\b/g,"did not"],[/\bisn't\b/g,"is not"],[/\baren't\b/g,"are not"],
+  [/\bwasn't\b/g,"was not"],[/\bweren't\b/g,"were not"],[/\bhaven't\b/g,"have not"],
+  [/\bhasn't\b/g,"has not"],[/\bcan't\b/g,"cannot"],
+  [/\bwon't\b/g,"will not"],[/\bshouldn't\b/g,"should not"],
+  [/\bi'm\b/g,"i am"],[/\byou're\b/g,"you are"],[/\bwe're\b/g,"we are"],
+  [/\bthey're\b/g,"they are"],[/\bhe's\b/g,"he is"],[/\bshe's\b/g,"she is"],
+  [/\bit's\b/g,"it is"],[/\bi've\b/g,"i have"],[/\byou've\b/g,"you have"],
+  [/\bwe've\b/g,"we have"],[/\bthey've\b/g,"they have"]];
+function SMnorm(s){
+  var v=(s||"").toLowerCase()
+    .replace(/[‘’ʼ`]/g,"'")
+    .replace(/[–—]/g,"-")
+    .replace(/ /g," ")
+    .replace(/[.!?;,]+$/,"")
+    .replace(/\s+/g," ").trim();
+  SM_CONTR.forEach(function(p){v=v.replace(p[0],p[1]);});
+  return v.replace(/\s+/g," ").trim();}
+function SMgapCard(t,n,sec){
+  tot++;var gi=++_GI;var d=document.createElement("div");d.className="card";
+  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div>'+
+    '<div class="gaprow"><input class="gap-in" placeholder="впиши ответ…">'+
+    '<button class="chk">Проверить</button></div><div class="ans"></div>';
+  var inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");
+  var done=false,logged=false,tries=0;
+  function check(){if(done)return;
+    var raw=inp.value.trim(), v=SMnorm(raw);
+    var ok=t.a.some(function(x){return SMnorm(x)===v;});
+    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
+    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;
+      inp.disabled=true;btn.disabled=true;an.style.display="none";bump();}
+    else{tries++;inp.classList.add("bad");an.style.display="block";
+      an.textContent=tries<2?"Не совсем. Попробуй ещё раз."
+                            :"Подсказка: "+t.a[0];}}
+  btn.onclick=check;
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  inp.addEventListener("input",function(){inp.classList.remove("bad");});
+  return d;}
 function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
-  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+  items.forEach(function(t,i){box.appendChild(SMgapCard(t,i+1,sec));});}
 function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
   items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
 function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
@@ -438,9 +485,8 @@ function SMrenderCloze(id,parts,bank,sec){var box=SMel(id);if(!box)return;
     var inp=document.createElement("input");inp.className="gap-in cin";
     inp.placeholder=seg.hint||"…";inp.size=Math.max(6,(seg.a[0]||"").length+2);
     var done=false,logged=false;
-    function chk(){if(done)return;var raw=inp.value.trim();
-      var v=raw.toLowerCase().replace(/\s+/g," ").replace(/[’]/g,"'");
-      var ok=seg.a.some(function(x){return x.toLowerCase().replace(/[’]/g,"'")===v;});
+    function chk(){if(done)return;var raw=inp.value.trim();var v=SMnorm(raw);
+      var ok=seg.a.some(function(x){return SMnorm(x)===v;});
       if(!logged){logged=true;_log(sec,gi,seg.hint||("gap"+i),raw,ok);}
       if(ok){inp.classList.remove("bad");inp.classList.add("ok");inp.disabled=true;done=true;bump();}
       else{inp.classList.add("bad");inp.title="Подсказка: "+seg.a[0];}}
