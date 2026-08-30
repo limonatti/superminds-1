@@ -10,7 +10,7 @@
         {
           "type": "words",
           "title": "🔤 Члены семьи",
-          "note": "Нажми 🔊 и повтори. Сначала — база, ниже разберём step-, half-, -in-law и great-.",
+          "note": "Нажми 🔊 и повтори. Сначала — база, ниже разберём step-, -in-law и great-.",
           "items": [
             [
               "mother (mum)",
@@ -107,11 +107,10 @@
           "title": "🧩 Приставки и -in-law",
           "cards": [
             {
-              "h": "step- · half- · -in-law · great-",
+              "h": "step- · -in-law · great-",
               "rows": [
                 "<b>-in-law</b> — родство через брак: <b>father-in-law</b> = отец мужа или жены · <b>brother-in-law</b> = муж сестры или брат супруга.",
                 "<b>step-</b> — родство через повторный брак: <b>stepmother</b> = жена отца · <b>stepsister</b> = дочь отчима или мачехи.",
-                "<b>half-</b> — общий только один родитель: <b>half-brother</b> = брат по одному родителю.",
                 "<b>great-</b> — на поколение дальше: <b>great-grandfather</b> = прадед · <b>great-uncle</b> = дядя мамы или папы."
               ]
             }
@@ -136,14 +135,6 @@
             [
               "stepsister",
               "сводная сестра"
-            ],
-            [
-              "half-brother",
-              "брат по одному родителю"
-            ],
-            [
-              "half-sister",
-              "сестра по одному родителю"
             ],
             [
               "mother-in-law",
@@ -296,16 +287,16 @@
               "o": [
                 "stepmother",
                 "mother-in-law",
-                "half-sister"
+                "stepsister"
               ],
               "a": 0
             },
             {
-              "q": "У нас общая только мама. Она моя ___ .",
+              "q": "Новый муж моей мамы — мой ___ .",
               "o": [
-                "half-sister",
-                "stepsister",
-                "sister-in-law"
+                "stepfather",
+                "father-in-law",
+                "great-uncle"
               ],
               "a": 0
             },
@@ -438,7 +429,7 @@
             ],
             [
               "f2",
-              "She is. We get on well. And the little boy is Sasha, my half-brother. We’ve got the same dad.",
+              "She is. We get on well. And the little boy is Sasha, my stepbrother. He’s Irina’s son.",
               "Ella"
             ],
             [
@@ -484,18 +475,18 @@
             {
               "q": "Sasha is Ella’s…",
               "o": [
-                "half-brother",
+                "stepbrother",
                 "stepbrother",
                 "cousin"
               ],
               "a": 0
             },
             {
-              "q": "What do Ella and Sasha share?",
+              "q": "Who is Sasha’s mother?",
               "o": [
-                "the same dad",
-                "the same mum",
-                "the same school"
+                "Irina",
+                "Ella’s mother",
+                "Vera"
               ],
               "a": 0
             },
@@ -671,7 +662,7 @@
           "type": "gap",
           "title": "2 · Родство через брак",
           "sec": "wb-voc",
-          "note": "Здесь нужны step-, half- и -in-law.",
+          "note": "Здесь нужны step- и -in-law.",
           "items": [
             {
               "q": "My mother’s new husband is my ___ .",
@@ -698,9 +689,9 @@
               ]
             },
             {
-              "q": "My brother and I have got the same mum but different dads. He is my ___ .",
+              "q": "My stepmother’s son is my ___ .",
               "a": [
-                "half-brother"
+                "stepbrother"
               ]
             },
             {

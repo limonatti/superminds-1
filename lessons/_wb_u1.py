@@ -26,13 +26,13 @@ WB["A"] = [
    {"q":"My sister’s son is my ___ .","a":["nephew"]}]},
 
  {"type":"gap","title":"2 · Родство через брак","sec":"wb-voc",
-  "note":"Здесь нужны step-, half- и -in-law.",
+  "note":"Здесь нужны step- и -in-law.",
   "items":[
    {"q":"My mother’s new husband is my ___ .","a":["stepfather"]},
    {"q":"My sister’s husband is my ___ .","a":["brother-in-law"]},
    {"q":"My son’s wife is my ___ .","a":["daughter-in-law"]},
    {"q":"My father’s wife’s daughter is my ___ .","a":["stepsister"]},
-   {"q":"My brother and I have got the same mum but different dads. He is my ___ .","a":["half-brother"]},
+   {"q":"My stepmother’s son is my ___ .","a":["stepbrother"]},
    {"q":"My grandmother’s mother is my ___ .","a":["great-grandmother"]}]},
 
  {"type":"mc","title":"3 · Где апостроф?","sec":"wb-gram",
