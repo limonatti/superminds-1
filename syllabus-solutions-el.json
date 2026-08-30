@@ -1,0 +1,165 @@
+{
+  "course": "solutions-el",
+  "title": "Solutions Elementary (3rd edition)",
+  "note": "Поурочная карта: тема, грамматика, лексика и тип задания каждого урока A–H. Только факты программы — тексты и упражнения на платформе авторские.",
+  "lesson_roles": {
+    "A": "Vocabulary",
+    "B": "Grammar",
+    "C": "Listening",
+    "D": "Grammar",
+    "E": "Word Skills",
+    "F": "Reading",
+    "G": "Speaking",
+    "H": "Writing"
+  },
+  "units": [
+    {
+      "n": 0,
+      "title": "Introduction",
+      "lessons": {
+        "A": {"topic": "Personal information", "cando": "I can exchange basic personal information.", "vocab": ["Alphabet", "Numbers 1–50", "Countries"], "skills": ["Speaking: Introductions", "Listening: Teens introducing themselves"]},
+        "B": {"topic": "be and have got", "cando": "I can use be and have got.", "grammar": ["be: affirmative, negative, questions, short answers", "have got: affirmative, negative, questions"]},
+        "C": {"topic": "Talking about ability and asking for permission", "cando": "I can talk about ability and ask for permission.", "grammar": ["can for ability", "can for permission"], "vocab": ["Action verbs (dance, ride a bike)", "Musical instruments"]},
+        "D": {"topic": "Articles: the, a / an, some; this / that / these / those", "cando": "I can use articles and this, that, these, those correctly.", "grammar": ["the, a / an, some", "this / that / these / those"], "vocab": ["In the classroom (pencil case, ruler)"], "skills": ["Speaking: Asking about classroom items"]}
+      }
+    },
+    {
+      "n": 1,
+      "title": "Family and friends",
+      "lessons": {
+        "A": {"topic": "Family", "cando": "I can talk about family members.", "vocab": ["Family members (aunt, son, stepbrother)", "step- / half- / -in-law / great-"], "grammar": ["Possessive 's", "Recycle: have got"], "skills": ["Speaking: Famous families quiz", "Listening: Describing a family photo"]},
+        "B": {"topic": "Present simple (affirmative)", "cando": "I can describe what people usually do.", "grammar": ["Present simple affirmative", "Third person -s / -es / -ies"], "skills": ["Pronunciation: Third person singular endings /s/ /z/ /ɪz/"]},
+        "C": {"topic": "Spelling and pronunciation", "cando": "I can distinguish similar sounds and use context.", "vocab": ["Housework"], "skills": ["Strategy: Vowels — same spelling, different sounds", "Strategy: Distinguishing similar sounds, using context", "Listening: Teens talking about housework"]},
+        "D": {"topic": "Present simple (negative and interrogative)", "cando": "I can ask and answer about routines.", "grammar": ["don't / doesn't", "Do / Does questions and short answers"], "skills": ["Listening: An argument between siblings"]},
+        "E": {"topic": "Singular and plural nouns", "cando": "I can use singular and plural forms correctly.", "grammar": ["Plural and singular forms, irregular plurals"], "vocab": ["Adjectives and dependent prepositions"], "skills": ["Dictionary work"]},
+        "F": {"topic": "Sibling rivalry", "cando": "I can understand a text about brothers and sisters.", "text": "Brotherly love?", "skills": ["Strategy: Gapped sentence tasks"]},
+        "G": {"topic": "Describing people", "cando": "I can describe what people look like and what they are like.", "vocab": ["Useful words for describing people", "Personality adjectives"], "skills": ["Key phrases: Giving personal information", "Listening: Describing friends"]},
+        "H": {"topic": "A personal profile", "cando": "I can write a personal profile.", "skills": ["Strategy: Using contractions appropriately", "Strategy: Writing in paragraphs"]}
+      }
+    },
+    {
+      "n": 2,
+      "title": "School days",
+      "lessons": {
+        "A": {"topic": "Daily routine", "cando": "I can talk about my daily routine.", "vocab": ["Daily routine (get dressed, wake up)", "School subjects", "Times"], "grammar": ["Recycle: do / does in questions"], "skills": ["Listening: Tim's timetable"]},
+        "B": {"topic": "have to", "cando": "I can talk about obligation.", "grammar": ["have to / don't have to", "Questions with have to"]},
+        "C": {"topic": "Unusual schools", "cando": "I can identify numbers, dates and times.", "skills": ["Saying numbers, dates and times", "Strategy: Identifying numbers, dates and times", "Speaking: Comparing your school with a democratic school", "Listening: Studying at the Brooklyn Free School"]},
+        "D": {"topic": "Adverbs of frequency; question words", "cando": "I can say how often and ask questions.", "grammar": ["Adverbs of frequency", "Question words"], "skills": ["Listening: A dialogue about school clubs"]},
+        "E": {"topic": "Prepositions of time", "cando": "I can use prepositions of time.", "grammar": ["in, on, at", "before, after, during, until, from … to"], "skills": ["Speaking: Talking about your school day and year"]},
+        "F": {"topic": "Dangerous journeys", "cando": "I can match sentences with a text.", "text": "The school run", "vocab": ["Landscape (mountain, river)"], "skills": ["Strategy: Matching sentences with texts"]},
+        "G": {"topic": "Giving advice", "cando": "I can give advice.", "grammar": ["should / shouldn't", "Imperatives"], "vocab": ["Adjectives to describe feelings"], "skills": ["Listening: Teens discussing problems and giving advice"]},
+        "H": {"topic": "An announcement", "cando": "I can write an announcement.", "vocab": ["School events (play, school club, sports day)"], "skills": ["Strategy: Writing notes to prepare for a task"]}
+      }
+    },
+    {
+      "n": 3,
+      "title": "Style",
+      "lessons": {
+        "A": {"topic": "Clothes", "cando": "I can describe what people wear.", "vocab": ["Clothes (boots, cardigan, dress)", "Colours"], "grammar": ["Recycle: Adverbs of frequency"], "skills": ["Speaking: Describing people's clothes", "Listening: Discussing clothes"]},
+        "B": {"topic": "Present continuous", "cando": "I can say what is happening now.", "grammar": ["Present continuous", "Spelling: -ing forms"], "vocab": ["Adjectives to describe clothes (casual, smart)"], "skills": ["Dictionary work"]},
+        "C": {"topic": "Catwalk fashion", "cando": "I can identify word stress.", "skills": ["Strategy: Identifying word stress", "Speaking: Inventing a catwalk commentary", "Listening: A radio programme about fashion"]},
+        "D": {"topic": "Contrast: present simple and present continuous", "cando": "I can choose between the two present tenses.", "grammar": ["Present tense contrast"], "skills": ["Listening: A phone conversation about shopping"]},
+        "E": {"topic": "Adjectives: opposites", "cando": "I can use opposite adjectives.", "vocab": ["Common adjectives", "Negative prefix un-"], "skills": ["Listening: Talking about buying clothes"]},
+        "F": {"topic": "Teenage pressures", "cando": "I can match headings with paragraphs.", "text": "Impossible images?", "vocab": ["Adjective opposites"], "skills": ["Strategy: Matching headings with texts", "Key phrases: Expressing opinions"]},
+        "G": {"topic": "Making arrangements", "cando": "I can make and respond to suggestions.", "grammar": ["Present continuous for future arrangements"], "skills": ["Key phrases: Making suggestions", "Key phrases: Agreeing to and declining suggestions", "Listening: Making plans for free-time activities"]},
+        "H": {"topic": "An email", "cando": "I can write an informal email.", "vocab": ["Accessories (bracelet, wallet)"], "skills": ["Strategy: Writing an informal email", "Grammar: Linking words", "Key phrases: Beginning and ending an email"]}
+      }
+    },
+    {
+      "n": 4,
+      "title": "Food",
+      "lessons": {
+        "A": {"topic": "Are you hungry?", "cando": "I can talk about food.", "vocab": ["Food (apples, bread, carrots, olives)", "Countable and uncountable nouns"], "grammar": ["Recycle: a / an / some"], "skills": ["Listening: Eating habits"]},
+        "B": {"topic": "there is / there are; some and any", "cando": "I can say what there is.", "grammar": ["there is / there are", "some and any"], "skills": ["Listening: An interview with a freegan"]},
+        "C": {"topic": "What a waste!", "cando": "I can recognise unstressed words.", "skills": ["Strategy: Recognising unstressed words", "Listening: A dialogue about ingredients"]},
+        "D": {"topic": "how much / how many; much / many / a lot of; a few / a little", "cando": "I can talk about quantity.", "grammar": ["how much / how many", "much / many / a lot of", "a few / a little"]},
+        "E": {"topic": "Adjective + preposition", "cando": "I can use adjectives with the right preposition.", "skills": ["Dictionary work"]},
+        "F": {"topic": "Unusual restaurants", "cando": "I can find specific information in a text.", "text": "Out of the ordinary", "vocab": ["Nouns that can be countable and uncountable", "Restaurants (customers, service)"], "skills": ["Strategy: Deciding which part of a text contains the information"]},
+        "G": {"topic": "In a restaurant", "cando": "I can order food in a restaurant.", "grammar": ["would like"], "skills": ["Key phrases: Asking questions in a restaurant", "Listening: Ordering food at a restaurant"]},
+        "H": {"topic": "An invitation", "cando": "I can write an invitation.", "skills": ["Strategy: Checking for mistakes", "Key phrases: Invitations"]}
+      }
+    },
+    {
+      "n": 5,
+      "title": "In the city",
+      "lessons": {
+        "A": {"topic": "Places", "cando": "I can describe where places are.", "vocab": ["Places in towns and cities (airport, bank, bus station)", "Prepositions of place (behind, opposite)"], "grammar": ["Recycle: there is / there are"], "skills": ["Speaking: Travel quiz", "Listening: Teen talking about where he lives"]},
+        "B": {"topic": "Comparatives", "cando": "I can compare two things.", "grammar": ["Comparative adjectives"], "vocab": ["Town and country (farm, lake, traffic)"], "skills": ["Listening: Five monologues about the town and the country", "Speaking: Advantages and disadvantages of living in your town"]},
+        "C": {"topic": "Town or country?", "cando": "I can listen for the main idea.", "skills": ["Strategy: Listening for the main ideas"]},
+        "D": {"topic": "Superlatives", "cando": "I can say which is the best.", "grammar": ["Superlative adjectives"], "skills": ["Listening: Discussing travel options"]},
+        "E": {"topic": "Words that go together", "cando": "I can use travel collocations.", "vocab": ["Travel collocations"]},
+        "F": {"topic": "Unusual cities", "cando": "I can read for overall meaning.", "text": "Unusual cities: the good, the bad and the ugly", "vocab": ["Compass points and continents"], "skills": ["Strategy: Reading for overall meaning"]},
+        "G": {"topic": "Asking for and giving directions", "cando": "I can ask for and give directions.", "skills": ["Strategy: Asking the speaker to slow down, repeat or clarify", "Key phrases: Giving directions", "Key phrases: Location", "Listening: Asking for and giving directions"]},
+        "H": {"topic": "An article", "cando": "I can write an article about a town.", "vocab": ["Adjectives to describe towns and cities"], "skills": ["Strategy: Writing in paragraphs"]}
+      }
+    },
+    {
+      "n": 6,
+      "title": "Going wild",
+      "lessons": {
+        "A": {"topic": "Wild animals", "cando": "I can describe animals.", "vocab": ["Wild animals (bear, shark)", "Parts of an animal (paw, tail)"], "grammar": ["Recycle: Comparative and superlative forms"], "skills": ["Listening: A guided tour of a wildlife park"]},
+        "B": {"topic": "Past simple (affirmative): regular", "cando": "I can talk about the past.", "grammar": ["Past simple regular", "Past tense expressions (last week, ten years ago)"], "skills": ["Pronunciation: -ed endings"]},
+        "C": {"topic": "Missing sounds", "cando": "I can understand joined words in speech.", "skills": ["Strategy: Joined words in connected speech"]},
+        "D": {"topic": "Past simple: be and can", "cando": "I can talk about past states and ability.", "grammar": ["was / were", "could / couldn't"], "skills": ["Listening: A safari trip", "Speaking: Talking about wild experiences"]},
+        "E": {"topic": "Prepositions of movement and place", "cando": "I can say where things are and how they move.", "grammar": ["Prepositions of place: on, in, by", "Prepositions of movement (across, down, under)"]},
+        "F": {"topic": "Stranger than fiction?", "cando": "I can do multiple-choice reading tasks.", "text": "Real animals that were once a myth", "vocab": ["Occupations (pilot, sailor)"], "skills": ["Strategy: Multiple-choice tasks", "Speaking: Survival in the rainforest story"]},
+        "G": {"topic": "Photo description", "cando": "I can describe a photo.", "vocab": ["Natural world (beach, stars)", "Actions (climbing, sitting)"], "skills": ["Strategy: Describing photos in general and in detail", "Key phrases: Describing a photo", "Listening: Photo descriptions"]},
+        "H": {"topic": "A postcard", "cando": "I can write a postcard.", "vocab": ["Adventure holiday activities (cycle, explore)"], "skills": ["Strategy: Choosing the right tense", "Key phrases: Postcards"]}
+      }
+    },
+    {
+      "n": 7,
+      "title": "Digital world",
+      "lessons": {
+        "A": {"topic": "Computing", "cando": "I can talk about technology.", "vocab": ["Computing nouns (charger, tablet)", "Computing verbs (delete, print)", "Technology collocations"], "grammar": ["Recycle: Present continuous"], "skills": ["Listening: Dialogues about technology"]},
+        "B": {"topic": "Past simple (affirmative): irregular", "cando": "I can use irregular past forms.", "grammar": ["Irregular past simple"]},
+        "C": {"topic": "Listening to instructions", "cando": "I can follow instructions.", "vocab": ["Computer instructions (connect, install)"], "skills": ["Strategy: Identifying sequencing words", "Listening: A computer help desk"]},
+        "D": {"topic": "Past simple (negative and interrogative)", "cando": "I can ask and answer about the past.", "grammar": ["didn't", "Did … ? and short answers"], "skills": ["Listening: Talking about a music festival"]},
+        "E": {"topic": "Introduction to phrasal verbs", "cando": "I can use phrasal verbs about computers.", "vocab": ["Phrasal verbs: computers (plug in, shut down)"], "skills": ["Dictionary work"]},
+        "F": {"topic": "Dancing Man", "cando": "I can follow the sequence of events in a text.", "text": "People power", "vocab": ["Internet phrases (internet forum, social media)"], "skills": ["Strategy: Gapped sentence tasks — thinking about the sequence of events"]},
+        "G": {"topic": "In a shop", "cando": "I can buy something in a shop.", "vocab": ["Prices", "Gadgets (touch-screen, Wi-Fi)"], "skills": ["Key phrases: In a shop", "Listening: Buying gadgets"]},
+        "H": {"topic": "A narrative", "cando": "I can write a narrative.", "skills": ["Strategy: Including direct speech in a narrative", "Key phrases: Time expressions for setting the scene and ordering events"]}
+      }
+    },
+    {
+      "n": 8,
+      "title": "Be active!",
+      "lessons": {
+        "A": {"topic": "Sports and hobbies", "cando": "I can talk about sports.", "vocab": ["Sports (aerobics, skiing)", "Verbs play, do and go"], "grammar": ["Recycle: Past simple affirmative and negative"], "skills": ["Speaking: Olympics quiz", "Listening: Monologues about sport"]},
+        "B": {"topic": "going to", "cando": "I can talk about plans.", "grammar": ["going to"], "vocab": ["Future time expressions (this evening, next week)"], "skills": ["Listening: Discussing weekend plans"]},
+        "C": {"topic": "Prediction", "cando": "I can predict how sentences finish.", "skills": ["Strategy: 'Listening ahead' to predict how sentences will finish", "Listening: A news story about Tommy Caldwell and Kevin Jorgeson"]},
+        "D": {"topic": "will", "cando": "I can make predictions and instant decisions.", "grammar": ["will / won't"]},
+        "E": {"topic": "Noun suffixes", "cando": "I can make nouns from verbs and adjectives.", "vocab": ["Noun suffixes", "Nationalities (Australian, Spanish)"]},
+        "F": {"topic": "Against the odds", "cando": "I can do multiple-choice reading tasks.", "text": "Unstoppable", "skills": ["Strategy: Multiple-choice tasks"]},
+        "G": {"topic": "Negotiating", "cando": "I can negotiate and suggest alternatives.", "vocab": ["Athletics events (high jump, relay)"], "skills": ["Strategy: Reacting in appropriate ways", "Key phrases: Rejecting a suggestion", "Key phrases: Suggesting an alternative", "Listening: Making plans to meet"]},
+        "H": {"topic": "An informal letter", "cando": "I can write an informal letter.", "vocab": ["Sports equipment (bike, goggles)"], "skills": ["Strategy: Planning and making notes", "Key phrases: Apologising, giving news and making suggestions"]}
+      }
+    },
+    {
+      "n": 9,
+      "title": "Home sweet home!",
+      "lessons": {
+        "A": {"topic": "My home", "cando": "I can describe my home.", "vocab": ["Furniture (bed, light, wardrobe)", "Parts of a home (bathroom, kitchen)"], "grammar": ["Recycle: Present simple and continuous contrast"], "skills": ["Listening: Family discussions"]},
+        "B": {"topic": "Present perfect (affirmative)", "cando": "I can talk about recent events.", "grammar": ["Present perfect affirmative", "just for recent events"], "skills": ["Listening: Finding a place to live"]},
+        "C": {"topic": "University accommodation", "cando": "I can understand connected speech.", "skills": ["Strategy: Sound changes in connected speech", "Speaking: Discussing university accommodation"]},
+        "D": {"topic": "Present perfect (negative and interrogative)", "cando": "I can ask about experience.", "grammar": ["Present perfect negative and questions", "already and yet"], "skills": ["Listening: Discussing housework"]},
+        "E": {"topic": "do, make, have, take, bring", "cando": "I can use common collocations.", "vocab": ["Collocations with do, make, have and take", "take vs bring"]},
+        "F": {"topic": "In the middle of nowhere", "cando": "I can check references to fill gaps.", "text": "Island home", "vocab": ["Collocations (daily life, sandy beaches)"], "skills": ["Strategy: Checking references to fill gaps"]},
+        "G": {"topic": "Photo comparison", "cando": "I can compare two photos.", "vocab": ["Adjectives to describe rooms"], "skills": ["Strategy: Describing and comparing photos", "Key phrases: Comparing and contrasting", "Key phrases: Speculating"]},
+        "H": {"topic": "A description", "cando": "I can write a description.", "vocab": ["although, because and so", "Modifiers (a bit, extremely)"], "skills": ["Strategy: Using modifiers to make a description sound natural"]}
+      }
+    }
+  ],
+  "exam_trainers": [
+    {"after_unit": 1, "tasks": ["Reading: Multiple choice", "Listening: Multiple matching", "Use of English: Multiple-choice cloze", "Speaking: Problem-solving / Role-play"]},
+    {"after_unit": 4, "tasks": ["Reading: Missing sentences", "Listening: Short text multiple choice", "Use of English: Open cloze", "Speaking: Situational role-play"]},
+    {"after_unit": 6, "tasks": ["Reading: Short text multiple choice", "Listening: True or false", "Use of English: Multiple-choice cloze", "Speaking: Photo description"]},
+    {"after_unit": 8, "tasks": ["Reading: True or false", "Listening: Short answers (sentence completion)", "Use of English: Word formation", "Speaking: Negotiation"]},
+    {"after_unit": 9, "tasks": ["Reading: Multiple matching (headings to paragraphs)", "Listening: Multiple choice", "Use of English: Open cloze", "Speaking: Photo comparison"]}
+  ],
+  "culture": [
+    "1 The Royal Family", "2 The University of Oxford", "3 Teens and their money",
+    "4 British food", "5 New York", "6 Yellowstone National Park",
+    "7 British scientists", "8 Football", "9 The White House"
+  ]
+}

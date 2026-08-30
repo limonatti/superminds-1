@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1G · Speaking · Solutions Elementary · English with Asya</title>
+<title>1G · Describing people · Family and friends · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -73,21 +73,96 @@
   .spkcard .spn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#8e5aa3;color:#fff;border-radius:50%;font-size:13px;margin-right:8px}
   .wbband{background:#fff;border:2px solid #7c2340;border-radius:18px;padding:12px 18px;font-weight:800;font-size:13.5px;color:#5a4f47;margin-bottom:12px}
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
-.subnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}.subchip{border:2px solid #e3d3ba;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:7px 13px;border-radius:999px}.subchip.on{background:#7c2340;border-color:#7c2340;color:#fff}
+.subgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}@media(max-width:620px){.subgrid{grid-template-columns:repeat(2,1fr)}}.subcard{display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:14px;padding:11px 13px;box-shadow:0 3px 0 #e3d3ba;color:#7c2340}.subcard b{font:900 16px 'Fredoka',sans-serif}.subcard span{font:800 11.5px 'Nunito',sans-serif;color:#8a7a68}
+.subnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}.subchip{border:2px solid #e3d3ba;background:#fff;color:#7c2340;font:800 13px 'Nunito',sans-serif;padding:7px 13px;border-radius:999px}.subchip.on{background:#7c2340;border-color:#7c2340;color:#fff}.cando{background:#2e6f4e;color:#fff;border-radius:16px;padding:12px 18px;font:800 14.5px 'Nunito',sans-serif;margin-bottom:18px}.subgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}@media(max-width:620px){.subgrid{grid-template-columns:repeat(2,1fr)}}.subcard{display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:14px;padding:11px 13px;box-shadow:0 3px 0 #e3d3ba;color:#7c2340}.subcard b{font:900 16px 'Fredoka',sans-serif}.subcard span{font:800 11.5px 'Nunito',sans-serif;color:#8a7a68}.matchwrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mitem{display:block;width:100%;border:2px solid #e3d3ba;background:#fdfaf0;cursor:pointer;font:800 14px 'Nunito',sans-serif;padding:9px 12px;border-radius:12px;margin-bottom:6px;text-align:left}.mitem.sel{border-color:#7c2340;background:#fff}.mitem.ok{background:#c8efc0;border-color:#27ae60}.mitem.bad{background:#ffc9c0;border-color:#c0392b}.wbhead{font:900 15px 'Fredoka',sans-serif;color:#7c2340;margin:22px 4px 8px}
 </style>
 </head>
 <body><div class="wrap">
   <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
   <div class="top"><a class="home" href="solutions-el-u1.html">← Юнит</a><a class="home alt" href="trainer.html?unit=sel-u1">🎯 Тренажёр</a><a class="home" href="solutions-el-course.html">Все юниты</a></div>
-  <h1>1G · 💬 Speaking</h1>
-  <div class="d">Unit 1 · Family and friends</div>
+  <h1>1G 💬 Describing people</h1>
+  <div class="d">Family and friends · Speaking</div>
   <div class="subnav"><a class="subchip" href="solutions-el-u1a.html">1A</a><a class="subchip" href="solutions-el-u1b.html">1B</a><a class="subchip" href="solutions-el-u1c.html">1C</a><a class="subchip" href="solutions-el-u1d.html">1D</a><a class="subchip" href="solutions-el-u1e.html">1E</a><a class="subchip" href="solutions-el-u1f.html">1F</a><a class="subchip on" href="solutions-el-u1g.html">1G</a><a class="subchip" href="solutions-el-u1h.html">1H</a></div>
-  <h2>💬 How to… рассказать о семье</h2>
-  <div class="card"><div class="g-ex"><b>This is my…</b> · <b>I've got…</b></div><div class="g-ex"><b>What does he/she do?</b> — <b>He/She is a…</b></div><div class="g-ex"><b>my parents' house</b> (притяжательный ')</div></div>
-  <div id="fx"></div><h2>💬 Говорим</h2><div id="spk"></div>
-  <div class="foot">Made for @english.with_asya · solutions-el · Unit 1G</div>
+  <div class="cando">✅ <b>Can-do:</b> I can describe my friends.</div>
+<h2>🔤 Внешность</h2>
+  <div class="wbband">Порядок: рост → телосложение → волосы → остальное. <i>She’s tall and slim with long dark hair.</i></div>
+  <div class="words" id="b1"></div>
+<h2>🔤 Характер</h2>
+  <div class="words" id="b2"></div>
+<h2>🗝️ Key phrases · говорим о себе и других</h2>
+  <div class="card"><span class="gt">Giving personal information</span>
+    <div class="g-ex">I’m <b>in</b> Year ten. · She’s <b>at</b> university.</div>
+    <div class="g-ex">I walk <b>to</b> school. · I listen <b>to</b> music.</div>
+    <div class="g-ex">I watch films <b>with</b> my friends <b>at</b> the weekend.</div>
+    <div class="g-ex">This is my friend Dan. He’s <b>got</b> short fair hair.</div>
+  </div>
+  <div class="card"><span class="gt">Как строить описание</span>
+    <div class="g-ex">Внешность через <b>be</b> и <b>have got</b>: She <b>is</b> tall. She <b>has got</b> green eyes.</div>
+    <div class="g-ex">Не путай: ~~She has tall~~ → <b>She is tall.</b></div>
+    <div class="g-ex">Характер через <b>be</b>: He <b>is</b> very funny and quite shy.</div>
+  </div>
+<h2>✍️ Впиши предлог или глагол</h2>
+  <div id="b4"></div>
+<h2>🎧 Аудирование</h2>
+  <div class="lc"><h3>Who’s who at the party?</h3><p>Три коротких разговора на дне рождения. Слушай и отвечай.</p><button class="lbtn" id="b5_play">▶ Слушать</button><button class="lbtn sec" id="b5_stop">⏹ Стоп</button><button class="lbtn sec" id="b5_txt">📜 Показать текст</button><div id="b5_sc" style="display:none;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14px;line-height:1.65"><b>Mia:</b> Who’s that boy by the window? The tall one with curly hair.<br><b>Jake:</b> That’s Dan. He’s in my maths class. He’s really funny.<br><b>Mia:</b> Is he here with Sally?<br><b>Jake:</b> No, he isn’t. Sally’s over there, talking to my sister.<br><br><b>Ryan:</b> Hi! I’m Ryan. I don’t know anybody here, honestly.<br><b>Lisa:</b> Nobody? Really?<br><b>Ryan:</b> Well, I know George. He’s my neighbour. The one with glasses and the black jacket.<br><b>Lisa:</b> Oh, George is my brother!<br><br><b>Mia:</b> So, what do you think of the party, Lucy?<br><b>Lucy:</b> It’s brilliant. The music is great.<br><b>Mia:</b> Do you know Kate? Short, with red hair.<br><b>Lucy:</b> I do, and I like her a lot. She’s very kind.</div></div>
+  <div id="b5" style="margin-top:14px"></div>
+<h2>✏️ Исправь описание</h2>
+  <div class="wbband">По диалогу выше — какое утверждение верное?</div>
+  <div id="b6"></div>
+<h2>💬 Говорим</h2>
+  <div id="b7"></div>
+<h2>📒 Рабочая тетрадь 1G</h2>
+  <div id="b8"></div>
+  <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1G</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+/* ── помощники рендера подуроков ── */
+function SMel(id){return document.getElementById(id);}
+function SMrenderWords(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var d=document.createElement("div");d.className="word";
+    d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+    d.querySelector("button").onclick=function(){say(w[0]);};box.appendChild(d);});}
+function SMrenderPron(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(w){var b=document.createElement("button");b.className="chip";
+    b.textContent="🔊 "+w;b.onclick=function(){say(w);};box.appendChild(b);});}
+function SMrenderMC(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(mcCard(t,i+1,sec));});}
+function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(gapCard(t,i+1,sec));});}
+function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  items.forEach(function(t,i){box.appendChild(tfCard(t,i+1,sec));});}
+function SMrenderMatch(id,pairs,sec){var box=SMel(id);if(!box||!pairs)return;
+  box.appendChild(matchCard(pairs,1,sec));}
+function SMrenderSpeak(id,items){var box=SMel(id);if(!box)return;
+  items.forEach(function(p,i){var d=document.createElement("div");d.className="spkcard";
+    d.innerHTML='<span class="spn">'+(i+1)+'</span> '+p;box.appendChild(d);});}
+function SMrenderDrill(id,items,sec){var box=SMel(id);if(!box||!items)return;
+  shuffle(items).forEach(function(c,i){
+    var others=shuffle(items.filter(function(x){return x[1]!==c[1];})).slice(0,2).map(function(x){return x[1];});
+    var opts=shuffle([c[1]].concat(others));
+    box.appendChild(mcCard({q:'Что значит <b>'+c[0]+'</b>?',o:opts,a:opts.indexOf(c[1])},i+1,sec));});}
+function SMrenderListen(id,script,qs,sec){
+  var p=SMel(id+"_play"),s=SMel(id+"_stop"),t=SMel(id+"_txt"),sc=SMel(id+"_sc");
+  if(p)p.onclick=function(){playDialog(script);};
+  if(s)s.onclick=function(){speechSynthesis.cancel();};
+  if(t&&sc)t.onclick=function(){sc.style.display=sc.style.display==="block"?"none":"block";};
+  SMrenderMC(id,qs,sec);}
+function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
+  function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
+  if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
+  if(gap&&gap.length){head("✍️ Впиши ответ");gap.forEach(function(t){box.appendChild(gapCard(t,++n,"wb"));});}
+  if(tf&&tf.length){head("🔍 True or False");tf.forEach(function(t){box.appendChild(tfCard(t,++n,"wb-tf"));});}}
+
+/* ── содержимое урока ── */
+SMrenderWords("b1",[["tall", "высокий"], ["short", "невысокий"], ["medium height", "среднего роста"], ["slim", "стройный"], ["well-built", "крепкого сложения"], ["good-looking", "симпатичный"], ["long hair", "длинные волосы"], ["short hair", "короткие волосы"], ["medium-length hair", "волосы средней длины"], ["straight hair", "прямые волосы"], ["curly hair", "кудрявые волосы"], ["wavy hair", "волнистые волосы"], ["fair hair", "светлые волосы"], ["dark hair", "тёмные волосы"], ["blue eyes", "голубые глаза"], ["green eyes", "зелёные глаза"], ["glasses", "очки"], ["a beard", "борода"], ["a moustache", "усы"], ["freckles", "веснушки"]]);
+SMrenderWords("b2",[["friendly", "дружелюбный"], ["shy", "стеснительный"], ["funny", "весёлый"], ["kind", "добрый"], ["patient", "терпеливый"], ["polite", "вежливый"], ["honest", "честный"], ["hard-working", "трудолюбивый"], ["creative", "творческий"], ["sensible", "здравомыслящий"], ["talkative", "разговорчивый"], ["quiet", "тихий"]]);
+SMrenderGap("b4",[{"q": "I’m ___ Year eleven.", "a": ["in"]}, {"q": "My sister is ___ university.", "a": ["at"]}, {"q": "I listen ___ music every evening.", "a": ["to"]}, {"q": "We go to the cinema ___ the weekend.", "a": ["at"]}, {"q": "She ___ tall and slim. (be)", "a": ["is", "’s", "'s"]}, {"q": "He ___ got a beard. (have)", "a": ["has", "’s", "'s"]}],"gap");
+SMrenderListen("b5",[["f", "Who’s that boy by the window? The tall one with curly hair."], ["m", "That’s Dan. He’s in my maths class. He’s really funny."], ["f", "Is he here with Sally?"], ["m", "No, he isn’t. Sally’s over there, talking to my sister."], ["m2", "Hi! I’m Ryan. I don’t know anybody here, honestly."], ["f2", "Nobody? Really?"], ["m2", "Well, I know George. He’s my neighbour. The one with glasses and the black jacket."], ["f2", "Oh, George is my brother!"], ["f", "So, what do you think of the party, Lucy?"], ["f2", "It’s brilliant. The music is great."], ["f", "Do you know Kate? Short, with red hair."], ["f2", "I do, and I like her a lot. She’s very kind."]],[{"q": "What does Dan look like?", "o": ["tall with curly hair", "short with fair hair", "tall with glasses"], "a": 0}, {"q": "Is Dan at the party with Sally?", "o": ["no", "yes", "we don’t know"], "a": 0}, {"q": "How many people does Ryan know?", "o": ["one", "nobody", "lots"], "a": 0}, {"q": "Who is George?", "o": ["Lisa’s brother", "Lisa’s neighbour", "Ryan’s brother"], "a": 0}, {"q": "What does Lucy think of the party?", "o": ["it’s brilliant", "it’s boring", "it’s too loud"], "a": 0}, {"q": "What is Kate like?", "o": ["kind", "shy", "funny"], "a": 0}],"listening");
+SMrenderMC("b6",[{"q": "Dan is…", "o": ["tall with curly hair", "quite short with red hair", "tall with a beard"], "a": 0}, {"q": "George wears…", "o": ["glasses and a black jacket", "glasses and a blue jacket", "a green jacket"], "a": 0}, {"q": "Kate is…", "o": ["short with red hair", "tall with fair hair", "short with dark hair"], "a": 0}],"grammar");
+SMrenderSpeak("b7",["Выбери человека в комнате и опиши его, не называя имени. Пусть собеседник угадает.", "Опиши лучшего друга: рост, волосы, глаза, характер. Минимум шесть предложений.", "Расскажи о себе по образцу key phrases: <b>I’m in Year… I walk to… I listen to… at the weekend.</b>", "Опиши члена семьи так, чтобы собеседник понял, кто это, по одному предложению."]);
+SMrenderWB("b8",[{"q": "She ___ long dark hair.", "o": ["has got", "is", "are"], "a": 0}, {"q": "He ___ quite tall.", "o": ["is", "has got", "have"], "a": 0}, {"q": "«кудрявые волосы» =", "o": ["curly hair", "wavy hair", "straight hair"], "a": 0}, {"q": "«усы» =", "o": ["a moustache", "a beard", "freckles"], "a": 0}, {"q": "«стеснительный» =", "o": ["shy", "sensible", "sensitive"], "a": 0}, {"q": "«трудолюбивый» =", "o": ["hard-working", "hardly working", "hard-worked"], "a": 0}],[{"q": "My brother ___ got green eyes.", "a": ["has", "’s", "'s"]}, {"q": "I’m ___ Year nine.", "a": ["in"]}, {"q": "«волосы средней длины» = ___-length hair", "a": ["medium"]}, {"q": "«вежливый» одним словом:", "a": ["polite"]}],[]);
+var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
+</script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script>
 const WORDS=[["mother (mum)","мама"],["father (dad)","папа"],["parents","родители"],["sister","сестра"],["brother","брат"],["daughter","дочь"],["son","сын"],["grandmother (grandma)","бабушка"],["grandfather (grandad)","дедушка"],["grandparents","бабушка и дедушка"],["aunt","тётя"],["uncle","дядя"],["cousin","двоюродный брат/сестра"],["nephew","племянник"],["niece","племянница"],["husband","муж"],["wife","жена"],["child / children","ребёнок / дети"],["grandson","внук"],["granddaughter","внучка"]];

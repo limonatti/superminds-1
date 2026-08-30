@@ -1,0 +1,759 @@
+{
+  "unit": 1,
+  "title": "Family and friends",
+  "lessons": {
+    "A": {
+      "role": "Vocabulary",
+      "topic": "Family",
+      "cando": "I can talk about family members.",
+      "blocks": [
+        {"type": "words", "title": "🔤 Члены семьи", "note": "Нажми 🔊 и повтори. Сначала — база, ниже разберём step-, half-, -in-law и great-.",
+         "items": [["mother (mum)", "мама"], ["father (dad)", "папа"], ["parents", "родители"], ["sister", "сестра"], ["brother", "брат"], ["daughter", "дочь"], ["son", "сын"], ["grandmother (grandma)", "бабушка"], ["grandfather (grandad)", "дедушка"], ["grandparents", "бабушка и дедушка"], ["granddaughter", "внучка"], ["grandson", "внук"], ["aunt", "тётя"], ["uncle", "дядя"], ["cousin", "двоюродный брат/сестра"], ["nephew", "племянник"], ["niece", "племянница"], ["husband", "муж"], ["wife", "жена"], ["child / children", "ребёнок / дети"], ["relatives", "родственники"], ["only child", "единственный ребёнок"]]},
+
+        {"type": "rules", "title": "🧩 Приставки и -in-law",
+         "cards": [
+           {"h": "step- · half- · -in-law · great-",
+            "rows": [
+              "<b>-in-law</b> — родство через брак: <b>father-in-law</b> = отец мужа или жены · <b>brother-in-law</b> = муж сестры или брат супруга.",
+              "<b>step-</b> — родство через повторный брак: <b>stepmother</b> = жена отца · <b>stepsister</b> = дочь отчима или мачехи.",
+              "<b>half-</b> — общий только один родитель: <b>half-brother</b> = брат по одному родителю.",
+              "<b>great-</b> — на поколение дальше: <b>great-grandfather</b> = прадед · <b>great-uncle</b> = дядя мамы или папы."
+            ]}
+         ]},
+
+        {"type": "words", "title": "🔤 Расширение",
+         "items": [["stepmother", "мачеха"], ["stepfather", "отчим"], ["stepbrother", "сводный брат"], ["stepsister", "сводная сестра"], ["half-brother", "брат по одному родителю"], ["half-sister", "сестра по одному родителю"], ["mother-in-law", "свекровь / тёща"], ["father-in-law", "свёкор / тесть"], ["brother-in-law", "зять / деверь / шурин"], ["sister-in-law", "невестка / золовка"], ["son-in-law", "зять"], ["daughter-in-law", "невестка"], ["great-grandmother", "прабабушка"], ["great-grandfather", "прадедушка"], ["great-aunt", "двоюродная бабушка"], ["great-uncle", "двоюродный дедушка"]]},
+
+        {"type": "pron", "title": "🗣️ Произношение", "note": "В составных словах ударение на первом слове: <b>MO</b>ther-in-law · <b>STEP</b>daughter · <b>GREAT</b>-grandfather. И осторожно: <b>niece</b> /niːs/ — «нис», не «найс».",
+         "items": ["mother-in-law", "stepdaughter", "great-grandfather", "niece", "nephew", "relatives", "cousin"]},
+
+        {"type": "rules", "title": "📖 Притяжательный падеж ’s",
+         "cards": [
+           {"h": "Основное правило",
+            "rows": [
+              "Один человек → <b>’s</b>: my cousin<b>’s</b> husband · Tom<b>’s</b> bike.",
+              "Мн. число на -s → только апостроф: my parent<b>s’</b> friends.",
+              "Неправильное мн. число → <b>’s</b>: his child<b>ren’s</b> school · the m<b>en’s</b> team."
+            ]},
+           {"h": "Где чаще всего ошибаются",
+            "rows": [
+              "Имя на -s: James<b>’s</b> car (читаем /ˈdʒeɪmzɪz/), допустимо и James<b>’</b>.",
+              "Общее владение → ’s только у второго: Tom and Anna<b>’s</b> house.",
+              "У каждого своё → ’s у обоих: Tom<b>’s</b> and Anna<b>’s</b> phones.",
+              "Про вещи обычно <b>of</b>: the door <b>of</b> the house."
+            ]},
+           {"h": "RECYCLE! have got",
+            "rows": [
+              "I / you / we / they <b>have got</b> (’ve got) · he / she / it <b>has got</b> (’s got).",
+              "Отрицание: <b>haven’t got</b> / <b>hasn’t got</b>. Вопрос: <b>Have</b> you got…? · <b>Has</b> he got…?",
+              "Короткий ответ: Yes, I have. / No, he hasn’t."
+            ]}
+         ]},
+
+        {"type": "mc", "title": "✏️ Упражнения", "sec": "grammar",
+         "items": [
+           {"q": "Комната моей сестры:", "o": ["my sister’s room", "my sisters room", "my sister room"], "a": 0},
+           {"q": "Друзья моих родителей:", "o": ["my parents’ friends", "my parent’s friends", "my parents friends"], "a": 0},
+           {"q": "Школа его детей:", "o": ["his children’s school", "his childrens’ school", "his childrens school"], "a": 0},
+           {"q": "Дом Тома и Анны (общий):", "o": ["Tom and Anna’s house", "Tom’s and Anna’s house", "Tom and Annas house"], "a": 0},
+           {"q": "Дверь дома:", "o": ["the door of the house", "the house’s door", "the houses door"], "a": 0},
+           {"q": "Мама моей жены — это моя ___ .", "o": ["mother-in-law", "stepmother", "great-aunt"], "a": 0},
+           {"q": "Новая жена моего отца — это моя ___ .", "o": ["stepmother", "mother-in-law", "half-sister"], "a": 0},
+           {"q": "У нас общая только мама. Она моя ___ .", "o": ["half-sister", "stepsister", "sister-in-law"], "a": 0},
+           {"q": "Бабушка моей мамы — моя ___ .", "o": ["great-grandmother", "grandmother", "great-aunt"], "a": 0},
+           {"q": "___ he got a stepbrother?", "o": ["Has", "Have", "Does"], "a": 0},
+           {"q": "They ___ got any cousins.", "o": ["haven’t", "hasn’t", "aren’t"], "a": 0},
+           {"q": "У меня нет братьев и сестёр. Я ___ .", "o": ["an only child", "a twin", "a relative"], "a": 0}
+         ]},
+
+        {"type": "gap", "title": "✍️ Впиши ответ", "sec": "gap",
+         "items": [
+           {"q": "___ (my brother) wife is my sister-in-law.", "a": ["my brother’s", "my brother's"]},
+           {"q": "These are my ___ (grandparents) photos.", "a": ["grandparents’", "grandparents'"]},
+           {"q": "That’s the ___ (women) changing room.", "a": ["women’s", "women's"]},
+           {"q": "She ___ (have got) three cousins.", "a": ["has got", "’s got", "'s got"]},
+           {"q": "Муж моей дочери — мой ___ .", "a": ["son-in-law"]},
+           {"q": "Дядя моего отца — мой ___ .", "a": ["great-uncle"]}
+         ]},
+
+        {"type": "listen", "title": "🎧 Аудирование", "h3": "Ella’s family photo",
+         "intro": "Элла показывает подруге фотографию. Кто на ней? Слушай сколько угодно.",
+         "script": [["f", "Is this an old photo, Ella?"], ["f2", "Yes, it’s from my cousin’s wedding. That’s me on the left."], ["f", "And who’s the woman next to you?"], ["f2", "That’s Irina. She’s my father’s second wife, so she’s my stepmother."], ["f", "She looks really friendly."], ["f2", "She is. We get on well. And the little boy is Sasha, my half-brother. We’ve got the same dad."], ["f", "He’s sweet! And the old lady in the blue dress?"], ["f2", "That’s my great-grandmother, Vera. She’s ninety-one in that photo."], ["f", "Ninety-one! Has she got a big family?"], ["f2", "Enormous. Four children, eleven grandchildren and she can’t remember all our names!"]],
+         "script_html": "<b>Mia:</b> Is this an old photo, Ella?<br><b>Ella:</b> Yes, it’s from my cousin’s wedding. That’s me on the left.<br><b>Mia:</b> And who’s the woman next to you?<br><b>Ella:</b> That’s Irina. She’s my father’s second wife, so she’s my stepmother.<br><b>Mia:</b> She looks really friendly.<br><b>Ella:</b> She is. We get on well. And the little boy is Sasha, my half-brother. We’ve got the same dad.<br><b>Mia:</b> He’s sweet! And the old lady in the blue dress?<br><b>Ella:</b> That’s my great-grandmother, Vera. She’s ninety-one in that photo.<br><b>Mia:</b> Ninety-one! Has she got a big family?<br><b>Ella:</b> Enormous. Four children, eleven grandchildren and she can’t remember all our names!",
+         "q": [
+           {"q": "Whose wedding is in the photo?", "o": ["Ella’s cousin’s", "Ella’s sister’s", "Ella’s aunt’s"], "a": 0},
+           {"q": "Who is Irina?", "o": ["Ella’s stepmother", "Ella’s mother", "Ella’s aunt"], "a": 0},
+           {"q": "Sasha is Ella’s…", "o": ["half-brother", "stepbrother", "cousin"], "a": 0},
+           {"q": "What do Ella and Sasha share?", "o": ["the same dad", "the same mum", "the same school"], "a": 0},
+           {"q": "How old is Vera in the photo?", "o": ["ninety-one", "nineteen", "seventy-one"], "a": 0},
+           {"q": "How many grandchildren has Vera got?", "o": ["eleven", "four", "ninety"], "a": 0}
+         ]},
+
+        {"type": "mc", "title": "🌟 Famous families quiz", "sec": "quiz",
+         "note": "Кто кому кем приходится. Отвечай вслух полным предложением: «She’s his sister.»",
+         "items": [
+           {"q": "Solange Knowles is Beyoncé’s…", "o": ["sister", "cousin", "aunt"], "a": 0},
+           {"q": "Jaden Smith is Will Smith’s…", "o": ["son", "brother", "nephew"], "a": 0},
+           {"q": "Liam and Chris Hemsworth are…", "o": ["brothers", "cousins", "father and son"], "a": 0},
+           {"q": "Jon Voight is Angelina Jolie’s…", "o": ["father", "uncle", "grandfather"], "a": 0},
+           {"q": "Prince William is King Charles III’s…", "o": ["son", "brother", "nephew"], "a": 0},
+           {"q": "Melanie Griffith is Dakota Johnson’s…", "o": ["mother", "sister", "aunt"], "a": 0},
+           {"q": "Prince George is Queen Elizabeth II’s…", "o": ["great-grandson", "grandson", "nephew"], "a": 0}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Спроси собеседника про шесть родственников: <b>Have you got a stepbrother? …a great-uncle? …a brother-in-law?</b>",
+           "Если ответ «yes» — узнай больше: How old is he? Where does he live? Do you get on well?",
+           "Опиши семейную фотографию: кто где стоит и кто кому кем приходится.",
+           "Назови трёх родственников через ’s: <b>my mother’s cousin</b>, <b>my parents’ friends</b>…"
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1A", "note": "Закрепление урока. Ответы сохранятся учителю.",
+         "mc": [
+           {"q": "Муж моей сестры — мой ___ .", "o": ["brother-in-law", "stepbrother", "half-brother"], "a": 0},
+           {"q": "Дочь моей мачехи — моя ___ .", "o": ["stepsister", "half-sister", "sister-in-law"], "a": 0},
+           {"q": "Отец моего мужа — мой ___ .", "o": ["father-in-law", "stepfather", "great-uncle"], "a": 0},
+           {"q": "Телефоны моих двоюродных братьев:", "o": ["my cousins’ phones", "my cousin’s phones", "my cousins phones"], "a": 0},
+           {"q": "___ they got a big family?", "o": ["Have", "Has", "Do"], "a": 0},
+           {"q": "Сын моей дочери — мой ___ .", "o": ["grandson", "nephew", "son-in-law"], "a": 0}
+         ],
+         "gap": [
+           {"q": "This is my ___ (aunt) house.", "a": ["aunt’s", "aunt's"]},
+           {"q": "Those are the ___ (children) books.", "a": ["children’s", "children's"]},
+           {"q": "Мать моей жены — my ___ .", "a": ["mother-in-law"]},
+           {"q": "Прадедушка — одним словом:", "a": ["great-grandfather"]},
+           {"q": "He ___ (have got) two nieces.", "a": ["has got", "’s got", "'s got"]}
+         ]}
+      ]
+    },
+
+    "B": {
+      "role": "Grammar",
+      "topic": "Present simple (affirmative)",
+      "cando": "I can use the present simple affirmative correctly.",
+      "blocks": [
+        {"type": "read", "title": "📕 Текст", "h3": "Friday is sitcom night", "sec": "reading",
+         "html": "<p>Every Friday evening the Novak family <b>watches</b> a sitcom together. Marek <b>makes</b> popcorn in the kitchen. His sister Ela <b>chooses</b> the episode. Their mum <b>brings</b> tea and their dad <b>turns</b> off his phone.</p><p>The family <b>loves</b> comedy, but everyone <b>likes</b> something different. Marek <b>enjoys</b> the clever jokes. Ela <b>prefers</b> the characters — she <b>says</b> they feel like real people. Their mum <b>watches</b> for the family scenes, and their dad just <b>laughs</b> at everything.</p><p>The episode <b>finishes</b> at nine o’clock. Then the family <b>talks</b> about it for twenty minutes. Marek always <b>says</b> the same thing: «Next Friday is too far away.»</p>",
+         "q": [
+           {"q": "When does the family watch the sitcom?", "o": ["every Friday evening", "every morning", "on Sundays"], "a": 0},
+           {"q": "Who makes the popcorn?", "o": ["Marek", "Ela", "their mum"], "a": 0},
+           {"q": "Who chooses the episode?", "o": ["Ela", "Marek", "their dad"], "a": 0},
+           {"q": "Why does Ela like the show?", "o": ["the characters", "the jokes", "the family scenes"], "a": 0},
+           {"q": "What does their dad do before the show?", "o": ["turns off his phone", "makes tea", "chooses the episode"], "a": 0},
+           {"q": "How long do they talk after the episode?", "o": ["twenty minutes", "nine minutes", "an hour"], "a": 0}
+         ]},
+
+        {"type": "rules", "title": "📖 Разбор грамматики",
+         "cards": [
+           {"h": "Present simple — когда",
+            "rows": [
+              "То, что происходит регулярно, всегда или никогда: They <b>watch</b> TV every Friday.",
+              "Факт, который всегда верен: Water <b>boils</b> at 100°C.",
+              "I / you / we / they → глагол без изменений. he / she / it → <b>+ -s</b>."
+            ]},
+           {"h": "Как пишется -s в третьем лице",
+            "table": [
+              ["Правило", "Пример"],
+              ["обычно + <b>-s</b>", "make → make<b>s</b> · live → live<b>s</b>"],
+              ["после -s, -sh, -ch, -x, -o → <b>-es</b>", "watch → watch<b>es</b> · finish → finish<b>es</b> · go → go<b>es</b>"],
+              ["согласная + y → <b>-ies</b>", "study → stud<b>ies</b> · try → tr<b>ies</b>"],
+              ["гласная + y → просто <b>-s</b>", "play → play<b>s</b> · enjoy → enjoy<b>s</b>"],
+              ["особый случай", "have → <b>has</b>"]
+            ]},
+           {"h": "Наречия частоты",
+            "rows": [
+              "<b>always · usually · often · sometimes · never</b> — перед основным глаголом: He <b>always</b> makes popcorn.",
+              "Но после <b>be</b>: She <b>is always</b> late.",
+              "Обстоятельства времени — в конце: every Friday · at the weekend · once a week."
+            ]}
+         ]},
+
+        {"type": "mc", "title": "✏️ Упражнения", "sec": "grammar",
+         "items": [
+           {"q": "Marek ___ popcorn every Friday.", "o": ["make", "makes", "making"], "a": 1},
+           {"q": "Ela ___ the episode.", "o": ["choose", "chooses", "choosing"], "a": 1},
+           {"q": "The episode ___ at nine.", "o": ["finish", "finishes", "finishs"], "a": 1},
+           {"q": "My sister ___ biology at university.", "o": ["study", "studies", "studys"], "a": 1},
+           {"q": "He ___ football at the weekend.", "o": ["plays", "plaies", "play"], "a": 0},
+           {"q": "She ___ two brothers.", "o": ["have", "has", "haves"], "a": 1},
+           {"q": "They ___ TV every evening.", "o": ["watch", "watches", "watchs"], "a": 0},
+           {"q": "My dad ___ to work by bus.", "o": ["go", "goes", "gos"], "a": 1},
+           {"q": "My cousin ___ photos of everything.", "o": ["takes", "take", "taks"], "a": 0},
+           {"q": "He ___ makes popcorn. (всегда)", "o": ["always", "every", "usual"], "a": 0},
+           {"q": "She ___ late. (всегда, с глаголом be)", "o": ["is always", "always is", "always"], "a": 0},
+           {"q": "Water ___ at 100 degrees.", "o": ["boils", "boil", "boiles"], "a": 0}
+         ]},
+
+        {"type": "gap", "title": "✍️ Впиши глагол", "sec": "gap",
+         "items": [
+           {"q": "Their mum ___ (bring) tea.", "a": ["brings"]},
+           {"q": "Their dad ___ (laugh) at everything.", "a": ["laughs"]},
+           {"q": "Marek ___ (enjoy) the clever jokes.", "a": ["enjoys"]},
+           {"q": "The family ___ (talk) about the episode.", "a": ["talks"]},
+           {"q": "My brother ___ (try) to cook every Sunday.", "a": ["tries"]},
+           {"q": "She ___ (have) three cousins.", "a": ["has"]},
+           {"q": "He ___ (finish) work at six.", "a": ["finishes"]},
+           {"q": "My aunt ___ (fly) to Spain every summer.", "a": ["flies"]}
+         ]},
+
+        {"type": "pron", "title": "🗣️ Произношение окончаний", "note": "Три звука в третьем лице: <b>/s/</b> после глухих (makes, laughs), <b>/z/</b> после звонких и гласных (lives, plays), <b>/ɪz/</b> после -s, -sh, -ch, -x, -ge (watches, finishes, chooses). Слушай и повторяй.",
+         "items": ["makes", "laughs", "takes", "lives", "plays", "brings", "watches", "finishes", "chooses"]},
+
+        {"type": "mc", "title": "🎧 Какое окончание?", "sec": "pron",
+         "items": [
+           {"q": "watches", "o": ["/ɪz/", "/s/", "/z/"], "a": 0},
+           {"q": "makes", "o": ["/s/", "/z/", "/ɪz/"], "a": 0},
+           {"q": "lives", "o": ["/z/", "/s/", "/ɪz/"], "a": 0},
+           {"q": "finishes", "o": ["/ɪz/", "/s/", "/z/"], "a": 0},
+           {"q": "plays", "o": ["/z/", "/s/", "/ɪz/"], "a": 0},
+           {"q": "laughs", "o": ["/s/", "/z/", "/ɪz/"], "a": 0}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Опиши вечер пятницы в своей семье: кто что делает. Минимум шесть глаголов в третьем лице.",
+           "Расскажи про любимый сериал: <b>It starts… The main character works… She lives…</b>",
+           "Опиши обычный день брата, сестры или друга — только he/she, следи за -s."
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1B", "note": "Present simple в утверждениях. Ответы сохранятся учителю.",
+         "mc": [
+           {"q": "She ___ in a hospital.", "o": ["work", "works", "working"], "a": 1},
+           {"q": "We ___ sitcoms.", "o": ["love", "loves", "loving"], "a": 0},
+           {"q": "He ___ his homework after school.", "o": ["do", "does", "dos"], "a": 1},
+           {"q": "My mum ___ the dishes every evening.", "o": ["washes", "washs", "wash"], "a": 0},
+           {"q": "Anna ___ never late.", "o": ["is", "are", "be"], "a": 0},
+           {"q": "My cousins ___ in Poland.", "o": ["live", "lives", "living"], "a": 0}
+         ],
+         "gap": [
+           {"q": "He ___ (watch) a film every Friday.", "a": ["watches"]},
+           {"q": "My sister ___ (study) maths.", "a": ["studies"]},
+           {"q": "They ___ (play) tennis at the weekend.", "a": ["play"]},
+           {"q": "It ___ (finish) at ten o’clock.", "a": ["finishes"]},
+           {"q": "She ___ (go) to school by bike.", "a": ["goes"]},
+           {"q": "My dad ___ (have) a new phone.", "a": ["has"]}
+         ]}
+      ]
+    },
+
+    "C": {
+      "role": "Listening",
+      "topic": "Spelling and pronunciation",
+      "cando": "I can distinguish between words with very similar sounds.",
+      "blocks": [
+        {"type": "note", "title": "🎧 Стратегия 1 · одна буква — разные звуки",
+         "html": "Одна и та же буква читается по-разному: <b>oo</b> в <i>school</i> /uː/ и в <i>look</i> /ʊ/. Не доверяй написанию — доверяй звуку. Слушай слово целиком, а не по буквам."},
+
+        {"type": "mc", "title": "✏️ Найди лишнее по звуку", "sec": "sounds",
+         "note": "В каждой группе одно слово звучит иначе. Нажми 🔊 в блоке ниже, если нужно послушать.",
+         "items": [
+           {"q": "1  school · too · look · cool", "o": ["look", "school", "too"], "a": 0},
+           {"q": "2  grandson · class · father · grandma", "o": ["grandson", "class", "father"], "a": 0},
+           {"q": "3  wife · China · Italy · like", "o": ["Italy", "wife", "like"], "a": 0},
+           {"q": "4  go · son · photo · hello", "o": ["son", "go", "photo"], "a": 0},
+           {"q": "5  eat · meat · seat · great", "o": ["great", "meat", "seat"], "a": 0},
+           {"q": "6  university · uncle · mum · Hungary", "o": ["university", "uncle", "mum"], "a": 0}
+         ]},
+
+        {"type": "pron", "title": "🔊 Послушай слова", "note": "Нажимай и сравнивай гласные.",
+         "items": ["school", "look", "father", "grandson", "wife", "Italy", "go", "son", "great", "meat", "university", "uncle"]},
+
+        {"type": "note", "title": "🎧 Стратегия 2 · похожие пары",
+         "html": "Некоторые слова звучат почти одинаково, но значат совершенно разное. Услышать разницу помогает <b>контекст</b>: посмотри на соседние слова и реши, что подходит по смыслу."},
+
+        {"type": "pron", "title": "🔊 Минимальные пары", "note": "Слушай по очереди: <b>men — man · cap — cup · far — for · wet — wait · live — leave · match — March</b>",
+         "items": ["men", "man", "cap", "cup", "far", "for", "wet", "wait", "live", "leave", "match", "March"]},
+
+        {"type": "mc", "title": "✏️ Какое слово в предложении?", "sec": "sounds",
+         "items": [
+           {"q": "Three ___ are waiting outside.", "o": ["men", "man"], "a": 0},
+           {"q": "Can I have a ___ of tea?", "o": ["cup", "cap"], "a": 0},
+           {"q": "We ___ in a small village.", "o": ["live", "leave"], "a": 0},
+           {"q": "This present is ___ you.", "o": ["for", "far"], "a": 0},
+           {"q": "___ a minute, please!", "o": ["Wait", "Wet"], "a": 0},
+           {"q": "My birthday is in ___ .", "o": ["March", "match"], "a": 0}
+         ]},
+
+        {"type": "words", "title": "🔤 Housework", "note": "Лексика для аудирования ниже.",
+         "items": [["do the washing", "стирать"], ["do the ironing", "гладить"], ["load the dishwasher", "загружать посудомойку"], ["set the table", "накрывать на стол"], ["clear the table", "убирать со стола"], ["tidy your room", "убирать в комнате"], ["make your bed", "заправлять кровать"], ["take out the rubbish", "выносить мусор"], ["do the shopping", "ходить за покупками"], ["walk the dog", "выгуливать собаку"], ["hoover", "пылесосить"], ["share the housework", "делить домашние дела"]]},
+
+        {"type": "listen", "title": "🎧 Аудирование", "h3": "Who does what at home?",
+         "intro": "Двое подростков обсуждают домашние дела. Слушай и отвечай.",
+         "script": [["m", "My mum says I never help at home. That’s not true!"], ["f", "Really? What do you do, then?"], ["m", "I take out the rubbish. And I walk the dog every morning before school."], ["f", "That’s two things, Ryan. My list is longer."], ["m", "Go on, then."], ["f", "I make my bed, I set the table, and on Saturdays I do the ironing with my dad."], ["m", "The ironing? Seriously?"], ["f", "It’s not so bad. We talk while we do it. My brother loads the dishwasher, but he always forgets."], ["m", "Does your mum do the washing?"], ["f", "Yes, but she says we share the housework. I think she does about half of it."], ["m", "So do I. Mums always do more."]],
+         "script_html": "<b>Ryan:</b> My mum says I never help at home. That’s not true!<br><b>Joanna:</b> Really? What do you do, then?<br><b>Ryan:</b> I take out the rubbish. And I walk the dog every morning before school.<br><b>Joanna:</b> That’s two things, Ryan. My list is longer.<br><b>Ryan:</b> Go on, then.<br><b>Joanna:</b> I make my bed, I set the table, and on Saturdays I do the ironing with my dad.<br><b>Ryan:</b> The ironing? Seriously?<br><b>Joanna:</b> It’s not so bad. We talk while we do it. My brother loads the dishwasher, but he always forgets.<br><b>Ryan:</b> Does your mum do the washing?<br><b>Joanna:</b> Yes, but she says we share the housework. I think she does about half of it.<br><b>Ryan:</b> So do I. Mums always do more.",
+         "q": [
+           {"q": "What does Ryan do every morning?", "o": ["walks the dog", "makes his bed", "does the ironing"], "a": 0},
+           {"q": "How many jobs does Ryan mention?", "o": ["two", "three", "four"], "a": 0},
+           {"q": "When does Joanna do the ironing?", "o": ["on Saturdays", "every morning", "on Sundays"], "a": 0},
+           {"q": "Who does Joanna do the ironing with?", "o": ["her dad", "her mum", "her brother"], "a": 0},
+           {"q": "What does Joanna’s brother often forget?", "o": ["the dishwasher", "the rubbish", "the dog"], "a": 0}
+         ]},
+
+        {"type": "tf", "title": "✅ True or False", "sec": "truefalse",
+         "items": [
+           {"q": "Ryan thinks he helps at home.", "a": true},
+           {"q": "Joanna does fewer jobs than Ryan.", "a": false},
+           {"q": "Joanna enjoys doing the ironing with her dad.", "a": true},
+           {"q": "Joanna’s brother always remembers the dishwasher.", "a": false},
+           {"q": "Joanna thinks her mum does about half the housework.", "a": true}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Расскажи, кто что делает по дому у тебя: <b>I take out the rubbish. My brother walks the dog.</b>",
+           "Справедливо ли распределены дела в твоей семье? Почему?",
+           "Какое домашнее дело ты ненавидишь больше всего и почему?"
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1C",
+         "mc": [
+           {"q": "«стирать» =", "o": ["do the washing", "do the washing-up", "do the ironing"], "a": 0},
+           {"q": "«накрывать на стол» =", "o": ["set the table", "clear the table", "load the table"], "a": 0},
+           {"q": "В каком слове звук /ʌ/?", "o": ["uncle", "school", "father"], "a": 0},
+           {"q": "«Please ___ here» — жди здесь.", "o": ["wait", "wet", "what"], "a": 0},
+           {"q": "«выносить мусор» =", "o": ["take out the rubbish", "make the rubbish", "do the rubbish"], "a": 0}
+         ],
+         "gap": [
+           {"q": "I ___ my bed every morning. (заправляю)", "a": ["make"]},
+           {"q": "We ___ the housework in our family. (делим)", "a": ["share"]},
+           {"q": "Впиши слово: My birthday is in M___ .", "a": ["March"]},
+           {"q": "Впиши слово: Can I have a c___ of tea?", "a": ["cup"]}
+         ]}
+      ]
+    },
+
+    "D": {
+      "role": "Grammar",
+      "topic": "Present simple (negative and interrogative)",
+      "cando": "I can ask questions about facts and everyday events.",
+      "blocks": [
+        {"type": "listen", "title": "🎧 Диалог", "h3": "Who’s got the remote?",
+         "intro": "Трое подростков спорят, что смотреть. Послушай и разбери формы.",
+         "script": [["f", "What’s this on TV?"], ["m", "I don’t know. It’s a sitcom, I think. It’s really funny."], ["m2", "But Sarah and I want to watch the football! Barcelona against Chelsea."], ["m", "I don’t like football."], ["f", "But I hate sitcoms! And Tom doesn’t like sitcoms either."], ["m", "Do you want to record the football, then?"], ["f", "We don’t want to record it, we want to watch it live! Give me the remote."], ["m", "I haven’t got it. Does Mum know where it is?"], ["m2", "It doesn’t matter. The match starts in two minutes."], ["f", "Found it! Right — football."]],
+         "script_html": "<b>Sarah:</b> What’s this on TV?<br><b>Jake:</b> I don’t know. It’s a sitcom, I think. It’s really funny.<br><b>Tom:</b> But Sarah and I want to watch the football! Barcelona against Chelsea.<br><b>Jake:</b> I don’t like football.<br><b>Sarah:</b> But I hate sitcoms! And Tom doesn’t like sitcoms either.<br><b>Jake:</b> Do you want to record the football, then?<br><b>Sarah:</b> We don’t want to record it, we want to watch it live! Give me the remote.<br><b>Jake:</b> I haven’t got it. Does Mum know where it is?<br><b>Tom:</b> It doesn’t matter. The match starts in two minutes.<br><b>Sarah:</b> Found it! Right — football.",
+         "q": [
+           {"q": "What is on TV at the start?", "o": ["a sitcom", "the football", "the news"], "a": 0},
+           {"q": "Who likes the sitcom?", "o": ["Jake", "Sarah", "Tom"], "a": 0},
+           {"q": "What does Jake suggest?", "o": ["recording the football", "watching the news", "turning off the TV"], "a": 0},
+           {"q": "Why doesn’t Sarah want to record it?", "o": ["she wants to watch it live", "she hates football", "the TV is broken"], "a": 0},
+           {"q": "Who finds the remote?", "o": ["Sarah", "Jake", "Tom"], "a": 0}
+         ]},
+
+        {"type": "rules", "title": "📖 Разбор грамматики",
+         "cards": [
+           {"h": "Отрицание",
+            "rows": [
+              "I / you / we / they + <b>don’t</b> + глагол: I <b>don’t like</b> football.",
+              "he / she / it + <b>doesn’t</b> + глагол <u>без -s</u>: Tom <b>doesn’t like</b> sitcoms.",
+              "Частая ошибка: ~~He doesn’t likes~~ → <b>He doesn’t like.</b> Окончание уже «съел» doesn’t."
+            ]},
+           {"h": "Вопрос",
+            "rows": [
+              "<b>Do</b> + I / you / we / they + глагол: <b>Do</b> you live near the school?",
+              "<b>Does</b> + he / she / it + глагол <u>без -s</u>: <b>Does</b> your friend like football?",
+              "Вопросительное слово впереди: <b>Where do</b> you live? · <b>What does</b> she do?"
+            ]},
+           {"h": "Короткие ответы",
+            "rows": [
+              "Yes, I <b>do</b>. / No, I <b>don’t</b>.",
+              "Yes, he <b>does</b>. / No, she <b>doesn’t</b>.",
+              "Полный глагол в коротком ответе не повторяем: ~~Yes, I do like~~."
+            ]}
+         ]},
+
+        {"type": "mc", "title": "✏️ Упражнения", "sec": "grammar",
+         "items": [
+           {"q": "My aunt ___ in London.", "o": ["doesn’t work", "don’t work", "doesn’t works"], "a": 0},
+           {"q": "I ___ rap music.", "o": ["don’t like", "doesn’t like", "not like"], "a": 0},
+           {"q": "My cousins ___ Spanish.", "o": ["don’t speak", "doesn’t speak", "don’t speaks"], "a": 0},
+           {"q": "___ your parents both work?", "o": ["Do", "Does", "Are"], "a": 0},
+           {"q": "___ your best friend like football?", "o": ["Does", "Do", "Is"], "a": 0},
+           {"q": "Where ___ she live?", "o": ["does", "do", "is"], "a": 0},
+           {"q": "«Do you wear jeans to school?» — «Yes, I ___ .»", "o": ["do", "am", "does"], "a": 0},
+           {"q": "«Does he play volleyball?» — «No, he ___ .»", "o": ["doesn’t", "don’t", "isn’t"], "a": 0},
+           {"q": "My stepbrother ___ at the weekend.", "o": ["doesn’t study", "doesn’t studies", "don’t study"], "a": 0},
+           {"q": "What time ___ the match start?", "o": ["does", "do", "is"], "a": 0}
+         ]},
+
+        {"type": "gap", "title": "✍️ Составь отрицание или вопрос", "sec": "gap",
+         "items": [
+           {"q": "My aunt works in London. → Отрицание: My aunt ___ in London.", "a": ["doesn’t work", "doesn't work", "does not work"]},
+           {"q": "Joe and I walk to school. → Отрицание: Joe and I ___ to school.", "a": ["don’t walk", "don't walk", "do not walk"]},
+           {"q": "Вопрос: ___ near the school? (you / live)", "a": ["do you live"]},
+           {"q": "Вопрос: ___ football? (your best friend / like)", "a": ["does your best friend like"]},
+           {"q": "Вопрос: ___ jeans to school? (you / wear)", "a": ["do you wear"]},
+           {"q": "Отрицание: She ___ (not / get up) early on Saturdays.", "a": ["doesn’t get up", "doesn't get up", "does not get up"]}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Задай собеседнику пять вопросов с Do/Does и запиши ответы.",
+           "Скажи три правдивых предложения о себе с <b>don’t</b>: <i>I don’t get up early on Saturdays.</i>",
+           "Расскажи, чего <b>не</b> делает твой брат, сестра или друг: <i>He doesn’t…</i>",
+           "Разыграй спор из диалога: кто что хочет смотреть и почему."
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1D",
+         "mc": [
+           {"q": "He ___ TV in the morning.", "o": ["doesn’t watch", "don’t watch", "doesn’t watches"], "a": 0},
+           {"q": "___ they live in Moscow?", "o": ["Do", "Does", "Are"], "a": 0},
+           {"q": "«Does she like maths?» — «Yes, she ___ .»", "o": ["does", "do", "is"], "a": 0},
+           {"q": "We ___ a car.", "o": ["haven’t got", "hasn’t got", "don’t got"], "a": 0},
+           {"q": "What ___ your dad do?", "o": ["does", "do", "is"], "a": 0}
+         ],
+         "gap": [
+           {"q": "She ___ (not / speak) French.", "a": ["doesn’t speak", "doesn't speak", "does not speak"]},
+           {"q": "___ (you / play) the guitar?", "a": ["do you play"]},
+           {"q": "___ (he / go) to school by bus?", "a": ["does he go"]},
+           {"q": "They ___ (not / argue) a lot.", "a": ["don’t argue", "don't argue", "do not argue"]}
+         ]}
+      ]
+    },
+
+    "E": {
+      "role": "Word Skills",
+      "topic": "Singular and plural nouns",
+      "cando": "I can form the plural of regular and irregular nouns.",
+      "blocks": [
+        {"type": "read", "title": "📕 Текст", "h3": "The family that runs on wheels", "sec": "reading",
+         "html": "<p>The Ivanovs are a family of five from Riga, and they are famous online for one thing: <b>bicycles</b>. Anna, the mother, repairs old <b>bikes</b> in the garage. Her husband Pavel makes <b>shelves</b> and <b>boxes</b> for the tools. Their two <b>daughters</b> film everything, and their little son carries the <b>knives</b>, <b>brushes</b> and <b>watches</b> that people bring for repair.</p><p>«People send us <b>photos</b> of broken bikes from three <b>countries</b>,» says Anna. «We give away most of them to <b>children</b> who haven’t got one.» The family has fixed over four hundred bikes. Their <b>lives</b> are busy, but nobody complains — except about the <b>dishes</b>, which nobody wants to wash.</p>",
+         "q": [
+           {"q": "Where is the family from?", "o": ["Riga", "Moscow", "Warsaw"], "a": 0},
+           {"q": "What does Pavel make?", "o": ["shelves and boxes", "bikes", "photos"], "a": 0},
+           {"q": "How many bikes has the family fixed?", "o": ["over four hundred", "five", "three"], "a": 0},
+           {"q": "Who do they give the bikes to?", "o": ["children without bikes", "their neighbours", "a museum"], "a": 0},
+           {"q": "What does nobody want to do?", "o": ["the dishes", "the filming", "the repairs"], "a": 0}
+         ]},
+
+        {"type": "rules", "title": "📖 Множественное число",
+         "cards": [
+           {"h": "Правила",
+            "table": [
+              ["Правило", "Пример"],
+              ["обычно + <b>-s</b>", "brother → brother<b>s</b>"],
+              ["после -s, -sh, -ch, -x, -z → <b>-es</b>", "bus → bus<b>es</b> · dish → dish<b>es</b> · watch → watch<b>es</b> · box → box<b>es</b>"],
+              ["после -o → -s или -es", "phot<b>os</b> · videos, но potato<b>es</b> · tomato<b>es</b>"],
+              ["согласная + y → <b>-ies</b>", "baby → bab<b>ies</b> · country → countr<b>ies</b>"],
+              ["-f / -fe → <b>-ves</b>", "life → li<b>ves</b> · knife → kni<b>ves</b> · shelf → shel<b>ves</b>"]
+            ]},
+           {"h": "Неправильные формы",
+            "rows": [
+              "man → <b>men</b> · woman → <b>women</b> · child → <b>children</b> · person → <b>people</b>",
+              "tooth → <b>teeth</b> · foot → <b>feet</b> · mouse → <b>mice</b>",
+              "Не меняются: sheep → <b>sheep</b> · fish → <b>fish</b>"
+            ]},
+           {"h": "Только множественное · только единственное",
+            "rows": [
+              "Всегда мн. число: <b>scissors · trousers · jeans · glasses</b> — <i>My jeans <b>are</b> old.</i>",
+              "Неисчисляемые, мн. числа нет: <b>homework · information · luggage · help · advice · money</b>.",
+              "Частая ошибка: ~~informations~~, ~~advices~~, ~~homeworks~~."
+            ]},
+           {"h": "Работа со словарём",
+            "rows": [
+              "В словаре неправильная форма стоит в скобках: <i>baby /ˈbeɪbi/ noun (plural <b>babies</b>)</i>.",
+              "Пометка <b>[U]</b> = uncountable, мн. числа нет. <b>[C]</b> = countable.",
+              "Если формы нет в скобках — работает обычное правило."
+            ]}
+         ]},
+
+        {"type": "gap", "title": "✏️ Напиши множественное число", "sec": "wordskills",
+         "items": [
+           {"q": "one baby → two ___", "a": ["babies"]},
+           {"q": "one address → two ___", "a": ["addresses"]},
+           {"q": "one day → two ___", "a": ["days"]},
+           {"q": "one video → two ___", "a": ["videos"]},
+           {"q": "one match → two ___", "a": ["matches"]},
+           {"q": "one life → two ___", "a": ["lives"]},
+           {"q": "one lady → two ___", "a": ["ladies"]},
+           {"q": "one tooth → two ___", "a": ["teeth"]},
+           {"q": "one knife → two ___", "a": ["knives"]},
+           {"q": "one person → two ___", "a": ["people"]}
+         ]},
+
+        {"type": "mc", "title": "✏️ Найди и исправь", "sec": "wordskills",
+         "items": [
+           {"q": "My jeans ___ very old.", "o": ["are", "is", "am"], "a": 0},
+           {"q": "Put the ___ and forks on the table.", "o": ["knives", "knifes", "knifs"], "a": 0},
+           {"q": "I’d like some ___ about trains.", "o": ["information", "informations", "an information"], "a": 0},
+           {"q": "Can I see some ___ of your family?", "o": ["photos", "photoes", "photoses"], "a": 0},
+           {"q": "How many ___ are there in your class?", "o": ["people", "peoples", "persons"], "a": 0},
+           {"q": "She gave me some good ___ .", "o": ["advice", "advices", "an advice"], "a": 0},
+           {"q": "The ___ are on the shelf.", "o": ["dishes", "dishs", "dishies"], "a": 0},
+           {"q": "My ___ hurt after the walk.", "o": ["feet", "foots", "feets"], "a": 0}
+         ]},
+
+        {"type": "match", "title": "🔗 Соедини единственное и множественное", "sec": "match",
+         "pairs": [["child", "children"], ["woman", "women"], ["mouse", "mice"], ["shelf", "shelves"], ["country", "countries"], ["box", "boxes"]]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1E",
+         "mc": [
+           {"q": "Множественное от «man»:", "o": ["men", "mans", "mens"], "a": 0},
+           {"q": "Множественное от «family»:", "o": ["families", "familys", "familyes"], "a": 0},
+           {"q": "«My homework ___ difficult.»", "o": ["is", "are", "were"], "a": 0},
+           {"q": "Какое слово всегда во мн. числе?", "o": ["scissors", "shelf", "advice"], "a": 0},
+           {"q": "Множественное от «wife»:", "o": ["wives", "wifes", "wifies"], "a": 0}
+         ],
+         "gap": [
+           {"q": "one wolf → two ___", "a": ["wolves"]},
+           {"q": "one city → two ___", "a": ["cities"]},
+           {"q": "one bus → two ___", "a": ["buses"]},
+           {"q": "one child → two ___", "a": ["children"]},
+           {"q": "one potato → two ___", "a": ["potatoes"]}
+         ]}
+      ]
+    },
+
+    "F": {
+      "role": "Reading",
+      "topic": "Sibling rivalry",
+      "cando": "I can understand a text about brothers and sisters.",
+      "blocks": [
+        {"type": "note", "title": "📕 Стратегия чтения",
+         "html": "Когда решаешь, какое предложение подходит в пропуск, читай <b>и до, и после</b> пропуска. Проверь три вещи: <b>1)</b> есть ли смысл; <b>2)</b> подходит ли грамматически (время, местоимения, единственное или множественное, this / that); <b>3)</b> о том ли это, о чём абзац."},
+
+        {"type": "read", "title": "📕 Текст с пропусками", "h3": "Brothers, sisters and the long war", "sec": "reading",
+         "html": "<p><i>«Sometimes I want to be alone. But my sister is always there!»</i><br><i>«My brother takes my things and he doesn’t ask me first. I hate that!»</i></p><p>These complaints are not unusual. <b>[1] ___</b> They argue about space, about noise, about who sat in the chair first. In general, teenagers are not very worried about their brothers and sisters when things go badly, and they are not very proud of them when things go well.</p><p>But most adults are keen on their brothers and sisters and have a good relationship. So when does the situation change? <b>[2] ___</b> Maya is 28 and her brother Leo is 26. «I remember terrible fights,» says Maya. «But now it’s completely different. <b>[3] ___</b> We meet two or three times a month and we always have a good time.»</p><p>So what can teenagers do while they wait? Learn to share. Give the other person time alone when they need it. Don’t tell people your brother’s or sister’s secrets. <b>[4] ___</b></p>",
+         "q": [
+           {"q": "Пропуск [1]", "o": ["Most teenagers have a difficult relationship with their brothers and sisters.", "We get on well and we never argue.", "Give your brother some time alone."], "a": 0},
+           {"q": "Пропуск [2]", "o": ["Research suggests the answer is around the age of 25.", "But other families are much smaller.", "He doesn’t ask me first."], "a": 0},
+           {"q": "Пропуск [3]", "o": ["We get on well and we don’t argue any more.", "Teenagers are not proud of their siblings.", "I want to be alone."], "a": 0},
+           {"q": "Пропуск [4]", "o": ["And the other answer is simple: just wait ten years.", "Most teenagers argue about space and noise.", "Adults are keen on their brothers and sisters."], "a": 0}
+         ]},
+
+        {"type": "mc", "title": "✏️ Понимание текста", "sec": "reading",
+         "items": [
+           {"q": "Какое резюме подходит лучше всего?", "o": ["Многие подростки плохо ладят с братьями и сёстрами, но во взрослом возрасте отношения обычно налаживаются.", "Все подростки прекрасно ладят с братьями и сёстрами.", "Отношения остаются плохими и во взрослом возрасте."], "a": 0},
+           {"q": "How old is Leo?", "o": ["26", "28", "25"], "a": 0},
+           {"q": "How often do Maya and Leo meet now?", "o": ["two or three times a month", "every day", "once a year"], "a": 0},
+           {"q": "Согласно тексту, отношения обычно меняются…", "o": ["около 25 лет", "в 15 лет", "никогда"], "a": 0}
+         ]},
+
+        {"type": "rules", "title": "🔠 Прилагательные с предлогами",
+         "cards": [
+           {"h": "Запоминай парой",
+            "rows": [
+              "worried <b>about</b> — переживать из-за · angry <b>about</b> (что-то) / <b>with</b> (кто-то)",
+              "proud <b>of</b> — гордиться · afraid <b>of</b> — бояться · tired <b>of</b> — устать от",
+              "keen <b>on</b> — увлекаться · interested <b>in</b> — интересоваться",
+              "nice / kind <b>to</b> — добр к · good <b>at</b> — хорош в · married <b>to</b> — женат на"
+            ]}
+         ]},
+
+        {"type": "gap", "title": "✍️ Впиши предлог", "sec": "wordskills",
+         "items": [
+           {"q": "She’s very proud ___ her little brother.", "a": ["of"]},
+           {"q": "I’m worried ___ the exam.", "a": ["about"]},
+           {"q": "He’s keen ___ football.", "a": ["on"]},
+           {"q": "Are you interested ___ history?", "a": ["in"]},
+           {"q": "My sister is good ___ maths.", "a": ["at"]},
+           {"q": "Please be nice ___ your cousin.", "a": ["to"]},
+           {"q": "I’m tired ___ this argument.", "a": ["of"]},
+           {"q": "My aunt is married ___ a musician.", "a": ["to"]}
+         ]},
+
+        {"type": "tf", "title": "✅ True or False", "sec": "truefalse",
+         "items": [
+           {"q": "Teenagers in the text argue about space and noise.", "a": true},
+           {"q": "Maya and Leo never argued as children.", "a": false},
+           {"q": "Most adults get on well with their siblings.", "a": true},
+           {"q": "The text advises telling your sibling’s secrets.", "a": false},
+           {"q": "Maya is older than Leo.", "a": true}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Возьми интервью у одноклассника, у которого есть брат или сестра: Do you argue? What about? Do you share a room?",
+           "Что из четырёх советов в конце текста работает, по-твоему, лучше всего?",
+           "Опиши свои отношения с братом, сестрой или близким другом. Используй <b>keen on, interested in, proud of, worried about</b>."
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1F",
+         "mc": [
+           {"q": "I’m not very keen ___ horror films.", "o": ["on", "of", "in"], "a": 0},
+           {"q": "She’s proud ___ her results.", "o": ["of", "about", "at"], "a": 0},
+           {"q": "He’s angry ___ his sister.", "o": ["with", "of", "in"], "a": 0},
+           {"q": "Are you good ___ drawing?", "o": ["at", "in", "on"], "a": 0},
+           {"q": "«sibling» — это…", "o": ["брат или сестра", "двоюродный брат", "родитель"], "a": 0}
+         ],
+         "gap": [
+           {"q": "I’m interested ___ languages.", "a": ["in"]},
+           {"q": "Don’t be afraid ___ the dog.", "a": ["of"]},
+           {"q": "My mum is worried ___ me.", "a": ["about"]},
+           {"q": "Be kind ___ your stepsister.", "a": ["to"]}
+         ]}
+      ]
+    },
+
+    "G": {
+      "role": "Speaking",
+      "topic": "Describing people",
+      "cando": "I can describe my friends.",
+      "blocks": [
+        {"type": "words", "title": "🔤 Внешность", "note": "Порядок: рост → телосложение → волосы → остальное. <i>She’s tall and slim with long dark hair.</i>",
+         "items": [["tall", "высокий"], ["short", "невысокий"], ["medium height", "среднего роста"], ["slim", "стройный"], ["well-built", "крепкого сложения"], ["good-looking", "симпатичный"], ["long hair", "длинные волосы"], ["short hair", "короткие волосы"], ["medium-length hair", "волосы средней длины"], ["straight hair", "прямые волосы"], ["curly hair", "кудрявые волосы"], ["wavy hair", "волнистые волосы"], ["fair hair", "светлые волосы"], ["dark hair", "тёмные волосы"], ["blue eyes", "голубые глаза"], ["green eyes", "зелёные глаза"], ["glasses", "очки"], ["a beard", "борода"], ["a moustache", "усы"], ["freckles", "веснушки"]]},
+
+        {"type": "words", "title": "🔤 Характер",
+         "items": [["friendly", "дружелюбный"], ["shy", "стеснительный"], ["funny", "весёлый"], ["kind", "добрый"], ["patient", "терпеливый"], ["polite", "вежливый"], ["honest", "честный"], ["hard-working", "трудолюбивый"], ["creative", "творческий"], ["sensible", "здравомыслящий"], ["talkative", "разговорчивый"], ["quiet", "тихий"]]},
+
+        {"type": "rules", "title": "🗝️ Key phrases · говорим о себе и других",
+         "cards": [
+           {"h": "Giving personal information",
+            "rows": [
+              "I’m <b>in</b> Year ten. · She’s <b>at</b> university.",
+              "I walk <b>to</b> school. · I listen <b>to</b> music.",
+              "I watch films <b>with</b> my friends <b>at</b> the weekend.",
+              "This is my friend Dan. He’s <b>got</b> short fair hair."
+            ]},
+           {"h": "Как строить описание",
+            "rows": [
+              "Внешность через <b>be</b> и <b>have got</b>: She <b>is</b> tall. She <b>has got</b> green eyes.",
+              "Не путай: ~~She has tall~~ → <b>She is tall.</b>",
+              "Характер через <b>be</b>: He <b>is</b> very funny and quite shy."
+            ]}
+         ]},
+
+        {"type": "gap", "title": "✍️ Впиши предлог или глагол", "sec": "gap",
+         "items": [
+           {"q": "I’m ___ Year eleven.", "a": ["in"]},
+           {"q": "My sister is ___ university.", "a": ["at"]},
+           {"q": "I listen ___ music every evening.", "a": ["to"]},
+           {"q": "We go to the cinema ___ the weekend.", "a": ["at"]},
+           {"q": "She ___ tall and slim. (be)", "a": ["is", "’s", "'s"]},
+           {"q": "He ___ got a beard. (have)", "a": ["has", "’s", "'s"]}
+         ]},
+
+        {"type": "listen", "title": "🎧 Аудирование", "h3": "Who’s who at the party?",
+         "intro": "Три коротких разговора на дне рождения. Слушай и отвечай.",
+         "script": [["f", "Who’s that boy by the window? The tall one with curly hair."], ["m", "That’s Dan. He’s in my maths class. He’s really funny."], ["f", "Is he here with Sally?"], ["m", "No, he isn’t. Sally’s over there, talking to my sister."], ["m2", "Hi! I’m Ryan. I don’t know anybody here, honestly."], ["f2", "Nobody? Really?"], ["m2", "Well, I know George. He’s my neighbour. The one with glasses and the black jacket."], ["f2", "Oh, George is my brother!"], ["f", "So, what do you think of the party, Lucy?"], ["f2", "It’s brilliant. The music is great."], ["f", "Do you know Kate? Short, with red hair."], ["f2", "I do, and I like her a lot. She’s very kind."]],
+         "script_html": "<b>Mia:</b> Who’s that boy by the window? The tall one with curly hair.<br><b>Jake:</b> That’s Dan. He’s in my maths class. He’s really funny.<br><b>Mia:</b> Is he here with Sally?<br><b>Jake:</b> No, he isn’t. Sally’s over there, talking to my sister.<br><br><b>Ryan:</b> Hi! I’m Ryan. I don’t know anybody here, honestly.<br><b>Lisa:</b> Nobody? Really?<br><b>Ryan:</b> Well, I know George. He’s my neighbour. The one with glasses and the black jacket.<br><b>Lisa:</b> Oh, George is my brother!<br><br><b>Mia:</b> So, what do you think of the party, Lucy?<br><b>Lucy:</b> It’s brilliant. The music is great.<br><b>Mia:</b> Do you know Kate? Short, with red hair.<br><b>Lucy:</b> I do, and I like her a lot. She’s very kind.",
+         "q": [
+           {"q": "What does Dan look like?", "o": ["tall with curly hair", "short with fair hair", "tall with glasses"], "a": 0},
+           {"q": "Is Dan at the party with Sally?", "o": ["no", "yes", "we don’t know"], "a": 0},
+           {"q": "How many people does Ryan know?", "o": ["one", "nobody", "lots"], "a": 0},
+           {"q": "Who is George?", "o": ["Lisa’s brother", "Lisa’s neighbour", "Ryan’s brother"], "a": 0},
+           {"q": "What does Lucy think of the party?", "o": ["it’s brilliant", "it’s boring", "it’s too loud"], "a": 0},
+           {"q": "What is Kate like?", "o": ["kind", "shy", "funny"], "a": 0}
+         ]},
+
+        {"type": "mc", "title": "✏️ Исправь описание", "sec": "grammar",
+         "note": "По диалогу выше — какое утверждение верное?",
+         "items": [
+           {"q": "Dan is…", "o": ["tall with curly hair", "quite short with red hair", "tall with a beard"], "a": 0},
+           {"q": "George wears…", "o": ["glasses and a black jacket", "glasses and a blue jacket", "a green jacket"], "a": 0},
+           {"q": "Kate is…", "o": ["short with red hair", "tall with fair hair", "short with dark hair"], "a": 0}
+         ]},
+
+        {"type": "speak", "title": "💬 Говорим",
+         "items": [
+           "Выбери человека в комнате и опиши его, не называя имени. Пусть собеседник угадает.",
+           "Опиши лучшего друга: рост, волосы, глаза, характер. Минимум шесть предложений.",
+           "Расскажи о себе по образцу key phrases: <b>I’m in Year… I walk to… I listen to… at the weekend.</b>",
+           "Опиши члена семьи так, чтобы собеседник понял, кто это, по одному предложению."
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1G",
+         "mc": [
+           {"q": "She ___ long dark hair.", "o": ["has got", "is", "are"], "a": 0},
+           {"q": "He ___ quite tall.", "o": ["is", "has got", "have"], "a": 0},
+           {"q": "«кудрявые волосы» =", "o": ["curly hair", "wavy hair", "straight hair"], "a": 0},
+           {"q": "«усы» =", "o": ["a moustache", "a beard", "freckles"], "a": 0},
+           {"q": "«стеснительный» =", "o": ["shy", "sensible", "sensitive"], "a": 0},
+           {"q": "«трудолюбивый» =", "o": ["hard-working", "hardly working", "hard-worked"], "a": 0}
+         ],
+         "gap": [
+           {"q": "My brother ___ got green eyes.", "a": ["has", "’s", "'s"]},
+           {"q": "I’m ___ Year nine.", "a": ["in"]},
+           {"q": "«волосы средней длины» = ___-length hair", "a": ["medium"]},
+           {"q": "«вежливый» одним словом:", "a": ["polite"]}
+         ]}
+      ]
+    },
+
+    "H": {
+      "role": "Writing",
+      "topic": "A personal profile",
+      "cando": "I can write a personal profile.",
+      "blocks": [
+        {"type": "read", "title": "📕 Образцы", "h3": "Two profiles from a school website", "sec": "reading",
+         "html": "<p><b>Lauren</b><br>Hi! I’m Lauren and I’m seventeen. I’m in Year twelve at Northgate School. I live very near the school, so I walk to school in five minutes every morning.</p><p>I really enjoy school. My favourite subjects are science and art, and I’m keen on languages too. I’m quite hard-working, but my friends say I’m also creative.</p><p>I love films and I watch DVDs with my friends every weekend. My other hobbies are dancing and reading. I’ve got a dog and two cats — I love animals! My ambition is to be a vet.</p><hr><p><b>James</b><br>Hello! My name’s James. I’m sixteen years old and I’m in Year eleven. I’ve got a brother in Year nine and I’ve got a stepsister too. She’s at university.</p><p>Music is important to me. I play the guitar and I write songs, but I’m not very patient, so I don’t practise every day. I’m friendly and quite talkative — maybe too talkative in lessons!</p><p>At the weekend I listen to music and I play football with my cousins. One day I want to study sound engineering.</p>",
+         "q": [
+           {"q": "Which subjects does Lauren like?", "o": ["science and art", "maths and history", "music and sport"], "a": 0},
+           {"q": "How does Lauren get to school?", "o": ["she walks", "by bus", "by bike"], "a": 0},
+           {"q": "Who is at university?", "o": ["James’s stepsister", "James’s brother", "Lauren’s sister"], "a": 0},
+           {"q": "What does James say about himself?", "o": ["he’s not very patient", "he’s very patient", "he’s shy"], "a": 0},
+           {"q": "What is Lauren’s ambition?", "o": ["to be a vet", "to be a dancer", "to study music"], "a": 0}
+         ]},
+
+        {"type": "rules", "title": "✍️ Как писать",
+         "cards": [
+           {"h": "Стратегия 1 · сокращения",
+            "rows": [
+              "В личном профиле, письме другу и неформальном письме пиши <b>сокращённо</b>: I’m, she’s, I’ve got, don’t.",
+              "Полные формы (I am, she is) звучат сухо и официально — они для формальных текстов.",
+              "Проверь себя: <i>I am Lauren and I am in Year twelve</i> → <b>I’m Lauren and I’m in Year twelve.</b>"
+            ]},
+           {"h": "Стратегия 2 · абзацы",
+            "rows": [
+              "Абзац = два и больше предложений <b>об одном</b>. Новая тема — новый абзац.",
+              "Рабочий план на четыре абзаца: <b>1)</b> кто я и где учусь · <b>2)</b> школа и предметы · <b>3)</b> хобби и свободное время · <b>4)</b> семья, питомцы, мечта.",
+              "Сначала план, потом текст. Так не получится каша из всего сразу."
+            ]},
+           {"h": "Key phrases · предлоги",
+            "rows": [
+              "I’m <b>in</b> Year twelve. · She’s <b>at</b> university.",
+              "I walk <b>to</b> school. · I listen <b>to</b> music.",
+              "I watch DVDs <b>with</b> my friends. · <b>At</b> the weekend I…"
+            ]}
+         ]},
+
+        {"type": "gap", "title": "✍️ Впиши предлог", "sec": "gap",
+         "items": [
+           {"q": "I’m ___ Year twelve.", "a": ["in"]},
+           {"q": "I walk ___ school.", "a": ["to"]},
+           {"q": "I watch DVDs ___ my friends.", "a": ["with"]},
+           {"q": "She’s ___ university.", "a": ["at"]},
+           {"q": "I listen ___ music.", "a": ["to"]},
+           {"q": "___ the weekend I play football.", "a": ["at", "At"]}
+         ]},
+
+        {"type": "mc", "title": "✏️ Сокращения и абзацы", "sec": "grammar",
+         "items": [
+           {"q": "Как лучше в личном профиле?", "o": ["I’m sixteen and I’ve got a brother.", "I am sixteen and I have got a brother.", "I sixteen and I have brother."], "a": 0},
+           {"q": "«She’s at university» — полная форма:", "o": ["She is at university", "She has at university", "She was at university"], "a": 0},
+           {"q": "«I’ve got a dog» — полная форма:", "o": ["I have got a dog", "I has got a dog", "I had got a dog"], "a": 0},
+           {"q": "Сколько предложений минимум в абзаце?", "o": ["два", "одно", "пять"], "a": 0},
+           {"q": "Новый абзац нужен, когда…", "o": ["меняется тема", "закончилась строка", "прошло три предложения"], "a": 0},
+           {"q": "Какое предложение лишнее в абзаце про хобби?", "o": ["My favourite subject is chemistry.", "I play the guitar.", "I read a lot at the weekend."], "a": 0}
+         ]},
+
+        {"type": "words", "title": "🔤 Personality adjectives", "note": "Выбери два-три для своего профиля.",
+         "items": [["creative", "творческий"], ["friendly", "дружелюбный"], ["hard-working", "трудолюбивый"], ["honest", "честный"], ["patient", "терпеливый"], ["polite", "вежливый"], ["sensible", "здравомыслящий"], ["talkative", "разговорчивый"], ["shy", "стеснительный"], ["funny", "весёлый"]]},
+
+        {"type": "writing", "title": "✍️ Твоя работа",
+         "html": "<b>A personal profile.</b> Напиши профиль о себе для школьного сайта — <b>100–130 слов, четыре абзаца</b>.<br><br><b>План:</b><br>1. Имя, возраст, класс, где живёшь и как добираешься до школы.<br>2. Школа: любимые предметы, что даётся легко, что трудно.<br>3. Хобби и выходные: что делаешь, с кем.<br>4. Семья и питомцы + твоя мечта или цель.<br><br><b>Проверь перед сдачей:</b><br>• Везде ли сокращения (I’m, I’ve got, don’t)?<br>• Четыре абзаца, каждый — об одном?<br>• Два-три прилагательных характера про себя?<br>• Present simple: третье лицо с <b>-s</b>?<br>• Заглавные буквы у имён, стран и языков?"},
+
+        {"type": "speak", "title": "💬 Перед письмом — проговори",
+         "items": [
+           "Расскажи свой профиль вслух по плану, не записывая. Потом садись писать — так текст выйдет живее.",
+           "Прочитай написанное вслух. Там, где спотыкаешься, — там и надо править."
+         ]},
+
+        {"type": "wb", "title": "📒 Рабочая тетрадь 1H",
+         "mc": [
+           {"q": "«I am» сокращённо:", "o": ["I’m", "Im", "I’am"], "a": 0},
+           {"q": "«do not» сокращённо:", "o": ["don’t", "dont", "do’nt"], "a": 0},
+           {"q": "«She has got» сокращённо:", "o": ["She’s got", "She has’t", "Shes got"], "a": 0},
+           {"q": "«терпеливый» =", "o": ["patient", "polite", "patiently"], "a": 0},
+           {"q": "«здравомыслящий» =", "o": ["sensible", "sensitive", "senseless"], "a": 0}
+         ],
+         "gap": [
+           {"q": "Сокращённо: I have got → ___ got", "a": ["I’ve", "I've"]},
+           {"q": "Сокращённо: he is not → he ___", "a": ["isn’t", "isn't"]},
+           {"q": "«творческий» по-английски:", "a": ["creative"]},
+           {"q": "«честный» по-английски:", "a": ["honest"]}
+         ]}
+      ]
+    }
+  }
+}
