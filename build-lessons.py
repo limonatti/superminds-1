@@ -148,8 +148,8 @@ def html_blocks(blocks):
                 html += "  </div>\n"
             out.append(html)
         elif t == "listen":
-            img = ('<img class="lcimg" src="%s" alt="%s">' % (b["image"], b.get("image_alt", ""))
-                   if b.get("image") else "")
+            img = ('  <img class="lcimg" src="%s" alt="%s" loading="lazy">\n'
+                   % (b["image"], b.get("image_alt", "")) if b.get("image") else "")
             out.append(sec + img + '  <div class="lc"><h3>%s</h3><p>%s</p>\n'
                        '    <div class="pl">\n'
                        '      <button class="plbtn main" id="%s_play">▶</button>\n'
