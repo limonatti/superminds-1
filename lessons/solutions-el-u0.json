@@ -7,519 +7,2705 @@
       "topic": "Personal information",
       "cando": "I can exchange basic personal information.",
       "blocks": [
-        {"type": "rules", "title": "🔡 Алфавит и как диктовать по буквам",
-         "cards": [
-           {"h": "Буквы, на которых спотыкаются все",
-            "rows": [
-              "<b>G</b> /dʒiː/ и <b>J</b> /dʒeɪ/ — «джи» и «джей». Путать их — классика.",
-              "<b>E</b> /iː/ и <b>I</b> /aɪ/ — «и» и «ай». <b>A</b> /eɪ/ — «эй», не «а».",
-              "<b>W</b> /ˈdʌbljuː/ — «дабл-ю». <b>Y</b> /waɪ/ — «уай». <b>Z</b> — /zed/ в британском, /ziː/ в американском.",
-              "Двойная буква: <b>double L</b> — Ellie = E-double L-I-E."
-            ]},
-           {"h": "Что спрашивают и что отвечают",
-            "rows": [
-              "<b>What’s your name?</b> — My name’s Sofia. / I’m Sofia.",
-              "<b>How do you spell that?</b> — S-O-F-I-A.",
-              "<b>How old are you?</b> — I’m thirteen. <u>Не</u> ~~I have thirteen~~.",
-              "<b>Where are you from?</b> — I’m from Poland."
-            ]}
-         ]},
-
-        {"type": "pron", "title": "🔊 Послушай буквы",
-         "note": "Нажимай и повторяй. Особое внимание на G / J и E / I.",
-         "items": ["A", "E", "G", "I", "J", "R", "U", "V", "W", "Y", "Z"]},
-
-        {"type": "words", "title": "🔢 Числа 1–50",
-         "note": "Ловушка: <b>thirTEEN</b> — ударение в конце, <b>THIRty</b> — в начале. Послушай разницу.",
-         "items": [["one", "1"], ["two", "2"], ["three", "3"], ["four", "4"], ["five", "5"], ["six", "6"], ["seven", "7"], ["eight", "8"], ["nine", "9"], ["ten", "10"], ["eleven", "11"], ["twelve", "12"], ["thirteen", "13"], ["fourteen", "14"], ["fifteen", "15"], ["sixteen", "16"], ["seventeen", "17"], ["eighteen", "18"], ["nineteen", "19"], ["twenty", "20"], ["twenty-one", "21"], ["thirty", "30"], ["forty", "40"], ["fifty", "50"]]},
-
-        {"type": "pron", "title": "🗣️ -teen или -ty?",
-         "note": "Слушай, где ударение: в -teen оно в конце, в -ty — в начале.",
-         "items": ["thirteen", "thirty", "fourteen", "forty", "fifteen", "fifty", "sixteen", "sixty"]},
-
-        {"type": "mc", "title": "✏️ Какое число ты слышишь?", "sec": "numbers",
-         "note": "Нажми 🔊 в блоке выше, потом отвечай.",
-         "items": [
-           {"q": "thir<b>TEEN</b> — это…", "o": ["13", "30", "3"], "a": 0},
-           {"q": "<b>FOR</b>ty — это…", "o": ["40", "14", "4"], "a": 0},
-           {"q": "fif<b>TEEN</b> — это…", "o": ["15", "50", "5"], "a": 0},
-           {"q": "<b>SIX</b>ty — это…", "o": ["60", "16", "6"], "a": 0}
-         ]},
-
-        {"type": "words", "title": "🌍 Страны",
-         "note": "Перед некоторыми странами обязателен <b>the</b>: the UK, the USA, the Czech Republic, the Netherlands.",
-         "items": [["Argentina", "Аргентина"], ["Australia", "Австралия"], ["Brazil", "Бразилия"], ["Canada", "Канада"], ["China", "Китай"], ["Croatia", "Хорватия"], ["the Czech Republic", "Чехия"], ["Egypt", "Египет"], ["France", "Франция"], ["Germany", "Германия"], ["Greece", "Греция"], ["Hungary", "Венгрия"], ["India", "Индия"], ["Italy", "Италия"], ["Japan", "Япония"], ["Mexico", "Мексика"], ["Poland", "Польша"], ["Russia", "Россия"], ["Spain", "Испания"], ["Turkey", "Турция"], ["the UK", "Великобритания"], ["Ukraine", "Украина"], ["the USA", "США"]]},
-
-        {"type": "chunks", "title": "🧩 Фразы знакомства",
-         "items": [["What’s your name?", "как тебя зовут?"], ["How do you spell that?", "как это пишется?"], ["How old are you?", "сколько тебе лет?"], ["Where are you from?", "откуда ты?"], ["I’m from…", "я из…"], ["Nice to meet you.", "приятно познакомиться"], ["This is my friend…", "это мой друг…"], ["See you tomorrow!", "до завтра!"]]},
-
-        {"type": "chunkdrill", "title": "🎯 Тренажёр фраз", "sec": "chunk",
-         "items": [["What’s your name?", "как тебя зовут?"], ["How do you spell that?", "как это пишется?"], ["How old are you?", "сколько тебе лет?"], ["Where are you from?", "откуда ты?"], ["I’m from…", "я из…"], ["Nice to meet you.", "приятно познакомиться"], ["This is my friend…", "это мой друг…"], ["See you tomorrow!", "до завтра!"]]},
-
-        {"type": "listen", "title": "🎧 Аудирование", "h3": "First day at the language school",
-         "intro": "Четверо новых учеников знакомятся. Кликни на реплику, чтобы слушать с неё.",
-         "script": [
-           ["f", "Good morning! Welcome to Europa Language School. What’s your name?", "Woman"],
-           ["m", "Kadir Demir.", "Kadir"],
-           ["f", "How do you spell that?", "Woman"],
-           ["m", "K-A-D-I-R. D-E-M-I-R.", "Kadir"],
-           ["f", "Thank you. And where are you from, Kadir?", "Woman"],
-           ["m", "I’m from Turkey. From Izmir.", "Kadir"],
-           ["f", "Lovely. How old are you?", "Woman"],
-           ["m", "I’m sixteen.", "Kadir"],
-           ["f2", "Excuse me — is this room fourteen?", "Bruna"],
-           ["f", "It’s room forty. Fourteen is upstairs. What’s your name?", "Woman"],
-           ["f2", "Bruna. B-R-U-N-A. I’m from Brazil and I’m fifteen.", "Bruna"],
-           ["f", "Perfect. Come in, both of you. Nice to meet you.", "Woman"]
-         ],
-         "q": [
-           {"q": "How do you spell the boy’s first name?", "o": ["K-A-D-I-R", "K-A-D-E-R", "C-A-D-I-R"], "a": 0},
-           {"q": "Where is Kadir from?", "o": ["Turkey", "Greece", "Croatia"], "a": 0},
-           {"q": "How old is Kadir?", "o": ["sixteen", "sixty", "fifteen"], "a": 0},
-           {"q": "Which room does Bruna want?", "o": ["fourteen", "forty", "four"], "a": 0},
-           {"q": "Which room are they in?", "o": ["forty", "fourteen", "four"], "a": 0},
-           {"q": "Where is Bruna from?", "o": ["Brazil", "Portugal", "Argentina"], "a": 0}
-         ]},
-
-        {"type": "speak", "title": "💬 Говорим",
-         "items": [
-           "Задай собеседнику четыре вопроса: name · spelling · age · country. Запиши ответы.",
-           "Продиктуй по буквам своё имя, фамилию и город.",
-           "Посчитай вслух от 50 до 1 назад. Потом только чётные.",
-           "Назови пять стран и скажи, где нужен <b>the</b>."
-         ]}
+        {
+          "type": "rules",
+          "title": "🔡 Алфавит и как диктовать по буквам",
+          "cards": [
+            {
+              "h": "Буквы, на которых спотыкаются все",
+              "rows": [
+                "<b>G</b> /dʒiː/ и <b>J</b> /dʒeɪ/ — «джи» и «джей». Путать их — классика.",
+                "<b>E</b> /iː/ и <b>I</b> /aɪ/ — «и» и «ай». <b>A</b> /eɪ/ — «эй», не «а».",
+                "<b>W</b> /ˈdʌbljuː/ — «дабл-ю». <b>Y</b> /waɪ/ — «уай». <b>Z</b> — /zed/ в британском, /ziː/ в американском.",
+                "Двойная буква: <b>double L</b> — Ellie = E-double L-I-E."
+              ]
+            },
+            {
+              "h": "Что спрашивают и что отвечают",
+              "rows": [
+                "<b>What’s your name?</b> — My name’s Sofia. / I’m Sofia.",
+                "<b>How do you spell that?</b> — S-O-F-I-A.",
+                "<b>How old are you?</b> — I’m thirteen. <u>Не</u> ~~I have thirteen~~.",
+                "<b>Where are you from?</b> — I’m from Poland."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "pron",
+          "title": "🔊 Послушай буквы",
+          "note": "Нажимай и повторяй. Особое внимание на G / J и E / I.",
+          "items": [
+            "A",
+            "E",
+            "G",
+            "I",
+            "J",
+            "R",
+            "U",
+            "V",
+            "W",
+            "Y",
+            "Z"
+          ]
+        },
+        {
+          "type": "words",
+          "title": "🔢 Числа 1–50",
+          "note": "Ловушка: <b>thirTEEN</b> — ударение в конце, <b>THIRty</b> — в начале. Послушай разницу.",
+          "items": [
+            [
+              "one",
+              "1"
+            ],
+            [
+              "two",
+              "2"
+            ],
+            [
+              "three",
+              "3"
+            ],
+            [
+              "four",
+              "4"
+            ],
+            [
+              "five",
+              "5"
+            ],
+            [
+              "six",
+              "6"
+            ],
+            [
+              "seven",
+              "7"
+            ],
+            [
+              "eight",
+              "8"
+            ],
+            [
+              "nine",
+              "9"
+            ],
+            [
+              "ten",
+              "10"
+            ],
+            [
+              "eleven",
+              "11"
+            ],
+            [
+              "twelve",
+              "12"
+            ],
+            [
+              "thirteen",
+              "13"
+            ],
+            [
+              "fourteen",
+              "14"
+            ],
+            [
+              "fifteen",
+              "15"
+            ],
+            [
+              "sixteen",
+              "16"
+            ],
+            [
+              "seventeen",
+              "17"
+            ],
+            [
+              "eighteen",
+              "18"
+            ],
+            [
+              "nineteen",
+              "19"
+            ],
+            [
+              "twenty",
+              "20"
+            ],
+            [
+              "twenty-one",
+              "21"
+            ],
+            [
+              "thirty",
+              "30"
+            ],
+            [
+              "forty",
+              "40"
+            ],
+            [
+              "fifty",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "pron",
+          "title": "🗣️ -teen или -ty?",
+          "note": "Слушай, где ударение: в -teen оно в конце, в -ty — в начале.",
+          "items": [
+            "thirteen",
+            "thirty",
+            "fourteen",
+            "forty",
+            "fifteen",
+            "fifty",
+            "sixteen",
+            "sixty"
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Какое число ты слышишь?",
+          "sec": "numbers",
+          "note": "Нажми 🔊 в блоке выше, потом отвечай.",
+          "items": [
+            {
+              "q": "thir<b>TEEN</b> — это…",
+              "o": [
+                "13",
+                "30",
+                "3"
+              ],
+              "a": 0
+            },
+            {
+              "q": "<b>FOR</b>ty — это…",
+              "o": [
+                "40",
+                "14",
+                "4"
+              ],
+              "a": 0
+            },
+            {
+              "q": "fif<b>TEEN</b> — это…",
+              "o": [
+                "15",
+                "50",
+                "5"
+              ],
+              "a": 0
+            },
+            {
+              "q": "<b>SIX</b>ty — это…",
+              "o": [
+                "60",
+                "16",
+                "6"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "words",
+          "title": "🌍 Страны",
+          "note": "Перед некоторыми странами обязателен <b>the</b>: the UK, the USA, the Czech Republic, the Netherlands.",
+          "items": [
+            [
+              "Argentina",
+              "Аргентина"
+            ],
+            [
+              "Australia",
+              "Австралия"
+            ],
+            [
+              "Brazil",
+              "Бразилия"
+            ],
+            [
+              "Canada",
+              "Канада"
+            ],
+            [
+              "China",
+              "Китай"
+            ],
+            [
+              "Croatia",
+              "Хорватия"
+            ],
+            [
+              "the Czech Republic",
+              "Чехия"
+            ],
+            [
+              "Egypt",
+              "Египет"
+            ],
+            [
+              "France",
+              "Франция"
+            ],
+            [
+              "Germany",
+              "Германия"
+            ],
+            [
+              "Greece",
+              "Греция"
+            ],
+            [
+              "Hungary",
+              "Венгрия"
+            ],
+            [
+              "India",
+              "Индия"
+            ],
+            [
+              "Italy",
+              "Италия"
+            ],
+            [
+              "Japan",
+              "Япония"
+            ],
+            [
+              "Mexico",
+              "Мексика"
+            ],
+            [
+              "Poland",
+              "Польша"
+            ],
+            [
+              "Russia",
+              "Россия"
+            ],
+            [
+              "Spain",
+              "Испания"
+            ],
+            [
+              "Turkey",
+              "Турция"
+            ],
+            [
+              "the UK",
+              "Великобритания"
+            ],
+            [
+              "Ukraine",
+              "Украина"
+            ],
+            [
+              "the USA",
+              "США"
+            ]
+          ]
+        },
+        {
+          "type": "chunks",
+          "title": "🧩 Фразы знакомства",
+          "items": [
+            [
+              "What’s your name?",
+              "как тебя зовут?"
+            ],
+            [
+              "How do you spell that?",
+              "как это пишется?"
+            ],
+            [
+              "How old are you?",
+              "сколько тебе лет?"
+            ],
+            [
+              "Where are you from?",
+              "откуда ты?"
+            ],
+            [
+              "I’m from…",
+              "я из…"
+            ],
+            [
+              "Nice to meet you.",
+              "приятно познакомиться"
+            ],
+            [
+              "This is my friend…",
+              "это мой друг…"
+            ],
+            [
+              "See you tomorrow!",
+              "до завтра!"
+            ]
+          ]
+        },
+        {
+          "type": "chunkdrill",
+          "title": "🎯 Тренажёр фраз",
+          "sec": "chunk",
+          "items": [
+            [
+              "What’s your name?",
+              "как тебя зовут?"
+            ],
+            [
+              "How do you spell that?",
+              "как это пишется?"
+            ],
+            [
+              "How old are you?",
+              "сколько тебе лет?"
+            ],
+            [
+              "Where are you from?",
+              "откуда ты?"
+            ],
+            [
+              "I’m from…",
+              "я из…"
+            ],
+            [
+              "Nice to meet you.",
+              "приятно познакомиться"
+            ],
+            [
+              "This is my friend…",
+              "это мой друг…"
+            ],
+            [
+              "See you tomorrow!",
+              "до завтра!"
+            ]
+          ]
+        },
+        {
+          "type": "listen",
+          "title": "🎧 Аудирование",
+          "h3": "First day at the language school",
+          "intro": "Четверо новых учеников знакомятся. Кликни на реплику, чтобы слушать с неё.",
+          "script": [
+            [
+              "f",
+              "Good morning! Welcome to Europa Language School. What’s your name?",
+              "Woman"
+            ],
+            [
+              "m",
+              "Kadir Demir.",
+              "Kadir"
+            ],
+            [
+              "f",
+              "How do you spell that?",
+              "Woman"
+            ],
+            [
+              "m",
+              "K-A-D-I-R. D-E-M-I-R.",
+              "Kadir"
+            ],
+            [
+              "f",
+              "Thank you. And where are you from, Kadir?",
+              "Woman"
+            ],
+            [
+              "m",
+              "I’m from Turkey. From Izmir.",
+              "Kadir"
+            ],
+            [
+              "f",
+              "Lovely. How old are you?",
+              "Woman"
+            ],
+            [
+              "m",
+              "I’m sixteen.",
+              "Kadir"
+            ],
+            [
+              "f2",
+              "Excuse me — is this room fourteen?",
+              "Bruna"
+            ],
+            [
+              "f",
+              "It’s room forty. Fourteen is upstairs. What’s your name?",
+              "Woman"
+            ],
+            [
+              "f2",
+              "Bruna. B-R-U-N-A. I’m from Brazil and I’m fifteen.",
+              "Bruna"
+            ],
+            [
+              "f",
+              "Perfect. Come in, both of you. Nice to meet you.",
+              "Woman"
+            ]
+          ],
+          "q": [
+            {
+              "q": "How do you spell the boy’s first name?",
+              "o": [
+                "K-A-D-I-R",
+                "K-A-D-E-R",
+                "C-A-D-I-R"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Where is Kadir from?",
+              "o": [
+                "Turkey",
+                "Greece",
+                "Croatia"
+              ],
+              "a": 0
+            },
+            {
+              "q": "How old is Kadir?",
+              "o": [
+                "sixteen",
+                "sixty",
+                "fifteen"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Which room does Bruna want?",
+              "o": [
+                "fourteen",
+                "forty",
+                "four"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Which room are they in?",
+              "o": [
+                "forty",
+                "fourteen",
+                "four"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Where is Bruna from?",
+              "o": [
+                "Brazil",
+                "Portugal",
+                "Argentina"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "title": "💬 Говорим",
+          "items": [
+            "Задай собеседнику четыре вопроса: name · spelling · age · country. Запиши ответы.",
+            "Продиктуй по буквам своё имя, фамилию и город.",
+            "Посчитай вслух от 50 до 1 назад. Потом только чётные.",
+            "Назови пять стран и скажи, где нужен <b>the</b>."
+          ]
+        }
       ],
       "workbook": [
-        {"type": "gap", "title": "1 · Составь вопрос", "sec": "wb-gram",
-         "note": "Впиши вопрос целиком.",
-         "items": [
-           {"q": "name / what’s / your", "a": ["what's your name", "what’s your name"]},
-           {"q": "that / spell / you / how / do", "a": ["how do you spell that"]},
-           {"q": "old / you / how / are", "a": ["how old are you"]},
-           {"q": "you / from / where / are", "a": ["where are you from"]}
-         ]},
-        {"type": "gap", "title": "2 · Напиши страну", "sec": "wb-voc",
-         "items": [
-           {"q": "Buenos Aires — ___", "a": ["argentina"]},
-           {"q": "Cairo — ___", "a": ["egypt"]},
-           {"q": "Zagreb — ___", "a": ["croatia"]},
-           {"q": "Budapest — ___", "a": ["hungary"]},
-           {"q": "Prague — ___ (с артиклем)", "a": ["the czech republic"]},
-           {"q": "Athens — ___", "a": ["greece"]},
-           {"q": "Warsaw — ___", "a": ["poland"]},
-           {"q": "Washington — ___ (с артиклем)", "a": ["the usa", "the united states"]}
-         ]},
-        {"type": "mc", "title": "3 · Число или похожее число?", "sec": "wb-num",
-         "items": [
-           {"q": "«This car is a Volvo S<b>60</b>» — читаем", "o": ["sixty", "sixteen", "six"], "a": 0},
-           {"q": "«Room <b>14</b>» — читаем", "o": ["fourteen", "forty", "four"], "a": 0},
-           {"q": "«He’s <b>50</b>» — читаем", "o": ["fifty", "fifteen", "five"], "a": 0},
-           {"q": "«I’m <b>13</b>» — читаем", "o": ["thirteen", "thirty", "three"], "a": 0},
-           {"q": "Где ударение в <b>seventeen</b>?", "o": ["на -teen", "на seven-", "на -ven-"], "a": 0}
-         ]},
-        {"type": "gap", "title": "4 · Запиши по буквам", "sec": "wb-spell",
-         "note": "Собери слово из продиктованных букв.",
-         "items": [
-           {"q": "S-P-A-I-N", "a": ["spain"]},
-           {"q": "G-R-E-E-C-E", "a": ["greece"]},
-           {"q": "J-A-P-A-N", "a": ["japan"]},
-           {"q": "double L в имени: E-double L-I-E", "a": ["ellie"]},
-           {"q": "U-K-R-A-I-N-E", "a": ["ukraine"]}
-         ]},
-        {"type": "sort", "title": "5 · Нужен ли the?", "sec": "wb-voc",
-         "note": "Нажми на страну, потом на нужную колонку.",
-         "groups": [
-           {"label": "без the", "words": ["France", "Poland", "Japan", "Brazil", "Turkey", "Egypt"]},
-           {"label": "с the", "words": ["the UK", "the USA", "the Czech Republic", "the Netherlands"]}],
-         "words": ["France", "Poland", "Japan", "Brazil", "Turkey", "Egypt",
-                   "the UK", "the USA", "the Czech Republic", "the Netherlands"]},
-        {"type": "free", "title": "6 · Напиши о себе",
-         "html": "Ответь письменно на четыре вопроса из упражнения 1 — <b>полными предложениями</b>.<br><br><i>Образец: My name’s Anna. A-N-N-A. I’m fourteen. I’m from Russia.</i>"}
+        {
+          "type": "gap",
+          "title": "1 · Составь вопрос",
+          "sec": "wb-gram",
+          "note": "Впиши вопрос целиком.",
+          "items": [
+            {
+              "q": "name / what’s / your",
+              "a": [
+                "what's your name",
+                "what’s your name"
+              ]
+            },
+            {
+              "q": "that / spell / you / how / do",
+              "a": [
+                "how do you spell that"
+              ]
+            },
+            {
+              "q": "old / you / how / are",
+              "a": [
+                "how old are you"
+              ]
+            },
+            {
+              "q": "you / from / where / are",
+              "a": [
+                "where are you from"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "2 · Напиши страну",
+          "sec": "wb-voc",
+          "items": [
+            {
+              "q": "Buenos Aires — ___",
+              "a": [
+                "argentina"
+              ]
+            },
+            {
+              "q": "Cairo — ___",
+              "a": [
+                "egypt"
+              ]
+            },
+            {
+              "q": "Zagreb — ___",
+              "a": [
+                "croatia"
+              ]
+            },
+            {
+              "q": "Budapest — ___",
+              "a": [
+                "hungary"
+              ]
+            },
+            {
+              "q": "Prague — ___ (с артиклем)",
+              "a": [
+                "the czech republic"
+              ]
+            },
+            {
+              "q": "Athens — ___",
+              "a": [
+                "greece"
+              ]
+            },
+            {
+              "q": "Warsaw — ___",
+              "a": [
+                "poland"
+              ]
+            },
+            {
+              "q": "Washington — ___ (с артиклем)",
+              "a": [
+                "the usa",
+                "the united states"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "3 · Число или похожее число?",
+          "sec": "wb-num",
+          "items": [
+            {
+              "q": "«This car is a Volvo S<b>60</b>» — читаем",
+              "o": [
+                "sixty",
+                "sixteen",
+                "six"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«Room <b>14</b>» — читаем",
+              "o": [
+                "fourteen",
+                "forty",
+                "four"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«He’s <b>50</b>» — читаем",
+              "o": [
+                "fifty",
+                "fifteen",
+                "five"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«I’m <b>13</b>» — читаем",
+              "o": [
+                "thirteen",
+                "thirty",
+                "three"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Где ударение в <b>seventeen</b>?",
+              "o": [
+                "на -teen",
+                "на seven-",
+                "на -ven-"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "4 · Запиши по буквам",
+          "sec": "wb-spell",
+          "note": "Собери слово из продиктованных букв.",
+          "items": [
+            {
+              "q": "S-P-A-I-N",
+              "a": [
+                "spain"
+              ]
+            },
+            {
+              "q": "G-R-E-E-C-E",
+              "a": [
+                "greece"
+              ]
+            },
+            {
+              "q": "J-A-P-A-N",
+              "a": [
+                "japan"
+              ]
+            },
+            {
+              "q": "double L в имени: E-double L-I-E",
+              "a": [
+                "ellie"
+              ]
+            },
+            {
+              "q": "U-K-R-A-I-N-E",
+              "a": [
+                "ukraine"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sort",
+          "title": "5 · Нужен ли the?",
+          "sec": "wb-voc",
+          "note": "Нажми на страну, потом на нужную колонку.",
+          "groups": [
+            {
+              "label": "без the",
+              "words": [
+                "France",
+                "Poland",
+                "Japan",
+                "Brazil",
+                "Turkey",
+                "Egypt"
+              ]
+            },
+            {
+              "label": "с the",
+              "words": [
+                "the UK",
+                "the USA",
+                "the Czech Republic",
+                "the Netherlands"
+              ]
+            }
+          ],
+          "words": [
+            "France",
+            "Poland",
+            "Japan",
+            "Brazil",
+            "Turkey",
+            "Egypt",
+            "the UK",
+            "the USA",
+            "the Czech Republic",
+            "the Netherlands"
+          ]
+        },
+        {
+          "type": "free",
+          "title": "6 · Напиши о себе",
+          "html": "Ответь письменно на четыре вопроса из упражнения 1 — <b>полными предложениями</b>.<br><br><i>Образец: My name’s Anna. A-N-N-A. I’m fourteen. I’m from Russia.</i>"
+        }
       ]
     },
-
     "B": {
       "role": "Grammar",
       "topic": "be and have got",
       "cando": "I can use be and have got.",
       "blocks": [
-        {"type": "listen", "title": "🎧 Диалог", "h3": "Is that your dog?",
-         "intro": "Послушай и найди все формы be и have got.",
-         "script": [
-           ["m", "Have you got a brother, Joanna?", "Max"],
-           ["f", "No, I haven’t. But I’ve got a sister. Here’s a photo of us — I’m on the right.", "Joanna"],
-           ["m", "Are you twins?", "Max"],
-           ["f", "Yes, we are, but we aren’t identical. Emma’s got black hair, like me, but she hasn’t got brown eyes.", "Joanna"],
-           ["m", "Is that your dog in the photo?", "Max"],
-           ["f", "Yes, it is. She’s called Rosie. Rosie is Emma’s dog, really.", "Joanna"],
-           ["m", "How old is she?", "Max"],
-           ["f", "She’s sixteen, of course.", "Joanna"],
-           ["m", "That’s very old for a dog!", "Max"],
-           ["f", "No — Emma’s sixteen. Rosie is six.", "Joanna"]
-         ],
-         "q": [
-           {"q": "Has Joanna got a brother?", "o": ["no", "yes, one", "yes, two"], "a": 0},
-           {"q": "Are Joanna and Emma twins?", "o": ["yes, but not identical", "no", "yes, identical"], "a": 0},
-           {"q": "What has Emma got that Joanna hasn’t?", "o": ["different eyes", "black hair", "a dog"], "a": 0},
-           {"q": "Whose dog is Rosie, really?", "o": ["Emma’s", "Joanna’s", "Max’s"], "a": 0},
-           {"q": "How old is Rosie?", "o": ["six", "sixteen", "sixty"], "a": 0}
-         ]},
-
-        {"type": "rules", "title": "📖 Глагол be",
-         "cards": [
-           {"h": "Формы",
-            "table": [
-              ["", "Утверждение", "Отрицание"],
-              ["I", "I <b>am</b> (I’m)", "I’m <b>not</b>"],
-              ["he / she / it", "he <b>is</b> (he’s)", "he <b>isn’t</b>"],
-              ["you / we / they", "you <b>are</b> (you’re)", "you <b>aren’t</b>"]
-            ]},
-           {"h": "Вопрос и короткий ответ",
-            "rows": [
-              "Глагол вперёд: <b>Are</b> you twins? · <b>Is</b> that your dog?",
-              "Yes, I <b>am</b>. / No, I’<b>m not</b>. — «Yes, I’m» не говорят.",
-              "Yes, she <b>is</b>. / No, she <b>isn’t</b>. · Yes, we <b>are</b>. / No, we <b>aren’t</b>."
-            ]}
-         ]},
-
-        {"type": "rules", "title": "📖 have got",
-         "cards": [
-           {"h": "Формы",
-            "table": [
-              ["", "Утверждение", "Отрицание", "Вопрос"],
-              ["I / you / we / they", "<b>have got</b> (’ve got)", "<b>haven’t got</b>", "<b>Have</b> … got?"],
-              ["he / she / it", "<b>has got</b> (’s got)", "<b>hasn’t got</b>", "<b>Has</b> … got?"]
-            ]},
-           {"h": "О чём помнить",
-            "rows": [
-              "have got — про то, чем владеешь, и про родню: I’ve got a sister.",
-              "Короткий ответ: Yes, I <b>have</b>. / No, he <b>hasn’t</b>. — без got.",
-              "Возраст только через <b>be</b>: I’<b>m</b> fifteen. Не ~~I have fifteen~~."
-            ]}
-         ]},
-
-        {"type": "mc", "title": "✏️ Упражнения", "sec": "grammar",
-         "items": [
-           {"q": "I ___ a new student.", "o": ["am", "is", "are"], "a": 0},
-           {"q": "She ___ from Croatia.", "o": ["is", "am", "are"], "a": 0},
-           {"q": "They ___ got a big schoolbag.", "o": ["have", "has", "is"], "a": 0},
-           {"q": "___ you seventeen?", "o": ["Are", "Is", "Have"], "a": 0},
-           {"q": "___ she got a dog?", "o": ["Has", "Have", "Is"], "a": 0},
-           {"q": "«Are you twins?» — «Yes, we ___ .»", "o": ["are", "have", "is"], "a": 0},
-           {"q": "«Has he got a bike?» — «No, he ___ .»", "o": ["hasn’t", "haven’t", "isn’t"], "a": 0},
-           {"q": "We ___ got an eraser.", "o": ["haven’t", "hasn’t", "aren’t"], "a": 0},
-           {"q": "My sister ___ sixteen.", "o": ["is", "has", "have"], "a": 0},
-           {"q": "It ___ cold today.", "o": ["isn’t", "aren’t", "hasn’t"], "a": 0}
-         ]},
-
-        {"type": "gap", "title": "✍️ Впиши форму", "sec": "gap",
-         "items": [
-           {"q": "___ (you / be) from Spain? (вопрос)", "a": ["are you"]},
-           {"q": "He ___ (have got) a new schoolbag.", "a": ["has got", "’s got", "'s got"]},
-           {"q": "She ___ (be / not) from Italy.", "a": ["isn’t", "isn't", "is not"]},
-           {"q": "We ___ (have got) some pencils.", "a": ["have got", "’ve got", "'ve got"]},
-           {"q": "They ___ (have got / not) a car.", "a": ["haven’t got", "haven't got", "have not got"]},
-           {"q": "___ (it / be) your dog? (вопрос)", "a": ["is it"]}
-         ]},
-
-        {"type": "speak", "title": "💬 Говорим",
-         "items": [
-           "Опиши фотографию своей семьи: кто есть, сколько лет, что у кого есть.",
-           "Задай пять вопросов с Have you got…? и пять с Are you…?",
-           "Скажи три правды и одну ложь о себе через be и have got — пусть собеседник найдёт ложь."
-         ]}
+        {
+          "type": "listen",
+          "title": "🎧 Диалог",
+          "h3": "Is that your dog?",
+          "intro": "Послушай и найди все формы be и have got.",
+          "script": [
+            [
+              "m",
+              "Have you got a brother, Joanna?",
+              "Max"
+            ],
+            [
+              "f",
+              "No, I haven’t. But I’ve got a sister. Here’s a photo of us — I’m on the right.",
+              "Joanna"
+            ],
+            [
+              "m",
+              "Are you twins?",
+              "Max"
+            ],
+            [
+              "f",
+              "Yes, we are, but we aren’t identical. Emma’s got black hair, like me, but she hasn’t got brown eyes.",
+              "Joanna"
+            ],
+            [
+              "m",
+              "Is that your dog in the photo?",
+              "Max"
+            ],
+            [
+              "f",
+              "Yes, it is. She’s called Rosie. Rosie is Emma’s dog, really.",
+              "Joanna"
+            ],
+            [
+              "m",
+              "How old is she?",
+              "Max"
+            ],
+            [
+              "f",
+              "She’s sixteen, of course.",
+              "Joanna"
+            ],
+            [
+              "m",
+              "That’s very old for a dog!",
+              "Max"
+            ],
+            [
+              "f",
+              "No — Emma’s sixteen. Rosie is six.",
+              "Joanna"
+            ]
+          ],
+          "q": [
+            {
+              "q": "Has Joanna got a brother?",
+              "o": [
+                "no",
+                "yes, one",
+                "yes, two"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Are Joanna and Emma twins?",
+              "o": [
+                "yes, but not identical",
+                "no",
+                "yes, identical"
+              ],
+              "a": 0
+            },
+            {
+              "q": "What has Emma got that Joanna hasn’t?",
+              "o": [
+                "different eyes",
+                "black hair",
+                "a dog"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Whose dog is Rosie, really?",
+              "o": [
+                "Emma’s",
+                "Joanna’s",
+                "Max’s"
+              ],
+              "a": 0
+            },
+            {
+              "q": "How old is Rosie?",
+              "o": [
+                "six",
+                "sixteen",
+                "sixty"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "rules",
+          "title": "📖 Глагол be",
+          "cards": [
+            {
+              "h": "Формы",
+              "table": [
+                [
+                  "",
+                  "Утверждение",
+                  "Отрицание"
+                ],
+                [
+                  "I",
+                  "I <b>am</b> (I’m)",
+                  "I’m <b>not</b>"
+                ],
+                [
+                  "he / she / it",
+                  "he <b>is</b> (he’s)",
+                  "he <b>isn’t</b>"
+                ],
+                [
+                  "you / we / they",
+                  "you <b>are</b> (you’re)",
+                  "you <b>aren’t</b>"
+                ]
+              ]
+            },
+            {
+              "h": "Вопрос и короткий ответ",
+              "rows": [
+                "Глагол вперёд: <b>Are</b> you twins? · <b>Is</b> that your dog?",
+                "Yes, I <b>am</b>. / No, I’<b>m not</b>. — «Yes, I’m» не говорят.",
+                "Yes, she <b>is</b>. / No, she <b>isn’t</b>. · Yes, we <b>are</b>. / No, we <b>aren’t</b>."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rules",
+          "title": "📖 have got",
+          "cards": [
+            {
+              "h": "Формы",
+              "table": [
+                [
+                  "",
+                  "Утверждение",
+                  "Отрицание",
+                  "Вопрос"
+                ],
+                [
+                  "I / you / we / they",
+                  "<b>have got</b> (’ve got)",
+                  "<b>haven’t got</b>",
+                  "<b>Have</b> … got?"
+                ],
+                [
+                  "he / she / it",
+                  "<b>has got</b> (’s got)",
+                  "<b>hasn’t got</b>",
+                  "<b>Has</b> … got?"
+                ]
+              ]
+            },
+            {
+              "h": "О чём помнить",
+              "rows": [
+                "have got — про то, чем владеешь, и про родню: I’ve got a sister.",
+                "Короткий ответ: Yes, I <b>have</b>. / No, he <b>hasn’t</b>. — без got.",
+                "Возраст только через <b>be</b>: I’<b>m</b> fifteen. Не ~~I have fifteen~~."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Упражнения",
+          "sec": "grammar",
+          "items": [
+            {
+              "q": "I ___ a new student.",
+              "o": [
+                "am",
+                "is",
+                "are"
+              ],
+              "a": 0
+            },
+            {
+              "q": "She ___ from Croatia.",
+              "o": [
+                "is",
+                "am",
+                "are"
+              ],
+              "a": 0
+            },
+            {
+              "q": "They ___ got a big schoolbag.",
+              "o": [
+                "have",
+                "has",
+                "is"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ you seventeen?",
+              "o": [
+                "Are",
+                "Is",
+                "Have"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ she got a dog?",
+              "o": [
+                "Has",
+                "Have",
+                "Is"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«Are you twins?» — «Yes, we ___ .»",
+              "o": [
+                "are",
+                "have",
+                "is"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«Has he got a bike?» — «No, he ___ .»",
+              "o": [
+                "hasn’t",
+                "haven’t",
+                "isn’t"
+              ],
+              "a": 0
+            },
+            {
+              "q": "We ___ got an eraser.",
+              "o": [
+                "haven’t",
+                "hasn’t",
+                "aren’t"
+              ],
+              "a": 0
+            },
+            {
+              "q": "My sister ___ sixteen.",
+              "o": [
+                "is",
+                "has",
+                "have"
+              ],
+              "a": 0
+            },
+            {
+              "q": "It ___ cold today.",
+              "o": [
+                "isn’t",
+                "aren’t",
+                "hasn’t"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "✍️ Впиши форму",
+          "sec": "gap",
+          "items": [
+            {
+              "q": "___ (you / be) from Spain? (вопрос)",
+              "a": [
+                "are you"
+              ]
+            },
+            {
+              "q": "He ___ (have got) a new schoolbag.",
+              "a": [
+                "has got",
+                "’s got",
+                "'s got"
+              ]
+            },
+            {
+              "q": "She ___ (be / not) from Italy.",
+              "a": [
+                "isn’t",
+                "isn't",
+                "is not"
+              ]
+            },
+            {
+              "q": "We ___ (have got) some pencils.",
+              "a": [
+                "have got",
+                "’ve got",
+                "'ve got"
+              ]
+            },
+            {
+              "q": "They ___ (have got / not) a car.",
+              "a": [
+                "haven’t got",
+                "haven't got",
+                "have not got"
+              ]
+            },
+            {
+              "q": "___ (it / be) your dog? (вопрос)",
+              "a": [
+                "is it"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "title": "💬 Говорим",
+          "items": [
+            "Опиши фотографию своей семьи: кто есть, сколько лет, что у кого есть.",
+            "Задай пять вопросов с Have you got…? и пять с Are you…?",
+            "Скажи три правды и одну ложь о себе через be и have got — пусть собеседник найдёт ложь."
+          ]
+        }
       ],
       "workbook": [
-        {"type": "gap", "title": "1 · Впиши форму be", "sec": "wb-gram",
-         "note": "Утверждение или отрицание — смотри на ✓ и ✗.",
-         "items": [
-           {"q": "They ___ cousins. ✗", "a": ["aren’t", "aren't", "are not"]},
-           {"q": "She ___ from Croatia. ✗", "a": ["isn’t", "isn't", "is not"]},
-           {"q": "You ___ at school. ✓", "a": ["are", "’re", "'re"]},
-           {"q": "I ___ a student. ✓", "a": ["am", "’m", "'m"]},
-           {"q": "We ___ hungry. ✗", "a": ["aren’t", "aren't", "are not"]},
-           {"q": "He ___ from Spain. ✗", "a": ["isn’t", "isn't", "is not"]}
-         ]},
-        {"type": "gap", "title": "2 · Собери вопрос", "sec": "wb-gram",
-         "items": [
-           {"q": "seventeen / are / you", "a": ["are you seventeen"]},
-           {"q": "they / from / are / Britain", "a": ["are they from britain"]},
-           {"q": "cold / today / it / is", "a": ["is it cold today"]},
-           {"q": "in / we / an English lesson / are", "a": ["are we in an english lesson"]},
-           {"q": "she / is / very tall", "a": ["is she very tall"]}
-         ]},
-        {"type": "note", "title": "3 · Таблица: что у кого есть",
-         "html": "<table><tr><th></th><th>Liam</th><th>Zoe</th></tr><tr><td>skateboard</td><td>✓</td><td>✗</td></tr><tr><td>smartphone</td><td>✓</td><td>✓</td></tr><tr><td>dictionary</td><td>✗</td><td>✓</td></tr><tr><td>bike</td><td>✓</td><td>✓</td></tr></table>"},
-        {"type": "gap", "title": "4 · Вопрос и короткий ответ по таблице", "sec": "wb-gram",
-         "note": "Формат ответа: <i>Yes, he has.</i> или <i>No, she hasn’t.</i>",
-         "items": [
-           {"q": "Has Liam got a skateboard?", "a": ["yes, he has", "yes he has"]},
-           {"q": "Has Zoe got a skateboard?", "a": ["no, she hasn’t", "no she hasn't", "no, she hasn't"]},
-           {"q": "Have Liam and Zoe got smartphones?", "a": ["yes, they have", "yes they have"]},
-           {"q": "Has Liam got a dictionary?", "a": ["no, he hasn’t", "no he hasn't", "no, he hasn't"]},
-           {"q": "Have Liam and Zoe got bikes?", "a": ["yes, they have", "yes they have"]}
-         ]},
-        {"type": "cloze", "title": "5 · Письмо другу по переписке", "sec": "wb-cloze",
-         "note": "Впиши формы be и have got — утверждение, отрицание или вопрос.",
-         "parts": ["Hi Lucy,\nMy name ", {"a": ["is", "’s", "'s"], "hint": "be"},
-                   " Emily. I ", {"a": ["am", "’m", "'m"], "hint": "be"},
-                   " seventeen years old. How old ", {"a": ["are"], "hint": "be"},
-                   " you?\nMy home town is Bristol, in England. But I ",
-                   {"a": ["am not", "’m not", "'m not"], "hint": "be, отриц."},
-                   " English — I’m American. My parents ",
-                   {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"},
-                   " a house here.\nI ", {"a": ["have got", "’ve got", "'ve got"], "hint": "have got"},
-                   " one brother, but I ", {"a": ["haven't got", "haven’t got"], "hint": "have got, отриц."},
-                   " a sister. ", {"a": ["have"], "hint": "вопрос"},
-                   " you got any brothers or sisters?\nWrite soon!\nEmily"]},
-        {"type": "free", "title": "6 · Ответь Эмили",
-         "html": "Напиши ответное письмо (5–6 предложений): имя, возраст, откуда ты, что у тебя есть, есть ли братья и сёстры. Используй <b>be</b> и <b>have got</b> в утверждении, отрицании и вопросе."}
+        {
+          "type": "gap",
+          "title": "1 · Впиши форму be",
+          "sec": "wb-gram",
+          "note": "Утверждение или отрицание — смотри на ✓ и ✗.",
+          "items": [
+            {
+              "q": "They ___ cousins. ✗",
+              "a": [
+                "aren’t",
+                "aren't",
+                "are not"
+              ]
+            },
+            {
+              "q": "She ___ from Croatia. ✗",
+              "a": [
+                "isn’t",
+                "isn't",
+                "is not"
+              ]
+            },
+            {
+              "q": "You ___ at school. ✓",
+              "a": [
+                "are",
+                "’re",
+                "'re"
+              ]
+            },
+            {
+              "q": "I ___ a student. ✓",
+              "a": [
+                "am",
+                "’m",
+                "'m"
+              ]
+            },
+            {
+              "q": "We ___ hungry. ✗",
+              "a": [
+                "aren’t",
+                "aren't",
+                "are not"
+              ]
+            },
+            {
+              "q": "He ___ from Spain. ✗",
+              "a": [
+                "isn’t",
+                "isn't",
+                "is not"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "2 · Собери вопрос",
+          "sec": "wb-gram",
+          "items": [
+            {
+              "q": "seventeen / are / you",
+              "a": [
+                "are you seventeen"
+              ]
+            },
+            {
+              "q": "they / from / are / Britain",
+              "a": [
+                "are they from britain"
+              ]
+            },
+            {
+              "q": "cold / today / it / is",
+              "a": [
+                "is it cold today"
+              ]
+            },
+            {
+              "q": "in / we / an English lesson / are",
+              "a": [
+                "are we in an english lesson"
+              ]
+            },
+            {
+              "q": "she / is / very tall",
+              "a": [
+                "is she very tall"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "title": "3 · Таблица: что у кого есть",
+          "html": "<table><tr><th></th><th>Liam</th><th>Zoe</th></tr><tr><td>skateboard</td><td>✓</td><td>✗</td></tr><tr><td>smartphone</td><td>✓</td><td>✓</td></tr><tr><td>dictionary</td><td>✗</td><td>✓</td></tr><tr><td>bike</td><td>✓</td><td>✓</td></tr></table>"
+        },
+        {
+          "type": "gap",
+          "title": "4 · Вопрос и короткий ответ по таблице",
+          "sec": "wb-gram",
+          "note": "Формат ответа: <i>Yes, he has.</i> или <i>No, she hasn’t.</i>",
+          "items": [
+            {
+              "q": "Has Liam got a skateboard?",
+              "a": [
+                "yes, he has",
+                "yes he has"
+              ]
+            },
+            {
+              "q": "Has Zoe got a skateboard?",
+              "a": [
+                "no, she hasn’t",
+                "no she hasn't",
+                "no, she hasn't"
+              ]
+            },
+            {
+              "q": "Have Liam and Zoe got smartphones?",
+              "a": [
+                "yes, they have",
+                "yes they have"
+              ]
+            },
+            {
+              "q": "Has Liam got a dictionary?",
+              "a": [
+                "no, he hasn’t",
+                "no he hasn't",
+                "no, he hasn't"
+              ]
+            },
+            {
+              "q": "Have Liam and Zoe got bikes?",
+              "a": [
+                "yes, they have",
+                "yes they have"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "cloze",
+          "title": "5 · Письмо другу по переписке",
+          "sec": "wb-cloze",
+          "note": "Впиши формы be и have got — утверждение, отрицание или вопрос.",
+          "parts": [
+            "Hi Lucy,\nMy name ",
+            {
+              "a": [
+                "is",
+                "’s",
+                "'s"
+              ],
+              "hint": "be"
+            },
+            " Emily. I ",
+            {
+              "a": [
+                "am",
+                "’m",
+                "'m"
+              ],
+              "hint": "be"
+            },
+            " seventeen years old. How old ",
+            {
+              "a": [
+                "are"
+              ],
+              "hint": "be"
+            },
+            " you?\nMy home town is Bristol, in England. But I ",
+            {
+              "a": [
+                "am not",
+                "’m not",
+                "'m not"
+              ],
+              "hint": "be, отриц."
+            },
+            " English — I’m American. My parents ",
+            {
+              "a": [
+                "have got",
+                "’ve got",
+                "'ve got"
+              ],
+              "hint": "have got"
+            },
+            " a house here.\nI ",
+            {
+              "a": [
+                "have got",
+                "’ve got",
+                "'ve got"
+              ],
+              "hint": "have got"
+            },
+            " one brother, but I ",
+            {
+              "a": [
+                "haven't got",
+                "haven’t got"
+              ],
+              "hint": "have got, отриц."
+            },
+            " a sister. ",
+            {
+              "a": [
+                "have"
+              ],
+              "hint": "вопрос"
+            },
+            " you got any brothers or sisters?\nWrite soon!\nEmily"
+          ]
+        },
+        {
+          "type": "free",
+          "title": "6 · Ответь Эмили",
+          "html": "Напиши ответное письмо (5–6 предложений): имя, возраст, откуда ты, что у тебя есть, есть ли братья и сёстры. Используй <b>be</b> и <b>have got</b> в утверждении, отрицании и вопросе."
+        }
       ]
     },
-
     "C": {
       "role": "Speaking",
       "topic": "Talking about ability and asking for permission",
       "cando": "I can talk about ability and ask for permission.",
       "blocks": [
-        {"type": "words", "title": "🎬 Что человек умеет делать",
-         "items": [["dance", "танцевать"], ["ride a bike", "кататься на велосипеде"], ["skate", "кататься на коньках"], ["ski", "кататься на лыжах"], ["sing", "петь"], ["swim", "плавать"], ["cook", "готовить"], ["draw", "рисовать"], ["drive", "водить машину"], ["speak Chinese", "говорить по-китайски"]]},
-
-        {"type": "words", "title": "🎺 Музыкальные инструменты",
-         "note": "С инструментами всегда <b>the</b>: play <b>the</b> guitar, play <b>the</b> piano. Но со спортом без артикля: play football.",
-         "items": [["the clarinet", "кларнет"], ["the drums", "барабаны"], ["the flute", "флейта"], ["the guitar", "гитара"], ["the keyboard", "синтезатор"], ["the piano", "пианино"], ["the saxophone", "саксофон"], ["the trumpet", "труба"], ["the violin", "скрипка"]]},
-
-        {"type": "rules", "title": "📖 can — умение и разрешение",
-         "cards": [
-           {"h": "Умение",
-            "rows": [
-              "После <b>can</b> — глагол без to и без -s: She <b>can swim</b>. He <b>can play</b> the guitar.",
-              "Отрицание: <b>can’t</b> (cannot). Вопрос: <b>Can</b> you ski? — Yes, I can. / No, I can’t.",
-              "can не меняется по лицам: I can · he can · they can."
-            ]},
-           {"h": "Разрешение и просьба",
-            "rows": [
-              "<b>Can I…?</b> — прошу за себя: Can I borrow your pencil?",
-              "<b>Can you…?</b> — прошу другого или спрашиваю об умении: Can you help me?",
-              "Ответ: Yes, of course. / Yes, sure. / Sorry, you can’t."
-            ]}
-         ]},
-
-        {"type": "chunks", "title": "🧩 Просьбы на уроке",
-         "items": [["Can I ask a question?", "можно вопрос?"], ["Can I borrow a pencil?", "можно взять карандаш?"], ["Can I share your book?", "можно смотреть в твою книгу?"], ["Can I use your dictionary?", "можно твой словарь?"], ["Can you repeat that, please?", "повторите, пожалуйста"], ["Can you help me?", "поможешь?"], ["Sorry, I don’t understand.", "простите, я не понял"], ["How do you say … in English?", "как по-английски…?"]]},
-
-        {"type": "chunkdrill", "title": "🎯 Тренажёр фраз", "sec": "chunk",
-         "items": [["Can I ask a question?", "можно вопрос?"], ["Can I borrow a pencil?", "можно взять карандаш?"], ["Can I share your book?", "можно смотреть в твою книгу?"], ["Can I use your dictionary?", "можно твой словарь?"], ["Can you repeat that, please?", "повторите, пожалуйста"], ["Can you help me?", "поможешь?"], ["Sorry, I don’t understand.", "простите, я не понял"], ["How do you say … in English?", "как по-английски…?"]]},
-
-        {"type": "listen", "title": "🎧 Аудирование", "h3": "She can’t sing!",
-         "intro": "Двое слушают уличного музыканта. Кликни на реплику, чтобы слушать с неё.",
-         "script": [
-           ["m", "Let’s stop and listen. This is a great song.", "Alfie"],
-           ["f", "Hmm. She isn’t very good. She can’t sing.", "Rose"],
-           ["m", "She can! Listen to the guitar — that’s really difficult.", "Alfie"],
-           ["f", "OK, she can play the guitar. But she can’t sing.", "Rose"],
-           ["m", "Can you play an instrument, Rose?", "Alfie"],
-           ["f", "I can play the piano a little. And the flute — but badly.", "Rose"],
-           ["m", "So you can play two instruments and I can play none. And I can’t sing either!", "Alfie"],
-           ["f", "Then let’s give her a pound and go.", "Rose"]
-         ],
-         "q": [
-           {"q": "What does Rose think of the singer?", "o": ["she can’t sing", "she’s brilliant", "she’s too loud"], "a": 0},
-           {"q": "What does Alfie say about the guitar?", "o": ["it’s really difficult", "it’s out of tune", "it’s too quiet"], "a": 0},
-           {"q": "What can Rose play?", "o": ["the piano and the flute", "the guitar", "the drums"], "a": 0},
-           {"q": "How well does Rose play the flute?", "o": ["badly", "very well", "she doesn’t play it"], "a": 0},
-           {"q": "Can Alfie play an instrument?", "o": ["no", "yes, the guitar", "yes, the piano"], "a": 0}
-         ]},
-
-        {"type": "mc", "title": "✏️ Упражнения", "sec": "grammar",
-         "items": [
-           {"q": "She ___ swim very well.", "o": ["can", "cans", "is"], "a": 0},
-           {"q": "___ you play the guitar?", "o": ["Can", "Are", "Do"], "a": 0},
-           {"q": "He ___ ride a bike.", "o": ["can’t", "doesn’t can", "not can"], "a": 0},
-           {"q": "___ I open the window, please?", "o": ["Can", "Am", "Do"], "a": 0},
-           {"q": "«Can you ski?» — «No, I ___ .»", "o": ["can’t", "don’t", "amn’t"], "a": 0},
-           {"q": "My sister can ___ the piano.", "o": ["play", "plays", "playing"], "a": 0},
-           {"q": "Which is correct?", "o": ["He can play the drums.", "He can plays the drums.", "He can to play the drums."], "a": 0},
-           {"q": "Прошу разрешения взять ручку:", "o": ["Can I borrow a pen?", "Can you borrow a pen?", "Do I borrow a pen?"], "a": 0}
-         ]},
-
-        {"type": "speak", "title": "💬 Говорим",
-         "items": [
-           "Скажи три вещи, которые ты умеешь, и три, которые не умеешь.",
-           "Спроси собеседника: Can you dance / ski / cook / draw / speak another language?",
-           "Разыграй урок: попроси карандаш, словарь, разрешения задать вопрос и выйти.",
-           "Расскажи, на каком инструменте ты играешь или хотел бы играть — и почему."
-         ]}
+        {
+          "type": "words",
+          "title": "🎬 Что человек умеет делать",
+          "items": [
+            [
+              "dance",
+              "танцевать"
+            ],
+            [
+              "ride a bike",
+              "кататься на велосипеде"
+            ],
+            [
+              "skate",
+              "кататься на коньках"
+            ],
+            [
+              "ski",
+              "кататься на лыжах"
+            ],
+            [
+              "sing",
+              "петь"
+            ],
+            [
+              "swim",
+              "плавать"
+            ],
+            [
+              "cook",
+              "готовить"
+            ],
+            [
+              "draw",
+              "рисовать"
+            ],
+            [
+              "drive",
+              "водить машину"
+            ],
+            [
+              "speak Chinese",
+              "говорить по-китайски"
+            ]
+          ]
+        },
+        {
+          "type": "words",
+          "title": "🎺 Музыкальные инструменты",
+          "note": "С инструментами всегда <b>the</b>: play <b>the</b> guitar, play <b>the</b> piano. Но со спортом без артикля: play football.",
+          "items": [
+            [
+              "the clarinet",
+              "кларнет"
+            ],
+            [
+              "the drums",
+              "барабаны"
+            ],
+            [
+              "the flute",
+              "флейта"
+            ],
+            [
+              "the guitar",
+              "гитара"
+            ],
+            [
+              "the keyboard",
+              "синтезатор"
+            ],
+            [
+              "the piano",
+              "пианино"
+            ],
+            [
+              "the saxophone",
+              "саксофон"
+            ],
+            [
+              "the trumpet",
+              "труба"
+            ],
+            [
+              "the violin",
+              "скрипка"
+            ]
+          ]
+        },
+        {
+          "type": "image",
+          "title": "🖼️ Восемь инструментов",
+          "src": "img/lessons/u0c-instruments.jpg",
+          "alt": "Восемь музыкальных инструментов: гитара, пианино, барабаны, скрипка, труба, флейта, саксофон, кларнет",
+          "caption": "Верхний ряд слева направо — 1, 2, 3, 4. Нижний — 5, 6, 7, 8."
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Назови инструмент по номеру",
+          "sec": "vocab",
+          "note": "Смотри на картинку выше. Отвечай вслух полной фразой: <b>Number one is a guitar.</b>",
+          "items": [
+            {
+              "q": "Номер 1",
+              "o": [
+                "a guitar",
+                "a violin",
+                "a piano"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 2",
+              "o": [
+                "a piano",
+                "a keyboard",
+                "a cupboard"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 3",
+              "o": [
+                "drums",
+                "a trumpet",
+                "a saxophone"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 4",
+              "o": [
+                "a violin",
+                "a guitar",
+                "a flute"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 5",
+              "o": [
+                "a trumpet",
+                "a saxophone",
+                "a clarinet"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 6",
+              "o": [
+                "a flute",
+                "a clarinet",
+                "a trumpet"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 7",
+              "o": [
+                "a saxophone",
+                "a trumpet",
+                "a flute"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Номер 8",
+              "o": [
+                "a clarinet",
+                "a flute",
+                "a violin"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "✍️ Напиши с the",
+          "sec": "gap",
+          "note": "С инструментами нужен артикль: play <b>the</b> guitar.",
+          "items": [
+            {
+              "q": "Номер 4: She can play ___ .",
+              "a": [
+                "the violin"
+              ]
+            },
+            {
+              "q": "Номер 7: He can play ___ .",
+              "a": [
+                "the saxophone"
+              ]
+            },
+            {
+              "q": "Номер 2: I can play ___ .",
+              "a": [
+                "the piano"
+              ]
+            },
+            {
+              "q": "Номер 3: My brother can play ___ .",
+              "a": [
+                "the drums"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rules",
+          "title": "📖 can — умение и разрешение",
+          "cards": [
+            {
+              "h": "Умение",
+              "rows": [
+                "После <b>can</b> — глагол без to и без -s: She <b>can swim</b>. He <b>can play</b> the guitar.",
+                "Отрицание: <b>can’t</b> (cannot). Вопрос: <b>Can</b> you ski? — Yes, I can. / No, I can’t.",
+                "can не меняется по лицам: I can · he can · they can."
+              ]
+            },
+            {
+              "h": "Разрешение и просьба",
+              "rows": [
+                "<b>Can I…?</b> — прошу за себя: Can I borrow your pencil?",
+                "<b>Can you…?</b> — прошу другого или спрашиваю об умении: Can you help me?",
+                "Ответ: Yes, of course. / Yes, sure. / Sorry, you can’t."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "chunks",
+          "title": "🧩 Просьбы на уроке",
+          "items": [
+            [
+              "Can I ask a question?",
+              "можно вопрос?"
+            ],
+            [
+              "Can I borrow a pencil?",
+              "можно взять карандаш?"
+            ],
+            [
+              "Can I share your book?",
+              "можно смотреть в твою книгу?"
+            ],
+            [
+              "Can I use your dictionary?",
+              "можно твой словарь?"
+            ],
+            [
+              "Can you repeat that, please?",
+              "повторите, пожалуйста"
+            ],
+            [
+              "Can you help me?",
+              "поможешь?"
+            ],
+            [
+              "Sorry, I don’t understand.",
+              "простите, я не понял"
+            ],
+            [
+              "How do you say … in English?",
+              "как по-английски…?"
+            ]
+          ]
+        },
+        {
+          "type": "chunkdrill",
+          "title": "🎯 Тренажёр фраз",
+          "sec": "chunk",
+          "items": [
+            [
+              "Can I ask a question?",
+              "можно вопрос?"
+            ],
+            [
+              "Can I borrow a pencil?",
+              "можно взять карандаш?"
+            ],
+            [
+              "Can I share your book?",
+              "можно смотреть в твою книгу?"
+            ],
+            [
+              "Can I use your dictionary?",
+              "можно твой словарь?"
+            ],
+            [
+              "Can you repeat that, please?",
+              "повторите, пожалуйста"
+            ],
+            [
+              "Can you help me?",
+              "поможешь?"
+            ],
+            [
+              "Sorry, I don’t understand.",
+              "простите, я не понял"
+            ],
+            [
+              "How do you say … in English?",
+              "как по-английски…?"
+            ]
+          ]
+        },
+        {
+          "type": "listen",
+          "title": "🎧 Аудирование",
+          "h3": "She can’t sing!",
+          "intro": "Двое слушают уличного музыканта. Кликни на реплику, чтобы слушать с неё.",
+          "script": [
+            [
+              "m",
+              "Let’s stop and listen. This is a great song.",
+              "Alfie"
+            ],
+            [
+              "f",
+              "Hmm. She isn’t very good. She can’t sing.",
+              "Rose"
+            ],
+            [
+              "m",
+              "She can! Listen to the guitar — that’s really difficult.",
+              "Alfie"
+            ],
+            [
+              "f",
+              "OK, she can play the guitar. But she can’t sing.",
+              "Rose"
+            ],
+            [
+              "m",
+              "Can you play an instrument, Rose?",
+              "Alfie"
+            ],
+            [
+              "f",
+              "I can play the piano a little. And the flute — but badly.",
+              "Rose"
+            ],
+            [
+              "m",
+              "So you can play two instruments and I can play none. And I can’t sing either!",
+              "Alfie"
+            ],
+            [
+              "f",
+              "Then let’s give her a pound and go.",
+              "Rose"
+            ]
+          ],
+          "q": [
+            {
+              "q": "What does Rose think of the singer?",
+              "o": [
+                "she can’t sing",
+                "she’s brilliant",
+                "she’s too loud"
+              ],
+              "a": 0
+            },
+            {
+              "q": "What does Alfie say about the guitar?",
+              "o": [
+                "it’s really difficult",
+                "it’s out of tune",
+                "it’s too quiet"
+              ],
+              "a": 0
+            },
+            {
+              "q": "What can Rose play?",
+              "o": [
+                "the piano and the flute",
+                "the guitar",
+                "the drums"
+              ],
+              "a": 0
+            },
+            {
+              "q": "How well does Rose play the flute?",
+              "o": [
+                "badly",
+                "very well",
+                "she doesn’t play it"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Can Alfie play an instrument?",
+              "o": [
+                "no",
+                "yes, the guitar",
+                "yes, the piano"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Упражнения",
+          "sec": "grammar",
+          "items": [
+            {
+              "q": "She ___ swim very well.",
+              "o": [
+                "can",
+                "cans",
+                "is"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ you play the guitar?",
+              "o": [
+                "Can",
+                "Are",
+                "Do"
+              ],
+              "a": 0
+            },
+            {
+              "q": "He ___ ride a bike.",
+              "o": [
+                "can’t",
+                "doesn’t can",
+                "not can"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ I open the window, please?",
+              "o": [
+                "Can",
+                "Am",
+                "Do"
+              ],
+              "a": 0
+            },
+            {
+              "q": "«Can you ski?» — «No, I ___ .»",
+              "o": [
+                "can’t",
+                "don’t",
+                "amn’t"
+              ],
+              "a": 0
+            },
+            {
+              "q": "My sister can ___ the piano.",
+              "o": [
+                "play",
+                "plays",
+                "playing"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Which is correct?",
+              "o": [
+                "He can play the drums.",
+                "He can plays the drums.",
+                "He can to play the drums."
+              ],
+              "a": 0
+            },
+            {
+              "q": "Прошу разрешения взять ручку:",
+              "o": [
+                "Can I borrow a pen?",
+                "Can you borrow a pen?",
+                "Do I borrow a pen?"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "title": "💬 Говорим",
+          "items": [
+            "Скажи три вещи, которые ты умеешь, и три, которые не умеешь.",
+            "Спроси собеседника: Can you dance / ski / cook / draw / speak another language?",
+            "Разыграй урок: попроси карандаш, словарь, разрешения задать вопрос и выйти.",
+            "Расскажи, на каком инструменте ты играешь или хотел бы играть — и почему."
+          ]
+        }
       ],
       "workbook": [
-        {"type": "gap", "title": "1 · Назови инструмент", "sec": "wb-voc",
-         "items": [
-           {"q": "Шесть струн, играют пальцами или медиатором — ___", "a": ["guitar", "the guitar"]},
-           {"q": "Чёрные и белые клавиши — ___", "a": ["piano", "the piano"]},
-           {"q": "Играют палочками, задают ритм — ___", "a": ["drums", "the drums"]},
-           {"q": "Маленький струнный, играют смычком — ___", "a": ["violin", "the violin"]},
-           {"q": "Медный духовой, три клапана — ___", "a": ["trumpet", "the trumpet"]},
-           {"q": "Держат вбок, дуют в отверстие — ___", "a": ["flute", "the flute"]},
-           {"q": "Изогнутый золотистый духовой, джаз — ___", "a": ["saxophone", "the saxophone"]},
-           {"q": "Деревянный духовой с тростью — ___", "a": ["clarinet", "the clarinet"]}
-         ]},
-        {"type": "note", "title": "2 · Таблица умений",
-         "html": "<table><tr><th></th><th>Ted</th><th>Marie</th><th>Sophie</th><th>Mason</th></tr><tr><td>football</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td></tr><tr><td>violin</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr><tr><td>ride a bike</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Chinese</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td></tr></table>"},
-        {"type": "gap", "title": "3 · Вопрос и ответ по таблице", "sec": "wb-gram",
-         "note": "Формат: <i>Can Ted play football? Yes, he can.</i> Впиши только ответ.",
-         "items": [
-           {"q": "Can Marie play the violin?", "a": ["yes, she can", "yes she can"]},
-           {"q": "Can Sophie and Mason ride a bike?", "a": ["yes, they can", "yes they can"]},
-           {"q": "Can Marie and Mason speak Chinese?", "a": ["yes, they can", "yes they can"]},
-           {"q": "Can Mason play football?", "a": ["no, he can’t", "no he can't", "no, he can't"]},
-           {"q": "Can Ted play the violin?", "a": ["no, he can’t", "no he can't", "no, he can't"]}
-         ]},
-        {"type": "gap", "title": "4 · Собери просьбу", "sec": "wb-gram",
-         "items": [
-           {"q": "a question / ask / I / can", "a": ["can i ask a question"]},
-           {"q": "borrow / pencil / can / a / I", "a": ["can i borrow a pencil"]},
-           {"q": "book / share / I / your / can", "a": ["can i share your book"]},
-           {"q": "use / dictionary / can / your / I", "a": ["can i use your dictionary"]}
-         ]},
-        {"type": "mc", "title": "5 · Какая просьба подходит?", "sec": "wb-gram",
-         "items": [
-           {"q": "A: Write your name here, please. B: OK. ___", "o": ["Can I borrow a pencil?", "Can I ask a question?", "Can I share your book?"], "a": 0},
-           {"q": "A: Turn to page 56. B: Oh no! My book is at home. ___", "o": ["Can I share your book?", "Can I borrow £1?", "Can I use your dictionary?"], "a": 0},
-           {"q": "A: How do you spell ‘clarinet’? B: I’m not sure. ___", "o": ["Can I use your dictionary?", "Can I ask a question?", "Can I borrow a pencil?"], "a": 0},
-           {"q": "A: Have you got money for the bus? B: No, I haven’t. ___", "o": ["Can I borrow £1?", "Can I share your book?", "Can I copy your answer?"], "a": 0},
-           {"q": "A: I don’t understand question 3. ___ B: No, you can’t!", "o": ["Can I copy your answer?", "Can I ask a question?", "Can I borrow a pencil?"], "a": 0}
-         ]},
-        {"type": "free", "title": "6 · Расскажи об умениях",
-         "html": "Напиши <b>шесть предложений</b>: три о том, что ты умеешь, и три о том, что не умеешь. В двух из них используй инструмент с <b>the</b>.<br><br><i>Образец: I can play the guitar, but I can’t play the piano.</i>"}
+        {
+          "type": "gap",
+          "title": "1 · Назови инструмент",
+          "sec": "wb-voc",
+          "items": [
+            {
+              "q": "Шесть струн, играют пальцами или медиатором — ___",
+              "a": [
+                "guitar",
+                "the guitar"
+              ]
+            },
+            {
+              "q": "Чёрные и белые клавиши — ___",
+              "a": [
+                "piano",
+                "the piano"
+              ]
+            },
+            {
+              "q": "Играют палочками, задают ритм — ___",
+              "a": [
+                "drums",
+                "the drums"
+              ]
+            },
+            {
+              "q": "Маленький струнный, играют смычком — ___",
+              "a": [
+                "violin",
+                "the violin"
+              ]
+            },
+            {
+              "q": "Медный духовой, три клапана — ___",
+              "a": [
+                "trumpet",
+                "the trumpet"
+              ]
+            },
+            {
+              "q": "Держат вбок, дуют в отверстие — ___",
+              "a": [
+                "flute",
+                "the flute"
+              ]
+            },
+            {
+              "q": "Изогнутый золотистый духовой, джаз — ___",
+              "a": [
+                "saxophone",
+                "the saxophone"
+              ]
+            },
+            {
+              "q": "Деревянный духовой с тростью — ___",
+              "a": [
+                "clarinet",
+                "the clarinet"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "title": "2 · Таблица умений",
+          "html": "<table><tr><th></th><th>Ted</th><th>Marie</th><th>Sophie</th><th>Mason</th></tr><tr><td>football</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td></tr><tr><td>violin</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr><tr><td>ride a bike</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Chinese</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td></tr></table>"
+        },
+        {
+          "type": "gap",
+          "title": "3 · Вопрос и ответ по таблице",
+          "sec": "wb-gram",
+          "note": "Формат: <i>Can Ted play football? Yes, he can.</i> Впиши только ответ.",
+          "items": [
+            {
+              "q": "Can Marie play the violin?",
+              "a": [
+                "yes, she can",
+                "yes she can"
+              ]
+            },
+            {
+              "q": "Can Sophie and Mason ride a bike?",
+              "a": [
+                "yes, they can",
+                "yes they can"
+              ]
+            },
+            {
+              "q": "Can Marie and Mason speak Chinese?",
+              "a": [
+                "yes, they can",
+                "yes they can"
+              ]
+            },
+            {
+              "q": "Can Mason play football?",
+              "a": [
+                "no, he can’t",
+                "no he can't",
+                "no, he can't"
+              ]
+            },
+            {
+              "q": "Can Ted play the violin?",
+              "a": [
+                "no, he can’t",
+                "no he can't",
+                "no, he can't"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "4 · Собери просьбу",
+          "sec": "wb-gram",
+          "items": [
+            {
+              "q": "a question / ask / I / can",
+              "a": [
+                "can i ask a question"
+              ]
+            },
+            {
+              "q": "borrow / pencil / can / a / I",
+              "a": [
+                "can i borrow a pencil"
+              ]
+            },
+            {
+              "q": "book / share / I / your / can",
+              "a": [
+                "can i share your book"
+              ]
+            },
+            {
+              "q": "use / dictionary / can / your / I",
+              "a": [
+                "can i use your dictionary"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "5 · Какая просьба подходит?",
+          "sec": "wb-gram",
+          "items": [
+            {
+              "q": "A: Write your name here, please. B: OK. ___",
+              "o": [
+                "Can I borrow a pencil?",
+                "Can I ask a question?",
+                "Can I share your book?"
+              ],
+              "a": 0
+            },
+            {
+              "q": "A: Turn to page 56. B: Oh no! My book is at home. ___",
+              "o": [
+                "Can I share your book?",
+                "Can I borrow £1?",
+                "Can I use your dictionary?"
+              ],
+              "a": 0
+            },
+            {
+              "q": "A: How do you spell ‘clarinet’? B: I’m not sure. ___",
+              "o": [
+                "Can I use your dictionary?",
+                "Can I ask a question?",
+                "Can I borrow a pencil?"
+              ],
+              "a": 0
+            },
+            {
+              "q": "A: Have you got money for the bus? B: No, I haven’t. ___",
+              "o": [
+                "Can I borrow £1?",
+                "Can I share your book?",
+                "Can I copy your answer?"
+              ],
+              "a": 0
+            },
+            {
+              "q": "A: I don’t understand question 3. ___ B: No, you can’t!",
+              "o": [
+                "Can I copy your answer?",
+                "Can I ask a question?",
+                "Can I borrow a pencil?"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "free",
+          "title": "6 · Расскажи об умениях",
+          "html": "Напиши <b>шесть предложений</b>: три о том, что ты умеешь, и три о том, что не умеешь. В двух из них используй инструмент с <b>the</b>.<br><br><i>Образец: I can play the guitar, but I can’t play the piano.</i>"
+        }
       ]
     },
-
     "D": {
       "role": "Grammar",
       "topic": "Articles: the, a / an, some; this / that / these / those",
       "cando": "I can use articles and this, that, these and those correctly.",
       "blocks": [
-        {"type": "words", "title": "🎒 В классе",
-         "items": [["a bin", "мусорная корзина"], ["a board", "доска"], ["a calculator", "калькулятор"], ["a chair", "стул"], ["a computer", "компьютер"], ["a cupboard", "шкаф"], ["a desk", "парта"], ["an eraser", "ластик"], ["an exercise book", "тетрадь"], ["a pen", "ручка"], ["a pencil", "карандаш"], ["a pencil case", "пенал"], ["a pencil sharpener", "точилка"], ["a ruler", "линейка"], ["a schoolbag", "рюкзак"], ["a shelf", "полка"], ["an interactive whiteboard", "интерактивная доска"]]},
-
-        {"type": "rules", "title": "📖 a / an / some / the",
-         "cards": [
-           {"h": "a и an",
-            "rows": [
-              "<b>a</b> — перед согласным <u>звуком</u>: a pen · a ruler · a university /juː/.",
-              "<b>an</b> — перед гласным <u>звуком</u>: an eraser · an old car · an hour /aʊ/.",
-              "Важно именно звучание, а не буква: <b>a</b> university, но <b>an</b> umbrella."
-            ]},
-           {"h": "some и the",
-            "rows": [
-              "<b>some</b> — с множественным числом, когда количество неважно: some pens.",
-              "<b>the</b> — когда собеседник понимает, о каком именно предмете речь.",
-              "Первый раз — a/an, дальше — the: I’ve got <b>a</b> cat and <b>a</b> dog. <b>The</b> cat is called Jimmy."
-            ]}
-         ]},
-
-        {"type": "rules", "title": "📖 this / that / these / those",
-         "cards": [
-           {"h": "Близко и далеко",
-            "table": [
-              ["", "один", "много"],
-              ["рядом", "<b>this</b> pen", "<b>these</b> pens"],
-              ["далеко", "<b>that</b> pen", "<b>those</b> pens"]
-            ]},
-           {"h": "Как использовать",
-            "rows": [
-              "<b>This</b> is my pencil case. · <b>Those</b> are your books over there.",
-              "Со множественным числом глагол <b>are</b>: These <b>are</b> my pens.",
-              "Частая ошибка: ~~This are my books~~ → <b>These are</b> my books."
-            ]}
-         ]},
-
-        {"type": "mc", "title": "✏️ a, an, some или the?", "sec": "grammar",
-         "items": [
-           {"q": "It’s ___ old calculator.", "o": ["an", "a", "some"], "a": 0},
-           {"q": "I’ve got ___ pens in my schoolbag.", "o": ["some", "a", "an"], "a": 0},
-           {"q": "She’s got ___ exercise book.", "o": ["an", "a", "some"], "a": 0},
-           {"q": "He’s got ___ ruler and ___ eraser.", "o": ["a … an", "an … a", "a … a"], "a": 0},
-           {"q": "I’ve got a cat and a dog. ___ cat is called Jimmy.", "o": ["The", "A", "Some"], "a": 0},
-           {"q": "There’s ___ interactive whiteboard in our classroom.", "o": ["an", "a", "some"], "a": 0},
-           {"q": "My mum has got ___ old car.", "o": ["an", "a", "the"], "a": 0},
-           {"q": "We’ve got ___ shelves in the cupboard.", "o": ["some", "a", "an"], "a": 0}
-         ]},
-
-        {"type": "mc", "title": "✏️ this / that / these / those", "sec": "grammar",
-         "items": [
-           {"q": "___ is my pencil case. (рядом, один)", "o": ["This", "That", "Those"], "a": 0},
-           {"q": "___ are your books over there. (далеко, много)", "o": ["Those", "These", "This"], "a": 0},
-           {"q": "___ are my pens. (рядом, много)", "o": ["These", "This", "That"], "a": 0},
-           {"q": "___ is your desk over there. (далеко, один)", "o": ["That", "This", "These"], "a": 0},
-           {"q": "Какое предложение верное?", "o": ["These are my books.", "This are my books.", "These is my books."], "a": 0}
-         ]},
-
-        {"type": "gap", "title": "✍️ Впиши артикль", "sec": "gap",
-         "items": [
-           {"q": "___ address (a / an)", "a": ["an"]},
-           {"q": "___ blue pencils (a / an / some)", "a": ["some"]},
-           {"q": "___ old car", "a": ["an"]},
-           {"q": "___ watch", "a": ["a"]},
-           {"q": "___ eye", "a": ["an"]},
-           {"q": "___ skateboard", "a": ["a"]},
-           {"q": "___ hour", "a": ["an"]},
-           {"q": "___ university", "a": ["a"]}
-         ]},
-
-        {"type": "speak", "title": "💬 Говорим",
-         "items": [
-           "Спроси собеседника, что у него в рюкзаке: <b>Have you got a ruler in your schoolbag?</b>",
-           "Назови пять предметов рядом с тобой через this / these и пять далеко — через that / those.",
-           "Опиши свой класс: что в нём есть и чего нет. Используй some и a / an."
-         ]}
+        {
+          "type": "image",
+          "title": "🖼️ Наш класс",
+          "src": "img/lessons/u0d-classroom.jpg",
+          "alt": "Класс: доска, книжный шкаф, компьютер, шкафчик, корзина, парта с пеналом, линейкой, тетрадями и ластиком, рюкзак на стуле",
+          "caption": "Ты сидишь за партой на первом плане. Всё на ней — рядом. Всё у дальней стены — далеко."
+        },
+        {
+          "type": "words",
+          "title": "🎒 В классе",
+          "items": [
+            [
+              "a bin",
+              "мусорная корзина"
+            ],
+            [
+              "a board",
+              "доска"
+            ],
+            [
+              "a calculator",
+              "калькулятор"
+            ],
+            [
+              "a chair",
+              "стул"
+            ],
+            [
+              "a computer",
+              "компьютер"
+            ],
+            [
+              "a cupboard",
+              "шкаф"
+            ],
+            [
+              "a desk",
+              "парта"
+            ],
+            [
+              "an eraser",
+              "ластик"
+            ],
+            [
+              "an exercise book",
+              "тетрадь"
+            ],
+            [
+              "a pen",
+              "ручка"
+            ],
+            [
+              "a pencil",
+              "карандаш"
+            ],
+            [
+              "a pencil case",
+              "пенал"
+            ],
+            [
+              "a pencil sharpener",
+              "точилка"
+            ],
+            [
+              "a ruler",
+              "линейка"
+            ],
+            [
+              "a schoolbag",
+              "рюкзак"
+            ],
+            [
+              "a shelf",
+              "полка"
+            ],
+            [
+              "an interactive whiteboard",
+              "интерактивная доска"
+            ]
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Что ты видишь в классе?",
+          "sec": "vocab",
+          "note": "Смотри на картинку выше.",
+          "items": [
+            {
+              "q": "На парте перед тобой лежит…",
+              "o": [
+                "a pencil case",
+                "a calculator",
+                "a computer"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Рядом с тетрадями лежит…",
+              "o": [
+                "a ruler",
+                "a pencil sharpener",
+                "a schoolbag"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Маленький розовый предмет на парте — это…",
+              "o": [
+                "an eraser",
+                "a bin",
+                "a shelf"
+              ],
+              "a": 0
+            },
+            {
+              "q": "На стуле висит…",
+              "o": [
+                "a schoolbag",
+                "a cupboard",
+                "a board"
+              ],
+              "a": 0
+            },
+            {
+              "q": "В углу слева стоит…",
+              "o": [
+                "a bin",
+                "a desk",
+                "a computer"
+              ],
+              "a": 0
+            },
+            {
+              "q": "На столе учителя стоит…",
+              "o": [
+                "a computer",
+                "a calculator",
+                "a pencil case"
+              ],
+              "a": 0
+            },
+            {
+              "q": "У дальней стены висит…",
+              "o": [
+                "a whiteboard",
+                "a window",
+                "a shelf"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Книги стоят на…",
+              "o": [
+                "shelves",
+                "chairs",
+                "desks"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "rules",
+          "title": "📖 a / an / some / the",
+          "cards": [
+            {
+              "h": "a и an",
+              "rows": [
+                "<b>a</b> — перед согласным <u>звуком</u>: a pen · a ruler · a university /juː/.",
+                "<b>an</b> — перед гласным <u>звуком</u>: an eraser · an old car · an hour /aʊ/.",
+                "Важно именно звучание, а не буква: <b>a</b> university, но <b>an</b> umbrella."
+              ]
+            },
+            {
+              "h": "some и the",
+              "rows": [
+                "<b>some</b> — с множественным числом, когда количество неважно: some pens.",
+                "<b>the</b> — когда собеседник понимает, о каком именно предмете речь.",
+                "Первый раз — a/an, дальше — the: I’ve got <b>a</b> cat and <b>a</b> dog. <b>The</b> cat is called Jimmy."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rules",
+          "title": "📖 this / that / these / those",
+          "cards": [
+            {
+              "h": "Близко и далеко",
+              "table": [
+                [
+                  "",
+                  "один",
+                  "много"
+                ],
+                [
+                  "рядом",
+                  "<b>this</b> pen",
+                  "<b>these</b> pens"
+                ],
+                [
+                  "далеко",
+                  "<b>that</b> pen",
+                  "<b>those</b> pens"
+                ]
+              ]
+            },
+            {
+              "h": "Как использовать",
+              "rows": [
+                "<b>This</b> is my pencil case. · <b>Those</b> are your books over there.",
+                "Со множественным числом глагол <b>are</b>: These <b>are</b> my pens.",
+                "Частая ошибка: ~~This are my books~~ → <b>These are</b> my books."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ a, an, some или the?",
+          "sec": "grammar",
+          "items": [
+            {
+              "q": "It’s ___ old calculator.",
+              "o": [
+                "an",
+                "a",
+                "some"
+              ],
+              "a": 0
+            },
+            {
+              "q": "I’ve got ___ pens in my schoolbag.",
+              "o": [
+                "some",
+                "a",
+                "an"
+              ],
+              "a": 0
+            },
+            {
+              "q": "She’s got ___ exercise book.",
+              "o": [
+                "an",
+                "a",
+                "some"
+              ],
+              "a": 0
+            },
+            {
+              "q": "He’s got ___ ruler and ___ eraser.",
+              "o": [
+                "a … an",
+                "an … a",
+                "a … a"
+              ],
+              "a": 0
+            },
+            {
+              "q": "I’ve got a cat and a dog. ___ cat is called Jimmy.",
+              "o": [
+                "The",
+                "A",
+                "Some"
+              ],
+              "a": 0
+            },
+            {
+              "q": "There’s ___ interactive whiteboard in our classroom.",
+              "o": [
+                "an",
+                "a",
+                "some"
+              ],
+              "a": 0
+            },
+            {
+              "q": "My mum has got ___ old car.",
+              "o": [
+                "an",
+                "a",
+                "the"
+              ],
+              "a": 0
+            },
+            {
+              "q": "We’ve got ___ shelves in the cupboard.",
+              "o": [
+                "some",
+                "a",
+                "an"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "✏️ this / that / these / those по картинке",
+          "sec": "grammar",
+          "note": "Ты за партой на первом плане. Выбирай по расстоянию и числу.",
+          "items": [
+            {
+              "q": "___ is my pencil case. (на твоей парте)",
+              "o": [
+                "This",
+                "That",
+                "Those"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ are my exercise books. (на твоей парте)",
+              "o": [
+                "These",
+                "This",
+                "Those"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ is the whiteboard. (у дальней стены)",
+              "o": [
+                "That",
+                "This",
+                "These"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ are the books on the shelves. (далеко)",
+              "o": [
+                "Those",
+                "These",
+                "This"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ is my ruler. (рядом)",
+              "o": [
+                "This",
+                "That",
+                "Those"
+              ],
+              "a": 0
+            },
+            {
+              "q": "___ are the desks at the back. (далеко)",
+              "o": [
+                "Those",
+                "These",
+                "That"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "✍️ Впиши артикль",
+          "sec": "gap",
+          "items": [
+            {
+              "q": "___ address (a / an)",
+              "a": [
+                "an"
+              ]
+            },
+            {
+              "q": "___ blue pencils (a / an / some)",
+              "a": [
+                "some"
+              ]
+            },
+            {
+              "q": "___ old car",
+              "a": [
+                "an"
+              ]
+            },
+            {
+              "q": "___ watch",
+              "a": [
+                "a"
+              ]
+            },
+            {
+              "q": "___ eye",
+              "a": [
+                "an"
+              ]
+            },
+            {
+              "q": "___ skateboard",
+              "a": [
+                "a"
+              ]
+            },
+            {
+              "q": "___ hour",
+              "a": [
+                "an"
+              ]
+            },
+            {
+              "q": "___ university",
+              "a": [
+                "a"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "title": "💬 Говорим",
+          "items": [
+            "Спроси собеседника, что у него в рюкзаке: <b>Have you got a ruler in your schoolbag?</b>",
+            "Назови пять предметов рядом с тобой через this / these и пять далеко — через that / those.",
+            "Опиши свой класс: что в нём есть и чего нет. Используй some и a / an."
+          ]
+        }
       ],
       "workbook": [
-        {"type": "gap", "title": "1 · Восстанови слово и поставь артикль", "sec": "wb-voc",
-         "note": "Пропущены гласные. Впиши слово целиком с артиклем: <i>a ruler</i> или <i>an eraser</i>.",
-         "items": [
-           {"q": "b__n", "a": ["a bin"]},
-           {"q": "c__lc__l__t__r", "a": ["a calculator"]},
-           {"q": "ch____r", "a": ["a chair"]},
-           {"q": "c__mp__t__r", "a": ["a computer"]},
-           {"q": "__r__s__r", "a": ["an eraser"]},
-           {"q": "__x__rc__s__ b__ __k", "a": ["an exercise book"]},
-           {"q": "r__l__r", "a": ["a ruler"]},
-           {"q": "sch____lb__g", "a": ["a schoolbag"]}
-         ]},
-        {"type": "cloze", "title": "2 · Впиши a, an, some или the", "sec": "wb-cloze",
-         "parts": ["I’ve got ", {"a": ["some"], "hint": "мн.ч."}, " pens in my pencil case. I’ve also got ",
-                   {"a": ["an"], "hint": "артикль"}, " eraser and ", {"a": ["a"], "hint": "артикль"},
-                   " pencil. ", {"a": ["The"], "hint": "уже знаем какой"}, " pencil case is in my schoolbag.\n\nMy dad has got ",
-                   {"a": ["a"], "hint": "артикль"}, " motorbike and my mum has got ",
-                   {"a": ["an"], "hint": "артикль"}, " old car. ", {"a": ["The"], "hint": "уже знаем какой"},
-                   " motorbike is red and ", {"a": ["the"], "hint": "уже знаем какой"}, " car is blue."]},
-        {"type": "mc", "title": "3 · Найди ошибку в артикле", "sec": "wb-gram",
-         "items": [
-           {"q": "Как правильно?", "o": ["There’s an elephant and some giraffes at our zoo.", "There’s a elephant and the giraffes at our zoo.", "There’s the elephant and a giraffes at our zoo."], "a": 0},
-           {"q": "Как правильно?", "o": ["We’ve got some apple trees in our garden.", "We’ve got some apple tree in our garden.", "We’ve got a apple trees in our garden."], "a": 0},
-           {"q": "Как правильно?", "o": ["I’ve got a phone and an MP3 player. The phone is with me.", "I’ve got some phone and an MP3 player. An phone is with me.", "I’ve got the phone and a MP3 player."], "a": 0},
-           {"q": "Как правильно?", "o": ["There are some exercise books and some dictionaries on my table.", "There are a exercise books and some dictionary on my table.", "There are the exercise book and a dictionaries."], "a": 0}
-         ]},
-        {"type": "gap", "title": "4 · this, that, these или those", "sec": "wb-gram",
-         "note": "Смотри на подсказку в скобках.",
-         "items": [
-           {"q": "___ is a pen. (рядом, один)", "a": ["this"]},
-           {"q": "___ are books. (рядом, много)", "a": ["these"]},
-           {"q": "___ is a calculator. (далеко, один)", "a": ["that"]},
-           {"q": "___ are shoes. (далеко, много)", "a": ["those"]},
-           {"q": "___ is my schoolbag. (рядом, один)", "a": ["this"]},
-           {"q": "___ are your pencils. (далеко, много)", "a": ["those"]}
-         ]},
-        {"type": "sort", "title": "5 · a или an?", "sec": "wb-gram",
-         "note": "Ориентируйся на звук, а не на букву.",
-         "groups": [
-           {"label": "a", "words": ["ruler", "university", "computer", "pen", "chair", "European friend"]},
-           {"label": "an", "words": ["eraser", "hour", "old car", "exercise book", "apple", "umbrella"]}],
-         "words": ["ruler", "university", "computer", "pen", "chair", "European friend",
-                   "eraser", "hour", "old car", "exercise book", "apple", "umbrella"]},
-        {"type": "free", "title": "6 · Опиши свой рюкзак",
-         "html": "Напиши <b>шесть предложений</b> о том, что у тебя в рюкзаке и на парте.<br><br>Используй: <b>a / an / some</b> при первом упоминании, <b>the</b> при повторном, и хотя бы по одному разу <b>this</b> и <b>those</b>.<br><br><i>Образец: I’ve got a pencil case and some pens. The pencil case is blue. This is my calculator, and those are my exercise books.</i>"}
+        {
+          "type": "gap",
+          "title": "1 · Восстанови слово и поставь артикль",
+          "sec": "wb-voc",
+          "note": "Пропущены гласные. Впиши слово целиком с артиклем: <i>a ruler</i> или <i>an eraser</i>.",
+          "items": [
+            {
+              "q": "b__n",
+              "a": [
+                "a bin"
+              ]
+            },
+            {
+              "q": "c__lc__l__t__r",
+              "a": [
+                "a calculator"
+              ]
+            },
+            {
+              "q": "ch____r",
+              "a": [
+                "a chair"
+              ]
+            },
+            {
+              "q": "c__mp__t__r",
+              "a": [
+                "a computer"
+              ]
+            },
+            {
+              "q": "__r__s__r",
+              "a": [
+                "an eraser"
+              ]
+            },
+            {
+              "q": "__x__rc__s__ b__ __k",
+              "a": [
+                "an exercise book"
+              ]
+            },
+            {
+              "q": "r__l__r",
+              "a": [
+                "a ruler"
+              ]
+            },
+            {
+              "q": "sch____lb__g",
+              "a": [
+                "a schoolbag"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "cloze",
+          "title": "2 · Впиши a, an, some или the",
+          "sec": "wb-cloze",
+          "parts": [
+            "I’ve got ",
+            {
+              "a": [
+                "some"
+              ],
+              "hint": "мн.ч."
+            },
+            " pens in my pencil case. I’ve also got ",
+            {
+              "a": [
+                "an"
+              ],
+              "hint": "артикль"
+            },
+            " eraser and ",
+            {
+              "a": [
+                "a"
+              ],
+              "hint": "артикль"
+            },
+            " pencil. ",
+            {
+              "a": [
+                "The"
+              ],
+              "hint": "уже знаем какой"
+            },
+            " pencil case is in my schoolbag.\n\nMy dad has got ",
+            {
+              "a": [
+                "a"
+              ],
+              "hint": "артикль"
+            },
+            " motorbike and my mum has got ",
+            {
+              "a": [
+                "an"
+              ],
+              "hint": "артикль"
+            },
+            " old car. ",
+            {
+              "a": [
+                "The"
+              ],
+              "hint": "уже знаем какой"
+            },
+            " motorbike is red and ",
+            {
+              "a": [
+                "the"
+              ],
+              "hint": "уже знаем какой"
+            },
+            " car is blue."
+          ]
+        },
+        {
+          "type": "mc",
+          "title": "3 · Найди ошибку в артикле",
+          "sec": "wb-gram",
+          "items": [
+            {
+              "q": "Как правильно?",
+              "o": [
+                "There’s an elephant and some giraffes at our zoo.",
+                "There’s a elephant and the giraffes at our zoo.",
+                "There’s the elephant and a giraffes at our zoo."
+              ],
+              "a": 0
+            },
+            {
+              "q": "Как правильно?",
+              "o": [
+                "We’ve got some apple trees in our garden.",
+                "We’ve got some apple tree in our garden.",
+                "We’ve got a apple trees in our garden."
+              ],
+              "a": 0
+            },
+            {
+              "q": "Как правильно?",
+              "o": [
+                "I’ve got a phone and an MP3 player. The phone is with me.",
+                "I’ve got some phone and an MP3 player. An phone is with me.",
+                "I’ve got the phone and a MP3 player."
+              ],
+              "a": 0
+            },
+            {
+              "q": "Как правильно?",
+              "o": [
+                "There are some exercise books and some dictionaries on my table.",
+                "There are a exercise books and some dictionary on my table.",
+                "There are the exercise book and a dictionaries."
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "gap",
+          "title": "4 · this, that, these или those",
+          "sec": "wb-gram",
+          "note": "Смотри на подсказку в скобках.",
+          "items": [
+            {
+              "q": "___ is a pen. (рядом, один)",
+              "a": [
+                "this"
+              ]
+            },
+            {
+              "q": "___ are books. (рядом, много)",
+              "a": [
+                "these"
+              ]
+            },
+            {
+              "q": "___ is a calculator. (далеко, один)",
+              "a": [
+                "that"
+              ]
+            },
+            {
+              "q": "___ are shoes. (далеко, много)",
+              "a": [
+                "those"
+              ]
+            },
+            {
+              "q": "___ is my schoolbag. (рядом, один)",
+              "a": [
+                "this"
+              ]
+            },
+            {
+              "q": "___ are your pencils. (далеко, много)",
+              "a": [
+                "those"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sort",
+          "title": "5 · a или an?",
+          "sec": "wb-gram",
+          "note": "Ориентируйся на звук, а не на букву.",
+          "groups": [
+            {
+              "label": "a",
+              "words": [
+                "ruler",
+                "university",
+                "computer",
+                "pen",
+                "chair",
+                "European friend"
+              ]
+            },
+            {
+              "label": "an",
+              "words": [
+                "eraser",
+                "hour",
+                "old car",
+                "exercise book",
+                "apple",
+                "umbrella"
+              ]
+            }
+          ],
+          "words": [
+            "ruler",
+            "university",
+            "computer",
+            "pen",
+            "chair",
+            "European friend",
+            "eraser",
+            "hour",
+            "old car",
+            "exercise book",
+            "apple",
+            "umbrella"
+          ]
+        },
+        {
+          "type": "free",
+          "title": "6 · Опиши свой рюкзак",
+          "html": "Напиши <b>шесть предложений</b> о том, что у тебя в рюкзаке и на парте.<br><br>Используй: <b>a / an / some</b> при первом упоминании, <b>the</b> при повторном, и хотя бы по одному разу <b>this</b> и <b>those</b>.<br><br><i>Образец: I’ve got a pencil case and some pens. The pencil case is blue. This is my calculator, and those are my exercise books.</i>"
+        }
       ]
     }
   }

@@ -103,6 +103,10 @@ EXTRA_CSS = (
     ".sortcol{background:#fdfaf0;border:2px solid #eee3d2;border-radius:12px;padding:9px}"
     ".sorth{font:900 13px 'Nunito',sans-serif;color:#7c2340;margin-bottom:7px;text-align:center}"
     ".sortdrop{min-height:64px;display:flex;flex-wrap:wrap;gap:5px;align-content:flex-start;cursor:pointer}"
+    # картинка урока
+    ".lessonpic{margin:0 0 14px;background:#fff;border-radius:18px;padding:10px;box-shadow:0 4px 0 #e3d3ba}"
+    ".lessonpic img{width:100%;display:block;border-radius:12px}"
+    ".lessonpic figcaption{font:800 12.5px 'Nunito',sans-serif;color:#8a7a68;padding:9px 6px 3px;text-align:center}"
 )
 
 
@@ -186,6 +190,13 @@ def html_blocks(blocks):
                        + '  <div id="%s"></div>\n' % bid)
         elif t == "free":
             out.append(sec + '  <div class="hw">%s</div>\n' % b.get("html", ""))
+        elif t == "image":
+            out.append(sec + '  <figure class="lessonpic">\n'
+                       '    <img src="%s" alt="%s" loading="lazy">\n'
+                       % (b["src"], b.get("alt", ""))
+                       + (('    <figcaption>%s</figcaption>\n' % b["caption"])
+                          if b.get("caption") else "")
+                       + '  </figure>\n')
     return "".join(out)
 
 
