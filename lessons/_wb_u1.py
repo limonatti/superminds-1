@@ -133,7 +133,7 @@ WB["B"] = [
    {"q":"My mum ___ the dishes every evening.","o":["washes","washs","wash"],"a":0},
    {"q":"He ___ his homework after school.","o":["does","do","dos"],"a":0},
    {"q":"They ___ in a small village.","o":["live","lives","living"],"a":0},
-   {"q":"Water ___ at 100 degrees.","o":["boils","boil","boiles"],"a":0},
+   {"q":"The film ___ at eight o’clock.","o":["starts","start","startes"],"a":0},
    {"q":"My aunt ___ to Spain every summer.","o":["flies","flys","fly"],"a":0},
    {"q":"She ___ always late for the bus.","o":["is","are","be"],"a":0}]},
 
@@ -180,7 +180,7 @@ WB["C"] = [
    {"q":"Can you ___ the door, please?","o":["shut","shot"],"a":0},
    {"q":"Please ___ me help you.","o":["let","late"],"a":0},
    {"q":"What do you want to ___ for lunch?","o":["eat","it"],"a":0},
-   {"q":"My birthday is in ___ .","o":["March","match"],"a":0}]},
+   {"q":"Three ___ are waiting at the bus stop.","o":["men","man"],"a":0}]},
 
  {"type":"listen","title":"5 · Послушай и отметь","h3":"Anna and the dishwasher",
   "intro":"Кликни на реплику, чтобы слушать с неё.",
@@ -210,7 +210,7 @@ WB["C"] = [
   "items":[
    {"q":"pl<u>ea</u>se — cl<u>ea</u>n","o":["одинаковый","разный"],"a":0},
    {"q":"unl<u>oa</u>d — s<u>u</u>permarket","o":["разный","одинаковый"],"a":0},
-   {"q":"bedr<u>oo</u>m — c<u>oo</u>k","o":["разный","одинаковый"],"a":0},
+   {"q":"f<u>oo</u>d — c<u>oo</u>k","o":["разный","одинаковый"],"a":0},
    {"q":"b<u>a</u>throom — m<u>a</u>ths","o":["одинаковый","разный"],"a":0},
    {"q":"n<u>i</u>ce — t<u>i</u>red","o":["одинаковый","разный"],"a":0},
    {"q":"m<u>o</u>ther — br<u>o</u>ther","o":["одинаковый","разный"],"a":0}]}]
@@ -330,7 +330,7 @@ WB["F"] = [
    {"q":"Jake is very different ___ his father.","a":["from"]},
    {"q":"Please be nice ___ your little cousin.","a":["to"]},
    {"q":"Are you pleased ___ your new bike?","a":["with"]},
-   {"q":"My aunt is married ___ a musician.","a":["to"]}]},
+   {"q":"She’s afraid ___ big dogs.","a":["of"]}]},
 
  {"type":"read","title":"2 · Текст с пропусками","h3":"The sibling effect","sec":"wb-read",
   "html":"<p><b>[1]</b> We don’t always get on well with our brothers and sisters — but "
@@ -396,15 +396,22 @@ WB["G"] = [
        {"q":"What is George like?","o":["quite shy","very talkative","unfriendly"],"a":0},
        {"q":"Who has got a beard?","o":["Marcus’s brother","George","Camilla’s friend"],"a":0}]},
 
- {"type":"gap","title":"4 · Где кто стоит","sec":"wb-voc",
-  "note":"Предлоги места: next to · between · behind · in front of · on the left · on the right",
-  "items":[
-   {"q":"Camilla is standing ___ to George. (рядом)","a":["next"]},
-   {"q":"George is ___ Camilla and the door. (между)","a":["between"]},
-   {"q":"The two boys are ___ the door. (перед)","a":["in front of"]},
-   {"q":"Marcus is on the ___ of the photo. (слева)","a":["left"]}]},
+ {"type":"note","title":"4 · Опиши расстановку",
+  "html":"Прочитай описание, потом впиши предлоги в упражнении ниже.<br><br>"
+         "<i>В центре комнаты стоит диван. Слева от дивана — окно, справа — дверь. "
+         "Camilla и George разговаривают у окна: Camilla ближе к окну, George рядом с ней. "
+         "Marcus сидит на диване между Camilla и дверью. Двое ребят стоят перед дверью.</i>"},
 
- {"type":"free","title":"5 · Опиши четверых",
+ {"type":"gap","title":"5 · Впиши предлог места","sec":"wb-voc",
+  "note":"Предлоги: next to · between · in front of · behind · on the left of · on the right of",
+  "items":[
+   {"q":"George is standing ___ Camilla. (рядом с)","a":["next to"]},
+   {"q":"Marcus is sitting ___ Camilla and the door. (между)","a":["between"]},
+   {"q":"Two boys are standing ___ the door. (перед)","a":["in front of"]},
+   {"q":"The window is ___ the sofa. (слева от)","a":["on the left of"]},
+   {"q":"The door is ___ the sofa. (справа от)","a":["on the right of"]}]},
+
+ {"type":"free","title":"6 · Опиши четверых",
   "html":"Представь фотографию с четырьмя людьми: <b>Max, Amy, Charlotte, Ollie</b>.<br><br>"
          "Опиши каждого — <b>внешность</b> (волосы, лицо, одежда) и <b>место</b> "
          "(next to…, between…, on the left…). По два предложения на человека.<br><br>"
@@ -450,7 +457,7 @@ WB["H"] = [
 
  {"type":"mc","title":"5 · Абзацы","sec":"wb-plan",
   "items":[
-   {"q":"Сколько предложений минимум в абзаце?","o":["два","одно","четыре"],"a":0},
+   {"q":"С чего начинают работу над профилем?","o":["с плана абзацев","с первого предложения","с проверки ошибок"],"a":0},
    {"q":"Новый абзац начинают, когда…","o":["меняется тема","строка закончилась","прошло три предложения"],"a":0},
    {"q":"Что лишнее в абзаце про школу?","o":["I’ve got a pet dog.","My favourite subject is art.","Our school is quite small."],"a":0}]},
 

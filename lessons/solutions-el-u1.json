@@ -1611,11 +1611,11 @@
               "a": 0
             },
             {
-              "q": "Water ___ at 100 degrees.",
+              "q": "The film ___ at eight o’clock.",
               "o": [
-                "boils",
-                "boil",
-                "boiles"
+                "starts",
+                "start",
+                "startes"
               ],
               "a": 0
             },
@@ -1672,7 +1672,7 @@
               "a": 0
             },
             {
-              "q": "2  grandson · class · father · grandma",
+              "q": "2  grandson · class · father · dance",
               "o": [
                 "grandson",
                 "class",
@@ -2235,10 +2235,10 @@
               "a": 0
             },
             {
-              "q": "My birthday is in ___ .",
+              "q": "Three ___ are waiting at the bus stop.",
               "o": [
-                "March",
-                "match"
+                "men",
+                "man"
               ],
               "a": 0
             }
@@ -2388,7 +2388,7 @@
               "a": 0
             },
             {
-              "q": "bedr<u>oo</u>m — c<u>oo</u>k",
+              "q": "f<u>oo</u>d — c<u>oo</u>k",
               "o": [
                 "разный",
                 "одинаковый"
@@ -3787,9 +3787,9 @@
               ]
             },
             {
-              "q": "My aunt is married ___ a musician.",
+              "q": "She’s afraid ___ big dogs.",
               "a": [
-                "to"
+                "of"
               ]
             }
           ]
@@ -4269,9 +4269,9 @@
         },
         {
           "type": "mc",
-          "title": "✏️ Исправь описание",
+          "title": "✏️ Проверь по диалогу",
           "sec": "grammar",
-          "note": "По диалогу выше — какое утверждение верное?",
+          "note": "Что на самом деле сказали в разговоре?",
           "items": [
             {
               "q": "Dan is…",
@@ -4503,40 +4503,51 @@
           ]
         },
         {
+          "type": "note",
+          "title": "4 · Опиши расстановку",
+          "html": "Прочитай описание, потом впиши предлоги в упражнении ниже.<br><br><i>В центре комнаты стоит диван. Слева от дивана — окно, справа — дверь. Camilla и George разговаривают у окна: Camilla ближе к окну, George рядом с ней. Marcus сидит на диване между Camilla и дверью. Двое ребят стоят перед дверью.</i>"
+        },
+        {
           "type": "gap",
-          "title": "4 · Где кто стоит",
+          "title": "5 · Впиши предлог места",
           "sec": "wb-voc",
-          "note": "Предлоги места: next to · between · behind · in front of · on the left · on the right",
+          "note": "Предлоги: next to · between · in front of · behind · on the left of · on the right of",
           "items": [
             {
-              "q": "Camilla is standing ___ to George. (рядом)",
+              "q": "George is standing ___ Camilla. (рядом с)",
               "a": [
-                "next"
+                "next to"
               ]
             },
             {
-              "q": "George is ___ Camilla and the door. (между)",
+              "q": "Marcus is sitting ___ Camilla and the door. (между)",
               "a": [
                 "between"
               ]
             },
             {
-              "q": "The two boys are ___ the door. (перед)",
+              "q": "Two boys are standing ___ the door. (перед)",
               "a": [
                 "in front of"
               ]
             },
             {
-              "q": "Marcus is on the ___ of the photo. (слева)",
+              "q": "The window is ___ the sofa. (слева от)",
               "a": [
-                "left"
+                "on the left of"
+              ]
+            },
+            {
+              "q": "The door is ___ the sofa. (справа от)",
+              "a": [
+                "on the right of"
               ]
             }
           ]
         },
         {
           "type": "free",
-          "title": "5 · Опиши четверых",
+          "title": "6 · Опиши четверых",
           "html": "Представь фотографию с четырьмя людьми: <b>Max, Amy, Charlotte, Ollie</b>.<br><br>Опиши каждого — <b>внешность</b> (волосы, лицо, одежда) и <b>место</b> (next to…, between…, on the left…). По два предложения на человека.<br><br><i>Образец: Amy is on the left. She’s got long wavy hair and she’s wearing a yellow dress. She’s standing next to Max.</i>"
         }
       ]
@@ -4983,11 +4994,11 @@
           "sec": "wb-plan",
           "items": [
             {
-              "q": "Сколько предложений минимум в абзаце?",
+              "q": "С чего начинают работу над профилем?",
               "o": [
-                "два",
-                "одно",
-                "четыре"
+                "с плана абзацев",
+                "с первого предложения",
+                "с проверки ошибок"
               ],
               "a": 0
             },

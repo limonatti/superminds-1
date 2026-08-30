@@ -101,6 +101,23 @@ def audit_json(path):
                 if len(b.get("pairs", [])) < 3:
                     warn(where, "мало пар для сопоставления")
 
+        # тетрадь должна закреплять, а не переспрашивать то же самое
+        def questions(bs):
+            out = {}
+            for bb in bs:
+                tt = bb.get("type")
+                src = bb.get("items", []) if tt in ("mc", "gap", "tf") else \
+                    (bb.get("q", []) if tt in ("read", "listen") else [])
+                for it in src:
+                    q = re.sub(r"<[^>]+>", "", str(it.get("q", ""))).strip().lower().rstrip(".").strip()
+                    if len(q) > 12:
+                        out[q] = bb.get("title", tt)
+            return out
+        ql, qw = questions(les.get("blocks", [])), questions(les.get("workbook", []))
+        for q in set(ql) & set(qw):
+            fail(where, "задание повторяется в уроке и тетради: «%s» (%s / %s)"
+                 % (q[:52], ql[q][:24], qw[q][:24]))
+
 
 def audit_html(course):
     """Проверка собранной страницы."""

@@ -119,8 +119,8 @@
     <div class="pllines" id="b5_lines"></div>
   </div>
   <div id="b5" style="margin-top:14px"></div>
-<h2>✏️ Исправь описание</h2>
-  <div class="wbband">По диалогу выше — какое утверждение верное?</div>
+<h2>✏️ Проверь по диалогу</h2>
+  <div class="wbband">Что на самом деле сказали в разговоре?</div>
   <div id="b6"></div>
 <h2>💬 Говорим</h2>
   <div id="b7"></div>
@@ -146,10 +146,12 @@
     <div class="pllines" id="b10_lines"></div>
   </div>
   <div id="b10" style="margin-top:14px"></div>
-<h2>4 · Где кто стоит</h2>
-  <div class="wbband">Предлоги места: next to · between · behind · in front of · on the left · on the right</div>
-  <div id="b11"></div>
-<h2>5 · Опиши четверых</h2>
+<h2>4 · Опиши расстановку</h2>
+  <div class="card">Прочитай описание, потом впиши предлоги в упражнении ниже.<br><br><i>В центре комнаты стоит диван. Слева от дивана — окно, справа — дверь. Camilla и George разговаривают у окна: Camilla ближе к окну, George рядом с ней. Marcus сидит на диване между Camilla и дверью. Двое ребят стоят перед дверью.</i></div>
+<h2>5 · Впиши предлог места</h2>
+  <div class="wbband">Предлоги: next to · between · in front of · behind · on the left of · on the right of</div>
+  <div id="b12"></div>
+<h2>6 · Опиши четверых</h2>
   <div class="hw">Представь фотографию с четырьмя людьми: <b>Max, Amy, Charlotte, Ollie</b>.<br><br>Опиши каждого — <b>внешность</b> (волосы, лицо, одежда) и <b>место</b> (next to…, between…, on the left…). По два предложения на человека.<br><br><i>Образец: Amy is on the left. She’s got long wavy hair and she’s wearing a yellow dress. She’s standing next to Max.</i></div>
   </div>
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Family and friends · 1G</div>
@@ -568,7 +570,7 @@ SMrenderSpeak("b7",["Выбери человека в комнате и опиш
 SMrenderCloze("b8",["Фото A: He’s got ", {"a": ["short"], "hint": "длина"}, " , ", {"a": ["dark"], "hint": "цвет"}, " hair and ", {"a": ["glasses"], "hint": "на лице"}, " . Фото B: He’s got ", {"a": ["fair"], "hint": "цвет"}, " hair, a ", {"a": ["beard"], "hint": "на подбородке"}, " and a ", {"a": ["moustache"], "hint": "над губой"}, " ."],[],"wb-cloze");
 SMrenderMC("b9",[{"q": "She ___ tall and slim.", "o": ["is", "has got", "have"], "a": 0}, {"q": "He ___ green eyes.", "o": ["has got", "is", "are"], "a": 0}, {"q": "They ___ curly hair.", "o": ["have got", "are", "is"], "a": 0}, {"q": "My brother ___ quite shy.", "o": ["is", "has got", "have got"], "a": 0}, {"q": "Kate ___ freckles.", "o": ["has got", "is", "are"], "a": 0}, {"q": "We ___ medium height.", "o": ["are", "have got", "has"], "a": 0}],"wb-gram");
 SMrenderListen("b10",[["f", "Who’s the girl with the long red hair?", "Zoe"], ["m", "That’s Camilla. She’s in my English class — very talkative.", "Marcus"], ["f", "And the boy next to her, the tall one?", "Zoe"], ["m", "George. He’s wearing glasses and a green jumper. He’s quite shy.", "Marcus"], ["f", "There are two boys by the door.", "Zoe"], ["m", "The one with the beard is my brother. The other one is his friend.", "Marcus"]],[{"q": "Camilla has got…", "o": ["long red hair", "short fair hair", "curly dark hair"], "a": 0}, {"q": "What is George wearing?", "o": ["glasses and a green jumper", "a black jacket", "a red T-shirt"], "a": 0}, {"q": "What is George like?", "o": ["quite shy", "very talkative", "unfriendly"], "a": 0}, {"q": "Who has got a beard?", "o": ["Marcus’s brother", "George", "Camilla’s friend"], "a": 0}],"listening");
-SMrenderGap("b11",[{"q": "Camilla is standing ___ to George. (рядом)", "a": ["next"]}, {"q": "George is ___ Camilla and the door. (между)", "a": ["between"]}, {"q": "The two boys are ___ the door. (перед)", "a": ["in front of"]}, {"q": "Marcus is on the ___ of the photo. (слева)", "a": ["left"]}],"wb-voc");
+SMrenderGap("b12",[{"q": "George is standing ___ Camilla. (рядом с)", "a": ["next to"]}, {"q": "Marcus is sitting ___ Camilla and the door. (между)", "a": ["between"]}, {"q": "Two boys are standing ___ the door. (перед)", "a": ["in front of"]}, {"q": "The window is ___ the sofa. (слева от)", "a": ["on the left of"]}, {"q": "The door is ___ the sofa. (справа от)", "a": ["on the right of"]}],"wb-voc");
 var _totF=document.getElementById("tot");if(_totF)_totF.textContent=tot;
 document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
   speechSynthesis.cancel();
