@@ -249,11 +249,7 @@
            {"q": "she / is / very tall", "a": ["is she very tall"]}
          ]},
         {"type": "note", "title": "3 · Таблица: что у кого есть",
-         "html": "<table><tr><th></th><th>Liam</th><th>Zoe</th></tr>"
-                 "<tr><td>skateboard</td><td>✓</td><td>✗</td></tr>"
-                 "<tr><td>smartphone</td><td>✓</td><td>✓</td></tr>"
-                 "<tr><td>dictionary</td><td>✗</td><td>✓</td></tr>"
-                 "<tr><td>bike</td><td>✓</td><td>✓</td></tr></table>"},
+         "html": "<table><tr><th></th><th>Liam</th><th>Zoe</th></tr><tr><td>skateboard</td><td>✓</td><td>✗</td></tr><tr><td>smartphone</td><td>✓</td><td>✓</td></tr><tr><td>dictionary</td><td>✗</td><td>✓</td></tr><tr><td>bike</td><td>✓</td><td>✓</td></tr></table>"},
         {"type": "gap", "title": "4 · Вопрос и короткий ответ по таблице", "sec": "wb-gram",
          "note": "Формат ответа: <i>Yes, he has.</i> или <i>No, she hasn’t.</i>",
          "items": [
@@ -368,11 +364,7 @@
            {"q": "Деревянный духовой с тростью — ___", "a": ["clarinet", "the clarinet"]}
          ]},
         {"type": "note", "title": "2 · Таблица умений",
-         "html": "<table><tr><th></th><th>Ted</th><th>Marie</th><th>Sophie</th><th>Mason</th></tr>"
-                 "<tr><td>football</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td></tr>"
-                 "<tr><td>violin</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr>"
-                 "<tr><td>ride a bike</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>"
-                 "<tr><td>Chinese</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td></tr></table>"},
+         "html": "<table><tr><th></th><th>Ted</th><th>Marie</th><th>Sophie</th><th>Mason</th></tr><tr><td>football</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td></tr><tr><td>violin</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr><tr><td>ride a bike</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Chinese</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td></tr></table>"},
         {"type": "gap", "title": "3 · Вопрос и ответ по таблице", "sec": "wb-gram",
          "note": "Формат: <i>Can Ted play football? Yes, he can.</i> Впиши только ответ.",
          "items": [
