@@ -962,6 +962,13 @@
       "cando": "I can use the present simple affirmative correctly.",
       "blocks": [
         {
+          "type": "image",
+          "title": "🖼️ Вечер пятницы",
+          "src": "img/lessons/u1b-sitcom.jpg",
+          "alt": "Семья в гостиной вечером: мама несёт чай, сын держит миску попкорна, дочь с пультом на диване, отец кладёт телефон на стол",
+          "caption": "Кто что делает? Опиши вслух, потом читай текст."
+        },
+        {
           "type": "read",
           "title": "📕 Текст",
           "h3": "Friday is sitcom night",
@@ -3531,6 +3538,13 @@
           "html": "Когда решаешь, какое предложение подходит в пропуск, читай <b>и до, и после</b> пропуска. Проверь три вещи: <b>1)</b> есть ли смысл; <b>2)</b> подходит ли грамматически (время, местоимения, единственное или множественное, this / that); <b>3)</b> о том ли это, о чём абзац."
         },
         {
+          "type": "image",
+          "title": "🖼️ Ссора",
+          "src": "img/lessons/u1f-siblings.jpg",
+          "alt": "Брат и сестра сидят спиной друг к другу на полу в комнате, скрестив руки",
+          "caption": "Что случилось, по-твоему? Прочитай текст и проверь."
+        },
+        {
           "type": "read",
           "title": "📕 Текст с пропусками",
           "h3": "Brothers, sisters and the long war",
@@ -4146,157 +4160,176 @@
         {
           "type": "listen",
           "title": "🎧 Аудирование",
-          "h3": "Who’s who at the party?",
-          "intro": "Три коротких разговора на дне рождения. Слушай и отвечай.",
+          "h3": "Who's who at Kate's party?",
+          "intro": "Сначала рассмотри фото. Потом слушай и определяй, кто есть кто.",
           "script": [
             [
               "f",
-              "Who’s that boy by the window? The tall one with curly hair.",
-              "Mia"
+              "So many people! Who's the tall boy by the window?",
+              "Zoe"
             ],
             [
               "m",
-              "That’s Dan. He’s in my maths class. He’s really funny.",
-              "Jake"
+              "That's Dan. He's in my chemistry class. Curly hair, glasses — you can't miss him.",
+              "Marcus"
             ],
             [
               "f",
-              "Is he here with Sally?",
-              "Mia"
+              "And the girl with the red hair, talking to him?",
+              "Zoe"
             ],
             [
               "m",
-              "No, he isn’t. Sally’s over there, talking to my sister.",
-              "Jake"
-            ],
-            [
-              "m2",
-              "Hi! I’m Ryan. I don’t know anybody here, honestly.",
-              "Ryan"
-            ],
-            [
-              "f2",
-              "Nobody? Really?",
-              "Lisa"
-            ],
-            [
-              "m2",
-              "Well, I know George. He’s my neighbour. The one with glasses and the black jacket.",
-              "Ryan"
-            ],
-            [
-              "f2",
-              "Oh, George is my brother!",
-              "Lisa"
+              "Kate. It's her party. She's really friendly.",
+              "Marcus"
             ],
             [
               "f",
-              "So, what do you think of the party, Lucy?",
-              "Mia"
+              "Who are the two girls behind them?",
+              "Zoe"
             ],
             [
-              "f2",
-              "It’s brilliant. The music is great.",
-              "Lucy"
+              "m",
+              "The one with her hair up is Mia, and the tall blonde one is Sally. They're sisters.",
+              "Marcus"
             ],
             [
               "f",
-              "Do you know Kate? Short, with red hair.",
-              "Mia"
+              "Sisters? They don't look alike at all.",
+              "Zoe"
             ],
             [
-              "f2",
-              "I do, and I like her a lot. She’s very kind.",
-              "Lucy"
+              "m",
+              "I know. And that's Ryan at the back with the drink — he never says much.",
+              "Marcus"
+            ],
+            [
+              "f",
+              "And the girl in the yellow dress?",
+              "Zoe"
+            ],
+            [
+              "m",
+              "That's Lucy. She's my cousin, actually.",
+              "Marcus"
             ]
           ],
           "q": [
             {
+              "q": "Look at the photo. How many people can you see?",
+              "o": [
+                "six",
+                "four",
+                "eight"
+              ],
+              "a": 0
+            },
+            {
               "q": "What does Dan look like?",
               "o": [
-                "tall with curly hair",
+                "tall, curly hair, glasses",
                 "short with fair hair",
-                "tall with glasses"
-              ],
-              "a": 0
-            },
-            {
-              "q": "Is Dan at the party with Sally?",
-              "o": [
-                "no",
-                "yes",
-                "we don’t know"
-              ],
-              "a": 0
-            },
-            {
-              "q": "How many people does Ryan know?",
-              "o": [
-                "one",
-                "nobody",
-                "lots"
-              ],
-              "a": 0
-            },
-            {
-              "q": "Who is George?",
-              "o": [
-                "Lisa’s brother",
-                "Lisa’s neighbour",
-                "Ryan’s brother"
-              ],
-              "a": 0
-            },
-            {
-              "q": "What does Lucy think of the party?",
-              "o": [
-                "it’s brilliant",
-                "it’s boring",
-                "it’s too loud"
-              ],
-              "a": 0
-            },
-            {
-              "q": "What is Kate like?",
-              "o": [
-                "kind",
-                "shy",
-                "funny"
-              ],
-              "a": 0
-            }
-          ]
-        },
-        {
-          "type": "mc",
-          "title": "✏️ Проверь по диалогу",
-          "sec": "grammar",
-          "note": "Что на самом деле сказали в разговоре?",
-          "items": [
-            {
-              "q": "Dan is…",
-              "o": [
-                "tall with curly hair",
-                "quite short with red hair",
                 "tall with a beard"
               ],
               "a": 0
             },
             {
-              "q": "George wears…",
+              "q": "Whose party is it?",
               "o": [
-                "glasses and a black jacket",
-                "glasses and a blue jacket",
-                "a green jacket"
+                "Kate's",
+                "Lucy's",
+                "Mia's"
               ],
               "a": 0
             },
             {
-              "q": "Kate is…",
+              "q": "Which girl has got red hair?",
               "o": [
-                "short with red hair",
-                "tall with fair hair",
-                "short with dark hair"
+                "Kate",
+                "Sally",
+                "Mia"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Mia and Sally are…",
+              "o": [
+                "sisters",
+                "cousins",
+                "classmates"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Who is quiet?",
+              "o": [
+                "Ryan",
+                "Dan",
+                "Marcus"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Who is Marcus's cousin?",
+              "o": [
+                "Lucy",
+                "Kate",
+                "Sally"
+              ],
+              "a": 0
+            }
+          ],
+          "image": "img/lessons/u1g-party.jpg",
+          "image_alt": "Шесть подростков на домашней вечеринке: высокий кудрявый парень в очках у окна, рыжая девушка, девушка с пучком, блондинка, парень с напитком, девушка в жёлтом платье"
+        },
+        {
+          "type": "mc",
+          "title": "✏️ Найди на фото",
+          "sec": "grammar",
+          "note": "Смотри на фотографию и вспоминай диалог.",
+          "items": [
+            {
+              "q": "Кто стоит у окна?",
+              "o": [
+                "Dan",
+                "Ryan",
+                "Marcus"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Девушка в жёлтом платье — это…",
+              "o": [
+                "Lucy",
+                "Kate",
+                "Sally"
+              ],
+              "a": 0
+            },
+            {
+              "q": "У кого волосы собраны в пучок?",
+              "o": [
+                "Mia",
+                "Sally",
+                "Kate"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Кто держит стакан в руке?",
+              "o": [
+                "Lucy",
+                "Kate",
+                "Mia"
+              ],
+              "a": 0
+            },
+            {
+              "q": "Sally — это девушка…",
+              "o": [
+                "с длинными светлыми волосами",
+                "с рыжими волосами",
+                "в жёлтом платье"
               ],
               "a": 0
             }
@@ -4557,6 +4590,13 @@
       "topic": "A personal profile",
       "cando": "I can write a personal profile.",
       "blocks": [
+        {
+          "type": "image",
+          "title": "🖼️ Лорен и Джеймс",
+          "src": "img/lessons/u1h-profiles.jpg",
+          "alt": "Двое подростков в школьном коридоре: девушка со скетчбуком и карандашом, парень с гитарой и наушниками',",
+          "caption": "Слева Лорен, справа Джеймс. Прочитай их профили ниже."
+        },
         {
           "type": "read",
           "title": "📕 Образцы",
