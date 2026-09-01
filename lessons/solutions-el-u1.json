@@ -8,6 +8,13 @@
       "cando": "I can talk about family members.",
       "blocks": [
         {
+          "type": "image",
+          "title": "🖼️ Три поколения одной семьи",
+          "src": "img/lessons/u1a-family-words.jpg",
+          "alt": "Групповое фото большой семьи из трёх поколений в саду",
+          "caption": "Кого ты видишь? Назови по-английски всех, кого можешь."
+        },
+        {
           "type": "words",
           "title": "🔤 Члены семьи",
           "note": "Нажми 🔊 и повтори. Сначала — база, ниже разберём step-, -in-law и great-.",
@@ -1824,6 +1831,13 @@
           ]
         },
         {
+          "type": "image",
+          "title": "🖼️ Что нужно для домашних дел",
+          "src": "img/lessons/u1c-housework-words.jpg",
+          "alt": "Раскладка предметов для уборки: утюг, корзина с бельём, пылесос, щётки, мусорный мешок, тарелки, перчатки",
+          "caption": "Назови предметы, потом посмотри слова ниже."
+        },
+        {
           "type": "words",
           "title": "🔤 Housework",
           "note": "Лексика для аудирования ниже.",
@@ -1882,7 +1896,7 @@
           "type": "listen",
           "title": "🎧 Аудирование",
           "h3": "Who does what at home?",
-          "intro": "Двое подростков обсуждают домашние дела. Слушай и отвечай.",
+          "intro": "Посмотри на фото: кто что делает? Потом слушай — кликни на реплику, чтобы слушать с неё.",
           "script": [
             [
               "m",
@@ -1986,7 +2000,9 @@
               ],
               "a": 0
             }
-          ]
+          ],
+          "image": "img/lessons/u1c-housework.jpg",
+          "image_alt": "Кухня: парень с мусорным пакетом и собакой, девушка гладит рубашку, отец складывает бельё"
         },
         {
           "type": "tf",
@@ -2439,7 +2455,7 @@
           "type": "listen",
           "title": "🎧 Диалог",
           "h3": "Who’s got the remote?",
-          "intro": "Трое подростков спорят, что смотреть. Послушай и разбери формы.",
+          "intro": "Из-за чего спор? Посмотри на фото, потом слушай.",
           "script": [
             [
               "f",
@@ -2538,7 +2554,9 @@
               ],
               "a": 0
             }
-          ]
+          ],
+          "image": "img/lessons/u1d-remote.jpg",
+          "image_alt": "Трое подростков смеются и тянутся к одному пульту, телевизор выключен"
         },
         {
           "type": "rules",
@@ -2944,11 +2962,18 @@
       "cando": "I can form the plural of regular and irregular nouns.",
       "blocks": [
         {
+          "type": "image",
+          "title": "🖼️ Семья Ивановых",
+          "src": "img/lessons/u1e-bikes.jpg",
+          "alt": "Семья чинит велосипеды в гараже: женщина у колеса, парень вешает полку, две девушки снимают на телефон, мальчик с доской",
+          "caption": "Чем заняты? Прочитай текст и проверь себя."
+        },
+        {
           "type": "read",
           "title": "📕 Текст",
           "h3": "The family that runs on wheels",
           "sec": "reading",
-          "html": "<p>The Ivanovs are a family of five from Riga, and they are famous online for one thing: <b>bicycles</b>. Anna, the mother, repairs old <b>bikes</b> in the garage. Her husband Pavel makes <b>shelves</b> and <b>boxes</b> for the tools. Their two <b>daughters</b> film everything, and their little son carries the <b>knives</b>, <b>brushes</b> and <b>watches</b> that people bring for repair.</p><p>«People send us <b>photos</b> of broken bikes from three <b>countries</b>,» says Anna. «We give away most of them to <b>children</b> who haven’t got one.» The family has fixed over four hundred bikes. Their <b>lives</b> are busy, but nobody complains — except about the <b>dishes</b>, which nobody wants to wash.</p>",
+          "html": "<p>The Ivanovs are a family of five from Riga, and they are famous online for one thing: <b>bicycles</b>. Anna repairs old <b>bikes</b> in the garage. Pavel builds <b>shelves</b> and <b>boxes</b> for the tools. The two <b>girls</b> film everything, and the youngest carries the <b>knives</b>, <b>brushes</b> and <b>watches</b> that people bring for repair.</p><p>«People send us <b>photos</b> of broken bikes from three <b>countries</b>,» says Anna. «We give away most of them to <b>children</b> who haven’t got one.» The family has fixed over four hundred bikes. Their <b>lives</b> are busy, but nobody complains — except about the <b>dishes</b>, which nobody wants to wash.</p>",
           "q": [
             {
               "q": "Where is the family from?",
@@ -3947,6 +3972,13 @@
       "cando": "I can describe my friends.",
       "blocks": [
         {
+          "type": "image",
+          "title": "🖼️ Шесть портретов",
+          "src": "img/lessons/u1g-appearance-words.jpg",
+          "alt": "Шесть портретов подростков: блондинка, кудрявый брюнет, рыжая, парень в очках, шатенка с волнистыми волосами, парень с бородой",
+          "caption": "Опиши каждого одним предложением, потом сверься со словами ниже."
+        },
+        {
           "type": "words",
           "title": "🔤 Внешность",
           "note": "Порядок: рост → телосложение → волосы → остальное. <i>She’s tall and slim with long dark hair.</i>",
@@ -4785,6 +4817,13 @@
               "a": 0
             }
           ]
+        },
+        {
+          "type": "image",
+          "title": "🖼️ Какие они?",
+          "src": "img/lessons/u1h-personality-words.jpg",
+          "alt": "Шесть школьных сцен: рисует, помогает однокласснику, смеётся с друзьями, читает одна, ждёт, придерживает дверь",
+          "caption": "Подбери прилагательное к каждой сцене."
         },
         {
           "type": "words",
