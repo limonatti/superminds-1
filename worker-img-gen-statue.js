@@ -58,6 +58,16 @@ export default {
     if (url.pathname === "/card" && request.method === "GET") {
       return handleCard(request, url, env, ctx);
     }
+    // Иллюстрации уроков: свой промпт целиком + постоянный ключ кеша.
+    // GET /scene?k=u1c-housework&p=<prompt>[&f=1 — перегенерировать]
+    if (url.pathname === "/scene" && request.method === "GET") {
+      return handleScene(request, url, env, ctx);
+    }
+    // Озвучка реплик уроков: настоящий mp3 с кешем, а не браузерный синтез.
+    // GET /say?k=u1a-l03&t=<text>&v=<voice>[&f=1 — перегенерировать]
+    if (url.pathname === "/say" && request.method === "GET") {
+      return handleSay(request, url, env, ctx);
+    }
 
     if (url.pathname === "/v1/models" && request.method === "GET") {
       return handleAuth(request, env) || json({
@@ -180,6 +190,163 @@ function clampInt(raw, min, max, fallback) {
 }
 
 // ---- Word-card endpoint -------------------------------------------------
+
+/* Голоса Deepgram Aura: разным персонажам диалога — разные голоса. */
+const VOICES = {
+  f:  "asteria",   // женский, тёплый
+  f2: "luna",      // женский, выше
+  f3: "athena",    // женский, спокойный
+  m:  "orion",     // мужской, ровный
+  m2: "arcas",     // мужской, мягче
+  m3: "perseus",   // мужской, ниже
+};
+
+/**
+ * Озвучка одной реплики. Возвращает mp3 и кладёт его в KV навсегда,
+ * поэтому страница урока получает настоящий аудиофайл с перемоткой,
+ * а не синтез в браузере на лету.
+ *
+ *   GET /say?k=u1a-l03&t=<text>&v=f&f=1
+ */
+async function handleSay(request, url, env, ctx) {
+  const k = (url.searchParams.get("k") || "").trim();
+  const t = (url.searchParams.get("t") || "").trim();
+  const v = (url.searchParams.get("v") || "f").trim();
+  if (!k) return json({ error: "k (key) required" }, 400);
+  if (!/^[a-z0-9-]{3,60}$/.test(k)) return json({ error: "k must be a-z0-9- (3..60)" }, 400);
+
+  const key = "say:v1:" + k;
+  const force = url.searchParams.get("f") === "1";
+  const cache = caches.default;
+  const cacheKey = new Request(url.origin + "/say?v=1&k=" + encodeURIComponent(k), { method: "GET" });
+
+  if (!force) {
+    const edge = await cache.match(cacheKey);
+    if (edge) return edge;
+    if (env.CARDS) {
+      try {
+        const cached = await env.CARDS.get(key, { type: "arrayBuffer" });
+        if (cached) {
+          const res = new Response(cached, { headers: audioHeaders("HIT") });
+          ctx.waitUntil(cache.put(cacheKey, res.clone()));
+          return res;
+        }
+      } catch (e) { /* сгенерируем заново */ }
+    }
+  }
+
+  if (!t) return json({ error: "t (text) required for first generation" }, 400);
+  const text = t.slice(0, 600);
+
+  try {
+    let bytes = null;
+    // 1) Aura — живые голоса и разные спикеры
+    try {
+      const r = await env.AI.run("@cf/deepgram/aura-1", {
+        text, speaker: VOICES[v] || VOICES.f,
+      });
+      bytes = await toBytes(r);
+    } catch (e1) {
+      bytes = null;
+    }
+    // 2) запасной вариант — melotts, сразу отдаёт mp3
+    if (!bytes || !bytes.length) {
+      const r2 = await env.AI.run("@cf/myshell-ai/melotts", { prompt: text, lang: "en" });
+      bytes = await toBytes(r2);
+    }
+    if (!bytes || !bytes.length) throw new Error("empty audio");
+
+    if (env.CARDS) {
+      ctx.waitUntil(env.CARDS.put(key, bytes, { expirationTtl: 31536000 }));
+    }
+    const res = new Response(bytes, { headers: audioHeaders(force ? "REGEN" : "MISS") });
+    ctx.waitUntil(cache.put(cacheKey, res.clone()));
+    return res;
+  } catch (err) {
+    return json({ error: "tts failed", details: err?.message || String(err) }, 500);
+  }
+}
+
+/* Модели отдают то ReadableStream, то base64, то массив байт — сводим к Uint8Array. */
+async function toBytes(r) {
+  if (!r) return null;
+  if (r instanceof ReadableStream) {
+    return new Uint8Array(await new Response(r).arrayBuffer());
+  }
+  if (r instanceof ArrayBuffer) return new Uint8Array(r);
+  if (r.audio) return base64ToUint8(r.audio);
+  if (typeof r === "string") return base64ToUint8(r);
+  try { return new Uint8Array(await new Response(r).arrayBuffer()); } catch (e) { return null; }
+}
+
+function audioHeaders(cache) {
+  return {
+    "Content-Type": "audio/mpeg",
+    "Cache-Control": "public, max-age=31536000, immutable",
+    "Access-Control-Allow-Origin": "*",
+    "X-Card-Cache": cache || "",
+  };
+}
+
+/**
+ * Иллюстрация урока по готовому промпту, с постоянным кешем по ключу.
+ *
+ * В отличие от /card здесь промпт НЕ переписывается моделью — он идёт
+ * как есть, потому что сцена урока должна точно совпадать с текстом
+ * диалога. Ключ k задаёт адрес картинки навсегда: страница урока
+ * ссылается на него, а не хранит файл в репозитории.
+ *
+ *   GET /scene?k=u1c-housework&p=<prompt>&f=1
+ */
+async function handleScene(request, url, env, ctx) {
+  const k = (url.searchParams.get("k") || "").trim();
+  const p = (url.searchParams.get("p") || "").trim();
+  if (!k) return json({ error: "k (key) required" }, 400);
+  if (!/^[a-z0-9-]{3,60}$/.test(k)) return json({ error: "k must be a-z0-9- (3..60)" }, 400);
+
+  const key = "scene:v1:" + k;
+  const force = url.searchParams.get("f") === "1";
+  const cache = caches.default;
+  const cacheKey = new Request(url.origin + "/scene?v=1&k=" + encodeURIComponent(k), { method: "GET" });
+
+  if (!force) {
+    const edge = await cache.match(cacheKey);
+    if (edge) return edge;
+    if (env.CARDS) {
+      try {
+        const cached = await env.CARDS.get(key, { type: "arrayBuffer" });
+        if (cached) {
+          const res = new Response(cached, { headers: imgHeaders("HIT") });
+          ctx.waitUntil(cache.put(cacheKey, res.clone()));
+          return res;
+        }
+      } catch (e) { /* сгенерируем заново */ }
+    }
+  }
+
+  if (!p) return json({ error: "p (prompt) required for first generation" }, 400);
+
+  try {
+    const prompt = p.slice(0, 1200) +
+      ", candid documentary photograph, natural light, realistic colours, sharp focus," +
+      " absolutely no text, no words, no letters, no captions, no signs, no watermark, no logo";
+    let result;
+    try {
+      result = await env.AI.run(DEFAULT_MODEL, { prompt, steps: 8 });
+    } catch (e1) {
+      result = await env.AI.run(DEFAULT_MODEL, { prompt: prompt.slice(0, 900) });
+    }
+    const bytes = base64ToUint8(extractBase64FromAIResult(result));
+    if (env.CARDS) {
+      ctx.waitUntil(env.CARDS.put(key, bytes, { expirationTtl: 31536000 }));
+    }
+    const res = new Response(bytes, { headers: imgHeaders(force ? "REGEN" : "MISS") });
+    ctx.waitUntil(cache.put(cacheKey, res.clone()));
+    return res;
+  } catch (err) {
+    return json({ error: "scene generation failed", details: err?.message || String(err) }, 500);
+  }
+}
 
 async function handleCard(request, url, env, ctx) {
   const w = (url.searchParams.get("w") || "").trim();
