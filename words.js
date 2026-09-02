@@ -414,6 +414,11 @@ function SM_waitForApi(ms) {
 window.SM_ready = SM_waitForApi()
   .then(function (ok) { return ok ? window.SM_refreshCloudCourses() : null; })
   .then(function () {
+    /* Слова Speakout и остальных курсов лежат в отдельных файлах, которые
+       подключаются ПОСЛЕ words.js. Подмешиваем их здесь — до выбора курса,
+       иначе SM_UNITS соберётся из пустого списка и страница окажется без юнитов. */
+    try { if (window.SM_absorbSpeakout) window.SM_absorbSpeakout(); } catch (e) {}
+    try { if (window.SM_absorbCourseWords) window.SM_absorbCourseWords(); } catch (e) {}
     window.SM_useCourse(window.SM_wantedCourse);
     return { course: window.SM_COURSE, units: window.SM_UNITS };
   })
