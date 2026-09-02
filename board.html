@@ -822,14 +822,65 @@
 
     /* ---- слова на доску ---- */
     const sel=document.getElementById("unitSel");
-    SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.title;sel.appendChild(o);});
     const SPK_LABEL={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
-    if(window.SPEAKOUT_WORDS){ Object.keys(window.SPEAKOUT_WORDS).forEach(course=>{ Object.keys(window.SPEAKOUT_WORDS[course]).forEach(un=>{ const o=document.createElement("option");o.value=course+"|"+un;o.textContent="🗣️ "+(SPK_LABEL[course]||course)+" · U"+un;sel.appendChild(o); }); }); }
+
+    /* Список юнитов для доски. Раньше сюда попадали только Speakout и текущий
+       курс — Solutions, Focus, Gateway и Super Minds на доску вытащить было
+       нельзя. Теперь собираем все учебники, у которых есть слова, и ждём их
+       загрузки: слова курсов подмешиваются уже после отрисовки страницы. */
+    function fillUnitList(){
+      const keep = sel.value;
+      sel.innerHTML = "";
+      const data = window.SM_COURSE_DATA || {};
+      const meta = {};
+      (window.SM_COURSES || []).forEach(c => { meta[c.id] = c; });
+
+      Object.keys(data).forEach(cid => {
+        const units = (data[cid] || []).filter(u => (u.words || []).length);
+        if (!units.length) return;
+        const m = meta[cid] || {};
+        const g = document.createElement("optgroup");
+        g.label = (m.emoji ? m.emoji + " " : "📘 ") + (m.title || cid);
+        units.forEach(u => {
+          const o = document.createElement("option");
+          o.value = cid + "::" + u.id;
+          o.textContent = (u.emoji || "📖") + " " + u.title;
+          g.appendChild(o);
+        });
+        sel.appendChild(g);
+      });
+
+      if (window.SPEAKOUT_WORDS) {
+        Object.keys(window.SPEAKOUT_WORDS).forEach(course => {
+          const g = document.createElement("optgroup");
+          g.label = "🗣️ " + (SPK_LABEL[course] || course);
+          Object.keys(window.SPEAKOUT_WORDS[course]).forEach(un => {
+            const o = document.createElement("option");
+            o.value = course + "|" + un;
+            o.textContent = "🗣️ " + (SPK_LABEL[course] || course) + " · U" + un;
+            g.appendChild(o);
+          });
+          sel.appendChild(g);
+        });
+      }
+      if (keep && [...sel.options].some(o => o.value === keep)) sel.value = keep;
+    }
+
+    fillUnitList();
+    /* Курсы догружаются позже — перестраиваем список, когда они приедут */
+    Promise.resolve(window.SM_ready).then(() => {
+      try { if (window.SM_absorbSpeakout) window.SM_absorbSpeakout(); } catch(e){}
+      try { if (window.SM_absorbCourseWords) window.SM_absorbCourseWords(); } catch(e){}
+      fillUnitList();
+    }).catch(()=>{});
     function placeCards(list){ const r=stage.getBoundingClientRect(); const c=toWorld(r.left+60,r.top+40); snapshot();
       list.slice(0,8).forEach((w,i)=>addCard(genId(),{x:c.x+(i%4)*110,y:c.y+Math.floor(i/4)*120,en:w.en,emoji:w.emoji},false)); }
     function addCurrentWords(val){ val=val||sel.value;
-      if(val && val.indexOf("|")>=0){ const parts=val.split("|"); const list=((window.SPEAKOUT_WORDS||{})[parts[0]]||{})[parts[1]]||[]; placeCards(list.map(w=>({en:w[0],emoji:"🗣️"}))); }
-      else { const u=SM_UNITS.find(x=>x.id===val); if(u) placeCards(u.words.map(w=>({en:w.en,emoji:w.emoji}))); } }
+      if(val && val.indexOf("|")>=0){ const parts=val.split("|"); const list=((window.SPEAKOUT_WORDS||{})[parts[0]]||{})[parts[1]]||[]; placeCards(list.map(w=>({en:w[0],emoji:"🗣️"}))); return; }
+      if(val && val.indexOf("::")>=0){                       /* курс::юнит из любого учебника */
+        const p=val.split("::"); const u=((window.SM_COURSE_DATA||{})[p[0]]||[]).find(x=>x.id===p[1]);
+        if(u) placeCards((u.words||[]).map(w=>({en:w.en,emoji:w.emoji}))); return; }
+      const u=SM_UNITS.find(x=>x.id===val); if(u) placeCards(u.words.map(w=>({en:w.en,emoji:w.emoji}))); }
     document.getElementById("addCards").onclick=()=>addCurrentWords(sel.value);
     window.addEventListener("message",e=>{ if(!e||!e.data)return;
       if(e.data.type==="sm-add"&&e.data.unit) addCurrentWords(e.data.unit);
