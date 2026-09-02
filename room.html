@@ -200,22 +200,62 @@
     document.getElementById("board").src="board.html?room="+encodeURIComponent(room);
 
     // выбор курса + юнита + задания
-    const COURSES=[{id:"sm",label:"🧒 Super Minds 1"},{id:"speakout-b1",label:"🗣️ Speakout B1"},{id:"speakout-b1plus",label:"🗣️ Speakout B1+"}];
+    /* Учебники, у которых есть страницы уроков вида slug-uN.html.
+       Раньше список был захардкожен тремя, и Solutions, Focus и Gateway
+       на уроке открыть было нельзя. */
+    const PAGED=["speakout-b1","speakout-b1plus","solutions-el","solutions-pi","focus-1","gateway-a1p"];
     const courseSel=document.getElementById("course");
     const unitSel=document.getElementById("unit");
-    COURSES.forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=c.label;courseSel.appendChild(o);});
     let course="sm", kind="trainer", unit="";
+
+    function buildCourses(){
+      const keep=courseSel.value;
+      courseSel.innerHTML="";
+      const meta={}; (window.SM_COURSES||[]).forEach(c=>{meta[c.id]=c;});
+      const add=(id,label)=>{const o=document.createElement("option");o.value=id;o.textContent=label;courseSel.appendChild(o);};
+      add("sm","🧒 Super Minds 1");
+      PAGED.forEach(id=>{
+        const m=meta[id]; if(!m && !(window.SM_COURSE_DATA||{})[id]) return;
+        add(id,((m&&m.emoji)||"📘")+" "+((m&&m.title)||id));
+      });
+      if(keep && [...courseSel.options].some(o=>o.value===keep)) courseSel.value=keep;
+    }
+
+    /* Номер юнита для адреса страницы: из "sel-u3" достаём 3 */
+    function unitNum(u,i){
+      const m=String(u.id||"").match(/u(\d+)$/);
+      if(m) return m[1];
+      const n=String(u.unit||"").match(/(\d+)/);
+      return n?n[1]:String(i);
+    }
+
     function buildUnits(){
       unitSel.innerHTML="";
       if(course==="sm"){
-        SM_UNITS.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=u.emoji+" "+u.unit+" · "+u.title;unitSel.appendChild(o);});
-        unit=SM_UNITS[0].id;
+        const list=window.SM_UNITS||[];
+        if(!list.length){ unit=""; return; }        /* курсы ещё грузятся — не падаем */
+        list.forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=(u.emoji||"📖")+" "+(u.unit||"")+" · "+u.title;unitSel.appendChild(o);});
+        unit=list[0].id;
+        return;
+      }
+      const src=(window.SM_COURSE_DATA||{})[course]||[];
+      if(src.length){
+        src.forEach((u,i)=>{const n=unitNum(u,i);const o=document.createElement("option");o.value=n;o.textContent=(u.unit||("Unit "+n))+" · "+u.title;unitSel.appendChild(o);});
+        unit=unitNum(src[0],0);
       } else {
         for(let n=1;n<=8;n++){const o=document.createElement("option");o.value=String(n);o.textContent="Unit "+n;unitSel.appendChild(o);}
         unit="1";
       }
     }
+
+    buildCourses();
     buildUnits();
+    /* Слова и юниты курсов приезжают после загрузки страницы — перестраиваем */
+    Promise.resolve(window.SM_ready).then(()=>{
+      try{ if(window.SM_absorbSpeakout) SM_absorbSpeakout(); }catch(e){}
+      try{ if(window.SM_absorbCourseWords) SM_absorbCourseWords(); }catch(e){}
+      buildCourses(); buildUnits(); try{ apply(false); }catch(e){}
+    }).catch(()=>{});
 
     function frameSrc(){ return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
