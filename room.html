@@ -95,7 +95,7 @@
       <span class="room" id="room"><span class="dot"></span><span id="roomTxt">…</span></span>
       <span class="who" id="whoTxt">…</span>
       <button class="tb" id="ctrlBtn">🎮 Управление</button>
-      <button class="tb" id="crdBtn" title="Доступ к самому компьютеру — через Chrome Remote Desktop">🖥 Экран ПК</button>
+      <button class="tb" id="crdBtn" title="Нужно редко: отдать управление своим компьютером. Просто показать экран можно кнопкой «Экран» в окне видео">🖥 Управление ПК</button>
       <button class="tb" id="vidBtn">📹 Видео</button>
       <button class="tb" id="panelBtn">⟨ Панель</button>
       <button id="invite">🔗 Позвать ученика</button>
@@ -131,7 +131,7 @@
   <div id="videoWrap">
     <div id="vidHead">
       <span class="ttl">📹 Видео</span>
-      <button id="vShare" title="Показать свой экран собеседнику">🖥 Экран</button>
+      <button id="vShare" title="Показать свой экран собеседнику прямо в звонке — без кодов и лишних программ">🖥 Экран</button>
       <button id="vMic" title="Микрофон">🎤</button>
       <button id="vCam" title="Камера">📷</button>
       <button id="vTile" title="Показать всех плиткой — себя видно всегда">⊞ Я</button>
@@ -144,15 +144,17 @@
       <button id="vidClose" title="Закрыть видео">×</button>
     </div>
     <div id="vidBody"><div id="vidGrip" title="Потяни, чтобы изменить размер"></div></div>
-    <div id="vidHint">В шапке окна видно, подключился ли второй. Себя видишь в углу — большое окно это собеседник; «⊞ Я» показывает обоих плиткой. Тяни за уголок ↘ или жми S · M · L. Если видео не открывается — кнопка «Открыть в новой вкладке».</div>
+    <div id="vidHint">«🖥 Экран» — показать свой экран прямо в звонке, никаких кодов. Браузер спросит, что показать: выбирай «Вкладка», если показываешь сайт или учебник. В шапке видно, подключился ли второй. Себя видишь в углу, большое окно — собеседник; «⊞ Я» показывает обоих плиткой.</div>
   </div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
   <div id="ask"></div>
   <div id="crd"><div class="box">
-    <h3>🖥 Доступ к самому компьютеру</h3>
-    <p>Внутри урока управление передаётся кнопкой «Управление» — этого хватает для упражнений и доски.
-       Если нужно показать что-то <b>вне сайта</b> (папку, программу, документ), браузер такого не умеет —
+    <h3>🖥 Управление чужим компьютером</h3>
+    <p><b>Просто показать экран — это не сюда.</b> Для показа есть кнопка «🖥 Экран» в окне видео:
+       нажал, выбрал что показать, собеседник видит. Никаких кодов и установок.</p>
+    <p>Эта страница нужна в редком случае: когда надо не показать, а <b>управлять</b> чужим
+       компьютером — нажимать за ученика в программе вне браузера. Браузер такого не умеет,
        нужна бесплатная программа Google.</p>
     <ol>
       <li>Тот, чей экран показываем, открывает ссылку ниже и жмёт «Поделиться экраном» → получает код из 12 цифр.</li>
@@ -350,6 +352,26 @@
     var vidPeers=0, vidPreferredDomain=null;
     /* Кто сейчас реально в звонке. Без этой строки не понять, подключился
        ли второй: своё превью легко принять за собеседника. */
+    /* показ экрана: разворачиваем окно на время показа и возвращаем обратно */
+    var vidSizeBeforeShare=null, vidSharingNow=false;
+    function vidPeerSharing(on){
+      if(on===vidSharingNow)return;
+      vidSharingNow=on;
+      if(on){
+        try{ vidSizeBeforeShare=localStorage.getItem("ewa-vid-size")||"m"; }catch(e){ vidSizeBeforeShare="m"; }
+        if(window.vidSetSize) vidSetSize("max",false);
+      } else if(window.vidRestoreSize){
+        window.vidRestoreSize();
+      }
+      vidShareHint(on,false);
+    }
+    function vidShareHint(on,mine){
+      var h=document.getElementById("vidHint"); if(!h)return;
+      if(on) h.textContent = mine
+        ? "Ты показываешь экран. Чтобы прекратить — нажми «🖥 Экран» ещё раз."
+        : "Собеседник показывает экран — окно развернулось. Вернуть размер: S · M · L.";
+      else h.textContent = h.dataset.def||h.textContent;
+    }
     function vidStatus(){
       var t=document.querySelector("#vidHead .ttl"); if(!t)return;
       t.textContent = vidPeers>0
@@ -427,6 +449,15 @@
           });
           jitsiApi.addListener("screenSharingStatusChanged",e=>{
             document.getElementById("vShare").classList.toggle("act",!!(e&&e.on));
+            vidShareHint(!!(e&&e.on),true);
+          });
+          /* Когда собеседник показывает экран, окно видео само разворачивается —
+             иначе на маленьком превью ничего не разобрать, а человек не
+             догадывается потянуть за уголок. Как показ закончился — возвращаем
+             прежний размер. */
+          jitsiApi.addListener("contentSharingParticipantsChanged",e=>{
+            const list=(e&&(e.data||e.participants||e.contentSharingParticipants))||[];
+            vidPeerSharing(list.length>0);
           });
           jitsiApi.addListener("audioMuteStatusChanged",e=>{
             document.getElementById("vMic").classList.toggle("off",!!(e&&e.muted));
@@ -733,6 +764,9 @@
     }
     window.addEventListener("resize",fitTop);
     setTimeout(fitTop,0); setTimeout(fitTop,400);
+
+    /* запомнили текст подсказки, чтобы вернуть его после показа экрана */
+    (function(){ var h=document.getElementById("vidHint"); if(h) h.dataset.def=h.textContent; })();
 
     if(ME==="s"){
       document.getElementById("invite").style.display="none";
