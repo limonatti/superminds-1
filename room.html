@@ -180,10 +180,12 @@
        const JITSI_DOMAIN = "meet.englishwithasya.ru";
        Больше менять нигде ничего не нужно.
        ============================================================ */
-    /* Первый в списке — свой сервер (без лимита по времени).
-       Второй — публичный, страховка: если у ученика провайдер или DNS
-       не пускает duckdns-домен, звонок всё равно состоится (5 минут). */
-    const JITSI_DOMAINS = ["asya-meet.duckdns.org","meet.jit.si"];
+    /* Первый в списке — свой сервер на своём домене (без лимита по времени).
+       Второй — тот же сервер по старому адресу duckdns, на случай сбоя DNS
+       у домена. Третий — публичный Jitsi, последняя страховка: если у
+       ученика сеть не пускает наши адреса, звонок всё равно состоится,
+       но публичный сервер обрывает встроенный звонок через 5 минут. */
+    const JITSI_DOMAINS = ["meet.english-with-asya.com","asya-meet.duckdns.org","meet.jit.si"];
     let JITSI_DOMAIN = JITSI_DOMAINS[0];
 
     /* Грузим external_api.js по очереди, пока какой-нибудь не отзовётся.
@@ -372,7 +374,7 @@
       vidClear();
       var d=document.createElement("div");
       d.style.cssText="color:#fff;padding:16px;font:700 13px Nunito,sans-serif;line-height:1.5";
-      d.innerHTML=t+'<br><a href="https://'+JITSI_DOMAINS[1]+'/ewa-lesson-'+encodeURIComponent(room)+
+      d.innerHTML=t+'<br><a href="https://'+JITSI_DOMAINS[JITSI_DOMAINS.length-1]+'/ewa-lesson-'+encodeURIComponent(room)+
         '" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:#7c2340;color:#fff;text-decoration:none;border-radius:999px;padding:9px 14px;font:800 12.5px Nunito,sans-serif">Открыть видео в новой вкладке ↗</a>';
       document.getElementById("vidBody").appendChild(d);
     }
