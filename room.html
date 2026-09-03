@@ -132,6 +132,7 @@
     <div id="vidHead">
       <span class="ttl">📹 Видео</span>
       <button id="vShare" title="Показать свой экран собеседнику прямо в звонке — без кодов и лишних программ">🖥 Экран</button>
+      <button id="vTab" title="Открыть звонок отдельной вкладкой во весь экран — там показ экрана работает всегда">↗ Во вкладку</button>
       <button id="vMic" title="Микрофон">🎤</button>
       <button id="vCam" title="Камера">📷</button>
       <button id="vTile" title="Показать всех плиткой — себя видно всегда">⊞ Я</button>
@@ -353,8 +354,9 @@
     /* Кто сейчас реально в звонке. Без этой строки не понять, подключился
        ли второй: своё превью легко принять за собеседника. */
     /* показ экрана: разворачиваем окно на время показа и возвращаем обратно */
-    var vidSizeBeforeShare=null, vidSharingNow=false;
+    var vidSizeBeforeShare=null, vidSharingNow=false, vidIShare=false;
     function vidPeerSharing(on){
+      if(vidIShare)return;              /* свой показ разворачивать не нужно */
       if(on===vidSharingNow)return;
       vidSharingNow=on;
       if(on){
@@ -368,9 +370,18 @@
     function vidShareHint(on,mine){
       var h=document.getElementById("vidHint"); if(!h)return;
       if(on) h.textContent = mine
-        ? "Ты показываешь экран. Чтобы прекратить — нажми «🖥 Экран» ещё раз."
+        ? "Ты показываешь экран — ученик его видит, тебе самой смотреть на него не нужно. Прекратить: «🖥 Экран» ещё раз."
         : "Собеседник показывает экран — окно развернулось. Вернуть размер: S · M · L.";
       else h.textContent = h.dataset.def||h.textContent;
+    }
+    /* Свой показ: окно ужимаем. Если оставить его большим, а показывать
+       вкладку с уроком, получается коридор из отражений и эхо. */
+    function vidMySharing(on){
+      vidIShare=on;
+      if(on){
+        try{ vidSizeBeforeShare=localStorage.getItem("ewa-vid-size")||"l"; }catch(e){ vidSizeBeforeShare="l"; }
+        if(window.vidSetSize) vidSetSize("s",false);
+      } else if(window.vidRestoreSize){ window.vidRestoreSize(); }
     }
     function vidStatus(){
       var t=document.querySelector("#vidHead .ttl"); if(!t)return;
@@ -448,8 +459,10 @@
             document.getElementById("vTile").classList.toggle("act",!!(e&&e.enabled));
           });
           jitsiApi.addListener("screenSharingStatusChanged",e=>{
-            document.getElementById("vShare").classList.toggle("act",!!(e&&e.on));
-            vidShareHint(!!(e&&e.on),true);
+            var mineOn=!!(e&&e.on);
+            document.getElementById("vShare").classList.toggle("act",mineOn);
+            vidShareHint(mineOn,true);
+            vidMySharing(mineOn);
           });
           /* Когда собеседник показывает экран, окно видео само разворачивается —
              иначе на маленьком превью ничего не разобрать, а человек не
@@ -517,8 +530,10 @@
       window.vidSetSize=setSize;
       /* вернуть сохранённый размер в момент показа окна */
       window.vidRestoreSize=function(){
-        var saved="m";
-        try{ saved=localStorage.getItem("ewa-vid-size")||"m"; }catch(e){}
+        /* по умолчанию просторное окно: в тесном Jitsi прячет панель с кнопкой
+           показа экрана, и человек её просто не находит */
+        var saved="l";
+        try{ saved=localStorage.getItem("ewa-vid-size")||"l"; }catch(e){}
         if(saved==="free"){
           var wh=["420","310"];
           try{ wh=(localStorage.getItem("ewa-vid-wh")||"420x310").split("x"); }catch(e){}
@@ -588,7 +603,30 @@
       if(!jitsiApi){ alert("Сначала включи видео кнопкой «📹 Видео»."); return; }
       try{ jitsiApi.executeCommand(cmd); }catch(e){ alert("Не получилось. Обнови страницу и попробуй снова."); }
     }
-    document.getElementById("vShare").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleShareScreen"); };
+    /* Показ экрана. Браузер выдаёт экран только по нажатию ВНУТРИ окна звонка:
+       команда, отправленная снаружи, не считается нажатием и молча ничего не
+       делает — из-за этого кнопка казалась сломанной. Поэтому: разворачиваем
+       окно, пробуем команду, и если через полторы секунды показ не начался —
+       прямо говорим, куда нажать, и предлагаем открыть звонок вкладкой. */
+    document.getElementById("vShare").onclick=function(e){
+      e.stopPropagation();
+      if(!jitsiApi){ alert("Сначала включи видео кнопкой «📹 Видео»."); return; }
+      try{ jitsiApi.executeCommand("toggleShareScreen"); }catch(err){}
+      setTimeout(function(){
+        if(document.getElementById("vShare").classList.contains("act"))return;
+        var h=document.getElementById("vidHint");
+        if(h) h.innerHTML='Браузер разрешает показ экрана только по нажатию внутри звонка: '+
+          'нажми кнопку с монитором 🖥 в тёмной панели внизу окна. '+
+          'Не находишь её — жми «↗ Во вкладку», там панель крупная и показ работает всегда.';
+      },1500);
+    };
+    document.getElementById("vTab").onclick=function(e){
+      e.stopPropagation();
+      /* встроенный звонок закрываем: иначе в комнате окажутся два «тебя» —
+         из окна и из вкладки, со звоном и эхом */
+      vidOpen(false);
+      window.open("https://"+JITSI_DOMAIN+"/ewa-lesson-"+encodeURIComponent(room),"_blank","noopener");
+    };
     document.getElementById("vMic").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleAudio"); };
     document.getElementById("vCam").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleVideo"); };
     document.getElementById("vTile").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleTileView"); };
