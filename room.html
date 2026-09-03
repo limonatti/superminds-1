@@ -214,9 +214,9 @@
       return jitsiReady;
     }
     loadJitsi().then(d=>{
-      /* учитель говорит ученику, на каком сервере встречаемся —
-         иначе один окажется на своём, другой на публичном */
-      if(ME==="t") setTimeout(()=>{ try{ sendOp({t:"vdom",d:d}); }catch(e){} },1200);
+      /* оба говорят друг другу, где смогли поднять видео — иначе один
+         окажется на своём сервере, другой на публичном, и они не встретятся */
+      setTimeout(()=>{ try{ sendOp({t:"vdom",d:d}); }catch(e){} },1200);
     }).catch(()=>{});
 
     const params=new URLSearchParams(location.search);
@@ -330,7 +330,7 @@
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
         if(payload.t==="state"){ if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;apply(false);}
-        else if(payload.t==="hello"){send({unit:unit,kind:kind}); if(ME==="t")sendOp({t:"ctrl",h:holder});}
+        else if(payload.t==="hello"){send({unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN});}}
         else onOp(payload);
       });
       channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
@@ -705,7 +705,12 @@
       else if(p.t==="nope"){ applyControl(); }
       else if(p.t==="vdom"){ /* встречаемся на том же сервере видео, что и партнёр */
         vidPreferredDomain=p.d;
-        if(!jitsiApi && typeof JitsiMeetExternalAPI==="undefined") loadJitsi(p.d).catch(()=>{});
+        if(typeof JitsiMeetExternalAPI==="undefined"){ loadJitsi(p.d).catch(()=>{}); }
+        else if(!jitsiApi){ JITSI_DOMAIN=p.d; }
+        else if(p.d!==JITSI_DOMAIN && ME==="t"){
+          /* у ученика заработал другой сервер — переезжаем к нему */
+          JITSI_DOMAIN=p.d; vidOpen(false); setTimeout(()=>vidOpen(true),400);
+        }
       }
       else if(p.t==="ptr"){ if(!iAmDriving()) drawPtr(p.x,p.y); }
       else if(p.t==="act"){ if(!iAmDriving()) replay(p); }
