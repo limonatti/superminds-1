@@ -36,36 +36,21 @@ if ! nginx -t; then
 fi
 systemctl reload nginx
 
-say "3/6 проверяю, что проверочный файл виден снаружи"
-mkdir -p "$WEBROOT/.well-known/acme-challenge"
-echo ok-$$ > "$WEBROOT/.well-known/acme-challenge/selftest"
-GOT="$(curl -s -m 15 -L "http://$NEW/.well-known/acme-challenge/selftest" || true)"
-rm -f "$WEBROOT/.well-known/acme-challenge/selftest"
-if [ "$GOT" != "ok-$$" ]; then
-  echo "!!! проверочный файл не отдаётся (ответ: ${GOT:-пусто})"
-  echo "    Значит nginx не обслуживает $NEW по http. Пришли этот вывод мне."
-  exit 1
-fi
-echo "видно снаружи — хорошо"
+say "3/6 выпускаю сертификат Let's Encrypt (standalone)"
+# У Jitsi в nginx нет location для /.well-known/acme-challenge/, поэтому
+# webroot-проверка отдаёт 404. Standalone поднимает свой сервер на порту 80,
+# для этого nginx останавливается на несколько секунд.
+apt-get install -y certbot >/dev/null 2>&1 || true
+systemctl stop nginx
+certbot certonly --standalone -d "$NEW" \
+  --non-interactive --agree-tos --register-unsafely-without-email --keep-until-expiring
+RC=$?
+systemctl start nginx
+CRT=/etc/letsencrypt/live/$NEW/fullchain.pem
+KEY=/etc/letsencrypt/live/$NEW/privkey.pem
+echo "certbot вернул код $RC"
 
-say "4/6 выпускаю сертификат Let's Encrypt"
-ACME="$(ls /opt/*/.acme.sh/acme.sh /opt/*/acme.sh/acme.sh /root/.acme.sh/acme.sh 2>/dev/null | head -1 || true)"
-CRT=/etc/jitsi/meet/$NEW.crt
-KEY=/etc/jitsi/meet/$NEW.key
-if [ -n "$ACME" ] && [ -x "$ACME" ]; then
-  echo "acme.sh: $ACME"
-  "$ACME" --issue -d "$NEW" -w "$WEBROOT" --server letsencrypt || true
-  "$ACME" --install-cert -d "$NEW" \
-      --key-file "$KEY" --fullchain-file "$CRT" \
-      --reloadcmd "systemctl force-reload nginx.service" || true
-else
-  echo "acme.sh не найден, беру certbot"
-  apt-get install -y certbot >/dev/null 2>&1 || true
-  certbot certonly --webroot -w "$WEBROOT" -d "$NEW" \
-    --non-interactive --agree-tos --register-unsafely-without-email --keep-until-expiring || true
-  CRT=/etc/letsencrypt/live/$NEW/fullchain.pem
-  KEY=/etc/letsencrypt/live/$NEW/privkey.pem
-fi
+say "4/6 проверяю, что сертификат на месте"
 if [ ! -s "$CRT" ] || [ ! -s "$KEY" ]; then
   echo "!!! сертификат не выпустился — пришли мне последние строки выше"
   exit 1
@@ -84,6 +69,13 @@ systemctl reload nginx
 say "6/6 перезапуск видеосервиса"
 systemctl restart jitsi-videobridge2 prosody jicofo 2>/dev/null || true
 
+sleep 3
+CODE="$(curl -s -o /dev/null -w '%{http_code}' -m 20 "https://$NEW/" || true)"
 echo ""
-echo "==================== ГОТОВО ===================="
-echo "Проверь https://$NEW — страница Jitsi без предупреждений."
+if [ "$CODE" = "200" ]; then
+  echo "==================== ГОТОВО ===================="
+  echo "https://$NEW отвечает 200 и сертификат принят."
+else
+  echo "Сертификат поставлен, но https отвечает: ${CODE:-нет ответа}"
+  echo "Пришли эту строку мне."
+fi
