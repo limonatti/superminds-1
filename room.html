@@ -144,7 +144,7 @@
       <button id="vidClose" title="Закрыть видео">×</button>
     </div>
     <div id="vidBody"><div id="vidGrip" title="Потяни, чтобы изменить размер"></div></div>
-    <div id="vidHint">Тяни за уголок ↘ или жми S · M · L. «Экран» — показать свой экран. Не видно себя — нажми «плитку» ⊞ в панели Jitsi или увеличь окно. Управление уроком — кнопка «🎮» в шапке.</div>
+    <div id="vidHint">В шапке окна видно, подключился ли второй. Себя видишь в углу — большое окно это собеседник; «⊞ Я» показывает обоих плиткой. Тяни за уголок ↘ или жми S · M · L. Если видео не открывается — кнопка «Открыть в новой вкладке».</div>
   </div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
@@ -180,13 +180,44 @@
        const JITSI_DOMAIN = "meet.englishwithasya.ru";
        Больше менять нигде ничего не нужно.
        ============================================================ */
-    const JITSI_DOMAIN = "asya-meet.duckdns.org";
-    (function(){
-      var s=document.createElement("script");
-      s.src="https://"+JITSI_DOMAIN+"/external_api.js"; s.async=true;
-      s.onerror=function(){ console.warn("Не загрузился external_api.js с "+JITSI_DOMAIN); };
-      document.head.appendChild(s);
-    })();
+    /* Первый в списке — свой сервер (без лимита по времени).
+       Второй — публичный, страховка: если у ученика провайдер или DNS
+       не пускает duckdns-домен, звонок всё равно состоится (5 минут). */
+    const JITSI_DOMAINS = ["asya-meet.duckdns.org","meet.jit.si"];
+    let JITSI_DOMAIN = JITSI_DOMAINS[0];
+
+    /* Грузим external_api.js по очереди, пока какой-нибудь не отзовётся.
+       Раньше скрипт грузился один раз молча: если он не приходил,
+       кнопка «Видео» вечно писала «ещё грузится» — ровно то, что
+       видел ученик. */
+    let jitsiReady=null;
+    function loadJitsi(preferred){
+      if(jitsiReady) return jitsiReady;
+      const list=[]; if(preferred) list.push(preferred);
+      JITSI_DOMAINS.forEach(d=>{ if(list.indexOf(d)<0) list.push(d); });
+      jitsiReady=new Promise((resolve,reject)=>{
+        (function next(i){
+          if(i>=list.length){ reject(new Error("no-video-server")); return; }
+          const d=list[i];
+          const s=document.createElement("script");
+          s.src="https://"+d+"/external_api.js"; s.async=true;
+          s.onload=()=>{
+            if(typeof JitsiMeetExternalAPI==="undefined"){ next(i+1); return; }
+            JITSI_DOMAIN=d; resolve(d);
+          };
+          s.onerror=()=>{ console.warn("Не загрузился external_api.js с "+d); next(i+1); };
+          document.head.appendChild(s);
+          /* сервер может «висеть» — не ждём его дольше 8 секунд */
+          setTimeout(()=>{ if(JITSI_DOMAIN!==d && typeof JitsiMeetExternalAPI==="undefined") next(i+1); },8000);
+        })(0);
+      });
+      return jitsiReady;
+    }
+    loadJitsi().then(d=>{
+      /* учитель говорит ученику, на каком сервере встречаемся —
+         иначе один окажется на своём, другой на публичном */
+      if(ME==="t") setTimeout(()=>{ try{ sendOp({t:"vdom",d:d}); }catch(e){} },1200);
+    }).catch(()=>{});
 
     const params=new URLSearchParams(location.search);
     const ME=params.get("s")?"s":"t";          // t — учитель (создал комнату), s — ученик (пришёл по ссылке)
@@ -314,6 +345,15 @@
 
     // Видеозвонок (Jitsi External API) — маленькое плавающее окно поверх доски
     var jitsiApi=null;
+    var vidPeers=0, vidPreferredDomain=null;
+    /* Кто сейчас реально в звонке. Без этой строки не понять, подключился
+       ли второй: своё превью легко принять за собеседника. */
+    function vidStatus(){
+      var t=document.querySelector("#vidHead .ttl"); if(!t)return;
+      t.textContent = vidPeers>0
+        ? "📹 Видео · "+(ME==="t"?"ученик":"учитель")+" в комнате"
+        : "📹 Видео · ждём "+(ME==="t"?"ученика":"учителя");
+    }
     /* чистим окно, но бережём уголок-ресайзер */
     function vidClear(){
       var body=document.getElementById("vidBody");
@@ -326,11 +366,31 @@
       d.textContent=t;
       document.getElementById("vidBody").appendChild(d);
     }
+    /* сообщение с кнопкой «открыть в новой вкладке» — работает даже когда
+       встроенное окно режется расширением или политикой браузера */
+    function vidFail(t){
+      vidClear();
+      var d=document.createElement("div");
+      d.style.cssText="color:#fff;padding:16px;font:700 13px Nunito,sans-serif;line-height:1.5";
+      d.innerHTML=t+'<br><a href="https://'+JITSI_DOMAINS[1]+'/ewa-lesson-'+encodeURIComponent(room)+
+        '" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:#7c2340;color:#fff;text-decoration:none;border-radius:999px;padding:9px 14px;font:800 12.5px Nunito,sans-serif">Открыть видео в новой вкладке ↗</a>';
+      document.getElementById("vidBody").appendChild(d);
+    }
+    let vidWanted=false;
     function vidOpen(on){
       var w=document.getElementById("videoWrap"),body=document.getElementById("vidBody"),b=document.getElementById("vidBtn");
       if(on){
         if(jitsiApi)return;
-        if(typeof JitsiMeetExternalAPI==="undefined"){ vidMsg("Видео ещё грузится, нажми ещё раз через секунду."); w.classList.add("on"); if(window.vidRestoreSize)window.vidRestoreSize(); return; }
+        vidWanted=true;
+        if(typeof JitsiMeetExternalAPI==="undefined"){
+          /* ждём сам загрузчик, а не просим человека жать ещё раз */
+          vidMsg("Подключаю видео…");
+          w.classList.add("on"); if(window.vidRestoreSize)window.vidRestoreSize();
+          b.textContent="📹 Скрыть видео";
+          loadJitsi(vidPreferredDomain).then(()=>{ if(vidWanted && !jitsiApi){ vidClear(); vidOpen(true); } })
+            .catch(()=>{ vidFail("Сервер видео недоступен из этой сети — скорее всего его блокирует провайдер или DNS."); });
+          return;
+        }
         try{
           jitsiApi=new JitsiMeetExternalAPI(JITSI_DOMAIN,{
             roomName:"ewa-lesson-"+room,
@@ -339,10 +399,11 @@
             configOverwrite:{
               prejoinPageEnabled:false, prejoinConfig:{enabled:false},
               startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true,
-              /* по умолчанию в звонке вдвоём Jitsi прячет твоё превью — возвращаем его */
-              disable1On1Mode:true,
+              /* Обычный режим «один-на-один»: собеседник большой, ты — в углу.
+                 Раньше стоял disable1On1Mode + принудительная плитка, и при
+                 одном участнике человек видел два своих окна — казалось,
+                 что звонишь сама себе. */
               disableSelfView:false,
-              filmstrip:{disableStageFilmstrip:true},
               /* короткий набор кнопок — иначе в маленьком окне всё уезжает в «…» */
               toolbarButtons:["microphone","camera","desktop","tileview","hangup"],
               disableResponsiveTiles:true
@@ -355,11 +416,10 @@
               MOBILE_APP_PROMO:false, DISABLE_VIDEO_BACKGROUND:true
             }
           });
-          /* плиточная раскладка сразу при входе: в ней своё окно видно всегда,
-             независимо от режима «один-на-один» */
-          jitsiApi.addListener("videoConferenceJoined",()=>{
-            setTimeout(()=>{ try{ jitsiApi.executeCommand("setTileView",true); }catch(e){} },800);
-          });
+          jitsiApi.addListener("videoConferenceJoined",()=>{ vidPeers=0; vidStatus(); });
+          jitsiApi.addListener("participantJoined",()=>{ vidPeers++; vidStatus(); });
+          jitsiApi.addListener("participantLeft",()=>{ vidPeers=Math.max(0,vidPeers-1); vidStatus(); });
+          jitsiApi.addListener("errorOccurred",e=>{ console.warn("Jitsi error",e); });
           jitsiApi.addListener("tileViewChanged",e=>{
             document.getElementById("vTile").classList.toggle("act",!!(e&&e.enabled));
           });
@@ -372,13 +432,19 @@
           jitsiApi.addListener("videoMuteStatusChanged",e=>{
             document.getElementById("vCam").classList.toggle("off",!!(e&&e.muted));
           });
-        }catch(e){ vidMsg("Не удалось открыть видео. Обнови страницу."); }
+          vidPeers=0; vidStatus();
+          /* учитель сообщает ученику рабочий сервер видео */
+          if(ME==="t") sendOp({t:"vdom",d:JITSI_DOMAIN});
+        }catch(e){ vidFail("Не удалось открыть встроенное видео."); }
         w.classList.add("on");
         if(window.vidRestoreSize)window.vidRestoreSize();
         b.textContent="📹 Скрыть видео";
       } else {
+        vidWanted=false;
         if(jitsiApi){try{jitsiApi.dispose();}catch(e){} jitsiApi=null;}
+        vidPeers=0;
         w.classList.remove("on"); vidClear(); b.textContent="📹 Видео";
+        var t=document.querySelector("#vidHead .ttl"); if(t)t.textContent="📹 Видео";
       }
     }
     document.getElementById("vidBtn").onclick=function(){ vidOpen(!document.getElementById("videoWrap").classList.contains("on")); };
@@ -637,6 +703,10 @@
       if(p.t==="ctrl"){ holder=p.h; applyControl(); }
       else if(p.t==="ask"){ if(iAmDriving()) showAsk(p.from); }
       else if(p.t==="nope"){ applyControl(); }
+      else if(p.t==="vdom"){ /* встречаемся на том же сервере видео, что и партнёр */
+        vidPreferredDomain=p.d;
+        if(!jitsiApi && typeof JitsiMeetExternalAPI==="undefined") loadJitsi(p.d).catch(()=>{});
+      }
       else if(p.t==="ptr"){ if(!iAmDriving()) drawPtr(p.x,p.y); }
       else if(p.t==="act"){ if(!iAmDriving()) replay(p); }
     }
