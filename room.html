@@ -51,6 +51,29 @@
      linear-gradient(135deg,transparent 0 46%,rgba(255,255,255,.75) 46% 54%,transparent 54% 70%,rgba(255,255,255,.75) 70% 78%,transparent 78%);z-index:5}
   #vidHint{color:#ffd27a;font:700 11px 'Nunito',sans-serif;padding:5px 9px;background:#5f1a31;line-height:1.45}
 
+  /* Нижняя панель как в зуме: одна плашка со всем управлением уроком,
+     всегда поверх — в том числе поверх демонстрации экрана. */
+  #zbar{display:none;position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:96;
+        background:rgba(28,19,16,.93);border-radius:18px;padding:9px 12px;gap:8px;align-items:center;
+        box-shadow:0 10px 30px rgba(0,0,0,.45)}
+  #zbar.on{display:flex}
+  #zbar button{background:rgba(255,255,255,.12);color:#fff;border:none;cursor:pointer;border-radius:12px;
+        padding:9px 13px;font:800 13px 'Nunito',sans-serif;display:flex;align-items:center;gap:6px;white-space:nowrap}
+  #zbar button:hover{background:rgba(255,255,255,.22)}
+  #zbar button.off{background:#7c2340}
+  #zbar button.act{background:#3f8f5c}
+  #zbar button.hang{background:#c0392b}
+  #zbar .sep{width:1px;height:26px;background:rgba(255,255,255,.18)}
+  #zbar .zlbl{color:#e0d5c2;font:800 12px 'Nunito',sans-serif;padding:0 4px;white-space:nowrap}
+  @media(max-width:820px){ #zbar button{padding:9px 10px;font-size:12px} #zbar .zlbl{display:none} }
+  /* стрелка-подсказка на родную кнопку показа внутри звонка */
+  #shareTip{display:none;position:fixed;z-index:97;background:#ffd27a;color:#241a18;border-radius:14px;
+        padding:12px 16px;font:800 13.5px 'Nunito',sans-serif;max-width:330px;line-height:1.45;
+        box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  #shareTip.on{display:block}
+  #shareTip button{margin-top:9px;background:#7c2340;color:#fff;border:none;border-radius:999px;
+        padding:7px 14px;font:800 12.5px 'Nunito',sans-serif;cursor:pointer}
+
   #main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
   #boardCol{flex:1.7;min-width:0;border-right:1px solid #e0d5c2}
   #boardCol iframe{width:100%;height:100%;border:none;display:block}
@@ -155,6 +178,18 @@
     <div id="vidBody"><div id="vidGrip" title="Потяни, чтобы изменить размер"></div></div>
     <div id="vidHint">«🖥 Экран» — показать свой экран прямо в звонке, никаких кодов. Браузер спросит, что показать: выбирай «Вкладка», если показываешь сайт или учебник. В шапке видно, подключился ли второй. Себя видишь в углу, большое окно — собеседник; «⊞ Я» показывает обоих плиткой.</div>
   </div>
+  <div id="zbar">
+    <span class="zlbl" id="zWho">…</span>
+    <button id="zMic" title="Микрофон">🎤 <span>Микрофон</span></button>
+    <button id="zCam" title="Камера">📷 <span>Камера</span></button>
+    <div class="sep"></div>
+    <button id="zShare" title="Показать свой экран ученику">🖥 <span>Демонстрация</span></button>
+    <button id="zCtrl" title="Отдать ученику управление уроком">🎮 <span>Управление</span></button>
+    <div class="sep"></div>
+    <button id="zBig" title="Развернуть окно звонка">⛶</button>
+    <button id="zHang" class="hang" title="Завершить звонок">📞</button>
+  </div>
+  <div id="shareTip"></div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
   <div id="ask"></div>
@@ -387,6 +422,7 @@
         if(window.vidRestoreSize) window.vidRestoreSize();
       }
       vidShareHint(on,false);
+      try{ zbarSync(); }catch(e){}
     }
     function vidShareHint(on,mine){
       var h=document.getElementById("vidHint"); if(!h)return;
@@ -411,6 +447,7 @@
     }
     function vidStatus(){
       var t=document.querySelector("#vidHead .ttl"); if(!t)return;
+      try{ zbarSync(); }catch(e){}
       t.textContent = (vidPeers>0
         ? "📹 Видео · "+(ME==="t"?"ученик":"учитель")+" в комнате"
         : "📹 Видео · ждём "+(ME==="t"?"ученика":"учителя"))
@@ -516,11 +553,12 @@
         w.classList.add("on");
         if(window.vidRestoreSize)window.vidRestoreSize();
         b.textContent="📹 Скрыть видео";
+        zbarShow(true); zbarSync();
       } else {
         vidWanted=false;
         if(jitsiApi){try{jitsiApi.dispose();}catch(e){} jitsiApi=null;}
         vidPeers=0;
-        w.classList.remove("on"); vidClear(); b.textContent="📹 Видео";
+        w.classList.remove("on"); w.classList.remove("pip","stage"); vidClear(); b.textContent="📹 Видео"; zbarShow(false);
         var t=document.querySelector("#vidHead .ttl"); if(t)t.textContent="📹 Видео";
       }
     }
@@ -645,11 +683,51 @@
       try{ jitsiApi.executeCommand("toggleShareScreen"); }catch(err){}
       setTimeout(function(){
         if(document.getElementById("vShare").classList.contains("act"))return;
-        var h=document.getElementById("vidHint");
-        if(h) h.innerHTML='Браузер разрешает показ экрана только по нажатию внутри звонка: '+
-          'нажми кнопку с монитором 🖥 в тёмной панели внизу окна звонка.';
+        shareTip(true);
       },1500);
     };
+    /* ---------- Нижняя панель, как в зуме ---------- */
+    function zbarShow(on){ document.getElementById("zbar").classList.toggle("on",!!on); }
+    function zbarSync(){
+      var w=document.getElementById("videoWrap");
+      document.getElementById("zMic").classList.toggle("off",document.getElementById("vMic").classList.contains("off"));
+      document.getElementById("zCam").classList.toggle("off",document.getElementById("vCam").classList.contains("off"));
+      document.getElementById("zShare").classList.toggle("act",vidIShare);
+      document.getElementById("zCtrl").classList.toggle("act",holder===ME);
+      document.getElementById("zWho").textContent = vidPeers>0
+        ? (ME==="t"?"ученик на связи":"учитель на связи")
+        : "ждём "+(ME==="t"?"ученика":"учителя");
+      document.getElementById("zBig").textContent = w.classList.contains("stage")||w.classList.contains("max") ? "⤢" : "⛶";
+    }
+    document.getElementById("zMic").onclick=function(){ jitsiCmd("toggleAudio"); setTimeout(zbarSync,300); };
+    document.getElementById("zCam").onclick=function(){ jitsiCmd("toggleVideo"); setTimeout(zbarSync,300); };
+    document.getElementById("zHang").onclick=function(){ vidOpen(false); zbarShow(false); };
+    document.getElementById("zBig").onclick=function(){
+      var w=document.getElementById("videoWrap");
+      if(w.classList.contains("stage")){ w.classList.remove("stage"); if(window.vidRestoreSize)vidRestoreSize(); }
+      else { w.classList.remove("pip"); w.classList.add("stage"); }
+      zbarSync();
+    };
+    document.getElementById("zCtrl").onclick=function(){ $ctrlBtn.click(); setTimeout(zbarSync,200); };
+    document.getElementById("zShare").onclick=function(){ document.getElementById("vShare").click(); };
+
+    /* Подсказка со стрелкой: браузер запускает показ экрана только по нажатию
+       внутри окна звонка, поэтому если наша команда не сработала — разворачиваем
+       звонок и прямо показываем, куда жать. */
+    function shareTip(on){
+      var t=document.getElementById("shareTip");
+      if(!on){ t.classList.remove("on"); return; }
+      var w=document.getElementById("videoWrap");
+      w.classList.remove("pip"); w.classList.add("stage");
+      t.innerHTML="Нажми кнопку с монитором 🖥 в тёмной панели внизу окна звонка — "+
+        "браузер разрешает показ экрана только оттуда.<br>Там же поставь галочку "+
+        "«Поделиться звуком», если показываешь видео.<br><button id='tipOk'>Понятно</button>";
+      t.style.left="50%"; t.style.transform="translateX(-50%)"; t.style.bottom="92px"; t.style.top="auto";
+      t.classList.add("on");
+      document.getElementById("tipOk").onclick=function(){ t.classList.remove("on"); };
+      setTimeout(function(){ t.classList.remove("on"); },12000);
+    }
+
     document.getElementById("vMic").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleAudio"); };
     document.getElementById("vCam").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleVideo"); };
     document.getElementById("vTile").onclick=function(e){ e.stopPropagation(); jitsiCmd("toggleTileView"); };
@@ -702,6 +780,7 @@
       const ab=document.getElementById("askBtn");
       if(ab) ab.onclick=()=>{ sendOp({t:"ask",from:ME}); ab.textContent="Запрос отправлен…"; ab.disabled=true; };
       if(mine){ $ptr.classList.remove("on"); }
+      try{ zbarSync(); }catch(e){}
     }
 
     function setHolder(h,broadcast){ holder=h; applyControl(); if(broadcast) sendOp({t:"ctrl",h:h}); }
