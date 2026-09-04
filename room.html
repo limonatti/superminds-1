@@ -444,6 +444,7 @@
         w.classList.remove("pip");
         if(window.vidRestoreSize) window.vidRestoreSize();
       }
+      try{ zbarSync(); }catch(e){}
     }
     function vidStatus(){
       var t=document.querySelector("#vidHead .ttl"); if(!t)return;
