@@ -166,6 +166,12 @@ window.SM_HANDLES_COURSE = true;
     function lvl(id){ return (progress[id] && progress[id].level) || 0; }
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function speak(t){ if(window.SM_speak)return SM_speak(t); try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){} }
+    /* На уроке тренажёр открыт внутри комнаты, и автоматическая озвучка
+       каждой новой карточки звучит «сама по себе», перебивая учителя.
+       Внутри комнаты озвучиваем только по кнопке 🔊, отдельная страница
+       тренажёра работает как раньше. */
+    const AUTO_SPEAK = (window.self===window.top);
+    function speakAuto(t){ if(AUTO_SPEAK) speak(t); }
 
     function beep(ok){ SMP.sfx(ok?"ok":"no"); }
 
@@ -300,7 +306,7 @@ window.SM_HANDLES_COURSE = true;
         '<button class="speak" id="spk">🔊 послушать</button><div class="ru" id="ru" style="display:none;margin-top:8px">'+esc(w.ru)+'</div>'+
         '<div class="prompt" id="ph">нажми на карточку, чтобы увидеть перевод</div></div>'+
         '<div class="fc-btns" id="fb" style="display:none"><button class="no" id="bno">❌ Ещё учу</button><button class="yes" id="byes">✅ Знаю</button></div>';
-      speak(w.en); let flipped=false;
+      speakAuto(w.en); let flipped=false;
       document.getElementById("spk").onclick=e=>{e.stopPropagation();speak(w.en);};
       document.getElementById("fc").onclick=()=>{if(flipped)return;flipped=true;document.getElementById("ru").style.display="block";document.getElementById("ph").style.display="none";document.getElementById("fb").style.display="flex";};
       document.getElementById("bno").onclick=()=>{record(w,false);nextRound();};
@@ -311,7 +317,7 @@ window.SM_HANDLES_COURSE = true;
       const head=dir==="toEn"?'<div class="emoji">'+SM_face(w,92)+'</div><div class="ru">'+esc(w.ru)+'</div><div class="prompt">выбери английское слово</div>'
         :'<div class="emoji">'+SM_face(w,92)+'</div><div class="word">'+esc(w.en)+'</div><button class="speak" id="spk">🔊</button><div class="prompt">выбери перевод</div>';
       stage.innerHTML='<div class="card">'+head+'</div><div class="opts" id="opts"></div>';
-      if(dir==="toRu"){speak(w.en);const s=document.getElementById("spk");if(s)s.onclick=()=>speak(w.en);}
+      if(dir==="toRu"){speakAuto(w.en);const s=document.getElementById("spk");if(s)s.onclick=()=>speak(w.en);}
       const box=document.getElementById("opts");
       opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=dir==="toEn"?o.en:o.ru;
         b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent===(dir==="toEn"?w.en:w.ru));
@@ -321,7 +327,7 @@ window.SM_HANDLES_COURSE = true;
     function renderListen(w){
       const stage=document.getElementById("stage"); const opts=shuffle([w,...distractors(w,3)]);
       stage.innerHTML='<div class="card"><button class="bigspeak" id="big">🔊</button><div class="prompt">послушай и выбери картинку</div></div><div class="opts" id="opts"></div>';
-      speak(w.en); document.getElementById("big").onclick=()=>speak(w.en);
+      speakAuto(w.en); document.getElementById("big").onclick=()=>speak(w.en);
       const box=document.getElementById("opts");
       opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.innerHTML='<span class="oem">'+SM_face(o,64)+'</span>'+esc(o.en);
         b.onclick=()=>{if(busy)return;busy=true;const ok=o.id===w.id;const cb=[...box.children].find(c=>c.textContent.includes(w.en));
@@ -332,7 +338,7 @@ window.SM_HANDLES_COURSE = true;
       const stage=document.getElementById("stage");
       stage.innerHTML='<div class="card"><div class="emoji">'+SM_face(w,92)+'</div><div class="ru">'+esc(w.ru)+'</div><button class="speak" id="spk">🔊 послушать</button><div class="prompt">напиши слово по-английски</div></div>'+
         '<div class="field"><input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type here…"><button class="check" id="chk">OK</button></div><button class="next" id="next">дальше →</button>';
-      speak(w.en); document.getElementById("spk").onclick=()=>speak(w.en);
+      speakAuto(w.en); document.getElementById("spk").onclick=()=>speak(w.en);
       const inp=document.getElementById("inp"); inp.focus();
       function submit(){ if(busy)return;busy=true;const val=inp.value.trim().toLowerCase();const ok=val===w.en.toLowerCase();
         inp.style.borderColor=ok?"#7cb342":"#7c2340";inp.style.background=ok?"#dff0d2":"#fbeae4";if(!ok)inp.value=w.en;
