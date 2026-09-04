@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <title>Комната урока · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -190,6 +191,10 @@
        недоступны, честно скажем об этом, а не утащим урок на публичный. */
     const JITSI_DOMAINS = ["meet.english-with-asya.com","asya-meet.duckdns.org"];
     const JITSI_PUBLIC = "meet.jit.si";   /* только вручную, ссылкой в сообщении об ошибке */
+    /* Версия комнаты. Учитель сообщает её ученику: если у того в браузере
+       лежит вчерашняя страница из кеша, он увидит просьбу обновиться —
+       иначе они молча оказываются на разных серверах и не видят друг друга. */
+    const BUILD = "2026-09-04-a";
     let JITSI_DOMAIN = JITSI_DOMAINS[0];
 
     /* Грузим external_api.js по очереди, пока какой-нибудь не отзовётся.
@@ -338,7 +343,7 @@
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
         if(payload.t==="state"){ if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;apply(false);}
-        else if(payload.t==="hello"){send({unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN});}}
+        else if(payload.t==="hello"){send({unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
         else onOp(payload);
       });
       channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
@@ -346,7 +351,11 @@
     function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",course:s.course,unit:s.unit,kind:s.kind}});}catch(e){}} }
 
     document.getElementById("invite").onclick=()=>{
-      const url=location.origin+location.pathname+"?room="+room+"&s=1";
+      /* метка времени в ссылке: у браузера ученика не остаётся шанса открыть
+         вчерашнюю версию страницы из кеша — а именно из-за этого урок уезжал
+         на публичный сервер со входом «Я организатор» и лимитом 5 минут */
+      const stamp=new Date().toISOString().slice(0,13).replace(/[-T]/g,"");
+      const url=location.origin+location.pathname+"?room="+room+"&s=1&v="+stamp;
       if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на урок скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));
       else prompt("Скопируй ссылку:",url);
     };
@@ -782,6 +791,14 @@
       if(p.t==="ctrl"){ holder=p.h; applyControl(); }
       else if(p.t==="ask"){ if(iAmDriving()) showAsk(p.from); }
       else if(p.t==="nope"){ applyControl(); }
+      else if(p.t==="ver"){
+        if(p.b && p.b!==BUILD && ME==="s"){
+          $ask.innerHTML="⚠️ У тебя открыта старая версия страницы урока."+
+            '<button class="yes" id="verGo">Обновить</button>';
+          $ask.classList.add("on");
+          document.getElementById("verGo").onclick=()=>location.reload(true);
+        }
+      }
       else if(p.t==="vdom"){ /* встречаемся на том же сервере видео, что и партнёр */
         vidPreferredDomain=p.d;
         if(typeof JitsiMeetExternalAPI==="undefined"){ loadJitsi(p.d).catch(()=>{}); }
