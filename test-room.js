@@ -3,7 +3,16 @@
    учителя и ученика.  Запуск:  node test-room.js   (из папки проекта)     */
 const fs = require("fs");
 const path = require("path");
-const { JSDOM, VirtualConsole } = require("/tmp/node_modules/jsdom");
+/* jsdom ищем где придётся: рядом, глобально или во временной папке.
+   Нет — подскажем, как поставить, и выйдем без шума. */
+let JSDOM, VirtualConsole;
+for (const p of ["jsdom", "/tmp/node_modules/jsdom", "/usr/lib/node_modules/jsdom"]) {
+  try { ({ JSDOM, VirtualConsole } = require(p)); break; } catch (e) {}
+}
+if (!JSDOM) {
+  console.log("Нужен jsdom. Поставь один раз:  npm install -g jsdom\nи запусти снова:  node test-room.js");
+  process.exit(0);
+}
 
 const html = fs.readFileSync(path.join(__dirname, "room.html"), "utf8");
 let fails = 0, checks = 0;
@@ -82,6 +91,27 @@ function run(role, title) {
   ok("кнопка ⛶ разворачивает", $("videoWrap").classList.contains("stage"));
   $("zBig").click();
   ok("повторное нажатие возвращает", !$("videoWrap").classList.contains("stage"));
+
+  /* новые возможности: рука, кадр, запись, зал ожидания */
+  ok("кнопка «поднять руку» есть", !!$("zHand"));
+  if (role === "t") {
+    ok("у учителя есть кадр, запись и замок",
+       $("zShot").style.display !== "none" && $("zRec").style.display !== "none" && $("zLock").style.display !== "none");
+    ok("зал ожидания включён по умолчанию", $("zLock").classList.contains("act"));
+    $("zLock").click();
+    ok("замок выключается", !$("zLock").classList.contains("act"));
+    $("zLock").click();
+    ok("и включается обратно", $("zLock").classList.contains("act"));
+    /* стук в дверь */
+    w.__fire("knockingParticipant", { participant: { id: "k1", name: "Маша" } });
+    ok("стук показывает запрос с именем", $("ask").classList.contains("on") && /Маша/.test($("ask").textContent));
+    $("knYes").click();
+    ok("после ответа запрос закрылся", !$("ask").classList.contains("on"));
+  } else {
+    ok("у ученика нет кадра, записи и замка",
+       $("zShot").style.display === "none" && $("zRec").style.display === "none" && $("zLock").style.display === "none");
+    ok("значок записи скрыт, пока не пишут", !$("recBadge").classList.contains("on"));
+  }
 
   /* завершение звонка */
   $("zHang").click();

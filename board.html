@@ -886,7 +886,26 @@
       if(e.data.type==="sm-add"&&e.data.unit) addCurrentWords(e.data.unit);
       else if(e.data.type==="sm-add-current") addCurrentWords(sel.value);
       else if(e.data.type==="sm-set"&&e.data.val){ if([...sel.options].some(o=>o.value===e.data.val)) sel.value=e.data.val; }
+      /* кадр экрана из комнаты урока — кладём картинкой в центр доски */
+      else if(e.data.type==="sm-add-img"&&e.data.src) addShot(e.data.src);
     });
+    /* Кадр приходит готовой картинкой: грузим её в хранилище, как обычное
+       фото, чтобы доска не разбухала, а при недоступности — прямо в доску. */
+    function addShot(dataUrl){
+      const im=new Image();
+      im.onload=async()=>{
+        const r=stage.getBoundingClientRect();
+        const base=toWorld(r.left+r.width/2,r.top+r.height/2);
+        const k=Math.min(1,620/Math.max(im.width,im.height));
+        const box={x:base.x-im.width*k/2,y:base.y-im.height*k/2,w:Math.round(im.width*k),h:Math.round(im.height*k)};
+        saveLbl.textContent="кладу кадр…";
+        const url=await uploadPic(dataUrl);
+        snapshot();
+        addImg(genId(),Object.assign({src:url||dataUrl},box),false);
+        saveLbl.textContent="сохранено";
+      };
+      im.src=dataUrl;
+    }
 
     document.getElementById("clear").onclick=()=>{ if(confirm("Очистить всю доску?")){ snapshot(); doClear(); send({t:"clr"}); } };
     function doClear(){ Object.keys(objs).forEach(removeObj); }

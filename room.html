@@ -6,6 +6,10 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <title>Комната урока · English with Asya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- соединение с видеосервером начинаем сразу, не дожидаясь кнопки: экономит
+     секунды на DNS и рукопожатии, особенно на мобильном интернете -->
+<link rel="preconnect" href="https://meet.english-with-asya.com" crossorigin>
+<link rel="dns-prefetch" href="https://meet.english-with-asya.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
@@ -71,6 +75,11 @@
         padding:12px 16px;font:800 13.5px 'Nunito',sans-serif;max-width:330px;line-height:1.45;
         box-shadow:0 10px 30px rgba(0,0,0,.4)}
   #shareTip.on{display:block}
+  /* ученик всегда видит, что урок записывают */
+  #recBadge{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);z-index:97;
+        background:#c0392b;color:#fff;border-radius:999px;padding:7px 15px;font:800 12.5px 'Nunito',sans-serif;
+        box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  #recBadge.on{display:block}
   #shareTip button{margin-top:9px;background:#7c2340;color:#fff;border:none;border-radius:999px;
         padding:7px 14px;font:800 12.5px 'Nunito',sans-serif;cursor:pointer}
 
@@ -185,11 +194,16 @@
     <div class="sep"></div>
     <button id="zShare" title="Показать свой экран ученику">🖥 <span>Демонстрация</span></button>
     <button id="zCtrl" title="Отдать ученику управление уроком">🎮 <span>Управление</span></button>
+    <button id="zHand" title="Поднять руку">✋</button>
+    <button id="zShot" title="Снять кадр экрана и положить на доску">📸</button>
+    <button id="zRec" title="Записать урок в файл на твой компьютер">⏺</button>
+    <button id="zLock" title="Зал ожидания: посторонний не войдёт без твоего разрешения">🔒</button>
     <div class="sep"></div>
     <button id="zBig" title="Развернуть окно звонка">⛶</button>
     <button id="zHang" class="hang" title="Завершить звонок">📞</button>
   </div>
   <div id="shareTip"></div>
+  <div id="recBadge">● идёт запись урока</div>
   <button id="panelShow">⟩ Показать панель</button>
   <div id="ptr" data-n=""></div>
   <div id="ask"></div>
@@ -268,7 +282,20 @@
       });
       return jitsiReady;
     }
+    /* Самый тяжёлый файл Jitsi — бандл на 3,4 МБ. Начинаем тянуть его в фоне
+       сразу при открытии комнаты, пока человек читает задание: к моменту
+       нажатия «Видео» он уже в кеше браузера, и звонок открывается сразу. */
+    function warmUpJitsi(d){
+      try{
+        const l=document.createElement("link");
+        l.rel="prefetch"; l.as="script"; l.crossOrigin="anonymous";
+        l.href="https://"+d+"/libs/app.bundle.min.js";
+        document.head.appendChild(l);
+      }catch(e){}
+    }
+
     loadJitsi().then(d=>{
+      warmUpJitsi(d);
       /* оба говорят друг другу, где смогли поднять видео — иначе один
          окажется на своём сервере, другой на публичном, и они не встретятся */
       setTimeout(()=>{ try{ sendOp({t:"vdom",d:d}); }catch(e){} },1200);
@@ -407,6 +434,92 @@
     var vidPeers=0, vidPreferredDomain=null;
     /* Кто сейчас реально в звонке. Без этой строки не понять, подключился
        ли второй: своё превью легко принять за собеседника. */
+    /* ---------- Запись урока ----------
+       Пишем на стороне учителя средствами браузера: он выбирает, что писать
+       (обычно «Весь экран» со звуком), файл падает к нему на компьютер.
+       Серверу для этого ничего не нужно, но ученика предупреждаем всегда. */
+    var recorder=null, recChunks=[], recStream=null, recStart=0;
+    function recSupported(){ return !!(navigator.mediaDevices&&navigator.mediaDevices.getDisplayMedia&&window.MediaRecorder); }
+    async function recToggle(){
+      if(recorder){ try{ recorder.stop(); }catch(e){} return; }
+      if(!recSupported()){ alert("Этот браузер не умеет записывать экран. Нужен Chrome на компьютере."); return; }
+      if(!confirm("Записать урок?\n\nСейчас браузер спросит, что записывать — выбери «Весь экран» и поставь галочку «Поделиться звуком».\nУченик увидит предупреждение о записи."))return;
+      try{
+        recStream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:15},audio:true});
+      }catch(e){ return; }                     /* человек передумал — молчим */
+      /* подмешиваем свой микрофон, иначе на записи не будет учителя */
+      let mixed=recStream;
+      try{
+        const mic=await navigator.mediaDevices.getUserMedia({audio:true});
+        const ctx=new (window.AudioContext||window.webkitAudioContext)();
+        const dest=ctx.createMediaStreamDestination();
+        if(recStream.getAudioTracks().length) ctx.createMediaStreamSource(recStream).connect(dest);
+        ctx.createMediaStreamSource(mic).connect(dest);
+        mixed=new MediaStream([...recStream.getVideoTracks(),...dest.stream.getAudioTracks()]);
+      }catch(e){}
+      recChunks=[];
+      try{ recorder=new MediaRecorder(mixed,{mimeType:"video/webm"}); }
+      catch(e){ recorder=new MediaRecorder(mixed); }
+      recorder.ondataavailable=ev=>{ if(ev.data&&ev.data.size) recChunks.push(ev.data); };
+      recorder.onstop=()=>{
+        try{ recStream.getTracks().forEach(t=>t.stop()); }catch(e){}
+        const blob=new Blob(recChunks,{type:"video/webm"});
+        const a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download="urok-"+room+"-"+new Date().toISOString().slice(0,16).replace(/[:T]/g,"-")+".webm";
+        a.click();
+        setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+        recorder=null; sendOp({t:"rec",on:false}); zbarSync();
+      };
+      recorder.start(1000);
+      recStart=Date.now();
+      /* если человек остановил показ кнопкой браузера — запись тоже кончается */
+      try{ recStream.getVideoTracks()[0].onended=()=>{ if(recorder){ try{recorder.stop();}catch(e){} } }; }catch(e){}
+      sendOp({t:"rec",on:true});
+      zbarSync();
+    }
+
+    /* ---------- Кадр демонстрации на доску ----------
+       Берём один кадр экрана и кладём картинкой на доску — дальше по нему
+       можно рисовать и подписывать вместе с учеником. */
+    async function shotToBoard(){
+      if(!(navigator.mediaDevices&&navigator.mediaDevices.getDisplayMedia)){ alert("Нужен Chrome на компьютере."); return; }
+      let st=null;
+      try{ st=await navigator.mediaDevices.getDisplayMedia({video:true}); }catch(e){ return; }
+      try{
+        const v=document.createElement("video");
+        v.srcObject=st; v.muted=true; await v.play();
+        await new Promise(r=>setTimeout(r,400));      /* даём кадру прийти */
+        const cv=document.createElement("canvas");
+        const W=Math.min(v.videoWidth||1280,1600);
+        cv.width=W; cv.height=Math.round((v.videoHeight||720)*W/(v.videoWidth||1280));
+        cv.getContext("2d").drawImage(v,0,0,cv.width,cv.height);
+        const src=cv.toDataURL("image/jpeg",.85);
+        document.getElementById("board").contentWindow.postMessage({type:"sm-add-img",src:src},location.origin);
+      }catch(e){ alert("Не получилось снять кадр."); }
+      try{ st.getTracks().forEach(t=>t.stop()); }catch(e){}
+    }
+
+    /* ---------- Зал ожидания ---------- */
+    var lobbyWanted=true, lobbyOn=false;
+    try{ lobbyWanted = localStorage.getItem("ewa-lobby")!=="0"; }catch(e){}
+    function lobbyToggle(){
+      lobbyWanted=!lobbyWanted;
+      try{ localStorage.setItem("ewa-lobby",lobbyWanted?"1":"0"); }catch(e){}
+      if(jitsiApi){ try{ jitsiApi.executeCommand("toggleLobby",lobbyWanted); lobbyOn=lobbyWanted; }catch(e){} }
+      zbarSync();
+    }
+    /* Кто-то стучится: спрашиваем разрешение, а не впускаем молча. */
+    function askKnock(id,name){
+      $ask.innerHTML="🔔 <b>"+String(name).slice(0,40)+"</b> просится в урок"+
+        '<button class="yes" id="knYes">Впустить</button><button class="no" id="knNo">Не сейчас</button>';
+      $ask.classList.add("on");
+      document.getElementById("knYes").onclick=()=>{ $ask.classList.remove("on");
+        try{ jitsiApi.executeCommand("answerKnockingParticipant",id,true); }catch(e){} };
+      document.getElementById("knNo").onclick=()=>{ $ask.classList.remove("on");
+        try{ jitsiApi.executeCommand("answerKnockingParticipant",id,false); }catch(e){} };
+    }
+
     /* показ экрана: разворачиваем окно на время показа и возвращаем обратно */
     var vidSizeBeforeShare=null, vidSharingNow=false, vidIShare=false;
     function vidPeerSharing(on){
@@ -502,6 +615,8 @@
             userInfo:{displayName:(ME==="t"?"Учитель":"Ученик")},
             configOverwrite:{
               prejoinPageEnabled:false, prejoinConfig:{enabled:false},
+              /* шумоподавление сразу: на уроке всегда есть фон — улица, семья */
+              noiseSuppression:{enabled:true},
               startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true,
               /* Обычный режим «один-на-один»: собеседник большой, ты — в углу.
                  Раньше стоял disable1On1Mode + принудительная плитка, и при
@@ -509,18 +624,29 @@
                  что звонишь сама себе. */
               disableSelfView:false,
               /* короткий набор кнопок — иначе в маленьком окне всё уезжает в «…» */
-              toolbarButtons:["microphone","camera","desktop","tileview","hangup"],
+              toolbarButtons:["microphone","camera","desktop","raisehand","select-background","tileview","hangup"],
               disableResponsiveTiles:true
             },
             interfaceConfigOverwrite:{
               TOOLBAR_ALWAYS_VISIBLE:true,
-              TOOLBAR_BUTTONS:["microphone","camera","desktop","tileview","hangup"],
+              TOOLBAR_BUTTONS:["microphone","camera","desktop","raisehand","select-background","tileview","hangup"],
               VERTICAL_FILMSTRIP:false, filmStripOnly:false,
               SHOW_JITSI_WATERMARK:false, SHOW_WATERMARK_FOR_GUESTS:false,
               MOBILE_APP_PROMO:false, DISABLE_VIDEO_BACKGROUND:true
             }
           });
-          jitsiApi.addListener("videoConferenceJoined",()=>{ vidPeers=0; vidStatus(); });
+          jitsiApi.addListener("videoConferenceJoined",()=>{
+            vidPeers=0; vidStatus();
+            /* Зал ожидания включает только учитель и только если он вошёл
+               первым: тогда он и есть модератор. Посторонний, знающий адрес,
+               внутрь уже не попадёт — постучится и будет ждать. */
+            if(ME==="t" && lobbyWanted) setTimeout(()=>{ try{ jitsiApi.executeCommand("toggleLobby",true); lobbyOn=true; zbarSync(); }catch(e){} },1500);
+          });
+          /* кто-то стучится в урок */
+          jitsiApi.addListener("knockingParticipant",e=>{
+            const p=(e&&(e.participant||e))||{};
+            askKnock(p.id||p.participantId, p.name||p.displayName||"Кто-то");
+          });
           jitsiApi.addListener("participantJoined",()=>{ vidPeers++; vidStatus(); });
           jitsiApi.addListener("participantLeft",()=>{ vidPeers=Math.max(0,vidPeers-1); vidStatus(); });
           jitsiApi.addListener("errorOccurred",e=>{ console.warn("Jitsi error",e); });
@@ -699,6 +825,11 @@
         ? (ME==="t"?"ученик на связи":"учитель на связи")
         : "ждём "+(ME==="t"?"ученика":"учителя");
       document.getElementById("zBig").textContent = w.classList.contains("stage")||w.classList.contains("max") ? "⤢" : "⛶";
+      document.getElementById("zRec").classList.toggle("off",!!recorder);
+      document.getElementById("zRec").textContent = recorder ? "⏹" : "⏺";
+      document.getElementById("zLock").classList.toggle("act",!!lobbyWanted);
+      /* ученику эти кнопки ни к чему — урок ведёт учитель */
+      ["zShot","zRec","zLock"].forEach(function(id){ document.getElementById(id).style.display = (ME==="t"?"":"none"); });
     }
     document.getElementById("zMic").onclick=function(){ jitsiCmd("toggleAudio"); setTimeout(zbarSync,300); };
     document.getElementById("zCam").onclick=function(){ jitsiCmd("toggleVideo"); setTimeout(zbarSync,300); };
@@ -711,6 +842,10 @@
     };
     document.getElementById("zCtrl").onclick=function(){ $ctrlBtn.click(); setTimeout(zbarSync,200); };
     document.getElementById("zShare").onclick=function(){ document.getElementById("vShare").click(); };
+    document.getElementById("zHand").onclick=function(){ jitsiCmd("toggleRaiseHand"); };
+    document.getElementById("zShot").onclick=function(){ shotToBoard(); };
+    document.getElementById("zRec").onclick=function(){ recToggle(); };
+    document.getElementById("zLock").onclick=function(){ lobbyToggle(); };
 
     /* Подсказка со стрелкой: браузер запускает показ экрана только по нажатию
        внутри окна звонка, поэтому если наша команда не сработала — разворачиваем
@@ -877,6 +1012,10 @@
       if(p.t==="ctrl"){ holder=p.h; applyControl(); }
       else if(p.t==="ask"){ if(iAmDriving()) showAsk(p.from); }
       else if(p.t==="nope"){ applyControl(); }
+      else if(p.t==="rec"){
+        var rb=document.getElementById("recBadge");
+        if(rb) rb.classList.toggle("on",!!p.on);
+      }
       else if(p.t==="ver"){
         if(p.b && p.b!==BUILD && ME==="s"){
           $ask.innerHTML="⚠️ У тебя открыта старая версия страницы урока."+
@@ -922,6 +1061,9 @@
     if(ME==="s"){
       document.getElementById("invite").style.display="none";
       document.querySelector("#top .title").textContent="🎓 Урок с учителем";
+      /* Ученик пришёл по ссылке ради урока — включаем видео сами, не заставляя
+         его искать кнопку и ждать загрузку уже после нажатия. */
+      setTimeout(function(){ if(!jitsiApi) vidOpen(true); },300);
     }
     applyControl();
     apply(false);
