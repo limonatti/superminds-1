@@ -113,6 +113,13 @@ function run(role, title) {
     ok("значок записи скрыт, пока не пишут", !$("recBadge").classList.contains("on"));
   }
 
+  /* имя в звонке */
+  ok("кнопка имени есть", !!$("zName"));
+  try { w.localStorage.setItem("ewa-name", "Ася"); } catch (e) {}
+  ok("имя берётся из памяти браузера", w.myName() === "Ася", w.myName());
+  try { w.localStorage.removeItem("ewa-name"); } catch (e) {}
+  ok("без имени показывается роль", w.myName() === (role === "t" ? "Учитель" : "Ученик"), w.myName());
+
   /* завершение звонка */
   $("zHang").click();
   ok("звонок завершён, панель убралась", !$("zbar").classList.contains("on") && !$("videoWrap").classList.contains("on"));
