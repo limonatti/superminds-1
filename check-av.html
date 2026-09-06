@@ -148,23 +148,34 @@
   };
 
   /* --- связь --- */
-  $("bNet").onclick = async () => {
+  /* Проверяем так же, как это делает сама комната урока: подключаем скрипт
+     видеосервера. Обычным запросом нельзя — браузер запрещает обращения
+     между разными адресами и покажет «недоступен» даже на живом сервере. */
+  $("bNet").onclick = () => {
     mark("dNet","rNet",null,"Проверяю…");
+    $("bNet").disabled = true;
     const t0 = performance.now();
-    try{
-      const r = await fetch("https://"+MEET+"/external_api.js", {cache:"no-store"});
-      await r.arrayBuffer();
-      const ms = Math.round(performance.now() - t0);
-      if(!r.ok) throw new Error("код "+r.status);
-      state.net = true;
-      mark("dNet","rNet",true, ms < 1500
-        ? "Связь с уроком есть, скорость хорошая ("+ms+" мс)."
-        : "Связь есть, но небыстрая ("+ms+" мс). Урок пойдёт, лучше сесть ближе к роутеру.");
-    }catch(e){
-      state.net = false;
-      mark("dNet","rNet",false,
-        "Видеосервер недоступен из этой сети. Попробуй другой интернет — например, мобильный вместо рабочего вайфая.");
-    }
+    const s = document.createElement("script");
+    let done = false;
+    const finish = (ok, ms) => {
+      if(done) return; done = true;
+      $("bNet").disabled = false;
+      s.remove();
+      state.net = ok;
+      if(ok){
+        mark("dNet","rNet",true, ms < 2500
+          ? "Связь с уроком есть, скорость хорошая ("+(ms/1000).toFixed(1)+" сек)."
+          : "Связь есть, но небыстрая ("+(ms/1000).toFixed(1)+" сек). Урок пойдёт; если будет рвать — сядь ближе к роутеру.");
+      } else {
+        mark("dNet","rNet",false,
+          "Видеосервер не отвечает из этой сети. Попробуй другой интернет — например, мобильный вместо рабочего вайфая.");
+      }
+    };
+    s.onload  = () => finish(true, performance.now() - t0);
+    s.onerror = () => finish(false);
+    setTimeout(() => finish(false), 20000);       /* висит — считаем недоступным */
+    s.src = "https://" + MEET + "/external_api.js?cb=" + Date.now();
+    document.head.appendChild(s);
   };
 </script>
 </body>
