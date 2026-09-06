@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверка связи · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4ece0;font-family:'Nunito',sans-serif;color:#241a18;min-height:100vh}
+  .wrap{max-width:620px;margin:0 auto;padding:28px 18px 60px}
+  h1{margin:0 0 6px;font-size:clamp(24px,5vw,34px);color:#7c2340;letter-spacing:-.5px}
+  .sub{font:700 14px 'Nunito',sans-serif;color:#5c534d;margin-bottom:20px;line-height:1.5}
+  .step{background:#fffdf8;border-radius:20px;box-shadow:0 6px 0 #e0d5c2;padding:18px;margin-bottom:14px}
+  .step h2{margin:0 0 6px;font-size:17px;color:#7c2340;display:flex;align-items:center;gap:8px}
+  .step p{margin:0 0 10px;font:700 13.5px 'Nunito',sans-serif;color:#5c534d;line-height:1.5}
+  .dot{width:12px;height:12px;border-radius:50%;background:#d8d7d6;flex:none}
+  .dot.ok{background:#3f8f5c}
+  .dot.bad{background:#c0392b}
+  .dot.wait{background:#e0952a}
+  button{font-family:inherit;border:none;cursor:pointer;background:#7c2340;color:#fff;border-radius:14px;
+         padding:12px 20px;font:800 14px 'Nunito',sans-serif}
+  button.ghost{background:#f4ece0;color:#7c2340}
+  button:disabled{opacity:.5;cursor:default}
+  video{width:100%;max-height:250px;background:#111;border-radius:14px;display:block;transform:scaleX(-1)}
+  .lvl{height:14px;background:#e0d5c2;border-radius:999px;overflow:hidden;margin-top:10px}
+  .lvl > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8bc34a,#3f8f5c);transition:width .1s}
+  .res{font:800 13px 'Nunito',sans-serif;margin-top:8px}
+  .res.ok{color:#3f8f5c} .res.bad{color:#c0392b} .res.wait{color:#a3762a}
+  .final{background:#7c2340;color:#fff;border-radius:20px;padding:20px;text-align:center;display:none}
+  .final.on{display:block}
+  .final h2{margin:0 0 6px;font-size:20px}
+  .final p{margin:0;font:700 13.5px 'Nunito',sans-serif;line-height:1.5;opacity:.95}
+  .hint{font:700 12.5px 'Nunito',sans-serif;color:#a3968a;line-height:1.5;margin-top:10px}
+  a.home{display:inline-block;margin-top:18px;color:#7c2340;font:800 13px 'Nunito',sans-serif}
+</style>
+<link rel="stylesheet" href="sm-skin.css?v=1d0ce501">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Проверка связи</h1>
+    <div class="sub">Займёт минуту. Лучше сделать до урока, а не на уроке —
+      тогда не придётся тратить занятие на «а ты меня слышишь?».</div>
+
+    <div class="step">
+      <h2><span class="dot" id="dCam"></span> 1. Камера</h2>
+      <p>Нажми кнопку и разреши браузеру доступ. Ты должна увидеть себя.</p>
+      <button id="bCam">Включить камеру</button>
+      <div style="margin-top:12px"><video id="vid" playsinline muted></video></div>
+      <div class="res" id="rCam"></div>
+    </div>
+
+    <div class="step">
+      <h2><span class="dot" id="dMic"></span> 2. Микрофон</h2>
+      <p>Скажи что-нибудь вслух — полоска должна двигаться.</p>
+      <button id="bMic">Включить микрофон</button>
+      <div class="lvl"><i id="lvl"></i></div>
+      <div class="res" id="rMic"></div>
+    </div>
+
+    <div class="step">
+      <h2><span class="dot" id="dNet"></span> 3. Связь с уроком</h2>
+      <p>Проверяем, открывается ли видеосервер и быстро ли грузится.</p>
+      <button id="bNet">Проверить</button>
+      <div class="res" id="rNet"></div>
+    </div>
+
+    <div class="final" id="final">
+      <h2 id="fTitle"></h2>
+      <p id="fText"></p>
+    </div>
+
+    <div class="hint">Ничего из этой страницы никуда не отправляется: видео и звук
+      остаются в твоём браузере, проверка идёт прямо на устройстве.</div>
+    <a class="home" href="course.html">← На главную</a>
+  </div>
+
+<script>
+  const MEET = "meet.english-with-asya.com";
+  const state = {cam:null, mic:null, net:null};
+  const $ = id => document.getElementById(id);
+
+  function mark(dot,res,ok,text){
+    $(dot).className = "dot " + (ok===true?"ok":ok===false?"bad":"wait");
+    $(res).className = "res " + (ok===true?"ok":ok===false?"bad":"wait");
+    $(res).textContent = text;
+    finalCheck();
+  }
+  function finalCheck(){
+    if(state.cam===null||state.mic===null||state.net===null)return;
+    const good = state.cam && state.mic && state.net;
+    $("final").classList.add("on");
+    $("fTitle").textContent = good ? "Всё готово к уроку" : "Кое-что не работает";
+    $("fText").textContent = good
+      ? "Камера, микрофон и связь в порядке. Заходи по ссылке на урок в назначенное время."
+      : "Напиши учителю, что именно не сработало — разберёмся до урока, а не во время.";
+  }
+
+  /* --- камера --- */
+  $("bCam").onclick = async () => {
+    mark("dCam","rCam",null,"Спрашиваю разрешение…");
+    try{
+      const st = await navigator.mediaDevices.getUserMedia({video:true});
+      $("vid").srcObject = st; await $("vid").play();
+      state.cam = true;
+      mark("dCam","rCam",true,"Камера работает — ты себя видишь.");
+    }catch(e){
+      state.cam = false;
+      mark("dCam","rCam",false, e.name==="NotAllowedError"
+        ? "Доступ к камере запрещён. Нажми на замочек слева в адресной строке и разреши камеру."
+        : "Камера не включилась: " + e.name + ". Возможно, её занял Zoom или Skype — закрой их.");
+    }
+  };
+
+  /* --- микрофон --- */
+  $("bMic").onclick = async () => {
+    mark("dMic","rMic",null,"Спрашиваю разрешение…");
+    try{
+      const st = await navigator.mediaDevices.getUserMedia({audio:true});
+      const ctx = new (window.AudioContext||window.webkitAudioContext)();
+      const src = ctx.createMediaStreamSource(st);
+      const an = ctx.createAnalyser(); an.fftSize = 512;
+      src.connect(an);
+      const buf = new Uint8Array(an.frequencyBinCount);
+      let peak = 0, t0 = Date.now();
+      (function tick(){
+        an.getByteFrequencyData(buf);
+        let sum = 0; for(const v of buf) sum += v;
+        const lvl = Math.min(100, sum / buf.length * 3);
+        $("lvl").style.width = lvl + "%";
+        peak = Math.max(peak, lvl);
+        if(Date.now() - t0 < 6000){ requestAnimationFrame(tick); }
+        else {
+          st.getTracks().forEach(t=>t.stop());
+          if(peak > 8){ state.mic = true; mark("dMic","rMic",true,"Микрофон слышит тебя."); }
+          else { state.mic = false; mark("dMic","rMic",false,
+                 "Микрофон включён, но звука нет. Проверь, тот ли микрофон выбран и не выключен ли он кнопкой на наушниках."); }
+        }
+      })();
+      mark("dMic","rMic",null,"Говори вслух шесть секунд…");
+    }catch(e){
+      state.mic = false;
+      mark("dMic","rMic",false, e.name==="NotAllowedError"
+        ? "Доступ к микрофону запрещён. Нажми на замочек в адресной строке и разреши микрофон."
+        : "Микрофон не включился: " + e.name);
+    }
+  };
+
+  /* --- связь --- */
+  $("bNet").onclick = async () => {
+    mark("dNet","rNet",null,"Проверяю…");
+    const t0 = performance.now();
+    try{
+      const r = await fetch("https://"+MEET+"/external_api.js", {cache:"no-store"});
+      await r.arrayBuffer();
+      const ms = Math.round(performance.now() - t0);
+      if(!r.ok) throw new Error("код "+r.status);
+      state.net = true;
+      mark("dNet","rNet",true, ms < 1500
+        ? "Связь с уроком есть, скорость хорошая ("+ms+" мс)."
+        : "Связь есть, но небыстрая ("+ms+" мс). Урок пойдёт, лучше сесть ближе к роутеру.");
+    }catch(e){
+      state.net = false;
+      mark("dNet","rNet",false,
+        "Видеосервер недоступен из этой сети. Попробуй другой интернет — например, мобильный вместо рабочего вайфая.");
+    }
+  };
+</script>
+</body>
+</html>

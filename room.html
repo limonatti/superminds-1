@@ -211,6 +211,7 @@
     <button id="zCtrl" title="Отдать ученику управление уроком">🎮 <span>Управление</span></button>
     <button id="zHand" title="Поднять руку">✋</button>
     <button id="zName" title="Как тебя подписывать в видео">✏️</button>
+    <button id="zEco" title="Эконом-режим: мелкая картинка ради стабильного звука">📶</button>
     <button id="zShot" title="Снять кадр экрана и положить на доску">📸</button>
     <button id="zRec" title="Записать урок в файл на твой компьютер">⏺</button>
     <button id="zLock" title="Зал ожидания: посторонний не войдёт без твоего разрешения">🔒</button>
@@ -441,7 +442,10 @@
          на публичный сервер со входом «Я организатор» и лимитом 5 минут */
       const stamp=new Date().toISOString().slice(0,13).replace(/[-T]/g,"");
       const url=location.origin+location.pathname+"?room="+room+"&s=1&v="+stamp;
-      if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на урок скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));
+      const check=location.origin+location.pathname.replace(/room\.html$/,"check-av.html");
+      const msg="Ссылка на урок скопирована!\n\nОтправь ученику:\n"+url+
+                "\n\nА это ссылка «проверить камеру и микрофон» — её хорошо дать новому ученику заранее:\n"+check;
+      if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert(msg),()=>prompt("Скопируй ссылку:",url));
       else prompt("Скопируй ссылку:",url);
     };
 
@@ -577,6 +581,27 @@
         try{ jitsiApi.executeCommand("answerKnockingParticipant",id,false); }catch(e){} };
     }
 
+    /* Возврат в звонок после обрыва: до пяти попыток с нарастающей паузой,
+       чтобы не долбить сервер, если интернет пропал совсем. */
+    var vidTries=0, vidRecovering=false;
+    function vidRecover(why){
+      if(!vidWanted || vidRecovering) return;      /* сама нажала «завершить» — не лезем */
+      vidRecovering=true;
+      vidTries++;
+      if(vidTries>5){
+        vidFail("Связь не восстанавливается. Проверь интернет и нажми «📹 Видео» заново.");
+        vidRecovering=false; return;
+      }
+      var wait=Math.min(2000*vidTries,10000);
+      vidMsg("Связь потеряна ("+why+"). Возвращаю в урок… попытка "+vidTries);
+      try{ if(jitsiApi){ jitsiApi.dispose(); } }catch(e){}
+      jitsiApi=null;
+      setTimeout(function(){
+        vidRecovering=false;
+        if(vidWanted && !jitsiApi){ vidClear(); vidOpen(true); }
+      },wait);
+    }
+
     /* показ экрана: разворачиваем окно на время показа и возвращаем обратно */
     var vidSizeBeforeShare=null, vidSharingNow=false, vidIShare=false;
     function vidPeerSharing(on){
@@ -674,6 +699,17 @@
               prejoinPageEnabled:false, prejoinConfig:{enabled:false},
               /* шумоподавление сразу: на уроке всегда есть фон — улица, семья */
               noiseSuppression:{enabled:true},
+              /* Слабый интернет: лучше мягко потерять картинку, чем оборвать
+                 урок. Ограничиваем разрешение, разрешаем гасить неактивные
+                 видео и не тянем больше пяти собеседников сразу. */
+              resolution:480,
+              constraints:{video:{height:{ideal:480,max:720,min:180}}},
+              enableLayerSuspension:true,
+              channelLastN:5,
+              startBitrate:"400",
+              videoQuality:{maxBitratesVideo:{low:200000,standard:500000,high:1200000}},
+              /* при полном пропадании сети Jitsi сам пробует вернуться */
+              enableAutomaticUrlCopy:false,
               startWithAudioMuted:false, startWithVideoMuted:false, disableDeepLinking:true,
               /* Обычный режим «один-на-один»: собеседник большой, ты — в углу.
                  Раньше стоял disable1On1Mode + принудительная плитка, и при
@@ -693,7 +729,7 @@
             }
           });
           jitsiApi.addListener("videoConferenceJoined",()=>{
-            vidPeers=0; vidStatus();
+            vidPeers=0; vidTries=0; vidStatus();
             /* Зал ожидания включает только учитель и только если он вошёл
                первым: тогда он и есть модератор. Посторонний, знающий адрес,
                внутрь уже не попадёт — постучится и будет ждать. */
@@ -708,6 +744,10 @@
           jitsiApi.addListener("participantJoined",()=>{ vidPeers++; vidStatus(); if(ME==="t") ding(); });
           jitsiApi.addListener("participantLeft",()=>{ vidPeers=Math.max(0,vidPeers-1); vidStatus(); });
           jitsiApi.addListener("errorOccurred",e=>{ console.warn("Jitsi error",e); });
+          /* Связь оборвалась, а урок не закончен — поднимаем звонок сами.
+             Раньше приходилось замечать это и нажимать «Видео» заново. */
+          jitsiApi.addListener("readyToClose",()=>{ vidRecover("связь оборвалась"); });
+          jitsiApi.addListener("videoConferenceLeft",()=>{ vidRecover("выпало из комнаты"); });
           jitsiApi.addListener("tileViewChanged",e=>{
             document.getElementById("vTile").classList.toggle("act",!!(e&&e.enabled));
           });
@@ -903,6 +943,18 @@
     document.getElementById("zShare").onclick=function(){ document.getElementById("vShare").click(); };
     document.getElementById("zHand").onclick=function(){ jitsiCmd("toggleRaiseHand"); };
     document.getElementById("zName").onclick=function(){ askName(); };
+    /* Когда у собеседника всё сыпется: жертвуем картинкой ради голоса. */
+    var ecoOn=false;
+    document.getElementById("zEco").onclick=function(){
+      if(!jitsiApi){ alert("Сначала включи видео."); return; }
+      ecoOn=!ecoOn;
+      try{ jitsiApi.executeCommand("setVideoQuality", ecoOn?180:480); }catch(e){}
+      document.getElementById("zEco").classList.toggle("act",ecoOn);
+      var h=document.getElementById("vidHint");
+      if(h) h.textContent = ecoOn
+        ? "Эконом-режим: картинка мелкая, зато звук не рвётся. Нажми 📶 ещё раз, чтобы вернуть качество."
+        : (h.dataset.def||"");
+    };
     document.getElementById("zShot").onclick=function(){ shotToBoard(); };
     document.getElementById("zRec").onclick=function(){ recToggle(); };
     document.getElementById("zLock").onclick=function(){ lobbyToggle(); };
