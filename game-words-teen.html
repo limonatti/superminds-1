@@ -106,6 +106,34 @@
   .gapline u{text-decoration:none;display:inline-block;min-width:96px;
     border-bottom:3px solid var(--accent);margin:0 4px}
 
+  /* ─── «Разложи по темам»: запас сверху, колонки снизу ─── */
+  .pool{display:flex;flex-wrap:wrap;gap:10px;min-height:62px;align-content:flex-start;
+    border:2px dashed #ded7ea;border-radius:16px;padding:11px 12px;margin-bottom:20px;
+    background:#fffefb}
+  .pool:empty::before{content:"все слова разложены";color:var(--n600);font:600 15px 'Nunito',sans-serif}
+  .w{border:0;background:var(--md-panel);color:#2f2a3d;border-radius:14px;
+    padding:12px 18px;font:800 19px 'Nunito',sans-serif;cursor:grab;user-select:none;
+    touch-action:none;box-shadow:0 4px 0 rgba(70,60,110,.18);
+    transition:transform .12s,box-shadow .12s}
+  .w:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(70,60,110,.18)}
+  /* пока тащим — карточка живёт поверх страницы и слегка наклонена */
+  .w.drag{cursor:grabbing;position:fixed;z-index:99;pointer-events:none;
+    box-shadow:0 16px 26px rgba(30,10,40,.34);transform:rotate(-2deg) scale(1.04)}
+  .w.ok{background:var(--md-ok);color:#20340a;box-shadow:0 4px 0 #6d9c12}
+  .w.no{background:#efd6cd;color:var(--bad-text);box-shadow:0 4px 0 #cba697;animation:shakeW .3s}
+  @keyframes shakeW{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .col{border-radius:18px;padding:14px 14px 16px;min-height:220px;outline:3px solid transparent;
+    transition:transform .13s,box-shadow .13s,outline-color .13s}
+  .col.k1{background:var(--md1)} .col.k2{background:var(--md2)} .col.k3{background:var(--md3)}
+  /* колонка под курсором приподнимается — видно, куда попадёшь, до того как отпустил */
+  .col.hot{transform:translateY(-4px);outline-color:#fff;box-shadow:0 12px 26px rgba(30,10,40,.28)}
+  .col h3{margin:0 0 3px;font:800 17px 'Nunito',sans-serif;color:#2f2a3d}
+  .col .num{font:700 12.5px 'Nunito',sans-serif;color:rgba(47,42,61,.6);margin-bottom:10px}
+  .col .in{display:flex;flex-direction:column;gap:8px}
+  .col .in .w{width:100%;text-align:left;font-size:17px;padding:10px 14px;cursor:default;
+    background:rgba(255,255,255,.86);box-shadow:0 3px 0 rgba(70,60,110,.14)}
+
   .note{margin-top:16px;font:700 16px 'Nunito',sans-serif;min-height:26px}
   .note.ok{color:var(--ok-text)} .note.bad{color:var(--bad-text)}
   .note small{display:block;font:600 14px 'Nunito',sans-serif;color:var(--n600);margin-top:3px}
@@ -164,6 +192,10 @@
         <button class="card" data-g="odd">
           <b>Найди лишнее</b>
           <span>Четыре слова, три из одной темы. Найди чужое — тренирует значения, а не перевод.</span>
+        </button>
+        <button class="card" data-g="sort">
+          <b>Разложи по темам</b>
+          <span>Слова трёх юнитов вперемешку — растащи по колонкам. Повторение сразу нескольких тем.</span>
         </button>
         <button class="card" data-g="gap">
           <b>Вставь пропущенное</b>
@@ -295,7 +327,9 @@ function проверитьДоступность(){
     order: ФРАЗЫ.length>=3,
     dictation: ВСЕ.length>=4,
     odd: СЛОВА.length>=3 && другиеЮниты().length>=1,
-    gap: ФРАЗЫ.length>=3
+    gap: ФРАЗЫ.length>=3,
+    sort: (window.SM_UNITS||[]).filter(function(u){
+      return (u.words||[]).filter(игровое).length>=4; }).length>=3
   };
   document.querySelectorAll(".card").forEach(function(b){
     var ok=хватает[b.dataset.g];
@@ -366,6 +400,7 @@ function верный(текст, подпись){
   noteEl.innerHTML=(текст||"Верно")+(подпись?"<small>"+подпись+"</small>":"");
   try{ SMP.sfx("ok"); }catch(e){}
   сохранить(true);
+  if(mode==="sort") return;              /* доска одна на весь раунд */
   locked=true;
   setTimeout(function(){ if(playing) deal(); }, 1100);
 }
@@ -536,10 +571,131 @@ function dealGap(){
   });
 }
 
+/* ---------- 5. Разложи по темам ----------
+   Колонки — это юниты, а юнит и есть тема. Ничего размечать вручную не надо,
+   игра работает на любом учебнике сразу. Берём выбранный юнит и двух соседей:
+   так повторяется не только текущая тема, но и то, что рядом. */
+var тащим=null, дельта={x:0,y:0}, подсвечена=null, вКолонках=0, надоРазложить=0;
+
+function темыДляСортировки(){
+  var все=(window.SM_UNITS||[]).filter(function(u){
+    return (u.words||[]).filter(игровое).length>=4;
+  });
+  if(все.length<3) return null;
+  var i=все.findIndex(function(u){ return u.id===sel.value; });
+  if(i<0) i=0;
+  /* соседи по номеру: предыдущий и следующий, а у краёв — два вперёд или назад */
+  var набор=[все[i]];
+  if(все[i+1]) набор.push(все[i+1]); else набор.unshift(все[i-2]);
+  if(все[i+2]) набор.push(все[i+2]); else if(все[i-1]) набор.unshift(все[i-1]);
+  набор=набор.filter(Boolean);
+  while(набор.length<3){
+    var к=все.find(function(u){ return набор.indexOf(u)<0; });
+    if(!к) break; набор.push(к);
+  }
+  return набор.slice(0,3);
+}
+
+function dealSort(){
+  var темы=темыДляСортировки();
+  if(!темы){ noteEl.className="note bad"; noteEl.textContent="В учебнике мало юнитов со словами"; return; }
+
+  вКолонках=0; надоРазложить=12;
+  playEl.innerHTML=
+    '<div class="ask">Растащи слова по темам</div>'+
+    '<div class="pool" id="pool"></div>'+
+    '<div class="cols" id="cols">'+
+      темы.map(function(u,i){
+        return '<div class="col k'+(i+1)+'" data-i="'+i+'">'+
+               '<h3>'+esc(u.title)+'</h3>'+
+               '<div class="num" id="n'+i+'">0 слов</div>'+
+               '<div class="in" id="in'+i+'"></div></div>';
+      }).join("")+
+    '</div>';
+
+  var pool=document.getElementById("pool"), набор=[];
+  темы.forEach(function(u,i){
+    shuffle((u.words||[]).filter(игровое)).slice(0,4).forEach(function(w){
+      набор.push({en:w.en, тема:i, имя:u.title});
+    });
+  });
+  надоРазложить=набор.length;
+  shuffle(набор).forEach(function(x){
+    var el=document.createElement("div");
+    el.className="w"; el.textContent=x.en;
+    el.dataset.тема=x.тема; el.dataset.имя=x.имя;
+    тащитьСлово(el);
+    pool.appendChild(el);
+  });
+}
+
+function тащитьСлово(el){
+  el.addEventListener("pointerdown", function(e){
+    if(тащим || locked) return;
+    var r=el.getBoundingClientRect();
+    дельта={x:e.clientX-r.left, y:e.clientY-r.top};
+    тащим=el; el.classList.add("drag");
+    el.style.left=r.left+"px"; el.style.top=r.top+"px"; el.style.width=r.width+"px";
+    if(el.setPointerCapture) el.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  el.addEventListener("pointermove", function(e){
+    if(тащим!==el) return;
+    el.style.left=(e.clientX-дельта.x)+"px";
+    el.style.top=(e.clientY-дельта.y)+"px";
+    var c=колонкаПод(e.clientX,e.clientY);
+    if(подсвечена!==c){
+      if(подсвечена) подсвечена.classList.remove("hot");
+      подсвечена=c; if(c) c.classList.add("hot");
+    }
+  });
+  var бросить=function(e){
+    if(тащим!==el) return;
+    тащим=null; el.classList.remove("drag");
+    el.style.left=el.style.top=el.style.width="";
+    var c=колонкаПод(e.clientX,e.clientY);
+    if(подсвечена){ подсвечена.classList.remove("hot"); подсвечена=null; }
+    if(c) положить(el, +c.dataset.i);
+  };
+  el.addEventListener("pointerup", бросить);
+  el.addEventListener("pointercancel", бросить);
+}
+
+function колонкаПод(x,y){
+  var cols=document.getElementById("cols");
+  if(!cols) return null;
+  return [].find.call(cols.children, function(c){
+    var r=c.getBoundingClientRect();
+    return x>=r.left && x<=r.right && y>=r.top && y<=r.bottom;
+  }) || null;
+}
+
+function положить(el, куда){
+  if(+el.dataset.тема===куда){
+    el.classList.add("ok");
+    document.getElementById("in"+куда).appendChild(el);
+    setTimeout(function(){ el.classList.remove("ok"); },400);
+    var n=document.getElementById("in"+куда).children.length;
+    document.getElementById("n"+куда).textContent =
+      n+" "+(n===1?"слово":n<5?"слова":"слов");
+    вКолонках++;
+    верный("Верно");
+    if(вКолонках>=надоРазложить){
+      locked=true;
+      later(function(){ if(playing) finish(); }, 1200);
+    }
+  } else {
+    el.classList.add("no");
+    setTimeout(function(){ el.classList.remove("no"); },500);
+    неверный("Не та тема", "«"+esc(el.textContent)+"» — из темы «"+esc(el.dataset.имя)+"»");
+  }
+}
+
 function deal(){
   locked=false;
   noteEl.textContent=""; noteEl.className="note";
-  if(mode==="order") dealOrder();
+  if(mode==="sort") dealSort();
+  else if(mode==="order") dealOrder();
   else if(mode==="dictation") dealDictation();
   else if(mode==="odd") dealOdd();
   else dealGap();
