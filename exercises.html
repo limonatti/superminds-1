@@ -45,6 +45,17 @@
     box-shadow:0 5px 0 #5d1a30,0 8px 16px rgba(40,20,10,.3)}
   .whub:disabled{opacity:.55;cursor:default}
   .whub:active:not(:disabled){transform:translate(-50%,-50%) translateY(3px);box-shadow:0 2px 0 #5d1a30}
+  .wimg{max-width:100%;max-height:190px;border-radius:14px;display:block;margin:0 0 14px}
+  .wopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .wopt{border:0;cursor:pointer;border-radius:14px;padding:14px 16px;text-align:left;
+    font:800 18px 'Nunito',sans-serif;color:#2f2a3d;box-shadow:0 5px 0 rgba(70,60,110,.18);
+    transition:transform .12s}
+  .wopt:hover{transform:translateY(-3px)}
+  .wopt.v1{background:#b6add6} .wopt.v2{background:#c7e3f7}
+  .wopt.v3{background:#e8b295} .wopt.v4{background:#f1b4df}
+  .wopt.yes{background:#8cc919;color:#20340a;box-shadow:0 5px 0 #6d9c12}
+  .wopt.no{background:#d9d4d0;color:#6b635e;box-shadow:0 5px 0 #b3aca7}
+  .wopt.dim{opacity:.45;pointer-events:none}
   .wtask{min-height:210px}
   .widle{color:#a3968a;font:600 15px 'Nunito',sans-serif;padding-top:18px}
   .wq{font:700 22px 'Nunito',sans-serif;color:#241a18;line-height:1.45;margin-bottom:16px}
@@ -369,7 +380,34 @@
 
       function задание(i){
         const it=данные[i];
-        task.innerHTML=
+        const выбор=разобратьВарианты(it.answer);
+        const карт = it.img ? '<img class="wimg" src="'+it.img+'" alt="">' : "";
+
+        if(выбор){
+          /* Учитель написал варианты через / или | и отметил верный звёздочкой —
+             значит ученик выбирает, а не печатает. */
+          task.innerHTML=карт+'<div class="wq">'+esc(it.q||it.face)+'</div><div class="wopts"></div>';
+          const box=task.querySelector(".wopts");
+          выбор.список.forEach((в,k)=>{
+            const b=document.createElement("button");
+            b.className="wopt v"+(k%4+1); b.textContent=в;
+            b.onclick=()=>{
+              if(выбор.верные.includes(в.toLowerCase())){
+                b.className="wopt yes";
+                [...box.children].forEach(x=>{ if(x!==b) x.classList.add("dim"); });
+                засчитать(i, выбор.верные[0]);
+              } else {
+                b.className="wopt no"; звНет();
+                fb.className="fb no"; fb.textContent="Пока нет — попробуй другой";
+              }
+            };
+            box.appendChild(b);
+          });
+          return;
+        }
+
+        /* иначе — ввод с клавиатуры, варианты через | все верные */
+        task.innerHTML=карт+
           '<div class="wq">'+esc(it.q||it.face)+'</div>'+
           '<div class="wrow"><input type="text" class="wans" autocomplete="off" spellcheck="false" placeholder="твой ответ">'+
           '<button class="check wchk">Проверить</button></div>';
@@ -379,24 +417,39 @@
         task.querySelector(".wchk").onclick=проверить;
 
         function проверить(){
-          const дано=inp.value.trim().toLowerCase();
+          const дано=inp.value.trim().toLowerCase().replace(/\s+/g," ");
           if(!дано) return;
-          /* учитель мог задать несколько верных вариантов через | */
-          const верные=String(it.answer||"").split("|").map(x=>x.trim().toLowerCase()).filter(Boolean);
+          const верные=String(it.answer||"").split("|").map(x=>x.trim().toLowerCase().replace(/\s+/g," ")).filter(Boolean);
           const попал=верные.some(v=> v===дано || (v.length>=5 && расст(дано,v)<=1) );
-          if(попал){
-            готово.push(i); рисовать(); звОк();
-            fb.className="fb ok"; fb.textContent="Верно · "+верные[0];
-            task.innerHTML='<div class="widle">'+
-              (готово.length===N ? "Все секторы пройдены." : "Крути дальше — осталось "+(N-готово.length)+".")+'</div>';
-            hub.disabled = готово.length===N;
-            if(hub.disabled) hub.textContent="Готово";
-          } else {
-            звНет(); fb.className="fb no"; fb.textContent="Пока нет. Правильно: "+верные[0];
-            inp.select();
-          }
+          if(попал) засчитать(i, верные[0]);
+          else { звНет(); fb.className="fb no"; fb.textContent="Пока нет. Правильно: "+верные[0]; inp.select(); }
         }
       }
+
+      /* Варианты на выбор пишутся через косую черту или палочку, а верный
+         помечается звёздочкой. Если звёздочки нет, это не выбор, а ответ,
+         который ученик набирает сам. */
+      function разобратьВарианты(строка){
+        const s=String(строка||"");
+        if(s.indexOf("*")<0) return null;
+        const части=s.split(/[\/|]/).map(x=>x.trim().replace(/\s+/g," ")).filter(Boolean);
+        if(части.length<2) return null;
+        const список=части.map(x=>x.replace(/\*/g,"").trim());
+        const верные=части.filter(x=>x.indexOf("*")>-1).map(x=>x.replace(/\*/g,"").trim().toLowerCase());
+        if(!верные.length) return null;
+        return {список:перемешать(список), верные};
+      }
+      function перемешать(a){ return a.slice().sort(()=>Math.random()-.5); }
+
+      function засчитать(i, верный){
+        готово.push(i); рисовать(); звОк();
+        fb.className="fb ok"; fb.textContent="Верно · "+верный;
+        task.innerHTML='<div class="widle">'+
+          (готово.length===N ? "Все секторы пройдены." : "Крути дальше — осталось "+(N-готово.length)+".")+'</div>';
+        hub.disabled = готово.length===N;
+        if(hub.disabled) hub.textContent="Готово";
+      }
+
       /* одна опечатка на длинном слове — промах по клавише, а не незнание */
       function расст(a,b){
         const m=a.length,n=b.length,d=[];

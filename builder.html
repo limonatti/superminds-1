@@ -353,8 +353,9 @@
           '<label>ЗАДАНИЕ (что увидит ученик, когда сектор выпадет)</label>'+
           '<textarea class="q" rows="2" placeholder="She ___ to school every day. (go)">'+esc(d.q||"")+'</textarea>'+
           '<div class="hinttext">Можно слово, можно предложение с пропуском ___ , можно глагол в скобках — что угодно. Проверяется по ответу ниже.</div>'+
-          '<label>ОТВЕТ (несколько вариантов через |)</label>'+
-          '<input class="answer" placeholder="goes|she goes" value="'+esc(d.answer||"")+'">';
+          '<label>ОТВЕТ</label>'+
+          '<input class="answer" placeholder="have got / has got* / is / are" value="'+esc(d.answer||"")+'">'+
+          '<div class="hinttext">Два способа. <b>Выбор из вариантов:</b> перечисли их через косую черту и пометь верный звёздочкой — <i>have got / has got* / is / are</i>. Ученик увидит кнопки. <b>Ввод с клавиатуры:</b> просто напиши ответ, а если верных написаний несколько — через палочку: <i>goes|she goes</i>.</div>';
       } else if(type==="open"){
         bf.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea class="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(d.q||"")+'</textarea><label>ОБРАЗЕЦ ОТВЕТА (необязательно)</label><textarea class="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(d.model||"")+'</textarea>';
       }
@@ -551,6 +552,9 @@
         const answer=b.querySelector(".answer").value.trim();
         if(!q) return {err:"впиши задание для сектора"};
         if(!answer) return {err:"впиши ответ — иначе игра не сможет проверить"};
+        /* частая осечка: перечислили варианты, а верный не пометили */
+        if(answer.indexOf("/")>-1 && answer.indexOf("*")<0)
+          return {err:"варианты перечислены, но верный не помечен — поставь * рядом с ним"};
         /* подпись на секторе не обязательна: если пусто, берём начало задания */
         let face=b.querySelector(".face").value.trim();
         if(!face) face=q.replace(/\s+/g," ").slice(0,14)+(q.length>14?"…":"");
