@@ -28,6 +28,32 @@
   .check{background:#7c2340;color:#fff;border-radius:12px;padding:0 20px;font:800 15px 'Nunito',sans-serif}
   .fb{margin-top:10px;font:800 14px 'Nunito',sans-serif;min-height:18px}
   .fb.ok{color:#3f8f5c}.fb.no{color:#7b2412}
+  /* ─── Колесо заданий ─── */
+  .wheelwrap{display:grid;grid-template-columns:330px 1fr;gap:26px;align-items:start;margin-top:6px}
+  @media(max-width:760px){ .wheelwrap{grid-template-columns:1fr} }
+  .wbox{position:relative;width:330px;max-width:100%}
+  .wneedle{position:absolute;left:50%;top:-5px;transform:translateX(-50%);z-index:3;
+    width:0;height:0;border:14px solid transparent;border-top:26px solid #7c2340;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.28));transform-origin:50% 20%}
+  .wneedle.tick{animation:wtick .09s ease-out}
+  @keyframes wtick{0%{transform:translateX(-50%) rotate(0)}
+    50%{transform:translateX(-50%) rotate(-13deg)}100%{transform:translateX(-50%) rotate(0)}}
+  .wsvg{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 20px rgba(40,20,10,.22))}
+  .whub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+    width:92px;height:92px;border-radius:50%;border:0;cursor:pointer;
+    background:#7c2340;color:#fff;font:800 17px 'Nunito',sans-serif;
+    box-shadow:0 5px 0 #5d1a30,0 8px 16px rgba(40,20,10,.3)}
+  .whub:disabled{opacity:.55;cursor:default}
+  .whub:active:not(:disabled){transform:translate(-50%,-50%) translateY(3px);box-shadow:0 2px 0 #5d1a30}
+  .wtask{min-height:210px}
+  .widle{color:#a3968a;font:600 15px 'Nunito',sans-serif;padding-top:18px}
+  .wq{font:700 22px 'Nunito',sans-serif;color:#241a18;line-height:1.45;margin-bottom:16px}
+  .wrow{display:flex;gap:10px;flex-wrap:wrap}
+  .wans{flex:1;min-width:180px;border:1px solid #e0d5c2;border-radius:12px;padding:13px 15px;
+    font:700 19px 'Nunito',sans-serif;color:#241a18;background:#fffefb}
+  .wans:focus{outline:none;border-color:#7c2340}
+  .wchk{height:auto;padding:13px 20px}
+
   .pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:8px}
   .pc{background:#f4ece0;border:1px solid #e0d5c2;border-radius:12px;padding:13px 10px;font-size:17px;font-weight:600;text-align:center}
   .pc.sel{border-color:#7c2340;background:#fbeef1}
@@ -123,7 +149,7 @@
     function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function speak(t){if(window.SM_speak)return SM_speak(t);try{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
     function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?,]/g,"");}
-    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ",reading:"ЧТЕНИЕ · ЭКЗАМЕН",tfns:"TRUE / FALSE / NOT STATED",wordform:"СЛОВООБРАЗОВАНИЕ",headings:"ПОДБЕРИ ЗАГОЛОВКИ"};
+    const KIND={choice:"ВЫБОР ОТВЕТА",gap:"ВПИШИ СЛОВО",match:"НАЙДИ ПАРУ",order:"ПОРЯДОК СЛОВ",tf:"ВЕРНО / НЕВЕРНО",listen:"АУДИРОВАНИЕ",multi:"НЕСКОЛЬКО ОТВЕТОВ",categorize:"КАТЕГОРИИ",cloze:"ПРОПУСКИ-ВЫБОР",letters:"СОБЕРИ СЛОВО",wheel:"КОЛЕСО ЗАДАНИЙ",fillbox:"ВПИШИ ИЗ БАНКА",text:"ТЕКСТ",image:"КАРТИНКА",video:"ВИДЕО",audio:"АУДИО",dialogue:"ДИАЛОГ",note:"ЗАМЕТКА",open:"ОТКРЫТЫЙ ВОПРОС",embed:"ИНТЕРАКТИВ",shadow:"SHADOWING · СЛУШАЙ И ПОВТОРЯЙ",reading:"ЧТЕНИЕ · ЭКЗАМЕН",tfns:"TRUE / FALSE / NOT STATED",wordform:"СЛОВООБРАЗОВАНИЕ",headings:"ПОДБЕРИ ЗАГОЛОВКИ"};
 
     const q=new URLSearchParams(location.search);
     const uid=q.get("u")||(SM_UNITS[0]&&SM_UNITS[0].id);
@@ -240,6 +266,153 @@
         fb.className="fb "+(good===tot?"ok":"no");fb.textContent=good===tot?"Верно! 🎉":("Верно "+good+" из "+tot);};
       return c;
     }
+
+    /* ---------- Колесо заданий ----------
+       Один сектор — одно задание из конструктора. Что написать на секторе,
+       что показать после остановки и что считать верным — решает учитель,
+       поэтому одно и то же колесо годится и под слова, и под предложения
+       с пропуском, и под глагол в скобках. */
+    function renderWheel(items){
+      const данные=(items||[]).filter(x=>x&&(x.q||x.face)).slice(0,12);
+      if(!данные.length) return warnCard('<div class="kind">🎡</div><div class="qt">В колесе нет секторов.</div>');
+
+      const c=card(
+        '<div class="kind">'+KIND.wheel+'</div>'+
+        '<div class="wheelwrap">'+
+          '<div class="wbox"><div class="wneedle"></div>'+
+            '<svg class="wsvg" viewBox="0 0 400 400"></svg>'+
+            '<button class="whub">Крутить</button></div>'+
+          '<div class="wtask"><div class="widle">Нажми «Крутить».</div></div>'+
+        '</div><div class="fb"></div>');
+
+      const svg=c.querySelector(".wsvg"), hub=c.querySelector(".whub"),
+            needle=c.querySelector(".wneedle"), task=c.querySelector(".wtask"),
+            fb=c.querySelector(".fb");
+      const ЦВЕТА=["#b6add6","#c7e3f7","#e8b295","#f1b4df","#a8d5c2","#f5d98b",
+                   "#c9b8e8","#9fd2e6","#eab8b0","#bfe0a8","#d9c7f0","#f2cf9e"];
+      const N=данные.length, СЕК=360/N, R=190, C=200;
+      let угол=0, крутится=false, готово=[];
+
+      function точка(a,r){ const t=(a-90)*Math.PI/180; return [C+r*Math.cos(t), C+r*Math.sin(t)]; }
+      function рисовать(){
+        let h='<g class="wrot" style="transform-origin:200px 200px;transition:transform 4.4s cubic-bezier(.16,.86,.24,1)">';
+        данные.forEach((it,i)=>{
+          const a0=i*СЕК, a1=(i+1)*СЕК, тускл=готово.includes(i);
+          const [x0,y0]=точка(a0,R), [x1,y1]=точка(a1,R);
+          h+='<path d="M'+C+','+C+' L'+x0.toFixed(1)+','+y0.toFixed(1)+' A'+R+','+R+
+             ' 0 0 1 '+x1.toFixed(1)+','+y1.toFixed(1)+' Z" fill="'+
+             (тускл?"#e6e1da":ЦВЕТА[i%ЦВЕТА.length])+'" stroke="#fffdf8" stroke-width="3"/>';
+          const am=a0+СЕК/2, [tx,ty]=точка(am,R*0.62);
+          const face=(it.face||it.q||"").slice(0,16);
+          h+='<text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle" '+
+             'dominant-baseline="central" transform="rotate('+am.toFixed(1)+','+tx.toFixed(1)+','+ty.toFixed(1)+')" '+
+             'font-family="Nunito,sans-serif" font-weight="800" font-size="'+(N>9?15:18)+'" fill="'+
+             (тускл?"#a49c93":"#2f2a3d")+'">'+esc(face)+'</text>';
+        });
+        h+='</g><circle cx="200" cy="200" r="192" fill="none" stroke="#2b2430" stroke-width="14"/>'+
+           '<circle cx="200" cy="200" r="183" fill="none" stroke="#fffdf8" stroke-width="4"/>';
+        svg.innerHTML=h;
+        svg.querySelector(".wrot").style.transform="rotate("+угол+"deg)";
+      }
+
+      /* звук синтезируем: файлы грузить не нужно, а щелчок глохнет вместе
+         с замедлением — именно это и создаёт ощущение тормозящего колеса */
+      let AC=null;
+      function ac(){ if(!AC){const K=window.AudioContext||window.webkitAudioContext; if(K)AC=new K();}
+        if(AC&&AC.state==="suspended")AC.resume(); return AC; }
+      function щелчок(сила){
+        const a=ac(); if(!a) return; const t=a.currentTime, d=0.045;
+        const buf=a.createBuffer(1,Math.ceil(a.sampleRate*d),a.sampleRate), ch=buf.getChannelData(0);
+        for(let i=0;i<ch.length;i++) ch[i]=(Math.random()*2-1)*Math.pow(1-i/ch.length,3);
+        const src=a.createBufferSource(); src.buffer=buf;
+        const f=a.createBiquadFilter(); f.type="bandpass"; f.frequency.value=1100+900*сила; f.Q.value=6;
+        const g=a.createGain(); g.gain.setValueAtTime(0.09+0.15*сила,t);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+        src.connect(f); f.connect(g); g.connect(a.destination); src.start(t); src.stop(t+d);
+      }
+      function тон(fr,d,тип,гр,з){ const a=ac(); if(!a) return;
+        const t=a.currentTime+(з||0), o=a.createOscillator(), g=a.createGain();
+        o.type=тип||"sine"; o.frequency.value=fr;
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(гр||0.15,t+0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+        o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+d+0.02); }
+      const звОк=()=>[660,880,1175].forEach((f,i)=>тон(f,0.2,"triangle",0.14,i*0.07));
+      const звНет=()=>{тон(300,0.18,"sine",0.12); тон(210,0.22,"sine",0.1,0.08);};
+
+      function крутить(){
+        const свободные=данные.map((_,i)=>i).filter(i=>!готово.includes(i));
+        if(!свободные.length||крутится) return;
+        крутится=true; hub.disabled=true; fb.textContent="";
+        task.innerHTML='<div class="widle">Колесо крутится…</div>';
+        тон(220,0.16,"triangle",0.11); тон(330,0.18,"triangle",0.09,0.06);
+
+        const цель=свободные[Math.floor(Math.random()*свободные.length)];
+        const внутри=(Math.random()-0.5)*(СЕК*0.55);
+        const надо=-(цель*СЕК+СЕК/2+внутри);
+        const было=угол;
+        угол=было+(5+Math.floor(Math.random()*2))*360+(((надо-было)%360)+360)%360;
+        svg.querySelector(".wrot").style.transform="rotate("+угол+"deg)";
+
+        const t0=performance.now(), путь=угол-было; let посл=-1;
+        (function шаг(t){
+          const k=Math.min(1,(t-t0)/4400), e=1-Math.pow(1-k,3);
+          const n=Math.floor((было+путь*e)/СЕК);
+          if(n!==посл){ if(посл>-1) щелчок(Math.max(0,1-k));
+            needle.classList.remove("tick"); void needle.offsetWidth; needle.classList.add("tick"); }
+          посл=n; if(k<1) requestAnimationFrame(шаг);
+        })(t0);
+
+        setTimeout(()=>{ крутится=false;
+          [523,659,784].forEach((f,i)=>тон(f,0.2,"triangle",0.14,i*0.07));
+          задание(цель); }, 4500);
+      }
+
+      function задание(i){
+        const it=данные[i];
+        task.innerHTML=
+          '<div class="wq">'+esc(it.q||it.face)+'</div>'+
+          '<div class="wrow"><input type="text" class="wans" autocomplete="off" spellcheck="false" placeholder="твой ответ">'+
+          '<button class="check wchk">Проверить</button></div>';
+        const inp=task.querySelector(".wans");
+        inp.focus();
+        inp.onkeydown=ev=>{ if(ev.key==="Enter") проверить(); };
+        task.querySelector(".wchk").onclick=проверить;
+
+        function проверить(){
+          const дано=inp.value.trim().toLowerCase();
+          if(!дано) return;
+          /* учитель мог задать несколько верных вариантов через | */
+          const верные=String(it.answer||"").split("|").map(x=>x.trim().toLowerCase()).filter(Boolean);
+          const попал=верные.some(v=> v===дано || (v.length>=5 && расст(дано,v)<=1) );
+          if(попал){
+            готово.push(i); рисовать(); звОк();
+            fb.className="fb ok"; fb.textContent="Верно · "+верные[0];
+            task.innerHTML='<div class="widle">'+
+              (готово.length===N ? "Все секторы пройдены." : "Крути дальше — осталось "+(N-готово.length)+".")+'</div>';
+            hub.disabled = готово.length===N;
+            if(hub.disabled) hub.textContent="Готово";
+          } else {
+            звНет(); fb.className="fb no"; fb.textContent="Пока нет. Правильно: "+верные[0];
+            inp.select();
+          }
+        }
+      }
+      /* одна опечатка на длинном слове — промах по клавише, а не незнание */
+      function расст(a,b){
+        const m=a.length,n=b.length,d=[];
+        for(let i=0;i<=m;i++)d[i]=[i];
+        for(let j=0;j<=n;j++)d[0][j]=j;
+        for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+          d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+        return d[m][n];
+      }
+
+      hub.onclick=крутить;
+      ["pointerdown","keydown"].forEach(ev=>window.addEventListener(ev,function один(){ac();window.removeEventListener(ev,один);},{once:true}));
+      рисовать();
+      return c;
+    }
+
     function renderLetters(e){
       const c=card('<div class="kind">'+KIND.letters+'</div><div class="qt">Собери слово'+(e.data.hint?' <span style="color:#a3968a;font-size:16px">('+esc(e.data.hint)+')</span>':'')+'</div><div class="built"></div><div class="words"></div><div class="field" style="margin-top:8px"><button class="check">⌫ стереть</button></div><div class="fb"></div>');
       const wbox=c.querySelector(".words"),built=c.querySelector(".built"),fb=c.querySelector(".fb");
@@ -444,7 +617,7 @@
       };
       return c;
     }
-    const R={embed:renderEmbed,shadow:renderShadow,reading:renderReading,tfns:renderTFNS,wordform:renderWordform,headings:renderHeadings,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
+    const R={embed:renderEmbed,shadow:renderShadow,reading:renderReading,tfns:renderTFNS,wordform:renderWordform,headings:renderHeadings,choice:renderChoice,gap:renderGap,match:renderMatch,order:renderOrder,tf:renderTF,listen:renderListen,multi:renderMulti,categorize:renderCategorize,cloze:renderCloze,letters:renderLetters,wheel:renderWheel,fillbox:renderFillbox,text:renderText,image:renderImage,video:renderVideo,audio:renderAudio,dialogue:renderDialogue,note:renderNote,open:renderOpen};
 
     let IS_TEACHER=false;
     /* Домашка блоками: учитель отмечает упражнения и отправляет ученикам.
@@ -529,6 +702,9 @@
         const fn=R[e.type];
         if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
         const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
+        /* Колесо — одно поле на все секторы, а не карточка на каждый */
+        if(e.type==="wheel"){ try{ wrap.appendChild(renderWheel(items)); }catch(err){
+          wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Колесо не удалось показать.</div>')); } return; }
         items.forEach((item,i)=>{ try{ const el=fn({type:e.type,data:item});
           if(item&&item.img){ const im=document.createElement("img"); im.src=item.img; im.alt=""; im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px"; const k=el.querySelector(".kind"); if(k) k.insertAdjacentElement("afterend",im); else el.insertBefore(im,el.firstChild); }
           wrap.appendChild(el); }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
@@ -700,6 +876,8 @@
         const fn=R[ex.type];
         if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️</div><div class="qt">Тип «'+esc(ex.type)+'» не поддерживается.</div>')); return; }
         const items=(ex.data&&ex.data.items&&ex.data.items.length)?ex.data.items:[ex.data];
+        if(ex.type==="wheel"){ try{ wrap.appendChild(renderWheel(items)); }catch(err){
+          wrap.appendChild(warnCard('<div class="kind">⚠️</div><div class="qt">Колесо не удалось показать.</div>')); } return; }
         items.forEach(item=>{ try{
           const el=fn({type:ex.type,data:item});
           if(item&&item.img){const im=document.createElement("img");im.src=item.img;im.alt="";im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px";const k=el.querySelector(".kind");if(k)k.insertAdjacentElement("afterend",im);else el.insertBefore(im,el.firstChild);}

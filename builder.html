@@ -90,6 +90,7 @@
       categorize:{label:"🗂 Категории"},
       cloze:{label:"🔽 Пропуски-выбор"},
       letters:{label:"🔡 Собери слово"},
+      wheel:{label:"🎡 Колесо заданий"},
       fillbox:{label:"📦 Впиши из банка слов"},
       text:{label:"📖 Текст / статья"},
       image:{label:"🖼 Картинка"},
@@ -108,7 +109,7 @@
     // const на верхнем уровне скрипта не попадает в window — а модулям он нужен
     window.TYPES=TYPES;
     // типы, где в одном упражнении можно добавлять несколько заданий-вопросов
-    const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open"]);
+    const QREPEAT=new Set(["choice","gap","order","tf","listen","multi","cloze","letters","open","wheel"]);
     let editId=null;
 
     /* ---- медиа: файл с компьютера → хранилище ex-media, в упражнение идёт ссылка ----
@@ -345,6 +346,15 @@
         bf.innerHTML='<label>ТЕКСТ С ПРОПУСКАМИ</label><textarea class="q" rows="3" placeholder="I [[am|is|are]] happy. She [[likes|like]] cats.">'+esc(d.q||"")+'</textarea><div class="hinttext">Пропуск: [[правильный|неправильный|неправильный]]. Первый вариант — правильный.</div>';
       } else if(type==="letters"){
         bf.innerHTML='<label>СЛОВО ИЛИ ФРАЗА</label><input class="word" placeholder="banana" value="'+esc(d.word||"")+'"><label>ПОДСКАЗКА (перевод, необязательно)</label><input class="hint" placeholder="банан" value="'+esc(d.hint||"")+'">';
+      } else if(type==="wheel"){
+        bf.innerHTML=
+          '<label>НА СЕКТОРЕ (коротко, помещается на колесе)</label>'+
+          '<input class="face" placeholder="go / хлеб / Present Simple" value="'+esc(d.face||"")+'">'+
+          '<label>ЗАДАНИЕ (что увидит ученик, когда сектор выпадет)</label>'+
+          '<textarea class="q" rows="2" placeholder="She ___ to school every day. (go)">'+esc(d.q||"")+'</textarea>'+
+          '<div class="hinttext">Можно слово, можно предложение с пропуском ___ , можно глагол в скобках — что угодно. Проверяется по ответу ниже.</div>'+
+          '<label>ОТВЕТ (несколько вариантов через |)</label>'+
+          '<input class="answer" placeholder="goes|she goes" value="'+esc(d.answer||"")+'">';
       } else if(type==="open"){
         bf.innerHTML='<label>ВОПРОС / ЗАДАНИЕ</label><textarea class="q" rows="2" placeholder="Расскажи о своей семье (2-3 предложения)">'+esc(d.q||"")+'</textarea><label>ОБРАЗЕЦ ОТВЕТА (необязательно)</label><textarea class="model" rows="2" placeholder="This is my mum. Her name is…">'+esc(d.model||"")+'</textarea>';
       }
@@ -535,6 +545,16 @@
         const word=b.querySelector(".word").value.trim();
         if(!word) return {err:"впиши слово"};
         return ret({word,hint:b.querySelector(".hint").value.trim()});
+      }
+      if(type==="wheel"){
+        const q=b.querySelector(".q").value.trim();
+        const answer=b.querySelector(".answer").value.trim();
+        if(!q) return {err:"впиши задание для сектора"};
+        if(!answer) return {err:"впиши ответ — иначе игра не сможет проверить"};
+        /* подпись на секторе не обязательна: если пусто, берём начало задания */
+        let face=b.querySelector(".face").value.trim();
+        if(!face) face=q.replace(/\s+/g," ").slice(0,14)+(q.length>14?"…":"");
+        return ret({face,q,answer});
       }
       if(type==="open"){
         const q=b.querySelector(".q").value.trim();
