@@ -125,6 +125,14 @@
   .sb:hover{border-color:var(--color-accent)}
   .sb.rec{background:#8a1400;border-color:#8a1400;color:#fff}
   .sb.ok{background:#1f7a3d;border-color:#1f7a3d;color:#fff}
+  .sb.voice{background:var(--color-text);border-color:var(--color-text);color:#fff}
+  .brs.marking{background:var(--color-accent-100)}
+  .markbar{position:sticky;top:0;z-index:6;background:var(--color-text);color:#fff;padding:12px 28px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;
+    font:700 13px "Nunito",sans-serif}
+  .markbar b{font:900 14px "Nunito",sans-serif}
+  .markbar button{border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;padding:7px 12px;font:800 12.5px "Nunito",sans-serif;cursor:pointer}
+  .markbar button.go{background:var(--color-accent);border-color:var(--color-accent)}
+  .markbar .hint{font-weight:600;color:var(--color-onink-muted);flex:1 1 240px}
 
   .line{display:flex;flex-wrap:wrap;align-items:flex-start;row-gap:14px}
   .un{display:inline-flex;flex-direction:column;margin-right:2px}
@@ -225,7 +233,20 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
 let LAYERS = Object.assign({ ipa:true, tags:true, links:true, tone:true, ru:true, notes:true, weak:false, nor:false }, store.get("br_layers", {}));
-let FOCUS = null, SLOW = false;
+let FOCUS = null, SLOW = false, MARK = null;   /* MARK — режим разметки времени фраз */
+/* времена начала фраз в ролике: из данных или из разметки учителя (браузер) */
+function times(m){
+  const local = store.get("br_times_" + m.id, null);
+  if (local && local.length) return local;
+  const fromData = m.segs.map(s => (s.t0 == null ? null : s.t0));
+  return fromData.some(x => x != null) ? fromData : null;
+}
+function segTime(m, si){
+  const T = times(m); if (!T || T[si] == null) return null;
+  let end = null;
+  for (let i = si + 1; i < T.length; i++) if (T[i] != null) { end = T[i]; break; }
+  return { start: T[si], end: end };
+}
 
 /* ---------- кэш разбора ---------- */
 const PARSED = {};
@@ -520,7 +541,7 @@ function pitchSVG(u, w){
 }
 
 function segHTML(m, s, P, si){
-  const dn = done(m.id)[si];
+  const dn = done(m.id)[si], hasT = !!segTime(m, si);
   let line = "";
   if (P.ok){
     P.units.forEach((u, ui) => {
@@ -545,7 +566,9 @@ function segHTML(m, s, P, si){
   }
   return '<article class="brs'+(dn?" done":"")+'" id="s-'+si+'">' +
     '<div class="sh"><span class="num">'+String(si+1).padStart(2,"0")+'</span><span class="ru">'+esc(s.ru||"")+'</span>' +
-      '<button class="sb" data-say="'+si+'">▶ Слушать</button>' +
+      (hasT ? '<button class="sb voice" data-play="'+si+'">▶ Голос носителя</button>' +
+              '<button class="sb" data-say="'+si+'" title="Читает голос браузера">🤖</button>'
+            : '<button class="sb" data-say="'+si+'">▶ Слушать</button>') +
       '<button class="sb" data-rec="'+si+'">🎤 Повторить</button>' +
       '<button class="sb'+(dn?" ok":"")+'" data-done="'+si+'">'+(dn?"✓ Отработано":"Отработано")+'</button></div>' +
     '<div class="line">'+line+'</div>' +
@@ -577,7 +600,11 @@ function monoView(m){
     '</div>' +
     '<div class="tools"><span class="lab">Слои</span>' + tg("ipa","Транскрипция") + tg("tags","Звуки") + tg("weak","Слабые формы") + tg("nor","r не звучит") +
       tg("links","Сцепления") + tg("tone","Интонация") + tg("ru","Перевод") + tg("notes","Разбор") +
-      '<button class="tg" id="slowBtn" aria-pressed="'+SLOW+'">Медленно</button></div>' +
+      '<button class="tg" id="slowBtn" aria-pressed="'+SLOW+'">Медленно</button>' +
+      (ROLE === "teacher" && m.video && m.video.yt ? '<button class="tg" id="markBtn">'+(times(m) ? "Переразметить время фраз" : "Разметить время фраз")+'</button>' : "") +
+      '</div>' +
+      (ROLE === "teacher" && m.video && m.video.yt && !times(m) ? '<div class="honest" style="margin-top:0"><b>Голос носителя пока не привязан.</b> ' +
+        'Нажми «Разметить время фраз»: включится ролик, и ты отмечаешь начало каждой фразы одной кнопкой. После этого «Слушать» будет играть кусок видео с настоящим голосом, а не робота.</div>' : "") +
     '<div class="legend"><span><b style="color:var(--color-accent-2)">↘</b>ядро, голос падает</span><span><b style="color:var(--color-accent-2)">↗</b>поднимается</span>' +
       '<span><b style="color:var(--color-accent-2)">↘↗</b>падает и поднимается — «продолжение следует»</span><span><b>|</b>граница группы, микропауза</span></div>' +
     '<div id="segs" class="'+cls+(FOCUS?" focus":"")+'">' + m.segs.map((s, si) => segHTML(m, s, PP[si], si)).join("") + '</div>' +
@@ -687,6 +714,83 @@ function bindPane(r){
     const s = m.segs[+b.dataset.say];
     if (window.SM_speak) SM_speak(plain(s.t), SLOW ? 0.62 : 0.9, "m", { lang:"en-GB" });
   });
+
+  /* ▶ Голос носителя: играет кусок ролика от начала фразы до начала следующей */
+  let stopAt = null, watch = null;
+  function player(){ return PLAYERS.find(P => P.yt); }
+  segs.querySelectorAll("[data-play]").forEach(b => b.onclick = () => {
+    const si = +b.dataset.play, t = segTime(m, si), P = player();
+    if (!t) return;
+    if (!P || !P.yt){ setTimeout(() => b.click(), 400); return; }
+    stopSpeak();
+    try { P.yt.setPlaybackRate(SLOW ? 0.75 : 1); } catch(e){}
+    P.yt.seekTo(Math.max(0, t.start - 0.25), true);
+    P.yt.playVideo();
+    document.getElementById("s-" + si).scrollIntoView({ block: "center", behavior: "smooth" });
+    clearInterval(watch);
+    stopAt = t.end;
+    if (stopAt != null) watch = setInterval(() => {
+      if (!P.yt || !P.yt.getCurrentTime) return clearInterval(watch);
+      if (P.yt.getCurrentTime() >= stopAt){ P.yt.pauseVideo(); clearInterval(watch); }
+    }, 120);
+  });
+
+  /* Разметка времени: учитель слушает ролик и отмечает начало каждой фразы */
+  const markBtn = document.getElementById("markBtn");
+  if (markBtn) markBtn.onclick = () => startMarking(m);
+
+  function startMarking(m){
+    const P = player();
+    if (!P || !P.yt){ markBtn.textContent = "Подожди, ролик ещё грузится…"; setTimeout(() => { markBtn.textContent = "Разметить время фраз"; }, 2000); return; }
+    MARK = { i: 0, list: m.segs.map(() => null) };
+    const bar = document.createElement("div");
+    bar.className = "markbar";
+    segs.parentNode.insertBefore(bar, segs);
+    const draw = () => {
+      const s = m.segs[MARK.i];
+      bar.innerHTML = MARK.i < m.segs.length
+        ? '<b>Фраза '+(MARK.i+1)+' из '+m.segs.length+':</b> <span>'+esc(plain(s.t).slice(0, 70))+'</span>' +
+          '<button class="go" data-m="hit">Отметить (пробел)</button>' +
+          '<button data-m="back">Назад</button><button data-m="minus">−0,3 с</button><button data-m="plus">+0,3 с</button>' +
+          '<button data-m="stop">Прервать</button>' +
+          '<span class="hint">Слушай ролик и жми «Отметить», когда фраза начинается. Кнопка сама переходит к следующей.</span>'
+        : '<b>Готово: отмечены все '+m.segs.length+' фраз.</b>' +
+          '<button class="go" data-m="save">Сохранить</button><button data-m="copy">Скопировать код</button><button data-m="stop">Отмена</button>' +
+          '<span class="hint">«Сохранить» — и кнопка «Голос носителя» заиграет сразу. «Скопировать код» — пришли его мне, я вложу разметку в сайт для всех учеников.</span>';
+      segs.querySelectorAll(".brs").forEach((el, k) => el.classList.toggle("marking", k === MARK.i));
+    };
+    const finish = save => {
+      document.removeEventListener("keydown", key, true);
+      bar.remove(); MARK = null;
+      segs.querySelectorAll(".brs").forEach(el => el.classList.remove("marking"));
+      if (save) render();
+    };
+    bar.onclick = e => {
+      const b = e.target.closest("button"); if (!b) return;
+      const a = b.dataset.m, P = player();
+      if (a === "hit" && P && P.yt){ MARK.list[MARK.i] = +P.yt.getCurrentTime().toFixed(2); MARK.i++; draw(); }
+      else if (a === "back"){ MARK.i = Math.max(0, MARK.i - 1); MARK.list[MARK.i] = null; draw(); }
+      else if (a === "minus" || a === "plus"){
+        const k = MARK.i - 1;
+        if (k >= 0 && MARK.list[k] != null){ MARK.list[k] = Math.max(0, +(MARK.list[k] + (a === "plus" ? 0.3 : -0.3)).toFixed(2)); draw(); }
+      }
+      else if (a === "save"){ store.set("br_times_" + m.id, MARK.list); finish(true); }
+      else if (a === "copy"){
+        const code = JSON.stringify({ mono: m.id, times: MARK.list });
+        navigator.clipboard && navigator.clipboard.writeText(code);
+        b.textContent = "Скопировано";
+      }
+      else if (a === "stop") finish(false);
+    };
+    const key = e => {
+      if (!MARK) return;
+      if (e.code === "Space"){ e.preventDefault(); const h = bar.querySelector('[data-m="hit"]'); if (h) h.click(); }
+    };
+    document.addEventListener("keydown", key, true);
+    draw();
+    try { P.yt.seekTo(0, true); P.yt.playVideo(); } catch(e){}
+    bar.scrollIntoView({ block: "start" });
+  }
   segs.querySelectorAll("[data-done]").forEach(b => b.onclick = () => {
     const i = b.dataset.done, d = done(m.id);
     if (d[i]) delete d[i]; else d[i] = 1;
