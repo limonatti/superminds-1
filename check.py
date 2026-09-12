@@ -51,6 +51,7 @@ MUST_HAVE = {
     "trainer.html":    ["ВЫБЕРИ ЮНИТЫ", "РЕЖИМ"],
     "exercises.html":  ["в домашку", "В домашнюю работу"],
     "shadowing.html":  ["Слушать образец", "Записать себя"],
+    "british.html":    ["Британский акцент", "Все звуки и сцепления", "Как сделаны разборы"],
     "board.html":      ["Ручка", "Стикер", "Таймер"],
     "index.html":      ["Мои курсы"],
     "students.html":   ["Мои ученики", "Новые регистрации", "Учебник", "Домашка"],
@@ -160,7 +161,7 @@ defined = (
     | set(re.findall(r'^\s*(\w+)\s*:', auth, re.M))     # поля вида srsQ: []
 )
 used = set()
-for page in PAGES + ["sm-shell.js", "sm-progress.js", "sm-voice-lab.js"]:
+for page in PAGES + ["sm-shell.js", "sm-progress.js", "sm-voice-lab.js", "sm-british.js"]:
     if not os.path.exists(page):
         continue
     src = open(page, encoding="utf-8").read()

@@ -12,10 +12,14 @@
      VL.record()                       -> Promise<{blob, url, buffer}>  (стоп — VL.stop())
      VL.stop()
      VL.analyse(arrayBufferOrBlob)     -> Promise<Track>
-     VL.compare(refTrack, myTrack)     -> {pitch, tempo, stress, total, notes[]}
+     VL.compare(refTrack, myTrack, words)
+                                       -> {pitch, tempo, stress, words, total, notes[]}
+        words — результат SMS.score / SMS.session (необязательно)
      VL.draw(canvas, refTrack, myTrack)
 
-   Track = { dur, pitch:[{t,hz}], rms:[{t,v}], voiced, words }
+   Track = { dur, rawDur, pitch:[{t,hz}], rms:[{t,v}], voiced }
+   Тишина в начале и в конце записи отрезается — иначе темп и форма
+   кривой сравниваются вместе с паузой до нажатия «Стоп».
    =========================================================================== */
 (function () {
   "use strict";
@@ -115,7 +119,7 @@
     var minLag = Math.floor(sr / FMAX);
     var maxLag = Math.min(Math.floor(sr / FMIN), n - 1);
 
-    var best = -1, bestLag = -1, c0 = 0;
+    var best = -1, bestLag = -1, c0 = 0, nr = {};
     for (i = 0; i < n; i++) c0 += buf[start + i] * buf[start + i];
     if (c0 <= 0) return 0;
 
@@ -126,12 +130,18 @@
         e += buf[start + i + lag] * buf[start + i + lag];
       }
       var norm = c / (Math.sqrt(c0 * e) + 1e-9);
+      nr[lag] = norm;
       if (norm > best) { best = norm; bestLag = lag; }
     }
     if (best < 0.35 || bestLag <= 0) return 0;   // не похоже на голос
 
-    /* уточняем вершину параболой по соседям */
-    return sr / bestLag;
+    /* уточняем вершину параболой по соседям — точнее, чем целый шаг */
+    var y0 = nr[bestLag - 1], y2 = nr[bestLag + 1], lagF = bestLag;
+    if (y0 !== undefined && y2 !== undefined) {
+      var den = y0 - 2 * best + y2;
+      if (den < 0) lagF = bestLag + 0.5 * (y0 - y2) / den;
+    }
+    return sr / lagF;
   }
 
   function analyse(src) {
@@ -158,11 +168,24 @@
         if (b * 1.7 < a && b * 1.7 < c) pitch[k].hz = b * 2;
       }
 
+      /* отрезаем тишину по краям */
+      var mx = 0;
+      rmsArr.forEach(function (x) { if (x.v > mx) mx = x.v; });
+      var thr = Math.max(0.006, mx * 0.08), a0 = 0, a1 = rmsArr.length - 1;
+      while (a0 < a1 && rmsArr[a0].v < thr) a0++;
+      while (a1 > a0 && rmsArr[a1].v < thr) a1--;
+      a0 = Math.max(0, a0 - 2); a1 = Math.min(rmsArr.length - 1, a1 + 2);
+      var t0 = rmsArr.length ? rmsArr[a0].t : 0;
+      var shift = function (x) { var y = {}; for (var k in x) y[k] = x[k]; y.t = x.t - t0; return y; };
+      var P = pitch.slice(a0, a1 + 1).map(shift), Rm = rmsArr.slice(a0, a1 + 1).map(shift);
+      var vc = P.filter(function (x) { return x.hz; }).length;
+
       return {
-        dur: data.length / sr,
-        pitch: pitch,
-        rms: rmsArr,
-        voiced: pitch.length ? voiced / pitch.length : 0
+        dur: Rm.length ? (Rm.length * HOP + WIN) / sr : data.length / sr,
+        rawDur: data.length / sr,
+        pitch: P,
+        rms: Rm,
+        voiced: P.length ? vc / P.length : 0
       };
     });
   }
@@ -215,9 +238,10 @@
     return silent / n;
   }
 
-  function compare(ref, my) {
+  function compare(ref, my, words) {
     var N = 120;
     var notes = [];
+    my = my || { dur: 0, pitch: [], rms: [] };
 
     /* --- интонация --- */
     var pitchScore = null;
@@ -261,10 +285,27 @@
       if (pm - pr > 0.18) notes.push("Много пауз внутри фразы — попробуй сказать её на одном дыхании.");
     }
 
-    var parts = [pitchScore, tempoScore, stressScore].filter(function (x) { return x !== null; });
+    /* --- без образца: хотя бы паузы по своей записи --- */
+    if (!ref && my.pitch.length && pauseRatio(my) > 0.5) {
+      notes.push("Больше половины записи — паузы. Попробуй сказать фразу слитно, на одном выдохе.");
+    }
+
+    /* --- слова по распознаванию --- */
+    var wordsScore = null;
+    if (words && words.words && words.words.length) {
+      wordsScore = words.score;
+      var miss = words.words.filter(function (w) { return w.state === "miss"; }).map(function (w) { return w.word; });
+      var near = words.words.filter(function (w) { return w.state === "near"; }).map(function (w) { return w.word; });
+      if (!miss.length && !near.length) notes.push("Все слова распознаны — дикция чистая.");
+      if (miss.length) notes.push("Не расслышала: " + miss.slice(0, 5).join(", ") +
+        ". Часто это безударные слова — они должны звучать коротко, но не пропадать.");
+      if (near.length) notes.push("Почти: " + near.slice(0, 5).join(", ") + " — проверь гласные и окончания.");
+    }
+
+    var parts = [pitchScore, tempoScore, stressScore, wordsScore].filter(function (x) { return x !== null; });
     var total = parts.length ? Math.round(parts.reduce(function (a, b) { return a + b; }, 0) / parts.length) : null;
 
-    return { pitch: pitchScore, tempo: tempoScore, stress: stressScore, total: total, notes: notes };
+    return { pitch: pitchScore, tempo: tempoScore, stress: stressScore, words: wordsScore, total: total, notes: notes };
   }
 
   /* ---------- график ---------- */
@@ -340,8 +381,9 @@
 
     /* подпись */
     g.font = "800 11px Nunito, sans-serif";
-    g.fillStyle = colRef; g.fillText("— — носитель", padL, h - 8);
-    g.fillStyle = colMy;  g.fillText("——— ты", padL + 96, h - 8);
+    var lx = padL;
+    if (ref) { g.fillStyle = colRef; g.fillText("— — носитель", lx, h - 8); lx += 96; }
+    if (my)  { g.fillStyle = colMy;  g.fillText("——— ты", lx, h - 8); }
   }
 
   window.VL = {

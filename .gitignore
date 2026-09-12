@@ -19,3 +19,6 @@ _chk_run.py
 ref-*.jpg
 ref-*.png
 preview-solutions-el.html
+
+# Файлы, которые Claude отдаёт в чат
+Claude outputs/

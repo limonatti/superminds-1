@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Британский акцент · English with Asya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sm-warm.css?v=b4490901">
+<style>
+  :root{--ipa:"Noto Sans","Charis SIL","Doulos SIL","Gentium Plus","Segoe UI","Lucida Grande","DejaVu Sans",sans-serif}
+  .ipa,.wi{font-family:var(--ipa)}
+
+  /* левая колонка */
+  .who{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--color-divider);
+    background:var(--color-surface);padding:11px 20px;cursor:pointer;color:var(--color-text)}
+  .who:hover{background:var(--color-accent-100)}
+  .who.on{background:var(--color-accent-100);box-shadow:inset 5px 0 0 var(--color-accent)}
+  .who .t{font:800 14.5px "Nunito",sans-serif}
+  .who .d{display:block;margin-top:2px;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .who .kd{float:right;font:800 9.5px "Nunito",sans-serif;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 6px;border:1px solid var(--color-divider);color:var(--color-neutral-700);margin-left:8px}
+  .who .kd.m{border-color:var(--color-accent);color:var(--color-accent)}
+  .grp{display:block;width:100%;text-align:left;border:0;cursor:pointer;background:var(--color-surface-deep);
+    padding:13px 20px 10px;border-bottom:1px solid var(--color-divider);color:var(--color-text)}
+  .grp .t{font:900 11px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+  .grp .d{display:block;font:600 11.5px "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:2px}
+  .grp.on{box-shadow:inset 5px 0 0 var(--color-accent)}
+
+  .box{padding:20px 28px;border-bottom:1px solid var(--color-divider)}
+  .box h2{font:900 clamp(24px,3.2vw,34px) "Nunito",sans-serif;letter-spacing:-.02em;margin:0 0 6px}
+  .box h3{font:900 18px "Nunito",sans-serif;margin:0 0 8px}
+  .box p{font:600 14.5px "Nunito",sans-serif;line-height:1.6;margin:0 0 8px;color:var(--color-neutral-800)}
+  .lab{font:800 10.5px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-600)}
+  .muted{color:var(--color-neutral-700)}
+  .honest{margin:16px 28px;padding:13px 15px;border-left:5px solid #8a6d00;background:#fdf6e3;
+    font:600 13.5px "Nunito",sans-serif;line-height:1.55}
+  .src{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);line-height:1.6}
+  .src a{word-break:break-all}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;background:var(--color-divider);
+    border-bottom:1px solid var(--color-divider)}
+  .bcard{background:var(--color-bg);padding:16px 18px;text-align:left;border:0;cursor:pointer;color:var(--color-text);display:block}
+  .bcard:hover{background:var(--color-accent-100)}
+  .bcard .t{font:900 16px "Nunito",sans-serif;display:block}
+  .bcard .d{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);display:block;margin-top:4px;line-height:1.45}
+  .bcard .k{font:800 10px "Nunito",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent);display:block;margin-bottom:6px}
+
+  /* черты акцента в профиле */
+  .feats{list-style:none;margin:0;padding:0}
+  .feats li{display:grid;grid-template-columns:170px 1fr;gap:4px 16px;padding:12px 0;border-top:1px solid var(--color-divider)}
+  .feats .fn{font:900 14px "Nunito",sans-serif}
+  .feats .fi{display:block;font:700 13px var(--ipa);color:var(--color-accent-600);margin-top:2px}
+  .feats .fx{font:600 14px "Nunito",sans-serif;line-height:1.55}
+  .feats .ex{display:block;font:700 13px "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:3px}
+  .badge2{display:inline-block;font:800 9.5px "Nunito",sans-serif;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 6px;margin:4px 6px 0 0;border:1px solid var(--color-divider);color:var(--color-neutral-700)}
+  .badge2.s{border-color:#1f7a3d;color:#1f7a3d}
+  .badge2.c{border-color:var(--color-accent);color:var(--color-accent)}
+  @media(max-width:560px){.feats li{grid-template-columns:1fr}}
+
+  .vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .vid{border:1px solid var(--color-divider);background:var(--color-bg)}
+  .vid .frame{position:relative;aspect-ratio:16/9;background:#111 center/cover no-repeat;display:flex;align-items:center;justify-content:center;
+    border:0;width:100%;cursor:pointer;color:#fff}
+  .vid .frame span{background:rgba(0,0,0,.65);padding:9px 14px;font:800 13px "Nunito",sans-serif}
+  .vid iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+  .vid .cap{padding:9px 11px;font:700 12.5px "Nunito",sans-serif;line-height:1.4}
+  .vid .cap i{font-style:normal;display:block;color:var(--color-neutral-700);font-weight:600}
+
+  /* проигрыватель платформы */
+  .pl{border:1px solid var(--color-divider);background:var(--color-bg)}
+  .pl-dock{background:var(--color-bg)}
+  .pl-screen{position:relative;aspect-ratio:16/9;overflow:hidden;
+    background:linear-gradient(135deg,var(--color-canvas) 0,var(--color-accent-800) 100%)}
+  .pl-screen iframe,.pl-screen>div{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .pl-start{position:absolute;inset:0;width:100%;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    background-color:var(--color-canvas);background-position:center;background-size:cover;background-repeat:no-repeat}
+  .pl-start span{background:var(--color-accent);color:#fff;padding:11px 18px;font:900 14px "Nunito",sans-serif;letter-spacing:.04em}
+  .pl-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;border-top:1px solid var(--color-divider);background:var(--color-surface-warm)}
+  .pl-bar[hidden],.pl-bar [hidden]{display:none!important}
+  .pl-bar button{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);padding:5px 9px;font:800 12px "Nunito",sans-serif;cursor:pointer;min-width:34px}
+  .pl-bar button[aria-pressed="true"]{background:var(--color-text);border-color:var(--color-text);color:#fff}
+  .pl-bar .pl-play{background:var(--color-accent);border-color:var(--color-accent);color:#fff;min-width:42px}
+  .pl-bar .pl-time{font:800 12px "Nunito",sans-serif;color:var(--color-neutral-700);font-variant-numeric:tabular-nums;margin:0 4px}
+  .pl-bar .pl-sep{width:1px;height:20px;background:var(--color-divider);margin:0 2px}
+  .pl-bar .pl-loop{color:var(--color-accent);border-color:var(--color-accent)}
+  .pl-bar .pl-close{margin-left:auto}
+  .pl-note{padding:10px 12px;border-top:1px solid var(--color-divider);background:#fdf6e3;
+    font:600 12.5px "Nunito",sans-serif;line-height:1.5;border-left:4px solid #8a6d00}
+  .pl .cap{padding:9px 11px;font:700 12.5px "Nunito",sans-serif;line-height:1.4}
+  .pl .cap i{font-style:normal;display:block;color:var(--color-neutral-700);font-weight:600}
+  .pl.docked .pl-dock{position:fixed;right:18px;bottom:18px;width:min(400px,calc(100vw - 36px));z-index:60;
+    box-shadow:0 14px 40px rgba(20,10,8,.35);border:1px solid var(--color-divider)}
+  @media(max-width:700px){.pl.docked .pl-dock{right:8px;left:8px;bottom:8px;width:auto}}
+  .tasks{list-style:none;margin:0;padding:0}
+  .tasks li{padding:9px 0;border-top:1px solid var(--color-divider)}
+  .tasks label{display:flex;gap:10px;align-items:flex-start;font:600 14px "Nunito",sans-serif;line-height:1.5;cursor:pointer}
+  .tasks input{margin-top:4px;accent-color:var(--color-accent);width:17px;height:17px;flex:none}
+
+  /* панель слоёв */
+  .tools{position:sticky;top:0;z-index:5;background:var(--color-bg);border-bottom:1px solid var(--color-divider);padding:10px 28px;
+    display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+  .tools .lab{margin-right:4px}
+  .tg{border:1px solid var(--color-divider);background:var(--color-bg);padding:6px 10px;font:800 12px "Nunito",sans-serif;cursor:pointer;color:var(--color-neutral-700)}
+  .tg[aria-pressed="true"]{background:var(--color-text);border-color:var(--color-text);color:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:12px 28px 16px;border-bottom:1px solid var(--color-divider)}
+  .chip{border:1px solid var(--color-divider);background:var(--color-bg);padding:6px 10px 6px 8px;cursor:pointer;
+    font:700 12.5px "Nunito",sans-serif;color:var(--color-text);display:inline-flex;gap:7px;align-items:center}
+  .chip b{font:700 12px var(--ipa);min-width:18px;text-align:center;padding:1px 4px;color:#fff}
+  .chip em{font-style:normal;color:var(--color-neutral-700);font-weight:800}
+  .chip[aria-pressed="true"]{outline:2px solid var(--color-text);outline-offset:-1px}
+
+  /* сегмент */
+  .brs{padding:18px 28px 16px;border-bottom:1px solid var(--color-divider);scroll-margin-top:60px}
+  .brs.done{background:linear-gradient(90deg,#e4f2e5 0,#e4f2e5 5px,transparent 5px)}
+  .brs.flash{animation:fl 1.6s ease-out}
+  @keyframes fl{0%{background:var(--color-accent-100)}100%{background:transparent}}
+  .sh{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:12px}
+  .sh .num{font:900 13px "Nunito",sans-serif;color:var(--color-accent)}
+  .sh .ru{font:600 13.5px "Nunito",sans-serif;color:var(--color-neutral-700);flex:1 1 240px}
+  .sb{border:1px solid var(--color-divider);background:var(--color-bg);padding:6px 10px;font:800 11.5px "Nunito",sans-serif;
+    cursor:pointer;color:var(--color-text);letter-spacing:.03em}
+  .sb:hover{border-color:var(--color-accent)}
+  .sb.rec{background:#8a1400;border-color:#8a1400;color:#fff}
+  .sb.ok{background:#1f7a3d;border-color:#1f7a3d;color:#fff}
+
+  .line{display:flex;flex-wrap:wrap;align-items:flex-start;row-gap:14px}
+  .un{display:inline-flex;flex-direction:column;margin-right:2px}
+  .uw{display:flex;flex-wrap:wrap;align-items:flex-start;row-gap:10px}
+  .brp{height:16px;width:calc(100% + 10px);margin:0 -5px;overflow:visible;display:block}
+  .brp path{fill:none;stroke:var(--color-accent-2);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+  .brp .hd{stroke:var(--color-neutral-400);stroke-width:1.6}
+  .brp .tl{stroke:var(--color-accent-2-300);stroke-width:1.8}
+  .ub{align-self:flex-start;font:900 22px "Nunito",sans-serif;color:var(--color-neutral-400);padding:0 8px;line-height:1.15}
+  .bw{display:inline-flex;flex-direction:column;align-items:center;gap:3px;padding:0 1px;border-radius:3px;transition:opacity .15s}
+  .wt{font:800 clamp(18px,2.3vw,23px) "Nunito",sans-serif;line-height:1.3;white-space:nowrap;position:relative;color:var(--color-text)}
+  .wt .p{color:var(--color-neutral-500);font-weight:700}
+  .nuc{position:relative;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:var(--color-accent-2)}
+  .nuc::before{position:absolute;left:50%;transform:translateX(-50%);top:-15px;font:900 13px "Noto Sans",sans-serif;color:var(--color-accent-2);white-space:nowrap}
+  .nuc.fall::before{content:"↘"}.nuc.rise::before{content:"↗"}.nuc.fallrise::before{content:"↘↗"}.nuc.risefall::before{content:"↗↘"}
+  .wi{font-size:13.5px;font-weight:500;color:var(--color-accent-600);white-space:nowrap}
+  .wd{display:flex;gap:2px;min-height:15px;flex-wrap:wrap;justify-content:center;max-width:120px}
+  .wd i{font:700 10px var(--ipa);font-style:normal;color:#fff;padding:1px 4px;border-radius:2px;line-height:1.3;cursor:help}
+  .lk{align-self:flex-start;font:900 20px "Nunito",sans-serif;line-height:1.25;margin:0 -1px;cursor:help}
+  .gap{display:inline-block;width:9px}
+
+  .hide-ipa .wi,.hide-tone .brp,.hide-ru .sh .ru,.hide-notes .nts{display:none}
+  .hide-tone .nuc{text-decoration:none}.hide-tone .nuc::before{content:none}
+  .hide-links .lk{color:transparent!important}
+  .wd i.f-weak{display:none}.show-weak .wd i.f-weak{display:inline}
+  .wd i.f-nor{display:none}.show-nor .wd i.f-nor{display:inline}
+  .hide-tags .wd i{display:none!important}
+  .focus .bw{opacity:.28}.focus .bw.hl{opacity:1;background:var(--color-accent-100);outline:1px solid var(--color-accent-300)}
+  .focus .lk{opacity:.25}.focus .lk.hl{opacity:1}
+
+  .nts{margin:12px 0 0;padding:0 0 0 18px}
+  .nts li{font:600 14px "Nunito",sans-serif;line-height:1.55;margin-bottom:4px;color:var(--color-neutral-800)}
+  .nts li b{font-family:var(--ipa);font-weight:700;color:var(--color-accent-600)}
+  .res{margin-top:10px;font:700 14px "Nunito",sans-serif}
+  .res span.o{background:#dff0d2;color:#2b6b1f;padding:1px 4px;margin-right:3px}
+  .res span.n{background:#fdf2cf;color:#7a5c00;padding:1px 4px;margin-right:3px}
+  .res span.x{background:#fbe4de;color:#9c2200;padding:1px 4px;margin-right:3px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:10px 28px;border-bottom:1px solid var(--color-divider);
+    font:700 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .legend span b{font:900 17px "Nunito",sans-serif;margin-right:4px}
+
+  /* справочник звуков */
+  .fgrid{list-style:none;margin:0;padding:0}
+  .fgrid li{border-bottom:1px solid var(--color-divider)}
+  .fgrid button{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:0;
+    background:var(--color-bg);padding:14px 28px;cursor:pointer;color:var(--color-text)}
+  .fgrid button:hover{background:var(--color-accent-100)}
+  .fgrid .sym{font:700 17px var(--ipa);color:#fff;text-align:center;padding:6px 0}
+  .fgrid .t{font:900 15px "Nunito",sans-serif}
+  .fgrid .d{display:block;font:600 13px "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:2px}
+  .fgrid .n{font:900 13px "Nunito",sans-serif;color:var(--color-neutral-700);white-space:nowrap}
+  .occ{list-style:none;margin:0;padding:0}
+  .occ li{border-top:1px solid var(--color-divider)}
+  .occ a{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 28px;color:var(--color-text)}
+  .occ a:hover{background:var(--color-accent-100)}
+  .occ .w1{font:900 16px "Nunito",sans-serif}
+  .occ .w1 .ipa{font-weight:500;font-size:14px;color:var(--color-accent-600);margin-left:8px}
+  .occ .w2{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);display:block;margin-top:2px}
+  .occ .w3{font:800 12px "Nunito",sans-serif;color:var(--color-neutral-700);align-self:center}
+  .rowsx{list-style:none;margin:0;padding:0}
+  .rowsx a{display:flex;gap:14px;align-items:baseline;padding:13px 28px;border-top:1px solid var(--color-divider);color:var(--color-text)}
+  .rowsx a:hover{background:var(--color-accent-100)}
+  .rowsx .t{font:900 15px "Nunito",sans-serif}
+  .rowsx .d{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .rowsx .p{margin-left:auto;font:800 12px "Nunito",sans-serif;color:var(--color-accent);white-space:nowrap}
+  @media(max-width:700px){.box,.brs,.tools,.chips,.legend,.occ a,.rowsx a,.fgrid button{padding-left:16px;padding-right:16px}.honest{margin-left:16px;margin-right:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side" id="side"></nav>
+  <div class="main">
+    <div class="cols">
+      <div class="list" id="nav"><div class="step">Британский акцент</div></div>
+      <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sm-auth.js?v=1a8f02f9"></script>
+<script src="sm-shell.js?v=a553824a"></script>
+<script src="sm-voice.js?v=6a1358e3"></script>
+<script src="sm-speech.js?v=345f1a8d"></script>
+<script src="sm-british.js?v=dc54b937"></script>
+<script src="british-data.js?v=353b64a8"></script>
+<script>
+const esc = SMUI.esc;
+const D = window.BR_DATA, F = BR.FEAT, LK = BR.LINK;
+const ROLE = /[?&]t=1/.test(location.search) ? "teacher" : "student";
+const PEOPLE = {}; D.people.forEach(p => PEOPLE[p.id] = p);
+const MONOS = {}; D.monos.forEach(m => MONOS[m.id] = m);
+const GROUP = {}; D.groups.forEach(g => GROUP[g.id] = g);
+
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+let LAYERS = Object.assign({ ipa:true, tags:true, links:true, tone:true, ru:true, notes:true, weak:false, nor:false }, store.get("br_layers", {}));
+let FOCUS = null, SLOW = false;
+
+/* ---------- кэш разбора ---------- */
+const PARSED = {};
+function parsed(m){
+  if (!PARSED[m.id]) PARSED[m.id] = m.segs.map(s => BR.parse(s));
+  return PARSED[m.id];
+}
+let INDEX = null;
+function index(){
+  if (INDEX) return INDEX;
+  INDEX = { feats:{}, links:{} };
+  D.monos.forEach(m => parsed(m).forEach((P, si) => P.words.forEach((w, wi) => {
+    w.tags.forEach(t => (INDEX.feats[t] = INDEX.feats[t] || []).push({ m:m.id, si, wi, w }));
+    if (w.linkNext) (INDEX.links[w.linkNext] = INDEX.links[w.linkNext] || []).push({ m:m.id, si, wi, w, next:P.words[wi+1] });
+  })));
+  return INDEX;
+}
+const done = id => store.get("br_done_" + id, {});
+
+/* ---------- навигация ---------- */
+function drawNav(route){
+  const nav = document.getElementById("nav");
+  let h = '<button class="grp'+(route.v==="home"?" on":"")+'" data-go="#"><span class="t">Британский акцент</span><span class="d">Разборы речи · 22 говорящих</span></button>' +
+    '<button class="who'+(route.v==="feat"?" on":"")+'" data-go="#f"><span class="t">Все звуки и сцепления</span><span class="d">Справочник: где что встречается</span></button>';
+  D.groups.forEach(g => {
+    h += '<button class="grp'+(route.v==="group"&&route.id===g.id?" on":"")+'" data-go="#g/'+g.id+'"><span class="t">'+esc(g.title)+'</span><span class="d">'+esc(g.sub)+'</span></button>';
+    D.people.filter(p => p.group === g.id).sort((a,b) => (a.kind===b.kind?0:a.kind==="speech"?-1:1)).forEach(p => {
+      const on = (route.v==="person" && route.id===p.id) || (route.v==="mono" && MONOS[route.id] && MONOS[route.id].person===p.id);
+      h += '<button class="who'+(on?" on":"")+'" data-go="#p/'+p.id+'">' +
+        '<span class="kd'+(p.kind==="speech"?" m":"")+'">'+(p.kind==="speech"?"разбор":"профиль")+'</span>' +
+        '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.name)+'</span></button>';
+    });
+  });
+  nav.innerHTML = h;
+  nav.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { location.hash = b.dataset.go; });
+}
+
+function route(){
+  const h = decodeURIComponent(location.hash.replace(/^#/, ""));
+  const [v, id, x] = h.split("/");
+  if (v === "p" && PEOPLE[id]) return { v:"person", id };
+  if (v === "m" && MONOS[id]) return { v:"mono", id, seg: x != null ? +x : null };
+  if (v === "g" && GROUP[id]) return { v:"group", id };
+  if (v === "f") return { v:"feat", id: id || null };
+  return { v:"home" };
+}
+
+let LAST_MONO = null;
+function render(){
+  const r = route();
+  if (r.v === "mono" && r.id !== LAST_MONO){ FOCUS = null; LAST_MONO = r.id; }
+  stopSpeak();
+  destroyPlayers();
+  drawNav(r);
+  const pane = document.getElementById("pane");
+  if (r.v === "person") pane.innerHTML = personView(PEOPLE[r.id]);
+  else if (r.v === "mono") pane.innerHTML = monoView(MONOS[r.id]);
+  else if (r.v === "group") pane.innerHTML = groupView(GROUP[r.id]);
+  else if (r.v === "feat") pane.innerHTML = r.id ? featView(r.id) : featsView();
+  else pane.innerHTML = homeView();
+  bindPane(r);
+  if (r.v === "mono" && r.seg != null){
+    setTimeout(() => {
+      const el = document.getElementById("s-" + r.seg);
+      if (el){ el.scrollIntoView({ block:"center" }); el.classList.add("flash"); }
+    }, 80);
+  } else {
+    pane.scrollTop = 0; window.scrollTo(0, 0);
+  }
+}
+
+/* ---------- экраны ---------- */
+const HONEST = '<div class="honest"><b>Как сделаны разборы.</b> Тексты — официальные стенограммы под открытой лицензией. ' +
+  'Транскрипция, сцепления и интонация — фонетический разбор: как этот человек, судя по его акценту, произносит каждую фразу. ' +
+  'Это не автоматическая расшифровка записи, поэтому слушай видео и сверяй. Черты с пометкой «подтверждено» описаны в исследованиях или у фонетистов.</div>';
+
+function homeView(){
+  return '<div class="pane-hd"><span>Британский акцент</span><span>'+D.monos.length+' разборов · '+D.people.length+' говорящих</span></div>' +
+    '<div class="box"><div class="lab">British voices</div><h2>Как на самом деле говорят британцы</h2>' +
+    '<p>Здесь не голый тренажёр звуков, а речь конкретных людей: король, премьер-министры, Дэвид Аттенборо, Джейми Оливер, Рио Фердинанд, Гай Гарви и ещё 12 звёзд. ' +
+    'Каждая фраза разобрана по косточкам: транскрипция, гортанные смычки, выпавшие звуки, связующий r, слабые формы, ударный слог и движение голоса.</p>' +
+    '<p class="muted">Начни с разбора в своей группе акцентов, потом открой профиль звезды и найди те же черты в её видео.</p></div>' +
+    '<div class="cards">' + D.groups.map(g => {
+      const ps = D.people.filter(p => p.group === g.id);
+      const ms = D.monos.filter(m => PEOPLE[m.person].group === g.id);
+      return '<button class="bcard" data-go="#g/'+g.id+'"><span class="k">'+esc(g.sub)+'</span><span class="t">'+esc(g.title)+'</span>' +
+        '<span class="d">'+esc(g.desc)+'</span><span class="d" style="margin-top:8px;font-weight:800">'+ms.length+' '+SMUI.plural(ms.length,["разбор","разбора","разборов"])+' · '+ps.length+' '+SMUI.plural(ps.length,["говорящий","говорящих","говорящих"])+'</span></button>';
+    }).join("") + '</div>' +
+    '<div class="sect"><span>Все разборы</span><span>'+D.monos.length+'</span></div>' + monoRows(D.monos) + HONEST;
+}
+
+function monoRows(list){
+  return '<ul class="rowsx">' + list.map(m => {
+    const p = PEOPLE[m.person], dn = Object.keys(done(m.id)).length;
+    return '<li><a href="#m/'+m.id+'"><span><span class="t">'+esc(p.ru)+' — '+esc(m.title_ru)+'</span><br>' +
+      '<span class="d">'+esc(m.kind)+' · '+esc(m.date.slice(0,4))+' · '+esc(GROUP[p.group].title)+' · '+m.segs.length+' фраз</span></span>' +
+      '<span class="p">'+(dn ? dn+' / '+m.segs.length : "открыть")+'</span></a></li>';
+  }).join("") + '</ul>';
+}
+
+function groupView(g){
+  const ms = D.monos.filter(m => PEOPLE[m.person].group === g.id);
+  const cel = D.people.filter(p => p.group === g.id && p.kind === "celeb");
+  const spk = D.people.filter(p => p.group === g.id && p.kind === "speech");
+  return '<div class="pane-hd"><span>'+esc(g.title)+'</span><span>'+esc(g.sub)+'</span></div>' +
+    '<div class="box"><h2>'+esc(g.title)+'</h2><p>'+esc(g.desc)+'</p></div>' +
+    '<div class="sect"><span>Разборы речи</span><span>'+ms.length+'</span></div>' + monoRows(ms) +
+    '<div class="sect"><span>Звёзды: профили и видео</span><span>'+cel.length+'</span></div>' +
+    '<div class="cards">' + cel.concat(spk).map(p =>
+      '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+(p.kind==="speech"?"есть разбор":"профиль · видео")+'</span>' +
+      '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.label)+'</span></button>').join("") + '</div>';
+}
+
+function ytId(u){ const m = (u||"").match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/); return m ? m[1] : null; }
+/* Видео играет только здесь, в проигрывателе платформы (YouTube-плеер без выхода на сайт) */
+function videoHTML(v, auto){
+  const id = v.yt || ytId(v.url);
+  if (!id) return "";
+  return '<div class="pl" data-pl="'+esc(id)+'"'+(auto ? ' data-auto="1"' : "")+'><div class="pl-dock">' +
+    '<div class="pl-screen"><button class="pl-start" style="background-image:url(https://i.ytimg.com/vi/'+esc(id)+'/hqdefault.jpg)" aria-label="Смотреть: '+esc(v.title||"")+'"><span>▶ Смотреть</span></button></div>' +
+    '<div class="pl-bar" hidden>' +
+      '<button class="pl-play" data-a="toggle" aria-label="Пауза">❚❚</button>' +
+      '<button data-a="back" title="Назад на 5 секунд">⟲ 5 с</button>' +
+      '<span class="pl-time">0:00 / 0:00</span><span class="pl-sep"></span>' +
+      '<button data-r="0.5">0.5×</button><button data-r="0.75">0.75×</button><button data-r="1" aria-pressed="true">1×</button><span class="pl-sep"></span>' +
+      '<button data-a="A" title="Начало повтора">A</button><button data-a="B" title="Конец повтора">B</button>' +
+      '<button class="pl-loop" data-a="loopoff" hidden>повтор ✕</button>' +
+      '<button class="pl-close" data-a="undock" hidden aria-label="Свернуть проигрыватель">✕</button>' +
+    '</div></div>' +
+    '<div class="cap">'+esc(v.title || "Оригинальная запись")+'<i>'+esc(v.channel||"")+(v.year?' · '+esc(v.year):"")+'</i></div></div>';
+}
+
+let YT_READY = null, PLAYERS = [], PL_SEQ = 0;
+const WEB = /^https?:$/.test(location.protocol);   /* YouTube не играет из локального файла (ошибка 153) */
+function ytApi(){
+  if (window.YT && YT.Player) return Promise.resolve();
+  if (!YT_READY) YT_READY = new Promise((res, rej) => {
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => { if (prev) prev(); res(); };
+    const sc = document.createElement("script");
+    sc.src = "https://www.youtube.com/iframe_api"; sc.onerror = () => rej(new Error("api"));
+    document.head.appendChild(sc);
+    setTimeout(() => rej(new Error("timeout")), 9000);
+  }).catch(e => { YT_READY = null; throw e; });
+  return YT_READY;
+}
+const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); };
+
+function destroyPlayers(){
+  PLAYERS.forEach(P => { clearInterval(P.timer); if (P.io) P.io.disconnect(); try { P.yt && P.yt.destroy && P.yt.destroy(); } catch(e){} });
+  PLAYERS = [];
+}
+
+function mountPlayer(box){
+  const id = box.dataset.pl, screen = box.querySelector(".pl-screen"), bar = box.querySelector(".pl-bar");
+  const P = { box, id, yt:null, A:null, B:null, timer:null, playing:false, dismissed:false };
+  PLAYERS.push(P);
+  const $ = sel => bar.querySelector(sel);
+
+  function setDock(on){
+    if (on === box.classList.contains("docked")) return;
+    if (on){ box.style.minHeight = box.offsetHeight + "px"; box.classList.add("docked"); }
+    else { box.classList.remove("docked"); box.style.minHeight = ""; }
+    $('[data-a="undock"]').hidden = !on;
+  }
+  function paint(){
+    if (!P.yt || !P.yt.getCurrentTime) return;
+    const t = P.yt.getCurrentTime(), d = P.yt.getDuration ? P.yt.getDuration() : 0;
+    $(".pl-time").textContent = fmt(t) + " / " + fmt(d);
+    if (P.A != null && P.B != null && P.B > P.A && t >= P.B) P.yt.seekTo(P.A, true);
+  }
+  function fallback(autoplay){
+    screen.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay='+(autoplay?1:0)+'&rel=0&playsinline=1' +
+      (WEB ? '&origin=' + encodeURIComponent(location.origin) : "") + '" ' +
+      'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Видео" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+  }
+
+  function start(autoplay){
+    PLAYERS.forEach(o => { if (o !== P && o.yt && o.yt.pauseVideo) o.yt.pauseVideo(); });
+    if (autoplay) stopSpeak();
+    const holder = document.createElement("div");
+    holder.id = "ytp-" + (++PL_SEQ);
+    screen.innerHTML = ""; screen.appendChild(holder);
+    ytApi().then(() => {
+      P.yt = new YT.Player(holder.id, {
+        host: "https://www.youtube-nocookie.com", videoId: id,
+        playerVars: Object.assign({ autoplay: autoplay ? 1 : 0, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3 },
+          WEB ? { origin: location.origin } : {}),
+        events: {
+          onReady: e => { bar.hidden = false; if (autoplay) { try { e.target.playVideo(); } catch(x){} } },
+          onStateChange: e => {
+            P.playing = e.data === 1;
+            const b = $('[data-a="toggle"]'); b.textContent = P.playing ? "❚❚" : "▶"; b.setAttribute("aria-label", P.playing ? "Пауза" : "Играть");
+            if (P.playing){ P.dismissed = false; PLAYERS.forEach(o => { if (o !== P && o.yt && o.yt.pauseVideo) o.yt.pauseVideo(); }); }
+          }
+        }
+      });
+      P.timer = setInterval(paint, 250);
+      if ("IntersectionObserver" in window){
+        P.io = new IntersectionObserver(en => {
+          const out = !en[0].isIntersecting;
+          setDock(out && P.playing && !P.dismissed);
+        }, { threshold: 0.15 });
+        P.io.observe(box);
+      }
+    }).catch(() => fallback(autoplay));
+  }
+  if (!WEB){
+    const note = document.createElement("div");
+    note.className = "pl-note";
+    note.innerHTML = 'Файл открыт с диска, поэтому YouTube отвечает ошибкой 153 и не запускает ролик. ' +
+      'Видео заработает, когда страница открыта по адресу сайта.';
+    box.querySelector(".pl-dock").appendChild(note);
+  }
+  box.querySelector(".pl-start").onclick = () => start(true);
+  if (box.dataset.auto && WEB) start(false);
+
+  bar.onclick = e => {
+    const b = e.target.closest("button"); if (!b || !P.yt) return;
+    if (b.dataset.r){
+      P.yt.setPlaybackRate(+b.dataset.r);
+      bar.querySelectorAll("[data-r]").forEach(x => x.setAttribute("aria-pressed", x === b));
+      return;
+    }
+    const a = b.dataset.a, t = P.yt.getCurrentTime();
+    if (a === "toggle"){ P.playing ? P.yt.pauseVideo() : P.yt.playVideo(); }
+    else if (a === "back"){ P.yt.seekTo(Math.max(0, t - 5), true); }
+    else if (a === "A"){ P.A = t; P.B = null; b.textContent = "A " + fmt(t); $('[data-a="B"]').textContent = "B"; $('[data-a="loopoff"]').hidden = false; }
+    else if (a === "B"){
+      if (P.A == null || t <= P.A + 0.3) return;
+      P.B = t; b.textContent = "B " + fmt(t); P.yt.seekTo(P.A, true); P.yt.playVideo();
+    }
+    else if (a === "loopoff"){ P.A = P.B = null; b.hidden = true; $('[data-a="A"]').textContent = "A"; $('[data-a="B"]').textContent = "B"; }
+    else if (a === "undock"){ P.dismissed = true; P.yt.pauseVideo(); setDock(false); }
+  };
+}
+
+function personView(p){
+  const g = GROUP[p.group];
+  const mine = D.monos.filter(m => m.person === p.id);
+  const copy = p.features.filter(x => x.copy), hear = p.features.filter(x => !x.copy);
+  const fl = list => '<ul class="feats">' + list.map(x =>
+    '<li><div><span class="fn">'+esc(x.name)+'</span><span class="fi">'+esc(x.ipa)+'</span>' +
+      '<span class="badge2 '+(x.conf==="source"?"s":"")+'">'+(x.conf==="source"?"подтверждено":"типично для акцента")+'</span></div>' +
+    '<div><span class="fx">'+esc(x.note || (x.fid && F[x.fid] ? F[x.fid].d : ""))+'</span>' +
+      (x.ex && x.ex.length ? '<span class="ex">Примеры: '+esc(x.ex.join(", "))+'</span>' : "") +
+      (x.fid && F[x.fid] && index().feats[x.fid] ? '<span class="ex"><a href="#f/'+x.fid+'">Где это слышно в разборах →</a></span>' : "") +
+    '</div></li>').join("") + '</ul>';
+
+  const doneTasks = store.get("br_tasks_" + p.id, {});
+  const tasks = p.features.filter(x => x.ex && x.ex.length && x.ipa !== "—");
+
+  return '<div class="pane-hd"><span>'+esc(g.title)+'</span><span>'+(p.kind==="speech"?"разбор речи":"профиль")+'</span></div>' +
+    '<div class="box"><div class="lab">'+esc(p.name)+'</div><h2>'+esc(p.ru)+'</h2>' +
+      '<p>'+esc(p.bg)+'</p><p class="muted"><b>Акцент:</b> '+esc(p.label)+'</p></div>' +
+    (mine.length ? '<div class="sect"><span>Разбор речи по фразам</span><span>'+mine.length+'</span></div>' + monoRows(mine) : "") +
+    (copy.length ? '<div class="sect"><span>Что копировать</span><span>'+copy.length+'</span></div><div class="box" style="padding-top:4px">'+fl(copy)+'</div>' : "") +
+    (hear.length ? '<div class="sect"><span>Что узнавать на слух</span><span>'+hear.length+'</span></div><div class="box" style="padding-top:4px">'+fl(hear)+'</div>' : "") +
+    (p.intonation && p.intonation.length ? '<div class="sect"><span>Интонация и манера</span><span></span></div><div class="box">' +
+      p.intonation.map(t => '<p>'+esc(t)+'</p>').join("") + '</div>' : "") +
+    (p.videos && p.videos.length ? '<div class="sect"><span>Видео</span><span>смотри здесь, в проигрывателе</span></div><div class="box"><div class="vids">' +
+      p.videos.map(v => videoHTML(v)).join("") + '</div></div>' : "") +
+    (tasks.length && p.videos && p.videos.length ? '<div class="sect"><span>Задания на слух</span><span>'+Object.keys(doneTasks).length+' / '+tasks.length+'</span></div>' +
+      '<div class="box"><p class="muted">Включи видео и отмечай, когда услышишь черту.</p><ul class="tasks">' + tasks.map((x,i) =>
+        '<li><label><input type="checkbox" data-task="'+i+'"'+(doneTasks[i]?" checked":"")+'><span>Услышь <b>'+esc(x.name.toLowerCase())+'</b> — например, в словах <b>'+esc(x.ex.slice(0,3).join(", "))+'</b>.</span></label></li>').join("") +
+      '</ul></div>' : "") +
+    '<div class="sect"><span>Источники</span><span>'+p.sources.length+'</span></div><div class="box src">' +
+      p.sources.map(u => '<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))+'</a>').join("<br>") + '</div>';
+}
+
+/* --- разбор монолога --- */
+function sylHTML(w){
+  const t = w.text;
+  if (!w.nuc) return esc(t);
+  const r = BR.syllable(t, w.nuc.at);
+  return esc(t.slice(0, r[0])) + '<span class="nuc '+w.nuc.tone+'">'+esc(t.slice(r[0], r[1]))+'</span>' + esc(t.slice(r[1]));
+}
+
+/* контур голоса под каждым словом: до ядра — ровная «голова», на ядре — тон, после — хвост */
+function pitchSVG(u, w){
+  const k = u.nuc ? u.words.indexOf(u.nuc) : -1, i = u.words.indexOf(w);
+  const tone = u.nuc ? u.nuc.nuc.tone : null;
+  let d, cls = "";
+  if (k < 0 || i < k){ d = "M0 9 L100 11"; cls = "hd"; }
+  else if (i === k){
+    d = tone === "fall" ? "M0 4 L100 20" : tone === "rise" ? "M0 19 L100 5" : tone === "fallrise" ? "M0 4 L55 20 L100 12" : "M0 17 L50 3 L100 20";
+  } else {
+    d = tone === "fall" || tone === "risefall" ? "M0 20 L100 21" : tone === "rise" ? "M0 7 L100 3" : "M0 13 L100 6";
+    cls = "tl";
+  }
+  return '<svg class="brp" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="'+cls+'" d="'+d+'"/></svg>';
+}
+
+function segHTML(m, s, P, si){
+  const dn = done(m.id)[si];
+  let line = "";
+  if (P.ok){
+    P.units.forEach((u, ui) => {
+      let ws = "";
+      u.words.forEach((w) => {
+        const wi = P.words.indexOf(w);
+        const tags = w.tags.map(t => F[t] ? '<i class="f-'+t+'" style="background:'+F[t].c+'" title="'+esc(F[t].n)+'">'+esc(F[t].s)+'</i>' : "").join("");
+        ws += '<span class="bw" data-tags="'+w.tags.join(" ")+'" data-link="'+(w.linkNext||"")+'">' +
+          '<span class="wt">'+sylHTML(w)+(w.punct ? '<span class="p">'+esc(w.punct)+'</span>' : "")+'</span>' +
+          pitchSVG(u, w) + '<span class="wi">'+esc(w.ipa)+'</span><span class="wd">'+tags+'</span></span>';
+        const last = u.words[u.words.length - 1] === w;
+        if (!last){
+          ws += w.linkNext ? '<span class="lk" data-lt="'+w.linkNext+'" style="color:'+LK[w.linkNext].c+'" title="'+esc(LK[w.linkNext].n+": "+LK[w.linkNext].d)+'">‿</span>'
+                           : '<span class="gap"></span>';
+        }
+      });
+      line += '<span class="un"><span class="uw">'+ws+'</span></span>';
+      if (ui < P.units.length - 1) line += '<span class="ub'+(u.end==="||"?" big":"")+'" title="граница интонационной группы">'+(u.end==="||"?"||":"|")+'</span>';
+    });
+  } else {
+    line = '<div><div class="wt">'+esc(s.t.replace(/[↘↗]/g,""))+'</div><div class="wi">'+esc(s.ipa)+'</div></div>';
+  }
+  return '<article class="brs'+(dn?" done":"")+'" id="s-'+si+'">' +
+    '<div class="sh"><span class="num">'+String(si+1).padStart(2,"0")+'</span><span class="ru">'+esc(s.ru||"")+'</span>' +
+      '<button class="sb" data-say="'+si+'">▶ Слушать</button>' +
+      '<button class="sb" data-rec="'+si+'">🎤 Повторить</button>' +
+      '<button class="sb'+(dn?" ok":"")+'" data-done="'+si+'">'+(dn?"✓ Отработано":"Отработано")+'</button></div>' +
+    '<div class="line">'+line+'</div>' +
+    (s.notes && s.notes.length ? '<ul class="nts">'+s.notes.map(n => '<li>'+noteHTML(n)+'</li>').join("")+'</ul>' : "") +
+    '<div class="res" id="r-'+si+'" aria-live="polite"></div></article>';
+}
+function noteHTML(n){ return esc(n).replace(/\[([^\]]+)\]/g, '<b>[$1]</b>'); }
+
+function monoView(m){
+  const p = PEOPLE[m.person], g = GROUP[p.group], PP = parsed(m);
+  const S = { f:{}, l:{} };
+  PP.forEach(P => P.words.forEach(w => { w.tags.forEach(t => S.f[t] = (S.f[t]||0) + 1); if (w.linkNext) S.l[w.linkNext] = (S.l[w.linkNext]||0) + 1; }));
+  const order = Object.keys(S.f).filter(k => F[k]).sort((a,b) => S.f[b] - S.f[a]);
+  const dn = Object.keys(done(m.id)).length;
+  const L = LAYERS;
+  const cls = [!L.ipa&&"hide-ipa", !L.tags&&"hide-tags", !L.links&&"hide-links", !L.tone&&"hide-tone", !L.ru&&"hide-ru", !L.notes&&"hide-notes", L.weak&&"show-weak", L.nor&&"show-nor"].filter(Boolean).join(" ");
+  const tg = (k, t) => '<button class="tg" data-layer="'+k+'" aria-pressed="'+!!L[k]+'">'+t+'</button>';
+
+  return '<div class="pane-hd"><span>'+esc(g.title)+' · <a href="#p/'+p.id+'">'+esc(p.ru)+'</a></span><span>'+dn+' / '+m.segs.length+' отработано</span></div>' +
+    '<div class="box"><div class="lab">'+esc(m.kind)+' · '+esc(m.date)+'</div><h2>'+esc(p.ru)+': '+esc(m.title_ru)+'</h2>' +
+      '<p>'+esc(m.intro)+'</p>' +
+      '<p class="src">Текст: <a href="'+esc(m.source.url)+'" target="_blank" rel="noopener">'+esc(m.title)+'</a> · '+esc(m.source.licence)+'. '+esc(m.source.note)+'</p>' +
+      (m.video && m.video.yt ? '<div style="margin-top:14px;max-width:640px">'+videoHTML({ yt:m.video.yt, title:"Оригинальная запись", channel:m.video.channel }, true)+'</div>'
+        : '<p class="src">Запись заседания парламент не разрешает встраивать на сторонние сайты, поэтому этот разбор — без видео.</p>') +
+    '</div>' + HONEST +
+    '<div class="sect"><span>Что слушать в этом монологе</span><span>нажми, чтобы подсветить</span></div>' +
+    '<div class="chips">' + order.map(k => '<button class="chip" data-focus="'+k+'" aria-pressed="'+(FOCUS===k)+'" title="'+esc(F[k].d)+'"><b style="background:'+F[k].c+'">'+esc(F[k].s)+'</b>'+esc(F[k].n)+' <em>'+S.f[k]+'</em></button>').join("") +
+      Object.keys(S.l).map(k => '<button class="chip" data-focus="link:'+k+'" aria-pressed="'+(FOCUS==="link:"+k)+'" title="'+esc(LK[k].d)+'"><b style="background:'+LK[k].c+'">‿</b>'+esc(LK[k].n)+' <em>'+S.l[k]+'</em></button>').join("") +
+    '</div>' +
+    '<div class="tools"><span class="lab">Слои</span>' + tg("ipa","Транскрипция") + tg("tags","Звуки") + tg("weak","Слабые формы") + tg("nor","r не звучит") +
+      tg("links","Сцепления") + tg("tone","Интонация") + tg("ru","Перевод") + tg("notes","Разбор") +
+      '<button class="tg" id="slowBtn" aria-pressed="'+SLOW+'">Медленно</button></div>' +
+    '<div class="legend"><span><b style="color:var(--color-accent-2)">↘</b>ядро, голос падает</span><span><b style="color:var(--color-accent-2)">↗</b>поднимается</span>' +
+      '<span><b style="color:var(--color-accent-2)">↘↗</b>падает и поднимается — «продолжение следует»</span><span><b>|</b>граница группы, микропауза</span></div>' +
+    '<div id="segs" class="'+cls+(FOCUS?" focus":"")+'">' + m.segs.map((s, si) => segHTML(m, s, PP[si], si)).join("") + '</div>' +
+    '<div class="box src">Разметка: ↘ ↗ — ядерный тон на ударном слоге (подчёркнут); ʔ гортанная смычка; (t) выпавший звук; ʳ связующий r; ʲ ʷ вставной звук; n̩ слоговой согласный.</div>';
+}
+
+/* --- справочник звуков --- */
+const GROUPS_F = [["cons","Согласные"],["vow","Гласные"],["flow","Ритм"]];
+function featsView(){
+  const I = index();
+  let h = '<div class="pane-hd"><span>Все звуки и сцепления</span><span>по всем разборам</span></div>' +
+    '<div class="box"><h2>Звуки британской речи</h2><p>Каждая черта — с объяснением, советом «копировать или узнавать» и всеми местами в разборах, где она звучит.</p></div>';
+  GROUPS_F.forEach(([gid, gt]) => {
+    const keys = Object.keys(F).filter(k => F[k].g === gid);
+    h += '<div class="sect"><span>'+gt+'</span><span>'+keys.length+'</span></div><ul class="fgrid">' + keys.map(k => {
+      const occ = I.feats[k] || [], spk = new Set(occ.map(o => MONOS[o.m].person)).size;
+      return '<li><button data-go="#f/'+k+'"><span class="sym" style="background:'+F[k].c+'">'+esc(F[k].s)+'</span>' +
+        '<span><span class="t">'+esc(F[k].n)+'</span><span class="d">'+esc(F[k].d)+'</span></span>' +
+        '<span class="n">'+(occ.length ? occ.length+' × · '+spk+' '+SMUI.plural(spk,["голос","голоса","голосов"]) : "в профилях")+'</span></button></li>';
+    }).join("") + '</ul>';
+  });
+  h += '<div class="sect"><span>Сцепления</span><span>'+Object.keys(LK).length+'</span></div><ul class="fgrid">' + Object.keys(LK).map(k => {
+    const occ = I.links[k] || [];
+    return '<li><button data-go="#f/link:'+k+'"><span class="sym" style="background:'+LK[k].c+'">‿</span><span><span class="t">'+esc(LK[k].n)+'</span><span class="d">'+esc(LK[k].d)+'</span></span><span class="n">'+occ.length+' ×</span></button></li>';
+  }).join("") + '</ul>';
+  return h;
+}
+
+function featView(id){
+  const I = index();
+  const isLink = id.indexOf("link:") === 0, key = isLink ? id.slice(5) : id;
+  const info = isLink ? LK[key] : F[key];
+  if (!info) return featsView();
+  const occ = (isLink ? I.links[key] : I.feats[key]) || [];
+  const byMono = {};
+  occ.forEach(o => (byMono[o.m] = byMono[o.m] || []).push(o));
+  const celebs = D.people.filter(p => p.features.some(x => x.fid === key));
+  return '<div class="pane-hd"><span><a href="#f">Все звуки</a> · '+esc(info.n)+'</span><span>'+occ.length+' ×</span></div>' +
+    '<div class="box"><div class="lab">'+(isLink?"сцепление":"звук")+'</div><h2>'+esc(info.n)+' <span class="ipa" style="color:'+info.c+'">'+esc(info.s||"‿")+'</span></h2>' +
+      '<p>'+esc(info.d)+'</p>' + (info.copy ? '<p><span class="badge2 c">совет</span> '+esc(info.copy)+'</p>' : "") + '</div>' +
+    (celebs.length ? '<div class="sect"><span>У кого описано</span><span>'+celebs.length+'</span></div><div class="cards">' + celebs.map(p => {
+      const x = p.features.find(y => y.fid === key);
+      return '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+esc(GROUP[p.group].title)+(x.conf==="source"?" · подтверждено":"")+'</span><span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(x.note || x.name)+'</span></button>';
+    }).join("") + '</div>' : "") +
+    Object.keys(byMono).map(mid => {
+      const m = MONOS[mid], p = PEOPLE[m.person];
+      return '<div class="sect"><span>'+esc(p.ru)+' — '+esc(m.title_ru)+'</span><span>'+byMono[mid].length+'</span></div><ul class="occ">' +
+        byMono[mid].map(o => {
+          const s = m.segs[o.si];
+          const word = isLink ? o.w.text + " ‿ " + (o.next ? o.next.text : "") : o.w.text;
+          const ipa = isLink ? o.w.ipa + " ‿ " + (o.next ? o.next.ipa : "") : o.w.ipa;
+          return '<li><a href="#m/'+mid+'/'+o.si+'"><span><span class="w1">'+esc(word)+'<span class="ipa">['+esc(ipa)+']</span></span>' +
+            '<span class="w2">'+esc(s.t.replace(/[↘↗]/g,"").replace(/\s*\|\|?\s*/g," "))+'</span></span><span class="w3">фраза '+(o.si+1)+' →</span></a></li>';
+        }).join("") + '</ul>';
+    }).join("");
+}
+
+/* ---------- действия ---------- */
+function stopSpeak(){ try { if (window.SM_stopSpeak) SM_stopSpeak(); } catch(e){} }
+function plain(t){ return t.replace(/[↘↗]/g, "").replace(/\s*\|\|?\s*/g, " ").replace(/\s+/g, " ").trim(); }
+
+let REC = null;
+function bindPane(r){
+  const pane = document.getElementById("pane");
+  pane.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { location.hash = b.dataset.go; });
+  pane.querySelectorAll("[data-pl]").forEach(mountPlayer);
+  if (r.v === "person"){
+    pane.querySelectorAll("[data-task]").forEach(c => c.onchange = () => {
+      const d = store.get("br_tasks_" + r.id, {});
+      if (c.checked) d[c.dataset.task] = 1; else delete d[c.dataset.task];
+      store.set("br_tasks_" + r.id, d);
+    });
+  }
+  if (r.v !== "mono") return;
+  const m = MONOS[r.id], segs = document.getElementById("segs");
+
+  pane.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
+    const k = b.dataset.layer; LAYERS[k] = !LAYERS[k]; store.set("br_layers", LAYERS);
+    b.setAttribute("aria-pressed", LAYERS[k]);
+    const map = { ipa:["hide-ipa",false], tags:["hide-tags",false], links:["hide-links",false], tone:["hide-tone",false], ru:["hide-ru",false], notes:["hide-notes",false], weak:["show-weak",true], nor:["show-nor",true] };
+    const [c, pos] = map[k];
+    segs.classList.toggle(c, pos ? LAYERS[k] : !LAYERS[k]);
+  });
+  document.getElementById("slowBtn").onclick = e => { SLOW = !SLOW; e.currentTarget.setAttribute("aria-pressed", SLOW); };
+
+  const applyFocus = () => {
+    segs.classList.toggle("focus", !!FOCUS);
+    segs.querySelectorAll(".bw").forEach(w => {
+      const on = FOCUS && (FOCUS.indexOf("link:") === 0 ? w.dataset.link === FOCUS.slice(5) : w.dataset.tags.split(" ").indexOf(FOCUS) >= 0);
+      w.classList.toggle("hl", !!on);
+    });
+    segs.querySelectorAll(".lk").forEach(l => l.classList.toggle("hl", !!FOCUS && FOCUS === "link:" + l.dataset.lt));
+    pane.querySelectorAll("[data-focus]").forEach(c => c.setAttribute("aria-pressed", c.dataset.focus === FOCUS));
+    if (FOCUS && FOCUS.indexOf("link:") !== 0){
+      if (FOCUS === "weak" && !LAYERS.weak) { LAYERS.weak = true; segs.classList.add("show-weak"); pane.querySelector('[data-layer="weak"]').setAttribute("aria-pressed", true); }
+      if (FOCUS === "nor" && !LAYERS.nor) { LAYERS.nor = true; segs.classList.add("show-nor"); pane.querySelector('[data-layer="nor"]').setAttribute("aria-pressed", true); }
+    }
+  };
+  pane.querySelectorAll("[data-focus]").forEach(c => c.onclick = () => {
+    FOCUS = FOCUS === c.dataset.focus ? null : c.dataset.focus;
+    applyFocus();
+    if (FOCUS){ const first = segs.querySelector(".bw.hl"); if (first) first.scrollIntoView({ block:"center", behavior:"smooth" }); }
+  });
+  if (FOCUS) applyFocus();
+
+  segs.querySelectorAll("[data-say]").forEach(b => b.onclick = () => {
+    const s = m.segs[+b.dataset.say];
+    if (window.SM_speak) SM_speak(plain(s.t), SLOW ? 0.62 : 0.9, "m", { lang:"en-GB" });
+  });
+  segs.querySelectorAll("[data-done]").forEach(b => b.onclick = () => {
+    const i = b.dataset.done, d = done(m.id);
+    if (d[i]) delete d[i]; else d[i] = 1;
+    store.set("br_done_" + m.id, d);
+    b.classList.toggle("ok", !!d[i]); b.textContent = d[i] ? "✓ Отработано" : "Отработано";
+    document.getElementById("s-" + i).classList.toggle("done", !!d[i]);
+    const hd = pane.querySelector(".pane-hd span:last-child"); if (hd) hd.textContent = Object.keys(d).length + " / " + m.segs.length + " отработано";
+  });
+  segs.querySelectorAll("[data-rec]").forEach(b => b.onclick = async () => {
+    const i = +b.dataset.rec, out = document.getElementById("r-" + i), s = m.segs[i];
+    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка произношения работает в Chrome, Edge и Safari."; return; }
+    if (REC && REC.i === i){
+      b.classList.remove("rec"); b.textContent = "🎤 Повторить"; out.textContent = "Считаю…";
+      const res = await REC.sess.stop(); REC = null;
+      if (!res){ out.textContent = "Не расслышала — говори ближе к микрофону."; return; }
+      out.innerHTML = '<b>'+res.score+' / 100</b> &nbsp;' + res.words.map(w => '<span class="'+(w.state==="ok"?"o":w.state==="near"?"n":"x")+'">'+esc(w.word)+'</span>').join("") +
+        '<div class="src" style="margin-top:4px">Браузер услышал: «'+esc(res.heard)+'»</div>';
+      const best = store.get("br_best_" + m.id, {});
+      if (best[i] == null || res.score > best[i]){ best[i] = res.score; store.set("br_best_" + m.id, best); }
+      return;
+    }
+    if (REC){ try { REC.sess.abort(); } catch(e){} const pb = segs.querySelector('[data-rec="'+REC.i+'"]'); if (pb){ pb.classList.remove("rec"); pb.textContent = "🎤 Повторить"; } }
+    stopSpeak();
+    const sess = SMS.session(plain(s.t), { lang:"en-GB", onInterim: tx => { out.textContent = "Слышу: " + tx; } });
+    if (!sess){ out.textContent = "Микрофон занят или недоступен."; return; }
+    REC = { i, sess };
+    b.classList.add("rec"); b.textContent = "■ Стоп"; out.textContent = "Говори фразу, потом нажми «Стоп».";
+  });
+}
+
+/* ---------- запуск ---------- */
+async function load(){
+  const pane = document.getElementById("pane");
+  const u = await SMUI.requireAuth(pane, ROLE);
+  if (!u) return;
+  SMUI.mount({ role: ROLE, active: "british" });
+  render();
+}
+window.addEventListener("hashchange", render);
+SMUI.mount({ role: ROLE, active: "british" });
+load();
+</script>
+</body>
+</html>

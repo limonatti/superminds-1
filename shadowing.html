@@ -17,6 +17,8 @@
   .snd .ipa{display:inline-block;min-width:34px;font:800 19px "Nunito",sans-serif;color:var(--color-accent)}
   .snd .t{font:800 14.5px "Nunito",sans-serif}
   .snd .d{display:block;margin-top:2px;font:600 12px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .snd.ownb{background:var(--color-bg)}
+  .snd.ownb.on{background:var(--color-accent-100)}
 
   /* Карточка фразы */
   .ph{padding:20px 28px;border-bottom:1px solid var(--color-divider)}
@@ -35,18 +37,86 @@
   .bar .play:disabled{opacity:.4;cursor:default}
   .bar .slow{background:var(--color-bg);color:var(--color-text);border:1px solid var(--color-divider)}
   .bar .slow.on{border-color:var(--color-accent);color:var(--color-accent)}
-  .bar .hint{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .bar .hint{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);flex:1 1 220px}
 
-  /* Пульсация во время записи */
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
   .bar .mic.rec{animation:pulse 1.1s ease-in-out infinite}
   @media(prefers-reduced-motion:reduce){.bar .mic.rec{animation:none}}
 
+  /* Акцент и голос */
+  .vbar{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;padding:10px 28px;
+    border-bottom:1px solid var(--color-divider);background:var(--color-surface-warm);
+    font:700 12.5px "Nunito",sans-serif;color:var(--color-neutral-700)}
+  .vbar .seg{display:inline-flex;border:1px solid var(--color-divider);border-radius:0;overflow:visible}
+  .vbar .seg button{border:0;background:var(--color-bg);padding:7px 12px;font:800 12px "Nunito",sans-serif;cursor:pointer;color:var(--color-text)}
+  .vbar .seg button+button{border-left:1px solid var(--color-divider)}
+  .vbar .seg button[aria-pressed="true"]{background:var(--color-text);color:#fff}
+  .vbar select{font:700 12.5px "Nunito",sans-serif;padding:6px 8px;border:1px solid var(--color-divider);
+    background:var(--color-bg);color:var(--color-text);max-width:260px}
+
+  /* Разбор связной речи */
+  .flow{padding:26px 28px 8px;border-bottom:1px solid var(--color-divider)}
+  .fl-line{font:700 clamp(21px,3vw,28px) "Nunito",sans-serif;line-height:1;display:flex;flex-wrap:wrap;
+    align-items:flex-start;row-gap:30px;padding-top:14px}
+  .wd{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+  .wd .tx{color:var(--color-neutral-600);font-weight:600;white-space:nowrap}
+  .wd.st .tx{color:var(--color-text);font-weight:900}
+  .wd .wf{font:700 12px "Nunito",sans-serif;color:var(--color-accent-2-600);min-height:12px;letter-spacing:.02em}
+  .wd s{text-decoration:line-through;text-decoration-thickness:2px;color:var(--color-neutral-400)}
+  .wd .mk{position:relative;border-radius:2px}
+  .wd .mk[data-l]::before{content:attr(data-l);position:absolute;left:50%;transform:translateX(-50%);
+    top:-17px;font:800 11px "Nunito",sans-serif;padding:0 3px;white-space:nowrap}
+  .wd .mk.as{background:#efe3f7;color:#5b2d86}.wd .mk.as::before{color:#5b2d86}
+  .wd .mk.fl{background:var(--color-ok-bg);color:var(--color-ok-text)}.wd .mk.fl::before{color:var(--color-ok-text)}
+  .wd .mk.hd{background:#dcecee;color:#245a5e}
+  .gap{display:inline-block;width:.42em}
+  .lk{display:inline-flex;align-items:flex-start;justify-content:center;min-width:.7em;margin:0 1px;
+    font:900 22px "Nunito",sans-serif;line-height:.8;cursor:help;transform:translateY(12px)}
+  .lk i{font-style:normal;font:900 13px "Nunito",sans-serif;border-radius:9px;padding:2px 5px;transform:translateY(-8px)}
+  .pz{display:inline-block;margin:0 .45em;color:var(--color-neutral-400);font-weight:600}
+  .rd{position:relative;display:inline-flex;align-items:flex-start}
+  .rd .tx{border-bottom:2px dashed var(--color-accent);padding-bottom:2px}
+  .rd::before{content:"→ " attr(data-say);position:absolute;left:0;top:-19px;font:800 12px "Nunito",sans-serif;
+    color:var(--color-accent);white-space:nowrap}
+  .t-link{color:var(--color-accent)}
+  .t-linkr{color:var(--color-accent-2)}
+  .t-glide{color:#8a6d00}.lk.t-glide i{background:#fdf2cf}
+  .t-elide{color:var(--color-neutral-500)}
+  .t-hold{color:#2f6f73}
+  .t-assim{color:#5b2d86}
+  .t-flap{color:var(--color-ok)}
+  .t-hdrop{color:var(--color-neutral-600)}
+  .t-reduce{color:var(--color-accent)}
+  .t-weak{color:var(--color-accent-2-600)}
+
+  .say{margin:22px 0 14px;padding:12px 15px;background:var(--color-surface);font:700 15px "Nunito",sans-serif;line-height:1.5}
+  .say .k{display:block;font:800 10px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:3px}
+  .say b{font-weight:900;font-size:18px;letter-spacing:.01em}
+
+  .pats{list-style:none;margin:0 0 16px;padding:0}
+  .pats li{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;padding:10px 0;border-top:1px solid var(--color-divider);
+    font:600 14px "Nunito",sans-serif;line-height:1.5}
+  .pats .ptag{font:800 10.5px "Nunito",sans-serif;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+  .pats .pw{font-weight:900;color:var(--color-text)}
+  .pats .snd2{font-weight:800;margin-left:6px}
+  .pats .nt{display:block;color:var(--color-neutral-700);font-size:13.5px}
+  @media(max-width:560px){.pats li{grid-template-columns:1fr}}
+
+  .chunks{padding:4px 28px 18px;border-bottom:1px solid var(--color-divider)}
+  .chunks p{font:600 13px "Nunito",sans-serif;color:var(--color-neutral-700);margin:0 0 10px}
+  .chunks .steps{display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+  .chunks button{border:1px solid var(--color-divider);background:var(--color-bg);padding:9px 13px;
+    font:800 15px "Nunito",sans-serif;cursor:pointer;text-align:left;color:var(--color-text)}
+  .chunks button:hover{border-color:var(--color-accent)}
+  .chunks button.on{border-color:var(--color-accent);background:var(--color-accent-100)}
+  .chunks button .n{display:inline-block;min-width:22px;color:var(--color-accent);font-size:12px}
+
   .chart{padding:10px 28px 4px}
   .chart canvas{width:100%;height:200px;display:block}
+  .chart canvas[hidden]{display:none}
   .chart .cap{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);padding:2px 0 10px}
 
-  .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));border-bottom:1px solid var(--color-divider)}
+  .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));border-bottom:1px solid var(--color-divider)}
   .grade{padding:16px 20px;border-right:1px solid var(--color-divider)}
   .grade:last-child{border-right:0}
   .grade .k{font:800 10px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700)}
@@ -59,11 +129,12 @@
   .notes .who{font:800 10px "Nunito",sans-serif;letter-spacing:.14em;text-transform:uppercase;
     color:var(--color-accent-600);margin-bottom:8px;display:block}
 
-  .words{padding:0 28px 16px;font:800 19px "Nunito",sans-serif;line-height:1.7}
+  .words{padding:14px 28px 6px;font:800 19px "Nunito",sans-serif;line-height:1.9}
   .words span{padding:2px 5px;margin-right:3px}
   .words .ok{background:#dff0d2;color:#2b6b1f}
   .words .near{background:#fdf2cf;color:#7a5c00}
   .words .no{background:#fbe4de;color:#9c2200}
+  .heard{padding:0 28px 16px;font:600 13px "Nunito",sans-serif;color:var(--color-neutral-700);border-bottom:1px solid var(--color-divider)}
 
   .yt{padding:14px 28px 20px}
   .yt iframe{width:100%;aspect-ratio:16/9;border:0;background:#000}
@@ -71,9 +142,19 @@
 
   .warn{margin:14px 28px;padding:13px 15px;border-left:5px solid #8a6d00;background:#fdf6e3;
     font:600 13.5px "Nunito",sans-serif;line-height:1.5}
-  .best{padding:12px 28px;font:700 13px "Nunito",sans-serif;color:var(--color-neutral-700);
-    border-bottom:1px solid var(--color-divider)}
-  .best b{color:var(--color-text)}
+
+  /* Своя фраза */
+  .ownf{padding:22px 28px;border-bottom:1px solid var(--color-divider);display:grid;gap:14px;max-width:760px}
+  .ownf label{display:grid;gap:6px;font:800 11px "Nunito",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)}
+  .ownf textarea,.ownf input[type=text],.ownf input[type=url]{font:700 17px "Nunito",sans-serif;padding:12px 13px;
+    border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-text);width:100%;box-sizing:border-box;
+    text-transform:none;letter-spacing:0}
+  .ownf textarea{min-height:96px;resize:vertical;line-height:1.45}
+  .ownf input[type=file]{font:600 13px "Nunito",sans-serif;text-transform:none;letter-spacing:0}
+  .ownf .sm{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);text-transform:none;letter-spacing:0}
+  .ownf .go{justify-self:start;border:0;background:var(--color-accent);color:#fff;padding:13px 22px;
+    font:800 13px "Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .backlink{border:0;background:none;color:var(--color-accent);font:800 12px "Nunito",sans-serif;cursor:pointer;padding:0}
 </style>
 </head>
 <body>
@@ -82,7 +163,7 @@
   <div class="main">
     <div class="cols">
       <div class="list">
-        <div class="step">Шаг 1 · Выбери звук</div>
+        <div class="step">Шаг 1 · Выбери звук или свою фразу</div>
         <div id="sndList"></div>
       </div>
       <div class="pane" id="pane"><div class="empty"><div class="p">Загрузка…</div></div></div>
@@ -95,28 +176,43 @@
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
-<script src="sm-shell.js?v=29cfb3d6"></script>
-<script src="sm-speech.js?v=6a1ba88b"></script>
-<script src="sm-voice-lab.js?v=7d8c1e9f"></script>
+<script src="sm-shell.js?v=a553824a"></script>
+<script src="sm-voice.js?v=6a1358e3"></script>
+<script src="sm-speech.js?v=345f1a8d"></script>
+<script src="sm-voice-lab.js?v=ee30ed82"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 
-let SOUNDS = [], PHRASES = [], sndSel = 0, phSel = 0;
+/* ---------- состояние ---------- */
+let SOUNDS = [], PHRASES = [], sndSel = 0, phSel = 0, OWN = false, ownForm = false;
 let refTrack = null, myTrack = null, myUrl = null, refAudio = null, slow = false;
-let lastCompare = null, lastWords = null, BEST = {};
+let lastCompare = null, lastWords = null, wordsState = null, BEST = {};
+let sess = null, sessStop = null, ownAudioUrl = null;
+
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+let ACCENT = store.get("sh_accent", "GB") === "US" ? "US" : "GB";
+const langOf = () => ACCENT === "US" ? "en-US" : "en-GB";
+const voiceKey = () => "sh_voice_" + ACCENT;
 
 /* ---------- список звуков ---------- */
 function drawSounds(){
   const box = document.getElementById("sndList");
-  if (!SOUNDS.length){
-    box.innerHTML = '<div class="step" style="border:0;text-transform:none;letter-spacing:0;font:600 14px \'Nunito\',sans-serif;color:var(--color-neutral-700)">Библиотека звуков пуста.</div>';
-    return;
-  }
-  box.innerHTML = SOUNDS.map((s,i) =>
-    '<button class="snd'+(i===sndSel?" on":"")+'" data-i="'+i+'">' +
-      '<span class="ipa">/'+esc(s.ipa)+'/</span><span class="t">'+esc(s.title)+'</span>' +
-      '<span class="d">'+esc(s.examples||"")+'</span></button>').join("");
-  box.querySelectorAll(".snd").forEach(b => b.onclick = async () => {
+  const own = '<button class="snd ownb'+(OWN?" on":"")+'" id="ownBtn">' +
+    '<span class="ipa">✎</span><span class="t">Своя фраза</span>' +
+    '<span class="d">Вставь фразу носителя — разберу связную речь</span></button>';
+  const list = SOUNDS.length
+    ? SOUNDS.map((s,i) =>
+        '<button class="snd'+(!OWN && i===sndSel?" on":"")+'" data-i="'+i+'">' +
+          '<span class="ipa">/'+esc(s.ipa)+'/</span><span class="t">'+esc(s.title)+'</span>' +
+          '<span class="d">'+esc(s.examples||"")+'</span></button>').join("")
+    : '<div class="step" style="border:0;text-transform:none;letter-spacing:0;font:600 14px \'Nunito\',sans-serif;color:var(--color-neutral-700)">Библиотека звуков пуста.</div>';
+  box.innerHTML = own + list;
+  document.getElementById("ownBtn").onclick = () => openOwnForm();
+  box.querySelectorAll("[data-i]").forEach(b => b.onclick = async () => {
+    stopAll(); OWN = false; ownForm = false;
     sndSel = +b.dataset.i; phSel = 0; resetTake();
     drawSounds(); await loadPhrases();
   });
@@ -133,23 +229,48 @@ async function loadPhrases(){
 
 async function loadBest(){
   BEST = {};
+  if (OWN){
+    const own = store.get("sh_own_best", {});
+    PHRASES.forEach(p => { if (own[p.text] != null) BEST[p.text] = own[p.text]; });
+    return;
+  }
   if (!PHRASES.length) return;
   let rows = [];
   try { rows = (await SM.shMyBest(PHRASES.map(p=>p.id))) || []; } catch(e){}
   rows.forEach(r => {
     const cur = BEST[r.phrase_id];
-    if (!cur || (r.score||0) > cur) BEST[r.phrase_id] = r.score||0;
+    if (cur == null || (r.score||0) > cur) BEST[r.phrase_id] = r.score||0;
   });
 }
+const bestKey = p => p.own ? p.text : p.id;
 
 function resetTake(){
-  refTrack = null; myTrack = null; lastCompare = null; lastWords = null;
+  refTrack = null; myTrack = null; lastCompare = null; lastWords = null; wordsState = null;
   if (myUrl){ URL.revokeObjectURL(myUrl); myUrl = null; }
 }
 
-/* ---------- эталон ---------- */
+function stopAll(){
+  try { if (window.SM_stopSpeak) SM_stopSpeak(); else speechSynthesis.cancel(); } catch(e){}
+  if (refAudio) { try { refAudio.pause(); } catch(e){} }
+  document.querySelectorAll(".chunks button.on").forEach(b => b.classList.remove("on"));
+}
+
+/* ---------- озвучка ---------- */
+function tts(text, rate, onend){
+  if (window.SM_speak){
+    SM_speak(text, rate, "f", { lang: langOf(), voiceURI: store.get(voiceKey(), "") || undefined, onend });
+    return;
+  }
+  try {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = langOf(); u.rate = rate; if (onend) u.onend = onend;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch(e){ if (onend) onend(); }
+}
+
 function speakRef(){
   const p = PHRASES[phSel]; if (!p) return;
+  stopAll();
   if (p.audio_url){
     if (!refAudio) refAudio = new Audio();
     refAudio.src = p.audio_url;
@@ -157,34 +278,114 @@ function speakRef(){
     refAudio.play().catch(()=>{});
     return;
   }
-  /* файла нет — читает браузер */
-  try {
-    const u = new SpeechSynthesisUtterance(p.text);
-    u.lang = "en-GB"; u.rate = slow ? 0.65 : 0.92;
-    speechSynthesis.cancel(); speechSynthesis.speak(u);
-  } catch(e){}
+  tts(p.text, slow ? 0.65 : 0.92);
 }
 
-/* ---------- рисуем экран ---------- */
+/* ---------- разбор связной речи: разметка ---------- */
+function wordHTML(t){
+  const raw = t.raw, L = raw.length;
+  const s = Math.min(t.cutStart || 0, L);
+  let n = 0, cls = "", label = "";
+  if (t.endMark){
+    cls = t.endMark.cls; label = t.endMark.label || "";
+    n = cls === "fl" ? 1 : (t.cutEnd || (t.e && t.e.n) || 1);
+  }
+  n = Math.min(n, L - s);
+  const head = raw.slice(0, s), body = raw.slice(s, L - n), tail = raw.slice(L - n);
+  let tx = (head ? '<s>'+esc(head)+'</s>' : "") + esc(body);
+  if (tail){
+    tx += cls === "el" ? '<s>'+esc(tail)+'</s>'
+        : '<span class="mk '+cls+'"'+(label?' data-l="'+esc(label)+'"':"")+'>'+esc(tail)+'</span>';
+  }
+  return '<span class="wd'+(t.stress?" st":"")+'"><span class="tx">'+tx+'</span>' +
+    '<span class="wf">'+(t.weak ? esc(t.weak.ipa) : "")+'</span></span>';
+}
+
+function flowHTML(F){
+  const T = F.tokens, Lk = F.links;
+  const from = {}, to = {};
+  F.spans.forEach(sp => { from[sp.from] = sp; to[sp.to] = sp; });
+  let h = "";
+  for (let i = 0; i < T.length; i++){
+    const t = T[i];
+    if (from[i]) h += '<span class="rd" title="Разговорная форма" data-say="'+esc(from[i].say)+'">';
+    h += wordHTML(t);
+    const lk = Lk[i];
+    const last = i === T.length - 1;
+    if (!last && lk && lk.type === "in-span") h += '<span class="gap"></span>';
+    if (to[i]) h += '</span>';
+    if (last) break;
+    if (t.brk) h += '<span class="pz" title="пауза">/</span>';
+    else if (lk && lk.type !== "in-span")
+      h += '<span class="lk t-'+lk.type+'" title="'+esc(SMS.names[lk.type]+": "+lk.note)+'">' +
+        (lk.type === "glide" ? '<i>'+esc(lk.sound)+'</i>' : '‿') + '</span>';
+    else if (!lk) h += '<span class="gap"></span>';
+  }
+  return h;
+}
+
+function patsHTML(F){
+  if (!F.items.length)
+    return '<ul class="pats"><li><span class="ptag">Стыков нет</span><span>Фраза читается по словам. Следи за ударениями — жирные слова звучат громче и дольше.</span></li></ul>';
+  return '<ul class="pats">' + F.items.map(it =>
+    '<li><span class="ptag t-'+it.type+'">'+esc(it.name)+'</span><span>' +
+      '<span class="pw">'+esc(it.words)+'</span>' +
+      (it.sound ? '<span class="snd2 t-'+it.type+'">→ '+esc(it.sound)+'</span>' : "") +
+      '<span class="nt">'+esc(it.note)+'</span></span></li>').join("") + '</ul>';
+}
+
+function chunksHTML(F){
+  const C = F.chunks;
+  if (!C.length) return "";
+  const steps = [];
+  for (let k = C.length - 1; k >= 0; k--) steps.push(C.slice(k).join(" "));
+  return '<div class="sect"><span>Отработка по кусочкам</span><span>сборка с конца</span></div>' +
+    '<div class="chunks"><p>' + (C.length > 1
+      ? 'Нажимай по порядку и повторяй вслух. Фраза собирается с конца — так интонация не проседает к финалу.'
+      : 'Фраза короткая — слушай и повторяй целиком, держа все сцепления.') + '</p>' +
+    '<div class="steps">' + steps.map((s,k) =>
+      '<button data-say="'+esc(s)+'"><span class="n">'+(k+1)+'</span>▶ '+esc(s)+'</button>').join("") +
+    '</div></div>';
+}
+
+/* ---------- экран ---------- */
+function voiceBar(){
+  let opts = '<option value="">голос: лучший из доступных</option>';
+  const cur = store.get(voiceKey(), "");
+  if (window.SM_voices){
+    SM_voices(langOf()).slice(0, 10).forEach(v => {
+      opts += '<option value="'+esc(v.voiceURI)+'"'+(v.voiceURI===cur?" selected":"")+'>'+esc(v.name)+'</option>';
+    });
+  }
+  return '<div class="vbar"><span>Акцент</span>' +
+    '<span class="seg"><button data-acc="GB" aria-pressed="'+(ACCENT==="GB")+'">Британский</button>' +
+    '<button data-acc="US" aria-pressed="'+(ACCENT==="US")+'">Американский</button></span>' +
+    '<select id="voiceSel" aria-label="Голос образца">'+opts+'</select></div>';
+}
+
 function drawPane(){
+  if (ownForm) return drawOwnForm();
   const p = document.getElementById("pane");
   const s = SOUNDS[sndSel];
 
   if (!PHRASES.length){
     p.innerHTML = '<div class="pane-hd"><span>Шаг 2 · '+esc(s?s.title:"")+'</span></div>' +
       '<div class="ink"><div><div class="k">Shadowing</div><h2>Фраз для этого звука пока нет</h2>' +
-      '<p>'+esc(s&&s.hint||"")+'</p></div></div>' +
-      (s ? '<div class="notes"><span class="who">Как ставить звук</span><div style="font:600 15px \'Nunito\',sans-serif;line-height:1.6">'+esc(s.hint||"")+'</div></div>' : "");
+      '<p>'+esc(s&&s.hint||"Возьми свою фразу — кнопка «Своя фраза» слева.")+'</p></div></div>';
     return;
   }
 
   const ph = PHRASES[phSel];
   const canGraph = !!ph.audio_url;
-  const best = BEST[ph.id];
+  const best = BEST[bestKey(ph)];
+  const F = SMS.flow(ph.text, { accent: ACCENT });
+
+  const head = OWN
+    ? '<span>Своя фраза · '+(phSel+1)+' из '+PHRASES.length+' · <button class="backlink" id="bEdit">изменить</button></span>'
+    : '<span>Шаг 2 · /'+esc(s.ipa)+'/ · фраза '+(phSel+1)+' из '+PHRASES.length+'</span>';
 
   p.innerHTML =
-    '<div class="pane-hd"><span>Шаг 2 · /'+esc(s.ipa)+'/ · фраза '+(phSel+1)+' из '+PHRASES.length+'</span>' +
-      '<span>'+(best!=null?'лучший результат '+best:'ещё не пробовал')+'</span></div>' +
+    '<div class="pane-hd">'+head+'<span>'+(best!=null?'лучший результат '+best:'ещё нет попыток')+'</span></div>' +
 
     '<div class="ph"><p class="en">'+esc(ph.text)+'</p>' +
       (ph.ipa ? '<p class="ipa">'+esc(ph.ipa)+'</p>' : "") +
@@ -192,18 +393,26 @@ function drawPane(){
 
     '<div class="bar">' +
       '<button class="listen" id="bListen">'+icon("sound",14)+' Слушать образец</button>' +
-      '<button class="slow'+(slow?" on":"")+'" id="bSlow">'+(slow?"замедленно":"обычная скорость")+'</button>' +
+      '<button class="slow'+(slow?" on":"")+'" id="bSlow" aria-pressed="'+slow+'">'+(slow?"замедленно":"обычная скорость")+'</button>' +
       '<button class="mic" id="bMic">🎤 Записать себя</button>' +
       '<button class="play" id="bMine" disabled>▶ Моя запись</button>' +
-      '<span class="hint" id="hint">Послушай, потом запиши свою версию.</span>' +
+      '<span class="hint" id="hint" aria-live="polite">Послушай, потом запиши свою версию.</span>' +
     '</div>' +
+    voiceBar() +
+
+    '<div class="sect"><span>Как звучит в потоке</span><span>'+(ACCENT==="US"?"американский":"британский")+'</span></div>' +
+    '<div class="flow"><div class="fl-line" aria-label="Разметка связной речи">'+flowHTML(F)+'</div>' +
+      '<div class="say"><span class="k">Звучит примерно как</span><b>'+esc(F.say)+'</b></div>' +
+      patsHTML(F) + '</div>' +
+
+    chunksHTML(F) +
 
     (canGraph ? "" :
-      '<div class="warn">У этой фразы нет аудиофайла носителя — образец читает браузер, ' +
-      'а его голос нельзя разобрать по частотам. Поэтому график сравнения недоступен: ' +
-      'покажу только твою кривую и точность слов. Добавь аудио к фразе, чтобы включить сравнение.</div>') +
+      '<div class="warn">У этой фразы нет записи носителя — образец читает голос браузера. ' +
+      'Его нельзя разобрать по частотам, поэтому график сравнения недоступен: будут твоя кривая и точность слов.' +
+      (OWN ? ' Прикрепи аудио к своей фразе — появится сравнение.' : '') + '</div>') +
 
-    '<div class="chart"><canvas id="cv"></canvas>' +
+    '<div class="chart"><canvas id="cv" hidden></canvas>' +
       '<div class="cap" id="cap">График появится после записи: пунктир — носитель, сплошная — ты.</div></div>' +
 
     '<div id="res"></div>' +
@@ -215,90 +424,227 @@ function drawPane(){
         'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>' +
       '<div class="cap">Видео открывается с сервера YouTube — оно не хранится на платформе.</div></div>' : "") +
 
-    '<div class="sect"><span>Все фразы звука</span><span>'+PHRASES.length+'</span></div>' +
+    (PHRASES.length > 1 ? '<div class="sect"><span>'+(OWN?"Все предложения":"Все фразы звука")+'</span><span>'+PHRASES.length+'</span></div>' +
     '<div class="rows">' + PHRASES.map((x,i) => {
-      const b = BEST[x.id];
+      const b = BEST[bestKey(x)];
       return '<button class="row'+(i===phSel?" now":"")+'" data-p="'+i+'">' +
         '<span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
         '<span><span class="t">'+esc(x.text)+'</span>' +
         '<span class="d">'+esc(x.translation||"")+'</span></span>' +
         '<span class="b sm">'+(b!=null? b+" / 100" : "открыть")+'</span></button>';
-    }).join("") + '</div>';
+    }).join("") + '</div>' : "");
 
   bind();
   if (myTrack || refTrack) redraw();
+  if (lastCompare) drawResult();
+  if (window.VL && VL.recording()){
+    const b = document.getElementById("bMic");
+    b.textContent = "■ Стоп — идёт запись"; b.classList.add("rec");
+  }
 }
+
+function setHint(t){ const h = document.getElementById("hint"); if (h) h.textContent = t; }
 
 function bind(){
   const $ = id => document.getElementById(id);
   $("bListen").onclick = speakRef;
   $("bSlow").onclick = () => { slow = !slow; drawPane(); };
   $("bMic").onclick = toggleRec;
+  if ($("bEdit")) $("bEdit").onclick = () => openOwnForm(true);
   const mine = $("bMine");
-  if (myUrl){ mine.disabled = false; mine.onclick = () => { const a = new Audio(myUrl); a.play().catch(()=>{}); }; }
-  document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => {
-    phSel = +b.dataset.p; resetTake(); drawPane();
+  if (myUrl){ mine.disabled = false; mine.onclick = () => { stopAll(); const a = new Audio(myUrl); a.play().catch(()=>{}); }; }
+  document.querySelectorAll("[data-acc]").forEach(b => b.onclick = () => {
+    if (ACCENT === b.dataset.acc) return;
+    ACCENT = b.dataset.acc; store.set("sh_accent", ACCENT); stopAll(); drawPane();
   });
+  const vs = $("voiceSel");
+  if (vs) vs.onchange = () => { store.set(voiceKey(), vs.value); const p = PHRASES[phSel]; if (p) tts(p.text, 0.92); };
+  document.querySelectorAll(".chunks [data-say]").forEach(b => b.onclick = () => {
+    stopAll(); b.classList.add("on");
+    tts(b.dataset.say, slow ? 0.62 : 0.88, () => b.classList.remove("on"));
+  });
+  document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => {
+    stopAll(); phSel = +b.dataset.p; resetTake(); drawPane();
+  });
+}
+
+/* ---------- своя фраза ---------- */
+function parseYt(u){
+  u = (u || "").trim(); if (!u) return null;
+  let id = null, t = 0;
+  const m = u.match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([A-Za-z0-9_-]{11})/);
+  if (m) id = m[1]; else if (/^[A-Za-z0-9_-]{11}$/.test(u)) id = u;
+  if (!id) return null;
+  const tm = u.match(/[?&#](?:t|start)=([0-9hms]+)/);
+  if (tm){
+    const v = tm[1];
+    if (/^\d+$/.test(v)) t = +v;
+    else {
+      const h = /(\d+)h/.exec(v), mi = /(\d+)m/.exec(v), s = /(\d+)s/.exec(v);
+      t = (h ? +h[1]*3600 : 0) + (mi ? +mi[1]*60 : 0) + (s ? +s[1] : 0);
+    }
+  }
+  return { id, start: t };
+}
+
+function openOwnForm(keep){
+  stopAll(); OWN = true; ownForm = true;
+  if (!keep) resetTake();
+  drawSounds(); drawOwnForm();
+}
+
+function drawOwnForm(){
+  const p = document.getElementById("pane");
+  const recent = store.get("sh_own_recent", []);
+  const cur = OWN && PHRASES.length && PHRASES[0].own ? PHRASES : null;
+  const curText = cur ? cur.map(x => x.text).join(" ") : "";
+  const curRu = cur && cur.length === 1 ? (cur[0].translation || "") : "";
+  const curYt = cur && cur[0].yt_raw ? cur[0].yt_raw : "";
+
+  p.innerHTML =
+    '<div class="pane-hd"><span>Своя фраза · разбор связной речи</span><span>бесплатно, всё в браузере</span></div>' +
+    '<div class="ownf">' +
+      '<label>Фраза или кусок речи носителя' +
+        '<textarea id="ownText" placeholder="Например: I was gonna tell you about it, but I kind of forgot.">'+esc(curText)+'</textarea>' +
+        '<span class="sm">Скопируй из субтитров сериала, подкаста или видео. Длинный текст разобью на предложения.</span></label>' +
+      '<label>Перевод (необязательно)<input type="text" id="ownRu" value="'+esc(curRu)+'"></label>' +
+      '<label>YouTube с таймкодом (необязательно)<input type="url" id="ownYt" placeholder="https://youtu.be/…?t=83" value="'+esc(curYt)+'">' +
+        '<span class="sm">Видео встанет под разбором и начнётся с нужной секунды.</span></label>' +
+      '<label>Аудио носителя (необязательно)<input type="file" id="ownAudio" accept="audio/*,video/mp4">' +
+        '<span class="sm">Короткий кусок только с этой фразой — тогда появится график сравнения интонации. Файл никуда не загружается.</span></label>' +
+      '<button class="go" id="ownGo">Разобрать</button>' +
+      '<span class="sm" id="ownMsg" aria-live="polite"></span>' +
+    '</div>' +
+    (recent.length ? '<div class="sect"><span>Недавние</span><span>'+recent.length+'</span></div><div class="rows">' +
+      recent.map((r,i) => '<button class="row" data-rec="'+i+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
+        '<span><span class="t">'+esc(r.text)+'</span><span class="d">'+esc(r.ru||"")+'</span></span>' +
+        '<span class="b sm">открыть</span></button>').join("") + '</div>' : "");
+
+  document.getElementById("ownGo").onclick = () => submitOwn();
+  document.getElementById("ownText").addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submitOwn();
+  });
+  p.querySelectorAll("[data-rec]").forEach(b => b.onclick = () => {
+    const r = recent[+b.dataset.rec]; if (!r) return;
+    document.getElementById("ownText").value = r.text;
+    document.getElementById("ownRu").value = r.ru || "";
+    document.getElementById("ownYt").value = r.yt || "";
+    submitOwn();
+  });
+}
+
+async function submitOwn(){
+  const text = document.getElementById("ownText").value.replace(/\s+/g, " ").trim();
+  const ru = document.getElementById("ownRu").value.trim();
+  const ytRaw = document.getElementById("ownYt").value.trim();
+  const file = document.getElementById("ownAudio").files[0];
+  const msg = document.getElementById("ownMsg");
+  if (!/[A-Za-z]/.test(text)){ msg.textContent = "Вставь английскую фразу."; return; }
+  const yt = parseYt(ytRaw);
+  if (ytRaw && !yt){ msg.textContent = "Не узнала ссылку YouTube — проверь её или оставь поле пустым."; return; }
+
+  const parts = (text.match(/[^.!?…]+[.!?…]*["»)]?/g) || [text]).map(x => x.trim()).filter(x => /[A-Za-z]/.test(x));
+  if (file){
+    if (ownAudioUrl) URL.revokeObjectURL(ownAudioUrl);
+    ownAudioUrl = URL.createObjectURL(file);
+  }
+  PHRASES = parts.map(x => ({
+    id: null, own: true, text: x,
+    translation: parts.length === 1 ? ru : "",
+    audio_url: parts.length === 1 && file ? ownAudioUrl : null,
+    yt_id: yt ? yt.id : null, yt_start: yt ? yt.start : 0, yt_raw: ytRaw
+  }));
+
+  const recent = store.get("sh_own_recent", []).filter(r => r.text !== text);
+  recent.unshift({ text, ru, yt: ytRaw });
+  store.set("sh_own_recent", recent.slice(0, 12));
+
+  ownForm = false; phSel = 0; resetTake();
+  await loadBest();
+  drawPane();
+  if (file && parts.length > 1) setHint("Аудио прикрепляется, только когда фраза одна — для сравнения нужен кусок ровно с этой фразой.");
 }
 
 /* ---------- запись и разбор ---------- */
 async function toggleRec(){
-  const btn = document.getElementById("bMic"), hint = document.getElementById("hint");
+  const btn = document.getElementById("bMic");
 
   if (!VL.supported()){
-    hint.textContent = "Этот браузер не умеет записывать звук. Попробуй Chrome или Safari посвежее.";
+    setHint("Этот браузер не умеет записывать звук. Попробуй свежий Chrome или Safari.");
     return;
   }
 
-  if (VL.recording()){ VL.stop(); btn.textContent = "🎤 Записать себя"; btn.classList.remove("rec"); return; }
+  if (VL.recording()){
+    sessStop = sess ? sess.stop() : null; sess = null;
+    VL.stop();
+    btn.textContent = "🎤 Записать себя"; btn.classList.remove("rec");
+    return;
+  }
 
+  stopAll();
+  const ph = PHRASES[phSel];
   btn.textContent = "■ Стоп — идёт запись"; btn.classList.add("rec");
-  hint.textContent = "Говори фразу целиком, потом нажми «Стоп».";
+  setHint("Говори фразу целиком, потом нажми «Стоп».");
+
+  const recP = VL.record();
+  sessStop = null;
+  sess = (window.SMS && SMS.supported())
+    ? SMS.session(ph.text, { lang: langOf(), onInterim: tx => { if (VL.recording() && tx) setHint("Слышу: " + tx); } })
+    : null;
+  wordsState = !(window.SMS && SMS.supported()) ? "unsupported" : sess ? "on" : "failed";
 
   let take;
-  try { take = await VL.record(); }
+  try { take = await recP; }
   catch(err){
-    btn.textContent = "🎤 Записать себя"; btn.classList.remove("rec");
-    hint.textContent = err && err.message ? err.message : "Не получилось записать";
+    if (sess){ sess.abort(); sess = null; }
+    const b = document.getElementById("bMic");
+    if (b){ b.textContent = "🎤 Записать себя"; b.classList.remove("rec"); }
+    setHint(err && err.message ? err.message : "Не получилось записать");
     return;
   }
 
-  btn.textContent = "🎤 Записать снова"; btn.classList.remove("rec");
-  hint.textContent = "Считаю…";
+  if (PHRASES[phSel] !== ph){ if (take && take.url) URL.revokeObjectURL(take.url); return; }
+
+  const b2 = document.getElementById("bMic");
+  if (b2){ b2.textContent = "🎤 Записать снова"; b2.classList.remove("rec"); }
+  setHint("Считаю…");
 
   if (myUrl) URL.revokeObjectURL(myUrl);
   myUrl = take.url;
 
-  const ph = PHRASES[phSel];
+  let words = null;
+  try { words = sessStop ? await sessStop : null; } catch(e){ words = null; }
+  sessStop = null;
+  lastWords = words;
+  if (wordsState === "on" && !words) wordsState = "empty";
 
   try { myTrack = await VL.analyse(take.blob); }
-  catch(e){ hint.textContent = "Не удалось разобрать запись: " + (e.message||""); return; }
+  catch(e){ setHint("Не удалось разобрать запись: " + (e.message||"")); return; }
 
-  /* эталон разбираем только если есть настоящий файл */
   if (ph.audio_url && !refTrack){
     try { refTrack = await VL.analyse(ph.audio_url); }
     catch(e){ refTrack = null; }
   }
 
-  lastCompare = VL.compare(refTrack, myTrack);
+  lastCompare = VL.compare(refTrack, myTrack, lastWords);
+  setHint("Готово. Послушай себя и сравни.");
 
-  /* точность слов — через распознавание браузера, если оно есть */
-  lastWords = null;
-  hint.textContent = "Готово. Послушай себя и сравни график.";
-
+  const mine = document.getElementById("bMine");
+  if (mine){ mine.disabled = false; mine.onclick = () => { stopAll(); const a = new Audio(myUrl); a.play().catch(()=>{}); }; }
   redraw();
   drawResult();
-  saveTake();
+  saveTake(ph);
 }
 
 function redraw(){
   const cv = document.getElementById("cv"); if (!cv) return;
+  cv.hidden = !(myTrack || refTrack);
   VL.draw(cv, refTrack, myTrack);
   const cap = document.getElementById("cap");
   if (cap){
     cap.textContent = refTrack
-      ? "Пунктир — носитель, сплошная — ты. Заливка снизу показывает громкость: там, где выше, стоит ударение."
-      : (myTrack ? "Твоя интонация. Кривую носителя показать не могу — у фразы нет аудиофайла."
+      ? "Пунктир — носитель, сплошная — ты. Заливка снизу — громкость: где выше, там ударение."
+      : (myTrack ? "Твоя интонация. Кривую носителя показать не могу — у фразы нет записи носителя."
                  : "График появится после записи.");
   }
 }
@@ -308,35 +654,55 @@ function cls(n){ return n==null?"":(n>=80?"good":n>=60?"mid":"bad"); }
 function drawResult(){
   const box = document.getElementById("res"); if (!box || !lastCompare) return;
   const c = lastCompare;
-  const g = (k, n, d) => '<div class="grade"><span class="k">'+k+'</span>' +
-    '<span class="n '+cls(n)+'">'+(n==null?"—":n)+'</span><span class="d">'+d+'</span></div>';
+  const g = (k, n, d) => n == null ? "" : '<div class="grade"><span class="k">'+k+'</span>' +
+    '<span class="n '+cls(n)+'">'+n+'</span><span class="d">'+d+'</span></div>';
+
+  let words = "";
+  if (lastWords && lastWords.words){
+    words = '<div class="sect"><span>Точность слов</span><span>по распознаванию браузера</span></div>' +
+      '<div class="words">' + lastWords.words.map(w =>
+        '<span class="'+(w.state==="miss"?"no":w.state)+'">'+esc(w.word)+'</span>').join("") + '</div>' +
+      '<div class="heard">Браузер услышал: «'+esc(lastWords.heard || "…")+'»</div>';
+  } else if (wordsState === "unsupported"){
+    words = '<div class="warn">Точность слов считает распознавание речи — оно есть в Chrome, Edge и Safari. В этом браузере его нет.</div>';
+  } else if (wordsState === "empty" || wordsState === "failed"){
+    words = '<div class="warn">Браузер не расслышал слов. Говори ближе к микрофону и не отключай интернет — распознавание работает через сервер браузера.</div>';
+  }
 
   box.innerHTML =
-    '<div class="grades">' +
-      g("Итог", c.total, "среднее по трём") +
+    (c.total == null ? "" : '<div class="grades">' +
+      g("Итог", c.total, "среднее по доступным") +
+      g("Слова", c.words, "что расслышано") +
       g("Интонация", c.pitch, "движение голоса") +
       g("Темп", c.tempo, "скорость и длина") +
       g("Ударения", c.stress, "где громче") +
-    '</div>' +
+    '</div>') + words +
     (c.notes.length
       ? '<div class="notes"><span class="who">Разбор</span><ul style="margin:0;padding-left:19px">' +
         c.notes.map(n => '<li>'+esc(n)+'</li>').join("") + '</ul></div>'
       : "");
 }
 
-async function saveTake(){
-  const ph = PHRASES[phSel]; if (!ph || !lastCompare) return;
-  const c = lastCompare;
+async function saveTake(ph){
+  if (!ph || !lastCompare) return;
+  const c = lastCompare, key = bestKey(ph);
+  if (c.total != null && (BEST[key] == null || c.total > BEST[key])){
+    BEST[key] = c.total;
+    if (ph.own){
+      const own = store.get("sh_own_best", {});
+      own[ph.text] = c.total;
+      store.set("sh_own_best", own);
+    }
+  }
+  if (ph.own || !ph.id || c.total == null) return;
   try {
     await SM.shSaveTake({
       phrase_id: ph.id, score: c.total, pitch_score: c.pitch,
-      tempo_score: c.tempo, words_score: null,
-      metrics: { dur: myTrack ? +myTrack.dur.toFixed(2) : null, hasRef: !!refTrack }
+      tempo_score: c.tempo, words_score: c.words,
+      heard: lastWords ? lastWords.heard : null,
+      metrics: { dur: myTrack ? +myTrack.dur.toFixed(2) : null, hasRef: !!refTrack, stress: c.stress, accent: ACCENT }
     });
   } catch(e){}
-  if (c.total != null && (BEST[ph.id] == null || c.total > BEST[ph.id])){
-    BEST[ph.id] = c.total;
-  }
 }
 
 /* ---------- запуск ---------- */
@@ -346,8 +712,11 @@ async function load(){
   if (!u) return;
   try { SOUNDS = (await SM.shSounds()) || []; } catch(e){ SOUNDS = []; }
   drawSounds();
-  await loadPhrases();
+  if (!SOUNDS.length) openOwnForm();
+  else await loadPhrases();
   SMUI.mount({ role:"student", active:"shadowing" });
+  /* голоса браузер отдаёт с задержкой — обновим список, когда придут */
+  if (window.SM_voicesReady) SM_voicesReady().then(() => { if (!ownForm && PHRASES.length && !(window.VL && VL.recording())) drawPane(); });
 }
 
 SMUI.mount({ role:"student", active:"shadowing" });
