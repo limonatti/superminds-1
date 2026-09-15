@@ -107,6 +107,98 @@
   .chipsbox>summary:hover{color:var(--color-accent)}
   .chipsbox .chips{border-bottom:0}
   @media(max-width:700px){.vidwrap{padding-left:16px;padding-right:16px}.chipsbox>summary{padding-left:16px;padding-right:16px}}
+
+  /* ======= четыре вида разбора: A нотный стан · B карточки · C два столбца · D караоке ======= */
+  .viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 28px;border-bottom:1px solid var(--color-divider);
+    background:var(--color-surface-warm)}
+  .viewbar .lab{margin-right:4px}
+  .viewbar button{border:1px solid var(--color-divider);background:var(--color-bg);color:var(--color-neutral-700);
+    padding:6px 11px;font:800 12px "Nunito",sans-serif;cursor:pointer}
+  .viewbar button[aria-pressed="true"]{background:var(--color-text);border-color:var(--color-text);color:#fff}
+  .mono-grid{display:block}
+  .mono-side{padding:0}
+  .steps{display:flex;border-bottom:1px solid var(--color-divider);background:var(--color-surface-warm)}
+  .steps button{flex:1;border:0;border-right:1px solid var(--color-divider);background:transparent;cursor:pointer;
+    padding:12px 14px;text-align:left;color:var(--color-text)}
+  .steps button:last-child{border-right:0}
+  .steps .n{display:block;font:900 10px "Nunito",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-400)}
+  .steps .t{display:block;font:900 15px "Nunito",sans-serif;margin-top:3px}
+  .steps .d{display:block;font:600 11.5px "Nunito",sans-serif;color:var(--color-neutral-600);margin-top:2px}
+  .steps button[aria-pressed="true"]{background:var(--color-bg);box-shadow:inset 0 -3px 0 var(--color-accent)}
+  .steps button[aria-pressed="true"] .n{color:var(--color-accent)}
+  .stepnote{padding:13px 28px;font:600 13px/1.55 "Nunito",sans-serif;color:var(--color-neutral-700);border-bottom:1px solid var(--color-divider)}
+  .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--color-divider);
+    border-bottom:1px solid var(--color-divider)}
+  .unit-card{background:var(--color-bg);padding:14px 16px}
+  .unit-card:hover{background:var(--color-surface-warm)}
+  .unit-card .cw{font:800 22px/1.25 "Nunito",sans-serif}
+  .unit-card .ci{font:500 14px var(--ipa);color:var(--color-neutral-600);margin-top:4px}
+  .unit-card .cf{display:block;font:700 11.5px/1.45 "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:8px}
+  .unit-card .cf i{font-style:normal;font-family:var(--ipa);color:var(--color-accent)}
+  .unit-card .cb{display:flex;gap:6px;margin-top:10px}
+  .unit-card .cb button{border:1px solid var(--color-divider);background:var(--color-bg);font:800 11px "Nunito",sans-serif;
+    padding:5px 9px;cursor:pointer;color:var(--color-text)}
+  .unit-card .cb button:hover{border-color:var(--color-accent)}
+  .unit-card .res{margin-top:8px;font-size:13px}
+
+  /* пометки формой, а не цветом */
+  .wt .el{text-decoration:line-through;text-decoration-thickness:2px;opacity:.45}
+  .wt .wk{border-bottom:1px dotted currentColor}
+  .wt sup{font-family:var(--ipa);font-size:.58em;line-height:1}
+  .hide-tags .wt .el{text-decoration:none;opacity:1}
+  .hide-tags .wt .wk{border-bottom:0}
+  .hide-tags .wt sup{display:none}
+
+  /* A · нотный стан: кнопки строки только при наведении */
+  .mv-A .brs .sh{opacity:.25;transition:opacity .15s}
+  .mv-A .brs:hover .sh,.mv-A .brs.act .sh{opacity:1}
+  .mv-A .vidwrap{max-width:640px}
+
+  /* B · карточки: раскрыта одна фраза */
+  .mv-B .mono-side{position:sticky;top:0;z-index:6;background:var(--color-bg);border-bottom:1px solid var(--color-divider)}
+  .mv-B .vidwrap{max-width:420px;padding-bottom:10px}
+  .mv-B #segs{padding:10px 18px 20px;display:grid;gap:8px;background:var(--color-surface)}
+  .mv-B .brs{border:1px solid var(--color-divider);background:var(--color-bg);padding:12px 16px;cursor:pointer}
+  .mv-B .brs:not(.act) .line .wi,.mv-B .brs:not(.act) .line .brp,.mv-B .brs:not(.act) .nts,
+  .mv-B .brs:not(.act) .sh .sb,.mv-B .brs:not(.act) .res{display:none}
+  .mv-B .brs:not(.act) .wt{font-size:17px;color:var(--color-neutral-600);font-weight:700}
+  .mv-B .brs:not(.act) .line{row-gap:2px}
+  .mv-B .brs.act{border-color:var(--color-accent);box-shadow:0 6px 22px rgba(33,26,25,.10)}
+
+  /* C · два столбца */
+  @media(min-width:1000px){
+    .mv-C .mono-grid{display:grid;grid-template-columns:minmax(320px,400px) 1fr;align-items:start}
+    .mv-C .mono-side{position:sticky;top:0;background:var(--color-surface-deep);padding:18px 18px 22px;border-right:1px solid var(--color-divider)}
+    .mv-C .vidwrap{padding:0;max-width:none}
+    .mv-C .tools{position:static;background:transparent;border-bottom:0;padding:14px 0 0}
+    .mv-C .mono-main{min-width:0}
+  }
+
+  /* D · караоке */
+  .mv-D{background:#1b1512;color:#f3ece7}
+  .mv-D .vidwrap{max-width:720px;margin:0 auto;padding:16px 18px}
+  .mv-D .steps,.mv-D .viewbar,.mv-D .tools,.mv-D .stepnote,.mv-D .legend{background:#241d1a;border-color:#3a2f2b;color:#cdbfb7}
+  .mv-D .steps button,.mv-D .viewbar button,.mv-D .tg{color:#f3ece7;border-color:#4a3c37;background:transparent}
+  .mv-D .steps button[aria-pressed="true"]{background:#1b1512;box-shadow:inset 0 -3px 0 var(--color-accent-300)}
+  .mv-D .viewbar button[aria-pressed="true"],.mv-D .tg[aria-pressed="true"]{background:#f3ece7;color:#1b1512;border-color:#f3ece7}
+  .mv-D .cardgrid{background:#3a2f2b}
+  .mv-D .unit-card{background:#241d1a;color:#f3ece7}
+  .mv-D .unit-card .ci,.mv-D .unit-card .cf{color:#bdafa7}
+  .mv-D .unit-card .cb button{background:transparent;color:#f3ece7;border-color:#4a3c37}
+  .mv-D .brs{border-bottom:0;padding:10px 28px;text-align:center;opacity:.32;transition:opacity .2s;cursor:pointer}
+  .mv-D .brs.act{opacity:1}
+  .mv-D .brs .line{justify-content:center}
+  .mv-D .brs:not(.act) .wi,.mv-D .brs:not(.act) .brp,.mv-D .brs:not(.act) .nts,.mv-D .brs:not(.act) .sh .sb,.mv-D .brs:not(.act) .res{display:none}
+  .mv-D .brs:not(.act) .wt{font-size:18px;font-weight:700}
+  .mv-D .wt{color:#fff}
+  .mv-D .wi{color:rgba(243,236,231,.62)}
+  .mv-D .sh .ru{color:rgba(243,236,231,.6)}
+  .mv-D .nts li{color:#cdbfb7}
+  .mv-D .sh{justify-content:center}
+  .mv-D .sb{background:transparent;color:#f3ece7;border-color:#4a3c37}
+  .mv-D .sb.voice{background:var(--color-accent);border-color:var(--color-accent)}
+  .mv-D .brs.done{background:none;box-shadow:inset 3px 0 0 #1f7a3d}
+  @media(max-width:700px){.viewbar,.stepnote{padding-left:16px;padding-right:16px}.steps button{padding:10px}}
   .tools{position:sticky;top:0;z-index:5;background:var(--color-bg);border-bottom:1px solid var(--color-divider);padding:10px 28px;
     display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
   .tools .lab{margin-right:4px}
@@ -240,7 +332,14 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
 let LAYERS = Object.assign({ ipa:true, tags:true, links:true, tone:true, ru:true, notes:true, weak:false, nor:false }, store.get("br_layers", {}));
-let FOCUS = null, SLOW = false, MARK = null;   /* MARK — режим разметки времени фраз */
+let FOCUS = null, SLOW = false, MARK = null, ACTIVE = 0;
+let VIEW = store.get("br_view", "C"), STEP = 0;
+const VIEWS = [["A","Лента"],["B","Карточки"],["C","Два столбца"],["D","Караоке"]];
+const STEPS = [
+  { n:"Шаг 1", t:"Слова", d:"звук в одном слове" },
+  { n:"Шаг 2", t:"Куски", d:"по 2–4 слова, со сцеплениями" },
+  { n:"Шаг 3", t:"Предложения", d:"как в видео, целиком" }
+];   /* MARK — режим разметки времени фраз */
 /* времена начала фраз в ролике: из данных или из разметки учителя (браузер) */
 function times(m){
   const local = store.get("br_times_" + m.id, null);
@@ -256,6 +355,30 @@ function segTime(m, si){
 }
 
 /* ---------- кэш разбора ---------- */
+const STEPDATA = {};
+function stepsOf(m){
+  if (STEPDATA[m.id]) return STEPDATA[m.id];
+  const PP = parsed(m), words = [], chunks = [], seen = {};
+  const PRIO = ["glottal","elide","weak","hdrop","th-front","lvoc","strut-north","bath-short","goat-mono","face-mono","rhotic","syll","bath-long","happy-tense","happy-lax","smooth","yod","ng-g","goose-front","velar","link"];
+  PP.forEach((P, si) => {
+    let cur = [];
+    P.words.forEach((w, i) => {
+      cur.push(w);
+      const nx = P.words[i + 1];
+      const brk = !nx || nx.unit !== w.unit || (!w.linkNext && cur.length >= 3) || cur.length >= 5;
+      if (brk){ if (cur.length > 1 || w.tags.length) chunks.push({ si, words: cur }); cur = []; }
+      const tg = w.tags.filter(t => t !== "nor" && F[t]);
+      if (!tg.length) return;
+      const key = w.text.toLowerCase() + "|" + w.ipa;
+      if (seen[key]) return;
+      seen[key] = 1;
+      words.push({ si, w: w, tags: tg, rank: Math.min.apply(null, tg.map(t => { const k = PRIO.indexOf(t); return k < 0 ? 99 : k; })) });
+    });
+  });
+  words.sort((a, b) => a.rank - b.rank || a.si - b.si);
+  return (STEPDATA[m.id] = { words: words.slice(0, 28), chunks: chunks });
+}
+
 const PARSED = {};
 function parsed(m){
   if (!PARSED[m.id]) PARSED[m.id] = m.segs.map(s => BR.parse(s));
@@ -547,31 +670,37 @@ function pitchSVG(u, w){
   return '<svg class="brp" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path class="'+cls+'" d="'+d+'"/></svg>';
 }
 
+function wordHTML(w, u, P){
+  let tx = sylHTML(w);
+  if (w.tags.indexOf("elide") >= 0) tx = tx.replace(/(.)(<\/span>)?$/, '<span class="el">$1</span>$2');
+  if (w.tags.indexOf("weak") >= 0) tx = '<span class="wk">' + tx + '</span>';
+  if (w.tags.indexOf("glottal") >= 0) tx += '<sup>ʔ</sup>';
+  const names = w.tags.filter(t => F[t]).map(t => F[t].n).join(" · ");
+  return '<span class="bw" data-tags="'+w.tags.join(" ")+'" data-link="'+(w.linkNext||"")+'"'+(names?' title="'+esc(names)+'"':"")+'>' +
+    '<span class="wt">'+tx+(w.punct ? '<span class="p">'+esc(w.punct)+'</span>' : "")+'</span>' +
+    (u ? pitchSVG(u, w) : "") + '<span class="wi">'+esc(w.ipa)+'</span></span>';
+}
+function lineHTML(P){
+  let line = "";
+  P.units.forEach((u, ui) => {
+    let ws = "";
+    u.words.forEach(w => {
+      ws += wordHTML(w, u, P);
+      if (u.words[u.words.length - 1] === w) return;
+      ws += w.linkNext
+        ? '<span class="lk" data-lt="'+w.linkNext+'" title="'+esc(LK[w.linkNext].n+": "+LK[w.linkNext].d)+'">‿</span>'
+        : '<span class="gap"></span>';
+    });
+    line += '<span class="un"><span class="uw">'+ws+'</span></span>';
+    if (ui < P.units.length - 1) line += '<span class="ub'+(u.end==="||"?" big":"")+'" title="граница интонационной группы">'+(u.end==="||"?"||":"|")+'</span>';
+  });
+  return line;
+}
 function segHTML(m, s, P, si){
   const dn = done(m.id)[si], hasT = !!segTime(m, si);
-  let line = "";
-  if (P.ok){
-    P.units.forEach((u, ui) => {
-      let ws = "";
-      u.words.forEach((w) => {
-        const wi = P.words.indexOf(w);
-        const tags = w.tags.map(t => F[t] ? '<i class="f-'+t+'" style="background:'+F[t].c+'" title="'+esc(F[t].n)+'">'+esc(F[t].s)+'</i>' : "").join("");
-        ws += '<span class="bw" data-tags="'+w.tags.join(" ")+'" data-link="'+(w.linkNext||"")+'">' +
-          '<span class="wt">'+sylHTML(w)+(w.punct ? '<span class="p">'+esc(w.punct)+'</span>' : "")+'</span>' +
-          pitchSVG(u, w) + '<span class="wi">'+esc(w.ipa)+'</span><span class="wd">'+tags+'</span></span>';
-        const last = u.words[u.words.length - 1] === w;
-        if (!last){
-          ws += w.linkNext ? '<span class="lk" data-lt="'+w.linkNext+'" style="color:'+LK[w.linkNext].c+'" title="'+esc(LK[w.linkNext].n+": "+LK[w.linkNext].d)+'">‿</span>'
-                           : '<span class="gap"></span>';
-        }
-      });
-      line += '<span class="un"><span class="uw">'+ws+'</span></span>';
-      if (ui < P.units.length - 1) line += '<span class="ub'+(u.end==="||"?" big":"")+'" title="граница интонационной группы">'+(u.end==="||"?"||":"|")+'</span>';
-    });
-  } else {
-    line = '<div><div class="wt">'+esc(s.t.replace(/[↘↗]/g,""))+'</div><div class="wi">'+esc(s.ipa)+'</div></div>';
-  }
-  return '<article class="brs'+(dn?" done":"")+'" id="s-'+si+'">' +
+  const line = P.ok ? lineHTML(P)
+    : '<div><div class="wt">'+esc(s.t.replace(/[↘↗]/g,""))+'</div><div class="wi">'+esc(s.ipa)+'</div></div>';
+  return '<article class="brs'+(dn?" done":"")+(si===ACTIVE?" act":"")+'" id="s-'+si+'" data-seg="'+si+'">' +
     '<div class="sh"><span class="num">'+String(si+1).padStart(2,"0")+'</span><span class="ru">'+esc(s.ru||"")+'</span>' +
       (hasT ? '<button class="sb voice" data-play="'+si+'">▶ Голос носителя</button>' +
               '<button class="sb" data-say="'+si+'" title="Читает голос браузера">🤖</button>'
@@ -581,6 +710,32 @@ function segHTML(m, s, P, si){
     '<div class="line">'+line+'</div>' +
     (s.notes && s.notes.length ? '<ul class="nts">'+s.notes.map(n => '<li>'+noteHTML(n)+'</li>').join("")+'</ul>' : "") +
     '<div class="res" id="r-'+si+'" aria-live="polite"></div></article>';
+}
+
+/* ——— шаг 1: слова · шаг 2: куски ——— */
+function practiceBtns(id, text){
+  return '<div class="cb"><button data-usay="'+esc(text)+'">🔊 Слушать</button>' +
+    '<button data-urec="'+id+'" data-text="'+esc(text)+'">🎤 Повторить</button></div><div class="res" id="u-'+id+'"></div>';
+}
+function wordsStep(m){
+  const W = stepsOf(m).words;
+  return '<div class="stepnote">Сначала звук в одном слове: послушай, повтори, поймай черту. ' +
+    'Здесь '+W.length+' слов из этого монолога, где слышно самое важное. Дальше — куски, потом целые предложения.</div>' +
+    '<div class="cardgrid">' + W.map((x, i) =>
+      '<div class="unit-card"><div class="cw">'+esc(x.w.text)+'</div><div class="ci">'+esc(x.w.ipa)+'</div>' +
+      '<span class="cf">'+x.tags.slice(0,2).map(t => '<i>'+esc(F[t].s)+'</i> '+esc(F[t].n)).join(" · ")+'</span>' +
+      practiceBtns("w"+i, x.w.text) + '</div>').join("") + '</div>';
+}
+function chunksStep(m){
+  const C = stepsOf(m).chunks, PP = parsed(m);
+  return '<div class="stepnote">Теперь кусок: два-четыре слова, которые в речи звучат как одно. Главное — не терять сцепления и слабые формы.</div>' +
+    '<div class="cardgrid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">' + C.map((c, i) => {
+      const text = c.words.map(w => w.text).join(" ");
+      return '<div class="unit-card"><div class="line">' + c.words.map((w, k) =>
+        wordHTML(w, null) + (k < c.words.length - 1
+          ? (w.linkNext ? '<span class="lk" data-lt="'+w.linkNext+'" title="'+esc(LK[w.linkNext].n)+'">‿</span>' : '<span class="gap"></span>')
+          : "")).join("") + '</div>' + practiceBtns("c"+i, text) + '</div>';
+    }).join("") + '</div>';
 }
 function noteHTML(n){ return esc(n).replace(/\[([^\]]+)\]/g, '<b>[$1]</b>'); }
 
@@ -594,37 +749,44 @@ function monoView(m){
   const cls = [!L.ipa&&"hide-ipa", !L.tags&&"hide-tags", !L.links&&"hide-links", !L.tone&&"hide-tone", !L.ru&&"hide-ru", !L.notes&&"hide-notes", L.weak&&"show-weak", L.nor&&"show-nor"].filter(Boolean).join(" ");
   const tg = (k, t) => '<button class="tg" data-layer="'+k+'" aria-pressed="'+!!L[k]+'">'+t+'</button>';
 
-  return '<div class="pane-hd"><span>'+esc(g.title)+' · <a href="#p/'+p.id+'">'+esc(p.ru)+'</a></span><span>'+dn+' / '+m.segs.length+' отработано</span></div>' +
+  const viewbar = '<div class="viewbar"><span class="lab">Вид</span>' +
+    VIEWS.map(v => '<button data-view="'+v[0]+'" aria-pressed="'+(VIEW===v[0])+'">'+v[0]+' · '+v[1]+'</button>').join("") + '</div>';
+  const stepsbar = '<div class="steps">' + STEPS.map((x, i) =>
+    '<button data-step="'+i+'" aria-pressed="'+(i===STEP)+'"><span class="n">'+x.n+'</span><span class="t">'+x.t+'</span><span class="d">'+x.d+'</span></button>').join("") + '</div>';
 
-    /* 1. заголовок  2. видео  3. сразу разбор по фразам  4. источники и пояснения внизу */
-    '<div class="box" style="padding-bottom:14px"><div class="lab">'+esc(m.kind)+' · '+esc(m.date)+'</div>' +
-      '<h2>'+esc(p.ru)+': '+esc(m.title_ru)+'</h2><p>'+esc(m.intro)+'</p></div>' +
-
-    (m.video && m.video.yt
+  const side = (m.video && m.video.yt
       ? '<div class="vidwrap">'+videoHTML({ yt:m.video.yt, title:"Оригинальная запись", channel:m.video.channel }, true)+'</div>'
       : '<div class="honest" style="margin:0 28px 14px"><b>Здесь нет видео.</b> Запись заседания парламент не разрешает встраивать на сторонние сайты. ' +
         'Текст и разбор полные, фразу можно послушать голосом браузера.</div>') +
-
     '<div class="tools"><span class="lab">Слои</span>' + tg("ipa","Транскрипция") + tg("tags","Звуки") + tg("weak","Слабые формы") + tg("nor","r не звучит") +
       tg("links","Сцепления") + tg("tone","Интонация") + tg("ru","Перевод") + tg("notes","Разбор") +
       '<button class="tg" id="slowBtn" aria-pressed="'+SLOW+'">Медленно</button>' +
       (ROLE === "teacher" && m.video && m.video.yt ? '<button class="tg" id="markBtn">'+(times(m) ? "Переразметить время фраз" : "Разметить время фраз")+'</button>' : "") +
       '</div>' +
       (ROLE === "teacher" && m.video && m.video.yt && !times(m) ? '<div class="honest" style="margin-top:0"><b>Голос носителя пока не привязан.</b> ' +
-        'Нажми «Разметить время фраз»: включится ролик, и ты отмечаешь начало каждой фразы одной кнопкой. После этого фраза будет звучать голосом самого говорящего, а не робота.</div>' : "") +
+        'Нажми «Разметить время фраз»: включится ролик, и ты отмечаешь начало каждой фразы одной кнопкой. После этого фраза будет звучать голосом самого говорящего, а не робота.</div>' : "");
 
-    '<details class="chipsbox"'+(FOCUS?" open":"")+'><summary>Что слушать в этом монологе · '+(order.length + Object.keys(S.l).length)+' черт · нажми, чтобы подсветить</summary>' +
+  const chips = '<details class="chipsbox"'+(FOCUS?" open":"")+'><summary>Что слушать в этом монологе · '+(order.length + Object.keys(S.l).length)+' черт · нажми, чтобы подсветить</summary>' +
     '<div class="chips">' + order.map(k => '<button class="chip" data-focus="'+k+'" aria-pressed="'+(FOCUS===k)+'" title="'+esc(F[k].d)+'"><b style="background:'+F[k].c+'">'+esc(F[k].s)+'</b>'+esc(F[k].n)+' <em>'+S.f[k]+'</em></button>').join("") +
       Object.keys(S.l).map(k => '<button class="chip" data-focus="link:'+k+'" aria-pressed="'+(FOCUS==="link:"+k)+'" title="'+esc(LK[k].d)+'"><b style="background:'+LK[k].c+'">‿</b>'+esc(LK[k].n)+' <em>'+S.l[k]+'</em></button>').join("") +
-    '</div></details>' +
+    '</div></details>';
 
-    '<div id="segs" class="'+cls+(FOCUS?" focus":"")+'">' + m.segs.map((s, si) => segHTML(m, s, PP[si], si)).join("") + '</div>' +
+  const content = STEP === 0 ? wordsStep(m)
+    : STEP === 1 ? chunksStep(m)
+    : chips + '<div id="segs" class="'+cls+(FOCUS?" focus":"")+'">' + m.segs.map((s, si) => segHTML(m, s, PP[si], si)).join("") + '</div>' +
+      '<div class="legend"><span><b style="color:var(--color-accent-2)">↘</b>ядро, голос падает</span><span><b style="color:var(--color-accent-2)">↗</b>поднимается</span>' +
+      '<span><b style="color:var(--color-accent-2)">↘↗</b>падает и поднимается — «продолжение следует»</span><span><b>|</b>граница группы</span>' +
+      '<span>ʔ смычка · зачёркнута буква — звук выпал · точки под словом — слабая форма · ‿ сцепление</span></div>';
 
-    '<div class="legend"><span><b style="color:var(--color-accent-2)">↘</b>ядро, голос падает</span><span><b style="color:var(--color-accent-2)">↗</b>поднимается</span>' +
-      '<span><b style="color:var(--color-accent-2)">↘↗</b>падает и поднимается — «продолжение следует»</span><span><b>|</b>граница группы, микропауза</span>' +
-      '<span>ʔ смычка · (t) выпавший звук · ʳ связующий r · ʲ ʷ вставной звук · n̩ слоговой согласный</span></div>' +
-    '<div class="box src" style="padding-top:14px">Текст: <a href="'+esc(m.source.url)+'" target="_blank" rel="noopener">'+esc(m.title)+'</a> · '+esc(m.source.licence)+'. '+esc(m.source.note)+'</div>' +
-    HONEST;
+  return '<div class="pane-hd"><span>'+esc(g.title)+' · <a href="#p/'+p.id+'">'+esc(p.ru)+'</a></span><span>'+dn+' / '+m.segs.length+' отработано</span></div>' +
+    '<div id="mono" class="mv-'+VIEW+'">' +
+      '<div class="box" style="padding-bottom:14px"><div class="lab">'+esc(m.kind)+' · '+esc(m.date)+'</div>' +
+        '<h2>'+esc(p.ru)+': '+esc(m.title_ru)+'</h2><p>'+esc(m.intro)+'</p></div>' + viewbar +
+      '<div class="mono-grid"><aside class="mono-side">'+side+'</aside>' +
+      '<div class="mono-main">'+stepsbar+content+'</div></div>' +
+      '<div class="box src" style="padding-top:14px">Текст: <a href="'+esc(m.source.url)+'" target="_blank" rel="noopener">'+esc(m.title)+'</a> · '+esc(m.source.licence)+'. '+esc(m.source.note)+'</div>' +
+      HONEST +
+    '</div>';
 }
 
 function featsView(){
@@ -694,6 +856,44 @@ function bindPane(r){
   }
   if (r.v !== "mono") return;
   const m = MONOS[r.id], segs = document.getElementById("segs");
+
+  /* переключатели вида и шага */
+  pane.querySelectorAll("[data-view]").forEach(b => b.onclick = () => {
+    VIEW = b.dataset.view; store.set("br_view", VIEW); render();
+  });
+  pane.querySelectorAll("[data-step]").forEach(b => b.onclick = () => { STEP = +b.dataset.step; render(); });
+
+  /* слушать и повторять на шагах «слова» и «куски» */
+  pane.querySelectorAll("[data-usay]").forEach(b => b.onclick = () => {
+    if (window.SM_speak) SM_speak(b.dataset.usay, SLOW ? 0.62 : 0.88, "m", { lang:"en-GB" });
+  });
+  pane.querySelectorAll("[data-urec]").forEach(b => b.onclick = async () => {
+    const id = b.dataset.urec, out = document.getElementById("u-" + id);
+    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка работает в Chrome, Edge и Safari."; return; }
+    if (REC && REC.i === id){
+      b.textContent = "🎤 Повторить"; b.classList.remove("rec"); out.textContent = "Считаю…";
+      const res = await REC.sess.stop(); REC = null;
+      if (!res){ out.textContent = "Не расслышала."; return; }
+      out.innerHTML = '<b>'+res.score+' / 100</b> ' + res.words.map(w =>
+        '<span class="'+(w.state==="ok"?"o":w.state==="near"?"n":"x")+'">'+esc(w.word)+'</span>').join("");
+      return;
+    }
+    if (REC){ try { REC.sess.abort(); } catch(e){} }
+    stopSpeak();
+    const sess = SMS.session(b.dataset.text, { lang:"en-GB" });
+    if (!sess){ out.textContent = "Микрофон занят."; return; }
+    REC = { i: id, sess };
+    b.textContent = "■ Стоп"; b.classList.add("rec"); out.textContent = "Говори…";
+  });
+
+  if (!segs) return;
+
+  /* в видах «Карточки» и «Караоке» раскрыта одна фраза */
+  segs.querySelectorAll("[data-seg]").forEach(el => el.addEventListener("click", e => {
+    if (e.target.closest("button")) return;
+    ACTIVE = +el.dataset.seg;
+    segs.querySelectorAll("[data-seg]").forEach(x => x.classList.toggle("act", x === el));
+  }));
 
   pane.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
     const k = b.dataset.layer; LAYERS[k] = !LAYERS[k]; store.set("br_layers", LAYERS);
