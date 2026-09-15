@@ -43,6 +43,12 @@
     border-bottom:1px solid var(--color-divider)}
   .bcard{background:var(--color-bg);padding:16px 18px;text-align:left;border:0;cursor:pointer;color:var(--color-text);display:block}
   .bcard:hover{background:var(--color-accent-100)}
+  .bcard.vid{background-size:cover;background-position:center;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:18px}
+  .bcard.vid:hover{filter:brightness(1.08)}
+  .bcard.vid .k{color:#ffd9c2}
+  .bcard.vid .t{font-size:19px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .bcard.vid .d{color:#f0e6df;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .bcard.vid .d.n{margin-top:8px;font-weight:800;color:#ffd9c2}
   .bcard .t{font:900 16px "Nunito",sans-serif;display:block}
   .bcard .d{font:600 12.5px "Nunito",sans-serif;color:var(--color-neutral-700);display:block;margin-top:4px;line-height:1.45}
   .bcard .k{font:800 10px "Nunito",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent);display:block;margin-bottom:6px}
@@ -127,11 +133,11 @@
   .steps button[aria-pressed="true"]{background:var(--color-bg);box-shadow:inset 0 -3px 0 var(--color-accent)}
   .steps button[aria-pressed="true"] .n{color:var(--color-accent)}
   .stepnote{padding:13px 28px;font:600 13px/1.55 "Nunito",sans-serif;color:var(--color-neutral-700);border-bottom:1px solid var(--color-divider)}
-  .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--color-divider);
+  .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1px;background:var(--color-divider);
     border-bottom:1px solid var(--color-divider)}
-  .unit-card{background:var(--color-bg);padding:14px 16px}
+  .unit-card{background:var(--color-bg);padding:12px 13px}
   .unit-card:hover{background:var(--color-surface-warm)}
-  .unit-card .cw{font:800 22px/1.25 "Nunito",sans-serif}
+  .unit-card .cw{font:800 19px/1.2 "Nunito",sans-serif}
   .unit-card .ci{font:500 14px var(--ipa);color:var(--color-neutral-600);margin-top:4px}
   .unit-card .cf{display:block;font:700 11.5px/1.45 "Nunito",sans-serif;color:var(--color-neutral-700);margin-top:8px}
   .unit-card .cf i{font-style:normal;font-family:var(--ipa);color:var(--color-accent)}
@@ -225,6 +231,9 @@
   .sb.rec{background:#8a1400;border-color:#8a1400;color:#fff}
   .sb.ok{background:#1f7a3d;border-color:#1f7a3d;color:#fff}
   .sb.voice{background:var(--color-text);border-color:var(--color-text);color:#fff}
+  .sb.off,.unit-card .cb .off{border:1px dashed var(--color-divider);background:transparent;color:var(--color-neutral-700);
+    padding:6px 10px;font:800 11.5px "Nunito",sans-serif;border-radius:999px;display:inline-block}
+  .unit-card .cb .voice{background:var(--color-text);border-color:var(--color-text);color:#fff}
   .brs.marking{background:var(--color-accent-100)}
   .markbar{position:sticky;top:0;z-index:6;background:var(--color-text);color:#fff;padding:12px 28px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;
     font:700 13px "Nunito",sans-serif}
@@ -315,10 +324,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=1a8f02f9"></script>
 <script src="sm-shell.js?v=a553824a"></script>
-<script src="sm-voice.js?v=6a1358e3"></script>
 <script src="sm-speech.js?v=345f1a8d"></script>
 <script src="sm-british.js?v=dc54b937"></script>
-<script src="british-data.js?v=353b64a8"></script>
+<script src="british-data.js?v=0215fccb"></script>
 <script>
 const esc = SMUI.esc;
 const D = window.BR_DATA, F = BR.FEAT, LK = BR.LINK;
@@ -332,7 +340,7 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
 let LAYERS = Object.assign({ ipa:true, tags:true, links:true, tone:true, ru:true, notes:true, weak:false, nor:false }, store.get("br_layers", {}));
-let FOCUS = null, SLOW = false, MARK = null, ACTIVE = 0;
+let FOCUS = null, SLOW = false, MARK = null, ACTIVE = 0, WANT_MARK = false;
 let VIEW = store.get("br_view", "C"), STEP = 0;
 const VIEWS = [["A","Лента"],["B","Карточки"],["C","Два столбца"],["D","Караоке"]];
 const STEPS = [
@@ -376,7 +384,12 @@ function stepsOf(m){
     });
   });
   words.sort((a, b) => a.rank - b.rank || a.si - b.si);
-  return (STEPDATA[m.id] = { words: words.slice(0, 28), chunks: chunks });
+  const cap = {}, pick = [];
+  words.forEach(x => {
+    const k = x.tags[0];
+    if ((cap[k] = (cap[k] || 0) + 1) <= 3) pick.push(x);
+  });
+  return (STEPDATA[m.id] = { words: pick.slice(0, 18), chunks: chunks });
 }
 
 const PARSED = {};
@@ -400,17 +413,15 @@ const done = id => store.get("br_done_" + id, {});
 function drawNav(route){
   const nav = document.getElementById("nav");
   let h = '<button class="grp'+(route.v==="home"?" on":"")+'" data-go="#"><span class="t">Британский акцент</span>' +
-    '<span class="d">«речь разобрана» — есть монолог по фразам · «только акцент» — черты и видео</span></button>' +
-    '<button class="who'+(route.v==="feat"?" on":"")+'" data-go="#f"><span class="t">Все звуки и сцепления</span><span class="d">Справочник: где что встречается</span></button>';
-  D.groups.forEach(g => {
-    h += '<button class="grp'+(route.v==="group"&&route.id===g.id?" on":"")+'" data-go="#g/'+g.id+'"><span class="t">'+esc(g.title)+'</span><span class="d">'+esc(g.sub)+'</span></button>';
-    D.people.filter(p => p.group === g.id).sort((a,b) => (a.kind===b.kind?0:a.kind==="speech"?-1:1)).forEach(p => {
-      const on = (route.v==="person" && route.id===p.id) || (route.v==="mono" && MONOS[route.id] && MONOS[route.id].person===p.id);
-      h += '<button class="who'+(on?" on":"")+'" data-go="#p/'+p.id+'">' +
-        '<span class="kd'+(p.kind==="speech"?" m":"")+'">'+(p.kind==="speech"?"речь разобрана":"только акцент")+'</span>' +
-        '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.name)+'</span></button>';
-    });
+    '<span class="d">Разборы речи: видео + фразы по косточкам</span></button>';
+  D.monos.forEach(m => {
+    const p = PEOPLE[m.person], dn = Object.keys(done(m.id)).length;
+    h += '<button class="who'+(route.v==="mono"&&route.id===m.id?" on":"")+'" data-go="#m/'+m.id+'">' +
+      '<span class="kd m">'+(dn ? dn+' / '+m.segs.length : m.segs.length+' фраз')+'</span>' +
+      '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(m.title_ru)+'</span></button>';
   });
+  h += '<button class="grp'+(route.v==="feat"?" on":"")+'" data-go="#f"><span class="t">Все звуки и сцепления</span>' +
+    '<span class="d">Справочник: где что встречается</span></button>';
   nav.innerHTML = h;
   nav.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { location.hash = b.dataset.go; });
 }
@@ -418,9 +429,7 @@ function drawNav(route){
 function route(){
   const h = decodeURIComponent(location.hash.replace(/^#/, ""));
   const [v, id, x] = h.split("/");
-  if (v === "p" && PEOPLE[id]) return { v:"person", id };
   if (v === "m" && MONOS[id]) return { v:"mono", id, seg: x != null ? +x : null };
-  if (v === "g" && GROUP[id]) return { v:"group", id };
   if (v === "f") return { v:"feat", id: id || null };
   return { v:"home" };
 }
@@ -433,9 +442,7 @@ function render(){
   destroyPlayers();
   drawNav(r);
   const pane = document.getElementById("pane");
-  if (r.v === "person") pane.innerHTML = personView(PEOPLE[r.id]);
-  else if (r.v === "mono") pane.innerHTML = monoView(MONOS[r.id]);
-  else if (r.v === "group") pane.innerHTML = groupView(GROUP[r.id]);
+  if (r.v === "mono") pane.innerHTML = monoView(MONOS[r.id]);
   else if (r.v === "feat") pane.innerHTML = r.id ? featView(r.id) : featsView();
   else pane.innerHTML = homeView();
   bindPane(r);
@@ -455,40 +462,18 @@ const HONEST = '<div class="honest"><b>Как сделаны разборы.</b>
   'Это не автоматическая расшифровка записи, поэтому слушай видео и сверяй. Черты с пометкой «подтверждено» описаны в исследованиях или у фонетистов.</div>';
 
 function homeView(){
-  return '<div class="pane-hd"><span>Британский акцент</span><span>'+D.monos.length+' разборов · '+D.people.length+' говорящих</span></div>' +
+  return '<div class="pane-hd"><span>Британский акцент</span><span>'+D.monos.length+' '+SMUI.plural(D.monos.length,["разбор","разбора","разборов"])+'</span></div>' +
     '<div class="box"><div class="lab">British voices</div><h2>Как на самом деле говорят британцы</h2>' +
-    '<p>Здесь не голый тренажёр звуков, а речь конкретных людей: король, премьер-министры, Дэвид Аттенборо, Джейми Оливер, Рио Фердинанд, Гай Гарви и ещё 12 звёзд. ' +
-    'Каждая фраза разобрана по косточкам: транскрипция, гортанные смычки, выпавшие звуки, связующий r, слабые формы, ударный слог и движение голоса.</p>' +
-    '<p class="muted">Начни с разбора в своей группе акцентов, потом открой профиль звезды и найди те же черты в её видео.</p></div>' +
-    '<div class="cards">' + D.groups.map(g => {
-      const ps = D.people.filter(p => p.group === g.id);
-      const ms = D.monos.filter(m => PEOPLE[m.person].group === g.id);
-      return '<button class="bcard" data-go="#g/'+g.id+'"><span class="k">'+esc(g.sub)+'</span><span class="t">'+esc(g.title)+'</span>' +
-        '<span class="d">'+esc(g.desc)+'</span><span class="d" style="margin-top:8px;font-weight:800">'+ms.length+' '+SMUI.plural(ms.length,["разбор","разбора","разборов"])+' · '+ps.length+' '+SMUI.plural(ps.length,["говорящий","говорящих","говорящих"])+'</span></button>';
-    }).join("") + '</div>' +
-    '<div class="sect"><span>Все разборы</span><span>'+D.monos.length+'</span></div>' + monoRows(D.monos) + HONEST;
-}
-
-function monoRows(list){
-  return '<ul class="rowsx">' + list.map(m => {
-    const p = PEOPLE[m.person], dn = Object.keys(done(m.id)).length;
-    return '<li><a href="#m/'+m.id+'"><span><span class="t">'+esc(p.ru)+' — '+esc(m.title_ru)+'</span><br>' +
-      '<span class="d">'+esc(m.kind)+' · '+esc(m.date.slice(0,4))+' · '+esc(GROUP[p.group].title)+' · '+m.segs.length+' фраз</span></span>' +
-      '<span class="p">'+(dn ? dn+' / '+m.segs.length : "открыть")+'</span></a></li>';
-  }).join("") + '</ul>';
-}
-
-function groupView(g){
-  const ms = D.monos.filter(m => PEOPLE[m.person].group === g.id);
-  const cel = D.people.filter(p => p.group === g.id && p.kind === "celeb");
-  const spk = D.people.filter(p => p.group === g.id && p.kind === "speech");
-  return '<div class="pane-hd"><span>'+esc(g.title)+'</span><span>'+esc(g.sub)+'</span></div>' +
-    '<div class="box"><h2>'+esc(g.title)+'</h2><p>'+esc(g.desc)+'</p></div>' +
-    '<div class="sect"><span>Разборы речи</span><span>'+ms.length+'</span></div>' + monoRows(ms) +
-    '<div class="sect"><span>Звёзды: профили и видео</span><span>'+cel.length+'</span></div>' +
-    '<div class="cards">' + cel.concat(spk).map(p =>
-      '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+(p.kind==="speech"?"речь разобрана по фразам":"черты акцента и видео")+'</span>' +
-      '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.label)+'</span></button>').join("") + '</div>';
+    '<p>Речь конкретных людей, разобранная по косточкам: транскрипция каждого слова, гортанные смычки, выпавшие звуки, ' +
+    'связующий r, слабые формы, ударный слог и движение голоса. Каждую фразу слышно голосом самого говорящего — из его записи.</p>' +
+    '<p class="muted">Три разбора для начала. Дальше добавим ещё — по одному, с видео и полной разметкой.</p></div>' +
+    '<div class="cards">' + D.monos.map(m => {
+      const p = PEOPLE[m.person], dn = Object.keys(done(m.id)).length;
+      return '<button class="bcard vid" data-go="#m/'+m.id+'" style="background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55)),url(https://i.ytimg.com/vi/'+esc(m.video.yt)+'/hqdefault.jpg)">' +
+        '<span class="k">'+esc(GROUP[p.group].title)+' · '+esc(m.date.slice(0,4))+'</span>' +
+        '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(m.title_ru)+'</span>' +
+        '<span class="d n">'+m.segs.length+' фраз · '+(dn ? dn+' отработано' : 'начать')+'</span></button>';
+    }).join("") + '</div>' + HONEST;
 }
 
 function ytId(u){ const m = (u||"").match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/); return m ? m[1] : null; }
@@ -615,42 +600,6 @@ function mountPlayer(box){
   };
 }
 
-function personView(p){
-  const g = GROUP[p.group];
-  const mine = D.monos.filter(m => m.person === p.id);
-  const copy = p.features.filter(x => x.copy), hear = p.features.filter(x => !x.copy);
-  const fl = list => '<ul class="feats">' + list.map(x =>
-    '<li><div><span class="fn">'+esc(x.name)+'</span><span class="fi">'+esc(x.ipa)+'</span>' +
-      '<span class="badge2 '+(x.conf==="source"?"s":"")+'">'+(x.conf==="source"?"подтверждено":"типично для акцента")+'</span></div>' +
-    '<div><span class="fx">'+esc(x.note || (x.fid && F[x.fid] ? F[x.fid].d : ""))+'</span>' +
-      (x.ex && x.ex.length ? '<span class="ex">Примеры: '+esc(x.ex.join(", "))+'</span>' : "") +
-      (x.fid && F[x.fid] && index().feats[x.fid] ? '<span class="ex"><a href="#f/'+x.fid+'">Где это слышно в разборах →</a></span>' : "") +
-    '</div></li>').join("") + '</ul>';
-
-  const doneTasks = store.get("br_tasks_" + p.id, {});
-  const tasks = p.features.filter(x => x.ex && x.ex.length && x.ipa !== "—");
-
-  return '<div class="pane-hd"><span>'+esc(g.title)+'</span><span>'+(p.kind==="speech"?"разбор речи":"профиль")+'</span></div>' +
-    '<div class="box"><div class="lab">'+esc(p.name)+'</div><h2>'+esc(p.ru)+'</h2>' +
-      '<p>'+esc(p.bg)+'</p><p class="muted"><b>Акцент:</b> '+esc(p.label)+'</p></div>' +
-    (mine.length ? '<div class="sect"><span>Разбор речи по фразам</span><span>'+mine.length+'</span></div>' + monoRows(mine)
-      : '<div class="honest" style="margin:16px 28px"><b>Здесь нет разбора по фразам.</b> Слова из интервью — чужой текст: перепечатывать их на платформе нельзя. ' +
-        'Поэтому у звезды профиль: особенности акцента с источниками, видео в проигрывателе и задания «услышь черту». ' +
-        'Разборы по фразам сделаны на речах с открытой лицензией — они в списке слева с пометкой «речь разобрана».</div>') +
-    (copy.length ? '<div class="sect"><span>Что копировать</span><span>'+copy.length+'</span></div><div class="box" style="padding-top:4px">'+fl(copy)+'</div>' : "") +
-    (hear.length ? '<div class="sect"><span>Что узнавать на слух</span><span>'+hear.length+'</span></div><div class="box" style="padding-top:4px">'+fl(hear)+'</div>' : "") +
-    (p.intonation && p.intonation.length ? '<div class="sect"><span>Интонация и манера</span><span></span></div><div class="box">' +
-      p.intonation.map(t => '<p>'+esc(t)+'</p>').join("") + '</div>' : "") +
-    (p.videos && p.videos.length ? '<div class="sect"><span>Видео</span><span>смотри здесь, в проигрывателе</span></div><div class="box"><div class="vids">' +
-      p.videos.map(v => videoHTML(v)).join("") + '</div></div>' : "") +
-    (tasks.length && p.videos && p.videos.length ? '<div class="sect"><span>Задания на слух</span><span>'+Object.keys(doneTasks).length+' / '+tasks.length+'</span></div>' +
-      '<div class="box"><p class="muted">Включи видео и отмечай, когда услышишь черту.</p><ul class="tasks">' + tasks.map((x,i) =>
-        '<li><label><input type="checkbox" data-task="'+i+'"'+(doneTasks[i]?" checked":"")+'><span>Услышь <b>'+esc(x.name.toLowerCase())+'</b> — например, в словах <b>'+esc(x.ex.slice(0,3).join(", "))+'</b>.</span></label></li>').join("") +
-      '</ul></div>' : "") +
-    '<div class="sect"><span>Источники</span><span>'+p.sources.length+'</span></div><div class="box src">' +
-      p.sources.map(u => '<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))+'</a>').join("<br>") + '</div>';
-}
-
 /* --- разбор монолога --- */
 function sylHTML(w){
   const t = w.text;
@@ -706,9 +655,7 @@ function segHTML(m, s, P, si){
     : '<div><div class="wt">'+esc(s.t.replace(/[↘↗]/g,""))+'</div><div class="wi">'+esc(s.ipa)+'</div></div>';
   return '<article class="brs'+(dn?" done":"")+(si===ACTIVE?" act":"")+'" id="s-'+si+'" data-seg="'+si+'">' +
     '<div class="sh"><span class="num">'+String(si+1).padStart(2,"0")+'</span><span class="ru">'+esc(s.ru||"")+'</span>' +
-      (hasT ? '<button class="sb voice" data-play="'+si+'">▶ Голос носителя</button>' +
-              '<button class="sb" data-say="'+si+'" title="Читает голос браузера">🤖</button>'
-            : '<button class="sb" data-say="'+si+'">▶ Слушать</button>') +
+      (hasT ? '<button class="sb voice" data-play="'+si+'">▶ Голос носителя</button>' : "") +
       '<button class="sb" data-rec="'+si+'">🎤 Повторить</button>' +
       '<button class="sb'+(dn?" ok":"")+'" data-done="'+si+'">'+(dn?"✓ Отработано":"Отработано")+'</button></div>' +
     '<div class="line">'+line+'</div>' +
@@ -717,28 +664,29 @@ function segHTML(m, s, P, si){
 }
 
 /* ——— шаг 1: слова · шаг 2: куски ——— */
-function practiceBtns(id, text){
-  return '<div class="cb"><button data-usay="'+esc(text)+'">🔊 Слушать</button>' +
+function practiceBtns(id, text, si, hasT){
+  return '<div class="cb">' +
+    (hasT ? '<button class="voice" data-uplay="'+si+'">▶ В записи</button>' : "") +
     '<button data-urec="'+id+'" data-text="'+esc(text)+'">🎤 Повторить</button></div><div class="res" id="u-'+id+'"></div>';
 }
 function wordsStep(m){
   const W = stepsOf(m).words;
   return '<div class="stepnote">Сначала звук в одном слове: послушай, повтори, поймай черту. ' +
-    'Здесь '+W.length+' слов из этого монолога, где слышно самое важное. Дальше — куски, потом целые предложения.</div>' +
+    'Здесь '+W.length+' слов из этого монолога, где слышно самое важное. «В записи» — фраза с этим словом в исполнении самого говорящего. Дальше — куски, потом целые предложения.</div>' +
     '<div class="cardgrid">' + W.map((x, i) =>
       '<div class="unit-card"><div class="cw">'+esc(x.w.text)+'</div><div class="ci">'+esc(x.w.ipa)+'</div>' +
       '<span class="cf">'+x.tags.slice(0,2).map(t => '<i>'+esc(F[t].s)+'</i> '+esc(F[t].n)).join(" · ")+'</span>' +
-      practiceBtns("w"+i, x.w.text) + '</div>').join("") + '</div>';
+      practiceBtns("w"+i, x.w.text, x.si, !!segTime(m, x.si)) + '</div>').join("") + '</div>';
 }
 function chunksStep(m){
   const C = stepsOf(m).chunks, PP = parsed(m);
   return '<div class="stepnote">Теперь кусок: два-четыре слова, которые в речи звучат как одно. Главное — не терять сцепления и слабые формы.</div>' +
-    '<div class="cardgrid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">' + C.map((c, i) => {
+    '<div class="cardgrid" style="grid-template-columns:repeat(auto-fill,minmax(215px,1fr))">' + C.map((c, i) => {
       const text = c.words.map(w => w.text).join(" ");
       return '<div class="unit-card"><div class="line">' + c.words.map((w, k) =>
         wordHTML(w, null) + (k < c.words.length - 1
           ? (w.linkNext ? '<span class="lk" data-lt="'+w.linkNext+'" title="'+esc(LK[w.linkNext].n)+'">‿</span>' : '<span class="gap"></span>')
-          : "")).join("") + '</div>' + practiceBtns("c"+i, text) + '</div>';
+          : "")).join("") + '</div>' + practiceBtns("c"+i, text, c.si, !!segTime(m, c.si)) + '</div>';
     }).join("") + '</div>';
 }
 function noteHTML(n){ return esc(n).replace(/\[([^\]]+)\]/g, '<b>[$1]</b>'); }
@@ -758,17 +706,18 @@ function monoView(m){
   const stepsbar = '<div class="steps">' + STEPS.map((x, i) =>
     '<button data-step="'+i+'" aria-pressed="'+(i===STEP)+'"><span class="n">'+x.n+'</span><span class="t">'+x.t+'</span><span class="d">'+x.d+'</span></button>').join("") + '</div>';
 
-  const side = (m.video && m.video.yt
-      ? '<div class="vidwrap">'+videoHTML({ yt:m.video.yt, title:"Оригинальная запись", channel:m.video.channel }, true)+'</div>'
-      : '<div class="honest" style="margin:0 28px 14px"><b>Здесь нет видео.</b> Запись заседания парламент не разрешает встраивать на сторонние сайты. ' +
-        'Текст и разбор полные, фразу можно послушать голосом браузера.</div>') +
+  const hasTimes = !!times(m);
+  const side = '<div class="vidwrap">'+videoHTML({ yt:m.video.yt, title:"Оригинальная запись", channel:m.video.channel }, true)+'</div>' +
     '<div class="tools"><span class="lab">Слои</span>' + tg("ipa","Транскрипция") + tg("tags","Звуки") + tg("weak","Слабые формы") + tg("nor","r не звучит") +
       tg("links","Сцепления") + tg("tone","Интонация") + tg("ru","Перевод") + tg("notes","Разбор") +
       '<button class="tg" id="slowBtn" aria-pressed="'+SLOW+'">Медленно</button>' +
-      (ROLE === "teacher" && m.video && m.video.yt ? '<button class="tg" id="markBtn">'+(times(m) ? "Переразметить время фраз" : "Разметить время фраз")+'</button>' : "") +
+      (ROLE === "teacher" ? '<button class="tg" id="markBtn">'+(hasTimes ? "Переразметить время фраз" : "Разметить время фраз")+'</button>' : "") +
       '</div>' +
-      (ROLE === "teacher" && m.video && m.video.yt && !times(m) ? '<div class="honest" style="margin-top:0"><b>Голос носителя пока не привязан.</b> ' +
-        'Нажми «Разметить время фраз»: включится ролик, и ты отмечаешь начало каждой фразы одной кнопкой. После этого фраза будет звучать голосом самого говорящего, а не робота.</div>' : "");
+      (hasTimes ? "" : ROLE === "teacher"
+        ? '<div class="honest" style="margin-top:0"><b>Голос носителя пока не привязан.</b> ' +
+          'Нажми «Разметить время фраз»: включится ролик, и ты отмечаешь начало каждой фразы одной кнопкой — примерно две минуты. ' +
+          'После этого каждая фраза звучит голосом самого говорящего. Браузерной озвучки здесь нет: она не передаёт произношение, и разбор теряет смысл.</div>'
+        : '<div class="honest" style="margin-top:0"><b>Звук фраз ещё не привязан.</b> Смотри ролик целиком — по фразам он заработает, когда учитель разметит время.</div>');
 
   const chips = '<details class="chipsbox"'+(FOCUS?" open":"")+'><summary>Что слушать в этом монологе · '+(order.length + Object.keys(S.l).length)+' черт · нажми, чтобы подсветить</summary>' +
     '<div class="chips">' + order.map(k => '<button class="chip" data-focus="'+k+'" aria-pressed="'+(FOCUS===k)+'" title="'+esc(F[k].d)+'"><b style="background:'+F[k].c+'">'+esc(F[k].s)+'</b>'+esc(F[k].n)+' <em>'+S.f[k]+'</em></button>').join("") +
@@ -782,7 +731,7 @@ function monoView(m){
       '<span><b style="color:var(--color-accent-2)">↘↗</b>падает и поднимается — «продолжение следует»</span><span><b>|</b>граница группы</span>' +
       '<span>ʔ смычка · зачёркнута буква — звук выпал · точки под словом — слабая форма · ‿ сцепление</span></div>';
 
-  return '<div class="pane-hd"><span>'+esc(g.title)+' · <a href="#p/'+p.id+'">'+esc(p.ru)+'</a></span><span>'+dn+' / '+m.segs.length+' отработано</span></div>' +
+  return '<div class="pane-hd"><span>'+esc(g.title)+' · '+esc(p.ru)+'</span><span>'+dn+' / '+m.segs.length+' отработано</span></div>' +
     '<div id="mono" class="mv-'+VIEW+'">' +
       '<div class="box" style="padding-bottom:14px"><div class="lab">'+esc(m.kind)+' · '+esc(m.date)+'</div>' +
         '<h2>'+esc(p.ru)+': '+esc(m.title_ru)+'</h2><p>'+esc(m.intro)+'</p></div>' + viewbar +
@@ -793,6 +742,7 @@ function monoView(m){
     '</div>';
 }
 
+const GROUPS_F = [["cons","Согласные"],["vow","Гласные"],["flow","Связная речь"]];
 function featsView(){
   const I = index();
   let h = '<div class="pane-hd"><span>Все звуки и сцепления</span><span>по всем разборам</span></div>' +
@@ -803,7 +753,7 @@ function featsView(){
       const occ = I.feats[k] || [], spk = new Set(occ.map(o => MONOS[o.m].person)).size;
       return '<li><button data-go="#f/'+k+'"><span class="sym" style="background:'+F[k].c+'">'+esc(F[k].s)+'</span>' +
         '<span><span class="t">'+esc(F[k].n)+'</span><span class="d">'+esc(F[k].d)+'</span></span>' +
-        '<span class="n">'+(occ.length ? occ.length+' × · '+spk+' '+SMUI.plural(spk,["голос","голоса","голосов"]) : "в профилях")+'</span></button></li>';
+        '<span class="n">'+(occ.length ? occ.length+' × · '+spk+' '+SMUI.plural(spk,["голос","голоса","голосов"]) : "нет в этих разборах")+'</span></button></li>';
     }).join("") + '</ul>';
   });
   h += '<div class="sect"><span>Сцепления</span><span>'+Object.keys(LK).length+'</span></div><ul class="fgrid">' + Object.keys(LK).map(k => {
@@ -821,14 +771,9 @@ function featView(id){
   const occ = (isLink ? I.links[key] : I.feats[key]) || [];
   const byMono = {};
   occ.forEach(o => (byMono[o.m] = byMono[o.m] || []).push(o));
-  const celebs = D.people.filter(p => p.features.some(x => x.fid === key));
   return '<div class="pane-hd"><span><a href="#f">Все звуки</a> · '+esc(info.n)+'</span><span>'+occ.length+' ×</span></div>' +
     '<div class="box"><div class="lab">'+(isLink?"сцепление":"звук")+'</div><h2>'+esc(info.n)+' <span class="ipa" style="color:'+info.c+'">'+esc(info.s||"‿")+'</span></h2>' +
       '<p>'+esc(info.d)+'</p>' + (info.copy ? '<p><span class="badge2 c">совет</span> '+esc(info.copy)+'</p>' : "") + '</div>' +
-    (celebs.length ? '<div class="sect"><span>У кого описано</span><span>'+celebs.length+'</span></div><div class="cards">' + celebs.map(p => {
-      const x = p.features.find(y => y.fid === key);
-      return '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+esc(GROUP[p.group].title)+(x.conf==="source"?" · подтверждено":"")+'</span><span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(x.note || x.name)+'</span></button>';
-    }).join("") + '</div>' : "") +
     Object.keys(byMono).map(mid => {
       const m = MONOS[mid], p = PEOPLE[m.person];
       return '<div class="sect"><span>'+esc(p.ru)+' — '+esc(m.title_ru)+'</span><span>'+byMono[mid].length+'</span></div><ul class="occ">' +
@@ -844,6 +789,25 @@ function featView(id){
 
 /* ---------- действия ---------- */
 function stopSpeak(){ try { if (window.SM_stopSpeak) SM_stopSpeak(); } catch(e){} }
+function player(){ return PLAYERS.find(P => P.yt); }
+
+/* Фраза звучит голосом самого говорящего: плеер играет кусок ролика от начала фразы до начала следующей */
+let PLAY_WATCH = null;
+function playSeg(m, si, btn, scroll){
+  const t = segTime(m, si), P = player();
+  if (!t) return;
+  if (!P || !P.yt){ if (btn) setTimeout(() => btn.click(), 400); return; }
+  stopSpeak();
+  try { P.yt.setPlaybackRate(SLOW ? 0.75 : 1); } catch(e){}
+  P.yt.seekTo(Math.max(0, t.start - 0.25), true);
+  P.yt.playVideo();
+  if (scroll){ const el = document.getElementById("s-" + si); if (el) el.scrollIntoView({ block:"center", behavior:"smooth" }); }
+  clearInterval(PLAY_WATCH);
+  if (t.end != null) PLAY_WATCH = setInterval(() => {
+    if (!P.yt || !P.yt.getCurrentTime) return clearInterval(PLAY_WATCH);
+    if (P.yt.getCurrentTime() >= t.end){ P.yt.pauseVideo(); clearInterval(PLAY_WATCH); }
+  }, 120);
+}
 function plain(t){ return t.replace(/[↘↗]/g, "").replace(/\s*\|\|?\s*/g, " ").replace(/\s+/g, " ").trim(); }
 
 let REC = null;
@@ -851,13 +815,6 @@ function bindPane(r){
   const pane = document.getElementById("pane");
   pane.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { location.hash = b.dataset.go; });
   pane.querySelectorAll("[data-pl]").forEach(mountPlayer);
-  if (r.v === "person"){
-    pane.querySelectorAll("[data-task]").forEach(c => c.onchange = () => {
-      const d = store.get("br_tasks_" + r.id, {});
-      if (c.checked) d[c.dataset.task] = 1; else delete d[c.dataset.task];
-      store.set("br_tasks_" + r.id, d);
-    });
-  }
   if (r.v !== "mono") return;
   const m = MONOS[r.id], segs = document.getElementById("segs");
 
@@ -868,9 +825,7 @@ function bindPane(r){
   pane.querySelectorAll("[data-step]").forEach(b => b.onclick = () => { STEP = +b.dataset.step; render(); });
 
   /* слушать и повторять на шагах «слова» и «куски» */
-  pane.querySelectorAll("[data-usay]").forEach(b => b.onclick = () => {
-    if (window.SM_speak) SM_speak(b.dataset.usay, SLOW ? 0.62 : 0.88, "m", { lang:"en-GB" });
-  });
+  pane.querySelectorAll("[data-uplay]").forEach(b => b.onclick = () => playSeg(m, +b.dataset.uplay, b));
   pane.querySelectorAll("[data-urec]").forEach(b => b.onclick = async () => {
     const id = b.dataset.urec, out = document.getElementById("u-" + id);
     if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка работает в Chrome, Edge и Safari."; return; }
@@ -890,6 +845,8 @@ function bindPane(r){
     b.textContent = "■ Стоп"; b.classList.add("rec"); out.textContent = "Говори…";
   });
 
+  const markBtn0 = document.getElementById("markBtn");
+  if (markBtn0 && STEP !== 2) markBtn0.onclick = () => { WANT_MARK = true; STEP = 2; render(); };
   if (!segs) return;
 
   /* в видах «Карточки» и «Караоке» раскрыта одна фраза */
@@ -928,34 +885,12 @@ function bindPane(r){
   });
   if (FOCUS) applyFocus();
 
-  segs.querySelectorAll("[data-say]").forEach(b => b.onclick = () => {
-    const s = m.segs[+b.dataset.say];
-    if (window.SM_speak) SM_speak(plain(s.t), SLOW ? 0.62 : 0.9, "m", { lang:"en-GB" });
-  });
-
-  /* ▶ Голос носителя: играет кусок ролика от начала фразы до начала следующей */
-  let stopAt = null, watch = null;
-  function player(){ return PLAYERS.find(P => P.yt); }
-  segs.querySelectorAll("[data-play]").forEach(b => b.onclick = () => {
-    const si = +b.dataset.play, t = segTime(m, si), P = player();
-    if (!t) return;
-    if (!P || !P.yt){ setTimeout(() => b.click(), 400); return; }
-    stopSpeak();
-    try { P.yt.setPlaybackRate(SLOW ? 0.75 : 1); } catch(e){}
-    P.yt.seekTo(Math.max(0, t.start - 0.25), true);
-    P.yt.playVideo();
-    document.getElementById("s-" + si).scrollIntoView({ block: "center", behavior: "smooth" });
-    clearInterval(watch);
-    stopAt = t.end;
-    if (stopAt != null) watch = setInterval(() => {
-      if (!P.yt || !P.yt.getCurrentTime) return clearInterval(watch);
-      if (P.yt.getCurrentTime() >= stopAt){ P.yt.pauseVideo(); clearInterval(watch); }
-    }, 120);
-  });
+  segs.querySelectorAll("[data-play]").forEach(b => b.onclick = () => playSeg(m, +b.dataset.play, b, true));
 
   /* Разметка времени: учитель слушает ролик и отмечает начало каждой фразы */
   const markBtn = document.getElementById("markBtn");
   if (markBtn) markBtn.onclick = () => startMarking(m);
+  if (WANT_MARK){ WANT_MARK = false; setTimeout(() => startMarking(m), 600); }
 
   function startMarking(m){
     const P = player();
