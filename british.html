@@ -399,14 +399,15 @@ const done = id => store.get("br_done_" + id, {});
 /* ---------- навигация ---------- */
 function drawNav(route){
   const nav = document.getElementById("nav");
-  let h = '<button class="grp'+(route.v==="home"?" on":"")+'" data-go="#"><span class="t">Британский акцент</span><span class="d">Разборы речи · 22 говорящих</span></button>' +
+  let h = '<button class="grp'+(route.v==="home"?" on":"")+'" data-go="#"><span class="t">Британский акцент</span>' +
+    '<span class="d">«речь разобрана» — есть монолог по фразам · «только акцент» — черты и видео</span></button>' +
     '<button class="who'+(route.v==="feat"?" on":"")+'" data-go="#f"><span class="t">Все звуки и сцепления</span><span class="d">Справочник: где что встречается</span></button>';
   D.groups.forEach(g => {
     h += '<button class="grp'+(route.v==="group"&&route.id===g.id?" on":"")+'" data-go="#g/'+g.id+'"><span class="t">'+esc(g.title)+'</span><span class="d">'+esc(g.sub)+'</span></button>';
     D.people.filter(p => p.group === g.id).sort((a,b) => (a.kind===b.kind?0:a.kind==="speech"?-1:1)).forEach(p => {
       const on = (route.v==="person" && route.id===p.id) || (route.v==="mono" && MONOS[route.id] && MONOS[route.id].person===p.id);
       h += '<button class="who'+(on?" on":"")+'" data-go="#p/'+p.id+'">' +
-        '<span class="kd'+(p.kind==="speech"?" m":"")+'">'+(p.kind==="speech"?"разбор":"профиль")+'</span>' +
+        '<span class="kd'+(p.kind==="speech"?" m":"")+'">'+(p.kind==="speech"?"речь разобрана":"только акцент")+'</span>' +
         '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.name)+'</span></button>';
     });
   });
@@ -486,7 +487,7 @@ function groupView(g){
     '<div class="sect"><span>Разборы речи</span><span>'+ms.length+'</span></div>' + monoRows(ms) +
     '<div class="sect"><span>Звёзды: профили и видео</span><span>'+cel.length+'</span></div>' +
     '<div class="cards">' + cel.concat(spk).map(p =>
-      '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+(p.kind==="speech"?"есть разбор":"профиль · видео")+'</span>' +
+      '<button class="bcard" data-go="#p/'+p.id+'"><span class="k">'+(p.kind==="speech"?"речь разобрана по фразам":"черты акцента и видео")+'</span>' +
       '<span class="t">'+esc(p.ru)+'</span><span class="d">'+esc(p.label)+'</span></button>').join("") + '</div>';
 }
 
@@ -632,7 +633,10 @@ function personView(p){
   return '<div class="pane-hd"><span>'+esc(g.title)+'</span><span>'+(p.kind==="speech"?"разбор речи":"профиль")+'</span></div>' +
     '<div class="box"><div class="lab">'+esc(p.name)+'</div><h2>'+esc(p.ru)+'</h2>' +
       '<p>'+esc(p.bg)+'</p><p class="muted"><b>Акцент:</b> '+esc(p.label)+'</p></div>' +
-    (mine.length ? '<div class="sect"><span>Разбор речи по фразам</span><span>'+mine.length+'</span></div>' + monoRows(mine) : "") +
+    (mine.length ? '<div class="sect"><span>Разбор речи по фразам</span><span>'+mine.length+'</span></div>' + monoRows(mine)
+      : '<div class="honest" style="margin:16px 28px"><b>Здесь нет разбора по фразам.</b> Слова из интервью — чужой текст: перепечатывать их на платформе нельзя. ' +
+        'Поэтому у звезды профиль: особенности акцента с источниками, видео в проигрывателе и задания «услышь черту». ' +
+        'Разборы по фразам сделаны на речах с открытой лицензией — они в списке слева с пометкой «речь разобрана».</div>') +
     (copy.length ? '<div class="sect"><span>Что копировать</span><span>'+copy.length+'</span></div><div class="box" style="padding-top:4px">'+fl(copy)+'</div>' : "") +
     (hear.length ? '<div class="sect"><span>Что узнавать на слух</span><span>'+hear.length+'</span></div><div class="box" style="padding-top:4px">'+fl(hear)+'</div>' : "") +
     (p.intonation && p.intonation.length ? '<div class="sect"><span>Интонация и манера</span><span></span></div><div class="box">' +
