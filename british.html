@@ -326,7 +326,7 @@
 <script src="sm-shell.js?v=a553824a"></script>
 <script src="sm-speech.js?v=345f1a8d"></script>
 <script src="sm-british.js?v=dc54b937"></script>
-<script src="british-data.js?v=0215fccb"></script>
+<script src="british-data.js?v=ba98a7bd"></script>
 <script>
 const esc = SMUI.esc;
 const D = window.BR_DATA, F = BR.FEAT, LK = BR.LINK;
@@ -352,10 +352,12 @@ const STEPS = [
 function times(m){
   const local = store.get("br_times_" + m.id, null);
   if (local && local.length) return local;
-  const fromData = m.segs.map(s => (s.t0 == null ? null : s.t0));
+  const fromData = m.segs.map(s => (s.t0 == null ? null : s.t0));   /* метки времени из данных */
   return fromData.some(x => x != null) ? fromData : null;
 }
 function segTime(m, si){
+  const s = m.segs[si];
+  if (s && s.t0 != null) return { start: s.t0, end: (s.t1 != null ? s.t1 : null) };
   const T = times(m); if (!T || T[si] == null) return null;
   let end = null;
   for (let i = si + 1; i < T.length; i++) if (T[i] != null) { end = T[i]; break; }
