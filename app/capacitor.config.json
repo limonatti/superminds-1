@@ -1,0 +1,30 @@
+{
+  "appId": "com.englishwithasya.app",
+  "appName": "English with Asya",
+  "webDir": "www",
+  "server": {
+    "url": "https://english-with-asya.com/?source=app",
+    "cleartext": false,
+    "errorPath": "offline.html"
+  },
+  "backgroundColor": "#5d1930",
+  "ios": {
+    "contentInset": "always",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 800,
+      "backgroundColor": "#5d1930",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "LIGHT",
+      "backgroundColor": "#5d1930",
+      "overlaysWebView": false
+    }
+  }
+}

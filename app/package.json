@@ -1,0 +1,27 @@
+{
+  "name": "english-with-asya-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Нативная обёртка english-with-asya.com для App Store и Google Play",
+  "scripts": {
+    "setup:ios": "npx cap add ios && npm run assets && npm run perms:ios",
+    "setup:android": "npx cap add android && npm run assets && npm run perms:android",
+    "assets": "npx capacitor-assets generate --ios --android --iconBackgroundColor '#ec3013' --splashBackgroundColor '#5d1930' --splashBackgroundColorDark '#5d1930'",
+    "perms:ios": "node scripts/perms.js ios",
+    "perms:android": "node scripts/perms.js android",
+    "sync": "npx cap sync",
+    "ios": "npx cap open ios",
+    "android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
+    "@capacitor/splash-screen": "^8.0.0",
+    "@capacitor/status-bar": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.0.0"
+  }
+}

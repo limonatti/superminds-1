@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "English with Asya",
+  "short_name": "Asya English",
+  "description": "Уроки, домашние задания, тренажёр, расписание и чат с преподавателем.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#5d1930",
+  "theme_color": "#5d1930",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/img/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/img/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/img/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Домашнее задание", "url": "/homework.html?source=app", "icons": [{ "src": "/img/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Тренажёр", "url": "/trainer.html?source=app", "icons": [{ "src": "/img/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Расписание", "url": "/schedule.html?source=app", "icons": [{ "src": "/img/app/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Чат", "url": "/chat.html?source=app", "icons": [{ "src": "/img/app/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

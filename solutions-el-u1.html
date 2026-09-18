@@ -75,6 +75,16 @@
   .foot{text-align:center;font-weight:700;font-size:13px;color:#8a7a68;margin-top:44px}
 .subgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}@media(max-width:620px){.subgrid{grid-template-columns:repeat(2,1fr)}}.subcard{display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:14px;padding:11px 13px;box-shadow:0 3px 0 #e3d3ba;color:#7c2340}.subcard b{font:900 16px 'Fredoka',sans-serif}.subcard span{font:800 11.5px 'Nunito',sans-serif;color:#8a7a68}
 </style>
+<!-- app: установка как приложение (manifest + sw) -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#5d1930">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Asya English">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script src="sm-pwa.js?v=6d98191a" defer></script>
 </head>
 <body>
 <div class="wrap">

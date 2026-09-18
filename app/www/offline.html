@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5d1930">
+<link rel="icon" href="icon.png" type="image/svg+xml">
+<title>Нет подключения — English with Asya</title>
+<style>
+  html,body{margin:0;height:100%}
+  body{display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;
+    background:#5d1930;color:#fdf7f5;font:16px/1.5 Archivo,system-ui,-apple-system,sans-serif;text-align:center}
+  .box{max-width:360px}
+  img{width:72px;height:72px;margin-bottom:20px}
+  h1{font-size:24px;margin:0 0 8px;font-weight:800}
+  p{margin:0 0 24px;opacity:.85}
+  button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px 28px;
+    background:#ec3013;color:#fdf7f5;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="icon.png" alt="">
+  <h1>Нет интернета</h1>
+  <p>Уроки, домашка и чат работают онлайн. Проверь подключение — и продолжим.</p>
+  <button onclick="location.reload()">Попробовать снова</button>
+</div>
+<script>window.addEventListener("online", function(){ location.reload(); });</script>
+</body>
+</html>

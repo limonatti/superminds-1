@@ -30,6 +30,16 @@
   .formrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;align-items:end}
   @media(max-width:820px){ .demo{padding:0 16px 40px} }
 </style>
+<!-- app: установка как приложение (manifest + sw) -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#5d1930">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Asya English">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script src="sm-pwa.js?v=6d98191a" defer></script>
 </head>
 <body>
 
