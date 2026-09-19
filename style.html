@@ -9,7 +9,7 @@
 <!-- Страница-образец. Не входит в меню и не связана с данными:
      здесь только вид. Переключатель сверху меняет тему на лету,
      чтобы можно было сравнить старое и новое на одном и том же экране. -->
-<link rel="stylesheet" id="theme1" href="sm-warm.css?v=1c9436fd">
+<link rel="stylesheet" id="theme1" href="sm-warm.css?v=33876983">
 <link rel="stylesheet" id="theme2" href="">
 
 <style>
@@ -39,7 +39,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<script src="sm-pwa.js?v=6d98191a" defer></script>
+<script src="sm-pwa.js?v=da801acd" defer></script>
 </head>
 <body>
 
@@ -305,7 +305,7 @@ var L1 = document.getElementById("theme1"),
 
 function setTheme(t){
   if (t === "old"){ L1.href = "modernist.css?v=6f7808f9"; L2.href = "sm-ui.css?v=073c02c6"; }
-  else            { L1.href = "sm-warm.css?v=1c9436fd";   L2.href = ""; }
+  else            { L1.href = "sm-warm.css?v=33876983";   L2.href = ""; }
   document.querySelectorAll("#swap button").forEach(function(b){
     b.classList.toggle("on", b.dataset.t === t);
   });

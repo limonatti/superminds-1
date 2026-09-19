@@ -517,6 +517,27 @@ textarea.input { min-height: 104px; resize: vertical; line-height: 1.55; }
 .sm-bar { display: none; }
 .sm-scrim { display: none; }
 
+/* ---------- нижняя полоса разделов: только в приложении ---------- */
+.sm-tabbar { display: none; }
+.sm-app .sm-tabbar {
+  display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; z-index: 61;
+  left: 0; right: 0; bottom: 0; background: var(--color-canvas); color: var(--color-onink);
+  border-top: 1px solid var(--color-onink-soft); padding-bottom: env(safe-area-inset-bottom);
+}
+.sm-app .tabItem {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 2px 7px; min-height: 52px; text-decoration: none;
+  font-size: 10px; font-weight: 700; letter-spacing: .02em; color: var(--color-onink-muted);
+}
+.sm-app .tabItem.on { color: var(--color-onink); }
+.sm-app .tabItem .badge {
+  position: absolute; top: 4px; left: 50%; margin-left: 4px; min-width: 16px; height: 16px; padding: 0 4px;
+  display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-pill);
+  background: var(--color-onink-fill); color: var(--color-onink-fill-text); font-size: 10px; font-weight: 700;
+}
+/* чтобы полоса не накрывала последнюю строку страницы */
+.sm-app .app { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+
 @media (max-width: 820px) {
   .app { grid-template-columns: minmax(0, 1fr); padding: 8px; padding-top: 62px; gap: 0; }
   .main { border-radius: var(--radius-md); }

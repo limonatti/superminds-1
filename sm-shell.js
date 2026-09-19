@@ -82,6 +82,24 @@ var TEACHER = [
   { id: "board",    t: "Доска",            i: "board", href: "board.html" }
 ];
 
+/* Нижнее меню — только в приложении (класс sm-app на <html>).
+   Пять главных разделов с короткими подписями: на полосе внизу
+   «Британский акцент» не помещается, а «Мои курсы» лишнее слово. */
+var TABS_STUDENT = [
+  { id: "courses",  t: "Курсы" },
+  { id: "homework", t: "Домашка" },
+  { id: "chat",     t: "Чат" },
+  { id: "schedule", t: "Уроки" },
+  { id: "shadowing",t: "Речь" }
+];
+var TABS_TEACHER = [
+  { id: "students", t: "Ученики" },
+  { id: "review",   t: "Домашка" },
+  { id: "chat",     t: "Чат" },
+  { id: "tsched",   t: "Уроки" },
+  { id: "board",    t: "Доска" }
+];
+
 /* 1 юнит · 2 юнита · 5 юнитов */
 function plural(n, forms) {
   n = Math.abs(Math.round(n));
@@ -143,7 +161,33 @@ var SMUI = {
 
     this.paintUser(role);
     this.mountBar(box);
+    this.mountTabbar(role, opts.active);
     this.refreshUnread(role);
+  },
+
+  /* Нижняя полоса разделов — как в обычном приложении.
+     Появляется только когда платформа открыта как приложение: в браузере
+     её нет, там хватает меню слева. */
+  mountTabbar(role, active) {
+    if (!document.documentElement.classList.contains("sm-app")) return;
+    if (document.querySelector(".sm-tabbar")) return;
+    var items = role === "teacher" ? TEACHER : STUDENT;
+    var tabs = role === "teacher" ? TABS_TEACHER : TABS_STUDENT;
+
+    var html = tabs.map(function (tab) {
+      var it = null;
+      for (var i = 0; i < items.length; i++) if (items[i].id === tab.id) it = items[i];
+      if (!it) return "";
+      var on = it.id === active ? " on" : "";
+      return '<a class="tabItem' + on + '" href="' + it.href + '">' +
+        svg(it.i, 21) + '<span>' + esc(tab.t) + "</span></a>";
+    }).join("");
+
+    var bar = document.createElement("nav");
+    bar.className = "sm-tabbar";
+    bar.setAttribute("aria-label", "Разделы");
+    bar.innerHTML = html;
+    document.body.appendChild(bar);
   },
 
   /* Верхняя полоса с бургером и выезжающее меню на узком экране.
@@ -263,16 +307,18 @@ var SMUI = {
         n = (await SM.myUnread()) || 0;
       }
     } catch (e) { n = 0; }
-    var link = document.querySelector('.navlist a[href="chat.html"]');
-    if (!link) return;
-    var old = link.querySelector(".badge");
-    if (old) old.parentNode.removeChild(old);
-    if (n > 0) {
-      var b = document.createElement("span");
-      b.className = "badge";
-      b.textContent = n > 99 ? "99+" : n;
-      link.appendChild(b);
-    }
+    var links = document.querySelectorAll('.navlist a[href="chat.html"], .sm-tabbar a[href="chat.html"]');
+    if (!links.length) return;
+    Array.prototype.forEach.call(links, function (link) {
+      var old = link.querySelector(".badge");
+      if (old) old.parentNode.removeChild(old);
+      if (n > 0) {
+        var b = document.createElement("span");
+        b.className = "badge";
+        b.textContent = n > 99 ? "99+" : n;
+        link.appendChild(b);
+      }
+    });
     this._syncBarBadge();
   },
 

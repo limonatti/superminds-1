@@ -18,6 +18,25 @@
       navigator.serviceWorker.register("/sw.js").catch(function () {});
     });
   }
+  /* В приложении чужие ссылки (YouTube, Instagram) открываем системным
+     браузером. Внутри окна приложения они выглядят как «мы всё ещё на сайте»
+     и вернуться оттуда нечем — за это Apple и снимает с проверки. */
+  if (isNative) {
+    document.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      var href = a.getAttribute("href") || "";
+      if (!/^https?:/i.test(href)) return;
+      var host;
+      try { host = new URL(href, location.href).hostname; } catch (err) { return; }
+      if (!host || host === location.hostname) return;
+      e.preventDefault();
+      var P = window.Capacitor && window.Capacitor.Plugins;
+      if (P && P.Browser && P.Browser.open) P.Browser.open({ url: href });
+      else window.open(href, "_system");
+    }, true);
+  }
+
   if (standalone || isNative) return;
 
   function hidden() {
