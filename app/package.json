@@ -4,11 +4,14 @@
   "private": true,
   "description": "Нативная обёртка english-with-asya.com для App Store и Google Play",
   "scripts": {
-    "setup:ios": "npx cap add ios && npm run assets && npm run perms:ios",
-    "setup:android": "npx cap add android && npm run assets && npm run perms:android",
+    "setup:ios": "npx cap add ios && npm run assets:ios && npm run perms:ios && npm run scheme:ios",
+    "setup:android": "npx cap add android && npm run assets:android && npm run perms:android",
     "assets": "npx capacitor-assets generate --ios --android --iconBackgroundColor '#ec3013' --splashBackgroundColor '#5d1930' --splashBackgroundColorDark '#5d1930'",
+    "assets:ios": "npx capacitor-assets generate --ios --iconBackgroundColor '#ec3013' --splashBackgroundColor '#5d1930' --splashBackgroundColorDark '#5d1930'",
+    "assets:android": "npx capacitor-assets generate --android --iconBackgroundColor '#ec3013' --splashBackgroundColor '#5d1930' --splashBackgroundColorDark '#5d1930'",
     "perms:ios": "node scripts/perms.js ios",
     "perms:android": "node scripts/perms.js android",
+    "scheme:ios": "node scripts/xcscheme.js",
     "sync": "npx cap sync",
     "ios": "npx cap open ios",
     "android": "npx cap open android"

@@ -14,11 +14,25 @@
 | Программа | Xcode (App Store на маке) | Android Studio |
 | Прочее | Node.js (nodejs.org, версия LTS) | то же |
 
-## Сборка (Терминал на маке)
+## Сборка без мака — прямо на GitHub
+Вкладка **Actions** → слева «Сборка приложения» → кнопка **Run workflow**.
+Через несколько минут внизу страницы запуска, в разделе **Artifacts**, лежат:
+
+| Файл | Что с ним делать |
+|---|---|
+| `app-debug.apk` | скачать на Android-телефон и установить — приложение работает сразу |
+| `app-release.aab` | **не подписан**; для Play Console подписать своим ключом (Android Studio → Build → Generate Signed App Bundle) |
+| `English-with-Asya-unsigned.ipa` | **не подписан**; на iPhone напрямую не ставится, нужен Apple Developer и подпись на маке |
+
+Этот прогон доказывает, что обе версии собираются. Для магазинов нужна подпись:
+у Apple — только на маке с Xcode, у Google — ключом из Android Studio.
+Workflow запускается сам при любой правке в `app/`.
+
+## Сборка на маке
 ```bash
 cd ~/"project Asya's platform"/app
 npm install
-npm run setup:ios        # создаёт папку ios/, иконки, разрешение на микрофон
+npm run setup:ios        # создаёт папку ios/, иконки, разрешение на микрофон, схему
 npm run setup:android    # то же для android/
 npm run ios              # откроет Xcode
 npm run android          # откроет Android Studio

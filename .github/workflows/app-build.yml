@@ -1,0 +1,125 @@
+# Сборка приложения в облаке GitHub: Android — готовый APK и AAB,
+# iOS — сборка проекта и неподписанный IPA.
+# Запуск: вкладка Actions → «Сборка приложения» → Run workflow.
+# Файлы появятся внизу страницы запуска, в разделе Artifacts.
+name: Сборка приложения
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'claude/**']
+    paths:
+      - 'app/**'
+      - '.github/workflows/app-build.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    name: Android (APK + AAB)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Зависимости
+        working-directory: app
+        run: npm ci
+
+      - name: Нативный проект, иконки, разрешения
+        working-directory: app
+        run: |
+          npx cap add android
+          npm run assets:android
+          npm run perms:android
+
+      - name: Номер версии из номера запуска
+        working-directory: app
+        run: |
+          sed -i "s/versionCode 1$/versionCode ${{ github.run_number }}/" android/app/build.gradle
+          sed -i "s/versionName \"1.0\"/versionName \"1.0.${{ github.run_number }}\"/" android/app/build.gradle
+
+      - name: Сборка
+        working-directory: app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug assembleRelease bundleRelease
+
+      - name: Куда положил файлы
+        working-directory: app/android
+        run: find app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -print
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          if-no-files-found: error
+          path: |
+            app/android/app/build/outputs/apk/debug/*.apk
+            app/android/app/build/outputs/apk/release/*.apk
+            app/android/app/build/outputs/bundle/release/*.aab
+
+  ios:
+    name: iOS (сборка + неподписанный IPA)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Зависимости
+        working-directory: app
+        run: npm ci
+
+      - name: Нативный проект, иконки, разрешения, схема
+        working-directory: app
+        run: |
+          npx cap add ios
+          npm run assets:ios
+          npm run perms:ios
+          npm run scheme:ios
+
+      - name: Сборка без подписи
+        working-directory: app
+        run: |
+          xcodebuild \
+            -project ios/App/App.xcodeproj \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath ios/build \
+            CURRENT_PROJECT_VERSION=${{ github.run_number }} \
+            MARKETING_VERSION=1.0.${{ github.run_number }} \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Упаковка в IPA
+        working-directory: app
+        run: |
+          mkdir -p ios/out/Payload
+          cp -R ios/build/Build/Products/Release-iphoneos/App.app ios/out/Payload/
+          cd ios/out
+          zip -qry "English-with-Asya-unsigned.ipa" Payload
+          ls -lh *.ipa
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios
+          if-no-files-found: error
+          path: app/ios/out/*.ipa
