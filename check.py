@@ -58,6 +58,9 @@ MUST_HAVE = {
     "new-password.html": ["Новый пароль", "Сохранить пароль"],
     "teacher-schedule.html": ["Поставить урок", "Дни недели", "По ученикам", "Неделя"],
     "schedule.html": ["Расписание", "Что подготовить к уроку", "Неделя"],
+    "privacy.html": ["Какие данные собираются", "Микрофон и запись голоса",
+                     "Как удалить аккаунт", "Где хранятся данные"],
+    "cabinet.html": ["Удалить аккаунт", "Политика конфиденциальности"],
 }
 
 # страницы, которые обязаны существовать
@@ -143,6 +146,10 @@ for page in PAGES:
         continue
     html = open(page, encoding="utf-8").read()
     for href in re.findall(r'href="([^"#?:]+\.html)', html):
+        # ссылка, которую страница собирает в JS ('+course+'-course.html) —
+        # реального файла с таким именем нет и быть не должно
+        if "+" in href or "$" in href:
+            continue
         if not os.path.exists(href):
             bad_links.add(f"{page} → {href}")
 if bad_links:

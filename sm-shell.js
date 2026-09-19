@@ -138,7 +138,8 @@ var SMUI = {
         '<button type="button" class="' + (role === "teacher" ? "on" : "") + '" onclick="location.href=\'teacher-class.html\'">Учитель</button>' +
       "</div>" +
       '<nav class="navlist">' + nav + "</nav>" +
-      '<div class="side-user" id="sideUser"></div>';
+      '<div class="side-user" id="sideUser"></div>' +
+      '<a class="side-legal" href="privacy.html">Политика конфиденциальности</a>';
 
     this.paintUser(role);
     this.mountBar(box);

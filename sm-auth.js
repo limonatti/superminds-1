@@ -429,6 +429,25 @@ const c = ensureClient(); if (!c) return { ok: false };
 const { error } = await c.rpc("hide_account", { p_user: userId, p_hidden: hidden !== false });
 return { ok: !error, error: error && error.message };
 },
+/* Ученик удаляет свой аккаунт сам — этого требуют App Store (5.1.1(v)) и Google Play.
+   Серверная функция delete_my_account() стирает профиль, прогресс, домашку,
+   слова, записи произношения, переписку и сам аккаунт входа. Отменить нельзя.
+   Учителю функция откажет: его аккаунт удаляется только вручную. */
+async deleteMyAccount() {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false, error: "нет соединения" };
+const { data, error } = await c.rpc("delete_my_account");
+if (error) return { ok: false, error: error.message };
+if (data && data.ok === false) {
+const codes = {
+teacher_account: "Это аккаунт преподавателя — напиши, удалим вручную.",
+not_signed_in: "Сначала войди в аккаунт."
+};
+return { ok: false, error: codes[data.error] || data.error || "Не удалось удалить" };
+}
+try { await c.auth.signOut(); } catch (e) {}
+return { ok: true };
+},
 /* Добавить такого человека к себе в класс */
 async attachStudent(userId, name) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };

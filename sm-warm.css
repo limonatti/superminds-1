@@ -305,6 +305,7 @@ textarea.input { min-height: 104px; resize: vertical; line-height: 1.55; }
 .side-user .who { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .side-user .who b { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .side-user .who span { font-size: 11px; color: var(--color-onink-muted); }
+.side-legal { display: block; padding: 8px 10px 2px; font-size: 11px; color: var(--color-onink-muted); text-decoration: underline; }
 .side-user .out { background: none; border: 0; color: var(--color-onink-muted); padding: 6px; border-radius: var(--radius-sm); }
 .side-user .out:hover { color: var(--color-onink); background: var(--color-canvas-2); }
 
