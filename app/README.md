@@ -24,6 +24,11 @@
 | `app-release.aab` | **не подписан**; для Play Console подписать своим ключом (Android Studio → Build → Generate Signed App Bundle) |
 | `English-with-Asya-unsigned.ipa` | **не подписан**; на iPhone напрямую не ставится, нужен Apple Developer и подпись на маке |
 
+Те же файлы, но с понятными именами и прямыми ссылками, выкладываются в
+[Releases](https://github.com/limonatti/superminds-1/releases) — ссылку на `.apk`
+можно открыть прямо на телефоне, вход в GitHub не нужен. Релиз появляется при
+сборке из `main` и при ручном запуске.
+
 Этот прогон доказывает, что обе версии собираются. Для магазинов нужна подпись:
 у Apple — только на маке с Xcode, у Google — ключом из Android Studio.
 Workflow запускается сам при любой правке в `app/`.

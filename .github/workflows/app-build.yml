@@ -13,7 +13,7 @@ on:
       - '.github/workflows/app-build.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   android:
@@ -123,3 +123,44 @@ jobs:
           name: ios
           if-no-files-found: error
           path: app/ios/out/*.ipa
+
+  release:
+    name: Выложить файлы
+    needs: [android, ios]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+
+      - name: Понятные имена файлов
+        run: |
+          V=1.0.${{ github.run_number }}
+          mkdir files
+          find out -type f \( -name '*.apk' -o -name '*.aab' -o -name '*.ipa' \) -print
+          cp "$(find out -name 'app-debug.apk')"            "files/English-with-Asya-$V.apk"
+          cp "$(find out -name 'app-release-unsigned.apk')" "files/English-with-Asya-$V-release-unsigned.apk"
+          cp "$(find out -name '*.aab')"                    "files/English-with-Asya-$V.aab"
+          cp "$(find out -name '*.ipa')"                    "files/English-with-Asya-$V-unsigned.ipa"
+          ls -lh files
+
+      - name: Релиз
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=1.0.${{ github.run_number }}
+          gh release create "app-v$V" files/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Приложение $V" \
+            --prerelease \
+            --notes "Сборка из коммита ${{ github.sha }}.
+
+          | Файл | Что делать |
+          |---|---|
+          | \`English-with-Asya-$V.apk\` | открыть ссылку на телефоне с Android и установить — работает сразу |
+          | \`English-with-Asya-$V.aab\` | для Google Play: подписать своим ключом в Android Studio и загрузить в Play Console |
+          | \`English-with-Asya-$V-release-unsigned.apk\` | то же, что .aab, но APK — на телефон без подписи не встанет |
+          | \`English-with-Asya-$V-unsigned.ipa\` | iOS-сборка без подписи: на iPhone напрямую не ставится, нужен Apple Developer и Xcode на маке |
+
+          Приложение открывает живой сайт english-with-asya.com, поэтому правки на сайте видны в нём сразу — пересобирать нужно только при смене иконки, разрешений или версии Capacitor."
