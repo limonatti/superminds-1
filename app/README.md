@@ -51,6 +51,37 @@ Product → Archive → Distribute App → App Store Connect.
 
 Папки `ios/`, `android/`, `node_modules/` в git не идут (они в `.gitignore`).
 
+## Push-уведомления: что уже сделано и что включить руками
+Код готов целиком: приложение спрашивает разрешение у вошедшего ученика,
+сохраняет токен устройства в таблицу `device_tokens`, а база сама шлёт
+уведомление о новом сообщении, новой домашке, её проверке и новом уроке
+(`supabase-push.sql`, Edge Function `push` в Supabase).
+
+Уведомления молчат, пока не появятся ключи. Что для этого нужно:
+
+1. **Firebase.** Завести бесплатный проект на console.firebase.google.com,
+   добавить туда приложение Android (ID `com.englishwithasya.app`) и iOS
+   (тот же ID). Скачать `google-services.json` → положить в
+   `app/android/app/`, `GoogleService-Info.plist` → в `app/ios/App/App/`.
+2. **APNs для iPhone.** В Apple Developer создать ключ APNs (.p8) и загрузить
+   его в Firebase: Project settings → Cloud Messaging → Apple app configuration.
+   Без этого iOS-уведомления не работают, Android — работает.
+3. **Ключ сервера.** В Firebase: Project settings → Service accounts →
+   Generate new private key. Полученный JSON целиком положить в секрет
+   Supabase: Edge Functions → push → Secrets → `FCM_SERVICE_ACCOUNT`.
+   Там же придумать и записать `PUSH_HOOK_SECRET` — любую длинную строку.
+4. **Связать базу с функцией.** В SQL-редакторе Supabase выполнить, подставив
+   свой секрет из пункта 3:
+   ```sql
+   select vault.create_secret('https://kdzpmbuohfjbtjpqrdfx.supabase.co/functions/v1/push', 'push_endpoint');
+   select vault.create_secret('ТОТ_САМЫЙ_PUSH_HOOK_SECRET', 'push_hook_secret');
+   ```
+5. **Пересобрать приложение** (Actions → «Сборка приложения») и проверить на
+   телефоне: написать ученику в чат — уведомление должно прийти.
+
+Пока шаги 1–4 не сделаны, платформа работает как обычно, просто без
+уведомлений: и приложение, и база рассчитаны на их отсутствие.
+
 ## Данные приложения
 - ID: `com.englishwithasya.app` (после публикации менять нельзя)
 - Название: English with Asya

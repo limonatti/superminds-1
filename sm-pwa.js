@@ -21,6 +21,16 @@
   /* В приложении чужие ссылки (YouTube, Instagram) открываем системным
      браузером. Внутри окна приложения они выглядят как «мы всё ещё на сайте»
      и вернуться оттуда нечем — за это Apple и снимает с проверки. */
+  /* Push-уведомления живут отдельным файлом и нужны только в сборке. */
+  if (isNative) {
+    var self = document.currentScript && document.currentScript.src || "";
+    var v = (self.match(/[?&]v=([A-Za-z0-9]+)/) || [])[1];
+    var ps = document.createElement("script");
+    ps.src = "/sm-push.js" + (v ? "?v=" + v : "");
+    ps.defer = true;
+    document.head.appendChild(ps);
+  }
+
   if (isNative) {
     document.addEventListener("click", function (e) {
       var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;

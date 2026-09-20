@@ -448,6 +448,15 @@ return { ok: false, error: codes[data.error] || data.error || "Не удалос
 try { await c.auth.signOut(); } catch (e) {}
 return { ok: true };
 },
+/* Токен устройства для push-уведомлений. Зовётся из sm-push.js при каждом
+   запуске приложения: токен FCM меняется сам, старый перестаёт работать. */
+async savePushToken(token, platform) {
+if (!useCloud) return { ok: false, error: "нужен Supabase" };
+const c = ensureClient(); if (!c) return { ok: false };
+const { data, error } = await c.rpc("save_push_token", { p_token: token, p_platform: platform || "web" });
+if (error) { console.warn("save_push_token:", error.message); return { ok: false, error: error.message }; }
+return { ok: !!(data && data.ok), error: data && data.error };
+},
 /* Добавить такого человека к себе в класс */
 async attachStudent(userId, name) {
 if (!useCloud) return { ok: false, error: "нужен Supabase" };
