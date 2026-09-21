@@ -44,6 +44,18 @@ jobs:
           npm run assets:android
           npm run perms:android
 
+      - name: Ключ Firebase для уведомлений
+        working-directory: app
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then
+            printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
+            echo "google-services.json на месте — уведомления включены"
+          else
+            echo "секрета GOOGLE_SERVICES_JSON нет — собираю без уведомлений"
+          fi
+
       - name: Номер версии из номера запуска
         working-directory: app
         run: |
@@ -92,6 +104,18 @@ jobs:
           npm run assets:ios
           npm run perms:ios
           npm run scheme:ios
+
+      - name: Ключ Firebase для уведомлений
+        working-directory: app
+        env:
+          GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.GOOGLE_SERVICE_INFO_PLIST }}
+        run: |
+          if [ -n "$GOOGLE_SERVICE_INFO_PLIST" ]; then
+            printf '%s' "$GOOGLE_SERVICE_INFO_PLIST" > ios/App/App/GoogleService-Info.plist
+            echo "GoogleService-Info.plist на месте — уведомления включены"
+          else
+            echo "секрета GOOGLE_SERVICE_INFO_PLIST нет — собираю без уведомлений"
+          fi
 
       - name: Сборка без подписи
         working-directory: app

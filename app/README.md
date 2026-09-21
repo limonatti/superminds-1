@@ -61,8 +61,12 @@ Product → Archive → Distribute App → App Store Connect.
 
 1. **Firebase.** Завести бесплатный проект на console.firebase.google.com,
    добавить туда приложение Android (ID `com.englishwithasya.app`) и iOS
-   (тот же ID). Скачать `google-services.json` → положить в
-   `app/android/app/`, `GoogleService-Info.plist` → в `app/ios/App/App/`.
+   (тот же ID). Скачанные файлы не кладём в репозиторий — он публичный, —
+   а сохраняем в секреты GitHub (Settings → Secrets and variables → Actions):
+   `google-services.json` целиком в секрет **GOOGLE_SERVICES_JSON**,
+   `GoogleService-Info.plist` — в **GOOGLE_SERVICE_INFO_PLIST**.
+   Сборка сама подставит их в нужное место; если секретов нет, приложение
+   соберётся просто без уведомлений.
 2. **APNs для iPhone.** В Apple Developer создать ключ APNs (.p8) и загрузить
    его в Firebase: Project settings → Cloud Messaging → Apple app configuration.
    Без этого iOS-уведомления не работают, Android — работает.
