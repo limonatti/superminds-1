@@ -188,7 +188,7 @@
 <script src="sm-auth.js?v=51735d86"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script src="sm-voice.js?v=6a1358e3"></script>
-<script src="sm-speech.js?v=345f1a8d"></script>
+<script src="sm-speech.js?v=e3dba6c4"></script>
 <script src="sm-voice-lab.js?v=ee30ed82"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -418,7 +418,7 @@ function drawPane(){
     chunksHTML(F) +
 
     (canGraph ? "" :
-      '<div class="warn">У этой фразы нет записи носителя — образец читает голос браузера. ' +
+      '<div class="warn">У этой фразы нет записи носителя — образец читает синтезированный голос. ' +
       'Его нельзя разобрать по частотам, поэтому график сравнения недоступен: будут твоя кривая и точность слов.' +
       (OWN ? ' Прикрепи аудио к своей фразе — появится сравнение.' : '') + '</div>') +
 
@@ -512,7 +512,7 @@ function drawOwnForm(){
   const curYt = cur && cur[0].yt_raw ? cur[0].yt_raw : "";
 
   p.innerHTML =
-    '<div class="pane-hd"><span>Своя фраза · разбор связной речи</span><span>бесплатно, всё в браузере</span></div>' +
+    '<div class="pane-hd"><span>Своя фраза · разбор связной речи</span><span>бесплатно, прямо на устройстве</span></div>' +
     '<div class="ownf">' +
       '<label>Фраза или кусок речи носителя' +
         '<textarea id="ownText" placeholder="Например: I was gonna tell you about it, but I kind of forgot.">'+esc(curText)+'</textarea>' +
@@ -580,7 +580,7 @@ async function toggleRec(){
   const btn = document.getElementById("bMic");
 
   if (!VL.supported()){
-    setHint("Этот браузер не умеет записывать звук. Попробуй свежий Chrome или Safari.");
+    setHint("Здесь нельзя записать звук. Открой платформу в свежем Chrome, Safari или в приложении.");
     return;
   }
 
@@ -669,14 +669,14 @@ function drawResult(){
 
   let words = "";
   if (lastWords && lastWords.words){
-    words = '<div class="sect"><span>Точность слов</span><span>по распознаванию браузера</span></div>' +
+    words = '<div class="sect"><span>Точность слов</span><span>по распознаванию речи</span></div>' +
       '<div class="words">' + lastWords.words.map(w =>
         '<span class="'+(w.state==="miss"?"no":w.state)+'">'+esc(w.word)+'</span>').join("") + '</div>' +
-      '<div class="heard">Браузер услышал: «'+esc(lastWords.heard || "…")+'»</div>';
+      '<div class="heard">Услышано: «'+esc(lastWords.heard || "…")+'»</div>';
   } else if (wordsState === "unsupported"){
-    words = '<div class="warn">Точность слов считает распознавание речи — оно есть в Chrome, Edge и Safari. В этом браузере его нет.</div>';
+    words = '<div class="warn">Точность слов считает распознавание речи. Здесь оно недоступно — открой платформу в Chrome, Edge, Safari или в приложении.</div>';
   } else if (wordsState === "empty" || wordsState === "failed"){
-    words = '<div class="warn">Браузер не расслышал слов. Говори ближе к микрофону и не отключай интернет — распознавание работает через сервер браузера.</div>';
+    words = '<div class="warn">Слов не расслышали. Говори ближе к микрофону и проверь интернет — распознавание идёт через сервер.</div>';
   }
 
   box.innerHTML =

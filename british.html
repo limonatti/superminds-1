@@ -334,7 +334,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sm-auth.js?v=51735d86"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
-<script src="sm-speech.js?v=345f1a8d"></script>
+<script src="sm-speech.js?v=e3dba6c4"></script>
 <script src="sm-british.js?v=dc54b937"></script>
 <script src="british-data.js?v=d54840e5"></script>
 <script>
@@ -840,7 +840,7 @@ function bindPane(r){
   pane.querySelectorAll("[data-uplay]").forEach(b => b.onclick = () => playSeg(m, +b.dataset.uplay, b));
   pane.querySelectorAll("[data-urec]").forEach(b => b.onclick = async () => {
     const id = b.dataset.urec, out = document.getElementById("u-" + id);
-    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка работает в Chrome, Edge и Safari."; return; }
+    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка работает в Chrome, Edge, Safari и в приложении."; return; }
     if (REC && REC.i === id){
       b.textContent = "🎤 Повторить"; b.classList.remove("rec"); out.textContent = "Считаю…";
       const res = await REC.sess.stop(); REC = null;
@@ -966,7 +966,7 @@ function bindPane(r){
   });
   segs.querySelectorAll("[data-rec]").forEach(b => b.onclick = async () => {
     const i = +b.dataset.rec, out = document.getElementById("r-" + i), s = m.segs[i];
-    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка произношения работает в Chrome, Edge и Safari."; return; }
+    if (!(window.SMS && SMS.supported())){ out.textContent = "Проверка произношения работает в Chrome, Edge, Safari и в приложении."; return; }
     if (REC && REC.i === i){
       b.classList.remove("rec"); b.textContent = "🎤 Повторить"; out.textContent = "Считаю…";
       const res = await REC.sess.stop(); REC = null;

@@ -113,7 +113,7 @@
     return best;
   }
 
-  function listen(target, opts) {
+  function webListen(target, opts) {
     opts = opts || {};
     return new Promise(function (resolve, reject) {
       if (!SR) { reject(new Error("no-speech-recognition")); return; }
@@ -141,7 +141,7 @@
 
   /* Слушает, пока не скажут stop(). Нужен там, где параллельно
      идёт запись звука и длину фразы решает сам ученик. */
-  function session(target, opts) {
+  function webSession(target, opts) {
     opts = opts || {};
     if (!SR) return null;
     var rec;
@@ -625,8 +625,126 @@
     return { tokens: tokens, links: links, spans: spans, items: items, say: sayStr, chunks: chunks, accent: US ? "US" : "GB" };
   }
 
+  /* ================= РАСПОЗНАВАНИЕ В ПРИЛОЖЕНИИ =================
+     Внутри сборки для App Store и Google Play движка браузера нет:
+     WKWebView на iPhone не знает SpeechRecognition вообще, у Android
+     WebView он тоже отсутствует. Поэтому там работает нативное
+     распознавание системы через @capacitor-community/speech-recognition —
+     то же API наружу, другой мотор внутри.
+     Побочный выигрыш: на iPhone произношение в приложении работает,
+     а на сайте в Safari — нет. */
+
+  var CAP = window.Capacitor;
+  var IS_NATIVE = !!(CAP && CAP.isNativePlatform && CAP.isNativePlatform());
+  var NSR = (IS_NATIVE && CAP.Plugins && CAP.Plugins.SpeechRecognition) || null;
+
+  /* Ловушка WebKit: внутри приложения window.webkitSpeechRecognition
+     существует, но ничего не делает — обычная проверка «есть ли объект»
+     даёт ложное «поддерживается», а распознавание молча не запускается
+     (bugs.webkit.org 239816). Поэтому в приложении движок браузера
+     не используем вовсе, только нативный плагин. */
+
+  var permOk = null;
+  async function ensurePerm() {
+    if (permOk === true) return true;
+    var st = null;
+    try { st = await NSR.checkPermissions(); } catch (e) {}
+    if (!st || st.speechRecognition !== "granted") {
+      try { st = await NSR.requestPermissions(); } catch (e) { permOk = false; throw new Error("no-permission"); }
+    }
+    permOk = !!(st && st.speechRecognition === "granted");
+    if (!permOk) throw new Error("no-permission");
+    return true;
+  }
+
+  async function nativeListen(target, opts) {
+    opts = opts || {};
+    await ensurePerm();
+    var limit = opts.timeout || 6000;
+    var guard = setTimeout(function () { try { NSR.stop(); } catch (e) {} }, limit);
+    var res;
+    try {
+      res = await NSR.start({
+        language: opts.lang || "en-GB",
+        maxResults: 3,
+        partialResults: false,
+        popup: false
+      });
+    } finally {
+      clearTimeout(guard);
+    }
+    var alts = (res && res.matches) || [];
+    if (!alts.length) throw new Error("no-match");
+    return bestOf(target, alts);
+  }
+
+  /* Длинная сессия: слушаем, пока ученик не нажмёт «стоп».
+     Промежуточные куски приходят событием, финал берём из последнего. */
+  function nativeSession(target, opts) {
+    opts = opts || {};
+    var alts = [], err = null, handle = null, stopped = false;
+
+    var started = ensurePerm().then(function () {
+      return NSR.addListener("partialResults", function (d) {
+        if (!d || !d.matches || !d.matches.length) return;
+        alts = d.matches;
+        if (typeof opts.onInterim === "function") {
+          try { opts.onInterim(String(alts[0] || "").trim()); } catch (x) {}
+        }
+      });
+    }).then(function (h) {
+      handle = h;
+      if (stopped) return null;
+      return NSR.start({
+        language: opts.lang || "en-GB",
+        maxResults: 3,
+        partialResults: true,
+        popup: false
+      });
+    }).catch(function (e) {
+      err = (e && e.message) || "speech-error";
+    });
+
+    function cleanup() {
+      if (handle && handle.remove) { try { handle.remove(); } catch (e) {} }
+      handle = null;
+    }
+
+    return {
+      stop: function () {
+        stopped = true;
+        return started
+          .then(function () { return NSR.stop(); })
+          .catch(function () {})
+          .then(function () {
+            cleanup();
+            if (!alts.length) return null;
+            return bestOf(target, alts);
+          });
+      },
+      abort: function () {
+        stopped = true;
+        started.then(function () { try { NSR.stop(); } catch (e) {} }).catch(function () {});
+        cleanup();
+      },
+      error: function () { return err; }
+    };
+  }
+
+  function listen(target, opts) {
+    if (NSR) return nativeListen(target, opts);
+    if (IS_NATIVE) return Promise.reject(new Error("no-speech-recognition"));
+    return webListen(target, opts);
+  }
+
+  function session(target, opts) {
+    if (NSR) return nativeSession(target, opts);
+    if (IS_NATIVE) return null;
+    return webSession(target, opts);
+  }
+
   window.SMS = {
-    supported: function () { return !!SR; },
+    supported: function () { return NSR ? true : (IS_NATIVE ? false : !!SR); },
     listen: listen,
     session: session,
     button: button,
