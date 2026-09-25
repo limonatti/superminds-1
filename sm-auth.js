@@ -1460,9 +1460,13 @@ return { src: url, h: 620, name: "сайт" };
     }
 
     /* Главный — курс, назначенный учителем в разделе «Мой класс».
-       Свой выбор ученика работает только там, где учитель ничего не назначил. */
+       Дальше — последний выбор самого ученика. Он лежит в браузере (его
+       кладёт pickCourse в момент нажатия) и в базе (на случай другого
+       устройства). Браузер идёт первым: запись в базу может не пройти,
+       и тогда старое значение из базы откатывало бы свежий выбор назад —
+       именно так словарь показывал чужой учебник. */
     const before = window.SM_COURSE && window.SM_COURSE.id;
-    const ok = apply(assigned) || apply(picked);
+    const ok = apply(assigned) || apply(window.SM_wantedCourse) || apply(picked);
     if (!ok) window.SM_useCourse(window.SM_wantedCourse);
     const after = window.SM_COURSE && window.SM_COURSE.id;
 
