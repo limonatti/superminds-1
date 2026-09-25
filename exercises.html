@@ -163,7 +163,7 @@
   <script src="words.js?v=6dc57848"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=51735d86"></script>
+  <script src="sm-auth.js?v=afb7e9d3"></script>
   <script src="sm-play.js?v=dd356834"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -704,7 +704,7 @@
         const own = window.SM_courseOfUnit && SM_courseOfUnit(uid);
         if(own && own !== cid){
           cid = own;
-          if(window.SM_useCourse){ SM_useCourse(cid); }
+          if(window.SM && SM.pickCourse){ SM.pickCourse(cid); }   /* запоминается на сервере */
           const u2 = SM_UNITS.find(x=>x.id===uid);
           if(u2) document.getElementById("sub").textContent = u2.emoji+" "+u2.title+" · упражнения";
         }

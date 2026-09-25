@@ -231,7 +231,7 @@
 <script src="words.js?v=6dc57848"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=442908de"></script>
-<script src="sm-auth.js?v=51735d86"></script>
+<script src="sm-auth.js?v=afb7e9d3"></script>
 <script src="sm-play.js?v=dd356834"></script>
 <script>
 /* ===========================================================================
@@ -282,11 +282,10 @@ function fillCourses(){
   var q=new URLSearchParams(location.search).get("course");
   var cur=q || (window.SM_COURSE && SM_COURSE.id);
   if(cur && [].some.call(csel.options,function(o){ return o.value===cur; })) csel.value=cur;
-  if(q && window.SM_useCourse) SM_useCourse(q);
+  if(q && window.SM && SM.pickCourse) SM.pickCourse(q);
 }
 csel.onchange=function(){
-  if(window.SM_useCourse) SM_useCourse(csel.value);
-  try{ localStorage.setItem("sm-course", csel.value); }catch(e){}
+  if(window.SM && SM.pickCourse) SM.pickCourse(csel.value);   /* запоминается на сервере */
   fillUnits(); toMenu();
 };
 
@@ -307,8 +306,7 @@ function fillUnits(){
   if(q && !(window.SM_UNITS||[]).some(function(u){ return u.id===q; }) && window.SM_courseOfUnit){
     var slug=SM_courseOfUnit(q);
     if(slug && window.SM_useCourse){
-      SM_useCourse(slug);
-      try{ localStorage.setItem("sm-course", slug); }catch(e){}
+      SM.pickCourse(slug);   /* выбор учебника запоминается на сервере */
       if([].some.call(csel.options,function(o){ return o.value===slug; })) csel.value=slug;
       списокЮнитов();
     }

@@ -144,7 +144,7 @@
   <script src="words.js?v=6dc57848"></script>
   <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=442908de"></script>
-  <script src="sm-auth.js?v=51735d86"></script>
+  <script src="sm-auth.js?v=afb7e9d3"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
@@ -411,8 +411,7 @@ window.SM_HANDLES_COURSE = true;
       if(ids.length && !ids.some(id=>SM_UNITS.some(u=>u.id===id)) && window.SM_courseOfUnit){
         const slug = window.SM_courseOfUnit(ids[0]);
         if(slug && slug !== (window.SM_COURSE && window.SM_COURSE.id)){
-          window.SM_useCourse(slug);
-          try { localStorage.setItem("sm-course", slug); } catch(e){}
+          SM.pickCourse(slug);   /* выбор учебника запоминается на сервере */
         }
       }
 

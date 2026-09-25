@@ -1435,8 +1435,13 @@ return { src: url, h: 620, name: "сайт" };
      чтобы он пережил другой браузер и очистку кэша. */
   window.SM.pickCourse = async function (slug) {
     if (!apply(slug)) return { ok: false, error: "неизвестный курс" };
-    try { await window.SM.setMyCourse(slug); } catch (e) {}
-    return { ok: true };
+    /* Записать выбор на сервер обязательно: при следующей загрузке страницы
+       курс берётся из базы, и без этой записи выбор ученика откатывается
+       на прежний учебник. Ошибку не глотаем — пусть будет видно. */
+    let r = { ok: false, error: "нет сети" };
+    try { r = (await window.SM.setMyCourse(slug)) || r; } catch (e) { r = { ok: false, error: String(e) }; }
+    if (!r.ok) console.warn("[sm] курс не сохранён на сервере:", r.error);
+    return r;
   };
 
   window.SM_ready = Promise.resolve(window.SM_ready).then(async function () {
