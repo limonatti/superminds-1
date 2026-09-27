@@ -179,11 +179,19 @@ return data || null;
 /* Запомнить выбранный учеником учебник — чтобы он пережил смену браузера */
 async setMyCourse(slug) {
 if (!useCloud) return { ok: true };
-const c = ensureClient(); if (!c) return { ok: false };
-const u = await this.getUser(); if (!u) return { ok: false };
-const { error } = await c.from("profiles").upsert(
-{ user_id: u.id, course: slug }, { onConflict: "user_id" });
-return { ok: !error, error: error && error.message };
+const c = ensureClient(); if (!c) return { ok: false, error: "нет клиента" };
+const u = await this.getUser(); if (!u) return { ok: false, error: "не вошёл" };
+/* Только update одной колонки. Раньше здесь был upsert: при конфликте он
+   переписывает ВСЕ переданные колонки, включая user_id, а права на изменение
+   user_id у ученика нет — база отвечала «permission denied for column user_id»,
+   и выбор учебника молча не сохранялся. */
+const { data, error } = await c.from("profiles")
+.update({ course: slug }).eq("user_id", u.id).select("user_id");
+if (error) return { ok: false, error: error.message };
+if (data && data.length) return { ok: true };
+/* Профиля ещё нет — тогда именно вставка, на неё право есть */
+const ins = await c.from("profiles").insert({ user_id: u.id, course: slug });
+return { ok: !ins.error, error: ins.error && ins.error.message };
 },
 /* Учитель: гарантировать профиль и получить свой код */
 /* Код класса выдаёт база, а не браузер: колонки role и teacher_code закрыты
