@@ -19,7 +19,7 @@ const loader=fs.readFileSync(path.join(root,'assets/loader.js'),'utf8');
 function harness(){const scripts=[],layers=[];const input={},status={};const ctx={window:{},URL:{createObjectURL:f=>'blob:'+f.webkitRelativePath},document:{createElement:tag=>({tag,querySelector:q=>q==='input'?input:status,remove(){this.removed=true}}),head:{appendChild:x=>scripts.push(x)},body:{appendChild:x=>x.tag==='script'?scripts.push(x):layers.push(x)}}};vm.runInNewContext(loader,ctx);return {ctx,scripts,layers,input,status};}
 (async()=>{
  let h=harness();h.ctx.window.COURSE={};h.scripts[0].onload();assert.equal(h.scripts[1].src,'assets/app.js');
- h=harness();h.scripts[0].onerror();assert.equal(h.layers.length,1);
+ h=harness();h.scripts[0].onerror();h.scripts[0].onerror();assert.equal(h.layers.length,1);
  await h.input.onchange({target:{files:[]}});assert.match(h.status.textContent,/нет assets/);
  const data={books:{sb:{path:'source/book.pdf',pages:[{image:'assets/sb-8.webp'}]}},media:[],resources:[]};
  const files=['assets/course.js','source/book.pdf','assets/sb-8.webp'].map(p=>({webkitRelativePath:'folder/'+p,text:async()=> 'window.COURSE='+JSON.stringify(data)+';'}));

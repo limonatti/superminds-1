@@ -1,10 +1,10 @@
-/* Course source files stay on the teacher's computer. No files are uploaded. */
+/* Prefer published course assets; retain the local source fallback. */
 'use strict';
 (async function(){
   function start(){const s=document.createElement('script');s.src='assets/app.js';document.body.appendChild(s);}
   function parse(text){const prefix='window.COURSE=';if(!text.startsWith(prefix))throw Error('Неверный файл курса');return JSON.parse(text.slice(prefix.length).replace(/;\s*$/, ''));}
-  const local=document.createElement('script');local.src='assets/course.js';
-  local.onload=()=>{if(window.COURSE)start();else choose();};local.onerror=choose;document.head.appendChild(local);
+  const local=document.createElement('script');local.src='assets/course-web.js';
+  local.onload=()=>{if(window.COURSE)start();else choose();};local.onerror=()=>{if(local.src.endsWith('course-web.js')){local.src='assets/course.js';document.head.appendChild(local);}else choose();};document.head.appendChild(local);
   function choose(){
     const layer=document.createElement('section');layer.className='source-picker';
     layer.innerHTML='<div><p class="eyebrow">English with Asya · Speakout A1</p><h1>Подключите материалы курса</h1><p>Выберите папку <b>speakout-a1-active-teach</b> на компьютере. В ней должны быть assets и source. Книги, аудио и видео откроются здесь, на платформе.</p><p>Файлы читаются только в браузере и не отправляются на сервер. После перезагрузки страницы папку нужно выбрать снова. Ответы сохраняются в этом браузере.</p><label class="folder-button">Выбрать папку<input type="file" webkitdirectory multiple aria-label="Выбрать папку материалов"></label><p role="status" class="source-status"></p><a href="../speakout-a1-course.html">← К юнитам</a></div>';

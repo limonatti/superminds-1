@@ -27,10 +27,8 @@ Claude outputs/
 .codex/
 .agents/
 
-# Личные оригиналы Speakout: подключаются локально, не публикуются.
+# Оригиналы остаются локально; для сайта публикуются облегчённые копии web/.
 speakout-a1-active-teach/source/
 speakout-a1-active-teach/extracted/
 speakout-a1-active-teach/backups/
 speakout-a1-active-teach/assets/course.js
-speakout-a1-active-teach/assets/sb-*.webp
-speakout-a1-active-teach/assets/wb-*.webp
