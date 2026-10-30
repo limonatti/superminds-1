@@ -1,7 +1,10 @@
 {
   "pages": 294,
-  "exercises": 1413,
-  "automatic": 451,
-  "withKeys": 955,
-  "missingOCR": 0
+  "exercises": 1412,
+  "automatic": 989,
+  "withKeys": 1056,
+  "missingOCR": 0,
+  "mixed": 55,
+  "open": 423,
+  "pending": 0
 }

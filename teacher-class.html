@@ -398,12 +398,13 @@ function outcomesResponses(data){
 }
 
 function solutionsResponses(data){
-  const entries=Object.entries(data.__coursework?.["solutions-int"]||{}).filter(([id,r])=>r && Array.isArray(r.values) && r.values.some(v=>String(v).trim()));
+  const entries=Object.entries(data.__coursework?.["solutions-int"]||{}).filter(([,r])=>r && Array.isArray(r.values) && (r.values.some(v=>String(v).trim())||r.reflection?.trim()||r.previousAnswers?.length));
   if(!entries.length)return "";
-  return '<div class="sect"><span>Solutions Intermediate · ответы ученика</span><span>'+entries.length+' упражнений</span></div>'+Array.from({length:10},(_,i)=>i).map(n=>{
-    const rows=entries.filter(([id,r])=>Number(r.unit)===n).sort((a,b)=>String(a[1].book).localeCompare(String(b[1].book))||a[1].page-b[1].page||Number(a[0].split('-').pop())-Number(b[0].split('-').pop()));
+  const values=(vs,labels=[])=>'<ol>'+vs.map((v,i)=>'<li style="white-space:pre-wrap">'+(labels[i]?'<b>'+esc(labels[i])+': </b>':'')+esc(v||'—')+'</li>').join('')+'</ol>';
+  return '<div class="sect"><span>Solutions Intermediate · ответы ученика</span><span>'+entries.length+' упражнений</span></div>'+[...Array.from({length:10},(_,i)=>i),'extra'].map(n=>{
+    const rows=entries.filter(([,r])=>String(r.unit)===String(n)).sort((a,b)=>String(a[1].book).localeCompare(String(b[1].book))||a[1].page-b[1].page||a[0].localeCompare(b[0],undefined,{numeric:true}));
     if(!rows.length)return "";
-    return '<details style="padding:12px 18px"><summary>'+(n?'Unit '+n:'Introduction')+' · '+rows.length+' заданий</summary>'+rows.map(([id,r])=>'<section style="padding:12px 0;border-bottom:1px solid #d7d3d3"><a href="solutions-int-active-teach/index.html?book='+esc(r.book)+'&amp;page='+Number(r.page)+'"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+Number(r.page)+' · № '+esc(r.exercise||id.split('-').pop())+'</b></a><ol>'+r.values.map(v=>'<li style="white-space:pre-wrap">'+esc(v||'—')+'</li>').join('')+'</ol></section>').join('')+'</details>';
+    return '<details style="padding:12px 18px"><summary>'+(n==='extra'?'Reference &amp; banks':n?'Unit '+n:'Introduction')+' · '+rows.length+' заданий</summary>'+rows.map(([id,r])=>'<section style="padding:12px 0;border-bottom:1px solid #d7d3d3"><a href="solutions-int-active-teach/index.html?book='+esc(r.book)+'&amp;page='+Number(r.page)+'"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+Number(r.page)+' · № '+esc(r.exercise||id.split('-').pop())+'</b></a>'+values(r.values,r.fieldLabels)+(r.score?'<p>Автопроверка: '+Number(r.score.correct)+' из '+Number(r.score.total)+'</p>':'')+(r.reflection?'<p><b>Свободный ответ</b></p><p style="white-space:pre-wrap">'+esc(r.reflection)+'</p>':'')+(r.previousAnswers?.length?'<details><summary>Предыдущие ответы</summary>'+r.previousAnswers.map(v=>values(v.values||[],v.labels)+(v.reflection?'<p>'+esc(v.reflection)+'</p>':'')).join('')+'</details>':'')+'</section>').join('')+'</details>';
   }).join('');
 }
 

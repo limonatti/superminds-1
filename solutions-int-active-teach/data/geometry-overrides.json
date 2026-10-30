@@ -1,0 +1,103 @@
+{
+  "remove": [
+    "sb-120-2-b2",
+    "sb-143-11",
+    "sb-31-2",
+    "sb-31-3",
+    "sb-31-4",
+    "wb-126-1"
+  ],
+  "upsert": {
+    "sb-14-2": {
+      "id": "sb-14-2",
+      "label": "2",
+      "x": 0.3957,
+      "y": 0.11497,
+      "box": [
+        0.39,
+        0.107,
+        0.57,
+        0.83
+      ],
+      "text": "2 Read the text quickly, ignoring the gaps. Choose the best summary of the\ntext: a, b or c.\na Parents may find it difficult to understand their adolescent children, but it is\na parent's duty to communicate properly with them and avoid arguments.\nb Although teenagers develop new ideas, values and beliefs during\nadolescence, that is no excuse for bad behaviour. They should listen to\ntheir parents.\nc Teenagers experience big physical and emotional changes during\nadolescence. It's important to communicate with your parents and try to\nunderstand their point of view.\nFREEDOM You may not want to spend as much time with your\nparents as you used to. You want more freedom to choose who you see and\nwhen. You may feel that your friends are as important to you as your family.\nPRIVACY You used to be most happy in the company of your\n20 parents. 2_\nYou need your own space and some privacy.\nINTERESTS You have new interests and they might include\nactivities that your parents do not understand or think are a waste of time,\nsuch as playing computer games or chatting on the internet.\nDECISIONS In the past, your parents made most decisions for you\n25 and told you what to do.\nYou may resent them telling you to go to bed,\ntidy your bedroom, or come home by ten o'clock.\nOPINIONS When you were younger, you didn't have many strong\nopinions. \"\nAdolescents are often idealistic and feel impatient and at\nodds with the adult world. You may feel that you have all the answers, while\n30 many adults don't have any!"
+    },
+    "sb-31-5": {
+      "id": "sb-31-5",
+      "label": "5",
+      "x": 0.055,
+      "y": 0.532,
+      "box": [
+        0.045,
+        0.15,
+        0.91,
+        0.4
+      ],
+      "text": "5 SPEAKING Work in pairs or small groups. Do the body quiz above."
+    },
+    "sb-31-7": {
+      "id": "sb-31-7",
+      "label": "7",
+      "x": 0.055,
+      "y": 0.603,
+      "box": [
+        0.045,
+        0.598,
+        0.445,
+        0.19
+      ],
+      "text": "7 Listen to four dialogues between doctors and their patients. Complete the table. Part of the body injured; When; Treatment."
+    },
+    "sb-123-1-b2": {
+      "id": "sb-123-1-b2",
+      "label": "1 (блок 2)",
+      "x": 0.506,
+      "y": 0.18,
+      "box": [
+        0.498,
+        0.172,
+        0.45399999999999996,
+        0.28400000000000003
+      ],
+      "text": "1 Cross out the one verb which cannot be used to complete\neach sentence grammatically. The sentences may have\ndifferent meanings with each correct verb.\n1 Today is not the best time to fail / set / make / complete\nthe test.\n2 Our class took part in / held / organised / opened a history\ncompetition.\n3 I hate informing / receiving / delivering / passing on\nmessages that are upsetting\n4 John got into / overheard / joined in / took up an\ninteresting conversation about robots in the canteen.\n5 I'm sure some of us might guess / speculate / offer /\nexpect some kind of an answer.\n6 The team gained / deserved / claimed / were awarded a\nprize for their entry.\n7 We regularly log onto / update / set up / post promotional\nwebsites for marketing.\n8 Do you think we'll ever be able to crack / decipher /\nsmash / unlock the secret codes?"
+    },
+    "wb-121-3": {
+      "id": "wb-121-3",
+      "label": "3",
+      "x": 0.39425,
+      "y": 0.15819,
+      "box": [
+        0.38625,
+        0.15019,
+        0.56575,
+        0.17081000000000002
+      ],
+      "text": "3 Match the texts with the questions below. Some questions match with\nmore than one text.\nWhich form(s) of transport\nA employs) workers who move between vehicles selling tickets? OC\nB hold(s) a world record? OO\nC is/are no longer used by commuters? O\nD date(s) back to the start of the 20th century? • O\nE carry/carries passengers downhill? O C\nF is/are not finished yet? OC\nGrammar and vocabulary"
+    },
+    "wb-121-4": {
+      "id": "wb-121-4",
+      "label": "4",
+      "x": 0.39425,
+      "y": 0.34884,
+      "box": [
+        0.38625,
+        0.34084,
+        0.56575,
+        0.48816
+      ],
+      "text": "4 Choose the correct answers.\nTRAVELLING THE WORLD - THE HARD WAY\nA Liverpool man has become the first person to visit all 201 countries in the\nworld without'_ a plane. Thirty-three-year-old Graham Hughes started his\nepic journey in Uruguay, South America. On his budget of $100 a week, he could\nnot afford\nmany luxuries, and he often had to depend on the kindness of\nstrangers. Not everything went smoothly on the trip. He was arrested when he\nwas trying 3_\nRussia, and he was accused 4\n_ a spy in the Democratic\nRepublic of the Congo. Also, the boat that took him to Cape Verde was in very\nbad condition, so Hughes had a very worrying four days. If the boat had sunk, he\n. Despite all of the setbacks, Hughes managed\nhis list after 1,426 days and 160,000 km. Journalists were waiting to greet him\nin Juba, the capital of South Sudan, a country which did not exist when he set\nout. When they asked Hughes why the journey, he said it was because he\nloved travelling. He also\nthem that he wanted to show people the world\nwas not a big scary place. Hughes went on 9\neveryone he had met for\nhelping him on his way. Now he plans to spend some more time 1_\naround\nAfrica before he eventually flies home.\nhaili\nto bu\nc to enter\nc to be\nc would die\nc to reach\nc had he made\nsaid\nb told\nc told to\n8\na\n9 a thank\nb thanking\nc to thank\nb travelling\nc to travel\n10 a travel\nWriting"
+    },
+    "wb-121-5": {
+      "id": "wb-121-5",
+      "label": "5",
+      "x": 0.3922,
+      "y": 0.85453,
+      "box": [
+        0.3842,
+        0.84653,
+        0.5678,
+        0.09546999999999994
+      ],
+      "text": "5 Imagine that you have recently returned from a holiday where you used\nmento fiend or asport mentioned in the Reading texts Wite an\n• describe the country that you visited\n• relate your experience travelling on the vehicle.\n• mention something that went wrong during the holiday.\n• invite your friend to go on holiday with you next year."
+    }
+  }
+}

@@ -137,3 +137,7 @@ data={'units':names,'pages':pages,'tracks':{b:[p.stem[len(b)+1:] for p in sorted
 (ROOT/'assets/course.js').write_text('window.SOLUTIONS = '+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n')
 report={'pages':len(pages),'exercises':sum(len(p['exercises']) for p in pages),'automatic':sum(bool(e['answers']) for p in pages for e in p['exercises']),'withKeys':sum(bool(e['key']) for p in pages for e in p['exercises']),'missingOCR':302-len(list((TMP/'ocr').glob('*.json')))}
 (ROOT/'audit.json').write_text(json.dumps(report,indent=2));print(report)
+
+# Apply reviewed keys and coordinate corrections after OCR extraction.
+import subprocess,sys
+subprocess.run([sys.executable,str(ROOT/"compile-marking.py")],check=True)

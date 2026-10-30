@@ -3,3 +3,17 @@
 
 /* Keep page markers in place while the shared skin presses a button. */
 .hotspot:active{transform:translate(-60%,-10%)}
+/* Answer labels follow the printed subitems, including tables and mixed tasks. */
+#exercise .answer-row{grid-template-columns:minmax(36px,140px) minmax(0,1fr);align-items:start}
+#exercise .answer-row>span:first-child{padding-top:12px;overflow-wrap:anywhere}
+#exercise .answer-row small{display:block;font-size:11px;font-weight:400;color:#5c6673}
+#exercise .answer-row input,#exercise .answer-row select,#exercise .answer-row textarea{min-width:0;width:100%;box-sizing:border-box}
+#exercise .answer-row textarea{min-height:78px}
+#exercise .answer-result{grid-column:2;font-size:13px}
+#exercise .reflection-label{display:block;margin:22px 0 10px;font-weight:600}
+#exercise .previous-answers{margin-top:20px;padding:14px;background:#f7f3eb;border-radius:12px}
+#exercise .previous-answers li,#exercise .previous-answers p{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:600px){#exercise .answer-row{grid-template-columns:minmax(30px,95px) minmax(0,1fr)}}
+
+#exercise .answer-row.correct textarea{border:2px solid #286141}
+#exercise .answer-row.incorrect textarea{border:2px solid #ae1800}
