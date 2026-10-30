@@ -91,8 +91,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="words.js?v=3606081a"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-<script src="course-words.js?v=442908de"></script>
-<script src="sm-auth.js?v=6cace4c0"></script>
+<script src="course-words.js?v=e2012266"></script>
+<script src="sm-auth.js?v=be01939b"></script>
 <script src="sm-lookup.js?v=f51c8a4a"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
@@ -100,8 +100,8 @@ window.SM_HANDLES_COURSE = true;
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK = [["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
-const SPK_L = { "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK = [["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
+const SPK_L = { "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -321,6 +321,7 @@ async function drawPane(){
           '<span class="b sm">Ответы</span></button>').join("") + '</div>'
       : '<div class="empty"><div class="p">Ученик ещё не решал упражнения Speakout.</div></div>') +
     '<div id="det"></div>' +
+    solutionsResponses(d) +
 
     '<div class="sect"><span>Сообщения ученику</span><span>чат · виден ученику в кабинете</span></div>' +
     '<div class="chatwrap"><div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загрузка…</div></div>' +
@@ -385,7 +386,18 @@ function hwChips(list, hw){
 /* Курсы с готовыми страницами юнитов: им задаём части урока
    (Урок / Грамматика / Workbook), ссылки вида solutions-el-u3-grammar.html.
    Номера юнитов — какие страницы реально лежат в проекте. */
+function solutionsResponses(data){
+  const entries=Object.entries(data.__coursework?.["solutions-int"]||{}).filter(([id,r])=>r && Array.isArray(r.values) && r.values.some(v=>String(v).trim()));
+  if(!entries.length)return "";
+  return '<div class="sect"><span>Solutions Intermediate · ответы ученика</span><span>'+entries.length+' упражнений</span></div>'+Array.from({length:10},(_,i)=>i).map(n=>{
+    const rows=entries.filter(([id,r])=>Number(r.unit)===n).sort((a,b)=>String(a[1].book).localeCompare(String(b[1].book))||a[1].page-b[1].page||Number(a[0].split('-').pop())-Number(b[0].split('-').pop()));
+    if(!rows.length)return "";
+    return '<details style="padding:12px 18px"><summary>'+(n?'Unit '+n:'Introduction')+' · '+rows.length+' заданий</summary>'+rows.map(([id,r])=>'<section style="padding:12px 0;border-bottom:1px solid #d7d3d3"><a href="solutions-int-active-teach/index.html?book='+esc(r.book)+'&amp;page='+Number(r.page)+'"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+Number(r.page)+' · № '+esc(r.exercise||id.split('-').pop())+'</b></a><ol>'+r.values.map(v=>'<li style="white-space:pre-wrap">'+esc(v||'—')+'</li>').join('')+'</ol></section>').join('')+'</details>';
+  }).join('');
+}
+
 const PAGE_COURSES = {
+  "solutions-int": { title: "Solutions Intermediate", units: [0,1,2,3,4,5,6,7,8,9] },
   "speakout-b1":     { title: "Speakout B1",           units: [1,2,3,4,5,6,7,8] },
   "speakout-b1plus": { title: "Speakout B1+",          units: [1,2,3,4,5,6,7,8] },
   "focus-1":         { title: "Focus 1",               units: [0,1,2,3,4,5,6,7,8] },
@@ -429,6 +441,18 @@ function fillUnits(){
   const course = document.getElementById("hCourse").value;
   const uSel = document.getElementById("hUnit");
   const page = PAGE_COURSES[course];
+  const solutions = course === "solutions-int";
+  const lessonPart = document.querySelector('.hPart[value="lesson"]');
+  const grammarPart = document.querySelector('.hPart[value="grammar"]');
+  if (lessonPart) lessonPart.parentElement.lastChild.textContent = solutions ? ' Student’s Book' : ' Урок · лексика/чанки';
+  if (grammarPart) {
+    if (!solutions && grammarPart.parentElement.hidden) grammarPart.checked = true;
+    grammarPart.parentElement.hidden = solutions;
+    if (solutions) grammarPart.checked = false;
+  }
+
+
+
 
   /* Страничный курс — части урока; учебник конструктора — формат задания */
   document.getElementById("hPartsRow").style.display = page ? "flex" : "none";

@@ -149,6 +149,31 @@ const { error } = await c.from("progress").upsert(
 return { ok: !error, error: error && error.message };
 },
 
+/* Ответы к заданиям книги: отдельное пространство, без выдуманной оценки. */
+async loadCourseWork(course) {
+  const c=ensureClient(), u=await this.getUser();
+  if(!c || !u) return {ok:false, error:"Войдите в аккаунт"};
+  const {data,error}=await c.from("progress").select("data").eq("user_id",u.id).maybeSingle();
+  if(error) return {ok:false,error:error.message};
+  return {ok:true,answers:(data && data.data && data.data.__coursework && data.data.__coursework[course]) || {}};
+},
+async saveCourseWork(course, answers, expectedUserId) {
+  const c=ensureClient(), u=await this.getUser();
+  if(!c || !u) return {ok:false,error:"Войдите в аккаунт"};
+  if(expectedUserId && u.id!==expectedUserId) return {ok:false,error:"Аккаунт изменился. Обновите страницу."};
+  const {data,error}=await c.from("progress").select("data").eq("user_id",u.id).maybeSingle();
+  if(error) return {ok:false,error:error.message};
+  const progress=(data && data.data) || {};
+  progress.__coursework=progress.__coursework || {};
+  const merged={...(progress.__coursework[course] || {})};
+  for(const [id,value] of Object.entries(answers)) {
+    if(!merged[id] || Number(value.updatedAt)>=Number(merged[id].updatedAt || 0)) merged[id]=value;
+  }
+  progress.__coursework[course]=merged;
+  const saved=await c.from("progress").upsert({user_id:u.id,data:progress,updated_at:new Date().toISOString()},{onConflict:"user_id"});
+  return saved.error ? {ok:false,error:saved.error.message} : {ok:true};
+},
+
 /* ---------- Умное повторение (ящики Лейтнера) ---------- */
 srsQ: [],
 srsQueue(wordId, ok) { this.srsQ.push({ id: wordId, ok: !!ok }); if (this.srsQ.length >= 12) this.srsFlush(); },
