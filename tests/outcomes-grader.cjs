@@ -25,6 +25,10 @@ assert.equal(field('sample','a valid alternative formulation',{soft:true}),'revi
 assert.equal(G.checkField({self:true,soft:true},'my answer'),'review');
 assert.equal(G.check({mode:'model'},['anything']).mode,'self');
 const mixed=G.check({mode:'items',items:[{key:'is'},{self:true,soft:true}]},['is','my response']);assert.equal(mixed.total,1);assert.equal(mixed.correct,1);assert.equal(mixed.needsReview,true);assert.equal(mixed.complete,false);
+assert.equal(G.isComplete({mode:'items',revision:'new'},{done:true}),false);
+assert.equal(G.isComplete({mode:'items',revision:'new'},{done:true,grade:{revision:'old',correct:1,total:1,items:['correct']}}),false);
+assert.equal(G.isComplete({mode:'items',revision:'new'},{done:true,grade:{revision:'new',correct:1,total:1,items:['correct']}}),true);
+assert.equal(G.isComplete({mode:'self'},{done:true}),true);
 const get=(b,p,n)=>bank[`${b}:${p+(b==='sb'?3:1)}`].find(e=>e.n===n);
 const negation=get('sb',13,12).check.items[5];assert.equal(G.checkField(negation,"It's not right. It's not 35 euros. It's 29."),'correct');assert.equal(G.checkField(negation,"It's not right. It's 35 euros. It's not 29."),'incorrect');
 assert.equal(get('sb',101,13).check.items.length,8);assert.equal(get('sb',99,8).check.items[0].key,'3');

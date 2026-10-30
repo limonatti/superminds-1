@@ -50,7 +50,8 @@
   const scored=spec.items.map((f,i)=>!f.soft?i:-1).filter(i=>i>=0);
   return {version:VERSION,mode:'auto',items,correct:scored.filter(i=>items[i]==='correct').length,total:scored.length,complete:items.every(x=>x==='correct'),needsReview:items.includes('review')};
  }
- const api={VERSION,normalize,variants,checkField,check};
+ function isComplete(spec,record){return Boolean(record?.done&&(spec?.mode!=='items'||(record.grade?.revision===spec.revision&&record.grade.correct===record.grade.total&&record.grade.items.every(s=>s==='correct'||s==='review'))))}
+ const api={VERSION,normalize,variants,checkField,check,isComplete};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  root.OutcomesGrader=api;
 })(typeof window==='undefined'?globalThis:window);
