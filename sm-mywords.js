@@ -41,10 +41,11 @@
   };
 
   /* Грузим сразу после того, как определился курс */
-  window.SM_ready = Promise.resolve(window.SM_ready).then(async function () {
+  window.SM_ready = Promise.resolve(window.SM_ready).then(async function (state) {
     try {
       var u = await window.SM.getUser();
       if (u) await window.SM_reloadMyWords();
     } catch (e) {}
+    return state;
   });
 })();

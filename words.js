@@ -293,7 +293,7 @@ window.SM_useCourse = function (cid) {
   if (!known) cid = window.SM_COURSE_DATA["sm1"] ? "sm1" : Object.keys(window.SM_COURSE_DATA)[0];
   window.SM_COURSE = window.SM_COURSES.filter(function (c) { return c.id === cid; })[0] || window.SM_COURSES[0];
   var units = (window.SM_COURSE_DATA[cid] || []).slice();
-  if ((window.SM_MY_WORDS || []).length) units.push(window.SM_ownUnit());
+  units.push(window.SM_ownUnit());
   window.SM_UNITS = units;
   window.SM_ALL_WORDS = window.SM_UNITS.flatMap(function (u) {
     return (u.words || []).map(function (w, i) {

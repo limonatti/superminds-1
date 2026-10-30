@@ -141,7 +141,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="words.js?v=6dc57848"></script>
+  <script src="words.js?v=personal-words-1"></script>
   <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=442908de"></script>
   <script src="sm-auth.js?v=6cace4c0"></script>
@@ -149,7 +149,7 @@
 window.SM_HANDLES_COURSE = true;
 </script>
   <script src="sm-lookup.js?v=949d163e"></script>
-  <script src="sm-mywords.js?v=906f5097"></script>
+  <script src="sm-mywords.js?v=personal-words-1"></script>
   <script src="sm-play.js?v=dd356834"></script>
   <script>
     const TARGET = 4;
@@ -238,7 +238,7 @@ window.SM_HANDLES_COURSE = true;
     }
 
     /* ---- бейджи за юниты ---- */
-    function unitDone(u){ return u.words.every((w,i)=> (progress[u.id+"-"+i] && progress[u.id+"-"+i].level>=TARGET)); }
+    function unitDone(u){ return u.words.every((w,i)=> (progress[w.id || (u.id+"-"+i)] && progress[w.id || (u.id+"-"+i)].level>=TARGET)); }
     function checkBadge(word){
       const u = SM_UNITS.find(x=>x.id===word.unitId);
       if(!u) return;

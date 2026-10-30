@@ -99,7 +99,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="words.js?v=6dc57848"></script>
+<script src="words.js?v=personal-words-1"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=442908de"></script>
 <script src="sm-auth.js?v=6cace4c0"></script>
@@ -107,7 +107,7 @@
 window.SM_HANDLES_COURSE = true;
 </script>
 <script src="sm-lookup.js?v=949d163e"></script>
-<script src="sm-mywords.js?v=906f5097"></script>
+<script src="sm-mywords.js?v=personal-words-1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -144,7 +144,7 @@ function drawList(){
   const rows = ['<button class="li'+(sel===-1?" on":"")+'" data-i="-1">' +
     '<span class="t">Все слова курса</span><span class="s">'+allWords().length+' слов</span></button>'];
   us.forEach((u,i) => {
-    const ids = u.words.map((w,j) => u.id+"-"+j);
+    const ids = u.words.map((w,j) => w.id || u.id+"-"+j);
     const done = ids.filter(isLearned).length;
     rows.push('<button class="li'+(sel===i?" on":"")+'" data-i="'+i+'">' +
       '<span class="t">'+esc(u.title)+'</span>' +
@@ -316,7 +316,7 @@ function drawPane(){
       '<h2>'+(rep.length ? rep.length+" слов ждут повторения" : "Всё повторено")+'</h2>' +
       '<p>'+(rep.length ? "Красным отмечены слова, которые ты уже видел, но ещё не закрепил."
                         : "Новые слова появятся здесь, как только начнёшь тренажёр.")+'</p></div>' +
-      '<a class="go" href="trainer.html">'+icon("play",15)+' Карточки</a></div>' +
+      '<a class="go" href="trainer.html'+(sel !== -1 && us[sel] ? '?unit='+encodeURIComponent(us[sel].id) : '')+'">'+icon("play",15)+' Карточки</a></div>' +
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Всего слов</span><span class="n">'+list.length+'</span></div>' +
       '<div class="tile"><span class="k">Выучено</span><span class="n">'+done.length+'</span></div>' +
@@ -362,8 +362,11 @@ function drawPane(){
   try { PROG = (await SM.loadProgress()) || {}; } catch(e){ PROG = {}; }
 
   /* Первый вход: курс ещё не выбран — предлагаем выбрать, а не решаем за ученика */
-  if (st.needsChoice) { drawPick(); return; }
+  if (st.needsChoice && new URLSearchParams(location.search).get("unit") !== "own") { drawPick(); return; }
 
+  if (new URLSearchParams(location.search).get("unit") === "own") {
+    sel = units().findIndex(u => u.id === "own");
+  }
   drawList(); drawPane();
 })();
 </script>
