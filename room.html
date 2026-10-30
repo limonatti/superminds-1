@@ -191,7 +191,7 @@
         </div>
         <div class="hint">Юнит и задание видят оба. Рисуйте вместе на доске слева. «Позвать ученика» — отправь ссылку, он войдёт в эту же комнату.</div>
       </div>
-      <div id="frameWrap"><iframe id="frame" title="Задание"></iframe></div>
+      <div id="frameWrap"><iframe id="frame" title="Задание" allow="fullscreen; autoplay"></iframe></div>
     </div>
   </div>
   <div id="videoWrap">
@@ -346,7 +346,8 @@
     const PAGED=["speakout-b1","speakout-b1plus","solutions-el","solutions-pi","focus-1","gateway-a1p"];
     const courseSel=document.getElementById("course");
     const unitSel=document.getElementById("unit");
-    let course="sm", kind="trainer", unit="";
+    const OUTCOMES_UNITS=["Be", "Live, work, eat", "Love, want, need", "Where and when?", "Going places", "Away from home", "Going out and staying in", "Here and there", "Healthy and happy", "News", "Life and history", "Thank you and goodbye"];
+    let course=params.get("course")==="outcomes-beginner"?"outcomes-beginner":"sm", kind="trainer", unit="";
 
     function buildCourses(){
       const keep=courseSel.value;
@@ -354,6 +355,7 @@
       const meta={}; (window.SM_COURSES||[]).forEach(c=>{meta[c.id]=c;});
       const add=(id,label)=>{const o=document.createElement("option");o.value=id;o.textContent=label;courseSel.appendChild(o);};
       add("sm","🧒 Super Minds 1");
+      add("outcomes-beginner","📘 Outcomes Beginner · Presentation Tool");
       PAGED.forEach(id=>{
         const m=meta[id]; if(!m && !(window.SM_COURSE_DATA||{})[id]) return;
         add(id,((m&&m.emoji)||"📘")+" "+((m&&m.title)||id));
@@ -378,6 +380,10 @@
         unit=list[0].id;
         return;
       }
+      if(course==="outcomes-beginner"){
+        OUTCOMES_UNITS.forEach((title,i)=>{const o=document.createElement("option");o.value=String(i+1);o.textContent="Unit "+(i+1)+" · "+title;unitSel.appendChild(o);});
+        unit="1";return;
+      }
       const src=(window.SM_COURSE_DATA||{})[course]||[];
       if(src.length){
         src.forEach((u,i)=>{const n=unitNum(u,i);const o=document.createElement("option");o.value=n;o.textContent=(u.unit||("Unit "+n))+" · "+u.title;unitSel.appendChild(o);});
@@ -390,14 +396,19 @@
 
     buildCourses();
     buildUnits();
+    const requestedUnit=Number(params.get("unit"));
+    if(course==="outcomes-beginner" && Number.isInteger(requestedUnit) && requestedUnit>=1 && requestedUnit<=12) unit=String(requestedUnit);
     /* Слова и юниты курсов приезжают после загрузки страницы — перестраиваем */
     Promise.resolve(window.SM_ready).then(()=>{
       try{ if(window.SM_absorbSpeakout) SM_absorbSpeakout(); }catch(e){}
       try{ if(window.SM_absorbCourseWords) SM_absorbCourseWords(); }catch(e){}
-      buildCourses(); buildUnits(); try{ apply(false); }catch(e){}
+      const selectedUnit=unit;
+      buildCourses(); buildUnits();
+      if([...unitSel.options].some(o=>o.value===selectedUnit)) unit=selectedUnit;
+      try{ apply(false); }catch(e){}
     }).catch(()=>{});
 
-    function frameSrc(){ return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
+    function frameSrc(){ if(course==="outcomes-beginner")return "outcomes-beginner-active-teach/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1"; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
       const isSM=course==="sm";
       document.getElementById("frame").src=frameSrc();
@@ -411,7 +422,7 @@
         document.getElementById("openGm").href="games.html?u="+unit;
         document.getElementById("openWs").href="worksheet.html?u="+unit;
       } else {
-        document.getElementById("openLesson").href=course+"-u"+unit+".html";
+        document.getElementById("openLesson").href=frameSrc().replace("&embedded=1","");
       }
       courseSel.value=course; unitSel.value=unit;
       postSel();
@@ -439,7 +450,7 @@
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
         if(payload.t==="state"){ if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;apply(false);}
-        else if(payload.t==="hello"){send({unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
+        else if(payload.t==="hello"){send({course:course,unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
         else onOp(payload);
       });
       channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
