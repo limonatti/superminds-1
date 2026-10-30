@@ -55,13 +55,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="words.js?v=3606081a"></script>
-<script src="course-words.js?v=e2012266"></script>
+<script src="course-words.js?v=8f0e3306"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=be01939b"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK_L = { "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND = {
   trainer:  { l:"Тренажёр слов", d:"выучить слова юнита в карточках и квизе", href:"trainer.html?unit=" },
   games:    { l:"Игры юнита",    d:"пройти игры юнита",                        href:"games.html?u=" },
@@ -69,7 +69,13 @@ const KIND = {
 };
 const PART_L = { lesson:"Лексика и чанки", grammar:"Грамматика", workbook:"Workbook" };
 const PART_D = { lesson:"слова и выражения юнита", grammar:"правила и упражнения", workbook:"рабочая тетрадь · закрепление" };
-function partHref(course, unit, part){ if(course==="solutions-int") return "solutions-int-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb"); return course+"-u"+unit+(part==="grammar"?"-grammar":part==="workbook"?"-workbook":"")+".html"; }
+function partHref(course, unit, part){
+  if(course==="solutions-int") return "solutions-int-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
+  if(course==="outcomes-beginner"){
+    const n=Math.max(1,Math.min(12,Number(unit)||1));
+    return "outcomes-beginner-active-teach/index.html?book="+(part==="workbook"?"wb":part==="grammar"?"grammar":"sb")+"&unit="+n+(part==="grammar"?"&page="+(117+2*(n-1)):"");
+  }
+  return course+"-u"+unit+(part==="grammar"?"-grammar":part==="workbook"?"-workbook":"")+".html"; }
 function parseNote(n){ try { const o=JSON.parse(n); if(o && (o.parts||o.due||o.msg!==undefined)) return o; } catch(e){} return { msg: n||"" }; }
 
 /* Статусы работы: выдано → отправлено → принято | на доработку */
@@ -244,7 +250,7 @@ async function load(){
     const parts = (meta.parts && meta.parts.length) ? meta.parts : (x.course==="solutions-int"?["lesson","workbook"]:["lesson","grammar"]);
     const rows = parts.map((pt,i) =>
       '<a class="row'+(i===0?" now":"")+'" href="'+partHref(x.course,x.unit,pt)+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-      '<span><span class="t">'+(x.course==="solutions-int"&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(x.course==="solutions-int"&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
+      '<span><span class="t">'+(["solutions-int","outcomes-beginner"].includes(x.course)&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(["solutions-int","outcomes-beginner"].includes(x.course)&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
       '<span class="b '+(i===0?"pri ":"")+'sm">Открыть</span></a>').join("");
     const dd = meta.due ? dueInfo(meta.due) : null;
     ITEMS.push({ type:"spk", id:x.id, done:!!x.done, st: statusOf(x), due: meta.due || null,

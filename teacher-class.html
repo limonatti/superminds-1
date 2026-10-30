@@ -91,7 +91,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="words.js?v=3606081a"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-<script src="course-words.js?v=e2012266"></script>
+<script src="course-words.js?v=8f0e3306"></script>
 <script src="sm-auth.js?v=be01939b"></script>
 <script src="sm-lookup.js?v=f51c8a4a"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
@@ -101,7 +101,7 @@ window.SM_HANDLES_COURSE = true;
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const SPK = [["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
-const SPK_L = { "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -322,6 +322,7 @@ async function drawPane(){
       : '<div class="empty"><div class="p">Ученик ещё не решал упражнения Speakout.</div></div>') +
     '<div id="det"></div>' +
     solutionsResponses(d) +
+    outcomesResponses(d) +
 
     '<div class="sect"><span>Сообщения ученику</span><span>чат · виден ученику в кабинете</span></div>' +
     '<div class="chatwrap"><div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загрузка…</div></div>' +
@@ -386,6 +387,16 @@ function hwChips(list, hw){
 /* Курсы с готовыми страницами юнитов: им задаём части урока
    (Урок / Грамматика / Workbook), ссылки вида solutions-el-u3-grammar.html.
    Номера юнитов — какие страницы реально лежат в проекте. */
+function outcomesResponses(data){
+  const entries=Object.values(data.__coursework?.["outcomes-beginner"]||{}).filter(r=>r && Array.isArray(r.values) && (r.done||r.values.some(v=>String(v).trim())));
+  if(!entries.length)return "";
+  return '<div class="sect"><span>Outcomes · ответы ученика</span><span>для проверки преподавателем</span></div>'+Array.from({length:12},(_,i)=>i+1).map(n=>{
+    const rows=entries.filter(r=>Number(r.unit)===n).sort((a,b)=>String(a.book).localeCompare(String(b.book))||a.page-b.page||Number(a.exercise)-Number(b.exercise));
+    if(!rows.length)return "";
+    return '<details style="padding:12px 18px"><summary>Unit '+n+' · '+rows.length+' заданий</summary>'+rows.map(r=>'<section style="padding:12px 0;border-bottom:1px solid #e3dcd1"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+esc(r.page)+' · № '+esc(r.exercise)+'</b><p>'+esc(r.done?'Ученик отметил выполнение':'Черновик')+'</p><ol>'+r.values.map(v=>'<li style="white-space:pre-wrap">'+esc(v||'—')+'</li>').join('')+'</ol></section>').join('')+'</details>';
+  }).join('');
+}
+
 function solutionsResponses(data){
   const entries=Object.entries(data.__coursework?.["solutions-int"]||{}).filter(([id,r])=>r && Array.isArray(r.values) && r.values.some(v=>String(v).trim()));
   if(!entries.length)return "";
@@ -397,6 +408,7 @@ function solutionsResponses(data){
 }
 
 const PAGE_COURSES = {
+  "outcomes-beginner": { title: "Outcomes Beginner", units: [1,2,3,4,5,6,7,8,9,10,11,12] },
   "solutions-int": { title: "Solutions Intermediate", units: [0,1,2,3,4,5,6,7,8,9] },
   "speakout-b1":     { title: "Speakout B1",           units: [1,2,3,4,5,6,7,8] },
   "speakout-b1plus": { title: "Speakout B1+",          units: [1,2,3,4,5,6,7,8] },
