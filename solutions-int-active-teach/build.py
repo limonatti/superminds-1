@@ -112,7 +112,7 @@ for book,end in [('sb',165),('wb',137)]:
   if bank in ['Wordlist','Irregular verbs'] or (book=='sb' and p>=163):exercises=[]
   tracks=sorted(set(re.findall(r'(?<!\d)([1-4]\.\d{2})(?!\d)',' '.join(w['text'] for w in ws))))
   tracks=[t for t in tracks if (ROOT/'media'/f'{book}-{t}.mp3').exists()]
-  pages.append({'id':f'{book}-{p}','book':book,'page':p,'image':f'assets/{file}','unit':unit if not bank else 'extra','title':title,'bank':bank,'exercises':sorted(exercises,key=lambda e:int(re.match(r'\d+',e['label'])[0])),'tracks':tracks})
+  pages.append({'id':f'{book}-{p}','book':book,'page':p,'image':'assets/'+file.replace('.webp','.jpg'),'unit':unit if not bank else 'extra','title':title,'bank':bank,'exercises':sorted(exercises,key=lambda e:int(re.match(r'\d+',e['label'])[0])),'tracks':tracks})
 by_id={p['id']:p for p in pages}
 for key,value in keys.items():
  b,p,n=key.split('-');current=by_id.get(f'{b}-{p}');previous=by_id.get(f'{b}-{int(p)-1}')

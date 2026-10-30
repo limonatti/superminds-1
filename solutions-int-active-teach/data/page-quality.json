@@ -1,0 +1,20 @@
+{
+  "sb": {
+    "pages": 165,
+    "dimensions": {
+      "(1448, 2048)": 165
+    },
+    "bytes": 86147050,
+    "sourceSHA256": "6a911b2d61add35c68e565f754faa4d7def7c7cd10c2e093b35cb2b24066bdca",
+    "encoding": "Original JPEG streams; no resizing or recompression"
+  },
+  "wb": {
+    "pages": 137,
+    "dimensions": {
+      "(1448, 2048)": 137
+    },
+    "bytes": 56144999,
+    "sourceSHA256": "30cc25fc655c2b7ba4c65a691577210b49aa77ff2c855247bfb3ca6bd2308c1f",
+    "encoding": "Original JPEG streams; no resizing or recompression"
+  }
+}
