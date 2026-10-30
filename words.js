@@ -368,7 +368,7 @@ window.SM_absorbSpeakout = function () {
 window.SM_absorbCourseWords = function () {
   var C = window.COURSE_WORDS;
   if (!C) return;
-  var PREFIX = { "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
+  var PREFIX = { "speakout-a1": "sa1-u", "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
   Object.keys(C).forEach(function (slug) {
     if ((window.SM_COURSE_DATA[slug] || []).length) return;
     var c = C[slug], pre = PREFIX[slug] || (slug.replace(/[^a-z0-9]/g, "").slice(0, 4) + "-u");

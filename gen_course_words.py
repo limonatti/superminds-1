@@ -4,7 +4,7 @@
 Источники разные, поэтому и способы разные:
   focus-1, solutions-pi  — данные лежат в генераторах *_data.py
   solutions-el, gateway  — слова зашиты в готовые страницы (WORDS=[[...]])
-Speakout сюда не входит: у него уже есть speakout-words.js.
+Speakout A1 — Vocabulary Bank в assets/words.json; B1/B1+ — speakout-words.js.
 """
 import re, glob, json, importlib.util, os, sys
 
@@ -86,6 +86,7 @@ def from_pages(pattern):
     return out
 
 COURSES = {
+    "speakout-a1": json.load(open(os.path.join(HERE, "speakout-a1-active-teach/assets/words.json"), encoding="utf-8")),
     "solutions-int": json.load(open(os.path.join(HERE, "solutions-int-active-teach/assets/words.json"), encoding="utf-8")),
     "outcomes-beginner": json.load(open(os.path.join(HERE, "outcomes-beginner-active-teach/assets/words.json"), encoding="utf-8")),
     "focus-1":      {"title": "Focus 1",              "subtitle": "A1–A2 · 9 юнитов",  "emoji": "📙", "color": "#f2e6df", "units": from_generator("focus1_data.py", "f1data")},
