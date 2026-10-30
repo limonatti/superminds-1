@@ -3,6 +3,8 @@ const G=require('../outcomes-beginner-active-teach/assets/grader.js');
 const ctx={window:{}};vm.runInNewContext(fs.readFileSync('outcomes-beginner-active-teach/assets/exercises.js','utf8'),ctx);const bank=ctx.window.OUTCOMES_EXERCISES;
 const field=(key,value,extra={})=>G.checkField({key,...extra},value);
 assert.equal(field("She isn't at home.",'She is not at home'),'correct');
+assert.equal(field("My tea’s not hot.",'My tea is not hot.'),'correct');
+assert.equal(field("My father's job",'My father is job'),'incorrect');
 assert.equal(field("I can't swim.",'I cant swim'),'incorrect');
 assert.equal(field("I'm a student.",'I am a student'),'correct');
 assert.equal(field("I'm from Berlin.",'I am from Berlin.',{requireContraction:true}),'incorrect');

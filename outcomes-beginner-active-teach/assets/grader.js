@@ -8,6 +8,7 @@
   const contractions={"can't":"cannot","won't":"will not","shan't":"shall not","i'm":"i am","you're":"you are","we're":"we are","they're":"they are","i'll":"i will","you'll":"you will","he'll":"he will","she'll":"she will","it'll":"it will","we'll":"we will","they'll":"they will","i'd":"i would","you'd":"you would","he'd":"he would","she'd":"she would","we'd":"we would","they'd":"they would"};
   for(const [a,b] of Object.entries(contractions))s=s.replace(new RegExp('\\b'+a+'\\b','g'),b);
   s=s.replace(/\b(he|she|it|that|there|what|who|where|how)'s\b/g,'$1 is').replace(/\b(are|is|was|were|do|does|did|could|should|would|must)n't\b/g,'$1 not');
+  s=s.replace(/\b([a-z]+)'s not\b/g,'$1 is not');
   s=s.replace(/(^|[\s;,])'(m|re|s|ll)\b/g,(_,before,a)=>before+({m:'am',re:'are',s:'is',ll:'will'}[a]));
   if(s==="n't")s='not';
   s=s.replace(/(\d),(?=\d{3}(?:\D|$))/g,'$1').replace(/(\d)[,:](?=\d{2}(?:\D|$))/g,'$1.');
