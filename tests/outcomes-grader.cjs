@@ -1,0 +1,40 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const G=require('../outcomes-beginner-active-teach/assets/grader.js');
+const ctx={window:{}};vm.runInNewContext(fs.readFileSync('outcomes-beginner-active-teach/assets/exercises.js','utf8'),ctx);const bank=ctx.window.OUTCOMES_EXERCISES;
+const field=(key,value,extra={})=>G.checkField({key,...extra},value);
+assert.equal(field("She isn't at home.",'She is not at home'),'correct');
+assert.equal(field("I can't swim.",'I cant swim'),'incorrect');
+assert.equal(field("I'm a student.",'I am a student'),'correct');
+assert.equal(field("I'm from Berlin.",'I am from Berlin.',{requireContraction:true}),'incorrect');
+assert.equal(field('12.15','12:15'),'correct');
+assert.equal(field('4.80','£4.80'),'correct');
+assert.equal(field('-15','15'),'incorrect');
+assert.equal(field('15','51'),'incorrect');
+assert.equal(field('can','cannot'),'incorrect');
+assert.equal(field('word','   '),'blank');
+assert.equal(field('a; in/on','a; on'),'correct');
+assert.equal(field('a; in/on','on; a'),'incorrect');
+assert.equal(field(['after class','after the class'],'after the class'),'correct');
+assert.equal(field('2,4,6','6 2 4',{match:'set'}),'correct');
+assert.equal(field('2,4,6','2,4,4,6',{match:'set'}),'incorrect');
+assert.equal(field('go out,have dinner','have dinner; go out',{match:'set'}),'correct');
+assert.equal(field('C,H,S','c,h,s',{match:'set',requireUppercase:true}),'incorrect');
+assert.equal(field('sample','a valid alternative formulation',{soft:true}),'review');
+assert.equal(G.checkField({self:true,soft:true},'my answer'),'review');
+assert.equal(G.check({mode:'model'},['anything']).mode,'self');
+const mixed=G.check({mode:'items',items:[{key:'is'},{self:true,soft:true}]},['is','my response']);assert.equal(mixed.total,1);assert.equal(mixed.correct,1);assert.equal(mixed.needsReview,true);assert.equal(mixed.complete,false);
+const get=(b,p,n)=>bank[`${b}:${p+(b==='sb'?3:1)}`].find(e=>e.n===n);
+const negation=get('sb',13,12).check.items[5];assert.equal(G.checkField(negation,"It's not right. It's not 35 euros. It's 29."),'correct');assert.equal(G.checkField(negation,"It's not right. It's 35 euros. It's not 29."),'incorrect');
+assert.equal(get('sb',101,13).check.items.length,8);assert.equal(get('sb',99,8).check.items[0].key,'3');
+assert.equal(get('wb',4,1).check.items[0].key.split(',').length,12);
+assert.equal(get('wb',60,2).check.items.length,5);assert.equal(get('wb',9,13).check.items[0].key,'C,H,S');
+const all=Object.values(bank).flat(),grammar=all.filter(e=>e.grammar);assert.equal(grammar.length,122);assert.equal(new Set(grammar.map(e=>e.unit)).size,12);
+for(const b of ['sb','wb'])assert.equal(new Set(all.filter(e=>e.book===b&&!e.grammar).map(e=>e.unit)).size,12);
+let slots=0;
+for(const e of all){assert.match(e.check.revision,/^[a-f0-9]{12}$/);assert.ok(e.instruction&&e.instruction!=='+'&&e.n);if(e.check.mode!=='items')continue;
+ assert.equal(e.count,e.check.items.length);assert.equal(new Set(e.check.items.map(f=>f.label)).size,e.count);
+ for(const f of e.check.items){if(f.self)continue;const variants=G.variants(f.key);assert.ok(variants.length);for(const v of variants){assert.ok(v.trim(),`${e.id} empty key`);assert.equal(G.checkField(f,v),'correct',`${e.id}/${f.label}: ${v}`)}
+ assert.equal(G.checkField(f,'definitely_wrong_answer_999'),f.soft?'review':'incorrect',e.id);assert.equal(G.checkField(f,''),'blank');slots++;
+ }
+}
+console.log(`Outcomes grading: ${all.length} exercises, ${slots} keyed response fields; normalization, alternatives, scoring, grammar and all 12 units checked.`);

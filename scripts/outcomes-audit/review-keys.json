@@ -1,0 +1,2092 @@
+[
+  {
+    "spread": 23,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are"
+        },
+        {
+          "label": "2",
+          "key": "is"
+        },
+        {
+          "label": "3",
+          "key": "do you"
+        },
+        {
+          "label": "4",
+          "key": "has"
+        },
+        {
+          "label": "5",
+          "key": "children; sons"
+        },
+        {
+          "label": "6",
+          "key": "his"
+        },
+        {
+          "label": "7",
+          "key": "do"
+        },
+        {
+          "label": "8",
+          "key": "are"
+        },
+        {
+          "label": "9",
+          "key": "don’t"
+        },
+        {
+          "label": "10",
+          "key": "I don’t"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "It’s not expensive."
+        },
+        {
+          "label": "2",
+          "key": "Is his mother retired?"
+        },
+        {
+          "label": "3",
+          "key": "They don’t have a lot of money."
+        },
+        {
+          "label": "4",
+          "key": "Do you work near here?"
+        },
+        {
+          "label": "5",
+          "key": "I don’t have a sister."
+        },
+        {
+          "label": "6",
+          "key": "Are the teachers nice?"
+        },
+        {
+          "label": "7",
+          "key": "I don’t know her brother."
+        },
+        {
+          "label": "8",
+          "key": "Does he like English?"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "don’t"
+        },
+        {
+          "label": "2",
+          "key": "his"
+        },
+        {
+          "label": "3",
+          "key": "don’t"
+        },
+        {
+          "label": "4",
+          "key": "not"
+        },
+        {
+          "label": "5",
+          "key": "are; is"
+        },
+        {
+          "label": "6",
+          "key": "is"
+        },
+        {
+          "label": "7",
+          "key": "lot"
+        },
+        {
+          "label": "8",
+          "key": "do; Is"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "What’s your name?"
+        },
+        {
+          "label": "2",
+          "key": "Where are you from?"
+        },
+        {
+          "label": "3",
+          "key": "How old are you?"
+        },
+        {
+          "label": "4",
+          "key": "What do you do?"
+        },
+        {
+          "label": "5",
+          "key": "Do you like your job?"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "work"
+        },
+        {
+          "label": "2",
+          "key": "take"
+        },
+        {
+          "label": "3",
+          "key": "live"
+        },
+        {
+          "label": "4",
+          "key": "have"
+        },
+        {
+          "label": "5",
+          "key": "walk"
+        },
+        {
+          "label": "6",
+          "key": "like"
+        },
+        {
+          "label": "7",
+          "key": "know"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Food",
+          "key": "chicken,fish,rice,salad,sandwich",
+          "match": "set"
+        },
+        {
+          "label": "Drink",
+          "key": "americano,Coke,orange juice,tea,water",
+          "match": "set"
+        },
+        {
+          "label": "Jobs",
+          "key": "doctor,nurse,taxi driver,teacher,waiter",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "This is my wife."
+        },
+        {
+          "label": "2",
+          "key": "This is my brother."
+        },
+        {
+          "label": "3",
+          "key": "This is my father."
+        },
+        {
+          "label": "4",
+          "key": "This is my daughter."
+        },
+        {
+          "label": "5",
+          "key": "It’s in the south."
+        },
+        {
+          "label": "6",
+          "key": "It’s very cheap."
+        },
+        {
+          "label": "7",
+          "key": "It’s a small town."
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "name"
+        },
+        {
+          "label": "2",
+          "key": "student"
+        },
+        {
+          "label": "3",
+          "key": "city"
+        },
+        {
+          "label": "4",
+          "key": "north"
+        },
+        {
+          "label": "5",
+          "key": "flat"
+        },
+        {
+          "label": "6",
+          "key": "brother"
+        },
+        {
+          "label": "7",
+          "key": "park"
+        },
+        {
+          "label": "8",
+          "key": "nice"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 23,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "d"
+        },
+        {
+          "label": "2",
+          "key": "g"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "f"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "h"
+        },
+        {
+          "label": "7",
+          "key": "e"
+        },
+        {
+          "label": "8",
+          "key": "c"
+        }
+      ]
+    },
+    "teacherPage": 34
+  },
+  {
+    "spread": 41,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "any"
+        },
+        {
+          "label": "2",
+          "key": "I’m not"
+        },
+        {
+          "label": "3",
+          "key": "you"
+        },
+        {
+          "label": "4",
+          "key": "never"
+        },
+        {
+          "label": "5",
+          "key": "Do you have"
+        },
+        {
+          "label": "6",
+          "key": "Is there"
+        },
+        {
+          "label": "7",
+          "key": "doesn’t"
+        },
+        {
+          "label": "8",
+          "key": "does it take"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Do you have a mobile?"
+        },
+        {
+          "label": "2",
+          "key": "Is there a supermarket near here?"
+        },
+        {
+          "label": "3",
+          "key": "They’re not French."
+        },
+        {
+          "label": "4",
+          "key": "It doesn’t take a long time."
+        },
+        {
+          "label": "5",
+          "key": "Do you need to do it today?"
+        },
+        {
+          "label": "6",
+          "key": "She doesn’t like coffee."
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Can I"
+        },
+        {
+          "label": "2",
+          "key": "Can you"
+        },
+        {
+          "label": "3",
+          "key": "Can you"
+        },
+        {
+          "label": "4",
+          "key": "Can I"
+        },
+        {
+          "label": "5",
+          "key": "Can you"
+        },
+        {
+          "label": "6",
+          "key": "Can I"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is the restaurant usually busy on Saturday night?"
+        },
+        {
+          "label": "2",
+          "key": "What time do you normally get up?"
+        },
+        {
+          "label": "3",
+          "key": "I never go to the beach. I can’t swim."
+        },
+        {
+          "label": "4",
+          "key": "I always get up late on Sundays."
+        },
+        {
+          "label": "5",
+          "key": "I don’t normally go out in the week."
+        },
+        {
+          "label": "6",
+          "key": [
+            "I usually get the bus to work, but I sometimes get a taxi.",
+            "I usually get the bus to work, but sometimes I get a taxi."
+          ]
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Does; have any"
+        },
+        {
+          "label": "2",
+          "key": "sometimes go; in the market"
+        },
+        {
+          "label": "3",
+          "key": "They’re not"
+        },
+        {
+          "label": "4",
+          "key": "anything else"
+        },
+        {
+          "label": "5",
+          "key": "There’s a"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Does; have any"
+        },
+        {
+          "label": "2",
+          "key": "sometimes go; in the market"
+        },
+        {
+          "label": "3",
+          "key": "They’re not"
+        },
+        {
+          "label": "4",
+          "key": "anything else"
+        },
+        {
+          "label": "5",
+          "key": "There’s a"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "turn off"
+        },
+        {
+          "label": "2",
+          "key": "take"
+        },
+        {
+          "label": "3",
+          "key": "want"
+        },
+        {
+          "label": "4",
+          "key": "sit"
+        },
+        {
+          "label": "5",
+          "key": "share"
+        },
+        {
+          "label": "6",
+          "key": "get"
+        },
+        {
+          "label": "7",
+          "key": "go"
+        },
+        {
+          "label": "8",
+          "key": "use"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Places",
+          "key": "bank,church,cinema,hotel,market",
+          "match": "set"
+        },
+        {
+          "label": "Things",
+          "key": "bag,brush,charger,map,toothpaste",
+          "match": "set"
+        },
+        {
+          "label": "Days / Times",
+          "key": "afternoon,evening,Saturday,tomorrow,yesterday",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "The supermarket’s closed."
+        },
+        {
+          "label": "2",
+          "key": "I’m busy on Monday."
+        },
+        {
+          "label": "3",
+          "key": "It’s very hot."
+        },
+        {
+          "label": "4",
+          "key": "I get up early on Sundays."
+        },
+        {
+          "label": "5",
+          "key": "I go there every morning."
+        },
+        {
+          "label": "6",
+          "key": "It’s a good film."
+        },
+        {
+          "label": "7",
+          "key": "It’s on the left."
+        },
+        {
+          "label": "8",
+          "key": "They’re my new shoes."
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 41,
+    "n": 10,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "married"
+        },
+        {
+          "label": "2",
+          "key": "hungry"
+        },
+        {
+          "label": "3",
+          "key": "small"
+        },
+        {
+          "label": "4",
+          "key": "difficult"
+        },
+        {
+          "label": "5",
+          "key": "well"
+        },
+        {
+          "label": "6",
+          "key": "long"
+        },
+        {
+          "label": "7",
+          "key": "tired"
+        },
+        {
+          "label": "8",
+          "key": "great"
+        }
+      ]
+    },
+    "teacherPage": 60
+  },
+  {
+    "spread": 59,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Are"
+        },
+        {
+          "label": "2",
+          "key": "is"
+        },
+        {
+          "label": "3",
+          "key": "Did"
+        },
+        {
+          "label": "4",
+          "key": "are you doing"
+        },
+        {
+          "label": "5",
+          "key": "wasn’t"
+        },
+        {
+          "label": "6",
+          "key": "weren’t"
+        },
+        {
+          "label": "7",
+          "key": "There are"
+        },
+        {
+          "label": "8",
+          "key": "to play"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "went"
+        },
+        {
+          "label": "2",
+          "key": "was"
+        },
+        {
+          "label": "3",
+          "key": "stayed"
+        },
+        {
+          "label": "4",
+          "key": "were"
+        },
+        {
+          "label": "5",
+          "key": "wasn’t"
+        },
+        {
+          "label": "6",
+          "key": "weren’t"
+        },
+        {
+          "label": "7",
+          "key": "had"
+        },
+        {
+          "label": "8",
+          "key": "didn’t rain"
+        },
+        {
+          "label": "9",
+          "key": "talked"
+        },
+        {
+          "label": "10",
+          "key": "loved"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Where are you going?"
+        },
+        {
+          "label": "2",
+          "key": [
+            "What are you doing",
+            "What are you going to do"
+          ]
+        },
+        {
+          "label": "3",
+          "key": "Are you going"
+        },
+        {
+          "label": "4",
+          "key": "What did you do; Where did you go"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Did you go"
+        },
+        {
+          "label": "2",
+          "key": "going to meet"
+        },
+        {
+          "label": "3",
+          "key": "There are some"
+        },
+        {
+          "label": "4",
+          "key": "What time did; go"
+        },
+        {
+          "label": "5",
+          "key": "had; went to"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Did you go"
+        },
+        {
+          "label": "2",
+          "key": "going to meet"
+        },
+        {
+          "label": "3",
+          "key": "There are some"
+        },
+        {
+          "label": "4",
+          "key": "What time did; go"
+        },
+        {
+          "label": "5",
+          "key": "had; went to"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "see"
+        },
+        {
+          "label": "2",
+          "key": "take"
+        },
+        {
+          "label": "3",
+          "key": "stay"
+        },
+        {
+          "label": "4",
+          "key": "have"
+        },
+        {
+          "label": "5",
+          "key": "go"
+        },
+        {
+          "label": "6",
+          "key": "get"
+        },
+        {
+          "label": "7",
+          "key": "play"
+        },
+        {
+          "label": "8",
+          "key": "need"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Buying tickets",
+          "key": "platform,return,second class,single",
+          "match": "set"
+        },
+        {
+          "label": "Hotels",
+          "key": "check out,key,passport,password",
+          "match": "set"
+        },
+        {
+          "label": "Problems",
+          "key": "a lot of rain,a lot of traffic,nowhere to sit,the wrong way",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "take"
+        },
+        {
+          "label": "2",
+          "key": "metro"
+        },
+        {
+          "label": "3",
+          "key": "wait"
+        },
+        {
+          "label": "4",
+          "key": "line"
+        },
+        {
+          "label": "5",
+          "key": "change"
+        },
+        {
+          "label": "6",
+          "key": "get off"
+        },
+        {
+          "label": "7",
+          "key": "long"
+        },
+        {
+          "label": "8",
+          "key": "costs"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 59,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "walk"
+        },
+        {
+          "label": "2",
+          "key": "do"
+        },
+        {
+          "label": "3",
+          "key": "enter"
+        },
+        {
+          "label": "4",
+          "key": "write"
+        },
+        {
+          "label": "5",
+          "key": "visit"
+        },
+        {
+          "label": "6",
+          "key": "clean"
+        },
+        {
+          "label": "7",
+          "key": "pay"
+        },
+        {
+          "label": "8",
+          "key": "sleep"
+        }
+      ]
+    },
+    "teacherPage": 86
+  },
+  {
+    "spread": 77,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "watching"
+        },
+        {
+          "label": "2",
+          "key": "are"
+        },
+        {
+          "label": "3",
+          "key": "isn’t working"
+        },
+        {
+          "label": "4",
+          "key": "looks"
+        },
+        {
+          "label": "5",
+          "key": "these; ones"
+        },
+        {
+          "label": "6",
+          "key": "them"
+        },
+        {
+          "label": "7",
+          "key": "him"
+        },
+        {
+          "label": "8",
+          "key": "is working"
+        },
+        {
+          "label": "9",
+          "key": "Are you reading"
+        },
+        {
+          "label": "10",
+          "key": "is he studying"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "is"
+        },
+        {
+          "label": "2",
+          "key": "Is"
+        },
+        {
+          "label": "3",
+          "key": "those / these"
+        },
+        {
+          "label": "4",
+          "key": "driving"
+        },
+        {
+          "label": "5",
+          "key": "are"
+        },
+        {
+          "label": "6",
+          "key": "not"
+        },
+        {
+          "label": "7",
+          "key": "her"
+        },
+        {
+          "label": "8",
+          "key": "am"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is it raining outside?"
+        },
+        {
+          "label": "2",
+          "key": "My husband doesn’t like doing exercise."
+        },
+        {
+          "label": "3",
+          "key": "Where did you buy them?"
+        },
+        {
+          "label": "4",
+          "key": "What are you watching?"
+        },
+        {
+          "label": "5",
+          "key": "She’s meeting a client in Athens today."
+        },
+        {
+          "label": "6",
+          "key": "Can I try these ones, please?"
+        },
+        {
+          "label": "7",
+          "key": "This chicken is very nice."
+        },
+        {
+          "label": "8",
+          "key": "I really like him."
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "these; ones"
+        },
+        {
+          "label": "2",
+          "key": "What’s; doing"
+        },
+        {
+          "label": "3",
+          "key": "’m watching; the moment"
+        },
+        {
+          "label": "4",
+          "key": "don’t like going; love it"
+        },
+        {
+          "label": "5",
+          "key": "did; have them; left them"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "these; ones"
+        },
+        {
+          "label": "2",
+          "key": "What’s; doing"
+        },
+        {
+          "label": "3",
+          "key": "’m watching; the moment"
+        },
+        {
+          "label": "4",
+          "key": "don’t like going; love it"
+        },
+        {
+          "label": "5",
+          "key": "did; have them; left them"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "wear"
+        },
+        {
+          "label": "2",
+          "key": "travel"
+        },
+        {
+          "label": "3",
+          "key": "meet"
+        },
+        {
+          "label": "4",
+          "key": "leave"
+        },
+        {
+          "label": "5",
+          "key": "take"
+        },
+        {
+          "label": "6",
+          "key": "go"
+        },
+        {
+          "label": "7",
+          "key": "study"
+        },
+        {
+          "label": "8",
+          "key": "make"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "In the house",
+          "key": "carpet,cupboard,fridge,kitchen,shelf",
+          "match": "set"
+        },
+        {
+          "label": "Buying clothes",
+          "key": "design,extra large,half price,jeans,jumper",
+          "match": "set"
+        },
+        {
+          "label": "Art and music",
+          "key": "concert,programme,series,story,writer",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "lost"
+        },
+        {
+          "label": "2",
+          "key": "sofa"
+        },
+        {
+          "label": "3",
+          "key": "designer"
+        },
+        {
+          "label": "4",
+          "key": "politics"
+        },
+        {
+          "label": "5",
+          "key": "team"
+        },
+        {
+          "label": "6",
+          "key": "player"
+        },
+        {
+          "label": "7",
+          "key": "hard"
+        },
+        {
+          "label": "8",
+          "key": "fridge"
+        },
+        {
+          "label": "9",
+          "key": "extra"
+        },
+        {
+          "label": "10",
+          "key": "try"
+        }
+      ],
+      "note": "Впишите слово целиком, вместе с уже напечатанными буквами."
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 77,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "free"
+        },
+        {
+          "label": "2",
+          "key": "music"
+        },
+        {
+          "label": "3",
+          "key": "concerts"
+        },
+        {
+          "label": "4",
+          "key": "sing"
+        },
+        {
+          "label": "5",
+          "key": "programmes"
+        },
+        {
+          "label": "6",
+          "key": "read"
+        },
+        {
+          "label": "7",
+          "key": "draw"
+        },
+        {
+          "label": "8",
+          "key": "cook"
+        }
+      ]
+    },
+    "teacherPage": 112
+  },
+  {
+    "spread": 95,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "ago"
+        },
+        {
+          "label": "2",
+          "key": "on"
+        },
+        {
+          "label": "3",
+          "key": "no"
+        },
+        {
+          "label": "4",
+          "key": "a lot of"
+        },
+        {
+          "label": "5",
+          "key": "your"
+        },
+        {
+          "label": "6",
+          "key": "it’s not going to stay"
+        },
+        {
+          "label": "7",
+          "key": "We’re not going"
+        },
+        {
+          "label": "8",
+          "key": "was"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "had"
+        },
+        {
+          "label": "2",
+          "key": "met"
+        },
+        {
+          "label": "3",
+          "key": "went"
+        },
+        {
+          "label": "4",
+          "key": "started"
+        },
+        {
+          "label": "5",
+          "key": "finished"
+        },
+        {
+          "label": "6",
+          "key": "took"
+        },
+        {
+          "label": "7",
+          "key": "cost"
+        },
+        {
+          "label": "8",
+          "key": "was"
+        },
+        {
+          "label": "9",
+          "key": "played"
+        },
+        {
+          "label": "10",
+          "key": "won"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "ago"
+        },
+        {
+          "label": "2",
+          "key": "few"
+        },
+        {
+          "label": "3",
+          "key": "this"
+        },
+        {
+          "label": "4",
+          "key": "last"
+        },
+        {
+          "label": "5",
+          "key": "to"
+        },
+        {
+          "label": "6",
+          "key": "going"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "It’s going to snow"
+        },
+        {
+          "label": "2",
+          "key": "There are a lot of problems"
+        },
+        {
+          "label": "3",
+          "key": "I’m not going to be here"
+        },
+        {
+          "label": "4",
+          "key": "There are almost no bad schools"
+        },
+        {
+          "label": "5",
+          "key": "You’re going to lose the match"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "broke; few months ago"
+        },
+        {
+          "label": "2",
+          "key": "’m going; this weekend"
+        },
+        {
+          "label": "3",
+          "key": "go; last Thursday"
+        },
+        {
+          "label": "4",
+          "key": "are quite a lot of"
+        },
+        {
+          "label": "5",
+          "key": "’s not going to rain"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "broke; few months ago"
+        },
+        {
+          "label": "2",
+          "key": "’m going; this weekend"
+        },
+        {
+          "label": "3",
+          "key": "go; last Thursday"
+        },
+        {
+          "label": "4",
+          "key": "are quite a lot of"
+        },
+        {
+          "label": "5",
+          "key": "’s not going to rain"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "work"
+        },
+        {
+          "label": "2",
+          "key": "build"
+        },
+        {
+          "label": "3",
+          "key": "do"
+        },
+        {
+          "label": "4",
+          "key": "get"
+        },
+        {
+          "label": "5",
+          "key": "have"
+        },
+        {
+          "label": "6",
+          "key": "lose"
+        },
+        {
+          "label": "7",
+          "key": "turn on"
+        },
+        {
+          "label": "8",
+          "key": "break"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Health and accidents",
+          "key": "break,cut,headache,hurt,sick",
+          "match": "set"
+        },
+        {
+          "label": "Society",
+          "key": "air,crime,education,environment,university",
+          "match": "set"
+        },
+        {
+          "label": "Entertainment",
+          "key": "circus,classical music,comedy,exhibition,festival",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "degrees"
+        },
+        {
+          "label": "2",
+          "key": "average"
+        },
+        {
+          "label": "3",
+          "key": "better"
+        },
+        {
+          "label": "4",
+          "key": "scored"
+        },
+        {
+          "label": "5",
+          "key": "lasts"
+        },
+        {
+          "label": "6",
+          "key": "minus"
+        },
+        {
+          "label": "7",
+          "key": "safe"
+        },
+        {
+          "label": "8",
+          "key": "attack"
+        },
+        {
+          "label": "9",
+          "key": "cold"
+        }
+      ],
+      "note": "Впишите слово целиком, вместе с уже напечатанными буквами."
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 95,
+    "n": 10,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "at"
+        },
+        {
+          "label": "2",
+          "key": "by"
+        },
+        {
+          "label": "3",
+          "key": "on"
+        },
+        {
+          "label": "4",
+          "key": "on"
+        },
+        {
+          "label": "5",
+          "key": "in"
+        },
+        {
+          "label": "6",
+          "key": "at"
+        },
+        {
+          "label": "7",
+          "key": "of"
+        },
+        {
+          "label": "8",
+          "key": "for"
+        }
+      ]
+    },
+    "teacherPage": 137
+  },
+  {
+    "spread": 113,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I’ll"
+        },
+        {
+          "label": "2",
+          "key": "so"
+        },
+        {
+          "label": "3",
+          "key": "for"
+        },
+        {
+          "label": "4",
+          "key": "us"
+        },
+        {
+          "label": "5",
+          "key": "because"
+        },
+        {
+          "label": "6",
+          "key": "to come"
+        },
+        {
+          "label": "7",
+          "key": "to"
+        },
+        {
+          "label": "8",
+          "key": "don’t"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are"
+        },
+        {
+          "label": "2",
+          "key": "Can"
+        },
+        {
+          "label": "3",
+          "key": "Do"
+        },
+        {
+          "label": "4",
+          "key": "was"
+        },
+        {
+          "label": "5",
+          "key": "does"
+        },
+        {
+          "label": "6",
+          "key": "is"
+        },
+        {
+          "label": "7",
+          "key": "were"
+        },
+        {
+          "label": "8",
+          "key": "did"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 3,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "How old are you"
+        },
+        {
+          "label": "2",
+          "key": "Do you want to come"
+        },
+        {
+          "label": "3",
+          "key": "How old are you going to be"
+        },
+        {
+          "label": "4",
+          "key": "When did you become a doctor"
+        },
+        {
+          "label": "5",
+          "key": "Do you like your job"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "so I can get"
+        },
+        {
+          "label": "2",
+          "key": "are you; why are you going"
+        },
+        {
+          "label": "3",
+          "key": "because I need; for"
+        },
+        {
+          "label": "4",
+          "key": "Get; don’t forget to"
+        },
+        {
+          "label": "5",
+          "key": "Wait; I’ll check"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "so I can get"
+        },
+        {
+          "label": "2",
+          "key": "are you; why are you going"
+        },
+        {
+          "label": "3",
+          "key": "because I need; for"
+        },
+        {
+          "label": "4",
+          "key": "Get; don’t forget to"
+        },
+        {
+          "label": "5",
+          "key": "Wait; I’ll check"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "go"
+        },
+        {
+          "label": "2",
+          "key": "become"
+        },
+        {
+          "label": "3",
+          "key": "do"
+        },
+        {
+          "label": "4",
+          "key": "celebrate"
+        },
+        {
+          "label": "5",
+          "key": "have"
+        },
+        {
+          "label": "6",
+          "key": "start"
+        },
+        {
+          "label": "7",
+          "key": "live"
+        },
+        {
+          "label": "8",
+          "key": "move"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Life events",
+          "key": "become a doctor,born in the 1980s,die in his sleep,finish school,start a business",
+          "match": "set"
+        },
+        {
+          "label": "History",
+          "key": "king and queen,protect the country,repair the castle,the fifteenth century",
+          "match": "set"
+        },
+        {
+          "label": "Leaving and saying goodbye",
+          "key": "call a taxi,forget my bag,lovely to meet you,miss my train,a sandwich for the journey",
+          "match": "set"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 8,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "the first"
+        },
+        {
+          "label": "2",
+          "key": "the fourth"
+        },
+        {
+          "label": "3",
+          "key": "the fifteenth"
+        },
+        {
+          "label": "4",
+          "key": "the twenty-second"
+        },
+        {
+          "label": "5",
+          "key": "February"
+        },
+        {
+          "label": "6",
+          "key": "August"
+        },
+        {
+          "label": "7",
+          "key": "September"
+        },
+        {
+          "label": "8",
+          "key": "November"
+        }
+      ]
+    },
+    "teacherPage": 160
+  },
+  {
+    "spread": 113,
+    "n": 9,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "heavy"
+        },
+        {
+          "label": "2",
+          "key": "low"
+        },
+        {
+          "label": "3",
+          "key": "broken"
+        },
+        {
+          "label": "4",
+          "key": "wrong"
+        },
+        {
+          "label": "5",
+          "key": "full"
+        },
+        {
+          "label": "6",
+          "key": "lost"
+        },
+        {
+          "label": "7",
+          "key": "strong"
+        },
+        {
+          "label": "8",
+          "key": "empty"
+        }
+      ]
+    },
+    "teacherPage": 160
+  }
+]

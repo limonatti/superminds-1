@@ -1,28 +1,53 @@
 # Student practice
 
-The course opens from the existing student course list. Vocabulary is registered in
-`course-words.js`, with `assets/words.json` as its generator source: 848 unique
-entries within their units, across all 12 Vocabulary Builder units. Repeated
-headwords in different units are retained. The shared trainer uses IDs `outc-u1`
-through `outc-u12` and supports flashcards and the existing training modes.
+The course opens from the existing student course list and assigned homework.
+The shared word trainer retains all 848 Vocabulary Builder entries in 12 units
+(`outc-u1` through `outc-u12`), including flashcards.
 
-`assets/exercises.js` contains click targets derived from the supplied page OCR
-on 168 SB/WB unit pages. The original image is the authoritative task wording.
-Targets open answer forms, with alphabet choices for matching where detected,
-and selectable ordering where detected. Learners can add response fields. An
-extra target marked + represents an instruction whose printed number was not
-reliably recognised. OCR targets and item counts are not a manually verified
-transcription of every exercise. No automatic correctness or grades are claimed.
-Speaking and writing responses are also entered as text for teacher review;
-there is no speech recording or automatic essay assessment.
+## Audited exercises and checking
+
+`assets/exercises.js` is generated from `scripts/outcomes-audit/reviewed-tasks.json`
+by `python3 scripts/build-outcomes-checks.py`. It contains 1,324 interactive targets:
+746 on Student’s Book unit/review/video pages, 456 on Workbook unit/quiz pages,
+and 122 in the Student’s Book Grammar Reference (printed pages 114–137).
+The original page remains visible beside each response form. The bank replaces
+heuristic OCR response counts and stray numbered-list/audio-track targets with
+reviewed exercise targets and numbered answer fields. See the audit directory
+for source-key extraction, corrections, coverage and provenance.
+
+Closed answers have deterministic checking: errors and blanks are identified per
+field, correct answers are retained, and editing invalidates the old result.
+After the first check, leaving an edited field rechecks the exercise. Learners can
+reveal/hide the key after attempting it. The record retains that a key was revealed.
+Each rubric has a content revision so stale results cannot be shown against changed
+keys. Examples printed in the books remain part of the numbered response form.
+
+The checker accepts declared alternatives, contractions/full forms, punctuation
+and capitalization differences, and reordered sets where appropriate. Explicit
+contraction/capital-letter tasks preserve their respective constraints. Numeric
+values, negative signs, grammar changes, missing words and spelling differences
+are not silently treated as correct.
+
+Personal writing, discussion and other open answers use a model/checklist; they
+are not automatically scored. Reading responses with multiple valid formulations
+are marked for comparison rather than wrong solely because of different wording.
+Mixed exercises score only the closed fields and separately require self-review.
+There is no automatic speech/essay assessment. Video tasks retain their keys and
+original instructions; this release does not supply missing video files.
+
+## Saving
 
 Answers are independent of presentation ink. They are stored by account ID in
 localStorage and under `progress.data.__coursework['outcomes-beginner']` for
-signed-in users. Guests retain answers only in the current browser. Failed
-cloud writes retain the local copy, and answers can be downloaded as JSON.
-The existing homework assignment status is not automatically changed by marking
-an individual exercise complete. Saved responses appear in the existing teacher class page under Outcomes, using
-the student progress returned by the existing teacher-authorized class API.
-Assignments support all 12 units and SB / Grammar / WB links.
+signed-in users. Guests retain answers only in the current browser. Failed cloud
+writes retain the local copy, and learners can download their responses as JSON.
+Existing saved answers are preserved; surplus legacy fields are retained in
+`legacyValues` when a reviewed form has fewer fields. Automatic completion cannot
+be set with the manual checkbox. Free responses use an explicit self-review checkbox.
+The existing homework assignment status is not automatically changed by completing
+an individual exercise. The teacher class page displays saved responses, checking
+results and whether the learner revealed the key.
 
-Verification: `node tests/outcomes-student.cjs` and `python3 check.py`.
+Verification: `node tests/outcomes-grader.cjs`, `node tests/outcomes-student.cjs`,
+`python3 check.py`, and browser testing of wrong/correct answers, repeated attempts,
+key reveal, persistence after navigation and ungraded self-review.

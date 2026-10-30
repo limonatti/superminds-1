@@ -393,7 +393,7 @@ function outcomesResponses(data){
   return '<div class="sect"><span>Outcomes · ответы ученика</span><span>для проверки преподавателем</span></div>'+Array.from({length:12},(_,i)=>i+1).map(n=>{
     const rows=entries.filter(r=>Number(r.unit)===n).sort((a,b)=>String(a.book).localeCompare(String(b.book))||a.page-b.page||Number(a.exercise)-Number(b.exercise));
     if(!rows.length)return "";
-    return '<details style="padding:12px 18px"><summary>Unit '+n+' · '+rows.length+' заданий</summary>'+rows.map(r=>'<section style="padding:12px 0;border-bottom:1px solid #e3dcd1"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+esc(r.page)+' · № '+esc(r.exercise)+'</b><p>'+esc(r.done?'Ученик отметил выполнение':'Черновик')+'</p><ol>'+r.values.map(v=>'<li style="white-space:pre-wrap">'+esc(v||'—')+'</li>').join('')+'</ol></section>').join('')+'</details>';
+    return '<details style="padding:12px 18px"><summary>Unit '+n+' · '+rows.length+' заданий</summary>'+rows.map(r=>'<section style="padding:12px 0;border-bottom:1px solid #e3dcd1"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+esc(r.page)+' · № '+esc(r.exercise)+'</b><p>'+esc(r.grade?.mode==='auto'?((r.grade.total?'Автопроверка: '+r.grade.correct+' из '+r.grade.total+' верно':'Свободные ответы: самопроверка')+(r.grade.needsReview?' · есть свободные ответы':'')+(r.assisted?' · открывал(а) ответы':'')):(r.done?'Самопроверка выполнена':'Черновик'))+'</p><ol>'+r.values.map(v=>'<li style="white-space:pre-wrap">'+esc(v||'—')+'</li>').join('')+'</ol></section>').join('')+'</details>';
   }).join('');
 }
 

@@ -1,0 +1,5995 @@
+[
+  {
+    "unit": 1,
+    "heading": "’m, ’s, ’re",
+    "n": 2,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tI\n\t 2\tThis\n\t 3\tShe\n\t 4\tWe\n\t 5\tHe\n\t 6\tthey\n\t 7\tyour name\n\t 7\tMy\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I"
+        },
+        {
+          "label": "2",
+          "key": "This"
+        },
+        {
+          "label": "3",
+          "key": "She"
+        },
+        {
+          "label": "4",
+          "key": "We"
+        },
+        {
+          "label": "5",
+          "key": "He"
+        },
+        {
+          "label": "6",
+          "key": "they"
+        },
+        {
+          "label": "7",
+          "key": "your name"
+        },
+        {
+          "label": "8",
+          "key": "My"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "’m, ’s, ’re",
+    "n": 3,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tI’m from Berlin.\n\t 2\tHe’s from London.\n\t 3\tMy name’s Cathy.\n\t 4\tWe’re friends.\n\t 5\tThey’re in my class.\n\t 6\tYou’re in class 6.\n\t 7\tShe’s my teacher.\n\t 8\tThat’s right.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I’m from Berlin.",
+          "requireContraction": true
+        },
+        {
+          "label": "2",
+          "key": "He’s from London.",
+          "requireContraction": true
+        },
+        {
+          "label": "3",
+          "key": "My name’s Cathy.",
+          "requireContraction": true
+        },
+        {
+          "label": "4",
+          "key": "We’re friends.",
+          "requireContraction": true
+        },
+        {
+          "label": "5",
+          "key": "They’re in my class.",
+          "requireContraction": true
+        },
+        {
+          "label": "6",
+          "key": "You’re in class 6.",
+          "requireContraction": true
+        },
+        {
+          "label": "7",
+          "key": "She’s my teacher.",
+          "requireContraction": true
+        },
+        {
+          "label": "8",
+          "key": "That’s right.",
+          "requireContraction": true
+        }
+      ],
+      "requireContraction": true,
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "’m, ’s, ’re",
+    "n": 4,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "Students’\town answers\n",
+    "check": {
+      "mode": "open",
+      "model": "Students’\town answers"
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "Questions with be",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\t ’s\n\t 2\t are\n\t 3\t ’s\n\t 4\t is\n\t\t 5\tis; Is\n\t\t 6\t’s; Is; ’s\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "’s"
+        },
+        {
+          "label": "2",
+          "key": "are"
+        },
+        {
+          "label": "3",
+          "key": "’s"
+        },
+        {
+          "label": "4",
+          "key": "is"
+        },
+        {
+          "label": "5",
+          "key": "is; Is"
+        },
+        {
+          "label": "6",
+          "key": "’s; Is; ’s"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "Questions with be",
+    "n": 2,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tWhere are you from?\n\t 2\tHow much are they?\n\t 3\tWho is he?\n\t 4\tHow old are you?\n\t 5\tWhat are their names?\n\t 6\tHow are you?\n\t 7\tWhat time is the bus?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Where are you from?"
+        },
+        {
+          "label": "2",
+          "key": "How much are they?"
+        },
+        {
+          "label": "3",
+          "key": "Who is he?"
+        },
+        {
+          "label": "4",
+          "key": "How old are you?"
+        },
+        {
+          "label": "5",
+          "key": "What are their names?"
+        },
+        {
+          "label": "6",
+          "key": "How are you?"
+        },
+        {
+          "label": "7",
+          "key": "What time is the bus?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "Questions with be",
+    "n": 3,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\t b \t 2\t c \t 3\t e \t 4\t d \t 5\t a \t 6\t g \t 7\t f\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        },
+        {
+          "label": "2",
+          "key": "c"
+        },
+        {
+          "label": "3",
+          "key": "e"
+        },
+        {
+          "label": "4",
+          "key": "d"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "g"
+        },
+        {
+          "label": "7",
+          "key": "f"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "Questions with be",
+    "n": 4,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tYes, I am.\n\t 2\tNo, it’s not. \n\t 3\tYes, you are. \n\t 4\tYes, we are.\n\t 5\tNo, I’m not.\n\t 6\tYes, he is.\n\t 7\tNo, she’s not.\n\t 8\tNo, it’s not.\n\t 9\tYes, they are.\n\t 10\tYes, it is.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Yes, I am."
+        },
+        {
+          "label": "2",
+          "key": "No, it’s not."
+        },
+        {
+          "label": "3",
+          "key": "Yes, you are."
+        },
+        {
+          "label": "4",
+          "key": "Yes, we are."
+        },
+        {
+          "label": "5",
+          "key": "No, I’m not."
+        },
+        {
+          "label": "6",
+          "key": "Yes, he is."
+        },
+        {
+          "label": "7",
+          "key": "No, she’s not."
+        },
+        {
+          "label": "8",
+          "key": "No, it’s not."
+        },
+        {
+          "label": "9",
+          "key": "Yes, they are."
+        },
+        {
+          "label": "10",
+          "key": "Yes, it is."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "his, her, our, their",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tHis\n\t 2\tKaren’s\n\t 3\tMy\n\t 4\tOur\n\t 5\ttheir\n\t 6\this\n\t 7\tyour cat’s\n\t 8\tLiam’s\n\t 9\tyour\n\t 10\tTomas and Pepa’s\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "His"
+        },
+        {
+          "label": "2",
+          "key": "Karen’s"
+        },
+        {
+          "label": "3",
+          "key": "My"
+        },
+        {
+          "label": "4",
+          "key": "Our"
+        },
+        {
+          "label": "5",
+          "key": "their"
+        },
+        {
+          "label": "6",
+          "key": "his"
+        },
+        {
+          "label": "7",
+          "key": "your cat’s"
+        },
+        {
+          "label": "8",
+          "key": "Liam’s"
+        },
+        {
+          "label": "9",
+          "key": "your"
+        },
+        {
+          "label": "10",
+          "key": "Tomas and Pepa’s"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "his, her, our, their",
+    "n": 2,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tI\n\t 2\tMy\n\t 3\tyou\n\t 4\tyour\n\t 5\the\n\t 6\ttheir\n\t 7\tour\n\t 8\tthey\n\t 9\tmy; It’s\n\t 10\tMy; He’s\n\t 11\tShe; our\n\t 12\tHer; my\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I"
+        },
+        {
+          "label": "2",
+          "key": "My"
+        },
+        {
+          "label": "3",
+          "key": "you"
+        },
+        {
+          "label": "4",
+          "key": "your"
+        },
+        {
+          "label": "5",
+          "key": "he"
+        },
+        {
+          "label": "6",
+          "key": "their"
+        },
+        {
+          "label": "7",
+          "key": "our"
+        },
+        {
+          "label": "8",
+          "key": "they"
+        },
+        {
+          "label": "9",
+          "key": "my; It’s"
+        },
+        {
+          "label": "10",
+          "key": "My; He’s"
+        },
+        {
+          "label": "11",
+          "key": "She; our"
+        },
+        {
+          "label": "12",
+          "key": "Her; my"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "not",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\ta \t 2\tb \t 3\tb \t 4\tb \t 5\ta \t 6\tb \t 7\tb \t 8\tb\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "b"
+        },
+        {
+          "label": "7",
+          "key": "b"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 1,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tWho’s he?\n\t 2\tWhere is it?\n\t 3\tWhere are you from?\n\t 4\tHow much is it?\n\t 5\tWhat day is it?\n\t 6\tWhat’s your name?\n\t 7\tHow old is she?\n\t 8\tWhat time is it?\n\t 9\tHow much are they?\n\t 10\tHow are you?\n\t 11\tHow old are you?\n\t 12\tWhere is he?\n\t 13\tWho’s she?\n\t 14\tHow long is it?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Who’s he?"
+        },
+        {
+          "label": "2",
+          "key": "Where is it?"
+        },
+        {
+          "label": "3",
+          "key": "Where are you from?"
+        },
+        {
+          "label": "4",
+          "key": "How much is it?"
+        },
+        {
+          "label": "5",
+          "key": "What day is it?"
+        },
+        {
+          "label": "6",
+          "key": "What’s your name?"
+        },
+        {
+          "label": "7",
+          "key": "How old is she?"
+        },
+        {
+          "label": "8",
+          "key": "What time is it?"
+        },
+        {
+          "label": "9",
+          "key": "How much are they?"
+        },
+        {
+          "label": "10",
+          "key": "How are you?"
+        },
+        {
+          "label": "11",
+          "key": "How old are you?"
+        },
+        {
+          "label": "12",
+          "key": "Where is he?"
+        },
+        {
+          "label": "13",
+          "key": "Who’s she?"
+        },
+        {
+          "label": "14",
+          "key": "How long is it?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tlive\n\t 2\tlive\n\t 3\thas\n\t 4\tknow; lives\n\t 5\tknow; works\n\t 6\twalk; takes\n\t 7\tlikes; like\n\t 8\tlives; know\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "live"
+        },
+        {
+          "label": "2",
+          "key": "live"
+        },
+        {
+          "label": "3",
+          "key": "has"
+        },
+        {
+          "label": "4",
+          "key": "know; lives"
+        },
+        {
+          "label": "5",
+          "key": "know; works"
+        },
+        {
+          "label": "6",
+          "key": "walk; takes"
+        },
+        {
+          "label": "7",
+          "key": "likes; like"
+        },
+        {
+          "label": "8",
+          "key": "lives; know"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple questions: do you",
+    "n": 1,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tA: Where do you live?\n  B: In Beppu. Do you know it?\n\t 2\tA: No. Where is it?\n  B: It’s a small city in the South of Japan.\n  A: Do you like it?\n\t 3\tB: Yes. It’s a nice place. Where do you live?\n  A: Birmingham. Do you know it?\n  B: Yes. My friend lives there!\n\t 4\tA: What’s his name?\n  B: Bryan.\n  A: Do you know his family name?\n\t 5\tB: No. Sorry. Do you like Birmingham?\n  A: Yes, it’s OK.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1A",
+          "key": "Where do you live?"
+        },
+        {
+          "label": "1B",
+          "key": "Do you know it?"
+        },
+        {
+          "label": "2A (последняя реплика)",
+          "key": "Do you like it?"
+        },
+        {
+          "label": "3B",
+          "key": "Where do you live?"
+        },
+        {
+          "label": "3A",
+          "key": "Do you know it?"
+        },
+        {
+          "label": "4A (последняя реплика)",
+          "key": "Do you know his family name?"
+        },
+        {
+          "label": "5B",
+          "key": "Do you like Birmingham?"
+        }
+      ],
+      "note": "Введите только изменённые предложения, а не весь диалог.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      }
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple questions: do you",
+    "n": 2,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tare\n\t 2\tdo\n\t 3\tare\n\t 4\tare\n\t 5\tdo\n\t 6\tDo\n\t 7\tAre\n\t 8\tDo\n\t 9\tdo\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are"
+        },
+        {
+          "label": "2",
+          "key": "do"
+        },
+        {
+          "label": "3",
+          "key": "are"
+        },
+        {
+          "label": "4",
+          "key": "are"
+        },
+        {
+          "label": "5",
+          "key": "do"
+        },
+        {
+          "label": "6",
+          "key": "Do"
+        },
+        {
+          "label": "7",
+          "key": "Are"
+        },
+        {
+          "label": "8",
+          "key": "Do"
+        },
+        {
+          "label": "9",
+          "key": "do"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple questions: do you",
+    "n": 3,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\tb \t 2\ta \t 3\tc \t 4\ti \t 5\tf \t 6\te \t 7\td \t 8\th \t 9\tg\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "c"
+        },
+        {
+          "label": "4",
+          "key": "i"
+        },
+        {
+          "label": "5",
+          "key": "f"
+        },
+        {
+          "label": "6",
+          "key": "e"
+        },
+        {
+          "label": "7",
+          "key": "d"
+        },
+        {
+          "label": "8",
+          "key": "h"
+        },
+        {
+          "label": "9",
+          "key": "g"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple questions: do you",
+    "n": 4,
+    "part": "",
+    "teacherPage": 161,
+    "raw": "\t 1\ta \t 2\tb \t 3\tb \t 4\ta \t 5\tb \t 6\tb\nanswer key\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "b answer key"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 161
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple negative: don’t (do not)",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tlike\n\t 2\tdon’t like\n\t 3\tdon’t work\n\t 4\tdon’t work\n\t 5\twork\n\t 6\tdon’t have\n\t 7\thave\n\t 8\tdon’t have\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "like"
+        },
+        {
+          "label": "2",
+          "key": "don’t like"
+        },
+        {
+          "label": "3",
+          "key": "don’t work"
+        },
+        {
+          "label": "4",
+          "key": "don’t work"
+        },
+        {
+          "label": "5",
+          "key": "work"
+        },
+        {
+          "label": "6",
+          "key": "don’t have"
+        },
+        {
+          "label": "7",
+          "key": "have"
+        },
+        {
+          "label": "8",
+          "key": "don’t have"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Present simple negative: don’t (do not)",
+    "n": 2,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tNo, we don’t.\n\t 2 No, I don’t.\n\t 3\tYes, I do.\n\t 4\tYes, they do.\n\t 5\tNo, I don’t.\n\t 6\tYes, we do. (Also possible: Yes, you do.)\n\t 7\tNo, they don’t.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "No, we don’t."
+        },
+        {
+          "label": "2",
+          "key": "No, I don’t."
+        },
+        {
+          "label": "3",
+          "key": "Yes, I do."
+        },
+        {
+          "label": "4",
+          "key": "Yes, they do."
+        },
+        {
+          "label": "5",
+          "key": "No, I don’t."
+        },
+        {
+          "label": "6",
+          "key": [
+            "Yes, we do.",
+            "Yes, you do."
+          ]
+        },
+        {
+          "label": "7",
+          "key": "No, they don’t."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Plural / no plural",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\ta job b   jobs\n\t 2\ta sons b   son\n\t 3\ta teacher b   teachers\n\t 4\ta people b   person\n\t 5\ta flats b   flat\n\t 6\ta women b   woman\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "job"
+        },
+        {
+          "label": "1b",
+          "key": "jobs"
+        },
+        {
+          "label": "2a",
+          "key": "sons"
+        },
+        {
+          "label": "2b",
+          "key": "son"
+        },
+        {
+          "label": "3a",
+          "key": "teacher"
+        },
+        {
+          "label": "3b",
+          "key": "teachers"
+        },
+        {
+          "label": "4a",
+          "key": "people"
+        },
+        {
+          "label": "4b",
+          "key": "person"
+        },
+        {
+          "label": "5a",
+          "key": "flats"
+        },
+        {
+          "label": "5b",
+          "key": "flat"
+        },
+        {
+          "label": "6a",
+          "key": "women"
+        },
+        {
+          "label": "6b",
+          "key": "woman"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Plural / no plural",
+    "n": 2,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\ta \t 2\tb \t 3\ta \t 4\tb \t 5\tb \t 6\tb \t 7\ta\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "b"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Plural / no plural",
+    "n": 3,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tvillages\n\t 2\tblocks\n\t 3\tsalads\n\t 4\tbrothers; sisters\n\t 5\tfruit\n\t 6\tshops\n\t 7\tkebabs\n\t 8\tjobs\n\t 9\trooms\n\t 10\twine\n\t 11\tcurries\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "villages"
+        },
+        {
+          "label": "2",
+          "key": "blocks"
+        },
+        {
+          "label": "3",
+          "key": "salads"
+        },
+        {
+          "label": "4",
+          "key": "brothers; sisters"
+        },
+        {
+          "label": "5",
+          "key": "fruit"
+        },
+        {
+          "label": "6",
+          "key": "shops"
+        },
+        {
+          "label": "7",
+          "key": "kebabs"
+        },
+        {
+          "label": "8",
+          "key": "jobs"
+        },
+        {
+          "label": "9",
+          "key": "rooms"
+        },
+        {
+          "label": "10",
+          "key": "wine"
+        },
+        {
+          "label": "11",
+          "key": "curries"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "like / don’t like",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tI love them.\n\t 2\tI don’t like it.\n\t 3\tI don’t like it.\n\t 4\tI don’t like them.\n\t 5\tI like them.\n\t 6\tI like it.\n\t 7\tI love them.\n\t 8\tI don’t like it.\n\t 9\tI like it.\n\t 10\tI love them.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I love them."
+        },
+        {
+          "label": "2",
+          "key": "I don’t like it."
+        },
+        {
+          "label": "3",
+          "key": "I don’t like it."
+        },
+        {
+          "label": "4",
+          "key": "I don’t like them."
+        },
+        {
+          "label": "5",
+          "key": "I like them."
+        },
+        {
+          "label": "6",
+          "key": "I like it."
+        },
+        {
+          "label": "7",
+          "key": "I love them."
+        },
+        {
+          "label": "8",
+          "key": "I don’t like it."
+        },
+        {
+          "label": "9",
+          "key": "I like it."
+        },
+        {
+          "label": "10",
+          "key": "I love them."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "b",
+    "teacherPage": 162,
+    "raw": "\t 1\ta    \n\t 2\tb \n\t 3\ta\n\t 4\ta\n\t 5\tb\n\t 6\ta\n\t 7\tb\n\t 8\ta\n\t 9\tb\n\t 10\ta\n\t 11\tb\n\t 12\ta \n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "b"
+        },
+        {
+          "label": "8",
+          "key": "a"
+        },
+        {
+          "label": "9",
+          "key": "b"
+        },
+        {
+          "label": "10",
+          "key": "a"
+        },
+        {
+          "label": "11",
+          "key": "b"
+        },
+        {
+          "label": "12",
+          "key": "a"
+        }
+      ],
+      "note": "Часть B: отметьте услышанный вариант (a/b). Часть A — прослушивание и повторение.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      }
+    }
+  },
+  {
+    "unit": 2,
+    "heading": "Pronunciation",
+    "n": 2,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tWhere are you from?\n\t 2\tDo you live here?\n\t 3\tAre you OK?\n\t 4\tWhat do you do?\n\t 5\tDo you know it?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Where are you from?"
+        },
+        {
+          "label": "2",
+          "key": "Do you live here?"
+        },
+        {
+          "label": "3",
+          "key": "Are you OK?"
+        },
+        {
+          "label": "4",
+          "key": "What do you do?"
+        },
+        {
+          "label": "5",
+          "key": "Do you know it?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Negative with be",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\ta \t 2\tb \t 3\tb \t 4\tb \t 5\ta \t 6\ta\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Negative with be",
+    "n": 2,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\t’s not (is not / isn’t)\n\t 2\t’re not (are not / aren’t)\n\t 3\t’re not (are not / aren’t)\n\t 4\t’re not (are not / aren’t)\n\t 5\t’m not (am not)\n\t 6\t’s not (is not / isn’t)\n\t 7\t’s not (is not / isn’t)\n\t 8\t’s not (is not / isn’t)\n\t 9\t’s not (is not / isn’t)\n\t 10\t’m not (am not)\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "’s not"
+        },
+        {
+          "label": "2",
+          "key": "’re not"
+        },
+        {
+          "label": "3",
+          "key": "’re not"
+        },
+        {
+          "label": "4",
+          "key": "’re not"
+        },
+        {
+          "label": "5",
+          "key": "’m not"
+        },
+        {
+          "label": "6",
+          "key": "’s not"
+        },
+        {
+          "label": "7",
+          "key": "’s not"
+        },
+        {
+          "label": "8",
+          "key": "’s not"
+        },
+        {
+          "label": "9",
+          "key": "’s not"
+        },
+        {
+          "label": "10",
+          "key": "’m not"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Present simple: doesn’t",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tI don’t like fish.\n\t 2\tMy son doesn’t like meat.\n\t 3\tIt doesn’t take a long time.\n\t 4\tMy mum and dad don’t have a big house.\n\t 5\tMy friend Mikel doesn’t have a very good job.\n\t 6\tShe doesn’t live near here.\n\t 7\tWe don’t like this city.\n\t 8\tI don’t have (any) money.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I don’t like fish."
+        },
+        {
+          "label": "2",
+          "key": "My son doesn’t like meat."
+        },
+        {
+          "label": "3",
+          "key": "It doesn’t take a long time."
+        },
+        {
+          "label": "4",
+          "key": "My mum and dad don’t have a big house."
+        },
+        {
+          "label": "5",
+          "key": "My friend Mikel doesn’t have a very good job."
+        },
+        {
+          "label": "6",
+          "key": "She doesn’t live near here."
+        },
+        {
+          "label": "7",
+          "key": "We don’t like this city."
+        },
+        {
+          "label": "8",
+          "key": "I don’t have (any) money."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Present simple questions: does",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tA: I’m sorry, I don’t know your name.\n  B: Andrea.\n\t 2\tA: Do you know this area?\n  B: No. I don’t live here.\n\t 3\tA: What does your mother do?\n  B: She doesn’t work now. She’s retired.\n\t 4\tA: Where does Maria live?\n  B: I don’t know. Ask Simon. He knows her well.\n\t 5\tA: Where does your girlfriend work?\n  B: Sorrento.\n  A: How long does it take to get there?\n  B: Twenty or thirty minutes.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1A",
+          "key": "I’m sorry, I don’t know your name."
+        },
+        {
+          "label": "2A",
+          "key": "Do you know this area?"
+        },
+        {
+          "label": "2B",
+          "key": "I don’t live here."
+        },
+        {
+          "label": "3A",
+          "key": "What does your mother do?"
+        },
+        {
+          "label": "3B",
+          "key": "She doesn’t work now."
+        },
+        {
+          "label": "4A",
+          "key": "Where does Maria live?"
+        },
+        {
+          "label": "4B",
+          "key": "I don’t know."
+        },
+        {
+          "label": "5A (первый вопрос)",
+          "key": "Where does your girlfriend work?"
+        },
+        {
+          "label": "5A (второй вопрос)",
+          "key": "How long does it take to get there?"
+        }
+      ],
+      "note": "Введите только изменённые предложения.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      }
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Present simple questions: does",
+    "n": 2,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\tdoes\n\t 2\tis\n\t 3\tdoes\n\t 4\tIs\n\t 5\tare\n\t 6\tdoesn’t\n\t 7\tDoes\n\t 8\tworks\n\t 9\tdo\n\t 10\tAre\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "does"
+        },
+        {
+          "label": "2",
+          "key": "is"
+        },
+        {
+          "label": "3",
+          "key": "does"
+        },
+        {
+          "label": "4",
+          "key": "Is"
+        },
+        {
+          "label": "5",
+          "key": "are"
+        },
+        {
+          "label": "6",
+          "key": "doesn’t"
+        },
+        {
+          "label": "7",
+          "key": "Does"
+        },
+        {
+          "label": "8",
+          "key": "works"
+        },
+        {
+          "label": "9",
+          "key": "do"
+        },
+        {
+          "label": "10",
+          "key": "Are"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "a/any",
+    "n": 1,
+    "part": "",
+    "teacherPage": 162,
+    "raw": "\t 1\ta\n\t 2\tany\n\t 3\tany\n\t 4\ta\n\t 5\tany\n\t 6\ta; a\n\t 7\tany\n\t 8\ta; a\n\t 9\ta\n\t 10\tany\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "any"
+        },
+        {
+          "label": "3",
+          "key": "any"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "any"
+        },
+        {
+          "label": "6",
+          "key": "a; a"
+        },
+        {
+          "label": "7",
+          "key": "any"
+        },
+        {
+          "label": "8",
+          "key": "a; a"
+        },
+        {
+          "label": "9",
+          "key": "a"
+        },
+        {
+          "label": "10",
+          "key": "any"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 162
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "b",
+    "teacherPage": 163,
+    "raw": "\t 1\ta \t 2\tb \t 3\tb \t 4\tb \t 5\ta \t 6\tb \t 7\ta \t 8\tb\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "b"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        }
+      ],
+      "note": "Часть B: отметьте услышанный вариант (a/b). Часть A — прослушивание и повторение.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      }
+    }
+  },
+  {
+    "unit": 3,
+    "heading": "Pronunciation",
+    "n": 2,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\t+\n\t 2\t–\n\t 3\t–\n\t 4\t–\n\t 5\t+\n\t 6\t–\n\t 7\t–\n\t 8\t+\n\t 9\t+\n\t 10\t+\n\t 11\t+\n\t 12\t–\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "+"
+        },
+        {
+          "label": "2",
+          "key": "–"
+        },
+        {
+          "label": "3",
+          "key": "–"
+        },
+        {
+          "label": "4",
+          "key": "–"
+        },
+        {
+          "label": "5",
+          "key": "+"
+        },
+        {
+          "label": "6",
+          "key": "–"
+        },
+        {
+          "label": "7",
+          "key": "–"
+        },
+        {
+          "label": "8",
+          "key": "+"
+        },
+        {
+          "label": "9",
+          "key": "+"
+        },
+        {
+          "label": "10",
+          "key": "+"
+        },
+        {
+          "label": "11",
+          "key": "+"
+        },
+        {
+          "label": "12",
+          "key": "–"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Is there …? There’s …",
+    "n": 1,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tIs there; There’s\n\t 2\tIs there\n\t 3\tThere’s\n\t 4\tIs there; there’s\n\t 5\tIs there; there’s\n\t 6\tIs there; There’s\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is there; There’s"
+        },
+        {
+          "label": "2",
+          "key": "Is there"
+        },
+        {
+          "label": "3",
+          "key": "There’s"
+        },
+        {
+          "label": "4",
+          "key": "Is there; there’s"
+        },
+        {
+          "label": "5",
+          "key": "Is there; there’s"
+        },
+        {
+          "label": "6",
+          "key": "Is there; There’s"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Prepositions and directions",
+    "n": 1,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tThere’s a small shop on the corner of this road.\n\t 2\tThere’s a restaurant in the hotel.\n\t 3\tThe hotel is near the centre.\n\t 4\tThe school is in the main square.\n\t 5\tThere’s a nice café next to the school.\n\t 6\tIt’s on the next road.\n\t 7\tThere’s a swimming pool in the park.\n\t 8\tThere’s a shop on the next corner.\n\t 9\tThere’s a small park at the end of our street.\n\t 10\tIs there a toilet on the second floor?\n\t 11\tIt’s down this road. Then take the second on the right.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "There’s a small shop on the corner of this road."
+        },
+        {
+          "label": "2",
+          "key": "There’s a restaurant in the hotel."
+        },
+        {
+          "label": "3",
+          "key": "The hotel is near the centre."
+        },
+        {
+          "label": "4",
+          "key": "The school is in the main square."
+        },
+        {
+          "label": "5",
+          "key": "There’s a nice café next to the school."
+        },
+        {
+          "label": "6",
+          "key": "It’s on the next road."
+        },
+        {
+          "label": "7",
+          "key": "There’s a swimming pool in the park."
+        },
+        {
+          "label": "8",
+          "key": "There’s a shop on the next corner."
+        },
+        {
+          "label": "9",
+          "key": "There’s a small park at the end of our street."
+        },
+        {
+          "label": "10",
+          "key": "Is there a toilet on the second floor?"
+        },
+        {
+          "label": "11",
+          "key": "It’s down this road. Then take the second on the right."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Prepositions and directions",
+    "n": 2,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tIs there a supermarket near here?\n\t 2\tThere’s a hotel on this road.\n\t 3\tThere’s a shop near the train station.\n\t 4\tIs there a cash machine near here?\n\t 5\tThere’s one on the corner.\n\t 6\tIs there a swimming pool near here?\n\t 7\tThere’s one at the end of this road.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is there a supermarket near here?"
+        },
+        {
+          "label": "2",
+          "key": "There’s a hotel on this road."
+        },
+        {
+          "label": "3",
+          "key": "There’s a shop near the train station."
+        },
+        {
+          "label": "4",
+          "key": "Is there a cash machine near here?"
+        },
+        {
+          "label": "5",
+          "key": "There’s one on the corner."
+        },
+        {
+          "label": "6",
+          "key": "Is there a swimming pool near here?"
+        },
+        {
+          "label": "7",
+          "key": "There’s one at the end of this road."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Adverbs of frequency",
+    "n": 1,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tI usually go out on Saturday night.\n\t 2\tThey’re always late.\n\t 3\tI sometimes work on Saturday.\n\t 4\tI always go to mosque on Friday.\n\t 5\tI’m normally free on Wednesday afternoon.\n\t 6\tI never go swimming.\n\t 7\tWe don’t usually go out at night in the week.\n\t 8\tI’m never busy at the weekend.\n\t 9\tHe’s not usually here in the afternoon.\n\t 10\tThey sometimes go to the beach on Sunday morning.\n\t 11\tI don’t often go to the cinema.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I usually go out on Saturday night."
+        },
+        {
+          "label": "2",
+          "key": "They’re always late."
+        },
+        {
+          "label": "3",
+          "key": "I sometimes work on Saturday."
+        },
+        {
+          "label": "4",
+          "key": "I always go to mosque on Friday."
+        },
+        {
+          "label": "5",
+          "key": "I’m normally free on Wednesday afternoon."
+        },
+        {
+          "label": "6",
+          "key": "I never go swimming."
+        },
+        {
+          "label": "7",
+          "key": "We don’t usually go out at night in the week."
+        },
+        {
+          "label": "8",
+          "key": "I’m never busy at the weekend."
+        },
+        {
+          "label": "9",
+          "key": "He’s not usually here in the afternoon."
+        },
+        {
+          "label": "10",
+          "key": "They sometimes go to the beach on Sunday morning."
+        },
+        {
+          "label": "11",
+          "key": "I don’t often go to the cinema."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Adverbs of frequency",
+    "n": 2,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tnever\n\t 2\talways\n\t 3\tusually\n\t 4\tnormally\n\t 5\tsometimes\n\t 6\toften\n\t 7\tusually\n\t 8\tsometimes\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "never"
+        },
+        {
+          "label": "2",
+          "key": "always"
+        },
+        {
+          "label": "3",
+          "key": "usually"
+        },
+        {
+          "label": "4",
+          "key": "normally"
+        },
+        {
+          "label": "5",
+          "key": "sometimes"
+        },
+        {
+          "label": "6",
+          "key": "often"
+        },
+        {
+          "label": "7",
+          "key": "usually"
+        },
+        {
+          "label": "8",
+          "key": "sometimes"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Can …?",
+    "n": 1,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tsay\n\t 2\thelp\n\t 3\twrite\n\t 4\twait\n\t 5\tgo\n\t 6\tsit\n\t 7\tget\n\t 8\tchange\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "say"
+        },
+        {
+          "label": "2",
+          "key": "help"
+        },
+        {
+          "label": "3",
+          "key": "write"
+        },
+        {
+          "label": "4",
+          "key": "wait"
+        },
+        {
+          "label": "5",
+          "key": "go"
+        },
+        {
+          "label": "6",
+          "key": "sit"
+        },
+        {
+          "label": "7",
+          "key": "get"
+        },
+        {
+          "label": "8",
+          "key": "change"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Can …?",
+    "n": 2,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tCan; can’t\n\t 2\tCan; can\n\t 3\tCan; can\n\t 4\tcan’t; Can; can’t; can\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Can; can’t"
+        },
+        {
+          "label": "2",
+          "key": "Can; can"
+        },
+        {
+          "label": "3",
+          "key": "Can; can"
+        },
+        {
+          "label": "4",
+          "key": "can’t; Can; can’t; can"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Can …?",
+    "n": 3,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tCan you help me?\n\t 2 I can’t hear you.\n\t 3\tMy mum can cook lots of different things.\n\t 4\tThey can’t speak English.\n\t 5\tWe can leave early.\n\t 6\tCan you write it on the board?\n\t 7\tShe can come in now.\n\t 8\tCan I help you?\n\t 9\tCan you three share a book?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Can you help me?"
+        },
+        {
+          "label": "2",
+          "key": "I can’t hear you."
+        },
+        {
+          "label": "3",
+          "key": "My mum can cook lots of different things."
+        },
+        {
+          "label": "4",
+          "key": "They can’t speak English."
+        },
+        {
+          "label": "5",
+          "key": "We can leave early."
+        },
+        {
+          "label": "6",
+          "key": "Can you write it on the board?"
+        },
+        {
+          "label": "7",
+          "key": "She can come in now."
+        },
+        {
+          "label": "8",
+          "key": "Can I help you?"
+        },
+        {
+          "label": "9",
+          "key": "Can you three share a book?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 4,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "b",
+    "teacherPage": 163,
+    "raw": "\t 1\tb\n\t 2\ta\n\t 3\ta\n\t 4\tb\n\t 5\ta\n\t 6\ta\n\t 7\tb\n\t 8\ta\n\t 9\tb\n\t 10\ta\n\t 11\tb\n\t 12\ta\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "b"
+        },
+        {
+          "label": "8",
+          "key": "a"
+        },
+        {
+          "label": "9",
+          "key": "b"
+        },
+        {
+          "label": "10",
+          "key": "a"
+        },
+        {
+          "label": "11",
+          "key": "b"
+        },
+        {
+          "label": "12",
+          "key": "a"
+        }
+      ],
+      "note": "Часть B: отметьте услышанный вариант (a/b). Часть A — прослушивание и повторение.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      }
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Are there …? / There are …",
+    "n": 1,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tThere are some men outside.\n\t 2\tThere are no toilets.\n\t 3\tThere are no bars near here.\n\t 4\tThere are some / a lot of / three shops on this road.\n\t 5\tThere are some / a lot of / two restaurants in \nthe square.\n\t 6\tThere are no cinemas in the area.\n\t 7\tThere aren’t any hospitals in the town.\n\t 8\tThere are some / a lot of / six people in the café.\n\t 9\tThere are some / a lot of / six men in our class.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "There are some men outside."
+        },
+        {
+          "label": "2",
+          "key": "There are no toilets."
+        },
+        {
+          "label": "3",
+          "key": "There are no bars near here."
+        },
+        {
+          "label": "4",
+          "key": [
+            "There are some shops on this road.",
+            "There are a lot of shops on this road.",
+            "There are three shops on this road.",
+            "There are  shops on this road."
+          ],
+          "soft": true
+        },
+        {
+          "label": "5",
+          "key": [
+            "There are some restaurants in the square.",
+            "There are a lot of restaurants in the square.",
+            "There are two restaurants in the square.",
+            "There are  restaurants in the square."
+          ],
+          "soft": true
+        },
+        {
+          "label": "6",
+          "key": "There are no cinemas in the area."
+        },
+        {
+          "label": "7",
+          "key": "There aren’t any hospitals in the town."
+        },
+        {
+          "label": "8",
+          "key": [
+            "There are some people in the café.",
+            "There are a lot of people in the café.",
+            "There are six people in the café.",
+            "There are  people in the café."
+          ],
+          "soft": true
+        },
+        {
+          "label": "9",
+          "key": [
+            "There are some men in our class.",
+            "There are a lot of men in our class.",
+            "There are six men in our class.",
+            "There are  men in our class."
+          ],
+          "soft": true
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Are there …? / There are …",
+    "n": 2,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tAre\n\t 2\t’s / is\n\t 3\tare\n\t 4\ta\n\t 5\tany\n\t 6\ta\n\t 7\tare\n\t 8\tIs\n\t 9\t’s / is\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Are"
+        },
+        {
+          "label": "2",
+          "key": "’s / is"
+        },
+        {
+          "label": "3",
+          "key": "are"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "any"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "are"
+        },
+        {
+          "label": "8",
+          "key": "Is"
+        },
+        {
+          "label": "9",
+          "key": "’s / is"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Are there …? / There are …",
+    "n": 3,
+    "part": "",
+    "teacherPage": 163,
+    "raw": "\t 1\tthere aren’t\n\t 2\tthere is\n\t 3\tthere isn’t\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "there aren’t"
+        },
+        {
+          "label": "2",
+          "key": "there is"
+        },
+        {
+          "label": "3",
+          "key": "there isn’t"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 163
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Talking about plans: I’m/We’re going",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\t’m\n\t 2\t’re; Do\n\t 3\tDo; ’m\n\t 4\t’m; Are; ’m\n\t 5\tDo; ’re; Do\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "’m"
+        },
+        {
+          "label": "2",
+          "key": "’re; Do"
+        },
+        {
+          "label": "3",
+          "key": "Do; ’m"
+        },
+        {
+          "label": "4",
+          "key": "’m; Are; ’m"
+        },
+        {
+          "label": "5",
+          "key": "Do; ’re; Do"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Talking about plans: I’m/We’re going",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tI’m going home at seven.\n\t 2\tWe’re going to the beach on Saturday.\n\t 3\ti am going to the cinema tonight.\n\t 4\tWe’re going to have a coffee.\n\t 5\tI’m going to the park after the class.\n\t 6\tWe’re going to see the Old Town tomorrow.\n\t 7\tWe’re going to meet some friends later.\n\t 8\tWe’re going to finish at six.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I’m going home at seven."
+        },
+        {
+          "label": "2",
+          "key": "We’re going to the beach on Saturday."
+        },
+        {
+          "label": "3",
+          "key": "i am going to the cinema tonight."
+        },
+        {
+          "label": "4",
+          "key": "We’re going to have a coffee."
+        },
+        {
+          "label": "5",
+          "key": "I’m going to the park after the class."
+        },
+        {
+          "label": "6",
+          "key": "We’re going to see the Old Town tomorrow."
+        },
+        {
+          "label": "7",
+          "key": "We’re going to meet some friends later."
+        },
+        {
+          "label": "8",
+          "key": "We’re going to finish at six."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Talking about plans: I’m/We’re going",
+    "n": 3,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\t a \t 2\t b \t 3\t b \t 4\t a \t 5\t a\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Talking about plans: I’m/We’re going",
+    "n": 4,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\twalk\n\t 2\tswimming\n\t 3\tcoffee\n\t 4\tshopping\n\t 5\tdinner\n\t 6\trun\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "walk"
+        },
+        {
+          "label": "2",
+          "key": "swimming"
+        },
+        {
+          "label": "3",
+          "key": "coffee"
+        },
+        {
+          "label": "4",
+          "key": "shopping"
+        },
+        {
+          "label": "5",
+          "key": "dinner"
+        },
+        {
+          "label": "6",
+          "key": "run"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Asking about plans: going and doing",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tdoing\n\t 2\tDo\n\t 3\tare\n\t 4\tdo you do?\n\t 5\tare you going\n\t 6\tWhat time\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "doing"
+        },
+        {
+          "label": "2",
+          "key": "Do"
+        },
+        {
+          "label": "3",
+          "key": "are"
+        },
+        {
+          "label": "4",
+          "key": "do you do?"
+        },
+        {
+          "label": "5",
+          "key": "are you going"
+        },
+        {
+          "label": "6",
+          "key": "What time"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Asking about plans: going and doing",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tc \t 2\ta \t 3\te \t 4\tf \t 5\tb \t 6\td\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "c"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "e"
+        },
+        {
+          "label": "4",
+          "key": "f"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "d"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 5,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "b",
+    "teacherPage": 164,
+    "raw": "\t 1\ta \n\t 2\ta\n\t 3\tb\n\t 4\tb\n\t 5\tb\n\t 6\ta\n\t 7\ta\n\t 8\tb\n\t 9\tb\n\t 10\ta\n\t 11\ta\n\t 12\tb    \n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        },
+        {
+          "label": "9",
+          "key": "b"
+        },
+        {
+          "label": "10",
+          "key": "a"
+        },
+        {
+          "label": "11",
+          "key": "a"
+        },
+        {
+          "label": "12",
+          "key": "b"
+        }
+      ],
+      "note": "Часть B: отметьте услышанный вариант (a/b). Часть A — прослушивание и повторение.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      }
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple: common irregular verbs",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\twent\n\t 2\thave\n\t 3\thad; went\n\t 4\tgo\n\t 5\tare\n\t 6\twas\n\t 7\twas; am\n\t 8\tare\n\t 9\tam; was\n\t 10\tdid; went\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "went"
+        },
+        {
+          "label": "2",
+          "key": "have"
+        },
+        {
+          "label": "3",
+          "key": "had; went"
+        },
+        {
+          "label": "4",
+          "key": "go"
+        },
+        {
+          "label": "5",
+          "key": "are"
+        },
+        {
+          "label": "6",
+          "key": "was"
+        },
+        {
+          "label": "7",
+          "key": "was; am"
+        },
+        {
+          "label": "8",
+          "key": "are"
+        },
+        {
+          "label": "9",
+          "key": "am; was"
+        },
+        {
+          "label": "10",
+          "key": "did; went"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple: common irregular verbs",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\ta were b   are\n\t 2\ta go  b   went\n\t 3\ta did b   do\n\t 4\ta had b   has\n\t 5\ta is  b   was\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "were"
+        },
+        {
+          "label": "1b",
+          "key": "are"
+        },
+        {
+          "label": "2a",
+          "key": "go"
+        },
+        {
+          "label": "2b",
+          "key": "went"
+        },
+        {
+          "label": "3a",
+          "key": "did"
+        },
+        {
+          "label": "3b",
+          "key": "do"
+        },
+        {
+          "label": "4a",
+          "key": "had"
+        },
+        {
+          "label": "4b",
+          "key": "has"
+        },
+        {
+          "label": "5a",
+          "key": "is"
+        },
+        {
+          "label": "5b",
+          "key": "was"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Regular past simple endings",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tThey talked a lot.\n\t 2\tI needed a coffee.\n\t 3\tWe shared a flat.\n\t 4\tIt rained a lot in April.\n\t 5\tShe loved him.\n\t 6\tI wanted to go.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "They talked a lot."
+        },
+        {
+          "label": "2",
+          "key": "I needed a coffee."
+        },
+        {
+          "label": "3",
+          "key": "We shared a flat."
+        },
+        {
+          "label": "4",
+          "key": "It rained a lot in April."
+        },
+        {
+          "label": "5",
+          "key": "She loved him."
+        },
+        {
+          "label": "6",
+          "key": "I wanted to go."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Regular past simple endings",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\twent\n\t 2\twanted\n\t 3\tstayed\n\t 4\thad\n\t 5\twas\n\t 6\twalked\n\t 7\trained\n\t 8\twas\n\t 9\tloved\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "went"
+        },
+        {
+          "label": "2",
+          "key": "wanted"
+        },
+        {
+          "label": "3",
+          "key": "stayed"
+        },
+        {
+          "label": "4",
+          "key": "had"
+        },
+        {
+          "label": "5",
+          "key": "was"
+        },
+        {
+          "label": "6",
+          "key": "walked"
+        },
+        {
+          "label": "7",
+          "key": "rained"
+        },
+        {
+          "label": "8",
+          "key": "was"
+        },
+        {
+          "label": "9",
+          "key": "loved"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple negatives",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\twasn’t\n\t 2\trained\n\t 3\tdidn’t have\n\t 4\tstayed\n\t 5\tdidn’t\n\t 6\tdon’t\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "wasn’t"
+        },
+        {
+          "label": "2",
+          "key": "rained"
+        },
+        {
+          "label": "3",
+          "key": "didn’t have"
+        },
+        {
+          "label": "4",
+          "key": "stayed"
+        },
+        {
+          "label": "5",
+          "key": "didn’t"
+        },
+        {
+          "label": "6",
+          "key": "don’t"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple negatives",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tdidn’t go out\n\t 2\tdidn’t work\n\t 3\tdon’t feel\n\t 4\tdon’t; have\n\t 5\tdidn’t know\n\t 6\tdoesn’t eat\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "didn’t go out"
+        },
+        {
+          "label": "2",
+          "key": "didn’t work"
+        },
+        {
+          "label": "3",
+          "key": "don’t feel"
+        },
+        {
+          "label": "4",
+          "key": "don’t; have"
+        },
+        {
+          "label": "5",
+          "key": "didn’t know"
+        },
+        {
+          "label": "6",
+          "key": "doesn’t eat"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple questions",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tWhat do you do?\n\t 2\tWhat did you do last night?\n\t 3\tWhere did you go after the class?\n\t 4\tDid you have a nice time on holiday?\n\t 5\tWhere do your parents live?\n\t 6\tWhat time did you get up this morning?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "What do you do?"
+        },
+        {
+          "label": "2",
+          "key": "What did you do last night?"
+        },
+        {
+          "label": "3",
+          "key": "Where did you go after the class?"
+        },
+        {
+          "label": "4",
+          "key": "Did you have a nice time on holiday?"
+        },
+        {
+          "label": "5",
+          "key": "Where do your parents live?"
+        },
+        {
+          "label": "6",
+          "key": "What time did you get up this morning?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple questions",
+    "n": 2,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\twere\n\t 2\twas\n\t 3\tWere\n\t 4\twere\n\t 5\twere\n\t 6\tWas\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "were"
+        },
+        {
+          "label": "2",
+          "key": "was"
+        },
+        {
+          "label": "3",
+          "key": "Were"
+        },
+        {
+          "label": "4",
+          "key": "were"
+        },
+        {
+          "label": "5",
+          "key": "were"
+        },
+        {
+          "label": "6",
+          "key": "Was"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple questions",
+    "n": 3,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tc \t 2\ta \t 3\tf \t 4\tb \t 5\td \t 6\te\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "c"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "f"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "d"
+        },
+        {
+          "label": "6",
+          "key": "e"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Past simple questions",
+    "n": 4,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tWhat did you do in St Petersburg?\n\t 2\tWhat did you see?\n\t 3\tWas it good?\n\t 4\tWhere was it?\n\t 5\tHow long was the opera?\n\t 6\tDid you sleep?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "What did you do in St Petersburg?"
+        },
+        {
+          "label": "2",
+          "key": "What did you see?"
+        },
+        {
+          "label": "3",
+          "key": "Was it good?"
+        },
+        {
+          "label": "4",
+          "key": "Where was it?"
+        },
+        {
+          "label": "5",
+          "key": "How long was the opera?"
+        },
+        {
+          "label": "6",
+          "key": "Did you sleep?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 164,
+    "raw": "\t 1\tDid you go to the museum?\n\t 2\t✓\n\t 3\tThe hotel didn’t have a nice restaurant.\n\t 4\tThere was a big problem at work last week.\n\t 5\t✓\n\t 6\tWe went to the beach yesterday afternoon.\n\t 7\tWhat did you do yesterday evening?\n\t 8\t✓\n\t 9\tI didn’t see you yesterday. Where were you?\n\t 10\t✓\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Did you go to the museum?"
+        },
+        {
+          "label": "2",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "3",
+          "key": "The hotel didn’t have a nice restaurant."
+        },
+        {
+          "label": "4",
+          "key": "There was a big problem at work last week."
+        },
+        {
+          "label": "5",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "6",
+          "key": "We went to the beach yesterday afternoon."
+        },
+        {
+          "label": "7",
+          "key": "What did you do yesterday evening?"
+        },
+        {
+          "label": "8",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "9",
+          "key": "I didn’t see you yesterday. Where were you?"
+        },
+        {
+          "label": "10",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 164
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 6,
+    "heading": "Pronunciation",
+    "n": 4,
+    "part": "B",
+    "teacherPage": 165,
+    "raw": "\t 1\ta\n\t 2\tb\n\t 3\tb\n\t 4\ta\n\t 5\tb\n\t 6\ta\n\t 7\ta\n\t 8\tb\n\t 9\tb\n\t 10\ta\n\t 11\tb\n\t 12\tb\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        },
+        {
+          "label": "9",
+          "key": "b"
+        },
+        {
+          "label": "10",
+          "key": "a"
+        },
+        {
+          "label": "11",
+          "key": "b"
+        },
+        {
+          "label": "12",
+          "key": "b"
+        }
+      ],
+      "note": "Часть B: отметьте услышанный вариант (a/b). Часть A — прослушивание и повторение.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      }
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Like + -ing",
+    "n": 1,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tcooking\n\t 2\tlistening\n\t 3\tdriving\n\t 4\tplaying\n\t 5\tgoing\n\t 6\ttravelling\n\t 7\twatching\n\t 8\teating\n\t 9\tliving\n\t 10\thaving\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "cooking"
+        },
+        {
+          "label": "2",
+          "key": "listening"
+        },
+        {
+          "label": "3",
+          "key": "driving"
+        },
+        {
+          "label": "4",
+          "key": "playing"
+        },
+        {
+          "label": "5",
+          "key": "going"
+        },
+        {
+          "label": "6",
+          "key": "travelling"
+        },
+        {
+          "label": "7",
+          "key": "watching"
+        },
+        {
+          "label": "8",
+          "key": "eating"
+        },
+        {
+          "label": "9",
+          "key": "living"
+        },
+        {
+          "label": "10",
+          "key": "having"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Like + -ing",
+    "n": 2,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "Short answers may vary.\n\t 1\tA: Do you like cooking?\n  B: Yes. I love it.\n\t 2\tA: Does your husband like cooking?\n  B: Not really.\n\t 3\tA: Do you like swimming\n  B: Not really.\n\t 4\tA: Do you like watching TV?\n  B: Yes, it’s OK.\n\t 5\tA: Does your son like playing football?\n  B: No, he doesn’t.\n\t 6\tA: Do you like reading?\n  B: Yes (I do). I love it. / It’s great.\n\t 7\tA: Do you like driving?\n  B: No (I don’t).\n\t 8\tA: Does your sister like travelling?\n  B: Yeah (a bit).\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1A",
+          "key": "Do you like cooking?"
+        },
+        {
+          "label": "2A",
+          "key": "Does your husband like cooking?"
+        },
+        {
+          "label": "3A",
+          "key": "Do you like swimming?"
+        },
+        {
+          "label": "4A",
+          "key": "Do you like watching TV?"
+        },
+        {
+          "label": "5A",
+          "key": "Does your son like playing football?"
+        },
+        {
+          "label": "6A",
+          "key": "Do you like reading?"
+        },
+        {
+          "label": "7A",
+          "key": "Do you like driving?"
+        },
+        {
+          "label": "8A",
+          "key": "Does your sister like travelling?"
+        },
+        {
+          "label": "1B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "2B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "3B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "4B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "5B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "6B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "7B",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "8B",
+          "soft": true,
+          "self": true
+        }
+      ],
+      "note": "A: напишите вопросы. B: напишите свои короткие ответы и проверьте их по образцу. Свободные ответы не получают автоматический балл.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      }
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Like + -ing",
+    "n": 3,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tDo\n\t 2\tDid\n\t 3\tgoing\n\t 4\tdidn’t\n\t 5\tplaying\n\t 6\tdo; it\n\t 7\tThey\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Do"
+        },
+        {
+          "label": "2",
+          "key": "Did"
+        },
+        {
+          "label": "3",
+          "key": "going"
+        },
+        {
+          "label": "4",
+          "key": "didn’t"
+        },
+        {
+          "label": "5",
+          "key": "playing"
+        },
+        {
+          "label": "6",
+          "key": "do; it"
+        },
+        {
+          "label": "7",
+          "key": "They"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Present continuous (I’m and are you …? )",
+    "n": 1,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tare; ’m\n\t 2\tAre\n\t 3\t’m\n\t 4\t’m; are\n\t 5\tare; ’re; are; am; ’m\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are; ’m"
+        },
+        {
+          "label": "2",
+          "key": "Are"
+        },
+        {
+          "label": "3",
+          "key": "’m"
+        },
+        {
+          "label": "4",
+          "key": "’m; are"
+        },
+        {
+          "label": "5",
+          "key": "are; ’re; are; am; ’m"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Present continuous (I’m and are you …? )",
+    "n": 2,
+    "part": "a",
+    "teacherPage": 165,
+    "raw": "\t 1\tAre you working now?\n\t 2\tWhat are you looking at?\n\t 3\tWhat are you listening to?\n\t 4\tWhat are they doing?\n\t 5\tAre you doing anything now?\n\t 6\tAre you coming with us?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "A1",
+          "key": "Are you working now?"
+        },
+        {
+          "label": "A2",
+          "key": "What are you looking at?"
+        },
+        {
+          "label": "A3",
+          "key": "What are you listening to?"
+        },
+        {
+          "label": "A4",
+          "key": "What are they doing?"
+        },
+        {
+          "label": "A5",
+          "key": "Are you doing anything now?"
+        },
+        {
+          "label": "A6",
+          "key": "Are you coming with us?"
+        },
+        {
+          "label": "B1",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "B2",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "B3",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "B4",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "B5",
+          "soft": true,
+          "self": true
+        },
+        {
+          "label": "B6",
+          "soft": true,
+          "self": true
+        }
+      ],
+      "note": "Часть A: напишите вопросы. Часть B: дайте свои ответы. Свободные ответы проверяются по образцу на странице.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      }
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Present continuous (I’m and are you …? )",
+    "n": 2,
+    "part": "B",
+    "teacherPage": 165,
+    "raw": "Students’ own answers\n",
+    "check": {
+      "mode": "open",
+      "model": "Students’ own answers"
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Present continuous (I’m and are you …? )",
+    "n": 3,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\ta listens  b   are; listening\n\t 2\ta am/’m not reading b   don’t read\n\t 3\ta am/’m working b   works\n\t 4\ta go out  b   Are; going\n\t 5\ta do   b   am/’m doing\n\t6\ta are; eating  b   do; eat\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "listens"
+        },
+        {
+          "label": "1b",
+          "key": "are; listening"
+        },
+        {
+          "label": "2a",
+          "key": "am not reading"
+        },
+        {
+          "label": "2b",
+          "key": "don’t read"
+        },
+        {
+          "label": "3a",
+          "key": "am working"
+        },
+        {
+          "label": "3b",
+          "key": "works"
+        },
+        {
+          "label": "4a",
+          "key": "go out"
+        },
+        {
+          "label": "4b",
+          "key": "Are; going"
+        },
+        {
+          "label": "5a",
+          "key": "do"
+        },
+        {
+          "label": "5b",
+          "key": "am doing"
+        },
+        {
+          "label": "6a",
+          "key": "are; eating"
+        },
+        {
+          "label": "6b",
+          "key": "do; eat"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "this/these, one/ones",
+    "n": 1,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\ta These shoes are very comfortable.\n\t 2\tb What do you think of this/my jacket?\n\t 3\tb The brown coats are OK but I don’t like these ones.\n\t 4\ta This skirt looks good.\n\t 5\tb I like the design on this bag / these bags.\n\t 6\tb This dress is nice, but I prefer the red one.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "These shoes are very comfortable."
+        },
+        {
+          "label": "2",
+          "key": [
+            "What do you think of this jacket?",
+            "What do you think of my jacket?"
+          ]
+        },
+        {
+          "label": "3",
+          "key": "The brown coats are OK but I don’t like these ones."
+        },
+        {
+          "label": "4",
+          "key": "This skirt looks good."
+        },
+        {
+          "label": "5",
+          "key": [
+            "I like the design on this bag.",
+            "I like the design on these bags."
+          ]
+        },
+        {
+          "label": "6",
+          "key": "This dress is nice, but I prefer the red one."
+        }
+      ],
+      "note": "Напишите исправленное предложение целиком — без буквы a/b.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      }
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tdo\n\t 2\tone\n\t 3\tThis\n\t 4\tit\n\t 5\tAre\n\t 6\t’m\n\t 7\tlike\n\t 8\tgoing\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "do"
+        },
+        {
+          "label": "2",
+          "key": "one"
+        },
+        {
+          "label": "3",
+          "key": "This"
+        },
+        {
+          "label": "4",
+          "key": "it"
+        },
+        {
+          "label": "5",
+          "key": "Are"
+        },
+        {
+          "label": "6",
+          "key": "’m"
+        },
+        {
+          "label": "7",
+          "key": "like"
+        },
+        {
+          "label": "8",
+          "key": "going"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Pronunciation",
+    "n": 2,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\ta\n\t 2\ta\n\t 3\tb\n\t 4\ta\n\t 5\ta\n\t 6\ta\n\t 7\tb\n\t 8\tb\n\t 9\ta\n\t 10\ta\n\t 11\ta\n\t 12\tb\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        },
+        {
+          "label": "7",
+          "key": "b"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        },
+        {
+          "label": "9",
+          "key": "a"
+        },
+        {
+          "label": "10",
+          "key": "a"
+        },
+        {
+          "label": "11",
+          "key": "a"
+        },
+        {
+          "label": "12",
+          "key": "b"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 7,
+    "heading": "Pronunciation",
+    "n": 3,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "1\tI like travelling a lot.\n2\tI don’t like listening to music.\n3\tI’m reading a good book at the moment.\n4\tAre you watching anything good at the moment?\n5\tWhat do you think of these shoes?\n6\tI prefer the black ones.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I like travelling a lot."
+        },
+        {
+          "label": "2",
+          "key": "I don’t like listening to music."
+        },
+        {
+          "label": "3",
+          "key": "I’m reading a good book at the moment."
+        },
+        {
+          "label": "4",
+          "key": "Are you watching anything good at the moment?"
+        },
+        {
+          "label": "5",
+          "key": "What do you think of these shoes?"
+        },
+        {
+          "label": "6",
+          "key": "I prefer the black ones."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Present continuous: all forms",
+    "n": 1,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tisn’t\n\t 2\tIs it\n\t 3\tis teaching\n\t 4\tis taking\n\t 5\tSue’s not\n\t 6\tis he doing\n\t 7\tHe’s not working\n\t 8\tis she driving\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "isn’t"
+        },
+        {
+          "label": "2",
+          "key": "Is it"
+        },
+        {
+          "label": "3",
+          "key": "is teaching"
+        },
+        {
+          "label": "4",
+          "key": "is taking"
+        },
+        {
+          "label": "5",
+          "key": "Sue’s not"
+        },
+        {
+          "label": "6",
+          "key": "is he doing"
+        },
+        {
+          "label": "7",
+          "key": "He’s not working"
+        },
+        {
+          "label": "8",
+          "key": "is she driving"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Present continuous: all forms",
+    "n": 2,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\ta rains b  is/’s raining\n\t 2\ta is/’s working b  works\n\t3\ta is/’s doing b  does\n\t 4\ta meet b  am/’m meeting\n\t 5\ta travels b  are/’re travelling\n\t 6\ta is/’s staying b  stays\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "rains"
+        },
+        {
+          "label": "1b",
+          "key": "is raining"
+        },
+        {
+          "label": "2a",
+          "key": "is working"
+        },
+        {
+          "label": "2b",
+          "key": "works"
+        },
+        {
+          "label": "3a",
+          "key": "is doing"
+        },
+        {
+          "label": "3b",
+          "key": "does"
+        },
+        {
+          "label": "4a",
+          "key": "meet"
+        },
+        {
+          "label": "4b",
+          "key": "am meeting"
+        },
+        {
+          "label": "5a",
+          "key": "travels"
+        },
+        {
+          "label": "5b",
+          "key": "are travelling"
+        },
+        {
+          "label": "6a",
+          "key": "is staying"
+        },
+        {
+          "label": "6b",
+          "key": "stays"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Present continuous: all forms",
+    "n": 3,
+    "part": "",
+    "teacherPage": 165,
+    "raw": "\t 1\tYes, it is.\n\t 2\tNo, he’s not.\n\t 3\tYes, she is.\n\t 4\tYes, he is.\n\t 5\tNo, she’s not (she is not / \nshe isn’t).\n\t 6\tYes, it is.\n\t 7\tNo, I’m not (am not).\n\t 8\tYes, it is. \n\t 9\tYes, I am.\n\t 10\tNo, it’s not (it is not / \nit isn’t).\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Yes, it is."
+        },
+        {
+          "label": "2",
+          "key": "No, he’s not."
+        },
+        {
+          "label": "3",
+          "key": "Yes, she is."
+        },
+        {
+          "label": "4",
+          "key": "Yes, he is."
+        },
+        {
+          "label": "5",
+          "key": "No, she’s not (she is not / she isn’t)."
+        },
+        {
+          "label": "6",
+          "key": "Yes, it is."
+        },
+        {
+          "label": "7",
+          "key": "No, I’m not (am not)."
+        },
+        {
+          "label": "8",
+          "key": "Yes, it is."
+        },
+        {
+          "label": "9",
+          "key": "Yes, I am."
+        },
+        {
+          "label": "10",
+          "key": "No, it’s not (it is not / it isn’t)."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 165
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Personal pronouns",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\ta \t 2\ta \t 3\tb \t 4\tb \t 5\ta \t 6\tb \t 7\tb \t 8\tb\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "a"
+        },
+        {
+          "label": "3",
+          "key": "b"
+        },
+        {
+          "label": "4",
+          "key": "b"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "b"
+        },
+        {
+          "label": "7",
+          "key": "b"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Personal pronouns",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tIt\n\t 2\tHe\n\t 3\tme\n\t 4\tit\n\t 5\tThey\n\t 6\tus\n\t 7\tWe\n\t 8\tthem\n\t 9\thim; her\n\t 10\tWe; She\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "It"
+        },
+        {
+          "label": "2",
+          "key": "He"
+        },
+        {
+          "label": "3",
+          "key": "me"
+        },
+        {
+          "label": "4",
+          "key": "it"
+        },
+        {
+          "label": "5",
+          "key": "They"
+        },
+        {
+          "label": "6",
+          "key": "us"
+        },
+        {
+          "label": "7",
+          "key": "We"
+        },
+        {
+          "label": "8",
+          "key": "them"
+        },
+        {
+          "label": "9",
+          "key": "him; her"
+        },
+        {
+          "label": "10",
+          "key": "We; She"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tIs your sister working now?\n\t 2\t✓\n\t 3\tWhat is she doing in Russia?\n\t 4\t✓\n\t 5\tHow much did they cost?\n\t 6\tShe’s staying in the Hilton Hotel.\n\t 7\tWho’s Anna talking to?\n\t 8\t✓\n\t 9\tHe’s not / He isn’t / He is not working at the moment.\n\t 10\t✓\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is your sister working now?"
+        },
+        {
+          "label": "2",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "3",
+          "key": "What is she doing in Russia?"
+        },
+        {
+          "label": "4",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "5",
+          "key": "How much did they cost?"
+        },
+        {
+          "label": "6",
+          "key": "She’s staying in the Hilton Hotel."
+        },
+        {
+          "label": "7",
+          "key": "Who’s Anna talking to?"
+        },
+        {
+          "label": "8",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "9",
+          "key": "He’s not / He isn’t / He is not working at the moment."
+        },
+        {
+          "label": "10",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 8,
+    "heading": "Pronunciation",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tShe’s cooking something\n\t 2\tHe’s studying\n\t 3\tAre you feeling\n\t 4\tHe’s playing\n\t 5\twith them; take you\n\t 6\t’s watching\n\t 7\t’s she doing, Is she\n\t 8\tto her, listen to me\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "She’s cooking something"
+        },
+        {
+          "label": "2",
+          "key": "He’s studying"
+        },
+        {
+          "label": "3",
+          "key": "Are you feeling"
+        },
+        {
+          "label": "4",
+          "key": "He’s playing"
+        },
+        {
+          "label": "5",
+          "key": "with them; take you"
+        },
+        {
+          "label": "6",
+          "key": "’s watching"
+        },
+        {
+          "label": "7",
+          "key": "’s she doing; Is she"
+        },
+        {
+          "label": "8",
+          "key": "to her; listen to me"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Time phrases for the past",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tthis\n\t 2\tago\n\t 3\ta\n\t 4\tlast\n\t 5\tfew\n\t 6\tthis\n\t 7\tminutes\n\t 8\ton\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "this"
+        },
+        {
+          "label": "2",
+          "key": "ago"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "last"
+        },
+        {
+          "label": "5",
+          "key": "few"
+        },
+        {
+          "label": "6",
+          "key": "this"
+        },
+        {
+          "label": "7",
+          "key": "minutes"
+        },
+        {
+          "label": "8",
+          "key": "on"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Time phrases for the past",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\td \t 2\tb \t 3\tf \t 4\tc \t 5\tg \t 6\th \t 7\ta \t 8\te\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "d"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "f"
+        },
+        {
+          "label": "4",
+          "key": "c"
+        },
+        {
+          "label": "5",
+          "key": "g"
+        },
+        {
+          "label": "6",
+          "key": "h"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        },
+        {
+          "label": "8",
+          "key": "e"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Quantity",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tThere are lots of …\n\t 2\tThere’s quite a lot of …\n\t 3\tThere are no …\n\t 4\tThere’s some …\n\t 5\tThere are lots of …\n\t 6\tThere’s almost no …\n\t 7\tThere’s some …\n\t 8\tThere are almost no …\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "There are lots of good restaurants in my town."
+        },
+        {
+          "label": "2",
+          "key": "There’s quite a lot of good seafood in this area."
+        },
+        {
+          "label": "3",
+          "key": "There are no women in government."
+        },
+        {
+          "label": "4",
+          "key": "There’s some beautiful countryside."
+        },
+        {
+          "label": "5",
+          "key": "There are lots of problems with the health system."
+        },
+        {
+          "label": "6",
+          "key": "There’s almost no rain in the summer."
+        },
+        {
+          "label": "7",
+          "key": "There’s some crime in the small towns, but not a lot."
+        },
+        {
+          "label": "8",
+          "key": "There are almost no museums in my city."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Quantity",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tare\n\t 2\tteachers\n\t 3\tare; women\n\t 4\twater\n\t 5\taren’t\n\t 6\tmeat\n\t 7\ttime\n\t 8\teducation\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are"
+        },
+        {
+          "label": "2",
+          "key": "teachers"
+        },
+        {
+          "label": "3",
+          "key": "are; women"
+        },
+        {
+          "label": "4",
+          "key": "water"
+        },
+        {
+          "label": "5",
+          "key": "aren’t"
+        },
+        {
+          "label": "6",
+          "key": "meat"
+        },
+        {
+          "label": "7",
+          "key": "time"
+        },
+        {
+          "label": "8",
+          "key": "education"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Quantity",
+    "n": 3,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tDo you have a lot of universities?\n\t 2\tThere isn’t a lot of rain most of the time.\n\t 3\tAre there a lot of police on the streets?\n\t 4\tWe don’t have a lot of football teams in my city.\n\t 5\tIs there a lot of crime?\n\t 6\tThere aren’t a lot of guns here.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Do you have a lot of universities?"
+        },
+        {
+          "label": "2",
+          "key": "There isn’t a lot of rain most of the time."
+        },
+        {
+          "label": "3",
+          "key": "Are there a lot of police on the streets?"
+        },
+        {
+          "label": "4",
+          "key": "We don’t have a lot of football teams in my city."
+        },
+        {
+          "label": "5",
+          "key": "Is there a lot of crime?"
+        },
+        {
+          "label": "6",
+          "key": "There aren’t a lot of guns here."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tThey went\n\t 2\tShe’s going to take\n\t 3\tI went\n\t 4\tWe’re going to visit\n\t 5\tHe plays\n\t 6\tI’m watching\n\t 7\tShe goes\n\t 8\tHe cooked\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "They went"
+        },
+        {
+          "label": "2",
+          "key": "She’s going to take"
+        },
+        {
+          "label": "3",
+          "key": "I went"
+        },
+        {
+          "label": "4",
+          "key": "We’re going to visit"
+        },
+        {
+          "label": "5",
+          "key": "He plays"
+        },
+        {
+          "label": "6",
+          "key": "I’m watching"
+        },
+        {
+          "label": "7",
+          "key": "She goes"
+        },
+        {
+          "label": "8",
+          "key": "He cooked"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Revision",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\t✓\n\t 2\tI cut my hand on Monday.\n\t 3\tThere are lots of beautiful mountains near here.\n\t 4\tThere are lots of / There are a lot of / There are quite a \nlot of problems here at the moment.\n\t 5\t✓\n\t 6\tShe broke her arm three weeks ago.\n\t 7\t✓\n\t 8\tWe have almost no snow.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "2",
+          "key": "I cut my hand on Monday."
+        },
+        {
+          "label": "3",
+          "key": "There are lots of beautiful mountains near here."
+        },
+        {
+          "label": "4",
+          "key": "There are lots of / There are a lot of / There are quite a lot of problems here at the moment."
+        },
+        {
+          "label": "5",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "6",
+          "key": "She broke her arm three weeks ago."
+        },
+        {
+          "label": "7",
+          "key": "✓",
+          "accept": [
+            "correct",
+            "right",
+            "true"
+          ],
+          "options": null
+        },
+        {
+          "label": "8",
+          "key": "We have almost no snow."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Pronunciation",
+    "n": 3,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tlast month\n\t 2\tthree years ago\n\t 3\ton Thursday\n\t 4\tforty years ago\n\t 5\ta few days ago\n\t 6\tthis morning\n\t 7\tthis afternoon\n\t 8\tlast night\n\t 9\tnine or ten years ago\n\t 10\tfour or five years ago\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "last month"
+        },
+        {
+          "label": "2",
+          "key": "three years ago"
+        },
+        {
+          "label": "3",
+          "key": "on Thursday"
+        },
+        {
+          "label": "4",
+          "key": "forty years ago"
+        },
+        {
+          "label": "5",
+          "key": "a few days ago"
+        },
+        {
+          "label": "6",
+          "key": "this morning"
+        },
+        {
+          "label": "7",
+          "key": "this afternoon"
+        },
+        {
+          "label": "8",
+          "key": "last night"
+        },
+        {
+          "label": "9",
+          "key": "nine or ten years ago"
+        },
+        {
+          "label": "10",
+          "key": "four or five years ago"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 9,
+    "heading": "Pronunciation",
+    "n": 5,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\t’s almost no\n\t 2\thave no\n\t 3\tThere are some\n\t 4\t’s a lot of\n\t 5\tare quite a lot of\n\t 6\tThere are lots of\n\t 7\tThere’s almost no\n\t 8\tThere’s no\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "’s almost no"
+        },
+        {
+          "label": "2",
+          "key": "have no"
+        },
+        {
+          "label": "3",
+          "key": "There are some"
+        },
+        {
+          "label": "4",
+          "key": "’s a lot of"
+        },
+        {
+          "label": "5",
+          "key": "are quite a lot of"
+        },
+        {
+          "label": "6",
+          "key": "There are lots of"
+        },
+        {
+          "label": "7",
+          "key": "There’s almost no"
+        },
+        {
+          "label": "8",
+          "key": "There’s no"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Future: am/are/is going",
+    "n": 1,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tAre\n\t 2\t’s/is\n\t 3\t’re/are\n\t 4\t’m/am\n\t 5\t’re/are\n\t 6\tIs\n\t 7\tare\n\t 8\t’m/am\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Are"
+        },
+        {
+          "label": "2",
+          "key": "’s/is"
+        },
+        {
+          "label": "3",
+          "key": "’re/are"
+        },
+        {
+          "label": "4",
+          "key": "’m/am"
+        },
+        {
+          "label": "5",
+          "key": "’re/are"
+        },
+        {
+          "label": "6",
+          "key": "Is"
+        },
+        {
+          "label": "7",
+          "key": "are"
+        },
+        {
+          "label": "8",
+          "key": "’m/am"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Future: am/are/is going",
+    "n": 2,
+    "part": "",
+    "teacherPage": 166,
+    "raw": "\t 1\tYou’re not / You are not / You aren’t going to lose \nyour job.\n\t 2\tI’m / I am not going to travel a lot this summer.\n\t 3\tAre you going to Japan?\n\t 4\tThey’re not / They are not / They aren’t going to \ndrive there.\n\t 5\tAre they going to university next year?\n\t 6\tAre we going to meet Anya tonight?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "You are not going to lose your job."
+        },
+        {
+          "label": "2",
+          "key": "I am not going to travel a lot this summer."
+        },
+        {
+          "label": "3",
+          "key": "Are you going to Japan?"
+        },
+        {
+          "label": "4",
+          "key": "They are not going to drive there."
+        },
+        {
+          "label": "5",
+          "key": "Are they going to university next year?"
+        },
+        {
+          "label": "6",
+          "key": "Are we going to meet Anya tonight?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 166
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Future: am/are/is going",
+    "n": 3,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tI’m going (to go) to bed early tonight.\n\t 2\tI’m not going to have (any) time this weekend.\n\t 3\tWhat are you going to wear to the party tonight?\n\t 4\tThey’re going to get married in June.\n\t 5\tWe’re going to travel there by train.\n\t 6\tWhere are you going to eat tonight?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "I’m going to bed early tonight.",
+            "I’m going to go to bed early tonight."
+          ]
+        },
+        {
+          "label": "2",
+          "key": [
+            "I’m not going to have time this weekend.",
+            "I’m not going to have any time this weekend."
+          ]
+        },
+        {
+          "label": "3",
+          "key": "What are you going to wear to the party tonight?"
+        },
+        {
+          "label": "4",
+          "key": "They’re going to get married in June."
+        },
+        {
+          "label": "5",
+          "key": "We’re going to travel there by train."
+        },
+        {
+          "label": "6",
+          "key": "Where are you going to eat tonight?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Future: am/are/is going",
+    "n": 4,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tc \t 2\tb \t 3\tf \t 4\td \t 5\te \t 6\ta\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "c"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "f"
+        },
+        {
+          "label": "4",
+          "key": "d"
+        },
+        {
+          "label": "5",
+          "key": "e"
+        },
+        {
+          "label": "6",
+          "key": "a"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Past forms review",
+    "n": 1,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\thad\n\t 2\twent\n\t 3\tspent\n\t 4\tstayed\n\t 5\twas\n\t 6\thelped\n\t 7\ttook\n\t 8\tmet\n\t 9\ttalked\n\t 10\ttried\n\t 11\tsaid\n\t 12\tcame\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "had"
+        },
+        {
+          "label": "2",
+          "key": "went"
+        },
+        {
+          "label": "3",
+          "key": "spent"
+        },
+        {
+          "label": "4",
+          "key": "stayed"
+        },
+        {
+          "label": "5",
+          "key": "was"
+        },
+        {
+          "label": "6",
+          "key": "helped"
+        },
+        {
+          "label": "7",
+          "key": "took"
+        },
+        {
+          "label": "8",
+          "key": "met"
+        },
+        {
+          "label": "9",
+          "key": "talked"
+        },
+        {
+          "label": "10",
+          "key": "tried"
+        },
+        {
+          "label": "11",
+          "key": "said"
+        },
+        {
+          "label": "12",
+          "key": "came"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Past forms review",
+    "n": 2,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tIt cost a lot.\n\t 2\tIt took a long time.\n\t 3\tYou tried very hard.\n\t 4\tWe spent a lot of money.\n\t 5\tWe won.\n\t 6\tI met her.\n\t 7\tHe came to class yesterday.\n\t 8\tThey were very happy about it.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "It cost a lot."
+        },
+        {
+          "label": "2",
+          "key": "It took a long time."
+        },
+        {
+          "label": "3",
+          "key": "You tried very hard."
+        },
+        {
+          "label": "4",
+          "key": "We spent a lot of money."
+        },
+        {
+          "label": "5",
+          "key": "We won."
+        },
+        {
+          "label": "6",
+          "key": "I met her."
+        },
+        {
+          "label": "7",
+          "key": "He came to class yesterday."
+        },
+        {
+          "label": "8",
+          "key": "They were very happy about it."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Past forms review",
+    "n": 3,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\topened\n\t 2\tdidn’t sleep\n\t 3\twon\n\t 4\tdid; start\n\t 5\tDid; like\n\t 6\tDid; see\n\t 7\tdied; had\n\t 8\twas; didn’t rain\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "opened"
+        },
+        {
+          "label": "2",
+          "key": "didn’t sleep"
+        },
+        {
+          "label": "3",
+          "key": "won"
+        },
+        {
+          "label": "4",
+          "key": "did; start"
+        },
+        {
+          "label": "5",
+          "key": "Did; like"
+        },
+        {
+          "label": "6",
+          "key": "Did; see"
+        },
+        {
+          "label": "7",
+          "key": "died; had"
+        },
+        {
+          "label": "8",
+          "key": "was; didn’t rain"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Past forms review",
+    "n": 4,
+    "part": "",
+    "teacherPage": 167,
+    "raw": " A: You weren’t in class last week. What happened?\n B: Oh. Sorry. I had a cold and I didn’t feel very well. \nI stayed in bed for three days.\n A: Oh no! I’m sorry.\n B: It’s OK. I’m better now.\n A: We weren’t very busy. It wasn’t a very good class. We \ndidn’t do a lot of work.\n B: No?\n A: No. The teacher wasn’t very well. She said she was \ntired.\n B: Maybe we had the same cold.\n A: Maybe.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "You weren’t in class last week."
+        },
+        {
+          "label": "2",
+          "key": "I had a cold and I didn’t feel very well."
+        },
+        {
+          "label": "3",
+          "key": "We weren’t very busy."
+        },
+        {
+          "label": "4",
+          "key": "It wasn’t a very good class."
+        },
+        {
+          "label": "5",
+          "key": "We didn’t do a lot of work."
+        },
+        {
+          "label": "6",
+          "key": "The teacher wasn’t very well."
+        }
+      ],
+      "note": "Введите только шесть изменённых предложений, по порядку сверху вниз. Остальной диалог переписывать не нужно.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      }
+    }
+  },
+  {
+    "unit": 10,
+    "heading": "Pronunciation",
+    "n": 1,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\ta\n\t 2\tb\n\t 3\ta\n\t 4\ta\n\t 5\ta\n\t 6\tb\n\t 7\ta\n\t 8\tb\n\t 9\ta\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a"
+        },
+        {
+          "label": "2",
+          "key": "b"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "a"
+        },
+        {
+          "label": "6",
+          "key": "b"
+        },
+        {
+          "label": "7",
+          "key": "a"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        },
+        {
+          "label": "9",
+          "key": "a"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Questions review",
+    "n": 1,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tare; Do\n\t 2\tCan; Is\n\t 3\tDid; was\n\t 4\tCan; is\n\t 5\tIs; Does\n\t 6\tAre; Are; Can\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "are; Do"
+        },
+        {
+          "label": "2",
+          "key": "Can; Is"
+        },
+        {
+          "label": "3",
+          "key": "Did; was"
+        },
+        {
+          "label": "4",
+          "key": "Can; is"
+        },
+        {
+          "label": "5",
+          "key": "Is; Does"
+        },
+        {
+          "label": "6",
+          "key": "Are; Are; Can"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Questions review",
+    "n": 2,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tA: What did you do yesterday after the class.\n\t 2\tA: Do you like playing computer games.\n\t 3\tB: No. What are you going to see there?\n\t 4\tA: c an I speak to you?\n  B: Sure. What is the problem?\n\t 5\tB: What does she do?\n\t 6\tB: was it good? w ere there many people there?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1A",
+          "key": "What did you do yesterday after the class?"
+        },
+        {
+          "label": "2A",
+          "key": "Do you like playing computer games?"
+        },
+        {
+          "label": "3B",
+          "key": "What are you going to see there?"
+        },
+        {
+          "label": "4A",
+          "key": "Can I speak to you?"
+        },
+        {
+          "label": "4B",
+          "key": "What is the problem?"
+        },
+        {
+          "label": "5B",
+          "key": "What does she do?"
+        },
+        {
+          "label": "6B (первый вопрос)",
+          "key": "Was it good?"
+        },
+        {
+          "label": "6B (второй вопрос)",
+          "key": "Were there many people there?"
+        }
+      ],
+      "note": "Введите только исправленные вопросы.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      }
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Questions review",
+    "n": 3,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tDid you go out last night?\n\t 2\tWhere do you live?\n\t 3\tDo you like swimming?\n\t 4\tCan you to turn on the light?\n\t 5\tWhere does your friend Paola work?\n\t 6\tc an you move, please?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Did you go out last night?"
+        },
+        {
+          "label": "2",
+          "key": "Where do you live?"
+        },
+        {
+          "label": "3",
+          "key": "Do you like swimming?"
+        },
+        {
+          "label": "4",
+          "key": "Can you to turn on the light?"
+        },
+        {
+          "label": "5",
+          "key": "Where does your friend Paola work?"
+        },
+        {
+          "label": "6",
+          "key": "c an you move, please?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Explaining when: time phrases",
+    "n": 1,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tin 1932\n\t 2\tafter/when he left the army\n\t 3\twhen she was 20\n\t 4\tin the 2000s\n\t 5\twhen we were both at school\n\t 6\tthree years ago / after three years\n\t 7\tafter (the) class\n\t 8\twhen we say goodbye\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "in 1932"
+        },
+        {
+          "label": "2",
+          "key": [
+            "after he left the army",
+            "when he left the army"
+          ]
+        },
+        {
+          "label": "3",
+          "key": "when she was 20"
+        },
+        {
+          "label": "4",
+          "key": "in the 2000s"
+        },
+        {
+          "label": "5",
+          "key": "when we were both at school"
+        },
+        {
+          "label": "6",
+          "key": "three years ago / after three years"
+        },
+        {
+          "label": "7",
+          "key": [
+            "after class",
+            "after the class"
+          ]
+        },
+        {
+          "label": "8",
+          "key": "when we say goodbye"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Explaining when: time phrases",
+    "n": 2,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tin\n\t 2\tAfter\n\t 3\tIn\n\t 4\tWhen (also possible: While)\n\t 5\tafter\n\t 6\tAfter/When\n\t 7\tin\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "in"
+        },
+        {
+          "label": "2",
+          "key": "After"
+        },
+        {
+          "label": "3",
+          "key": "In"
+        },
+        {
+          "label": "4",
+          "key": [
+            "When",
+            "While"
+          ]
+        },
+        {
+          "label": "5",
+          "key": "after"
+        },
+        {
+          "label": "6",
+          "key": "After/When"
+        },
+        {
+          "label": "7",
+          "key": "in"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Explaining why: because and so",
+    "n": 1,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\t, so\n\t 2\t, so\n\t 3\tbecause\n\t 4\tbecause\n\t 5\t, so\n\t 6\t, so\n\t 7\tbecause\n\t 8\tbecause\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": ", so"
+        },
+        {
+          "label": "2",
+          "key": ", so"
+        },
+        {
+          "label": "3",
+          "key": "because"
+        },
+        {
+          "label": "4",
+          "key": "because"
+        },
+        {
+          "label": "5",
+          "key": ", so"
+        },
+        {
+          "label": "6",
+          "key": ", so"
+        },
+        {
+          "label": "7",
+          "key": "because"
+        },
+        {
+          "label": "8",
+          "key": "because"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Explaining why: because and so",
+    "n": 2,
+    "part": "",
+    "teacherPage": 167,
+    "raw": "\t 1\tf\n\t 2\td\n\t 3\t a\n\t 4\t e\n\t 5\t g\n\t 6\t c\n\t 7\t h\n\t 8\t b\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "f"
+        },
+        {
+          "label": "2",
+          "key": "d"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "e"
+        },
+        {
+          "label": "5",
+          "key": "g"
+        },
+        {
+          "label": "6",
+          "key": "c"
+        },
+        {
+          "label": "7",
+          "key": "h"
+        },
+        {
+          "label": "8",
+          "key": "b"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 167
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tdid; so\n\t 2\tdid; in\n\t 3\tdid; Because\n\t 4\tare; After\n\t 5\tIs; when\n\t 6\tare; so\n\t 7\tCan; after\n\t 8\twhen; did\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "did; so"
+        },
+        {
+          "label": "2",
+          "key": "did; in"
+        },
+        {
+          "label": "3",
+          "key": "did; Because"
+        },
+        {
+          "label": "4",
+          "key": "are; After"
+        },
+        {
+          "label": "5",
+          "key": "Is; when"
+        },
+        {
+          "label": "6",
+          "key": "are; so"
+        },
+        {
+          "label": "7",
+          "key": "Can; after"
+        },
+        {
+          "label": "8",
+          "key": "when; did"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 11,
+    "heading": "Pronunciation",
+    "n": 3,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tCan you help me in a minute?\n\t 2\tIt was lovely weather when I was there.\n\t 3\tIt happened after I left her.\n\t 4\tI can have the car when I need it.\n\t 5\tI’m going there in a few weeks.\n\t 6\tI get angry when I’m tired.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Can you help me in a minute?"
+        },
+        {
+          "label": "2",
+          "key": "It was lovely weather when I was there."
+        },
+        {
+          "label": "3",
+          "key": "It happened after I left her."
+        },
+        {
+          "label": "4",
+          "key": "I can have the car when I need it."
+        },
+        {
+          "label": "5",
+          "key": "I’m going there in a few weeks."
+        },
+        {
+          "label": "6",
+          "key": "I get angry when I’m tired."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "I’ll",
+    "n": 1,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tI’ll stand.\n\t 2\tI’ll take\n\t 3\tI’ll pay.\n\t 4\tI’ll stay\n\t 5\tI’ll lend\n\t 6\tI’ll go and look for\n\t 7\tI’ll make\n\t 8\tI’ll wash\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I’ll stand."
+        },
+        {
+          "label": "2",
+          "key": "I’ll take"
+        },
+        {
+          "label": "3",
+          "key": "I’ll pay."
+        },
+        {
+          "label": "4",
+          "key": "I’ll stay"
+        },
+        {
+          "label": "5",
+          "key": "I’ll lend"
+        },
+        {
+          "label": "6",
+          "key": "I’ll go and look for"
+        },
+        {
+          "label": "7",
+          "key": "I’ll make"
+        },
+        {
+          "label": "8",
+          "key": "I’ll wash"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "I’ll",
+    "n": 2,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tB: It’s OK. i’ll walk. It’s only fifteen minutes.\n\t 2\tA: I’ll meet you at the restaurant at nine.\n\t 3\tA: It’s OK. I’ll clean everything.\n\t 4\tA: Yeah. i’ll bring you some, if you like.\n\t 5\tB: It’s OK. i’ll buy it.\n\t 6\tB: i’ll go and get some now.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "It’s OK. I’ll walk. It’s only fifteen minutes."
+        },
+        {
+          "label": "2",
+          "key": "I’ll meet you at the restaurant at nine."
+        },
+        {
+          "label": "3",
+          "key": "It’s OK. I’ll clean everything."
+        },
+        {
+          "label": "4",
+          "key": "Yeah. I’ll bring you some, if you like."
+        },
+        {
+          "label": "5",
+          "key": "It’s OK. I’ll buy it."
+        },
+        {
+          "label": "6",
+          "key": "I’ll go and get some now."
+        }
+      ],
+      "note": "Напишите исправленную реплику целиком — без буквы A/B.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      }
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Explaining purpose: for or to",
+    "n": 1,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "i’m here for … i ’m here to …\nan appointment check out\nSylvia’s birthday party collect a computer \nthe conference help you\nwork and pleasure meet Mr Hassan\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "I’m here for …",
+          "key": "an appointment,Sylvia’s birthday party,the conference,work and pleasure",
+          "match": "set"
+        },
+        {
+          "label": "I’m here to …",
+          "key": "check out,collect a computer,help you,meet Mr Hassan",
+          "match": "set"
+        }
+      ],
+      "note": "Распределите фразы по двум группам. Разделяйте фразы запятыми; порядок внутри группы не важен.",
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      }
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Explaining purpose: for or to",
+    "n": 2,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tto get some money.\n\t 2\tfor dinner.\n\t 3\tfor our anniversary.\n\t 4\tto say thanks.\n\t 5\tto buy desks.\n\t 6\tfor schools.\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "to get some money."
+        },
+        {
+          "label": "2",
+          "key": "for dinner."
+        },
+        {
+          "label": "3",
+          "key": "for our anniversary."
+        },
+        {
+          "label": "4",
+          "key": "to say thanks."
+        },
+        {
+          "label": "5",
+          "key": "to buy desks."
+        },
+        {
+          "label": "6",
+          "key": "for schools."
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Explaining purpose: for or to",
+    "n": 3,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tDo we need anything to make dinner?\n\t 2\tDo you have anything for headaches?\n\t 3\tDo you need anyone to help you?\n\t 4\tDo you know anywhere nice for a picnic?\n\t 5\tAre there any nice places for children?\n\t 6\tWho’s the best person to ask?\n\t 7\tWhat are you getting her for her birthday?\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Do we need anything to make dinner?"
+        },
+        {
+          "label": "2",
+          "key": "Do you have anything for headaches?"
+        },
+        {
+          "label": "3",
+          "key": "Do you need anyone to help you?"
+        },
+        {
+          "label": "4",
+          "key": "Do you know anywhere nice for a picnic?"
+        },
+        {
+          "label": "5",
+          "key": "Are there any nice places for children?"
+        },
+        {
+          "label": "6",
+          "key": "Who’s the best person to ask?"
+        },
+        {
+          "label": "7",
+          "key": "What are you getting her for her birthday?"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Telling people to do things: imperatives",
+    "n": 1,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tDon’t be\n\t 2\tTell\n\t 3\tDon’t forget\n\t 4\tHave\n\t 5\tSend\n\t 6\tHave\n\t 7\tBe\n\t 8\tDon’t hurry\n\t 9\tWait\n\t 10\tDon’t say\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Don’t be"
+        },
+        {
+          "label": "2",
+          "key": "Tell"
+        },
+        {
+          "label": "3",
+          "key": "Don’t forget"
+        },
+        {
+          "label": "4",
+          "key": "Have"
+        },
+        {
+          "label": "5",
+          "key": "Send"
+        },
+        {
+          "label": "6",
+          "key": "Have"
+        },
+        {
+          "label": "7",
+          "key": "Be"
+        },
+        {
+          "label": "8",
+          "key": "Don’t hurry"
+        },
+        {
+          "label": "9",
+          "key": "Wait"
+        },
+        {
+          "label": "10",
+          "key": "Don’t say"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Telling people to do things: imperatives",
+    "n": 2,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\twon’t\n\t 2\twill\n\t 3\twill\n\t 4\twon’t\n\t 5\twill\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "won’t"
+        },
+        {
+          "label": "2",
+          "key": "will"
+        },
+        {
+          "label": "3",
+          "key": "will"
+        },
+        {
+          "label": "4",
+          "key": "won’t"
+        },
+        {
+          "label": "5",
+          "key": "will"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Revision",
+    "n": 1,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tfor\n\t 2\tto\n\t 3\tI’ll\n\t 4\tbe\n\t 5\tDon’t\n\t 6\tfor\n\t 7\tDon’t\n\t 8\twon’t\n\t 9\tHave\n\t 10\tI’ll\n\t 11\tSay\n\t 12\twill\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "for"
+        },
+        {
+          "label": "2",
+          "key": "to"
+        },
+        {
+          "label": "3",
+          "key": "I’ll"
+        },
+        {
+          "label": "4",
+          "key": "be"
+        },
+        {
+          "label": "5",
+          "key": "Don’t"
+        },
+        {
+          "label": "6",
+          "key": "for"
+        },
+        {
+          "label": "7",
+          "key": "Don’t"
+        },
+        {
+          "label": "8",
+          "key": "won’t"
+        },
+        {
+          "label": "9",
+          "key": "Have"
+        },
+        {
+          "label": "10",
+          "key": "I’ll"
+        },
+        {
+          "label": "11",
+          "key": "Say"
+        },
+        {
+          "label": "12",
+          "key": "will"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  },
+  {
+    "unit": 12,
+    "heading": "Pronunciation",
+    "n": 3,
+    "part": "",
+    "teacherPage": 168,
+    "raw": "\t 1\tDon’t forget to\n\t 2\tI’ll go and get something\n\t 3\tI’ll send someone to\n\t 4\tI can’t go now, but\n\t 5\tDo you know a good place\n\t 6\tI don’t want to have fish\n",
+    "check": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Don’t forget to"
+        },
+        {
+          "label": "2",
+          "key": "I’ll go and get something"
+        },
+        {
+          "label": "3",
+          "key": "I’ll send someone to"
+        },
+        {
+          "label": "4",
+          "key": "I can’t go now, but"
+        },
+        {
+          "label": "5",
+          "key": "Do you know a good place"
+        },
+        {
+          "label": "6",
+          "key": "I don’t want to have fish"
+        }
+      ],
+      "source": {
+        "book": "Teacher’s Book · Grammar reference",
+        "page": 168
+      },
+      "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+    }
+  }
+]

@@ -1,0 +1,874 @@
+[
+  {
+    "book": "wb",
+    "page": 62,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "be",
+          "key": "was"
+        },
+        {
+          "label": "decide",
+          "key": "decided"
+        },
+        {
+          "label": "finish",
+          "key": "finished"
+        },
+        {
+          "label": "get",
+          "key": "got"
+        },
+        {
+          "label": "happen",
+          "key": "happened"
+        },
+        {
+          "label": "lose",
+          "key": "lost"
+        },
+        {
+          "label": "open",
+          "key": "opened"
+        },
+        {
+          "label": "stop",
+          "key": "stopped"
+        },
+        {
+          "label": "take",
+          "key": "took"
+        },
+        {
+          "label": "win",
+          "key": "won"
+        }
+      ]
+    }
+  },
+  {
+    "book": "wb",
+    "page": 62,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "be",
+          "key": "Ir"
+        },
+        {
+          "label": "decide",
+          "key": "R"
+        },
+        {
+          "label": "finish",
+          "key": "R"
+        },
+        {
+          "label": "get",
+          "key": "Ir"
+        },
+        {
+          "label": "happen",
+          "key": "R"
+        },
+        {
+          "label": "lose",
+          "key": "Ir"
+        },
+        {
+          "label": "open",
+          "key": "R"
+        },
+        {
+          "label": "stop",
+          "key": "R"
+        },
+        {
+          "label": "take",
+          "key": "Ir"
+        },
+        {
+          "label": "win",
+          "key": "Ir"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 10,
+    "n": 5,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "10; 12; 14; 16"
+        },
+        {
+          "label": "2",
+          "key": "4; 8; 12; 16"
+        },
+        {
+          "label": "3",
+          "key": "7; 11; 13; 17"
+        },
+        {
+          "label": "4",
+          "key": "1; 3; 6; 10"
+        }
+      ],
+      "note": "Впишите услышанные числа в каждой строке по порядку."
+    }
+  },
+  {
+    "book": "sb",
+    "page": 21,
+    "n": 14,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Where do you live?",
+          "key": "4"
+        },
+        {
+          "label": "They have a nice house.",
+          "key": "10"
+        },
+        {
+          "label": "I don’t know it.",
+          "key": "7"
+        },
+        {
+          "label": "It’s in the north.",
+          "key": "2"
+        },
+        {
+          "label": "I don’t live near here.",
+          "key": "6"
+        },
+        {
+          "label": "He’s a student at university.",
+          "key": "9"
+        },
+        {
+          "label": "I like it here.",
+          "key": "5"
+        },
+        {
+          "label": "I don’t like it.",
+          "key": "8"
+        },
+        {
+          "label": "It’s a nice area.",
+          "key": "1"
+        },
+        {
+          "label": "She’s a teacher in a language school.",
+          "key": "3"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 21,
+    "n": 15,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Where do you live?",
+          "key": "4"
+        },
+        {
+          "label": "They have a nice house.",
+          "key": "10"
+        },
+        {
+          "label": "I don’t know it.",
+          "key": "7"
+        },
+        {
+          "label": "It’s in the north.",
+          "key": "2"
+        },
+        {
+          "label": "I don’t live near here.",
+          "key": "6"
+        },
+        {
+          "label": "He’s a student at university.",
+          "key": "9"
+        },
+        {
+          "label": "I like it here.",
+          "key": "5"
+        },
+        {
+          "label": "I don’t like it.",
+          "key": "8"
+        },
+        {
+          "label": "It’s a nice area.",
+          "key": "1"
+        },
+        {
+          "label": "She’s a teacher in a language school.",
+          "key": "3"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 27,
+    "n": 13,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "She’s not my friend."
+        },
+        {
+          "label": "2",
+          "key": "It’s not a big city."
+        },
+        {
+          "label": "3",
+          "key": "We’re not married."
+        },
+        {
+          "label": "4",
+          "key": "I’m not very hungry."
+        },
+        {
+          "label": "5",
+          "key": "They’re not from here."
+        },
+        {
+          "label": "6",
+          "key": "The rooms are not very expensive."
+        },
+        {
+          "label": "7",
+          "key": "My job’s not very good. The money’s not great."
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 27,
+    "n": 14,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "She’s not my friend."
+        },
+        {
+          "label": "2",
+          "key": "It’s not a big city."
+        },
+        {
+          "label": "3",
+          "key": "We’re not married."
+        },
+        {
+          "label": "4",
+          "key": "I’m not very hungry."
+        },
+        {
+          "label": "5",
+          "key": "They’re not from here."
+        },
+        {
+          "label": "6",
+          "key": "The rooms are not very expensive."
+        },
+        {
+          "label": "7",
+          "key": "My job’s not very good. The money’s not great."
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 48,
+    "n": 6,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "I’m going to meet my brother tonight.",
+            "Tonight I’m going to meet my brother."
+          ]
+        },
+        {
+          "label": "2",
+          "key": [
+            "We’re going to the park this afternoon.",
+            "This afternoon we’re going to the park."
+          ]
+        },
+        {
+          "label": "3",
+          "key": [
+            "We’re going to the beach on Sunday.",
+            "On Sunday we’re going to the beach."
+          ]
+        },
+        {
+          "label": "4",
+          "key": [
+            "I’m going to have a coffee now.",
+            "Now I’m going to have a coffee."
+          ]
+        },
+        {
+          "label": "5",
+          "key": [
+            "We’re going to have a party tomorrow night.",
+            "Tomorrow night we’re going to have a party."
+          ]
+        },
+        {
+          "label": "6",
+          "key": [
+            "I’m going to the pool with some friends tomorrow morning.",
+            "Tomorrow morning I’m going to the pool with some friends.",
+            "I’m going to the pool tomorrow morning with some friends."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 48,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "I’m going to meet my brother tonight.",
+            "Tonight I’m going to meet my brother."
+          ]
+        },
+        {
+          "label": "2",
+          "key": [
+            "We’re going to the park this afternoon.",
+            "This afternoon we’re going to the park."
+          ]
+        },
+        {
+          "label": "3",
+          "key": [
+            "We’re going to the beach on Sunday.",
+            "On Sunday we’re going to the beach."
+          ]
+        },
+        {
+          "label": "4",
+          "key": [
+            "I’m going to have a coffee now.",
+            "Now I’m going to have a coffee."
+          ]
+        },
+        {
+          "label": "5",
+          "key": [
+            "We’re going to have a party tomorrow night.",
+            "Tomorrow night we’re going to have a party."
+          ]
+        },
+        {
+          "label": "6",
+          "key": [
+            "I’m going to the pool with some friends tomorrow morning.",
+            "Tomorrow morning I’m going to the pool with some friends.",
+            "I’m going to the pool tomorrow morning with some friends."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 57,
+    "n": 15,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "journey"
+        },
+        {
+          "label": "2",
+          "key": "day"
+        },
+        {
+          "label": "3",
+          "key": "hostel"
+        },
+        {
+          "label": "4",
+          "key": "lake"
+        },
+        {
+          "label": "5",
+          "key": "WiFi"
+        },
+        {
+          "label": "6",
+          "key": "night"
+        },
+        {
+          "label": "7",
+          "key": "friends"
+        },
+        {
+          "label": "8",
+          "key": "gym"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 75,
+    "n": 16,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "at home"
+        },
+        {
+          "label": "2",
+          "key": "to Tokyo"
+        },
+        {
+          "label": "3",
+          "key": "making dinner"
+        },
+        {
+          "label": "4",
+          "key": "to someone"
+        },
+        {
+          "label": "5",
+          "key": "my keys"
+        },
+        {
+          "label": "6",
+          "key": "have them"
+        },
+        {
+          "label": "7",
+          "key": "of money"
+        },
+        {
+          "label": "8",
+          "key": "good teacher"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 98,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "January"
+        },
+        {
+          "label": "2",
+          "key": "February"
+        },
+        {
+          "label": "3",
+          "key": "March"
+        },
+        {
+          "label": "4",
+          "key": "April"
+        },
+        {
+          "label": "5",
+          "key": "May"
+        },
+        {
+          "label": "6",
+          "key": "June"
+        },
+        {
+          "label": "7",
+          "key": "July"
+        },
+        {
+          "label": "8",
+          "key": "August"
+        },
+        {
+          "label": "9",
+          "key": "September"
+        },
+        {
+          "label": "10",
+          "key": "October"
+        },
+        {
+          "label": "11",
+          "key": "November"
+        },
+        {
+          "label": "12",
+          "key": "December"
+        }
+      ],
+      "note": "Впишите названия месяцев целиком в календарном порядке."
+    }
+  },
+  {
+    "book": "sb",
+    "page": 111,
+    "n": 15,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "carry —",
+          "key": "stand"
+        },
+        {
+          "label": "send —",
+          "key": "lend"
+        },
+        {
+          "label": "miss —",
+          "key": "give"
+        },
+        {
+          "label": "walk —",
+          "key": "order"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 111,
+    "n": 16,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "carry —",
+          "key": "stand"
+        },
+        {
+          "label": "send —",
+          "key": "lend"
+        },
+        {
+          "label": "miss —",
+          "key": "give"
+        },
+        {
+          "label": "walk —",
+          "key": "order"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 111,
+    "n": 17,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "carry",
+          "key": "carry a bag"
+        },
+        {
+          "label": "stand",
+          "key": "stand by the bar"
+        },
+        {
+          "label": "lend",
+          "key": "lend me some money"
+        },
+        {
+          "label": "send",
+          "key": "send them an email"
+        },
+        {
+          "label": "miss",
+          "key": "miss the bus"
+        },
+        {
+          "label": "give",
+          "key": "give them a gift"
+        },
+        {
+          "label": "order",
+          "key": "order a taxi"
+        },
+        {
+          "label": "walk",
+          "key": "walk home"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 13,
+    "n": 12,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "My tea – it’s not right."
+        },
+        {
+          "label": "2",
+          "key": "My coffee – it’s not a cappuccino."
+        },
+        {
+          "label": "3",
+          "key": "Sorry. It’s a small tea – not large."
+        },
+        {
+          "label": "4",
+          "key": "No. It’s coffee cake – not chocolate."
+        },
+        {
+          "label": "5",
+          "key": "No. My tea’s not hot."
+        },
+        {
+          "label": "6",
+          "key": "It’s not right. It’s 35 euros. It’s not 29."
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 13,
+    "n": 13,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "My tea – it’s not right."
+        },
+        {
+          "label": "2",
+          "key": "My coffee – it’s not a cappuccino."
+        },
+        {
+          "label": "3",
+          "key": "Sorry. It’s a small tea – not large."
+        },
+        {
+          "label": "4",
+          "key": "No. It’s coffee cake – not chocolate."
+        },
+        {
+          "label": "5",
+          "key": "No. My tea’s not hot."
+        },
+        {
+          "label": "6",
+          "key": "It’s not right. It’s 35 euros. It’s not 29."
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 19,
+    "n": 7,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "I don’t work on Friday and Saturday."
+        },
+        {
+          "label": "2",
+          "key": "I don’t know."
+        },
+        {
+          "label": "3",
+          "key": "You don’t live near here."
+        },
+        {
+          "label": "4",
+          "key": "I don’t like it."
+        },
+        {
+          "label": "5",
+          "key": "We don’t have children."
+        },
+        {
+          "label": "6",
+          "key": "They don’t live in the centre."
+        },
+        {
+          "label": "7",
+          "key": "I don’t walk to class."
+        },
+        {
+          "label": "8",
+          "key": "I don’t go to a language school."
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 56,
+    "n": 4,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 62,
+    "n": 1,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "cook",
+          "key": "cooked"
+        },
+        {
+          "label": "do",
+          "key": "did"
+        },
+        {
+          "label": "go",
+          "key": "went"
+        },
+        {
+          "label": "listen",
+          "key": "listened"
+        },
+        {
+          "label": "read",
+          "key": "read"
+        },
+        {
+          "label": "watch",
+          "key": "watched"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 62,
+    "n": 2,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "cook",
+          "key": "cooked"
+        },
+        {
+          "label": "do",
+          "key": "did"
+        },
+        {
+          "label": "go",
+          "key": "went"
+        },
+        {
+          "label": "listen",
+          "key": "listened"
+        },
+        {
+          "label": "read",
+          "key": "read"
+        },
+        {
+          "label": "watch",
+          "key": "watched"
+        }
+      ]
+    }
+  },
+  {
+    "book": "sb",
+    "page": 101,
+    "n": 14,
+    "parsed": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a child"
+        },
+        {
+          "label": "2",
+          "key": "there"
+        },
+        {
+          "label": "3",
+          "key": "ten"
+        },
+        {
+          "label": "4",
+          "key": "on holiday"
+        },
+        {
+          "label": "5",
+          "key": "at university"
+        },
+        {
+          "label": "6",
+          "key": "in the army"
+        }
+      ]
+    }
+  }
+]

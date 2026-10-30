@@ -1,0 +1,4975 @@
+{
+  "corrections": {
+    "6": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "18"
+        },
+        {
+          "label": "2",
+          "key": "20"
+        },
+        {
+          "label": "3",
+          "key": "19"
+        },
+        {
+          "label": "4",
+          "key": "15"
+        }
+      ]
+    },
+    "17": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Friday"
+        },
+        {
+          "label": "2",
+          "key": "121 786 5539"
+        },
+        {
+          "label": "3",
+          "key": [
+            "The Spanish Centre",
+            "3 High Street"
+          ]
+        },
+        {
+          "label": "4",
+          "key": [
+            "Sara and Pedro’s baby",
+            "Sara and Pedro’s son"
+          ]
+        },
+        {
+          "label": "5",
+          "key": [
+            "five hours",
+            "5 hours"
+          ]
+        },
+        {
+          "label": "6",
+          "key": "6"
+        }
+      ]
+    },
+    "20": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "cappuccino medium",
+          "key": "3.40"
+        },
+        {
+          "label": "latte large",
+          "key": "3.75"
+        },
+        {
+          "label": "latte small",
+          "key": "2.90"
+        },
+        {
+          "label": "americano large",
+          "key": "3.10"
+        },
+        {
+          "label": "fresh orange juice large",
+          "key": "4.35"
+        },
+        {
+          "label": "water",
+          "key": "1.35"
+        },
+        {
+          "label": "sandwiches",
+          "key": "6.50"
+        }
+      ],
+      "note": "Меню Student A на этой странице: впишите цены цифрами."
+    },
+    "21": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Заказ",
+          "key": "one large cappuccino,one large americano with milk,one medium black tea,one small orange juice,two chocolate cakes",
+          "match": "set"
+        }
+      ]
+    },
+    "22": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        }
+      ]
+    },
+    "25": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "3"
+        },
+        {
+          "label": "2",
+          "key": "2"
+        },
+        {
+          "label": "3",
+          "key": "5"
+        },
+        {
+          "label": "4",
+          "key": "1"
+        },
+        {
+          "label": "5",
+          "key": "4"
+        },
+        {
+          "label": "6",
+          "key": "6"
+        }
+      ]
+    },
+    "27": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "a village"
+        },
+        {
+          "label": "b",
+          "key": "a city"
+        },
+        {
+          "label": "d",
+          "key": "a road"
+        },
+        {
+          "label": "f",
+          "key": "flats"
+        },
+        {
+          "label": "g",
+          "key": "the north"
+        }
+      ]
+    },
+    "30": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Where do you live?"
+        },
+        {
+          "label": "2",
+          "key": "Do you live with your brother?"
+        },
+        {
+          "label": "3",
+          "key": "Who do you live with?"
+        },
+        {
+          "label": "4",
+          "key": "Do you like your city?"
+        },
+        {
+          "label": "5",
+          "key": "Do you know my name?"
+        },
+        {
+          "label": "6",
+          "key": "Do you have a house or a flat?"
+        }
+      ]
+    },
+    "39": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Jessica 1",
+          "key": "small"
+        },
+        {
+          "label": "Jessica 2",
+          "key": "flat"
+        },
+        {
+          "label": "Rasa 1",
+          "key": "an office"
+        },
+        {
+          "label": "Rasa 2",
+          "key": "a language school"
+        },
+        {
+          "label": "Ali 1",
+          "key": "OK but"
+        },
+        {
+          "label": "Ali 2",
+          "key": "daughters"
+        }
+      ],
+      "note": "Введите исправленные слова вместо неверных слов текста."
+    },
+    "41": {
+      "mode": "model",
+      "model": "1\tMexico, Australia, Lithuania, Turkey\n2\tLondon"
+    },
+    "43": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "south"
+        },
+        {
+          "label": "2",
+          "key": "80"
+        }
+      ],
+      "note": "Впишите правильные слова вместо centre и 30."
+    },
+    "51": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Напитки",
+          "key": "two orange juices,a Coke,some water",
+          "match": "set"
+        }
+      ]
+    },
+    "52": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Блюда",
+          "key": "kebab with rice,chicken with chips,prawns with rice",
+          "match": "set"
+        }
+      ]
+    },
+    "58": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "T"
+        },
+        {
+          "label": "2",
+          "key": "F"
+        },
+        {
+          "label": "3",
+          "key": "F"
+        },
+        {
+          "label": "4",
+          "key": "F"
+        },
+        {
+          "label": "5",
+          "key": "T"
+        },
+        {
+          "label": "6",
+          "key": "T"
+        },
+        {
+          "label": "7",
+          "key": "F"
+        }
+      ],
+      "model": "1\tT\n2\tF (The baby is 14 months old.)\n3\tF (They are friends).\n4\tF (She does like the book.)\n5\tT\n6\tT\n7\tF (The boy is ten.)"
+    },
+    "59": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "We"
+        },
+        {
+          "label": "2",
+          "key": "He; His"
+        },
+        {
+          "label": "3",
+          "key": "has; He"
+        },
+        {
+          "label": "4",
+          "key": "it"
+        },
+        {
+          "label": "5",
+          "key": "you"
+        },
+        {
+          "label": "6",
+          "key": "’re"
+        }
+      ]
+    },
+    "64": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "0",
+            "0°C",
+            "zero"
+          ]
+        },
+        {
+          "label": "2",
+          "key": [
+            "-15",
+            "-15°C",
+            "minus 15"
+          ]
+        },
+        {
+          "label": "3",
+          "key": "78"
+        },
+        {
+          "label": "4",
+          "key": "98"
+        }
+      ]
+    },
+    "82": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "sixteen hours",
+            "16 hours"
+          ]
+        },
+        {
+          "label": "2",
+          "key": "no"
+        },
+        {
+          "label": "3",
+          "key": [
+            "black tea",
+            "tea"
+          ]
+        },
+        {
+          "label": "4",
+          "key": [
+            "a phone charger",
+            "phone charger"
+          ]
+        }
+      ]
+    },
+    "89": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "7"
+        },
+        {
+          "label": "2",
+          "key": "5"
+        },
+        {
+          "label": "3",
+          "key": "8"
+        },
+        {
+          "label": "4",
+          "key": "6"
+        },
+        {
+          "label": "5",
+          "key": "2"
+        },
+        {
+          "label": "6",
+          "key": "1"
+        },
+        {
+          "label": "7",
+          "key": "3"
+        },
+        {
+          "label": "8",
+          "key": "4"
+        }
+      ]
+    },
+    "98": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "cash machine"
+        },
+        {
+          "label": "2",
+          "key": [
+            "pizza restaurant",
+            "restaurant"
+          ]
+        },
+        {
+          "label": "3",
+          "key": "car park"
+        }
+      ]
+    },
+    "99": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "200"
+        },
+        {
+          "label": "2a",
+          "key": "this"
+        },
+        {
+          "label": "3a",
+          "key": "second"
+        },
+        {
+          "label": "1b",
+          "key": "next to"
+        },
+        {
+          "label": "2b",
+          "key": "first"
+        },
+        {
+          "label": "3b",
+          "key": "right"
+        },
+        {
+          "label": "1c",
+          "key": "left"
+        },
+        {
+          "label": "2c",
+          "key": "right"
+        },
+        {
+          "label": "3c",
+          "key": "left"
+        }
+      ]
+    },
+    "105": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "F"
+        },
+        {
+          "label": "2",
+          "key": "F"
+        },
+        {
+          "label": "3",
+          "key": "T"
+        },
+        {
+          "label": "4",
+          "key": "T"
+        },
+        {
+          "label": "5",
+          "key": "F"
+        }
+      ],
+      "model": "1\tfalse  (In Indonesia, people normally only have a \nfree day on Sunday; In C olombia …  lots of \npeople only have Sunday free.)\n2\tfalse  (In Saudi Arabia, the weekend is usually \nFriday and Saturday; In Indonesia, people \nnormally only have a free day on Sunday)\n3\ttrue  (In Colombia, people usually work 48 hours \na week and lots of people only have Sunday \nfree.)\n4\ttrue  (… children usually go to school on Saturday \nmorning.)\n5\tfalse  (Government offices are always open \non Saturday … )"
+    },
+    "106": {
+      "mode": "model",
+      "model": "1\tdepend = if something ‘depends’ on your religion, \nit only happens because of your religion\n2\tcompanies = people work for them (e.g. Sony, Ford \nand Microsoft are companies)\n3\tgovernment = makes laws and rules"
+    },
+    "107": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "S"
+        },
+        {
+          "label": "2",
+          "key": "S"
+        },
+        {
+          "label": "3",
+          "key": "S"
+        },
+        {
+          "label": "4",
+          "key": [
+            "S",
+            "T"
+          ]
+        },
+        {
+          "label": "5",
+          "key": "T"
+        },
+        {
+          "label": "6",
+          "key": "S"
+        },
+        {
+          "label": "7",
+          "key": "T"
+        }
+      ]
+    },
+    "111": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Can you help me?"
+        },
+        {
+          "label": "2",
+          "key": "Can you close the window?"
+        },
+        {
+          "label": "3",
+          "key": "Can you wait a minute?"
+        },
+        {
+          "label": "4",
+          "key": "Can you do exercises 6 and 7?"
+        },
+        {
+          "label": "5a",
+          "key": "Can we have a break?"
+        },
+        {
+          "label": "5b",
+          "key": [
+            "Can we have drinks in the class?",
+            "Can we have five more minutes?"
+          ]
+        }
+      ]
+    },
+    "115": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "2"
+        },
+        {
+          "label": "2",
+          "key": "4"
+        },
+        {
+          "label": "3",
+          "key": "6"
+        },
+        {
+          "label": "4",
+          "key": "7"
+        },
+        {
+          "label": "5",
+          "key": "1"
+        },
+        {
+          "label": "6",
+          "key": "5"
+        },
+        {
+          "label": "7",
+          "key": "3"
+        },
+        {
+          "label": "8",
+          "key": "8"
+        }
+      ]
+    },
+    "117": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Страны",
+          "key": "Japan,Italy,America,Turkey,China,Vietnam,Argentina",
+          "match": "set"
+        }
+      ]
+    },
+    "118": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Turkey"
+        },
+        {
+          "label": "2",
+          "key": "Italy"
+        },
+        {
+          "label": "3",
+          "key": "Japan"
+        },
+        {
+          "label": "4",
+          "key": "Argentina"
+        },
+        {
+          "label": "5",
+          "key": "China"
+        },
+        {
+          "label": "6",
+          "key": "Vietnam"
+        },
+        {
+          "label": "7",
+          "key": "America"
+        }
+      ],
+      "note": "Впишите страну, откуда человек из каждого предложения."
+    },
+    "119": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "10; 50"
+        },
+        {
+          "label": "b",
+          "key": "1st; 5"
+        },
+        {
+          "label": "c",
+          "key": "13 million"
+        },
+        {
+          "label": "d",
+          "key": "7.30"
+        },
+        {
+          "label": "e",
+          "key": "73"
+        },
+        {
+          "label": "f",
+          "key": "200"
+        },
+        {
+          "label": "g",
+          "key": "8; $490"
+        }
+      ]
+    },
+    "130": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "walk; 10 minutes"
+        },
+        {
+          "label": "2",
+          "key": "train; 30 minutes"
+        },
+        {
+          "label": "3",
+          "key": "car / taxi; 20 minutes"
+        },
+        {
+          "label": "4",
+          "key": "bus; 10 minutes"
+        },
+        {
+          "label": "5",
+          "key": "taxi; 10 / 15 minutes"
+        }
+      ],
+      "note": "В каждой строке укажите транспорт и время через точку с запятой."
+    },
+    "137": {
+      "mode": "model",
+      "model": "platform = an area next to a train track where \npassengers get onto and off trains\nbeautiful = very attractive to look at\nsingle ticket = a ticket for a train that goes from A to \nB only (opposite of return – a return goes from A to \nB then back to A again) \ncosts = the amount of money you must pay\npassengers = people on a train or bus or plane\nthird class = a cheap ticket or seat (compare first \nclass and second class)"
+    },
+    "141": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "2"
+        },
+        {
+          "label": "b",
+          "key": "1; 3"
+        }
+      ]
+    },
+    "142": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "3",
+          "match": "set"
+        },
+        {
+          "label": "b",
+          "key": "1",
+          "match": "set"
+        },
+        {
+          "label": "c",
+          "key": "2",
+          "match": "set"
+        },
+        {
+          "label": "d",
+          "key": "1",
+          "match": "set"
+        },
+        {
+          "label": "e",
+          "key": "2",
+          "match": "set"
+        },
+        {
+          "label": "f",
+          "key": "1",
+          "match": "set"
+        },
+        {
+          "label": "g",
+          "key": "3",
+          "match": "set"
+        },
+        {
+          "label": "h",
+          "key": "2",
+          "match": "set"
+        }
+      ]
+    },
+    "143": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "3"
+        },
+        {
+          "label": "b",
+          "key": "1; 2"
+        }
+      ]
+    },
+    "149": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "8"
+        },
+        {
+          "label": "2",
+          "key": "5"
+        },
+        {
+          "label": "3",
+          "key": "3"
+        },
+        {
+          "label": "4",
+          "key": "4"
+        },
+        {
+          "label": "5",
+          "key": "2"
+        },
+        {
+          "label": "6",
+          "key": "6"
+        },
+        {
+          "label": "7",
+          "key": "7"
+        },
+        {
+          "label": "8",
+          "key": "1"
+        }
+      ]
+    },
+    "162": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "rooms"
+        },
+        {
+          "label": "2",
+          "key": "booking"
+        },
+        {
+          "label": "3",
+          "key": "passport"
+        },
+        {
+          "label": "4",
+          "key": "address"
+        },
+        {
+          "label": "5",
+          "key": "bags"
+        },
+        {
+          "label": "6",
+          "key": "number"
+        },
+        {
+          "label": "7",
+          "key": "check out"
+        },
+        {
+          "label": "8",
+          "key": "lift"
+        },
+        {
+          "label": "9",
+          "key": "breakfast"
+        },
+        {
+          "label": "10",
+          "key": "password"
+        }
+      ]
+    },
+    "163": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Услышанные предложения",
+          "key": "2,3,4,5,6,9",
+          "match": "set"
+        }
+      ]
+    },
+    "164": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "b"
+        }
+      ]
+    },
+    "165": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Hotel",
+          "key": "3,5,6",
+          "match": "set"
+        },
+        {
+          "label": "Hostel",
+          "key": "1,2,4",
+          "match": "set"
+        }
+      ]
+    },
+    "166": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Остальные глаголы с -ed",
+          "key": "rained,loved",
+          "match": "set"
+        }
+      ]
+    },
+    "169": {
+      "mode": "model",
+      "model": "band = musical group \nservice = when you bring food to or do things for \npeople in a hotel or restaurant\ntour = when you go and visit different places on \nholiday in a group (often on a bus) \nlake = a large area of water which is inland"
+    },
+    "184": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "City 1",
+          "key": "Cairo"
+        },
+        {
+          "label": "Other things 1",
+          "key": "mosques; pyramids"
+        },
+        {
+          "label": "City 2",
+          "key": "Alexandria"
+        },
+        {
+          "label": "Other things 2",
+          "key": "beach; cafés"
+        },
+        {
+          "label": "City 3",
+          "key": "Luxor"
+        },
+        {
+          "label": "Other things 3",
+          "key": "great art"
+        }
+      ]
+    },
+    "185": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "F"
+        },
+        {
+          "label": "2",
+          "key": "F"
+        },
+        {
+          "label": "3",
+          "key": "F"
+        },
+        {
+          "label": "4",
+          "key": "T"
+        },
+        {
+          "label": "5",
+          "key": "F"
+        },
+        {
+          "label": "6",
+          "key": "F"
+        },
+        {
+          "label": "7",
+          "key": "F"
+        },
+        {
+          "label": "8",
+          "key": "T"
+        }
+      ],
+      "model": "1\tF (20 million)\n2\tF (things from the time of Pharaoh Tutankhamun)\n3\tF (more than 70)\n4\tT\n5\tF (three hours)\n6\tF (Arabic, English and French)\n7\tF (the south)\n8\tT"
+    },
+    "186": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "d"
+        },
+        {
+          "label": "2",
+          "key": "e"
+        },
+        {
+          "label": "3",
+          "key": "f"
+        },
+        {
+          "label": "4",
+          "key": "a"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        },
+        {
+          "label": "6",
+          "key": "c"
+        }
+      ]
+    },
+    "196": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "cooking"
+        },
+        {
+          "label": "1b",
+          "key": "Russian"
+        },
+        {
+          "label": "2a",
+          "key": "the news"
+        },
+        {
+          "label": "2b",
+          "key": "The Crown"
+        },
+        {
+          "label": "3a",
+          "key": "running"
+        },
+        {
+          "label": "3b",
+          "key": "Atlético Madrid"
+        }
+      ]
+    },
+    "213": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Colour",
+          "key": "blue,brown,green,white,yellow",
+          "match": "set"
+        },
+        {
+          "label": "Size",
+          "key": "12,38,extra large,long,small",
+          "match": "set"
+        },
+        {
+          "label": "Clothes",
+          "key": "a coat,a dress,a jacket,jeans,a T-shirt",
+          "match": "set"
+        },
+        {
+          "label": "Reason to buy",
+          "key": "25% off,the design,feels comfortable,half price,looks good",
+          "match": "set"
+        }
+      ]
+    },
+    "216": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Photo a",
+          "key": "3"
+        },
+        {
+          "label": "Photo b",
+          "key": "1"
+        }
+      ]
+    },
+    "226": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "take a friend to the airport"
+        },
+        {
+          "label": "2",
+          "key": "work at home"
+        },
+        {
+          "label": "3",
+          "key": "study for an exam"
+        },
+        {
+          "label": "4",
+          "key": "travel a long way"
+        },
+        {
+          "label": "5",
+          "key": "make a lot of money"
+        },
+        {
+          "label": "6",
+          "key": "meet a client"
+        },
+        {
+          "label": "7",
+          "key": "get something to eat"
+        }
+      ]
+    },
+    "231": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "✓"
+        },
+        {
+          "label": "1b",
+          "key": "Ulla is talking to a client."
+        },
+        {
+          "label": "1c",
+          "key": "Katya’s not coming to the meeting."
+        },
+        {
+          "label": "1d",
+          "key": "Her son is not feeling well."
+        },
+        {
+          "label": "2a",
+          "key": "Emma’s studying French and Spanish."
+        },
+        {
+          "label": "2b",
+          "key": "✓"
+        },
+        {
+          "label": "3a",
+          "key": "He’s travelling to Dubai."
+        },
+        {
+          "label": "3b",
+          "key": "✓"
+        }
+      ]
+    },
+    "232": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Is; working; ’s meeting"
+        },
+        {
+          "label": "2",
+          "key": "it’s not raining"
+        },
+        {
+          "label": "3",
+          "key": "is; doing; ’s teaching"
+        },
+        {
+          "label": "4",
+          "key": "Are; going; ’m staying"
+        },
+        {
+          "label": "5",
+          "key": "’s not coming; ’s not feeling"
+        },
+        {
+          "label": "6",
+          "key": "is; taking"
+        }
+      ]
+    },
+    "236": {
+      "mode": "model",
+      "model": "Kim (not Ken)\nShe’s not coming today. She’s meeting a friend."
+    },
+    "237": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "thank you"
+        },
+        {
+          "label": "2",
+          "key": "I’m sorry"
+        },
+        {
+          "label": "3",
+          "key": [
+            "hello",
+            "hi"
+          ]
+        },
+        {
+          "label": "4",
+          "key": "thank you"
+        },
+        {
+          "label": "5",
+          "key": [
+            "hello",
+            "hi"
+          ]
+        },
+        {
+          "label": "6",
+          "key": "I’m sorry"
+        }
+      ],
+      "note": "Впишите только передаваемые слова: thank you, I’m sorry, hello или hi."
+    },
+    "239": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Kitchen",
+          "key": "fridge,chair,table,shelf,cupboard",
+          "match": "set"
+        },
+        {
+          "label": "Bathroom",
+          "key": "sink,shelf",
+          "match": "set"
+        },
+        {
+          "label": "Bedroom",
+          "key": "bed,carpet,shelf,cupboard",
+          "match": "set"
+        },
+        {
+          "label": "Living room",
+          "key": "cupboard,table,carpet,sofa,chair,shelf",
+          "match": "set"
+        }
+      ]
+    },
+    "241": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "my glasses; bathroom; sink"
+        },
+        {
+          "label": "2",
+          "key": "passport; bedroom; carpet"
+        },
+        {
+          "label": "3",
+          "key": "keys; living room; sofa"
+        },
+        {
+          "label": "4",
+          "key": "phone; kitchen; table"
+        }
+      ],
+      "note": "В каждой строке: вещь; комната; предмет мебели."
+    },
+    "243": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "saw",
+          "key": "see"
+        },
+        {
+          "label": "left",
+          "key": "leave"
+        },
+        {
+          "label": "was",
+          "key": "be / is"
+        }
+      ]
+    },
+    "249": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "me"
+        },
+        {
+          "label": "2",
+          "key": "you"
+        },
+        {
+          "label": "3",
+          "key": "it"
+        },
+        {
+          "label": "4",
+          "key": "He"
+        },
+        {
+          "label": "5",
+          "key": "She"
+        },
+        {
+          "label": "6",
+          "key": "We"
+        },
+        {
+          "label": "7",
+          "key": "them"
+        }
+      ]
+    },
+    "257": {
+      "mode": "model",
+      "model": "growing = getting bigger\nmillion = 1,000,000\nhalf = 50% \nwebsite = www page on a computer\nbecause = for this reason\nspace = if a room is large, it has a large space to do \nthings in"
+    },
+    "259": {
+      "mode": "model",
+      "model": "39 million = number of homeworkers in India\n45% = number of people in Argentina who work at \nhome one day a week or more\n13% = the amount of extra work Ctrip homeworkers \ndid / the number of UK homeworkers who work in \nthe kitchen\n13 million = number of freelancers in Mexico\n25% = the number of UK homeworkers who like \nlistening to music when they work\n36% = the number of UK homeworkers who work in \nthe living room"
+    },
+    "260": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "manage",
+          "key": "manager"
+        },
+        {
+          "label": "play",
+          "key": "player"
+        },
+        {
+          "label": "teach",
+          "key": "teacher"
+        },
+        {
+          "label": "work",
+          "key": "worker"
+        },
+        {
+          "label": "write",
+          "key": "writer"
+        }
+      ]
+    },
+    "262": {
+      "mode": "model",
+      "model": "Text A on page 75:\n1\tAgata\n2\tin Berlin in Germany\n3\tShe draws pictures for children’s books.\n4\tIn the kitchen at home or in a café\n5\tyes (I really like my job.)\n6\tno \n7\tShe’s writing her own book at the moment.\nText B on page 144:\n1\tHigor\n2\tin Curatiba in the south of Brazil\n3\tHe’s a teacher.\n4\tin a small office at home\n5\tyes (I love my job.)\n6\tyes\n7\tHe’s making his own website."
+    },
+    "270": {
+      "mode": "model",
+      "model": "fly = to move through the air above the ground\nsuddenly = quickly and unexpectedly\npretty = quite\nwake up = to stop sleeping\ncome out = to appear\npush = to use physical force to move something \nforward"
+    },
+    "277": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Present verbs",
+          "key": "cut,break,have,feel,hit,hurt",
+          "match": "set"
+        },
+        {
+          "label": "Parts of the body",
+          "key": "hand,leg,head,back,eye",
+          "match": "set"
+        }
+      ],
+      "note": "Впишите слова из упражнения 6. Дополнительные примеры обсудите с преподавателем."
+    },
+    "293": {
+      "mode": "model",
+      "model": "97%: the number of people in Iceland who say the \nwater is very good\n22: number 22 in the world in sports / number of \nhours in a day in summer in Iceland\n83: On average, people live until they are 83 years \nold in Iceland.\n17 minutes: amount of time Icelanders see the sun \non a day in December\n60%: number of people who go to university \nin Iceland\nthree or four: On average, it rains or snows three or \nfour times a week in Iceland."
+    },
+    "294": {
+      "mode": "model",
+      "model": "almost = nearly but not completely\nguns = things that you use to shoot bullets (Bang! \nBang!)\n(on) average = the amount that is typical of a group \nof people; in the middle\nworse = the comparative adjective of bad\ncontinue = go on; keep doing something without \nstopping\nsummer = the hot months of the year"
+    },
+    "297": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "a,c,d,g,h,i",
+          "match": "set"
+        },
+        {
+          "label": "2",
+          "key": "b,e,f,j",
+          "match": "set"
+        }
+      ]
+    },
+    "298": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a conference",
+          "key": "at"
+        },
+        {
+          "label": "university",
+          "key": "at"
+        },
+        {
+          "label": "holiday",
+          "key": "on"
+        },
+        {
+          "label": "the army",
+          "key": "in"
+        },
+        {
+          "label": "love",
+          "key": "for"
+        },
+        {
+          "label": "work",
+          "key": "for"
+        },
+        {
+          "label": "business",
+          "key": "on"
+        },
+        {
+          "label": "study",
+          "key": "to"
+        }
+      ]
+    },
+    "304": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "An’s sister had a baby last year."
+        },
+        {
+          "label": "2",
+          "key": "Kasper thinks the British health system is bad."
+        },
+        {
+          "label": "3",
+          "key": "✓"
+        },
+        {
+          "label": "4",
+          "key": "✓"
+        }
+      ],
+      "note": "Напишите исправленное предложение или ✓, если оно правильное."
+    },
+    "305": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "For work."
+        },
+        {
+          "label": "2",
+          "key": "Four or five years ago."
+        },
+        {
+          "label": "3",
+          "key": "Hanoi"
+        },
+        {
+          "label": "4",
+          "key": "It was very hot and busy."
+        },
+        {
+          "label": "5",
+          "key": "Only two days."
+        }
+      ]
+    },
+    "306": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "arm"
+        },
+        {
+          "label": "2",
+          "key": "course"
+        },
+        {
+          "label": "3",
+          "key": "move"
+        },
+        {
+          "label": "4",
+          "key": "women"
+        },
+        {
+          "label": "5",
+          "key": "great"
+        },
+        {
+          "label": "6",
+          "key": "air"
+        },
+        {
+          "label": "7",
+          "key": "friend"
+        },
+        {
+          "label": "8",
+          "key": "war"
+        }
+      ]
+    },
+    "314": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "rained"
+        },
+        {
+          "label": "2",
+          "key": "is"
+        },
+        {
+          "label": "3",
+          "key": "raining"
+        },
+        {
+          "label": "4",
+          "key": "was"
+        },
+        {
+          "label": "5",
+          "key": "is; rains"
+        }
+      ]
+    },
+    "315": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "am; are"
+        },
+        {
+          "label": "2",
+          "key": "is; are"
+        },
+        {
+          "label": "3",
+          "key": "is; is; is; are"
+        },
+        {
+          "label": "4",
+          "key": "are; is"
+        }
+      ]
+    },
+    "317": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "no"
+        },
+        {
+          "label": "2",
+          "key": "no"
+        },
+        {
+          "label": "3",
+          "key": "yes"
+        },
+        {
+          "label": "4",
+          "key": "yes"
+        }
+      ]
+    },
+    "318": {
+      "mode": "model",
+      "model": "1\thot (35 degrees)\n2\tcold (minus 10); nothing special\n3\twet (horrible); sunny (25 degrees)\n4\tlovely (sunny/warm); windy; clean the house"
+    },
+    "322": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a",
+          "key": "3"
+        },
+        {
+          "label": "b",
+          "key": "1"
+        },
+        {
+          "label": "c",
+          "key": "7"
+        },
+        {
+          "label": "d",
+          "key": "5"
+        },
+        {
+          "label": "e",
+          "key": "8"
+        },
+        {
+          "label": "f",
+          "key": "6"
+        }
+      ]
+    },
+    "324": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "T"
+        },
+        {
+          "label": "2",
+          "key": "F"
+        },
+        {
+          "label": "3",
+          "key": "F"
+        },
+        {
+          "label": "4",
+          "key": "F"
+        },
+        {
+          "label": "5",
+          "key": "T"
+        }
+      ],
+      "model": "1\tT   (In the first year, it was in Trenčín’s football \nstadium.)\n2\tF (all kinds of music from all over the world )\n3\tF (Almost 30,000 people visit the festival each day.)\n4\tF (The weather is normally hot and sunny… )\n5\tT   (Children can learn circus skills or they can do \ndancing or play games. / There is a special area \nfor families. / …it’s free for children… )"
+    },
+    "325": {
+      "mode": "model",
+      "model": "lasted = continued for a period of time (e.g. a \nfootball match lasts 90 minutes)\ndiscussions = serious talks, often in groups\nskills = special abilities\nso = consequently / as a result\nadult = person over 18"
+    },
+    "327": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Планы",
+          "key": "concert,class,discussion,play,film",
+          "match": "set"
+        }
+      ]
+    },
+    "328": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "How about"
+        },
+        {
+          "label": "2",
+          "key": [
+            "Yeah great",
+            "OK"
+          ]
+        },
+        {
+          "label": "3",
+          "key": [
+            "OK",
+            "Yeah great"
+          ]
+        },
+        {
+          "label": "4",
+          "key": "How about"
+        },
+        {
+          "label": "5",
+          "key": "I’d prefer"
+        },
+        {
+          "label": "6",
+          "key": "I don’t really like"
+        },
+        {
+          "label": "7",
+          "key": "I’ll meet you"
+        }
+      ]
+    },
+    "331": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Новости о будущем",
+          "key": "1,7,9,10",
+          "match": "set"
+        }
+      ]
+    },
+    "333": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "finish",
+          "key": "finished"
+        },
+        {
+          "label": "decide",
+          "key": "decided"
+        },
+        {
+          "label": "open",
+          "key": "opened"
+        },
+        {
+          "label": "happen",
+          "key": "happened"
+        },
+        {
+          "label": "stop",
+          "key": "stopped"
+        },
+        {
+          "label": "play",
+          "key": "played"
+        },
+        {
+          "label": "talk",
+          "key": "talked"
+        },
+        {
+          "label": "help",
+          "key": "helped"
+        },
+        {
+          "label": "try",
+          "key": "tried"
+        },
+        {
+          "label": "use",
+          "key": "used"
+        },
+        {
+          "label": "am/is/are",
+          "key": "was / were"
+        },
+        {
+          "label": "get",
+          "key": "got"
+        },
+        {
+          "label": "win",
+          "key": "won"
+        },
+        {
+          "label": "take",
+          "key": "took"
+        },
+        {
+          "label": "see",
+          "key": "saw"
+        },
+        {
+          "label": "meet",
+          "key": "met"
+        },
+        {
+          "label": "cut",
+          "key": "cut"
+        },
+        {
+          "label": "cost",
+          "key": "cost"
+        },
+        {
+          "label": "spend",
+          "key": "spent"
+        },
+        {
+          "label": "come",
+          "key": "came"
+        }
+      ]
+    },
+    "336": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "heart"
+        },
+        {
+          "label": "2",
+          "key": "use"
+        },
+        {
+          "label": "3",
+          "key": "little"
+        },
+        {
+          "label": "4",
+          "key": "score"
+        },
+        {
+          "label": "5",
+          "key": "about"
+        },
+        {
+          "label": "6",
+          "key": "close"
+        },
+        {
+          "label": "7",
+          "key": "like"
+        }
+      ]
+    },
+    "340": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Факты из видео",
+          "key": "2,3,4,6,7,8,10",
+          "match": "set"
+        }
+      ],
+      "model": "2\t(In a few days, this four-metre piece of paper is \ngoing to be full of Stephen’s art.)\n\t 3\t(Stephen has autism.)\n\t 4\t(He didn’t learn to speak until he was nine.)\n\t 6\t(He is going to draw all of Mexico City. From \nmemory.)\n\t 7\t(He now travels around the world and draws \nthese amazing pictures of big cities. )\n\t 8\t(Some museums have exhibitions of his work.)\n\t 10\t\t(It took Stephen 28 hours over five days to finish \nhis picture of Mexico City.)"
+    },
+    "345": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "18th"
+        },
+        {
+          "label": "1b",
+          "key": "sister’s"
+        },
+        {
+          "label": "2a",
+          "key": "5th"
+        },
+        {
+          "label": "2b",
+          "key": "a public holiday"
+        },
+        {
+          "label": "3a",
+          "key": "Saturday"
+        },
+        {
+          "label": "3b",
+          "key": "6"
+        },
+        {
+          "label": "4a",
+          "key": "10th"
+        },
+        {
+          "label": "4b",
+          "key": "Saturday 23rd"
+        }
+      ]
+    },
+    "351": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "a1",
+          "key": "Can"
+        },
+        {
+          "label": "a2",
+          "key": [
+            "day",
+            "date",
+            "time"
+          ]
+        },
+        {
+          "label": "a3",
+          "key": "check"
+        },
+        {
+          "label": "b1",
+          "key": "you"
+        },
+        {
+          "label": "b2",
+          "key": "come"
+        },
+        {
+          "label": "b3",
+          "key": "love"
+        },
+        {
+          "label": "b4",
+          "key": [
+            "date",
+            "day"
+          ]
+        },
+        {
+          "label": "b5",
+          "key": "can’t"
+        },
+        {
+          "label": "b6",
+          "key": "going"
+        }
+      ]
+    },
+    "355": {
+      "mode": "model",
+      "model": "live on the streets\nstart a business\nlose your home\nhave problems with the police\ngo to prison\nhave an online shop\nStudents may also suggest: go to / finish (art) \nschool; do well at (art) school; become interested in \nart/politics"
+    },
+    "363": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "King Jeongjo"
+        },
+        {
+          "label": "2",
+          "key": "in the 1790s"
+        },
+        {
+          "label": "3",
+          "key": "because his father was killed there"
+        },
+        {
+          "label": "4",
+          "key": "King Jeongjo wanted to make Suwon Hwaseong the new capital city"
+        },
+        {
+          "label": "5",
+          "key": "Some parts of the fortress were damaged in the war in the 1950s"
+        }
+      ]
+    },
+    "364": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "so"
+        },
+        {
+          "label": "1b",
+          "key": "because"
+        },
+        {
+          "label": "2a",
+          "key": "because"
+        },
+        {
+          "label": "2b",
+          "key": "so"
+        },
+        {
+          "label": "3a",
+          "key": "so"
+        },
+        {
+          "label": "3b",
+          "key": "because"
+        },
+        {
+          "label": "4a",
+          "key": "because"
+        },
+        {
+          "label": "4b",
+          "key": "so"
+        }
+      ]
+    },
+    "368": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": [
+            "–",
+            "not answered"
+          ]
+        },
+        {
+          "label": "2",
+          "key": "47"
+        },
+        {
+          "label": "3",
+          "key": [
+            "–",
+            "not answered"
+          ]
+        },
+        {
+          "label": "4",
+          "key": "2"
+        },
+        {
+          "label": "5",
+          "key": "5.7"
+        },
+        {
+          "label": "6",
+          "key": [
+            "6",
+            "4"
+          ]
+        },
+        {
+          "label": "7",
+          "key": "800"
+        },
+        {
+          "label": "8",
+          "key": "130"
+        },
+        {
+          "label": "9",
+          "key": "1"
+        },
+        {
+          "label": "10",
+          "key": "1997"
+        }
+      ],
+      "note": "Введите только число. Если ответа в записи нет, поставьте —."
+    },
+    "369": {
+      "mode": "model",
+      "model": "1\tbecause the king died quite young\n3\tnobody knows – politics!"
+    },
+    "370": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "queen"
+        },
+        {
+          "label": "2",
+          "key": "put"
+        },
+        {
+          "label": "3",
+          "key": "sure"
+        },
+        {
+          "label": "4",
+          "key": "history"
+        },
+        {
+          "label": "5",
+          "key": "rock"
+        },
+        {
+          "label": "6",
+          "key": "May"
+        },
+        {
+          "label": "7",
+          "key": "born"
+        },
+        {
+          "label": "8",
+          "key": "July"
+        }
+      ]
+    },
+    "384": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "same"
+        },
+        {
+          "label": "2",
+          "key": "different"
+        },
+        {
+          "label": "3",
+          "key": "same"
+        },
+        {
+          "label": "4",
+          "key": "different"
+        },
+        {
+          "label": "5",
+          "key": "different"
+        },
+        {
+          "label": "6",
+          "key": "different"
+        }
+      ]
+    },
+    "385": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "d"
+        },
+        {
+          "label": "2",
+          "key": "c"
+        },
+        {
+          "label": "3",
+          "key": "a"
+        },
+        {
+          "label": "4",
+          "key": "e"
+        },
+        {
+          "label": "5",
+          "key": "b"
+        }
+      ]
+    },
+    "387": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "T"
+        },
+        {
+          "label": "2",
+          "key": "F"
+        },
+        {
+          "label": "3",
+          "key": "T"
+        },
+        {
+          "label": "4",
+          "key": "F"
+        }
+      ],
+      "model": "1\tT\n2\tF   (I’m sure some boys would love a present like that, \nbut I was not one of those boys! )\n3\tT\n4\tF   (A lot of people are happy with just a thank you \nor some other nice words.)"
+    },
+    "390": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "for +",
+          "key": "noun"
+        },
+        {
+          "label": "to +",
+          "key": "verb"
+        }
+      ]
+    },
+    "399": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "Have"
+        },
+        {
+          "label": "2",
+          "key": "Don’t be"
+        },
+        {
+          "label": "3",
+          "key": "Be"
+        },
+        {
+          "label": "4",
+          "key": "Say"
+        },
+        {
+          "label": "5",
+          "key": "Don’t ask"
+        },
+        {
+          "label": "6",
+          "key": "Hurry"
+        },
+        {
+          "label": "7",
+          "key": "Send"
+        },
+        {
+          "label": "8",
+          "key": "Go; be"
+        },
+        {
+          "label": "9",
+          "key": "Don’t work; Get"
+        },
+        {
+          "label": "10",
+          "key": "Don’t worry; forget"
+        }
+      ]
+    },
+    "404": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Повелительные предложения",
+          "key": "Stay in contact,Say goodbye to your sons,Have a good journey,Be safe",
+          "match": "set"
+        }
+      ]
+    },
+    "405": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Conversation 1",
+          "key": "2,3,5,8",
+          "match": "set"
+        },
+        {
+          "label": "Conversation 2",
+          "key": "1,4,6,7,9",
+          "match": "set"
+        }
+      ]
+    },
+    "410": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "Неверные предложения",
+          "key": "1,4",
+          "match": "set"
+        }
+      ],
+      "model": "1\tF (It happens in October or November …)\n2\tT (It celebrates light, hope and good things in the \nworld.)\n3\tT (People also draw flowers on the floor outside \ntheir homes. They use sand in different colours.)\n4\tF (They take them food. People make special sweets \nand cakes.)\n5\tT (On the fifth night there are fireworks… People \nalso have fireworks at their private parties.)"
+    },
+    "202": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1a",
+          "key": "✗"
+        },
+        {
+          "label": "1b",
+          "key": "✓"
+        },
+        {
+          "label": "2a",
+          "key": "✓"
+        },
+        {
+          "label": "2b",
+          "key": "✗"
+        },
+        {
+          "label": "3a",
+          "key": "✗"
+        },
+        {
+          "label": "3b",
+          "key": "✓"
+        },
+        {
+          "label": "4a",
+          "key": "✗"
+        },
+        {
+          "label": "4b",
+          "key": "✗"
+        }
+      ]
+    },
+    "207": {
+      "mode": "model",
+      "model": "The Mad Toy: no. Three Daughters of Eve: yes. Animal Farm: yes. Ваше собственное мнение может отличаться."
+    },
+    "357": {
+      "mode": "items",
+      "items": [
+        {
+          "label": "1",
+          "key": "in"
+        },
+        {
+          "label": "2",
+          "key": "After"
+        },
+        {
+          "label": "3",
+          "key": "When"
+        },
+        {
+          "label": "4",
+          "key": "when"
+        },
+        {
+          "label": "5",
+          "key": "when"
+        },
+        {
+          "label": "6",
+          "key": "in"
+        },
+        {
+          "label": "7",
+          "key": "after"
+        },
+        {
+          "label": "8",
+          "key": "After"
+        }
+      ]
+    },
+    "5": {
+      "mode": "model",
+      "model": "boy, son, daughter, mother, father, brother, sister, \nhusband, wife, friend, doctor, teacher, student"
+    },
+    "10": {
+      "mode": "model",
+      "model": "three o’clock\nFine, thanks. / OK.\nSpain / Here!\ntwenty\nfifteen minutes"
+    },
+    "18": {
+      "mode": "model",
+      "model": "2\tWhere’s the party?\n3\tWhat time is the party? / What time is Tia’s party?\n4\tHow long is the party? / How long is Sara and \nPedro’s party?\n5\tWhat’s the phone number / email address? Who \nis Rebeca?"
+    },
+    "23": {
+      "mode": "model",
+      "model": "2\nA: Are you OK?\nB: It’s water – not Coke.\nA: Sorry.\n3\nA: What’s the problem?\nB: It’s not the right change. It’s 49 euros – not 59.\nA: Sorry.\n4\nA: What’s the problem?\nB: It’s not black tea. It’s tea with milk.\nA: Sorry.\n5\nA: Are you OK?\nB: It’s not fresh orange juice.\nA: Sorry."
+    },
+    "40": {
+      "mode": "model",
+      "model": "I don’t go to school at the weekend.\nI don’t live in New York.\nI don’t work in an office.\nI don’t like my job.\nI’m not a waiter."
+    },
+    "47": {
+      "mode": "model",
+      "model": "Ali, from the reading text on Student’s Book page 19."
+    },
+    "48": {
+      "mode": "model",
+      "model": "I’m a manager. I work in an office. I love my job. The \nhours aren’t good. The people are nice. The money’s OK."
+    },
+    "54": {
+      "mode": "model",
+      "model": "Jobs/Work: \njob, bus driver, doctor, nurse, student, waiter, mum, \nretired, teacher, work in an office / a university / a \ncoffee shop / a hospital, hours, money, company\nFood/Drinks: \nchicken, fish, ice cream, salad, meat, seafood, \nburgers, chips, oranges, vegetables, bacon, kebab, \nrice, tomato, prawns, bread, cake, curry, pizza, cheese, \nsalmon, cod, sandwich, drinks, fruit juice, coffee, tea, \nwater, coke, milk"
+    },
+    "56": {
+      "mode": "model",
+      "model": "Answers will vary, but the flags suggest Spain, Israel \nand Georgia. The faces are from Asia, the Indian \nsubcontinent, Europe and perhaps South America. \nThe best answer is ‘many different countries in \nthe world’."
+    },
+    "60": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "62": {
+      "mode": "model",
+      "model": "Photo a: difficult, hungry, small, tired\nPhoto b: expensive, good, great, married, new, nice\nPhoto c: cold, difficult, expensive, good, great\nPhoto d: good, great, hot, nice, old, tired, well"
+    },
+    "63": {
+      "mode": "model",
+      "model": "1\tIt’s an expensive / a good / a great / a new flat.\n2\tIt’s a big / a difficult / a great / a new / a small \nclass.\n3\tIt’s an expensive / a great / a nice / an old hotel.\n4\tIt’s bad / cold / good / hot / nice weather.\n5\tThey’re expensive / great / new / nice / old \nclothes.\n6\tI’m cold / hot / hungry / married / old / well / \ntired."
+    },
+    "71": {
+      "mode": "model",
+      "model": "1\tin a hotel: How’s your room? How’s the \nrestaurant? How’s the food? How’s the service?\n2\tin a restaurant: How’s the food? How’s the \nservice? How’s your table?\n3\tat school: How’s the class? How’s the teacher? \nHow are the students? How’s the lesson?\n4\tin a different country: How’s the weather? How’s \nthe food? How’s your hotel?\n5\tabout a new flat/house: How’s the living room? \nHow’s the garden? How’s the kitchen?"
+    },
+    "74": {
+      "mode": "model",
+      "model": "My brother doesn’t go to university.\nMy friend doesn’t have a lot of money.\nMy mum doesn’t live in New York.\nMy sister doesn’t take the bus to work.\nMy dad doesn’t want a new job.\nMy son doesn’t work in the city centre."
+    },
+    "77": {
+      "mode": "model",
+      "model": "I don’t want a new job. I have a good job. I’m a doctor.\nI want a new house. I don’t like my flat.\nI have a lot of friends. I go to a lot of parties. I don’t \nwant more friends.\nI want a family. I want a daughter and a son. I don’t \nwant lots of money."
+    },
+    "80": {
+      "mode": "model",
+      "model": "a weekend in a city: a map, my mobile, a charger, a \nsmall bag, some cash, a toothbrush and toothpaste, \n(credit card, passport, sunglasses)\na week to visit friends or family: my mobile, a towel \nand some soap, a charger, lots of clothes, something \nto read, some other shoes, (presents)\ntwo weeks in a hotel in a hot country: my mobile, a \ncharger, a (beach) towel, lots of clothes, some cash, \nsomething to read, some other shoes, (sun cream, \nsunglasses, swimming costume)"
+    },
+    "84": {
+      "mode": "model",
+      "model": "Here is a list of words students may wish to say: \npassport, credit card, hat, boots, flip flops, sunglasses, \nsun cream, shorts, bikini, swimming costume, \nheadphones, a (guide) book."
+    },
+    "85": {
+      "mode": "model",
+      "model": "I don’t take a brush. I don’t have any hair!\nI don’t take any soap. The hotel has soap.\nI don’t take lots of clothes. I take a small bag of things.\nI don’t take any food from home. I like different food!"
+    },
+    "88": {
+      "mode": "model",
+      "model": "Student A (student):\nDo you have any soap? Of course. Here you are.\nDo you have a charger? No. I’m sorry.\nDo you want my mobile  \nnumber?   Yes, please.\nStudent B (host):\nDo you need to phone  \nhome?   No. It’s OK. Later.\nDo you want to eat? Yes, please. I’m hungry.\nDo you have a coat? Yes, I do."
+    },
+    "90": {
+      "mode": "model",
+      "model": "adjectives: cheap, expensive, big, small, cold, hot, \ngood, bad, etc.\nthings you have: money, a big house, a nice car, \nbooks, free time, children, a mobile"
+    },
+    "92": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "93": {
+      "mode": "model",
+      "model": "a) a church, a shop (but not a clothes shop), a café \n(perhaps), a park (perhaps)\nb) a supermarket, a restaurant, a church, a park, a \ncash machine, a clothes shop, a car park, a hotel, a \ncafé, a bank (the others – a cinema, a swimming \npool, a hospital, a train station and a market – are all \npossible in a town in the UK, and likely in a big town, \nbut not necessarily in a small town)\nNote that the answers may also depend on where \nyour students come from. In some countries, most \nvillages may have no facilities at all."
+    },
+    "97": {
+      "mode": "model",
+      "model": "There’s a hotel in Picture A but there isn’t one in \nPicture B.\nThere’s a man in Picture A but there’s a woman in \nPicture B.\nIn Picture B there’s a child but in Picture A there isn’t.\nThere’s a car park in Picture A but there’s a food shop \nin Picture B.\nThere’s a cinema in Picture B but there isn’t one in \nPicture A.\nThere’s a pizza restaurant in Picture A but in Picture B \nthere’s a café.\nThere are tables and chairs outside in Picture B but  \nin Picture A there are no tables and chairs.\nIn Picture A there’s a book shop but in Picture B \nthere’s a clothes shop."
+    },
+    "100": {
+      "mode": "model",
+      "model": "Students’\town\tideas"
+    },
+    "101": {
+      "mode": "model",
+      "model": "Answers depend on what day it is today, as well \nas your students’ culture. The answers below are a \nguide:\n4 6am (or when it gets light) to 12 (midday)\n5 12 (midday) to about 5pm\n6 5 or 6pm to about 9pm\n7  about 10 or 11pm to 4 or 5am (or when it \ngets light)\n8 Monday; 10 o’clock; 11 o’clock\n9 Sunday\n10 6am (on weekdays in the UK)"
+    },
+    "102": {
+      "mode": "model",
+      "model": "Students’ own ideas\nI always/usually go to work on Monday.\nI’m normally free on Saturday and Sunday.\nI always/usually/normally start classes at 9.\nI normally go to bed at 11.\nI usually wake up at 7."
+    },
+    "114": {
+      "mode": "model",
+      "model": "You ask the teacher:\nCan you open / close the window / door?\nCan you help me?\nCan you translate this word?\nCan you repeat that?\nCan I write the answer in the book?\nCan I go to the toilet?\nThe teacher asks you:\nCan you open / close your book?\nCan you stop talking?\nCan you listen?\nCan I have your books?\nYou ask another student:\nCan I have a pen?\nCan I use your dictionary?\nCan I sit with you?"
+    },
+    "116": {
+      "mode": "model",
+      "model": "days of the week: Sunday, Monday, Tuesday, \nWednesday, Thursday, Friday, Saturday, today, \ntomorrow, yesterday\ntimes of day: morning, afternoon, evening, night\nplaces in towns and cities: a supermarket, a \nrestaurant, a cinema, a church, a park, a cash \nmachine, a clothes shop, a car park, a hotel, a café, \nthe train station, a swimming pool, a hospital, a \nbank, a market"
+    },
+    "121": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "122": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "126": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "129": {
+      "mode": "model",
+      "model": "T axis in my town are very expensive.\nI usually walk to work but on Fridays I get a taxi.\nI usually wait about five minutes for the bus.\nI never get a taxi to go to work. I always get  \nthe bus.\nConversation practice"
+    },
+    "131": {
+      "mode": "model",
+      "model": "1\ttake the train / bus / red line\n2\tget off the bus / train / at the next stop \n3\tvisit the museum / a friend / the old town / \nLondon / a city\n4\twait for the bus / the train / a friend\n5\tbuy some clothes / a drink / some food"
+    },
+    "132": {
+      "mode": "model",
+      "model": "Here is a possible dialogue with an extra question:\n A:\tHow do you normally get here?\n B:\tI always get the bus.\n A:\tHow long does it take?\n B:\tIt usually takes 35 minutes.\n A:\tWhat bus do you get? \n B:\tThe C3."
+    },
+    "133": {
+      "mode": "model",
+      "model": "Yes – it’s good to eat, sleep and talk to people on \ntrains. You can get off and see interesting places. \nSome trains are cheap.\nNo – trains are slow, take a long time and are \nusually expensive."
+    },
+    "139": {
+      "mode": "model",
+      "model": "Possible conversations:\n A:\tWhere are you going?\n B:\tThe pizzeria in the city centre. \n A:\tOh, yes. It’s in the High Street near the \nsupermarket. You can walk there.\n A:\tWhere are you going?\n B:\tThe National Sports Centre.\n\tA:\tOK. Take the number 7 bus. It takes about \n20 minutes."
+    },
+    "140": {
+      "mode": "model",
+      "model": "After class, I normally go to a café / go shopping / \ngo home.\nAfter work I often go to the gym / visit friends.\nOn holiday, I usually go to the beach / visit family \nin Australia."
+    },
+    "144": {
+      "mode": "model",
+      "model": "I’m going to meet friends after the class.\nI’m going (to go) to the cinema tonight.\nI’m going (to go) on holiday next week."
+    },
+    "146": {
+      "mode": "model",
+      "model": "Possible conversation:\n A:\tWhat are you doing after the class?\n B:\tI’m going to meet friends after the class.\n A:\tOh. Where are you going?\n B:\tTo a café in the Old Town. We’re going to have \na coffee.\n A:\tGreat!"
+    },
+    "148": {
+      "mode": "model",
+      "model": "Possible conversation:\n A:\tI’ll meet you at the station.\n B:\tOK. What time are you getting there?\n A:\tOh, at about four o’clock.\n B:\tGreat. Can we meet at the café there?\n B:\tYes, fine."
+    },
+    "150": {
+      "mode": "model",
+      "model": "words for buying tickets and travelling by train: \nchange trains, first/second/third class, single, return, \npay by card, cash, receipt, platform\nthings you are going to do next weekend: go to the \ngym, meet a friend, see a film, play football, have a \ncoffee, go shopping, stay at home"
+    },
+    "151": {
+      "mode": "model",
+      "model": "a is not serious (but it is disappointing)\nb is a serious problem (you could miss a holiday or \nwork\nc could be serious (you can’t sleep)\nd is not serious (but might be serious if you are tired \nevery day)"
+    },
+    "153": {
+      "mode": "model",
+      "model": "There’s a lot of rain: in my country, I often have this \nproblem.\nI’m very tired: I sometimes have this problem \nbecause I work a lot.\nThere’s nowhere to sit: in our class, I never have this \nproblem. There are a lot of chairs."
+    },
+    "156": {
+      "mode": "model",
+      "model": "I went to the cinema / the theatre / a restaurant / a \ncafé / a party yesterday / last night.\nI had a party / a meal / an evening class yesterday / \nan evening at home last night."
+    },
+    "159": {
+      "mode": "model",
+      "model": "I had a problem at home. / I don’t have my book. / I \ndon’t have my homework. / The bus was late. / I had \na problem with my car."
+    },
+    "160": {
+      "mode": "model",
+      "model": "How was your journey/flight: It was good / late / on \ntime / long / OK. Thank you. \nHow was your day?: It was OK/great/busy.\nHow was your holiday?: It was great / not very \ngood / OK, thanks."
+    },
+    "161": {
+      "mode": "model",
+      "model": "How\tare\tyou?\t \tI’m\tfine/good,\tthanks.\nHow’s\twork?\t\t It’ s\tOK/great.\nHow\tdo\tyou\tget\there?\t \tOn\tthe\tbus/I\twalk\tto\t\nschool.\nHow\twas\tthe\tlast\tclass?\t \tIt\twas\tOK/great/\ninteresting.\nHow\twas\tyour\tweekend?\t \tIt\twas\tgreat.\tI\twent\t\nto\tthe\tbeach.\nHow\twas\tyour\tday\tyesterday?\t It\twas\tOK/busy."
+    },
+    "167": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "170": {
+      "mode": "model",
+      "model": "I went to Thailand. I stayed there for ten days. I stayed \nin a hotel called the Bangkok Palace. It’s near the beach. \nIt was expensive but great. We went swimming but we \ndidn’t see a lot. I liked the food in Thailand."
+    },
+    "171": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "173": {
+      "mode": "model",
+      "model": "I like the afternoon best. I don’t like the morning.\nIn the morning I usually have breakfast, in the \nafternoon I often go for a coffee and in the evening \nI sometimes go to class. I never go to the gym in \nthe morning!\nThe meal I like best is dinner. I usually have a big \ndinner at home.\nI usually have bread with my meals. I always have \nsome water."
+    },
+    "176": {
+      "mode": "model",
+      "model": "When\tI’m\ton\tholiday\tI\tsometimes\ttalk\tto\tpeople\tin\t\nthe\thotel.\tI\toften\ttalk\tto\tpeople\tat\tbreakfast.\t\nWe\tusually\tstay\tin\ta\thotel\tnear\tthe\tbeach.\nI\tlike\twalks\tin\tthe\tOld\tTown.\tI\tlike\tmuseums\tand\tart\t\ngalleries,\ttoo."
+    },
+    "179": {
+      "mode": "model",
+      "model": "A:\t I\twent\tto\twork.\t\nB:\tWhere\tdo\tyou\twork?\t\nA:\t In\tan\toffice\tin\tthe\tcity.\nB:\t Oh.\tWhat\tdo\tyou\tdo?\nA:\tI’m\ta\tlawyer.\nA:\t I\twent\tout\tlast\tnight.\nB:\t Where\tdid\tyou\tgo?\nA:\t I\twent\tto\tthe\tcinema.\tDid\tyou\tgo\tout?\nB:\tNo.\tI\tstayed\tat\thome.\tI\twatched\tTV.\nA:\t I\twent\tto\tthe\tbeach\tyesterday.\nB:\t Did\tyou\tstay\tthere\tlong?\nA:\tNo.\tI\tstayed\tthere\tfor\tan\thour.\nB:\t Oh.\tDid\tyou\tswim\tin\tthe\tsea?\nA:\tNo.\tIt\trained\tand\twe\twent\thome!"
+    },
+    "180": {
+      "mode": "model",
+      "model": "How\twas\tyour\tday/meal/lunch/walk?\nI\thad\ta\tvery\tbusy\tweek/weekend/morning.\nWe\tstayed\tin\ta\thotel/village/town.\nWe\thad\ta\tgreat\tview\tof\tthe\tmountains/sea/beach.\nWhat’s\tthe\tpassword\tfor\tthe\tinternet?\nWhat\tdid\tyou\tdo\tlast\tFriday/weekend?\nI\tmet\tsome\tstudents/people/children.\nI\twent\tto\tthe\tcinema/park/supermarket."
+    },
+    "181": {
+      "mode": "model",
+      "model": "past\tverbs:\twas,\twere,\thad,\twent,\tdid,\tloved,\trained,\t\nstayed,\tshared,\ttalked\nwords\tabout\tproblems:\tlate,\tnoise,\train,\ttired,\ttraffic,\t\nwrong"
+    },
+    "183": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "188": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "198": {
+      "mode": "model",
+      "model": "I went to see my cousin.\nDo you like visiting your cousin?\nDo you go to see your cousin a lot?\nWhat do you normally do with your cousin?"
+    },
+    "199": {
+      "mode": "model",
+      "model": "1\nreading: book / favourite writer / story / magazine / \nbook shop\nlistening to music: singer / band / song / CD\ngoing shopping: try on clothes / bag / money / \nshop / buy\n(See Exercise 4 on Student’s Book page 62 for more \npossible answers.)\n2\nLast week I went to the beach. It was good and I \nwent in the water.\nAt the weekend I normally go shopping for food. \nNext week I’m going to do an exam. Then next \nmonth I’m going on holiday!"
+    },
+    "200": {
+      "mode": "model",
+      "model": "Picture a: There is a man reading a book. He is sitting \non a bed.\nPicture b: A man is using a computer in the kitchen.\nPicture c: There is a young man watching something \nat home.\nPicture d: A young man is listening to music in \nthe park."
+    },
+    "204": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "205": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "208": {
+      "mode": "model",
+      "model": "Japanese writers: Haruki Murakami, Koushun Takami, \nNahoko Uehashi\nAmerican bands: Aerosmith, Foo Fighters, Nirvana\nBritish singers: Adele, Leona Lewis, Ed Sheeran\nChinese companies: Air China, Alibaba, Huawei\nSpanish actors: Antonio Banderas, Penélope Cruz, \nJavier Bardem\nEgyptian cities: Cairo, Alexandria, Sharm El Sheikh"
+    },
+    "210": {
+      "mode": "model",
+      "model": "Student’s own ideas\nWriting"
+    },
+    "211": {
+      "mode": "model",
+      "model": "I don’t often watch TV. I don’t really like it.\nI love reading books. I like crime novels and stories \nabout the past. \nI normally read in the evening at home. At the \nmoment I’m reading a book called The Fault In Our \nStars. It’s about two young people and it’s very sad, \nbut I like it."
+    },
+    "212": {
+      "mode": "model",
+      "model": "Student’s own ideas"
+    },
+    "214": {
+      "mode": "model",
+      "model": "Colour: red, orange, pink, purple, grey, gold, silver\nSize: extra small, medium, short\nClothes: a shirt, a skirt, a jumper, trousers, shorts\nReason to buy: feels great, looks nice, fits well, like \nthe colour"
+    },
+    "215": {
+      "mode": "model",
+      "model": "In photo a you can see: blue, brown, green, yellow, \ntops, a dress, a jacket, small\nIn photo b you can see: blue, brown, green, white, \njeans, shoes, a shirt, long \nStudents could also argue for: (the shoes) feel \ncomfortable and (the dresses) look good"
+    },
+    "221": {
+      "mode": "model",
+      "model": "1\tDo you like playing football?\n2\tDid you watch the new TV series last night?\n3\tI’m sleeping a lot at the moment.\n4\tIt’s a really good French film.\n5\tWhat are you reading?\n6\tWhat do you think of this?\n7\tThey are my favourite jeans.\n8\tWhat do you normally cook?"
+    },
+    "222": {
+      "mode": "model",
+      "model": "Country adjectives: American, British, Brazilian, \nChinese, Egyptian, French, German, Japanese, \nSpanish\nColours: black, blue, brown, green, red, white, yellow\nClothes: coat, dress, hat, jeans, jumper, shirt, shoes, \nskirt, socks, top, trainers, trousers, T-shirt"
+    },
+    "227": {
+      "mode": "model",
+      "model": "1\ttake a bus/train\n2\twork in an office/school/hospital\n3\tstudy English/History/Maths\n4\ttravel abroad / to the USA / fast\n5\tmake dinner/lunch/tea\n6\t\tmeet new classmates / your family / to go shopping\n7\t\tget lunch / a drink / some shopping"
+    },
+    "228": {
+      "mode": "model",
+      "model": "I’m working hard at the moment. \nI often travel a lot for work.\nI met a friend for coffee yesterday.\nMy sister got a new job last year."
+    },
+    "229": {
+      "mode": "model",
+      "model": "Picture a: There is a girl. She is sitting and writing. \nI think she is studying for an exam.\nPicture b: A man is at the airport. There is a plane. \nHe is waiting.\nPicture c: There is a child on a sofa. He is ill. \nHis mother is using a computer."
+    },
+    "238": {
+      "mode": "model",
+      "model": "Three more words that go with the verbs on page 70:\ntake a taxi / a bus / a train\nwork in an office / at home /at school\nstudy English / History / at school\ntravel on a bus / abroad / to the USA\nmake friends / dinner / tea\nmeet for a coffee / friends / classmates \nget lunch / new car / ready"
+    },
+    "240": {
+      "mode": "model",
+      "model": "Kitchen: cooker, washing machine, dishwasher, freezer\nBathroom: bath, mirror, toilet, bidet\nBedroom: wardrobe, chest of drawers, mirror\nLiving room: armchair, TV, coffee table, lamp"
+    },
+    "244": {
+      "mode": "model",
+      "model": "bag, coat, shoes, = in a cupboard next to the door\nkeys = on a shelf in the kitchen\nmoney and cards = in my bag\npassport = in a cupboard in the living room\nphone = on a table in my bedroom"
+    },
+    "247": {
+      "mode": "model",
+      "model": "I lost some money on holiday in Mexico. I left it in \na taxi.\nI lost my pen yesterday."
+    },
+    "248": {
+      "mode": "model",
+      "model": "No, I didn’t find the money. I went to the police, but \nI didn’t find the money. It was $200!\nI looked in my big bag and the pen was there! No, \nit wasn’t an expensive pen, but I like it."
+    },
+    "255": {
+      "mode": "model",
+      "model": "Picture 1:  \nShe’s in the living room. I think she’s American or \nmaybe she’s British. She’s sitting on a sofa and using \na laptop. Maybe she’s an accountant.\nPicture 2:  \nShe’s at a desk in an office or workroom. Maybe she’s \nfrom a European country. She’s making jewellery, I \nthink. I don’t know the name of her job."
+    },
+    "263": {
+      "mode": "model",
+      "model": "1\tI’m working hard / in the office this week. \n2\tShe’s travelling a long way / on a train today.\n3\tHe’s in the kitchen washing dishes / cooking.\n4\tShe’s talking on the phone / to her friend.\n5\tI can’t find the bank / my pen / the website.\n6\tWhen did you last go to a restaurant / \nwork at home?\n7\tThey make a lot of cakes/friends at parties.\n8\tHe’s a very good father/writer."
+    },
+    "264": {
+      "mode": "model",
+      "model": "Rooms: bathroom, bedroom, kitchen, living \nroom, office\nFurniture: bed, chair, cupboard, shelf, sofa, table, \n(carpet, fridge, sink, shower)\nJobs: cleaner, dancer, designer, driver, manager, player, \nsinger, teacher, worker, writer"
+    },
+    "267": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "268": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "273": {
+      "mode": "model",
+      "model": "I broke my mobile phone a few days ago.\nI went on holiday last summer.\nI didn’t go to my English class on Tuesday."
+    },
+    "280": {
+      "mode": "model",
+      "model": "1 \nA: I went on holiday two months ago.\nB: Where did you go?\nA: I went to Argentina a few years ago. \nB: What did you do there?\nA: I went to see some friends.\n2 \nA: I broke my arm when I was young. \nB: Did it hurt?\nA: Yes! But it’s OK now."
+    },
+    "282": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "283": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "284": {
+      "mode": "model",
+      "model": "transport, jobs, shops, history, entertainment (cafés, \nrestaurants, cinemas)"
+    },
+    "285": {
+      "mode": "model",
+      "model": "A: The weather in this country is good. \nB: Yes, there’s always sun and there isn’t often rain.\nA: I think the environment here is OK. \nB: Yes. There aren’t a lot of cars and the air is good.\nC: Here it is OK, but in the big towns it’s not \nvery good."
+    },
+    "287": {
+      "mode": "model",
+      "model": "We have almost no snow in Greece. \nThere are a lot of police on the streets of big towns in \nmy country.\nThere is some beautiful countryside in my country."
+    },
+    "291": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "295": {
+      "mode": "model",
+      "model": "The weather in my country is better.\nI think education is worse in my country.\nI think the environment is better there."
+    },
+    "296": {
+      "mode": "model",
+      "model": "What do you think of the weather here?\nIs the health system good in your country?\nWhat do you think of the environment in Mexico?\nDo you think France is safe?"
+    },
+    "299": {
+      "mode": "model",
+      "model": "Difficulties in living abroad: new language, different \ncustoms, missing family and friends, problems with \nvisas and passports, different food, getting access to \na health system"
+    },
+    "301": {
+      "mode": "model",
+      "model": "My friends Sue and Paulo moved to a new place. \nThey are in Spain because they like hot weather. \nScotland was very cold!\nMy brother moved to Los Angeles for work. He works \nwith computers and there’s a lot of work there."
+    },
+    "302": {
+      "mode": "model",
+      "model": "A: Who is Pietro? How do you know him?\nB: He’s my friend from work. We started work on the \nsame day in the same office. How do you know \nMina?\nA: She lives in the house next to me. She moved to \nthe house four years ago. We’re friends now."
+    },
+    "307": {
+      "mode": "model",
+      "model": "Education\tis\tworse\ttoday.\nWe\thave\ta\tproblem\twith\tour\thealth\tsystem.\nBusiness\tis\tvery\tgood.\nThere\tisn’t\ta\twar\tin\tmy\tcountry.\nFor further revision and pronunciation \npractice, see Exercises 1–5 in the Grammar \nreference on pages 131–132."
+    },
+    "312": {
+      "mode": "model",
+      "model": "Note that there is no fixed answer – answers will \ndepend on your students and the places they \ncome from. \nsummer\nair-con(ditioning)\nhot\n38 degrees (38 °C)\nsunny\ndry\nwarm\nWinter\nheating\ncold\nminus 30 (–30 °C)\nrain\nwet\nwindy\nfire"
+    },
+    "313": {
+      "mode": "model",
+      "model": "Summer: sun, sunglasses, sun cream, holiday\nWinter: ice, snow, ski, coat, snowboarding, fog, cool"
+    },
+    "316": {
+      "mode": "model",
+      "model": "It’s going to be sunny tomorrow.\nIt’s going to be 20 degrees next weekend, but it’s \ngoing to rain next week.\nI’m going shopping tomorrow.\nNext week I’m going walking in the mountains.\nWe’re going to stay at home in the summer.\nMy sister’s going to university next year."
+    },
+    "319": {
+      "mode": "model",
+      "model": "A: Is it going to be nice at the weekend?\nB: Yes, I think so.\nA: Are you going to the café this evening?\nB: No, I don’t think so. Are you going?\nA: I think so.\nConversation Practice"
+    },
+    "320": {
+      "mode": "model",
+      "model": "A:  Last week it was sunny. I went to the beach.\nB:  Yes, it was really hot all week. It was great. Is it \ngoing to be hot next week too?\nA: I don’t know, maybe.\nC:  Yes, I think so. It’s always like this in the summer. I \ndon’t like it hot!\nA: Well, I like it because it doesn’t usually rain.\nB: And it’s not very windy."
+    },
+    "321": {
+      "mode": "model",
+      "model": "A: I’m going to Spain in the summer. We’re going to \nstay at a hotel near the beach. Are you going on \nholiday?\nB: Yes, I am. I’m visiting my family next week and \nthen in August I’m going to the USA. It’s going to \nbe great!\nA: Nice!"
+    },
+    "326": {
+      "mode": "model",
+      "model": "Students’ own ideas\nWriting"
+    },
+    "329": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "332": {
+      "mode": "model",
+      "model": "1\tnext year / in the summer\n\t 2\tonly 60\n\t 3\ta girl\n\t 4\tsomebody dropped a cigarette\n\t 5\tthe Green Party\n\t 6\tI don’t think so.\n\t 7\tThe old airport is too small.\n\t 8\tGolovin\n\t 9\tmillions\n\t 10\ttwo hundred"
+    },
+    "335": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "337": {
+      "mode": "model",
+      "model": "Weather: rain/raining, snow, windy, sunny, dry, wet, \nhorrible, cold, warm, hot, summer, winter, degrees\nEntertainment: play, theatre, circus, festival, fair, \nexhibition, concert, jazz, comedy show, film, cinema, \nmatch, fun, boring, music\nNews: heart attack, election, score, win/lose, build, \naccident, fire, sport, famous people, politics, die, \ngood, terrible, interesting\nFor further pronunciation practice, see Exercise 1  \nin the Grammar reference on page 133.\nanswers to exercise 1B, g rammar reference\n1 a    2 b    3 a    4 a    5 a    6 b    7 a    8 b    9 a    \nvI deo 5: a sPeCIal sk Ill"
+    },
+    "338": {
+      "mode": "model",
+      "model": "There’s a big room in a large building, maybe a \nhotel or an exhibition centre. It has lots of very big \nwindows. You can also see the street outside with \ncars and people in it.\nThere’s an artist drawing a picture and people are \nwatching and taking photos of him. Some people are \nsitting, some are standing and others are walking."
+    },
+    "342": {
+      "mode": "model",
+      "model": "Students’ own answers\nKey phrases: have a party, go out for a meal, cook a \nspecial meal, invite friends, buy/give a present, send \na card, make a cake, sing a song"
+    },
+    "344": {
+      "mode": "model",
+      "model": "1\tMy birthday is in May / at the beginning of May.\n2\tMy grandparents’ anniversary is in the third week \nof September / during September.\n3\tMy sister’s birthday is at the end of October  / in the \nsummer.\n4\tThe next public holiday is in August / during the \nsummer.\n5\tI’m going to the USA for work at the end of this \nmonth / in the middle of June.\n6\tI went to France skiing in December / in the second \nweek of January. \n7\tI had a horrible time at the beginning of November \n/ during the winter.\n8\tLast year was a good year. I went on holiday in July / \ngot a new job in August."
+    },
+    "352": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "358": {
+      "mode": "model",
+      "model": "I finished school when I was 16.\nI finished university in 2015.\nI got my first job after university.\nI became a manager before I was 30."
+    },
+    "361": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "362": {
+      "mode": "model",
+      "model": "Students’ own answers"
+    },
+    "365": {
+      "mode": "model",
+      "model": "I’m studying English because I have an exam soon / \nI want a good job.\nI chose this school because the website was good / \nit’s in an interesting place.\nI like where I live because the people are friendly / \nthere are good cafés.\nI like my job because the pay is good. I chose it \nbecause I could live in my home city."
+    },
+    "371": {
+      "mode": "model",
+      "model": "See the full list of months on Student’s Book page 98.\nSee the extensive list of collocations about life \nevents on Student’s Book page 100.\nFor further revision and pronunciation \npractice, see Exercises 1–2 in the Grammar \nreference on page 135."
+    },
+    "374": {
+      "mode": "model",
+      "model": "I help my family a lot. I always help my dad to make \nbreakfast and I sometimes help in the garden.\nLast week I helped my friend with his English \nhomework. I sometimes help tourists in my city. \nI give them directions to places."
+    },
+    "375": {
+      "mode": "model",
+      "model": "Picture a:\nThey are in a bar or café.\nStudents may suggest problems with service, or the \nquality of coffee, or that there is only one seat.\nThe waiter or waitress may fix the problem.\nPicture b:\nThey are in the street or in a town/city.\nStudents may suggest problems with the car, or the \nfact that the man can’t walk well.\nThe woman may help the man get into the car.\nPicture c:\nThey are in a hotel, near the reception desk.\nThere seems to be a problem with the shower. \nPerhaps the receptionist can get somebody to fix it."
+    },
+    "379": {
+      "mode": "model",
+      "model": "1\tI’ll cook/buy lunch.\n2\tI’ll call your boss.\n3\tI’ll go up the stairs.\n4\tI’ll look at the timetable / ask my mum."
+    },
+    "386": {
+      "mode": "model",
+      "model": "Problems: hungry, late for a meeting, no space in \nthe lift, don’t know bus times, something wrong \nwith computer, a bit lost, coffee’s not hot, the café’s \nvery full, glasses are broken, battery’s low, card’s not \nworking, the shopping’s heavy\nExample conversation: \nA: My shopping’s very heavy.\nB: I’ll carry it for you.\nA: Are you sure?\nB: Yes. It’s fine. I’m walking past your house."
+    },
+    "389": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    },
+    "395": {
+      "mode": "model",
+      "model": "I want to get a big cake for my mother’s \nbirthday party.\nI need to get a new bike to ride to work. My bike \nis broken!\nMy friend bought me a card for my birthday.\nMy dad bought me a suitcase to put my things in \nwhen I go to university."
+    },
+    "396": {
+      "mode": "model",
+      "model": "When you leave home in the morning: wave or give \na kiss or hug and say: Bye! See you later!\nAt the end of a class or meeting: Goodbye. See you \ntomorrow. Have a nice evening.\nAt the end of an evening out with friends: wave, \ngive a kiss or a hug and say: Bye! See you. Let’s get \ntogether again soon.\nAfter staying at someone’s home: shake hands, give \na kiss or a hug and say: Thanks for having me.\nAfter meeting someone for the first time: shake \nhands, or possibly give a kiss and say: It was nice to \nmeet you. Hope to see you again.\nWhen a friend or one of your family is going away \nfor a long time: give them a hug and/or a kiss and \nsay: Goodbye. Stay in touch/contact. Please call/write."
+    },
+    "398": {
+      "mode": "model",
+      "model": "I missed a train in France last year. I was very \nunhappy. I waited three hours for the next one.\nI hurry all the time. I’m sometimes late to work and I \nhave a lot of things to do.\nI don’t often forget things. I write everything down \nin a list or in my diary. I sometimes forget my \ncousins’ birthdays.\nI stay in contact with friends on Whatsapp. I stay in \ncontact with my family by phone or by visiting."
+    },
+    "406": {
+      "mode": "model",
+      "model": "carry a backpack/suitcase\nstand up / in the corner\nlend me a book / your car keys\nsend them a letter / a text\nmiss the train / the party\ngive them a card / a kiss\norder a meal / a takeaway\nwalk to work / to school \nFor further revision and pronunciation \npractice, see Exercises 1–3 in the Grammar \nreference on pages 136–137."
+    },
+    "409": {
+      "mode": "model",
+      "model": "Students’ own ideas"
+    }
+  },
+  "targets": {
+    "0": {
+      "spread": 8,
+      "n": 8,
+      "aliases": [
+        9
+      ]
+    },
+    "1": {
+      "spread": 8,
+      "n": 13,
+      "aliases": []
+    },
+    "2": {
+      "spread": 8,
+      "n": 2,
+      "aliases": []
+    },
+    "3": {
+      "spread": 8,
+      "n": 3,
+      "aliases": []
+    },
+    "4": {
+      "spread": 8,
+      "n": 4,
+      "aliases": []
+    },
+    "5": {
+      "spread": 10,
+      "n": 1,
+      "aliases": []
+    },
+    "6": {
+      "spread": 10,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "7": {
+      "spread": 10,
+      "n": 9,
+      "aliases": []
+    },
+    "8": {
+      "spread": 10,
+      "n": 10,
+      "aliases": []
+    },
+    "9": {
+      "spread": 10,
+      "n": 11,
+      "aliases": [
+        12
+      ]
+    },
+    "10": {
+      "spread": 10,
+      "n": 14,
+      "aliases": []
+    },
+    "11": {
+      "spread": 10,
+      "n": 1,
+      "aliases": []
+    },
+    "12": {
+      "spread": 10,
+      "n": 2,
+      "aliases": []
+    },
+    "13": {
+      "spread": 10,
+      "n": 3,
+      "aliases": []
+    },
+    "14": {
+      "spread": 10,
+      "n": 4,
+      "aliases": []
+    },
+    "15": {
+      "spread": 10,
+      "n": 1,
+      "aliases": []
+    },
+    "16": {
+      "spread": 10,
+      "n": 2,
+      "aliases": []
+    },
+    "17": {
+      "spread": 10,
+      "n": 16,
+      "aliases": []
+    },
+    "18": {
+      "spread": 10,
+      "n": 17,
+      "aliases": []
+    },
+    "19": {
+      "spread": 12,
+      "n": 2,
+      "aliases": []
+    },
+    "20": {
+      "spread": 12,
+      "n": 6,
+      "aliases": []
+    },
+    "21": {
+      "spread": 12,
+      "n": 10,
+      "aliases": []
+    },
+    "22": {
+      "spread": 12,
+      "n": 11,
+      "aliases": []
+    },
+    "23": {
+      "spread": 12,
+      "n": 15,
+      "aliases": []
+    },
+    "24": {
+      "spread": 12,
+      "n": 1,
+      "aliases": []
+    },
+    "25": {
+      "spread": 12,
+      "n": 17,
+      "aliases": []
+    },
+    "26": {
+      "spread": 12,
+      "n": 1,
+      "aliases": []
+    },
+    "27": {
+      "spread": 16,
+      "n": 4,
+      "aliases": []
+    },
+    "28": {
+      "spread": 16,
+      "n": 6,
+      "aliases": []
+    },
+    "29": {
+      "spread": 16,
+      "n": 1,
+      "aliases": []
+    },
+    "30": {
+      "spread": 16,
+      "n": 11,
+      "aliases": [
+        12
+      ]
+    },
+    "31": {
+      "spread": 16,
+      "n": 1,
+      "aliases": []
+    },
+    "32": {
+      "spread": 16,
+      "n": 2,
+      "aliases": []
+    },
+    "33": {
+      "spread": 16,
+      "n": 3,
+      "aliases": []
+    },
+    "34": {
+      "spread": 16,
+      "n": 4,
+      "aliases": []
+    },
+    "35": {
+      "spread": 16,
+      "n": 16,
+      "aliases": [
+        17
+      ]
+    },
+    "36": {
+      "spread": 18,
+      "n": 3,
+      "aliases": []
+    },
+    "37": {
+      "spread": 18,
+      "n": 1,
+      "aliases": []
+    },
+    "38": {
+      "spread": 18,
+      "n": 2,
+      "aliases": []
+    },
+    "39": {
+      "spread": 18,
+      "n": 14,
+      "aliases": []
+    },
+    "40": {
+      "spread": 18,
+      "n": 9,
+      "aliases": []
+    },
+    "41": {
+      "spread": 18,
+      "n": 11,
+      "aliases": []
+    },
+    "42": {
+      "spread": 18,
+      "n": 12,
+      "aliases": []
+    },
+    "43": {
+      "spread": 18,
+      "n": 13,
+      "aliases": []
+    },
+    "44": {
+      "spread": 18,
+      "n": 1,
+      "aliases": []
+    },
+    "45": {
+      "spread": 18,
+      "n": 2,
+      "aliases": []
+    },
+    "46": {
+      "spread": 18,
+      "n": 3,
+      "aliases": []
+    },
+    "47": {
+      "spread": 18,
+      "n": 15,
+      "aliases": []
+    },
+    "48": {
+      "spread": 18,
+      "n": 17,
+      "aliases": []
+    },
+    "49": {
+      "spread": 20,
+      "n": 2,
+      "aliases": []
+    },
+    "50": {
+      "spread": 20,
+      "n": 1,
+      "aliases": []
+    },
+    "51": {
+      "spread": 20,
+      "n": 8,
+      "aliases": []
+    },
+    "52": {
+      "spread": 20,
+      "n": 9,
+      "aliases": []
+    },
+    "53": {
+      "spread": 20,
+      "n": 10,
+      "aliases": []
+    },
+    "54": {
+      "spread": 20,
+      "n": 17,
+      "aliases": []
+    },
+    "55": {
+      "spread": 20,
+      "n": 2,
+      "aliases": []
+    },
+    "56": {
+      "spread": 22,
+      "n": 1,
+      "aliases": []
+    },
+    "57": {
+      "spread": 22,
+      "n": 2,
+      "aliases": []
+    },
+    "58": {
+      "spread": 22,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "59": {
+      "spread": 22,
+      "n": 5,
+      "aliases": []
+    },
+    "60": {
+      "spread": 22,
+      "n": 6,
+      "aliases": []
+    },
+    "61": {
+      "spread": 23,
+      "n": 0,
+      "aliases": []
+    },
+    "62": {
+      "spread": 26,
+      "n": 5,
+      "aliases": []
+    },
+    "63": {
+      "spread": 26,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "64": {
+      "spread": 26,
+      "n": 8,
+      "aliases": []
+    },
+    "65": {
+      "spread": 26,
+      "n": 10,
+      "aliases": []
+    },
+    "66": {
+      "spread": 26,
+      "n": 11,
+      "aliases": []
+    },
+    "67": {
+      "spread": 26,
+      "n": 12,
+      "aliases": []
+    },
+    "68": {
+      "spread": 26,
+      "n": 1,
+      "aliases": []
+    },
+    "69": {
+      "spread": 26,
+      "n": 2,
+      "aliases": []
+    },
+    "70": {
+      "spread": 26,
+      "n": 18,
+      "aliases": []
+    },
+    "71": {
+      "spread": 26,
+      "n": 21,
+      "aliases": []
+    },
+    "72": {
+      "spread": 28,
+      "n": 2,
+      "aliases": []
+    },
+    "73": {
+      "spread": 28,
+      "n": 5,
+      "aliases": []
+    },
+    "74": {
+      "spread": 28,
+      "n": 6,
+      "aliases": []
+    },
+    "75": {
+      "spread": 28,
+      "n": 1,
+      "aliases": []
+    },
+    "76": {
+      "spread": 28,
+      "n": 9,
+      "aliases": []
+    },
+    "77": {
+      "spread": 28,
+      "n": 11,
+      "aliases": []
+    },
+    "78": {
+      "spread": 28,
+      "n": 1,
+      "aliases": []
+    },
+    "79": {
+      "spread": 28,
+      "n": 2,
+      "aliases": []
+    },
+    "80": {
+      "spread": 30,
+      "n": 3,
+      "aliases": []
+    },
+    "81": {
+      "spread": 30,
+      "n": 4,
+      "aliases": []
+    },
+    "82": {
+      "spread": 30,
+      "n": 5,
+      "aliases": []
+    },
+    "83": {
+      "spread": 30,
+      "n": 6,
+      "aliases": []
+    },
+    "84": {
+      "spread": 30,
+      "n": 10,
+      "aliases": []
+    },
+    "85": {
+      "spread": 30,
+      "n": 11,
+      "aliases": []
+    },
+    "86": {
+      "spread": 30,
+      "n": 12,
+      "aliases": []
+    },
+    "87": {
+      "spread": 30,
+      "n": 1,
+      "aliases": []
+    },
+    "88": {
+      "spread": 30,
+      "n": 16,
+      "aliases": []
+    },
+    "89": {
+      "spread": 30,
+      "n": 18,
+      "aliases": []
+    },
+    "90": {
+      "spread": 30,
+      "n": 21,
+      "aliases": []
+    },
+    "91": {
+      "spread": 30,
+      "n": 2,
+      "aliases": []
+    },
+    "92": {
+      "spread": 34,
+      "n": 1,
+      "aliases": []
+    },
+    "93": {
+      "spread": 34,
+      "n": 4,
+      "aliases": []
+    },
+    "94": {
+      "spread": 34,
+      "n": 5,
+      "aliases": []
+    },
+    "95": {
+      "spread": 34,
+      "n": 6,
+      "aliases": []
+    },
+    "96": {
+      "spread": 34,
+      "n": 1,
+      "aliases": []
+    },
+    "97": {
+      "spread": 34,
+      "n": 9,
+      "aliases": []
+    },
+    "98": {
+      "spread": 34,
+      "n": 10,
+      "aliases": []
+    },
+    "99": {
+      "spread": 34,
+      "n": 11,
+      "aliases": []
+    },
+    "100": {
+      "spread": 34,
+      "n": 14,
+      "aliases": []
+    },
+    "101": {
+      "spread": 36,
+      "n": 4,
+      "aliases": []
+    },
+    "102": {
+      "spread": 36,
+      "n": 7,
+      "aliases": []
+    },
+    "103": {
+      "spread": 36,
+      "n": 1,
+      "aliases": []
+    },
+    "104": {
+      "spread": 36,
+      "n": 2,
+      "aliases": []
+    },
+    "105": {
+      "spread": 36,
+      "n": 10,
+      "aliases": []
+    },
+    "106": {
+      "spread": 36,
+      "n": 9,
+      "aliases": []
+    },
+    "107": {
+      "spread": 38,
+      "n": 3,
+      "aliases": []
+    },
+    "108": {
+      "spread": 38,
+      "n": 1,
+      "aliases": []
+    },
+    "109": {
+      "spread": 38,
+      "n": 2,
+      "aliases": []
+    },
+    "110": {
+      "spread": 38,
+      "n": 3,
+      "aliases": []
+    },
+    "111": {
+      "spread": 38,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "112": {
+      "spread": 38,
+      "n": 8,
+      "aliases": []
+    },
+    "113": {
+      "spread": 38,
+      "n": 9,
+      "aliases": []
+    },
+    "114": {
+      "spread": 38,
+      "n": 10,
+      "aliases": []
+    },
+    "115": {
+      "spread": 38,
+      "n": 12,
+      "aliases": []
+    },
+    "116": {
+      "spread": 38,
+      "n": 15,
+      "aliases": []
+    },
+    "117": {
+      "spread": 40,
+      "n": 2,
+      "aliases": []
+    },
+    "118": {
+      "spread": 40,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "119": {
+      "spread": 40,
+      "n": 5,
+      "aliases": [
+        6
+      ]
+    },
+    "120": {
+      "spread": 41,
+      "n": 0,
+      "aliases": []
+    },
+    "121": {
+      "spread": 44,
+      "n": 1,
+      "aliases": []
+    },
+    "122": {
+      "spread": 44,
+      "n": 2,
+      "aliases": []
+    },
+    "123": {
+      "spread": 44,
+      "n": 3,
+      "aliases": []
+    },
+    "124": {
+      "spread": 44,
+      "n": 4,
+      "aliases": []
+    },
+    "125": {
+      "spread": 44,
+      "n": 5,
+      "aliases": []
+    },
+    "126": {
+      "spread": 44,
+      "n": 6,
+      "aliases": []
+    },
+    "127": {
+      "spread": 44,
+      "n": 7,
+      "aliases": []
+    },
+    "128": {
+      "spread": 44,
+      "n": 10,
+      "aliases": []
+    },
+    "129": {
+      "spread": 44,
+      "n": 11,
+      "aliases": []
+    },
+    "130": {
+      "spread": 44,
+      "n": 12,
+      "aliases": []
+    },
+    "131": {
+      "spread": 46,
+      "n": 1,
+      "aliases": []
+    },
+    "132": {
+      "spread": 46,
+      "n": 2,
+      "aliases": []
+    },
+    "133": {
+      "spread": 46,
+      "n": 3,
+      "aliases": []
+    },
+    "134": {
+      "spread": 46,
+      "n": 4,
+      "aliases": []
+    },
+    "135": {
+      "spread": 46,
+      "n": 5,
+      "aliases": []
+    },
+    "136": {
+      "spread": 46,
+      "n": 6,
+      "aliases": []
+    },
+    "137": {
+      "spread": 46,
+      "n": 7,
+      "aliases": []
+    },
+    "138": {
+      "spread": 46,
+      "n": 10,
+      "aliases": [
+        11
+      ]
+    },
+    "139": {
+      "spread": 46,
+      "n": 14,
+      "aliases": []
+    },
+    "140": {
+      "spread": 48,
+      "n": 1,
+      "aliases": []
+    },
+    "141": {
+      "spread": 48,
+      "n": 2,
+      "aliases": []
+    },
+    "142": {
+      "spread": 48,
+      "n": 4,
+      "aliases": []
+    },
+    "143": {
+      "spread": 48,
+      "n": 5,
+      "aliases": []
+    },
+    "144": {
+      "spread": 48,
+      "n": 9,
+      "aliases": []
+    },
+    "145": {
+      "spread": 48,
+      "n": 12,
+      "aliases": []
+    },
+    "146": {
+      "spread": 48,
+      "n": 14,
+      "aliases": []
+    },
+    "147": {
+      "spread": 48,
+      "n": 15,
+      "aliases": []
+    },
+    "148": {
+      "spread": 48,
+      "n": 16,
+      "aliases": []
+    },
+    "149": {
+      "spread": 48,
+      "n": 18,
+      "aliases": []
+    },
+    "150": {
+      "spread": 48,
+      "n": 21,
+      "aliases": []
+    },
+    "151": {
+      "spread": 52,
+      "n": 1,
+      "aliases": []
+    },
+    "152": {
+      "spread": 52,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "153": {
+      "spread": 52,
+      "n": 5,
+      "aliases": []
+    },
+    "154": {
+      "spread": 52,
+      "n": 6,
+      "aliases": []
+    },
+    "155": {
+      "spread": 52,
+      "n": 9,
+      "aliases": []
+    },
+    "156": {
+      "spread": 52,
+      "n": 10,
+      "aliases": []
+    },
+    "157": {
+      "spread": 52,
+      "n": 12,
+      "aliases": []
+    },
+    "158": {
+      "spread": 52,
+      "n": 14,
+      "aliases": []
+    },
+    "159": {
+      "spread": 52,
+      "n": 15,
+      "aliases": []
+    },
+    "160": {
+      "spread": 52,
+      "n": 17,
+      "aliases": []
+    },
+    "161": {
+      "spread": 54,
+      "n": 2,
+      "aliases": []
+    },
+    "162": {
+      "spread": 54,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "163": {
+      "spread": 54,
+      "n": 5,
+      "aliases": []
+    },
+    "164": {
+      "spread": 54,
+      "n": 6,
+      "aliases": []
+    },
+    "165": {
+      "spread": 54,
+      "n": 9,
+      "aliases": []
+    },
+    "166": {
+      "spread": 54,
+      "n": 10,
+      "aliases": []
+    },
+    "167": {
+      "spread": 54,
+      "n": 11,
+      "aliases": []
+    },
+    "168": {
+      "spread": 54,
+      "n": 12,
+      "aliases": []
+    },
+    "169": {
+      "spread": 54,
+      "n": 13,
+      "aliases": []
+    },
+    "170": {
+      "spread": 54,
+      "n": 16,
+      "aliases": []
+    },
+    "171": {
+      "spread": 54,
+      "n": 14,
+      "aliases": []
+    },
+    "172": {
+      "spread": 54,
+      "n": 15,
+      "aliases": []
+    },
+    "173": {
+      "spread": 56,
+      "n": 1,
+      "aliases": []
+    },
+    "174": {
+      "spread": 56,
+      "n": 2,
+      "aliases": []
+    },
+    "175": {
+      "spread": 56,
+      "n": 3,
+      "aliases": []
+    },
+    "176": {
+      "spread": 56,
+      "n": 5,
+      "aliases": []
+    },
+    "177": {
+      "spread": 56,
+      "n": 6,
+      "aliases": []
+    },
+    "178": {
+      "spread": 56,
+      "n": 10,
+      "aliases": [
+        11
+      ]
+    },
+    "179": {
+      "spread": 56,
+      "n": 12,
+      "aliases": []
+    },
+    "180": {
+      "spread": 56,
+      "n": 16,
+      "aliases": []
+    },
+    "181": {
+      "spread": 56,
+      "n": 18,
+      "aliases": []
+    },
+    "182": {
+      "spread": 56,
+      "n": 1,
+      "aliases": []
+    },
+    "183": {
+      "spread": 58,
+      "n": 1,
+      "aliases": []
+    },
+    "184": {
+      "spread": 58,
+      "n": 2,
+      "aliases": []
+    },
+    "185": {
+      "spread": 58,
+      "n": 3,
+      "aliases": []
+    },
+    "186": {
+      "spread": 58,
+      "n": 4,
+      "aliases": [
+        5
+      ]
+    },
+    "187": {
+      "spread": 59,
+      "n": 0,
+      "aliases": []
+    },
+    "188": {
+      "spread": 62,
+      "n": 3,
+      "aliases": []
+    },
+    "189": {
+      "spread": 62,
+      "n": 4,
+      "aliases": []
+    },
+    "190": {
+      "spread": 62,
+      "n": 5,
+      "aliases": []
+    },
+    "191": {
+      "spread": 62,
+      "n": 7,
+      "aliases": []
+    },
+    "192": {
+      "spread": 62,
+      "n": 1,
+      "aliases": []
+    },
+    "193": {
+      "spread": 62,
+      "n": 2,
+      "aliases": []
+    },
+    "194": {
+      "spread": 62,
+      "n": 3,
+      "aliases": []
+    },
+    "195": {
+      "spread": 62,
+      "n": 10,
+      "aliases": []
+    },
+    "196": {
+      "spread": 62,
+      "n": 11,
+      "aliases": []
+    },
+    "197": {
+      "spread": 62,
+      "n": 12,
+      "aliases": []
+    },
+    "198": {
+      "spread": 62,
+      "n": 15,
+      "aliases": []
+    },
+    "199": {
+      "spread": 64,
+      "n": 1,
+      "aliases": []
+    },
+    "200": {
+      "spread": 64,
+      "n": 2,
+      "aliases": []
+    },
+    "201": {
+      "spread": 64,
+      "n": 2,
+      "aliases": []
+    },
+    "202": {
+      "spread": 64,
+      "n": 3,
+      "aliases": []
+    },
+    "203": {
+      "spread": 64,
+      "n": 5,
+      "aliases": []
+    },
+    "204": {
+      "spread": 64,
+      "n": 6,
+      "aliases": []
+    },
+    "205": {
+      "spread": 64,
+      "n": 7,
+      "aliases": []
+    },
+    "206": {
+      "spread": 64,
+      "n": 12,
+      "aliases": []
+    },
+    "207": {
+      "spread": 64,
+      "n": 13,
+      "aliases": []
+    },
+    "208": {
+      "spread": 64,
+      "n": 9,
+      "aliases": []
+    },
+    "209": {
+      "spread": 64,
+      "n": 14,
+      "aliases": []
+    },
+    "210": {
+      "spread": 64,
+      "n": 15,
+      "aliases": []
+    },
+    "211": {
+      "spread": 64,
+      "n": 16,
+      "aliases": []
+    },
+    "212": {
+      "spread": 66,
+      "n": 1,
+      "aliases": []
+    },
+    "213": {
+      "spread": 66,
+      "n": 3,
+      "aliases": []
+    },
+    "214": {
+      "spread": 66,
+      "n": 4,
+      "aliases": []
+    },
+    "215": {
+      "spread": 66,
+      "n": 5,
+      "aliases": []
+    },
+    "216": {
+      "spread": 66,
+      "n": 7,
+      "aliases": []
+    },
+    "217": {
+      "spread": 66,
+      "n": 8,
+      "aliases": []
+    },
+    "218": {
+      "spread": 66,
+      "n": 9,
+      "aliases": []
+    },
+    "219": {
+      "spread": 66,
+      "n": 10,
+      "aliases": []
+    },
+    "220": {
+      "spread": 66,
+      "n": 14,
+      "aliases": []
+    },
+    "221": {
+      "spread": 66,
+      "n": 15,
+      "aliases": []
+    },
+    "222": {
+      "spread": 66,
+      "n": 17,
+      "aliases": []
+    },
+    "223": {
+      "spread": 66,
+      "n": 1,
+      "aliases": []
+    },
+    "224": {
+      "spread": 66,
+      "n": 3,
+      "aliases": []
+    },
+    "225": {
+      "spread": 70,
+      "n": 1,
+      "aliases": []
+    },
+    "226": {
+      "spread": 70,
+      "n": 2,
+      "aliases": []
+    },
+    "227": {
+      "spread": 70,
+      "n": 3,
+      "aliases": []
+    },
+    "228": {
+      "spread": 70,
+      "n": 4,
+      "aliases": []
+    },
+    "229": {
+      "spread": 70,
+      "n": 6,
+      "aliases": []
+    },
+    "230": {
+      "spread": 70,
+      "n": 6,
+      "aliases": []
+    },
+    "231": {
+      "spread": 70,
+      "n": 7,
+      "aliases": []
+    },
+    "232": {
+      "spread": 70,
+      "n": 9,
+      "aliases": []
+    },
+    "233": {
+      "spread": 70,
+      "n": 1,
+      "aliases": []
+    },
+    "234": {
+      "spread": 70,
+      "n": 2,
+      "aliases": []
+    },
+    "235": {
+      "spread": 70,
+      "n": 3,
+      "aliases": []
+    },
+    "236": {
+      "spread": 70,
+      "n": 13,
+      "aliases": []
+    },
+    "237": {
+      "spread": 70,
+      "n": 15,
+      "aliases": []
+    },
+    "238": {
+      "spread": 72,
+      "n": 1,
+      "aliases": []
+    },
+    "239": {
+      "spread": 72,
+      "n": 2,
+      "aliases": []
+    },
+    "240": {
+      "spread": 72,
+      "n": 4,
+      "aliases": []
+    },
+    "241": {
+      "spread": 72,
+      "n": 7,
+      "aliases": []
+    },
+    "242": {
+      "spread": 72,
+      "n": 8,
+      "aliases": []
+    },
+    "243": {
+      "spread": 72,
+      "n": 9,
+      "aliases": []
+    },
+    "244": {
+      "spread": 72,
+      "n": 9,
+      "aliases": []
+    },
+    "245": {
+      "spread": 72,
+      "n": 12,
+      "aliases": []
+    },
+    "246": {
+      "spread": 72,
+      "n": 15,
+      "aliases": []
+    },
+    "247": {
+      "spread": 72,
+      "n": 16,
+      "aliases": []
+    },
+    "248": {
+      "spread": 72,
+      "n": 17,
+      "aliases": []
+    },
+    "249": {
+      "spread": 72,
+      "n": 18,
+      "aliases": []
+    },
+    "250": {
+      "spread": 72,
+      "n": 13,
+      "aliases": []
+    },
+    "251": {
+      "spread": 72,
+      "n": 14,
+      "aliases": []
+    },
+    "252": {
+      "spread": 72,
+      "n": 19,
+      "aliases": []
+    },
+    "253": {
+      "spread": 72,
+      "n": 1,
+      "aliases": []
+    },
+    "254": {
+      "spread": 72,
+      "n": 2,
+      "aliases": []
+    },
+    "255": {
+      "spread": 74,
+      "n": 1,
+      "aliases": []
+    },
+    "256": {
+      "spread": 74,
+      "n": 2,
+      "aliases": [
+        3
+      ]
+    },
+    "257": {
+      "spread": 74,
+      "n": 4,
+      "aliases": []
+    },
+    "258": {
+      "spread": 74,
+      "n": 5,
+      "aliases": []
+    },
+    "259": {
+      "spread": 74,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "260": {
+      "spread": 74,
+      "n": 9,
+      "aliases": []
+    },
+    "261": {
+      "spread": 74,
+      "n": 10,
+      "aliases": []
+    },
+    "262": {
+      "spread": 74,
+      "n": 12,
+      "aliases": []
+    },
+    "263": {
+      "spread": 74,
+      "n": 17,
+      "aliases": []
+    },
+    "264": {
+      "spread": 74,
+      "n": 18,
+      "aliases": []
+    },
+    "265": {
+      "spread": 74,
+      "n": 1,
+      "aliases": []
+    },
+    "266": {
+      "spread": 74,
+      "n": 2,
+      "aliases": []
+    },
+    "267": {
+      "spread": 76,
+      "n": 1,
+      "aliases": []
+    },
+    "268": {
+      "spread": 76,
+      "n": 2,
+      "aliases": []
+    },
+    "269": {
+      "spread": 76,
+      "n": 4,
+      "aliases": []
+    },
+    "270": {
+      "spread": 76,
+      "n": 5,
+      "aliases": []
+    },
+    "271": {
+      "spread": 76,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "272": {
+      "spread": 77,
+      "n": 0,
+      "aliases": []
+    },
+    "273": {
+      "spread": 80,
+      "n": 5,
+      "aliases": []
+    },
+    "274": {
+      "spread": 80,
+      "n": 1,
+      "aliases": []
+    },
+    "275": {
+      "spread": 80,
+      "n": 2,
+      "aliases": []
+    },
+    "276": {
+      "spread": 80,
+      "n": 6,
+      "aliases": []
+    },
+    "277": {
+      "spread": 80,
+      "n": 8,
+      "aliases": []
+    },
+    "278": {
+      "spread": 80,
+      "n": 12,
+      "aliases": []
+    },
+    "279": {
+      "spread": 80,
+      "n": 13,
+      "aliases": []
+    },
+    "280": {
+      "spread": 82,
+      "n": 1,
+      "aliases": []
+    },
+    "281": {
+      "spread": 82,
+      "n": 2,
+      "aliases": []
+    },
+    "282": {
+      "spread": 82,
+      "n": 4,
+      "aliases": []
+    },
+    "283": {
+      "spread": 82,
+      "n": 5,
+      "aliases": []
+    },
+    "284": {
+      "spread": 82,
+      "n": 6,
+      "aliases": []
+    },
+    "285": {
+      "spread": 82,
+      "n": 7,
+      "aliases": []
+    },
+    "286": {
+      "spread": 82,
+      "n": 8,
+      "aliases": []
+    },
+    "287": {
+      "spread": 82,
+      "n": 9,
+      "aliases": []
+    },
+    "288": {
+      "spread": 82,
+      "n": 1,
+      "aliases": []
+    },
+    "289": {
+      "spread": 82,
+      "n": 2,
+      "aliases": []
+    },
+    "290": {
+      "spread": 82,
+      "n": 3,
+      "aliases": []
+    },
+    "291": {
+      "spread": 82,
+      "n": 10,
+      "aliases": []
+    },
+    "292": {
+      "spread": 82,
+      "n": 11,
+      "aliases": []
+    },
+    "293": {
+      "spread": 82,
+      "n": 12,
+      "aliases": []
+    },
+    "294": {
+      "spread": 82,
+      "n": 13,
+      "aliases": []
+    },
+    "295": {
+      "spread": 82,
+      "n": 14,
+      "aliases": []
+    },
+    "296": {
+      "spread": 82,
+      "n": 15,
+      "aliases": []
+    },
+    "297": {
+      "spread": 84,
+      "n": 3,
+      "aliases": []
+    },
+    "298": {
+      "spread": 84,
+      "n": 4,
+      "aliases": []
+    },
+    "299": {
+      "spread": 84,
+      "n": 1,
+      "aliases": []
+    },
+    "300": {
+      "spread": 84,
+      "n": 2,
+      "aliases": []
+    },
+    "301": {
+      "spread": 84,
+      "n": 5,
+      "aliases": []
+    },
+    "302": {
+      "spread": 84,
+      "n": 7,
+      "aliases": []
+    },
+    "303": {
+      "spread": 84,
+      "n": 8,
+      "aliases": [
+        9
+      ]
+    },
+    "304": {
+      "spread": 84,
+      "n": 10,
+      "aliases": []
+    },
+    "305": {
+      "spread": 84,
+      "n": 13,
+      "aliases": []
+    },
+    "306": {
+      "spread": 84,
+      "n": 15,
+      "aliases": []
+    },
+    "307": {
+      "spread": 84,
+      "n": 17,
+      "aliases": []
+    },
+    "308": {
+      "spread": 84,
+      "n": 1,
+      "aliases": []
+    },
+    "309": {
+      "spread": 84,
+      "n": 2,
+      "aliases": []
+    },
+    "310": {
+      "spread": 84,
+      "n": 5,
+      "aliases": []
+    },
+    "311": {
+      "spread": 88,
+      "n": 3,
+      "aliases": []
+    },
+    "312": {
+      "spread": 88,
+      "n": 4,
+      "aliases": []
+    },
+    "313": {
+      "spread": 88,
+      "n": 5,
+      "aliases": []
+    },
+    "314": {
+      "spread": 88,
+      "n": 6,
+      "aliases": []
+    },
+    "315": {
+      "spread": 88,
+      "n": 8,
+      "aliases": []
+    },
+    "316": {
+      "spread": 88,
+      "n": 9,
+      "aliases": []
+    },
+    "317": {
+      "spread": 88,
+      "n": 11,
+      "aliases": []
+    },
+    "318": {
+      "spread": 88,
+      "n": 12,
+      "aliases": []
+    },
+    "319": {
+      "spread": 88,
+      "n": 15,
+      "aliases": []
+    },
+    "320": {
+      "spread": 90,
+      "n": 1,
+      "aliases": []
+    },
+    "321": {
+      "spread": 90,
+      "n": 2,
+      "aliases": []
+    },
+    "322": {
+      "spread": 90,
+      "n": 3,
+      "aliases": []
+    },
+    "323": {
+      "spread": 90,
+      "n": 7,
+      "aliases": []
+    },
+    "324": {
+      "spread": 90,
+      "n": 8,
+      "aliases": []
+    },
+    "325": {
+      "spread": 90,
+      "n": 9,
+      "aliases": []
+    },
+    "326": {
+      "spread": 90,
+      "n": 10,
+      "aliases": []
+    },
+    "327": {
+      "spread": 90,
+      "n": 12,
+      "aliases": []
+    },
+    "328": {
+      "spread": 90,
+      "n": 13,
+      "aliases": [
+        14
+      ]
+    },
+    "329": {
+      "spread": 92,
+      "n": 1,
+      "aliases": []
+    },
+    "330": {
+      "spread": 92,
+      "n": 2,
+      "aliases": [
+        3
+      ]
+    },
+    "331": {
+      "spread": 92,
+      "n": 4,
+      "aliases": []
+    },
+    "332": {
+      "spread": 92,
+      "n": 5,
+      "aliases": []
+    },
+    "333": {
+      "spread": 92,
+      "n": 8,
+      "aliases": []
+    },
+    "334": {
+      "spread": 92,
+      "n": 10,
+      "aliases": []
+    },
+    "335": {
+      "spread": 92,
+      "n": 11,
+      "aliases": []
+    },
+    "336": {
+      "spread": 92,
+      "n": 16,
+      "aliases": []
+    },
+    "337": {
+      "spread": 92,
+      "n": 18,
+      "aliases": []
+    },
+    "338": {
+      "spread": 94,
+      "n": 1,
+      "aliases": []
+    },
+    "339": {
+      "spread": 94,
+      "n": 2,
+      "aliases": []
+    },
+    "340": {
+      "spread": 94,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "341": {
+      "spread": 95,
+      "n": 0,
+      "aliases": []
+    },
+    "342": {
+      "spread": 98,
+      "n": 1,
+      "aliases": []
+    },
+    "343": {
+      "spread": 98,
+      "n": 4,
+      "aliases": []
+    },
+    "344": {
+      "spread": 98,
+      "n": 6,
+      "aliases": []
+    },
+    "345": {
+      "spread": 98,
+      "n": 9,
+      "aliases": []
+    },
+    "346": {
+      "spread": 98,
+      "n": 10,
+      "aliases": []
+    },
+    "347": {
+      "spread": 98,
+      "n": 12,
+      "aliases": []
+    },
+    "348": {
+      "spread": 98,
+      "n": 1,
+      "aliases": []
+    },
+    "349": {
+      "spread": 98,
+      "n": 2,
+      "aliases": []
+    },
+    "350": {
+      "spread": 98,
+      "n": 3,
+      "aliases": []
+    },
+    "351": {
+      "spread": 98,
+      "n": 15,
+      "aliases": []
+    },
+    "352": {
+      "spread": 100,
+      "n": 1,
+      "aliases": []
+    },
+    "353": {
+      "spread": 100,
+      "n": 2,
+      "aliases": []
+    },
+    "354": {
+      "spread": 100,
+      "n": 6,
+      "aliases": [
+        7
+      ]
+    },
+    "355": {
+      "spread": 100,
+      "n": 8,
+      "aliases": []
+    },
+    "356": {
+      "spread": 100,
+      "n": 11,
+      "aliases": [
+        12
+      ]
+    },
+    "357": {
+      "spread": 100,
+      "n": 13,
+      "aliases": []
+    },
+    "358": {
+      "spread": 100,
+      "n": 15,
+      "aliases": []
+    },
+    "359": {
+      "spread": 100,
+      "n": 1,
+      "aliases": []
+    },
+    "360": {
+      "spread": 100,
+      "n": 2,
+      "aliases": []
+    },
+    "361": {
+      "spread": 102,
+      "n": 1,
+      "aliases": []
+    },
+    "362": {
+      "spread": 102,
+      "n": 4,
+      "aliases": []
+    },
+    "363": {
+      "spread": 102,
+      "n": 5,
+      "aliases": []
+    },
+    "364": {
+      "spread": 102,
+      "n": 6,
+      "aliases": []
+    },
+    "365": {
+      "spread": 102,
+      "n": 7,
+      "aliases": []
+    },
+    "366": {
+      "spread": 102,
+      "n": 1,
+      "aliases": []
+    },
+    "367": {
+      "spread": 102,
+      "n": 2,
+      "aliases": []
+    },
+    "368": {
+      "spread": 102,
+      "n": 8,
+      "aliases": []
+    },
+    "369": {
+      "spread": 102,
+      "n": 9,
+      "aliases": []
+    },
+    "370": {
+      "spread": 102,
+      "n": 14,
+      "aliases": []
+    },
+    "371": {
+      "spread": 102,
+      "n": 16,
+      "aliases": []
+    },
+    "372": {
+      "spread": 102,
+      "n": 1,
+      "aliases": []
+    },
+    "373": {
+      "spread": 102,
+      "n": 3,
+      "aliases": []
+    },
+    "374": {
+      "spread": 106,
+      "n": 1,
+      "aliases": []
+    },
+    "375": {
+      "spread": 106,
+      "n": 2,
+      "aliases": []
+    },
+    "376": {
+      "spread": 106,
+      "n": 3,
+      "aliases": []
+    },
+    "377": {
+      "spread": 106,
+      "n": 4,
+      "aliases": [
+        5
+      ]
+    },
+    "378": {
+      "spread": 106,
+      "n": 6,
+      "aliases": []
+    },
+    "379": {
+      "spread": 106,
+      "n": 8,
+      "aliases": []
+    },
+    "380": {
+      "spread": 106,
+      "n": 10,
+      "aliases": []
+    },
+    "381": {
+      "spread": 106,
+      "n": 11,
+      "aliases": []
+    },
+    "382": {
+      "spread": 106,
+      "n": 1,
+      "aliases": []
+    },
+    "383": {
+      "spread": 106,
+      "n": 2,
+      "aliases": []
+    },
+    "384": {
+      "spread": 106,
+      "n": 12,
+      "aliases": []
+    },
+    "385": {
+      "spread": 106,
+      "n": 14,
+      "aliases": []
+    },
+    "386": {
+      "spread": 108,
+      "n": 1,
+      "aliases": []
+    },
+    "387": {
+      "spread": 108,
+      "n": 3,
+      "aliases": []
+    },
+    "388": {
+      "spread": 108,
+      "n": 4,
+      "aliases": []
+    },
+    "389": {
+      "spread": 108,
+      "n": 5,
+      "aliases": []
+    },
+    "390": {
+      "spread": 108,
+      "n": 6,
+      "aliases": []
+    },
+    "391": {
+      "spread": 108,
+      "n": 7,
+      "aliases": []
+    },
+    "392": {
+      "spread": 108,
+      "n": 1,
+      "aliases": []
+    },
+    "393": {
+      "spread": 108,
+      "n": 2,
+      "aliases": []
+    },
+    "394": {
+      "spread": 108,
+      "n": 3,
+      "aliases": []
+    },
+    "395": {
+      "spread": 108,
+      "n": 11,
+      "aliases": []
+    },
+    "396": {
+      "spread": 110,
+      "n": 1,
+      "aliases": []
+    },
+    "397": {
+      "spread": 110,
+      "n": 2,
+      "aliases": []
+    },
+    "398": {
+      "spread": 110,
+      "n": 3,
+      "aliases": []
+    },
+    "399": {
+      "spread": 110,
+      "n": 8,
+      "aliases": []
+    },
+    "400": {
+      "spread": 110,
+      "n": 1,
+      "aliases": []
+    },
+    "401": {
+      "spread": 110,
+      "n": 2,
+      "aliases": []
+    },
+    "402": {
+      "spread": 110,
+      "n": 11,
+      "aliases": []
+    },
+    "403": {
+      "spread": 110,
+      "n": 5,
+      "aliases": []
+    },
+    "404": {
+      "spread": 110,
+      "n": 7,
+      "aliases": []
+    },
+    "405": {
+      "spread": 110,
+      "n": 12,
+      "aliases": []
+    },
+    "406": {
+      "spread": 110,
+      "n": 18,
+      "aliases": []
+    },
+    "407": {
+      "spread": 110,
+      "n": 1,
+      "aliases": []
+    },
+    "408": {
+      "spread": 110,
+      "n": 3,
+      "aliases": []
+    },
+    "409": {
+      "spread": 112,
+      "n": 1,
+      "aliases": []
+    },
+    "410": {
+      "spread": 112,
+      "n": 2,
+      "aliases": []
+    },
+    "411": {
+      "spread": 112,
+      "n": 3,
+      "aliases": [
+        4
+      ]
+    },
+    "412": {
+      "spread": 112,
+      "n": 5,
+      "aliases": []
+    },
+    "413": {
+      "spread": 113,
+      "n": 0,
+      "aliases": []
+    }
+  }
+}
