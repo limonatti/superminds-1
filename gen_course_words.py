@@ -86,6 +86,7 @@ def from_pages(pattern):
     return out
 
 COURSES = {
+    "outcomes-beginner": json.load(open(os.path.join(HERE, "outcomes-beginner-active-teach/assets/words.json"), encoding="utf-8")),
     "focus-1":      {"title": "Focus 1",              "subtitle": "A1–A2 · 9 юнитов",  "emoji": "📙", "color": "#f2e6df", "units": from_generator("focus1_data.py", "f1data")},
     "solutions-pi": {"title": "Solutions Pre-Int",    "subtitle": "Pre-Intermediate",  "emoji": "📕", "color": "#f2dfe4", "units": from_generator("solutions_pi_data.py", "spidata")},
     "solutions-el": {"title": "Solutions Elementary", "subtitle": "Elementary",        "emoji": "📗", "color": "#dff2e4", "units": from_pages("solutions-el-u*.html")},
