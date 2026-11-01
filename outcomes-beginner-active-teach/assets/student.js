@@ -1,7 +1,7 @@
 /* Student answers belong to the signed-in account, independently of teacher ink. */
 (()=>{
  const COURSE='outcomes-beginner', bank=window.OUTCOMES_EXERCISES||{};
- let user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false;
+ let user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false, exerciseTrigger=null, exerciseZoom=1, fullSource=false;
  const status=s=>document.getElementById('courseworkStatus').textContent=s;
  const key=()=>`outcomes-work-v1:${user?.id||'guest'}`;
  const pageTasks=()=>bank[pageKey()]||[];
@@ -11,7 +11,7 @@
   const list=pageTasks(), visible=enabled&&['sb','wb','grammar'].includes(S.book);
   $('#wordCards').href=`../trainer.html?unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
   $('#exerciseHotspots').hidden=!visible;
-  $('#exerciseHotspots').innerHTML=visible?list.map(e=>`<button class="exercisePin ${OutcomesGrader.isComplete(e.check,answers[e.id])?'done':''}" data-exercise="${e.id}" style="left:${Math.max(0,e.x-.047)*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?', выполнено':''}">${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?' ✓':''}</button>`).join(''):'';
+  $('#exerciseHotspots').innerHTML=visible?list.map(e=>`<button class="exercisePin ${OutcomesGrader.isComplete(e.check,answers[e.id])?'done':''}" data-exercise="${e.id}" style="left:${(e.x+.005)*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?', выполнено':''}">${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?' ✓':''}</button>`).join(''):'';
   $('#exerciseList').hidden=!visible;
   $('#exerciseList').innerHTML=visible?`<h3>Задания страницы</h3><p class="exerciseHelp">Нажмите номер на странице или выберите задание ниже.</p>${list.length?list.map(e=>`<button data-exercise="${e.id}" class="exerciseRow"><span>№ ${e.n}</span><span>${esc(e.instruction)}</span><small>${workLabel(e)}</small></button>`).join(''):'<p>На этой странице нет упражнений.</p>'}<button id="workDownload">Скачать мои ответы</button>`:'';
   $$('[data-exercise]').forEach(b=>b.onclick=()=>openTask(list.find(e=>e.id===b.dataset.exercise)));
@@ -20,25 +20,74 @@
  function download(){const blob=new Blob([JSON.stringify({course:COURSE,answers},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='outcomes-my-answers.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  function workLabel(e){const r=answers[e.id];if(r?.grade?.revision===e.check?.revision&&r.grade.total)return `${r.grade.correct}/${r.grade.total} верно`;return OutcomesGrader.isComplete(e.check,r)?'Выполнено':r?'Черновик':e.check?.mode==='items'?'Проверить':'Открыть'}
  function responseFields(e,record){
-  const fields=e.check?.mode==='items'?e.check.items:Array.from({length:Math.max(e.count,record.values?.length||0)},(_,i)=>({label:i+1}));
-  return fields.map((field,i)=>`<label class="responseField" id="response-${i}"><span>${esc(field.label||i+1)}</span>${field.options?`<select data-response="${i}" aria-label="Ответ ${esc(field.label||i+1)}" aria-describedby="feedback-${i}"><option value="">Выберите…</option>${field.options.map(v=>`<option value="${esc(v)}" ${record.values?.[i]===v?'selected':''}>${esc(v)}</option>`).join('')}</select>`:`<textarea data-response="${i}" aria-label="Ответ ${esc(field.label||i+1)}" aria-describedby="feedback-${i}" rows="${e.kind==='writing'?5:2}" maxlength="10000" placeholder="${field.match==='set'?'Слова или номера через запятую…':e.kind==='writing'?'Напишите свой текст…':'Введите ответ…'}">${esc(record.values?.[i]||'')}</textarea>`}<small id="feedback-${i}" class="answerFeedback"></small></label>`).join('');
+  const fields=e.check?.mode==='items'?e.check.items:Array.from({length:Math.max(e.count,record.values?.length||0)},(_,i)=>({label:i+1})),ui=OutcomesInteractions.spec(e,window.OUTCOMES_INTERACTIONS?.[e.id]);
+  return fields.map((field,i)=>{const f=ui[i]||{kind:'text'},value=record.values?.[i]||'',long=e.kind==='writing'||field.self||field.soft||field.match==='set';return `<div class="responseField" id="response-${i}" data-interaction="${f.kind}"><label for="answer-${i}">${esc(field.label||i+1)}${f.kind==='order'?' · Соберите предложение':f.kind==='match'?' · Найдите соответствие':''}</label>${f.prompt?`<p class="printedPrompt">${esc(f.prompt)}</p>`:''}${f.kind==='order'?`<div class="sentenceSlots" data-drop="${i}" data-sentence="${i}" role="group" aria-label="Предложение ${esc(field.label)}"></div><div class="wordPool" data-word-pool="${i}" role="group" aria-label="Слова для предложения ${esc(field.label)}"></div>`:''}${f.options?`<div class="exerciseChoices" role="group" aria-label="Варианты ответа ${esc(field.label)}">${f.options.map(o=>`<button type="button" data-choice="${esc(o.value)}" data-for="${i}" draggable="${f.kind==='match'||f.kind==='bank'}" aria-pressed="false">${esc(o.label)}</button>`).join('')}</div>`:''}${long?`<textarea id="answer-${i}" data-response="${i}" aria-label="Ответ ${esc(field.label)}" aria-describedby="feedback-${i}" rows="${e.kind==='writing'?5:2}" maxlength="10000">${esc(value)}</textarea>`:`<input type="${f.kind==='choice'||f.kind==='multi'?'hidden':'text'}" id="answer-${i}" data-response="${i}" data-drop="${i}" aria-label="Ответ ${esc(field.label)}" aria-describedby="feedback-${i}" value="${esc(value)}" autocomplete="off" spellcheck="false" maxlength="10000">`}<small id="feedback-${i}" class="answerFeedback"></small></div>`}).join('');
  }
+ function cropExercise(){
+  if(!active)return;const img=$('#exerciseImage');if(!img?.naturalWidth)return;
+  const box=fullSource?[0,0,1,1]:window.OUTCOMES_INTERACTIONS?.[active.id]?.box||[0,0,1,1];
+  const [x,y,w,h]=box,frame=$('#exerciseCrop'),width=frame.parentElement.clientWidth*exerciseZoom,full=width/w,height=full*img.naturalHeight/img.naturalWidth;
+  Object.assign(frame.style,{width:width+'px',height:height*h+'px'});Object.assign(img.style,{width:full+'px',left:-full*x+'px',top:-height*y+'px'});
+  $('#taskZoomReset').textContent=Math.round(exerciseZoom*100)+'%';$('#taskFullPage').textContent=fullSource?'Только задание':'Вся страница';$('#taskFullPage').setAttribute('aria-pressed',fullSource);
+ }
+ function navigateTask(delta){const tasks=pageTasks(),i=tasks.findIndex(e=>e.id===active?.id);if(tasks[i+delta]){saveDraft();openTask(tasks[i+delta])}}
  function openTask(e){
   if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;
-  active=e;const p=current(),record=answers[e.id]||{values:[],done:false},auto=e.check?.mode==='items';
+  if(!$('#modal').open)exerciseTrigger=document.activeElement;$$('audio').forEach(a=>a.pause());exerciseZoom=1;fullSource=false;active=e;const p=current(),record=answers[e.id]||{values:[],done:false},auto=e.check?.mode==='items';
   checked=Boolean(record.grade&&record.grade.revision===e.check?.revision);revealed=false;
   const tracks=/listen/i.test(e.instruction)?D.media.filter(m=>m.book===source()&&m.pages.includes(p.page)):[];
-  const help=auto?(e.check.note||'Заполните ответы и нажмите «Проверить».'):"У этого задания нет единственного правильного ответа. Запишите свой вариант и откройте самопроверку.";
-  openModal(`${names[S.book]} · стр. ${p.page} · № ${e.n}`,`<div class="exerciseDialog"><section class="exerciseSource"><p>Оригинальное задание № ${e.n}. Изображение можно прокручивать.</p><img src="${p.image}" alt="${esc(names[S.book])}, страница ${p.page}, упражнение ${e.n}"></section><section class="responsePanel"><div class="checkType">${auto?'Практика с проверкой':'Свободный ответ · самопроверка'}</div><h3>${esc(e.instruction)}</h3><p>${esc(help)}</p>${e.check?.items?.some(f=>f.soft)?'<p class="openAnswerNote">В ответах на вопросы возможны другие формулировки. Их можно сравнить с образцом; несовпадение не считается ошибкой.</p>':''}${tracks.map(m=>`<label>Аудио ${esc(m.track)}<audio class="taskAudio" controls preload="none" src="${m.path}"></audio></label>`).join('')}<div id="responseFields">${responseFields(e,record)}</div>${auto?'':'<button id="addResponse">+ Ещё ответ</button>'}<div class="checkActions"><button id="checkTask">${auto?'Проверить ответы':'Самопроверка'}</button>${auto?'<button id="revealAnswers" hidden>Показать ответы</button>':''}<p id="checkSummary" class="checkSummary" role="status" aria-live="polite"></p></div><div id="selfCheck" hidden></div><label class="workDone" ${auto&&!e.check.items.some(f=>f.soft)?'hidden':''}><input type="checkbox" id="workDone" ${OutcomesGrader.isComplete(e.check,record)?'checked':''}> ${auto?'Я также проверил(а) свободные ответы':'Я выполнил(а) задание и проверил(а) себя'}</label><p id="taskSaveStatus" role="status"></p><button id="saveTask">Сохранить и закрыть</button></section></div>`);
-  const sourceImage=$('.exerciseSource img');const scrollSource=()=>{const box=$('.exerciseSource');box.scrollTop=Math.max(0,e.y*sourceImage.clientHeight-42);box.scrollLeft=Math.max(0,(e.x-.04)*sourceImage.clientWidth)};sourceImage.onload=scrollSource;if(sourceImage.complete)scrollSource();
+  const kinds=new Set(OutcomesInteractions.spec(e,window.OUTCOMES_INTERACTIONS?.[e.id]).map(f=>f.kind));
+  const interactionHelp=kinds.has('order')?'Нажимайте или перетаскивайте слова, чтобы собрать предложение. Нажмите слово в ответе, чтобы убрать его. ':kinds.has('match')||kinds.has('bank')?'Нажимайте на варианты или перетаскивайте их в поле ответа. ':kinds.has('choice')||kinds.has('multi')?'Выберите ответ кнопкой и нажмите «Проверить ответы». ':'';
+  const help=interactionHelp+(auto?(e.check.note||'Заполните ответы и нажмите «Проверить».'):"У этого задания нет единственного правильного ответа. Запишите свой вариант и откройте самопроверку.");
+  openModal(`${names[S.book]} · стр. ${p.page} · № ${e.n}`,`<nav class="exerciseTools" aria-label="Управление упражнением"><button id="taskPrev" ${pageTasks()[0]?.id===e.id?'disabled':''}>← Предыдущее</button><button id="taskNext" ${pageTasks().at(-1)?.id===e.id?'disabled':''}>Следующее →</button><button id="taskZoomOut" aria-label="Уменьшить задание">−</button><button id="taskZoomReset">100%</button><button id="taskZoomIn" aria-label="Увеличить задание">+</button><button id="taskFullPage" aria-pressed="false">Вся страница</button><button id="taskCurtain" aria-pressed="false">Скрыть задание</button></nav><div class="exerciseDialog"><section class="exerciseSource"><div id="exerciseCrop"><img id="exerciseImage" src="${p.image}" alt="${esc(names[S.book])}, страница ${p.page}, упражнение ${e.n}"></div><button id="taskUncover" hidden>Открыть задание</button></section><section class="responsePanel"><div class="checkType">${auto?'Практика с проверкой':'Свободный ответ · самопроверка'}</div><h3>${esc(e.instruction)}</h3><p>${esc(help)}</p>${e.check?.items?.some(f=>f.soft)?'<p class="openAnswerNote">В ответах на вопросы возможны другие формулировки. Их можно сравнить с образцом; несовпадение не считается ошибкой.</p>':''}${tracks.map(m=>`<label>Аудио ${esc(m.track)}<audio class="taskAudio" controls preload="none" src="${m.path}"></audio></label>`).join('')}<div id="responseFields">${responseFields(e,record)}</div>${auto?'':'<button id="addResponse">+ Ещё ответ</button>'}<div class="checkActions"><button id="checkTask">${auto?'Проверить ответы':'Самопроверка'}</button>${auto?'<button id="revealAnswers" hidden>Показать ответы</button>':''}<p id="checkSummary" class="checkSummary" role="status" aria-live="polite"></p></div><div id="selfCheck" hidden></div><label class="workDone" ${auto&&!e.check.items.some(f=>f.soft)?'hidden':''}><input type="checkbox" id="workDone" ${OutcomesGrader.isComplete(e.check,record)?'checked':''}> ${auto?'Я также проверил(а) свободные ответы':'Я выполнил(а) задание и проверил(а) себя'}</label><p id="taskSaveStatus" role="status"></p><button id="saveTask">Сохранить и закрыть</button></section></div>`);
+  $('#exerciseImage').onload=cropExercise;cropExercise();
+  $('#taskPrev').onclick=()=>navigateTask(-1);$('#taskNext').onclick=()=>navigateTask(1);
+  $('#taskFullPage').onclick=()=>{fullSource=!fullSource;cropExercise()};
+  $('#taskZoomIn').onclick=()=>{exerciseZoom=Math.min(3,exerciseZoom+.25);cropExercise()};$('#taskZoomOut').onclick=()=>{exerciseZoom=Math.max(.5,exerciseZoom-.25);cropExercise()};$('#taskZoomReset').onclick=()=>{exerciseZoom=1;cropExercise()};
+  const curtain=on=>{$('#exerciseCrop').style.visibility=on?'hidden':'';$('#taskUncover').hidden=!on;$('#taskCurtain').setAttribute('aria-pressed',on)};
+  $('#taskCurtain').onclick=()=>curtain($('#taskUncover').hidden);$('#taskUncover').onclick=()=>curtain(false);
+  $$('.taskAudio').forEach(a=>{const controls=document.createElement('div');controls.className='taskAudioTools';controls.innerHTML='<label>Скорость <select aria-label="Скорость аудио"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label><button type="button" aria-pressed="false">Повтор</button>';a.after(controls);controls.querySelector('select').onchange=ev=>a.playbackRate=Number(ev.target.value);controls.querySelector('button').onclick=ev=>{a.loop=!a.loop;ev.target.setAttribute('aria-pressed',a.loop)};a.onplay=()=>$$('audio').forEach(other=>{if(other!==a)other.pause()})});
   bindResponses();$('#workDone').onchange=()=>saveDraft();
   if($('#addResponse'))$('#addResponse').onclick=()=>{saveDraft();const r=answers[e.id];r.values.push('');$('#responseFields').innerHTML=responseFields(e,r);bindResponses()};
   $('#checkTask').onclick=checkTask;
   if($('#revealAnswers'))$('#revealAnswers').onclick=()=>{revealed=!revealed;checkTask()};
   $('#saveTask').onclick=()=>{saveDraft();flush();$('#modal').close()};
   if(checked)renderFeedback(OutcomesGrader.check(e.check,record.values));
+  $('#modalTitle').tabIndex=-1;$('#modalTitle').focus({preventScroll:true});
  }
- function bindResponses(){$$('[data-response]').forEach(el=>{el.oninput=()=>saveDraft();el.onblur=()=>{if(checked&&active?.check?.mode==='items')checkTask()}})}
+ let skipDragClick=false;
+ document.addEventListener('click',ev=>{if(skipDragClick){ev.preventDefault();ev.stopImmediatePropagation();skipDragClick=false}},true);
+ function bindDrag(button,value,append){
+  button.draggable=false;button.style.touchAction='none';
+  button.onpointerdown=ev=>{
+   if(ev.button!==0||button.disabled)return;const start=[ev.clientX,ev.clientY],task=active.id,index=+button.dataset.for;let moved=false,ghost=null;
+   button.setPointerCapture(ev.pointerId);
+   const clean=()=>{ghost?.remove();button.onpointermove=null;button.onpointerup=null;button.onpointercancel=null};
+   button.onpointermove=move=>{if(Math.hypot(move.clientX-start[0],move.clientY-start[1])<6&&!moved)return;moved=true;move.preventDefault();if(!ghost){ghost=document.createElement('div');ghost.className='exerciseDragGhost';ghost.textContent=value;$('#modal').append(ghost)}ghost.style.left=move.clientX+12+'px';ghost.style.top=move.clientY+12+'px'};
+   button.onpointerup=up=>{const target=document.elementFromPoint(up.clientX,up.clientY)?.closest('[data-drop]');if(button.hasPointerCapture(up.pointerId))button.releasePointerCapture(up.pointerId);clean();if(!moved)return;skipDragClick=true;setTimeout(()=>skipDragClick=false,0);if(active?.id===task&&target&&+target.dataset.drop===index)applyChoice(index,value,append)};
+   button.onpointercancel=clean;
+  };
+ }
+ function refreshWidgets(){
+  if(!active)return;const ui=OutcomesInteractions.spec(active,window.OUTCOMES_INTERACTIONS?.[active.id]);
+  $$('[data-choice]').forEach(b=>{const i=+b.dataset.for,value=$(`[data-response="${i}"]`).value;b.setAttribute('aria-pressed',ui[i]?.kind==='multi'?value.split(/,\s*/).includes(b.dataset.choice):OutcomesGrader.normalize(value)===OutcomesGrader.normalize(b.dataset.choice))});
+  ui.forEach((f,i)=>{if(f.kind!=='order')return;const input=$(`[data-response="${i}"]`),words=input.value.trim()?input.value.trim().split(/\s+/):[],remaining=[...words];
+   $(`[data-sentence="${i}"]`).innerHTML=words.length?words.map((w,j)=>`<button type="button" data-remove="${j}" data-for="${i}" aria-label="Убрать слово ${esc(w)}">${esc(w)}</button>`).join(''):'<span>Нажимайте или перетаскивайте слова сюда</span>';
+   $(`[data-word-pool="${i}"]`).innerHTML=OutcomesInteractions.shuffled(f.tokens,active.id+':'+i).map(t=>{const j=remaining.findIndex(w=>OutcomesInteractions.norm(w)===OutcomesInteractions.norm(t.text)),used=j>=0;if(used)remaining.splice(j,1);return `<button type="button" data-token="${esc(t.text)}" data-for="${i}" draggable="true" ${used?'disabled':''}>${esc(t.text)}</button>`}).join('');
+  });
+  $$('[data-token]').forEach(b=>{b.onclick=()=>applyChoice(+b.dataset.for,b.dataset.token,true);bindDrag(b,b.dataset.token,true)});
+  $$('[data-remove]').forEach(b=>b.onclick=()=>{const i=+b.dataset.for,input=$(`[data-response="${i}"]`),words=input.value.trim().split(/\s+/);words.splice(+b.dataset.remove,1);input.value=words.join(' ');saveDraft();refreshWidgets();if(checked)checkTask();($(`[data-sentence="${i}"] button`)||$(`[data-word-pool="${i}"] button:not(:disabled)`)||input).focus({preventScroll:true})});
+ }
+ function applyChoice(i,value,append=false){const input=$(`[data-response="${i}"]`),ui=OutcomesInteractions.spec(active,window.OUTCOMES_INTERACTIONS?.[active.id])[i];
+  if(ui?.kind==='multi'){const selected=input.value?input.value.split(/,\s*/):[];input.value=(selected.includes(value)?selected.filter(v=>v!==value):[...selected,value]).join(', ')}else input.value=append?[input.value.trim(),value].filter(Boolean).join(' '):value;
+  saveDraft();refreshWidgets();if(checked)checkTask();if(append)($(`[data-word-pool="${i}"] button:not(:disabled)`)||input).focus({preventScroll:true});
+ }
+ function bindResponses(){
+  $$('[data-response]').forEach(el=>{el.oninput=()=>{saveDraft();refreshWidgets()};el.onblur=()=>{if(checked&&active?.check?.mode==='items')checkTask()}});
+  $$('[data-choice]').forEach(b=>{b.onclick=()=>applyChoice(+b.dataset.for,b.dataset.choice);if(b.getAttribute('draggable')==='true')bindDrag(b,b.dataset.choice,false)});
+  $$('[data-drop]').forEach(el=>{el.ondragover=ev=>{if([...ev.dataTransfer.types].includes('application/x-outcomes'))ev.preventDefault()};el.ondrop=ev=>{ev.preventDefault();try{const d=JSON.parse(ev.dataTransfer.getData('application/x-outcomes'));if(d.id!==active.id||d.index!==+el.dataset.drop||typeof d.value!=='string')return;applyChoice(d.index,d.value,d.append)}catch{}}});
+  refreshWidgets();
+ }
  function keyText(field){if(field.self)return 'Ответ зависит от вас. Проверьте его по примеру на странице.';return Array.isArray(field.key)?field.key.join(' / '):field.key}
  function renderFeedback(grade){
   if(!active)return;
@@ -79,7 +128,8 @@
  }
  $('#exerciseToggle').onclick=()=>{enabled=!enabled;$('#exerciseToggle').setAttribute('aria-pressed',enabled);renderTasks()};
  window.addEventListener('outcomes-page',renderTasks);window.addEventListener('online',flush);
- $('#modal').addEventListener('close',()=>{$$('.taskAudio').forEach(a=>a.pause());active=null});
+ $('#modal').addEventListener('close',()=>{$$('.taskAudio').forEach(a=>a.pause());const trigger=exerciseTrigger?.isConnected?exerciseTrigger:$$('[data-exercise]').find(b=>b.dataset.exercise===exerciseTrigger?.dataset.exercise);active=null;(trigger||$('#exerciseToggle')).focus({preventScroll:true})});
+ window.addEventListener('resize',cropExercise);
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
  $('#keys').hidden=true;
  async function init(){

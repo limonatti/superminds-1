@@ -51,3 +51,27 @@ results and whether the learner revealed the key.
 Verification: `node tests/outcomes-grader.cjs`, `node tests/outcomes-student.cjs`,
 `python3 check.py`, and browser testing of wrong/correct answers, repeated attempts,
 key reveal, persistence after navigation and ungraded self-review.
+
+## Presentation interactions (November 2026)
+
+Clicking the exercise number opens a focused modal showing a crop of that exercise.
+The window includes previous/next exercises on the page, zoom, full-page context,
+a source curtain, and audio playback speed/repeat. Keyboard focus returns to the
+exercise trigger when the window closes. All 1,324 exercise IDs retain their stored
+answer strings and existing grading rubrics.
+
+`assets/interactions-data.js` supplies source text/crop geometry, generated with
+`scripts/build-outcomes-interactions.py` from the supplied SB/WB OCR JSON files.
+`assets/interactions.js` selects conservative controls using the printed task:
+choice buttons, matching, word banks, multi-selection and sentence building.
+The current corpus has 1,047 enhanced response fields; other fields remain text
+inputs for gap filling, spelling, writing and tasks whose choices cannot be safely
+reconstructed. Distractors come from the supplied exercise, not invented alternatives.
+Sentence banks are shuffled and preserve repeated tokens. Buttons support keyboard
+and touch activation; matching/bank/sentence tiles additionally support pointer drag.
+Free responses keep the existing self-review policy. This is a platform-native
+presentation interface, not the publisher's proprietary ActiveTeach software.
+
+Verification also includes `node tests/outcomes-interactions.cjs` and browser checks
+of the printed-number hotspot, choices, correction, sentence tile add/remove/drag,
+saved responses, navigation, zoom, full-page context and the source curtain.
