@@ -1,0 +1,58 @@
+{
+  "inputs": [
+    {
+      "name": "688_1- Speakout 3rd B1+ Student's Book_2022.pdf",
+      "sha256": "2d498405ae6d41053211ce22745019ccf1100ab8848413e7ec6c87d945c9ee77",
+      "bytes": 39400041
+    },
+    {
+      "name": "688_5- Speakout 3rd B1+ Workbook_2022.pdf",
+      "sha256": "bc1e6fe3fb0773cd881ede2a0fa4ec544f1676f69dc9e11e51855a02858db252",
+      "bytes": 19092276
+    },
+    {
+      "name": "688_2- Speakout 3rd B1+ Student's Book Keys.pdf",
+      "sha256": "0f58050e4e4ef1b1201e0db95534d3cae64a65ab868dd2629b5da8b500c506f8",
+      "bytes": 345940
+    },
+    {
+      "name": "688_7- Speakout 3rd B1+ Teacher's Book_2022.pdf",
+      "sha256": "99941a0704c0f907a0251f3f1e23a8cd5b079d87af95cf78c7bb7fe8bfcd4e84",
+      "bytes": 6175660
+    },
+    {
+      "name": "688_3- Speakout 3rd B1+ Class Audio.zip",
+      "sha256": "b8667678731e856a72ad87720105e28ea84e23ae6239692faa43aaa18812cd46",
+      "bytes": 89392741
+    },
+    {
+      "name": "688_4- Speakout 3rd B1+ Video.zip",
+      "sha256": "9528c41fa25cf73c4bcccab728f3bb95b4303e7cf75c332032ad85acfd7dffe0",
+      "bytes": 254117164
+    },
+    {
+      "name": "688_6- Speakout 3rd B1+ Workbook Audio.zip",
+      "sha256": "5bf89436f6dab460aedd3829e652a7b63fc9c8c6078e45b9fe920551594bdc45",
+      "bytes": 59421761
+    },
+    {
+      "name": "778449126-Speakout-B1-page-139-175.pdf",
+      "role": "sb-supplement",
+      "sha256": "b283775fa722671bec3d1d12e9ccd84fdac85cf05de312a5380b985dd82b6a5a",
+      "bytes": 4690319,
+      "printedPages": [
+        139,
+        175
+      ]
+    }
+  ],
+  "missingSourcePages": {
+    "sb": [
+      6,
+      138
+    ],
+    "wb": [
+      3
+    ]
+  }
+}
