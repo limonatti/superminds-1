@@ -12,6 +12,7 @@
  if(role==='t'){
   for(const event of ['play','pause','seeked','ratechange','ended','emptied'])document.addEventListener(event,e=>{
    if(e.target.tagName!=='AUDIO')return;
+   if(event==='emptied'&&e.target===current){current=null;send({kind:'audio',stop:true});return;}
    if(event==='play'||!current)current=e.target;
    if(e.target===current)publish(event);
   },true);

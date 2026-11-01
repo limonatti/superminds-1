@@ -15,6 +15,6 @@ function setup(role,folder){
  const before=player.src;s.receive({...t.sent.at(-1),src:'https://evil.test/audio.mp3'});assert.equal(player.src,before);s.receive({...t.sent.at(-1),time:99},'https://evil.test');assert.equal(player.currentTime,38);
  player.readyState=0;a.currentTime=45;t.docEvents.seeked({target:a});s.receive(t.sent.at(-1));assert.equal(player.currentTime,38);player.readyState=1;player.handlers.loadedmetadata();assert.equal(player.currentTime,45);
  const play=player.play.bind(player);player.play=()=>Promise.reject({name:'NotAllowedError'});a.paused=false;t.docEvents.play({target:a});s.receive(t.sent.at(-1));await new Promise(r=>setImmediate(r));assert.equal(s.elements[3].hidden,false);player.play=play;s.elements[3].onclick();await Promise.resolve();assert.equal(player.paused,false);
- a.isConnected=false;t.poll();s.receive(t.sent.at(-1));assert.equal(player.paused,true);assert.equal(s.elements[1].hidden,true);
+ t.docEvents.emptied({target:a});assert.equal(t.sent.at(-1).stop,true);t.docEvents.play({target:a});a.isConnected=false;t.poll();s.receive(t.sent.at(-1));assert.equal(player.paused,true);assert.equal(s.elements[1].hidden,true);
  }
  console.log('Audio: all 3 course roots; play, pause, seek, rate, removed-player stop, source and origin guards passed.');})().catch(e=>{console.error(e);process.exitCode=1});
