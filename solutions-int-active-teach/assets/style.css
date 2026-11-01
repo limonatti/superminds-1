@@ -17,3 +17,17 @@
 
 #exercise .answer-row.correct textarea{border:2px solid #286141}
 #exercise .answer-row.incorrect textarea{border:2px solid #ae1800}
+/* Selecting homework directly on a scanned page. */
+#teacherAssignment{border-bottom:2px solid var(--line);padding-bottom:22px;margin-bottom:22px}
+#assignForm{display:grid;gap:8px}#assignForm label{font-size:13px;font-weight:700;margin-top:8px}
+#assignForm select,#assignForm input,#assignForm textarea{min-width:0;width:100%;padding:9px;border:1px solid #aaa;background:#fff;border-radius:10px}#assignForm textarea{min-height:80px}
+#assignToggle,#assignSend{background:var(--accent);color:#fff}#assignToggle[aria-pressed=true]{background:var(--ink)}
+.assign-tools{display:flex;gap:6px;flex-wrap:wrap}.assign-tools button,#assignReload{font-size:12px}
+#assignItems{padding:0;list-style:none;max-height:240px;overflow:auto;font-size:12px}#assignItems li{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:7px 0}#assignItems button{flex-shrink:0;padding:4px 9px;min-height:32px}
+#assignStatus,#assignResultLink{font-size:13px;overflow-wrap:anywhere}
+.hotspot.assign-choosing{background:#fff;color:#ae1800;border-color:#ae1800}
+.hotspot.assign-selected{background:#286141;color:#fff;border-color:#fff;outline:3px solid #286141}
+.exercise-link.assign-selected{background:#e0eee3;color:#164a2a}
+#assignExercise{margin:0 8px 8px 0;font-size:12px}
+@media(max-width:900px){#teacherAssignment{display:grid;grid-template-columns:1fr 1fr;gap:12px}#teacherAssignment[hidden]{display:none!important}#teacherAssignment h2,#assignStatus,#assignResultLink{grid-column:1/-1}#assignForm{grid-column:2;grid-row:2/5}#assignItems{max-height:300px;margin:0}.assign-tools{align-items:start}}
+@media(max-width:520px){#teacherAssignment{display:block}#assignItems{max-height:180px}}

@@ -4,7 +4,7 @@ const D=window.SOLUTIONS,$=s=>document.querySelector(s),$$=s=>[...document.query
 const params=new URLSearchParams(location.search), NS='solutions-int:responses:v1';
 let book=params.get('book')==='wb'?'wb':'sb',unit=params.get('unit')||'0',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve();
 const M=window.SolutionsMarking;
-let previousAnswers=[],homework=null,submitting=false;
+let previousAnswers=[],homework=null,submitting=false,assigner=null;
 const H=window.SolutionsHW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
 function status(text){$('#saveStatus').textContent=text;}
@@ -26,11 +26,11 @@ function render(){
  $('#pageImage').src=page.image;$('#pageImage').alt=`${book==='sb'?'Student’s Book':'Workbook'}, страница ${page.page}`;$('#imageError').hidden=true;
  $('#hotspots').innerHTML=page.exercises.map(e=>`<button class="hotspot ${responses[e.id]?'done':''}" data-ex="${e.id}" style="left:${e.x*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.label}">${e.label}</button>`).join('');
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Слова доступны в словаре и карточках.</p>';
- $$('[data-ex]').forEach(b=>b.onclick=()=>openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
+ $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
  $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book}-${t}.mp3"></audio></label>`).join(''):'<p>Выбери аудио по номеру трека в учебнике.</p>';
  $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
  $('#trainer').href='../trainer.html?course=solutions-int'+(unit==='extra'?'':'&unit=solu-u'+unit);$('#vocabulary').href='../vocabulary.html?course=solutions-int';
- $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();
+ $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
 }
 function resizeCrop(){if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
 function openExercise(id){
@@ -53,7 +53,7 @@ function openExercise(id){
  if(previousAnswers.length)$('#fields').insertAdjacentHTML('beforeend',`<details class="previous-answers"><summary>Ранее сохранённые ответы</summary><p>Поля задания уточнены. Твои предыдущие ответы сохранены; перенеси нужные в новые поля для проверки.</p>${previousAnswers.map(r=>`<ol>${r.values.map((v,i)=>`<li>${r.labels?.[i]?esc(r.labels[i])+': ':''}${esc(v||'—')}</li>`).join('')}</ol>${r.reflection?`<p>${esc(r.reflection)}</p>`:''}`).join('')}</details>`);
  $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
- $('#exercise').showModal();resizeCrop();
+ $('#exercise').showModal();resizeCrop();updateAssignMarkers();
 }
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
 function save(explicit){
@@ -94,6 +94,18 @@ $('#pageImage').onerror=()=>$('#imageError').hidden=false;$('#retryImage').oncli
 window.addEventListener('resize',resizeCrop);document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.body.classList.remove('present');$('#present').setAttribute('aria-pressed','false');}});
 document.addEventListener('play',ev=>{if(ev.target.tagName==='AUDIO')$$('audio').forEach(a=>{if(a!==ev.target)a.pause();});},true);
 window.addEventListener('storage',ev=>{if(ev.key===storageKey){try{responses=merge(responses,JSON.parse(ev.newValue)||{});renderProgress();}catch{}}});
+function updateAssignMarkers(){
+ const choosing=!!assigner?.mode;
+ $$('[data-ex]').forEach(b=>{const e=page?.exercises.find(e=>e.id===b.dataset.ex);if(!e)return;
+  const picked=choosing&&assigner.has(e.id);b.classList.toggle('assign-selected',picked);b.classList.toggle('assign-choosing',choosing);
+  b.setAttribute('aria-label',`${choosing?'Выбрать':'Открыть'} упражнение ${e.label}`);
+  if(choosing)b.setAttribute('aria-pressed',String(picked));else b.removeAttribute('aria-pressed');
+  const span=b.querySelector('span');if(span)span.textContent=choosing?(picked?'✓ Выбрано':'Выбрать'):(responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ');
+ });
+ $('#assignExercise').hidden=!assigner?.allowed;
+ $('#assignExercise').textContent=active&&assigner?.has(active.id)?'Убрать из домашки':'В домашку';
+}
+$('#assignExercise').onclick=()=>{if(active&&assigner?.allowed){assigner.toggle(active.id,true);$('#exercise').close();}};
 function renderHomework(){
  if(!homework)return;
  const ids=H.ids(homework),meta=H.meta(homework),finished=['submitted','done'].includes(homework.status||(homework.done?'done':'new')),done=ids.filter(id=>!H.readiness(id,responses[id])).length;
@@ -122,7 +134,7 @@ async function loadHomework(){
   if(!homework)throw Error('Эта домашка не найдена в твоём аккаунте. Открой её из раздела «Моя домашка».');renderHomework();
  }catch(e){$('#assignment').textContent=e.message;}
 }
-(async()=>{try{user=await SM.getUser();}catch{}storageKey=NS+':'+(user?.id||'guest');try{responses=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch{}if(user){try{const remote=await SM.loadCourseWork('solutions-int');if(remote?.ok)responses=merge(responses,remote.answers);}catch{}}ready=true;page=D.pages.find(p=>p.book===book&&p.page===Number(params.get('page')));if(page)unit=String(page.unit);render();persist();await loadHomework();const wanted=params.get('ex');if(wanted&&page.exercises.some(e=>e.id===wanted))openExercise(wanted);})();
+(async()=>{try{user=await SM.getUser();}catch{}storageKey=NS+':'+(user?.id||'guest');try{responses=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch{}if(user){try{const remote=await SM.loadCourseWork('solutions-int');if(remote?.ok)responses=merge(responses,remote.answers);}catch{}}ready=true;page=D.pages.find(p=>p.book===book&&p.page===Number(params.get('page')));if(page)unit=String(page.unit);render();persist();assigner=window.SolutionsAssign.create({getUser:()=>user,getPage:()=>page,onChange:updateAssignMarkers});assigner.init();await loadHomework();const wanted=params.get('ex');if(wanted&&page.exercises.some(e=>e.id===wanted))openExercise(wanted);})();
 window.LiveCourse?.connect({
  course:'solutions-int',
  view:()=>ready&&page?{book,page:page.page,exercise:$('#exercise').open?active?.id||null:null}:null,
