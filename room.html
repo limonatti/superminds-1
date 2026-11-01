@@ -412,7 +412,7 @@
 
     function frameSrc(){ if(LIVE_COURSES[course])return LIVE_COURSES[course].path+"/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1&lessonRole="+ME; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
-      if(broadcast){outcomesView=null;outcomesAnswers=null;}
+      if(broadcast){outcomesView=null;outcomesAnswers=null;lessonAudio=null;}
       const isSM=course==="sm";
       const lessonFrame=document.getElementById("frame"),nextSource=frameSrc();
       if(lessonFrame.getAttribute("src")!==nextSource)lessonFrame.src=nextSource;
@@ -446,18 +446,20 @@
 
     // Semantic Outcomes messages replace fragile DOM-path replay. Only this
     // room's frame can publish; teachers lead navigation, students own answers.
-    let outcomesView=null, outcomesAnswers=null;
+    let outcomesView=null, outcomesAnswers=null, lessonAudio=null;
     function postOutcomes(data){
       if(!LIVE_COURSES[course])return;
       document.getElementById("frame").contentWindow.postMessage({type:"outcomes-lesson",...data},location.origin);
     }
     function replayOutcomes(){
       if(ME==="t"&&outcomesView)sendOp({t:"outcomes",course,from:ME,data:outcomesView});
+      if(ME==="t"&&lessonAudio)sendOp({t:"outcomes",course,from:ME,data:lessonAudio});
       if(ME==="s")postOutcomes({kind:"snapshot"});
     }
     function receiveOutcomes(p){
       if(!LIVE_COURSES[course]||!p.data||(p.course||"outcomes-beginner")!==course)return;
-      if(ME==="s"&&p.from==="t"&&p.data.kind==="view"){
+      if(ME==="s"&&p.from==="t"&&p.data.kind==="audio"){lessonAudio=p.data;postOutcomes(p.data);}
+      else if(ME==="s"&&p.from==="t"&&p.data.kind==="view"){
         outcomesView=p.data;postOutcomes(p.data);
       }else if(ME==="t"&&p.from==="s"&&p.data.kind==="answers"){
         outcomesAnswers=p.data;postOutcomes(p.data);
@@ -466,10 +468,13 @@
     window.addEventListener("message",e=>{
       if(e.origin!==location.origin||e.source!==document.getElementById("frame").contentWindow||!LIVE_COURSES[course]||e.data?.type!=="outcomes-lesson")return;
       const d=e.data;
-      if(d.kind==="ready"){
+      if(d.kind==="audio-ready"){if(ME==="s"&&lessonAudio)postOutcomes(lessonAudio);}
+      else if(d.kind==="audio"&&ME==="t"){lessonAudio=d;sendOp({t:"outcomes",course,from:ME,data:d});}
+      else if(d.kind==="ready"){
         if(ME==="t")send({course,unit,kind});
         postOutcomes({kind:"connection",online});
         if(ME==="s"&&outcomesView)postOutcomes(outcomesView);
+        if(ME==="s"&&lessonAudio)postOutcomes(lessonAudio);
         if(ME==="t"&&outcomesAnswers)postOutcomes(outcomesAnswers);
         if(ME==="s")sendOp({t:"hello"});
       }else if(ME==="t"&&d.kind==="view"){
@@ -490,7 +495,7 @@
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
         if(payload.t==="outcomes"){ receiveOutcomes(payload); }
-        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&!LIVE_COURSES[course]))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;outcomesAnswers=null;apply(false);}}
+        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&!LIVE_COURSES[course]))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;outcomesAnswers=null;lessonAudio=null;apply(false);}}
         else if(payload.t==="hello"){if(ME==="t")send({course:course,unit:unit,kind:kind}); replayOutcomes(); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
         else onOp(payload);
       });
