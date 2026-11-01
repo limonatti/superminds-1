@@ -75,3 +75,8 @@ presentation interface, not the publisher's proprietary ActiveTeach software.
 Verification also includes `node tests/outcomes-interactions.cjs` and browser checks
 of the printed-number hotspot, choices, correction, sentence tile add/remove/drag,
 saved responses, navigation, zoom, full-page context and the source curtain.
+
+## Live Outcomes lesson
+Open the course through `room.html?course=outcomes-beginner` and use the room invitation for the student. Teacher page/book/exercise changes are sent through the existing room Realtime channel. The student can answer without requesting the board controls. The teacher sees a separate live response panel (including checked results); student responses are never merged into teacher coursework. Typing and interactive widgets use the same draft-save path, throttled to 120 ms for transport. A late join/reload/reconnect requests the current exercise and student response snapshot. Outside a room, homework remains independent. New rooms use random UUID tokens. This is the platform's existing link-based one-teacher/one-student room model.
+
+Validation: `node tests/outcomes-live.cjs`; two browser participants tested against Realtime: WB 4 #5 choices and grading, student reload with draft restored, teacher next to #6, text input.

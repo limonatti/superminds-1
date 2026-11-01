@@ -334,7 +334,7 @@
     const NAME={t:"учитель",s:"ученик"};
     let holder="t";                             // у кого сейчас штурвал
     let room=params.get("room");
-    if(!room){ room=Math.random().toString(36).slice(2,7).toUpperCase(); history.replaceState(null,"","?room="+room); }
+    if(!room){ room=crypto.randomUUID().replace(/-/g,""); history.replaceState(null,"","?room="+room); }
 
     // доска в iframe (сама синхронизируется по board:room)
     document.getElementById("board").src="board.html?room="+encodeURIComponent(room);
@@ -408,8 +408,9 @@
       try{ apply(false); }catch(e){}
     }).catch(()=>{});
 
-    function frameSrc(){ if(course==="outcomes-beginner")return "outcomes-beginner-active-teach/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1"; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
+    function frameSrc(){ if(course==="outcomes-beginner")return "outcomes-beginner-active-teach/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1&lessonRole="+ME; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
+      if(broadcast)outcomesView=null;
       const isSM=course==="sm";
       document.getElementById("frame").src=frameSrc();
       document.querySelector(".acts").style.display=isSM?"flex":"none";
@@ -427,6 +428,7 @@
       courseSel.value=course; unitSel.value=unit;
       postSel();
       if(broadcast) send({course:course,unit:unit,kind:kind});
+      try{applyControl();}catch(e){}
     }
     courseSel.onchange=()=>{course=courseSel.value;buildUnits();apply(true);};
     unitSel.onchange=()=>{unit=unitSel.value;apply(true);};
@@ -439,6 +441,40 @@
       try{ postSel(); bf.contentWindow.postMessage({type:"sm-add-current"}, location.origin); }catch(e){}
     };
 
+    // Semantic Outcomes messages replace fragile DOM-path replay. Only this
+    // room's frame can publish; teachers lead navigation, students own answers.
+    let outcomesView=null, outcomesAnswers=null;
+    function postOutcomes(data){
+      if(course!=="outcomes-beginner")return;
+      document.getElementById("frame").contentWindow.postMessage({type:"outcomes-lesson",...data},location.origin);
+    }
+    function replayOutcomes(){
+      if(ME==="t"&&outcomesView)sendOp({t:"outcomes",from:ME,data:outcomesView});
+      if(ME==="s")postOutcomes({kind:"snapshot"});
+    }
+    function receiveOutcomes(p){
+      if(course!=="outcomes-beginner"||!p.data)return;
+      if(ME==="s"&&p.from==="t"&&p.data.kind==="view"){
+        outcomesView=p.data;postOutcomes(p.data);
+      }else if(ME==="t"&&p.from==="s"&&p.data.kind==="answers"){
+        outcomesAnswers=p.data;postOutcomes(p.data);
+      }
+    }
+    window.addEventListener("message",e=>{
+      if(e.origin!==location.origin||e.source!==document.getElementById("frame").contentWindow||course!=="outcomes-beginner"||e.data?.type!=="outcomes-lesson")return;
+      const d=e.data;
+      if(d.kind==="ready"){
+        postOutcomes({kind:"connection",online});
+        if(ME==="s"&&outcomesView)postOutcomes(outcomesView);
+        if(ME==="t"&&outcomesAnswers)postOutcomes(outcomesAnswers);
+        if(ME==="s")sendOp({t:"hello"});
+      }else if(ME==="t"&&d.kind==="view"){
+        outcomesView=d;sendOp({t:"outcomes",from:ME,data:d});
+      }else if(ME==="s"&&d.kind==="answers"){
+        outcomesAnswers=d;sendOp({t:"outcomes",from:ME,data:d});
+      }
+    });
+
     // синхронизация панели урока через Supabase Realtime
     const SB_URL="https://kdzpmbuohfjbtjpqrdfx.supabase.co";
     const SB_KEY="sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
@@ -449,11 +485,12 @@
       const sb=window.supabase.createClient(SB_URL,SB_KEY);
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
-        if(payload.t==="state"){ if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;apply(false);}
-        else if(payload.t==="hello"){send({course:course,unit:unit,kind:kind}); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
+        if(payload.t==="outcomes"){ receiveOutcomes(payload); }
+        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&course!=="outcomes-beginner"))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;apply(false);}}
+        else if(payload.t==="hello"){if(ME==="t")send({course:course,unit:unit,kind:kind}); replayOutcomes(); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
         else onOp(payload);
       });
-      channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
+      channel.subscribe(st=>{ online=st==="SUBSCRIBED";setOnline(online);postOutcomes({kind:"connection",online}); if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
     }catch(e){}})();
     function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",course:s.course,unit:s.unit,kind:s.kind}});}catch(e){}} }
 
@@ -1036,14 +1073,15 @@
     function iAmDriving(){ return holder===ME; }
 
     function applyControl(){
-      const mine=iAmDriving();
+      const mine=iAmDriving(), outcomes=course==="outcomes-beginner";
+      courseSel.disabled=unitSel.disabled=outcomes&&ME==="s";
       $who.textContent=mine?"🎮 ведёшь ты":("👀 ведёт "+NAME[holder]);
       $who.classList.toggle("mine",mine);
-      $panel.classList.toggle("locked",!mine);
+      $panel.classList.toggle("locked",!mine&&!outcomes);
       $ctrlBtn.classList.toggle("hot",!mine);
       if(ME==="t") $ctrlBtn.textContent=mine?"🎮 Передать ученику":"🎮 Забрать управление";
       else $ctrlBtn.textContent=mine?"🎮 Вернуть учителю":"✋ Попросить управление";
-      $lock.classList.toggle("on",!mine);
+      $lock.classList.toggle("on",!mine&&!outcomes);
       if(!mine) $lock.innerHTML="Сейчас ведёт "+NAME[holder]+" — смотри, как он делает."+
         (ME==="s"?'<button id="askBtn">✋ Попросить управление</button>':"");
       const ab=document.getElementById("askBtn");
@@ -1094,7 +1132,7 @@
     function attachSync(){
       const f=document.getElementById("frame");
       let doc=null; try{ doc=f.contentDocument; }catch(e){ return; }
-      if(!doc||!doc.body||doc.body.dataset.smSync)return;
+      if(course==="outcomes-beginner"||!doc||!doc.body||doc.body.dataset.smSync)return;
       doc.body.dataset.smSync="1";
       const root=doc.body;
       doc.addEventListener("click",e=>{
@@ -1121,6 +1159,7 @@
     document.getElementById("frame").addEventListener("load",()=>{ setTimeout(attachSync,120); });
 
     function replay(a){
+      if(course==="outcomes-beginner")return;
       const f=document.getElementById("frame");
       let doc=null; try{ doc=f.contentDocument; }catch(e){ return; }
       if(!doc||!doc.body)return;

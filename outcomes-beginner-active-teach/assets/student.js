@@ -53,6 +53,7 @@
   if($('#revealAnswers'))$('#revealAnswers').onclick=()=>{revealed=!revealed;checkTask()};
   $('#saveTask').onclick=()=>{saveDraft();flush();$('#modal').close()};
   if(checked)renderFeedback(OutcomesGrader.check(e.check,record.values));
+  liveView();renderLiveAnswers();
   $('#modalTitle').tabIndex=-1;$('#modalTitle').focus({preventScroll:true});
  }
  let skipDragClick=false;
@@ -113,6 +114,7 @@
   const record={...previous,book:active.book||source(),page:active.page||current().page,unit:active.unit||S.unit,exercise:active.n,values,done,grade,assisted:Boolean(previous.assisted||previous.grade?.revealed||grade?.revealed),updatedAt:Date.now()};
   if(previous.values?.length>values.length&&!previous.legacyValues)record.legacyValues=previous.values;
   if(changed&&!newGrade?.mode){$$('.responseField').forEach(el=>{delete el.dataset.result;el.querySelector('[data-response]').removeAttribute('aria-invalid')});$$('.answerFeedback').forEach(el=>el.textContent='');if($('#checkSummary'))$('#checkSummary').textContent=checked?'Ответ изменён. Проверим после выхода из поля.':'';}
+  liveAnswer(record);
   answers[active.id]=record;dirty[active.id]=record;const saved=localSave();renderTasks();if($('#taskSaveStatus'))$('#taskSaveStatus').textContent=saved?(user?'Сохранено на устройстве. Синхронизация…':'Сохранено в этом браузере. Войдите для сохранения в аккаунте.'):'Не удалось сохранить. Скачайте ответы.';clearTimeout(timer);timer=setTimeout(flush,900);
  }
  async function flush(){
@@ -128,7 +130,7 @@
  }
  $('#exerciseToggle').onclick=()=>{enabled=!enabled;$('#exerciseToggle').setAttribute('aria-pressed',enabled);renderTasks()};
  window.addEventListener('outcomes-page',renderTasks);window.addEventListener('online',flush);
- $('#modal').addEventListener('close',()=>{$$('.taskAudio').forEach(a=>a.pause());const trigger=exerciseTrigger?.isConnected?exerciseTrigger:$$('[data-exercise]').find(b=>b.dataset.exercise===exerciseTrigger?.dataset.exercise);active=null;(trigger||$('#exerciseToggle')).focus({preventScroll:true})});
+ $('#modal').addEventListener('close',()=>{$$('.taskAudio').forEach(a=>a.pause());const trigger=exerciseTrigger?.isConnected?exerciseTrigger:$$('[data-exercise]').find(b=>b.dataset.exercise===exerciseTrigger?.dataset.exercise);active=null;liveView();(trigger||$('#exerciseToggle')).focus({preventScroll:true})});
  window.addEventListener('resize',cropExercise);
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
  $('#keys').hidden=true;
@@ -140,7 +142,60 @@
   }else status('Гостевой режим: ответы сохраняются только в этом браузере.');
   $('#keys').hidden=!['teacher','admin'].includes(role);$('#notesTab').hidden=!['teacher','admin'].includes(role);
   if(!['teacher','admin'].includes(role))$('#resources').onclick=()=>{openModal('Материалы ученика',`<p>Student’s Book, Workbook и словарь доступны через вкладки. Нажимайте номера заданий, чтобы записывать ответы.</p><p>В комплекте Workbook ©2019 (ISBN 9780357042243). Название архива «3ed» не меняет издание книги.</p><a href="resources/workbook.pdf" target="_blank" rel="noopener">Workbook PDF</a> · <a href="resources/vocabulary.pdf" target="_blank" rel="noopener">Vocabulary Builder PDF</a>`)};
-  ready=true;renderTasks();flush();
+  ready=true;renderTasks();flush();liveSend({kind:"ready"});liveView();
  }
+ // The room mediates transport; no student response is merged into the
+ // teacher's coursework. Outside a room this adapter remains inactive.
+ const liveRole=params.get('embedded')==='1'&&window.parent!==window?params.get('lessonRole'):null;
+ let liveApplying=false,liveTimer,liveAnswerTimer,liveRemote=null,liveOnline=false;
+ function liveSend(data){if(liveRole)parent.postMessage({type:'outcomes-lesson',...data},location.origin)}
+ function liveView(){
+  if(liveRole!=='t'||liveApplying||!ready)return;
+  clearTimeout(liveTimer);liveTimer=setTimeout(()=>liveSend({kind:'view',book:S.book,page:S.id,exercise:active?.id||null}),80);
+ }
+ function liveAnswer(record){
+  if(liveRole!=='s'||!active)return;
+  const data={kind:'answers',exercise:active.id,values:record.values,checked:Boolean(record.grade),updatedAt:Date.now()};
+  clearTimeout(liveAnswerTimer);liveAnswerTimer=setTimeout(()=>liveSend(data),120);
+ }
+ function renderLiveAnswers(){
+  if(!liveRole||!active)return;
+  let panel=$('#liveLessonAnswers');
+  if(!panel){panel=document.createElement('section');panel.id='liveLessonAnswers';panel.className='liveLessonAnswers';$('.responsePanel').prepend(panel)}
+  if(liveRole==='s'){panel.textContent=liveOnline?'Онлайн-урок · Учитель видит ваши ответы по мере ввода.':'Связь с уроком восстанавливается. Ответы сохраняются на устройстве.';return}
+  const r=liveRemote?.exercise===active.id?liveRemote:null;
+  panel.innerHTML='<h3>Ответы ученика · онлайн</h3><p>'+(!liveOnline?'Связь с уроком восстанавливается. Показаны последние полученные ответы.':r?'Обновляются по мере ввода.':'Ожидаем ответы ученика…')+'</p>';
+  if(r){
+   const grade=r.checked&&active.check?.mode==='items'?OutcomesGrader.check(active.check,r.values):null;
+   const list=document.createElement('ol');
+   r.values.forEach((value,i)=>{const li=document.createElement('li');li.textContent=(value||'—')+(grade?' · '+({correct:'✓ Верно',incorrect:'✕ Ошибка',blank:'Нет ответа',review:'Свободный ответ'}[grade.items[i]]||''):'');list.append(li)});panel.append(list);
+  }
+ }
+ window.addEventListener('outcomes-page',()=>{if(active){saveDraft();active=null;$('#modal').close()}liveView()});
+ window.addEventListener('message',ev=>{
+  if(!liveRole||ev.origin!==location.origin||ev.source!==parent||ev.data?.type!=='outcomes-lesson')return;
+  const d=ev.data;
+  if(d.kind==='connection'){liveOnline=Boolean(d.online);renderLiveAnswers();return}
+  if(d.kind==='snapshot'){if(active)liveAnswer(answers[active.id]||{values:[]});return}
+  if(d.kind==='answers'&&liveRole==='t'){
+   if(typeof d.exercise!=='string'||!Array.isArray(d.values)||d.values.length>200||d.values.some(v=>typeof v!=='string'||v.length>10000))return;
+   liveRemote=d;renderLiveAnswers();return;
+  }
+  if(d.kind!=='view'||liveRole!=='s'||!ready||!names[d.book])return;
+  const src=['grammar','reference'].includes(d.book)?'sb':d.book;
+  if(!D.books[src]?.pages.some(p=>p.id===d.page))return;
+  const task=(bank[src+':'+d.page]||[]).find(e=>e.id===d.exercise);
+  if(d.exercise&&!task)return;
+  if(S.book===d.book&&S.id===d.page&&active?.id===d.exercise){liveAnswer(answers[active.id]||{values:[]});return}
+  liveApplying=true;
+  try{
+   saveDraft();S.book=d.book;S.id=d.page;
+   // Avoid an asynchronous dialog close event wiping a newly opened task.
+   active=null;render();
+   if(task){openTask(task);liveAnswer(answers[task.id]||{values:[]})}
+   else if($('#modal').open)$('#modal').close();
+  }finally{liveApplying=false}
+ });
+
  renderTasks();init();
 })();
