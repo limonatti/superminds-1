@@ -163,3 +163,15 @@ pageScroll.addEventListener('wheel',ev=>{
  pageScroll.scrollLeft+=rect.left+fx*rect.width-ev.clientX;
  pageScroll.scrollTop+=rect.top+fy*rect.height-ev.clientY;
 },{passive:false});
+
+// Apply explicit lesson links independently of a previously visited page.
+const lessonParams=new URLSearchParams(location.search);
+if(lessonParams.has('unit')){const u=lessonParams.get('unit');if(lessonParams.get('book')==='wb')S.book='wb';S.unit=u;const target=pages().find(p=>belongs(p,u));if(target)go(target.page);}
+window.LiveCourse?.connect({
+ course:'speakout-a1',
+ view:()=>({book:S.book,page:S.page,exercise:$('#exerciseDialog').open?selectedEx?.label||null:null}),
+ apply(v){const target=D.books[v.book]?.pages.find(p=>p.page===v.page);if(!target||v.exercise&&!target.exercises.some(e=>e.label===v.exercise))return;
+  S.book=v.book;go(v.page,v.exercise);if(v.exercise)openExercise(target.exercises.findIndex(e=>e.label===v.exercise));else if($('#exerciseDialog').open)$('#exerciseDialog').close();},
+ host:()=>$('#exerciseDialog').open?$('.exercise-response'):null,
+ answer(){if(!selectedEx||!$('#exerciseDialog').open)return null;const r=answerState(),spec=I.spec(selectedEx,getKey(selectedEx));return {exercise:selectedEx.label,items:Object.entries(r.values||{}).map(([label,text])=>{const field=spec.items?.find(f=>f.n===label);return {label,text,result:typeof r.score==='number'&&field?(I.matches(text,field.answer)?'✓ Верно':'✕ Ошибка'):''}}).concat(r.note?[{label:'Свободный ответ',text:r.note}]:[])};}
+});

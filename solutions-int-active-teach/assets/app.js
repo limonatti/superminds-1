@@ -11,7 +11,7 @@ function merge(a,b){const out={...a};Object.entries(b||{}).forEach(([k,v])=>{if(
 function persist(){try{localStorage.setItem(storageKey,JSON.stringify(responses));status(user?'Сохранено на устройстве':'Гостевой режим · сохранено на устройстве');}catch{status('Не удалось сохранить на устройстве — скачай ответы');}renderProgress();}
 function sync(){queue=queue.then(async()=>{if(!user){status('Войди в аккаунт платформы для синхронизации');return;}try{const current=await SM.getUser();if(!current||current.id!==user.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return;}status('Синхронизация…');const remote=await SM.loadCourseWork('solutions-int');if(!remote?.ok)throw new Error();const combined=merge(remote.answers,responses);const result=await SM.saveCourseWork('solutions-int',combined,user.id);if(!result?.ok)throw new Error();responses=merge(responses,combined);persist();status('Ответы сохранены в аккаунте');}catch{status('Нет связи · ответы на устройстве, повтори синхронизацию');}});return queue;}
 function renderProgress(){const all=D.pages.filter(p=>p.unit===page?.unit).flatMap(p=>p.exercises);const done=all.filter(e=>(responses[e.id]?.values?.some(v=>v.trim())||responses[e.id]?.reflection?.trim())).length;$('#progress').textContent=`${done} из ${all.length} упражнений с ответами в этом разделе.`;}
-function url(){return `${location.pathname}?book=${book}&unit=${unit}&page=${page.page}`;}
+function url(){const q=new URLSearchParams(location.search);q.set("book",book);q.set("unit",unit);q.set("page",page.page);return location.pathname+"?"+q;}
 function render(){
  if(!page||page.book!==book||String(page.unit)!==String(unit))page=list()[0];
  if(!page){unit='0';page=list()[0];}
@@ -91,4 +91,13 @@ window.addEventListener('resize',resizeCrop);document.addEventListener('fullscre
 document.addEventListener('play',ev=>{if(ev.target.tagName==='AUDIO')$$('audio').forEach(a=>{if(a!==ev.target)a.pause();});},true);
 window.addEventListener('storage',ev=>{if(ev.key===storageKey){try{responses=merge(responses,JSON.parse(ev.newValue)||{});renderProgress();}catch{}}});
 (async()=>{try{user=await SM.getUser();}catch{}storageKey=NS+':'+(user?.id||'guest');try{responses=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch{}if(user){try{const remote=await SM.loadCourseWork('solutions-int');if(remote?.ok)responses=merge(responses,remote.answers);}catch{}}ready=true;page=D.pages.find(p=>p.book===book&&p.page===Number(params.get('page')));if(page)unit=String(page.unit);render();persist();})();
+window.LiveCourse?.connect({
+ course:'solutions-int',
+ view:()=>ready&&page?{book,page:page.page,exercise:$('#exercise').open?active?.id||null:null}:null,
+ apply(v){const target=D.pages.find(p=>p.book===v.book&&p.page===v.page);if(!target||v.exercise&&!target.exercises.some(e=>e.id===v.exercise))return;
+  book=v.book;page=target;unit=String(page.unit);render();if(v.exercise)openExercise(v.exercise);else if($('#exercise').open)$('#exercise').close();},
+ host:()=>$('#exercise').open?$('#answerForm'):null,
+ answer(){if(!active||!$('#exercise').open)return null;const r=responses[active.id]||{},values=r.values||[];return {exercise:active.id,items:values.map((text,i)=>({label:String(active.answerSpec?.[i]?.label||i+1),text,result:r.score?(M.checkField(text,active.answerSpec[i])?'✓ Верно':'✕ Ошибка'):''})).concat(r.reflection?[{label:'Свободная часть',text:r.reflection}]:[])};}
+});
+
 })();

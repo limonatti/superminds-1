@@ -346,8 +346,9 @@
     const PAGED=["speakout-b1","speakout-b1plus","solutions-el","solutions-pi","focus-1","gateway-a1p"];
     const courseSel=document.getElementById("course");
     const unitSel=document.getElementById("unit");
+    const LIVE_COURSES={"outcomes-beginner":{path:"outcomes-beginner-active-teach",title:"Outcomes Beginner",count:12,start:1},"solutions-int":{path:"solutions-int-active-teach",title:"Solutions Intermediate",count:10,start:0},"speakout-a1":{path:"speakout-a1-active-teach",title:"Speakout A1",count:8,start:1}};
     const OUTCOMES_UNITS=["Be", "Live, work, eat", "Love, want, need", "Where and when?", "Going places", "Away from home", "Going out and staying in", "Here and there", "Healthy and happy", "News", "Life and history", "Thank you and goodbye"];
-    let course=params.get("course")==="outcomes-beginner"?"outcomes-beginner":"sm", kind="trainer", unit="";
+    let course=LIVE_COURSES[params.get("course")]?params.get("course"):"sm", kind="trainer", unit="";
 
     function buildCourses(){
       const keep=courseSel.value;
@@ -355,7 +356,7 @@
       const meta={}; (window.SM_COURSES||[]).forEach(c=>{meta[c.id]=c;});
       const add=(id,label)=>{const o=document.createElement("option");o.value=id;o.textContent=label;courseSel.appendChild(o);};
       add("sm","🧒 Super Minds 1");
-      add("outcomes-beginner","📘 Outcomes Beginner · Presentation Tool");
+      Object.entries(LIVE_COURSES).forEach(([id,c])=>add(id,"📘 "+c.title+" · Presentation Tool"));
       PAGED.forEach(id=>{
         const m=meta[id]; if(!m && !(window.SM_COURSE_DATA||{})[id]) return;
         add(id,((m&&m.emoji)||"📘")+" "+((m&&m.title)||id));
@@ -380,6 +381,7 @@
         unit=list[0].id;
         return;
       }
+      if(LIVE_COURSES[course]&&course!=="outcomes-beginner"){const c=LIVE_COURSES[course];for(let n=c.start;n<c.start+c.count;n++){const o=document.createElement("option");o.value=String(n);o.textContent=n===0?"Introduction":"Unit "+n;unitSel.appendChild(o);}unit=String(c.start);return;}
       if(course==="outcomes-beginner"){
         OUTCOMES_UNITS.forEach((title,i)=>{const o=document.createElement("option");o.value=String(i+1);o.textContent="Unit "+(i+1)+" · "+title;unitSel.appendChild(o);});
         unit="1";return;
@@ -397,7 +399,7 @@
     buildCourses();
     buildUnits();
     const requestedUnit=Number(params.get("unit"));
-    if(course==="outcomes-beginner" && Number.isInteger(requestedUnit) && requestedUnit>=1 && requestedUnit<=12) unit=String(requestedUnit);
+    if(LIVE_COURSES[course] && params.has("unit") && [...unitSel.options].some(o=>o.value===String(requestedUnit))) unit=String(requestedUnit);
     /* Слова и юниты курсов приезжают после загрузки страницы — перестраиваем */
     Promise.resolve(window.SM_ready).then(()=>{
       try{ if(window.SM_absorbSpeakout) SM_absorbSpeakout(); }catch(e){}
@@ -408,11 +410,12 @@
       try{ apply(false); }catch(e){}
     }).catch(()=>{});
 
-    function frameSrc(){ if(course==="outcomes-beginner")return "outcomes-beginner-active-teach/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1&lessonRole="+ME; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
+    function frameSrc(){ if(LIVE_COURSES[course])return LIVE_COURSES[course].path+"/index.html?book=sb&unit="+encodeURIComponent(unit)+"&embedded=1&lessonRole="+ME; return course==="sm" ? ((kind==="games"?"games.html?u=":"trainer.html?unit=")+unit) : (course+"-u"+unit+".html"); }
     function apply(broadcast){
-      if(broadcast)outcomesView=null;
+      if(broadcast){outcomesView=null;outcomesAnswers=null;}
       const isSM=course==="sm";
-      document.getElementById("frame").src=frameSrc();
+      const lessonFrame=document.getElementById("frame"),nextSource=frameSrc();
+      if(lessonFrame.getAttribute("src")!==nextSource)lessonFrame.src=nextSource;
       document.querySelector(".acts").style.display=isSM?"flex":"none";
       document.getElementById("aTrainer").classList.toggle("on",kind==="trainer");
       document.getElementById("aGames").classList.toggle("on",kind==="games");
@@ -445,15 +448,15 @@
     // room's frame can publish; teachers lead navigation, students own answers.
     let outcomesView=null, outcomesAnswers=null;
     function postOutcomes(data){
-      if(course!=="outcomes-beginner")return;
+      if(!LIVE_COURSES[course])return;
       document.getElementById("frame").contentWindow.postMessage({type:"outcomes-lesson",...data},location.origin);
     }
     function replayOutcomes(){
-      if(ME==="t"&&outcomesView)sendOp({t:"outcomes",from:ME,data:outcomesView});
+      if(ME==="t"&&outcomesView)sendOp({t:"outcomes",course,from:ME,data:outcomesView});
       if(ME==="s")postOutcomes({kind:"snapshot"});
     }
     function receiveOutcomes(p){
-      if(course!=="outcomes-beginner"||!p.data)return;
+      if(!LIVE_COURSES[course]||!p.data||(p.course||"outcomes-beginner")!==course)return;
       if(ME==="s"&&p.from==="t"&&p.data.kind==="view"){
         outcomesView=p.data;postOutcomes(p.data);
       }else if(ME==="t"&&p.from==="s"&&p.data.kind==="answers"){
@@ -461,17 +464,18 @@
       }
     }
     window.addEventListener("message",e=>{
-      if(e.origin!==location.origin||e.source!==document.getElementById("frame").contentWindow||course!=="outcomes-beginner"||e.data?.type!=="outcomes-lesson")return;
+      if(e.origin!==location.origin||e.source!==document.getElementById("frame").contentWindow||!LIVE_COURSES[course]||e.data?.type!=="outcomes-lesson")return;
       const d=e.data;
       if(d.kind==="ready"){
+        if(ME==="t")send({course,unit,kind});
         postOutcomes({kind:"connection",online});
         if(ME==="s"&&outcomesView)postOutcomes(outcomesView);
         if(ME==="t"&&outcomesAnswers)postOutcomes(outcomesAnswers);
         if(ME==="s")sendOp({t:"hello"});
       }else if(ME==="t"&&d.kind==="view"){
-        outcomesView=d;sendOp({t:"outcomes",from:ME,data:d});
+        outcomesView=d;sendOp({t:"outcomes",course,from:ME,data:d});
       }else if(ME==="s"&&d.kind==="answers"){
-        outcomesAnswers=d;sendOp({t:"outcomes",from:ME,data:d});
+        outcomesAnswers=d;sendOp({t:"outcomes",course,from:ME,data:d});
       }
     });
 
@@ -486,11 +490,11 @@
       channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>{
         if(payload.t==="outcomes"){ receiveOutcomes(payload); }
-        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&course!=="outcomes-beginner"))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;apply(false);}}
+        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&!LIVE_COURSES[course]))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;outcomesAnswers=null;apply(false);}}
         else if(payload.t==="hello"){if(ME==="t")send({course:course,unit:unit,kind:kind}); replayOutcomes(); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
         else onOp(payload);
       });
-      channel.subscribe(st=>{ online=st==="SUBSCRIBED";setOnline(online);postOutcomes({kind:"connection",online}); if(st==="SUBSCRIBED"){online=true;setOnline(true);channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
+      channel.subscribe(st=>{ online=st==="SUBSCRIBED";setOnline(online);postOutcomes({kind:"connection",online}); if(st==="SUBSCRIBED"){online=true;setOnline(true);if(ME==="t"){send({course,unit,kind});replayOutcomes();}channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
     }catch(e){}})();
     function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",course:s.course,unit:s.unit,kind:s.kind}});}catch(e){}} }
 
@@ -1073,7 +1077,7 @@
     function iAmDriving(){ return holder===ME; }
 
     function applyControl(){
-      const mine=iAmDriving(), outcomes=course==="outcomes-beginner";
+      const mine=iAmDriving(), outcomes=Boolean(LIVE_COURSES[course]);
       courseSel.disabled=unitSel.disabled=outcomes&&ME==="s";
       $who.textContent=mine?"🎮 ведёшь ты":("👀 ведёт "+NAME[holder]);
       $who.classList.toggle("mine",mine);
@@ -1132,7 +1136,7 @@
     function attachSync(){
       const f=document.getElementById("frame");
       let doc=null; try{ doc=f.contentDocument; }catch(e){ return; }
-      if(course==="outcomes-beginner"||!doc||!doc.body||doc.body.dataset.smSync)return;
+      if(LIVE_COURSES[course]||!doc||!doc.body||doc.body.dataset.smSync)return;
       doc.body.dataset.smSync="1";
       const root=doc.body;
       doc.addEventListener("click",e=>{
@@ -1159,7 +1163,7 @@
     document.getElementById("frame").addEventListener("load",()=>{ setTimeout(attachSync,120); });
 
     function replay(a){
-      if(course==="outcomes-beginner")return;
+      if(LIVE_COURSES[course])return;
       const f=document.getElementById("frame");
       let doc=null; try{ doc=f.contentDocument; }catch(e){ return; }
       if(!doc||!doc.body)return;
