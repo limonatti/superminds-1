@@ -20,7 +20,7 @@ function go(p,ex){stopMedia();S.page=Number(p);const pg=page();S.page=pg.page;S.
 function stopMedia(){document.querySelectorAll('audio,video').forEach(x=>x.pause())}
 function render(){sidebar();$("#wordTrainer").href="../trainer.html?course=speakout-a1"+(/^[1-8]$/.test(S.unit)?"&unit=sa1-u"+S.unit:"");const p=page();$('#breadcrumb').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;$('#lessonTitle').textContent=titleFor(p.lesson);$('#pageSelect').innerHTML=pages().map(x=>`<option value="${x.page}">${x.page}</option>`).join('');$('#pageSelect').value=S.page;$('#prev').disabled=pages().indexOf(p)===0;$('#next').disabled=pages().indexOf(p)===pages().length-1;$('#pageImage').src=url(p.image);$('#pageImage').alt=`${S.book==='sb'?'Student’s Book':'Workbook'}, страница ${S.page}`;$('#hotspots').innerHTML=p.exercises.map((e,i)=>e.x===null?'':`<button class="hotspot" style="left:${e.x}%;top:${e.y}%" data-ex-index="${i}" aria-label="Открыть упражнение ${esc(e.label)}">${esc(e.label)}</button>`).join('');$('#exerciseNav').innerHTML=p.exercises.map((e,i)=>`<button data-ex-index="${i}">${esc(e.label)}${answers[recordId(e)]?.done?' ✓':''}</button>`).join('');$$('[data-ex-index]').forEach(b=>b.onclick=()=>openExercise(Number(b.dataset.exIndex)));let ix=p.exercises.findIndex(e=>e.label===S.ex);selectExercise(Math.max(0,ix));setTool('pointer');$('#mediaCount').textContent=mediaFor('lesson').length;renderMedia();showView(S.view);updateProgress();drawBoard()}
 function cropHTML(e){const [x,y,w,h]=e.box;return `<div class="crop" style="aspect-ratio:${w*595}/${h*842}"><img src="${url(page().image)}" alt="Оригинал упражнения ${esc(e.label)}" style="width:${10000/w}%;left:${-x/w*100}%;top:${-y/h*100}%"><button class="cropZoom">Вся страница</button></div>`}
-let exerciseTrigger=null,dragTile=null;
+let exerciseTrigger=null,dragTile=null,exerciseZoom=1;
 function openExercise(index){
  exerciseTrigger=document.activeElement;stopMedia();$('#magnifier').hidden=true;
  selectExercise(index);if(!selectedEx)return;
@@ -34,6 +34,11 @@ function fullExercisePage(on){
  $('#exercisePage').hidden=!on;$('#exerciseBody').classList.toggle('full-source',on);
  $('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);
 }
+function setExerciseZoom(value){
+ exerciseZoom=Math.max(.75,Math.min(3,value));for(const el of $$('#exerciseBody .crop,#exercisePage'))el.style.width=(exerciseZoom*100)+'%';
+ $('#exerciseZoomFit').textContent=Math.round(exerciseZoom*100)+'%';$('#exerciseZoomOut').disabled=exerciseZoom<=.75;$('#exerciseZoomIn').disabled=exerciseZoom>=3;
+}
+$('#exerciseZoomOut').onclick=()=>setExerciseZoom(exerciseZoom-.25);$('#exerciseZoomIn').onclick=()=>setExerciseZoom(exerciseZoom+.25);$('#exerciseZoomFit').onclick=()=>setExerciseZoom(1);
 $('#closeExercise').onclick=()=>$('#exerciseDialog').close();
 $('#exerciseDialog').addEventListener('close',()=>{stopMedia();persist();exerciseTrigger?.isConnected&&exerciseTrigger.focus({preventScroll:true})});
 $('#exerciseDialog').addEventListener('click',e=>{if(e.target===$('#exerciseDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
@@ -65,7 +70,7 @@ function selectExercise(index){
   html+='<p class="instruction">Выполни задание по оригиналу. Для устного ответа подготовь реплики, для письменного — запиши свой вариант.</p><label for="freeNote">Твой ответ или заметки</label><textarea id="freeNote" class="note" placeholder="Напиши ответ…">'+esc(state.note)+'</textarea><p class="teacher-note">Это задание проверяется с преподавателем или по образцу в ключе.</p>';
  }
  html+=`<div class="actions"><button id="done" class="${state.done?'selected':''}">${state.done?'✓ Выполнено':auto?'Отметить после сверки':'Отметить выполненным'}</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div><div id="keyArea" ${S.teacher?'':'hidden'}>${key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Отдельный ключ не привязан. Ответ можно обсудить с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>'}</div>`;
- $('#exerciseBody').innerHTML=html+'</div>';fullExercisePage(/photos|pictures|drawing/i.test(e.text)&&e.box[3]<15);$('.cropZoom').onclick=()=>fullExercisePage(true);
+ $('#exerciseBody').innerHTML=html+'</div>';setExerciseZoom(1);fullExercisePage(/photos|pictures|drawing/i.test(e.text)&&e.box[3]<15);$('.cropZoom').onclick=()=>fullExercisePage(true);
  function invalidate(n){state.done=false;state.score=null;clearFeedback();persist()}
  function inputFor(n){return $$('[data-answer]').find(x=>x.dataset.answer===n)}
  function put(n,v){const input=inputFor(n);input.value=v;state.values[n]=v;invalidate(n);syncChoices()}

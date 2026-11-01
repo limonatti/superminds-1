@@ -7,3 +7,6 @@
 
 #exerciseBody{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start}.exercise-source{position:sticky;top:80px;min-width:0;max-height:calc(92dvh - 130px);overflow:auto}.exercise-source .crop{margin:0}.exercise-response{min-width:0}#exercisePage{margin:0}.exercise-response>.instruction{margin-top:0}#exerciseMedia{margin-bottom:16px}#exerciseMedia summary{cursor:pointer;padding:10px 0;font-size:13px;color:var(--muted)}#exerciseBody .primary{background:var(--wine);border-color:var(--wine);color:white}#exerciseBody .actions{flex-wrap:wrap}#exerciseAllMedia{margin:0 0 8px;font-size:13px}
 @media(max-width:760px){#exerciseBody{display:block}.exercise-source{position:static;max-height:55dvh;margin-bottom:16px}.exercise-response>.instruction{margin-top:16px}}
+
+.exercise-source-zoom{display:flex;gap:4px;margin-left:auto}.exercise-source-zoom button{min-width:40px}#exerciseZoomFit{min-width:64px}.exercise-source .crop,#exercisePage{max-width:none}#exercisePage img{max-width:none}.exercise-source{scrollbar-width:thin}
+@media(max-width:600px){.exercise-source-zoom{flex:1 0 100%;justify-content:flex-end}.exercise-source-zoom button{flex:none}}
