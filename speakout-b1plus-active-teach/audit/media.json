@@ -1,0 +1,1736 @@
+[
+  {
+    "path": "media/so3-b1-sb-8b-audio-8-04.mp3",
+    "duration": 30.34898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1a-audio-vb1-01.mp3",
+    "duration": 72.46898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-01.mp3",
+    "duration": 41.484966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-08.mp3",
+    "duration": 166.42898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3c-audio-mb3-01.mp3",
+    "duration": 92.532971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-09.mp3",
+    "duration": 41.556984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3r-audio-r3-01.mp3",
+    "duration": 82.500975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-02.mp3",
+    "duration": 66.996984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-03.mp3",
+    "duration": 140.580975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3a-audio-3-02.mp3",
+    "duration": 65.196984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5a-audio-5-02.mp3",
+    "duration": 255.34898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6a-audio-6-02.mp3",
+    "duration": 37.212971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8b-audio-8-02.mp3",
+    "duration": 107.484966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4r-audio-r4-01.mp3",
+    "duration": 115.332971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8c-audio-8-06.mp3",
+    "duration": 38.124966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-07.mp3",
+    "duration": 49.236984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-06.mp3",
+    "duration": 61.42898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8c-audio-8-07.mp3",
+    "duration": 207.444966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8b-audio-8-03.mp3",
+    "duration": 53.964966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5a-audio-5-03.mp3",
+    "duration": 75.804966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5c-audio-mb5-01.mp3",
+    "duration": 67.692971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-08.mp3",
+    "duration": 163.452971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3a-audio-3-01.mp3",
+    "duration": 113.38898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6a-audio-6-01.mp3",
+    "duration": 241.956984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5a-audio-5-01.mp3",
+    "duration": 34.884966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-04.mp3",
+    "duration": 45.900975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8c-audio-8-05.mp3",
+    "duration": 262.404966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-05.mp3",
+    "duration": 111.372971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u1-bbc-streetint.mp4",
+    "duration": 203.893991,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-03.mp3",
+    "duration": 35.38898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3b-audio-3-05.mp3",
+    "duration": 28.572971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-03.mp3",
+    "duration": 63.324966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-06.mp3",
+    "duration": 48.156984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u7-bbc-streetint.mp4",
+    "duration": 189.846009,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-07.mp3",
+    "duration": 83.364966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-02.mp3",
+    "duration": 38.964966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3b-audio-3-04.mp3",
+    "duration": 57.492971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-02.mp3",
+    "duration": 75.70898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5b-audio-5-04.mp3",
+    "duration": 36.204966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-09.mp3",
+    "duration": 176.532971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-05.mp3",
+    "duration": 61.740975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u4-bbc-vlogs.mp4",
+    "duration": 129.288005,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-04.mp3",
+    "duration": 39.780975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-01.mp3",
+    "duration": 41.772971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7r-audio-r7-01.mp3",
+    "duration": 90.804966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-01.mp3",
+    "duration": 50.74898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-08.mp3",
+    "duration": 80.62898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u6-bbc-programmes.mp4",
+    "duration": 249.892993,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u3-bbc-vlogs.mp4",
+    "duration": 134.210998,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-mb1-02.mp3",
+    "duration": 67.020975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-05.mp3",
+    "duration": 105.180975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3b-audio-3-03.mp3",
+    "duration": 338.460975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6b-audio-6-03.mp3",
+    "duration": 28.476984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u5-bbc-street-interviews-video.mp4",
+    "duration": 173.987007,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-09.mp3",
+    "duration": 20.532971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-05.mp3",
+    "duration": 91.30898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u8-bbc-programmes.mp4",
+    "duration": 355.450998,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5c-audio-5-07.mp3",
+    "duration": 70.812971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3c-audio-3-07.mp3",
+    "duration": 230.316984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3c-audio-3-06.mp3",
+    "duration": 45.372971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5c-audio-5-06.mp3",
+    "duration": 92.62898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6c-audio-6-06.mp3",
+    "duration": 25.42898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u7-bbc-vlogs.mp4",
+    "duration": 132.770998,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-04.mp3",
+    "duration": 160.956984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-01.mp3",
+    "duration": 63.396984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-08.mp3",
+    "duration": 33.540975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-04.mp3",
+    "duration": 134.724966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-mb1-01.mp3",
+    "duration": 60.324966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-06.mp3",
+    "duration": 23.676984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-03.mp3",
+    "duration": 44.412971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8c-audio-mb8-01.mp3",
+    "duration": 74.74898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-06.mp3",
+    "duration": 55.140975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6d-audio-6-07.mp3",
+    "duration": 132.324966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7c-audio-7-09.mp3",
+    "duration": 23.74898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6c-audio-6-04.mp3",
+    "duration": 229.212971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2c-audio-2-09.mp3",
+    "duration": 51.132971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2c-audio-2-08.mp3",
+    "duration": 73.66898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6c-audio-6-05.mp3",
+    "duration": 48.444966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7c-audio-7-08.mp3",
+    "duration": 67.860975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5c-audio-5-05.mp3",
+    "duration": 189.492971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u3-bbc-streetint.mp4",
+    "duration": 190.960998,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-07.mp3",
+    "duration": 106.42898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-02.mp3",
+    "duration": 169.18898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-07.mp3",
+    "duration": 43.212971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8a-audio-8-01.mp3",
+    "duration": 31.212971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-03.mp3",
+    "duration": 42.396984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-06.mp3",
+    "duration": 41.340975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4d-audio-4-06.mp3",
+    "duration": 173.436984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u6-bbc-vlogs.mp4",
+    "duration": 136.370998,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4c-audio-4-05.mp3",
+    "duration": 35.580975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3c-audio-3-08.mp3",
+    "duration": 72.540975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-1-05.mp3",
+    "duration": 76.18898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-1-04.mp3",
+    "duration": 234.46898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7c-audio-7-10.mp3",
+    "duration": 24.70898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4c-audio-4-04.mp3",
+    "duration": 201.060975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5b-audio-vb5-01.mp3",
+    "duration": 36.804966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-07.mp3",
+    "duration": 114.396984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-02.mp3",
+    "duration": 32.076984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u4-bbc-programmes.mp4",
+    "duration": 359.7,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u2-bbc-vlogs.mp4",
+    "duration": 133.979002,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6r-audio-r6-01.mp3",
+    "duration": 129.660975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4b-audio-4-02.mp3",
+    "duration": 36.34898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-05.mp3",
+    "duration": 147.060975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-11.mp3",
+    "duration": 148.956984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7c-audio-7-06.mp3",
+    "duration": 69.82898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-1-06.mp3",
+    "duration": 41.340975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1c-audio-1-07.mp3",
+    "duration": 31.044966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2c-audio-2-07.mp3",
+    "duration": 167.74898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7c-audio-7-07.mp3",
+    "duration": 168.324966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2d-audio-2-10.mp3",
+    "duration": 128.98898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-8-08.mp3",
+    "duration": 122.940975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-10.mp3",
+    "duration": 34.476984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-04.mp3",
+    "duration": 61.404966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4b-audio-4-03.mp3",
+    "duration": 312.420975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2b-audio-2-03.mp3",
+    "duration": 132.612971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-01.mp3",
+    "duration": 72.156984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1b-audio-1-03.mp3",
+    "duration": 44.604966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-4-08.mp3",
+    "duration": 42.22898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-05.mp3",
+    "duration": 68.436984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1r-audio-r1-01.mp3",
+    "duration": 101.916984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-01.mp3",
+    "duration": 77.052971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-6-08.mp3",
+    "duration": 87.324966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-10.mp3",
+    "duration": 42.852971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2b-audio-2-06.mp3",
+    "duration": 57.804966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-04.mp3",
+    "duration": 151.884966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2b-audio-2-04.mp3",
+    "duration": 173.004966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-06.mp3",
+    "duration": 157.596984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-03.mp3",
+    "duration": 140.38898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u5-bbc-vlogs.mp4",
+    "duration": 132.075011,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-1-02.mp3",
+    "duration": 29.076984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-3-07.mp3",
+    "duration": 73.836984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2b-audio-2-05.mp3",
+    "duration": 18.396984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u1-bbc-vlogs.mp4",
+    "duration": 128.917007,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7b-audio-7-05.mp3",
+    "duration": 38.124966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-04.mp3",
+    "duration": 72.46898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-01.mp3",
+    "duration": 67.092971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-2-08.mp3",
+    "duration": 53.844966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-4a-audio-4-01.mp3",
+    "duration": 34.044966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7a-audio-7-01.mp3",
+    "duration": 375.060975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1a-audio-1-01.mp3",
+    "duration": 230.220975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2a-audio-2-01.mp3",
+    "duration": 31.932971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-05.mp3",
+    "duration": 52.260975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-07.mp3",
+    "duration": 81.636984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8b-audio-vb8-01.mp3",
+    "duration": 79.980975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7a-audio-7-03.mp3",
+    "duration": 56.86898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-02.mp3",
+    "duration": 158.340975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2r-audio-r2-01.mp3",
+    "duration": 99.34898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-03.mp3",
+    "duration": 45.204966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7a-audio-7-02.mp3",
+    "duration": 62.100975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-2a-audio-2-02.mp3",
+    "duration": 43.716984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-1a-audio-1-02.mp3",
+    "duration": 66.060975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-8r-audio-r8-01.mp3",
+    "duration": 130.164966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-06.mp3",
+    "duration": 50.052971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-02.mp3",
+    "duration": 145.260975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-6c-audio-mb6-01.mp3",
+    "duration": 130.476984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-07.mp3",
+    "duration": 69.58898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-06.mp3",
+    "duration": 62.556984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-3c-audio-vb3-01.mp3",
+    "duration": 111.036984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-03.mp3",
+    "duration": 49.78898,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-7-01.mp3",
+    "duration": 44.364966,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-5r-audio-r5-01.mp3",
+    "duration": 72.732971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u8-bbc-vlogs.mp4",
+    "duration": 124.342993,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-04.mp3",
+    "duration": 108.660975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1p-wb-5-05.mp3",
+    "duration": 129.900975,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-u2-bbc-programmes.mp4",
+    "duration": 212.695011,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7b-audio-vb7-01.mp3",
+    "duration": 56.796984,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  },
+  {
+    "path": "media/so3-b1-sb-7a-audio-7-04.mp3",
+    "duration": 37.932971,
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio"
+      }
+    ]
+  }
+]

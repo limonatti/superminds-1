@@ -1,0 +1,5693 @@
+{
+  "wb|1A|1": {
+    "raw": "1 leather (Leather can be soft.)\n2 damaged (It is damaged because\nit is old and has been used a lot.\nSomething does not become\ngenuine after a period of time.)\n3 worth (Special cannot be used\nwith the adverb anything. Not\nworth anything means that\nsomething has no value.)\n4 special (We cannot use inherit +\nto.)\n5 genuine (Worth is only used after\nverbs such as be, seem and look.)\n6 belonged (Belong is used here to\nshow possession. We use belong\n+ to. We cannot use inherit + to.)\n7 inherited (We use inherit + from.)\n8 cool (Cool is used here to say\nthat something is good or really\ninteresting.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "leather"
+      },
+      {
+        "n": "2",
+        "answer": "damaged"
+      },
+      {
+        "n": "3",
+        "answer": "worth"
+      },
+      {
+        "n": "4",
+        "answer": "special"
+      },
+      {
+        "n": "5",
+        "answer": "genuine"
+      },
+      {
+        "n": "6",
+        "answer": "belonged"
+      },
+      {
+        "n": "7",
+        "answer": "inherited"
+      },
+      {
+        "n": "8",
+        "answer": "cool"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|2A": {
+    "raw": "1 a (Iron is a metal. Gates are very\nunlikely to be made of glass or\nrubber.)\n2 c (Denim is a type of material.\nIt is unlikely a jacket would be\nmade of stone or silver. Silver\ncannot be used to describe the\ncolour of the jacket, because the\nsentence states that the jacket\nis blue.)\n3 c (A shopping bag is unlikely to\nbe made of rubber or wood.)\n4 b (Gold is a metal often used in\njewellery. A chain is unlikely to\nbe made of rubber or denim.)\n5 a (Floors are not usually made\nfrom the metal iron or rubber.)\n6 a (Knives are often made of the\nmetal steel. They are unlikely to\nbe leather or diamond.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|2B": {
+    "raw": "1 diamond (Diamonds are\nexpensive stones often used in\njewellery and traditionally used\nin engagement rings.)\n2 rubber (Rubber is a material\noften used to make things such\nas tyres, boots or balls.)\n3 cotton (Cotton is a type\nof material often used to\nmake things like shirts and\nsheets.)\n4 wood (Wood is a material made\nfrom trees and often used to\nmake furniture.)\n5 silver (Silver is a metal often\nused to make jewellery.)\n6 glass (Glass is a material used to\nmake windows.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "diamond"
+      },
+      {
+        "n": "2",
+        "answer": "rubber"
+      },
+      {
+        "n": "3",
+        "answer": "cotton"
+      },
+      {
+        "n": "4",
+        "answer": "wood"
+      },
+      {
+        "n": "5",
+        "answer": "silver"
+      },
+      {
+        "n": "6",
+        "answer": "glass"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|3A": {
+    "raw": "1 c (We use the past perfect\nto describe something that\nhappened before Freddie\narrived at the airport.)\n2 c (We use the past simple to\ndescribe a finished action in the\n3 a (We use the past continuous\nto give background information.)\n4 b (We use the past simple to\ndescribe a finished action.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|3B": {
+    "raw": "1 had just finished / 'd just\nfinished (The past perfect\nis used here to describe\nsomething that happened\nbefore they cycled to Istanbul.)\n2 was trying (The past continuous\nis used here to describe an action\nin progress at a time in the past.)\n3 was watching (The past\ncontinuous is used here to\ndescribe an action in progress at\na time in the past.)\n4 had never made /'d never made\n(The past perfect is used here\nto describe something that\nhappened before another event\nin the past.)\n5 arrived (The past simple is used\nhere for a completed action in\n6 met (The past simple is used\nhere for a completed action in\n7 was camping (The past\ncontinuous is used here to\ndescribe an action in progress at\na time in the past.)\n8 blew (The past simple is used\nhere for a completed action in\n9 realised (The past simple is used\nhere for a completed event in\n10 didn't want (The past simple is\nused with a state verb.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "had just finished / 'd just finished"
+      },
+      {
+        "n": "2",
+        "answer": "was trying"
+      },
+      {
+        "n": "3",
+        "answer": "was watching"
+      },
+      {
+        "n": "4",
+        "answer": "had never made /'d never made"
+      },
+      {
+        "n": "5",
+        "answer": "arrived"
+      },
+      {
+        "n": "6",
+        "answer": "met"
+      },
+      {
+        "n": "7",
+        "answer": "was camping"
+      },
+      {
+        "n": "8",
+        "answer": "blew"
+      },
+      {
+        "n": "9",
+        "answer": "realised"
+      },
+      {
+        "n": "10",
+        "answer": "didn't want"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|4": {
+    "raw": "1 were working\n5 were living\n2 had lost\n6 had given\n7 was studying\n3 was travelling\n4 had seen\n8 had been",
+    "items": [
+      {
+        "n": "1",
+        "answer": "were working"
+      },
+      {
+        "n": "5",
+        "answer": "were living"
+      },
+      {
+        "n": "2",
+        "answer": "had lost"
+      },
+      {
+        "n": "6",
+        "answer": "had given"
+      },
+      {
+        "n": "7",
+        "answer": "was studying"
+      },
+      {
+        "n": "3",
+        "answer": "was travelling"
+      },
+      {
+        "n": "4",
+        "answer": "had seen"
+      },
+      {
+        "n": "8",
+        "answer": "had been"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|5A": {
+    "raw": "b ('It's sometimes difficult to let go\nof possessions ... we're speaking\nto people who are giving things\naway and asking them what the\nmost difficult thing has been.')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|5B": {
+    "raw": "a 2 ('It'sa drum ...')\nb 1 ('a T-shirt with my favourite\nband on it..')\nc 3 ('a small statue of a cat that\nmy husband, Danny, gave me')\nd 2 ('1 went to Senegal')\ne 1,2 |'It's full of holes now (1);\nthe top broke and I still haven't\nfixed it (2)')\nf 1 ('itreminds me of being young\nand having fun with my friends')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|5C": {
+    "raw": "1 c ('I can't stand their music now')\n2 a l'It reminds me of being young\nand having fun with my friends')\n3 b ('1 got it at a local market')\n4 c ('I thought that I'd learn to\nplay it properly, but l've never\nhad the time')\n5 b ('l have no idea why he gave it\nto me')\n6 c ('I suppose | felt guilty about\nthrowing away the first present\nDanny gave me')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a l'It reminds me of being young and having fun with my friends')"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|6A": {
+    "raw": "1 C ('condition: as new')\n2 B ('free')\n3 B ('damaged')\n4 C l'only three months old')\n5 D ('heavy')\n6 A ('Easy to fall asleep on')\n6B1d 2e 3f 4a 5c 6b",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|7A": {
+    "raw": "1 Very good condition\n2 Price includes two chairs\n3 New and in perfect condition.\n4 In used condition. Zip slightly\ndamaged.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Very good condition"
+      },
+      {
+        "n": "2",
+        "answer": "Price includes two chairs"
+      },
+      {
+        "n": "3",
+        "answer": "New and in perfect condition."
+      },
+      {
+        "n": "4",
+        "answer": "In used condition. Zip slightly damaged."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1A|7B": {
+    "raw": "See the model answer in Ex 6A.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1B|1A": {
+    "raw": "1 dream (We cannot use pleasure\nor fan with job.)\n2 do without (Do without is used\nto say that the speaker does not\n3 ideal (We cannot use dream here\nwithout an article. We cannot\nuse appreciate with for.)\n4 tastes (Tastes is used here to\ndescribe what someone likes\nand dislikes.)\n5 not for me (Not for me is used\nhere to show the speaker's\n6 pleasure (We cannot say it gives\nhertastes. It gives her dreams\ndoes not work in this context.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "dream"
+      },
+      {
+        "n": "2",
+        "answer": "do without"
+      },
+      {
+        "n": "3",
+        "answer": "ideal"
+      },
+      {
+        "n": "4",
+        "answer": "tastes"
+      },
+      {
+        "n": "5",
+        "answer": "not for me"
+      },
+      {
+        "n": "6",
+        "answer": "pleasure"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1B|1B": {
+    "raw": "1 ideal\n4 do without\n2 a fan of\n5 tastes\n3 appreciate\n6 pleasure",
+    "items": [
+      {
+        "n": "1",
+        "answer": "ideal"
+      },
+      {
+        "n": "4",
+        "answer": "do without"
+      },
+      {
+        "n": "2",
+        "answer": "a fan of"
+      },
+      {
+        "n": "5",
+        "answer": "tastes"
+      },
+      {
+        "n": "3",
+        "answer": "appreciate"
+      },
+      {
+        "n": "6",
+        "answer": "pleasure"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1B|1C": {
+    "raw": "1e 2c 3a 4b 5f 6d",
+    "items": [
+      {
+        "n": "1",
+        "answer": "e"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "f"
+      },
+      {
+        "n": "6",
+        "answer": "d"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1B|2A": {
+    "raw": "1 c (The -ing form follows the\npreposition in.)\n2 a (The -ing form follows the\npreposition about.)\n3 b (The -ing form follows the\npreposition to.)\n4 b (The -ing form follows the\npreposition off.)\n5 b (The to infinitive follows turn\nout.)\n6 b (The -ing form follows the\npreposition about.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 76,
+    "ocr": true
+  },
+  "wb|1B|2B": {
+    "raw": "1 making (This describes\nsomething she did as a child.)\n2 to do (This describes what she\nended up studying.)\n3 getting (The -ing form follows\nthe preposition in.)\n4 feeling (This describes a\nmemory.)\n5 to be (The to infinitive follows\nturn out.)\n6 creating (The -ing form follows\nthe preposition in.)\n7 living (The -ing form follows\nenjoy.)\n8 producing (The -ing form\nfollows the preposition about.)\n9 retiring (The -ing form follows\nthe preposition on.)\n10 to do (The to infinitive follows\n11 designing (The -ing form follows\nthe preposition about.)\n12 do (The -ing form follows stop\nto mean changing a habit or",
+    "items": [
+      {
+        "n": "1",
+        "answer": "making"
+      },
+      {
+        "n": "2",
+        "answer": "to do"
+      },
+      {
+        "n": "3",
+        "answer": "getting"
+      },
+      {
+        "n": "4",
+        "answer": "feeling"
+      },
+      {
+        "n": "5",
+        "answer": "to be"
+      },
+      {
+        "n": "6",
+        "answer": "creating"
+      },
+      {
+        "n": "7",
+        "answer": "living"
+      },
+      {
+        "n": "8",
+        "answer": "producing"
+      },
+      {
+        "n": "9",
+        "answer": "retiring"
+      },
+      {
+        "n": "10",
+        "answer": "to do"
+      },
+      {
+        "n": "11",
+        "answer": "designing"
+      },
+      {
+        "n": "12",
+        "answer": "do"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1B|3": {
+    "raw": "1 in\n4 on\n2 about\n5 in\n3 about\n6 about",
+    "items": [
+      {
+        "n": "1",
+        "answer": "in"
+      },
+      {
+        "n": "4",
+        "answer": "on"
+      },
+      {
+        "n": "2",
+        "answer": "about"
+      },
+      {
+        "n": "5",
+        "answer": "in"
+      },
+      {
+        "n": "3",
+        "answer": "about"
+      },
+      {
+        "n": "6",
+        "answer": "about"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1B|4B": {
+    "raw": "1 T ('new houses in the UK are, on\naverage, twenty percent smaller\nthan those built seventy years\n2 F l'are now smaller than\nthe 37 m2 the government\nrecommends as a minimum')\n3 F ('If a room is dark because it\ndoesn't have a window, it will\nalways look dark')\n4 T ('Another way to make your\nrooms look bigger is to put\nshelves up on the walls')\n5 T ('try to keep your home free\nfrom stuff - that's all those\nthings you don't really need')\n6 F ('think about whether or not\nyou really need it')\n2 1,15\n19\n3 37",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1B|4D": {
+    "raw": "1 F (according to research)\n2 F (according to the results of\none study)\n3 F (The Guardian newspaper\nreports)\n4 O (Many people think)\n5 O (the writer recommends)\n6 O (For me)\n7 F (the writer read this in a\nreport)\n8 O (1 think)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "F"
+      },
+      {
+        "n": "2",
+        "answer": "F"
+      },
+      {
+        "n": "3",
+        "answer": "F"
+      },
+      {
+        "n": "4",
+        "answer": "O"
+      },
+      {
+        "n": "5",
+        "answer": "O"
+      },
+      {
+        "n": "6",
+        "answer": "O"
+      },
+      {
+        "n": "7",
+        "answer": "F"
+      },
+      {
+        "n": "8",
+        "answer": "O"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|1A": {
+    "raw": "1 pick up\n5 turn up\n2 throws out\n6 tidy, up\n3 Hang, up\n7 lock up\n4 take, out\n8 go over",
+    "items": [
+      {
+        "n": "1",
+        "answer": "pick up"
+      },
+      {
+        "n": "5",
+        "answer": "turn up"
+      },
+      {
+        "n": "2",
+        "answer": "throws out"
+      },
+      {
+        "n": "6",
+        "answer": "tidy, up"
+      },
+      {
+        "n": "3",
+        "answer": "Hang, up"
+      },
+      {
+        "n": "7",
+        "answer": "lock up"
+      },
+      {
+        "n": "4",
+        "answer": "take, out"
+      },
+      {
+        "n": "8",
+        "answer": "go over"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|1B": {
+    "raw": "1 tidy\n4 taking\n2 hang\n5 pick\n3 throwing\nHow to...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "tidy"
+      },
+      {
+        "n": "4",
+        "answer": "taking"
+      },
+      {
+        "n": "2",
+        "answer": "hang"
+      },
+      {
+        "n": "5",
+        "answer": "pick"
+      },
+      {
+        "n": "3",
+        "answer": "throwing How to..."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|2A": {
+    "raw": "1 c ('1 was wondering if | left my\nscarf at your house')\n2 a ('Would you mind getting the\nkids from school')\n3 b l'do you think you could tidy\nup a bit, please?')\n4 d ('Would you mind giving me a",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b l'do you think you could tidy up a bit, please?')"
+      },
+      {
+        "n": "4",
+        "answer": "d"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|2B": {
+    "raw": "1 a party\n2 scarf\n3 train\n4 3.15\n56\n6 take the rubbish out\n7 10.30\n8 ID",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|2C": {
+    "raw": "1 I wonder if you could call me\nback.\n2 I'll get back to you as soon as\npossible\n3 Please leave a message and I'Il\ncall you back.\n4 Please let me know you got this\nmessage.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1C|4A": {
+    "raw": "1 reached\n5 favour\n2 call\n6 wonder\n3 message\n7 could\n4 calling\n8 let",
+    "items": [
+      {
+        "n": "1",
+        "answer": "reached"
+      },
+      {
+        "n": "5",
+        "answer": "favour"
+      },
+      {
+        "n": "2",
+        "answer": "call"
+      },
+      {
+        "n": "6",
+        "answer": "wonder"
+      },
+      {
+        "n": "3",
+        "answer": "message"
+      },
+      {
+        "n": "7",
+        "answer": "could"
+      },
+      {
+        "n": "4",
+        "answer": "calling"
+      },
+      {
+        "n": "8",
+        "answer": "let"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|1A": {
+    "raw": "1 b (Except is used to say not\nincluding. Apart cannot be used\nwithout the preposition, not\neven does not make sense in the\ncontext.)\n2 b (From is the preposition used\nwith apart.)\n3 a (Not even is used here to\nrefer to something surprising,\nunexpected or unusual.)\n4 b (For is the preposition used\nwith except.)\n5 b (Even is used here to refer\nto something surprising\nunexpected or unusual.)\n6 c (Except is used with noun\nphrases.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|1B": {
+    "raw": "1 from (From is the preposition\nused with apart.)\n2 even (Even is used here to refer\nto something surprising.)\n3 except (Except is used to say\nnot including. The answer\ncannot be apart because of the\npreposition for.)\n4 not (Not even is used here to\nrefer to something surprising.)\n5 even (Even is used here to refer\nto something surprising.)\n6 except (Except is used to say not\nincluding. Apart cannot be used\nwithout the preposition.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "from"
+      },
+      {
+        "n": "2",
+        "answer": "even"
+      },
+      {
+        "n": "3",
+        "answer": "except"
+      },
+      {
+        "n": "4",
+        "answer": "not"
+      },
+      {
+        "n": "5",
+        "answer": "even"
+      },
+      {
+        "n": "6",
+        "answer": "except"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|1C": {
+    "raw": "1 b (Not even is used here to\nrefer to something surprising,\nunexpected or unusual.)\n2 b (From is the preposition used\n3 c (For is the preposition used\nwith except.)\n4 a (Except is used with noun\nphrases.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|2A": {
+    "raw": "b l'switching off our gadgets and\nscreens for a period of time')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|2B": {
+    "raw": "1 F ('who has just spent a\nweekend without going online')\n2 F ('The first thing | do when |\nwake up is reach for my phone\nand luse it right up until | fall\nasleep at night')\n3 T ('About an hour more than the\nnational average.')\n4 T ('I was worried that | might\nmiss something important')\n5 T ('I couldn't check the film\ntimes')\n6 F ('I slept more')\n7 T ('I really don't need to be on\nmy phone all the time')\n8 T ('So, would you do it again? ...\nAbsolutely!')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "F"
+      },
+      {
+        "n": "2",
+        "answer": "F"
+      },
+      {
+        "n": "3",
+        "answer": "T"
+      },
+      {
+        "n": "4",
+        "answer": "T"
+      },
+      {
+        "n": "5",
+        "answer": "T"
+      },
+      {
+        "n": "6",
+        "answer": "F"
+      },
+      {
+        "n": "7",
+        "answer": "T"
+      },
+      {
+        "n": "8",
+        "answer": "T"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|1D|2C": {
+    "raw": "1 mental\n4 practical\n2 average\n5 conversations\n3 surprise\nUNIT 2",
+    "items": [
+      {
+        "n": "1",
+        "answer": "mental"
+      },
+      {
+        "n": "4",
+        "answer": "practical"
+      },
+      {
+        "n": "2",
+        "answer": "average"
+      },
+      {
+        "n": "5",
+        "answer": "conversations"
+      },
+      {
+        "n": "3",
+        "answer": "surprise UNIT 2"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|2A|1A": {
+    "raw": "1 c (Resist means you stop\nyourself from doing something\nthat you should not do, even\nthough you want to.)\n2 b (You use the verb make with\neffort. You cannot use make with\ngoal or aim.)\n3 c (You use manage + infinitive\nYou use achieve + noun and the\nphrasal verb stick to + noun or\n-ing form.)\n4 a (Achieve goals means succeed\nin doing what you planned. You\ncannot use stick here without\nto. Set goals means to plan what\nyou want to do.)\n5 b (Puts off here means avoiding\ndoing something.)\n6 c (Set goals means planning what\nyou want to achieve. You cannot\nuse stick or put with goal.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 77,
+    "ocr": true
+  },
+  "wb|2A|1B": {
+    "raw": "1 put off (avoid doing something)\n2 gave up (stopped a habit)\n3 kept on (continued)\n4 took up (started a new activity)\n5 stick to (do something you\ndecided or promised to do)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "put off"
+      },
+      {
+        "n": "2",
+        "answer": "gave up"
+      },
+      {
+        "n": "3",
+        "answer": "kept on"
+      },
+      {
+        "n": "4",
+        "answer": "took up"
+      },
+      {
+        "n": "5",
+        "answer": "stick to"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|1C": {
+    "raw": "1 achieve (Goal is incorrect\nbecause it is a noun.)\n2 set (We cannot use put + goal.)\n3 drinking (We use give up + -ing\nform to talk about a habit we\nwant to stop.)\n4 up (Take up means start a new\n5 to stay (We use manage + to\n6 to (Stick to something means\nyou do something you decided\n7 on (Keep on doing something\nmeans to continue something.)\n8 make (We use make + effort.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "achieve"
+      },
+      {
+        "n": "2",
+        "answer": "set"
+      },
+      {
+        "n": "3",
+        "answer": "drinking"
+      },
+      {
+        "n": "4",
+        "answer": "up"
+      },
+      {
+        "n": "5",
+        "answer": "to stay"
+      },
+      {
+        "n": "6",
+        "answer": "to"
+      },
+      {
+        "n": "7",
+        "answer": "on"
+      },
+      {
+        "n": "8",
+        "answer": "make"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|2A": {
+    "raw": "1 's been working\n2 've been trying\n3 've been living\n4 've been looking\n5 has she been playing\n6 've been making\n7 's been raining\n8 been listening to",
+    "items": [
+      {
+        "n": "1",
+        "answer": "'s been working"
+      },
+      {
+        "n": "2",
+        "answer": "'ve been trying"
+      },
+      {
+        "n": "3",
+        "answer": "'ve been living"
+      },
+      {
+        "n": "4",
+        "answer": "'ve been looking"
+      },
+      {
+        "n": "5",
+        "answer": "has she been playing"
+      },
+      {
+        "n": "6",
+        "answer": "'ve been making"
+      },
+      {
+        "n": "7",
+        "answer": "'s been raining"
+      },
+      {
+        "n": "8",
+        "answer": "been listening to"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|2B": {
+    "raw": "1 c (We use the present perfect\nsimple with state verbs.)\n2 a (We need to use have in the\npresent perfect continuous.)\n3 c (We use the present perfect\ncontinuous to talk about an\nactivity that began at a point in\nthe past and is still continuing.)\n4 b (We cannot use the continuous",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|3A": {
+    "raw": "1 a 2b 3b 4a",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|4A": {
+    "raw": "c",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|4B": {
+    "raw": "1 c ('started leaving my phone in\nanother room when I went to\nbed')\n2 a l'three things that made me\nfeel happy or that I'm grateful\nfor that day')\n3 b l'ten minutes outside in the\nfresh air is good for our bodies\nand our brains')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a l'three things that made me feel happy or that I'm grateful for that day')"
+      },
+      {
+        "n": "3",
+        "answer": "b l'ten minutes outside in the fresh air is good for our bodies and our brains')"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|4C": {
+    "raw": "2,4",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2A|4D": {
+    "raw": "1 F ('I never managed to stick to\n2 T ('Last year | decided that |\nwasn't going to give anything\nup, apart from setting goals')\n3 T l'only one in five people in the\nUK get the recommended eight\nhours of sleep a night')\n4 F ('I often stayed up late looking\nat social media or binge-\nwatching a series on my phone')\n5 T ('I feel much more positive,\nless anxious and less stressed')\n6 T l'It doesn't have to be a long\nwalk. Even ten minutes outside\nin the fresh air is good for our\nbodies and our brains')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|1A": {
+    "raw": "1 bad (We cannot be in an upset\nmood. Good does not work\nin this context because the\nspeaker says 'I don't know what\nwas wrong with him')\n2 fault (Fault refers to the fact\nthe speaker is to blame for not\nleaving earlier.)\n3 comfortable (Comfortable refers\nto the fact that the speaker does\nnot feel happy in large groups.)\n4 like it (Feel like it refers to the\nfact that the speaker did not\nwant to do something.)\n5 do (We use do + favour.)\n6 makes (We use make +\ncomment.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "bad"
+      },
+      {
+        "n": "2",
+        "answer": "fault"
+      },
+      {
+        "n": "3",
+        "answer": "comfortable"
+      },
+      {
+        "n": "4",
+        "answer": "like it"
+      },
+      {
+        "n": "5",
+        "answer": "do"
+      },
+      {
+        "n": "6",
+        "answer": "makes"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|1B": {
+    "raw": "1 comment\n5 argument\n2 upset\n6 fault\n3 mood\n7 favour\n4 feel\n8 comfortable",
+    "items": [
+      {
+        "n": "1",
+        "answer": "comment"
+      },
+      {
+        "n": "5",
+        "answer": "argument"
+      },
+      {
+        "n": "2",
+        "answer": "upset"
+      },
+      {
+        "n": "6",
+        "answer": "fault"
+      },
+      {
+        "n": "3",
+        "answer": "mood"
+      },
+      {
+        "n": "7",
+        "answer": "favour"
+      },
+      {
+        "n": "4",
+        "answer": "feel"
+      },
+      {
+        "n": "8",
+        "answer": "comfortable"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|2A": {
+    "raw": "1 c (Use where to refer to places.)\n2 a (Use whose to refer to\npossession.)\n3 c (Use when to refer to time.)\n4 b (Use who to refer to people.)\n5 c (Use which to refer to things.)\n6 b (Use that not which to refer to\npeople.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "c"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|2B": {
+    "raw": "1arbr\n2 av b x (We don't use that with\nplaces.)\n3arbu\n4arbr\n5 av b x (We don't use when with\nplaces.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|2C": {
+    "raw": "2 Jill took me to the shop where\nshe bought her new bike.\n3 This is the app which/that helps\nme learn Italian.\n4 Yusuf is the Turkish man whose\ndog you like.\n5 The woman who/that lives next\ndoor is an actress.\n6 Is this the website you / that you\n/ which you were talking about?",
+    "items": [
+      {
+        "n": "2",
+        "answer": "Jill took me to the shop where she bought her new bike."
+      },
+      {
+        "n": "3",
+        "answer": "This is the app which/that helps me learn Italian."
+      },
+      {
+        "n": "4",
+        "answer": "Yusuf is the Turkish man whose dog you like."
+      },
+      {
+        "n": "5",
+        "answer": "The woman who/that lives next door is an actress."
+      },
+      {
+        "n": "6",
+        "answer": "Is this the website you / that you / which you were talking about?"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|3A": {
+    "raw": "2 The only time when I get up late\nis the weekend.\n3 | try to avoid places that are\nbusy.\n4 Someone pushed in front of\nme in a queue today, which was\nreally annoying.\n5 Pablo is someone who always\ntells the truth.\n6 | think people who work in\nrestaurants should get free\nfood",
+    "items": [
+      {
+        "n": "2",
+        "answer": "The only time when I get up late is the weekend."
+      },
+      {
+        "n": "3",
+        "answer": "| try to avoid places that are busy."
+      },
+      {
+        "n": "4",
+        "answer": "Someone pushed in front of me in a queue today, which was really annoying."
+      },
+      {
+        "n": "5",
+        "answer": "Pablo is someone who always tells the truth."
+      },
+      {
+        "n": "6",
+        "answer": "| think people who work in restaurants should get free food"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|4A": {
+    "raw": "1 e 2b\n3 d\n4f 5 a 6c",
+    "items": [
+      {
+        "n": "1",
+        "answer": "e"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "d"
+      },
+      {
+        "n": "4",
+        "answer": "f"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|4B": {
+    "raw": "1 b, c, d, e\n2 a, f",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b, c, d, e"
+      },
+      {
+        "n": "2",
+        "answer": "a, f"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|4C": {
+    "raw": "1 b ('I worried all the time about\nwhat people thought of me')\n2 c ('I spent too much time doing\nthings I didn't want to and not\nenough doing things | loved')\n3 b ('Then I read a book about\nhow you can declutter your life')\n4 b ('You have so much more time,\nenergy and money to do the\nthings you want to')\n5 a l'The most important thing\nis to be polite and honest with\nyour friends')\n6 c ('For example, my friend kept\non inviting me to the cinema\nand each time l'd make up an\nexcuse then feel guilty about\nlying to him')\n1 avoid busy places, for instance,\n5\nshopping centres.\n2 I never say no, like when\nsomeone asks a favour.\n3 l ate food I hated, for example,\nfish.\n4 I always agree with people, for\ninstance, in a meeting.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|6A": {
+    "raw": "1 convenient\n4 make\n2 office\n5 have\n3 arrange\n6 put",
+    "items": [
+      {
+        "n": "1",
+        "answer": "convenient"
+      },
+      {
+        "n": "4",
+        "answer": "make"
+      },
+      {
+        "n": "2",
+        "answer": "office"
+      },
+      {
+        "n": "5",
+        "answer": "have"
+      },
+      {
+        "n": "3",
+        "answer": "arrange"
+      },
+      {
+        "n": "6",
+        "answer": "put"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|6B": {
+    "raw": "a I'm afraid that ...;I'm afraid that |\ncan't\nb l'm out of the office ...; There's\nanother meeting which I have to\ngoto...\nc I wonder if we could...; Would\nyou mind if we...",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2B|6C": {
+    "raw": "See Ex 6A (emails 2 and 3) for\nmodel answers.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 78,
+    "ocr": true
+  },
+  "wb|2C|1A": {
+    "raw": "1 join (Join a queue means you go\nand stand at the end of a line\nof people who are waiting for\nsomething.)\n2 drop (Drop litter means put\nrubbish on the ground.)\n3 get out of (Get out of the way\nmeans move out of someone's\npath.)\n4 respond (Respond means react\nto something.)\n5 ignore (Ignore means not\nlistening or paying attention to\nsomething intentionally.)\n6 well (Well is an adverb\ndescribing how the children\nbehaved. Rude is an adjective so\nis not used with a verb.)\n7 rush (In a rush means you are in\na hurry or moving quickly.)\n8 arguing (Arguing means\nspeaking angrily or disagreeing\nwith someone.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "join"
+      },
+      {
+        "n": "2",
+        "answer": "drop"
+      },
+      {
+        "n": "3",
+        "answer": "get out of"
+      },
+      {
+        "n": "4",
+        "answer": "respond"
+      },
+      {
+        "n": "5",
+        "answer": "ignore"
+      },
+      {
+        "n": "6",
+        "answer": "well"
+      },
+      {
+        "n": "7",
+        "answer": "rush"
+      },
+      {
+        "n": "8",
+        "answer": "arguing"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2C|1B": {
+    "raw": "1 hurry\n4 badly\n2 way\n5 react\n3 jump\nHow to ...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "hurry"
+      },
+      {
+        "n": "4",
+        "answer": "badly"
+      },
+      {
+        "n": "2",
+        "answer": "way"
+      },
+      {
+        "n": "5",
+        "answer": "react"
+      },
+      {
+        "n": "3",
+        "answer": "jump How to ..."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2C|2A": {
+    "raw": "1 b ('People talking loudly in\npublic places')\n2 d ('My flatmate is always leaving\nhis dirty dishes in the sink;\nMy flatmate is tidy but she's\nconstantly taking my food')\n3 a l'it drives me mad when | get\non the train in the morning;\nI can't bear it when I'm waiting\nat the bus stop')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2C|2B": {
+    "raw": "1 bugs\n5 annoys\n2 annoying\n6 bother\n3 always\n7 drives\n4 gets\n8 bear",
+    "items": [
+      {
+        "n": "1",
+        "answer": "bugs"
+      },
+      {
+        "n": "5",
+        "answer": "annoys"
+      },
+      {
+        "n": "2",
+        "answer": "annoying"
+      },
+      {
+        "n": "6",
+        "answer": "bother"
+      },
+      {
+        "n": "3",
+        "answer": "always"
+      },
+      {
+        "n": "7",
+        "answer": "drives"
+      },
+      {
+        "n": "4",
+        "answer": "gets"
+      },
+      {
+        "n": "8",
+        "answer": "bear"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2C|3A": {
+    "raw": "1 It annoys me when people drop\nlitter.\n2 | can't bear it when people play\nloud music.\n3 It gets on my nerves when\npeople are always late.\n4 I can't stand it when people\ndisagree with me.\n5 It bugs me when people jump\nthe queue.\n6 My husband is always losing his\nhouse keys.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "It annoys me when people drop litter."
+      },
+      {
+        "n": "2",
+        "answer": "| can't bear it when people play loud music."
+      },
+      {
+        "n": "3",
+        "answer": "It gets on my nerves when people are always late."
+      },
+      {
+        "n": "4",
+        "answer": "I can't stand it when people disagree with me."
+      },
+      {
+        "n": "5",
+        "answer": "It bugs me when people jump the queue."
+      },
+      {
+        "n": "6",
+        "answer": "My husband is always losing his house keys."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2C|4A": {
+    "raw": "1 bear\n5 crazy\n2 bugs\n6 forever\n3 checking\n7 nerves\n4 so\n8 it",
+    "items": [
+      {
+        "n": "1",
+        "answer": "bear"
+      },
+      {
+        "n": "5",
+        "answer": "crazy"
+      },
+      {
+        "n": "2",
+        "answer": "bugs"
+      },
+      {
+        "n": "6",
+        "answer": "forever"
+      },
+      {
+        "n": "3",
+        "answer": "checking"
+      },
+      {
+        "n": "7",
+        "answer": "nerves"
+      },
+      {
+        "n": "4",
+        "answer": "so"
+      },
+      {
+        "n": "8",
+        "answer": "it"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2D|1A": {
+    "raw": "1 c 2b",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2D|1B": {
+    "raw": "1 d ('My love of wild places comes\nfrom those trips.)\n2 f ('But my favourite place to\nwork is the jungle.)\n3 a l'It was an experience I won't\n4 b ('When you're working with\nanimals like crocodiles or lions,\nyou need to stay calm.)\n5 c l'It was a total disaster! I'd\nnever done anything like it\nbefore and I wasn't prepared for\nhow tough it would be.)\n6 e l'I'm going to spend the next\nmonth in the Himalayas looking",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|2D|1C": {
+    "raw": "1 a ('My love of wild places comes\nfrom those trips.)\n2 c ('There are animals all around\nyou - on the forest floor, in the\ntlowers, the trees. Nowhere else\non Earth has such a variety of\n3 b l'it was so peaceful that |\n4 a l'animals can smell fear)\n5 b ('I wasn't prepared for how\n6 c ('Hardly anyone sees them in\nthe wild because they're very shy\nof people and good at hiding.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "b l'it was so peaceful that |"
+      },
+      {
+        "n": "4",
+        "answer": "a l'animals can smell fear)"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|Review 1–2|1": {
+    "raw": "1 achieved (We use the past\nsimple for a completed action in\nthe past.)\n2 l'd always dreamt (We use the\npast perfect simple to describe\nsomething that happened\nbefore another action in the\npast - the writer dreamt of\nliving by the sea before moving\n3 had (We use the past simple here\nbecause have is a state verb.)\n4 was getting (We use the past\ncontinuous to show an ongoing\naction in the past.)\n5 had heard (We use the past\nperfect simple to describe\nsomething that happened betore\nanother action in the past -the\nwriter heard Almeria was nice\nbefore getting a job there.)\n6 had told (We use the past\nperfect simple to describe\nsomething that happened\nbefore another action in the\npast - no one had told the\nwriter Almeria was beautiful.)\n7 was walking (We use the past\ncontinuous to give background\n8 was (We use the past simple for\na completed action in the past.)\n2\n1 living (We use the - ing form\nafter preposition about.)\n2 earning (We use the -ing form\nafter preposition about.)\n3 to study (We use to infinitive to\ndescribe the next thing Clare\ndid. Go on + -ing form means to\ncontinue doing something.)\n4 eating (We use the -ing form\nafter preposition up.)\n5 meeting (We use the -ing form\nafter look forward to.)\n6 to pick up (We use to infinitive\nto describe something you need\nto remember.)\n7 swimming (We use the -ing form\nto describe a memory.)\n8 playing (We use the -ing form\nto describe an activity that\ncontinues.)\n9 staying (We use the -ing form to\ndescribe a memory.)\n10 to be (We use to infinitive with\nturn out.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|Review 1–2|3": {
+    "raw": "1 've known / have known (The\npresent perfect continuous is\nnot possible because know is a\nstate verb.)\n2 have been living\n3 've been cleaning / have been\ncleaning\n4 's (always) liked / has (always)\nliked (The present perfect\ncontinuous is not possible\nbecause like is a state verb.)\n5 've been trying / have been trying\n(We use the present perfect\ncontinuous to describe an action\nin the past that is relevant now.)\n6 've been studying / have been\nstudying\n4\n1 b (Use where to refer to places.)\n2 a (Use which to refer to things.)\n3 c (Use whose to refer to\npossession.)\n4 b (Use that to refer to people.)\n5\n1 from (We use the preposition\nfrom with apart.)\n2 except (When except for follows\na noun, we can omit for with\nno change in meaning. We also\nneed to use the preposition\nfrom with apart.)\n3 even (We use even to emphasise\nthat something is unusual or\nsurprising, you need to use the\npreposition from with apart.)\n4 except (We use except not apart\nas a conjunction.)\n5 even (We use even to emphasise\nthat something is unusual or\nsurprising.)\n6 for (We use the preposition for\nwith except).\n6\n1 who/that (relative pronoun used\nto refer to a person)\n2 was (past continuous)\n3 been (present perfect)\n4 to (go on + infinitive to describe\nthe next thing Marie Kondo did)\n5 has (present perfect)\n6 that/which (relative pronoun to\nrefer to things)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 79,
+    "ocr": true
+  },
+  "wb|Review 1–2|7": {
+    "raw": "1 belonged\n4 worth\n2 inherited\n5 special\n3 glass\n8\n1 dream\n5 appreciate\n2 fan\n6 do without\n3\npleasure\n7 for me\n4 tastes\n8 ideal\n1 tidy up (make a place look tidy)\n2 take out (remove something\nfrom inside a building)\n3 hang up (hang clothes in a\n4 put off (delay doing something)\n5 turn up (produce more heat,\n6 lock up (lock the doors)\n7 give up (stop doing something)\n8 stick to (do what you said you\n10\n2 mood\n6 goals\n3 comments\n7 effort\n4 comfortable\n8 ignore\n11\n1d 2 e 3a\n4b 5f 6c\n12\n1 manage\n5 damaged\n2 feel\n6 genuine\n3 resist\n7 keep\n8 goal\n4 worth\nUNIT 3",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|1A": {
+    "raw": "1 b (We cannot say get or forget\nconcentration.)\n2 a (We cannot say lose or meet\nbehind schedule.)\n3 b (We cannot say keep\ndistractions. We can say deal\nwith distractions, but not deal\ndistractions.)\n4 c (We keep to a routine. We can\nsay have a routine, but not have\nto a routine.)\n5 a (We cannot use meet or see +\nwith a challenge.)\n6 c (We cannot use have or make\nwith a lot done.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|1B": {
+    "raw": "1 meet (Use meet with deadlines\nto mean you get work\ncompleted on time.)\n2 get\n3 avoid\n4 schedule\n5 lose\n6 way (Get something out of the\nway means to finish doing\nsomething, especially something\ndifficult or unpleasant.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "meet"
+      },
+      {
+        "n": "2",
+        "answer": "get"
+      },
+      {
+        "n": "3",
+        "answer": "avoid"
+      },
+      {
+        "n": "4",
+        "answer": "schedule"
+      },
+      {
+        "n": "5",
+        "answer": "lose"
+      },
+      {
+        "n": "6",
+        "answer": "way"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|3A": {
+    "raw": "1 b (We use unless to mean 'if not'.)\n2 c (We use even if for emphasis,\nto say that something will not\n3 a (We use in case to talk about\nbeing prepared for the possibility\nthat something might happen.)\n4 c (We use in case of + noun in\nformal situations to mean 'if\nsomething happens'. It is often\nabout a bad or dangerous",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|3B": {
+    "raw": "2 case of (an)\n3 Unless you invite\n4 even if he",
+    "items": [
+      {
+        "n": "2",
+        "answer": "case of"
+      },
+      {
+        "n": "3",
+        "answer": "Unless you invite"
+      },
+      {
+        "n": "4",
+        "answer": "even if he"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|3C": {
+    "raw": "1 b (We use unless + present tenses\nto speak about the present or\nthe future, not unless + will.)\n2 c (We use even if for emphasis,\nto say that something will not\nchange a situation.)\n3 a (We use in case of + noun in\nformal situations to mean if\nsomething happens. It is often\nabout a bad or dangerous\nsituation.)\n4 c (We use in case to talk about\nbeing prepared for the possibility\nthat something might happen.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|4A": {
+    "raw": "a ('I have more time with family\nand friends')\nc l'it's easier to focus on my work')\nf ('I also find it impossible to avoid\ndistractions')\nh ('You also get more support\nwhen you're in an office\nenvironment')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|4B": {
+    "raw": "1 T ('The biggest benefit is having\nmore time and energy for my\npersonal life')\n2 X ('it's hard to concentrate')\n3 X ('I work from home two days a\n4 T ('In the office, my colleagues\nwould stop at my desk for a chat\nand l'd lose concentration')\n5 X ('I stop in the middle of a task\nto tidy up the living room or\n6 T ('Now, I spend that time going\n7 X ('I have to work on my laptop\non the sofa')\n8 X ('it's much easier to ask a\nquick question in person')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "T"
+      },
+      {
+        "n": "2",
+        "answer": "X"
+      },
+      {
+        "n": "3",
+        "answer": "X"
+      },
+      {
+        "n": "4",
+        "answer": "T"
+      },
+      {
+        "n": "5",
+        "answer": "X"
+      },
+      {
+        "n": "6",
+        "answer": "T"
+      },
+      {
+        "n": "7",
+        "answer": "X"
+      },
+      {
+        "n": "8",
+        "answer": "X"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3A|4C": {
+    "raw": "1 energy\n5 contact\n2 commuting\n6 work\n3 distractions\n7 routine\n4 isolated",
+    "items": [
+      {
+        "n": "1",
+        "answer": "energy"
+      },
+      {
+        "n": "5",
+        "answer": "contact"
+      },
+      {
+        "n": "2",
+        "answer": "commuting"
+      },
+      {
+        "n": "6",
+        "answer": "work"
+      },
+      {
+        "n": "3",
+        "answer": "distractions"
+      },
+      {
+        "n": "7",
+        "answer": "routine"
+      },
+      {
+        "n": "4",
+        "answer": "isolated"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3B|1A": {
+    "raw": "1 opportunities (Opportunity has a\nsimilar meaning to chance.)\n2 temporary (Temporary means\nshort-term or not permanent.)\n3 experience (Experience has a\nsimilar meaning to background.)\n4 organising (Organise has a\nsimilar meaning to plan.)\n5 exploited (Exploit has a similar\nmeaning to treat unfairly.)\n6 handles (Handle has a similar\nmeaning to deal with.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "opportunities"
+      },
+      {
+        "n": "2",
+        "answer": "temporary"
+      },
+      {
+        "n": "3",
+        "answer": "experience"
+      },
+      {
+        "n": "4",
+        "answer": "organising"
+      },
+      {
+        "n": "5",
+        "answer": "exploited"
+      },
+      {
+        "n": "6",
+        "answer": "handles"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3B|1B": {
+    "raw": "1 permanent (the speaker says\ntheir contract ends soon so it is\nnot permanent.)\n2 responsibility (If you take\nresponsibility for something, it\nis your job to deal with it.)\n3 exploited (The speaker says\ngig workers are treated badly\nbecause they don't get paid if\nthey are unwell.)\n4 opportunities (Jane is looking\nfor the chance to be promoted.)\n5 organised (The speaker is asking\nif someone has planned a party.)\n6 handle (Deal with and handle\nhave a similar meaning, but you\ncannot use deal here without\nwith.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "permanent"
+      },
+      {
+        "n": "2",
+        "answer": "responsibility"
+      },
+      {
+        "n": "3",
+        "answer": "exploited"
+      },
+      {
+        "n": "4",
+        "answer": "opportunities"
+      },
+      {
+        "n": "5",
+        "answer": "organised"
+      },
+      {
+        "n": "6",
+        "answer": "handle"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3B|1C": {
+    "raw": "1 responsibility\n4 temporary\n2 opportunity\n5 organise\n3 permanent\n6 handle",
+    "items": [
+      {
+        "n": "1",
+        "answer": "responsibility"
+      },
+      {
+        "n": "4",
+        "answer": "temporary"
+      },
+      {
+        "n": "2",
+        "answer": "opportunity"
+      },
+      {
+        "n": "5",
+        "answer": "organise"
+      },
+      {
+        "n": "3",
+        "answer": "permanent"
+      },
+      {
+        "n": "6",
+        "answer": "handle"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3B|2A": {
+    "raw": "1 c (We use be supposed to +\ninfinitive for something which\nis an obligation, but which we\ndon't always do.)\n2 b (We use need + to +infinitive\nto express something that\nsomeone expects me to do.)\n3 a (We use be essential to +\ninfinitive to say that something\nis necessary and important.)\n4 c (We use be permitted to +\ninfinitive to say that something\nis OK to do. It is more formal\nthan be allowed to.)\n5 a (We use need to + be + past\nparticiple to express obligation\nor necessity.)\n6 c (We use be allowed to +\ninfinitive to say that something\nis OK to do.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 80,
+    "ocr": true
+  },
+  "wb|3B|2B": {
+    "raw": "1 need (We use need to + be + past\nparticiple to express obligation.)\n2 needs (We use need to + be\n+ past participle to express\nnecessity.)\n3 got (We use have got + to +\ninfinitive to express obligation.)\n4 allowed (We use be not allowed\nto + infinitive to say that\nsomething is not OK to do.)\n5 supposed (We use be supposed\nto + infinitive for something\nwhich is an obligation, but which\nwe don't always do.)\nessential (We use be essential\nto + infinitive to say that\nsomething is necessary and\nimportant.)\n7 not supposed (The waiters have\nto give the tips to the manager\nso they are not supposed to keep\n8 allowed (We use be allowed to +\ninfinitive to say that something\nis OK to do.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|3A": {
+    "raw": "1 allowed to\n2 supposed to\n3 gotto",
+    "items": [
+      {
+        "n": "1",
+        "answer": "allowed to"
+      },
+      {
+        "n": "2",
+        "answer": "supposed to"
+      },
+      {
+        "n": "3",
+        "answer": "gotto"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|4": {
+    "raw": "Gig working is becoming\nincreasingly common in England\nand Wales, with almost 4.5 million\npeople now working in the gig\neconomy. While gig working can\noffer workers more choice about\nwhen they work, it also has many\ndisadvantages. Temporary workers\ndon't have as many rights as those\non permanent contracts. They\ndon't get paid when they are sick,\nthey don't receive holiday pay and\nthey need to pay their own tax.\nPay is often lower for gig workers,\nwhich means that many do multiple\ngig jobs at the same time, leading\nto very long working days.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|5A": {
+    "raw": "c",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|5B": {
+    "raw": "1 F ('I run a cleaning company')\n2 T ('l've actually also given\npermanent jobs to a couple of\npeople I hired through Fair Gig')\n3 F ('l've been a gig worker for a\nfew years now')\n4 F ('I haven't felt exploited by any\nof the people I've worked for')\n5 F ('1 think it has some\nadvantages')\n6 T ('there is nothing to stop a\ncompany changing their mind\nand deciding not to hire you at\nthe very last minute.')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "F"
+      },
+      {
+        "n": "2",
+        "answer": "T"
+      },
+      {
+        "n": "3",
+        "answer": "F"
+      },
+      {
+        "n": "4",
+        "answer": "F"
+      },
+      {
+        "n": "5",
+        "answer": "F"
+      },
+      {
+        "n": "6",
+        "answer": "T"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|5C": {
+    "raw": "1 a l'it can help gig workers find\nlong-term work, too')\n2 b l'it's really easy to use')\nb l'you can control when you\n4 b |'It also guarantees that you'll\nbe paid a minimum hourly rate,\nwhich is higher than a lot of gig\njobs l've done in the past')\n5 b ('Fair Gig is definitely the best.')\n6 c ('I don't think it does that\nmuch to improve short-term\nworkers' rights')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|6A": {
+    "raw": "C",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|6B": {
+    "raw": "1 lam very interested in this job:\n2 I'm looking for a part-time job / 1\nam looking for a part-time job\n3 | served customers and filled\nthe shelves.\n4 l am a very helpful and friendly\nperson.\n5 | can start immediately.\n6 | look forward to hearing from\nyou soon.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "lam very interested in this job:"
+      },
+      {
+        "n": "2",
+        "answer": "I'm looking for a part-time job / 1 am looking for a part-time job"
+      },
+      {
+        "n": "3",
+        "answer": "| served customers and filled the shelves."
+      },
+      {
+        "n": "4",
+        "answer": "l am a very helpful and friendly person."
+      },
+      {
+        "n": "5",
+        "answer": "| can start immediately."
+      },
+      {
+        "n": "6",
+        "answer": "| look forward to hearing from you soon."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3B|6C": {
+    "raw": "Sample answer\nDear Ms Rossi\n1 am writing to apply for the job\nt waiter at your restaurant in\nGlasgow which I saw advertised or\nIam very interested in this job. I\nlove Italian food and I have eaten at\nI believe l am a good candidate for\n• I have experience of working in\n• My grandparents are Italian so l\ncan speak Italian fluently\n• My English is level B1.\n• Iamavery hardworking and\nfriendly person.\n• I really enjoy working with the\npublic.\n• I can start immediately.\nI have some questions about the\nrole. What is the pay? Is it possible\nto work more hours during the\nholidays?\nI look forward to hearing from you\nsoon!\nBest wishes,\nBarbara Capaldi",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|1A": {
+    "raw": "1 independent (Someone who is\nindependent is confident, free,\nand doesn't need to ask other\npeople for help, money, or\npermission to do something.)\n2 flexible (Someone who is flexible\ndoesn't mind changing their\nplans.)\n3 willing (Someone who is willing\nis eager and happy to do\nsomething.)\n4 professional (Someone who\nis professional has qualities of\ntrained and skilled people.)\n5 confident (Someone who is\nconfident is completely sure of\nthemselves.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "independent"
+      },
+      {
+        "n": "2",
+        "answer": "flexible"
+      },
+      {
+        "n": "3",
+        "answer": "willing"
+      },
+      {
+        "n": "4",
+        "answer": "professional"
+      },
+      {
+        "n": "5",
+        "answer": "confident"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|1B": {
+    "raw": "1 enthusiastic\n4 confident\n2 flexible\n5 sensitive\n3 responsible",
+    "items": [
+      {
+        "n": "1",
+        "answer": "enthusiastic"
+      },
+      {
+        "n": "4",
+        "answer": "confident"
+      },
+      {
+        "n": "2",
+        "answer": "flexible"
+      },
+      {
+        "n": "5",
+        "answer": "sensitive"
+      },
+      {
+        "n": "3",
+        "answer": "responsible"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|2A": {
+    "raw": "1 enthusiastic\n2 professional\n3 flexible\n4 responsible\n5 confident\n6 sensitive\n7 independent\n8 willing\nVOCABULARY: negative prefixes",
+    "items": [
+      {
+        "n": "1",
+        "answer": "enthusiastic"
+      },
+      {
+        "n": "2",
+        "answer": "professional"
+      },
+      {
+        "n": "3",
+        "answer": "flexible"
+      },
+      {
+        "n": "4",
+        "answer": "responsible"
+      },
+      {
+        "n": "5",
+        "answer": "confident"
+      },
+      {
+        "n": "6",
+        "answer": "sensitive"
+      },
+      {
+        "n": "7",
+        "answer": "independent"
+      },
+      {
+        "n": "8",
+        "answer": "willing VOCABULARY: negative prefixes"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|3": {
+    "raw": "1 inappropriate\n2 unclear\n3 employed\n4 expensive\n9 unnecessary\n10 irregular\nHow to ..",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|4A": {
+    "raw": "hotel manager",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|4B": {
+    "raw": "1 tell\n6 could\n7 mean\n2 start\n3 here\n8 veakness\n4 asking\n5 bring\n10 mean",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3C|5A": {
+    "raw": "1 research\n5 team\n2 role\n6 strength\n3 skills\n7 weakness\n4 offer\n8 motivates",
+    "items": [
+      {
+        "n": "1",
+        "answer": "research"
+      },
+      {
+        "n": "5",
+        "answer": "team"
+      },
+      {
+        "n": "2",
+        "answer": "role"
+      },
+      {
+        "n": "6",
+        "answer": "strength"
+      },
+      {
+        "n": "3",
+        "answer": "skills"
+      },
+      {
+        "n": "7",
+        "answer": "weakness"
+      },
+      {
+        "n": "4",
+        "answer": "offer"
+      },
+      {
+        "n": "8",
+        "answer": "motivates"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3D|1A": {
+    "raw": "1 c (We use would prefer + to\ninfinitive to express preference.)\n2 c (We use prefer +-ing form\n+ to to talk about general\npreferences.)\n3 c (We use would rather + infinitive\n+ than to express preterence.)\n4 a (We use would prefer +\nto + infinitive to talk about\nhypothetical situations.)\n5 b (To make a negative, use 'd\npreter not + to intinitive.)\n6 b (We use definitely + prefer to\nshow a strong preference.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 81,
+    "ocr": true
+  },
+  "wb|3D|1B": {
+    "raw": "1 do (general preference)\n2 rather (We use would rather\n+ infinitive + than to express\npreference.)\n3 than (We use would rather +\ninfinitive + than to express\npreference.)\n4 prefer (prefer + to infinitive) /\nchoose\n5 not\n6 go (Use go for to mean would\nchoose/prefer.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "do"
+      },
+      {
+        "n": "2",
+        "answer": "rather"
+      },
+      {
+        "n": "3",
+        "answer": "than"
+      },
+      {
+        "n": "4",
+        "answer": "prefer"
+      },
+      {
+        "n": "5",
+        "answer": "not"
+      },
+      {
+        "n": "6",
+        "answer": "go"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|3D|1C": {
+    "raw": "1 Would you rather go\n2 prefer playing tennis to\n3 'd / would rather not work\n4 definitely preferred her\n5 Do you prefer / Which do you\nprefer-\n6 would far rather have",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Would you rather go"
+      },
+      {
+        "n": "2",
+        "answer": "prefer playing tennis to"
+      },
+      {
+        "n": "3",
+        "answer": "'d / would rather not work"
+      },
+      {
+        "n": "4",
+        "answer": "definitely preferred her"
+      },
+      {
+        "n": "5",
+        "answer": "Do you prefer / Which do you prefer-"
+      },
+      {
+        "n": "6",
+        "answer": "would far rather have"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|3D|2B": {
+    "raw": "1 a ('help people decide what their\ncareer goals are and plan how\nto reach them')\n2 a l'A lot of my clients are\nreturning to work after raising\nchildren')\n3 b ('l wanted to be a marine\nscientist and live on a boat\nstudying whales and dolphins!')\n4 b ('I get to help people improve\ntheir lives')\n5 c l'find a job where the good bits\nare so good that the bad things\ndon't make you unhappy')\n6 b ('Your priorities ... change\nduring your life')\n3\n1 l'd rather be a teacher than a\ndoctor.\n2 I prefer working outside to\nworking in an office\n3 Would you prefer to be a singer\nor an actor?\n4 I'd rather not have to work at\nthe weekend.\nUNIT 4",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|1A": {
+    "raw": "1 b (If you pretend to do\nsomething, you behave as if\nsomething is true even though\nyou know it isn't.)\n2 c (If you live a lie, you live in a\nway that is dishonest.)\n3 b (If you make something up, you\ninvent a story or an excuse.)\n4 a (A scheme is a plan for doing\nsomething.)\n5 b (If you deceive someone you\nmake them believe something\nthat is not true.)\n6 b (If you come clean, you tell the\ntruth about something you've\nbeen keeping secret.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|1B": {
+    "raw": "1 made\n5 come\n2 pretending\n6 truth\n3 doubt\n7 living\n4 deceived\n8 scheme",
+    "items": [
+      {
+        "n": "1",
+        "answer": "made"
+      },
+      {
+        "n": "5",
+        "answer": "come"
+      },
+      {
+        "n": "2",
+        "answer": "pretending"
+      },
+      {
+        "n": "6",
+        "answer": "truth"
+      },
+      {
+        "n": "3",
+        "answer": "doubt"
+      },
+      {
+        "n": "7",
+        "answer": "living"
+      },
+      {
+        "n": "4",
+        "answer": "deceived"
+      },
+      {
+        "n": "8",
+        "answer": "scheme"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|2A": {
+    "raw": "1 intended (We use intend + to to\nshow a planned action in the\npast.)\n2 was planning (We use was\nplanning to to talk about a\nplanned action in the past that\ndidn't happen.)\n3 were expecting (used to\ndescribe a past intention.)\n4 hoping (We use was/were hoping\nto to talk about a planned action\nin the past that didn't happen.)\n5 meant to (We use meant to to\ntalk about a planned action in\nthe past that didn't happen.\n6 it would (We use thought it\nwould to talk about the reason\nfor a planned action in the past.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "intended"
+      },
+      {
+        "n": "2",
+        "answer": "was planning"
+      },
+      {
+        "n": "3",
+        "answer": "were expecting"
+      },
+      {
+        "n": "4",
+        "answer": "hoping"
+      },
+      {
+        "n": "5",
+        "answer": "meant to"
+      },
+      {
+        "n": "6",
+        "answer": "it would"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|2B": {
+    "raw": "1 b (We use the past simple here\nto show a planned action in the\n2 c (We use meant to to talk about\na planned action in the past\n3 a (We need to use to here.)\n4 b (We use the past simple here\nto show a planned action in the",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|2C": {
+    "raw": "1 was going to\n2 was going to\n3 were (you) going to\n4 were going to\n5 wasn't going to / was not\ngoing to\n6 were going to\n7 was going to\n8 wasn't going to",
+    "items": [
+      {
+        "n": "1",
+        "answer": "was going to"
+      },
+      {
+        "n": "2",
+        "answer": "was going to"
+      },
+      {
+        "n": "3",
+        "answer": "were"
+      },
+      {
+        "n": "4",
+        "answer": "were going to"
+      },
+      {
+        "n": "5",
+        "answer": "wasn't going to / was not going to"
+      },
+      {
+        "n": "6",
+        "answer": "were going to"
+      },
+      {
+        "n": "7",
+        "answer": "was going to"
+      },
+      {
+        "n": "8",
+        "answer": "wasn't going to"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|3A": {
+    "raw": "1 listen\n4 scheme\n2 doubt\n5 would\n3 sign\n6 answer",
+    "items": [
+      {
+        "n": "1",
+        "answer": "listen"
+      },
+      {
+        "n": "4",
+        "answer": "scheme"
+      },
+      {
+        "n": "2",
+        "answer": "doubt"
+      },
+      {
+        "n": "5",
+        "answer": "would"
+      },
+      {
+        "n": "3",
+        "answer": "sign"
+      },
+      {
+        "n": "6",
+        "answer": "answer"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|4": {
+    "raw": "1 (on) social media\n2 journalists\n3 (other) people's views\n4 advertising / clicks",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|5A": {
+    "raw": "b",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4A|5B": {
+    "raw": "1 F (It was created for fun.)\n2 F (The tree octopus can also live\non land.)\n3 T (There are signs that the\nwebsite is a hoax.)\n4 F (They are killed for people to\nput on hats.)\n5 F (They said they would\n6 T (Almost eight percent still\nbelieved it was real.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "F"
+      },
+      {
+        "n": "2",
+        "answer": "F"
+      },
+      {
+        "n": "3",
+        "answer": "T"
+      },
+      {
+        "n": "4",
+        "answer": "F"
+      },
+      {
+        "n": "5",
+        "answer": "F"
+      },
+      {
+        "n": "6",
+        "answer": "T"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|1A": {
+    "raw": "1 powerful\n4 slow\n2 intelligent\n5 dramatic\n6 extraordinary\n3 enjoyable",
+    "items": [
+      {
+        "n": "1",
+        "answer": "powerful"
+      },
+      {
+        "n": "4",
+        "answer": "slow"
+      },
+      {
+        "n": "2",
+        "answer": "intelligent"
+      },
+      {
+        "n": "5",
+        "answer": "dramatic"
+      },
+      {
+        "n": "6",
+        "answer": "extraordinary"
+      },
+      {
+        "n": "3",
+        "answer": "enjoyable"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|1B": {
+    "raw": "1 shocking (If something is\nshocking, it is extremely\nsurprising.)\n2 disappointing (If something is\ndisappointing, it is not as good\nas you expected.)\n3 slow (If a film is slow, there is not\nmuch action.)\n4 intelligent (if a book is\nintelligent, it is clever and makes\nyou think.)\n5 extraordinary (If a life is\nextraordinary, it is very special or\nunusual.)\n6 dramatic (If something is\ndramatic, it is full of action or\nexcitement.)\n2\n1 soundtrackR\n6 direct\n2 film-maker\n7 industry\n3 script\n8 Footage\n4 star\n9 produce\n5 location\n10 shoot",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|3A": {
+    "raw": "1 It's Tuesday today, isn't it?\n2 Don'tyou think we should leave\nsoon?\n3 Didn't we watch this film last\nyear?\n4 Wasn't that the film starring\nBrad Pitt?\n5 Do you know who the director is?\n6 Could you tell me what time the\nfilm starts?\n7 Can lask where| should put my\ncoat?\n8 Do you know how much the\ntickets cost?",
+    "items": [
+      {
+        "n": "1",
+        "answer": "It's Tuesday today, isn't it?"
+      },
+      {
+        "n": "2",
+        "answer": "Don'tyou think we should leave soon?"
+      },
+      {
+        "n": "3",
+        "answer": "Didn't we watch this film last year?"
+      },
+      {
+        "n": "4",
+        "answer": "Wasn't that the film starring Brad Pitt?"
+      },
+      {
+        "n": "5",
+        "answer": "Do you know who the director is?"
+      },
+      {
+        "n": "6",
+        "answer": "Could you tell me what time the film starts?"
+      },
+      {
+        "n": "7",
+        "answer": "Can lask where| should put my coat?"
+      },
+      {
+        "n": "8",
+        "answer": "Do you know how much the tickets cost?"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|3B": {
+    "raw": "1 b (Use the past simple to talk\nabout a finished action in the\n2 c (We don't use the auxiliary\nverb do in indirect questions.)\n3 a (Use a negative question to\nsound polite.)\n4 c (Use a negative question to\n5 a (Use a negative question to\nsound polite.)\n6 b (The word order changes in",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|4": {
+    "raw": "1B 2A 3A 4B",
+    "items": [
+      {
+        "n": "1",
+        "answer": "B"
+      },
+      {
+        "n": "2",
+        "answer": "A"
+      },
+      {
+        "n": "3",
+        "answer": "A"
+      },
+      {
+        "n": "4",
+        "answer": "B"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 82,
+    "ocr": true
+  },
+  "wb|4B|5": {
+    "raw": "Filmed in some of the most\nextraordinary places on Earth,\nThe Green Planet focuses on the\nlife of plants and trees around the\nworld. The series is presented by\nSir David Attenborough, who is\nfamous for several other nature\ndocumentaries, but the main\nstars of the programme are the\nplants and trees. Shot using new\ntechnology, including a robot\ncamera named Triffid, the series\nshows us that the life of plants is\njust as dramatic and exciting as\nthat of animals.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4B|6B": {
+    "raw": "1 c ('It spends about seven years\nproducing a flower that only\nlives for one day')\n2 a ('My favourite scene was\nwhere the plants in the jungle\nwere competing to be the first\nto reach the light')\n3 b ('I thought it would be a bit\nslow when I read about it')\n4 c ('I think it makes it more\nenjoyable seeing him with the\nplants. He's so enthusiastic\n5 b ('It's really powerful.')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4B|7A": {
+    "raw": "a",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4B|7B": {
+    "raw": "1 D (gives background\ninformation)\n2 C (give a brief summary)\n3 A (gives the writer's opinion)\n4 B (conclusion)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "D"
+      },
+      {
+        "n": "2",
+        "answer": "C"
+      },
+      {
+        "n": "3",
+        "answer": "A"
+      },
+      {
+        "n": "4",
+        "answer": "B"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4B|7C": {
+    "raw": "1 intelligently\n4 wonderful\n2 naturally\n5 identical\n3 surprisingly 6 happily",
+    "items": [
+      {
+        "n": "1",
+        "answer": "intelligently"
+      },
+      {
+        "n": "4",
+        "answer": "wonderful"
+      },
+      {
+        "n": "2",
+        "answer": "naturally"
+      },
+      {
+        "n": "5",
+        "answer": "identical"
+      },
+      {
+        "n": "3",
+        "answer": "surprisingly 6 happily"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4B|7D": {
+    "raw": "See Ex 7A for a model answer.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4C|1A": {
+    "raw": "1 march (to walk together in a\nlarge group to protest about\nsomething)\n2 arrested (If someone is arrested,\nthey are taken away by the\npolice because the police think\nthey have done something\nillegal.)\n3 strike (If a group of workers go\non strike, they stop working\nfor a period of time because\nthey want better pay or better\nworking conditions.)\n4 celebrity (A celebrity is\nsomeone who is famous.)\n5 scandal (A scandal is something\ndishonest or that a famous or\nimportant person does which\nshocks a lot of people.)\n6 escape (If you escape, you leave\na place or dangerous situation\nwhen someone is trying to catch\nyou or stop you.)\n7 rescued (If someone is rescued,\nthey are saved from harm or\ndanger.)\n8 attack (If something attacks\nyou, it uses violence to try to\nhurt or kill you.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "march"
+      },
+      {
+        "n": "2",
+        "answer": "arrested"
+      },
+      {
+        "n": "3",
+        "answer": "strike"
+      },
+      {
+        "n": "4",
+        "answer": "celebrity"
+      },
+      {
+        "n": "5",
+        "answer": "scandal"
+      },
+      {
+        "n": "6",
+        "answer": "escape"
+      },
+      {
+        "n": "7",
+        "answer": "rescued"
+      },
+      {
+        "n": "8",
+        "answer": "attack"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4C|1B": {
+    "raw": "1 protests\n2 arrested\n3 march\n4 quit\n5 announcement\n2\n1 live feed\n2 biased\n3 update\n4 went viral\n5 announcements\n6 breaking news\n7 subscribe\n8 trending\nHow to...\n3A1F 2T 3 T 4F",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4C|3B": {
+    "raw": "1 heard\n4 story\n2 follow\n5 Basically\n3 shame\n6 believe",
+    "items": [
+      {
+        "n": "1",
+        "answer": "heard"
+      },
+      {
+        "n": "4",
+        "answer": "story"
+      },
+      {
+        "n": "2",
+        "answer": "follow"
+      },
+      {
+        "n": "5",
+        "answer": "Basically"
+      },
+      {
+        "n": "3",
+        "answer": "shame"
+      },
+      {
+        "n": "6",
+        "answer": "believe"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4C|4": {
+    "raw": "1 Apparently, there's going to be\na protest next week.\n2 Basically, he quit because he\nfound a better job.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Apparently, there's going to be a protest next week."
+      },
+      {
+        "n": "2",
+        "answer": "Basically, he quit because he found a better job."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4C|5A": {
+    "raw": "1 following\n4 Apparently\n2 coverage\n5 seems\n3 details\n6 That's",
+    "items": [
+      {
+        "n": "1",
+        "answer": "following"
+      },
+      {
+        "n": "4",
+        "answer": "Apparently"
+      },
+      {
+        "n": "2",
+        "answer": "coverage"
+      },
+      {
+        "n": "5",
+        "answer": "seems"
+      },
+      {
+        "n": "3",
+        "answer": "details"
+      },
+      {
+        "n": "6",
+        "answer": "That's"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4D|1": {
+    "raw": "b (The collocation is keep a secret,\nnot store. You can use tell a secret,\nbut not say.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4D|2A": {
+    "raw": "a ('In 2004, Frank Warren began\nasking strangers to tell him their\nsecrets... with some simple\ninstructions on one side')\nc ('This success has also resulted\nin six books, and several\nexhibitions and live events all\naround the world.')\nd ('People share their secret fears,\nhopes and dreams for the future,\nas well as their embarrassing\nhabits.)\nf ('people share their secrets\nbecause it helps them feel less\nalone')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4D|2B": {
+    "raw": "1a 2e 3c 4b 5d 6f",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a"
+      },
+      {
+        "n": "2",
+        "answer": "e"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "d"
+      },
+      {
+        "n": "6",
+        "answer": "f"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4D|2C": {
+    "raw": "1 2004\n4 100\n2 strangers\n5 blog\n6 funny\n3 Washington",
+    "items": [
+      {
+        "n": "1",
+        "answer": "2004"
+      },
+      {
+        "n": "4",
+        "answer": "100"
+      },
+      {
+        "n": "2",
+        "answer": "strangers"
+      },
+      {
+        "n": "5",
+        "answer": "blog"
+      },
+      {
+        "n": "6",
+        "answer": "funny"
+      },
+      {
+        "n": "3",
+        "answer": "Washington"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|4D|2D": {
+    "raw": "1 T ('without sharing your identity')\n2 T l'the secret could be anything\nas long as it was true and had\nnever been shared with anyone\nbefore.)\n3 F ('hoped he would get at least\n365 replies.')\n4 F ('in the first ten years of his\nproject, he had received over a\nmillion postcards.')\n5 F ('He reads every card he gets,\nand each Sunday he chooses\nabout twenty which he posts on\nhis blog')\n6 F ('He believes that people\nshare their secrets because it\nhelps them feel less alone')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|Review 3–4|1": {
+    "raw": "1 c (We use unless to mean 'if not'.)\n2 a (We use even if for emphasis,\nto say that something will not\nchange a situation.)\n3 b (We use in case to talk\nabout being prepared for the\npossibility that something might\nhappen.)\n4 b (We use even if for emphasis,\nto say that something will not\nchange a situation.)\n5 a (We use in case to talk about\nbeing prepared for the possibility\nthat something might happen.)\n6 c (We use in case of + noun in\nformal situations to mean if\nsomething happens. It is often\nabout a bad or dangerous\nsituation.)\n2\n1 not permitted to walk\n2 is essential\n3 need to wear\n4 are not supposed\n5 are not allowed to\n6 have to complete\n3\n1 prefer, definitely\n2 Would, rather\n3 to go, rather\n4 be, prefer\n5 to watch, l'd rather not\n5 planning to\n4\n1 meant\n2 were\n6 intended to\n3 was\n7 going\n4 wasn't\n8 woulc\n5\n1 me what time the film starts?\n2 how much the tickets are?\n3 it cheaper to buy tickets online?\n4 like something to eat?\n5 we should leave soon?\n6 it's / it is easier to take the train\nor the bus?",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 83,
+    "ocr": true
+  },
+  "wb|Review 3–4|7": {
+    "raw": "1 c (If you can handle something,\nyou can deal with it.)\n2 b (If you have a permanent\ncontract, it is long-term and not\ntemporary.)\n3 b (If you are willing to do\nsomething, you want to do it.)\n4 c (If you make something up, you\ninvent or create it.)\n5 a (If something is biased, it is\nunfair and supports one group\nor person.)\n8\n1 concentration\n2 long-term\n3 avoid\n4 meet\n5 deceives\n6 made-up\n7 doubt\n8 truth\n9\n1 routine\n5 pretend\n2 exploited\n6 scandal\n3 Inflexible\n7 direct\n4 shocking\n8 subscribe\n1 got\n2 unemployed\n3 opportunities\n4 unhealthy\n5 disappointing\n6 industry\n11\n1b2c3a4c5b6c\nUNIT 5",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|1A": {
+    "raw": "1 confident\n5 pleasant\n2 direct\n6 patient\n3 sensible\n7 aggressive\n4 shy\n8 calm",
+    "items": [
+      {
+        "n": "1",
+        "answer": "confident"
+      },
+      {
+        "n": "5",
+        "answer": "pleasant"
+      },
+      {
+        "n": "2",
+        "answer": "direct"
+      },
+      {
+        "n": "6",
+        "answer": "patient"
+      },
+      {
+        "n": "3",
+        "answer": "sensible"
+      },
+      {
+        "n": "7",
+        "answer": "aggressive"
+      },
+      {
+        "n": "4",
+        "answer": "shy"
+      },
+      {
+        "n": "8",
+        "answer": "calm"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|1B": {
+    "raw": "1 b (If you are direct, you say\nexactly what you think.)\n2 a llf you are confident, you are\ncertain of you abilities.)\n3 c (If you are patient, you can\nwait for a long time without\nbecoming annoyed.)\n4 b (If you are pleasant, you are\nfriendly and easy to like.)\n5 a (If you are sensible, you make\ngood decisions.)\n6 b (If you are calm, you stay\nrelaxed and don't get stressed.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|2": {
+    "raw": "10 2\n3\n5\nOo.\n6\n7\n8",
+    "items": [
+      {
+        "n": "10",
+        "answer": "2 3 5 Oo. 6 7 8"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|3A": {
+    "raw": "1 Jan went to the supermarket to\nbuy milk.\n2 l'd take an umbrella so that you\ndon't get wet.\n3 Pia opened the window in order\nto let in fresh air.\n4 I put my coat on so as not to\nfeel cold.\n5 He gets up early in order to be\non time for work.\n6 You should leave at 8 a.m. in\norder not to miss your train.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Jan went to the supermarket to buy milk."
+      },
+      {
+        "n": "2",
+        "answer": "l'd take an umbrella so that you don't get wet."
+      },
+      {
+        "n": "3",
+        "answer": "Pia opened the window in order to let in fresh air."
+      },
+      {
+        "n": "4",
+        "answer": "I put my coat on so as not to feel cold."
+      },
+      {
+        "n": "5",
+        "answer": "He gets up early in order to be on time for work."
+      },
+      {
+        "n": "6",
+        "answer": "You should leave at 8 a.m. in order not to miss your train."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|3B": {
+    "raw": "1 c (We use so that + subject +\nverb to talk about purpose. In\nthis sentence, my parents is the\nsubject.)\n2 b (We use in order to + infinitive\nto introduce purpose clauses. In\nthis sentence, you cannot use so\nas without to.)\n3 c (We use in order to + infinitive\nto introduce purpose clauses.\nIn this sentence, you cannot use\nso as without to, or in order that\nbecause there isn't a subject in\nthe clause.)\n4 a (We use so that + subject +\nverb to talk about purpose. In\nthis sentence, she is the subject.)\n5 b (We put not before to in\nnegative purpose clauses.)\n6 a (We use to + infinitive to\nintroduce purpose clauses.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|3C": {
+    "raw": "1 to invite/ask her\n2 so as not to\n3 in order that\n4 in order to find\n5 so as\n6 in order not to",
+    "items": [
+      {
+        "n": "1",
+        "answer": "to invite/ask her"
+      },
+      {
+        "n": "2",
+        "answer": "so as not to"
+      },
+      {
+        "n": "3",
+        "answer": "in order that"
+      },
+      {
+        "n": "4",
+        "answer": "in order to find"
+      },
+      {
+        "n": "5",
+        "answer": "so as"
+      },
+      {
+        "n": "6",
+        "answer": "in order not to"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|4A": {
+    "raw": "a ('I think the most important\nthing is knowing exactly what you\nwant to complain about before\nyou pick up the phone or start\nwriting an email.)\nb ('There's also no real point in\ncomplaining about a problem if\nabsolutely nothing can be done\nd ('They're much more likely to\nhelp if you're pleasant?)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|4B": {
+    "raw": "1c 2f 3a 4d 5e 6b",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "f"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "d"
+      },
+      {
+        "n": "5",
+        "answer": "e"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|4C": {
+    "raw": "1 mutter\n4 ramble\n2 embarrassed\n5 outcome\n3 key\n6 perspective",
+    "items": [
+      {
+        "n": "1",
+        "answer": "mutter"
+      },
+      {
+        "n": "4",
+        "answer": "ramble"
+      },
+      {
+        "n": "2",
+        "answer": "embarrassed"
+      },
+      {
+        "n": "5",
+        "answer": "outcome"
+      },
+      {
+        "n": "3",
+        "answer": "key"
+      },
+      {
+        "n": "6",
+        "answer": "perspective"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|4D": {
+    "raw": "1 key\n4 perspective\n2 ramble\n5 outcome\n3 embarrassed\n6 mutter",
+    "items": [
+      {
+        "n": "1",
+        "answer": "key"
+      },
+      {
+        "n": "4",
+        "answer": "perspective"
+      },
+      {
+        "n": "2",
+        "answer": "ramble"
+      },
+      {
+        "n": "5",
+        "answer": "outcome"
+      },
+      {
+        "n": "3",
+        "answer": "embarrassed"
+      },
+      {
+        "n": "6",
+        "answer": "mutter"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|5B": {
+    "raw": "1T 2F 3F 4T 5F 6T",
+    "items": [
+      {
+        "n": "1",
+        "answer": "T"
+      },
+      {
+        "n": "2",
+        "answer": "F"
+      },
+      {
+        "n": "3",
+        "answer": "F"
+      },
+      {
+        "n": "4",
+        "answer": "T"
+      },
+      {
+        "n": "5",
+        "answer": "F"
+      },
+      {
+        "n": "6",
+        "answer": "T"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5A|6C": {
+    "raw": "See text in Ex 5A for a model.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5B|1A": {
+    "raw": "1 a bargain (A bargain hunter is\nsomeone who looks for places\nto buy things at a cheaper price\nthan usual.)\n2 make (You make a purchase, not\ndo or buy.)\n3 offer (If something is on offer, it\nis cheaper than usual.)\n4 influence (If you influence\nsomeone, you change how they\nbehave or the decisions they\nmake.)\n5 availability (If something has\nlimited availability, there aren't\nmany of it to buy.)\n6 loyalty (Brand loyalty is the habit\nof buying the same products\nmade by the same company.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a bargain"
+      },
+      {
+        "n": "2",
+        "answer": "make"
+      },
+      {
+        "n": "3",
+        "answer": "offer"
+      },
+      {
+        "n": "4",
+        "answer": "influence"
+      },
+      {
+        "n": "5",
+        "answer": "availability"
+      },
+      {
+        "n": "6",
+        "answer": "loyalty"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5B|1B": {
+    "raw": "1 good\n6 quality\n7 hunter\n2 influence\n3 limited\n8 consumer\n4 purchase\n9 brand\n5 worth\n2\n1 discount (A discount is a\nreduction in the usual price of\nsomething.)\n2 loss (If a company makes a\nloss, it earns less money than it\n3 fees (Fees are an amount\nof money that you pay for\nprofessional services or that you\npay to do something.)\n4 donation (A donation is\nsomething, especially money,\nthat you give to help a person or\norganisation.)\n5 charge (A charge is the amount\nof money you have to pay for\n6 bargain (A bargain is something\nyou buy cheaply or for less than\nits usual price.)\n7 profit (A profit is the money that\nyou get when you sell something\nfor more than you paid for it,\nespecially in business.)\n8 receipt (A receipt is a piece of\npaper that shows you have paid\nfor something.)\n9 fare (A fare is the amount you pay\nto travel by train, plane, bus, etc.)\n10 refund (A refund is money that\nis given back to you in a shop,\nrestaurant, etc., for example\nbecause you are not satisfied\nwith what you bought.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5B|3A": {
+    "raw": "1 c (In this sentence, we need\na superlative adjective. The\nsuperlative adjective of cheap is\ncheapest.)\n2 b (Use as + comparative\nadjective + as.)\n3 c (Use the phrase by far the +\nsuperlative adjectives.)\n4 a (We often use one of, some\nof, among with superlative\nadjectives. We use among with\nbe not have.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 84,
+    "ocr": true
+  },
+  "wb|5B|3B": {
+    "raw": "1 harder\n2 fewer\n3 more popular\n4 bigger\n5 the most successful",
+    "items": [
+      {
+        "n": "1",
+        "answer": "harder"
+      },
+      {
+        "n": "2",
+        "answer": "fewer"
+      },
+      {
+        "n": "3",
+        "answer": "more popular"
+      },
+      {
+        "n": "4",
+        "answer": "bigger"
+      },
+      {
+        "n": "5",
+        "answer": "the most successful"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5B|4A": {
+    "raw": "1 Brands are spending more and\nmore money on advertising\n2 The harder I work, the happier |\nfeel.\n3 Computers are getting easier\nand easier to use.\n4 The worst ever advert l've seen\nwas one for chocolate.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Brands are spending more and more money on advertising"
+      },
+      {
+        "n": "2",
+        "answer": "The harder I work, the happier | feel."
+      },
+      {
+        "n": "3",
+        "answer": "Computers are getting easier and easier to use."
+      },
+      {
+        "n": "4",
+        "answer": "The worst ever advert l've seen was one for chocolate."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5B|5B": {
+    "raw": "a 'There are millions of influencers\nwith a range of interests and\nbackgrounds.\nc l'some are paid up to $1 million\ne ('Influencer marketing is so\nsuccessful because of the ability\nof influencers to create content\nthat seems real and honest and to\nconnect with their audience')\nf ('Many people question\ninfluencers' honesty and whether\ntheir posts hide the fact that they\nare advertising something')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|1A": {
+    "raw": "1 superb (Superb means very\ngood.)\n2 suitable (If something is suitable,\nit has the right qualities for a\nparticular purpose, person, or\n3 reasonable (If something\nis reasonable, it is not very\n4 decent (If something is decent, it\nis good enough or fairly good.)\n5 stable (If something is stable,\nit is in a firm position and not\nlikely to move.)\n6 solid (If something is solid, it is\nhard or firm, with a fixed shape.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "superb"
+      },
+      {
+        "n": "2",
+        "answer": "suitable"
+      },
+      {
+        "n": "3",
+        "answer": "reasonable"
+      },
+      {
+        "n": "4",
+        "answer": "decent"
+      },
+      {
+        "n": "5",
+        "answer": "stable"
+      },
+      {
+        "n": "6",
+        "answer": "solid"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|1B": {
+    "raw": "1 impressive\n4 suitable\n2 superb\n5 stable\n3 reasonable\nHow to ...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "impressive"
+      },
+      {
+        "n": "4",
+        "answer": "suitable"
+      },
+      {
+        "n": "2",
+        "answer": "superb"
+      },
+      {
+        "n": "5",
+        "answer": "stable"
+      },
+      {
+        "n": "3",
+        "answer": "reasonable How to ..."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|2A": {
+    "raw": "The Hotel Marina",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|2B": {
+    "raw": "1 From\n2 whether\n3 to\n4 all\n5 just\n6 The only\n7 into",
+    "items": [
+      {
+        "n": "1",
+        "answer": "From"
+      },
+      {
+        "n": "2",
+        "answer": "whether"
+      },
+      {
+        "n": "3",
+        "answer": "to"
+      },
+      {
+        "n": "4",
+        "answer": "all"
+      },
+      {
+        "n": "5",
+        "answer": "just"
+      },
+      {
+        "n": "6",
+        "answer": "The only"
+      },
+      {
+        "n": "7",
+        "answer": "into"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|3": {
+    "raw": "1A2A 3B 4B 5A 6 B",
+    "items": [
+      {
+        "n": "1",
+        "answer": "A"
+      },
+      {
+        "n": "2",
+        "answer": "A"
+      },
+      {
+        "n": "3",
+        "answer": "B"
+      },
+      {
+        "n": "4",
+        "answer": "B"
+      },
+      {
+        "n": "5",
+        "answer": "A"
+      },
+      {
+        "n": "6",
+        "answer": "B"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5C|4A": {
+    "raw": "1 to\n4 from\n2 because\n5 of\n3 is\n6 in",
+    "items": [
+      {
+        "n": "1",
+        "answer": "to"
+      },
+      {
+        "n": "4",
+        "answer": "from"
+      },
+      {
+        "n": "2",
+        "answer": "because"
+      },
+      {
+        "n": "5",
+        "answer": "of"
+      },
+      {
+        "n": "3",
+        "answer": "is"
+      },
+      {
+        "n": "6",
+        "answer": "in"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|1A": {
+    "raw": "1 c (We form the causative have\nwith have + object + past\nparticiple.)\n2 c (The reflexive pronoun for they\n3 b (We form the causative\nget with get + object + past\nparticiple. In this sentence, use\nthe past simple because the\naction took place yesterday.)\n4 b We use get + subject + to\ninninitive when we ask someone\nto do something and they do it.)\n5 b (The reflexive pronoun for she\n(Meera) is herself.)\n6 a (We use the infinitive + to with",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|1B": {
+    "raw": "1 herself\n2 get\n6 got\n3 getting\n7 themselves\n4 had\n8 ourselves",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|1C": {
+    "raw": "1 We need to get someone to\nrepair the fridge.\n2 I have just had my hair cut at the\nhairdresser's. Do you like it?\n3 Where did you have your car\nchecked?\n4 Jaime didn't buy curtains. He\nmade new ones himself.\n5 Next time, you should have your\nshopping delivered\n6 Is Antonella organising her\nleaving party herself?",
+    "items": [
+      {
+        "n": "1",
+        "answer": "We need to get someone to repair the fridge."
+      },
+      {
+        "n": "2",
+        "answer": "I have just had my hair cut at the hairdresser's. Do you like it?"
+      },
+      {
+        "n": "3",
+        "answer": "Where did you have your car checked?"
+      },
+      {
+        "n": "4",
+        "answer": "Jaime didn't buy curtains. He made new ones himself."
+      },
+      {
+        "n": "5",
+        "answer": "Next time, you should have your shopping delivered"
+      },
+      {
+        "n": "6",
+        "answer": "Is Antonella organising her leaving party herself?"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|2A": {
+    "raw": "1 a, b, d, f, g, i,j",
+    "items": [
+      {
+        "n": "1",
+        "answer": "a, b, d, f, g, i,j"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|2B": {
+    "raw": "1 b ('A recent study of 200,000\npeople in ten countries across\nAsia, Europe and North America')\n2 b l'women spend an average of\ntwo hours, forty-nine minutes a\nday doing unpaid tasks')\n3 a l'both of my parents worked\n4 b ('I remember my dad ironing\nhis work shirts')\n5 a ('l think our experience is fairly\ntypical. Most people we know\nhave a similar situation and\nshare the chores')\n6 b l'we both work full-time')\n7 c ('We get the house cleaned\nonce a week')\n8 a ('I cook most of the meals')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|5D|2C": {
+    "raw": "1 Did you have your hair cut last\nweek?\n2 1 get my food delivered by the\nsupermarket.\n3 l usually get someone to cut the\ngrass.\n4 l always try to fix broken things\nmyself.\nUNIT 6",
+    "items": [
+      {
+        "n": "1",
+        "answer": "Did you have your hair cut last week?"
+      },
+      {
+        "n": "2",
+        "answer": "1 get my food delivered by the supermarket."
+      },
+      {
+        "n": "3",
+        "answer": "l usually get someone to cut the grass."
+      },
+      {
+        "n": "4",
+        "answer": "l always try to fix broken things myself. UNIT 6"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|6A|1A": {
+    "raw": "1 c (If somewhere is run-down, it is\nin bad condition because it has\nnot been looked after.)\n2 c (A high-rise building is very tall.)\n3 b (If an area is wealthy, there are\nlots of rich people there.)\n4 a (A relaxed atmosphere is the\nfeeling that a place is relaxed\nand calm.)\n5 a (The correct collocation is\nstreet market, not road or lane\n6 c (The correct collocation is",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|6A|1B": {
+    "raw": "1 run-down (An adjective with\na negative meaning is needed\nsince Lavapiés is now popular.)\n2 spot (A tourist spot is an area\nwhich is popular with tourists.)\n3 tree-lined (A tree-lined avenue\nis a road with trees along each\n4 buildings (Historic buildings are\nold and interesting.)\n5 murals (A mural is a picture\n6 market (A street market is\nsomewhere that can be busy\nand there may be bargains.)\n7 ideal (An ideal spot is a perfect\n8 nightlife (Lively nightlife is busy\nbars, clubs or restaurants that\npeople go to in the evening in a\ntown or city.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "run-down"
+      },
+      {
+        "n": "2",
+        "answer": "spot"
+      },
+      {
+        "n": "3",
+        "answer": "tree-lined"
+      },
+      {
+        "n": "4",
+        "answer": "buildings"
+      },
+      {
+        "n": "5",
+        "answer": "murals"
+      },
+      {
+        "n": "6",
+        "answer": "market"
+      },
+      {
+        "n": "7",
+        "answer": "ideal"
+      },
+      {
+        "n": "8",
+        "answer": "nightlife"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|6A|2A": {
+    "raw": "1 so (We use so + adjective to\nshow emphasis or strong\nfeelings about something.)\n2 such (We use such + a/an +\nadjective + singular noun (a\nrelaxed atmosphere) to show\nemphasis or strong feelings\nabout something.)\n3 such (We use such + a/an +\nadjective + singular noun (a\ngreat time) to show emphasis\nor strong feelings about\nsomething.)\n4 so (We use so before the\nquantifier many to show\nemphasis or strong feelings\nabout something.)\n5 so (We use so + adjective to\nshow emphasis or strong\nfeelings about something.)\n6 such (We use such + a/an +\nadjective + singular noun\n(a wonderful time) to show\nemphasis or strong feelings\nabout something.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "so"
+      },
+      {
+        "n": "2",
+        "answer": "such"
+      },
+      {
+        "n": "3",
+        "answer": "such"
+      },
+      {
+        "n": "4",
+        "answer": "so"
+      },
+      {
+        "n": "5",
+        "answer": "so"
+      },
+      {
+        "n": "6",
+        "answer": "such"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 85,
+    "ocr": true
+  },
+  "wb|6A|2B": {
+    "raw": "1 c (We use so + adjective to show\nemphasis or strong feelings\nabout something.)\n2 a (We use such + a/an +\nadjective + singular noun (a\ngreat sense of community)\nto show emphasis or strong\nfeelings about something.)\n3 c (We use so before the\nquantifier many to show\nemphasis or strong feelings\nabout something.)\n4 b (We use such before a noun\n(with or without an adjective)\n(bad weather) to show emphasis\nor strong feelings about\nsomething.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6A|3A": {
+    "raw": "1 such\n4 such\n2 so\n5 so\n3 such\n6 SO",
+    "items": [
+      {
+        "n": "1",
+        "answer": "such"
+      },
+      {
+        "n": "4",
+        "answer": "such"
+      },
+      {
+        "n": "2",
+        "answer": "so"
+      },
+      {
+        "n": "5",
+        "answer": "so"
+      },
+      {
+        "n": "3",
+        "answer": "such"
+      },
+      {
+        "n": "6",
+        "answer": "SO"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6A|4B": {
+    "raw": "1 f, k\n4 b,g\n2 d, h\n5 c, i\n3 e,j\n6 a\n5\n1 It was a run-down part of the\ncity.\n2 There are lots of high-rise\nbuildings in the city centre.\n3 It's a wealthy area with many\nhistoric buildings.\n4 It's a popular tourist spot with a\nlively nightlife.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6A|6A": {
+    "raw": "1 best\n4 five-minute\n2 take\n5 Turn\n3 journey\n6 on\n6B1b 2c 3a",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6A|6C": {
+    "raw": "See text in Ex 6A for a model.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|1A": {
+    "raw": "1 tough\n2 unpredictable\n3 risk\n4 challenging\n5 familiar\n6 escape",
+    "items": [
+      {
+        "n": "1",
+        "answer": "tough"
+      },
+      {
+        "n": "2",
+        "answer": "unpredictable"
+      },
+      {
+        "n": "3",
+        "answer": "risk"
+      },
+      {
+        "n": "4",
+        "answer": "challenging"
+      },
+      {
+        "n": "5",
+        "answer": "familiar"
+      },
+      {
+        "n": "6",
+        "answer": "escape"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|1B": {
+    "raw": "1 safety (how safe something is.)\n2 unfamiliar (If something is\nunfamiliar, you don't know it\nwell.)\n3 difficulties (If you have\ndifficulties, you have problems in\na situation.)\n4 conditions (The physical state\nthat something is in.)\n5 escape\n6 challenging\n2\n1 living (If you live out of a suitcase,\nyou live or stay somewhere for\na temporary period with only\nsome of your belongings.)\n2 weather (If you weather the\nstorm, you successfully deal\nwith a very difficult problem.)\n3 think (If you think on your feet,\nyou can make a quick decision.)\n4 be (If you are in hot water, you\nare in a difficult situation.)\n5 travelling (If you travel light, you\ndo not take many belongings\nwith you.)\n6 break (If you break a journey,\nyou stop for a rest on the way\nsomewhere.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|3A": {
+    "raw": "1 c (We use be used to + it to\ntalk about something we are\naccustomed to doing.)\n2 a (We use get used to + -ing form\nto talk about a situation we\nbecome accustomed to.)\n3 b (We use be used to + -ing form\nto talk about an activity we are\naccustomed to doing.)\n4 c (We use get used to + it to talk\nabout something we become\naccustomed to.)\n5 a (We use get used to + noun\nto talk about something we\nbecome accustomed to.)\n6 a (We use used to + infinitive to\ntalk about a habit or state in the\npast, which is usually something\nwe don't do now or is no longer\nthe case.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|3B": {
+    "raw": "1 to\n5 was\n2 used\n6 get\n3l'm\n7 to\n4 used",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|4": {
+    "raw": "1 usedto\n4 used to\n5 use\n2 use\n3 usedto\n6 usedto",
+    "items": [
+      {
+        "n": "1",
+        "answer": "usedto"
+      },
+      {
+        "n": "4",
+        "answer": "used to"
+      },
+      {
+        "n": "5",
+        "answer": "use"
+      },
+      {
+        "n": "2",
+        "answer": "use"
+      },
+      {
+        "n": "3",
+        "answer": "usedto"
+      },
+      {
+        "n": "6",
+        "answer": "usedto"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|5": {
+    "raw": "b",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|6A": {
+    "raw": "1 d 2a\n3 b",
+    "items": [
+      {
+        "n": "1",
+        "answer": "d"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|6B": {
+    "raw": "a story 3 ('I saw loads of wildlife')\n• story 2 ('1 rode through freezing\nrain and the heat and wind of\nthe desert')\nc story 1 ('My husband and |\nweren't used to spending so\nmuch time together, and we\nhad lots of arguments to begin\nwith')\nd story 2 ('I loved seeing\nunfamiliar landscapes and\ngetting to know local people')\ne story 2 ('living out of a tiny bag')\nf story 3 ('explored areas you can\nonly reach by sea')\ng story 1 ('our van kept breaking\ndown')\nh story 2 ('As a child, I was\nfascinated by stories of famous\ntravellers and dreamed of\nescaping my small town to\ntravel the ancient routes they\nwrote about')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6B|6C": {
+    "raw": "1 adventure\n5 memorable\n2 demanding\n6 breathtaking\n3 capable\n7 magical\n4 fascinated\n8 highlights",
+    "items": [
+      {
+        "n": "1",
+        "answer": "adventure"
+      },
+      {
+        "n": "5",
+        "answer": "memorable"
+      },
+      {
+        "n": "2",
+        "answer": "demanding"
+      },
+      {
+        "n": "6",
+        "answer": "breathtaking"
+      },
+      {
+        "n": "3",
+        "answer": "capable"
+      },
+      {
+        "n": "7",
+        "answer": "magical"
+      },
+      {
+        "n": "4",
+        "answer": "fascinated"
+      },
+      {
+        "n": "8",
+        "answer": "highlights"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6C|1A": {
+    "raw": "1 hour (Rush hour is the time of\nday when there is a lot of traffic\nbecause people are going to\nand from work.)\n2 lanes (A cycle lane is a part of a\nroad that is separated from the\nrest of the road for the use of\npeople riding bikes.)\n3 advance (If you do something\nin advance, you do it before a\nparticular time.)\n4 travel (If you have unlimited\ntravel, you can travel as much as\nyou want.)\n5 speed (The speed limit is the\nmaximum speed that you can\ntravel.)\n6 charge (The amount you pay to\ndo something.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "hour"
+      },
+      {
+        "n": "2",
+        "answer": "lanes"
+      },
+      {
+        "n": "3",
+        "answer": "advance"
+      },
+      {
+        "n": "4",
+        "answer": "travel"
+      },
+      {
+        "n": "5",
+        "answer": "speed"
+      },
+      {
+        "n": "6",
+        "answer": "charge"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6C|1B": {
+    "raw": "1 cycle\n4 charge\n2 hour\n5 limit\n3 book\nHow to...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "cycle"
+      },
+      {
+        "n": "4",
+        "answer": "charge"
+      },
+      {
+        "n": "2",
+        "answer": "hour"
+      },
+      {
+        "n": "5",
+        "answer": "limit"
+      },
+      {
+        "n": "3",
+        "answer": "book How to..."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6C|2A": {
+    "raw": "1 catch\n4 go through\n2 words\n5 last bit\n3 check\n6 mean",
+    "items": [
+      {
+        "n": "1",
+        "answer": "catch"
+      },
+      {
+        "n": "4",
+        "answer": "go through"
+      },
+      {
+        "n": "2",
+        "answer": "words"
+      },
+      {
+        "n": "5",
+        "answer": "last bit"
+      },
+      {
+        "n": "3",
+        "answer": "check"
+      },
+      {
+        "n": "6",
+        "answer": "mean"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6C|2B": {
+    "raw": "a 2,3,6\nb 1,4,5",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6C|4A": {
+    "raw": "1 give\n4 can\n2 options\n5 last bit\n3 check\n6 catch",
+    "items": [
+      {
+        "n": "1",
+        "answer": "give"
+      },
+      {
+        "n": "4",
+        "answer": "can"
+      },
+      {
+        "n": "2",
+        "answer": "options"
+      },
+      {
+        "n": "5",
+        "answer": "last bit"
+      },
+      {
+        "n": "3",
+        "answer": "check"
+      },
+      {
+        "n": "6",
+        "answer": "catch"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6D|1A": {
+    "raw": "a 2 ('Masdar City is a new city\nwhich is under construction')\nb 4 ('Bengularu isn't as famous for\nits modern buildings as Hong\nKong or Dubai')\nc 3 ('most of Hong Kong's 7.5\nmillion people live on the 15th\nfloor or higher')\nd 4 ('Bengaluru is one of the\nfastest-growing cities in the\nworld')\ne 3 ('It has the largest number of\nbuildings taller than 150 metres\nin the world')\nf 1 ('It is now one of the most\npopular tourist destinations in\nthe world')\ng 2 ('it will be the world's first\nzero-waste city')\nh 1 ('It is also well known for its\nartificial islands')\n1B\n150,000\n5 7,000\n2 828\n6 7.5\n3 300\n7 13\n4 100",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 86,
+    "ocr": true
+  },
+  "wb|6D|1C": {
+    "raw": "1 fishing\n5 high\n2 map\n6 park\n3 wind\n7 headquarters\n4 vehicles\n8 institutions",
+    "items": [
+      {
+        "n": "1",
+        "answer": "fishing"
+      },
+      {
+        "n": "5",
+        "answer": "high"
+      },
+      {
+        "n": "2",
+        "answer": "map"
+      },
+      {
+        "n": "6",
+        "answer": "park"
+      },
+      {
+        "n": "3",
+        "answer": "wind"
+      },
+      {
+        "n": "7",
+        "answer": "headquarters"
+      },
+      {
+        "n": "4",
+        "answer": "vehicles"
+      },
+      {
+        "n": "8",
+        "answer": "institutions"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|Review 5–6|1": {
+    "raw": "1 in (We use in order to + infinitive\nto introduce purpose clauses.)\n2 that (We use so that + subject +\nverb to talk about purpose.)\n3 not (We put not before to in\nnegative purpose clauses: in\norder not to.)\n4 so (We use so that + subject +\nverb to talk about purpose.)\n5 as (We use so as to + infinitive to\nintroduce purpose clauses.)\n6 so (We use so as (not) to +\ninfinitive to introduce purpose\n7 to (We use to + infinitive to\nintroduce purpose clauses.)\n8 so (We use so as to + infinitive to\nintroduce purpose clauses.)\n2\n1 hotter (We use a comparative\nadjective with than.)\n2 better (We would need to use\nthe with best here.)\n3 best (Use a superlative with /'ve\never eaten.)\n4 nice (We need to use an\nadjective in this structure - as +\nadjective + as.)\n5 less (Use a comparative to\ncompare the two apartments.)\n6 more (Use a comparative with\nthan.)\n7 friendliest (Use a superlative\nwith l've ever met.)\n8 more confidently (Use a\ncomparative with than.)\n1 myself (The reflexive pronoun\nfor l is myself.)\n2 repaired (We form the causative\nhave with have + object + past\nparticiple.)\n3 had (We form the causative\nhave with have + object + past\nparticiple.)\n4 get (We use get + subject + to +\ninfinitive when we ask someone\nto do something and they do it.)\n1 It's such a hot day today!\n2 I'm so excited about visiting you\n3 The hotel had such a relaxed\natmosphere that | wanted to\n4 You look so young in this photo!\n5 There was so much noise\nin the office that I couldn't\nconcentrate.\n6 We had such a great time in\n7 The hotel was so far from the\nstation that we had to take a taxi.\n8 Deirdra is such a pleasant\nperson that everyone likes her.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|Review 5–6|5": {
+    "raw": "1 we're (We use be used to + noun\nto talk about something we are\n2 get (We use get used to + -ing\nform to talk about something\nwe become accustomed to.)\n3 I'm not (We use be used to + -ing\nform to talk about something\nwe are accustomed to.)\n4 get (We use get used to + -ing\nform to talk about something\nwe become accustomed to.)\n5 l'm (We use be used to + it to\ntalk about something we are\n6 got (We use get used to + noun\nto talk about something we\nbecome accustomed to.)\n7 used (We use used to + infinitive\nto talk about a habit or state\nin the past, which is usually\nsomething we don't do now or is\n8 she's (We use be used to + it to\ntalk about something we are\naccustomed to.)\n1 as (comparative structure - as +\n2 was (be used to + noun to\ntalk about something we are\n3 order (in order to + infinitive to\nintroduce purpose clauses)\n4 such (such + a/an (+ adjective) +\n5 have/get (causative have/get\nwith have/get + object + past\n6 than (than with a comparative",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|Review 5–6|7": {
+    "raw": "1 historic\n5 atmosphere\n2 advance\n6 lanes\n3 unpredictable 7 worth\n4 escape\n8 reasonable\n8\n1c 2f 3a\n4 e 5b 6d\n9\n1 donation\n4 run-down\n2 direct\n5 receipt\n1b 2c 3b\n4a 5 c 6a\n6 charge\n3 challenging\n4 impressive\n8 availability\nUNIT 7",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|7A|1A": {
+    "raw": "1 c (We use wonder to think about\nsomething we do not know.)\n2 a (We use warn to tell someone\nthat something bad or\ndangerous may happen.)\n3 b (We use enquire to ask\nsomeone for information.)\n4 a (We use mention to talk or\nwrite about something without\ngiving many details.)\n5 b (We use confirm to tell\nsomeone that an arrangement\n6 c (We use add to say something\nextra about what we have just",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|7A|1B": {
+    "raw": "1 confirm\n2 convinced",
+    "items": [
+      {
+        "n": "1",
+        "answer": "confirm"
+      },
+      {
+        "n": "2",
+        "answer": "convinced"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|7A|3": {
+    "raw": "1 answer, argue, mention,\npromise, wonder\n2 agree, complain, enquire,\nexplain, reply",
+    "items": [
+      {
+        "n": "1",
+        "answer": "answer, argue, mention, promise, wonder"
+      },
+      {
+        "n": "2",
+        "answer": "agree, complain, enquire, explain, reply"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|7A|4A": {
+    "raw": "1 didn't (After a reporting verb,\nthe original verb often moves\none tense back into the past.\nIn this sentence, the present\nsimple changes to the past\nsimple.)\n2 if I knew (In reported yes/no\nquestions, we add if or whether\nafter the reporting verb and\nkeep the word order the same\nas for statements.)\n3 the year before (In reported\nspeech, last year becomes the\nyear before.)\n4 the following day (In reported\nspeech, tomorrow becomes the\nfollowing day or the next day.)\n5 if l was (In reported yes/no\nquestions, we add if or whether\nafter the reporting verb and\nkeep the word order the same\nas for statements.)\n6 had (After a reporting verb, the\noriginal verb often moves one\ntense back into the past. In this\nsentence, the present perfect\nchanges to the past perfect.)\n7 the day before (In reported\nspeech, yesterday becomes the\nday before.)\n8 could (In reported speech, can\nbecomes could.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "didn't"
+      },
+      {
+        "n": "2",
+        "answer": "if I knew"
+      },
+      {
+        "n": "3",
+        "answer": "the year before"
+      },
+      {
+        "n": "4",
+        "answer": "the following day"
+      },
+      {
+        "n": "5",
+        "answer": "if l was"
+      },
+      {
+        "n": "6",
+        "answer": "had"
+      },
+      {
+        "n": "7",
+        "answer": "the day before"
+      },
+      {
+        "n": "8",
+        "answer": "could"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 87,
+    "ocr": true
+  },
+  "wb|7A|4B": {
+    "raw": "1b 2a 3c 4b",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|4C": {
+    "raw": "1 if/whether | had met Fatima\n2 there would be twenty people\nat the meeting that\n3 the weather had been terrible\n4 (that) she was going to Brazil\n5 they had been planning to go\n6 what time the last train was",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|5A": {
+    "raw": "b ('Then he asked why l'd gone to\nCafé Napoli when I was supposed\nto meet her at Bar Napoli.')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|5B": {
+    "raw": "1 F ('It was my wedding\nanniversary.)\n2 T (T'a never met her, or even\nseen a photo')\n3 F ('When I got to the restaurant,\nI saw a woman sitting at a table\nby herself, so 1 went over, asked\nif she was called Emma')\n4 T ('I could see that Ross was\nsending me loads of messages')\n5 T ('he asked why I hadn't met\nEmma and said that she'd\nwaited for me in the restaurant\nfor over an hour before going\nhome')\n6 F ('1 felt awful that I'd left Emma\nwaiting alone)\n7 F '(I'd misunderstood the name\nof the restaurant and gone to\nthe wrong one!')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "F"
+      },
+      {
+        "n": "2",
+        "answer": "T"
+      },
+      {
+        "n": "3",
+        "answer": "F"
+      },
+      {
+        "n": "4",
+        "answer": "T"
+      },
+      {
+        "n": "5",
+        "answer": "T"
+      },
+      {
+        "n": "6",
+        "answer": "F"
+      },
+      {
+        "n": "7",
+        "answer": "F '"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|5C": {
+    "raw": "1 introduced\n2 common\n3 ignored\n4 upset\n5 misunderstood",
+    "items": [
+      {
+        "n": "1",
+        "answer": "introduced"
+      },
+      {
+        "n": "2",
+        "answer": "common"
+      },
+      {
+        "n": "3",
+        "answer": "ignored"
+      },
+      {
+        "n": "4",
+        "answer": "upset"
+      },
+      {
+        "n": "5",
+        "answer": "misunderstood"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|6A": {
+    "raw": "1 C 2B 3A",
+    "items": [
+      {
+        "n": "1",
+        "answer": "C"
+      },
+      {
+        "n": "2",
+        "answer": "B"
+      },
+      {
+        "n": "3",
+        "answer": "A"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|6B": {
+    "raw": "1 turned out that\n2 things got more bizarre\n3 at which point\n4 Apparently\n5 the funny thing is",
+    "items": [
+      {
+        "n": "1",
+        "answer": "turned out that"
+      },
+      {
+        "n": "2",
+        "answer": "things got more bizarre"
+      },
+      {
+        "n": "3",
+        "answer": "at which point"
+      },
+      {
+        "n": "4",
+        "answer": "Apparently"
+      },
+      {
+        "n": "5",
+        "answer": "the funny thing is"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7A|6C": {
+    "raw": "See text in Ex 6A for a model.\n7\nModel answer\n1 agree that it's harder to make\nfriends when you're older. When\nyou are younger, you go to school\nwith people the same age as\nyou and you usually have similar\ninterests. Then, as a young adult,\nyou meet people at work, and\nbecause you don't have many\nresponsibilities, you have time to\ndevelop relationships. As you get\nolder, you have less time for your\nfriends because you might have\nchildren or aging parents to look\nafter. Also, if other people keep\nthe same friends from when they\nwere younger, they might not be\nas willing to make new friends.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|1A": {
+    "raw": "1 spam\n4 pop-ups\n2 back up\n5 profile\n3 forward",
+    "items": [
+      {
+        "n": "1",
+        "answer": "spam"
+      },
+      {
+        "n": "4",
+        "answer": "pop-ups"
+      },
+      {
+        "n": "2",
+        "answer": "back up"
+      },
+      {
+        "n": "5",
+        "answer": "profile"
+      },
+      {
+        "n": "3",
+        "answer": "forward"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|1B": {
+    "raw": "1 post (Use post to mean put a\nphoto of someone on social\nmedia.)\n2 forward (Use forward to mean\nsend someone an email or\nmessage that you have been\n3 tag (Use tag to create a link to\nattach a name to something\nonline.)\n4 back up (Use back-up to mean\nmake a copy of your work.)\n5 spam (Spam is the word we\nuse for unwanted emails, often\nadvertisements.)\n6 usernames (A username is a\nword you use to log onto a\ncomputer programme.)\n1 download (receive information\nor programmes on a computer,\nespecially using the internet)\n2 scroll (move information up or\ndown a computer screen so that\nyou can read it)\n3 tap (hit something lightly)\n4 icon (a small sign or picture on\na computer screen that you\nchoose when you want the\ncomputer to do something)\n5 inbox (the place in a computer\nemail programme where new\n6 network (a system of things that\nare connected with each other)\n7 upload (to move information\nfrom a computer to a computer\nnetwork so that other people\ncan see it or use it)\n8 swipe (move your finger over\nthe screen of a mobile phone\nor tablet to move onto the next\n9 folder (a group of related\ndocuments that you store\ntogether on a computer)\n10 refresh (to make a computer\nscreen show new information\nthat has arrived since you began\nlooking at it)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|3A": {
+    "raw": "1 b (We need the future passive\nform here because the\nsentences says next year.)\n2 a (We need the past simple\npassive to talk about a\ncompleted action in the past.)\n3 b (We need the present\ncontinuous passive here\nbecause the sentence says at\nthe moment.)\n4 a (We place just after the\n5 c (We use the future (going\nto) passive here because the\nsentence says tomorrow.)\n6 b (We use get + past participle\ninformally when something\nis dramatic or unexpected or\nfor negative situations. In this\nsentence, we use the past\nsimple passive because it says",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "a"
+      },
+      {
+        "n": "5",
+        "answer": "c"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|3B": {
+    "raw": "1 has been downloaded\n2 are backed up\n3 still haven't been told\n4 is going to be published\n5 is being painted\n6 have already been posted",
+    "items": [
+      {
+        "n": "1",
+        "answer": "has been downloaded"
+      },
+      {
+        "n": "2",
+        "answer": "are backed up"
+      },
+      {
+        "n": "3",
+        "answer": "still haven't been told"
+      },
+      {
+        "n": "4",
+        "answer": "is going to be published"
+      },
+      {
+        "n": "5",
+        "answer": "is being painted"
+      },
+      {
+        "n": "6",
+        "answer": "have already been posted"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|4A": {
+    "raw": "1 sent\n4 broken\n2 uploaded\n5 tagged\n3 told",
+    "items": [
+      {
+        "n": "1",
+        "answer": "sent"
+      },
+      {
+        "n": "4",
+        "answer": "broken"
+      },
+      {
+        "n": "2",
+        "answer": "uploaded"
+      },
+      {
+        "n": "5",
+        "answer": "tagged"
+      },
+      {
+        "n": "3",
+        "answer": "told"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|5A": {
+    "raw": "a, b, c, f, 9",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7B|5B": {
+    "raw": "1 T ('We leave footprints in other\nplaces too, often without\nrealising. If you've ever uploaded\na video to YouTube or 'liked' a\nphoto on social media, you've\nleft a digital footprint.')\n2 F ('We all know about the\ndangers of sharing too much\npersonal information online.')\n3 T l'even if we use apps that\nautomatically delete posts\nafter a certain amount of time,\nsomeone can make a copy of the\nposts before they are deleted.')\n4 T l'our digital footprint is not\nonly made up of the information\nthat we chose to share, but\nalso the data we share without\nknowing')\n5 F ('It's because companies use\nthis information to target their\nadvertising and sell things to\nyou.')\n6 F ('Even if you delete your\nsearch history and remove\ncookies, some data will remain.')\n7 T ('thinking carefully before you\npost anything at all.')\n8 F ('the question we should all be\nasking ourselves is, would I be\nhappy seeing this post online in\nten years' time?')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 88,
+    "ocr": true
+  },
+  "wb|7C|1A": {
+    "raw": "1 extremely\n4 particularly\n2 slightly\n5 fairly\n3 perfectly\n6 totally",
+    "items": [
+      {
+        "n": "1",
+        "answer": "extremely"
+      },
+      {
+        "n": "4",
+        "answer": "particularly"
+      },
+      {
+        "n": "2",
+        "answer": "slightly"
+      },
+      {
+        "n": "5",
+        "answer": "fairly"
+      },
+      {
+        "n": "3",
+        "answer": "perfectly"
+      },
+      {
+        "n": "6",
+        "answer": "totally"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7C|1B": {
+    "raw": "1 c (We cannot use totally or\ncompletely with interesting.)\n2 a (We cannot use slightly or\ntotally with good.)\n3 c (We cannot use slightly or\nparticularly with fine.)\n4 c (We cannot use perfectly or\ncompletely with strange.)\n5 b (We cannot use slightly or\nfairly with amazing.)\n6 a (We need an adverb that\nmeans more.)\nHow to ...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "b"
+      },
+      {
+        "n": "6",
+        "answer": "a"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7C|2A": {
+    "raw": "2",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7C|2B": {
+    "raw": "1 c\n2 e 3a 4d\n7f\n5 g\n6b\nc 2,3",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "e"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "d 7f"
+      },
+      {
+        "n": "5",
+        "answer": "g 6b c 2,3"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7C|2C": {
+    "raw": "a 1\nb 4,6,7\nd5",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7C|4A": {
+    "raw": "and 4B\n1 do\n5 how\n2 Did\n6 sounds\n7 How\n3 get\n4 that\n8 mean",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7D|1A": {
+    "raw": "1 b (We use the auxiliary verb\ndo to avoid repetition. In this\nsentence, you need the present\nsimple.)\n2 c (We use the auxiliary verb\ndo to avoid repetition. In this\nsentence, you need the past\nsimple because the party was\nlast night.)\n3 a (We use want to, would like to,\nand try to to avoid repetition,\nparticularly of a verb.)\n4 b (We use want to, would like to,\nand try to to avoid repetition,\nparticularly of a verb.)\n5 c (We use the auxiliary verb\ndo to avoid repetition. In this\nsentence, you need the past\nsimple because Bea said she'd\ncall last night.)\n6 b (We use be to avoid repetition\nof the noun or noun phrase.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "c"
+      },
+      {
+        "n": "3",
+        "answer": "a"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "c"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7D|1B": {
+    "raw": "1 so (Use think so, hope so,\ntell (someone) so to avoid\n2 suppose (Use suppose so and\nguess so when we give a positive\nanswer, but we don't really want\n3 not (Use / guess not to say we\nagree with something negative.)\n4 hope (Use hope not to avoid\nrepetition in negative answers.)\n5 to (Use would love to to avoid\nrepetition of a verb phrase.)\n6 be (Use be to avoid repetition of",
+    "items": [
+      {
+        "n": "1",
+        "answer": "so"
+      },
+      {
+        "n": "2",
+        "answer": "suppose"
+      },
+      {
+        "n": "3",
+        "answer": "not"
+      },
+      {
+        "n": "4",
+        "answer": "hope"
+      },
+      {
+        "n": "5",
+        "answer": "to"
+      },
+      {
+        "n": "6",
+        "answer": "be"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7D|2A": {
+    "raw": "3,5, 6",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|7D|2B": {
+    "raw": "1 c l'author of several books\nabout management skills')\n2 b ('bad communication can often\nlead to misunderstandings')\n3 a l'Sometimes we're so focused\non what we want to say ... we\nforget to listen.)\n4 a l'Talking or writing on and\non about something can\noften make people feel bored\nand they might stop paying\nattention') (\n5 c ('that body language counts\nfor fifty-five percent of\ncommunication')\n2 writing\nUNIT 8",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|1A": {
+    "raw": "1 ready\n4 make\n2 time\n5 afraid\n3 worrying",
+    "items": [
+      {
+        "n": "1",
+        "answer": "ready"
+      },
+      {
+        "n": "4",
+        "answer": "make"
+      },
+      {
+        "n": "2",
+        "answer": "time"
+      },
+      {
+        "n": "5",
+        "answer": "afraid"
+      },
+      {
+        "n": "3",
+        "answer": "worrying"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|1B": {
+    "raw": "1 about\n4 attention\n2 seriously\n5 make\n3 be\n6 time",
+    "items": [
+      {
+        "n": "1",
+        "answer": "about"
+      },
+      {
+        "n": "4",
+        "answer": "attention"
+      },
+      {
+        "n": "2",
+        "answer": "seriously"
+      },
+      {
+        "n": "5",
+        "answer": "make"
+      },
+      {
+        "n": "3",
+        "answer": "be"
+      },
+      {
+        "n": "6",
+        "answer": "time"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|2A": {
+    "raw": "1 should have listened\n2 shouldn't have spent\n3 should have called\n4 shouldn't have eaten\n5 should have left\n6 should have worn",
+    "items": [
+      {
+        "n": "1",
+        "answer": "should have listened"
+      },
+      {
+        "n": "2",
+        "answer": "shouldn't have spent"
+      },
+      {
+        "n": "3",
+        "answer": "should have called"
+      },
+      {
+        "n": "4",
+        "answer": "shouldn't have eaten"
+      },
+      {
+        "n": "5",
+        "answer": "should have left"
+      },
+      {
+        "n": "6",
+        "answer": "should have worn"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|2B": {
+    "raw": "1 had listened; might/would have\nunderstood\n2 would/could/might have made; 1\nhad known\n3 had asked; would/might have\n4 would/might not have told; had\nthought\n5 might/would not have missed;\nhad been\n6 had saved; could/might/would\nhave bought",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|2C": {
+    "raw": "1 c (if + past perfect)\n2 b (wouldn't + have + past\nparticiple)\n3 c (should have + past participle)\n4 c (wouldn't + have + past\nparticiple\n5 a (could + have + past participle)\n6 b (shouldn't have + past\nparticiple)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      },
+      {
+        "n": "5",
+        "answer": "a"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|3": {
+    "raw": "1 should have\n2 l'd; would have\n3 shouldn't have\n4 wouldn't have; l'd",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|4A": {
+    "raw": "1 d ('I was always anxious;\nworrying that other people\nwouldn't approve')\n2 a ('l feel like | haven't made the\nmost of my abilities')\n3 c ('I'd tell myself to be kinder.\nI wasn't very nice when I was\nyounger')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "d"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|4B": {
+    "raw": "1 b ('1 was always anxious about\nmaking the wrong decisions and\nupsetting people, so 1 did the\nthings other people thought |\nshould')\n2 c ('l'd have studied art instead of\nlaw')\n3 a l'I didn't pay attention to my\nteachers, and I chatted and told\njokes to my friends during class')\n4 a l'l feel like | haven't made the\nmost of my abilities and should\nhave made myself try harder?')\n5 b l'l only thought about myself\nand didn't care how other\npeople felt')\n6 b l'lonly made friends with\npeople who were useful to\nme, so | didn't have any proper\nfriendships.?')\nattentio",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8A|4C": {
+    "raw": "1 anxious\n2 listened\nsuccessf\n3 approv\n7 treated\n4 minimur\n8 tough",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8B|1A": {
+    "raw": "1 inspire\n4 achieve\n2 master\n5 passion\n3 motivated",
+    "items": [
+      {
+        "n": "1",
+        "answer": "inspire"
+      },
+      {
+        "n": "4",
+        "answer": "achieve"
+      },
+      {
+        "n": "2",
+        "answer": "master"
+      },
+      {
+        "n": "5",
+        "answer": "passion"
+      },
+      {
+        "n": "3",
+        "answer": "motivated"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8B|1B": {
+    "raw": "1 c (Use deepen + interest in to say\nyou became more interested in\nsomething.)\n2 b (Use encourage + someone\nto say you give them the\nconfidence to do something.)\n3 c (Use make + progress to mean\n'improve'.)\n4 b (Use lifelong + passion to talk\nabout something you've been\ninterested in for a long time.)\n5 c (Use mastered to say that you\ncan do something very well.)\n6 b (Use inspire to say you make\nsomeone want to do something.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "c"
+      },
+      {
+        "n": "2",
+        "answer": "b"
+      },
+      {
+        "n": "3",
+        "answer": "c"
+      },
+      {
+        "n": "4",
+        "answer": "b"
+      },
+      {
+        "n": "5",
+        "answer": "c"
+      },
+      {
+        "n": "6",
+        "answer": "b"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 89,
+    "ocr": true
+  },
+  "wb|8B|2": {
+    "raw": "1 down (If you write something\ndown, you write something on a\npiece of paper.)\n2 out (If you figure something\nout, you find the answer to a\nproblem.)\n3 up (If you follow something up,\nyou do something in addition to\nwhat you have already done.)\n4 up (If you dream something up,\nyou think of an idea.)\n5 down (If you break something\ndown, you separate it into\nsmaller parts.)\n6 through (If you think things\nthrough, you spend time\nthinking about something.)\n7 out (If you try out a method or\npiece of equipment, you test it.)\n8 together (If you get together\nwith someone, you meet them.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "down"
+      },
+      {
+        "n": "2",
+        "answer": "out"
+      },
+      {
+        "n": "3",
+        "answer": "up"
+      },
+      {
+        "n": "4",
+        "answer": "up"
+      },
+      {
+        "n": "5",
+        "answer": "down"
+      },
+      {
+        "n": "6",
+        "answer": "through"
+      },
+      {
+        "n": "7",
+        "answer": "out"
+      },
+      {
+        "n": "8",
+        "answer": "together"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|3A": {
+    "raw": "1 used to (Use used to + state\nverbs.)\n2 would go (Use would + infinitive\nto talk about habits in the past\n- would go to the beach.)\n3 would (Use would + adverb of\nfrequency. You cannot use used\nto because the adverb comes\nbefore used to - he always used\nto walk.) (\n4 used to (Use used to with state\nverbs.)\n5 used to (Use used to when there\nis no time reference.)\n6 loved (We cannot use would\nwith state verbs.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "used to"
+      },
+      {
+        "n": "2",
+        "answer": "would go"
+      },
+      {
+        "n": "3",
+        "answer": "would"
+      },
+      {
+        "n": "4",
+        "answer": "used to"
+      },
+      {
+        "n": "5",
+        "answer": "used to"
+      },
+      {
+        "n": "6",
+        "answer": "loved"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|3B": {
+    "raw": "1 b (Use used to with state verbs.)\n2 a (Use would because the\nadverb comes after the verb in\nthis sentence.)\n3 b (In negative sentences, use\ndidn't use to, not didn't used to).\n4 c (Use used to with state verbs.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "a"
+      },
+      {
+        "n": "3",
+        "answer": "b"
+      },
+      {
+        "n": "4",
+        "answer": "c"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|3C": {
+    "raw": "1 heusedto be\n2 would always play\n3 would sing\n4 would usually go\n5 used to live\n6 used to love",
+    "items": [
+      {
+        "n": "1",
+        "answer": "heusedto be"
+      },
+      {
+        "n": "2",
+        "answer": "would always play"
+      },
+      {
+        "n": "3",
+        "answer": "would sing"
+      },
+      {
+        "n": "4",
+        "answer": "would usually go"
+      },
+      {
+        "n": "5",
+        "answer": "used to live"
+      },
+      {
+        "n": "6",
+        "answer": "used to love"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|4A": {
+    "raw": "1 five\n3 five\n2 three\n4 five",
+    "items": [
+      {
+        "n": "1",
+        "answer": "five"
+      },
+      {
+        "n": "3",
+        "answer": "five"
+      },
+      {
+        "n": "2",
+        "answer": "three"
+      },
+      {
+        "n": "4",
+        "answer": "five"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|4B": {
+    "raw": "1 l'd go swimming every day.\n2 He'd watch cartoons.\n3 They'd visit us on Saturdays.\n4 We'd go to the park.",
+    "items": [
+      {
+        "n": "1",
+        "answer": "l'd go swimming every day."
+      },
+      {
+        "n": "2",
+        "answer": "He'd watch cartoons."
+      },
+      {
+        "n": "3",
+        "answer": "They'd visit us on Saturdays."
+      },
+      {
+        "n": "4",
+        "answer": "We'd go to the park."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|5": {
+    "raw": "The Paralympic Games are\nperhaps the world's most\nimportant sporting event\ninvolving athletes with disabilities.\nSince they began in 1948, the size\nof the Paralympics has increased\ngreatly. In 1960, 400 athletes\nfrom twenty-three countries\nparticipated in eight sports.\nIn 2020, around 4,400 athletes\nfrom 162 countries competed in\ntwenty-two sports.\nLike the Olympic Games, there are\nSummer and Winter Paralympics\nwhich are held every four years.\nSince 1988, the Paralympic\nGames have been held shortly\nafter the Olympics finish, in the\nsame cities and using the same\nvenues. The Paralympics include a\nrange of sports and races such as\nswimming, skiing and basketball.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|6A": {
+    "raw": "b",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|6B": {
+    "raw": "1 a l'she competes in wheelchair\nraces')\n2 b 'just after Hannah was born,\nher heart stopped twice')\n3 a l'Her parents made sure\nthat they didn't treat her any\ndifferently to her brothers')\n4 c l'She... started ballet classes\nwhen she was just three years\nold')\n5 b l'She broke her first world\nrecord in 2010. Then four weeks\nlater, she broke another seven\nworld records in eight days!')\n6 a l'lheard her give a speech at a\nconference a few years ago and\nit really motivated me to try to\nbe the best athlete I can be')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|7A": {
+    "raw": "1 consequently\n2 so\n3 As a result\n4 as\n5 because",
+    "items": [
+      {
+        "n": "1",
+        "answer": "consequently"
+      },
+      {
+        "n": "2",
+        "answer": "so"
+      },
+      {
+        "n": "3",
+        "answer": "As a result"
+      },
+      {
+        "n": "4",
+        "answer": "as"
+      },
+      {
+        "n": "5",
+        "answer": "because"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8B|7B": {
+    "raw": "See text in Ex 7A for a model.",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8C|1A": {
+    "raw": "1 talk (A talk is a presentation.)\n2 outline (An outline is the main\nideas or facts about something.)\n3 key points (The key points are\nthe most important ideas.)\n4 slides (Slides are pictures or\nillustrations on a screen.)\n5 illustrate (If you illustrate\nsomething you make it clear by\nproviding an example.)\n6 subject matter (The subject\nmatter is the thing you are\ntalking about.)\n7 facts and figures (Facts and\nfigures are detailed information.)\n8 field (A field is a subject that\npeople study or a type of work\nthat they are involved in.)\n9 presenters (Presenters are\npeople who give presentations.)\n10 delivery (Delivery is the way that\nyou say something.)\n11 engage (If something engages\nyour interest or attention, it\nmakes you stay interested.)\n12 argument (An argument is a\nset of reasons that show that\nsomething is true or untrue,\nright or wrong.)",
+    "items": [
+      {
+        "n": "1",
+        "answer": "talk"
+      },
+      {
+        "n": "2",
+        "answer": "outline"
+      },
+      {
+        "n": "3",
+        "answer": "key points"
+      },
+      {
+        "n": "4",
+        "answer": "slides"
+      },
+      {
+        "n": "5",
+        "answer": "illustrate"
+      },
+      {
+        "n": "6",
+        "answer": "subject matter"
+      },
+      {
+        "n": "7",
+        "answer": "facts and figures"
+      },
+      {
+        "n": "8",
+        "answer": "field"
+      },
+      {
+        "n": "9",
+        "answer": "presenters"
+      },
+      {
+        "n": "10",
+        "answer": "delivery"
+      },
+      {
+        "n": "11",
+        "answer": "engage"
+      },
+      {
+        "n": "12",
+        "answer": "argument"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8C|1B": {
+    "raw": "1 talk\n4 outline\n2 presenter\n5 slides\n3 subject\nHowto...",
+    "items": [
+      {
+        "n": "1",
+        "answer": "talk"
+      },
+      {
+        "n": "4",
+        "answer": "outline"
+      },
+      {
+        "n": "2",
+        "answer": "presenter"
+      },
+      {
+        "n": "5",
+        "answer": "slides"
+      },
+      {
+        "n": "3",
+        "answer": "subject Howto..."
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8C|2A": {
+    "raw": "1 show\n5 recap\n2 brings\n6 questions\n3 point\n7 question\n4 Turning\n8 answer\n2Ba2 b1 c 4\nd 3",
+    "items": [
+      {
+        "n": "1",
+        "answer": "show"
+      },
+      {
+        "n": "5",
+        "answer": "recap"
+      },
+      {
+        "n": "2",
+        "answer": "brings"
+      },
+      {
+        "n": "6",
+        "answer": "questions"
+      },
+      {
+        "n": "3",
+        "answer": "point"
+      },
+      {
+        "n": "7",
+        "answer": "question"
+      },
+      {
+        "n": "4",
+        "answer": "Turning"
+      },
+      {
+        "n": "8",
+        "answer": "answer 2Ba2 b1 c 4 d 3"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8C|3": {
+    "raw": "1 first\n4 next\n2 final\n5 sum\n6 summarise\n3 Turning",
+    "items": [
+      {
+        "n": "1",
+        "answer": "first"
+      },
+      {
+        "n": "4",
+        "answer": "next"
+      },
+      {
+        "n": "2",
+        "answer": "final"
+      },
+      {
+        "n": "5",
+        "answer": "sum"
+      },
+      {
+        "n": "6",
+        "answer": "summarise"
+      },
+      {
+        "n": "3",
+        "answer": "Turning"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8C|4A": {
+    "raw": "1 speak\n6 final\n2 idea\n7 summarise\n8 comments\n3 point\n4 Moving\n9 question\n5 next\n10 answer",
+    "items": [
+      {
+        "n": "1",
+        "answer": "speak"
+      },
+      {
+        "n": "6",
+        "answer": "final"
+      },
+      {
+        "n": "2",
+        "answer": "idea"
+      },
+      {
+        "n": "7",
+        "answer": "summarise"
+      },
+      {
+        "n": "8",
+        "answer": "comments"
+      },
+      {
+        "n": "3",
+        "answer": "point"
+      },
+      {
+        "n": "4",
+        "answer": "Moving"
+      },
+      {
+        "n": "9",
+        "answer": "question"
+      },
+      {
+        "n": "5",
+        "answer": "next"
+      },
+      {
+        "n": "10",
+        "answer": "answer"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8D|1A": {
+    "raw": "c ('Would you like to become an\nentrepreneur...; The advic\nelow could inspire you to tak\nthe first steps')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8D|1B": {
+    "raw": "1 b ('Successful entrepreneurs are\nalways ready to try again, even\nafter their ideas and pitches have\nbeen rejected a hundred times')\n2 d ('All entrepreneurs will make\nmistakes at some point in their\ncareer)\n3 a l'if you want to be successful,\nyou cannot escape hard work')\n4 c l'so it's important to do\nsomething that you love')",
+    "items": [
+      {
+        "n": "1",
+        "answer": "b"
+      },
+      {
+        "n": "2",
+        "answer": "d"
+      },
+      {
+        "n": "3",
+        "answer": "a l'if you want to be successful, you cannot escape hard work')"
+      },
+      {
+        "n": "4",
+        "answer": "c l'so it's important to do something that you love')"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8D|1C": {
+    "raw": "1 T ('Successful entrepreneurs are\nalways ready to try again, even\nafter their ideas and pitches have\nbeen rejected a hundred times')\n2 F ('Steve Jobs, former CEO\nof Apple, said that unlike\npeople who failed in business,\nsuccessful entrepreneurs had\nthe ability to keep trying to do\nsomething difficult')\n3 F ('Their pitch was rejected\nby all five investors, with one\ninvestor, businesswoman Jenny\nCampbell, describing it as a\n'pasta disaster'!)\n4 T l'Successful entrepreneurs\ntake responsibility for their\nmistakes and see failure as a\npositive experience that they\ncan learn from')\n5 T('... has been involved in many\n6 F ('People often think that\nsuccessful entrepreneurs are\njust very lucky, or that they are\nin the right place at the right\ntime. Dragons' Den investor\nand successful businesswoman\nDeborah Meaden disagrees')\n7 T ('He believes that anyone can\nbe a successful entrepreneur, as\nlong as they are willing to work\n8 T ('if an entrepreneur has no a\npassion for what they're doing,\ntheir business won't remain\nsuccessful for very long.')",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 90,
+    "ocr": true
+  },
+  "wb|8D|1D": {
+    "raw": "1 perseverance\n2 pitch\n3 embarrassed\n4 goals\n5 passion",
+    "items": [
+      {
+        "n": "1",
+        "answer": "perseverance"
+      },
+      {
+        "n": "2",
+        "answer": "pitch"
+      },
+      {
+        "n": "3",
+        "answer": "embarrassed"
+      },
+      {
+        "n": "4",
+        "answer": "goals"
+      },
+      {
+        "n": "5",
+        "answer": "passion"
+      }
+    ],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 91,
+    "ocr": true
+  },
+  "wb|Review 7–8|1": {
+    "raw": "1 had (After a reporting verb, the\noriginal verb often moves one\ntense back into the past. In this\nsentence, the present perfect\nchanges to the past perfect.)\n2 was (After a reporting verb\nthe original verb often moves\none tense back into the past.\nIn this sentence, the present\ncontinuous changes to the past\ncontinuous.)\n3 wouldn't (In reported speech,\nwon't becomes wouldn't.)\n4 if (In reported yes/no questions,\nwe add if or whether after the\nreporting verb and keep the\nword order the same as for\nstatements.)\n5 could (In reported speech, can\nbecomes could.)\n6 there (In reported speech, here\nbecomes there.)\n2\n1 have been used (Use the\npresent perfect passive to talk\nabout something that started in\nthe past and continues now.)\n2 was developed (Use the past\nsimple passive to talk about a\ncompleted action in the past.)\n3 were put (Use the past\nsimple passive to talk about a\ncompleted action in the past.)\n4 is shared (Use the present\nsimple passive to talk about\nsomething that happens now.)\n5 are sent (Use the present simple\npassive to talk about something\nthat happens now.)\n6 will be replaced (Use the future\npassive form here because\nthe sentences says in the near\nfuture.)\n1 so (We use suppose so when\nwe give a positive answer, but\nwe don't really want to do\nsomething.)\n2 go (We use the infinitive to avoid\n3 so (We use guess so when we\ngive a positive answer, but we\ndon't really want to agree.)\n4 hope (We use hope so to avoid\n5 to (We use would love to to avoid\nrepetition, particularly of a\n6 don't\n1 c (Use if + past perfect + would/\nmight/could + have + past\nparticiple to form the third\n2 b (Use shouldn't have + past\nparticiple to talk about things\nyou'd like to be different about\n3 a (Use would/might/could +\nhave + past participle + if + past\nperfect.)\n4 b (Use should have + past\nparticiple to talk about things\nyou'd like to be different about\nthe past.)\n5\n1 used to live (use used to with\nstate verbs)\n2 would spend\n3 would buy\n4 would sit\n5 would pack up\n6 would make\n7 would sit\n8 didn't use to have (use used to\nwith state verbs)\n9 would take\n10 would go",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 91,
+    "ocr": true
+  },
+  "wb|Review 7–8|8": {
+    "raw": "1 c (Use confirm to tell someone\nthat an arrangement is now\ndefinite.)\n2 b (Use be careful not + to\ninfinitive.)\n3 a (We cannot use perfectly or\ntotally with worried.)\n4 c (The phrasal verb get together\nmeans meet or spend time with.)\n5 b (A field is a subject that people\nstudy or a type of work that\nthey are involved in.)\n6 a (Use mastered to say that\nsomeone can do something very\nwell.)\n9\n1 talk\n5 time\n2 worried\n6 figures\n3 outline\n7 engaged\n4 points\n101b 2c 3a 4b 5c 6a",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 91,
+    "ocr": true
+  },
+  "wb|Cumulative review|1": {
+    "raw": "1 bumped into (The past simple\nis used to describe a completed\n2 was walking (The past\ncontinuous is used to give\nbackground information.)\n3 heard (The past simple is used\nto describe a completed action\nin the past that interrupts\nanother activity.)\n4 turned around (The past simple\nis used to describe a completed\naction in the past.)\n5 was (The past simple is used for\n6 was travelling (The past\ncontinuous is used to describe\n7 decided (The past simple is used\nto describe a completed action\nin the past.)\n8 hadn't / had not seen (The past\nperfect is used to describe\nsomething that happened before\nanother action in the past.)\n9 finished (The past simple is used\nto describe a completed action\nin the past.)\n10 had (The past simple is used for\n11 had spent (The past perfect is\nused to describe something that\nhappened before another action\n12 told (The past simple is used to\ndescribe a completed action in\nthe past.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 91,
+    "ocr": true
+  },
+  "wb|Cumulative review|2": {
+    "raw": "1 c (Use the present perfect\ncontinuous for activities that\nbegan at a point in the past and\nare still continuing.)\n2 a (Use the present perfect\ncontinuous for activities that\nbegan at a point in the past and\nare still continuing.)\n3 c (Use the present perfect\nsimple for state verbs.)\n4 a (Use the present perfect\ncontinuous for activities that\nbegan at a point in the past and\nare still continuing.)\n5 a (Use the past simple for\nfinished actions in the past.)\n6 b (Use the present perfect\nsimple for state verbs.)\n7 b (Use the present perfect\ncontinuous for activities that\nbegan at a point in the past and\nare still continuing.)\n8 b (Use the present perfect\nsimple for state verbs.)\n3\n1 which/that (Use which or that\nfor things. You cannot omit the\nrelative pronoun here because\nthe verb changed does not have\na subject.)\n2 where (Use where for places.)\n3 to buy / where we can buy (We\ncan replace a defining relative\nclause with to infinitive. We\noften use to infinitive with a\nsuperlative adjective. Use the\nrelative pronoun where for\nplaces.)\n4 who took / taking (Use who\nfor people. We can replace the\nrelative pronoun and verb in\na defining relative clause with\nverb + -ing.)\n5 whose (Use whose for\npossession.)\n6 when/- (Use when for times. We\ncan omit the relative pronoun\nhere because the relative clause\nhas a subject.)\n7 that/- (Use that for things. We\ncan omit the relative pronoun\nhere because the relative clause\nhas a subject.)\n4\n1 essential to\n5 allowed to\n2 need\n6 are permitted\n3 got\n7 necessary\n4 supposed\n8 had\n5\n1 the station is (The word order\nchanges in indirect questions.\nAfter the opening phrase, we\nuse the affirmative form.)\n2 Wouldn't (We use negative\nquestions when we want to\ncheck or confirm information.)\n3 Can (Use can not do.)\n4 the film starts (We don't use\nan auxiliary verb in indirect\nquestions.)\n5 Could (Use could not did.)\n6 Wasn't (We use negative\nquestions when we want to\ncheck or confirm information.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 91,
+    "ocr": true
+  },
+  "wb|Cumulative review|10": {
+    "raw": "1 pretended (If you pretend to\ndo something, you behave as if\nsomething is true, even though\nyou know it is not.)\n2 deceiving (If you deceive\nsomeone, you make them\nbelieve something is true when\nit isn't. We can't using lying here\n3 living (The collocation is live a lie.)\n4 doubt (If you doubt something,\nyou wonder if it is true.)\n5 tell (The collocation is tell the\nHow to ...\n11\n1 take\n8 want\n9 done\n2 message\n3 calling\n10 bring\n4 reach\n11 hear\n5 stand\n12 happened\n6 annoys\n13 details\n7 drives\n12\n1 need/have\n4 whose\n2 been\n5 was\n3 who/that\n6 had/got",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 92,
+    "ocr": true
+  },
+  "wb|Cumulative review|6": {
+    "raw": "1 shy (If you are shy, you are\nnervous about meeting new\n2 confident (If you are confident,\nyou are certain of your abilities.)\n3 direct (If you are direct, you say\n4 aggressive (If you are aggressive,\nyou behave in an angry or\nviolent way.)\n5 calm (If you are calm, you stay\nrelaxed and don't get stressed.)\n1 an ideal (An ideal spot is a\nperfect place.)\n2 run-down (If somewhere is\nrun-down, it is in bad condition\nbecause it has not been looked\nafter.)\n3 atmosphere (If a place has a\nrelaxed atmosphere there is a\nfeeling that the area is peaceful\nand calm.)\n4 lively (Lively nightlife is busy\nbars, clubs or restaurants that\npeople go to in the evening in a\ntown or city.)\n5 historic (Historic buildings are\nold and interesting, such as a\n14th-century palace.)\n6 street (The correct collocation\nis street market, not road\nmarket.)\n8\n1 C\n2 e\n3 d\n4 a\n5 b\n9\n1 forward\n4 username\n2 backed up\n5 tag\n3 spam\n6 inbox\n1 completely/totally\n2 totally\n3 particularly\n4 fairly\n5 slightly/extremely\n1 take\n4 careful\n2 about\n5 most\n3 рaу\n6 Take\nHow to ...\n9 know\n2 from\n10 did\n3 Basically\n11 really\n4 short\n12 get\n5 give\n13 brings\n6 catch\n14 turning\n7 check\n15 summarise\n8 right\n131a 2b 3c 4c 5a 6b",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 92,
+    "ocr": true
+  },
+  "wb|Cumulative review|7": {
+    "raw": "1 had/got (it) cut (We form the\ncausative have/get with have/get\n+ object + past participle.)\n2 have/get (your eyes) tested (We\nform the causative have/get\nwith have/get + object + past\n3 have/get (my teeth) checked\n(We form the causative have/get\nwith have/get + object + past\n4 got (Gino to) take (use get +\nsubject + to infinitive when we\nask someone to do something,\n5 get (someone to) help (use get +\nsubject + to + infinitive when we\nask someone to do something,\nand they do it.)\n1 so (We use so + adjective/adverb\nto show emphasis.)\n2 such (We can use such +\na + singular noun to show\n3 so (We use so + adjective/adverb\nto show emphasis.)\n4 so (We use so + adjective/adverb\n5 such (We can use such + a +\nadjective + singular noun to\nshow emphasis.)\n6 so (We also use so + adjective/\nadverb + that clause to describe\nsomething that leads to a result.)\n7 so (We use so + adjective/adverb\n8 such (We can use such + a +\nadjective + singular noun to\nshow emphasis.)\n1 was written (Use the past\nsimple passive in this sentence\nbecause it says the author wrote\nthe book in 1986.)\n2 has just been bought (Use the\npresent perfect passive with\n3 was made (Use the past simple\npassive to talk about something\nin the past.)\n4 Has (Kai) been given (Use the\npresent perfect passive with\nalready.)\n5 was promoted (Use the past\nsimple passive because the\nsentence says last month.)\n6 is going to be held / will be held\n/ is being held (Use a future\npassive or present continuous\nhere here because the sentence\n7 is being developed (Use the\npresent continuous passive here\nwith at the moment.)\n8 is spoken (Use the present\nsimple passive to talk about a\npresent truth.)\n10 1 c (We used to + to infinitive. We\ncannot use would here because\nwe don't use to with would).\n2 c (We cannot use would with like\nhere because like is a state verb\nIn negative sentences use didn't\nuse to, not didn't used to)\n3 b (The adverb usually comes\nafter would but before used to.)\n4 b (We cannot use would with\nstate verbs)\n5 c (The adverb always comes\nafter would but before used to.)\n6 c (In negative sentences, use\ndidn't use to, not didn't used to.)\n7 c (We cannot use would with\nstate verbs)\n8 b (The adverb never comes\nbefore used to, but after would.)\nform after enjoy.)\n2 such (use such + a + adjective +\nsingular noun to show emphasis\nor strong feelings about\nsomething.)\n3 been (present simple passive)\n4 to (We use used to to talk about\npast habits.)\n5 so (We use so that + subject +\nverb to talk about purpose.)\n6 than (We use would rather +\nthan to talk about preference.)",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 93,
+    "ocr": true
+  },
+  "wb|Cumulative review|14B": {
+    "raw": "1f 2e 3d 4b 5c 6a\n15\n1a2b 3c 4a 5b 6c",
+    "items": [],
+    "pdf": "resources/wb.pdf",
+    "pdfPage": 94,
+    "ocr": true
+  }
+}

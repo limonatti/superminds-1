@@ -69,8 +69,14 @@
     <div id="foot" id="pos"></div>
   </div>
 <script>
+ (function(){
   var params=new URLSearchParams(location.search);
   var course=params.get("course")||"speakout-b1plus";
+  if(course==="speakout-b1plus"){
+    var b1plusUnit=Math.min(8,Math.max(1,parseInt(params.get("u"),10)||1));
+    location.replace("speakout-b1plus-active-teach/index.html?unit="+b1plusUnit+"&book=sb");
+    return;
+  }
   var LABEL={"speakout-b1":"Speakout B1","speakout-b1plus":"Speakout B1+"};
   var HUB={"speakout-b1":"speakout-b1-course.html","speakout-b1plus":"speakout-b1plus-course.html"};
   var n=Math.max(1,Math.min(8, parseInt(params.get("u")||"1",10)||1));
@@ -98,6 +104,7 @@
   document.getElementById("full").onclick=function(){ var el=document.documentElement; if(document.fullscreenElement){document.exitFullscreen();} else if(el.requestFullscreen){el.requestFullscreen();} };
   document.addEventListener("keydown",function(e){ if(e.key==="ArrowRight"&&n<8){n++;render(true);} else if(e.key==="ArrowLeft"&&n>1){n--;render(true,true);} });
   render(false);
+ })();
 </script>
 </body>
 </html>

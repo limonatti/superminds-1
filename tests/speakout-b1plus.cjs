@@ -1,0 +1,96 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../speakout-b1plus-active-teach');
+const D=JSON.parse(fs.readFileSync(path.join(root,'assets/course.js'),'utf8').slice(14).replace(/;\s*$/,''));
+assert.equal(D.books.sb.pages.length,168);assert.equal(D.books.wb.pages.length,93);
+assert.equal(D.media.filter(m=>m.type==='audio').length,151);assert.equal(D.media.filter(m=>m.type==='video').length,16);
+for(const [b,book] of Object.entries(D.books)){
+ assert.equal(new Set(book.pages.map(p=>p.page)).size,book.pages.length);
+ for(let u=1;u<=8;u++)for(const s of 'ABCD')assert(book.pages.some(p=>p.lesson===u+s),`${b}: ${u}${s}`);
+ for(const p of book.pages){
+  assert(fs.existsSync(path.join(root,p.image)),p.image);
+  assert.equal(new Set(p.exercises.map(e=>e.label)).size,p.exercises.length);
+  for(const e of p.exercises){const [x,y,w,h]=e.box;assert(e.box.every(Number.isFinite));assert(x>=0&&y>=0&&w>0&&h>0&&x+w<=100&&y+h<=100,`${b}:${p.page}:${e.label}`);}
+ }
+}
+for(const m of D.media){assert(fs.existsSync(path.join(root,m.path)),m.path);assert(m.unit>=1&&m.unit<=8);}
+for(const r of D.resources)if(r.path)assert(fs.existsSync(path.join(root,r.path)),r.path);
+assert(D.resources.every(r=>r.path&&!r.url),'All materials must be local');
+assert.equal(D.books.sb.pages.find(p=>p.page===103).lesson,'8R');
+assert.equal(D.books.sb.pages.find(p=>p.page===104).lesson,'1A Grammar');
+assert.equal(D.books.sb.pages.find(p=>p.page===131).lesson,'8C Grammar');
+assert.equal(D.books.wb.pages.find(p=>p.page===60).lesson,'Review 1–4');
+assert.equal(D.books.wb.pages.find(p=>p.page===66).lesson,'Review 1–8 Vocabulary');
+assert.deepEqual(D.keys['sb|1A|3A'].items.map(q=>q.answer),['F','T','T','T','T','F']);
+assert.deepEqual(D.keys['wb|1A|2A'].items.map(q=>q.answer),['a','c','c','b','a','a']);
+assert.equal(D.keys['sb|5A|1D'].pdfPage,21);
+assert(!D.keys['sb|4R|1D'],'Unit 5 key must not inherit Unit 4 Review');
+assert.equal(D.keys['sb|3A|7A'].pdfPage,12);
+assert(!D.keys['sb|3A Grammar|7A']);
+assert.equal(D.keys['wb|1B|2B'].items.find(q=>q.n==='12').answer,'doing');
+const sb=D.books.sb.pages,findPage=n=>sb.find(p=>p.page===n);
+assert.deepEqual(D.missingSourcePages,{sb:[6,138],wb:[3]});
+for(let n=139;n<=175;n++){assert(findPage(n));assert.equal(findPage(n).pdfPage,n-138);assert.equal(findPage(n).pdf,'resources/sb-supplement.pdf');}
+assert.equal(sb.filter(p=>p.group==='communication').reduce((n,p)=>n+p.exercises.length,0),18);
+for(let u=1;u<=8;u++)assert(sb.some(p=>p.lesson===u+'C Mediation'));
+for(const [n,labels] of [[147,['4','5','6A','6B','6C','6D']],[151,['4','5','6A','6B']],[153,['1','2','3','4','5','6','7A','7B']],[154,['1','2','3','4','5','6','7']],[156,['1','2','3A','3B','4','5','6','7A','7B']]])assert.deepEqual(findPage(n).exercises.map(e=>e.label),labels);
+assert(sb.filter(p=>p.page>=157).every(p=>!p.exercises.length));
+assert(findPage(11).exercises.find(e=>e.label==='1C').relatedPages.includes(139));
+assert(findPage(139).exercises.find(e=>e.label==='1B_1C_A').relatedPages.includes(11));
+assert(findPage(154).exercises.every(e=>e.relatedPages.includes(155)));
+for(const [t,n] of [['MB1.01',145],['MB1.02',145],['MB3.01',149],['MB5.01',152],['MB6.01',153],['MB8.01',156]])assert(D.media.find(m=>m.track===t).pages.includes(n));
+const I=require(path.join(root,'assets/interactive.js'));
+assert(I.matches('true','T'));assert(!I.matches('','F'));
+assert(I.matches('he has been','he’s been'));
+assert.equal(I.spec({text:'Complete the sentence.'},{items:[{n:'1',answer:'deal with a/the challenge'}]}).mode,'review');
+console.log('PASS source coverage, eight units, page numbering, local assets, exercise bounds and source answer fixtures.');
+if(process.argv.includes('--browser'))(async()=>{
+ const {chromium}=require('/Users/mak/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+ const browser=await chromium.launch({channel:'chrome',headless:true});
+ try{
+ const page=await browser.newPage({viewport:{width:1440,height:1050}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const base='http://127.0.0.1:8768/speakout-b1plus-active-teach/index.html';
+ await page.goto('http://127.0.0.1:8768/speakout-book.html?course=speakout-b1plus&u=3');
+ await page.waitForURL('**/speakout-b1plus-active-teach/index.html?unit=3&book=sb');
+ assert.equal(await page.locator('#unit').inputValue(),'3');
+ await page.goto(base+'?book=sb&page=8');await page.locator('#exerciseNav button').first().waitFor();
+ assert.equal(await page.locator('#lessonTitle').textContent(),'The story of me');
+ await page.screenshot({path:'/private/tmp/speakout-b1plus-desktop.png'});
+ await page.locator('#exerciseNav button').filter({hasText:/^3A$/}).click();
+ assert(await page.locator('#exerciseDialog').evaluate(d=>d.open));
+ for(const q of D.keys['sb|1A|3A'].items)await page.locator(`[data-choice="${q.answer}"][data-for="${q.n}"]`).click();
+ await page.locator('#check').click();assert.match(await page.locator('#checkResult').textContent(),/6 из 6/);
+ await page.locator('#exerciseKeys').click();assert(await page.locator('#keyArea').isVisible());
+ await page.screenshot({path:'/private/tmp/speakout-b1plus-task.png'});
+ await page.keyboard.press('Escape');await page.waitForTimeout(350);await page.reload();
+ await page.locator('#exerciseNav button').filter({hasText:/^3A/}).click();assert.equal(await page.locator('[data-answer="1"]').inputValue(),'F');
+ await page.keyboard.press('Escape');await page.goto(base+'?unit=8&book=wb');assert.equal(await page.locator('#pageSelect').inputValue(),'52');
+ await page.goto(base+'?book=sb&page=104');assert.equal(await page.locator('#unit').inputValue(),'grammar');
+ await page.goto(base+'?book=wb&page=4');await page.locator('#exerciseNav button').filter({hasText:/^2A$/}).click();
+ for(const q of D.keys['wb|1A|2A'].items)await page.locator(`[data-answer="${q.n}"]`).fill(q.answer);
+ await page.locator('#check').click();assert.match(await page.locator('#checkResult').textContent(),/6 из 6/);
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:'/private/tmp/speakout-b1plus-mobile.png'});
+ const dims=await page.locator('#exerciseDialog').evaluate(d=>[d.scrollWidth,d.clientWidth,d.getBoundingClientRect().width]);assert(dims[0]<=dims[1]+1&&dims[2]<=390,JSON.stringify(dims));
+ await page.keyboard.press('Escape');await page.goto(base+'?book=sb&page=8');await page.locator('#mediaTab').click();await page.locator('#mediaFilter').selectOption('unit');
+ const player=page.locator('#mediaList audio').first();await player.evaluate(p=>p.load());await page.waitForFunction(()=>document.querySelector('#mediaList audio').readyState>=1);assert((await player.evaluate(p=>p.duration))>0);
+ const video=page.locator('#mediaList video').first();await video.evaluate(p=>p.load());await page.waitForFunction(()=>document.querySelector('#mediaList video').readyState>=1);assert((await video.evaluate(p=>p.duration))>0);
+ await page.setViewportSize({width:1440,height:1050});
+ await page.goto(base+'?book=sb&page=11');await page.locator('#exerciseNav button').filter({hasText:/^1C$/}).click();
+ await page.locator('[data-source-page="139"]').click();assert.equal(await page.locator('#pageSelect').inputValue(),'139');
+ await page.locator('#exerciseNav button').filter({hasText:'Student A'}).first().click();
+ assert.match(await page.locator('#exerciseTitle').textContent(),/Student A/);
+ assert(await page.locator('[data-source-page="11"]').isVisible());
+ await page.screenshot({path:'/private/tmp/speakout-b1plus-communication.png'});
+ await page.keyboard.press('Escape');await page.goto(base+'?book=sb&page=145');
+ await page.locator('#exerciseNav button').filter({hasText:/^3A$/}).click();
+ const mb=page.locator('#exerciseMedia audio').first();assert((await mb.getAttribute('src')).includes('mb1'));
+ await mb.evaluate(p=>p.load());await page.waitForFunction(()=>document.querySelector('#exerciseMedia audio').readyState>=1);
+ await page.screenshot({path:'/private/tmp/speakout-b1plus-mediation.png'});
+ await page.keyboard.press('Escape');await page.goto(base+'?book=sb&page=154');
+ await page.locator('#exerciseNav button').filter({hasText:/^2$/}).click();await page.locator('[data-source-page="155"]').click();
+ assert.equal(await page.locator('#pageSelect').inputValue(),'155');
+ await page.goto(base+'?book=sb&page=175');assert.equal(await page.locator('#unit').inputValue(),'reference');
+ await page.goto(base+'?book=sb&page=7');await page.locator('#pageSelect').selectOption('145');
+ assert.equal(await page.locator('#pageSelect').inputValue(),'145');
+ assert.deepEqual(errors,[]);console.log('PASS browser: original lessons, auto-check SB/WB, saved answers, banks, unit links, mobile dialog, audio and video metadata.');
+ }finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exitCode=1});
