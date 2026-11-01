@@ -16,3 +16,13 @@ An automatic field has `label` and `accepted`. A `kind: "set"` field instead has
 Every exercise has an answer-schema fingerprint. Incompatible saved homework remains visible under previous answers and survives local/cloud saves. The teacher view and JSON export retain both versions.
 
 Recompile from the checked-in manifest with `python3 solutions-int-active-teach/compile-marking.py`. The OCR build script also runs this compiler after page extraction. After changing runtime assets, refresh their content hashes in `index.html`. Run `node tests/solutions-int.cjs`, `node tests/solutions-marking.cjs` and `python3 check.py` before publishing.
+
+## Assigned homework
+
+`solutions-homework.js` provides the SB/WB picker in My Class and the reports in My Class / Homework Review. `hw.note` keeps the existing `parts`, `due`, `msg` metadata and adds `solutionsExercises: [stable exercise IDs]`. No new database table or permission is required. Existing whole-unit homework stays compatible.
+
+The player accepts `?book=sb&page=32&ex=sb-32-7&hw=<assignment ID>`. Assignments are resolved only from `SM.myHW()` for the signed-in student. Checks retain the last ten distinct answer attempts. Editing invalidates the current score but keeps the attempts.
+
+Submission requires completed responses, current automatic checks, and the free part for mixed tasks. Incorrect checked answers may be submitted. A deep copy is saved under `__homework:<assignment ID>` in the existing Solutions coursework namespace before `hwSubmit` is called. Failed synchronization prevents submission. The teacher report uses this copy for submitted/accepted assignments and current drafts for work in progress or rework. Later practice cannot silently change a submitted report.
+
+Regression tests: `node tests/solutions-homework.cjs`. The optional browser test (`tests/solutions-homework-browser.cjs`) uses mocked accounts and storage, never real student records; serve this repository on localhost:8771, provide Playwright/Chrome through `PLAYWRIGHT_PATH` and `CHROME_PATH`, then run it with Node.

@@ -39,6 +39,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
 </head>
 <body>
 <div class="app">
@@ -59,11 +60,12 @@
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=be01939b"></script>
+<script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const KIND_L = { trainer:"Тренажёр слов", games:"Игры юнита", worksheet:"Рабочий лист" };
-const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK_L = { "solutions-int":"Solutions Intermediate", "outcomes-beginner":"Outcomes Beginner", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const ST_L   = { new:["Новое","b-new"], submitted:["На проверке","b-sub"],
                  done:["Принято","b-done"], rework:["На доработку","b-rework"] };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
@@ -124,7 +126,7 @@ async function drawPane(){
     const meta = parseNote(h.note);
     const isBlocks = Array.isArray(meta.ex) && meta.ex.length;
     const parts = (meta.parts||[]).map(x => PART_L[x]||x).join(", ");
-    const what = isBlocks
+    const what = SolutionsHW.ids(h).length?'Solutions Intermediate · '+SolutionsHW.ids(h).length+' упр.':isBlocks
       ? "Урок " + (meta.unitId||"") + " · " + meta.ex.length + " упр."
       : (SPK_L[h.course]||h.course)+" · Unit "+h.unit+(parts?" · "+parts:"");
     return '<tr><td><b>'+esc(nameOf(h.student_id))+'</b></td>' +
@@ -156,7 +158,10 @@ async function drawPane(){
   let detail = "";
 
   /* Блочная домашка: показываем каждое заданное упражнение и результат по нему */
-  if (q.type === "spk" && q.ex && q.ex.length){
+  if(q.type==='spk'&&SolutionsHW.ids(q.hw).length){
+    try{await SolutionsHW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=SolutionsHW.renderAssignment(q.hw,student?.data?.__coursework?.['solutions-int']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}
+  }
+  else if (q.type === "spk" && q.ex && q.ex.length){
     let list = [], tries = [];
     try { list  = (await SM.exercisesByIds(q.ex)) || []; } catch(e){}
     try { tries = (await SM.attemptsFor(q.sid, q.ex)) || []; } catch(e){}
@@ -215,6 +220,7 @@ async function drawPane(){
         '<span class="b sm">Открыть</span></a></div>';
   }
 
+  if(QUEUE[sel]!==q)return;
   /* Вердикт доступен только для настоящей сданной работы (не для сводки по упражнениям) */
   const verdict = q.hwId
     ? '<div class="sect"><span>Вердикт</span><span>ученик увидит его сразу</span></div>' +
@@ -303,11 +309,11 @@ async function load(){
       const isBlocks = Array.isArray(meta.ex) && meta.ex.length;
       const parts = (meta.parts||[]).map(x => PART_L[x]||x).join(", ");
       return {
-        type:"spk", hwId:h.id, sid:h.student_id, who:nameOf(h.student_id),
+        type:"spk", hw:h, hwId:h.id, sid:h.student_id, who:nameOf(h.student_id),
         course:h.course, unit:h.unit,
         ex: isBlocks ? meta.ex : null,
         unitId: meta.unitId || null,
-        title: isBlocks
+        title: SolutionsHW.ids(h).length?'Solutions Intermediate · '+SolutionsHW.ids(h).length+' упр.':isBlocks
           ? "Урок " + (meta.unitId || "") + " · " + meta.ex.length + " упр."
           : (SPK_L[h.course]||h.course)+" · Unit "+h.unit+(parts?" · "+parts:""),
         when: since(h.submitted_at)

@@ -73,6 +73,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
 </head>
 <body>
 <div class="app">
@@ -97,6 +98,7 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
+<script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -234,6 +236,11 @@ async function drawPane(){
   try { mats = (await SM.listMaterials(sid)) || []; } catch(e){}
   try { sum = (await SM.studentHwSummary(sid)) || []; } catch(e){}
 
+  let solReport='';
+  if(hw.some(h=>SolutionsHW.ids(h).length)||Object.keys(d.__coursework?.['solutions-int']||{}).length){
+    try{await SolutionsHW.load();solReport=SolutionsHW.renderClass(hw,d);}catch(e){solReport='<p>'+esc(e.message)+'</p>';}
+  }
+  if(STUDENTS[sel]?.student_id!==sid)return;
   const kindOpts = '<option value="trainer">Тренажёр</option><option value="games">Игры</option><option value="worksheet">Лист</option>';
   const note = (()=>{ try { return localStorage.getItem(noteKey(sid)) || ""; } catch(e){ return ""; } })();
   const openHw = hw.filter(a=>!a.done).length + open;
@@ -285,6 +292,7 @@ async function drawPane(){
         '<label class="cb"><input type="checkbox" class="hPart" value="grammar" checked> Грамматика</label>' +
         '<label class="cb"><input type="checkbox" class="hPart" value="workbook" checked> Workbook</label>' +
       '</span></div>' +
+      '<div id="hSolutions" hidden></div>' +
       '<div class="hf-row" id="hKindRow" style="display:none"><label>Формат</label><select id="hKind">'+kindOpts+'</select></div>' +
       '<div class="hf-row"><label>Срок</label><input type="date" id="hDue">' +
         '<span class="parts">' +
@@ -321,6 +329,7 @@ async function drawPane(){
           '<span class="b sm">Ответы</span></button>').join("") + '</div>'
       : '<div class="empty"><div class="p">Ученик ещё не решал упражнения Speakout.</div></div>') +
     '<div id="det"></div>' +
+    solReport +
     solutionsResponses(d) +
     outcomesResponses(d) +
 
@@ -376,7 +385,7 @@ function hwChips(list, hw){
     const meta = parseNote(a.note);
     const parts = (meta.parts||[]).map(p => PART_L[p]||p).join(", ");
     all.push({ k:"spk", id:a.id, done:a.done,
-      txt:(SPK_L[a.course]||a.course)+" · Unit "+a.unit + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
+      txt:(SPK_L[a.course]||a.course)+(SolutionsHW.ids(a).length?" · "+SolutionsHW.ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
   });
   if (!all.length) return "";
   return '<div class="chips">' + all.map(x =>
@@ -400,6 +409,7 @@ function outcomesResponses(data){
 function solutionsResponses(data){
   const entries=Object.entries(data.__coursework?.["solutions-int"]||{}).filter(([,r])=>r && Array.isArray(r.values) && (r.values.some(v=>String(v).trim())||r.reflection?.trim()||r.previousAnswers?.length));
   if(!entries.length)return "";
+  if(typeof window!=='undefined'&&window.SolutionsHW&&window.SOLUTIONS)return '<div class="sect"><span>Solutions Intermediate · все сохранённые ответы</span></div>'+entries.map(([id,r])=>'<details class="sh-ex"><summary>'+esc(SolutionsHW.label(id))+'</summary><a href="'+esc(SolutionsHW.link(id))+'" target="_blank" rel="noopener">Открыть условие ↗</a>'+SolutionsHW.renderAnswer(id,r)+'</details>').join('');
   const values=(vs,labels=[])=>'<ol>'+vs.map((v,i)=>'<li style="white-space:pre-wrap">'+(labels[i]?'<b>'+esc(labels[i])+': </b>':'')+esc(v||'—')+'</li>').join('')+'</ol>';
   return '<div class="sect"><span>Solutions Intermediate · ответы ученика</span><span>'+entries.length+' упражнений</span></div>'+[...Array.from({length:10},(_,i)=>i),'extra'].map(n=>{
     const rows=entries.filter(([,r])=>String(r.unit)===String(n)).sort((a,b)=>String(a[1].book).localeCompare(String(b[1].book))||a[1].page-b[1].page||a[0].localeCompare(b[0],undefined,{numeric:true}));
@@ -455,6 +465,7 @@ function fillUnits(){
   const uSel = document.getElementById("hUnit");
   const page = PAGE_COURSES[course];
   const solutions = course === "solutions-int";
+  const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
   if (lessonPart) lessonPart.parentElement.lastChild.textContent = solutions ? ' Student’s Book' : ' Урок · лексика/чанки';
@@ -468,12 +479,19 @@ function fillUnits(){
 
 
   /* Страничный курс — части урока; учебник конструктора — формат задания */
-  document.getElementById("hPartsRow").style.display = page ? "flex" : "none";
+  document.getElementById("hPartsRow").style.display = page && !solutions ? "flex" : "none";
   document.getElementById("hKindRow").style.display  = page ? "none" : "flex";
 
+  document.getElementById("hSolutions").hidden=!solutions;
+  uSel.onchange=null;
   if (page){
     uSel.innerHTML = page.units.map(n =>
       '<option value="'+n+'">'+(n===0 ? "Unit 0 · Intro" : "Unit "+n)+'</option>').join("");
+    if(solutions){
+      uSel.insertAdjacentHTML('beforeend','<option value="extra">Reference &amp; banks</option>');
+      const holder=document.getElementById('hSolutions');holder.selectedIds=()=>[];
+      SolutionsHW.mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
+    }
     return;
   }
 
@@ -490,6 +508,7 @@ function fillUnits(){
 function bindStudent(sid){
   const $ = id => document.getElementById(id);
   fillUnits();
+  if($("shRefresh"))$("shRefresh").onclick=()=>load();
   $("hCourse").onchange = fillUnits;
   /* Назначить ученику учебник */
   const acGo = $("acGo");
@@ -559,7 +578,9 @@ function bindStudent(sid){
     }
 
     let parts = null, note = null;
-    if (isPage){
+    if(course==='solutions-int'){
+      try{note=SolutionsHW.makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
+    } else if (isPage){
       parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
       if (!parts.length){
         res.style.display = "block"; res.className = "res";
@@ -578,8 +599,8 @@ function bindStudent(sid){
       let r;
       try {
         if (isPage){
-          try { await SM.enrolCourse(t, course); } catch(e2){}
-          r = await SM.addHW(t, course, +$("hUnit").value, note);
+          if(course!=="solutions-int")try { await SM.enrolCourse(t, course); } catch(e2){}
+          r = await SM.addHW(t, course, (Number($("hUnit").value)||0), note);
         } else {
           /* Учебник из конструктора: тренажёр, игры или рабочий лист по юниту */
           r = await SM.assignTo(t, $("hUnit").value, $("hKind").value);
@@ -673,7 +694,7 @@ function bindStudent(sid){
   document.querySelectorAll("[data-delm]").forEach(b => b.onclick = async () => {
     await SM.deleteMaterial(b.dataset.delm); drawPane();
   });
-  document.querySelectorAll(".res").forEach(b => b.onclick = async () => {
+  document.querySelectorAll("button.res[data-c]").forEach(b => b.onclick = async () => {
     const det = $("det");
     det.innerHTML = '<div class="sect"><span>Загрузка…</span></div>';
     const rows = await SM.studentHwResults(sid, b.dataset.c, +b.dataset.u);

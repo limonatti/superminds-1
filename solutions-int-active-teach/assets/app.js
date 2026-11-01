@@ -4,14 +4,15 @@ const D=window.SOLUTIONS,$=s=>document.querySelector(s),$$=s=>[...document.query
 const params=new URLSearchParams(location.search), NS='solutions-int:responses:v1';
 let book=params.get('book')==='wb'?'wb':'sb',unit=params.get('unit')||'0',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve();
 const M=window.SolutionsMarking;
-let previousAnswers=[];
+let previousAnswers=[],homework=null,submitting=false;
+const H=window.SolutionsHW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
 function status(text){$('#saveStatus').textContent=text;}
 function merge(a,b){const out={...a};Object.entries(b||{}).forEach(([k,v])=>{if(!out[k]||(v.updatedAt||0)>(out[k].updatedAt||0))out[k]=v;});return out;}
 function persist(){try{localStorage.setItem(storageKey,JSON.stringify(responses));status(user?'Сохранено на устройстве':'Гостевой режим · сохранено на устройстве');}catch{status('Не удалось сохранить на устройстве — скачай ответы');}renderProgress();}
-function sync(){queue=queue.then(async()=>{if(!user){status('Войди в аккаунт платформы для синхронизации');return;}try{const current=await SM.getUser();if(!current||current.id!==user.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return;}status('Синхронизация…');const remote=await SM.loadCourseWork('solutions-int');if(!remote?.ok)throw new Error();const combined=merge(remote.answers,responses);const result=await SM.saveCourseWork('solutions-int',combined,user.id);if(!result?.ok)throw new Error();responses=merge(responses,combined);persist();status('Ответы сохранены в аккаунте');}catch{status('Нет связи · ответы на устройстве, повтори синхронизацию');}});return queue;}
-function renderProgress(){const all=D.pages.filter(p=>p.unit===page?.unit).flatMap(p=>p.exercises);const done=all.filter(e=>(responses[e.id]?.values?.some(v=>v.trim())||responses[e.id]?.reflection?.trim())).length;$('#progress').textContent=`${done} из ${all.length} упражнений с ответами в этом разделе.`;}
-function url(){const q=new URLSearchParams(location.search);q.set("book",book);q.set("unit",unit);q.set("page",page.page);return location.pathname+"?"+q;}
+function sync(){queue=queue.then(async()=>{if(!user){status('Войди в аккаунт платформы для синхронизации');return {ok:false};}try{const current=await SM.getUser();if(!current||current.id!==user.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return {ok:false};}status('Синхронизация…');const remote=await SM.loadCourseWork('solutions-int');if(!remote?.ok)throw new Error();const combined=merge(remote.answers,responses);const result=await SM.saveCourseWork('solutions-int',combined,user.id);if(!result?.ok)throw new Error();responses=merge(responses,combined);persist();status('Ответы сохранены в аккаунте');return {ok:true};}catch{status('Нет связи · ответы на устройстве, повтори синхронизацию');return {ok:false};}});return queue;}
+function renderProgress(){renderHomework();const all=D.pages.filter(p=>p.unit===page?.unit).flatMap(p=>p.exercises);const done=all.filter(e=>(responses[e.id]?.values?.some(v=>v.trim())||responses[e.id]?.reflection?.trim())).length;$('#progress').textContent=`${done} из ${all.length} упражнений с ответами в этом разделе.`;}
+function url(){const q=new URLSearchParams(location.search);q.set("book",book);q.set("unit",unit);q.set("page",page.page);q.delete("ex");return location.pathname+"?"+q;}
 function render(){
  if(!page||page.book!==book||String(page.unit)!==String(unit))page=list()[0];
  if(!page){unit='0';page=list()[0];}
@@ -33,7 +34,7 @@ function render(){
 }
 function resizeCrop(){if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
 function openExercise(id){
- active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;
+ active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':'Workbook'} · стр. ${page.page}`;
  $('#exerciseAudio').innerHTML=page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
@@ -59,7 +60,7 @@ function save(explicit){
  if(!active||!ready)return;
  const values=$$('[data-answer]').map(e=>e.value),old=responses[active.id];
  const score=old?.answerVersion===active.answerVersion&&JSON.stringify(old.values)===JSON.stringify(values)?old.score:undefined;
- responses[active.id]={values,score,reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
+ responses[active.id]={values,score,checks:old?.checks||[],reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
  persist();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
  if(explicit)$('#feedback').textContent=user?'Ответ сохранён. Синхронизация с аккаунтом…':'Ответ сохранён на этом устройстве.';
 }
@@ -70,10 +71,13 @@ $('#answerForm').onsubmit=ev=>{
  const results=values.map((v,i)=>M.checkField(v,spec[i])),correct=results.filter(Boolean).length;
  $$('.answer-row').forEach((row,i)=>{const ok=results[i];row.classList.toggle('correct',ok);row.classList.toggle('incorrect',!ok);row.querySelector('[data-answer]').setAttribute('aria-invalid',String(!ok));row.querySelector('.answer-result')?.remove();const result=document.createElement('span');result.className='answer-result';result.textContent=ok?'Верно':'Проверь ответ и форму записи';row.append(result);});
  $('#feedback').textContent=`${active.marking.mode==='mixed'?'Закрытая часть. ':''}Верно: ${correct} из ${values.length}.${active.marking.mode==='mixed'?' Свободную часть проверяет преподаватель.':''}`;
- responses[active.id].score={correct,total:values.length};persist();
+ responses[active.id].score={correct,total:values.length};
+ const checks=responses[active.id].checks||[],last=checks.at(-1);
+ if(!last||last.answerVersion!==active.answerVersion||JSON.stringify(last.values)!==JSON.stringify(values))checks.push({checkedAt:Date.now(),answerVersion:active.answerVersion,labels:spec.map(f=>f.label),values:[...values],results});
+ responses[active.id].checks=checks.slice(-10);persist();
  if(user)recordAttempts(values.map((answer,i)=>({course:'solutions-int',unit:Number(page.unit)||0,section:(book==='wb'?'workbook':'lesson')+':solutions',ex_index:M.attemptIndex(active.id,spec[i].label),question:`${book.toUpperCase()} p.${page.page} ex.${active.label}, ${spec[i].label}`,answer,correct:results[i]}))).catch(()=>{});
 };
-async function recordAttempts(rows){const current=await SM.getUser();if(current?.id!==user?.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return;}return SM.saveHwAttempts(rows);}
+async function recordAttempts(rows){const current=await SM.getUser();if(current?.id!==user?.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return {ok:false};}return SM.saveHwAttempts(rows);}
 $('#fullPage').onclick=()=>{$('#fullPage').setAttribute('aria-pressed',$('#fullPage').getAttribute('aria-pressed')!=='true');resizeCrop();};
 $('#saveAnswer').onclick=()=>save(true);$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
 $('#pages').onchange=ev=>{page=list().find(p=>p.id===ev.target.value);render();};
@@ -90,7 +94,35 @@ $('#pageImage').onerror=()=>$('#imageError').hidden=false;$('#retryImage').oncli
 window.addEventListener('resize',resizeCrop);document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.body.classList.remove('present');$('#present').setAttribute('aria-pressed','false');}});
 document.addEventListener('play',ev=>{if(ev.target.tagName==='AUDIO')$$('audio').forEach(a=>{if(a!==ev.target)a.pause();});},true);
 window.addEventListener('storage',ev=>{if(ev.key===storageKey){try{responses=merge(responses,JSON.parse(ev.newValue)||{});renderProgress();}catch{}}});
-(async()=>{try{user=await SM.getUser();}catch{}storageKey=NS+':'+(user?.id||'guest');try{responses=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch{}if(user){try{const remote=await SM.loadCourseWork('solutions-int');if(remote?.ok)responses=merge(responses,remote.answers);}catch{}}ready=true;page=D.pages.find(p=>p.book===book&&p.page===Number(params.get('page')));if(page)unit=String(page.unit);render();persist();})();
+function renderHomework(){
+ if(!homework)return;
+ const ids=H.ids(homework),meta=H.meta(homework),finished=['submitted','done'].includes(homework.status||(homework.done?'done':'new')),done=ids.filter(id=>!H.readiness(id,responses[id])).length;
+ $('#assignment').hidden=false;
+ $('#assignment').innerHTML=`<h2>Домашнее задание · ${ids.length} упр.</h2><p>${esc(meta.msg||'Выполни назначенные упражнения и отправь ответы преподавателю.')}</p>${meta.due?`<p>Срок: ${esc(meta.due)}</p>`:''}${homework.feedback?`<p>Комментарий преподавателя: ${esc(homework.feedback)}</p>`:''}<div class="sh-links">${ids.map(id=>`<a href="${esc('../'+H.link(id,homework.id))}">${esc(H.label(id))} · ${esc(H.readiness(id,responses[id])||'Готово')}</a>`).join('')}</div><p>Готово к отправке: ${done} из ${ids.length}. Ошибки не мешают отправить работу.</p><button id="submitHomework" ${finished||submitting?'disabled':''}>${submitting?'Отправляю…':finished?'Работа отправлена':'Отправить преподавателю'}</button><p id="homeworkStatus" role="status"></p>`;
+ $('#submitHomework').onclick=submitHomework;
+}
+async function submitHomework(){
+ if(!homework||submitting)return;
+ let shot;try{shot=H.snapshot(homework,responses);}catch(e){$('#homeworkStatus').textContent=e.message;return;}
+ submitting=true;renderHomework();
+ try{
+  const current=await SM.getUser();if(!current||current.id!==user?.id)throw Error('Аккаунт изменился. Обнови страницу.');
+  // Save the exact submitted answers before changing the assignment status.
+  responses[H.snapshotKey(homework.id)]=shot;persist();clearTimeout(syncTimer);
+  const saved=await sync();if(!saved?.ok)throw Error('Не удалось синхронизировать ответы. Работа не отправлена; повтори попытку.');
+  const result=await SM.hwSubmit(homework.id);if(!result?.ok)throw Error(result?.error||'Не удалось отправить работу. Повтори попытку.');
+  homework.status='submitted';submitting=false;renderHomework();$('#homeworkStatus').textContent='Работа отправлена. Преподаватель увидит ответы и результаты проверки.';
+ }catch(e){submitting=false;renderHomework();$('#homeworkStatus').textContent=e.message;}
+}
+async function loadHomework(){
+ if(!params.get('hw'))return;
+ $('#assignment').hidden=false;
+ try{if(!user)throw Error('Войди в аккаунт ученика, чтобы открыть назначенную домашку.');
+  const assignments=await SM.myHW();homework=assignments.find(h=>String(h.id)===params.get('hw')&&H.ids(h).length);
+  if(!homework)throw Error('Эта домашка не найдена в твоём аккаунте. Открой её из раздела «Моя домашка».');renderHomework();
+ }catch(e){$('#assignment').textContent=e.message;}
+}
+(async()=>{try{user=await SM.getUser();}catch{}storageKey=NS+':'+(user?.id||'guest');try{responses=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch{}if(user){try{const remote=await SM.loadCourseWork('solutions-int');if(remote?.ok)responses=merge(responses,remote.answers);}catch{}}ready=true;page=D.pages.find(p=>p.book===book&&p.page===Number(params.get('page')));if(page)unit=String(page.unit);render();persist();await loadHomework();const wanted=params.get('ex');if(wanted&&page.exercises.some(e=>e.id===wanted))openExercise(wanted);})();
 window.LiveCourse?.connect({
  course:'solutions-int',
  view:()=>ready&&page?{book,page:page.page,exercise:$('#exercise').open?active?.id||null:null}:null,

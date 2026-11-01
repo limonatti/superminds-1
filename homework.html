@@ -38,6 +38,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
 </head>
 <body>
 <div class="app">
@@ -58,6 +59,7 @@
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=be01939b"></script>
+<script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -180,7 +182,9 @@ function drawPane(){
     matsHtml();
 
   const mk = document.getElementById("mark");
+  if(mk&&it.solutions)mk.textContent='Открыть и отправить работу';
   if (mk) mk.onclick = async () => {
+    if(it.solutions){location.href=it.href;return;}
     const old = mk.textContent;
     mk.disabled = true; mk.textContent = "Отправляю…";
     const r = it.type === "spk" ? await SM.hwSubmit(it.id) : await SM.markAssignment(it.id, true);
@@ -227,6 +231,13 @@ async function load(){
   spk.forEach(x => {
     const meta = parseNote(x.note);
 
+    const solIds=SolutionsHW.ids(x);
+    if(solIds.length){
+      const href=SolutionsHW.link(solIds[0],x.id);
+      ITEMS.push({type:'spk',solutions:true,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:'Solutions Intermediate · '+solIds.length+' упр.',sub:'Student’s Book / Workbook',kicker:'Домашнее задание',desc:meta.msg||'Выполни выбранные упражнения и отправь работу преподавателю.',href,
+        extra:'<div class="sect"><span>Назначенные упражнения</span></div><div class="rows">'+solIds.map(id=>'<a class="row" href="'+esc(SolutionsHW.link(id,x.id))+'">'+esc(SolutionsHW.label(id))+' →</a>').join('')+'</div>'});
+      return;
+    }
     /* Домашка блоками: учитель отметил конкретные упражнения урока */
     if (Array.isArray(meta.ex) && meta.ex.length){
       const href = "exercises.html?u=" + encodeURIComponent(meta.unitId || "") + "&hw=" + encodeURIComponent(x.id);
