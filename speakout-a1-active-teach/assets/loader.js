@@ -1,7 +1,7 @@
 /* Prefer published course assets; retain the local source fallback. */
 'use strict';
 (async function(){
-  function start(){const s=document.createElement('script');s.src='assets/app.js?v=16d43e63';document.body.appendChild(s);}
+  function start(){const s=document.createElement('script');s.src='assets/app.js?v=34348d6e';document.body.appendChild(s);}
   function parse(text){const prefix='window.COURSE=';if(!text.startsWith(prefix))throw Error('Неверный файл курса');return JSON.parse(text.slice(prefix.length).replace(/;\s*$/, ''));}
   const local=document.createElement('script');local.src='assets/course-web.js';
   local.onload=()=>{if(window.COURSE)start();else choose();};local.onerror=()=>{if(local.src.endsWith('course-web.js')){local.src='assets/course.js';document.head.appendChild(local);}else choose();};document.head.appendChild(local);
