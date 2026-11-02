@@ -20,7 +20,7 @@ function go(p,ex){stopMedia();S.page=Number(p);const pg=page();S.page=pg.page;S.
 function stopMedia(){document.querySelectorAll('audio,video').forEach(x=>x.pause())}
 function render(){sidebar();$("#reviewQuest").href="review.html"+(/^[1-8]$/.test(S.unit)?"?unit="+S.unit:"");$("#wordTrainer").href="../trainer.html?course=speakout-a1"+(/^[1-8]$/.test(S.unit)?"&unit=sa1-u"+S.unit:"");const p=page();$('#breadcrumb').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;$('#lessonTitle').textContent=titleFor(p.lesson);$('#pageSelect').innerHTML=pages().map(x=>`<option value="${x.page}">${x.page}</option>`).join('');$('#pageSelect').value=S.page;$('#prev').disabled=pages().indexOf(p)===0;$('#next').disabled=pages().indexOf(p)===pages().length-1;$('#pageImage').src=url(p.image);$('#pageImage').alt=`${S.book==='sb'?'Student’s Book':'Workbook'}, страница ${S.page}`;$('#hotspots').innerHTML=p.exercises.map((e,i)=>e.x===null?'':`<button class="hotspot" style="left:${e.x}%;top:${e.y}%" data-ex-index="${i}" aria-label="Открыть упражнение ${esc(e.label)}">${esc(e.label)}</button>`).join('');$('#exerciseNav').innerHTML=p.exercises.map((e,i)=>`<button data-ex-index="${i}">${esc(e.label)}${answers[recordId(e)]?.done?' ✓':''}</button>`).join('');$$('[data-ex-index]').forEach(b=>b.onclick=()=>openExercise(Number(b.dataset.exIndex)));let ix=p.exercises.findIndex(e=>e.label===S.ex);selectExercise(Math.max(0,ix));setTool('pointer');$('#mediaCount').textContent=mediaFor('lesson').length;renderMedia();showView(S.view);updateProgress();drawBoard()}
 function cropHTML(e){const [x,y,w,h]=e.box;return `<div class="crop" style="aspect-ratio:${w*595}/${h*842}"><img src="${url(page().image)}" alt="Оригинал упражнения ${esc(e.label)}" style="width:${10000/w}%;left:${-x/w*100}%;top:${-y/h*100}%"><button class="cropZoom">Вся страница</button></div>`}
-let exerciseTrigger=null,dragTile=null,exerciseZoom=1;
+let exerciseTrigger=null,dragTile=null,exerciseZoom=1,inlinePlayer=null;
 function openExercise(index){
  exerciseTrigger=document.activeElement;stopMedia();$('#magnifier').hidden=true;
  selectExercise(index);if(!selectedEx)return;
@@ -31,18 +31,19 @@ function syncExerciseKeys(){
  if($('#keyArea'))$('#keyArea').hidden=!S.teacher;
 }
 function fullExercisePage(on){
+ if(inlinePlayer){inlinePlayer.setFullPage(on);$('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);return}
  $('#exercisePage').hidden=!on;$('#exerciseBody').classList.toggle('full-source',on);
  $('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);
 }
 function setExerciseZoom(value){
- exerciseZoom=Math.max(.75,Math.min(3,value));for(const el of $$('#exerciseBody .crop,#exercisePage'))el.style.width=(exerciseZoom*100)+'%';
+ exerciseZoom=Math.max(.75,Math.min(3,value));if(inlinePlayer)inlinePlayer.setZoom(exerciseZoom);for(const el of $$('#exerciseBody .crop,#exercisePage'))el.style.width=(exerciseZoom*100)+'%';
  $('#exerciseZoomFit').textContent=Math.round(exerciseZoom*100)+'%';$('#exerciseZoomOut').disabled=exerciseZoom<=.75;$('#exerciseZoomIn').disabled=exerciseZoom>=3;
 }
 $('#exerciseZoomOut').onclick=()=>setExerciseZoom(exerciseZoom-.25);$('#exerciseZoomIn').onclick=()=>setExerciseZoom(exerciseZoom+.25);$('#exerciseZoomFit').onclick=()=>setExerciseZoom(1);
 $('#closeExercise').onclick=()=>$('#exerciseDialog').close();
 $('#exerciseDialog').addEventListener('close',()=>{stopMedia();persist();exerciseTrigger?.isConnected&&exerciseTrigger.focus({preventScroll:true})});
 $('#exerciseDialog').addEventListener('click',e=>{if(e.target===$('#exerciseDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
-$('#exerciseFullPage').onclick=()=>fullExercisePage($('#exercisePage').hidden);
+$('#exerciseFullPage').onclick=()=>fullExercisePage(inlinePlayer?!inlinePlayer.full:$('#exercisePage').hidden);
 $('#exerciseKeys').onclick=()=>{S.teacher=!S.teacher;syncExerciseKeys();$('#teacherToggle').textContent=S.teacher?'Ключи: показаны':'Ключи: скрыты';$('#teacherToggle').setAttribute('aria-pressed',S.teacher);$('#teacherToggle').classList.toggle('selected',S.teacher)};
 function exerciseAudio(){
  const tracks=mediaFor('lesson'),exact=tracks.filter(m=>m.track&&selectedEx?.text.includes(m.track));
@@ -60,6 +61,13 @@ function selectExercise(index){
  $('#exerciseTitle').textContent=`Упражнение ${e.label}`;$('#exerciseLocation').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;
  syncExerciseKeys();
  $$('[data-ex-index]').forEach(b=>{b.classList.toggle('selected',+b.dataset.exIndex===index);b.classList.toggle('active',+b.dataset.exIndex===index);b.setAttribute('aria-pressed',+b.dataset.exIndex===index)});
+ inlinePlayer=null;$('#exerciseBody').classList.remove('has-inline','full-source');
+ const inline=window.SpeakoutInline?.model(recordId(e),spec);
+ if(inline){
+  const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
+  inlinePlayer=window.SpeakoutInline.mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
+  setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();return;
+ }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
  if(auto){
   const kinds=new Set(spec.items.map(f=>f.kind));
@@ -80,12 +88,15 @@ function selectExercise(index){
  $$('[data-reveal]').forEach(b=>b.onclick=()=>{const f=spec.items.find(f=>f.n===b.dataset.reveal);state.revealed[f.n]=true;state.done=false;const row=b.closest('.answerrow');row.classList.remove('incorrect','correct');row.querySelector('.feedback').textContent='Ответ: '+f.answer;row.classList.add('revealed');updateProgress();persist()});
  if(auto){$('#check').onclick=()=>check(spec,state);$('#retryMistakes').onclick=()=>{for(const f of spec.items)if(!I.matches(state.values[f.n]||'',f.answer)||state.revealed[f.n]){delete state.values[f.n];delete state.revealed[f.n]}state.done=false;selectExercise(index);updateProgress();persist()};$('#retry').onclick=()=>{state.values={};state.revealed={};state.done=false;state.score=null;selectExercise(index);updateProgress();persist()}}
  if($('#freeNote'))$('#freeNote').oninput=ev=>{state.note=ev.target.value;state.done=false;updateProgress();persist()};
+ wireExerciseNavigation(index,state);
+ syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
+ quickMedia();exerciseAudio();persist();
+}
+function wireExerciseNavigation(index,state){const p=page();
  $('#done').onclick=()=>{state.done=!state.done;selectExercise(index);updateProgress();persist()};
  $('#exercisePrevious').onclick=()=>{selectExercise(index-1);$('#exerciseDialog').scrollTop=0};
  $('#exerciseNext').onclick=()=>{if(index<p.exercises.length-1)selectExercise(index+1);else{const nx=pages()[pages().indexOf(p)+1];if(nx)go(nx.page);else toast('Это последнее задание книги.')}$('#exerciseDialog').scrollTop=0};
  if($('#openKeys'))$('#openKeys').onclick=()=>resources(true);
- syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
- quickMedia();exerciseAudio();persist();
 }
 function tileOrder(f,value){const words=String(value||'').trim().split(/\s+/).filter(Boolean),used=new Set(),ids=[];for(const word of words){const id=f.tokens.findIndex((t,i)=>!used.has(i)&&t===word);if(id<0)return [];used.add(id);ids.push(id)}return ids}
 function setTiles(f,state,ids){const keyboardTile=document.activeElement?.matches('[data-tile],[data-used]');state.values[f.n]=ids.map(i=>f.tokens[i]).join(' ');state.done=false;const input=$$('[data-answer]').find(x=>x.dataset.answer===f.n);input.value=state.values[f.n];clearFeedback();renderTiles(f,state);if(keyboardTile){const bank=$$('[data-bank]').find(x=>x.dataset.bank===f.n);(bank.querySelector('button:not(:disabled)')||input).focus({preventScroll:true})}persist()}
@@ -173,5 +184,5 @@ window.LiveCourse?.connect({
  apply(v){const target=D.books[v.book]?.pages.find(p=>p.page===v.page);if(!target||v.exercise&&!target.exercises.some(e=>e.label===v.exercise))return;
   S.book=v.book;go(v.page,v.exercise);if(v.exercise)openExercise(target.exercises.findIndex(e=>e.label===v.exercise));else if($('#exerciseDialog').open)$('#exerciseDialog').close();},
  host:()=>$('#exerciseDialog').open?$('.exercise-response'):null,
- answer(){if(!selectedEx||!$('#exerciseDialog').open)return null;const r=answerState(),spec=I.spec(selectedEx,getKey(selectedEx));return {exercise:selectedEx.label,items:Object.entries(r.values||{}).map(([label,text])=>{const field=spec.items?.find(f=>f.n===label);return {label,text,result:typeof r.score==='number'&&field?(I.matches(text,field.answer)?'✓ Верно':'✕ Ошибка'):''}}).concat(r.note?[{label:'Свободный ответ',text:r.note}]:[])};}
+ answer(){if(!selectedEx||!$('#exerciseDialog').open)return null;if(inlinePlayer)return {exercise:selectedEx.label,items:inlinePlayer.report()};const r=answerState(),spec=I.spec(selectedEx,getKey(selectedEx));return {exercise:selectedEx.label,items:Object.entries(r.values||{}).map(([label,text])=>{const field=spec.items?.find(f=>f.n===label);return {label,text,result:typeof r.score==='number'&&field?(I.matches(text,field.answer)?'✓ Верно':'✕ Ошибка'):''}}).concat(r.note?[{label:'Свободный ответ',text:r.note}]:[])};}
 });
