@@ -3,6 +3,8 @@
    id слова: unitId + "-" + индекс — используется для прогресса.
    Добавить новый учебник = добавить SM_COURSE_DATA["xxx"]=[...] и запись в SM_COURSES. */
 window.SM_COURSE_DATA = window.SM_COURSE_DATA || {};
+// Presentation course: keep it selectable without falling back to another book's vocabulary.
+window.SM_COURSE_DATA["speakout-b2plus"] = window.SM_COURSE_DATA["speakout-b2plus"] || [];
 window.SM_COURSE_DATA["sm1"] = [
   {
     id: "welcome", unit: "Welcome", title: "Friends · цвета", emoji: "👋", color: "#f6e2cf",
@@ -193,6 +195,7 @@ window.SM_COURSE_DATA["sm1"] = [
 /* ---- Реестр учебников (курсов) ---- */
 window.SM_COURSES = [
   { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true, img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054541_850dabec-bbfc-4814-8d79-266c06b5b0b2_min.webp" },
+  { id: "speakout-b2plus", title: "Speakout B2+", subtitle: "Presentation Tool · 8 юнитов", emoji: "📘", color: "#f6e2cf", ready: true, presentation: true, hub: "speakout-b2plus-active-teach/index.html", img: "img/course-icons/speakout-b2plus.jpg" },
   { id: "own",  title: "Свой учебник",  subtitle: "создай в конструкторе",  emoji: "➕", color: "#f6e2cf", ready: false, admin: true }
 ];
 
