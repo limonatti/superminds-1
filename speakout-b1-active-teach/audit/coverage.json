@@ -199,23 +199,7 @@
       146,
       147,
       148,
-      149,
-      158,
-      159,
-      160,
-      161,
-      162,
-      163,
-      164,
-      165,
-      166,
-      167,
-      168,
-      169,
-      170,
-      171,
-      172,
-      173
+      149
     ],
     "wb": []
   },
@@ -962,6 +946,134 @@
         "image": "assets/sb-157.jpg"
       },
       {
+        "page": 158,
+        "pdfPage": 1,
+        "image": "assets/sb-158.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 160
+      },
+      {
+        "page": 159,
+        "pdfPage": 2,
+        "image": "assets/sb-159.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 161
+      },
+      {
+        "page": 160,
+        "pdfPage": 3,
+        "image": "assets/sb-160.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 162
+      },
+      {
+        "page": 161,
+        "pdfPage": 4,
+        "image": "assets/sb-161.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 163
+      },
+      {
+        "page": 162,
+        "pdfPage": 5,
+        "image": "assets/sb-162.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 164
+      },
+      {
+        "page": 163,
+        "pdfPage": 6,
+        "image": "assets/sb-163.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 165
+      },
+      {
+        "page": 164,
+        "pdfPage": 7,
+        "image": "assets/sb-164.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 166
+      },
+      {
+        "page": 165,
+        "pdfPage": 8,
+        "image": "assets/sb-165.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 167
+      },
+      {
+        "page": 166,
+        "pdfPage": 9,
+        "image": "assets/sb-166.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 168
+      },
+      {
+        "page": 167,
+        "pdfPage": 10,
+        "image": "assets/sb-167.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 169
+      },
+      {
+        "page": 168,
+        "pdfPage": 11,
+        "image": "assets/sb-168.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 170
+      },
+      {
+        "page": 169,
+        "pdfPage": 12,
+        "image": "assets/sb-169.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 171
+      },
+      {
+        "page": 170,
+        "pdfPage": 13,
+        "image": "assets/sb-170.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 172
+      },
+      {
+        "page": 171,
+        "pdfPage": 14,
+        "image": "assets/sb-171.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 173
+      },
+      {
+        "page": 172,
+        "pdfPage": 15,
+        "image": "assets/sb-172.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 174
+      },
+      {
+        "page": 173,
+        "pdfPage": 16,
+        "image": "assets/sb-173.jpg",
+        "pdf": "resources/sb-scripts.pdf",
+        "sourceFile": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+        "sourcePdfPage": 175
+      },
+      {
         "page": 174,
         "pdfPage": 169,
         "image": "assets/sb-174.jpg"
@@ -1461,8 +1573,12 @@
       }
     ]
   },
+  "scriptMedia": {
+    "audio": 89,
+    "video": 16
+  },
   "pages": {
-    "sb": 149,
+    "sb": 165,
     "wb": 94
   },
   "exercises": {
@@ -1473,13 +1589,17 @@
     "audio": 177,
     "video": 16
   },
-  "resources": 266,
+  "resources": 267,
   "keys": 858,
   "structuredKeys": 525,
   "unassignedAudio": [
     "1.0XA",
     "1.0XB",
     "1.0XC",
+    "2.0X",
+    "3.0X",
+    "4.0X",
+    "5.0X",
     "6.0XA",
     "6.0XB",
     "7.0XA",

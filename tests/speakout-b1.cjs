@@ -2,8 +2,21 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 const root=path.resolve(__dirname,'../speakout-b1-active-teach');
 const src=fs.readFileSync(path.join(root,'assets/course.js'),'utf8');
 const D=JSON.parse(src.slice(src.indexOf('=')+1).trim().replace(/;$/,''));
-assert.equal(D.books.sb.pages.length,149);assert.equal(D.books.wb.pages.length,94);
-assert.deepEqual(D.missingSourcePages,{sb:[146,147,148,149,...Array.from({length:16},(_,i)=>158+i)],wb:[]});
+assert.equal(D.books.sb.pages.length,165);assert.equal(D.books.wb.pages.length,94);
+assert.deepEqual(D.missingSourcePages,{sb:[146,147,148,149],wb:[]});
+for(let n=158;n<=173;n++){
+ const p=D.books.sb.pages.find(p=>p.page===n);
+ assert.equal(p.group,'scripts');assert.equal(p.lesson,n<170?'Audioscripts':'Videoscripts');assert.equal(p.exercises.length,0);
+ assert.equal(p.pdf,'resources/sb-scripts.pdf');assert.equal(p.pdfPage,n-157);assert.equal(p.sourcePdfPage,n+2);
+}
+assert.equal(D.media.filter(m=>m.type==='audio'&&m.scriptPages.length).length,89);
+assert.equal(D.media.filter(m=>m.type==='video'&&m.scriptPages.length).length,16);
+for(const m of D.media)for(const n of m.scriptPages){
+ assert.equal(m.book,'sb');assert(D.books.sb.pages.some(p=>p.page===n&&p.group==='scripts'));
+}
+for(const [track,pages] of Object.entries({'1.07':[158,159],'3.08':[161,162],'R7.01':[167,168],'8.06':[168,169]}))assert.deepEqual(D.media.find(m=>m.book==='sb'&&m.track===track).scriptPages,pages);
+assert.deepEqual(D.media.find(m=>m.type==='video'&&m.lesson==='3Intro').scriptPages,[170,171]);
+for(const m of D.media.filter(m=>m.track.includes('.0X'))){assert.equal(m.lesson,'');assert.deepEqual(m.scriptPages,[])}
 for(const [b,book] of Object.entries(D.books)){
  assert.equal(new Set(book.pages.map(p=>p.page)).size,book.pages.length);
  for(let u=1;u<=8;u++)for(const l of 'ABCD')assert(book.pages.some(p=>p.lesson===u+l),`${b}:${u}${l}`);
@@ -58,6 +71,21 @@ if(process.argv.includes('--browser'))(async()=>{
  await page.goto(base+'?book=sb&page=136');await ready();assert.equal(await page.locator('#unit').inputValue(),'vocabulary');
  await page.goto(base+'?book=sb&page=150');await ready();assert.equal(await page.locator('#unit').inputValue(),'mediation');
  await page.locator('#exerciseNav button').filter({hasText:/^1$/}).click();await page.locator('#freeNote').fill('A community project.');await page.locator('#done').click();await page.waitForTimeout(400);await page.keyboard.press('Escape');
+ // Every restored page loads; transcript buttons work from both lesson media and exercise dialogs.
+ for(let n=158;n<=173;n++){
+  await page.goto(base+`?book=sb&page=${n}`);await page.locator('#pageSelect option[value="173"]').waitFor({state:'attached'});
+  assert.equal(await page.locator('#unit').inputValue(),'scripts');assert.equal(await page.locator('#pageSelect').inputValue(),String(n));
+  await page.waitForFunction(()=>document.querySelector('#pageImage')?.naturalWidth>0);
+  assert.equal(await page.locator('#exerciseNav button').count(),0);
+  await page.locator('#mediaTab').click();assert(await page.locator('#mediaList audio,#mediaList video').count()>0);
+ }
+ await page.goto(base+'?book=sb&page=9&exercise=3A');await page.locator('#exerciseDialog[open]').waitFor();
+ await page.locator('#exerciseMedia [data-script-page="158"]').first().click();
+ assert.equal(await page.locator('#pageSelect').inputValue(),'158');assert(await page.locator('#pageView').isVisible());assert.equal(await page.locator('#exerciseDialog[open]').count(),0);
+ await page.locator('#mediaTab').click();await page.locator('#mediaList [data-script-page="159"]').click();
+ assert.equal(await page.locator('#pageSelect').inputValue(),'159');assert(await page.locator('#pageView').isVisible());
+ await page.goto(base+'?book=sb&page=173');await page.locator('#pageSelect option[value="173"]').waitFor({state:'attached'});
+ await page.locator('#mediaTab').click();assert.equal(await page.locator('#mediaList video').count(),4);
  await page.goto(base+'?book=sb&unit=1');await ready();await page.locator('#mediaTab').click();await page.locator('#mediaFilter').selectOption('unit');
  for(const type of ['audio','video']){const player=page.locator('#mediaList '+type).first();await player.evaluate(p=>p.load());await page.waitForFunction(t=>document.querySelector('#mediaList '+t)?.readyState>=1,type);assert((await player.evaluate(p=>p.duration))>0)}
  await page.locator('#resources').click();await page.locator('#resourceSearch').fill('Photocopiable');assert(await page.locator('#resourceList a').count()>0);await page.keyboard.press('Escape');

@@ -3,6 +3,7 @@ from pathlib import Path
 import json,re,collections,shutil
 from speakout_b1_keys import extract
 from speakout_b1_exercises import make_exercises
+from pypdf import PdfReader
 
 ROOT=Path(__file__).resolve().parents[1]/'speakout-b1-active-teach'
 D=json.loads((ROOT/'work/manifest.json').read_text())
@@ -20,6 +21,8 @@ def lesson_for(book,n):
         if n<146:return 'Vocabulary Bank'
         if n<150:return 'Communication Bank'
         if n<158:return str(n-149)+'C Mediation'
+        if n<170:return 'Audioscripts'
+        if n<174:return 'Videoscripts'
         return 'Irregular verbs'
     if n==3:return 'Contents'
     for u,start in enumerate(wbstarts,1):
@@ -42,10 +45,14 @@ for book in ['sb','wb']:
         words=json.loads((ROOT/'work/ocr'/(image.name+'.json')).read_text())
         foot=[int(w['text']) for w in words if w['y']>.93 and re.fullmatch(r'\d{1,3}',w['text'])]
         if book=='sb':
-            if n<8 or n==170:continue
-            if n==49 and foot==[3,4]:foot=[34] # Printed footer visually verified.
-            if len(foot)!=1:report['unmapped'].append([book,n,foot]);continue
-            printed=foot[0]
+            if p.get('printedPage'):
+                printed=p.pop('printedPage')
+                assert printed in foot,(image,printed,foot)
+            else:
+                if n<8 or n==170:continue
+                if n==49 and foot==[3,4]:foot=[34] # Printed footer visually verified.
+                if len(foot)!=1:report['unmapped'].append([book,n,foot]);continue
+                printed=foot[0]
         elif image.name.startswith('wb-keys'):
             printed=n+75;p['pdf']='resources/wb-keys.pdf'
         else:
@@ -59,7 +66,7 @@ for book in ['sb','wb']:
         p.update(page=printed,image=str(dest.relative_to(ROOT)),lesson=lesson_for(book,printed))
         p.pop('sourceImage',None)
         p['text']='\n'.join(w['text'] for w in words)
-        p['group']='lead-in' if p['lesson'] in ['Lead-in','Contents'] else 'mediation' if p['lesson'].endswith(' Mediation') else 'grammar' if book=='sb' and p['lesson'].endswith(' Grammar') else 'vocabulary' if p['lesson']=='Vocabulary Bank' else 'reference' if p['lesson']=='Irregular verbs' else 'scripts' if p['lesson'] in ['Audioscripts','Answer key'] else p['lesson'][0] if re.match('[1-8]',p['lesson']) else 'banks'
+        p['group']='lead-in' if p['lesson'] in ['Lead-in','Contents'] else 'mediation' if p['lesson'].endswith(' Mediation') else 'grammar' if book=='sb' and p['lesson'].endswith(' Grammar') else 'vocabulary' if p['lesson']=='Vocabulary Bank' else 'reference' if p['lesson']=='Irregular verbs' else 'scripts' if p['lesson'] in ['Audioscripts','Videoscripts','Answer key'] else p['lesson'][0] if re.match('[1-8]',p['lesson']) else 'banks'
         if book=='sb' and 136<=printed<146:
             for w in words:
                 if w['y']<.13 and re.fullmatch('[A-D]',w['text']):w['text']={136:'1A',137:'2A',138:'3A',139:'3C',140:'4B',141:'5B',142:'6B',143:'7A',144:'8A',145:'8C'}.get(printed,w['text'])+' Vocabulary'
@@ -73,9 +80,23 @@ for book in ['sb','wb']:
                 e['displayLabel']=unitlesson+' · '+e['keyLabel'];e['shortLabel']=e['keyLabel']
         allwords[f'{book}:{printed}']=words;entries[printed]=p
     books[book]={'path':source['path'],'pages':sorted(entries.values(),key=lambda p:p['page'])}
-    report['pageMap'][book]=[{k:p[k] for k in ['page','pdfPage','image']}|({'pdf':p['pdf']} if p.get('pdf') else {}) for p in books[book]['pages']]
+    report['pageMap'][book]=[{k:p[k] for k in ['page','pdfPage','image','pdf','sourceFile','sourcePdfPage'] if k in p} for p in books[book]['pages']]
     report['missingSourcePages'][book]=[n for n in range(6 if book=='sb' else 3,175 if book=='sb' else 97) if n not in entries]
 D['books']=books;D['missingSourcePages']=report['missingSourcePages']
+# Track headings are searchable in the supplied PDF. Include visually verified
+# continuations so a transcript split between pages remains complete.
+script_pdf=ROOT/'resources/sb-scripts.pdf'
+if script_pdf.exists():
+    scripts=PdfReader(script_pdf)
+    carry={159:'1.07',162:'3.08',163:'4.01',165:'5.07',167:'7.03',168:'R7.01',169:'8.06'}
+    video_lessons={170:['1Intro','1D','2Intro','2D','3Intro'],171:['3Intro','3D','4Intro','4D'],172:['5Intro','5D','6Intro','6D'],173:['7Intro','7D','8Intro','8D']}
+    for p in books['sb']['pages']:
+        if p.get('pdf')!='resources/sb-scripts.pdf':continue
+        if p['lesson']=='Audioscripts':
+            headings=re.findall(r'^Audio\s+((?:VB|R)?[1-8]\.\d{2}|L\.\d{2})\b',scripts.pages[p['pdfPage']-1].extract_text(),re.M)
+            p['scriptTracks']=([carry[p['page']]] if p['page'] in carry else [])+headings
+            assert headings,p['page']
+        else:p['scriptLessons']=video_lessons[p['page']]
 D['keys']={**extract(ROOT,'sb'),**extract(ROOT,'wb')}
 for book,data in books.items():
     for p in data['pages']:
@@ -106,12 +127,17 @@ for m in D['media']:
     if m['track'].startswith('L'):m['lesson']='Lead-in'
     variants=[m['track']]
     if '.0X' in m['track']:
-        variants.extend([m['track'].replace('.0X','.'),m['track'].replace('.0X','.X')])
+        variants.append(m['track'].replace('.0X','.X'))
     m['references']=variants
     pattern=r'(?<![\w.])(?:'+'|'.join(re.escape(x) for x in variants)+r')(?!\w)'
     hits=[p for p in books[m['book']]['pages'] if p['group']!='scripts' and re.search(pattern,p['text'],re.I)]
     if not m['lesson'] and hits:m['lesson']=hits[0]['lesson']
     m['pages']=[p['page'] for p in hits]
+for m in D['media']:
+    m['scriptPages']=[p['page'] for p in books['sb']['pages'] if m['book']=='sb' and
+                      (m['type']=='audio' and m['track'] in p.get('scriptTracks',[]) or
+                       m['type']=='video' and m['lesson'] in p.get('scriptLessons',[]))]
+report['scriptMedia']=dict(collections.Counter(m['type'] for m in D['media'] if m['scriptPages']))
 report.update(pages={b:len(v['pages']) for b,v in books.items()},exercises={b:sum(len(p['exercises']) for p in v['pages']) for b,v in books.items()},media=dict(collections.Counter(m['type'] for m in D['media'])),resources=len(D['resources']),keys=len(D['keys']),structuredKeys=sum(bool(k['items']) for k in D['keys'].values()),unassignedAudio=[m['track'] for m in D['media'] if m['type']=='audio' and not m['lesson']],emptyTaskPages=[f"{b}:{p['page']}" for b,v in books.items() for p in v['pages'] if p['group'] not in ['scripts','reference','lead-in'] and not p['exercises']])
 assert not report['unmapped'],report['unmapped']
 D.pop('inputs');D['scope']='Units 1–8'

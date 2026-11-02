@@ -12,7 +12,7 @@ manifest = {'inputs': [], 'books': {}, 'media': [], 'resources': []}
 def record(p):
     manifest['inputs'].append({'name': p.name, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'bytes': p.stat().st_size})
 for kind, prefix, title in [('sb','687_1-', 'Student’s Book'), ('wb','687_5-', 'Workbook'), ('keys','687_2-', 'Student’s Book · Answer key'), ('wb-keys','687_6-', 'Workbook · Answer key'), ('teacher','687_8-', 'Teacher’s Book')]:
-    src = next(p for p in SOURCE.glob(prefix+'*.pdf') if '(1)' not in p.name)
+    src = next(p for p in SOURCE.glob(prefix+'*.pdf') if not re.search(r'\(\d+\)\.pdf$',p.name))
     record(src); dst = ROOT/'resources'/f'{kind}.pdf'; shutil.copyfile(src,dst)
     manifest['resources'].append({'path': str(dst.relative_to(ROOT)), 'name': title, 'category': 'books'})
     if kind not in ['sb','wb','wb-keys']: continue

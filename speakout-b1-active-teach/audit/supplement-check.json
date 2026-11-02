@@ -1,0 +1,58 @@
+{
+  "checkedOn": "2026-11-02",
+  "files": [
+    {
+      "name": "687_1- Speakout 3rd B1 Student's Book_2022 (2).pdf",
+      "bytes": 49945547,
+      "sha256": "bef2687bbf497301a5732ea1cfafa86e2a7a3beaa2685a5341385a1542dda2bf",
+      "pdfPages": 170,
+      "result": "Byte-identical to the original supplied incomplete SB."
+    },
+    {
+      "name": "697264663-SpeakOut-B1-3rd-Stud-Book.pdf",
+      "bytes": 126354621,
+      "sha256": "199d75eb2111e35f43860d526804ddb4c2901d7102e203ffa3ecb7f8213bb67d",
+      "pdfPages": 178,
+      "result": "Restores printed pages 158–173. Printed pages 146–149 are blank."
+    },
+    {
+      "name": "794283116-Speakout-3rd-B1-Student-s-Book-2022.pdf",
+      "bytes": 49935153,
+      "sha256": "1fd4d0a5b0fbe900062141ac0aa3a69ec712fc5ef59cf4bdb1c3c66975c4533a",
+      "pdfPages": 170,
+      "result": "All 170 page content streams and image hashes match the original incomplete SB."
+    }
+  ],
+  "restoredPages": [
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173
+  ],
+  "stillMissingPages": [
+    146,
+    147,
+    148,
+    149
+  ],
+  "blankSourcePdfPages": [
+    148,
+    149,
+    150,
+    151
+  ],
+  "extractedPdf": "resources/sb-scripts.pdf",
+  "extractedPdfSha256": "0e3b4dd6d0f44e383a66a66dfa4129673e7de91f72e90f211ff39581b001209b"
+}
