@@ -1,0 +1,24 @@
+#modal.materials-dialog{width:min(1180px,96vw)}
+.material-categories,.material-actions,.material-pager{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.material-categories{padding-bottom:18px;border-bottom:1px solid var(--line)}
+.material-filters{display:grid;grid-template-columns:150px minmax(150px,1fr) auto;gap:16px;align-items:end;margin:18px 0}
+.material-filters label{font-size:14px;font-weight:700}
+.material-filters input[type=search],.material-filters select{display:block;width:100%;margin-top:5px}
+.material-filters .material-teacher{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px}
+#materialCount{font-size:13px;color:var(--muted)}
+#materialList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.material-card{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.material-card h3{font-size:16px;margin:0;overflow-wrap:anywhere}
+.material-card p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.material-card a{font-size:13px;white-space:nowrap}
+.material-actions{margin-bottom:18px}.material-actions a{padding:8px;font-size:14px}
+.material-pager{margin:18px 0;font-size:14px}.material-pager select{padding:8px}
+.material-viewport{overflow:auto;max-height:68vh;background:#e8e1dc;border:1px solid var(--line);border-radius:8px}
+#modalBody .material-viewport img{display:block;max-width:none;height:auto;margin:0}
+.material-audio{display:flex;flex-wrap:wrap;gap:16px}
+.material-audio label{font-size:13px;max-width:100%}.material-audio audio{display:block;max-width:100%;margin-top:5px}
+.material-answer{margin-top:20px}.material-answer label{display:block;font-weight:700;margin-bottom:8px}
+.material-answer textarea{width:100%;resize:vertical}.material-answer p{font-size:13px;color:var(--muted)}
+.material-coverage{margin-top:24px;border-top:1px solid var(--line);padding-top:16px;font-size:13px}
+.lesson-materials{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.lesson-materials button{font-size:13px}
+@media(max-width:650px){#modal.materials-dialog{padding:16px}#materialList{grid-template-columns:1fr}.material-filters{grid-template-columns:1fr 1fr;gap:10px}.material-teacher{grid-column:1/-1}.material-card{padding:12px;gap:8px}.material-actions{gap:6px}.material-pager{gap:5px}.material-pager button{padding:8px 11px}}

@@ -1,0 +1,1235 @@
+{
+  "inputs": [
+    {
+      "name": "688_8- Speakout 3rd B1+ Tests.zip",
+      "sha256": "615272f51a094d42e91eceeabff0cee3cc2e6cea77d781996a49c47d88739fdc"
+    },
+    {
+      "name": "688_9- Speakout 3rd B1+ Photocopiables.zip",
+      "sha256": "c25c3e39b832478656ebdc94ced314a8d3bc1a2316b4f3051659c611d2317430"
+    },
+    {
+      "name": "688_10- Speakout 3rd B1+ Literature Lessons.zip",
+      "sha256": "14f36923a48f18c00ebb964200e0632ddbd7c6d43c4d9f830b9ef62d12eab244"
+    }
+  ],
+  "files": [
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_ET_1_Audio_ET_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-et-1-audio-et-01.mp3",
+      "sha256": "e69c76a312454ffe7c3d390e54a6b38c47dd94a91f9ad21be871c53f51b4402e"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_1_Audio_PT1_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-1-audio-pt1-01.mp3",
+      "sha256": "133309062cc50ca22ec538d292ddd531fe12fb9e90e2dde3ce1c5fcfd1b536d3"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_1_Audio_PT1_02.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-1-audio-pt1-02.mp3",
+      "sha256": "76e8bb761e1ff3ddb668259af199c6e190eda65b1032efbbdfaf06840826bec6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_2_Audio_PT2_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-2-audio-pt2-01.mp3",
+      "sha256": "415625f436993bd5cf1550f97349b564d7203b541c2c7dfe51fbfe754884776e"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_2_Audio_PT2_02.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-2-audio-pt2-02.mp3",
+      "sha256": "20ba930b2e653a210575e565e1feee54b7588d89b102469e75579792045c38a9"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_3_Audio_PT3_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-3-audio-pt3-01.mp3",
+      "sha256": "37dd0cc144b35a68f32500a75a33792f403c2f209056ee449966880b1fc68b06"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_3_Audio_PT3_02.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-3-audio-pt3-02.mp3",
+      "sha256": "694014901001b8250a3b916a403ca3c438b852a419eac43d73d562a008ddd9cb"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_4_Audio_PT4_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-4-audio-pt4-01.mp3",
+      "sha256": "aa5c078acaaad1d04844ddee1957ae77a7a9518f5408d61ecd0e226f18855bd2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_PT_4_Audio_PT4_02.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-pt-4-audio-pt4-02.mp3",
+      "sha256": "c692e3766deab2b1c107718a68c3ba81d8b2eaeaf208be7dfc9bacb49d6c4d55"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_1_Audio_UT1_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-1-audio-ut1-01.mp3",
+      "sha256": "59de3180a11ad2883d56c87141d0f27948450fe089b6eaa80c7a0a9c3a09b262"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_2_Audio_UT2_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-2-audio-ut2-01.mp3",
+      "sha256": "64c7d3eab7618c4f84b556a3f844ebbfc0e746eaa10e9ea9fedf9edea38de052"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_3_Audio_UT3_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-3-audio-ut3-01.mp3",
+      "sha256": "824627c83938c26847f1653feaba14a01720f18c7189c2b88b46f91a26e15bc8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_4_Audio_UT4_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-4-audio-ut4-01.mp3",
+      "sha256": "649956656bc1efc90bd70ffe06c185c43e58e228ebe982a3e08f2a5cd27d50df"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_5_Audio_UT5_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-5-audio-ut5-01.mp3",
+      "sha256": "8beb20c33e8cc20e5a0c570d5bccfb2ee73497b177ff8d7ce41ff3e0507e915a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_6_Audio_UT6_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-6-audio-ut6-01.mp3",
+      "sha256": "41999f3d5afda02344ac0ef31d31043072b37071fa0ed961b659564f441a7565"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_7_Audio_UT7_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-7-audio-ut7-01.mp3",
+      "sha256": "c7a407d28af0ff8fc8bc71b589fa2664d478f45b4bea12418d0f460ecdc3a281"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_Tests_UT_8_Audio_UT8_01.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-tests-ut-8-audio-ut8-01.mp3",
+      "sha256": "0f62afad79dad370e4944896453e0cf0fee6e251fc3f038abba206e29b2ef8be"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Master mp3s/SO3_B1+_TEST_TITLES.mp3",
+      "path": "resources/additional/tests/audio/so3-b1p-test-titles.mp3",
+      "sha256": "241133c67531fbd902af765be4ac5e2d2bfa91a92691d090570de72d4370fec6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_AK.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-ak.docx",
+      "sha256": "3af12f0088bcdf7ecf73f18c981bd1f1fa7e4d973c73fda3b00a632bb09bc5f9"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_AK.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-ak.pdf",
+      "sha256": "bc1e71875d3d85c9d5992897542aa968565c6ae7c27ad015f3ed4af48d89faf8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Guidance for teachers.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-guidance-for-teachers.docx",
+      "sha256": "ffd2413638de6ac26b87b040d398796d948ea73d366f7eb32d6a7d7b6cff673f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Guidance for teachers.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-guidance-for-teachers.pdf",
+      "sha256": "760773078333080d3018a6b93043fb72c0753cb600ab3dea9b24bed64f8e6af0"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-a.docx",
+      "sha256": "f348fde7e392cff164d161e3778d86270593da13fdf591027710e527e8fb5edc"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-a.pdf",
+      "sha256": "3fef44c78612f98c78226d1bc691495d19b364f28c4538a0548d9c20874884c6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-b.docx",
+      "sha256": "4e5eea7f7a1274df7740ba312addfb8ebabbb0fa6af9013c537e75bcedeaa8a8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-b.pdf",
+      "sha256": "bf0a31ff5130928563b9b3e9e7836f4eea2d5694316ac6e8ed631295978dcf79"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version_C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-c.docx",
+      "sha256": "a341153802a090ac2a6dc9cc367fdd540755239d2e4a0b1cae3d826aa65ea4e8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part A_Version_C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-a-version-c.pdf",
+      "sha256": "cb1eba292f3d2828edc83c699a36f33a6ba5e02ad19c3c52a89f6c096c40b696"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-a.docx",
+      "sha256": "521c9ecfece5e5a3ee9f410390c72b014d08b6df7fdab9ee4376c1cd8c8ab738"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-a.pdf",
+      "sha256": "cba9ee52de8b42c04acef2faf713afddad154da19b25c7bbc496640db55dbc53"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-b.docx",
+      "sha256": "6a7424ccc6038a903aa67015cbf6caa00a051cc654a3591ec8543c612e818512"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-b.pdf",
+      "sha256": "64939ec6a0dc812551a9160961d57cd3799d05fbdae27ccc946b7bd30f6edfeb"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version_C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-c.docx",
+      "sha256": "833b7d87cb70530b8b349e3c764937b124f773aae2f709cc89b04b9fb75f54a2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Part B_Version_C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-part-b-version-c.pdf",
+      "sha256": "2619cc4babac303dca11b4c0a2517d35823b3709bd34dca9ba87d6bd3bd7cc1d"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Version_C_AK.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-version-c-ak.docx",
+      "sha256": "94ce3e8f32d3d23c912b2756a4a47c372bf98e71c7ae3f76085a23345463d659"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/SO3_B1+_Diagnostic Test_Version_C_AK.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-diagnostic-test-version-c-ak.pdf",
+      "sha256": "293f6087f73387030c1c2c547d6944a42ed888cdc0b224fa6e6eeeda7192ff11"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(Word)/SO3_B1+_End of Course Test_U1-8A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8a.docx",
+      "sha256": "174701a33db01bbcf46dd6cf5b97b083df7eae4dc2a2b89d7dfe56ac7ace257f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(PDF)/SO3_B1+_End of Course Test_U1-8A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8a.pdf",
+      "sha256": "21f8d5e34e8c33e31737bfb659067eaaecfca6de82d4eb633c9a6fdd3d15ce67"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(Word)/SO3_B1+_End of Course Test_U1-8B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8b.docx",
+      "sha256": "23e47324848b62c17b4001e5d058d35b57c257e7e4ff863be13edc20c726dbd8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(PDF)/SO3_B1+_End of Course Test_U1-8B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8b.pdf",
+      "sha256": "5f5be0cfadace9bb4ea5459b954a63951efb0ccb575145a2856fa417d62d28d2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(Word)/SO3_B1+_End of Course Test_U1-8C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8c.docx",
+      "sha256": "0c993fb73310c3db2f5e504e6f95040ea7a890a977237bd0d8adf2b1b0261670"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_End_of_Course_Test_(PDF)/SO3_B1+_End of Course Test_U1-8C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-end-of-course-test-u1-8c.pdf",
+      "sha256": "5f44f7542b7887b3cc2b10d57e68e82c5de2a46543c81e7ff199f51494964579"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(Word)/SO3_B1+_Mid-course Test_U1-4A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4a.docx",
+      "sha256": "b1f4c822f3194a4ea81eb4c60bd89ecb9900e2906d7e7b5de0df694bb923ad4b"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(PDF)/SO3_B1+_Mid-course Test_U1-4A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4a.pdf",
+      "sha256": "300090ea8cf6a517c03f2dddfcc4f0fd259065bef0c6ec6a0d970942d54ab8e4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(Word)/SO3_B1+_Mid-course Test_U1-4B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4b.docx",
+      "sha256": "5b658d45b989201175f91e6801bf05a5a76f75c474f3824cf3158c9be79f40fe"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(PDF)/SO3_B1+_Mid-course Test_U1-4B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4b.pdf",
+      "sha256": "8a7bd63bab984a25e9be135daaa06099144195da64a14f07529e016729a1f716"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(Word)/SO3_B1+_Mid-course Test_U1-4C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4c.docx",
+      "sha256": "27380123c137fe4bd6a37db30716a34ba7762563da290fe2de355d6db0033e41"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Mid-course_Test_(PDF)/SO3_B1+_Mid-course Test_U1-4C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-mid-course-test-u1-4c.pdf",
+      "sha256": "c7b6c6b946c7014dfa94fb7c10ed327e892cce28032e88d05f112532d3ddc694"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_1A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1a.docx",
+      "sha256": "5a50c589f8a0c6740d6869bfaa60f2ee4717ecf2ec9df07a8008692f0ca57de9"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_1A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1a.pdf",
+      "sha256": "b7f6bf9459db3d7abef892c1d6d1997d60335258f3270214fe90f5bec0f89b1f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_1B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1b.docx",
+      "sha256": "5ddf0d6e9d604279be0219e5228b45585d11a8451e3d99ded438d0fc1e99beb4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_1B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1b.pdf",
+      "sha256": "577f4f3f68840e0fa6c0e92dfbaf178497c6851a05dca3ed043a24aa68952c46"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_1C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1c.docx",
+      "sha256": "baeee7d11669a42d0e551b76de5f66e86051a7e50d2e3c4756836bd968a3c83e"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_1C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-1c.pdf",
+      "sha256": "154a3c53fa443c8aa5b4638b9c180d9dc6b05fd9abfbb563194575cc0eefea7c"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_2A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2a.docx",
+      "sha256": "ec71540e1daa16d31edf2a393f2d44499ad19c77ed6a68a201301c15a9e0d75d"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_2A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2a.pdf",
+      "sha256": "1e45eaf0955a735f6f49ff75593faeea3d7304f3867d676c3049fd5e438778e6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_2B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2b.docx",
+      "sha256": "a51189e5aed06f627fef30b1e27e310094c48ca7f6627622a2301aebecda5b0a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_2B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2b.pdf",
+      "sha256": "09b79b96ccd6dc5a47f104e1012ce0baea9937e778aecc50cd153da9d95dfb6b"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_2C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2c.docx",
+      "sha256": "11d7af0d4e20e5edd9551e4813255e200daf4ef0d6eeb4d28c6c7a8fc15dbb72"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_2C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-2c.pdf",
+      "sha256": "a77e9772868c0c0250f0d9c85567e90a7bbd59a24e0395fab22e08ab854f8bad"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_3A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3a.docx",
+      "sha256": "1174b2be5012ef9153ed8655bf73b3ec1740e7665789ca0bff8766180f0f093f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_3A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3a.pdf",
+      "sha256": "3552a5f689f70651bd99f43048fe57d9bdf4e31eb4661e8a72a265e0c9d97ec3"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_3B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3b.docx",
+      "sha256": "0591269f0f15d9023ca96186f8ac87a45bd4fff620bc8db53d5d3a7854ad3a7a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_3B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3b.pdf",
+      "sha256": "7eabaa9868219e1b34fb60128c78a7469332e012dd75b17e2891953cf8dd9b72"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_3C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3c.docx",
+      "sha256": "0eff81422cabe27350da907dd06abc05c5738a5f1791e57f952017f48f61283f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_3C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-3c.pdf",
+      "sha256": "fdfd328941b3f9d2f37d67b10c319041b5fce3ca4563ee9342a9337db7e6c0a4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_4A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4a.docx",
+      "sha256": "9dd94f0695c92f4ded0d59b1b9439c46fcc10c53ddc6ba11ff7b7dc6836cb533"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_4A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4a.pdf",
+      "sha256": "c2e2463b335b55d4b622c7994dcb05a48f132de4e742e5f169fcf7c8cd520e01"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_4B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4b.docx",
+      "sha256": "c657b6f4039f93e030cf7f0076721eb70d217f2fc8c3a6f74075db37e5faf00a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_4B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4b.pdf",
+      "sha256": "3481cd81cc59f84338918240783981938bb830ebd910d4ca7c9bd11fba4037ed"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(Word)/SO3_B1+_Progress Test_4C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4c.docx",
+      "sha256": "5deefee485ea1a69fe86f7d29b870b89177323cf51a5ad8a688417b1191e9be2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Progress_Tests_(PDF)/SO3_B1+_Progress Test_4C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-progress-test-4c.pdf",
+      "sha256": "291e98e92615ef36f43cc295f3567fa5e18cce5c51f69c91ddc6aa041ac073d1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(Word)/SO3_B1+_Quick End of Course Test_U1-8A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8a.docx",
+      "sha256": "46ddf8a723f7f98905b5a9877cf97f7b6f6a89f8ca4236996009bcf2c0a0db79"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(PDF)/SO3_B1+_Quick End of Course Test_U1-8A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8a.pdf",
+      "sha256": "0119b23b6ce7f2a0b3ee60e40398b784d7f8f4ac73a27f83cb59f01ab974f9c2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(Word)/SO3_B1+_Quick End of Course Test_U1-8B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8b.docx",
+      "sha256": "2ca8df79510c92606a54ae62d07661743fffec0cc685ee35d5630fbdd990d83f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(PDF)/SO3_B1+_Quick End of Course Test_U1-8B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8b.pdf",
+      "sha256": "e1774400172f3e813a2e5cd2e5d9354d804620fbd7740a3a8f1048ad306ef3a4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(Word)/SO3_B1+_Quick End of Course Test_U1-8C.doc",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8c.doc",
+      "sha256": "dec095a0592e46a3a8ce6366525ff83a225411172cf4aaf64290d4b912e0d895"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_End_of_Course_Test_(PDF)/SO3_B1+_Quick End of Course Test_U1-8C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-end-of-course-test-u1-8c.pdf",
+      "sha256": "ac972d1eaf0ef1cc149fc7f7da577078d71cf81822ebf9cb4201d7daf31975c7"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U1A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1a.docx",
+      "sha256": "afe5a68bdd77ba189201c0d9568db8d92c1e00264e980c0584ed006982d0be04"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U1A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1a.pdf",
+      "sha256": "88ae729cff544849a5bd9262aa2d2934558c567598ec510774529858f88715f5"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U1B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1b.docx",
+      "sha256": "3c4854ca91902f39b521ca589122d61b81e04c1c029eb58e6b1afeee03c0ba4c"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U1B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1b.pdf",
+      "sha256": "8bb6eb69ebb4d49ce8088c0348bbbda4486e490ed0b94c230adb711c81ad2007"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U1C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1c.docx",
+      "sha256": "6ecc3bbbfdcdd34f552dd7423916120d739ef3e6983da7b429e803bfbad2d556"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U1C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u1c.pdf",
+      "sha256": "35c404f2645185ed3f0b5d37799b3d28ec91fc64f20d8de9088e56df36f5b43c"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U2A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2a.docx",
+      "sha256": "a2a7963a3ba4882df9afda9ccfa6f0fb12ee2298b762039b3b20082eaf03f27e"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U2A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2a.pdf",
+      "sha256": "32c513bd7d2c693ff7255414449abdbc6d189e9326b7683cf0b19b4c7e2c65bc"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U2B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2b.docx",
+      "sha256": "b57fd30567f63ac32b2b9dd73df979da34d6c48bfe234c97d6a649ea2e05971d"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U2B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2b.pdf",
+      "sha256": "e74f65f7b636610eea5b746d5bd582813afa762aa5f68a6c794be8296cfc8228"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U2C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2c.docx",
+      "sha256": "06be52b1d15f0e7ad0eca1d263d71d8ef56e6cb2657dffcbfabcae9e343ec6d9"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U2C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u2c.pdf",
+      "sha256": "5fc4fcca8b73b4f46dffe96774f98590d3964abc5b272fafa2bba57193275e92"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U3A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3a.docx",
+      "sha256": "448bba7b0060bfae3e89cb13ddede24beeda01b24aeb823ce7753dc3da2f5fc7"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U3A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3a.pdf",
+      "sha256": "3d5b975d5c16b0b27de07b5e71c542534fec313aebcb9bf68b6436a086c9b0b1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U3B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3b.docx",
+      "sha256": "72a81686dc51fdc5d39e9584fa7ecdba4d2b3c39ef8675bb2ca4aee335b7b98a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U3B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3b.pdf",
+      "sha256": "c5a2ca122306a964d3d2a6b36ad78b8df8473bdeb77258d1b14b6bdaa58f82f2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U3C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3c.docx",
+      "sha256": "60b338a59b78c8f9e18c0b9a1afcb853c660b691fd2a1da7865880bdf24bdb0b"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U3C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u3c.pdf",
+      "sha256": "28fded61d16b635b77228aabccc4467a444657cd8d0106eb7460c837b40f54fb"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U4A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4a.docx",
+      "sha256": "da536f1c9217ae17e7aad783c79e7d25159f315181b4e4e723720a7c72c42ba1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U4A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4a.pdf",
+      "sha256": "c3ec37dc4b10695ffa5ad657b965f15ac5895ea34a415eb984cab45e766322f6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U4B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4b.docx",
+      "sha256": "1d483c30288a33635f7c864cd41650adeac8f92467054a349fc9caea1fe3f002"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U4B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4b.pdf",
+      "sha256": "c2f67c187a2cc7b7334dca64fe0a846893f5fca8d039c4d7b811f972e6d95829"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U4C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4c.docx",
+      "sha256": "287e59feced1f1d511f0762dc0f4c672f3b57e86db27f8a2e32a87b393d534d4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U4C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u4c.pdf",
+      "sha256": "7417b6d3ac57e2bd0abf1fc5e0810dcce7358114bb42b9c9af50951f2c48fc89"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U5A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5a.docx",
+      "sha256": "6ccdb3562d49fe7286296b0344357b33c8b2356a79ca5ec2df3f0b7d76c69a96"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U5A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5a.pdf",
+      "sha256": "bbe425b382d68ca0b6251b4ce01fc1c1913e5c3cd2da1ea678381d8414287e08"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U5B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5b.docx",
+      "sha256": "041f0f1836d24f2dd856c6dcd127d28ba410d1253f9f3459b7804123e97f19aa"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U5B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5b.pdf",
+      "sha256": "96f7d6df83cdebb5886eaed3055cd40be0b2e94a0af4aac820cbf33f65e59fb6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U5C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5c.docx",
+      "sha256": "abbc00d0ad3a1ee9facae8dd3d0acfbae5c62b57760a5be001b9314fe4021ba6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U5C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u5c.pdf",
+      "sha256": "f180f444aea7121803a501450319115653b66e958092e9b891d865a0d10f1eca"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U6A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6a.docx",
+      "sha256": "5184b30ba48be96c07fb8cc442d9f0a5ed1a31209563291d17621e2c55c8bef0"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U6A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6a.pdf",
+      "sha256": "69c5d1f1c734227dc70cc030cbac1203a4e5c6c697c054a0732de2b3e5f4fe2f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U6B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6b.docx",
+      "sha256": "91968c10593b06fbbcfb9a61537b4acc84fb6f7a49aef1ff1c22f8d10e2491b2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U6B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6b.pdf",
+      "sha256": "ec5313e2423aa9934584b3b9962f7900bae60d99052fd89784754d533a2551bd"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U6C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6c.docx",
+      "sha256": "872221922853dffa8785225301061e646ea8165805308b58a807b4de43af1aaf"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U6C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u6c.pdf",
+      "sha256": "b16fdd69cf100a6540469ba598f83af3ba36d08dd8df2cb5544627f64e8b7064"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U7A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7a.docx",
+      "sha256": "13c81fb3509e93109467df1df096b7cc25ca8453c8eb151eb821addf4dc5bc23"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U7A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7a.pdf",
+      "sha256": "7f256b0ccc402e879dc3b13e2203e8215d717648e92c6438ff13e74db9b3727f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U7B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7b.docx",
+      "sha256": "065a2d9698238b66e94641dd1d894852ffc0bf82bb1d6f0c2a15bd1c4c856b07"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U7B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7b.pdf",
+      "sha256": "07a1e046052e88284b29dc722fbb30ed13244fece359a5970c301a8c3ddec1b8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U7C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7c.docx",
+      "sha256": "e3b41af1886739a492728bd7bd6cc0a230ec695aa314227d3c259e9fa3424ce1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U7C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u7c.pdf",
+      "sha256": "305a08ca00516be27d10cda088c84e1308178e39546b0a885083ec1b0e214250"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U8A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8a.docx",
+      "sha256": "a3e99802833f4b1c460c80ccb7bc62a57143d2fd19e811c9971eee34fb7002bd"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U8A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8a.pdf",
+      "sha256": "223ff8eb2c7580dd3c004a53b583c0186b527651de2c52a9021fbdc3c2ffe3c2"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U8B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8b.docx",
+      "sha256": "a14e6c1e336bea7b44973752212d0af4ff5582fb27feb3f4c35afb77d23473ca"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U8B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8b.pdf",
+      "sha256": "8f024c7c15edbfba9c71829a126e5a0f77746d73778cdf988f21c3786905d421"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(WORD)/SO3_B1+_Quick Quiz_U8C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8c.docx",
+      "sha256": "71ca342c505182dd23e2bf294bbb61028b8099f7a6cef74d7d51b463c6f0c58f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Quick_Quizzes_(PDF)/SO3_B1+_Quick Quiz_U8C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-quick-quiz-u8c.pdf",
+      "sha256": "47c3103409d795bb137bf1bac7d411e0e126874bcddf32a38eeba3b8621bb5fa"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U1A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1a.docx",
+      "sha256": "17961ebf22452c98bf613da2153c5be6879dfe6cffd3fbddd6cc025f2cda2f57"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U1A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1a.pdf",
+      "sha256": "676ee534317881d0220f6f89ffc5a9deb9a046bbb661f13c998b3a75b2a0f704"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U1B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1b.docx",
+      "sha256": "38f9f99e2444180c72badb6ea8ae1b7b6fb4b203f5ba98b7b3b949b096d080c0"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U1B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1b.pdf",
+      "sha256": "b685d918cf137b649e075802aa6e88c2ce205f52542e871a3c6d804720cca2a8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U1C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1c.docx",
+      "sha256": "7433e92c56b20003e51f0ef621b3534f137fe7b9828bcd58e207d5f640ef7609"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U1C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u1c.pdf",
+      "sha256": "83ef8ddf751bc359befaeed3488f720053b28572af5b8654c7b0d09df06ee290"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U2A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2a.docx",
+      "sha256": "0d311f91c620041d1dc32bc35d778b2a7f64b0de6953cf76b07c06ef898de6a4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U2A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2a.pdf",
+      "sha256": "ac775957e0df5c9352480e34a999e4e08f218f0331aa670783eb8fbeedbe832f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U2B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2b.docx",
+      "sha256": "0496c32a33e862fe02c0ecb8ffc7f2e0df2f2de60084a84f77d928b4c589094c"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U2B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2b.pdf",
+      "sha256": "1844a0cf520d84dcb393d8a7378d58ebd5b4745db6873a16638a77278f3be0a1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U2C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2c.docx",
+      "sha256": "4a4c8b37a5b1dc6ffc1c90ac58feefec5e6ada26bad453490abddeaf41fbc611"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U2C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u2c.pdf",
+      "sha256": "47ffab433d48f6e8c8f603cc9899bac8ee2cc85c7d7073cebb59c3b131109c8f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U3A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3a.docx",
+      "sha256": "f3fc5eb3f16ea89d4bdce76af5375c2b0343630747c51ba1583f4f770c189eae"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U3A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3a.pdf",
+      "sha256": "a6fa925e1edef854619c5e58003f611dffa27a09929a00f339774583f2cb4941"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U3B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3b.docx",
+      "sha256": "af6841f26b509703e208cdbad1c06ca1706caf41da62066fabcecdb790ffbb51"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U3B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3b.pdf",
+      "sha256": "a60ccec5e2bbb12cc92263110205a1febd0b092c629cede2d76e0fbb627df5ba"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U3C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3c.docx",
+      "sha256": "885057de56ea1976e5f128187ce389bc6e284b6ef4584e87aafcde101a9b86b4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U3C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u3c.pdf",
+      "sha256": "678ccb4f81e9a69ef85e0c7b53f259e977d27103752a248fbae5153256c47e2f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U4A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4a.docx",
+      "sha256": "4c9446fdafedc8ed2da8d90a0ffb320f48ee7c0733745f23b865dda4c5f21285"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U4A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4a.pdf",
+      "sha256": "99c76a84adbc13da07319f4e21d2d5af1be363a0bdb30f2155e74ccecefe690c"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U4B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4b.docx",
+      "sha256": "8c35fc57d1d1400524f46f3ccc3d8960e5d35aa49130468a943c219b168355c9"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U4B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4b.pdf",
+      "sha256": "ab9b742308285a34c9ffd74e042695bfa2a8f8367754e15e35364011c9666b30"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U4C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4c.docx",
+      "sha256": "3bd57ef684f60f8bbdb5f63b9c1eae6a105ccc63305e3b61719cf6e3419b05e5"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U4C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u4c.pdf",
+      "sha256": "8c8c236d1263e5bb7b9c5a39fd4d66c21f3335007c862b3527e4a1b4c36662f8"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U5A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5a.docx",
+      "sha256": "21342f78b86e3af2de186eefe1088a3f27665974ba9a28533a4a108d080bdd37"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U5A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5a.pdf",
+      "sha256": "d5051c2d915f8726543a4ed2e871af79e779f397d271e5ede8b0db8027f42241"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U5B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5b.docx",
+      "sha256": "a57f26458a3a780e8b986a1ffe0d0d6f1a7f4066b2a304a80f92a66e4919db25"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U5B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5b.pdf",
+      "sha256": "455a55c4203cfc82dc4303e261017a7df0dc81f27ef0c5b1893b9c257f8a0dd4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U5C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5c.docx",
+      "sha256": "9586d2e738c64ea24b541497640bc8c3e05621c8e7c18bdd608693afb92c6bb0"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U5C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u5c.pdf",
+      "sha256": "f119b49f99fc568e3e0b955e32612564d889b3f90fd77765eba3e8395f46a586"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U6A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6a.docx",
+      "sha256": "9c59efad798bbc6a134640b4772b7c72d5511926be0bdcc72b84075cad810635"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U6A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6a.pdf",
+      "sha256": "2f81afc674e72ab04fcaec80ed3e686cbf8f5d233042dd231124a003d29329a3"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U6B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6b.docx",
+      "sha256": "cf052555707f727fff3255a7ff16ce27368c1d23a8920eed6fdc08a6a14cd64f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U6B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6b.pdf",
+      "sha256": "9b853b773c284513b16745d39537924082d3d78e3767484eee49826a52a02e59"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U6C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6c.docx",
+      "sha256": "17203ad4cd6c60304d3822107c887674593d518ab9c63ab3575f757ff47e4959"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U6C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u6c.pdf",
+      "sha256": "321b9f90aa14293b72bcf480d7a2ae258e6601d5367439e4f803d069de93aa55"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U7A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7a.docx",
+      "sha256": "6cdb7968998f9ace08b82836aa3ffe97a522be39e0b5e1ecdd47a752b4ecef8e"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U7A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7a.pdf",
+      "sha256": "b80fe0641d9a77fc23c2e43493fc18198221b58d61f360f12ef1259e5c5d9390"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U7B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7b.docx",
+      "sha256": "a96007bea7419c913e8ad9ebce64bdf3c361a8a8659b1b4432c9e692cb89d8f7"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U7B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7b.pdf",
+      "sha256": "08f003bad8ebe542705f7ebdfa694997802bf8b37624c6eb33d2aca9cedb76c0"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U7C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7c.docx",
+      "sha256": "2a032b6a6ebc937877bbcde750d62fe78c7b0155e70f698f91a367563634c592"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U7C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u7c.pdf",
+      "sha256": "1fbbd172b40589a65ecbbe0e368ede1bb058e6b769be13aa68cc29f26163ad4b"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U8A.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8a.docx",
+      "sha256": "9b2af97a528e0b9f6e0aba33d1d0997094f56def54064a262744f691e99f9fb4"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U8A.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8a.pdf",
+      "sha256": "a0e758bce6bde11f04aaf4935b4a47a05a1351583d869c0cc8a858d01356dba6"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U8B.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8b.docx",
+      "sha256": "477b43ed56ffae72e4eca54117aeb25d947a5aebe26b6ac4a252b6c3f5c9cc51"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U8B.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8b.pdf",
+      "sha256": "1fc92415ac611fafa0ffb02494dcedd5a499f69bc94464759f32b71ff6fc3402"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(Word)/SO3_B1+_Unit Test_U8C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8c.docx",
+      "sha256": "b57091e319a730f61f4d3212c7e8095d79ffdbd178e20c3810fbcd3597c2f95b"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1+_Unit_Tests_(PDF)/SO3_B1+_Unit Test_U8C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-unit-test-u8c.pdf",
+      "sha256": "bffc78280a77dc15096e33d2937ca19f17c7b2b45be6411ee285fd40b54fb98f"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_End_of_Course_Test_(Word)/SO3_B1+_Mark scheme_Speaking.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-mark-scheme-speaking.docx",
+      "sha256": "64d04ff15ae37cba099670a473faa7c622b6d57618c8243abc2670648765f43d"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_Tests_Answer_Key_(PDF)/SO3_B1+_Mark scheme_Speaking.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-mark-scheme-speaking.pdf",
+      "sha256": "c3c9f7a9988c2804360ead6535782bcf2c5e8443b0a370641186aed032aeea68"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_End_of_Course_Test_(Word)/SO3_B1+_Mark scheme_Writing.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-mark-scheme-writing.docx",
+      "sha256": "511fc3598d19672af8379e12b5fc49c120dec4bb7c2b73f9a0a68a47e067d7be"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_Tests_Answer_Key_(PDF)/SO3_B1+_Mark scheme_Writing.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-mark-scheme-writing.pdf",
+      "sha256": "2f167f8f9bb29632339c475f43e3bb5cf764e80510e52f740b0ef137863b2f7a"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_End_of_Course_Test_(Word)/SO3_B1+_Tests_Answer Key C.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-tests-answer-key-c.docx",
+      "sha256": "c7667855d378c9de2a6e703068049ff89fa7d49e126ee6f76566b031312166ed"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_Tests_Answer_Key_(PDF)/SO3_B1+_Tests_Answer Key C.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-tests-answer-key-c.pdf",
+      "sha256": "5d6e36f0479ce251ae34878c4e3db921e0bc6196a2d69a9271214635258883b1"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_End_of_Course_Test_(Word)/SO3_B1+_Tests_Answer Key.docx",
+      "path": "resources/additional/tests/tests-so3-b1p-tests-answer-key.docx",
+      "sha256": "9fc5ca6f8ce96a193ad8b14da4d8d142fbb939baf8e19c9def0e243731d58420"
+    },
+    {
+      "source": "688_8- Speakout 3rd B1+ Tests/Speakout_B1P_Tests_Answer_Key_(PDF)/SO3_B1+_Tests_Answer Key.pdf",
+      "path": "resources/additional/tests/tests-so3-b1p-tests-answer-key.pdf",
+      "sha256": "df1c07c75e382318aa7e5b97552560911846aff59f1829f4790008b1bcc289c0"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PCs_Notes_AK.pdf.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pcs-notes-ak.pdf",
+      "sha256": "d8633d44118e8a902bcda9bb0dc7501bcd3094b946b5b84f3fb1c3c9d06241fa"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_1A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-1a-grammar.pdf",
+      "sha256": "2fab4281dff16c9eedd27813413dd9935e51bd8e94e771193943f341744618af"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_1A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-1a-vocab.pdf",
+      "sha256": "98e240580a2e2a480d1e6b7af66266fb3eca868c8da1411cc745532b2610206f"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_1B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-1b-grammar.pdf",
+      "sha256": "3b7c5a2ab445b3020fc466819af0ab89a630dd18e8047ff859f27e8359d5c9f8"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_1B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-1b-vocab.pdf",
+      "sha256": "832028c9c117130e9b7b95b12c7e1a9404ed358771e222ffb6ca87136802f976"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_1C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-1c-how-to.pdf",
+      "sha256": "74f7aa5fef635b3b37840ed675dd699f1c5b6f506fc9465b3681b846e7284001"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_2A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-2a-grammar.pdf",
+      "sha256": "3e249617100c5f866f0b26c38b350792d1acf9e8513b20c474970e17c9d31f21"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_2A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-2a-vocab.pdf",
+      "sha256": "0b76fcdfe12d7dccc19db73d094105c0b37af3c63fe49e4f69812ff37e1fd236"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_2B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-2b-grammar.pdf",
+      "sha256": "3cf677ab4181e45bac201f41fdd8143ab708635fd12fc4d9a535af17109238c5"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_2B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-2b-vocab.pdf",
+      "sha256": "3d5cf9de19c3c5d6a5d471fb7fa420d194f730ef9d549d40d3f08b1466753b6e"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_2C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-2c-how-to.pdf",
+      "sha256": "227497fda63ca51d274338f33d3abbf660e9d77a00562651985cf54fd037b613"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_3A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-3a-grammar.pdf",
+      "sha256": "17d00034c64322194049ce53ea2e47ab2fc840449a92dab6676f4a79902c5edf"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_3A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-3a-vocab.pdf",
+      "sha256": "db671929eca5a8a3d64966fa46667ef546667e1eeb54e8ddaadf773240776e03"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_3B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-3b-grammar.pdf",
+      "sha256": "d8eb44d5a3ebe01262e72df669d71b43651291b24240b41b99b39cb7106fc5f4"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_3B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-3b-vocab.pdf",
+      "sha256": "5c2efa10c2280fa98f75c13eca361affb0f6c114f1bb2d18ee20fb461502105a"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_3C_How to..pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-3c-how-to.pdf",
+      "sha256": "096eaf92dde978a0d0377f210831dd1c7bd5a53bf201d2edd048d3812ebb64b4"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_4A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-4a-grammar.pdf",
+      "sha256": "0de45976780644d045d4fd561572348d0476764d3a75e110f9ef39f849d74e3b"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_4A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-4a-vocab.pdf",
+      "sha256": "d71d321302b2596a8e2871c9f14cb5fa857d15b0d3924742e1c4450fd602b158"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_4B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-4b-grammar.pdf",
+      "sha256": "c7af9c458cd765cd60f9470194c7e3298ad4a47dde4fbe8ab6e876aa7b31dee6"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_4B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-4b-vocab.pdf",
+      "sha256": "b5ca3dadeb5ac06849093607bcd971ab6beb98322a16c59005d46342c4127cf4"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_4C_How+to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-4c-howpto.pdf",
+      "sha256": "64634d852c8dd69ac0a3819ce3fe90b2b5f089e63462e7495f510bed3601478d"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_5A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-5a-grammar.pdf",
+      "sha256": "eedd1cd7d20eafcfb6ec3344ac84edbec61733c25c4e35b7033a90a93e3fa2ac"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_5A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-5a-vocab.pdf",
+      "sha256": "b93c9f3dce8d71c44f9528f5026287297f1502a335f5984ed927b4813b911b4a"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_5B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-5b-grammar.pdf",
+      "sha256": "7c9b50368d614f125879a8d09b046feb6766610ff9687467fc12d45a021e1729"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_5B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-5b-vocab.pdf",
+      "sha256": "281b05b385d929d5cc903535c3ef3e273ef2a9974e0e8f9390469735e14d321c"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_5C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-5c-how-to.pdf",
+      "sha256": "143bd2da2a198dab216c218c737151bab06edfd1ac378c47ba520227eafbf3cd"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_6A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-6a-grammar.pdf",
+      "sha256": "d086ce42fd1b791b762203f456f3829643dcb9c8417dd4be83b35c20058859a9"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_6A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-6a-vocab.pdf",
+      "sha256": "af655c32c046cf470f1943f0015b889461efa4808829b7d2343dd85d15b05e0c"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_6B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-6b-grammar.pdf",
+      "sha256": "c98ef85a97e482f27facadfcc5121cb9781a1fcf431f36c71d647518e7ddf024"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_6B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-6b-vocab.pdf",
+      "sha256": "42a3ecbc65adc464134460682a5d1e2210578c51e5314af183b85e29b967766d"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_6C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-6c-how-to.pdf",
+      "sha256": "b919040de6147d28e7a0ffaf538a0e59cf767412facf207b039ca55bb2373cbd"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_7A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-7a-grammar.pdf",
+      "sha256": "f3be35cea6b8d21c2754439feb99334a95330077de0c6343cdd51c462b84695c"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_7A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-7a-vocab.pdf",
+      "sha256": "27fe000e22397b948d198f64163213eac22a51dc51120feedc4b083aadf03f8e"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_7B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-7b-grammar.pdf",
+      "sha256": "303c8b397fd36fff54fd8d72da26ae240aaaa28e5b26c6614e6b8f6a8350d05e"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_7B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-7b-vocab.pdf",
+      "sha256": "08918495ea437f268961ef75a5b95732fc3a567d414254610515b0064159ae6b"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_7C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-7c-how-to.pdf",
+      "sha256": "3f89fe2de2f764ee8383820dcb7efc7106be14b45dec7a974baa8b27582e05d6"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_8A_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-8a-grammar.pdf",
+      "sha256": "bf387f3330b9d7f8cf67205125df06d16355430186cb90be3cd1d89fbeb229f2"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_8A_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-8a-vocab.pdf",
+      "sha256": "409a255c5a36103ed04e198e0233fbc5fdc3ed399058bf296365e6a27b7de83a"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_8B_Grammar.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-8b-grammar.pdf",
+      "sha256": "933230426682f4cd32e1f9d2ba8154a9cf115c74ed1d6bbed2177c977597ecdf"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_8B_Vocab.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-8b-vocab.pdf",
+      "sha256": "a1826c0c591b8d1c11b11ac68ab12d02bf0a8a8ce69a6aa159fd44f42c8c3d7d"
+    },
+    {
+      "source": "688_9- Speakout 3rd B1+ Photocopiables/SO3_B1P_PC_8C_How to.pdf",
+      "path": "resources/additional/photocopiables/photocopiables-so3-b1p-pc-8c-how-to.pdf",
+      "sha256": "9e60993a629e4c05833e852b1dad77cc7099a5d8dc3895a952dd2e505542cd24"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_07_B1-B2.pdf",
+      "path": "resources/additional/literature/literature-so3-lit-lesson-07-b1-b2.pdf",
+      "sha256": "62e154a4435b6039c63585380a111f609e17cf8cb22bbc82a2a04f3944b9908a"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_08_B1-B2.pdf",
+      "path": "resources/additional/literature/literature-so3-lit-lesson-08-b1-b2.pdf",
+      "sha256": "66174ef6607aadc92f3a4a3179216ae857a1eebd5c1e810249be02f1457481be"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_09_B1P-B2P.pdf",
+      "path": "resources/additional/literature/literature-so3-lit-lesson-09-b1p-b2p.pdf",
+      "sha256": "0229faa9a84905b2b0691610277872d0bfba0f852c9f78f849882f8823032a5a"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_10_B1P-B2P.pdf",
+      "path": "resources/additional/literature/literature-so3-lit-lesson-10-b1p-b2p.pdf",
+      "sha256": "4391bac847417f4c2c8d6c03555dcaf4b6474957828582f17bfe66c854e3a39f"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2_Lit_Lesson_TN_Intro.pdf",
+      "path": "resources/additional/literature/literature-so3-a2-lit-lesson-tn-intro.pdf",
+      "sha256": "df014f3eed9ff445c3ee3bd4c4cfe29c889357e37591ea947d0738c2e78fecd1"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_B1-B2_Lit_Lesson_7_TN.pdf",
+      "path": "resources/additional/literature/literature-so3-b1-b2-lit-lesson-7-tn.pdf",
+      "sha256": "599af2063b88ddc4f7b0bfa744d18ac5cfeddcf336e64e65f337f0a10f4157f2"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_B1-B2_Lit_Lesson_8_TN.pdf",
+      "path": "resources/additional/literature/literature-so3-b1-b2-lit-lesson-8-tn.pdf",
+      "sha256": "f2736cb549115ff9c970cc3d1a5f314014e5655dc33a8b9582ca6c6d0eeeedda"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_B1P-B2P_Lit_Lesson_10_TN.pdf",
+      "path": "resources/additional/literature/literature-so3-b1p-b2p-lit-lesson-10-tn.pdf",
+      "sha256": "4b46a30c4f5c444583ba7812a6e26223d4e598c8a0610995c198dbd323013a92"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_B1P-B2P_Lit_Lesson_9_TN.pdf",
+      "path": "resources/additional/literature/literature-so3-b1p-b2p-lit-lesson-9-tn.pdf",
+      "sha256": "f014b5f04d45829fc00365405d379366c626f3fe99d05e6559b66792668a055d"
+    }
+  ],
+  "excluded": [
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_01_A2-A2P.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_02_A2-A2P.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_03_A2-AP.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_04_A2-AP.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_05_A2P-B1.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Literature Lessons/SO3_Lit_Lesson_06_A2P-B1.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2-A2P_Lit_Lesson_1_TN.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2-A2P_Lit_Lesson_2_TN.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2-A2P_Lit_Lesson_3_TN.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2-A2P_Lit_Lesson_4_TN.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2P-B1_Lit_Lesson_5_TN.pdf",
+      "reason": "Literature level below B1+"
+    },
+    {
+      "source": "688_10- Speakout 3rd B1+ Literature Lessons/Teacher's Notes/SO3_A2P-B1_Lit_Lesson_6_TN.pdf",
+      "reason": "Literature level below B1+"
+    }
+  ],
+  "counts": {
+    "tests": 82,
+    "photocopiables": 41,
+    "literature": 9,
+    "audio": 18,
+    "renderedPages": 695
+  }
+}

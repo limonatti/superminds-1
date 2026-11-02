@@ -21,6 +21,15 @@ the supplied “AI worksheets” were not used.
 - Verified publisher errata are recorded in `audit/errata.json` and displayed
   alongside the original key. Answers and board annotations stay in this browser;
   export/import provides a local backup.
+- Supplemental materials: 75 test documents (including A/B/C variants), 40
+  photocopiable activities, four literature lessons suitable for B1+, 13 teacher
+  documents and 18 supplied test audio files. The library filters by category
+  and unit, displays original pages locally, saves written answers, and links
+  original keys and editable test documents. Test audio is matched by the
+  recording codes printed in the PDFs; it is separate from SB/WB media.
+- Literature lessons 7–10 cover B1–B2 and B1+–B2+. Their nine referenced audio
+  recordings are absent from the supplied ZIP and explicitly marked missing.
+  The six lower-level lessons and their notes are not included in this course.
 
 ## Rebuild on macOS
 
@@ -36,6 +45,7 @@ work/ocr-runner assets work/ocr
 python extract_pages.py
 python optimize_video.py
 python build.py
+python import_materials.py '/path/to/Tests.zip' '/path/to/Photocopiables.zip' '/path/to/Literature Lessons.zip'
 ```
 
 `work/` holds source extraction and OCR intermediates and is ignored. `audit/`
@@ -47,3 +57,9 @@ From the repository root, run `python3 check.py` and
 `node tests/speakout-b1plus.cjs`. For the browser smoke test, serve the repository
 on port 8768 and run the latter with `--browser`. It covers SB/WB grading,
 saved answers, source page numbering, navigation, mobile sizing and media.
+
+Run `node tests/speakout-b1plus-materials.cjs` (optionally `--browser`) to verify
+supplemental source hashes, level selection, key/audio mappings, the library,
+mobile page viewing and answer backup/import. `audit/materials.json` records
+archive hashes, every retained original and the twelve excluded lower-level PDFs.
+Supplement previews are rendered directly from the PDFs at 2000 pixels high.
