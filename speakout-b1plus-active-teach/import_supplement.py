@@ -22,7 +22,7 @@ for ix,page in enumerate(reader.pages):
 manifest['books']['sb']['pages']=[p for p in manifest['books']['sb']['pages'] if p['page']<139]+pages
 manifest['resources']=[r for r in manifest['resources'] if r['path']!=relative]+[{'path':relative,'name':'Student’s Book · pages 139–175 · Communication, Mediation, scripts, irregular verbs'}]
 manifest['inputs']=[p for p in manifest['inputs'] if p.get('role')!='sb-supplement']+[{'name':source.name,'role':'sb-supplement','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'bytes':source.stat().st_size,'printedPages':[139,175]}]
-manifest['missingSourcePages']['sb']=[6,138]
+manifest['missingSourcePages']['sb']=sorted(set(range(6,176))-{p['page'] for p in manifest['books']['sb']['pages']})
 (ROOT/'work/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 (ROOT/'audit/sources.json').write_text(json.dumps({k:manifest[k] for k in ('inputs','missingSourcePages')},ensure_ascii=False,indent=2))
-print('Imported 37 original pages; SB missing pages: 6, 138.')
+print('Imported 37 original pages; SB missing pages:',manifest['missingSourcePages']['sb'])

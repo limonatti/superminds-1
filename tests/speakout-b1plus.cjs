@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'../speakout-b1plus-active-teach');
 const D=JSON.parse(fs.readFileSync(path.join(root,'assets/course.js'),'utf8').slice(14).replace(/;\s*$/,''));
-assert.equal(D.books.sb.pages.length,168);assert.equal(D.books.wb.pages.length,93);
+assert.equal(D.books.sb.pages.length,169);assert.equal(D.books.wb.pages.length,94);
 assert.equal(D.media.filter(m=>m.type==='audio').length,151);assert.equal(D.media.filter(m=>m.type==='video').length,16);
 for(const [b,book] of Object.entries(D.books)){
  assert.equal(new Set(book.pages.map(p=>p.page)).size,book.pages.length);
@@ -28,7 +28,13 @@ assert.equal(D.keys['sb|3A|7A'].pdfPage,12);
 assert(!D.keys['sb|3A Grammar|7A']);
 assert.equal(D.keys['wb|1B|2B'].items.find(q=>q.n==='12').answer,'doing');
 const sb=D.books.sb.pages,findPage=n=>sb.find(p=>p.page===n);
-assert.deepEqual(D.missingSourcePages,{sb:[6,138],wb:[3]});
+assert.deepEqual(D.missingSourcePages,{sb:[138],wb:[]});
+assert.equal(findPage(6).lesson,'Lead-in');assert.equal(findPage(6).group,'leadin');
+assert.equal(findPage(6).pdfPage,7);assert.equal(findPage(6).pdf,'resources/sb-lead-in-sample.pdf');
+assert.deepEqual(findPage(6).exercises.map(e=>e.label),['1A','1B','2','3A','3B','4A','4B','4C','5','6A','6B']);
+const contents=D.books.wb.pages.find(p=>p.page===3);
+assert.equal(contents.group,'contents');assert.equal(contents.exercises.length,0);
+assert.equal(contents.pdfPage,3);assert.equal(contents.pdf,'resources/wb-contents-sample.pdf');
 for(let n=139;n<=175;n++){assert(findPage(n));assert.equal(findPage(n).pdfPage,n-138);assert.equal(findPage(n).pdf,'resources/sb-supplement.pdf');}
 assert.equal(sb.filter(p=>p.group==='communication').reduce((n,p)=>n+p.exercises.length,0),18);
 for(let u=1;u<=8;u++)assert(sb.some(p=>p.lesson===u+'C Mediation'));
@@ -91,6 +97,21 @@ if(process.argv.includes('--browser'))(async()=>{
  await page.goto(base+'?book=sb&page=175');assert.equal(await page.locator('#unit').inputValue(),'reference');
  await page.goto(base+'?book=sb&page=7');await page.locator('#pageSelect').selectOption('145');
  assert.equal(await page.locator('#pageSelect').inputValue(),'145');
+ await page.goto(base+'?book=sb&page=6');assert.equal(await page.locator('#unit').inputValue(),'leadin');
+ assert.equal(await page.locator('#lessonTitle').textContent(),'Lead-in');
+ assert.equal(await page.locator('#exerciseNav button').count(),11);
+ await page.locator('#exerciseNav button').filter({hasText:/^3A$/}).click();
+ for(const q of D.keys['sb|Lead-in|3A'].items)await page.locator(`[data-answer="${q.n}"]`).fill(q.answer);
+ await page.locator('#check').click();assert.match(await page.locator('#checkResult').textContent(),/8 из 8/);
+ await page.keyboard.press('Escape');await page.locator('#exerciseNav button').filter({hasText:/^4B$/}).click();
+ assert.match(await page.locator('#exerciseMedia').textContent(),/L\.01.*отсутствует/);
+ await page.keyboard.press('Escape');await page.screenshot({path:'/private/tmp/speakout-b1plus-leadin.png'});
+ await page.locator('#next').click();assert.equal(await page.locator('#pageSelect').inputValue(),'7');
+ await page.goto(base+'?book=wb&page=3');assert.equal(await page.locator('#unit').inputValue(),'contents');
+ assert.equal(await page.locator('#lessonTitle').textContent(),'Оглавление');
+ assert.equal(await page.locator('#exerciseNav button').count(),0);
+ await page.screenshot({path:'/private/tmp/speakout-b1plus-contents.png'});
+ await page.locator('#next').click();assert.equal(await page.locator('#pageSelect').inputValue(),'4');
  assert.deepEqual(errors,[]);console.log('PASS browser: original lessons, auto-check SB/WB, saved answers, banks, unit links, mobile dialog, audio and video metadata.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});

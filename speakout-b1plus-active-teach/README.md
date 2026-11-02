@@ -7,12 +7,14 @@ the supplied “AI worksheets” were not used.
 
 ## Coverage
 
-- Student's Book: printed pages 7–137 and 139–175, all eight units, Grammar,
+- Student's Book: printed pages 6–137 and 139–175, all eight units, Grammar,
   Vocabulary, Communication and Mediation Banks, scripts and irregular verbs.
-- Workbook: printed pages 4–96, reviews, audioscripts and answer key.
+- Workbook: printed pages 3–96 (page 3 is labelled iii), reviews, audioscripts and answer key.
 - 151 audio recordings and 16 videos, assigned to their original lessons.
-- Missing from supplied PDFs: SB 6 and 138, WB 3. These will be added from
-  the owner’s complete files. The course has no external replacement links.
+  Lead-in track L.01 is absent from the supplied audio archive and is marked
+  as unavailable; the page and its original answer key are included.
+- Missing from supplied PDFs: SB 138. SB 6 and WB 3 were restored from
+  the owner’s additional samples. The course has no external replacement links.
 - Original keys remain accessible. Only unambiguous extracted keys enable
   automatic checking; discussion, pronunciation, uncertain OCR and shared
   slash alternatives use written answers and manual review.
@@ -28,6 +30,7 @@ and ffmpeg for optional video optimization. Run in this directory:
 ```sh
 python prepare.py '/path/to/Speakout B1+'
 python import_supplement.py '/path/to/778449126-Speakout-B1-page-139-175.pdf'
+python import_frontmatter.py '/path/to/798882975-Speakout-3-B1.pdf' '/path/to/975523717-Speakout-3rd-B1-WB-Key-OCR-RMF-Sample.pdf'
 swiftc ocr.swift -o work/ocr-runner
 work/ocr-runner assets work/ocr
 python extract_pages.py

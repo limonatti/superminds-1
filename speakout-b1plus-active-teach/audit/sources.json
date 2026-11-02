@@ -44,15 +44,36 @@
         139,
         175
       ]
+    },
+    {
+      "name": "798882975-Speakout-3-B1.pdf",
+      "role": "sb-lead-in-sample",
+      "sha256": "11903232e4f79b7b1c66281aa5dcbcfaba02fc0bc86ea6468248728c7cf6378f",
+      "bytes": 2130861,
+      "printedPages": [
+        6
+      ],
+      "pdfPages": [
+        7
+      ]
+    },
+    {
+      "name": "975523717-Speakout-3rd-B1-WB-Key-OCR-RMF-Sample.pdf",
+      "role": "wb-contents-sample",
+      "sha256": "83efc343dd148ee8c5e7bffeff27a0670a865b5200b28aec0e58e8212f0a0018",
+      "bytes": 3500387,
+      "printedPages": [
+        3
+      ],
+      "pdfPages": [
+        3
+      ]
     }
   ],
   "missingSourcePages": {
     "sb": [
-      6,
       138
     ],
-    "wb": [
-      3
-    ]
+    "wb": []
   }
 }

@@ -13,6 +13,7 @@ grammar=[f'{u}{s} Grammar' for u in range(1,9) for s in ('ABCD' if u%2 else 'ABC
 wbstarts=[4,10,18,24,32,38,46,52]
 def lesson_for(book,n):
     if book=='sb':
+        if n==6:return 'Lead-in'
         if n==103:return '8R'
         if n<104:
             u=(n-7)//12+1;o=(n-7)%12
@@ -24,6 +25,7 @@ def lesson_for(book,n):
         if n<170:return 'Audioscripts'
         if n<175:return 'Videoscripts'
         return 'Irregular verbs'
+    if n==3:return 'Contents'
     for u,start in enumerate(wbstarts,1):
         if start<=n<start+6:return str(u)+('A' if n-start<2 else 'B' if n-start<4 else 'C' if n-start==4 else 'D')
     if n in [16,17,30,31,44,45,58,59]:return 'Review '+{16:'1–2',17:'1–2',30:'3–4',31:'3–4',44:'5–6',45:'5–6',58:'7–8',59:'7–8'}[n]
@@ -35,7 +37,7 @@ def lesson_for(book,n):
 COMMAND=r'(?:Read|Listen|Watch|Work|Choose|Complete|Match|Write|Look|Think|Check|Find|Make|Underline|Put|Learn|Ask|Discuss|Compare|Take|Cover|Practise|Practice|Say|Talk|Use|Go|Correct|Replace|Answer|Give|Tick|Circle|Plan|Prepare|Tell|Rewrite|Record|Repeat|Number|Order|Label|Decide|Add|Notice|Try|Now|Then|Mark|Cross|Study|Turn|Imagine|Reduce|Swap|Change)\b'
 def command(t):return bool(re.search(COMMAND,t))
 def make_exercises(book,p,ws):
-    if p['lesson'] in ['Audioscripts','Videoscripts','Irregular verbs','Answer key']:return []
+    if p['lesson'] in ['Contents','Audioscripts','Videoscripts','Irregular verbs','Answer key']:return []
     if p['lesson']=='Communication Bank':return communication_exercises(p['page'],ws)
     for w in ws:
         w['text']=w['text'].translate(str.maketrans({'З':'3','А':'A','В':'B','С':'C','Е':'E','Н':'H','в':'B'}))
@@ -101,7 +103,7 @@ def make_exercises(book,p,ws):
             a=max(before,key=lambda a:a['y'])
             if a['label'][-1:].isalpha():anchors.append(dict(w,label=a['number']+m[1],number=a['number'],x=a['x']))
     # Visually verified labels that Vision omitted next to video/practice icons.
-    corrections={('sb',16):[('2B',.415,.387),('2C',.415,.477)],('sb',64):[('2B',.415,.281),('3C',.415,.461)],('sb',114):[('1',.458,.147)],('sb',129):[('2',.425,.471)],('sb',153):[('1',.075,.205)],('sb',154):[('2',.057,.509)],('sb',156):[('2',.058,.476)]}
+    corrections={('sb',6):[('5',.5051,.3400)],('sb',16):[('2B',.415,.387),('2C',.415,.477)],('sb',64):[('2B',.415,.281),('3C',.415,.461)],('sb',114):[('1',.458,.147)],('sb',129):[('2',.425,.471)],('sb',153):[('1',.075,.205)],('sb',154):[('2',.057,.509)],('sb',156):[('2',.058,.476)]}
     for label,x,y in corrections.get((book,p['page']),[]):
         if not any(a['label']==label for a in anchors):anchors.append({'label':label,'number':re.match(r'\d+',label)[0],'x':x,'y':y})
     # The numbered tips in Text B are reading content, not activities.
@@ -125,6 +127,19 @@ def make_exercises(book,p,ws):
             if heads:
                 h=max(heads,key=lambda w:w['y']);ex['keyLesson']=h['text'][:2]+' Vocabulary';ex['keyLabel']=a['label']
         result.append(ex)
+    if book=='sb' and p['page']==6:
+        # Verified against the newly supplied page: keep every instruction whole,
+        # include the reading passage in 1B and the matching words in 4B.
+        boxes={'1A':[4.8,9.6,43.2,27.2],'1B':[4.8,9.6,43.2,34.4],
+               '2':[4.8,49.8,43.2,12.3],'3A':[4.8,67.6,43.2,23.8],
+               '3B':[4.8,92.0,43.2,3.6],'4A':[49.7,9.6,45.3,12.4],
+               '4B':[49.7,9.6,45.3,14.5],'4C':[49.7,24.2,45.3,4.3],
+               '5':[49.7,33.4,45.3,16.2],'6A':[49.7,54.9,45.3,32.2],
+               '6B':[49.7,87.4,45.3,7.5]}
+        for ex in result:
+            ex['box']=boxes[ex['label']]
+            if ex['label']=='3B':
+                ex['text']='\n'.join(w['text'] for w in sorted(ws,key=lambda w:w['y']) if w['x']<.48 and .92<w['y']<.956)
     return sorted(result,key=lambda e:(int(re.match(r'\d+',e['label'])[0]),e['label']))
 allwords={}
 for book,data in D['books'].items():
@@ -139,8 +154,10 @@ for book,data in D['books'].items():
             if 'ANSWER KEY' in heading:p['lesson']='Answer key'
             elif 'AUDIOSCRIPTS' in heading:p['lesson']='Audioscripts'
         p['text']='\n'.join(w['text'] for w in ws)
+        if book=='sb' and p['page']==6:
+            p['missingAudio']=[] if any(m['book']=='sb' and m['track']=='L.01' for m in D['media']) else ['L.01']
         p['exercises']=make_exercises(book,p,ws)
-        p['group']='mediation' if p['lesson'].endswith(' Mediation') else 'communication' if p['lesson']=='Communication Bank' else 'reference' if p['lesson']=='Irregular verbs' else 'grammar' if p['lesson'].endswith(' Grammar') else 'vocabulary' if p['lesson']=='Vocabulary Bank' else 'scripts' if p['lesson'] in ['Audioscripts','Videoscripts','Answer key'] else p['lesson'][0] if re.match(r'^[1-8]',p['lesson']) else 'banks'
+        p['group']='leadin' if p['lesson']=='Lead-in' else 'contents' if p['lesson']=='Contents' else 'mediation' if p['lesson'].endswith(' Mediation') else 'communication' if p['lesson']=='Communication Bank' else 'reference' if p['lesson']=='Irregular verbs' else 'grammar' if p['lesson'].endswith(' Grammar') else 'vocabulary' if p['lesson']=='Vocabulary Bank' else 'scripts' if p['lesson'] in ['Audioscripts','Videoscripts','Answer key'] else p['lesson'][0] if re.match(r'^[1-8]',p['lesson']) else 'banks'
         p['width']=595;p['height']=842
 # Use source track references to assign workbook audio; unidentified tracks remain
 # available under the correct unit instead of being guessed into a lesson.
