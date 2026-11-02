@@ -47,14 +47,15 @@
             }
           }
         }
-        if(id){
+      }
+      if(id){
           const guest=this.read('account-v2:guest',{});
           for(const[page,p]of Object.entries(guest.pages||{}))for(const[k,v]of Object.entries({...p.data,...Object.fromEntries(Object.entries(p.pending||{}).map(([k,e])=>[k,e.value]))})){
-            if(!(k in this.page(page).pending))this.page(page).pending[k]={value:v,seq:++this.seq,imported:true};
+            const existing=this.page(page).pending[k];
+            if(!existing||existing.imported)this.page(page).pending[k]={value:v,seq:++this.seq,imported:true};
           }
           this.saveCache();
-          if(!this.cacheError){this.storage.setItem(PREFIX+'legacy-owner',JSON.stringify(id));this.storage.removeItem(PREFIX+'account-v2:guest');}
-        }
+          if(!this.cacheError){if(!owner)this.storage.setItem(PREFIX+'legacy-owner',JSON.stringify(id));this.storage.removeItem(PREFIX+'account-v2:guest');}
       }
       this.saveCache();this.onChange({accountChanged:true});this.status();
       if(id){await this.pull();await this.flush();}
