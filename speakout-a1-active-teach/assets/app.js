@@ -62,10 +62,10 @@ function selectExercise(index){
  syncExerciseKeys();
  $$('[data-ex-index]').forEach(b=>{b.classList.toggle('selected',+b.dataset.exIndex===index);b.classList.toggle('active',+b.dataset.exIndex===index);b.setAttribute('aria-pressed',+b.dataset.exIndex===index)});
  inlinePlayer=null;$('#exerciseBody').classList.remove('has-inline','full-source');
- const inline=window.SpeakoutInline?.model(recordId(e),spec);
+ const choice=window.SpeakoutChoices?.model(recordId(e),spec),inline=choice||window.SpeakoutInline?.model(recordId(e),spec);
  if(inline){
   const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
-  inlinePlayer=window.SpeakoutInline.mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
+  inlinePlayer=(choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
   setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();return;
  }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
