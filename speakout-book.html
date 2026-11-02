@@ -72,6 +72,10 @@
  (function(){
   var params=new URLSearchParams(location.search);
   var course=params.get("course")||"speakout-b1plus";
+  if(course==="speakout-b2plus"){
+    params.delete("course");
+    location.replace("speakout-b2plus-active-teach/index.html?"+params.toString());return;
+  }
   if(course==="speakout-b1"){
     var b1Unit=Math.max(1,Math.min(8,Number(params.get("u")||params.get("unit"))||1));
     location.replace("speakout-b1-active-teach/index.html?unit="+b1Unit+"&book=sb");return;

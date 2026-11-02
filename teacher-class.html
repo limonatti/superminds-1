@@ -90,7 +90,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="words.js?v=ac060602"></script>
+<script src="words.js?v=26e6ae94"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="sm-auth.js?v=be01939b"></script>
@@ -102,8 +102,8 @@ window.SM_HANDLES_COURSE = true;
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK = [["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
-const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK = [["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["speakout-b2plus","Speakout B2+"],["focus-1","Focus 1"],["solutions-pi","Solutions Pre-Int"]];
+const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -267,10 +267,10 @@ async function drawPane(){
     '<div class="hwform">' +
       '<div class="hf-row"><label>Курс</label><select id="acCourse">' +
         '<option value="">— не назначен —</option>' +
-        (window.SM_COURSES||[]).filter(c => c.ready && (window.SM_COURSE_DATA[c.id]||[]).length)
+        (window.SM_COURSES||[]).filter(c => c.ready && (c.presentation || (window.SM_COURSE_DATA[c.id]||[]).length))
           .map(c => '<option value="'+esc(c.id)+'"'+(course===c.id?" selected":"")+'>' +
             esc((c.emoji?c.emoji+" ":"")+c.title) + ' · ' +
-            (window.SM_COURSE_DATA[c.id]||[]).reduce((a,u)=>a+(u.words||[]).length,0) + ' слов</option>').join("") +
+            (c.presentation ? 'Presentation Tool' : (window.SM_COURSE_DATA[c.id]||[]).reduce((a,u)=>a+(u.words||[]).length,0) + ' слов') + '</option>').join("") +
       '</select>' +
       '<button class="mini" id="acGo">Назначить</button>' +
       '<span class="hint" id="acHint">' +
@@ -433,6 +433,7 @@ const PAGE_COURSES = {
   "outcomes-beginner": { title: "Outcomes Beginner", units: [1,2,3,4,5,6,7,8,9,10,11,12] },
   "solutions-int": { title: "Solutions Intermediate", units: [0,1,2,3,4,5,6,7,8,9] },
   "speakout-b1":     { title: "Speakout B1",           units: [1,2,3,4,5,6,7,8] },
+  "speakout-b2plus": { title: "Speakout B2+", units: [1,2,3,4,5,6,7,8] },
   "speakout-b1plus": { title: "Speakout B1+",          units: [1,2,3,4,5,6,7,8] },
   "focus-1":         { title: "Focus 1",               units: [0,1,2,3,4,5,6,7,8] },
   "solutions-el":    { title: "Solutions Elementary",  units: [0,1,2,3,4,5,6,7,8,9] },
@@ -479,7 +480,7 @@ function fillUnits(){
   const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
-  if (lessonPart) lessonPart.parentElement.lastChild.textContent = (solutions || course === 'speakout-b1') ? ' Student’s Book' : ' Урок · лексика/чанки';
+  if (lessonPart) lessonPart.parentElement.lastChild.textContent = (solutions || course === 'speakout-b1' || course === 'speakout-b2plus') ? ' Student’s Book' : ' Урок · лексика/чанки';
   if (grammarPart) {
     if (!solutions && grammarPart.parentElement.hidden) grammarPart.checked = true;
     grammarPart.parentElement.hidden = solutions;
@@ -535,7 +536,7 @@ function bindStudent(sid){
       res.className = "res ok";
       const t = ((window.SM_COURSES||[]).filter(c=>c.id===slug)[0]||{}).title;
       res.textContent = slug
-        ? "Готово: у ученика теперь «"+t+"». В его словаре и тренажёре будут слова этого курса."
+        ? "Готово: у ученика теперь «"+t+"». "+(slug === "speakout-b2plus" ? "Presentation Tool доступен в каталоге курсов." : "В его словаре и тренажёре будут слова этого курса.")
         : "Курс снят — ученик снова выбирает учебник сам.";
       $("acHint").textContent = slug ? "Сейчас у ученика: "+t : "Курс не назначен — ученик выбирает учебник сам.";
     } else {
