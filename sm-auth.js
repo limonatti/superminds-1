@@ -175,6 +175,41 @@ async saveCourseWork(course, answers, expectedUserId) {
 },
 
 /* ---------- Умное повторение (ящики Лейтнера) ---------- */
+/* Presentation tools use private rows, independent of vocabulary progress. */
+async presentationSession() {
+  const c=ensureClient(); if(!c) throw Error('Авторизация недоступна');
+  const {data,error}=await c.auth.getSession();
+  if(error) throw error;
+  return data.session?.user || null;
+},
+watchPresentationAuth(callback) {
+  const c=ensureClient(); if(!c) return ()=>{};
+  const {data}=c.auth.onAuthStateChange((event,session)=>{
+    forgetUser();
+    // Supabase auth callbacks must not await further SDK requests.
+    setTimeout(()=>callback(session?.user || null),0);
+  });
+  return ()=>data.subscription.unsubscribe();
+},
+async loadPresentationPage(userId, course, page) {
+  const c=ensureClient(); if(!c) throw Error('Нет подключения к аккаунту');
+  const {data,error}=await c.from('presentation_pages').select('data').eq('user_id',userId).eq('course',course).eq('page',page).maybeSingle();
+  if(error) throw error;
+  return data?.data || {};
+},
+async loadPresentationPages(userId, course) {
+  const c=ensureClient(); if(!c) throw Error('Нет подключения к аккаунту');
+  const {data,error}=await c.from('presentation_pages').select('page,data').eq('user_id',userId).eq('course',course);
+  if(error) throw error;
+  return data || [];
+},
+async savePresentationPage(userId, course, page, changes) {
+  const c=ensureClient(); if(!c) throw Error('Нет подключения к аккаунту');
+  const {data,error}=await c.rpc('save_presentation_page',{p_user:userId,p_course:course,p_page:page,p_changes:changes});
+  if(error) throw error;
+  return data;
+},
+
 srsQ: [],
 srsQueue(wordId, ok) { this.srsQ.push({ id: wordId, ok: !!ok }); if (this.srsQ.length >= 12) this.srsFlush(); },
 async srsFlush() {

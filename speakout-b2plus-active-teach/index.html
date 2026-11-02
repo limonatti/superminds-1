@@ -8,6 +8,7 @@
 <link rel="icon" href="../img/course-icons/speakout-b2plus.jpg">
 <link rel="stylesheet" href="assets/style.css?v=b24374cb7a">
 <link rel="stylesheet" href="assets/platform.css?v=15b20c6c55">
+<link rel="stylesheet" href="assets/exercises.css?v=1d06bf45d7">
 </head>
 <body>
 
@@ -118,7 +119,7 @@
       <button data-tab="files">Файлы</button>
     </div>
     <div id="pbody"></div>
-    <p id="saveStatus" role="status">Пометки сохраняются в этом браузере · перенос через «Экспорт»</p>
+    <div class="save-account"><p id="saveStatus" role="status">Подключаем сохранение…</p><a id="accountLogin" href="../index.html">Войти в аккаунт</a><button id="syncRetry" class="btn" hidden>Повторить сохранение</button></div>
     <div id="player">
       <div id="pTitle"></div>
       <div id="bar"><div id="barAB"></div><div id="barIn"></div></div>
@@ -213,6 +214,11 @@
 
 <script src="data/index.js?v=04e3f366d3"></script>
 <script src="data/notes.js?v=c0f374fe21"></script>
-<script src="assets/app.js?v=01ffde4c26"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../sm-auth.js?v=0b6bfb1f3e"></script>
+<script src="assets/account-store.js?v=afb3b4ae70"></script>
+<script src="data/exercises.js?v=3cecd18143"></script>
+<script src="assets/app.js?v=4764d28a65"></script>
+<script src="assets/exercises.js?v=3da189e799"></script>
 </body>
 </html>

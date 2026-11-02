@@ -2,12 +2,13 @@
 
 Adaptation of the owner's complete Claude `SpeakoutPT` build dated 2026-09-03.
 The source copy is preserved on the owner's Mac. This is a classroom presentation
-tool: exercises are marked by the teacher; the supplied build does not contain
-pre-marked exercise regions or a platform vocabulary deck.
+tool. Exercise regions now open in a centered dialog over the original page.
+There is no platform vocabulary deck.
 
 ## Contents
 
-- 139 Student's Book scans and 94 Workbook scans, unchanged from the supplied files.
+- 139 Student's Book pages and 94 Workbook pages. 35 SB pages were restored from
+  the complete original PDF: the supplied JPEGs omitted text/vector layers.
 - 32 lessons across eight units; Writing, Grammar and Vocabulary banks.
 - 105 Student's Book tracks (including six previously unlisted Review tracks),
   75 Workbook tracks and 16 BBC videos.
@@ -15,8 +16,9 @@ pre-marked exercise regions or a platform vocabulary deck.
 - Drawing, highlighting, exercise regions, reveal/gap/matching/quiz activities,
   curtain, spotlight, timer, random student picker, teams and A–B audio repeat.
 
-`audit/source-files.json` records source checksums. The page images are identical
-to those checksums. Videos use H.264/AAC, at most 720 pixels high, with fast-start
+`audit/source-files.json` records source checksums; `audit/page-restoration.json`
+records the corrected pages and renderer. Other page images are unchanged.
+Videos use H.264/AAC, at most 720 pixels high, with fast-start
 metadata; `audit/video.json` records sizes and verified durations. The 16 videos
 were reduced from 850 MB to 213 MB. `optimize-video.py` documents the encoding.
 
@@ -39,11 +41,39 @@ context when moving between pages. Workbook no longer displays Student's Book ke
 
 ## Saving and portability
 
-Drawings, custom exercise regions and classroom tools are saved in this browser
-under `ewa_speakout_b2plus_*`. They are not uploaded to the student's cloud progress.
-Use **Экспорт разметки и заметок** / **Импорт разметки** in the lesson menu to move
-work between computers. Original `speakout-pt-backup.json` exports are supported.
-A website cannot automatically read storage belonging to the offline file.
+Drawings, custom regions and exercise answers use the platform's existing account.
+Apply `sql/presentation-pages.sql` in the platform Supabase project before enabling
+cloud operation. Until that migration is applied, the UI explicitly reports that
+account saving is unavailable and retains edits locally; it never claims success.
+Private rows are owned by `auth.uid()` and isolated with RLS. They do not touch
+vocabulary progress. The RPC atomically merges changed strokes/regions/answer fields.
+Deletions remain tombstones; distinct edits from other devices are preserved. For
+the same answer or region, the last successful save wins.
+
+Each account has a separate local queue. Offline edits retry automatically. The
+current page refreshes every 30 seconds, on focus and on reconnect. Old browser
+marks migrate once into the first account, without replacing existing cloud keys.
+Switching accounts/signing out clears the displayed marks. Team names and other
+classroom settings remain local per account. Export/import includes exercise answers;
+original `speakout-pt-backup.json` exports are supported. File:// browser storage
+cannot be read by the website; use an export from that offline copy.
+
+## Interactive exercises
+
+`data/exercises.js` maps 1,113 regions on 181 pages to the original page crops.
+Inputs, selection fields, matching/custom quiz tasks and notes open in a native
+centered dialog. Keyboard focus stays in the dialog; Escape closes it.
+534 fields have conservative exact checks derived from unambiguous supplied SB keys.
+Open questions are saved for discussion, without a fabricated correct/incorrect grade.
+The workbook PDF's appended keys refer to a different course (e.g. Lesson 1A
+is about daily routines, while this workbook's Lesson 1A is about relationships).
+They are deliberately excluded from automatic checks. A teacher can add custom
+gap/matching/quiz regions with verified answers. Missing response fields can be
+added with **+ Ответ**.
+
+`scripts/build-speakout-b2plus-exercises.py` rebuilds regions from local Vision OCR;
+`audit/exercises.json` records coverage. Rendering full PDF pages uses
+`scripts/render-presentation-pages.swift`.
 
 `Tab` moves keyboard focus; `Alt+L` toggles the lesson menu. Dialogs use native
 focus handling. On small screens the lesson list and materials open as drawers.
@@ -55,9 +85,11 @@ From the repository root:
 ```sh
 python3 check.py
 node tests/speakout-b2plus.cjs
+node tests/speakout-b2plus-sync.cjs
 python3 -m http.server 8772 --bind 127.0.0.1
 # In another terminal (set PLAYWRIGHT_PATH if needed):
 node tests/speakout-b2plus.cjs --browser
+node tests/speakout-b2plus-exercises.cjs
 ```
 
 Tests cover file references, page checksums, printed page numbering, all units,
