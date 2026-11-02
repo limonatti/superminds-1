@@ -24,11 +24,8 @@ const S = {
   spot: null, drawing: false,
 };
 const LS = {
-  get(k, d) { try { return JSON.parse(localStorage.getItem('ewa_speakout_b2plus_' + k)) ?? d; } catch { return d; } },
-  set(k, v) {
-    try { localStorage.setItem('ewa_speakout_b2plus_' + k, JSON.stringify(v)); }
-    catch { $('#saveStatus').textContent = 'Не удалось сохранить. Скачайте копию через «Экспорт».'; }
-  }
+  get(k,d) { return window.B2Store?.get(k,d) ?? d; },
+  set(k,v) { window.B2Store?.set(k,v); }
 };
 let INK   = LS.get('ink', {});     // "sb:12" -> [strokes]
 let SPOTS = LS.get('spots', {});   // "sb:12" -> [{x,y,w,h,label,audio,type,data}]
@@ -100,7 +97,8 @@ function goPage(n) {
   S.page = Math.max(1, Math.min(max, Number.isFinite(n) ? Math.trunc(n) : 1));
   S.activeSpot = null;
   S.code = lessonAt(S.book, S.page)?.code || null;
-  const src = 'pages/' + S.book + '/' + String(S.page).padStart(3, '0') + '.jpg';
+  const pageVersion=window.SPEAKOUT_PAGE_VERSIONS?.[pkey()];
+  const src = 'pages/' + S.book + '/' + String(S.page).padStart(3, '0') + '.jpg'+(pageVersion?'?v='+pageVersion:'');
   const img = $('#pageImg');
   img.onload = () => { $('#empty').style.display = 'none'; sizeInk(); fit(); drawInk(); renderSpots(); };
   img.onerror = () => { $('#empty').style.display = 'grid'; };
@@ -118,6 +116,7 @@ function goPage(n) {
   ['unit', 'u', 'lesson', 'sheet', 'section'].forEach(k => url.searchParams.delete(k));
   url.searchParams.set('book', S.book); url.searchParams.set('page', printed);
   history.replaceState(null, '', url);
+  if (window.B2Store?.ready) window.B2Store.openPage(pkey());
 }
 function lessonAt(book, sheet) {
   const printed = sheet - 1 + D.pages[book === 'sb' ? 'sbOffset' : 'wbOffset'];
@@ -206,7 +205,9 @@ function ptOf(e) {
 (function pointerLogic() {
   const stage = $('#stage'); let cur = null, pan = null, selBox = null;
   stage.addEventListener('pointerdown', e => {
+    if(window.B2Store&&!B2Store.ready)return;
     if (e.target.closest('.shade, #light, .spot')) return;
+    S.drawing=true;
     stage.setPointerCapture(e.pointerId);
     if (S.marking) {
       const p = ptOf(e); selBox = { x: p[0], y: p[1] };
@@ -234,6 +235,8 @@ function ptOf(e) {
     if (cur) { cur.p.push(ptOf(e)); drawInk(); }
   });
   stage.addEventListener('pointerup', e => {
+    if(!cur&&!pan&&!selBox)return;
+    S.drawing=false;
     if (selBox) {
       const x1 = Math.min(selBox.x, selBox.x2 ?? selBox.x), y1 = Math.min(selBox.y, selBox.y2 ?? selBox.y);
       const w = Math.abs((selBox.x2 ?? selBox.x) - selBox.x), h = Math.abs((selBox.y2 ?? selBox.y) - selBox.y);
@@ -244,7 +247,9 @@ function ptOf(e) {
     if (cur && cur !== 'erasing') saveInk();
     if (cur === 'erasing') saveInk();
     cur = null; pan = null;
+    if(window.B2Store)refreshAccountMarks();
   });
+  stage.addEventListener('pointercancel',()=>{S.drawing=false;if(cur)saveInk();cur=null;pan=null;selBox=null;$('#sel').style.display='none';});
   stage.addEventListener('wheel', e => {
     if (!e.ctrlKey && !e.metaKey && Math.abs(e.deltaY) < 2) return;
     e.preventDefault();
@@ -262,6 +267,13 @@ function eraseAt(p) {
 function renderSpots() {
   const box = $('#spots'); const img = $('#pageImg');
   box.innerHTML = '';
+  (window.SPEAKOUT_EXERCISES?.[pkey()] || []).forEach(s=>{
+    const d=document.createElement('button');d.type='button';d.className='spot book-exercise';
+    d.setAttribute('aria-label','Открыть упражнение '+s.label);
+    Object.assign(d.style,{left:s.x*img.naturalWidth+'px',top:s.y*img.naturalHeight+'px',width:s.w*img.naturalWidth+'px',height:s.h*img.naturalHeight+'px'});
+    d.innerHTML='<span class="tag">'+esc(s.label)+'</span>';
+    d.onclick=ev=>{ev.stopPropagation();window.B2Exercises?.open(s,pkey());};box.appendChild(d);
+  });
   (SPOTS[pkey()] || []).forEach((s, i) => {
     const d = document.createElement('div');
     d.className = 'spot';
@@ -324,10 +336,8 @@ $('#spFill').onclick = () => {
 
 function openSpot(i) {
   const s = (SPOTS[pkey()] || [])[i]; if (!s) return;
-  focusRect(s);
   S.activeSpot = s;
-  setTab('ex');
-  if (s.audio) playTrack(s.audio, 'Трек к упражнению ' + (s.label || ''));
+  window.B2Exercises?.open(s, pkey());
 }
 
 /* поиск ответа по номеру упражнения в текущем уроке */
@@ -350,6 +360,12 @@ function findAnswer(label) {
 
 /* ═══════════ правая панель ═══════════ */
 function setTab(t) {
+  if(t==='ex'){
+    const ex=S.activeSpot || window.SPEAKOUT_EXERCISES?.[pkey()]?.[0];
+    if(ex)window.B2Exercises?.open(ex,pkey());
+    else alert('На этой странице нет готовой области задания. Нажмите «Разметка» и обведите нужное упражнение.');
+    return;
+  }
   S.tab = t;
   $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
   renderPanel();
@@ -415,7 +431,7 @@ function viewAudio(l) {
 }
 
 function viewAnswers(l) {
-  if (S.book === 'wb') return `<div class="card"><h5>Ответы Workbook</h5><p class="mini">Ключи находятся в конце оригинальной рабочей тетради.</p><a class="btn" target="_blank" rel="noopener" href="${CONTENT + enc(D.media.docs.wb)}">Открыть Workbook с ключами</a></div>`;
+  if (S.book === 'wb') return `<div class="card"><h5>Ответы Workbook</h5><p class="mini">Ответы сохраняются для разбора с преподавателем. Ключи в приложенном PDF не совпадают с заданиями этой тетради, поэтому для автоматической проверки не используются.</p><a class="btn" target="_blank" rel="noopener" href="${CONTENT + enc(D.media.docs.wb)}">Открыть оригинальный Workbook</a></div>`;
   if (!l) return '<div class="card"><h5>Выберите урок</h5></div>';
   const items = (ITEMS[l.code] || []).filter(i => i.label);
   let html = `<div class="card"><h5>Ответы · ${l.code}</h5>
@@ -533,7 +549,7 @@ function wirePanel() {
     if (t.closest('[data-hideans]')) { $$('#pbody .ans').forEach(x => x.classList.add('blur')); return; }
     const sf = t.closest('[data-spotfill]');
     if (sf) {
-      S.activeSpot = { label: sf.dataset.spotfill, type: 'reveal', audio: '',
+      S.activeSpot = { x:.04,y:.04,w:.92,h:.9,label: sf.dataset.spotfill, type: 'reveal', audio: '',
                        data: findAnswer(sf.dataset.spotfill) };
       setTab('ex'); return;
     }
@@ -769,8 +785,11 @@ $('#zeroTeams').onclick = () => { TEAMS.forEach(t => t.s = 0); LS.set('teams', T
 drawTeams();
 
 /* ═══════════ экспорт / импорт ═══════════ */
-function exportData() {
-  const blob = new Blob([JSON.stringify({ course: 'speakout-b2plus', version: 1, ink: INK, spots: SPOTS, names: LS.get('names', ''), teams: TEAMS }, null, 1)],
+async function exportData() {
+  let all={ink:INK,spots:SPOTS};
+  try { if(window.B2Store) all=await window.B2Store.exportAll(); }
+  catch { alert('Нет связи с аккаунтом. В экспорт войдут страницы, сохранённые на этом устройстве.'); }
+  const blob = new Blob([JSON.stringify({ course: 'speakout-b2plus', version: 2, ...all, names: LS.get('names', ''), teams: TEAMS }, null, 1)],
                         { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -799,6 +818,18 @@ function validateBackup(d) {
   }
   if (d.names !== undefined && typeof d.names !== 'string') throw Error('Неверный список имён');
   if (d.teams !== undefined && (!Array.isArray(d.teams) || !d.teams.every(t => t && typeof t.n === 'string' && Number.isFinite(t.s)))) throw Error('Неверные команды');
+  if(d.answers!==undefined){
+    if(!d.answers||typeof d.answers!=='object'||Array.isArray(d.answers))throw Error('Неверные ответы');
+    for(const [page,answers]of Object.entries(d.answers)){
+      const match=/^(sb|wb):(\d+)$/.exec(page);
+      if(!match||+match[2]<1||+match[2]>D.pages[match[1]]||!answers||typeof answers!=='object'||Array.isArray(answers))throw Error('Неверная страница ответов');
+      for(const[id,value]of Object.entries(answers)){
+        if(!/^[A-Za-z0-9:_-]{1,150}$/.test(id))throw Error('Неверное задание');
+        if(id.endsWith(':_count')){if(!Number.isInteger(value)||value<1||value>40)throw Error('Неверное число ответов');}
+        else if(value!==null&&typeof value!=='string'&&!(value&&typeof value.value==='string'&&typeof value.checked==='boolean'))throw Error('Неверный ответ');
+      }
+    }
+  }
   return d;
 }
 function importData() {
@@ -814,6 +845,8 @@ function importData() {
         if (d.spots) { SPOTS = d.spots; LS.set('spots', SPOTS); }
         if (d.names !== undefined) { LS.set('names', d.names); $('#names').value = d.names; }
         if (d.teams) { TEAMS = d.teams; LS.set('teams', TEAMS); drawTeams(); }
+        if (d.answers && window.B2Store) for(const [page,answers] of Object.entries(d.answers))
+          if(/^(sb|wb):\d+$/.test(page)) for(const [id,value] of Object.entries(answers)) window.B2Store.patch(page,'answer:'+id,value,false);
         drawInk(); renderSpots(); markRail(); alert('Загружено.');
       } catch { alert('Не получилось прочитать файл.'); }
     };
@@ -863,6 +896,7 @@ $('#bMark').onclick = () => {
 $$('.dbtn[data-tool]').forEach(b => b.onclick = () => setTool(b.dataset.tool));
 function setTool(t) {
   S.tool = t;
+  document.body.classList.toggle('drawing-tool',t!=='cursor');
   $$('.dbtn[data-tool]').forEach(b => b.classList.toggle('on', b.dataset.tool === t));
   $('#stage').style.cursor = t === 'cursor' ? 'grab' : 'crosshair';
 }
@@ -913,6 +947,7 @@ document.addEventListener('keydown', e => {
   if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); el.click(); }
 });
 window.addEventListener('resize', () => { fit(); layoutOverlays(); });
+matchMedia('(max-width: 1100px)').addEventListener('change',e=>{if(e.matches)closeDrawers();});
 
 /* ═══════════ старт ═══════════ */
 if (D) {
@@ -928,4 +963,40 @@ if (D) {
   else if (params.has('sheet')) sheet = Number(params.get('sheet'));
   goPage(Number(sheet));
   layoutOverlays(); renderPanel();
+}
+
+/* Account storage starts after the page is usable; each account has its own cache. */
+function refreshAccountMarks(event) {
+  if(event?.accountChanged){
+    S.drawing=false;S.spot=null;
+    if($('#mdSpot').open)close$('#mdSpot');
+    window.B2Exercises?.close();
+    $('#names').value=LS.get('names','');
+    TEAMS=LS.get('teams',[{n:'Команда 1',s:0},{n:'Команда 2',s:0}]);drawTeams();
+  }
+  if(S.drawing || $('#mdSpot').open)return;
+  INK=LS.get('ink',{});SPOTS=LS.get('spots',{});
+  drawInk();renderSpots();markRail();
+  window.B2Exercises?.refresh();
+}
+if(window.SpeakoutAccountStore) {
+  $('#dock').inert=true;$('#bMark').disabled=true;
+  window.B2Store=new SpeakoutAccountStore({api:window.SM||{
+    presentationSession:async()=>null,watchPresentationAuth:()=>()=>{}
+  },storage:localStorage,onChange:refreshAccountMarks,onStatus:(state,text)=>{
+    $('#saveStatus').textContent=text;$('#saveStatus').dataset.state=state;
+    const modalStatus=$('#mdExercise .exercise-status');if(modalStatus)modalStatus.textContent=text;
+    $('#accountLogin').hidden=!!window.B2Store?.user;
+    $('#syncRetry').hidden=!['error','pending'].includes(state);
+  }});
+  B2Store.current=pkey();
+  B2Store.start().then(()=>{$('#dock').inert=false;$('#bMark').disabled=false;refreshAccountMarks();});
+  $('#syncRetry').onclick=async()=>{await B2Store.pull();await B2Store.flush();};
+  const sync=()=>{if(!document.hidden){B2Store.pull();B2Store.flush();}};
+  window.addEventListener('online',sync);window.addEventListener('focus',sync);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)B2Store.flush();else sync();});
+  setInterval(sync,30000);
+  window.addEventListener('storage',e=>{
+    if(e.key?.startsWith('sb-')&&e.key.endsWith('-auth-token'))window.SM?.presentationSession().then(u=>B2Store.switchUser(u));
+  });
 }

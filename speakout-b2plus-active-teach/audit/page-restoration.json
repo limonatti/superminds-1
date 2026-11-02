@@ -1,0 +1,181 @@
+{
+  "source": "content/Speakout_Third_edition_B2_Plus_Students_Book_with_Keys_www.frenglish.ru/Speakout_Third_edition_B2_Plus_Students_Book_with_Keys_www.frenglish.ru.pdf",
+  "renderer": "scripts/render-presentation-pages.swift",
+  "pages": [
+    {
+      "path": "pages/sb/002.jpg",
+      "pdf_page": 2,
+      "sha256": "a0b865f22770a12673ee937d8804ac70d99653deda0879b293635cb8496081bd"
+    },
+    {
+      "path": "pages/sb/003.jpg",
+      "pdf_page": 3,
+      "sha256": "abf31490145871a332a43c5d296a16d24353a52e3f8a1c7f445a58a79136a7d3"
+    },
+    {
+      "path": "pages/sb/004.jpg",
+      "pdf_page": 4,
+      "sha256": "ed7d3a10fc0652d13d690c14a527e891026b389067e4f478da8891d1834ce558"
+    },
+    {
+      "path": "pages/sb/005.jpg",
+      "pdf_page": 5,
+      "sha256": "5a66ea8347d7fbf01c44588c7a56880edb599fcf2f447f7ea7c4d0b3fcff77e7"
+    },
+    {
+      "path": "pages/sb/109.jpg",
+      "pdf_page": 109,
+      "sha256": "8b0e7609001d629e1b28d25db5253417a515ccf1433637145fc9d1ec1b710f28"
+    },
+    {
+      "path": "pages/sb/110.jpg",
+      "pdf_page": 110,
+      "sha256": "7446891ab56e9c850bcc09d2120e02cf17ba8d4c6bedba6779d1f25d1f72ba78"
+    },
+    {
+      "path": "pages/sb/111.jpg",
+      "pdf_page": 111,
+      "sha256": "ea7f35a4780cc6e59140364ee935a55db75dfcd351aeda6b91dfdaaf3fb2f597"
+    },
+    {
+      "path": "pages/sb/112.jpg",
+      "pdf_page": 112,
+      "sha256": "202494f5b7b2f2c79d5a09c1833a561bc688927292e793b7e8a3fb0e9aa868c9"
+    },
+    {
+      "path": "pages/sb/113.jpg",
+      "pdf_page": 113,
+      "sha256": "c945d71aee7a0ec7d72caa42473e4282c79794bc5daad821340912d63700c820"
+    },
+    {
+      "path": "pages/sb/114.jpg",
+      "pdf_page": 114,
+      "sha256": "0a0031bb65d480c563d5f0c82cd3567cef144d1dfef44ad3c786dba0b902751b"
+    },
+    {
+      "path": "pages/sb/115.jpg",
+      "pdf_page": 115,
+      "sha256": "9d83b70b00c2c62906dbba7155b1429dae8ed1d92def4fd09dfb65594771205a"
+    },
+    {
+      "path": "pages/sb/116.jpg",
+      "pdf_page": 116,
+      "sha256": "71d5b59d0f11303b38a72f28439dff491981f9aaa90f809fa30bc645809e04e3"
+    },
+    {
+      "path": "pages/sb/117.jpg",
+      "pdf_page": 117,
+      "sha256": "e27a9addbb703b1deec7601da6776060e62369b2188a7145af5a59162941572a"
+    },
+    {
+      "path": "pages/sb/118.jpg",
+      "pdf_page": 118,
+      "sha256": "597c2e08b459b3c47f4a936b84321c96f275a59bf934ad0d6652580984d46304"
+    },
+    {
+      "path": "pages/sb/119.jpg",
+      "pdf_page": 119,
+      "sha256": "919bee5616cf94797462d840fe6e9f97ded2299b8a1b400ea6e69947e0cb2c41"
+    },
+    {
+      "path": "pages/sb/120.jpg",
+      "pdf_page": 120,
+      "sha256": "742f5999fdeb2ac8300245286408a1c81ad7c222e7687746b8de283497c30403"
+    },
+    {
+      "path": "pages/sb/121.jpg",
+      "pdf_page": 121,
+      "sha256": "a81772e5732bfcf149bdaca7912ac9f8d21f480a3275aedba77a878bdb760d16"
+    },
+    {
+      "path": "pages/sb/122.jpg",
+      "pdf_page": 122,
+      "sha256": "6554e9a7b372c57569a1811658d83ca2587d5c0f83a472b919a3c7905ecb2564"
+    },
+    {
+      "path": "pages/sb/123.jpg",
+      "pdf_page": 123,
+      "sha256": "a891af65226e2e3d7af5e0e92cadac4eb31cf923221542665c4900d3cf7bc6c1"
+    },
+    {
+      "path": "pages/sb/124.jpg",
+      "pdf_page": 124,
+      "sha256": "8788588a350b5b565d90e2ff3d361ae76e3104c3c1cf255b89942b35338b3c3a"
+    },
+    {
+      "path": "pages/sb/125.jpg",
+      "pdf_page": 125,
+      "sha256": "7a4846c0d9c9fc69067febb1bffb30d5544e963b7c553aa40dfc5f293789f157"
+    },
+    {
+      "path": "pages/sb/126.jpg",
+      "pdf_page": 126,
+      "sha256": "fe9ac0349e01cba78e0717024fccf2b59d83344bcb7442ea53e79578d9d380fb"
+    },
+    {
+      "path": "pages/sb/127.jpg",
+      "pdf_page": 127,
+      "sha256": "affa16d177432977a19d9238167fda1b413f44ff6f764dcc6e1a8655147c1aed"
+    },
+    {
+      "path": "pages/sb/128.jpg",
+      "pdf_page": 128,
+      "sha256": "bcc079963c30dd40aaec3bfbf421f8f16f3ab1c920d780ca0178eddbe7f1d14f"
+    },
+    {
+      "path": "pages/sb/129.jpg",
+      "pdf_page": 129,
+      "sha256": "36b45a6c0c3b41301983caa62b86b1783b566ac2c6836203598e9e4ccdd5bf3b"
+    },
+    {
+      "path": "pages/sb/130.jpg",
+      "pdf_page": 130,
+      "sha256": "4d4ab56d643707e9d413ccca92873738f32acf6ceed55353a84fc96c658f2f93"
+    },
+    {
+      "path": "pages/sb/131.jpg",
+      "pdf_page": 131,
+      "sha256": "0a1b0249f140ecef54055aefdd7f862378f945b787b6cbdee5e00e548ad2f401"
+    },
+    {
+      "path": "pages/sb/132.jpg",
+      "pdf_page": 132,
+      "sha256": "50d26983c6be922565a6f6f7be693722812acd733d31529dee0d5739e2b395e9"
+    },
+    {
+      "path": "pages/sb/133.jpg",
+      "pdf_page": 133,
+      "sha256": "ac472aad1db9758174af147951aee598cd27af1487bda8f23971f5516822829a"
+    },
+    {
+      "path": "pages/sb/134.jpg",
+      "pdf_page": 134,
+      "sha256": "cf1cfe72b7b44dc0468093e33365dfdcabdf52883252f28796834a2102308406"
+    },
+    {
+      "path": "pages/sb/135.jpg",
+      "pdf_page": 135,
+      "sha256": "be3f50a4a3769d32904a092958bd9667b295bd973a26a600308daf1d3529372d"
+    },
+    {
+      "path": "pages/sb/136.jpg",
+      "pdf_page": 136,
+      "sha256": "9c13483555a2224e998bad5fbfe3d8e1c78596e181153016062cc6b83cf89586"
+    },
+    {
+      "path": "pages/sb/137.jpg",
+      "pdf_page": 137,
+      "sha256": "b005a5fe94bdfe55e86e20e58912e3d8ac87fca81369bd1bf37834df74d967ed"
+    },
+    {
+      "path": "pages/sb/138.jpg",
+      "pdf_page": 138,
+      "sha256": "4609032385aa0583a4114ab891371170450d757c3ad987ee988c955940ba7697"
+    },
+    {
+      "path": "pages/sb/139.jpg",
+      "pdf_page": 139,
+      "sha256": "cbe6c4cd2e302fdfe7ad58c4134dfd505593bd476b20592819d9c793e993f873"
+    }
+  ]
+}

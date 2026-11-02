@@ -1,0 +1,1395 @@
+[
+  {
+    "book": "sb",
+    "sheet": 5,
+    "printed": 6,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 6,
+    "printed": 7,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 7,
+    "printed": 8,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 8,
+    "printed": 9,
+    "exercises": 10,
+    "checked_fields": 16
+  },
+  {
+    "book": "sb",
+    "sheet": 9,
+    "printed": 10,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 10,
+    "printed": 11,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 11,
+    "printed": 12,
+    "exercises": 1,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 12,
+    "printed": 13,
+    "exercises": 10,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 13,
+    "printed": 14,
+    "exercises": 4,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 14,
+    "printed": 15,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 15,
+    "printed": 16,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 16,
+    "printed": 17,
+    "exercises": 12,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 17,
+    "printed": 18,
+    "exercises": 11,
+    "checked_fields": 26
+  },
+  {
+    "book": "sb",
+    "sheet": 18,
+    "printed": 19,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 19,
+    "printed": 20,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 20,
+    "printed": 21,
+    "exercises": 16,
+    "checked_fields": 4
+  },
+  {
+    "book": "sb",
+    "sheet": 21,
+    "printed": 22,
+    "exercises": 13,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 22,
+    "printed": 23,
+    "exercises": 6,
+    "checked_fields": 18
+  },
+  {
+    "book": "sb",
+    "sheet": 23,
+    "printed": 24,
+    "exercises": 12,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 24,
+    "printed": 25,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 25,
+    "printed": 26,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 26,
+    "printed": 27,
+    "exercises": 5,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 27,
+    "printed": 28,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 28,
+    "printed": 29,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 29,
+    "printed": 30,
+    "exercises": 11,
+    "checked_fields": 16
+  },
+  {
+    "book": "sb",
+    "sheet": 30,
+    "printed": 31,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 31,
+    "printed": 32,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 32,
+    "printed": 33,
+    "exercises": 6,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 33,
+    "printed": 34,
+    "exercises": 16,
+    "checked_fields": 10
+  },
+  {
+    "book": "sb",
+    "sheet": 34,
+    "printed": 35,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 35,
+    "printed": 36,
+    "exercises": 4,
+    "checked_fields": 16
+  },
+  {
+    "book": "sb",
+    "sheet": 36,
+    "printed": 37,
+    "exercises": 7,
+    "checked_fields": 9
+  },
+  {
+    "book": "sb",
+    "sheet": 37,
+    "printed": 38,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 38,
+    "printed": 39,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 39,
+    "printed": 40,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 40,
+    "printed": 41,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 41,
+    "printed": 42,
+    "exercises": 6,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 42,
+    "printed": 43,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 43,
+    "printed": 44,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 44,
+    "printed": 45,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 45,
+    "printed": 46,
+    "exercises": 13,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 46,
+    "printed": 47,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 47,
+    "printed": 48,
+    "exercises": 9,
+    "checked_fields": 16
+  },
+  {
+    "book": "sb",
+    "sheet": 48,
+    "printed": 49,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 49,
+    "printed": 50,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 50,
+    "printed": 51,
+    "exercises": 3,
+    "checked_fields": 3
+  },
+  {
+    "book": "sb",
+    "sheet": 51,
+    "printed": 52,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 52,
+    "printed": 53,
+    "exercises": 9,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 53,
+    "printed": 54,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 54,
+    "printed": 55,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 55,
+    "printed": 56,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 56,
+    "printed": 57,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 57,
+    "printed": 58,
+    "exercises": 11,
+    "checked_fields": 4
+  },
+  {
+    "book": "sb",
+    "sheet": 58,
+    "printed": 59,
+    "exercises": 6,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 59,
+    "printed": 60,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 60,
+    "printed": 61,
+    "exercises": 14,
+    "checked_fields": 5
+  },
+  {
+    "book": "sb",
+    "sheet": 61,
+    "printed": 62,
+    "exercises": 9,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 62,
+    "printed": 63,
+    "exercises": 13,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 63,
+    "printed": 64,
+    "exercises": 1,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 64,
+    "printed": 65,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 65,
+    "printed": 66,
+    "exercises": 12,
+    "checked_fields": 12
+  },
+  {
+    "book": "sb",
+    "sheet": 66,
+    "printed": 67,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 67,
+    "printed": 68,
+    "exercises": 7,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 68,
+    "printed": 69,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 69,
+    "printed": 70,
+    "exercises": 5,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 70,
+    "printed": 71,
+    "exercises": 6,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 71,
+    "printed": 72,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 72,
+    "printed": 73,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 73,
+    "printed": 74,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 74,
+    "printed": 75,
+    "exercises": 4,
+    "checked_fields": 3
+  },
+  {
+    "book": "sb",
+    "sheet": 75,
+    "printed": 76,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 76,
+    "printed": 77,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 77,
+    "printed": 78,
+    "exercises": 13,
+    "checked_fields": 32
+  },
+  {
+    "book": "sb",
+    "sheet": 78,
+    "printed": 79,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 79,
+    "printed": 80,
+    "exercises": 3,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 80,
+    "printed": 81,
+    "exercises": 9,
+    "checked_fields": 12
+  },
+  {
+    "book": "sb",
+    "sheet": 81,
+    "printed": 82,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 82,
+    "printed": 83,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 83,
+    "printed": 84,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 84,
+    "printed": 85,
+    "exercises": 10,
+    "checked_fields": 4
+  },
+  {
+    "book": "sb",
+    "sheet": 85,
+    "printed": 86,
+    "exercises": 7,
+    "checked_fields": 7
+  },
+  {
+    "book": "sb",
+    "sheet": 86,
+    "printed": 87,
+    "exercises": 13,
+    "checked_fields": 7
+  },
+  {
+    "book": "sb",
+    "sheet": 87,
+    "printed": 88,
+    "exercises": 1,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 88,
+    "printed": 89,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 89,
+    "printed": 90,
+    "exercises": 4,
+    "checked_fields": 10
+  },
+  {
+    "book": "sb",
+    "sheet": 90,
+    "printed": 91,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 91,
+    "printed": 92,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 92,
+    "printed": 93,
+    "exercises": 3,
+    "checked_fields": 12
+  },
+  {
+    "book": "sb",
+    "sheet": 93,
+    "printed": 94,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 94,
+    "printed": 95,
+    "exercises": 5,
+    "checked_fields": 5
+  },
+  {
+    "book": "sb",
+    "sheet": 95,
+    "printed": 96,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 96,
+    "printed": 97,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 97,
+    "printed": 98,
+    "exercises": 5,
+    "checked_fields": 10
+  },
+  {
+    "book": "sb",
+    "sheet": 98,
+    "printed": 99,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 99,
+    "printed": 100,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 100,
+    "printed": 101,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 101,
+    "printed": 102,
+    "exercises": 12,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 102,
+    "printed": 103,
+    "exercises": 10,
+    "checked_fields": 30
+  },
+  {
+    "book": "sb",
+    "sheet": 103,
+    "printed": 104,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 104,
+    "printed": 105,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 105,
+    "printed": 106,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 106,
+    "printed": 107,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 107,
+    "printed": 108,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 108,
+    "printed": 109,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 109,
+    "printed": 110,
+    "exercises": 3,
+    "checked_fields": 6
+  },
+  {
+    "book": "sb",
+    "sheet": 110,
+    "printed": 111,
+    "exercises": 3,
+    "checked_fields": 18
+  },
+  {
+    "book": "sb",
+    "sheet": 111,
+    "printed": 112,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 112,
+    "printed": 113,
+    "exercises": 3,
+    "checked_fields": 12
+  },
+  {
+    "book": "sb",
+    "sheet": 113,
+    "printed": 114,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 114,
+    "printed": 115,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 115,
+    "printed": 116,
+    "exercises": 3,
+    "checked_fields": 17
+  },
+  {
+    "book": "sb",
+    "sheet": 116,
+    "printed": 117,
+    "exercises": 4,
+    "checked_fields": 13
+  },
+  {
+    "book": "sb",
+    "sheet": 117,
+    "printed": 118,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 118,
+    "printed": 119,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 119,
+    "printed": 120,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 120,
+    "printed": 121,
+    "exercises": 17,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 121,
+    "printed": 122,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 122,
+    "printed": 123,
+    "exercises": 2,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 123,
+    "printed": 124,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 124,
+    "printed": 125,
+    "exercises": 3,
+    "checked_fields": 14
+  },
+  {
+    "book": "sb",
+    "sheet": 125,
+    "printed": 126,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 126,
+    "printed": 127,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 127,
+    "printed": 128,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 128,
+    "printed": 129,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 129,
+    "printed": 130,
+    "exercises": 1,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 130,
+    "printed": 131,
+    "exercises": 0,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 131,
+    "printed": 132,
+    "exercises": 2,
+    "checked_fields": 12
+  },
+  {
+    "book": "sb",
+    "sheet": 132,
+    "printed": 133,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 133,
+    "printed": 134,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 134,
+    "printed": 135,
+    "exercises": 5,
+    "checked_fields": 8
+  },
+  {
+    "book": "sb",
+    "sheet": 135,
+    "printed": 136,
+    "exercises": 1,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 136,
+    "printed": 137,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 137,
+    "printed": 138,
+    "exercises": 3,
+    "checked_fields": 13
+  },
+  {
+    "book": "sb",
+    "sheet": 138,
+    "printed": 139,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "sb",
+    "sheet": 139,
+    "printed": 140,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 2,
+    "printed": 4,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 3,
+    "printed": 5,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 4,
+    "printed": 6,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 5,
+    "printed": 7,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 6,
+    "printed": 8,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 7,
+    "printed": 9,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 8,
+    "printed": 10,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 9,
+    "printed": 11,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 10,
+    "printed": 12,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 11,
+    "printed": 13,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 12,
+    "printed": 14,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 13,
+    "printed": 15,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 14,
+    "printed": 16,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 15,
+    "printed": 17,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 16,
+    "printed": 18,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 17,
+    "printed": 19,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 18,
+    "printed": 20,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 19,
+    "printed": 21,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 20,
+    "printed": 22,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 21,
+    "printed": 23,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 22,
+    "printed": 24,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 23,
+    "printed": 25,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 24,
+    "printed": 26,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 25,
+    "printed": 27,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 26,
+    "printed": 28,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 27,
+    "printed": 29,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 28,
+    "printed": 30,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 29,
+    "printed": 31,
+    "exercises": 9,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 30,
+    "printed": 32,
+    "exercises": 9,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 31,
+    "printed": 33,
+    "exercises": 2,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 32,
+    "printed": 34,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 33,
+    "printed": 35,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 34,
+    "printed": 36,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 35,
+    "printed": 37,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 36,
+    "printed": 38,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 37,
+    "printed": 39,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 38,
+    "printed": 40,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 39,
+    "printed": 41,
+    "exercises": 9,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 40,
+    "printed": 42,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 41,
+    "printed": 43,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 42,
+    "printed": 44,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 43,
+    "printed": 45,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 44,
+    "printed": 46,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 45,
+    "printed": 47,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 46,
+    "printed": 48,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 47,
+    "printed": 49,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 48,
+    "printed": 50,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 49,
+    "printed": 51,
+    "exercises": 4,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 50,
+    "printed": 52,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 51,
+    "printed": 53,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 52,
+    "printed": 54,
+    "exercises": 5,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 53,
+    "printed": 55,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 54,
+    "printed": 56,
+    "exercises": 10,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 55,
+    "printed": 57,
+    "exercises": 3,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 56,
+    "printed": 58,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 57,
+    "printed": 59,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 58,
+    "printed": 60,
+    "exercises": 11,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 59,
+    "printed": 61,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 60,
+    "printed": 62,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 61,
+    "printed": 63,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 62,
+    "printed": 64,
+    "exercises": 7,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 63,
+    "printed": 65,
+    "exercises": 8,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 64,
+    "printed": 66,
+    "exercises": 6,
+    "checked_fields": 0
+  },
+  {
+    "book": "wb",
+    "sheet": 65,
+    "printed": 67,
+    "exercises": 6,
+    "checked_fields": 0
+  }
+]

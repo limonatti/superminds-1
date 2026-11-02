@@ -26,10 +26,11 @@ for (const l of D.lessons) {
   assert(l.sbIdx >= 0 && l.sbIdx < D.pages.sb && l.wbIdx >= 0 && l.wbIdx < D.pages.wb);
 }
 const source = JSON.parse(fs.readFileSync(path.join(root, 'audit/source-files.json')));
+const restored = JSON.parse(fs.readFileSync(path.join(root, 'audit/page-restoration.json'))).pages;
 for (const f of source.files.filter(f => f.path.startsWith('pages/'))) {
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, f.path))).digest('hex'), f.sha256, f.path);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, f.path))).digest('hex'), (restored.find(r=>r.path===f.path)||f).sha256, f.path);
 }
-console.log(`PASS 233 unchanged book scans, 32 lessons, 180 book audio tracks, 16 videos and ${referenced.size} linked resources.`);
+console.log(`PASS 233 book scans (${restored.length} restored from complete PDF pages), 32 lessons, 180 book audio tracks, 16 videos and ${referenced.size} linked resources.`);
 
 if (process.argv.includes('--browser')) (async () => {
   const {chromium} = require(process.env.PLAYWRIGHT_PATH || '/Users/mak/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
@@ -41,7 +42,7 @@ if (process.argv.includes('--browser')) (async () => {
     const page = await browser.newPage({viewport: {width: 1440, height: 960}});
     page.on('pageerror', e => errors.push(e.message));
     page.on('response', r => { if (r.url().startsWith(url.slice(0, -10)) && r.status() >= 400) failed.push([r.status(), r.url()]); });
-    const ready = () => page.waitForFunction(() => document.querySelector('#pageImg')?.complete && document.querySelector('#pageImg').naturalWidth > 0);
+    const ready = () => page.waitForFunction(() => document.querySelector('#pageImg')?.complete && document.querySelector('#pageImg').naturalWidth > 0 && window.B2Store?.ready);
     await page.goto(url + '?unit=1'); await ready();
     assert.equal(await page.locator('#pageImg').getAttribute('src'), 'pages/sb/007.jpg');
     assert.match(await page.locator('#crumb').innerText(), /1A.*стр\. 8/);
