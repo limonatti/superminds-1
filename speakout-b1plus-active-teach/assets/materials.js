@@ -5,7 +5,7 @@ window.SpeakoutMaterials = (() => {
   const {esc,url,answers,persist,stopMedia,bindExclusivePlayers} = config;
   const dialog=document.querySelector('#modal'),body=document.querySelector('#modalBody'),heading=document.querySelector('#modalTitle');
   const entries=(window.SPEAKOUT_MATERIALS?.items||[]).concat(config.books.map((r,i)=>({...r,id:'book-'+i,category:'books',teacher:/key|teacher/i.test(r.name),units:[]})));
-  let category=categories[config.category]?config.category:'books',unit=config.unit||'all',query='',teachers=!!config.keys;
+  let category=categories[config.category]?config.category:'books',unit=config.unit||'all',query=config.query||'',teachers=!!config.keys;
   let active=null,source=null,pageNumber=0,zoom=100;
   const get=id=>entries.find(r=>r.id===id);
   const $=selector=>body.querySelector(selector);
@@ -25,7 +25,7 @@ window.SpeakoutMaterials = (() => {
    results();
   }
   function results(){
-   const found=entries.filter(r=>r.category===category&&(!r.teacher||teachers)&&(unit==='all'||['books','literature'].includes(category)||!r.units.length||r.units.includes(+unit))&&(`${r.name} ${r.lesson||''} ${r.level||''}`).toLowerCase().includes(query.trim().toLowerCase()));
+   const found=entries.filter(r=>r.category===category&&(!r.teacher||teachers)&&(unit==='all'||['books','literature'].includes(category)||!r.units.length||r.units.includes(+unit))&&(`${r.name} ${r.id} ${r.lesson||''} ${r.level||''}`).toLowerCase().includes(query.trim().toLowerCase()));
    $('#materialCount').textContent=`Материалов: ${found.length}`;
    $('#materialList').innerHTML=found.length?found.map(r=>`<article class="material-card"><div><h3>${esc(r.name)}</h3><p>${esc([r.level,r.lesson?'Урок '+r.lesson:'',r.teacher?'Для преподавателя':'',r.pageCount?r.pageCount+' стр.':'',!r.teacher&&r.audio?.length?r.audio.length+' аудио':''].filter(Boolean).join(' · '))}</p></div><div>${r.images?`<button data-material="${r.id}">Открыть</button>`:`<a href="${url(r.path)}" target="_blank" rel="noopener">Открыть PDF</a>`}</div></article>`).join(''):'<p>Материалы не найдены. Попробуй другой юнит или поисковый запрос.</p>';
    $$('[data-material]').forEach(b=>b.onclick=()=>show(get(b.dataset.material)));

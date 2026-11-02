@@ -68,7 +68,11 @@ if(process.argv.includes('--browser'))(async()=>{
   await page.locator('#materialZoomIn').click();assert.equal(await page.locator('#materialZoomFit').textContent(),'125%');
   await page.keyboard.press('Escape');await page.goto(base+'?book=sb&page=8');
   await page.locator('#lessonWorksheets').click();assert.equal(await page.locator('#materialUnit').inputValue(),'1');
-  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#materialSearch').inputValue(),'1A');
+  assert.equal(await page.locator('#materialList .material-card').count(),2);
+  await page.locator('#materialSearch').fill('Grammar');
+  assert.equal(await page.locator('#materialList .material-card').count(),2);
+  await page.locator('#closeModal').click();
   // Supplemental notes survive the same answer backup/import used by book exercises.
   await page.locator('.answer-backup summary').click();
   const download=page.waitForEvent('download');await page.locator('#export').click();

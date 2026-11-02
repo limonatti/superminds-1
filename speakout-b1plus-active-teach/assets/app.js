@@ -121,7 +121,7 @@ function lessonMaterials(){
  const container=document.createElement('div');container.className='lesson-materials';
  container.innerHTML=(cards.length?`<button id="lessonWorksheets">Доп. задания ${esc(lesson)} (${cards.length})</button>`:'')+`<button id="lessonTests">Тесты Unit ${unit}</button>`;
  $('#quickMedia').append(container);
- if($('#lessonWorksheets'))$('#lessonWorksheets').onclick=()=>resources(false,{category:'photocopiables',unit});
+ if($('#lessonWorksheets'))$('#lessonWorksheets').onclick=()=>resources(false,{category:'photocopiables',unit,query:lesson});
  $('#lessonTests').onclick=()=>resources(false,{category:'tests',unit});
 }
 
