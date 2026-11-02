@@ -26,8 +26,9 @@ window.SpeakoutMaterials = (() => {
   }
   function results(){
    const found=entries.filter(r=>r.category===category&&(!r.teacher||teachers)&&(unit==='all'||['books','literature'].includes(category)||!r.units.length||r.units.includes(+unit))&&(`${r.name} ${r.id} ${r.lesson||''} ${r.level||''}`).toLowerCase().includes(query.trim().toLowerCase()));
+   if(category==='tests')found.sort((a,b)=>Math.max(0,...a.units)-Math.max(0,...b.units)||a.id.localeCompare(b.id,undefined,{numeric:true}));
    $('#materialCount').textContent=`Материалов: ${found.length}`;
-   $('#materialList').innerHTML=found.length?found.map(r=>`<article class="material-card"><div><h3>${esc(r.name)}</h3><p>${esc([r.level,r.lesson?'Урок '+r.lesson:'',r.teacher?'Для преподавателя':'',r.pageCount?r.pageCount+' стр.':'',!r.teacher&&r.audio?.length?r.audio.length+' аудио':''].filter(Boolean).join(' · '))}</p></div><div>${r.images?`<button data-material="${r.id}">Открыть</button>`:`<a href="${url(r.path)}" target="_blank" rel="noopener">Открыть PDF</a>`}</div></article>`).join(''):'<p>Материалы не найдены. Попробуй другой юнит или поисковый запрос.</p>';
+   $('#materialList').innerHTML=found.length?found.map(r=>`<article class="material-card"><div><h3>${esc(r.name)}</h3><p>${esc([r.level,r.lesson?'Урок '+r.lesson:'',r.teacher?'Для преподавателя':'',r.pageCount?r.pageCount+' стр.':'',!r.teacher&&r.audio?.length?r.audio.length+' аудио':''].filter(Boolean).join(' · '))}</p>${window.SPEAKOUT_MATERIAL_INTERACTIONS?.materials[r.id]?'<span class="material-interactive-badge">Интерактивный тест</span>':''}</div><div>${r.images?`<button data-material="${r.id}">Открыть</button>`:`<a href="${url(r.path)}" target="_blank" rel="noopener">Открыть PDF</a>`}</div></article>`).join(''):'<p>Материалы не найдены. Попробуй другой юнит или поисковый запрос.</p>';
    $$('[data-material]').forEach(b=>b.onclick=()=>show(get(b.dataset.material)));
   }
   function show(item,from=null){
@@ -39,8 +40,8 @@ window.SpeakoutMaterials = (() => {
     ${item.level?`<p class="source-note">Уровень оригинала: ${esc(item.level)}</p>`:''}
     <div class="material-audio">${(item.teacher?[]:item.audio).map(m=>`<label>Аудио ${esc(m.track)}<audio controls preload="none" src="${url(m.path)}"></audio></label>`).join('')}</div>
     ${item.missingAudio?.length?`<p class="source-note">Записей ${esc(item.missingAudio.join(', '))} нет в архиве. Доступны чтение и обсуждение; задания на аудирование требуют этих записей.</p>`:''}
-    <div class="material-pager"><button id="materialPrev" aria-label="Предыдущая страница материала">‹</button><label>Страница <select id="materialPage">${item.images.map((_,i)=>`<option value="${i}">${i+1}</option>`).join('')}</select> из ${item.pageCount}</label><button id="materialNext" aria-label="Следующая страница материала">›</button><button id="materialZoomOut" aria-label="Уменьшить материал">−</button><button id="materialZoomFit">100%</button><button id="materialZoomIn" aria-label="Увеличить материал">+</button></div>
-    <div class="material-viewport"><img id="materialImage" alt="${esc(item.name)}"></div>
+    <div class="material-study"><div class="material-original"><div class="material-pager"><button id="materialPrev" aria-label="Предыдущая страница материала">‹</button><label>Страница <select id="materialPage">${item.images.map((_,i)=>`<option value="${i}">${i+1}</option>`).join('')}</select> из ${item.pageCount}</label><button id="materialNext" aria-label="Следующая страница материала">›</button><button id="materialZoomOut" aria-label="Уменьшить материал">−</button><button id="materialZoomFit">100%</button><button id="materialZoomIn" aria-label="Увеличить материал">+</button></div>
+    <div class="material-viewport"><img id="materialImage" alt="${esc(item.name)}"></div></div><div class="material-practice"></div></div>
     ${!item.teacher?`<div class="material-answer"><label for="materialNote">Ответы и заметки к заданию</label><textarea id="materialNote" rows="5" placeholder="Запиши ответы по номерам упражнений…">${esc(answer.note||'')}</textarea><p>Проверка с преподавателем или по оригинальному ключу. Ответы сохраняются в этом браузере и входят в файл «Мои ответы».</p><button id="materialDone" class="${answer.done?'selected':''}" aria-pressed="${!!answer.done}">${answer.done?'✓ Выполнено':'Отметить выполненным'}</button></div>`:''}`;
    $('#materialBack').onclick=()=>source?show(source):list();
    if(key)$('#materialKey').onclick=()=>show(key,item);
@@ -52,7 +53,10 @@ window.SpeakoutMaterials = (() => {
     $('#materialDone').onclick=()=>{answer.done=!answer.done;syncDone();persist()};
    }
    function syncDone(){const b=$('#materialDone');b.textContent=answer.done?'✓ Выполнено':'Отметить выполненным';b.classList.toggle('selected',answer.done);b.setAttribute('aria-pressed',!!answer.done)}
-   renderPage();bindExclusivePlayers();heading.focus({preventScroll:true});
+   renderPage();
+   const interactive=window.SpeakoutMaterialExercises?.mount($('.material-practice'),{item,answer,persist,esc,url,bindExclusivePlayers,setPage:n=>{pageNumber=n-1;renderPage()}});
+   $('.material-study').classList.toggle('has-practice',!!interactive);
+   bindExclusivePlayers();heading.focus({preventScroll:true});
   }
   function setZoom(value){zoom=Math.max(75,Math.min(250,value));$('#materialImage').style.width=zoom+'%';$('#materialZoomFit').textContent=zoom+'%';$('#materialZoomOut').disabled=zoom<=75;$('#materialZoomIn').disabled=zoom>=250}
   function renderPage(){

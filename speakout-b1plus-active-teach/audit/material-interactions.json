@@ -1,0 +1,744 @@
+{
+  "materials": [
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-a-version-a",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-a-version-b",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-a-version-c",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-b-version-a",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-b-version-b",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-diagnostic-test-part-b-version-c",
+      "units": [],
+      "sections": 1,
+      "auto": 1,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u1a",
+      "units": [
+        1
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u1b",
+      "units": [
+        1
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u1c",
+      "units": [
+        1
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u1a",
+      "units": [
+        1
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 85
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u1b",
+      "units": [
+        1
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 85
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u1c",
+      "units": [
+        1
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 54
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-1a",
+      "units": [
+        1,
+        2
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-1b",
+      "units": [
+        1,
+        2
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-1c",
+      "units": [
+        1,
+        2
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 63
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u2a",
+      "units": [
+        2
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u2b",
+      "units": [
+        2
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u2c",
+      "units": [
+        2
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u2a",
+      "units": [
+        2
+      ],
+      "sections": 14,
+      "auto": 10,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u2b",
+      "units": [
+        2
+      ],
+      "sections": 14,
+      "auto": 10,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u2c",
+      "units": [
+        2
+      ],
+      "sections": 14,
+      "auto": 10,
+      "fields": 54
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u3a",
+      "units": [
+        3
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u3b",
+      "units": [
+        3
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u3c",
+      "units": [
+        3
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u3a",
+      "units": [
+        3
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u3b",
+      "units": [
+        3
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u3c",
+      "units": [
+        3
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 56
+    },
+    {
+      "id": "tests-so3-b1p-mid-course-test-u1-4a",
+      "units": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 100
+    },
+    {
+      "id": "tests-so3-b1p-mid-course-test-u1-4b",
+      "units": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 100
+    },
+    {
+      "id": "tests-so3-b1p-mid-course-test-u1-4c",
+      "units": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-2a",
+      "units": [
+        3,
+        4
+      ],
+      "sections": 20,
+      "auto": 15,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-2b",
+      "units": [
+        3,
+        4
+      ],
+      "sections": 20,
+      "auto": 15,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-2c",
+      "units": [
+        3,
+        4
+      ],
+      "sections": 20,
+      "auto": 15,
+      "fields": 69
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u4a",
+      "units": [
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u4b",
+      "units": [
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u4c",
+      "units": [
+        4
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u4a",
+      "units": [
+        4
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u4b",
+      "units": [
+        4
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u4c",
+      "units": [
+        4
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 58
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u5a",
+      "units": [
+        5
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u5b",
+      "units": [
+        5
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u5c",
+      "units": [
+        5
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u5a",
+      "units": [
+        5
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 75
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u5b",
+      "units": [
+        5
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 75
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u5c",
+      "units": [
+        5
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 55
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-3a",
+      "units": [
+        5,
+        6
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 90
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-3b",
+      "units": [
+        5,
+        6
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 90
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-3c",
+      "units": [
+        5,
+        6
+      ],
+      "sections": 19,
+      "auto": 14,
+      "fields": 64
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u6a",
+      "units": [
+        6
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u6b",
+      "units": [
+        6
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u6c",
+      "units": [
+        6
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u6a",
+      "units": [
+        6
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 85
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u6b",
+      "units": [
+        6
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 85
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u6c",
+      "units": [
+        6
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 58
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u7a",
+      "units": [
+        7
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u7b",
+      "units": [
+        7
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u7c",
+      "units": [
+        7
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u7a",
+      "units": [
+        7
+      ],
+      "sections": 17,
+      "auto": 13,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u7b",
+      "units": [
+        7
+      ],
+      "sections": 17,
+      "auto": 13,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u7c",
+      "units": [
+        7
+      ],
+      "sections": 16,
+      "auto": 12,
+      "fields": 58
+    },
+    {
+      "id": "tests-so3-b1p-end-of-course-test-u1-8a",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 12,
+      "auto": 8,
+      "fields": 132
+    },
+    {
+      "id": "tests-so3-b1p-end-of-course-test-u1-8b",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 12,
+      "auto": 8,
+      "fields": 132
+    },
+    {
+      "id": "tests-so3-b1p-end-of-course-test-u1-8c",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 12,
+      "auto": 8,
+      "fields": 82
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-4a",
+      "units": [
+        7,
+        8
+      ],
+      "sections": 21,
+      "auto": 16,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-4b",
+      "units": [
+        7,
+        8
+      ],
+      "sections": 21,
+      "auto": 16,
+      "fields": 95
+    },
+    {
+      "id": "tests-so3-b1p-progress-test-4c",
+      "units": [
+        7,
+        8
+      ],
+      "sections": 20,
+      "auto": 15,
+      "fields": 65
+    },
+    {
+      "id": "tests-so3-b1p-quick-end-of-course-test-u1-8a",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 100
+    },
+    {
+      "id": "tests-so3-b1p-quick-end-of-course-test-u1-8b",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 100
+    },
+    {
+      "id": "tests-so3-b1p-quick-end-of-course-test-u1-8c",
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 60
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u8a",
+      "units": [
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u8b",
+      "units": [
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 25
+    },
+    {
+      "id": "tests-so3-b1p-quick-quiz-u8c",
+      "units": [
+        8
+      ],
+      "sections": 3,
+      "auto": 3,
+      "fields": 20
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u8a",
+      "units": [
+        8
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u8b",
+      "units": [
+        8
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 80
+    },
+    {
+      "id": "tests-so3-b1p-unit-test-u8c",
+      "units": [
+        8
+      ],
+      "sections": 15,
+      "auto": 11,
+      "fields": 54
+    }
+  ],
+  "issues": [],
+  "fieldTypes": {
+    "choice": 3044,
+    "text": 625,
+    "match": 508,
+    "bank": 299,
+    "order": 58
+  },
+  "counts": {
+    "materials": 75,
+    "sections": 739,
+    "fields": 4534,
+    "manualSections": 168
+  }
+}

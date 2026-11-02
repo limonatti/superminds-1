@@ -1,0 +1,37 @@
+.material-study{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+#modal.materials-dialog>.dialoghead{position:sticky;top:-24px;z-index:5;background:var(--paper);padding:8px 0}
+#modal.materials-dialog:has(.has-practice) .material-audio{display:none}
+.material-study.has-practice{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.material-original{min-width:0;position:sticky;top:76px}
+.has-practice .material-viewport{max-height:73vh}
+.material-practice{min-width:0;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--paper)}
+.material-practice:empty{display:none}
+.practice-summary{display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px}
+.practice-summary p{font-size:12px;margin:0}.practice-summary button{font-size:12px}
+.practice-select-label{display:block;margin:16px 0;font-size:13px;font-weight:700}
+.practice-select-label select{display:block;width:100%;margin-top:6px}
+#practiceTitle{font-size:17px;margin:18px 0 10px;color:var(--wine)}
+.practice-instruction{font-size:15px;line-height:1.5;font-weight:700}
+.practice-help{font-size:12px;color:var(--muted);line-height:1.6}
+.practice-source-text,.practice-key{font-size:13px;border:1px solid var(--line);border-radius:8px;padding:10px;margin:12px 0}
+.practice-source-text>div,.practice-key>div{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px;max-height:400px;overflow:auto}
+.practice-track{display:block;font-size:13px;margin:12px 0}.practice-track audio{display:block;width:100%;margin-top:6px}
+.practice-field{padding:14px 12px;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+.practice-field label{display:block;line-height:1.6;font-size:14px;margin-bottom:9px;font-weight:400;overflow-wrap:anywhere}
+.practice-field label strong{color:var(--wine);margin-right:3px}
+.practice-field input,.practice-field select{width:100%;font-size:15px}
+.practice-options,.practice-tokens{display:flex;flex-wrap:wrap;gap:6px}
+.practice-options button,.practice-tokens button{font-size:14px;text-align:left;overflow-wrap:anywhere;max-width:100%}
+.practice-tokens{margin-bottom:8px}.practice-tokens button{font-weight:400}
+.practice-field.correct{border-color:#34724e;background:#f3faf4}
+.practice-field.incorrect{border-color:#b33b4e;background:#fff5f6}
+.practice-feedback-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+.practice-feedback{font-size:12px;overflow-wrap:anywhere}.correct .practice-feedback{color:#245d3a}.incorrect .practice-feedback{color:#922b3d}
+.practice-reveal{font-size:11px;padding:4px 8px;min-height:32px;font-weight:400;margin-left:auto}
+.practice-actions,.practice-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.practice-actions button,.practice-nav button{font-size:13px}.practice-nav{justify-content:space-between}
+#practiceResult{font-weight:700;font-size:14px}#practiceNote{width:100%;resize:vertical;display:block;margin:8px 0 12px}
+.material-interactive-badge{display:inline-block;font-size:11px;padding:2px 7px;background:#efe2d9;border-radius:5px;color:var(--wine);margin-top:6px}
+@media(min-width:1100px){#modal.materials-dialog:has(.has-practice){width:min(1500px,97vw)}}
+@media(max-width:650px){#modal.materials-dialog>.dialoghead{top:-16px}}
+@media(max-width:800px){.material-study.has-practice{grid-template-columns:minmax(0,1fr)}.material-original{position:static}.has-practice .material-viewport{max-height:35vh}.material-practice{padding:12px}.practice-summary{align-items:flex-start}.practice-summary button{padding:7px;font-size:11px}.practice-field{padding:12px 9px}}

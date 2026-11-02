@@ -15,7 +15,7 @@ the supplied “AI worksheets” were not used.
   as unavailable; the page and its original answer key are included.
 - Missing from supplied PDFs: SB 138. SB 6 and WB 3 were restored from
   the owner’s additional samples. The course has no external replacement links.
-- Original keys remain accessible. Only unambiguous extracted keys enable
+- Original keys remain accessible. For SB/WB, only unambiguous extracted keys enable
   automatic checking; discussion, pronunciation, uncertain OCR and shared
   slash alternatives use written answers and manual review.
 - Verified publisher errata are recorded in `audit/errata.json` and displayed
@@ -27,6 +27,15 @@ the supplied “AI worksheets” were not used.
   and unit, displays original pages locally, saves written answers, and links
   original keys and editable test documents. Test audio is matched by the
   recording codes printed in the PDFs; it is separate from SB/WB media.
+- All 75 student test documents are interactive, ordered by unit: Unit Tests
+  and Quick Quizzes A/B/C for Units 1–8, Progress Tests, mid-course/final tests
+  and diagnostics. The 739 exercises contain 4,534 automatically checked
+  responses, with source choices, gaps, matching, word banks and sentence ordering.
+  Writing and speaking use saved responses and teacher review, without automatic
+  marks. Scores count correct responses rather than imitating the printed test's
+  weighted marks. Exercise selection opens the original page and relevant audio;
+  progress is retained per test and variant and included in answer export/import.
+  Photocopiables and literature retain their original reader and written notes.
 - Literature lessons 7–10 cover B1–B2 and B1+–B2+. Their nine referenced audio
   recordings are absent from the supplied ZIP and explicitly marked missing.
   The six lower-level lessons and their notes are not included in this course.
@@ -46,6 +55,7 @@ python extract_pages.py
 python optimize_video.py
 python build.py
 python import_materials.py '/path/to/Tests.zip' '/path/to/Photocopiables.zip' '/path/to/Literature Lessons.zip'
+python build_material_interactions.py
 ```
 
 `work/` holds source extraction and OCR intermediates and is ignored. `audit/`
@@ -63,3 +73,11 @@ supplemental source hashes, level selection, key/audio mappings, the library,
 mobile page viewing and answer backup/import. `audit/materials.json` records
 archive hashes, every retained original and the twelve excluded lower-level PDFs.
 Supplement previews are rendered directly from the PDFs at 2000 pixels high.
+
+Run `node tests/speakout-b1plus-interactive-materials.cjs` (optionally `--browser`)
+to check every compiled test, source-key fixtures, per-variant progress,
+interactive controls, retries, audio, manual writing and answer backup/import.
+The compiler reads the supplied Word tasks and A/B/C answer keys; PDF text maps
+each exercise to its original page. It requires pypdf and macOS `textutil` for
+the single legacy `.doc`. `audit/material-interactions.json` records coverage
+and any unmapped keys/pages; all issues must be resolved before publication.
