@@ -1,0 +1,224 @@
+{
+  "wb:10:1A": {
+    "note": "The printed example eleven is already numbered 1. The remaining words take their numeric ranks.",
+    "given": [
+      "1"
+    ]
+  },
+  "wb:10:3A": {
+    "note": "Small vowel slots and the printed label 8 are lost/merged in the supplied OCR. Coordinates checked against Workbook p.10 (1190 \u00d7 1684 original image).",
+    "fields": [
+      {
+        "n": "1",
+        "id": "1",
+        "box": [
+          73,
+          630.5,
+          6.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "2",
+        "id": "2.1",
+        "box": [
+          70,
+          644,
+          9,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "2",
+        "id": "2.2",
+        "box": [
+          84.5,
+          643.5,
+          9,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "3",
+        "id": "3",
+        "box": [
+          73,
+          657,
+          17.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "4",
+        "id": "4",
+        "box": [
+          72.5,
+          670.5,
+          18.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "5",
+        "id": "5.1",
+        "box": [
+          198.5,
+          630.5,
+          6.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "5",
+        "id": "5.2",
+        "box": [
+          212.5,
+          630.5,
+          7.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "5",
+        "id": "5.3",
+        "box": [
+          227,
+          630.5,
+          6.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "6",
+        "id": "6",
+        "box": [
+          198.5,
+          644,
+          19,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "7",
+        "id": "7.1",
+        "box": [
+          196.5,
+          657,
+          6.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "7",
+        "id": "7.2",
+        "box": [
+          210,
+          657,
+          17.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "7",
+        "id": "7.3",
+        "box": [
+          232,
+          657,
+          7.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "7",
+        "id": "7.4",
+        "box": [
+          244.5,
+          657,
+          9,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "8",
+        "id": "8.1",
+        "box": [
+          198.5,
+          670.5,
+          28.5,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "8",
+        "id": "8.2",
+        "box": [
+          233.5,
+          670.5,
+          6,
+          13.5
+        ],
+        "kind": "dots"
+      },
+      {
+        "n": "8",
+        "id": "8.3",
+        "box": [
+          245.5,
+          670.5,
+          6.5,
+          13.5
+        ],
+        "kind": "dots"
+      }
+    ]
+  },
+  "sb:56:3A": {
+    "templates": {
+      "2": "{}riv{}, {}anc{}",
+      "3": "{}yp{}, {}ak{}",
+      "4": "{}w{}m, {}ng",
+      "5": "c{}tc{}, t{}nk",
+      "6": "pa{}n{}, l{}s{}en",
+      "7": "{}member, {}ad",
+      "8": "fo{}ge{}, {}h{}ow"
+    }
+  },
+  "sb:66:2A": {
+    "templates": {
+      "1": "fr{}",
+      "2": "be{}",
+      "3": "opp{}",
+      "4": "be{}",
+      "5": "ne{} t{}"
+    }
+  },
+  "wb:56:1B": {
+    "note": "The printed u slot in return is next to the ascender of r, which prevents conservative raster detection. Checked on the original page at pixels x416\u2013434, baseline y1067.",
+    "appendFields": [
+      {
+        "n": "6",
+        "box": [
+          208,
+          522,
+          9,
+          13.5
+        ],
+        "kind": "short"
+      }
+    ]
+  }
+}
