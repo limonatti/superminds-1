@@ -331,6 +331,7 @@ async function drawPane(){
     '<div id="det"></div>' +
     solReport +
     solutionsResponses(d) +
+    speakoutB1Responses(d) +
     outcomesResponses(d) +
 
     '<div class="sect"><span>Сообщения ученику</span><span>чат · виден ученику в кабинете</span></div>' +
@@ -417,6 +418,16 @@ function solutionsResponses(data){
     return '<details style="padding:12px 18px"><summary>'+(n==='extra'?'Reference &amp; banks':n?'Unit '+n:'Introduction')+' · '+rows.length+' заданий</summary>'+rows.map(([id,r])=>'<section style="padding:12px 0;border-bottom:1px solid #d7d3d3"><a href="solutions-int-active-teach/index.html?book='+esc(r.book)+'&amp;page='+Number(r.page)+'"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+Number(r.page)+' · № '+esc(r.exercise||id.split('-').pop())+'</b></a>'+values(r.values,r.fieldLabels)+(r.score?'<p>Автопроверка: '+Number(r.score.correct)+' из '+Number(r.score.total)+'</p>':'')+(r.reflection?'<p><b>Свободный ответ</b></p><p style="white-space:pre-wrap">'+esc(r.reflection)+'</p>':'')+(r.previousAnswers?.length?'<details><summary>Предыдущие ответы</summary>'+r.previousAnswers.map(v=>values(v.values||[],v.labels)+(v.reflection?'<p>'+esc(v.reflection)+'</p>':'')).join('')+'</details>':'')+'</section>').join('')+'</details>';
   }).join('');
 }
+function speakoutB1Responses(data){
+  const entries=Object.entries(data.__coursework?.["speakout-b1"]||{}).filter(([,r])=>r && Array.isArray(r.values) && (r.values.some(v=>String(v).trim())||r.reflection?.trim()||r.previousAnswers?.length));
+  if(!entries.length)return "";
+  const values=(vs,labels=[])=>'<ol>'+vs.map((v,i)=>'<li style="white-space:pre-wrap">'+(labels[i]?'<b>'+esc(labels[i])+': </b>':'')+esc(v||'—')+'</li>').join('')+'</ol>';
+  return '<div class="sect"><span>Speakout B1 · ответы ученика</span><span>'+entries.length+' упражнений</span></div>'+[...Array.from({length:8},(_,i)=>i+1),'extra'].map(n=>{
+    const rows=entries.filter(([,r])=>String(r.unit)===String(n)).sort((a,b)=>String(a[1].book).localeCompare(String(b[1].book))||a[1].page-b[1].page||a[0].localeCompare(b[0],undefined,{numeric:true}));
+    if(!rows.length)return "";
+    return '<details style="padding:12px 18px"><summary>'+(n==='extra'?'Reference &amp; banks':n?'Unit '+n:'Introduction')+' · '+rows.length+' заданий</summary>'+rows.map(([id,r])=>'<section style="padding:12px 0;border-bottom:1px solid #d7d3d3"><a href="speakout-b1-active-teach/index.html?book='+esc(r.book)+'&amp;page='+Number(r.page)+'&amp;exercise='+encodeURIComponent(r.exercise)+'"><b>'+esc(r.book==='wb'?'Workbook':'Student’s Book')+' · стр. '+Number(r.page)+' · № '+esc(r.exercise||id.split('-').pop())+'</b></a>'+values(r.values,r.fieldLabels)+(r.score?'<p>Автопроверка: '+Number(r.score.correct)+' из '+Number(r.score.total)+'</p>':'')+(r.reflection?'<p><b>Свободный ответ</b></p><p style="white-space:pre-wrap">'+esc(r.reflection)+'</p>':'')+(r.previousAnswers?.length?'<details><summary>Предыдущие ответы</summary>'+r.previousAnswers.map(v=>values(v.values||[],v.labels)+(v.reflection?'<p>'+esc(v.reflection)+'</p>':'')).join('')+'</details>':'')+'</section>').join('')+'</details>';
+  }).join('');
+}
 
 const PAGE_COURSES = {
   "outcomes-beginner": { title: "Outcomes Beginner", units: [1,2,3,4,5,6,7,8,9,10,11,12] },
@@ -468,7 +479,7 @@ function fillUnits(){
   const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
-  if (lessonPart) lessonPart.parentElement.lastChild.textContent = solutions ? ' Student’s Book' : ' Урок · лексика/чанки';
+  if (lessonPart) lessonPart.parentElement.lastChild.textContent = (solutions || course === 'speakout-b1') ? ' Student’s Book' : ' Урок · лексика/чанки';
   if (grammarPart) {
     if (!solutions && grammarPart.parentElement.hidden) grammarPart.checked = true;
     grammarPart.parentElement.hidden = solutions;

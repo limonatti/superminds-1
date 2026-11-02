@@ -72,6 +72,8 @@ const KIND = {
 const PART_L = { lesson:"Лексика и чанки", grammar:"Грамматика", workbook:"Workbook" };
 const PART_D = { lesson:"слова и выражения юнита", grammar:"правила и упражнения", workbook:"рабочая тетрадь · закрепление" };
 function partHref(course, unit, part){
+  if(course==="speakout-b1"){const n=Math.max(1,Math.min(8,Number(unit)||1));return "speakout-b1-active-teach/index.html?unit="+n+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+(104+4*(n-1)):"");}
+
   if(course==="solutions-int") return "solutions-int-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
   if(course==="outcomes-beginner"){
     const n=Math.max(1,Math.min(12,Number(unit)||1));
@@ -261,7 +263,7 @@ async function load(){
     const parts = (meta.parts && meta.parts.length) ? meta.parts : (x.course==="solutions-int"?["lesson","workbook"]:["lesson","grammar"]);
     const rows = parts.map((pt,i) =>
       '<a class="row'+(i===0?" now":"")+'" href="'+partHref(x.course,x.unit,pt)+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-      '<span><span class="t">'+(["solutions-int","outcomes-beginner"].includes(x.course)&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(["solutions-int","outcomes-beginner"].includes(x.course)&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
+      '<span><span class="t">'+(["solutions-int","outcomes-beginner","speakout-b1"].includes(x.course)&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(["solutions-int","outcomes-beginner","speakout-b1"].includes(x.course)&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
       '<span class="b '+(i===0?"pri ":"")+'sm">Открыть</span></a>').join("");
     const dd = meta.due ? dueInfo(meta.due) : null;
     ITEMS.push({ type:"spk", id:x.id, done:!!x.done, st: statusOf(x), due: meta.due || null,
