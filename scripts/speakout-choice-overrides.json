@@ -1,0 +1,233 @@
+{
+  "sb:31:3A": {
+    "1": [
+      "have",
+      "has"
+    ],
+    "2": [
+      "I have",
+      "I'm have"
+    ],
+    "3": [
+      "no have",
+      "don't have"
+    ],
+    "4": [
+      "has",
+      "have"
+    ],
+    "5": [
+      "does",
+      "do"
+    ],
+    "6": [
+      "Do you have",
+      "Have you"
+    ],
+    "7": [
+      "don't",
+      "don't have"
+    ],
+    "8": [
+      "have",
+      "do have"
+    ]
+  },
+  "sb:25:6A": {
+    "1": [
+      "her friend",
+      "someone in her family"
+    ]
+  },
+  "sb:26:6A": {
+    "_ocr": {
+      "31:heir": "3their",
+      "'what": "7what",
+      "'what/who": "7what/who",
+      "'what/": "7what/"
+    },
+    "_renumber": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "sb:43:3B": {
+    "1": [
+      "Can I",
+      "I can"
+    ]
+  },
+  "sb:56:6A": {
+    "_ocr": {
+      "°thanks": "10thanks"
+    },
+    "8": [
+      "a cheap",
+      "an expensive"
+    ],
+    "_renumber": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "sb:74:2B": {
+    "6": [
+      "at the weekends",
+      "every day"
+    ]
+  },
+  "sb:84:1B": {
+    "1": [
+      "Kodo drummers",
+      "BBC presenters"
+    ]
+  },
+  "sb:85:4D": {
+    "1": [
+      "play the piano",
+      "dance the tango"
+    ],
+    "2": [
+      "I love music",
+      "my husband wants me to learn"
+    ],
+    "3": [
+      "not very good",
+      "really bad",
+      "a disaster"
+    ],
+    "4": [
+      "near us",
+      "in town"
+    ],
+    "5": [
+      "start next month",
+      "are every week"
+    ]
+  },
+  "wb:14:2B": {
+    "2": [
+      "tired",
+      "not very well"
+    ]
+  },
+  "wb:23:2C": {
+    "5": [
+      "clothes shop",
+      "shoe shop"
+    ]
+  },
+  "wb:25:5C": {
+    "1": [
+      "eat",
+      "don't eat"
+    ]
+  },
+  "wb:28:2": {
+    "3": [
+      "one coffee",
+      "two coffees"
+    ]
+  },
+  "wb:41:4B": {
+    "_ocr": {
+      "spermarket": "supermarket",
+      "librar": "library"
+    },
+    "2": [
+      "swimming pool",
+      "sports centre"
+    ]
+  },
+  "wb:57:1A": {
+    "3": [
+      "would like",
+      "likes"
+    ]
+  },
+  "wb:58:5": {
+    "1": [
+      "I'd like",
+      "I'd want",
+      "I liked"
+    ],
+    "6": [
+      "I'd",
+      "I'm like",
+      "I'd like"
+    ]
+  },
+  "wb:4:1": {
+    "_lanes": [
+      [
+        30,
+        175
+      ],
+      [
+        175,
+        290
+      ]
+    ],
+    "_superscripts": true,
+    "_ocr": {
+      "Goodbe": "Goodbye",
+      "Be": "Bye",
+      "He": "Hey",
+      "o": "you"
+    },
+    "3": [
+      "Goodbye",
+      "Bye"
+    ],
+    "4": [
+      "Goodbye",
+      "See you"
+    ],
+    "7": [
+      "Good evening",
+      "Good night"
+    ],
+    "8": [
+      "Bye",
+      "See you"
+    ]
+  },
+  "sb:45:5": {
+    "_skip": true
+  },
+  "wb:40:2A": {
+    "_ocr": {
+      "an": "any"
+    }
+  },
+  "wb:23:1A": {
+    "_ocr": {
+      "00": "Do"
+    }
+  },
+  "wb:10:4A": {
+    "_loose_letters": true
+  },
+  "wb:34:1E": {
+    "_ocr": {
+      "I": "/"
+    }
+  },
+  "wb:58:1A": {
+    "_first": true
+  }
+}
