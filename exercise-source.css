@@ -1,4 +1,9 @@
 /* Existing course colours and answer components; a consistent two-pane work area. */
+.exercise-region{position:absolute!important;transform:none!important;min-width:0!important;min-height:0!important;padding:0!important;border:1px solid transparent!important;border-radius:4px!important;background:transparent!important;box-shadow:none!important;cursor:pointer;pointer-events:auto;text-align:left}
+.exercise-region:hover{background:#315e9f0a!important;border-color:#315e9f80!important}
+.exercise-region:focus-visible{outline:3px solid #315e9f!important;outline-offset:2px;background:#315e9f0a!important}
+.exercise-region-label{position:absolute;top:0;left:0;display:block;min-width:24px;padding:2px 5px;border-radius:5px;background:var(--wine,var(--accent,#7c2340));color:#fff;font-size:12px;line-height:20px;box-shadow:0 1px 4px #0003;pointer-events:none}
+.exercise-region.done .exercise-region-label{background:#287044}
 dialog#exerciseDialog.focus-dialog,dialog#exercise.focus-dialog,dialog#modal.focus-dialog,dialog#mdExercise.focus-dialog{width:min(1680px,calc(100vw - 32px));max-width:calc(100vw - 32px);height:calc(100dvh - 32px);max-height:calc(100dvh - 32px);padding:20px;overflow:hidden;box-sizing:border-box}
 dialog.focus-dialog[open]{display:flex;flex-direction:column;gap:0}
 .focus-dialog>.exercise-head,.focus-dialog>.dialog-head,.focus-dialog>.dialoghead{position:static;flex:none;margin:0 0 12px;padding:0 0 12px;background:inherit;min-height:48px}

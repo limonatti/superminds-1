@@ -42,5 +42,25 @@ function controls(host){
  buttons[0].onclick=()=>{change(host,{zoom:Math.max(.5,state().zoom-.25)})};buttons[1].onclick=()=>{change(host,{zoom:1})};buttons[2].onclick=()=>{change(host,{zoom:Math.min(3,state().zoom+.25)})};buttons[3].onclick=()=>{const full=!state().full;buttons[3].textContent=full?'Только задание':'Вся страница';buttons[3].setAttribute('aria-pressed',full);change(host,{full})};
  host.prepend(bar);fit(host);return bar;
 }
-root.ExerciseSource={mount,change,columns,controls};
+// Use the existing exercise crop for the click target. Keep the original
+// button, label and handlers so keyboard access and saved answer IDs survive.
+function regions(host,boxes){
+ if(!host)return;
+ [...host.children].forEach((button,i)=>{
+  const box=boxes[i];if(!box||box.length!==4||!box.every(Number.isFinite))return;
+  let [x,y,w,h]=box;x=Math.max(0,x);y=Math.max(0,y);w=Math.min(1-x,w);h=Math.min(1-y,h);
+  // Older crops can include a neighbouring column or the next task. They
+  // remain useful in the reader but must not cover another clickable task.
+  for(const other of boxes){
+   if(!other||!other.every(Number.isFinite))continue;
+   if(other[0]>x+.17)w=Math.min(w,other[0]-x-.003);
+   if(Math.abs(other[0]-x)<.17&&other[1]>y+.012)h=Math.min(h,other[1]-y-.003);
+  }
+  if(w<=0||h<=0)return;
+  button.classList.add('exercise-region');
+  Object.assign(button.style,{left:x*100+'%',top:y*100+'%',width:w*100+'%',height:h*100+'%'});
+  const label=document.createElement('span');label.className='exercise-region-label';label.textContent=button.textContent;button.replaceChildren(label);
+ });
+}
+root.ExerciseSource={mount,change,columns,controls,regions};
 })(window);

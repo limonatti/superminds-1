@@ -12,8 +12,9 @@
   $('#wordCards').href=`../trainer.html?unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
   $('#exerciseHotspots').hidden=!visible;
   $('#exerciseHotspots').innerHTML=visible?list.map(e=>`<button class="exercisePin ${OutcomesGrader.isComplete(e.check,answers[e.id])?'done':''}" data-exercise="${e.id}" style="left:${(e.x+.005)*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?', выполнено':''}">${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?' ✓':''}</button>`).join(''):'';
+  window.ExerciseSource.regions($('#exerciseHotspots'),list.map(e=>window.OUTCOMES_INTERACTIONS?.[e.id]?.box));
   $('#exerciseList').hidden=!visible;
-  $('#exerciseList').innerHTML=visible?`<h3>Задания страницы</h3><p class="exerciseHelp">Нажмите номер на странице или выберите задание ниже.</p>${list.length?list.map(e=>`<button data-exercise="${e.id}" class="exerciseRow"><span>№ ${e.n}</span><span>${esc(e.instruction)}</span><small>${workLabel(e)}</small></button>`).join(''):'<p>На этой странице нет упражнений.</p>'}<button id="workDownload">Скачать мои ответы</button>`:'';
+  $('#exerciseList').innerHTML=visible?`<h3>Задания страницы</h3><p class="exerciseHelp">Нажмите на упражнение на странице или выберите задание ниже.</p>${list.length?list.map(e=>`<button data-exercise="${e.id}" class="exerciseRow"><span>№ ${e.n}</span><span>${esc(e.instruction)}</span><small>${workLabel(e)}</small></button>`).join(''):'<p>На этой странице нет упражнений.</p>'}<button id="workDownload">Скачать мои ответы</button>`:'';
   $$('[data-exercise]').forEach(b=>b.onclick=()=>openTask(list.find(e=>e.id===b.dataset.exercise)));
   if($('#workDownload'))$('#workDownload').onclick=download;
  }

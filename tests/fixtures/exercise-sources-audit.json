@@ -205,7 +205,7 @@
         "page": "sb:39",
         "exercises": 10,
         "sourceGroups": 5,
-        "gutter": 0.42125
+        "gutter": null
       },
       {
         "page": "sb:40",
@@ -673,7 +673,7 @@
         "page": "wb:33",
         "exercises": 6,
         "sourceGroups": 3,
-        "gutter": 0.5075
+        "gutter": null
       },
       {
         "page": "wb:34",
@@ -697,7 +697,7 @@
         "page": "wb:37",
         "exercises": 7,
         "sourceGroups": 2,
-        "gutter": 0.51625
+        "gutter": null
       },
       {
         "page": "wb:38",
@@ -709,7 +709,7 @@
         "page": "wb:39",
         "exercises": 7,
         "sourceGroups": 2,
-        "gutter": 0.5075
+        "gutter": null
       },
       {
         "page": "wb:40",
@@ -745,13 +745,13 @@
         "page": "wb:45",
         "exercises": 6,
         "sourceGroups": 4,
-        "gutter": 0.49875
+        "gutter": null
       },
       {
         "page": "wb:46",
         "exercises": 8,
         "sourceGroups": 3,
-        "gutter": 0.49375
+        "gutter": null
       },
       {
         "page": "wb:47",
@@ -799,7 +799,7 @@
         "page": "wb:54",
         "exercises": 7,
         "sourceGroups": 3,
-        "gutter": 0.4925
+        "gutter": null
       },
       {
         "page": "wb:55",
@@ -817,7 +817,7 @@
         "page": "wb:57",
         "exercises": 7,
         "sourceGroups": 2,
-        "gutter": 0.50375
+        "gutter": null
       },
       {
         "page": "wb:58",
@@ -835,7 +835,7 @@
         "page": "wb:60",
         "exercises": 6,
         "sourceGroups": 6,
-        "gutter": 0.49125
+        "gutter": null
       },
       {
         "page": "wb:61",
@@ -877,7 +877,7 @@
         "page": "wb:67",
         "exercises": 7,
         "sourceGroups": 6,
-        "gutter": 0.4975
+        "gutter": null
       }
     ]
   },

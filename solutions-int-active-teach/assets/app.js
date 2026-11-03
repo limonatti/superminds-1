@@ -25,6 +25,7 @@ function render(){
  $('#prev').disabled=list().indexOf(page)===0;$('#next').disabled=list().indexOf(page)===list().length-1;
  $('#pageImage').src=page.image;$('#pageImage').alt=`${book==='sb'?'Student’s Book':'Workbook'}, страница ${page.page}`;$('#imageError').hidden=true;
  $('#hotspots').innerHTML=page.exercises.map(e=>`<button class="hotspot ${responses[e.id]?'done':''}" data-ex="${e.id}" style="left:${e.x*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.label}">${e.label}</button>`).join('');
+ window.ExerciseSource.regions($('#hotspots'),page.exercises.map(e=>e.box));
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Слова доступны в словаре и карточках.</p>';
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
  $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book}-${t}.mp3"></audio></label>`).join(''):'<p>Выбери аудио по номеру трека в учебнике.</p>';

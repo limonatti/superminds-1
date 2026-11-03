@@ -17,6 +17,17 @@ course loads `assets/exercise-sources.js` before its existing answer engine.
 The source image files, question IDs, answer schemas and grading keys remain
 unchanged. The source viewer contains no editable answer controls.
 
+The same original exercise bounds now act as mouse/touch targets in all six
+books. Click an exercise body or its number to open the existing centered dialog.
+The shared `ExerciseSource.regions` helper retains each native button and its
+keyboard, grading and persistence handlers. Drawing tools keep their existing
+priority over exercise targets. B2+ already used whole exercise targets.
+
+A1 has 49 restored page targets, recorded in `audit/regions-restored.json`, using
+the supplied PDFs. The existing `wb:21:3B` list entry is retained but has no page
+target because page 21 prints exercise 3 without a separate B instruction.
+Answer record IDs and grading keys are unchanged.
+
 The desktop dialog uses the available viewport. The original task fits the pane
 by default; explicit zoom remains available. Longer supporting texts and images
 follow the main task in the source pane. On narrow screens, the complete source
@@ -62,3 +73,9 @@ Verification:
 Original task images are never edited. Supplemental photocopiables and literature
 readers keep their original navigation; the complete-source view is for exercises
 that already have interactive answer controls.
+
+Check page-body clicks in both books and all 49 restored A1 targets:
+
+```sh
+COURSE_TEST_BASE=http://127.0.0.1:8768 node tests/exercise-regions-browser.cjs
+```
