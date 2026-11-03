@@ -10,6 +10,7 @@
 .exercise-field{display:flex;flex-direction:column;gap:6px}.exercise-field label{font-size:14px;font-weight:600}
 .exercise-field input,.exercise-field textarea,.exercise-field select{box-sizing:border-box;width:100%;min-height:44px;border:1px solid #677789;border-radius:8px;padding:10px 12px;background:#10161c;color:#fff;font:inherit}
 .exercise-field textarea{resize:vertical}.exercise-field.correct input,.exercise-field.correct select{border-color:#77c397}.exercise-field.retry input,.exercise-field.retry select{border-color:#efae78}
+.exercise-multiple{display:flex;flex-wrap:wrap;gap:8px}.exercise-multiple label{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #677789;border-radius:8px;cursor:pointer}.exercise-multiple input[type=checkbox]{width:20px;min-height:20px;height:20px;accent-color:#91baff}.exercise-field:has(.exercise-multiple){grid-column:1/-1}.exercise-field.correct .exercise-multiple label{border-color:#77c397}.exercise-field.retry .exercise-multiple label{border-color:#efae78}
 .field-result{font-size:12px;min-height:16px;color:#e9c59f}.correct .field-result{color:#a0e6b7}
 .exercise-note,.exercise-status{font-size:13px;color:#b8c4d0;line-height:1.5}
 .exercise-key{margin-top:20px;border:1px solid #415064;border-radius:8px;padding:12px}.exercise-key summary{cursor:pointer}.exercise-key p,.exercise-prompt{white-space:pre-wrap;line-height:1.6}

@@ -1,0 +1,212 @@
+{
+  "60": {
+    "1": {
+      "answers": "is always complaining about things|used to be good friends|keeps on borrowing my things|is inclined to be lazy|would go swimming every day"
+    },
+    "2": {
+      "answers": "will do|one|so/I expect so|not many|not/I hope not"
+    },
+    "3": {
+      "answers": "seem|feels|felt|like|if",
+      "hint": "Введите только лишнее слово, которое нужно удалить."
+    },
+    "4": {
+      "answers": "I'm|I've been|I'll be|I'll have been|to be"
+    },
+    "5": {
+      "answers": "bumped|fell|made|confided|socialise|wavelength"
+    },
+    "6": {
+      "answers": "track|enough|time|stuck|blown|rush"
+    },
+    "7": {
+      "answers": "edge|collaboration|alliances|adversaries|potential|limits"
+    }
+  },
+  "61": {
+    "8": {
+      "answers": "tragic|frustrating|unconvincing|entertaining|eager"
+    },
+    "9": {
+      "answers": "reason|motivate|pressure|win|drive"
+    },
+    "10": {
+      "answers": "flyers|target|merchandise|slogan|hype|viral"
+    },
+    "11": {
+      "answers": "give|rather|Given|run|jump|arm"
+    },
+    "12": {
+      "answers": "coming|level|suggesting|effective|makes|neat"
+    }
+  },
+  "62": {
+    "1": {
+      "answers": "be hungry now if I hadn't had/be hungry if I hadn't had|liked Sam, I would have invited|have gone to Brazil if I didn't|hadn't bought a car last month, I would/hadn't bought a car, I would",
+      "prefixes": [
+        "I would",
+        "If I",
+        "I wouldn't",
+        "If I"
+      ],
+      "suffixes": [
+        "such a big lunch.",
+        "him to my party.",
+        "speak Portuguese.",
+        "get the bus to work."
+      ],
+      "hint": "Допишите пропущенную часть. Можно ввести и полное предложение.",
+      "evidence": "Mixed conditionals link past cause with present result in 1/4 and present condition with past result in 2/3."
+    },
+    "2": {
+      "answers": "being given|have been made|to be rewritten|be asked|Having been offered|to be offered|to be given|have been sent"
+    },
+    "3": {
+      "answers": "She was sitting by the fire quietly and reading a book.|I often bump into Sam when I'm in town.|Fortunately, our train wasn't delayed for too long.|It rained all afternoon.|Mary seemed to be very angry about something.|I never go to the gym.",
+      "hint": "Введите полное предложение: сохраните исходные слова и заполните только один пропуск выбранным наречием.",
+      "evidence": "Each response selects one supplied adverbial and places it in one of the printed gaps."
+    },
+    "4": {
+      "answers": "will be waiting|'ll have received/will have received|'ll have been learning Japanese for/will have been learning Japanese for/will have been learning it for/will have been learning for|may be playing/might be playing/could be playing|may have decorated/might have decorated/could have decorated",
+      "evidence": "Gap 3 includes 'Japanese for' before the printed 'five years'. Uncertain future events accept may/might/could."
+    },
+    "5": {
+      "answers": "reached|decision|change|heart|real|dilemma|second|thoughts|assess|outcomes|torn|between",
+      "numbers": [
+        "1a",
+        "1b",
+        "2a",
+        "2b",
+        "3a",
+        "3b",
+        "4a",
+        "4b",
+        "5a",
+        "5b",
+        "6a",
+        "6b"
+      ],
+      "hint": "Для каждого предложения введите два слова по порядку."
+    },
+    "6": {
+      "answers": "homelessness|rough|fossil fuels|greenhouse gases|welfare|hardship|diversity|equal opportunities",
+      "numbers": [
+        "1a",
+        "1b",
+        "2a",
+        "2b",
+        "3a",
+        "3b",
+        "4a",
+        "4b"
+      ],
+      "hint": "Для каждого предложения заполните два пропуска по порядку."
+    }
+  },
+  "63": {
+    "7": {
+      "answers": "b|b|a|b|a|a",
+      "choices": "ab"
+    },
+    "8": {
+      "answers": "define|sum|spell|illustrate|signify"
+    },
+    "9": {
+      "answers": "striped|decent|chic|matching|waterproof|trendy|vintage|classy"
+    },
+    "10": {
+      "answers": "energy-efficient|revolutionise|recyclable|recharge|hand-held|eliminates"
+    },
+    "11": {
+      "answers": "basically|words|nutshell|mean|summarise|another"
+    },
+    "12": {
+      "answers": "starving|dead|fortune|forever|killing|green"
+    }
+  },
+  "64": {
+    "1": {
+      "answers": "living|served|destroyed|taking|wishing|bought"
+    },
+    "2": {
+      "answers": "What you should do|what he won was|what they're asking for is|what they stole was|what I'll do is"
+    },
+    "3": {
+      "answers": "how|whose|that|who|where|what"
+    },
+    "4": {
+      "answers": "a|b|b|a|b",
+      "choices": "ab"
+    },
+    "5": {
+      "answers": "have learned|has been explored|had assumed|to have existed|to have disappeared|will have been answered"
+    },
+    "6": {
+      "answers": "had he felt|would she tell|did I realise/did I realize|will I|is he|do I agree",
+      "hint": "Введите только замену подчёркнутой части (не более трёх слов).",
+      "evidence": "Past perfect after never before; modal inversion; do-support in past/present; inversion of be."
+    }
+  },
+  "65": {
+    "7": {
+      "answers": "Because|As|Seeing|light|result|by"
+    },
+    "8": {
+      "answers": "However|Even though|That said|Although|Admittedly|though"
+    },
+    "9": {
+      "answers": "every bit as|invaluable|infinitely more|useful|nowhere near as"
+    },
+    "10": {
+      "answers": "quite a broad|can give you|That's an interesting|can say|feel quite strongly|most important point"
+    },
+    "11": {
+      "answers": "acceptable|arrangement|happy|fair|offer|sounds"
+    },
+    "12": {
+      "answers": "see/view|with|seems/appears|can/do|other|makes|have/share/hold"
+    }
+  },
+  "66": {
+    "1": {
+      "answers": "residence|outskirts|built in|modernised|construction|demolished"
+    },
+    "2": {
+      "answers": "time|favourite|bend|fair|costs|away"
+    },
+    "3": {
+      "answers": "bankruptcy|scheme|cutbacks|on-site|bonus|profitability"
+    },
+    "4": {
+      "answers": "down|sick|pain|up the wall|temper|make"
+    },
+    "5": {
+      "answers": "b|c|a|b|a|c",
+      "choices": "abc"
+    },
+    "6": {
+      "answers": "experience|training|proficient|competent|beyond|skills"
+    }
+  },
+  "67": {
+    "7": {
+      "answers": "predatory|instinctive|breed|environmental|poach|reproductive|conserve|migrate"
+    },
+    "8": {
+      "answers": "miscalculate|input|forecast|process|categorise|dictate"
+    },
+    "9": {
+      "answers": "run-down|cracks|crumbling|cramped|mould|rotten|chilly|overlooked"
+    },
+    "10": {
+      "answers": "a|b|a|a",
+      "choices": "ab"
+    },
+    "11": {
+      "answers": "social unrest|oppression|justice|curfew|surveillance"
+    },
+    "12": {
+      "answers": "overdraft|essentials|put aside|discounted|overpriced|blow"
+    }
+  }
+}

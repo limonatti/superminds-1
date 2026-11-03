@@ -1,0 +1,50 @@
+{
+  "46": {
+    "1A": {"answers":"a|c|b|c|a|a", "choices":"abc"},
+    "1B": {"answers":"define|capture|spell out|illustrate|convey|signified|defined|sum up"},
+    "2A": {"answers":"in 2018|usually|every morning|excitedly|To my disappointment"},
+    "2B": {"answers":"b|b|b|a|b|b", "choices":"abc"},
+    "3A": {"answers":"a|b|a|b|a|b", "choices":"ab", "audio":"7.01", "evidence":"Initial adverbials separated after while/Interestingly/later; final supplementary adverbials before for/from/temporarily."},
+    "3B": {"open":"Repeat the sentences, pausing around the detached adverbials as in the recording.", "audio":"7.01"}
+  },
+  "47": {
+    "4A": {"answers":"4|3|1|2", "numbers":"abcd", "audio":"7.02"},
+    "4B": {"answers":"c|c|b|c|a", "choices":"abc", "audio":"7.02", "evidence":"Answers follow the recording's accounts, not independent etymological claims: Italian disastro; Hindi jangal; quiz joke; robot in a play; OK attested in an American newspaper."},
+    "4C": {"answers":"It's been estimated that English has around a million words.|The word is now defined as any unfortunate event.|It was thought that the stars influenced our health.|They had never seen dense, tropical forests before.", "audio":"7.03"},
+    "5A": {"answers":"a", "choices":"ab"},
+    "5B": {"answers":"agrees|doesn't accept|an informal"},
+    "6A": {"answers":"b", "choices":"abc"},
+    "6B": {"open":"Write two comments of 80–100 words each. Supporting comment: discuss communication, cultural understanding and the value of early exposure. Opposing comment: discuss curriculum time, different needs and the possibility of learning successfully as an adult. Use a friendly informal style and respond to specific points without attacking the writer."}
+  },
+  "48": {
+    "1": {"answers":"reverted|evolution|shrank|consistent|remained|shift"},
+    "2A": {"answers":"calories|cholesterol|vegetarian|Organic|binge|in season"},
+    "2B": {"answers":"snack|diet|junk|nutrients|vegan"},
+    "3A": {"answers":"c|a|b|a", "choices":"abc"},
+    "3B": {"answers":"as it's twelve thirty, why don't we have lunch?|by his cooking skills, the restaurant offered him a job.|my mistake, the cake was a disaster./the mistake I made, the cake was a disaster.|of a complaint, we gave the customer a refund./of the complaint, we gave the customer a refund.|of concerns about the safety of this product, we are taking it off the menu.", "numbers":"23456", "prefixes":["Seeing","Impressed","Because of","As a result","In light"], "hint":"Допишите предложение после указанного начала. Можно ввести и полное предложение.", "evidence":"Item 1 is the printed example. Main clauses and fronted reason clauses preserve the given meanings; allow contractions and both article choices for the complaint."},
+    "4A": {"answers":"2,4,5", "mode":"set", "choices":"12345", "audio":"7.04", "evidence":"Consonant–vowel links: As it's, Because of, As a / result of. The other bold boundaries do not give the target link."},
+    "4B": {"open":"Repeat the sentences, linking the consonant to the following vowel in As it's, Because of and As a result of.", "audio":"7.04"}
+  },
+  "49": {
+    "5A": {"answers":"Leon|Sara|Leon|Daisy|Sara|Daisy", "choices":["Daisy","Leon","Sara"]},
+    "5B": {"answers":"T|F|F|T|T|F", "choices":["T","F"], "evidence":"Daisy gives up luxuries; Leon says climate change affects everyone; Sara distrusts industrial ingredients but says their harm is not fully understood, rather than citing proof."},
+    "6": {"answers":"working conditions|producers|climate change|meat|locally|transport|processed|products", "evidence":"Eight gaps checked visually; 'foods' is already printed after gap 7."}
+  },
+  "50": {
+    "1": {"answers":"costly|second-hand|decent|vintage|trendy"},
+    "2": {"answers":"chic|matching|scruffy|baggy|loud|striped"},
+    "3A": {"answers":"b|a|c|e", "choices":"abcde", "audio":"7.05"},
+    "3B": {"answers":"killing|ten|dead|million|centuries|fortune", "audio":"7.05"},
+    "4A": {"answers":"dead|fortune|killing|die", "audio":"7.06", "evidence":"The hyperbolic content word receives the main exaggerating stress in each phrase."},
+    "4B": {"open":"Practise emphasising dead, fortune, killing and die to make the exaggeration clear.", "audio":"7.06"},
+    "5A": {"answers":"dead|nothing like|forever|starving|a fortune", "audio":"7.07"},
+    "5B": {"open":"Take B's part after each beep, using the completed 5A conversation.", "audio":"7.08"},
+    "5C": {"open":"Compare your recording with 5A. Check the exaggerated expressions and the stress on their strongest words.", "audio":"7.07"}
+  },
+  "51": {
+    "1": {"answers":"d|c|b", "choices":"abcd", "audio":"7.09"},
+    "2": {"answers":"really kind/kind|dancing|train set|telescope|teddy bear|chips", "audio":"7.09", "evidence":"One or two words taken from the three speakers' accounts."},
+    "3": {"answers":"c", "choices":"abc"},
+    "4": {"answers":"a|b|a|a|b", "choices":"ab", "evidence":"Answers report the article: birthday-memory doubt; rapid brain growth; long-term storage from seven; miscategorisation; food preferences affected."}
+  }
+}

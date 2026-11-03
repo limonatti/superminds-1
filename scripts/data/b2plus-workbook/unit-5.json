@@ -1,0 +1,48 @@
+{
+  "32": {
+    "1A": {"answers":"b|c|a|c|c|a", "choices":"abc"},
+    "1B": {"answers":"dilemma|decision|thoughts|outcomes|sleep"},
+    "2A": {"answers":"a|c|b|c", "choices":"abc"},
+    "2B": {"answers":"had completed|'d have contacted/would have contacted|wouldn't be enjoying/would not be enjoying|wouldn't have/would not have", "evidence":"Past decisions have present consequences in 1, 3 and 4; a present condition explains the missed past contact in 2."},
+    "3": {"answers":"'d be|'d have enjoyed|'d have passed|'d be|'d have organised", "audio":"5.01", "evidence":"All five forms checked against the supplied Audio 5.01 script."},
+    "4A": {"answers":"b", "choices":"abc", "sourcePages":[33]},
+    "4B": {"answers":"F|T|T|F|F", "choices":["T","F"], "sourcePages":[33], "evidence":"Already in careers; move triggered reappraisal; reduced costs/possessions; new purchases still allowed by strict guidelines; no regrets."},
+    "4C": {"answers":"3|5|6|8", "numbers":"abcd", "sourcePages":[33], "evidence":"Ironic extracts: 'perfect life', expensive useless gadget, explaining job changes to friends, envy of people saving for holidays."}
+  },
+  "33": {
+    "5A": {"answers":"b", "choices":"abc"},
+    "5B": {"answers":"a|b|e|c|d|f", "choices":"abcdef"},
+    "6": {"open":"Write 130–150 words to your new neighbour. Use their first name, show you understand the change they are making, mention something you have in common, offer practical support and suggest meeting. Finish with an invitation to reply. An informal, friendly tone is appropriate."}
+  },
+  "34": {
+    "1A": {"answers":"poaching|Conservationists|ecosystem|breeding|migration|predators"},
+    "1B": {"answers":"predators|ecosystem|instincts|game|migrations|reproduction"},
+    "2": {"answers":"Migratory|poachers|conservation|prey|breed|environment"},
+    "3A": {"answers":"3|2|2/1|4|3", "prompts":["reproductive — номер ударного слога","instinctive — номер ударного слога","migratory — номер ударного слога","environmental — номер ударного слога","conservationist — номер ударного слога"], "audio":"5.02", "hint":"Введите номер слога с главным ударением. У migratory допустимы два словарных варианта.", "evidence":"re-pro-DUC-tive, in-STINC-tive, mi-GRA-to-ry / MI-gra-to-ry, en-vi-ron-MEN-tal, con-ser-VA-tion-ist. Cambridge lists both migratory stresses.", "references":["https://dictionary.cambridge.org/pronunciation/english/migratory"]},
+    "3B": {"open":"Practise the pairs of words. Main stress: re-pro-DUC-tive, in-STINC-tive, mi-GRA-to-ry (also MI-gra-to-ry), en-vi-ron-MEN-tal, con-ser-VA-tion-ist.", "audio":"5.02"},
+    "4A": {"answers":"b|c|a|c|b|c", "choices":"abc"}
+  },
+  "35": {
+    "4B": {"answers":"have been trained/have trained|had declined|to have resulted|has been introduced|will have started|had been destroyed", "evidence":"Passive training and active 'rangers have trained' are both grammatical in 1. Other contexts establish tense, voice and perfect infinitive."},
+    "4C": {"answers":"have been|had|has been|have|have had|will have been|will have", "evidence":"Original image verified: seven gaps and seven phrases; all are needed despite the printed claim that one is extra. Do not omit a valid answer to follow that erroneous instruction."},
+    "5A": {"answers":"c", "choices":"abc", "audio":"5.03"},
+    "5B": {"answers":"in Asia|bred them with other kinds of horses|extinct in the wild|zoos|have now started|hunting|extremely dangerous|the 1970s|Yellowstone Park and other parts of the US|bird of prey|their food contained harmful chemicals|banned harmful chemicals|increasing", "audio":"5.03", "evidence":"All thirteen choices checked against the horse, wolf and peregrine sections of the script."},
+    "5C": {"answers":"bear|examples|fame|caught|banned", "hint":"Введите пять слов из печатного текста, которые отличаются от записи, в порядке появления.", "audio":"5.04", "evidence":"Printed → spoken: bear → mammal; examples → symbols; fame → celebrity; caught → captured; banned → prohibited."}
+  },
+  "36": {
+    "1": {"answers":"jobless|non-profit|disadvantaged|fundraisers|supporting"},
+    "2": {"answers":"landfill|shelter|Deforestation|equal opportunities|diversity|neglected", "hint":"Введите слова целиком, включая первые две буквы."},
+    "3A": {"answers":"child poverty|lack of facilities|crime|pollution|climate change", "audio":"5.05", "evidence":"Five extracts: unsupported children in holidays; youth facilities; burglaries/thefts; urban vehicle emissions; global greenhouse gases."},
+    "3B": {"answers":"Basically|words|nutshell|saying|brief|another|recap|mean", "audio":"5.05"},
+    "4": {"open":"Practise separating the introductory summary phrase from the main message. Natural places to pause are after 'summarise' and 'change'; after 'is' and 'worse'; after 'recap' and 'money'. Compare your timing with Audio 5.06.", "audio":"5.06", "review":"audio-pauses", "evidence":"Suggested sense-group boundaries; direct timing verification is needed before enforcing an exact pause-selection key."},
+    "5A": {"answers":"words|saying|basically|nutshell", "audio":"5.07"},
+    "5B": {"open":"Speak as B after each beep, using words, saying, basically and nutshell in the four responses.", "audio":"5.08"},
+    "5C": {"open":"Compare your recording with 5A. Check the summary phrases and pauses between the introduction and main point.", "audio":"5.07"}
+  },
+  "37": {
+    "1": {"answers":"b,c,d,f,h", "mode":"set", "choices":"abcdefgh", "audio":"5.09"},
+    "2": {"answers":"b|a|b|a", "choices":"ab", "audio":"5.09", "evidence":"Habits can improve life; start with a brief task; link it to an existing journey; return the day after a lapse. The stated 40% is not a majority."},
+    "3": {"answers":"c", "choices":"abc"},
+    "4": {"answers":"T|F|T|F|F", "choices":["T","F"], "evidence":"According to this article: inherited half is fixed; openness decreases with age; treatment can change personality; volunteers choose the feature; friends/family confirm changes."}
+  }
+}

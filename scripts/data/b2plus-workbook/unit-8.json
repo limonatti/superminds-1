@@ -1,0 +1,233 @@
+{
+  "52": {
+    "1A": {
+      "answers": "idealism|paradise|justice|Oppression|surveillance|innocence|harmony|social unrest"
+    },
+    "1B": {
+      "answers": "unrest|greed|curfew|paranoia|tranquillity"
+    },
+    "2A": {
+      "answers": "a|c|c|c|b|a",
+      "choices": "abc"
+    },
+    "2B": {
+      "answers": "Admittedly, I think he's a good writer, but his vision of the future|There are a lot of problems in the world. That said, there|While I agree with a lot of his ideas, I don't share|is good, though the ending is disappointing./is good. The ending is disappointing, though.|though the government's proposals on taxation are, I don't",
+      "prefixes": [
+        "",
+        "",
+        "",
+        "The film",
+        "Interesting"
+      ],
+      "suffixes": [
+        "is very depressing.",
+        "is still a lot to feel good about.",
+        "all his opinions.",
+        "",
+        "agree with them."
+      ],
+      "hint": "Допишите пропущенную часть. Можно ввести и полное предложение.",
+      "evidence": "Admittedly/that said allow independent clauses; while/though introduce concession clauses; fronted adjective + though requires subject + verb, without inversion."
+    },
+    "3A": {
+      "answers": "b|b|b|b",
+      "choices": "ab",
+      "audio": "8.01",
+      "evidence": "Pause at the clause boundary after ending/However/was/good, not inside a clause."
+    },
+    "3B": {
+      "open": "Practise pausing between the concession and the main point, as in the recording.",
+      "audio": "8.01"
+    }
+  },
+  "53": {
+    "4A": {
+      "answers": "dystopian|Guardians|optimistic"
+    },
+    "4B": {
+      "answers": "1,2,4,5,7",
+      "mode": "set",
+      "choices": "12345678",
+      "evidence": "Past pressure to work/conform; Dark Day destruction; fear of being sole survivor; daily search for necessities; deceptive offers from Guardians. No support for satisfaction with the catastrophe, arguments within the group, or improving city conditions.",
+      "explanation": "1: pressure to work, earn money and conform. 2: the Dark Day turned everything upside down. 4: each feared being the city's only survivor. 5: securing basic supplies is the daily priority. 7: offers of help can lead to capture."
+    },
+    "5": {
+      "answers": "escape reality|the main characters/main characters|overcome difficult problems/overcome problems|honesty and integrity",
+      "evidence": "At most three words per response; problem-overcoming answer may paraphrase because the task does not require copying exact words."
+    }
+  },
+  "54": {
+    "1": {
+      "answers": "c|b|c|b|a|c",
+      "choices": "abc"
+    },
+    "2": {
+      "answers": "hand-held|energy-efficient|hazardous|user-friendly|state-of-the-art|recyclable"
+    },
+    "3A": {
+      "answers": "will be using|will have found|will have been travelling|may be living|might have been modified"
+    },
+    "3B": {
+      "answers": "b|a|c|b",
+      "choices": "abc"
+    },
+    "3C": {
+      "answers": "will be travelling/will be traveling|'ll have finished/will have finished|will be playing|will have been announced|will have been dancing"
+    }
+  },
+  "55": {
+    "4A": {
+      "answers": "b|b|b|b",
+      "choices": "ab",
+      "audio": "8.02",
+      "evidence": "Script explicitly contracts will in 1 and 3; future-perfect auxiliary have is weak, and passive been is weak in 2 and 3. Will is uncontracted in 2 and 4."
+    },
+    "4B": {
+      "open": "Repeat the future-perfect forms, using the contractions and weak auxiliaries in the recording.",
+      "audio": "8.02"
+    },
+    "5A": {
+      "answers": "b",
+      "choices": "abc",
+      "audio": "8.03"
+    },
+    "5B": {
+      "answers": "T|F|T|F|F|T|T|T",
+      "choices": [
+        "T",
+        "F"
+      ],
+      "audio": "8.03",
+      "evidence": "Hands-free umbrella still needs a remote; sweater blocks hands but is no real solution; rug has holes rather than making users remove shoes; presenter recognises the joke and agrees with the anti-waste message."
+    },
+    "5C": {
+      "answers": "In practice, you do have to hold the remote control.|The idea is, you step in the holes in the rug.|He designs inventions to solve problems that don't really exist.|He uploads photos and videos of his inventions onto his website.",
+      "audio": "8.04"
+    },
+    "6A": {
+      "answers": "b",
+      "choices": "abc"
+    },
+    "6B": {
+      "answers": "d|a|b",
+      "choices": "abcd"
+    },
+    "7": {
+      "open": "Write at least 200 words. State how far you agree, develop reasons with examples, consider a counterargument and give a conclusion. Possible points include waste, resource use, repairing/reusing products and distinguishing needs from wants. Different defensible opinions are valid."
+    }
+  },
+  "56": {
+    "1A": {
+      "answers": "d|c|a|e|b",
+      "choices": "abcde"
+    },
+    "1B": {
+      "answers": "steady job|splash out|blow|put aside|frugal"
+    },
+    "2": {
+      "answers": "discounted|overpriced|economical|pricey|complimentary|a cost-effective"
+    },
+    "3A": {
+      "answers": "b|a|c",
+      "choices": "abc",
+      "audio": "8.05"
+    },
+    "3B": {
+      "answers": "Frankly|side|with|different|looking|two|see|say",
+      "audio": "8.05"
+    },
+    "4": {
+      "open": "Listen to Audio 8.06 and mark each ending R (rising) or F (falling). A falling tone can signal that the speaker is ending the discussion. The recording determines the answers; the written script alone does not verify pitch.",
+      "audio": "8.06",
+      "review": "audio-intonation"
+    },
+    "5A": {
+      "answers": "saying|see|looking|say|with|guess",
+      "audio": "8.07"
+    },
+    "5B": {
+      "open": "Respond as B after each beep, using the completed conversation in 5A.",
+      "audio": "8.08"
+    },
+    "5C": {
+      "open": "Compare your recording with 5A. Check discussion phrases and the difference between inviting a reply and ending an exchange.",
+      "audio": "8.07"
+    }
+  },
+  "57": {
+    "1": {
+      "answers": "3|1|2|4",
+      "numbers": "abcd",
+      "audio": "8.09"
+    },
+    "2": {
+      "answers": "b|c|d|a",
+      "choices": "abcd",
+      "audio": "8.09",
+      "evidence": "Phone size; translator for aliens; space station research now and staging-post possibility; tablet for news."
+    },
+    "3": {
+      "answers": "b",
+      "choices": "abc"
+    },
+    "4": {
+      "answers": "BenW|BeaZ|ChuckP|Nesta|BeaZ|Nesta"
+    }
+  },
+  "58": {
+    "1": {
+      "answers": "suspiciously|occasionally|really|Fortunately|about once a week"
+    },
+    "2": {
+      "answers": "a|c|a|b|c|b",
+      "choices": "abc"
+    },
+    "3": {
+      "answers": "as|however|Admittedly|Although|Even"
+    },
+    "4": {
+      "answers": "changed|will have been|will have been|be buying|may be choosing"
+    },
+    "5": {
+      "answers": "signify|sum up|specify|define|illustrate"
+    },
+    "6": {
+      "answers": "surge|switch|transform|exploded|decline|catalyst"
+    },
+    "7": {
+      "answers": "b|a|c|a|c|a",
+      "choices": "abc"
+    }
+  },
+  "59": {
+    "8": {
+      "answers": "second-hand|decent|classy|costly|vintage|trendy"
+    },
+    "9": {
+      "answers": "b|a|c|b|c|a",
+      "choices": "abc"
+    },
+    "10": {
+      "answers": "d|e|b|a|c",
+      "choices": "abcdef"
+    },
+    "11": {
+      "answers": "generate|emit|recharge|convert|activate",
+      "hint": "Введите слова целиком, включая указанную первую букву."
+    },
+    "12": {
+      "answers": "F|T|T|T|F",
+      "choices": [
+        "T",
+        "F"
+      ]
+    },
+    "13": {
+      "answers": "stingy|allowance|blow|aside|overdraft|essentials"
+    },
+    "14": {
+      "answers": "b|b|c|a|c",
+      "choices": "abc"
+    }
+  }
+}

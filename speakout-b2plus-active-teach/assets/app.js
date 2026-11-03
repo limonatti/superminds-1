@@ -65,7 +65,7 @@ function buildRail() {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.code) { openLesson(b.dataset.code); }
     else if (b.dataset.sb) { S.code = null; setBook('sb'); goPage(+b.dataset.sb + 1); }
-    else if (b.dataset.wbkeys) { setBook('wb'); goPage(1); setTab('ans'); }
+    else if (b.dataset.wbkeys) { const target=S.book==='wb'?Math.max(2,Math.min(65,S.page)):2;setBook('wb');goPage(target);setTab('ans'); }
     else if (b.dataset.open) { setTab(b.dataset.open); }
     else if (b.id === 'expBtn') exportData();
     else if (b.id === 'impBtn') importData();
@@ -431,7 +431,10 @@ function viewAudio(l) {
 }
 
 function viewAnswers(l) {
-  if (S.book === 'wb') return `<div class="card"><h5>Ответы Workbook</h5><p class="mini">Ответы сохраняются для разбора с преподавателем. Ключи в приложенном PDF не совпадают с заданиями этой тетради, поэтому для автоматической проверки не используются.</p><a class="btn" target="_blank" rel="noopener" href="${CONTENT + enc(D.media.docs.wb)}">Открыть оригинальный Workbook</a></div>`;
+  if (S.book === 'wb') {
+    const exercises=window.SPEAKOUT_EXERCISES?.[pkey()]||[];
+    return `<div class="card"><h5>Ответы Workbook · стр. ${S.page+2}</h5><p class="mini">Нажмите на упражнение на странице, введите ответы и нажмите «Проверить». Письменные работы и устная практика сохраняются для разбора с преподавателем.</p></div>`+exercises.map(e=>`<details class="card"><summary>Упражнение ${esc(e.label)}</summary><p class="mini" style="white-space:pre-wrap">${esc(e.key)}</p></details>`).join('');
+  }
   if (!l) return '<div class="card"><h5>Выберите урок</h5></div>';
   const items = (ITEMS[l.code] || []).filter(i => i.label);
   let html = `<div class="card"><h5>Ответы · ${l.code}</h5>

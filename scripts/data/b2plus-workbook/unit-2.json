@@ -1,0 +1,244 @@
+{
+  "10": {
+    "1A": {
+      "answers": "d|a|f|c|e|b",
+      "choices": "abcdef"
+    },
+    "1B": {
+      "answers": "c|b|a|c|b|c",
+      "choices": "abc"
+    },
+    "2A": {
+      "answers": "no one|delay|don't follow|lost|admit|win|fall to|badly"
+    },
+    "2B": {
+      "answers": "favourite|unbeaten|underdogs|concede|diving|put|bending|play"
+    },
+    "3A": {
+      "answers": "worry about is|did was go to|what she wore|what she did was|did was call|was charged with was",
+      "evidence": "Cleft structures from the supplied story; each gap is three or four words. 'was charged with was fraud' preserves the passive and focus."
+    }
+  },
+  "11": {
+    "3B": {
+      "answers": "b|c|c|c",
+      "choices": "abc",
+      "evidence": "Item 4: 'What they were celebrating was the end of their exams.' The alternative 'wanted is celebrate' lacks 'to'."
+    },
+    "4": {
+      "answers": "did|do|suspect|doing|forgot",
+      "audio": "2.01",
+      "evidence": "Main lexical verb in each initial what-clause receives the emphatic stress."
+    },
+    "5A": {
+      "answers": "b",
+      "choices": "abc",
+      "audio": "2.02"
+    },
+    "5B": {
+      "answers": "a|d|b|a|c|b",
+      "choices": "abcd",
+      "audio": "2.02",
+      "evidence": "Fear of a higher bid; auction emotions; extended viewing of the photo; scarcity increases perceived value; competitive bidding; closes the app."
+    },
+    "5C": {
+      "answers": "There are only ten minutes of bidding time left.|The problem is, this stops you making rational decisions.|That's so interesting and it really makes sense.|You have to admit, they're pretty smart trainers.",
+      "audio": "2.03"
+    }
+  },
+  "12": {
+    "1A": {
+      "answers": "gain|fulfil|form|push|bitter|adversary"
+    },
+    "1B": {
+      "answers": "a|b|a|b|a|b",
+      "choices": "ab"
+    },
+    "2A": {
+      "answers": "potential|alliance|limits|edge",
+      "audio": "2.04",
+      "evidence": "Main stress falls on the final content noun in each industry collocation."
+    },
+    "2B": {
+      "open": "Check the stressed words: potential, alliance, limits, edge.",
+      "audio": "2.04"
+    },
+    "2C": {
+      "open": "Practise the sentences, placing the main phrase stress on potential, alliance, limits and edge.",
+      "audio": "2.04"
+    },
+    "3A": {
+      "answers": "it was|accept it|it's|that's|delighted",
+      "hint": "Введите только слова, которые можно убрать.",
+      "evidence": "Coordinated subject/verb ellipsis; VP ellipsis after 'will'; informal subject/auxiliary ellipsis after the dash; adjective ellipsis after 'were'."
+    },
+    "3B": {
+      "answers": "b|c|a|b|b|c",
+      "choices": "abc"
+    },
+    "4A": {
+      "answers": "b",
+      "choices": "ab",
+      "sourcePages": [
+        13
+      ]
+    },
+    "4B": {
+      "answers": "T|F|T|F",
+      "choices": [
+        "T",
+        "F"
+      ],
+      "sourcePages": [
+        13
+      ],
+      "evidence": "Three-sided football encourages cooperation. Alliances shift during play; rules remain loose; only a handful of leagues exist."
+    },
+    "4C": {
+      "answers": "a|b|b|a|b|a",
+      "choices": "ab",
+      "sourcePages": [
+        13
+      ]
+    }
+  },
+  "13": {
+    "5A": {
+      "answers": "c|b|d|a|e",
+      "choices": "abcde",
+      "evidence": "do = verb substitution; Nevertheless = contrast; Such a mindset = noun reference; owing to = reason; this = reference to the proposal to focus on less competitive sports."
+    },
+    "5B": {
+      "open": "Competitive sport can build ambition, resilience and a desire to improve. Less competitive sport can encourage cooperation, enjoyment, inclusion and regular participation. Discuss how to balance improvement with wellbeing and fair play."
+    },
+    "6": {
+      "open": "Write three paragraphs totalling 220–260 words. Develop the benefits of competitive sport, then the benefits of less competitive sport, and finish with your own balanced conclusion. Link ideas with phrases such as 'nevertheless', 'owing to', 'such an approach' and 'this'. Your opinion and examples may differ."
+    }
+  },
+  "14": {
+    "1": {
+      "answers": "initiatives|efficiency|competitiveness|bankruptcy|productivity|cutback"
+    },
+    "2": {
+      "answers": "perks|financial|bonus|tuition|mentor",
+      "evidence": "Five numbered gaps in the conversation; job perks, financial incentives, bonus scheme, tuition assistance, mentor programme."
+    },
+    "3A": {
+      "answers": "b|c|a",
+      "choices": "abc",
+      "audio": "2.05"
+    },
+    "3B": {
+      "answers": "nowhere near as important as|infinitely more appealing|every bit as important|invaluable for|a waste of time",
+      "audio": "2.05"
+    },
+    "4A": {
+      "answers": "way|nothing|almost|significantly|slightly|just",
+      "audio": "2.06",
+      "evidence": "The degree modifier is the focus in these contrasting comparisons."
+    },
+    "4B": {
+      "open": "Repeat the comparisons, stressing way, nothing, almost, significantly, slightly and just.",
+      "audio": "2.06"
+    },
+    "5A": {
+      "answers": "way|as|invaluable|near|bit",
+      "audio": "2.07"
+    },
+    "5B": {
+      "open": "Check 5A against the recording: way, as, invaluable, near, bit.",
+      "audio": "2.07"
+    },
+    "5C": {
+      "open": "Respond as B after each beep. Use the completed conversation in 5A as your model.",
+      "audio": "2.08"
+    },
+    "5D": {
+      "open": "Compare your recording with 5A. Check the comparison phrases and stress on the degree modifiers.",
+      "audio": "2.07"
+    }
+  },
+  "15": {
+    "1": {
+      "answers": "Grace|Milo|Oscar",
+      "choices": [
+        "Oscar",
+        "Grace",
+        "Milo"
+      ],
+      "audio": "2.09"
+    },
+    "2": {
+      "answers": "Oscar|Grace|Milo|Grace|Milo|Oscar",
+      "choices": [
+        "Oscar",
+        "Grace",
+        "Milo"
+      ],
+      "audio": "2.09",
+      "evidence": "Oscar doubts completing training and achieves a rare feat. Grace sacrifices social life but feels liberated. Milo's group transforms through cooperation and he now looks for others' positive qualities."
+    },
+    "3": {
+      "answers": "b",
+      "choices": "ab"
+    },
+    "4": {
+      "answers": "b|a|b|b|a",
+      "choices": "ab",
+      "evidence": "Answers report the writer's claims, not medical advice: curiosity, both swimmers' improved conditions, physical recovery studies, caution for beginners, no desire to repeat."
+    }
+  },
+  "16": {
+    "1": {
+      "answers": "used to enjoy|tend to go|kept on making|was prone to having|is inclined to spend|constantly criticising",
+      "evidence": "Each answer retains the given keyword and has no more than four words."
+    },
+    "2": {
+      "answers": "living|used|wishing|sent|raised|working"
+    },
+    "3": {
+      "answers": "what they did was|what they discovered was|what they did was install|what happens is/what happens|what they do is look/what they do is|what universities hope is"
+    },
+    "4": {
+      "answers": "b|a|c|b|a",
+      "choices": "abc"
+    },
+    "5": {
+      "answers": "bonded|party|have/had|confide|clicked|hit",
+      "evidence": "'have' and 'had' both fit the mutual-friend sentence, depending on whether the friendship is presented as current or in the past."
+    },
+    "6": {
+      "answers": "a|b|c|b|a|b",
+      "choices": "abc"
+    }
+  },
+  "17": {
+    "7": {
+      "answers": "Demolish|build|Spruce|Restore|Merge"
+    },
+    "8": {
+      "answers": "industrial estate|outskirts|residence|construction|residential"
+    },
+    "9": {
+      "answers": "time|lifetime|get|blown"
+    },
+    "10": {
+      "answers": "costs|fair|faked|con|away|heads",
+      "hint": "Введите слова целиком, включая указанную первую букву."
+    },
+    "11": {
+      "answers": "c|a|d|b|e",
+      "choices": "abcde"
+    },
+    "12": {
+      "answers": "e|a|b|c|d",
+      "choices": "abcde"
+    },
+    "13": {
+      "answers": "efficiency|profitability|turnover|cutbacks|bankruptcy|initiative"
+    },
+    "14": {
+      "answers": "perks|bonus|health|paternity|childcare|pay"
+    }
+  }
+}

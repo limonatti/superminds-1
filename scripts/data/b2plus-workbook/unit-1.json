@@ -1,0 +1,51 @@
+{
+  "4": {
+    "1A": {"answers":"off|on|with|in|over|with|with|have", "evidence":"Relationship collocations: hit it off, on the same wavelength, socialise with, confide in, bond over, click with, party with, have a mutual friend."},
+    "1B": {"answers":"a|b|c|c|c|a", "choices":"abc"},
+    "2": {"answers":"to|around|apart|into|between|to|by|up|with"},
+    "3A": {"answers":"'s always shouting|used to live|'ll tell you|'d play|tend to get|used to go|kept on criticising|was always drawing", "evidence":"Checked bold alternatives in original page. In item 8, 'was' belongs to the first alternative; 'inclined to draw' alone lacks an auxiliary."},
+    "3B": {"answers":"b|c|b|a", "choices":"abc"},
+    "3C": {"answers":"would|used|inclined|of|was|kept|prone|tend", "evidence":"Eight gaps, not six. Used to + infinitive; inclined to + infinitive; prone to + gerund. 'is' and 'will' unused."}
+  },
+  "5": {
+    "4": {"answers":"'ll|'d|'d|'ll|'d|'ll|'ll|'d", "choices":["'ll","'d"], "audio":"1.01", "evidence":"Every contraction checked against Audio 1.01 audioscript."},
+    "5A": {"answers":"b", "choices":"abc", "audio":"1.02"},
+    "5B": {"answers":"Rafael|Not used|Daniel|Anita", "choices":["Anita","Daniel","Rafael","Not used"], "audio":"1.03", "evidence":"Rafael found present-day relatives; Daniel became increasingly curious; Anita stopped after limited success and another person's bad discovery. No caller found their family boring."},
+    "5C": {"answers":"b|a|c|a|a|b", "choices":"abc", "audio":"1.03"},
+    "5D": {"answers":"I|NI|I|I|NI|NI", "choices":["I","NI"], "audio":"1.04", "evidence":"Irony follows Daniel's initial disinterest, Anita's mother's ignorance and 5,000 search hits. Presenter's praise and Rafael's final enthusiasm are sincere."},
+    "5E": {"answers":"No doubt you're going to tell me all about it!|I started doing a bit of digging around online.|I knew they were originally from the Netherlands.|I've found I've actually got family all over the world.", "audio":"1.05", "evidence":"Four dictated sentences, verbatim from supplied Audio 1.05 script."}
+  },
+  "6": {
+    "1": {"answers":"modernised|demolished|refurbished|merged|reconstruct|restore", "legacyLabel":"1E"},
+    "2": {"answers":"industrial estate|residence|built-up|suburban|slums|construction", "hint":"Введите слова целиком, включая указанные первую и последнюю буквы."},
+    "3A": {"open":"Listen for the /r/ in outskirts, architecture, inner-city and modernised. Whether /r/ is pronounced before a consonant depends on the speaker's accent; compare your answers with the recording.", "audio":"1.06", "review":"audio-accent", "evidence":"Accent identification requires direct phonetic review; the written script alone does not identify the rhotic speakers. Do not invent an exact key."},
+    "3B": {"open":"Practise each sentence with a rhotic accent and then with a non-rhotic accent. In non-rhotic pronunciation, /r/ is normally heard before a vowel, but not before a consonant or a pause.", "legacyLabel":"2B", "audio":"1.06"},
+    "4A": {"answers":"a|c|b|c|b|c", "choices":"abc"},
+    "4B": {"answers":"built in the|people living in|wishing to view|created in", "evidence":"Retain the words outside each gap: 'The cinema ___ 1960s'; 'with the ___ the area'; 'People ___ the new flats'; 'park ___ the city centre'. Two or three words per gap."}
+  },
+  "7": {
+    "5": {"answers":"a|b|a|b", "choices":"ab", "evidence":"Paragraphs: connecting isolated places; Bridges to Prosperity charity; economic benefits; healthcare, education and culture."},
+    "6A": {"answers":"a", "choices":"abc"},
+    "6B": {"open":"1 Introduce a proposal for a bridge near Fari.\n2 Explain the flooding, the twenty-kilometre detour and the lack of public transport.\n3 Discuss access to jobs, markets, education, healthcare and cultural activities.\n4 Recommend a feasibility study, safe design and funding."},
+    "6C": {"answers":"aim|result|living|created|proposed"},
+    "7": {"open":"Write 200–240 words. Use a clear title and sections for the introduction, current situation, benefits and conclusion. Describe how a bridge would improve access to the town; explain economic and social benefits. Use formal language such as 'The aim of this proposal is…', 'As a result…' and 'The change proposed…'. Your own ideas and wording are valid."}
+  },
+  "8": {
+    "1A": {"answers":"a once in a lifetime experience|get enough of it|lose|the time of my life|get an adrenaline rush|track of time", "evidence":"Checked bold selection boundaries in original. Item 3 is 'lose' before 'myself'; item 6 is 'track of time' after 'lost'."},
+    "1B": {"answers":"time|blown|rush|enough|track", "evidence":"Original image has five gaps, not eight; lifetime/myself/stuck unused. Dialogue A: lines are not separate exercises."},
+    "2A": {"answers":"2,3,5", "mode":"set", "choices":"123456", "audio":"1.07", "hint":"Выберите все три подходящих варианта."},
+    "2B": {"answers":"catch|jump|go|run|sooner|give", "audio":"1.07"},
+    "3A": {"answers":"2,4,5", "mode":"set", "choices":"123456", "audio":"1.08", "evidence":"Linking /r/: for an, prefer a, rather ask. Remaining bold words precede consonants in the non-rhotic model."},
+    "3B": {"open":"Repeat the sentences. Link the final /r/ to the following vowel in 'for an', 'prefer a' and 'rather ask'.", "audio":"1.08", "legacyId":"wb-6-2B-6"},
+    "4A": {"answers":"rather|for|prefer|choice|miss|way", "audio":"1.09"},
+    "4B": {"open":"Compare your six answers in 4A with Audio 1.09: rather, for, prefer, choice, miss, way.", "audio":"1.09"},
+    "4C": {"open":"Role-play B. Say the responses from 4A after each beep, using your own recording to check fluency and pronunciation.", "audio":"1.10"},
+    "4D": {"open":"Compare your recording with 4A: check the preference phrases, final /r/ linking, stress and fluency.", "audio":"1.09"}
+  },
+  "9": {
+    "1": {"answers":"3|1|4|2|5", "numbers":"abcde", "audio":"1.11", "evidence":"Recording order: unsweetened cocoa, sweetened Spanish drink, bars, natural chemicals, fat/sugar ratio."},
+    "2": {"answers":"b|a|b|a", "choices":"ab", "audio":"1.11"},
+    "3": {"answers":"b|c|a", "choices":"abc"},
+    "4": {"answers":"T|T|F|T", "choices":["T","F"], "evidence":"Under-three intake is hormonally regulated; pleasure is an evolutionary survival mechanism; sight/smell can trigger false hunger; routine creates hunger at mealtimes."}
+  }
+}

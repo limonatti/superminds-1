@@ -4,7 +4,7 @@ const data={window:{}};vm.createContext(data);vm.runInContext(fs.readFileSync('s
 const exercises=data.window.SPEAKOUT_EXERCISES;
 for(const [page,exs] of Object.entries(exercises))for(const ex of exs){
  assert(ex.fields.length);assert(ex.x>=0&&ex.y>=0&&ex.w>0&&ex.h>0&&ex.x+ex.w<=1&&ex.y+ex.h<=1,page+ex.label);
- if(page.startsWith('wb:'))assert.equal(ex.key,'','Do not use mismatched workbook keys');
+ if(page.startsWith('wb:'))assert(ex.reviewedWorkbook,'Workbook fields must come from the independently reviewed answer set');
 }
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true,timeout:30000}),server=new Map(),errors=[];

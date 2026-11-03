@@ -1,0 +1,481 @@
+{
+  "provenance": "Independently solved from the supplied workbook pages and audioscripts; not a Pearson answer key.",
+  "pages": [
+    {
+      "page": 4,
+      "exercises": 6,
+      "checked_fields": 43,
+      "open_exercises": 0
+    },
+    {
+      "page": 5,
+      "exercises": 6,
+      "checked_fields": 29,
+      "open_exercises": 0
+    },
+    {
+      "page": 6,
+      "exercises": 6,
+      "checked_fields": 22,
+      "open_exercises": 2
+    },
+    {
+      "page": 7,
+      "exercises": 5,
+      "checked_fields": 10,
+      "open_exercises": 2
+    },
+    {
+      "page": 8,
+      "exercises": 10,
+      "checked_fields": 25,
+      "open_exercises": 4
+    },
+    {
+      "page": 9,
+      "exercises": 4,
+      "checked_fields": 16,
+      "open_exercises": 0
+    },
+    {
+      "page": 10,
+      "exercises": 5,
+      "checked_fields": 34,
+      "open_exercises": 0
+    },
+    {
+      "page": 11,
+      "exercises": 5,
+      "checked_fields": 20,
+      "open_exercises": 0
+    },
+    {
+      "page": 12,
+      "exercises": 10,
+      "checked_fields": 38,
+      "open_exercises": 2
+    },
+    {
+      "page": 13,
+      "exercises": 3,
+      "checked_fields": 5,
+      "open_exercises": 2
+    },
+    {
+      "page": 14,
+      "exercises": 10,
+      "checked_fields": 30,
+      "open_exercises": 4
+    },
+    {
+      "page": 15,
+      "exercises": 4,
+      "checked_fields": 15,
+      "open_exercises": 0
+    },
+    {
+      "page": 16,
+      "exercises": 6,
+      "checked_fields": 35,
+      "open_exercises": 0
+    },
+    {
+      "page": 17,
+      "exercises": 8,
+      "checked_fields": 42,
+      "open_exercises": 0
+    },
+    {
+      "page": 18,
+      "exercises": 8,
+      "checked_fields": 32,
+      "open_exercises": 1
+    },
+    {
+      "page": 19,
+      "exercises": 3,
+      "checked_fields": 4,
+      "open_exercises": 2
+    },
+    {
+      "page": 20,
+      "exercises": 4,
+      "checked_fields": 21,
+      "open_exercises": 0
+    },
+    {
+      "page": 21,
+      "exercises": 7,
+      "checked_fields": 23,
+      "open_exercises": 2
+    },
+    {
+      "page": 22,
+      "exercises": 9,
+      "checked_fields": 29,
+      "open_exercises": 3
+    },
+    {
+      "page": 23,
+      "exercises": 4,
+      "checked_fields": 16,
+      "open_exercises": 0
+    },
+    {
+      "page": 24,
+      "exercises": 6,
+      "checked_fields": 24,
+      "open_exercises": 2
+    },
+    {
+      "page": 25,
+      "exercises": 4,
+      "checked_fields": 20,
+      "open_exercises": 0
+    },
+    {
+      "page": 26,
+      "exercises": 6,
+      "checked_fields": 30,
+      "open_exercises": 1
+    },
+    {
+      "page": 27,
+      "exercises": 5,
+      "checked_fields": 7,
+      "open_exercises": 2
+    },
+    {
+      "page": 28,
+      "exercises": 10,
+      "checked_fields": 26,
+      "open_exercises": 5
+    },
+    {
+      "page": 29,
+      "exercises": 5,
+      "checked_fields": 17,
+      "open_exercises": 0
+    },
+    {
+      "page": 30,
+      "exercises": 7,
+      "checked_fields": 38,
+      "open_exercises": 0
+    },
+    {
+      "page": 31,
+      "exercises": 7,
+      "checked_fields": 42,
+      "open_exercises": 0
+    },
+    {
+      "page": 32,
+      "exercises": 8,
+      "checked_fields": 34,
+      "open_exercises": 0
+    },
+    {
+      "page": 33,
+      "exercises": 3,
+      "checked_fields": 7,
+      "open_exercises": 1
+    },
+    {
+      "page": 34,
+      "exercises": 6,
+      "checked_fields": 29,
+      "open_exercises": 1
+    },
+    {
+      "page": 35,
+      "exercises": 5,
+      "checked_fields": 32,
+      "open_exercises": 0
+    },
+    {
+      "page": 36,
+      "exercises": 8,
+      "checked_fields": 28,
+      "open_exercises": 3
+    },
+    {
+      "page": 37,
+      "exercises": 4,
+      "checked_fields": 11,
+      "open_exercises": 0
+    },
+    {
+      "page": 38,
+      "exercises": 6,
+      "checked_fields": 26,
+      "open_exercises": 1
+    },
+    {
+      "page": 39,
+      "exercises": 3,
+      "checked_fields": 13,
+      "open_exercises": 0
+    },
+    {
+      "page": 40,
+      "exercises": 6,
+      "checked_fields": 36,
+      "open_exercises": 0
+    },
+    {
+      "page": 41,
+      "exercises": 10,
+      "checked_fields": 23,
+      "open_exercises": 4
+    },
+    {
+      "page": 42,
+      "exercises": 10,
+      "checked_fields": 26,
+      "open_exercises": 5
+    },
+    {
+      "page": 43,
+      "exercises": 4,
+      "checked_fields": 8,
+      "open_exercises": 0
+    },
+    {
+      "page": 44,
+      "exercises": 7,
+      "checked_fields": 39,
+      "open_exercises": 0
+    },
+    {
+      "page": 45,
+      "exercises": 7,
+      "checked_fields": 39,
+      "open_exercises": 0
+    },
+    {
+      "page": 46,
+      "exercises": 6,
+      "checked_fields": 31,
+      "open_exercises": 1
+    },
+    {
+      "page": 47,
+      "exercises": 7,
+      "checked_fields": 18,
+      "open_exercises": 1
+    },
+    {
+      "page": 48,
+      "exercises": 7,
+      "checked_fields": 27,
+      "open_exercises": 1
+    },
+    {
+      "page": 49,
+      "exercises": 3,
+      "checked_fields": 20,
+      "open_exercises": 0
+    },
+    {
+      "page": 50,
+      "exercises": 9,
+      "checked_fields": 30,
+      "open_exercises": 3
+    },
+    {
+      "page": 51,
+      "exercises": 4,
+      "checked_fields": 15,
+      "open_exercises": 0
+    },
+    {
+      "page": 52,
+      "exercises": 6,
+      "checked_fields": 28,
+      "open_exercises": 1
+    },
+    {
+      "page": 53,
+      "exercises": 3,
+      "checked_fields": 8,
+      "open_exercises": 0
+    },
+    {
+      "page": 54,
+      "exercises": 5,
+      "checked_fields": 26,
+      "open_exercises": 0
+    },
+    {
+      "page": 55,
+      "exercises": 8,
+      "checked_fields": 21,
+      "open_exercises": 2
+    },
+    {
+      "page": 56,
+      "exercises": 9,
+      "checked_fields": 33,
+      "open_exercises": 3
+    },
+    {
+      "page": 57,
+      "exercises": 4,
+      "checked_fields": 15,
+      "open_exercises": 0
+    },
+    {
+      "page": 58,
+      "exercises": 7,
+      "checked_fields": 38,
+      "open_exercises": 0
+    },
+    {
+      "page": 59,
+      "exercises": 7,
+      "checked_fields": 38,
+      "open_exercises": 0
+    },
+    {
+      "page": 60,
+      "exercises": 7,
+      "checked_fields": 38,
+      "open_exercises": 0
+    },
+    {
+      "page": 61,
+      "exercises": 5,
+      "checked_fields": 28,
+      "open_exercises": 0
+    },
+    {
+      "page": 62,
+      "exercises": 6,
+      "checked_fields": 43,
+      "open_exercises": 0
+    },
+    {
+      "page": 63,
+      "exercises": 6,
+      "checked_fields": 37,
+      "open_exercises": 0
+    },
+    {
+      "page": 64,
+      "exercises": 6,
+      "checked_fields": 34,
+      "open_exercises": 0
+    },
+    {
+      "page": 65,
+      "exercises": 6,
+      "checked_fields": 36,
+      "open_exercises": 0
+    },
+    {
+      "page": 66,
+      "exercises": 6,
+      "checked_fields": 36,
+      "open_exercises": 0
+    },
+    {
+      "page": 67,
+      "exercises": 6,
+      "checked_fields": 37,
+      "open_exercises": 0
+    }
+  ],
+  "audio_review": [
+    {
+      "page": 6,
+      "exercise": "3A",
+      "track": "1.06",
+      "reason": "audio-accent"
+    },
+    {
+      "page": 21,
+      "exercise": "4A",
+      "track": "3.02",
+      "reason": "audio-accent"
+    },
+    {
+      "page": 24,
+      "exercise": "4A",
+      "track": "4.01",
+      "reason": "audio-phonetics"
+    },
+    {
+      "page": 28,
+      "exercise": "4A",
+      "track": "4.05",
+      "reason": "audio-intonation"
+    },
+    {
+      "page": 36,
+      "exercise": "4",
+      "track": "5.06",
+      "reason": "audio-pauses"
+    },
+    {
+      "page": 41,
+      "exercise": "5A",
+      "track": "6.05",
+      "reason": "audio-intonation"
+    },
+    {
+      "page": 42,
+      "exercise": "3A",
+      "track": "6.07",
+      "reason": "audio-intonation"
+    },
+    {
+      "page": 56,
+      "exercise": "4",
+      "track": "8.06",
+      "reason": "audio-intonation"
+    }
+  ],
+  "retired_regions": [
+    "wb-12-5A-6",
+    "wb-14-1A-4",
+    "wb-14-3A-5",
+    "wb-20-1A-1",
+    "wb-24-6-2",
+    "wb-24-8-3",
+    "wb-26-1A-1",
+    "wb-26-5A-8",
+    "wb-28-1A-3",
+    "wb-29-8A-1",
+    "wb-29-8A-2",
+    "wb-30-1A-2",
+    "wb-34-1A-1",
+    "wb-40-1A-2",
+    "wb-40-4A-8",
+    "wb-46-1-2",
+    "wb-46-3-3",
+    "wb-46-5-4",
+    "wb-46-6-5",
+    "wb-46-6A-7",
+    "wb-48-5A-6",
+    "wb-48-5A-7",
+    "wb-48-5B-8",
+    "wb-54-1A-2",
+    "wb-58-1-6",
+    "wb-58-2-7",
+    "wb-58-3A-2",
+    "wb-58-5A-3",
+    "wb-59-11A-4",
+    "wb-6-1A-2",
+    "wb-6-1A-3",
+    "wb-61-11B-5",
+    "wb-62-5A-2",
+    "wb-63-10A-4",
+    "wb-63-10A-5",
+    "wb-8-2A-4"
+  ],
+  "preserved_ids": 356,
+  "exercises": 393,
+  "checked_fields": 1681,
+  "open_exercises": 61
+}

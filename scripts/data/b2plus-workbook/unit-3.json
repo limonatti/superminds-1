@@ -1,0 +1,174 @@
+{
+  "18": {
+    "1A": {
+      "answers": "b|c|a|a|b|a",
+      "choices": "abc"
+    },
+    "1B": {
+      "answers": "c|d|a|e|f|b",
+      "choices": "abcdef"
+    },
+    "2A": {
+      "answers": "looks as if she's|It was as if|as if to say|as if in|tastes as though it's|as if we were"
+    },
+    "2B": {
+      "answers": "b|b|b|a",
+      "choices": "abc"
+    },
+    "3A": {
+      "answers": "as if|as though|as if|as though|as though",
+      "audio": "3.01"
+    },
+    "3B": {
+      "open": "Repeat the sentences, using the weak form /əz/ in 'as if' and 'as though'.",
+      "audio": "3.01"
+    },
+    "4A": {
+      "answers": "b",
+      "choices": "abc",
+      "sourcePages": [
+        19
+      ]
+    },
+    "4B": {
+      "answers": "b,e|f|c|a,d",
+      "mode": "set",
+      "choices": "abcdef",
+      "sourcePages": [
+        19
+      ],
+      "evidence": "Text 1 contrasts optimal problem-solving times with tired creativity; 2 lists failed methods; 3 concerns connecting clues; 4 recommends nutrition and a book for many creative professions."
+    }
+  },
+  "19": {
+    "5A": {
+      "answers": "c|a|d|b",
+      "choices": "abcd",
+      "evidence": "Answer fields refer to paragraph topics 1–4: background, lead-up, scene, evaluation."
+    },
+    "5B": {
+      "open": "Choose a scene you know. Plan: background details of the film; what leads up to the scene; what happens and how the visuals, music and acting work; your overall response. Support your opinions with examples."
+    },
+    "6": {
+      "open": "Write 200–260 words about your chosen scene. Include background, plot context, details of the scene and an overall conclusion. Use evaluative language and examples, and 'as if/as though' where appropriate. Different film choices and opinions are valid."
+    }
+  },
+  "20": {
+    "1A": {
+      "answers": "b|a|b|c|a|b",
+      "choices": "abc"
+    },
+    "1B": {
+      "answers": "2,3,6",
+      "mode": "set",
+      "choices": "123456",
+      "evidence": "Eva is nervous about results, regrets failing to revise irregular verbs and shouted at Enrico. The dialogue does not say that Jo is annoyed or that exams annoy her."
+    },
+    "2A": {
+      "answers": "e|h|f|c|a|g|d|b",
+      "choices": "abcdefgh"
+    },
+    "2B": {
+      "answers": "a|b|b|b|a|b",
+      "choices": "ab"
+    }
+  },
+  "21": {
+    "3A": {
+      "answers": "No matter where|No matter what|No matter how|No matter that|No matter whose|No matter who"
+    },
+    "3B": {
+      "answers": "b|a|c|b|a|c",
+      "choices": "abc"
+    },
+    "4A": {
+      "open": "Compare each speaker's pronunciation of 'matter': a released /t/, a tapped sound similar to /d/, or a glottal replacement. These are accent differences, not errors.",
+      "audio": "3.02",
+      "review": "audio-accent",
+      "evidence": "The script does not encode the six speakers' allophones. Exact grading must wait for direct phonetic verification."
+    },
+    "4B": {
+      "open": "Choose a consistent pronunciation of 'matter' and practise the six sentences. The three accent variants in 4A can all be valid.",
+      "audio": "3.02"
+    },
+    "5A": {
+      "answers": "b",
+      "choices": "abc",
+      "audio": "3.03"
+    },
+    "5B": {
+      "answers": "b|c|b|c|c|d",
+      "choices": "abcd",
+      "audio": "3.03",
+      "evidence": "Freddie prepares a debate; Carrie prioritises public services, accepts art can convey messages but dislikes obscure poetry; Freddie says profitable festivals can fund themselves and thanks her at the end."
+    },
+    "5C": {
+      "answers": "I don't agree that the government should fund the arts.|Why do you think it's necessary to have art galleries?|This can inform our understanding of the present.|I don't think we'll ever see eye to eye.",
+      "audio": "3.04"
+    }
+  },
+  "22": {
+    "1": {
+      "answers": "motivating|pressurise|drives|reasons|win"
+    },
+    "2": {
+      "answers": "pressure|manipulation|drive|motivation|coaxing|persuasion"
+    },
+    "3A": {
+      "answers": "a,b",
+      "mode": "set",
+      "choices": "abc",
+      "audio": "3.05"
+    },
+    "3B": {
+      "answers": "coming|level|makes|hand|effective|idea|see|disadvantage|about|sense",
+      "audio": "3.05",
+      "hint": "Введите слова целиком, включая указанную первую букву."
+    },
+    "4": {
+      "answers": "high",
+      "choices": [
+        "high",
+        "low"
+      ],
+      "audio": "3.06",
+      "evidence": "The corresponding Teacher’s Book lesson 3C, pronunciation exercise 4A/B, explicitly explains that the voice stays high before a tactful disagreement. Applied to the four Workbook responses."
+    },
+    "5A": {
+      "answers": "sense/logic|hand|why|level|not|That's/It's",
+      "audio": "3.07"
+    },
+    "5B": {
+      "open": "Check the six gaps: sense, hand, why, level, not, That's.",
+      "audio": "3.07"
+    },
+    "5C": {
+      "open": "Speak as B after each beep, using the completed 5A conversation as a model.",
+      "audio": "3.08"
+    },
+    "5D": {
+      "open": "Compare your recording with 5A. Check the phrases for acknowledging an idea and tactfully explaining a reservation.",
+      "audio": "3.07"
+    }
+  },
+  "23": {
+    "1": {
+      "answers": "b",
+      "choices": "ab",
+      "audio": "3.09"
+    },
+    "2": {
+      "answers": "their own future|are too successful|has a job and a life they enjoy|a dream they are able to achieve|less",
+      "audio": "3.09",
+      "evidence": "Nick explicitly says celebrities can share students' backgrounds but be too successful to provide an achievable path. Super-intelligent former A-grade students can demotivate students."
+    },
+    "3": {
+      "answers": "b|d|c|a|e",
+      "choices": "abcde"
+    },
+    "4": {
+      "answers": "inspire|productive|setbacks|passion|confident",
+      "evidence": "Each answer is a single word taken from the indicated paragraph and fits the new sentence's grammar."
+    }
+  }
+}

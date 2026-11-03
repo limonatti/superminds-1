@@ -1,0 +1,71 @@
+{
+  "38": {
+    "1A": {"answers":"b|a|c|c|c|b", "choices":"abc"},
+    "1B": {"answers":"forecast|input/inputted|processed|generated|determined|miscalculated"},
+    "2A": {"answers":"b|c|c|b", "choices":"abc"},
+    "2B": {"answers":"before had I felt|next week will we know|do I agree|later did he realise/later did he realize|only did it rain|no circumstances will I agree", "evidence":"Negative/restrictive fronting requires auxiliary–subject inversion. All inserted answers have three to five words."},
+    "3A": {"answers":"a|a|a|a", "choices":"ab", "audio":"6.01", "evidence":"Fronted restrictive/negative phrases carry the emphasis in the inversion pattern."},
+    "3B": {"open":"Practise placing emphasis on In no way, Never before, Under no circumstances and Only in ten years' time.", "audio":"6.01"}
+  },
+  "39": {
+    "4": {"answers":"direct debits|lack of time|computer errors|human error", "evidence":"No more than three words, copied from the paragraph. Use plural direct debits/computer errors as printed."},
+    "5A": {"answers":"b|a|c", "choices":"abc"},
+    "5B": {"answers":"Luke,Elise|Luke|Elise,Maria|Luke,Elise|Elise|Maria", "mode":"set", "choices":["Luke","Elise","Maria"], "evidence":"Luke and Elise admit partial fault and praise the response; Luke learns a lesson; Elise loses overdraft fees and Maria excess charges; Elise excuses individuals; Maria received no apology."}
+  },
+  "40": {
+    "1A": {"answers":"made the assumption|mistaken|mistook|rectify|slipped up|accidentally"},
+    "1B": {"answers":"off|misled|mistakenly|presumed|assumptions"},
+    "2": {"answers":"way|in|stick|put|go"},
+    "3A": {"answers":"a|b|c|c|b|c", "choices":"abc"},
+    "3B": {"answers":"to be repaired|have been sent|being shown|to have been planted|being introduced|Having been cancelled/Having been canceled"},
+    "3C": {"answers":"been|have|to be|to have|being|having|been|to be", "evidence":"Passive perfect/modal and infinitive forms; gerund after enjoys/regret; perfect participial clause 'Having only been taken on'."}
+  },
+  "41": {
+    "4A": {"answers":"a,b,d,e", "mode":"set", "choices":"abcdef", "audio":"6.02"},
+    "4B": {"answers":"F|T|T|F|F|F", "choices":["T","F"], "audio":"6.02", "evidence":"Nick struggles with mornings; Joey forgot to set the alarm and arrived halfway through; Alicia slept on the train after getting up early."},
+    "4C": {"answers":"relieved|upset|embarrassed|furious with", "audio":"6.03"},
+    "4D": {"answers":"When I finally woke up, I couldn't believe it!|Looking back, I wouldn't have enjoyed the job.|I'd forgotten to set my alarm, so I missed my bus.|I fell asleep on the train on the way there.", "audio":"6.04"},
+    "5A": {"open":"Choose the attitude you hear in each sentence, then compare pitch, pace and emphasis with the recording. The words alone do not determine whether a speaker sounds nervous, pleased, shocked, disgusted, excited, confused, impressed or scared.", "audio":"6.05", "review":"audio-intonation"},
+    "5B": {"open":"Repeat the four sentences, copying the speakers' intonation. Try changing the attitude while keeping the words the same.", "audio":"6.05"},
+    "6A": {"answers":"complain about|all"},
+    "6B": {"answers":"e|a|c|b|d|f", "choices":"abcdef"},
+    "7A": {"open":"Useful phrases: I am writing to express my disappointment…; Please see the attached tickets…; To make matters worse…; I am sure you understand my frustration…; I would like to request compensation…; I look forward to hearing from you."},
+    "7B": {"open":"Write 220–260 words. Explain that the flight was overbooked, attach ticket details, describe losing two holiday days and paying for an airport hotel, and request compensation. Use a formal greeting, clear paragraphs and a polite closing. No single wording is required."}
+  },
+  "42": {
+    "1A": {"answers":"a|b|b|b", "choices":"ab"},
+    "1B": {"answers":"cracks|rotten|luxurious|mould|overlooked"},
+    "2A": {"answers":"b|c|a", "choices":"abc", "audio":"6.06"},
+    "2B": {"answers":"expect|can|sounds like|acceptable|happy|think|offer|to", "audio":"6.06"},
+    "3A": {"open":"Compare the two versions of each complaint. Listen for clear stress, a controlled pace and a firm ending rather than an uncertain rise. Record which speaker sounds more assertive and explain what you hear.", "audio":"6.07", "review":"audio-intonation"},
+    "3B": {"open":"Practise the three complaints clearly and firmly, without sounding aggressive. Use the confident versions in the recording as models.", "audio":"6.07"},
+    "4A": {"answers":"fair|expect|arrangement|sounds|offer|happy", "audio":"6.08"},
+    "4B": {"open":"Check: fair, expect, arrangement, sounds, offer, happy.", "audio":"6.08"},
+    "4C": {"open":"Respond as B after each beep, using the completed 4A conversation.", "audio":"6.09"},
+    "4D": {"open":"Compare your recording with Audio 6.08. Check the negotiation phrases and a calm, assertive tone.", "audio":"6.08"}
+  },
+  "43": {
+    "1": {"answers":"a", "choices":"ab", "audio":"6.10"},
+    "2": {"answers":"a,c,e,f", "mode":"set", "choices":"abcdef", "audio":"6.10", "evidence":"Dan anticipates relaxation and notes resistance to new technology; Barbara instinctively opposes driverless cars but usually embraces technology. Neither assigns liability to the owner or says cities will always be impossible."},
+    "3": {"answers":"c", "choices":"abc"},
+    "4": {"answers":"T|T|F|T|F", "choices":["T","F"], "evidence":"Slow human intervention; calculator bias; chimps prefer machines; social betrayal adds emotions; stress strengthens trust in machines."}
+  },
+  "44": {
+    "1": {"answers":"hadn't bought|spoke|would have entered|wouldn't be|hadn't made|wouldn't have happened"},
+    "2": {"answers":"has increased|has lived/has been living|had died|have been caused|to have resulted|will have become"},
+    "3": {"answers":"before have I seen|no way was this|no circumstances should you|only did he borrow|later did I realise/later did I realize|will I forget"},
+    "4": {"answers":"to being|to be|have been|Having been|to have been"},
+    "5": {"answers":"a|b|a|b", "choices":"ab"},
+    "6": {"answers":"breed|poaching|predators|migration|ecosystem|Conservationists", "hint":"Введите слова целиком, включая указанные первую и последнюю буквы."},
+    "7": {"answers":"migratory|prey|environmental|poachers|reproduce|conserve"}
+  },
+  "45": {
+    "8": {"answers":"a|b|b|b", "choices":"ab"},
+    "9": {"answers":"hardship|rough|welfare|fossil fuels|deforestation|landfill sites"},
+    "10": {"answers":"miscalculate|input|process|forecast|reinforce"},
+    "11": {"answers":"c|c|b|a|c|b", "choices":"abc"},
+    "12": {"answers":"d|f|a|e|b|c", "choices":"abcdef"},
+    "13": {"answers":"ruins|rotten|cosy|overlooked|cracks|luxurious"},
+    "14": {"answers":"a|b|b|c|a|a", "choices":"abc"}
+  }
+}

@@ -60,20 +60,39 @@ cannot be read by the website; use an export from that offline copy.
 
 ## Interactive exercises
 
-`data/exercises.js` maps 1,113 regions on 181 pages to the original page crops.
+`data/exercises.js` maps 1,114 regions on 181 pages to the original page crops.
 Inputs, selection fields, matching/custom quiz tasks and notes open in a native
 centered dialog. Keyboard focus stays in the dialog; Escape closes it.
-534 fields have conservative exact checks derived from unambiguous supplied SB keys.
+534 SB fields have conservative exact checks derived from unambiguous supplied SB keys.
+Workbook printed pages 4–67 have 393 reviewed exercise regions and 1,681 checked
+response fields. These WB answers were independently solved from the supplied
+pages and matching audioscripts, then checked against the original wording and
+the relevant grammar rules. They are not a publisher-issued answer key.
 Open questions are saved for discussion, without a fabricated correct/incorrect grade.
 The workbook PDF's appended keys refer to a different course (e.g. Lesson 1A
 is about daily routines, while this workbook's Lesson 1A is about relationships).
-They are deliberately excluded from automatic checks. A teacher can add custom
+That appendix is deliberately excluded from automatic checks. WB writing and
+speaking use guidance; eight recording-specific pronunciation tasks remain for
+teacher review because the scripts do not verify their sound. A teacher can add custom
 gap/matching/quiz regions with verified answers. Missing response fields can be
 added with **+ Ответ**.
 
 `scripts/build-speakout-b2plus-exercises.py` rebuilds regions from local Vision OCR;
 `audit/exercises.json` records coverage. Rendering full PDF pages uses
 `scripts/render-presentation-pages.swift`.
+
+After rebuilding the base regions, run
+`python3 scripts/build-speakout-b2plus-workbook.py /path/to/ocr` to apply the
+reviewed WB data in `scripts/data/b2plus-workbook`. `layout.json` preserves stable
+IDs and reviewed click regions; `audit/workbook-answers.json` records coverage and
+remaining sound-review tasks. `audit/workbook-legacy-regions.json` links old OCR
+fragments to their real exercise so previous answers remain visible and editable.
+No stored account answers are deleted during this update.
+
+Workbook grading accepts relevant contractions, punctuation/case differences,
+British/American spelling and the listed grammatical alternatives. Checkbox
+tasks compare the complete selected set. Sentence transformations accept the
+gap or the completed sentence. SB and custom-region grading stays unchanged.
 
 `Tab` moves keyboard focus; `Alt+L` toggles the lesson menu. Dialogs use native
 focus handling. On small screens the lesson list and materials open as drawers.
@@ -86,10 +105,12 @@ From the repository root:
 python3 check.py
 node tests/speakout-b2plus.cjs
 node tests/speakout-b2plus-sync.cjs
+node tests/speakout-b2plus-workbook.cjs
 python3 -m http.server 8772 --bind 127.0.0.1
 # In another terminal (set PLAYWRIGHT_PATH if needed):
 node tests/speakout-b2plus.cjs --browser
 node tests/speakout-b2plus-exercises.cjs
+B2PLUS_TEST_BASE=http://127.0.0.1:8772 node tests/speakout-b2plus-workbook.cjs --browser
 ```
 
 Tests cover file references, page checksums, printed page numbering, all units,

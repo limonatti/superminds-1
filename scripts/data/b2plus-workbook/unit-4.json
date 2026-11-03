@@ -1,0 +1,248 @@
+{
+  "24": {
+    "1": {
+      "answers": "a|b|c|c|a|b",
+      "choices": "abc"
+    },
+    "2": {
+      "answers": "shot|foreground|focus|blurred|frame|pose|zoom in|close-up|zoom out|composition"
+    },
+    "3A": {
+      "answers": "b|a|b|b",
+      "choices": "ab"
+    },
+    "3B": {
+      "answers": "b|c|a|b",
+      "choices": "abc"
+    },
+    "4A": {
+      "open": "Compare the two pronunciations with the recording. Notice that /d/ in 'should' may change or disappear before another consonant, and that auxiliary 'have' can have a weak form. Before a vowel, the /d/ is normally retained.",
+      "audio": "4.01",
+      "review": "audio-phonetics",
+      "evidence": "The script does not transcribe the exact reductions. No guessed five-item sound key."
+    },
+    "4B": {
+      "open": "Repeat each sentence after the recording, linking 'should' to the following word and copying its weak forms.",
+      "audio": "4.01"
+    }
+  },
+  "25": {
+    "5A": {
+      "answers": "c",
+      "choices": "abc"
+    },
+    "5B": {
+      "answers": "T|T|F|T|T|T|F",
+      "choices": [
+        "T",
+        "F"
+      ],
+      "evidence": "The writer defends professional portraits: all included and looking good, repeatable over time, meaningful records for descendants. A passer-by's photographic skill is untested."
+    },
+    "5C": {
+      "answers": "spontaneous|artificial|wooden|spectacular|dynamic|staged",
+      "evidence": "All six bold target words checked visually in the original page; item 3 refers to 'wooden', not the non-bold word 'still'."
+    },
+    "5D": {
+      "answers": "P|N|N|P|P|N",
+      "choices": [
+        "P",
+        "N"
+      ],
+      "prompts": [
+        "spontaneous",
+        "artificial",
+        "wooden",
+        "spectacular",
+        "dynamic",
+        "staged"
+      ],
+      "evidence": "Order follows 5C; labels explicitly name the word. Valence is as used by this writer."
+    }
+  },
+  "26": {
+    "1A": {
+      "answers": "push|went|billboards|hype|target|flyers"
+    },
+    "1B": {
+      "answers": "slogan|target|hype|flyers|billboards|merchandise|push|viral"
+    },
+    "2A": {
+      "answers": "b|a|a/b|b|c|c",
+      "choices": "abc",
+      "evidence": "Item 3 permits 'had been looking' when the morning is viewed as past, or 'have been looking' if it is still morning. The sentence gives no time of speaking, so accept both rather than reject a grammatical reading."
+    },
+    "2B": {
+      "answers": "to be feeling|was catching up|is listening/'s listening|had been standing/'d been standing|have you been studying"
+    },
+    "3A": {
+      "answers": "'ve been|'ll have been|'ve been|'ll have been|'ll have been",
+      "choices": [
+        "'ve been",
+        "'ll have been"
+      ],
+      "audio": "4.02",
+      "evidence": "Checked against all five lines of Audio 4.02 script."
+    },
+    "3B": {
+      "open": "Practise 'have been' and 'will have been', using the contractions heard in the recording.",
+      "audio": "4.02"
+    }
+  },
+  "27": {
+    "4A": {
+      "answers": "b",
+      "choices": "abc",
+      "audio": "4.03"
+    },
+    "4B": {
+      "answers": "c|b|a|b|a",
+      "choices": "abc",
+      "audio": "4.03",
+      "evidence": "Banana marketing; very little research evidence needed for the label; risk of a narrow diet; sugary/fatty snacks can use the label; varied healthy produce regardless of labels."
+    },
+    "5A": {
+      "answers": "B",
+      "choices": [
+        "A",
+        "B"
+      ],
+      "evidence": "Residents' email B requires litter and traffic issues to be addressed before the plan proceeds."
+    },
+    "5B": {
+      "open": "Overview: expand and rebrand the café, offer takeaways, consult residents, budget £500,000. Advantages: modern image, more customers and benefits for the area. Concerns: unhealthy food, litter and traffic. Recommend a healthy menu and a waste/parking plan before approval."
+    },
+    "5C": {
+      "open": "Write 200–260 words using the four headings in 5B. Present the plan and both groups' concerns fairly, then make practical recommendations. Use formal language and distinguish proposals from agreed decisions."
+    }
+  },
+  "28": {
+    "1": {
+      "answers": "trained|unskilled|competent|handy|beyond"
+    },
+    "2": {
+      "answers": "incompetent|skilled|experienced|untrained|training"
+    },
+    "3A": {
+      "answers": "b|a|c",
+      "choices": "abc",
+      "audio": "4.04"
+    },
+    "3B": {
+      "answers": "e|a|f|b|c|d",
+      "choices": "abcdef",
+      "audio": "4.04"
+    },
+    "4A": {
+      "open": "Listen for a steady, neutral pitch and natural stress. Compare that delivery with exaggerated rises or falls, which can suggest excessive enthusiasm, uncertainty or overconfidence.",
+      "audio": "4.05",
+      "review": "audio-intonation",
+      "evidence": "The script gives identical words for the intended contrasts; selecting the two professional deliveries requires direct audio review."
+    },
+    "4B": {
+      "open": "Practise all five sentences with steady, professional intonation and clear stress on the relevant skills.",
+      "audio": "4.05"
+    },
+    "5A": {
+      "answers": "just|thought|point|question|say|quite|Perhaps",
+      "audio": "4.06"
+    },
+    "5B": {
+      "open": "Check: just, thought, point, question, say, quite, Perhaps.",
+      "audio": "4.06"
+    },
+    "5C": {
+      "open": "Take B's part after each beep, using the completed conversation in 5A.",
+      "audio": "4.07"
+    },
+    "5D": {
+      "open": "Compare your recording with 5A. Check the phrases for steering the conversation and your professional intonation.",
+      "audio": "4.06"
+    }
+  },
+  "29": {
+    "1": {
+      "answers": "widespread|recommendations|websites|time-consuming",
+      "hint": "Введите четыре слова из печатного текста, которые отличаются от записи, в порядке появления.",
+      "audio": "4.08",
+      "evidence": "Printed → spoken: widespread → popular; recommendations → advice; websites → clothes; time-consuming → expensive."
+    },
+    "2": {
+      "answers": "Olivia",
+      "choices": [
+        "Olivia",
+        "Amy",
+        "Ed"
+      ],
+      "audio": "4.09"
+    },
+    "3": {
+      "answers": "Ed|Amy|Olivia",
+      "choices": [
+        "Olivia",
+        "Amy",
+        "Ed"
+      ],
+      "audio": "4.09"
+    },
+    "4": {
+      "answers": "c|a|d|b|e",
+      "choices": "abcde"
+    },
+    "5": {
+      "answers": "a|b|b|a",
+      "choices": "ab",
+      "evidence": "Mirrors everywhere; clearer metal-backed glass came later than Rome; feng shui objects to placement opposite windows; negativity bias may undermine confidence."
+    }
+  },
+  "30": {
+    "1": {
+      "answers": "looks as if|if to|as though|as if|if she was/as if she was|if/as if"
+    },
+    "2": {
+      "answers": "no matter how much|no matter where|No matter who|No matter that"
+    },
+    "3": {
+      "answers": "should you|should have left|shouldn't be carrying|should have been told|should you need"
+    },
+    "4": {
+      "answers": "have been driving|had been rising|had been falling/were falling|to be losing|are continuing",
+      "evidence": "Current duration, pre-1959 developments, continuous infinitive after seemed, and an ongoing present trend. In gap 3 both past continuous and past perfect continuous describe the pre-launch falling sales."
+    },
+    "5": {
+      "answers": "entertaining|tragic|profound|convincing|encouraging|eager"
+    },
+    "6": {
+      "answers": "pain|edge|butterflies|hair|temper|wall"
+    },
+    "7": {
+      "answers": "a|b|c|b|c|a",
+      "choices": "abc"
+    }
+  },
+  "31": {
+    "8": {
+      "answers": "motivate|reason|manipulate|win|pressurise|coax"
+    },
+    "9": {
+      "answers": "pressure|drive|persuasion|motivation|coaxing|manipulation"
+    },
+    "10": {
+      "answers": "abolish|restrict|deter|impose|regulate|eliminate",
+      "evidence": "Uses the supplied six-word bank. The book's first definition loosely describes 'abolish'; 'prohibit' would be more precise but is not supplied."
+    },
+    "11": {
+      "answers": "shots|pose|focus|blurred|close-up|composition"
+    },
+    "12": {
+      "answers": "viral|merchandise|flyer|slogan|target|hype",
+      "hint": "Введите слова целиком, включая указанную первую букву."
+    },
+    "13": {
+      "answers": "unskilled|beyond|at|trained|with|in"
+    },
+    "14": {
+      "answers": "unskilled|trained|experience|proficient|competent|skilled"
+    }
+  }
+}
