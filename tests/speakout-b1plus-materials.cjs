@@ -44,7 +44,7 @@ if(process.argv.includes('--browser'))(async()=>{
   const player=page.locator('.material-audio audio').first();assert((await player.getAttribute('src')).includes('ut1-01'));
   await player.evaluate(p=>p.load());await page.waitForFunction(()=>document.querySelector('.material-audio audio').readyState>=1);
   assert(await player.evaluate(p=>p.duration>0));
-  await page.locator('#materialNext').click();assert.equal(await page.locator('#materialPage').inputValue(),'1');
+  await page.locator('.focus-source-controls button').last().click();assert.equal(await page.locator('.focus-source-controls button').last().getAttribute('aria-pressed'),'true');await page.locator('.material-answer summary').click();
   await page.locator('#materialNote').fill('1. went\n2. was walking');await page.locator('#materialDone').click();
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('speakout-b1plus-v1')).answers['material:tests-so3-b1p-unit-test-u1a']?.done);
   await page.locator('#materialKey').click();assert.match(await page.locator('#modalTitle').textContent(),/Answer Key/);

@@ -21,7 +21,7 @@ for(const [page,exs] of Object.entries(exercises))for(const ex of exs){
   });
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));return page;
  }
- const url='http://127.0.0.1:8772/speakout-b2plus-active-teach/index.html?book=sb&page=9';
+ const url=(process.env.B2PLUS_TEST_BASE||'http://127.0.0.1:8772')+'/speakout-b2plus-active-teach/index.html?book=sb&page=9';
  const ready=page=>page.waitForFunction(()=>B2Store.ready&&document.querySelector('#pageImg').naturalWidth>0);
  try{
   const a=await device();await a.goto(url);await ready(a);

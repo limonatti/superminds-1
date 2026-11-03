@@ -27,7 +27,7 @@
     const result=f=>{const a=value(f);return !a.checked?'':!f.answer?'Сохранено для обсуждения':!String(a.value).trim()?'Введите ответ':correct(a.value,f.answer)?'Верно':'Попробуйте ещё раз';};
     dialog.innerHTML=`<header class="exercise-head"><div><p>${book==='sb'?"Student’s Book":'Workbook'} · стр. ${printed}</p><h2 id="exerciseTitle">Упражнение ${esc(s.label||'')}</h2></div><button class="btn" id="exerciseClose" aria-label="Закрыть упражнение">✕</button></header>
       <div class="exercise-content"><div class="exercise-original"><svg role="img" aria-label="Оригинал упражнения ${esc(s.label)}" viewBox="${s.x*img.naturalWidth} ${s.y*img.naturalHeight} ${s.w*img.naturalWidth} ${s.h*img.naturalHeight}"><image href="${esc(img.src)}" width="${img.naturalWidth}" height="${img.naturalHeight}"/></svg></div>
-      ${s.type==='gap'?`<p class="exercise-prompt">${esc(s.data.replace(/\{[^}]+\}/g,'_____'))}</p>`:''}
+      <div class="focus-responses">${s.type==='gap'?`<p class="exercise-prompt">${esc(s.data.replace(/\{[^}]+\}/g,'_____'))}</p>`:''}
       <div class="exercise-fields ${fields.length===1?'single':''}">${fields.map(f=>{
         const a=value(f),id='exercise-field-'+f.n,message=result(f),ok=message==='Верно';
         const control=f.choices?`<select id="${id}" data-answer="${f.n}" ${disabled?'disabled':''}><option value="">Выберите ответ</option>${f.choices.map(c=>`<option ${a.value===c?'selected':''} value="${esc(c)}">${esc(c)}</option>`).join('')}</select>`:
@@ -36,8 +36,11 @@
         return `<div class="exercise-field ${message?(ok?'correct':f.answer?'retry':'discussion'):''}"><label for="${id}">${f.n==='notes'?'Ваш ответ / заметки':esc(f.prompt||'Ответ '+f.n)}</label>${control}<span class="field-result" aria-live="polite">${message}</span></div>`;
       }).join('')}</div>
       ${!fields.some(f=>f.answer)?'<p class="exercise-note">Ответы сохраняются. Это задание можно обсудить с преподавателем или сверить с образцом, если он доступен.</p>':''}
-      ${key?`<details class="exercise-key" ${revealed?'open':''}><summary>Показать ключ / образец ответа</summary><p>${esc(key)}</p></details>`:''}</div>
+      ${key?`<details class="exercise-key" ${revealed?'open':''}><summary>Показать ключ / образец ответа</summary><p>${esc(key)}</p></details>`:''}</div></div>
       <footer class="exercise-footer"><span class="exercise-status">${esc(document.querySelector('#saveStatus').textContent)}</span>${s.audio?'<button class="btn" id="exerciseAudio">▶ Аудио / пауза</button>':''}${s.video?'<button class="btn" id="exerciseVideo">▶ Видео</button>':''}<button class="btn" id="exerciseAdd">+ Ответ</button><button class="btn" id="exerciseReset">Сбросить ответы</button><button class="btn pri" id="exerciseCheck" ${disabled?'disabled':''}>${fields.some(f=>f.answer)?'Проверить':'Сохранить ответы'}</button></footer>`;
+    window.ExerciseSource.columns(dialog,dialog.querySelector('.exercise-content'),dialog.querySelector('.exercise-original'),dialog.querySelector('.focus-responses'));
+    window.ExerciseSource.mount(dialog.querySelector('.exercise-original'),active.id,{label:s.label,sources:[{image:img.src,size:[img.naturalWidth,img.naturalHeight],box:[s.x,s.y,s.w,s.h],page:printed}]});
+    window.ExerciseSource.controls(dialog.querySelector('.exercise-original'));
     dialog.querySelector('#exerciseClose').onclick=()=>dialog.close();
     dialog.querySelectorAll('[data-answer]').forEach(el=>el.oninput=()=>{
       window.B2Store.answer(active.id+':'+el.dataset.answer,{value:el.value,checked:false});

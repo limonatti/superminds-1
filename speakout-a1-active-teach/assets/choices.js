@@ -29,7 +29,7 @@ function mount({container,data,page,exercise,state,keyHTML,url,teacher,index,onC
  function place(el,b,region){const[x,y,w,h]=region;Object.assign(el.style,{left:((b[0]-x)/w*100)+'%',top:((b[1]-y)/h*100)+'%',width:(b[2]/w*100)+'%',height:(b[3]/h*100)+'%'})}
  function fit(input,f){measure.font='10px Arial';const size=Math.max(6,Math.min(10,10*(f.box[2]-.5)/(measure.measureText(input.value).width||1)));input.style.fontSize=size/(full?595:data.box[2])*100+'cqw'}
  function layout(){const region=full?[0,0,595,842]:data.box,[x,y,w,h]=region;stage.style.width=zoom*100+'%';stage.style.aspectRatio=`${w}/${h}`;Object.assign($('.inline-original').style,{width:595/w*100+'%',left:-x/w*100+'%',top:-y/h*100+'%'});
-  for(const button of buttons){const{o}=meta(button),first=o.boxes[0];place(button,first,region);button.style.fontSize=8.5/w*100+'cqw';for(const part of button.children)place(part,o.boxes[+part.dataset.part],first)}
+  for(const button of buttons){const{o}=meta(button),first=o.boxes[0];place(button,first,region);button.style.fontSize=8.5/w*100+'cqw';for(const part of button.querySelectorAll('[data-part]'))place(part,o.boxes[+part.dataset.part],first)}
   for(const input of inputs){const f=data.gaps.find(f=>f.id===input.dataset.inline);place(input,f.box,region);fit(input,f)}
  }
  function activate(g){active=g;$('#inlineCurrent').textContent=`Пункт ${g.id} · ${data.groups.indexOf(g)+1} из ${data.groups.length}`;$('#inlineHint').disabled=g.correct===undefined}
@@ -48,6 +48,7 @@ function mount({container,data,page,exercise,state,keyHTML,url,teacher,index,onC
  if($('#retryMistakes'))$('#retryMistakes').onclick=()=>{for(const q of data.items)if(state.revealed[q.n]||!data.byNumber[q.n].every(correct))clearNumber(q.n);state.done=false;state.score=null;clearFeedback();sync();onChange()};
  $('#retry').onclick=()=>{for(const n of Object.keys(data.byNumber))clearNumber(n);state.done=false;state.score=null;clearFeedback();sync();onChange()};
  if($('#inlineCompare'))$('#inlineCompare').onclick=()=>document.querySelector('#exerciseKeys').click();
+ for(const button of buttons){const text=document.createElement('span');text.textContent=meta(button).o.label;button.append(text)}
  activate(active);sync();layout();
  return {setZoom(v){zoom=v;layout()},setFullPage(v){full=v;layout()},get full(){return full},report(){return data.groups.map(g=>({label:g.id,text:selected(g)?.label||value(g),result:data.auto&&typeof state.score==='number'?(correct(g)?'✓ Верно':'✕ Ошибка'):''}))}};
 }

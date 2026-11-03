@@ -376,15 +376,19 @@ def source_pages(sections, pages, item):
     lastpage=0
     for section in sections:
         needle=norm((section['n']+' ' if section['numbered'] else '')+section['instruction'])
-        candidates=[i for i,p in enumerate(compact) if i>=lastpage and needle[:70] in p]
-        if candidates:
-            start=candidates[0]
+        found=None
+        for length in (70,35):
+            prefix=needle[:length]
+            for i in range(lastpage,len(compact)):
+                pos=compact[i].find(prefix,cursor if i==lastpage else 0)
+                if pos>=0:
+                    found=(i,pos+len(prefix));break
+            if found:break
+        if found:
+            start,cursor=found
         else:
-            short=needle[:35]
-            candidates=[i for i,p in enumerate(compact) if i>=lastpage and short in p]
-            start=candidates[0] if candidates else lastpage
-            if not candidates:
-                ISSUES.append({'kind':'source-page-review','material':item['id'],'section':section['id'],'instruction':section['instruction'],'fallback':start+1})
+            start=lastpage
+            ISSUES.append({'kind':'source-page-review','material':item['id'],'section':section['id'],'instruction':section['instruction'],'fallback':start+1})
         section['sourcePage']=start+1
         lastpage=start
     for i,section in enumerate(sections):

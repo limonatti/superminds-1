@@ -31,11 +31,13 @@ function syncExerciseKeys(){
  if($('#keyArea'))$('#keyArea').hidden=!S.teacher;
 }
 function fullExercisePage(on){
+ window.ExerciseSource.change($('#exerciseBody'),{full:!!on});
  $('#exercisePage').hidden=!on;$('#exerciseBody').classList.toggle('full-source',on);
  $('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);
 }
 function setExerciseZoom(value){
  exerciseZoom=Math.max(.75,Math.min(3,value));for(const el of $$('#exerciseBody .crop,#exercisePage'))el.style.width=(exerciseZoom*100)+'%';
+ window.ExerciseSource.change($('#exerciseBody'),{zoom:exerciseZoom});
  $('#exerciseZoomFit').textContent=Math.round(exerciseZoom*100)+'%';$('#exerciseZoomOut').disabled=exerciseZoom<=.75;$('#exerciseZoomIn').disabled=exerciseZoom>=3;
 }
 $('#exerciseZoomOut').onclick=()=>setExerciseZoom(exerciseZoom-.25);$('#exerciseZoomIn').onclick=()=>setExerciseZoom(exerciseZoom+.25);$('#exerciseZoomFit').onclick=()=>setExerciseZoom(1);
@@ -54,6 +56,19 @@ function exerciseAudio(){
  $$('[data-ex-loop]').forEach(b=>b.onclick=()=>{const player=b.closest('.exercise-track').querySelector('audio,video');player.loop=!player.loop;b.setAttribute('aria-pressed',player.loop);b.classList.toggle('selected',player.loop)});
  if($('#exerciseAllMedia'))$('#exerciseAllMedia').onclick=()=>{$('#exerciseDialog').close();$('#mediaFilter').value='lesson';showView('media');renderMedia()};
  $$('[data-ex-speed]').forEach(el=>el.onchange=()=>el.closest('.exercise-track').querySelector('audio,video').playbackRate=+el.value);bindExclusivePlayers();
+}
+function focusExercise(){
+ const body=$('#exerciseBody'),left=body.querySelector('.exercise-source'),right=body.querySelector('.exercise-response');
+ if(!left||!right)return;
+ const instruction=body.querySelector('.inline-instruction');if(instruction){instruction.textContent='Выбери варианты или заполни ответы по оригиналу слева.';right.prepend(instruction)}
+ const controls=[...left.querySelectorAll('.page-choice-group,[data-inline]')];
+ if(controls.length){
+  const list=document.createElement('div');list.className='focus-answer-list';
+  for(const el of controls){const row=document.createElement('div'),label=document.createElement('label');label.className='focus-answer-label';label.textContent=el.getAttribute('aria-label');if(el.tagName==='INPUT'){el.id='focus-'+el.dataset.inline;label.htmlFor=el.id}row.append(label,el);list.append(row)}
+  right.insertBefore(list,right.querySelector('.inline-tools'));
+ }
+ window.ExerciseSource.columns($('#exerciseDialog'),body,left,right);
+ window.ExerciseSource.mount(left,recordId(selectedEx));
 }
 function selectExercise(index){
  const p=page();selectedEx=p.exercises[index];
@@ -74,7 +89,7 @@ function selectExercise(index){
  html+=`<div class="actions"><button id="done" class="${state.done?'selected':''}">${state.done?'✓ Выполнено':auto?'Отметить после сверки':'Отметить выполненным'}</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div><div id="keyArea" ${S.teacher?'':'hidden'}>${key?`<h3>Ключ</h3>${key.correctionNote?`<p class="source-note">${esc(key.correctionNote)}</p>`:''}<div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Сверь ответы с оригинальным ключом ниже.')}</div>${key.images?.length?`<details><summary>Страницы оригинального ключа к уроку</summary>${key.images.map(src=>`<a href="${url(src)}" target="_blank" rel="noopener"><img loading="lazy" src="${url(src)}" alt="Оригинальный ключ к уроку" style="width:100%"></a>`).join('')}</details>`:''}<a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Отдельный ключ не привязан. Ответ можно обсудить с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>'}</div>`;
  const refs=[...new Set([...[...e.text.matchAll(/(?:page|pages)\s+(\d{1,3})/gi)].map(m=>Number(m[1])),...(e.relatedPages||[])])].filter(n=>n!==p.page);
  if(refs.length)html+='<div class="source-references"><h4>Материалы к заданию</h4>'+refs.map(n=>D.books.sb.pages.some(p=>p.page===n)?`<button data-source-page="${n}">Student’s Book · стр. ${n} →</button>`:`<p>Student’s Book · стр. ${n} ещё не добавлена.</p>`).join('')+'</div>';
- $('#exerciseBody').innerHTML=html+'</div>';$$('[data-source-page]').forEach(b=>b.onclick=()=>{$('#exerciseDialog').close();S.book='sb';go(b.dataset.sourcePage)});setExerciseZoom(1);fullExercisePage(/photos|pictures|drawing/i.test(e.text)&&e.box[3]<15);$('.cropZoom').onclick=()=>fullExercisePage(true);
+ $('#exerciseBody').innerHTML=html+'</div>';$$('[data-source-page]').forEach(b=>b.onclick=()=>{$('#exerciseDialog').close();S.book='sb';go(b.dataset.sourcePage)});setExerciseZoom(1);fullExercisePage(false);$('.cropZoom').onclick=()=>fullExercisePage(true);focusExercise();
  function invalidate(n){state.done=false;state.score=null;clearFeedback();persist()}
  function inputFor(n){return $$('[data-answer]').find(x=>x.dataset.answer===n)}
  function put(n,v){const input=inputFor(n);input.value=v;state.values[n]=v;invalidate(n);syncChoices()}

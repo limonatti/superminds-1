@@ -1,0 +1,36 @@
+/* Existing course colours and answer components; a consistent two-pane work area. */
+dialog#exerciseDialog.focus-dialog,dialog#exercise.focus-dialog,dialog#modal.focus-dialog,dialog#mdExercise.focus-dialog{width:min(1680px,calc(100vw - 32px));max-width:calc(100vw - 32px);height:calc(100dvh - 32px);max-height:calc(100dvh - 32px);padding:20px;overflow:hidden;box-sizing:border-box}
+dialog.focus-dialog[open]{display:flex;flex-direction:column;gap:0}
+.focus-dialog>.exercise-head,.focus-dialog>.dialog-head,.focus-dialog>.dialoghead{position:static;flex:none;margin:0 0 12px;padding:0 0 12px;background:inherit;min-height:48px}
+.focus-dialog>.exercise-toolbar,.focus-dialog>.exerciseTools{flex:none;margin:0 0 12px}
+.focus-dialog>#exerciseMedia{flex:none;max-height:100px;overflow:auto;margin:0 0 12px}
+.focus-dialog .focus-columns{display:grid!important;grid-template-columns:minmax(0,1.3fr) minmax(320px,1fr)!important;gap:24px;flex:1;min-height:0;overflow:hidden;align-items:stretch!important;padding:0}
+.focus-dialog .focus-original{position:relative!important;top:auto!important;min-width:0;max-height:none!important;height:100%;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;margin:0!important;border:0!important;border-radius:0;background:transparent;padding:0 12px 16px 0;box-sizing:border-box}
+.focus-dialog .focus-responses{min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 8px 24px 0;box-sizing:border-box}
+.focus-legacy{display:none!important}.focus-document{min-width:0;max-width:none!important;box-sizing:border-box}.focus-sheet{margin:0 0 20px;padding:0}.focus-sheet figcaption{font-size:12px;line-height:1.5;margin:0 0 10px;color:inherit;opacity:.8}.focus-sheet svg{display:block;width:100%;height:auto;max-height:none!important;background:white;overflow:hidden}
+.focus-source-controls{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}.focus-source-controls button{min-height:44px;font-size:13px}
+.focus-dialog .inline-instruction{grid-column:1/-1;margin:0}.focus-dialog .focus-answer-list{display:grid;gap:16px;margin:0 0 16px}
+.focus-dialog .focus-answer-label{display:block;font-size:14px;margin:0 0 6px;font-weight:600}
+#exerciseBody .focus-answer-list .inline-field{position:static!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;min-height:44px!important;padding:10px 12px!important;font:inherit!important;line-height:1.5!important;text-align:left!important;border:1px solid var(--line,#aaa)!important;border-radius:6px;background:var(--paper,#fff)}
+#exerciseBody .focus-answer-list .page-choice-group{display:flex;flex-wrap:wrap;gap:8px}
+#exerciseBody .focus-answer-list .page-choice{position:static!important;left:auto!important;top:auto!important;width:auto!important;height:auto!important;min-height:44px!important;padding:8px 12px!important;font:inherit!important;line-height:1.5!important;border:1px solid var(--line,#aaa)!important;border-radius:6px;background:var(--paper,#fff);color:var(--ink,#202020)}
+#exerciseBody .focus-answer-list .page-choice.selected{background:var(--ink,#202020);color:var(--paper,#fff)}
+#exerciseBody .focus-answer-list .page-choice.correct{border-color:#287044!important;box-shadow:inset 0 -3px #287044}#exerciseBody .focus-answer-list .page-choice.incorrect{border-color:#b12525!important;box-shadow:inset 0 -3px #b12525}
+#exerciseBody .focus-answer-list .page-choice:focus-visible{outline:3px solid #315e9f;outline-offset:3px}
+.focus-dialog .focus-answer-list .choice-hit{display:none!important}
+.focus-dialog #modalBody{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.focus-dialog .exerciseDialog{flex:1;min-height:0}.focus-dialog .exercise-footer{flex:none}
+@media(max-width:760px){dialog#exerciseDialog.focus-dialog,dialog#exercise.focus-dialog,dialog#modal.focus-dialog,dialog#mdExercise.focus-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:12px}.focus-dialog .focus-columns{grid-template-columns:minmax(0,1fr)!important;display:block!important;overflow:auto}.focus-dialog .focus-original{height:auto;max-height:none!important;overflow:visible!important;padding:0}.focus-dialog .focus-responses{overflow:visible;padding:16px 0}.focus-dialog>.exercise-head h2{font-size:20px}.focus-dialog .exercise-toolbar{margin-bottom:8px}.focus-dialog .focus-document{width:100%!important}}
+/* Supplemental tests share the same source view, with their library controls. */
+#modal.materials-dialog.focus-material-dialog{width:min(1680px,calc(100vw - 32px));max-width:calc(100vw - 32px);height:calc(100dvh - 32px);max-height:calc(100dvh - 32px);padding:20px;overflow:hidden}
+#modal.focus-material-dialog[open]{display:flex;flex-direction:column}
+#modal.focus-material-dialog>.dialoghead{flex:none;position:static;margin:0 0 12px;padding:0 0 12px}
+#modal.focus-material-dialog #modalBody{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+#modal.focus-material-dialog .material-actions{flex:none;margin:0 0 12px}
+#modal.focus-material-dialog .material-study{flex:1;min-height:0;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,1fr);gap:24px;align-items:stretch}
+#modal.focus-material-dialog .material-original{height:100%;max-height:none;position:static;overflow:auto;min-width:0;padding-right:12px}
+#modal.focus-material-dialog .material-practice{height:100%;overflow:auto;min-width:0;border:0;border-left:1px solid var(--line);border-radius:0;padding:0 8px 24px 24px}
+#modal.focus-material-dialog .material-answer{flex:none;margin:0;border:0;padding:8px 0;font-size:12px}
+#modal.focus-material-dialog .material-answer{max-height:24vh;overflow:auto}#modal.focus-material-dialog .material-answer summary{cursor:pointer;min-height:32px}
+#modal.focus-material-dialog .material-audio{display:none}
+@media(max-width:760px){#modal.materials-dialog.focus-material-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:12px}#modal.focus-material-dialog .material-study{display:block;overflow:auto}#modal.focus-material-dialog .material-original{height:auto;overflow:visible;padding:0}#modal.focus-material-dialog .material-practice{height:auto;overflow:visible;border:0;padding:16px 0}}

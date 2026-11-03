@@ -31,12 +31,14 @@ function syncExerciseKeys(){
  if($('#keyArea'))$('#keyArea').hidden=!S.teacher;
 }
 function fullExercisePage(on){
+ window.ExerciseSource.change($('#exerciseBody'),{full:!!on});
  if(inlinePlayer){inlinePlayer.setFullPage(on);$('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);return}
  $('#exercisePage').hidden=!on;$('#exerciseBody').classList.toggle('full-source',on);
  $('#exerciseFullPage').textContent=on?'Только задание':'Вся страница';$('#exerciseFullPage').setAttribute('aria-pressed',on);
 }
 function setExerciseZoom(value){
  exerciseZoom=Math.max(.75,Math.min(3,value));if(inlinePlayer)inlinePlayer.setZoom(exerciseZoom);for(const el of $$('#exerciseBody .crop,#exercisePage'))el.style.width=(exerciseZoom*100)+'%';
+ window.ExerciseSource.change($('#exerciseBody'),{zoom:exerciseZoom});
  $('#exerciseZoomFit').textContent=Math.round(exerciseZoom*100)+'%';$('#exerciseZoomOut').disabled=exerciseZoom<=.75;$('#exerciseZoomIn').disabled=exerciseZoom>=3;
 }
 $('#exerciseZoomOut').onclick=()=>setExerciseZoom(exerciseZoom-.25);$('#exerciseZoomIn').onclick=()=>setExerciseZoom(exerciseZoom+.25);$('#exerciseZoomFit').onclick=()=>setExerciseZoom(1);
@@ -54,6 +56,19 @@ function exerciseAudio(){
  if($('#exerciseAllMedia'))$('#exerciseAllMedia').onclick=()=>{$('#exerciseDialog').close();$('#mediaFilter').value='lesson';showView('media');renderMedia()};
  $$('[data-ex-speed]').forEach(el=>el.onchange=()=>el.closest('.exercise-track').querySelector('audio,video').playbackRate=+el.value);bindExclusivePlayers();
 }
+function focusExercise(){
+ const body=$('#exerciseBody'),left=body.querySelector('.exercise-source'),right=body.querySelector('.exercise-response');
+ if(!left||!right)return;
+ const instruction=body.querySelector('.inline-instruction');if(instruction){instruction.textContent='Выбери варианты или заполни ответы по оригиналу слева.';right.prepend(instruction)}
+ const controls=[...left.querySelectorAll('.page-choice-group,[data-inline]')];
+ if(controls.length){
+  const list=document.createElement('div');list.className='focus-answer-list';
+  for(const el of controls){const row=document.createElement('div'),label=document.createElement('label');label.className='focus-answer-label';label.textContent=el.getAttribute('aria-label');if(el.tagName==='INPUT'){el.id='focus-'+el.dataset.inline;label.htmlFor=el.id}row.append(label,el);list.append(row)}
+  right.insertBefore(list,right.querySelector('.inline-tools'));
+ }
+ window.ExerciseSource.columns($('#exerciseDialog'),body,left,right);
+ window.ExerciseSource.mount(left,recordId(selectedEx));
+}
 function selectExercise(index){
  const p=page();selectedEx=p.exercises[index];
  if(!selectedEx){$('#exerciseBody').innerHTML='';$('#exerciseMedia').innerHTML='';if($('#exerciseDialog').open)$('#exerciseDialog').close();quickMedia();return}
@@ -66,7 +81,7 @@ function selectExercise(index){
  if(inline){
   const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
   inlinePlayer=(choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
-  setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();return;
+  focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();return;
  }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
  if(auto){
@@ -78,7 +93,7 @@ function selectExercise(index){
   html+='<p class="instruction">Выполни задание по оригиналу. Для устного ответа подготовь реплики, для письменного — запиши свой вариант.</p><label for="freeNote">Твой ответ или заметки</label><textarea id="freeNote" class="note" placeholder="Напиши ответ…">'+esc(state.note)+'</textarea><p class="teacher-note">Это задание проверяется с преподавателем или по образцу в ключе.</p>';
  }
  html+=`<div class="actions"><button id="done" class="${state.done?'selected':''}">${state.done?'✓ Выполнено':auto?'Отметить после сверки':'Отметить выполненным'}</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div><div id="keyArea" ${S.teacher?'':'hidden'}>${key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Отдельный ключ не привязан. Ответ можно обсудить с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>'}</div>`;
- $('#exerciseBody').innerHTML=html+'</div>';setExerciseZoom(1);fullExercisePage(/photos|pictures|drawing/i.test(e.text)&&e.box[3]<15);$('.cropZoom').onclick=()=>fullExercisePage(true);
+ $('#exerciseBody').innerHTML=html+'</div>';setExerciseZoom(1);fullExercisePage(false);$('.cropZoom').onclick=()=>fullExercisePage(true);focusExercise();
  function invalidate(n){state.done=false;state.score=null;clearFeedback();persist()}
  function inputFor(n){return $$('[data-answer]').find(x=>x.dataset.answer===n)}
  function put(n,v){const input=inputFor(n);input.value=v;state.values[n]=v;invalidate(n);syncChoices()}

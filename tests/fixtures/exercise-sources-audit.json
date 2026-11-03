@@ -1,0 +1,7250 @@
+[
+  {
+    "course": "speakout-a1",
+    "exercises": 1180,
+    "pages": [
+      {
+        "page": "sb:6",
+        "exercises": 14,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:7",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:8",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:9",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:10",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:11",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:12",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:13",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:14",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:15",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:16",
+        "exercises": 15,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:17",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:18",
+        "exercises": 12,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:19",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:20",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:21",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:22",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:23",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:24",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:25",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:26",
+        "exercises": 14,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:27",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:28",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:29",
+        "exercises": 13,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:30",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:31",
+        "exercises": 11,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:32",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:33",
+        "exercises": 13,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:34",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:35",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:36",
+        "exercises": 14,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:37",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:38",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:39",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": 0.42125
+      },
+      {
+        "page": "sb:40",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:41",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:42",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:43",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:44",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:45",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:46",
+        "exercises": 15,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:47",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:48",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:49",
+        "exercises": 17,
+        "sourceGroups": 5,
+        "gutter": 0.51125
+      },
+      {
+        "page": "sb:50",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:51",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:52",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:53",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": 0.45
+      },
+      {
+        "page": "sb:54",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:55",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:56",
+        "exercises": 15,
+        "sourceGroups": 6,
+        "gutter": 0.48875
+      },
+      {
+        "page": "sb:57",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:58",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:59",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:60",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:61",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": 0.4475
+      },
+      {
+        "page": "sb:62",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:63",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:64",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:65",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:66",
+        "exercises": 13,
+        "sourceGroups": 5,
+        "gutter": 0.435
+      },
+      {
+        "page": "sb:67",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:68",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:69",
+        "exercises": 15,
+        "sourceGroups": 5,
+        "gutter": 0.50875
+      },
+      {
+        "page": "sb:70",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": 0.4775
+      },
+      {
+        "page": "sb:71",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": 0.5125
+      },
+      {
+        "page": "sb:72",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:73",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": 0.42
+      },
+      {
+        "page": "sb:74",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:75",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:76",
+        "exercises": 15,
+        "sourceGroups": 7,
+        "gutter": 0.48875
+      },
+      {
+        "page": "sb:77",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:78",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:79",
+        "exercises": 14,
+        "sourceGroups": 4,
+        "gutter": 0.59125
+      },
+      {
+        "page": "sb:80",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:81",
+        "exercises": 14,
+        "sourceGroups": 5,
+        "gutter": 0.51375
+      },
+      {
+        "page": "sb:82",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:83",
+        "exercises": 11,
+        "sourceGroups": 5,
+        "gutter": 0.4175
+      },
+      {
+        "page": "sb:84",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:85",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:86",
+        "exercises": 13,
+        "sourceGroups": 6,
+        "gutter": 0.49
+      },
+      {
+        "page": "wb:3",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:4",
+        "exercises": 7,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:5",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:6",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:7",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:8",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:9",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:10",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:11",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:12",
+        "exercises": 8,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:13",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:14",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:15",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:16",
+        "exercises": 8,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:17",
+        "exercises": 8,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:18",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:19",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:20",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:21",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:22",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:23",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:24",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": 0.49875
+      },
+      {
+        "page": "wb:25",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": 0.5125
+      },
+      {
+        "page": "wb:26",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": 0.495
+      },
+      {
+        "page": "wb:27",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": 0.5025
+      },
+      {
+        "page": "wb:28",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:29",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:30",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:31",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": 0.50375
+      },
+      {
+        "page": "wb:32",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.485
+      },
+      {
+        "page": "wb:33",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:34",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:35",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.50875
+      },
+      {
+        "page": "wb:36",
+        "exercises": 12,
+        "sourceGroups": 4,
+        "gutter": 0.48875
+      },
+      {
+        "page": "wb:37",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.51625
+      },
+      {
+        "page": "wb:38",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.49625
+      },
+      {
+        "page": "wb:39",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:40",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:41",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:42",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:43",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:44",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:45",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": 0.49875
+      },
+      {
+        "page": "wb:46",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.49375
+      },
+      {
+        "page": "wb:47",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:48",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:49",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:50",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:51",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.51
+      },
+      {
+        "page": "wb:52",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.44625
+      },
+      {
+        "page": "wb:53",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.5025
+      },
+      {
+        "page": "wb:54",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:55",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:56",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:57",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.50375
+      },
+      {
+        "page": "wb:58",
+        "exercises": 7,
+        "sourceGroups": 5,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:59",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": 0.49125
+      },
+      {
+        "page": "wb:60",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": 0.49125
+      },
+      {
+        "page": "wb:61",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": 0.4975
+      },
+      {
+        "page": "wb:62",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": 0.49375
+      },
+      {
+        "page": "wb:63",
+        "exercises": 9,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:64",
+        "exercises": 10,
+        "sourceGroups": 9,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:65",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": 0.4975
+      },
+      {
+        "page": "wb:66",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": 0.4925
+      },
+      {
+        "page": "wb:67",
+        "exercises": 7,
+        "sourceGroups": 6,
+        "gutter": 0.4975
+      }
+    ]
+  },
+  {
+    "course": "speakout-b1",
+    "exercises": 1242,
+    "pages": [
+      {
+        "page": "sb:6",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:7",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:8",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.57625
+      },
+      {
+        "page": "sb:9",
+        "exercises": 13,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:10",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:11",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:12",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.4875
+      },
+      {
+        "page": "sb:13",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:14",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:15",
+        "exercises": 12,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:16",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:17",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:18",
+        "exercises": 12,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:19",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:20",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:21",
+        "exercises": 12,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:22",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:23",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:24",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:26",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:27",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:28",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:29",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:30",
+        "exercises": 9,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:31",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:32",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:33",
+        "exercises": 13,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:34",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:35",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": 0.405
+      },
+      {
+        "page": "sb:36",
+        "exercises": 12,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:37",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:38",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.47375
+      },
+      {
+        "page": "sb:39",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:40",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:41",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:42",
+        "exercises": 11,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:43",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:44",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": 0.43125
+      },
+      {
+        "page": "sb:45",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:46",
+        "exercises": 11,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:47",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:48",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:49",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:50",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:51",
+        "exercises": 11,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:52",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:53",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:54",
+        "exercises": 10,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:55",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:56",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.485
+      },
+      {
+        "page": "sb:57",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:58",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:59",
+        "exercises": 5,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:60",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:61",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:62",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:63",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:64",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:65",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:66",
+        "exercises": 10,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:67",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:68",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:70",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:71",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:72",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:73",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:74",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:75",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:76",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:77",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:78",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:79",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:80",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": 0.485
+      },
+      {
+        "page": "sb:81",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:82",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:83",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:84",
+        "exercises": 10,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:85",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:86",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:87",
+        "exercises": 14,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:88",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:89",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:90",
+        "exercises": 8,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:91",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:92",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": 0.49875
+      },
+      {
+        "page": "sb:93",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:94",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:95",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.6575
+      },
+      {
+        "page": "sb:96",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:97",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:98",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:99",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:100",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:101",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:102",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:103",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:104",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:105",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:106",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:107",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:108",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:109",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:110",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:111",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:112",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:113",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:114",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:115",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:116",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:117",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:118",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:119",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:120",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:121",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:122",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:123",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:124",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:125",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:126",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:127",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:128",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:129",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:130",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:131",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:132",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:133",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:134",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:135",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:136",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:137",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:138",
+        "exercises": 6,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:139",
+        "exercises": 5,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:140",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:141",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:142",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:143",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:144",
+        "exercises": 8,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:145",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:150",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:151",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:152",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:153",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:154",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:155",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:156",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:157",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:4",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:5",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:6",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:7",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:8",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:9",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:10",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:11",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:12",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:13",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:14",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:15",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:16",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:17",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:18",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:19",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:20",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:21",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.50375
+      },
+      {
+        "page": "wb:22",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:23",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:24",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:25",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:26",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:27",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": 0.5
+      },
+      {
+        "page": "wb:28",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:29",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": 0.49875
+      },
+      {
+        "page": "wb:30",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:31",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:32",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:33",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:34",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:35",
+        "exercises": 7,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:36",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:37",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:38",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:39",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.505
+      },
+      {
+        "page": "wb:40",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:41",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:42",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:43",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": 0.5075
+      },
+      {
+        "page": "wb:44",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:45",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:46",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:47",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:48",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:49",
+        "exercises": 7,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:50",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:51",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:52",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:53",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:54",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:55",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:56",
+        "exercises": 10,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:57",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:58",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:59",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:60",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:61",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:62",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:63",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:64",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:65",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:66",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:67",
+        "exercises": 7,
+        "sourceGroups": 6,
+        "gutter": null
+      }
+    ]
+  },
+  {
+    "course": "speakout-b1plus",
+    "exercises": 1272,
+    "pages": [
+      {
+        "page": "sb:6",
+        "exercises": 11,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:7",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:8",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": 0.43
+      },
+      {
+        "page": "sb:9",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:10",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.35625
+      },
+      {
+        "page": "sb:11",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": 0.5425
+      },
+      {
+        "page": "sb:12",
+        "exercises": 12,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:13",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:14",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:15",
+        "exercises": 14,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:16",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:17",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:18",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:19",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:20",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:21",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": 0.47375
+      },
+      {
+        "page": "sb:22",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:23",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": 0.54
+      },
+      {
+        "page": "sb:24",
+        "exercises": 15,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:25",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:26",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:27",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:28",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:29",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:30",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:31",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:32",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.41
+      },
+      {
+        "page": "sb:33",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:34",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:35",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:36",
+        "exercises": 12,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:37",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:38",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:39",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:40",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:41",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:42",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:43",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:44",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": 0.38875
+      },
+      {
+        "page": "sb:45",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:46",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:47",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": 0.54125
+      },
+      {
+        "page": "sb:48",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:49",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:50",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:51",
+        "exercises": 11,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:52",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:53",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:54",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:55",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:56",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": 0.51625
+      },
+      {
+        "page": "sb:57",
+        "exercises": 14,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:58",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:59",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:60",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.41
+      },
+      {
+        "page": "sb:61",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:62",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:63",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:64",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:65",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:66",
+        "exercises": 9,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:67",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:68",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:69",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:70",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:71",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.47
+      },
+      {
+        "page": "sb:72",
+        "exercises": 14,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:74",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": 0.38625
+      },
+      {
+        "page": "sb:75",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:76",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:77",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:78",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:79",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:80",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:81",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:82",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:83",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:84",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": 0.385
+      },
+      {
+        "page": "sb:85",
+        "exercises": 15,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:86",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": 0.45625
+      },
+      {
+        "page": "sb:87",
+        "exercises": 15,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:88",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:89",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:90",
+        "exercises": 12,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:91",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:92",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:93",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.3875
+      },
+      {
+        "page": "sb:94",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:95",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.4825
+      },
+      {
+        "page": "sb:96",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:97",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:98",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:99",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:100",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:101",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:102",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:103",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:104",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:105",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:106",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:107",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:108",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:109",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:110",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:111",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:112",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:113",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:114",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:115",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:116",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:117",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:118",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:119",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:120",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:121",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:122",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:123",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:124",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:125",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:126",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:127",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:128",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:129",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:130",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:131",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:132",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:133",
+        "exercises": 6,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:134",
+        "exercises": 9,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:135",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:136",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:137",
+        "exercises": 8,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:139",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:140",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:141",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:142",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:143",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:144",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:145",
+        "exercises": 8,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:146",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:147",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:148",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:149",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:150",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": 0.45125
+      },
+      {
+        "page": "sb:151",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:152",
+        "exercises": 9,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:153",
+        "exercises": 8,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:154",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:156",
+        "exercises": 9,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:4",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:5",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:6",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:7",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": 0.5025
+      },
+      {
+        "page": "wb:8",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:9",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:10",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:11",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:12",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:13",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:14",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:15",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.48
+      },
+      {
+        "page": "wb:16",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:17",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:18",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:19",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:20",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:21",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:22",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:23",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:24",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:25",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": 0.505
+      },
+      {
+        "page": "wb:26",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:27",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:28",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:29",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.50625
+      },
+      {
+        "page": "wb:30",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:31",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:32",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:33",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:34",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:35",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": 0.4175
+      },
+      {
+        "page": "wb:36",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:37",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:38",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:39",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:40",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:41",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:42",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:43",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.50875
+      },
+      {
+        "page": "wb:44",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:45",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:46",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:47",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:48",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:49",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:50",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:51",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:52",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:53",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": 0.50625
+      },
+      {
+        "page": "wb:54",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:55",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:56",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:57",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": 0.4675
+      },
+      {
+        "page": "wb:58",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:59",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:60",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:61",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:62",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:63",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:64",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:65",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:66",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:67",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      }
+    ]
+  },
+  {
+    "course": "solutions-int",
+    "exercises": 1412,
+    "pages": [
+      {
+        "page": "sb-4",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-5",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-6",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb-7",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-8",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-9",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-10",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-11",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-12",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-13",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-14",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb-15",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-16",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-17",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-18",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-19",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-20",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb-21",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-22",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-23",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-24",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-25",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-26",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-28",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-29",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-30",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-31",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-32",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-33",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-34",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-35",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-36",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-38",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb-39",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-40",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-41",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-42",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-43",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-44",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-45",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-46",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-47",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-48",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-49",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-50",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb-51",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-52",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-53",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-54",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-55",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-56",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-57",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-58",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-59",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-60",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb-61",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-62",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-63",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-64",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-65",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-66",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-67",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-68",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-69",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-70",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb-71",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-72",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb-73",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-74",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-75",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-76",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-77",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-78",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-79",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-80",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-82",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-83",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-84",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-85",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-86",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-87",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-88",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-89",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-90",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-91",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-92",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-94",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb-95",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-96",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-97",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-98",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-99",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-100",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-101",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-102",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-104",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-105",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-106",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-107",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-108",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-109",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-110",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-111",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-112",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-113",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-114",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-115",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-116",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-117",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-118",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-119",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-120",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-121",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb-122",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-123",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb-124",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-125",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb-126",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-127",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-128",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-129",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb-130",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-131",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-132",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-133",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-134",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-135",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-136",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-137",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-138",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-139",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-140",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb-141",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb-142",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb-143",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb-144",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb-145",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-147",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-149",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-151",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-157",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-159",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb-161",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb-4",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-5",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-6",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-7",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-8",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-9",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-10",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-11",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-12",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-13",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-14",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-15",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-16",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-17",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-18",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-19",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-20",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-21",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-22",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-23",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-24",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-25",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-26",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-27",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-28",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-29",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-30",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-31",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-32",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-33",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-34",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-35",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-36",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-37",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-38",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-39",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-40",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-41",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-42",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-43",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-44",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-45",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-46",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-47",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-48",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-49",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-50",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-51",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-52",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-53",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-54",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-55",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-56",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-57",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-58",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-59",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-60",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-61",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-62",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-63",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-64",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-65",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-66",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-67",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-68",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb-69",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-70",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-71",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-72",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-73",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-74",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-75",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-76",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-77",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-78",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-79",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-80",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-81",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-82",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-83",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-84",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-85",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-86",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-87",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-88",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-89",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-90",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-91",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-92",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-93",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-94",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-95",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-96",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-97",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-98",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb-99",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-100",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-101",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-102",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb-103",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-104",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-105",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-106",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-107",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb-108",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-109",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb-110",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-111",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-112",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-113",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-114",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-115",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-116",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb-117",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-118",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb-119",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-120",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb-121",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      }
+    ]
+  },
+  {
+    "course": "outcomes-beginner",
+    "exercises": 1324,
+    "pages": [
+      {
+        "page": "sb:10",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:11",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:12",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:13",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:14",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:15",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:16",
+        "exercises": 12,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:18",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:19",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:20",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:21",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:22",
+        "exercises": 12,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:23",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:24",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:25",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:26",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:28",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:29",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:30",
+        "exercises": 14,
+        "sourceGroups": 14,
+        "gutter": null
+      },
+      {
+        "page": "sb:31",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:32",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:33",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:34",
+        "exercises": 15,
+        "sourceGroups": 15,
+        "gutter": null
+      },
+      {
+        "page": "sb:36",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:37",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:38",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:39",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:40",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:41",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:42",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:43",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:44",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:46",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:47",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:48",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:49",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:50",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:51",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:52",
+        "exercises": 14,
+        "sourceGroups": 14,
+        "gutter": null
+      },
+      {
+        "page": "sb:54",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:55",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:56",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:57",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:58",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": 0.5
+      },
+      {
+        "page": "sb:59",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:60",
+        "exercises": 12,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:61",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:62",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:64",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:65",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:66",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:67",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:68",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:69",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:70",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:72",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:73",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:74",
+        "exercises": 12,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:75",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": 0.50125
+      },
+      {
+        "page": "sb:76",
+        "exercises": 12,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:77",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:78",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:79",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:80",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:82",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:83",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:84",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:85",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:86",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:87",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:88",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:90",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:91",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:92",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:93",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:94",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:95",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:96",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:97",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:98",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:100",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:101",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:102",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:103",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "sb:104",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:105",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:106",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "sb:108",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:109",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": 0.49625
+      },
+      {
+        "page": "sb:110",
+        "exercises": 13,
+        "sourceGroups": 13,
+        "gutter": null
+      },
+      {
+        "page": "sb:111",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": 0.43375
+      },
+      {
+        "page": "sb:112",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:113",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:114",
+        "exercises": 14,
+        "sourceGroups": 14,
+        "gutter": null
+      },
+      {
+        "page": "sb:115",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:116",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:117",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:118",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:119",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:120",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:121",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:122",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:123",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:124",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:125",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:126",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:127",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:128",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:129",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:130",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:131",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:132",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:133",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:134",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:135",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:136",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:137",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:138",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:139",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:140",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:5",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:6",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:7",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "wb:8",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:9",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "wb:10",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:11",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:12",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:13",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:14",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:15",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:16",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:17",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:18",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:19",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:20",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:21",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:22",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:23",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:24",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:25",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:26",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:27",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:28",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:29",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:30",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": 0.50125
+      },
+      {
+        "page": "wb:31",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:32",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:33",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:34",
+        "exercises": 10,
+        "sourceGroups": 10,
+        "gutter": null
+      },
+      {
+        "page": "wb:35",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:36",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:37",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:38",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:39",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:40",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:41",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:42",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:43",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:44",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:45",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:46",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:47",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:48",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:49",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:50",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:51",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:52",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:53",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:54",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:55",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:56",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:57",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:58",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:59",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:60",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:61",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:62",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:63",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:64",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:65",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:66",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:67",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:68",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:69",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:70",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:71",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:72",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:73",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:74",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:75",
+        "exercises": 9,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "wb:76",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      }
+    ]
+  },
+  {
+    "course": "speakout-b2plus",
+    "exercises": 1113,
+    "pages": [
+      {
+        "page": "sb:7",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:8",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:9",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:10",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:11",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:12",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:13",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:14",
+        "exercises": 11,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:15",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:16",
+        "exercises": 12,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:17",
+        "exercises": 11,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:19",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:20",
+        "exercises": 16,
+        "sourceGroups": 12,
+        "gutter": null
+      },
+      {
+        "page": "sb:21",
+        "exercises": 13,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:22",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:23",
+        "exercises": 12,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:25",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:26",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:27",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:28",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:29",
+        "exercises": 11,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:31",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:32",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:33",
+        "exercises": 16,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:34",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:35",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:36",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:37",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:38",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:39",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:40",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:41",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:43",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:45",
+        "exercises": 13,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:46",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:47",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:48",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:49",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:50",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:51",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:52",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:53",
+        "exercises": 11,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:55",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:56",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:57",
+        "exercises": 11,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:58",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:59",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:60",
+        "exercises": 14,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:61",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:62",
+        "exercises": 13,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:63",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:64",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:65",
+        "exercises": 12,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:67",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:69",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:70",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:71",
+        "exercises": 10,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:72",
+        "exercises": 8,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:73",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:74",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:75",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:76",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:77",
+        "exercises": 13,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "sb:79",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:80",
+        "exercises": 9,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:81",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:82",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:83",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:84",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:85",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:86",
+        "exercises": 13,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "sb:87",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:88",
+        "exercises": 7,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:89",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:91",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:92",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:93",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:94",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:95",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:96",
+        "exercises": 6,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:97",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:98",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:99",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:100",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:101",
+        "exercises": 12,
+        "sourceGroups": 9,
+        "gutter": null
+      },
+      {
+        "page": "sb:102",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:103",
+        "exercises": 10,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:104",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:105",
+        "exercises": 8,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:106",
+        "exercises": 7,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:107",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:108",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:109",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:110",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:111",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:112",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:113",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "sb:114",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:115",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:116",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "sb:117",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:118",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:119",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:120",
+        "exercises": 17,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "sb:122",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:124",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:126",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:129",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:131",
+        "exercises": 2,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:132",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:133",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "sb:134",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:135",
+        "exercises": 1,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:136",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "sb:137",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:138",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "sb:139",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:2",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:3",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:4",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:5",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:6",
+        "exercises": 10,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:7",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:8",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:9",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:10",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:11",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:12",
+        "exercises": 10,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:13",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:14",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:15",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:16",
+        "exercises": 8,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:17",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:18",
+        "exercises": 4,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:19",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:20",
+        "exercises": 7,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:21",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:22",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:23",
+        "exercises": 4,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:24",
+        "exercises": 7,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:25",
+        "exercises": 4,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:26",
+        "exercises": 11,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:27",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:28",
+        "exercises": 8,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:29",
+        "exercises": 9,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:30",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:31",
+        "exercises": 2,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:32",
+        "exercises": 5,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:33",
+        "exercises": 5,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:34",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:35",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:36",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:37",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:38",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:39",
+        "exercises": 9,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:40",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:41",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:42",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:43",
+        "exercises": 5,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:44",
+        "exercises": 6,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:45",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:46",
+        "exercises": 11,
+        "sourceGroups": 8,
+        "gutter": null
+      },
+      {
+        "page": "wb:47",
+        "exercises": 3,
+        "sourceGroups": 2,
+        "gutter": null
+      },
+      {
+        "page": "wb:48",
+        "exercises": 11,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:49",
+        "exercises": 4,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:50",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:51",
+        "exercises": 3,
+        "sourceGroups": 1,
+        "gutter": null
+      },
+      {
+        "page": "wb:52",
+        "exercises": 5,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:53",
+        "exercises": 6,
+        "sourceGroups": 4,
+        "gutter": null
+      },
+      {
+        "page": "wb:54",
+        "exercises": 10,
+        "sourceGroups": 5,
+        "gutter": null
+      },
+      {
+        "page": "wb:55",
+        "exercises": 3,
+        "sourceGroups": 3,
+        "gutter": null
+      },
+      {
+        "page": "wb:56",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:57",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:58",
+        "exercises": 11,
+        "sourceGroups": 11,
+        "gutter": null
+      },
+      {
+        "page": "wb:59",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:60",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:61",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:62",
+        "exercises": 7,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:63",
+        "exercises": 8,
+        "sourceGroups": 7,
+        "gutter": null
+      },
+      {
+        "page": "wb:64",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      },
+      {
+        "page": "wb:65",
+        "exercises": 6,
+        "sourceGroups": 6,
+        "gutter": null
+      }
+    ]
+  }
+]

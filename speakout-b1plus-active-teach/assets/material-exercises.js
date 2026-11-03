@@ -80,7 +80,7 @@ function mount(container,config){
    $('#practiceDone').onclick=e=>{st.done=!st.done;e.target.textContent=st.done?'✓ Подготовлено':'Ответ подготовлен';e.target.setAttribute('aria-pressed',!!st.done);e.target.classList.toggle('selected',!!st.done);summary();persist()};
   }
   $('#practicePrevious').onclick=()=>navigate(-1);$('#practiceNext').onclick=()=>navigate(1);
-  setPage(selected.sourcePage);feedback();summary();bindExclusivePlayers();persist();
+  setPage(selected.sourcePage,selected);feedback();summary();bindExclusivePlayers();persist();
  }
  function navigate(delta){
   container.querySelectorAll('audio').forEach(a=>a.pause());selected=sections[sections.indexOf(selected)+delta];render();$('#practiceTitle').focus({preventScroll:true});container.scrollIntoView({block:'nearest'});

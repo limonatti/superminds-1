@@ -11,7 +11,7 @@ window.SpeakoutMaterials = (() => {
   const $=selector=>body.querySelector(selector);
   const $$=selector=>[...body.querySelectorAll(selector)];
   function title(value){heading.textContent=value;heading.tabIndex=-1;dialog.scrollTop=0;}
-  function list(){
+  function list(){dialog.classList.remove('focus-material-dialog');
    stopMedia();active=null;title('Материалы Speakout B1+');
    body.innerHTML=`<div class="material-categories" role="group" aria-label="Виды материалов">${Object.entries(categories).map(([id,label])=>`<button data-category="${id}" aria-pressed="${category===id}" class="${category===id?'selected':''}">${label}</button>`).join('')}</div>
     <div class="material-filters"><label>Юнит<select id="materialUnit"><option value="all">Все юниты</option>${Array.from({length:8},(_,i)=>`<option value="${i+1}">Unit ${i+1}</option>`).join('')}</select></label><label>Поиск<input id="materialSearch" type="search" placeholder="Например, 1A, Unit 3, Grammar…" value="${esc(query)}"></label><label class="material-teacher"><input id="materialTeacher" type="checkbox" ${teachers?'checked':''}> Ключи и рекомендации</label></div>
@@ -54,8 +54,8 @@ window.SpeakoutMaterials = (() => {
    }
    function syncDone(){const b=$('#materialDone');b.textContent=answer.done?'✓ Выполнено':'Отметить выполненным';b.classList.toggle('selected',answer.done);b.setAttribute('aria-pressed',!!answer.done)}
    renderPage();
-   const interactive=window.SpeakoutMaterialExercises?.mount($('.material-practice'),{item,answer,persist,esc,url,bindExclusivePlayers,setPage:n=>{pageNumber=n-1;renderPage()}});
-   $('.material-study').classList.toggle('has-practice',!!interactive);
+   const interactive=window.SpeakoutMaterialExercises?.mount($('.material-practice'),{item,answer,persist,esc,url,bindExclusivePlayers,setPage:(n,section)=>{pageNumber=n-1;renderPage();const spec=window.MATERIAL_EXERCISE_SOURCES?.[item.id+':'+section.id];if(spec)window.ExerciseSource.mount($('.material-original'),item.id+':'+section.id,spec)}});
+   $('.material-study').classList.toggle('has-practice',!!interactive);if(interactive){dialog.classList.add('focus-material-dialog');$('.material-study').classList.add('focus-columns');$('.material-practice').classList.add('focus-responses');window.ExerciseSource.controls($('.material-original'));const notes=$('.material-answer');if(notes){const detail=document.createElement('details'),summary=document.createElement('summary');detail.className='material-answer';summary.textContent='Общие заметки к тесту';detail.append(summary,...notes.childNodes);notes.replaceWith(detail)}}else dialog.classList.remove('focus-material-dialog');
    bindExclusivePlayers();heading.focus({preventScroll:true});
   }
   function setZoom(value){zoom=Math.max(75,Math.min(250,value));$('#materialImage').style.width=zoom+'%';$('#materialZoomFit').textContent=zoom+'%';$('#materialZoomOut').disabled=zoom<=75;$('#materialZoomIn').disabled=zoom>=250}
