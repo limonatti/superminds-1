@@ -19,5 +19,6 @@
 .spot.book-exercise .tag{background:#396abd;color:white;opacity:.75;font-size:11px}.spot.book-exercise:hover .tag{opacity:1}
 .drawing-tool .spot,.marking .book-exercise{pointer-events:none}
 .save-account{padding:8px 12px;border-top:1px solid #35414d;font-size:12px}.save-account #saveStatus{padding:0;margin:0 0 6px;border:0}.save-account a{color:#a8c8ff}.save-account button{font-size:12px;height:auto;padding:5px 8px}
+.save-account [hidden]{display:none!important}
 #saveStatus[data-state=saved]{color:#a0d9b0}#saveStatus[data-state=error]{color:#f4c18e}
 @media(max-width:600px){.exercise-fields{grid-template-columns:1fr}.exercise-head{padding:12px}.exercise-content{padding:12px}.exercise-footer{padding:10px 12px}.exercise-head h2{font-size:19px}.exercise-original{max-height:37dvh}.exercise-status{flex-basis:100%}}
