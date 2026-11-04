@@ -152,7 +152,7 @@
         '<div class="panel">'+
         (cloud?'<div class="tabs"><button class="tab '+(authTab==="in"?"on":"")+'" onclick="setTab(\'in\')">Вход</button><button class="tab '+(authTab==="up"?"on":"")+'" onclick="setTab(\'up\')">Регистрация</button></div>':'')+
         ((!cloud||authTab==="up")?'<label>ИМЯ</label><input id="fName" placeholder="Например, Маша">':'')+
-        (cloud?'<label>EMAIL (родителя)</label><input id="fEmail" type="email" placeholder="mail@example.com"><label>ПАРОЛЬ</label><input id="fPass" type="password" placeholder="минимум 6 символов">':'')+
+        (cloud?'<label>ЛОГИН ИЛИ EMAIL</label><input id="fEmail" type="text" autocomplete="username" placeholder="логин от учителя или email"><label>ПАРОЛЬ</label><input id="fPass" type="password" placeholder="минимум 6 символов">':'')+
         '<button class="primary" id="go">'+(cloud?(authTab==="in"?"Войти":"Создать аккаунт"):"Начать")+'</button>'+
         '<div class="msg" id="msg"></div>'+
         (cloud?'':'<div class="note">Настоящие аккаунты включаются подключением Supabase — см. SETUP-SUPABASE.md</div>')+
@@ -373,7 +373,19 @@
       if(unreadIn){ try{ await SM.chatMarkRead(chatState.teacherId, chatState.studentId); }catch(e){} }
     }
 
-    async function route(){ stopChat(); const user=await SM.getUser(); if(user)renderDash(user); else renderAuth(); }
+    async function route(){
+      stopChat();const user=await SM.getUser();
+      if(user){
+        const next=new URLSearchParams(location.search).get("next");
+        if(next){
+          const dest=new URL(next,location.href);
+          if(dest.origin===location.origin && /\/(?:room|board)\.html$/.test(dest.pathname)){
+            location.replace(dest.href);return;
+          }
+        }
+        renderDash(user);
+      }else renderAuth();
+    }
     route();
   </script>
 </body>

@@ -336,11 +336,14 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="sm-room-access.js?v=fbdf8bea"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
   <script src="speakout-words.js?v=3094c556"></script>
   <script>
+  (async function(){
+    const access=await SMRoom.open(); if(!access)return;
     const COLORS=["#1c1310","#7c2340","#c0392b","#e0952a","#27ae60","#2980b9","#8e44ad","#ffffff"];
     const NOTE_COLORS={"#e0952a":"#ffe08a","#27ae60":"#c8efc0","#2980b9":"#bfe0ff","#8e44ad":"#e6cdf5","#c0392b":"#ffc9c0","#1c1310":"#fff3c4","#7c2340":"#f6cddb","#ffffff":"#ffffff"};
     let tool="pan", color="#1c1310", penW=4, eraseR=28;
@@ -359,25 +362,23 @@
     function toWorld(sx,sy){ const r=stage.getBoundingClientRect(); return {x:(sx-r.left-cam.x)/cam.s, y:(sy-r.top-cam.y)/cam.s}; }
     function toScreen(wx,wy){ return {x:wx*cam.s+cam.x, y:wy*cam.s+cam.y}; }
 
-    const objs={};
+    const objs=Object.create(null);
+    function escapeText(value){return String(value??" ").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
     function genId(){return Math.random().toString(36).slice(2,9);}
     let pages=[[]], pageIdx=0;   // страницы доски
 
     /* ---- Realtime ---- */
-    const params=new URLSearchParams(location.search);
-    let room=params.get("room"); if(!room){room=Math.random().toString(36).slice(2,7).toUpperCase();history.replaceState(null,"","?room="+room);}
-    const SB_URL="https://kdzpmbuohfjbtjpqrdfx.supabase.co";
-    const SB_KEY="sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+    const room=access.room;
     const myColor=["#e0952a","#2980b9","#27ae60","#8e44ad","#c0392b"][Math.floor(Math.random()*5)];
     const myId=genId();
-    let channel=null, online=false, sb=null;
+    let channel=null, online=false;
+    const sb=access.sb;
     function setStatus(t,on){document.getElementById("statusTxt").textContent=t;document.getElementById("status").classList.toggle("on",!!on);}
-    (function(){try{
-      sb=window.supabase.createClient(SB_URL,SB_KEY,{realtime:{params:{eventsPerSecond:60}}});
-      channel=sb.channel("board:"+room,{config:{broadcast:{self:false}}});
+    function connectBoard(){
+      channel=sb.channel("board:"+room,{config:{private:true,broadcast:{self:false}}});
       channel.on("broadcast",{event:"op"},({payload})=>applyRemote(payload));
-      channel.subscribe(st=>{ if(st==="SUBSCRIBED"){online=true;setStatus("комната "+room,true);send({t:"hello"});} else if(st==="CHANNEL_ERROR"||st==="TIMED_OUT"){online=false;setStatus("оффлайн",false);} });
-    }catch(e){setStatus("оффлайн",false);}})();
+      channel.subscribe(st=>{ online=st==="SUBSCRIBED";setStatus(online?"на связи":"нет связи",online);if(online)send({t:"hello"}); });
+    }
 
     /* ==================================================================
        СОХРАНЕНИЕ. Доска пишется в базу по номеру комнаты и подхватывается
@@ -388,28 +389,24 @@
     function boardData(){ const p=pages.slice(); p[pageIdx]=serialize(); return {pages:p, page:pageIdx}; }
     function markDirty(){ if(!sb)return; saveLbl.textContent="сохраняю…"; clearTimeout(saveT); saveT=setTimeout(saveBoard,2000); }
     async function saveBoard(){
-      if(!sb)return;
+      if(!sb||!loadedFromDb)return;
       try{
         const json=JSON.stringify(boardData());
         if(json===lastSaved){ saveLbl.textContent="сохранено"; return; }
-        const {error}=await sb.from("boards").upsert({room:room,data:JSON.parse(json),updated_at:new Date().toISOString()},{onConflict:"room"});
-        if(error){ saveLbl.textContent="не сохранено"; console.warn("save:",error.message); }
+        const {data,error}=await sb.from("boards").update({data:JSON.parse(json),updated_at:new Date().toISOString()}).eq("room",room).select("room").maybeSingle();
+        if(error||!data){ saveLbl.textContent="не сохранено — проверьте подключение"; }
         else { lastSaved=json; saveLbl.textContent="сохранено"; }
       }catch(e){ saveLbl.textContent="не сохранено"; }
     }
     async function loadBoard(){
-      if(!sb)return;
-      try{
-        const {data,error}=await sb.from("boards").select("data").eq("room",room).maybeSingle();
-        if(error||!data||!data.data)return;
-        const d=data.data;
-        if(!d.pages||!d.pages.length)return;
-        if(Object.keys(objs).length)return;      // с доски уже пришли данные от соседа
-        loadedFromDb=true;
-        pages=d.pages.map(x=>x||[]); pageIdx=Math.min(d.page||0,pages.length-1);
+      const {data,error}=await sb.from("boards").select("data").eq("room",room).maybeSingle();
+      if(error||!data)throw error||new Error("ROOM_ACCESS_DENIED");
+      const d=data.data||{};
+      if(d.pages?.length){
+        pages=d.pages.map(x=>x||[]);pageIdx=Math.max(0,Math.min(d.page||0,pages.length-1));
         (pages[pageIdx]||[]).forEach(o=>buildFrom(o,true));
-        lastSaved=JSON.stringify(boardData()); renderPages(); saveLbl.textContent="сохранено";
-      }catch(e){}
+      }
+      loadedFromDb=true;lastSaved=JSON.stringify(boardData());renderPages();saveLbl.textContent="сохранено";
     }
     function send(op){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:op});}catch(e){}} }
 
@@ -423,7 +420,8 @@
       a.href="room.html?room="+room;
     })();
 
-    document.getElementById("invite").onclick=()=>{const url=location.origin+location.pathname+"?room="+room;
+    document.getElementById("invite").style.display=access.role==="teacher"?"":"none";
+    document.getElementById("invite").onclick=()=>{const url=access.inviteUrl("board.html");
       if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Ссылка на доску скопирована!\nОтправь ученику:\n\n"+url),()=>prompt("Скопируй ссылку:",url));else prompt("Скопируй ссылку:",url);};
 
     /* ---- инструменты / палитра ---- */
@@ -628,14 +626,14 @@
       const o={type:"text",id,x:d.x,y:d.y,color:d.color,el}; objs[id]=o; delX(el,id); dragObj(el,o);
       el.addEventListener("input",()=>send({t:"tt",id,text:txtOf(el)}));
       if(!remote) send({t:"any",o:{type:"text",id,x:d.x,y:d.y,color:d.color,text:d.text||"текст"}}); if(focus)setTimeout(()=>{el.focus();document.execCommand&&document.execCommand("selectAll");},10); }
-    function addCard(id,d,remote){ if(objs[id])return; const el=document.createElement("div"); el.className="obj card"; el.innerHTML='<div class="em">'+d.emoji+'</div><div class="en">'+d.en+'</div>'; place(el,d.x,d.y); world.appendChild(el);
+    function addCard(id,d,remote){ if(objs[id])return; const el=document.createElement("div"); el.className="obj card"; el.innerHTML='<div class="em">'+escapeText(d.emoji)+'</div><div class="en">'+escapeText(d.en)+'</div>'; place(el,d.x,d.y); world.appendChild(el);
       const o={type:"card",id,x:d.x,y:d.y,en:d.en,emoji:d.emoji,el}; objs[id]=o; delX(el,id); dragObj(el,o,()=>speak(d.en));
       if(!remote) send({t:"any",o:{type:"card",id,x:d.x,y:d.y,en:d.en,emoji:d.emoji}}); }
 
     /* ---- фото ---- */
     function addImg(id,d,remote){ if(objs[id])return;
       const el=document.createElement("div"); el.className="obj pic"; el.style.width=d.w+"px"; el.style.height=d.h+"px"; place(el,d.x,d.y);
-      const im=document.createElement("img"); im.crossOrigin="anonymous"; im.src=d.src; el.appendChild(im); world.appendChild(el);
+      const im=document.createElement("img"); im.crossOrigin="anonymous";SMRoom.imageUrl(sb,d.src).then(url=>{if(url)im.src=url;else im.alt="Недоступное изображение";}).catch(()=>{im.alt="Не удалось загрузить изображение — обновите страницу";}); el.appendChild(im); world.appendChild(el);
       const o={type:"img",id,x:d.x,y:d.y,w:d.w,h:d.h,src:d.src,el}; objs[id]=o; delX(el,id); dragObj(el,o); resizer(el,o);
       if(!remote) send({t:"any",o:{type:"img",id,x:d.x,y:d.y,w:d.w,h:d.h,src:d.src}}); }
 
@@ -671,8 +669,7 @@
         const path=room+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,7)+".jpg";
         const {error}=await sb.storage.from("board-images").upload(path,blob,{contentType:"image/jpeg",upsert:false});
         if(error){ console.warn("upload:",error.message); return null; }
-        const {data}=sb.storage.from("board-images").getPublicUrl(path);
-        return (data&&data.publicUrl)||null;
+        return "board-image:"+path;
       }catch(e){ return null; }
     }
     function dropFiles(files,at){
@@ -726,14 +723,14 @@
       if(/docs\.google\.com/i.test(url)) return {src:url.replace(/\/edit[^\/]*$/,"/preview"),name:"Google Docs",w:600,h:460,link:url};
       return {src:url,name:"сайт",w:600,h:440,link:url,risky:true};
     }
-    function addEmb(id,d,remote){ if(objs[id])return;
+    function addEmb(id,d,remote){ if(objs[id]||!/^https?:\/\//i.test(d.src||""))return;
       const el=document.createElement("div"); el.className="obj emb"; el.style.width=d.w+"px"; el.style.height=d.h+"px"; place(el,d.x,d.y);
       const hd=document.createElement("div"); hd.className="hd";
-      hd.innerHTML='<span class="nm">'+(d.name||"сайт")+'</span>';
-      const a=document.createElement("a"); a.textContent="↗"; a.title="Открыть в новой вкладке"; a.target="_blank"; a.rel="noopener"; a.href=d.link||d.src;
+      hd.innerHTML='<span class="nm">'+escapeText(d.name||"сайт")+'</span>';
+      const a=document.createElement("a"); a.textContent="↗"; a.title="Открыть в новой вкладке"; a.target="_blank"; a.rel="noopener"; a.href=/^https?:\/\//i.test(d.link||"")?d.link:d.src;
       a.addEventListener("pointerdown",e=>e.stopPropagation());
       hd.appendChild(a);
-      const f=document.createElement("iframe"); f.src=d.src; f.setAttribute("allow","camera; microphone; autoplay; fullscreen; clipboard-write"); f.setAttribute("allowfullscreen","");
+      const f=document.createElement("iframe"); f.src=d.src;f.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"); f.setAttribute("allow","camera; microphone; autoplay; fullscreen; clipboard-write"); f.setAttribute("allowfullscreen","");
       el.appendChild(hd); el.appendChild(f); world.appendChild(el);
       const o={type:"emb",id,x:d.x,y:d.y,w:d.w,h:d.h,src:d.src,name:d.name,link:d.link,el}; objs[id]=o;
       delX(el,id); dragObj(el,o,null,hd); resizer(el,o);
@@ -892,7 +889,7 @@
         if(u) placeCards((u.words||[]).map(w=>({en:w.en,emoji:w.emoji}))); return; }
       const u=SM_UNITS.find(x=>x.id===val); if(u) placeCards(u.words.map(w=>({en:w.en,emoji:w.emoji}))); }
     document.getElementById("addCards").onclick=()=>addCurrentWords(sel.value);
-    window.addEventListener("message",e=>{ if(!e||!e.data)return;
+    window.addEventListener("message",e=>{ if(e.origin!==location.origin||e.source!==window.parent||window.parent===window||!e.data)return;
       if(e.data.type==="sm-add"&&e.data.unit) addCurrentWords(e.data.unit);
       else if(e.data.type==="sm-add-current") addCurrentWords(sel.value);
       else if(e.data.type==="sm-set"&&e.data.val){ if([...sel.options].some(o=>o.value===e.data.val)) sel.value=e.data.val; }
@@ -921,10 +918,10 @@
     function doClear(){ Object.keys(objs).forEach(removeObj); }
 
     /* ---- живые курсоры ---- */
-    const peers={}; let lastCur=0;
+    const peers=Object.create(null); let lastCur=0;
     function cursorOut(sx,sy){ const now=Date.now(); if(now-lastCur<45)return; lastCur=now; const w=toWorld(sx,sy); send({t:"cur",id:myId,x:w.x,y:w.y,c:myColor}); }
     function drawCursors(){ Object.keys(peers).forEach(id=>{const p=peers[id];const s=toScreen(p.x,p.y);p.el.style.left=s.x+"px";p.el.style.top=s.y+"px";}); }
-    function showPeer(id,x,y,c){ let p=peers[id]; if(!p){ const el=document.createElement("div"); el.className="cur"; el.innerHTML='<svg width="26" height="26" viewBox="0 0 26 26"><path d="M2 2 L2 20 L7 15 L11 23 L14 22 L10 14 L18 14 Z" fill="'+(c||"#e0952a")+'" stroke="#fff" stroke-width="1.5"/></svg>'; cursors.appendChild(el); p=peers[id]={el};} p.x=x;p.y=y; const s=toScreen(x,y); p.el.style.left=s.x+"px"; p.el.style.top=s.y+"px"; clearTimeout(p.to); p.to=setTimeout(()=>{p.el.remove();delete peers[id];},4000); }
+    function showPeer(id,x,y,c){ c=/^#[a-f0-9]{3,8}$/i.test(c||"")?c:"#e0952a"; let p=peers[id]; if(!p){ const el=document.createElement("div"); el.className="cur"; el.innerHTML='<svg width="26" height="26" viewBox="0 0 26 26"><path d="M2 2 L2 20 L7 15 L11 23 L14 22 L10 14 L18 14 Z" fill="'+(c||"#e0952a")+'" stroke="#fff" stroke-width="1.5"/></svg>'; cursors.appendChild(el); p=peers[id]={el};} p.x=x;p.y=y; const s=toScreen(x,y); p.el.style.left=s.x+"px"; p.el.style.top=s.y+"px"; clearTimeout(p.to); p.to=setTimeout(()=>{p.el.remove();delete peers[id];},4000); }
 
     /* ---- сборка объекта из описания ---- */
     function buildFrom(o,remote){
@@ -940,7 +937,7 @@
     }
 
     /* ---- приём ---- */
-    function applyRemote(op){ switch(op.t){
+    function applyRemote(op){ if(!op||typeof op!=="object")return;switch(op.t){
       case "cur": showPeer(op.id,op.x,op.y,op.c); break;
       case "any": buildFrom(op.o,true); break;
       case "nt": { const o=objs[op.id]; if(o&&o.el&&document.activeElement!==o.el)setTxt(o.el,op.text); break; }
@@ -974,11 +971,15 @@
 
     /* любое входящее изменение тоже надо сохранить */
     const _applyRemote=applyRemote;
-    applyRemote=function(op){ _applyRemote(op); if(["any","rm","clr","mv","sz","nt","tt","cu","pg"].includes(op.t)) markDirty(); };
+    applyRemote=function(op){ if(!op||typeof op!=="object")return;_applyRemote(op); if(["any","rm","clr","mv","sz","nt","tt","cu","pg"].includes(op.t)) markDirty(); };
 
     applyCam(); updHist(); renderPages();
-    setTimeout(loadBoard,1200);
+    stage.style.pointerEvents="none";
+    await loadBoard();
+    stage.style.pointerEvents="";
+    connectBoard();
     window.addEventListener("beforeunload",()=>{ if(saveT){ clearTimeout(saveT); saveBoard(); } });
+  })().catch(SMRoom.fail);
   </script>
 </body>
 </html>

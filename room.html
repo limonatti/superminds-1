@@ -253,10 +253,13 @@
   </div></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="sm-room-access.js?v=fbdf8bea"></script>
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
   <script>
+  (async function(){
+    const access=await SMRoom.open(); if(!access)return;
     /* ============================================================
        СЕРВЕР ВИДЕОЗВОНКОВ — единственное место, где его меняют.
        "meet.jit.si" — публичный сервер Jitsi. Он обрывает встроенный
@@ -277,7 +280,7 @@
     /* Версия комнаты. Учитель сообщает её ученику: если у того в браузере
        лежит вчерашняя страница из кеша, он увидит просьбу обновиться —
        иначе они молча оказываются на разных серверах и не видят друг друга. */
-    const BUILD = "2026-09-04-a";
+    const BUILD = "2026-11-04-private";
     let JITSI_DOMAIN = JITSI_DOMAINS[0];
 
     /* Грузим external_api.js по очереди, пока какой-нибудь не отзовётся.
@@ -286,6 +289,7 @@
        видел ученик. */
     let jitsiReady=null;
     function loadJitsi(preferred){
+      if(preferred&&!JITSI_DOMAINS.includes(preferred))preferred=null;
       if(jitsiReady) return jitsiReady;
       const list=[]; if(preferred) list.push(preferred);
       JITSI_DOMAINS.forEach(d=>{ if(list.indexOf(d)<0) list.push(d); });
@@ -329,12 +333,11 @@
     }).catch(()=>{});
 
     const params=new URLSearchParams(location.search);
-    const ME=params.get("s")?"s":"t";          // t — учитель (создал комнату), s — ученик (пришёл по ссылке)
+    const ME=access.role==="teacher"?"t":"s"; // роль подтверждена сервером
     const OTHER=ME==="t"?"s":"t";
     const NAME={t:"учитель",s:"ученик"};
     let holder="t";                             // у кого сейчас штурвал
-    let room=params.get("room");
-    if(!room){ room=crypto.randomUUID().replace(/-/g,""); history.replaceState(null,"","?room="+room); }
+    const room=access.room;
 
     // доска в iframe (сама синхронизируется по board:room)
     document.getElementById("board").src="board.html?room="+encodeURIComponent(room);
@@ -485,30 +488,40 @@
     });
 
     // синхронизация панели урока через Supabase Realtime
-    const SB_URL="https://kdzpmbuohfjbtjpqrdfx.supabase.co";
-    const SB_KEY="sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG";
+    const sb=access.sb;
     let channel=null, online=false;
-    function setOnline(on){document.getElementById("room").classList.toggle("on",on);document.getElementById("roomTxt").textContent=(on?"комната ":"оффлайн · ")+room;}
+    const connection={t:false,s:false};
+    function setOnline(on){document.getElementById("room").classList.toggle("on",on);document.getElementById("roomTxt").textContent=on?"на связи":"подключение…";}
     setOnline(false);
-    (function(){try{
-      const sb=window.supabase.createClient(SB_URL,SB_KEY);
-      channel=sb.channel("lesson:"+room,{config:{broadcast:{self:false}}});
-      channel.on("broadcast",{event:"op"},({payload})=>{
-        if(payload.t==="outcomes"){ receiveOutcomes(payload); }
-        else if(payload.t==="state" && (ME==="s"||(holder==="s"&&!LIVE_COURSES[course]))){ const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();} unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;outcomesAnswers=null;lessonAudio=null;apply(false);}}
-        else if(payload.t==="hello"){if(ME==="t")send({course:course,unit:unit,kind:kind}); replayOutcomes(); if(ME==="t"){sendOp({t:"ctrl",h:holder}); sendOp({t:"vdom",d:JITSI_DOMAIN}); sendOp({t:"ver",b:BUILD});}}
-        else onOp(payload);
+    function receiveLesson(raw,sender){
+      const payload=SMRoom.acceptLessonMessage(raw,sender,ME,holder,Boolean(LIVE_COURSES[course]));
+      if(!payload)return;
+      if(payload.t==="state" && (!/^[a-z0-9-]+$/.test(payload.course||"") || !/^[a-z0-9-]+$/.test(String(payload.unit||"")) || ![...courseSel.options].some(o=>o.value===payload.course)))return;
+      if(payload.t==="outcomes"){receiveOutcomes(payload);}
+      else if(payload.t==="state" && (ME==="s"||(holder==="s"&&!LIVE_COURSES[course]))){const changed=payload.course!==course||payload.unit!==unit||payload.kind!==kind;if(payload.course&&payload.course!==course){course=payload.course;buildUnits();}unit=payload.unit;kind=payload.kind;if(changed){outcomesView=null;outcomesAnswers=null;lessonAudio=null;apply(false);}}
+      else if(payload.t==="hello"){if(ME==="t")send({course,unit,kind});replayOutcomes();if(ME==="t"){sendOp({t:"ctrl",h:holder});sendOp({t:"vdom",d:JITSI_DOMAIN});sendOp({t:"ver",b:BUILD});}}
+      else onOp(payload);
+    }
+    function connectLesson(){
+      ["t","s"].forEach(sender=>{
+        const ch=sb.channel((sender==="t"?"lesson:":"lesson-student:")+room,{config:{private:true,broadcast:{self:false}}});
+        if(sender===ME)channel=ch;
+        ch.on("broadcast",{event:"op"},({payload})=>receiveLesson(payload,sender));
+        ch.subscribe(st=>{
+          connection[sender]=st==="SUBSCRIBED";online=connection.t&&connection.s;setOnline(online);
+          postOutcomes({kind:"connection",online});
+          if(online){if(ME==="t"){send({course,unit,kind});replayOutcomes();}sendOp({t:"hello"});}
+        });
       });
-      channel.subscribe(st=>{ online=st==="SUBSCRIBED";setOnline(online);postOutcomes({kind:"connection",online}); if(st==="SUBSCRIBED"){online=true;setOnline(true);if(ME==="t"){send({course,unit,kind});replayOutcomes();}channel.send({type:"broadcast",event:"op",payload:{t:"hello"}});} });
-    }catch(e){}})();
-    function send(s){ if(channel&&online){try{channel.send({type:"broadcast",event:"op",payload:{t:"state",course:s.course,unit:s.unit,kind:s.kind}});}catch(e){}} }
+    }
+    function send(s){sendOp({t:"state",course:s.course,unit:s.unit,kind:s.kind});}
 
     document.getElementById("invite").onclick=()=>{
       /* метка времени в ссылке: у браузера ученика не остаётся шанса открыть
          вчерашнюю версию страницы из кеша — а именно из-за этого урок уезжал
          на публичный сервер со входом «Я организатор» и лимитом 5 минут */
       const stamp=new Date().toISOString().slice(0,13).replace(/[-T]/g,"");
-      const url=location.origin+location.pathname+"?room="+room+"&s=1&v="+stamp;
+      const url=access.inviteUrl("room.html?v="+stamp);
       const check=location.origin+location.pathname.replace(/room\.html$/,"check-av.html");
       const msg="Ссылка на урок скопирована!\n\nОтправь ученику:\n"+url+
                 "\n\nА это ссылка «проверить камеру и микрофон» — её хорошо дать новому ученику заранее:\n"+check;
@@ -1206,6 +1219,7 @@
         }
       }
       else if(p.t==="vdom"){ /* встречаемся на том же сервере видео, что и партнёр */
+        if(!JITSI_DOMAINS.includes(p.d))return;
         vidPreferredDomain=p.d;
         if(typeof JitsiMeetExternalAPI==="undefined"){ loadJitsi(p.d).catch(()=>{}); }
         else if(!jitsiApi){ JITSI_DOMAIN=p.d; }
@@ -1249,6 +1263,8 @@
     applyControl();
     apply(false);
     setTimeout(attachSync,600);
+    connectLesson();
+  })().catch(SMRoom.fail);
   </script>
 </body>
 </html>

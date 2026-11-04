@@ -22,7 +22,7 @@ function ok(name, cond, extra) {
   else { fails++; console.log("  ✗ " + name + (extra ? "  → " + extra : "")); }
 }
 
-function boot(role) {
+async function boot(role) {
   const url = "https://english-with-asya.com/room.html?room=TEST1" + (role === "s" ? "&s=1" : "");
   const vc = new VirtualConsole();          /* молчим про внешние скрипты */
   const dom = new JSDOM(html, {
@@ -40,15 +40,19 @@ function boot(role) {
       w.supabase = { createClient: () => ({
         channel: () => ({ on(){return this;}, subscribe(){return this;}, send(){} })
       })};
+      const client=w.supabase.createClient();
+      w.SMRoom={open:async()=>({sb:client,role:role==="t"?"teacher":"student",room:"TEST1",inviteUrl:()=>"https://example.test"}),fail:e=>{throw e;},acceptLessonMessage:p=>p};
+      w.SM_UNITS=[];
       w.alert = () => {}; w.open = () => {};
     }
   });
+  await new Promise(resolve => setImmediate(resolve));
   return dom;
 }
 
-function run(role, title) {
+async function run(role, title) {
   console.log("\n" + title);
-  const dom = boot(role);
+  const dom = await boot(role);
   const w = dom.window, d = w.document;
   const $ = id => d.getElementById(id);
 
@@ -116,9 +120,11 @@ function run(role, title) {
   /* имя в звонке */
   ok("кнопка имени есть", !!$("zName"));
   try { w.localStorage.setItem("ewa-name", "Ася"); } catch (e) {}
-  ok("имя берётся из памяти браузера", w.myName() === "Ася", w.myName());
+  $("zBig").click();
+  ok("имя берётся из памяти браузера", $("zName").title.includes("Ася"), $("zName").title);
   try { w.localStorage.removeItem("ewa-name"); } catch (e) {}
-  ok("без имени показывается роль", w.myName() === (role === "t" ? "Учитель" : "Ученик"), w.myName());
+  $("zBig").click();
+  ok("без имени показывается роль", $("zName").title.includes(role === "t" ? "Учитель" : "Ученик"), $("zName").title);
 
   /* завершение звонка */
   $("zHang").click();
@@ -127,8 +133,10 @@ function run(role, title) {
   dom.window.close();
 }
 
-run("t", "СТОРОНА УЧИТЕЛЯ");
-run("s", "СТОРОНА УЧЕНИКА");
+(async()=>{
+await run("t", "СТОРОНА УЧИТЕЛЯ");
+await run("s", "СТОРОНА УЧЕНИКА");
 
 console.log("\n" + (fails ? "ПРОВАЛЕНО " + fails + " из " + checks : "Всё в порядке: " + checks + " проверок"));
-process.exit(fails ? 1 : 0);
+process.exitCode=fails ? 1 : 0;
+})().catch(e=>{console.error(e);process.exitCode=1;});
