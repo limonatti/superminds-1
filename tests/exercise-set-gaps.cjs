@@ -21,5 +21,7 @@ const base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8772';
  await p.goto(base+'/solutions-int-active-teach/index.html?book=wb&page=34');await p.locator('[data-ex="wb-34-3"]').first().click();
  assert.match(await p.locator('.play-current').innerText(),/из 18/);assert.equal(await p.locator('.answer-row textarea:visible,.play-manual input:visible').count(),0);
  assert.deepEqual((await p.locator('.play-word').allTextContents()).sort(),['annoy','bore','care','disgust','excite','help','hope','pain','power','surprise']);
+ await p.goto(base+'/solutions-el-active-teach/index.html?book=sb&page=61');await p.locator('[data-ex="sb-61-8"]').first().click();
+ assert(await p.locator('#written').isVisible(),'article writing retains its original long answer');assert.equal(await p.locator('.play-workbench').count(),0);
  assert.deepEqual(errors,[]);console.log('PASS grouped cloze words on the original page, original example, set grading/storage, reload, and 18 separate adjective slots');
 }finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

@@ -56,7 +56,7 @@
   $('#saveTask').onclick=async()=>{saveDraft();const saved=await flush();if(saved?.ok||!user)$('#modal').close()};
   if(checked)renderFeedback(OutcomesGrader.check(e.check,record.values));
   liveView();renderLiveAnswers();
-  const playUI=OutcomesInteractions.spec(e,window.OUTCOMES_INTERACTIONS?.[e.id]);window.ExercisePlay.attach({dialog:$('#modal'),source:$('.exerciseSource'),responses:$('.responsePanel'),id:e.id,text:e.instruction,fields:(e.check?.mode==='items'?e.check.items:[]).map((f,i)=>window.ExercisePlay.inputField(String(f.label||i+1),$(`[data-response="${i}"]`),f.soft||f.self?[]:[f.key],playUI[i]?.options,$(`#response-${i}`),{kind:f.match==='set'?'set':playUI[i]?.kind,count:f.match==='set'?OutcomesGrader.variants(f.key)[0].split(/[,;\n]+/).length:undefined,tokens:playUI[i]?.tokens}))});
+  const playUI=OutcomesInteractions.spec(e,window.OUTCOMES_INTERACTIONS?.[e.id]);window.ExercisePlay.attach({dialog:$('#modal'),source:$('.exerciseSource'),responses:$('.responsePanel'),id:e.id,text:e.instruction,fields:(e.check?.mode==='items'?e.check.items:[]).map((f,i)=>window.ExercisePlay.inputField(String(f.label||i+1),$(`[data-response="${i}"]`),f.soft||f.self?[]:[f.key],playUI[i]?.options,$(`#response-${i}`),{kind:f.match==='set'?'set':playUI[i]?.kind,count:f.match==='set'?OutcomesGrader.variants(f.key)[0]?.split(/[,;\n]+/).length:undefined,tokens:playUI[i]?.tokens}))});
   $('#modalTitle').tabIndex=-1;$('#modalTitle').focus({preventScroll:true});
  }
  let skipDragClick=false;

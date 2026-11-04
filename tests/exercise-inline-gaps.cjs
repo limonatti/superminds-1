@@ -67,6 +67,7 @@ const base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8772';
   await f.locator('input.play-slot').nth(0).fill('yes, it is');assert(await f.locator('#exerciseKeys').isDisabled());await f.locator('input.play-slot').nth(1).fill("no, it isn't");
   const grouped=await f.locator('#group').inputValue();assert.equal(grouped,"yes, it is; no, it isn't");assert(require('../solutions-int-active-teach/assets/marking.js').checkField(grouped,{kind:'set',members:[['yes, it is'],["no, it isn't"]]}));
   await f.evaluate(()=>mountSet());assert.deepEqual(await f.locator('input.play-slot').evaluateAll(xs=>xs.map(x=>x.value)),['yes, it is',"no, it isn't"]);
+  await f.locator('input.play-slot').nth(0).fill('');await f.locator('input.play-slot').nth(1).fill('');assert.equal(await f.locator('#group').inputValue(),'','clearing all words also clears the saved grouped answer');
   await f.close();
   assert.deepEqual(errors,[]);
   console.log('PASS on-image card fill, grading, persistence, full page, mobile, unmarked tap/drop snapping, direct typing, repositioning, multipart storage, key gating, two full pages, keyboard placement and restored free drafts');

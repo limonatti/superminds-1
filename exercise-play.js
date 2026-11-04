@@ -71,7 +71,7 @@ function attach(config){
  // grading contract while giving each printed blank its own editable slot.
  for(let i=fields.length-1;i>=0;i--){const f=fields[i];if(f.kind!=='set')continue;
   const read=()=>{const value=String(f.get()),parts=value.split(/[;\n]/.test(value)?/[;\n]/:/,/).map(s=>s.trim());while(parts.length>1&&!parts.at(-1))parts.pop();return parts},count=Math.max(1,Number(f.count)||1,read().length);
-  fields.splice(i,1,...Array.from({length:count},(_,j)=>({...f,id:f.id+'.'+(j+1),label:count===1?f.label:f.label+'.'+(j+1),kind:'set-part',get:()=>read()[j]||'',set:value=>{const values=read();while(values.length<count)values.push('');values[j]=value;return f.set(values.join('; ')+(count===1?';':''))}})));
+  fields.splice(i,1,...Array.from({length:count},(_,j)=>({...f,id:f.id+'.'+(j+1),label:count===1?f.label:f.label+'.'+(j+1),kind:'set-part',get:()=>read()[j]||'',set:value=>{const values=read();while(values.length<count)values.push('');values[j]=value;return f.set(values.some(v=>v.trim())?values.join('; ')+(count===1?';':''):'')}})));
  }
  // Split a legacy combined answer only when the source explicitly locates its parts.
  for(let i=fields.length-1;i>=0;i--){
@@ -82,7 +82,9 @@ function attach(config){
  }
  // Placement is saved separately from answers; the original inputs keep their sync and grading.
  let freeAnswer=null,freeValues=[];
- if(inline&&!config.native&&!fields.length&&!(config.fields||[]).length){
+ // A writing task can mention words/articles without containing printed blanks.
+ const instruction=text.slice(0,400).replace(/\s+/g,' '),writingTask=/\bwrite\s+(?:(?:a|an|the|your|own|short|three|two|more)\s+)*(?:articles?|essays?|e-?mails?|letters?|stor(?:y|ies)|paragraphs?|reports?|blog posts?|comments?|summar(?:y|ies))\b/i.test(instruction)&&!/\b(?:each|every)\s+(?:gap|blank)\b/i.test(instruction);
+ if(inline&&!writingTask&&!config.native&&!fields.length&&!(config.fields||[]).length){
   const note=responses.querySelector('textarea');
   if(note){freeAnswer=note;freeValues=readFree();for(let i=0;i<freeValues.length;i++)fields.push(freeField(i));}
  }
