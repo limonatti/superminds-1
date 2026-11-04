@@ -29,7 +29,9 @@ target because page 21 prints exercise 3 without a separate B instruction.
 Answer record IDs and grading keys are unchanged.
 
 The desktop dialog uses the available viewport. The original task fits the pane
-by default; explicit zoom remains available. Longer supporting texts and images
+by default; explicit zoom remains available. B2+ prioritizes readable text: its
+source fills the wider left column and scrolls vertically, while answers use a
+compact 270–350 px column with labels beside short inputs. Longer supporting texts and images
 follow the main task in the source pane. On narrow screens, the complete source
 comes before the answer form in one scrollable column. Escape and the close
 button remain available.

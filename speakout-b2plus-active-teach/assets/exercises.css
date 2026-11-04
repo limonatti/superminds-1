@@ -16,6 +16,18 @@
 .exercise-key{margin-top:20px;border:1px solid #415064;border-radius:8px;padding:12px}.exercise-key summary{cursor:pointer}.exercise-key p,.exercise-prompt{white-space:pre-wrap;line-height:1.6}
 .exercise-footer{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:14px 20px;border-top:1px solid #35414d}.exercise-status{flex:1;min-width:160px}
 .exercise-dialog :focus-visible{outline:3px solid #91baff;outline-offset:3px}
+/* Keep book text readable; long exercises scroll instead of shrinking to fit. */
+#mdExercise.focus-dialog .focus-columns{grid-template-columns:minmax(0,1fr) clamp(270px,26vw,350px)!important;gap:20px}
+#mdExercise.focus-dialog .focus-sheet{width:100%!important}
+#mdExercise.focus-dialog .exercise-fields{grid-template-columns:minmax(0,1fr);gap:10px}
+#mdExercise.focus-dialog .exercise-field{min-width:0;gap:4px}
+#mdExercise.focus-dialog .exercise-field.compact{display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:8px;align-items:center}
+#mdExercise.focus-dialog .exercise-field label{font-size:13px;line-height:1.4}
+#mdExercise.focus-dialog .exercise-field input:not([type=checkbox]),#mdExercise.focus-dialog .exercise-field select{min-width:0;min-height:40px;padding:8px 10px;font-size:15px}
+#mdExercise.focus-dialog .exercise-field.compact .field-result{grid-column:2}
+#mdExercise.focus-dialog .field-result:empty{display:none}
+#mdExercise.focus-dialog .exercise-key{margin-top:16px;padding:10px;font-size:13px}
+@media(max-width:760px){#mdExercise.focus-dialog .exercise-field input:not([type=checkbox]),#mdExercise.focus-dialog .exercise-field select{min-height:44px;font-size:16px}}
 .spot.book-exercise{border-color:transparent;background:transparent}.spot.book-exercise:hover,.spot.book-exercise:focus-visible{border-color:#7ca7ff;background:#7ca7ff12}
 .spot.book-exercise .tag{background:#396abd;color:white;opacity:.75;font-size:11px}.spot.book-exercise:hover .tag{opacity:1}
 .drawing-tool .spot,.marking .book-exercise{pointer-events:none}
