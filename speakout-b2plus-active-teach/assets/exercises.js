@@ -62,6 +62,7 @@
     if(s.audio)dialog.querySelector('#exerciseAudio').onclick=()=>{if(!AU.src.endsWith(enc(s.audio)))playTrack(s.audio,'Упражнение '+s.label);else if(!AU.paused)AU.pause();else AU.play().catch(()=>{});};
     if(s.video)dialog.querySelector('#exerciseVideo').onclick=()=>openVideo(s.video,'Видео к упражнению '+s.label);
     const detail=dialog.querySelector('details');if(detail)detail.ontoggle=()=>{revealed=detail.open;};
+    window.ExercisePlay.attach({dialog,source:dialog.querySelector('.exercise-original'),responses:dialog.querySelector('.focus-responses'),id:active.id,text:s.text||s.data||'',fields:fields.filter(f=>f.n!=='notes'&&f.mode!=='set').map(f=>{const input=[...dialog.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n);return input&&window.ExercisePlay.inputField(f.n,input,f.accepted||f.answers||[f.answer],f.choices?.map(v=>({value:v,label:v})),input.closest('.exercise-field'))}).filter(Boolean)});
   }
   dialog.onkeydown=e=>e.stopPropagation();
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});

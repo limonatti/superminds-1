@@ -55,6 +55,7 @@ function openExercise(id){
  $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
  window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);$('#exercise').showModal();resizeCrop();updateAssignMarkers();
+ window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:active.text,fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i],options=input.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.textContent})):undefined;return window.ExercisePlay.inputField(f.label,input,f.accepted||[],options,input.closest('.answer-row'),{kind:f.kind})})});
 }
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
 function save(explicit){

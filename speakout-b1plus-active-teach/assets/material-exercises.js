@@ -81,6 +81,7 @@ function mount(container,config){
   }
   $('#practicePrevious').onclick=()=>navigate(-1);$('#practiceNext').onclick=()=>navigate(1);
   setPage(selected.sourcePage,selected);feedback();summary();bindExclusivePlayers();persist();
+  const dialog=container.closest('dialog'),source=dialog.querySelector('.material-original');window.ExercisePlay.attach({dialog,source,responses:container,id:item.id+':'+selected.id,geometry:root.MATERIAL_EXERCISE_GAPS?.[item.id+':'+selected.id],text:selected.instruction,fields:selected.mode==='auto'?selected.fields.map(f=>{const input=$$('[data-practice-input]').find(el=>el.dataset.practiceInput===f.n),scope=$$('[data-field]').find(el=>el.dataset.field===f.n);if(input)return window.ExercisePlay.inputField(f.n,input,f.answers,f.options,scope,{tokens:f.tokens});return {id:f.n,label:f.n,scope,answers:f.answers,options:f.options,get:()=>state().values[f.n]||'',set:v=>{updateValue(f.n,v);return true}}}):[]});
  }
  function navigate(delta){
   container.querySelectorAll('audio').forEach(a=>a.pause());selected=sections[sections.indexOf(selected)+delta];render();$('#practiceTitle').focus({preventScroll:true});container.scrollIntoView({block:'nearest'});

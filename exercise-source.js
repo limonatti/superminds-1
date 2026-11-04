@@ -24,10 +24,11 @@ function render(doc){
   const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`${x*pw} ${y*ph} ${w*pw} ${h*ph}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',caption.textContent);svg.style.aspectRatio=`${w*pw}/${h*ph}`;section.dataset.aspect=w*pw/(h*ph);section.dataset.context=!!source.context;
   const image=document.createElementNS(ns,'image');image.setAttribute('href',root.SPEAKOUT_FILES?.get(source.image)||root.SPEAKOUT_FILES?.get(source.image.replace(/\.webp$/i,'.jpg'))||source.image);image.setAttribute('width',pw);image.setAttribute('height',ph);svg.append(image);section.append(svg);doc.append(section);
  }
- fit(doc.parentElement);
+ fit(doc.parentElement);doc.dispatchEvent(new CustomEvent('exercise-source-render'));
 }
 function fit(host){
  const doc=host.querySelector('.focus-document');if(!doc?._focus)return;
+ if(host.closest('.play-dialog')){const available=host.clientWidth;for(const figure of doc.querySelectorAll('.focus-sheet'))figure.style.width=Math.min(available,Math.max(Math.min(460,available),Math.min(600,innerHeight*.48)*Number(figure.dataset.aspect))*doc._focus.zoom)+'px';return}
  const height=host.clientHeight-(host.querySelector('.focus-source-controls')?.offsetHeight||0)-(doc.querySelector('figcaption')?.offsetHeight||18)-32;for(const figure of doc.querySelectorAll('.focus-sheet')){figure.style.width=innerWidth>760&&height>100&&figure.dataset.context==='false'?Math.min(doc.clientWidth,height*Number(figure.dataset.aspect)*doc._focus.zoom)+'px':'100%'}
 }
 function change(host,changes){const doc=host?.matches('.focus-document')?host:host?.querySelector('.focus-document');if(!doc?._focus)return;Object.assign(doc._focus,changes);render(doc)}

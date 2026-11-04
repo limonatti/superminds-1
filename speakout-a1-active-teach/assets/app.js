@@ -81,7 +81,7 @@ function selectExercise(index){
  if(inline){
   const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
   inlinePlayer=(choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
-  focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();return;
+  focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,inline,choice,text:e.text});return;
  }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
  if(auto){
@@ -105,7 +105,7 @@ function selectExercise(index){
  if($('#freeNote'))$('#freeNote').oninput=ev=>{state.note=ev.target.value;state.done=false;updateProgress();persist()};
  wireExerciseNavigation(index,state);
  syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
- quickMedia();exerciseAudio();persist();
+ quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text});
 }
 function wireExerciseNavigation(index,state){const p=page();
  $('#done').onclick=()=>{state.done=!state.done;selectExercise(index);updateProgress();persist()};

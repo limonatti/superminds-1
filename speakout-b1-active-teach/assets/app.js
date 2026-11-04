@@ -103,7 +103,7 @@ function selectExercise(index){
  $('#exerciseNext').onclick=()=>{if(index<p.exercises.length-1)selectExercise(index+1);else{const nx=pages()[pages().indexOf(p)+1];if(nx)go(nx.page);else toast('Это последнее задание книги.')}$('#exerciseDialog').scrollTop=0};
  if($('#openKeys'))$('#openKeys').onclick=()=>resources(true);
  syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
- quickMedia();exerciseAudio();persist();window.dispatchEvent(new Event('b1-view'));
+ quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text});window.dispatchEvent(new Event('b1-view'));
 }
 function tileOrder(f,value){const words=String(value||'').trim().split(/\s+/).filter(Boolean),used=new Set(),ids=[];for(const word of words){const id=f.tokens.findIndex((t,i)=>!used.has(i)&&t===word);if(id<0)return [];used.add(id);ids.push(id)}return ids}
 function setTiles(f,state,ids){const keyboardTile=document.activeElement?.matches('[data-tile],[data-used]');state.values[f.n]=ids.map(i=>f.tokens[i]).join(' ');state.done=false;const input=$$('[data-answer]').find(x=>x.dataset.answer===f.n);input.value=state.values[f.n];clearFeedback();renderTiles(f,state);if(keyboardTile){const bank=$$('[data-bank]').find(x=>x.dataset.bank===f.n);(bank.querySelector('button:not(:disabled)')||input).focus({preventScroll:true})}persist()}

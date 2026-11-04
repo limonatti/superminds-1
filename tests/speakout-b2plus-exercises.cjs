@@ -30,8 +30,8 @@ for(const [page,exs] of Object.entries(exercises))for(const ex of exs){
   assert(await a.locator('#mdExercise').evaluate(d=>d.open));
   const box=await a.locator('#mdExercise').boundingBox();assert(Math.abs(box.x+box.width/2-720)<4,'centered dialog');
   const f=exercise.fields.find(f=>f.answer),input=a.locator('[data-answer="'+f.n+'"]');
-  if(f.choices)await input.selectOption(f.answer);else await input.fill(f.answer.split('/')[0].trim());
-  await a.locator('#exerciseCheck').click();assert.match(await a.locator('#mdExercise').innerText(),/Верно/);
+  if(f.choices)await a.locator('.play-word').filter({hasText:new RegExp('^'+f.answer+'$')}).click();else {await a.locator('.play-type-toggle').click();await a.locator('.play-manual input').fill(f.answer.split('/')[0].trim());}
+  await a.locator('.play-check').click();assert.match(await a.locator('#mdExercise').innerText(),/Верно/);
   await a.evaluate(()=>B2Store.flush());
   await a.screenshot({path:'/private/tmp/b2-exercise-desktop.png'});
   const b=await device();await b.goto(url);await ready(b);await b.getByRole('button',{name:'Открыть упражнение '+exercise.label,exact:true}).first().click();

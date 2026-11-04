@@ -1,0 +1,50 @@
+{
+  "speakout-b1": {
+    "exercises": 17,
+    "gaps": 135,
+    "unmapped": {
+      "no_complete_set": 344,
+      "ambiguous_numbers": 12
+    }
+  },
+  "speakout-b1plus": {
+    "exercises": 31,
+    "gaps": 211,
+    "unmapped": {
+      "no_complete_set": 213,
+      "ambiguous_numbers": 4
+    }
+  },
+  "solutions-int": {
+    "exercises": 216,
+    "gaps": 1600,
+    "unmapped": {
+      "no_complete_set": 516,
+      "ambiguous_numbers": 19
+    }
+  },
+  "outcomes-beginner": {
+    "exercises": 32,
+    "gaps": 196,
+    "unmapped": {
+      "no_complete_set": 585,
+      "ambiguous_numbers": 12
+    }
+  },
+  "speakout-b2plus": {
+    "exercises": 74,
+    "gaps": 405,
+    "unmapped": {
+      "no_complete_set": 286,
+      "ambiguous_numbers": 12
+    }
+  },
+  "speakout-b1plus-tests": {
+    "exercises": 196,
+    "gaps": 1235,
+    "unmapped": {
+      "no_complete_set": 220,
+      "ambiguous_numbers": 6
+    }
+  }
+}
