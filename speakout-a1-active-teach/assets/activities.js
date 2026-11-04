@@ -10,7 +10,7 @@ function model(id,spec){
  if(source.type==='bank'){
   if(source.keyItems?.length)spec={...spec,mode:'auto',items:source.keyItems.map(q=>({...q,kind:'text'}))};
   const original=root.SPEAKOUT_INLINE_DATA?.[id],inline=N.model(id,spec,source.fields?{...original,box:source.box,fields:source.fields,distinct:source.distinct,given:source.given||original?.given}:undefined);
-  if(inline?.rank)return {kind:'bank',...source,bank:inline.items.map(q=>({value:q.answer,label:q.answer})),inline,box:union(source.box,inline.box)};
+  if(inline?.rank)return {kind:'bank',...source,bank:inline.items.map(q=>({value:q.n,label:q.n})),inline,box:union(source.box,inline.box)};
   if(inline&&!inline.rank&&!inline.vowels)return {kind:'bank',...source,inline,box:union(source.box,inline.box)};
   if(!source.items?.length)return null;
   const left=(source.targets||source.items.map(q=>({id:q.n,label:q.n}))).map(n=>({...n}));

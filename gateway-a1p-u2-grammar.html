@@ -84,6 +84,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="coursework.css?v=6b0d7a29">
 </head>
 <body>
 <div class="wrap">
@@ -123,7 +124,7 @@
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Gateway A1+ (2nd edition) · Unit 2 · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=64c9ed6c"></script>
+<script src="sm-auth.js?v=fed7ca58"></script><script src="coursework-store.js?v=5d9875a0"></script><script src="coursework-ui.js?v=59aae6bf"></script><script src="course-practice.js?v=1179b2b9"></script>
 <script>
 const WORDS=[["art","рисование/ИЗО"],["English","английский"],["French","французский"],["geography","география"],["history","история"],["ICT","информатика"],["maths","математика"],["music","музыка"],["PE","физкультура"],["science","естествознание"],["calculator","калькулятор"],["folder","папка"],["laptop","ноутбук"],["mobile phone","мобильный телефон"],["pencil case","пенал"],["tablet","планшет"],["trainers","кроссовки"],["ear","ухо"],["eye","глаз"],["hair","волосы"],["mouth","рот"],["nose","нос"],["teeth","зубы"],["curly","кудрявый"],["straight","прямой"],["fair","светлый (о волосах)"],["dark","тёмный"],["tall","высокий"],["short","короткий/низкий"]];
 const PRONWORDS=["geography","science","calculator","French","history","curly"];
@@ -214,63 +215,19 @@ var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const 
 const HW={course:"gateway-a1p",unit:2};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
 function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:sec,question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
-async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+async function _flush(){if(!_ATT.length)return;const session=await SM.presentationSession();if(!session||session.id!==_ATT_OWNER)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
 window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
-(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
-let sc=0,tot=0;
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;_ATT_OWNER=u?.id||null;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let _ATT_OWNER=null;let sc=0,tot=0;
 function bump(){sc++;document.getElementById("sc").textContent=sc;}
-function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
-  let done=false,logged=false;
-  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
-    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
-    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
-function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
-  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
-  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
-    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
-    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
-    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
-  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
-  return d;}
+function mcCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("mc",t,n,{course:HW.course,unit:HW.unit,section:sec||"grammar",attempt:gi,log:_log});}
+function gapCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("gap",t,n,{course:HW.course,unit:HW.unit,section:sec||"gap",attempt:gi,log:_log});}
 /* Правда / Ложь */
-function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
-  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
-  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
-    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
-    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
+function tfCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("tf",t,n,{course:HW.course,unit:HW.unit,section:sec||"truefalse",attempt:gi,log:_log});}
 /* True / False / Not Given (IELTS) */
-function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
-    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
-  let done=false,logged=false;const want=String(t.a).toUpperCase();
-  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
-    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
-    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
+function tfngCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("tfng",t,n,{course:HW.course,unit:HW.unit,section:sec||"tfng",attempt:gi,log:_log});}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
-function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
-  const d=document.createElement("div");d.className="card";
-  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
-    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
-  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
-  let sel=-1,matched=0;
-  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
-    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
-  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
-    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
-      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
-      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
-      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
-  return d;}
+function matchCard(pairs,n,sec){tot+=pairs.length;const gi=++_GI;return CoursePractice.legacy("match",pairs,n,{course:HW.course,unit:HW.unit,section:sec||"match",attempt:gi,log:_log});}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -280,7 +237,7 @@ if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="wo
   d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
   d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function shuffle(a){return CoursePractice.shuffle(a)}
 const chpr=document.getElementById("chpr");
 if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
   const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
@@ -355,6 +312,8 @@ if(wb){
   }
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
+
+for(const prompt of document.querySelectorAll('.spkcard,.hw')){const text=prompt.textContent.trim();if(text)prompt.after(CoursePractice.card({prompt:text,fields:[{kind:'open',prompt:'Мой ответ / заметки'}]},{course:HW.course,unit:HW.unit,section:'open',title:'Свой ответ'}));}
 </script>
 </body>
 </html>

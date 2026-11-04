@@ -2,37 +2,43 @@
 (function(root){
 'use strict';
 const mounted=new WeakMap(),norm=s=>String(s??'').normalize('NFKC').replace(/[‘’]/g,"'").trim().toLowerCase();
-const families=[['am',"'m",'is','are'],['was','were','is','are'],['do','does','did'],['have','has','had'],['a','an','the','—'],['in','on','at','to','from','for','with','of'],['who','what','where','when','why','how'],['much','many','some','any','a lot of'],['and','but','because','so','although'],['can','could','must','should','may','might']];
 function shuffle(values,seed){let n=2166136261;for(const c of seed)n=Math.imul(n^c.charCodeAt(0),16777619);return values.map((v,i)=>{n^=n<<13;n^=n>>>17;n^=n<<5;return{v,r:n>>>0,i}}).sort((a,b)=>a.r-b.r||a.i-b.i).map(x=>x.v)}
 function unique(values){const seen=new Set();return values.filter(v=>{const k=norm(v.label);if(!k||seen.has(k))return false;seen.add(k);return true})}
 function candidates(field,fields,text){
  if(field.options?.length)return unique(field.options.map(o=>typeof o==='string'?{value:o,label:o}:o));
  if(field.tokens?.length)return field.tokens.map(t=>({value:t.text||t,label:t.text||t,append:true}));
- const answers=fields.flatMap(f=>f.options?.length?[]:(f.answers||[]).slice(0,1)).filter(v=>typeof v==='string'&&v.trim()&&v.length<=52&&v.trim().split(/\s+/).length<=5&&!/[;\n]|\b(?:e\.g\.|possible|sample|answers? vary)\b/i.test(v));
- let values=unique(answers.map(v=>({value:v,label:v})));
- const own=(field.answers||[])[0];if(!own||!values.some(v=>norm(v.value)===norm(own)))return [];
- if(values.length===1&&/\bwho\b/i.test(text)&&/^[A-Z][a-z]+$/.test(own)){const names=[...text.matchAll(/^\s*([A-Z][a-z]{2,18})\s*$/gm)].map(m=>({value:m[1],label:m[1]}));values=unique([...values,...names])}
- const words=values.map(v=>norm(v.value));
- for(const family of families)if(words.length&&words.every(v=>family.map(norm).includes(v))){values=unique(values.concat(family.map(v=>({value:v,label:v}))));break}
- if(values.length===1&&/^[a-z]$/i.test(own))values=['a','b','c','d'].map(v=>({value:v,label:v}));
- if(values.length<2)return [];
- // Long banks become a stable, manageable selection for the current gap.
- if(values.length>20)values=unique([{value:own,label:own},...shuffle(values,field.id).slice(0,9)]);
- return values;
+ // Suggestions are authored by the exercise, never reconstructed from grading keys.
+ return [];
+}
+
+function sourceLetters(text=''){
+ const labels=new Set();for(const m of text.matchAll(/\b([a-j])\s*[–—-]\s*([b-j])\b/gi)){const from=m[1].toLowerCase().charCodeAt(0),to=m[2].toLowerCase().charCodeAt(0);if(to>from)for(let n=from;n<=to;n++)labels.add(String.fromCharCode(n))}
+ for(const m of text.matchAll(/(?:^|\n)\s*([A-Ja-j])(?:[.)]\s+|\s*\n)/g))labels.add(m[1].toLowerCase());return [...labels].sort();
 }
 function inputField(id,input,answers=[],options,scope,extra={}){
  return {id:String(id),label:String(id),input,scope:scope||input?.parentElement,answers:answers.flat(Infinity).filter(v=>typeof v==='string'),options,
   get:()=>input?.value||'',activate:()=>input?.dispatchEvent(new FocusEvent('focus')),set:v=>{if(!input||input.disabled)return false;input.value=v;input.dispatchEvent(new Event(input.tagName==='SELECT'?'change':'input',{bubbles:true}));if(input.tagName==='SELECT')input.dispatchEvent(new Event('input',{bubbles:true}));return true},...extra};
 }
+// A key is a comparison after a filled attempt, never an initial suggestion.
+function gateKeys(dialog,responses,fields){
+ const keySelector='#keyArea,#keyPanel,.practice-key,.exercise-key',buttonSelector='#exerciseKeys,#inlineHint,#inlineCompare,[data-reveal],[data-practice-reveal]';
+ let attempted='';
+ const values=()=>fields.length?fields.map(f=>String(f.get?.()||'')):[...responses.querySelectorAll('textarea,input:not([type=checkbox])')].map(el=>el.value);
+ const allowed=()=>{const v=values();return v.length&&v.every(s=>s.trim())&&JSON.stringify(v)===attempted};
+ const update=()=>{const open=allowed();dialog.querySelectorAll(keySelector).forEach(el=>el.classList.toggle('play-key-locked',!open));dialog.querySelectorAll(buttonSelector).forEach(el=>{el.disabled=!open;el.title=open?'':'Сначала заполните и проверьте упражнение'});};
+ const capture=ev=>{if(ev.target.closest(buttonSelector)&&!allowed()){ev.preventDefault();ev.stopImmediatePropagation()}};
+ const checked=ev=>{if(ev.target.closest('#check,#checkTask,#exerciseCheck,#practiceCheck,#practiceCheckAll,#practiceDone,#done,#saveAnswer,.coursework-save'))attempted=JSON.stringify(values());update()};
+ dialog.addEventListener('click',capture,true);dialog.addEventListener('click',checked);dialog.addEventListener('input',update);dialog.addEventListener('change',update);update();
+ return()=>{dialog.removeEventListener('click',capture,true);dialog.removeEventListener('click',checked);dialog.removeEventListener('input',update);dialog.removeEventListener('change',update);dialog.querySelectorAll(keySelector).forEach(el=>el.classList.remove('play-key-locked'));dialog.querySelectorAll(buttonSelector).forEach(el=>el.disabled=false)};
+}
 function attach(config){
  const {dialog,source,responses,id,text=''}=config;if(!dialog||!source||!responses)return;
  mounted.get(dialog)?.destroy();dialog.classList.add('play-dialog');dialog.classList.toggle('play-native',!!config.native);
  const geometry=config.geometry||root.EXERCISE_GAPS?.[id]||{};
- const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&f.kind!=='multi'&&f.kind!=='set'&&f.input?.tagName!=='TEXTAREA').flatMap(f=>{
-  const answer=(f.answers||[])[0]||'',parts=answer.split(/\s*[,;]\s*/);if(f.tokens||f.options?.length||parts.length<2||parts.length>4||parts.some(p=>!p||p.length>52)||f.geometry)return [f];
-  const separator=answer.includes(';')?'; ':', ';return parts.map((part,i)=>({...f,id:f.id+'.'+(i+1),label:f.label+'.'+(i+1),answers:[part],geometry:geometry[f.id+'.'+(i+1)],get:()=>f.get().split(/\s*[,;]\s*/)[i]||'',set:v=>{const values=f.get().split(/\s*[,;]\s*/);while(values.length<parts.length)values.push('');values[i]=v;return f.set(values.join(separator))}}));
- });
- if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
+ const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&f.kind!=='multi'&&f.kind!=='set'&&f.input?.tagName!=='TEXTAREA');
+ source.dataset.sourceFit='width';
+ const releaseKeys=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,config.fields||[]);
+ if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{releaseKeys();dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
  dialog.classList.remove('play-open-answer');
  let selected=0,ignoreClickUntil=0,destroyed=false,drag=null,hintMessage='';
  const doc=source.querySelector('.focus-document'),slots=new Map(),hidden=new Map();
@@ -107,7 +113,7 @@ function attach(config){
  const observer=new MutationObserver(refresh);for(const f of fields)if(f.scope)observer.observe(f.scope,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-invalid','aria-pressed','data-result','disabled']});if(feedback)observer.observe(feedback,{childList:true,subtree:true,characterData:true});
  const resize=new ResizeObserver(()=>{root.ExerciseSource?.fit(source);refresh()});resize.observe(source);resize.observe(bench);const onInput=()=>refresh();responses.addEventListener('input',onInput);responses.addEventListener('change',onInput);doc?.addEventListener('exercise-source-render',place);
  const resetButtons=[...dialog.querySelectorAll('#retry,#retryMistakes,#exerciseReset,#practiceRetry,#practiceReset')],onReset=()=>{hintMessage='';if(!destroyed)activate(Math.max(0,fields.findIndex(f=>!f.get())))};for(const b of resetButtons)b.addEventListener('click',onReset);
- function destroy(){destroyed=true;observer.disconnect();resize.disconnect();drag?.ghost?.remove();bench.remove();doc?.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());for(const [el,wasHidden]of hidden){el.hidden=wasHidden;el.classList.remove('play-original-control')}for(const b of resetButtons)b.removeEventListener('click',onReset);responses.removeEventListener('input',onInput);responses.removeEventListener('change',onInput);doc?.removeEventListener('exercise-source-render',place);dialog.removeEventListener('close',destroy);dialog.classList.remove('play-dialog','play-open-answer','play-graded')}
+ function destroy(){releaseKeys();destroyed=true;observer.disconnect();resize.disconnect();drag?.ghost?.remove();bench.remove();doc?.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());for(const [el,wasHidden]of hidden){el.hidden=wasHidden;el.classList.remove('play-original-control')}for(const b of resetButtons)b.removeEventListener('click',onReset);responses.removeEventListener('input',onInput);responses.removeEventListener('change',onInput);doc?.removeEventListener('exercise-source-render',place);dialog.removeEventListener('close',destroy);dialog.classList.remove('play-dialog','play-open-answer','play-graded')}
  mounted.set(dialog,{destroy,refresh});dialog.addEventListener('close',destroy,{once:true});place();root.ExerciseSource?.change(source,{});return {refresh,destroy};
 }
 function speakout({dialog,id,page,spec,inline,choice,activity,text}){
@@ -124,11 +130,11 @@ function speakout({dialog,id,page,spec,inline,choice,activity,text}){
     status:()=>buttons.some(b=>b.classList.contains('incorrect'))?'incorrect':buttons.some(b=>b.classList.contains('correct'))?'correct':''};
   });body.querySelectorAll('[data-inline]').forEach(el=>{el.parentElement.hidden=true});
  }else if(inline){
-  fields=inline.fields.map(f=>{const input=[...body.querySelectorAll('[data-inline]')].find(el=>el.dataset.inline===f.id),item=spec.items.find(q=>q.n===f.n);return inputField(f.id,input,f.answer===undefined?[]:[f.answer],inline.vowels?['a','e','i','o','u',...(f.answer?.length>1?[f.answer]:[])].map(v=>({value:v,label:v})):item?.options?.map(o=>({value:o.label.replace(/^[a-d]\.\s*/i,''),label:o.label.replace(/^[a-d]\.\s*/i,'')})),input?.parentElement,{geometry:{box:f.box.map((v,i)=>v/(i%2?842:595)),image:page.image,page:page.page}})});
+  fields=inline.fields.map(f=>{const input=[...body.querySelectorAll('[data-inline]')].find(el=>el.dataset.inline===f.id),item=spec.items.find(q=>q.n===f.n);return inputField(f.id,input,f.answer===undefined?[]:[f.answer],inline.vowels?undefined:item?.options?.map(o=>({value:o.label.replace(/^[a-d]\.\s*/i,''),label:o.label.replace(/^[a-d]\.\s*/i,'')})),input?.parentElement,{geometry:{box:f.box.map((v,i)=>v/(i%2?842:595)),image:page.image,page:page.page}})});
  }else fields=spec.items.map(f=>{const input=[...body.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n);return input&&inputField(f.n,input,root.SpeakoutInteractive.variants(f.answer),f.options,input.closest('.answerrow'),{tokens:f.tokens})}).filter(Boolean);
  if(activity?.kind==='bank')for(const f of fields)f.options=activity.bank.map(o=>({value:o.value,label:o.label}));
  return attach({dialog,source,responses,id,text,fields});
 }
-root.ExercisePlay={attach,inputField,candidates,shuffle,speakout};
-if(typeof module!=='undefined'&&module.exports)module.exports={candidates,shuffle};
+root.ExercisePlay={attach,inputField,candidates,shuffle,sourceLetters,speakout};
+if(typeof module!=='undefined'&&module.exports)module.exports={candidates,shuffle,sourceLetters};
 })(typeof window==='undefined'?globalThis:window);

@@ -142,36 +142,25 @@ async saveProgress(progress) {
 if (!useCloud) { localSetProgress(progress); return { ok: true }; }
 const c = ensureClient(); if (!c) return { ok: false };
 const u = await this.getUser(); if (!u) return { ok: false };
-const { error } = await c.from("progress").upsert(
-{ user_id: u.id, data: progress, updated_at: new Date().toISOString() },
-{ onConflict: "user_id" }
-);
+const { error } = await c.rpc('save_learning_progress', {p_user:u.id,p_progress:progress});
 return { ok: !error, error: error && error.message };
 },
 
 /* Ответы к заданиям книги: отдельное пространство, без выдуманной оценки. */
-async loadCourseWork(course) {
-  const c=ensureClient(), u=await this.getUser();
+async loadCourseWork(course, expectedUserId) {
+  const c=ensureClient(), u=await this.presentationSession();
   if(!c || !u) return {ok:false, error:"Войдите в аккаунт"};
+  if(expectedUserId && u.id!==expectedUserId) return {ok:false,error:"Аккаунт изменился"};
   const {data,error}=await c.from("progress").select("data").eq("user_id",u.id).maybeSingle();
   if(error) return {ok:false,error:error.message};
-  return {ok:true,answers:(data && data.data && data.data.__coursework && data.data.__coursework[course]) || {}};
+  return {ok:true,answers:data?.data?.__coursework?.[course] || {}};
 },
 async saveCourseWork(course, answers, expectedUserId) {
-  const c=ensureClient(), u=await this.getUser();
+  const c=ensureClient(), u=await this.presentationSession();
   if(!c || !u) return {ok:false,error:"Войдите в аккаунт"};
-  if(expectedUserId && u.id!==expectedUserId) return {ok:false,error:"Аккаунт изменился. Обновите страницу."};
-  const {data,error}=await c.from("progress").select("data").eq("user_id",u.id).maybeSingle();
-  if(error) return {ok:false,error:error.message};
-  const progress=(data && data.data) || {};
-  progress.__coursework=progress.__coursework || {};
-  const merged={...(progress.__coursework[course] || {})};
-  for(const [id,value] of Object.entries(answers)) {
-    if(!merged[id] || Number(value.updatedAt)>=Number(merged[id].updatedAt || 0)) merged[id]=value;
-  }
-  progress.__coursework[course]=merged;
-  const saved=await c.from("progress").upsert({user_id:u.id,data:progress,updated_at:new Date().toISOString()},{onConflict:"user_id"});
-  return saved.error ? {ok:false,error:saved.error.message} : {ok:true};
+  if(expectedUserId && u.id!==expectedUserId) return {ok:false,error:"Аккаунт изменился"};
+  const {data,error}=await c.rpc('save_course_work',{p_user:expectedUserId||u.id,p_course:course,p_answers:answers});
+  return error?{ok:false,error:error.message}:{ok:true,answers:data||{}};
 },
 
 /* ---------- Умное повторение (ящики Лейтнера) ---------- */

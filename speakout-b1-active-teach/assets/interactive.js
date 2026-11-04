@@ -47,7 +47,7 @@ function spec(ex,key){
  if(letterMatch){
   const range=/\b([A-J])\s*[-–—]\s*([A-J])\b/.exec(text);
   if(range)for(let i=range[1].charCodeAt(0);i<=range[2].charCodeAt(0);i++)letters.push(String.fromCharCode(i));
-  else letters=[...new Set([...text.matchAll(/^\s*([A-J])\s*$/gm)].map(m=>m[1]).concat(items.map(q=>q.answer).filter(a=>/^[A-J]$/.test(a))))].sort();
+  else letters=[...new Set([...text.matchAll(/^\s*([A-J])\s*$/gm)].map(m=>m[1]).concat([...text.matchAll(/\b[A-J](?:\s*(?:,|and|or)\s*[A-J])+\b/g)].flatMap(m=>m[0].match(/[A-J]/g)||[])))].sort();
   if(items.some(q=>/^[–—-]$/.test(q.answer)))letters.push('–');
  }
  const bank=sourceBank(text,items);
@@ -58,7 +58,7 @@ function spec(ex,key){
   if(allTF){field.kind='choice';field.options=[{value:'T',label:'True'},{value:'F',label:'False'}]}
   else if(letterMatch&&letters.length>1){field.kind='match';field.options=letters.map(a=>({value:a,label:a==='–'?'Нет соответствия':a}))}
   else if(/^[a-d]$/.test(q.answer)){const opts=optionsFor(text,q.n)||printedOptions?.map(o=>({value:o.value,label:o.value.toUpperCase()}));if(opts?.some(o=>o.value===q.answer)){field.kind='choice';field.options=opts}}
-  else if(reorder&&!q.answer.includes('/')&&q.answer.trim().split(/\s+/).length>2){field.kind='order';field.tokens=q.answer.trim().split(/\s+/)}
+  else if(reorder&&(numbered(text)[q.n]||'').split('/').length>2){field.kind='order';field.tokens=numbered(text)[q.n].split('/').map(s=>s.trim()).filter(Boolean)}
   else if(bank){field.kind='bank';field.options=bank.map(a=>({value:a,label:a}))}
   return field;
  });

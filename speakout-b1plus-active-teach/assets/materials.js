@@ -42,9 +42,15 @@ window.SpeakoutMaterials = (() => {
     ${item.missingAudio?.length?`<p class="source-note">Записей ${esc(item.missingAudio.join(', '))} нет в архиве. Доступны чтение и обсуждение; задания на аудирование требуют этих записей.</p>`:''}
     <div class="material-study"><div class="material-original"><div class="material-pager"><button id="materialPrev" aria-label="Предыдущая страница материала">‹</button><label>Страница <select id="materialPage">${item.images.map((_,i)=>`<option value="${i}">${i+1}</option>`).join('')}</select> из ${item.pageCount}</label><button id="materialNext" aria-label="Следующая страница материала">›</button><button id="materialZoomOut" aria-label="Уменьшить материал">−</button><button id="materialZoomFit">100%</button><button id="materialZoomIn" aria-label="Увеличить материал">+</button></div>
     <div class="material-viewport"><img id="materialImage" alt="${esc(item.name)}"></div></div><div class="material-practice"></div></div>
-    ${!item.teacher?`<div class="material-answer"><label for="materialNote">Ответы и заметки к заданию</label><textarea id="materialNote" rows="5" placeholder="Запиши ответы по номерам упражнений…">${esc(answer.note||'')}</textarea><p>Проверка с преподавателем или по оригинальному ключу. Ответы сохраняются в этом браузере и входят в файл «Мои ответы».</p><button id="materialDone" class="${answer.done?'selected':''}" aria-pressed="${!!answer.done}">${answer.done?'✓ Выполнено':'Отметить выполненным'}</button></div>`:''}`;
+    ${!item.teacher?`<div class="material-answer"><label for="materialNote">Ответы и заметки к заданию</label><textarea id="materialNote" rows="5" placeholder="Запиши ответы по номерам упражнений…">${esc(answer.note||'')}</textarea><p>Проверка с преподавателем или по оригинальному ключу. Ответы сохраняются в аккаунте и входят в файл «Мои ответы».</p><button id="materialDone" class="${answer.done?'selected':''}" aria-pressed="${!!answer.done}">${answer.done?'✓ Выполнено':'Отметить выполненным'}</button></div>`:''}`;
    $('#materialBack').onclick=()=>source?show(source):list();
-   if(key)$('#materialKey').onclick=()=>show(key,item);
+   if(key){
+    const sections=window.SPEAKOUT_MATERIAL_INTERACTIONS?.materials[item.id]?.sections;
+    const attempted=()=>sections?.length?sections.every(ex=>{const st=answer.exercises?.[ex.id];return ex.mode==='review'?!!(st?.note?.trim()&&st.done):ex.fields.every(f=>st?.checked?.[f.n]&&String(st.values?.[f.n]||'').trim())}):!!(answer.note?.trim()&&answer.done);
+    const refreshKey=()=>{const b=$('#materialKey');if(b){const disabled=!attempted();if(b.disabled!==disabled)b.disabled=disabled;b.title=disabled?'Ключ ко всему материалу доступен после заполнения и проверки всех разделов':''}};
+    $('#materialKey').onclick=()=>{if(attempted())show(key,item)};refreshKey();
+    const observer=new MutationObserver(refreshKey);observer.observe(body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-pressed']});$('#modal').addEventListener('close',()=>observer.disconnect(),{once:true});
+   }
    $('#materialPrev').onclick=()=>{pageNumber--;renderPage()};$('#materialNext').onclick=()=>{pageNumber++;renderPage()};
    $('#materialPage').onchange=e=>{pageNumber=+e.target.value;renderPage()};
    $('#materialZoomOut').onclick=()=>setZoom(zoom-25);$('#materialZoomIn').onclick=()=>setZoom(zoom+25);$('#materialZoomFit').onclick=()=>setZoom(100);

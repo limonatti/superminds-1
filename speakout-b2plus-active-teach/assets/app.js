@@ -958,11 +958,12 @@ if(window.SpeakoutAccountStore) {
   window.B2Store=new SpeakoutAccountStore({api:window.SM||{
     presentationSession:async()=>null,watchPresentationAuth:()=>()=>{}
   },storage:localStorage,onChange:refreshAccountMarks,onStatus:(state,text)=>{
-    $('#saveStatus').textContent=text;$('#saveStatus').dataset.state=state;
+    window.CourseWorkUI?.status(text);$('#saveStatus').textContent=text;$('#saveStatus').dataset.state=state;
     const modalStatus=$('#mdExercise .exercise-status');if(modalStatus)modalStatus.textContent=text;
     $('#accountLogin').hidden=!!window.B2Store?.user;
     $('#syncRetry').hidden=!['error','pending'].includes(state);
   }});
+  CourseWorkUI.bind({get message(){return $('#saveStatus').textContent},flush:async()=>{await B2Store.pull();await B2Store.flush()}});
   B2Store.current=pkey();
   B2Store.start().then(()=>{$('#dock').inert=false;$('#bMark').disabled=false;refreshAccountMarks();});
   $('#syncRetry').onclick=async()=>{await B2Store.pull();await B2Store.flush();};

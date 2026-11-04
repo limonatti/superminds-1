@@ -14,7 +14,7 @@ function spec(e,source={}){
   const r={kind:'text',prompt:''},key=Array.isArray(f.key)?f.key[0]:f.key;if(f.self||f.soft)return r;
   if(f.options?.length){return {...r,kind:'choice',options:f.options.map(v=>({value:v,label:v==='T'?'True':v==='F'?'False':v==='DS'?'Doesn’t say':v}))}}
   if(matching&&letters.length>=2&&letters.length<=16&&/^[a-p]$/i.test(key)&&letters.includes(norm(key)))return {...r,kind:'match',options:letters.map(v=>({value:v,label:rows[v]?v+'. '+rows[v]:v}))};
-  if(ordering&&typeof key==='string'&&!/[;/]/.test(key)&&key.split(/\s+/).length>=3)return {...r,kind:'order',tokens:key.trim().split(/\s+/)};
+  if(ordering&&(rows[String(f.label)]||'').split('/').length>=3)return {...r,kind:'order',tokens:rows[String(f.label)].split('/').map(s=>s.trim()).filter(Boolean)};
   if(/number.*order|sentences.*correct order/i.test(e.instruction)&&fields.length>1&&fields.length<=20&&fields.every(q=>/^\d+$/.test(q.key)&&+q.key>=1&&+q.key<=fields.length))return {...r,kind:'match',options:fields.map((_,j)=>({value:String(j+1),label:String(j+1)}))};
   const line=rows[String(f.label)]||'';
   if(/choose|circle|correct word/i.test(e.instruction)&&line){

@@ -32,3 +32,7 @@ dialog#exerciseDialog.focus-dialog.play-dialog,dialog#exercise.focus-dialog.play
 .play-dialog.play-native #inlineFeedback{display:block!important}
 .play-dialog.play-native .pair-summary-row{padding:4px 0;font-size:13px}
 @media(max-height:480px){dialog[open].focus-dialog.play-dialog{display:block!important;overflow:auto!important}.play-dialog .focus-columns,.play-dialog .material-study{overflow:visible!important;flex:none!important}.play-dialog .play-workbench{position:static}}
+
+.play-key-locked{display:none!important}
+
+.play-dialog [data-pair-hint]{display:none!important}

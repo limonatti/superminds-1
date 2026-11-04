@@ -1,12 +1,12 @@
 /* Student answers belong to the signed-in account, independently of teacher ink. */
 (()=>{
  const COURSE='outcomes-beginner', bank=window.OUTCOMES_EXERCISES||{};
- let user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false, exerciseTrigger=null, exerciseZoom=1, fullSource=false;
+ let workStore=null, user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false, exerciseTrigger=null, exerciseZoom=1, fullSource=false;
  const status=s=>document.getElementById('courseworkStatus').textContent=s;
  const key=()=>`outcomes-work-v1:${user?.id||'guest'}`;
  const pageTasks=()=>bank[pageKey()]||[];
  const parse=s=>{try{return JSON.parse(s)||{}}catch{return {}}};
- function localSave(){try{localStorage.setItem(key(),JSON.stringify(answers));return true}catch{status('Не удалось сохранить на устройстве. Скачайте ответы.');return false}}
+ function localSave(){workStore.capture(answers);answers=workStore.records;return workStore.localOK}
  function renderTasks(){
   const list=pageTasks(), visible=enabled&&['sb','wb','grammar'].includes(S.book);
   $('#wordCards').href=`../trainer.html?unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
@@ -53,7 +53,7 @@
   if($('#addResponse'))$('#addResponse').onclick=()=>{saveDraft();const r=answers[e.id];r.values.push('');$('#responseFields').innerHTML=responseFields(e,r);bindResponses()};
   $('#checkTask').onclick=checkTask;
   if($('#revealAnswers'))$('#revealAnswers').onclick=()=>{revealed=!revealed;checkTask()};
-  $('#saveTask').onclick=()=>{saveDraft();flush();$('#modal').close()};
+  $('#saveTask').onclick=async()=>{saveDraft();const saved=await flush();if(saved?.ok||!user)$('#modal').close()};
   if(checked)renderFeedback(OutcomesGrader.check(e.check,record.values));
   liveView();renderLiveAnswers();
   const playUI=OutcomesInteractions.spec(e,window.OUTCOMES_INTERACTIONS?.[e.id]);window.ExercisePlay.attach({dialog:$('#modal'),source:$('.exerciseSource'),responses:$('.responsePanel'),id:e.id,text:e.instruction,fields:(e.check?.mode==='items'?e.check.items:[]).map((f,i)=>window.ExercisePlay.inputField(String(f.label||i+1),$(`[data-response="${i}"]`),f.soft||f.self?[]:[f.key],playUI[i]?.options,$(`#response-${i}`),{kind:f.match==='set'?'set':playUI[i]?.kind,tokens:playUI[i]?.tokens}))});
@@ -98,12 +98,13 @@
   grade.items.forEach((result,i)=>{const field=active.check.items[i],box=$(`#response-${i}`),input=box.querySelector('[data-response]'),feedback=$(`#feedback-${i}`);box.dataset.result=result;input.setAttribute('aria-invalid',result==='incorrect'?'true':'false');feedback.innerHTML=({correct:'✓ Верно',incorrect:'✕ Есть ошибка — попробуйте ещё раз',blank:'Заполните этот пункт',review:'Сравните свою формулировку с образцом'})[result]+((revealed||result==='review')?`<span class="answerKey">${field.self?'Самопроверка':field.soft?'Образец':'Ответ'}: ${esc(keyText(field))}</span>`:'')});
   const blanks=grade.items.filter(v=>v==='blank').length,wrong=grade.items.filter(v=>v==='incorrect').length;
   $('#checkSummary').textContent=grade.total?`${grade.correct} из ${grade.total} верно.${blanks?' Не заполнено: '+blanks+'.':''}${wrong?' Исправьте отмеченные пункты.':''}${grade.needsReview?' Свободные ответы сравните с образцом.':''}${grade.complete?' Всё верно!':''}`:'Сравните ответы с образцами. Другие верные формулировки тоже возможны.';
-  $('#revealAnswers').hidden=false;$('#revealAnswers').textContent=revealed?'Скрыть ответы':'Показать ответы';
+  $('#revealAnswers').hidden=grade.items.some(v=>v==='blank');$('#revealAnswers').textContent=revealed?'Скрыть ответы':'Показать ответы';
   if(active.check.model&&revealed){$('#selfCheck').hidden=false;$('#selfCheck').innerHTML=`<h4>Пояснение к ключу</h4><p class="modelAnswer">${esc(active.check.model)}</p>`}
  }
  function checkTask(){
   if(!active)return;
   if(active.check?.mode!=='items'){
+   if(!$$('[data-response]').some(el=>el.value.trim())){$('#checkSummary').textContent='Сначала запишите свой ответ.';return;}
    $('#selfCheck').hidden=false;$('#selfCheck').innerHTML=`${active.check?.model?`<h4>Образец для сравнения</h4><p class="modelAnswer">${esc(active.check.model)}</p>`:''}<h4>Проверьте себя</h4><ul><li>Ответили на все части задания?</li><li>Использовали слова и грамматику из примера на странице?</li><li>Проверили порядок слов, форму глагола и написание?</li>${/listen|repeat|practise|conversation/i.test(active.instruction)?'<li>Произнесли ответ вслух и сравнили с записью или примером?</li>':''}</ul><p>Это самопроверка. Автоматический балл за свободный ответ не выставляется.</p>`;$('#selfCheck').scrollIntoView({block:'nearest'});saveDraft();return;
   }
   checked=true;const grade={...OutcomesGrader.check(active.check,$$('[data-response]').map(el=>el.value)),revision:active.check.revision,checkedAt:Date.now(),revealed:revealed||Boolean(answers[active.id]?.assisted||answers[active.id]?.grade?.revealed)};
@@ -116,21 +117,11 @@
   const done=auto?(Boolean(grade)&&grade.correct===grade.total&&!grade.items.includes('blank')&&(!active.check.items.some(f=>f.soft)||$('#workDone').checked)):$('#workDone').checked;
   const record={...previous,book:active.book||source(),page:active.page||current().page,unit:active.unit||S.unit,exercise:active.n,values,done,grade,assisted:Boolean(previous.assisted||previous.grade?.revealed||grade?.revealed),updatedAt:Date.now()};
   if(previous.values?.length>values.length&&!previous.legacyValues)record.legacyValues=previous.values;
-  if(changed&&!newGrade?.mode){$$('.responseField').forEach(el=>{delete el.dataset.result;el.querySelector('[data-response]').removeAttribute('aria-invalid')});$$('.answerFeedback').forEach(el=>el.textContent='');if($('#checkSummary'))$('#checkSummary').textContent=checked?'Ответ изменён. Проверим после выхода из поля.':'';}
+  if(changed&&!newGrade?.mode){revealed=false;if($('#revealAnswers'))$('#revealAnswers').hidden=true;$('#selfCheck').hidden=true;$$('.responseField').forEach(el=>{delete el.dataset.result;el.querySelector('[data-response]').removeAttribute('aria-invalid')});$$('.answerFeedback').forEach(el=>el.textContent='');if($('#checkSummary'))$('#checkSummary').textContent=checked?'Ответ изменён. Проверим после выхода из поля.':'';}
   liveAnswer(record);
   answers[active.id]=record;dirty[active.id]=record;const saved=localSave();renderTasks();if($('#taskSaveStatus'))$('#taskSaveStatus').textContent=saved?(user?'Сохранено на устройстве. Синхронизация…':'Сохранено в этом браузере. Войдите для сохранения в аккаунте.'):'Не удалось сохранить. Скачайте ответы.';clearTimeout(timer);timer=setTimeout(flush,900);
  }
- async function flush(){
-  if(!user||busy||!Object.keys(dirty).length)return;
-  busy=true;const batch={...dirty};
-  try{
-   const result=await SM.saveCourseWork(COURSE,batch,user.id);
-   if(!result.ok)throw Error(result.error||'network');
-   for(const [id,v] of Object.entries(batch))if(dirty[id]===v)delete dirty[id];
-   status('Ответы сохранены в вашем аккаунте');if($('#taskSaveStatus'))$('#taskSaveStatus').textContent='Сохранено в аккаунте';
-  }catch{status('Ответы сохранены на устройстве. Нет связи с аккаунтом — повторим при восстановлении сети.');if($('#taskSaveStatus'))$('#taskSaveStatus').textContent='Сохранено на устройстве; синхронизация пока недоступна.'}
-  finally{busy=false}
- }
+ async function flush(){return workStore?.flush()}
  $('#exerciseToggle').onclick=()=>{enabled=!enabled;$('#exerciseToggle').setAttribute('aria-pressed',enabled);renderTasks()};
  window.addEventListener('outcomes-page',renderTasks);window.addEventListener('online',flush);
  $('#modal').addEventListener('close',()=>{$$('.taskAudio').forEach(a=>a.pause());const trigger=exerciseTrigger?.isConnected?exerciseTrigger:$$('[data-exercise]').find(b=>b.dataset.exercise===exerciseTrigger?.dataset.exercise);active=null;liveView();(trigger||$('#exerciseToggle')).focus({preventScroll:true})});
@@ -138,11 +129,9 @@
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
  $('#keys').hidden=true;
  async function init(){
-  try{user=await SM.getUser();if(user){const profile=await SM.myProfile();role=profile?.role||'student'}}catch{}
-  try{answers=parse(localStorage.getItem(key()))}catch{answers={}}
-  if(user){
-   try{const cloud=await SM.loadCourseWork(COURSE);if(!cloud.ok)throw Error();for(const [id,v] of Object.entries(cloud.answers)){if(!answers[id]||Number(v.updatedAt)>Number(answers[id].updatedAt||0))answers[id]=v}for(const [id,v] of Object.entries(answers))if(!cloud.answers[id]||Number(v.updatedAt)>Number(cloud.answers[id].updatedAt||0))dirty[id]=v;localSave();status('Ответы загружены из аккаунта');}catch{status('Открыты ответы с этого устройства. Синхронизация пока недоступна.')}
-  }else status('Гостевой режим: ответы сохраняются только в этом браузере.');
+  workStore=new CourseWorkStore({course:COURSE,legacy(u){try{return parse(localStorage.getItem(`outcomes-work-v1:${u?.id||'guest'}`))}catch{return {}}},onStatus:t=>{status(t);if($('#taskSaveStatus'))$('#taskSaveStatus').textContent=t},onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){answers=rows;if(ready&&change.remote)renderTasks()}});
+  await workStore.start();user=workStore.user;answers=workStore.records;CourseWorkUI.bind(workStore,()=>{saveDraft();return flush()});
+  try{if(user){const profile=await SM.myProfile();role=profile?.role||'student'}}catch{}
   $('#keys').hidden=!['teacher','admin'].includes(role);$('#notesTab').hidden=!['teacher','admin'].includes(role);
   if(!['teacher','admin'].includes(role))$('#resources').onclick=()=>{openModal('Материалы ученика',`<p>Student’s Book, Workbook и словарь доступны через вкладки. Нажимайте номера заданий, чтобы записывать ответы.</p><p>В комплекте Workbook ©2019 (ISBN 9780357042243). Название архива «3ed» не меняет издание книги.</p><a href="resources/workbook.pdf" target="_blank" rel="noopener">Workbook PDF</a> · <a href="resources/vocabulary.pdf" target="_blank" rel="noopener">Vocabulary Builder PDF</a>`)};
   ready=true;renderTasks();flush();liveSend({kind:"ready"});liveView();

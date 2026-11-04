@@ -237,8 +237,9 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="coursework.css?v=6b0d7a29">
 </head>
-<body>
+<body><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="sm-auth.js?v=fed7ca58"></script><script src="coursework-store.js?v=5d9875a0"></script><script src="coursework-ui.js?v=59aae6bf"></script>
 
 <div class="wrap noprint">
   <header>
@@ -548,11 +549,16 @@ GROUPS.forEach((g,gi)=>g.sounds.forEach(s=>{s.gi=gi;s.color=g.color;s.video=g.vi
 const TOTAL = ALL.length;
 
 /* ============ state ============ */
-let learned = load();
+let learned = {}, phonicsStore=null;
 let current = null;
 
 function load(){try{return JSON.parse(localStorage.getItem('es_learned')||'{}')}catch(e){return {}}}
-function save(){localStorage.setItem('es_learned',JSON.stringify(learned))}
+function save(){if(!phonicsStore)return;const next={...learned};for(const sound of ALL)if(!!next[sound.id]!==!!phonicsStore.records[sound.id]?.done)phonicsStore.set(sound.id,{values:[!!next[sound.id]],done:!!next[sound.id],updatedAt:Date.now()});}
+(async()=>{const status=document.createElement('p');status.className='coursework-status';status.setAttribute('role','status');document.getElementById('progText').parentElement.append(status);
+phonicsStore=new CourseWorkStore({course:'phonics',onStatus:t=>status.textContent=t,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows){learned=Object.fromEntries(Object.entries(rows).map(([k,v])=>[k,!!v.done]));renderHome();if(current)syncLearnBtn()}});await phonicsStore.start();
+const button=document.createElement('button');button.textContent='Сохранить прогресс';button.onclick=()=>phonicsStore.flush();status.after(button);
+const old=load();if(Object.keys(old).length){const transfer=document.createElement('button');transfer.textContent='Перенести мой прежний прогресс браузера';transfer.onclick=()=>{for(const[k,v]of Object.entries(old))if(v)learned[k]=true;save();renderHome();transfer.remove()};button.after(transfer);}
+})();
 
 /* ============ render home ============ */
 function renderHome(){
@@ -584,7 +590,7 @@ function updateProgress(){
   document.getElementById('progText').textContent = n+' / '+TOTAL;
   document.getElementById('progFill').style.width = (n/TOTAL*100)+'%';
 }
-function resetProgress(){ if(confirm('Сбросить весь прогресс? · Reset all progress?')){learned={};save();renderHome();} }
+function resetProgress(){ if(!phonicsStore||phonicsStore.user===undefined)return;if(confirm('Сбросить весь прогресс? · Reset all progress?')){learned={};save();renderHome();} }
 
 /* ============ speech ============ */
 let voices=[];
@@ -653,7 +659,7 @@ function shade(c){ // darker variant for gradient
 /* ============ learned ============ */
 function toggleLearned(){
   if(!current)return;
-  learned[current.id]=!learned[current.id];
+  if(!phonicsStore||phonicsStore.user===undefined)return;learned[current.id]=!learned[current.id];
   save();syncLearnBtn();updateProgress();
   // update card
   renderHome();

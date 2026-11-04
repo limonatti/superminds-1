@@ -1,13 +1,18 @@
-(function(){
+(async function(){
   'use strict';
   const D=window.SPEAKOUT_REVIEW,main=document.querySelector('#main'),status=document.querySelector('#save-status');
   const KEY='speakout-a1-review-v1',esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let attempts=[],active=null,unit=null,missionIndex=0,selectedPair=null,storageError=false;
-  try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(saved))attempts=saved.filter(a=>a&&typeof a.id==='string'&&D.units.some(u=>u.id===a.unit)&&['practice','check'].includes(a.mode)&&a.work&&typeof a.work==='object'&&!Array.isArray(a.work)&&typeof a.name==='string');}catch{storageError=true;}
+  let suspended=false,booted=false;
+  const courseStore=new CourseWorkStore({course:'speakout-a1-review',onAccountChange:()=>{suspended=true;CourseWorkUI.accountChanged()},onStatus:t=>status.textContent=t,onChange(rows,change){if(change.account&&active){suspended=true;return}if(change.local)return;const old=active;attempts=Object.values(rows).map(r=>r.attempt?JSON.parse(JSON.stringify(r.attempt)):null).filter(Boolean).map(a=>old?.id===a.id&&JSON.stringify(a)===JSON.stringify(old)?old:a);if(old)active=attempts.find(a=>a.id===old.id)||null;if(booted&&old!==active)route();}});
+  await courseStore.start();
+  CourseWorkUI.bind(courseStore,()=>{save();return courseStore.flush()});
   function save(){
-    if(active)active.updated=new Date().toISOString();
-    try{localStorage.setItem(KEY,JSON.stringify(attempts));storageError=false;status.textContent='Сохранено в этом браузере. Отчёт можно скачать для преподавателя.';}catch{storageError=true;status.textContent='Не удалось сохранить в браузере. Скачай отчёт перед закрытием страницы.';}
+    if(suspended)return;if(active)active.updated=new Date().toISOString();
+    for(const a of attempts)if(JSON.stringify(courseStore.records[a.id]?.attempt)!==JSON.stringify(a))courseStore.set(a.id,{unit:a.unit,book:'review',exercise:a.id,attempt:JSON.parse(JSON.stringify(a)),updatedAt:Date.now()});
   }
+  const saveButton=document.createElement('button');saveButton.textContent='Сохранить ответы';saveButton.onclick=()=>{save();courseStore.flush()};status.before(saveButton);
+  try{const old=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(old)&&old.length){const transfer=document.createElement('button');transfer.textContent='Перенести мои прежние прохождения';transfer.onclick=()=>{for(const a of old)if(a?.id&&a.work&&!attempts.some(b=>b.id===a.id))attempts.push(a);save();route();transfer.remove()};status.before(transfer)}}catch{}
   const stamp=a=>new Date(a.started).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
   const mode=a=>a.mode==='check'?'Проверка':'Тренировка';
   const points=m=>m.questions.reduce((n,q)=>n+(q.type==='match'?q.pairs.length:1),0);
@@ -40,7 +45,7 @@
     main.innerHTML=`<section class="intro"><p class="eyebrow">Speakout A1 / Extra practice</p><h1 tabindex="-1">Твой английский.<br>В деле.</h1><p class="lead">Восемь квестов с фотографиями, играми, аудио и видео. Проверь, что умеешь после каждого юнита.</p><div class="facts"><span><b>8</b> квестов</span><span><b>192</b> ответа с проверкой</span><span><b>16</b> открытых заданий</span></div></section>
       <section class="setup" aria-labelledby="setup-title"><div><h2 id="setup-title">Выбери свой маршрут</h2><p>Один юнит: примерно 30–45 минут. Можно пройти часть сейчас и вернуться позже.</p></div><div class="settings"><label for="learner">Имя ученика или псевдоним<input id="learner" maxlength="60" placeholder="Например, Саша" autocomplete="off"></label><fieldset><legend>Как проходить</legend><label class="mode"><input type="radio" name="mode" value="practice" checked><span><strong>Тренировка</strong><small>Разбор после каждой миссии, можно исправлять ошибки.</small></span></label><label class="mode"><input type="radio" name="mode" value="check"><span><strong>Проверка</strong><small>Одна попытка. Ответы и разбор после всех семи миссий.</small></span></label></fieldset></div></section>
       <div class="unit-list">${D.units.map(u=>`<article class="unit-row${unit?.id===u.id?' recommended':''}">${imgHTML(u.image,true)}<div><p class="unit-label">Unit ${u.id} · ${esc(u.name)}</p><h2>${esc(u.title)}</h2><p>${esc(u.story)}</p><small>24 ответа с автопроверкой + речь и письмо</small></div><button class="primary start" data-unit="${u.id}">Начать квест ${u.id} →</button></article>`).join('')}</div>
-      <section class="saved"><h2>Мои прохождения</h2><p class="muted">Каждое прохождение хранится отдельно на этом устройстве. Автоматической отправки преподавателю нет.</p>${attempts.length?`<ul>${attempts.slice().reverse().map(a=>`<li><div><strong>${esc(a.name||'Без имени')}</strong> · Unit ${a.unit} · ${mode(a)}<small>${esc(stamp(a))} · ${Object.values(a.work).filter(w=>w?.first).length}/7 миссий проверено</small></div><button data-resume="${esc(a.id)}">Открыть</button></li>`).join('')}</ul>`:'<p>Здесь появятся начатые квесты.</p>'}</section>`;
+      <section class="saved"><h2>Мои прохождения</h2><p class="muted">Каждое прохождение сохраняется в вашем аккаунте. Автоматической отправки преподавателю нет.</p>${attempts.length?`<ul>${attempts.slice().reverse().map(a=>`<li><div><strong>${esc(a.name||'Без имени')}</strong> · Unit ${a.unit} · ${mode(a)}<small>${esc(stamp(a))} · ${Object.values(a.work).filter(w=>w?.first).length}/7 миссий проверено</small></div><button data-resume="${esc(a.id)}">Открыть</button></li>`).join('')}</ul>`:'<p>Здесь появятся начатые квесты.</p>'}</section>`;
     main.querySelectorAll('.start').forEach(b=>b.onclick=()=>{
       const name=main.querySelector('#learner').value.trim(),selected=main.querySelector('input[name="mode"]:checked').value;
       const a={id:globalThis.crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`,unit:+b.dataset.unit,name,mode:selected,started:new Date().toISOString(),mission:0,work:{},speaking:'',writing:''};
@@ -57,7 +62,7 @@
     main.querySelectorAll('[data-mission]').forEach(b=>b.onclick=()=>openMission(+b.dataset.mission));
     main.querySelector('#report-open').onclick=renderReport;
     main.querySelector('#download').onclick=download;
-    if(m.id==='final'){bindFinal();return;}
+    if(m.id==='final'){bindFinal();showMission();return;}
     main.querySelector('#next').onclick=()=>openMission(missionIndex+1);
     main.querySelector('#submit-mission')?.addEventListener('click',()=>submit(m));
     main.querySelector('#retry')?.addEventListener('click',()=>{w.current=null;save();renderQuest();main.querySelector('.questions input,.questions button')?.focus();});
@@ -74,6 +79,12 @@
       p.onerror=()=>{main.querySelector('#media-error').hidden=false;};
     });
     const speed=main.querySelector('#speed');if(speed)speed.onchange=()=>{main.querySelector('audio,video').playbackRate=+speed.value;};
+    showMission();
+  }
+  function showMission(){
+    const mission=main.querySelector('.mission'),dialog=document.createElement('dialog'),preview=document.createElement('button'),close=document.createElement('button');
+    dialog.className='coursework-dialog review-exercise';dialog.setAttribute('aria-label',unit.missions[missionIndex].name);preview.className='coursework-preview';preview.textContent='Открыть упражнение · '+unit.missions[missionIndex].name;close.className='coursework-close';close.textContent='×';close.setAttribute('aria-label','Закрыть упражнение');close.onclick=()=>dialog.close();
+    mission.replaceWith(preview,dialog);dialog.append(close,mission);preview.onclick=()=>dialog.showModal();dialog.addEventListener('close',()=>{stopMedia();preview.focus()});dialog.showModal();CourseWorkUI.mount();
   }
   function mediaHTML(media){return `<aside class="media"><p class="media-label">${esc(media.label)}</p><${media.type} controls preload="metadata" ${media.type==='video'?'playsinline':''} src="${media.src}" aria-label="${esc(media.label)}"></${media.type}><label class="speed" for="speed">Скорость<select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label><p>Можно поставить на паузу и вернуться к любому фрагменту.</p><p id="media-error" class="error" hidden>Запись не загрузилась. <a href="${media.src}" target="_blank" rel="noopener">Открыть файл отдельно</a> или вернуться к миссии позже. Без записи результат будет неполным.</p></aside>`;}
   function questionHTML(q,i,locked,w){
@@ -149,5 +160,5 @@
     const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`speakout-a1-unit-${unit.id}-review-${active.started.slice(0,10)}.txt`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Отчёт подготовлен для скачивания. Передай файл преподавателю.';
   }
   window.addEventListener('popstate',()=>{stopMedia();route();});
-  route();
+  route();booted=true;
 })();

@@ -86,6 +86,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="coursework.css?v=6b0d7a29">
 </head>
 <body><div class="wrap">
   <div class="scorebar">⭐ Счёт: <span id="sc">0</span> / <span id="tot">0</span></div>
@@ -161,7 +162,7 @@
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Introduction · 0D</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=64c9ed6c"></script>
+<script src="sm-auth.js?v=fed7ca58"></script><script src="coursework-store.js?v=5d9875a0"></script><script src="coursework-ui.js?v=59aae6bf"></script><script src="course-practice.js?v=1179b2b9"></script>
 <script>
 const WORDS=[["pen","ручка"],["pencil","карандаш"],["pencil case","пенал"],["ruler","линейка"],["eraser","ластик"],["exercise book","тетрадь"],["schoolbag","рюкзак"],["calculator","калькулятор"],["desk","парта"],["whiteboard","доска"],["dance","танцевать"],["ride a bike","кататься на велосипеде"],["skate","кататься на коньках"],["ski","кататься на лыжах"],["sing","петь"],["swim","плавать"],["play the guitar","играть на гитаре"],["play the piano","играть на пианино"],["play the drums","играть на барабанах"],["country","страна"],["nationality","национальность"],["spell","произносить по буквам"]];
 const PRONWORDS=["nationality","calculator","guitar","Argentina","thirteen","thirty","exercise"];
@@ -251,63 +252,19 @@ var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const 
 const HW={course:"solutions-el",unit:0,sub:"0D"};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
 function _log(sec,idx,question,answer,correct){if(!_LOGGED)return;_ATT.push({course:HW.course,unit:HW.unit,ex_index:idx,section:(HW.sub?HW.sub+"-"+sec:sec),question:question,answer:answer,correct:correct,duration_ms:Date.now()-_T0});clearTimeout(_flushT);_flushT=setTimeout(_flush,1200);}
-async function _flush(){if(!_ATT.length)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
+async function _flush(){if(!_ATT.length)return;const session=await SM.presentationSession();if(!session||session.id!==_ATT_OWNER)return;const rows=_ATT.splice(0,_ATT.length);try{const r=await SM.saveHwAttempts(rows);if(!r||!r.ok){_ATT.unshift.apply(_ATT,rows);}}catch(e){_ATT.unshift.apply(_ATT,rows);}}
 window.addEventListener("pagehide",_flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")_flush();});
-(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
-let sc=0,tot=0;
+(async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;_ATT_OWNER=u?.id||null;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
+let _ATT_OWNER=null;let sc=0,tot=0;
 function bump(){sc++;document.getElementById("sc").textContent=sc;}
-function mcCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+t.o.map(o=>'<button class="opt">'+o+'</button>').join("")+'</div>';
-  let done=false,logged=false;
-  d.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{if(done)return;
-    if(!logged){logged=true;_log(sec||"grammar",gi,t.q,b.textContent,i===t.a);}
-    if(i===t.a){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
-function gapCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="gaprow"><input class="gap-in" placeholder="впиши ответ…"><button class="chk">Проверить</button></div><div class="ans"></div>';
-  const inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");let done=false,logged=false;
-  function check(){if(done)return;const raw=inp.value.trim();const v=raw.toLowerCase().replace(/\s+/g," ");const ok=t.a.some(x=>x.toLowerCase()===v);
-    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
-    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;inp.disabled=true;btn.disabled=true;bump();}
-    else{inp.classList.add("bad");an.style.display="block";an.textContent="Подсказка: "+t.a[0];}}
-  btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
-  return d;}
+function mcCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("mc",t,n,{course:HW.course,unit:HW.unit,section:sec||"grammar",attempt:gi,log:_log});}
+function gapCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("gap",t,n,{course:HW.course,unit:HW.unit,section:sec||"gap",attempt:gi,log:_log});}
 /* Правда / Ложь */
-function tfCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts"><button class="opt" data-v="1">✔ True</button><button class="opt" data-v="0">✘ False</button></div>';
-  let done=false,logged=false;const want=(t.a===true||t.a==="T"||t.a===1);
-  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v==="1";
-    if(!logged){logged=true;_log(sec||"truefalse",gi,t.q,val?"True":"False",val===want);}
-    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
+function tfCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("tf",t,n,{course:HW.course,unit:HW.unit,section:sec||"truefalse",attempt:gi,log:_log});}
 /* True / False / Not Given (IELTS) */
-function tfngCard(t,n,sec){tot++;const gi=++_GI;const d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div><div class="opts">'+
-    '<button class="opt" data-v="T">True</button><button class="opt" data-v="F">False</button><button class="opt" data-v="NG">Not Given</button></div>';
-  let done=false,logged=false;const want=String(t.a).toUpperCase();
-  d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;const val=b.dataset.v;
-    if(!logged){logged=true;_log(sec||"tfng",gi,t.q,val,val===want);}
-    if(val===want){b.classList.add("ok");done=true;d.querySelectorAll(".opt").forEach(x=>x.disabled=true);bump();}
-    else{b.classList.add("bad");b.disabled=true;}});
-  return d;}
+function tfngCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("tfng",t,n,{course:HW.course,unit:HW.unit,section:sec||"tfng",attempt:gi,log:_log});}
 /* Сопоставление (две колонки): pairs=[[left,right],…]. Клик слева → клик справа. */
-function matchCard(pairs,n,sec){const gi=++_GI;pairs.forEach(()=>tot++);
-  const d=document.createElement("div");d.className="card";
-  const rights=shuffle(pairs.map((p,i)=>({t:p[1],i:i})));
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>Соедини пары — сначала слева, потом справа:</div>'+
-    '<div class="matchwrap"><div class="mcol" id="ml'+gi+'"></div><div class="mcol" id="mr'+gi+'"></div></div>';
-  const ml=d.querySelector("#ml"+gi),mr=d.querySelector("#mr"+gi);
-  let sel=-1,matched=0;
-  pairs.forEach((p,i)=>{const b=document.createElement("button");b.className="mitem";b.textContent=p[0];b.dataset.i=i;
-    b.onclick=()=>{if(b.classList.contains("ok"))return;ml.querySelectorAll(".mitem").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;};ml.appendChild(b);});
-  rights.forEach(r=>{const b=document.createElement("button");b.className="mitem";b.textContent=r.t;b.dataset.i=r.i;
-    b.onclick=()=>{if(sel<0||b.classList.contains("ok"))return;const lb=ml.querySelector('.mitem[data-i="'+sel+'"]');
-      const ok=(r.i===sel);_log(sec||"match",gi,"match:"+(lb?lb.textContent:""),b.textContent,ok);
-      if(ok){b.classList.add("ok");b.disabled=true;if(lb){lb.classList.add("ok");lb.classList.remove("sel");lb.disabled=true;}sel=-1;matched++;bump();}
-      else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),500);}};mr.appendChild(b);});
-  return d;}
+function matchCard(pairs,n,sec){tot+=pairs.length;const gi=++_GI;return CoursePractice.legacy("match",pairs,n,{course:HW.course,unit:HW.unit,section:sec||"match",attempt:gi,log:_log});}
 /* Произношение */
 const pbox=document.getElementById("pron");
 if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
@@ -317,7 +274,7 @@ if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="wo
   d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
   d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function shuffle(a){return CoursePractice.shuffle(a)}
 const chpr=document.getElementById("chpr");
 if(chpr)shuffle(CHUNKS).forEach((c,i)=>{
   const others=shuffle(CHUNKS.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]);
@@ -431,26 +388,7 @@ function SMnorm(s){
     .replace(/\s+/g," ").trim();
   SM_CONTR.forEach(function(p){v=v.replace(p[0],p[1]);});
   return v.replace(/\s+/g," ").trim();}
-function SMgapCard(t,n,sec){
-  tot++;var gi=++_GI;var d=document.createElement("div");d.className="card";
-  d.innerHTML='<div class="q"><span class="n">'+n+'.</span>'+t.q+'</div>'+
-    '<div class="gaprow"><input class="gap-in" placeholder="впиши ответ…">'+
-    '<button class="chk">Проверить</button></div><div class="ans"></div>';
-  var inp=d.querySelector(".gap-in"),btn=d.querySelector(".chk"),an=d.querySelector(".ans");
-  var done=false,logged=false,tries=0;
-  function check(){if(done)return;
-    var raw=inp.value.trim(), v=SMnorm(raw);
-    var ok=t.a.some(function(x){return SMnorm(x)===v;});
-    if(!logged){logged=true;_log(sec||"gap",gi,t.q,raw,ok);}
-    if(ok){inp.classList.remove("bad");inp.classList.add("ok");done=true;
-      inp.disabled=true;btn.disabled=true;an.style.display="none";bump();}
-    else{tries++;inp.classList.add("bad");an.style.display="block";
-      an.textContent=tries<2?"Не совсем. Попробуй ещё раз."
-                            :"Подсказка: "+t.a[0];}}
-  btn.onclick=check;
-  inp.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
-  inp.addEventListener("input",function(){inp.classList.remove("bad");});
-  return d;}
+function SMgapCard(t,n,sec){tot++;const gi=++_GI;return CoursePractice.legacy('gap',t,n,{course:HW.course,unit:HW.unit,section:sec||'gap',attempt:gi,log:_log,normalize:SMnorm});}
 function SMrenderGap(id,items,sec){var box=SMel(id);if(!box||!items)return;
   items.forEach(function(t,i){box.appendChild(SMgapCard(t,i+1,sec));});}
 function SMrenderTF(id,items,sec){var box=SMel(id);if(!box||!items)return;
@@ -512,52 +450,8 @@ function SMrenderListen(id,script,qs,sec){
   SMrenderMC(id,qs,sec);}
 /* Связный текст с пропусками: parts — куски текста, между ними поля.
    Каждый пропуск: {a:["варианты"], hint:"подсказка в скобках"} */
-function SMrenderCloze(id,parts,bank,sec){var box=SMel(id);if(!box)return;
-  var gi=++_GI, wrap=document.createElement("div");wrap.className="card cloze";
-  if(bank&&bank.length){var bb=document.createElement("div");bb.className="bank";
-    bb.innerHTML='<b>Слова:</b> '+bank.join(" · ");wrap.appendChild(bb);}
-  var p=document.createElement("div");p.className="clozetext";
-  parts.forEach(function(seg,i){
-    if(typeof seg==="string"){p.appendChild(document.createTextNode(seg));return;}
-    tot++;
-    var inp=document.createElement("input");inp.className="gap-in cin";
-    inp.placeholder=seg.hint||"…";inp.size=Math.max(6,(seg.a[0]||"").length+2);
-    var done=false,logged=false;
-    function chk(){if(done)return;var raw=inp.value.trim();var v=SMnorm(raw);
-      var ok=seg.a.some(function(x){return SMnorm(x)===v;});
-      if(!logged){logged=true;_log(sec,gi,seg.hint||("gap"+i),raw,ok);}
-      if(ok){inp.classList.remove("bad");inp.classList.add("ok");inp.disabled=true;done=true;bump();}
-      else{inp.classList.add("bad");inp.title="Подсказка: "+seg.a[0];}}
-    inp.addEventListener("blur",chk);
-    inp.addEventListener("keydown",function(e){if(e.key==="Enter")chk();});
-    p.appendChild(inp);});
-  wrap.appendChild(p);
-  var b=document.createElement("button");b.className="chk";b.textContent="Проверить всё";
-  b.onclick=function(){wrap.querySelectorAll(".cin").forEach(function(x){
-    if(!x.disabled){x.blur();var ev=new Event("blur");x.dispatchEvent(ev);}});};
-  wrap.appendChild(b);box.appendChild(wrap);}
-/* Сортировка слов по группам (например, по звуку) */
-function SMrenderSort(id,groups,words,sec){var box=SMel(id);if(!box)return;
-  var gi=++_GI, card=document.createElement("div");card.className="card";
-  var pool=document.createElement("div");pool.className="pool";
-  var cols=document.createElement("div");cols.className="sortcols";
-  var sel=null;
-  groups.forEach(function(g,gi2){
-    var c=document.createElement("div");c.className="sortcol";
-    c.innerHTML='<div class="sorth">'+g.label+'</div>';
-    var drop=document.createElement("div");drop.className="sortdrop";drop.dataset.g=gi2;
-    drop.onclick=function(){if(!sel)return;
-      var w=sel.textContent, ok=(g.words.indexOf(w)>=0);
-      _log(sec,gi,"sort:"+w,g.label,ok);
-      if(ok){sel.classList.add("ok");sel.disabled=true;drop.appendChild(sel);sel=null;bump();}
-      else{sel.classList.add("bad");var s2=sel;setTimeout(function(){s2.classList.remove("bad");},450);}};
-    c.appendChild(drop);cols.appendChild(c);});
-  shuffle(words).forEach(function(w){tot++;
-    var b=document.createElement("button");b.className="ptoken";b.textContent=w;
-    b.onclick=function(){if(b.disabled)return;
-      pool.querySelectorAll(".ptoken").forEach(function(x){x.classList.remove("sel");});
-      b.classList.add("sel");sel=b;};pool.appendChild(b);});
-  card.appendChild(pool);card.appendChild(cols);box.appendChild(card);}
+function SMrenderCloze(id,parts,bank,sec){const box=SMel(id);if(!box)return;const fields=[];const prompt=(bank?.length?'Слова: '+bank.join(' · ')+'\n':'')+parts.map(seg=>{if(typeof seg==='string')return seg;fields.push({prompt:seg.hint||String(fields.length+1),accepted:seg.a});return '___ ('+(seg.hint||fields.length)+')'}).join('');tot+=fields.length;const gi=++_GI;box.append(CoursePractice.card({prompt,fields,normalize:SMnorm},{course:HW.course,unit:HW.unit,section:sec,attempt:gi,log:_log,title:'Текст с пропусками'}));}
+function SMrenderSort(id,groups,words,sec){const box=SMel(id);if(!box)return;const fields=shuffle(words).map(w=>({prompt:w,options:groups.map((g,i)=>({label:g.label,value:String(i)})),accepted:groups.flatMap((g,i)=>g.words.includes(w)?[String(i)]:[])}));tot+=fields.length;const gi=++_GI;box.append(CoursePractice.card({prompt:'Распределите слова по группам',fields},{course:HW.course,unit:HW.unit,section:sec,attempt:gi,log:_log,title:'Группы слов'}));}
 function SMrenderWB(id,mc,gap,tf){var box=SMel(id);if(!box)return;var n=0;
   function head(x){var h=document.createElement("div");h.className="wbhead";h.textContent=x;box.appendChild(h);}
   if(mc&&mc.length){head("✅ Выбери правильный вариант");mc.forEach(function(t){box.appendChild(mcCard(t,++n,"wb"));});}
@@ -583,6 +477,8 @@ document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
   document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on');});
   b.classList.add('on');document.getElementById('pane-'+b.dataset.p).classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});};});
+
+for(const prompt of document.querySelectorAll('.spkcard,.hw')){const text=prompt.textContent.trim();if(text)prompt.after(CoursePractice.card({prompt:text,fields:[{kind:'open',prompt:'Мой ответ / заметки'}]},{course:HW.course,unit:HW.unit,section:'open',title:'Свой ответ'}));}
 </script>
 </body>
 </html>

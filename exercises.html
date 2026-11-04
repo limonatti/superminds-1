@@ -149,6 +149,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
+<link rel="stylesheet" href="coursework.css?v=6b0d7a29">
 </head>
 <body>
   <a class="home" href="units.html">← Юниты</a>
@@ -163,7 +164,7 @@
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=64c9ed6c"></script>
+  <script src="sm-auth.js?v=fed7ca58"></script><script src="coursework-store.js?v=5d9875a0"></script><script src="coursework-ui.js?v=59aae6bf"></script><script src="course-practice.js?v=1179b2b9"></script><script src="course-authored.js?v=535f42dc"></script>
   <script src="sm-play.js?v=dd356834"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -293,7 +294,7 @@
        что показать после остановки и что считать верным — решает учитель,
        поэтому одно и то же колесо годится и под слова, и под предложения
        с пропуском, и под глагол в скобках. */
-    function renderWheel(items){
+    function renderWheel(items,meta){
       const данные=(items||[]).filter(x=>x&&(x.q||x.face)).slice(0,12);
       if(!данные.length) return warnCard('<div class="kind">🎡</div><div class="qt">В колесе нет секторов.</div>');
 
@@ -312,7 +313,10 @@
       const ЦВЕТА=["#b6add6","#c7e3f7","#e8b295","#f1b4df","#a8d5c2","#f5d98b",
                    "#c9b8e8","#9fd2e6","#eab8b0","#bfe0a8","#d9c7f0","#f2cf9e"];
       const N=данные.length, СЕК=360/N, R=190, C=200;
-      let угол=0, крутится=false, готово=[];
+      let угол=0, крутится=false, готово=[], drafts={},currentSector=null,wheelReady=!meta;
+      const wheel=meta?CoursePractice.storeFor(meta.course):null,wheelId=meta?'wheel:'+meta.id:null;
+      function saveWheel(){if(!wheelReady||!wheel)return;wheel.store.set(wheelId,{book:'practice',unit:meta.unit,exercise:meta.title||'Колесо',values:Object.values(drafts),drafts,completed:[...готово],currentSector,done:готово.length===N,updatedAt:Date.now()})}
+      if(wheel){hub.disabled=true;wheel.ready.then(()=>{const saved=wheel.store.records[wheelId]||{};drafts=saved.drafts||{};готово=saved.completed||[];currentSector=saved.currentSector??null;wheelReady=true;hub.disabled=готово.length===N;рисовать();if(currentSector!==null&&!готово.includes(currentSector))задание(currentSector,true);})}
 
       function точка(a,r){ const t=(a-90)*Math.PI/180; return [C+r*Math.cos(t), C+r*Math.sin(t)]; }
       function рисовать(){
@@ -362,7 +366,7 @@
 
       function крутить(){
         const свободные=данные.map((_,i)=>i).filter(i=>!готово.includes(i));
-        if(!свободные.length||крутится) return;
+        if(!wheelReady||!свободные.length||крутится) return;
         крутится=true; hub.disabled=true; fb.textContent="";
         task.innerHTML='<div class="widle">Колесо крутится…</div>';
         тон(220,0.16,"triangle",0.11); тон(330,0.18,"triangle",0.09,0.06);
@@ -388,8 +392,8 @@
           задание(цель); }, 4500);
       }
 
-      function задание(i){
-        const it=данные[i];
+      function задание(i,restoring=false){
+        currentSector=i;if(!restoring)saveWheel();const it=данные[i];
         const выбор=разобратьВарианты(it.answer);
         const карт = it.img ? '<img class="wimg" src="'+it.img+'" alt="">' : "";
 
@@ -401,7 +405,8 @@
           выбор.список.forEach((в,k)=>{
             const b=document.createElement("button");
             b.className="wopt v"+(k%4+1); b.textContent=в;
-            b.onclick=()=>{
+            if(drafts[i]===в){b.style.background="#ede8f9";b.setAttribute("aria-pressed","true")}
+            b.onclick=()=>{drafts[i]=в;saveWheel();
               if(выбор.верные.includes(в.toLowerCase())){
                 b.className="wopt yes";
                 [...box.children].forEach(x=>{ if(x!==b) x.classList.add("dim"); });
@@ -421,7 +426,7 @@
           '<div class="wq">'+esc(it.q||it.face)+'</div>'+
           '<div class="wrow"><input type="text" class="wans" autocomplete="off" spellcheck="false" placeholder="твой ответ">'+
           '<button class="check wchk">Проверить</button></div>';
-        const inp=task.querySelector(".wans");
+        const inp=task.querySelector(".wans");inp.value=drafts[i]||"";inp.oninput=()=>{drafts[i]=inp.value;saveWheel()};
         inp.focus();
         inp.onkeydown=ev=>{ if(ev.key==="Enter") проверить(); };
         task.querySelector(".wchk").onclick=проверить;
@@ -432,7 +437,7 @@
           const верные=String(it.answer||"").split("|").map(x=>x.trim().toLowerCase().replace(/\s+/g," ")).filter(Boolean);
           const попал=верные.some(v=> v===дано || (v.length>=5 && расст(дано,v)<=1) );
           if(попал) засчитать(i, верные[0]);
-          else { звНет(); fb.className="fb no"; fb.textContent="Пока нет. Правильно: "+верные[0]; inp.select(); }
+          else { звНет(); fb.className="fb no"; fb.textContent="Пока нет. Попробуй ещё раз."; inp.select(); }
         }
       }
 
@@ -452,7 +457,7 @@
       function перемешать(a){ return a.slice().sort(()=>Math.random()-.5); }
 
       function засчитать(i, верный){
-        готово.push(i); рисовать(); звОк();
+        готово.push(i);currentSector=null;saveWheel(); рисовать(); звОк();
         fb.className="fb ok"; fb.textContent="Верно · "+верный;
         task.innerHTML='<div class="widle">'+
           (готово.length===N ? "Все секторы пройдены." : "Крути дальше — осталось "+(N-готово.length)+".")+'</div>';
@@ -764,11 +769,11 @@
         if(e.title){const hd=document.createElement("div");hd.style.cssText="font:800 15px 'Nunito',sans-serif;color:#5c534d;margin:4px 4px 8px";hd.textContent=e.title;wrap.appendChild(hd);}
         const fn=R[e.type];
         if(!fn){ wrap.appendChild(warnCard('<div class="kind">⚠️ '+esc(e.type)+'</div><div class="qt">Этот тип упражнения не поддерживается этой страницей. Обнови страницу жёстко (Ctrl+Shift+R).</div>')); return; }
-        const items=(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
+        const items=e.type!=="wordform"&&(e.data&&e.data.items&&e.data.items.length)?e.data.items:[e.data];
         /* Колесо — одно поле на все секторы, а не карточка на каждый */
-        if(e.type==="wheel"){ try{ wrap.appendChild(renderWheel(items)); }catch(err){
+        if(e.type==="wheel"){ try{const meta={course:cid,unit:uid,id:e.id,title:e.title||"Колесо заданий"};wrap.appendChild(CoursePractice.wrap(renderWheel(items,meta),meta)); }catch(err){
           wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Колесо не удалось показать.</div>')); } return; }
-        items.forEach((item,i)=>{ try{ const el=fn({type:e.type,data:item});
+        items.forEach((item,i)=>{ try{ const el=CourseAuthored.render(e,item,i,{course:cid,unit:uid,onCheck:result=>{if(!IS_TEACHER)SM.saveAttempt({course:cid,unit_id:uid,exercise_id:e.id,ex_type:e.type,correct:result.done}).catch(()=>{})}},fn);
           if(item&&item.img){ const im=document.createElement("img"); im.src=item.img; im.alt=""; im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px"; const k=el.querySelector(".kind"); if(k) k.insertAdjacentElement("afterend",im); else el.insertBefore(im,el.firstChild); }
           wrap.appendChild(el); }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
       });
@@ -920,7 +925,7 @@
       const b=document.getElementById("hwSend");
       if(b) b.onclick=async ()=>{
         b.disabled=true; b.textContent="Отправляю…";
-        const r=await SM.hwSubmit(HW_REC.id);
+        const saved=await CoursePractice.flush();const r=saved.ok?await SM.hwSubmit(HW_REC.id):{ok:false,error:"Ответы пока не сохранены в аккаунте. Повторите отправку после восстановления связи."};
         if(r&&r.ok) location.href="homework.html";
         else { b.disabled=false; b.textContent="Отправить на проверку"; alert((r&&r.error)||"Не получилось отправить"); }
       };

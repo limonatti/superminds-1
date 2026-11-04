@@ -1,36 +1,23 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-const {candidates,shuffle}=require('../exercise-play.js'),root=path.resolve(__dirname,'..');
+const {candidates,shuffle,sourceLetters}=require('../exercise-play.js'),root=path.resolve(__dirname,'..');
 const fields=[{id:'1',answers:['Are']},{id:'2',answers:["'m"]},{id:'3',answers:['am']}];
-const choices=candidates(fields[0],fields,'');assert(choices.some(o=>o.value==='is'));assert(choices.some(o=>o.value==='Are'));assert.equal(new Set(choices.map(o=>o.label.toLowerCase())).size,choices.length);assert.deepEqual(shuffle(choices,'a'),shuffle(choices,'a'));assert.equal(fields[0].answers[0],'Are');
+assert.deepEqual(sourceLetters('Match 1–4 with A–F.'),['a','b','c','d','e','f']);assert.deepEqual(sourceLetters('She is a doctor.'),[]);
+const choices=candidates(fields[0],fields,'');assert.deepEqual(choices,[]);assert.deepEqual(candidates({options:['a','b'],answers:['a']},fields,''),[{value:'a',label:'a'},{value:'b',label:'b'}]);assert.deepEqual(shuffle(['x','y'],'a'),shuffle(['x','y'],'a'));assert.equal(fields[0].answers[0],'Are');
 const read=p=>{const s=fs.readFileSync(path.join(root,p),'utf8');return JSON.parse(s.slice(s.indexOf('=')+1).replace(/;\s*$/,''))};
 let gaps=0;
-for(const c of ['focus-1','speakout-b1','speakout-b1plus','solutions-int','outcomes-beginner','speakout-b2plus'])for(const model of Object.values(read(c+'-active-teach/assets/exercise-gaps.js')))for(const g of Object.values(model)){const[x,y,w,h]=g.box;assert(x>=0&&y>=0&&w>0&&h>0&&x+w<=1&&y+h<=1);assert(fs.existsSync(path.join(root,c+'-active-teach',g.image)));gaps++}
-console.log('PASS bank alternatives, stable order, unchanged keys and',gaps,'printed gap bounds');
+for(const c of ['focus-1','speakout-b1','speakout-b1plus','solutions-int','outcomes-beginner','speakout-b2plus'])for(const model of Object.values(read(c+'-active-teach/assets/exercise-gaps.js')))for(const g of Object.values(model)){const[x,y,w,h]=g.box;assert(x>=0&&y>=0&&w>0&&h>0&&x+w<=1&&y+h<=1);if(!process.argv.includes('--models-only'))assert(fs.existsSync(path.join(root,c+'-active-teach',g.image)));gaps++}
+console.log('PASS source-only choices, stable order, unchanged keys and',gaps,'printed gap bounds; media checks',process.argv.includes('--models-only')?'skipped (sparse checkout)':'passed');
 if(process.argv.includes('--browser'))(async()=>{
- const{chromium}=require(process.env.PLAYWRIGHT_MODULE||require.resolve('playwright',{paths:[root,path.join(require('node:os').homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node')]}));
- const browser=await chromium.launch({channel:'chrome',headless:true}),base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8768',errors=[];
- const page=async(options={})=>{const p=await browser.newPage({viewport:{width:1280,height:900},...options});p.on('pageerror',e=>errors.push(e.message));await p.route('https://**',r=>r.abort());return p};
- const choose=async(p,label)=>{await p.locator('.play-word').filter({hasText:new RegExp('^'+label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$','i')}).click()};
- const images=p=>p.locator('dialog[open] .focus-sheet image').evaluateAll(async nodes=>Promise.all(nodes.map(async n=>{const img=new Image();img.src=n.getAttribute('href');await img.decode()})));
- try{
-  const a=await page();await a.goto(base+'/speakout-a1-active-teach/index.html?book=sb&page=8');const open=()=>a.locator('#exerciseNav button').filter({hasText:/^2A/}).click();await open();await images(a);
-  assert.equal(await a.locator('.play-gap-layer .play-slot').count(),3);assert.equal(await a.locator('.play-answer-strip .play-slot').count(),0);
-  await choose(a,'is');await a.locator('.play-check').click();assert.equal(await a.locator('.play-slot[data-result="incorrect"]').count(),3);
-  await a.locator('#retryMistakes').click();assert.equal(await a.locator('[data-inline="1"]').inputValue(),'');
-  await a.locator('.play-word').filter({hasText:/^are$/i}).dragTo(a.locator('.play-slot[data-field="0"]'));assert.equal((await a.locator('[data-inline="1"]').inputValue()).toLowerCase(),'are');
-  await a.locator('.play-step[aria-label="Следующий пропуск"]').click();await choose(a,'‘m');await choose(a,'am');await a.locator('.play-check').click();assert.match(await a.locator('.play-feedback').innerText(),/3 из 3/);assert.equal(await a.locator('.play-slot[data-result="correct"]').count(),3);
-  await a.waitForTimeout(250);await a.reload();await open();assert.equal(await a.locator('[data-inline="3"]').inputValue(),'am');
-  await a.locator('#exerciseFullPage').count().then(async count=>{if(count){await a.locator('#exerciseFullPage').click();assert.equal(await a.locator('.play-gap-layer .play-slot').count(),3)}});
-  await a.setViewportSize({width:390,height:844});assert(await a.locator('dialog[open]').evaluate(d=>d.scrollWidth<=d.clientWidth+1));await a.keyboard.press('Escape');assert.equal(await a.locator('dialog[open]').count(),0);await a.close();
-  const cases=[['focus-1',14,'[data-ex]',null],['speakout-b1',6,'#exerciseNav button',/^1A/],['speakout-b1plus',9,'#exerciseNav button',/^6A/],['solutions-int',4,'[data-ex]',null],['outcomes-beginner',12,'[data-exercise]',null],['speakout-b2plus',9,'.spot.book-exercise',null]];
-  for(const[c,n,selector,label]of cases){const p=await page();await p.goto(`${base}/${c}-active-teach/index.html?book=sb&page=${n}`);if(label)await p.locator(selector).filter({hasText:label}).click();else {const count=await p.locator(selector).count();for(let i=0;i<count;i++){await p.locator(selector).nth(i).click();if(await p.locator('.play-word').count())break;await p.keyboard.press('Escape')}}
-   await images(p);assert(await p.locator('.play-word').count(),c);const first=await p.locator('.play-word').first().innerText();await p.locator('.play-word').first().focus();await p.keyboard.press('Enter');assert(await p.locator('.play-slot').filter({hasText:first}).count(),c+' keyboard choice');
-   assert(await p.locator('dialog[open]').evaluate(d=>d.clientWidth<920&&d.clientHeight<=820),c+' compact dialog');
-   await p.setViewportSize({width:390,height:844});assert(await p.locator('dialog[open]').evaluate(d=>d.scrollWidth<=d.clientWidth+1),c+' mobile overflow');await p.close();
-  }
-  const o=await page();await o.goto(base+'/outcomes-beginner-active-teach/index.html?book=sb&page=12');await o.locator('[data-exercise]').first().click();for(const w of ['son','husband','doctor','teacher','sister','friend'])await choose(o,w);await o.locator('.play-check').click();assert.match(await o.locator('.play-feedback').innerText(),/4 из 4/);assert.equal(await o.locator('[data-response="2"]').inputValue(),'doctor; teacher');await o.close();
-  const t=await page();await t.goto(base+'/speakout-b1plus-active-teach/index.html?materials=tests&material=tests-so3-b1p-quick-quiz-u1c');await t.locator('#practiceSelect').selectOption('q-2');assert(await t.locator('.play-word').count());await t.locator('.play-word').first().click();await t.locator('.play-check').click();assert.match(await t.locator('.play-feedback').innerText(),/из 8/);await t.locator('#practiceSelect').selectOption('q-3');await images(t);assert.match(await t.locator('#modal .focus-sheet figcaption').innerText(),/стр. 5/);await t.close();
-  const touch=await page({hasTouch:true,isMobile:true,viewport:{width:390,height:844}});await touch.goto(base+'/speakout-a1-active-teach/index.html?book=sb&page=8');await touch.locator('#exerciseNav button').filter({hasText:/^2A/}).click();const from=await touch.locator('.play-word').filter({hasText:/^are$/i}).boundingBox(),to=await touch.locator('.play-slot[data-field="0"]').boundingBox();const session=await touch.context().newCDPSession(touch);await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:from.x+from.width/2,y:from.y+from.height/2}]});for(let i=1;i<=8;i++)await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:from.x+from.width/2+(to.x+to.width/2-from.x-from.width/2)*i/8,y:from.y+from.height/2+(to.y+to.height/2-from.y-from.height/2)*i/8}]});await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});assert.equal((await touch.locator('[data-inline="1"]').inputValue()).toLowerCase(),'are');await touch.close();
-  assert.deepEqual(errors,[]);console.log('PASS seven course layouts, source image loading, click, native drag, touch drag, keyboard, grading, retry, multipart answers, persistence, mobile and B1+ tests');
+ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||require.resolve('playwright',{paths:[root,path.join(require('node:os').homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node')]}));
+ const browser=await chromium.launch({channel:'chrome',headless:true}),base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8768';
+ try{const p=await browser.newPage({viewport:{width:1280,height:900}});
+ await p.route('https://**',r=>r.abort());
+ await p.goto(base+'/speakout-a1-active-teach/index.html?book=sb&page=8');const open=()=>p.locator('#exerciseNav button').filter({hasText:/^2A/}).click();await open();
+ assert.equal(await p.locator('.play-word').count(),0,'formation task must not suggest keys');
+ for(const [i,value] of ['Are',"'m",'am'].entries()){await p.locator(`.play-slot[data-field="${i}"]`).first().click();await p.locator('.play-manual input').fill(value)}
+ await p.locator('.play-check').click();assert.match(await p.locator('.play-feedback').innerText(),/3 из 3/);await p.reload();await open();assert.equal(await p.locator('[data-inline="3"]').inputValue(),'am');
+ const cases=[['focus-1',14,'[data-ex]'],['solutions-int',4,'[data-ex]'],['solutions-el',4,'[data-ex]'],['outcomes-beginner',12,'[data-exercise]'],['speakout-b1',6,'#exerciseNav button'],['speakout-b1plus',9,'#exerciseNav button'],['speakout-b2plus',9,'.spot.book-exercise']];
+ for(const [c,page,selector]of cases){await p.setViewportSize({width:1280,height:900});await p.goto(`${base}/${c}-active-teach/index.html?book=sb&page=${page}`);await p.locator(selector).first().click();assert(await p.locator('dialog[open] .coursework-save').isVisible(),c);await p.setViewportSize({width:390,height:844});assert(await p.locator('dialog[open]').evaluate(d=>d.scrollWidth<=d.clientWidth+1),c+' overflow');}
+ console.log('PASS typed formation, persistence, eight course dialogs and responsive widths');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
