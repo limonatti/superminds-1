@@ -28,7 +28,7 @@ class CourseWorkStore{
   const changed=this.user!==undefined;clearTimeout(this.timer);this.epoch++;this.user=user||null;this.loaded=false;this.busy=null;this.records={};this.pending={};
   try{const cached=JSON.parse(this.storage.getItem(this.key())||'{}');this.records=cached.records||{};this.pending=cached.pending||{}}catch{}
   if(this.legacy){try{for(const[id,value]of Object.entries(this.legacy(this.user)||{}))if(!this.records[id]||time(value)>time(this.records[id])){this.records[id]=copy(value);this.pending[id]=copy(value)}}catch{}}
-  this.remember();this.persist();this.onChange(this.records,{account:true});this.announce();if(changed)this.onAccountChange(this.user);
+  this.remember();this.persist();this.onChange(this.records,{account:true});this.announce();if(changed){this.onAccountChange(this.user);if(root.__courseworkAccountChanged)return;}
   if(this.user)await this.flush();
  }
  set(id,value){

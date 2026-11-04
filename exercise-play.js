@@ -58,7 +58,7 @@ function attach(config){
  mounted.get(dialog)?.destroy();dialog.classList.add('play-dialog');dialog.classList.toggle('play-native',!!config.native);
  const geometry=config.geometry||root.EXERCISE_GAPS?.[id]||{};
  const layout=root.EXERCISE_INLINE?.[id];
- const inline=!!layout||Object.keys(geometry).length>0||(config.fields||[]).some(f=>f.geometry)||/\b(?:complet\w*|fill|gaps?|missing)\b|_{2,}|\.{4,}|\bwrite\b.{0,80}\b(?:word|verb|preposition|article)\b|\b(?:use|put)\b.{0,80}\bcorrect form\b/i.test(text.slice(0,500));
+ const inline=!!layout||Object.keys(geometry).length>0||(config.fields||[]).some(f=>f.geometry)||/\b(?:complet\w*|fill|insert|gaps?|blanks?|missing)\b|_{2,}|\.{4,}|\bwrite\b.{0,80}\b(?:word|verb|preposition|article)\b|\b(?:use|put)\b.{0,80}\bcorrect forms?\b|\b(?:put|write|use)\b.{0,100}\b(?:verbs?|past simple|present simple|present perfect)\b/i.test(text.slice(0,500).replace(/\s+/g,' '));
  const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&f.kind!=='multi'&&f.kind!=='set'&&(inline||f.input?.tagName!=='TEXTAREA'));
  // Split a legacy combined answer only when the source explicitly locates its parts.
  for(let i=fields.length-1;i>=0;i--){

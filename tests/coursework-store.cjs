@@ -26,6 +26,9 @@ function memory(){const data=new Map();return{getItem:k=>data.get(k)||null,setIt
  assert.equal(cloud.alice.test.private.values[0],'alice only');retry.destroy();
  const captured=await make().start();captured.records.partial.values[0]='edited in place';captured.capture(captured.records);await captured.flush();assert.equal(cloud.alice.test.partial.values[0],'edited in place');
  globalThis.__courseworkAccountChanged=true;captured.set('stale',{values:['old tab unload']});assert(!captured.records.stale);delete globalThis.__courseworkAccountChanged;captured.destroy();
+ // Account navigation removes the old UI; do not start another load against it.
+ let loads=0;const navigating=await make({api:{...api,loadCourseWork:async()=>{loads++;return{ok:true,answers:{}}}},onAccountChange:()=>{globalThis.__courseworkAccountChanged=true},onStatus:()=>{if(globalThis.__courseworkAccountChanged)throw Error('detached UI')}}).start();
+ const before=loads;await navigating.switchUser({id:'next-account'});assert.equal(loads,before);delete globalThis.__courseworkAccountChanged;navigating.destroy();
  // Concurrent courses are independent; older server ACKs cannot overwrite new edits.
  const first=await make({course:'first'}).start(),second=await make({course:'second'}).start();first.set('e',{values:['1']});second.set('e',{values:['2']});await Promise.all([first.flush(),second.flush()]);assert(cloud.alice.first.e&&cloud.alice.second.e);first.destroy();second.destroy();
  const quota=await make({storage:{getItem:()=>null,setItem:()=>{throw Error('quota')}}}).start();quota.set('quota',{values:['cloud survives']});await quota.flush();assert(cloud.alice.test.quota);assert(!quota.message.includes('сохранены в аккаунте'));quota.destroy();
