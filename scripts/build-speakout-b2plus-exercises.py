@@ -112,6 +112,10 @@ for book in ('sb','wb'):
   if exercises:OUT[f'{book}:{n}']=exercises
   audit.append({'book':book,'sheet':n,'printed':printed,'exercises':len(exercises),'checked_fields':sum(bool(q['answer'])for e in exercises for q in e['fields'])})
 restored=json.loads((ROOT/'speakout-b2plus-active-teach/audit/page-restoration.json').read_text())
+from b2plus_studentbook_review import apply_review
+apply_review(OUT)
+for row in audit:
+ if row["book"]=="sb":row["checked_fields"]=sum(bool(f["answer"])for e in OUT.get("sb:"+str(row["sheet"]),[])for f in e["fields"])
 versions={'sb:'+str(r['pdf_page']):r['sha256'][:10]for r in restored['pages']}
 (DEST/'exercises.js').write_text('window.SPEAKOUT_EXERCISES='+json.dumps(OUT,ensure_ascii=False,separators=(',',':'))+';\nwindow.SPEAKOUT_PAGE_VERSIONS='+json.dumps(versions,separators=(',',':'))+';\n')
 (ROOT/'speakout-b2plus-active-teach/audit/exercises.json').write_text(json.dumps(audit,indent=2))

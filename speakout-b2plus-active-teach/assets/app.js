@@ -431,42 +431,13 @@ function viewAudio(l) {
 }
 
 function viewAnswers(l) {
-  if (S.book === 'wb') {
-    const exercises=window.SPEAKOUT_EXERCISES?.[pkey()]||[];
-    return `<div class="card"><h5>Ответы Workbook · стр. ${S.page+2}</h5><p class="mini">Нажмите на упражнение на странице, введите ответы и нажмите «Проверить». Письменные работы и устная практика сохраняются для разбора с преподавателем.</p></div>`+exercises.map(e=>`<details class="card"><summary>Упражнение ${esc(e.label)}</summary><p class="mini" style="white-space:pre-wrap">${esc(e.key)}</p></details>`).join('');
-  }
-  if (!l) return '<div class="card"><h5>Выберите урок</h5></div>';
-  const items = (ITEMS[l.code] || []).filter(i => i.label);
-  let html = `<div class="card"><h5>Ответы · ${l.code}</h5>
-      <div class="mini">Ответы закрыты размытием — клик открывает. Нажмите ещё раз, чтобы спрятать.</div>
-      <div class="row" style="margin-top:8px">
-        <button class="btn" data-allans>Показать все</button>
-        <button class="btn" data-hideans>Спрятать все</button>
-      </div></div>`;
-  let sec = null;
-  items.forEach(it => {
-    if (it.section && it.section !== sec) {
-      sec = it.section;
-      html += `<div class="mini" style="margin:12px 2px 6px;text-transform:uppercase;
-                letter-spacing:.07em;color:#7d8a97">${esc(sec)}</div>`;
-    }
-    html += `<div class="card" style="padding:9px 11px">
-        <div class="row" style="justify-content:space-between;margin-bottom:5px">
-          <b style="color:var(--acc2)">${esc(it.label)}</b>
-          <button class="btn" style="height:26px;padding:0 8px;font-size:11px"
-                  data-spotfill="${esc(it.label)}">в упражнение</button>
-        </div>
-        <div class="ans blur" data-reveal>${esc(it.text)}</div></div>`;
-  });
-  if (!items.length) html += `<div class="card"><div class="mini">
-      Автоматически разобранных ответов нет — откройте PDF ниже.</div></div>`;
-  const tb = TB[l.code] || {};
-  if ((tb.answers || []).length) html += `<div class="card"><h5>Из книги учителя</h5>` +
-      tb.answers.map(a => `<div class="ans blur" data-reveal style="margin-bottom:6px">${esc(a)}</div>`).join('') +
-      '</div>';
-  if (D.media.docs.sbKeys) html += `<a class="btn" style="width:100%" target="_blank"
-        href="${CONTENT + enc(D.media.docs.sbKeys)}">Открыть полный Answer Key PDF</a>`;
-  return html;
+  const exercises=window.SPEAKOUT_EXERCISES?.[pkey()]||[];
+  const saved=window.B2Store?.answers(pkey())||{};
+  const printed=S.page+(S.book==='sb'?1:2);
+  return `<div class="card"><h5>Ответы ${S.book==='sb'?"Student’s Book":'Workbook'} · стр. ${printed}</h5><p class="mini">Нажмите на упражнение на странице, заполните ответы и нажмите «Проверить» или «Сохранить ответы». После попытки здесь появится ключ, если он доступен.</p></div>`+
+    exercises.filter(e=>e.key).map(e=>window.B2ExercisePolicy?.attempted(e,saved)
+      ? `<details class="card"><summary>Упражнение ${esc(e.label)}</summary><p class="mini" style="white-space:pre-wrap">${esc(e.key)}</p></details>`
+      : `<div class="card"><b>Упражнение ${esc(e.label)}</b><p class="mini">Ключ доступен после заполнения и проверки ответов.</p></div>`).join('');
 }
 
 function viewExercise() {

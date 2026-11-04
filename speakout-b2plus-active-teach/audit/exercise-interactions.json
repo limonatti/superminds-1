@@ -1,0 +1,22 @@
+{
+  "scope": "All current Student’s Book and Workbook interactive exercises",
+  "policy": "Only task choices are displayed; grading answers never populate suggestion banks. Keys require a complete submitted attempt.",
+  "books": {
+    "sb": {
+      "pages": 117,
+      "exercises": 721,
+      "checked_fields": 547,
+      "free_entry_fields": 2139,
+      "choice_fields": 72,
+      "multiple_selection_fields": 0
+    },
+    "wb": {
+      "pages": 64,
+      "exercises": 393,
+      "checked_fields": 1681,
+      "free_entry_fields": 1168,
+      "choice_fields": 555,
+      "multiple_selection_fields": 19
+    }
+  }
+}

@@ -61,7 +61,7 @@ function attach(config){
   const hint=q('.play-hint-button'),trigger=originalHint||current().scope?.querySelector('[data-reveal],[data-practice-reveal]');if(hint)hint.disabled=!trigger||trigger.disabled;
   if(feedback)q('.play-feedback').textContent=hintMessage||feedback.textContent;else {const statuses=fields.map(state);q('.play-feedback').textContent=hintMessage||(statuses.some(s=>s==='correct'||s==='incorrect')?`Верно: ${statuses.filter(s=>s==='correct').length} из ${fields.length}.`:'')}
  }
- function activate(index){hintMessage='';selected=index;current().activate?.();renderBank();refresh()}
+ function activate(index){hintMessage='';selected=index;manual.value=current().get();current().activate?.();renderBank();refresh()}
  function commit(f,option,advance=true){
   if(f.input?.disabled)return;
   hintMessage='';

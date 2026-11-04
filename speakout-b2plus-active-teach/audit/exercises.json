@@ -88,7 +88,7 @@
     "sheet": 17,
     "printed": 18,
     "exercises": 11,
-    "checked_fields": 26
+    "checked_fields": 27
   },
   {
     "book": "sb",
@@ -186,7 +186,7 @@
     "sheet": 31,
     "printed": 32,
     "exercises": 4,
-    "checked_fields": 0
+    "checked_fields": 6
   },
   {
     "book": "sb",
@@ -221,7 +221,7 @@
     "sheet": 36,
     "printed": 37,
     "exercises": 7,
-    "checked_fields": 9
+    "checked_fields": 10
   },
   {
     "book": "sb",
@@ -438,7 +438,7 @@
     "sheet": 67,
     "printed": 68,
     "exercises": 7,
-    "checked_fields": 8
+    "checked_fields": 11
   },
   {
     "book": "sb",
@@ -571,7 +571,7 @@
     "sheet": 86,
     "printed": 87,
     "exercises": 13,
-    "checked_fields": 7
+    "checked_fields": 10
   },
   {
     "book": "sb",
@@ -928,7 +928,7 @@
     "sheet": 137,
     "printed": 138,
     "exercises": 3,
-    "checked_fields": 13
+    "checked_fields": 12
   },
   {
     "book": "sb",

@@ -1,0 +1,306 @@
+{
+  "provenance": "Corrections verified against the supplied Student’s Book task text and its existing extracted answer key, not newly invented answers. Workbook review remains unchanged.",
+  "exercises": {
+    "sb-17-1A-0": {
+      "source": "Supplied U1 Review 1A key: optional (on); the next heading is not part of answer 5.",
+      "remove_key_suffix": "reduced relative clauses",
+      "fields": {
+        "3": {
+          "answer": "do you keep doing / do you keep on doing"
+        },
+        "5": {
+          "answer": "As a rule"
+        }
+      }
+    },
+    "sb-22-3A-3": {
+      "source": "Supplied 2B 3A key; stress explanation is separate from item 5.",
+      "fields": {
+        "5": {
+          "answer": "fulfil their potential"
+        }
+      }
+    },
+    "sb-23-5A-4": {
+      "source": "Original task explicitly matches items 1–8 to explanations a–h.",
+      "choices": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h"
+      ]
+    },
+    "sb-31-2A-1": {
+      "source": "Supplied 3A 2A key: the first six matches are fixed; possible answers concern the additional open question.",
+      "choices": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "c"
+        },
+        {
+          "n": "2",
+          "answer": "b"
+        },
+        {
+          "n": "3",
+          "answer": "a"
+        },
+        {
+          "n": "4",
+          "answer": "e"
+        },
+        {
+          "n": "5",
+          "answer": "f"
+        },
+        {
+          "n": "6",
+          "answer": "d"
+        }
+      ]
+    },
+    "sb-36-5C-2": {
+      "source": "Supplied 3C 5C key; explanation after item 5 is not part of the letter answer.",
+      "choices": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "fields": {
+        "5": {
+          "answer": "d"
+        }
+      }
+    },
+    "sb-41-1-0": {
+      "source": "Supplied U3 Review 1 key; no matter is the next heading.",
+      "remove_key_suffix": "no matter",
+      "fields": {
+        "8": {
+          "answer": "like"
+        }
+      }
+    },
+    "sb-47-4A-3": {
+      "source": "All six tense names are printed in the task’s original word box.",
+      "choices": [
+        "past continuous",
+        "past perfect continuous",
+        "present continuous",
+        "present perfect continuous",
+        "future continuous",
+        "future perfect continuous"
+      ]
+    },
+    "sb-67-2B-2": {
+      "source": "Original T/F task and supplied 6A 2B key: F explanations are not part of the choice.",
+      "choices": [
+        "T",
+        "F"
+      ],
+      "fields": {
+        "2": {
+          "answer": "F"
+        },
+        "3": {
+          "answer": "F"
+        },
+        "4": {
+          "answer": "F"
+        }
+      }
+    },
+    "sb-77-1A-0": {
+      "source": "Original a/b/c choices; passive structures is the next heading in the supplied U6 Review key.",
+      "remove_key_suffix": "passive structures",
+      "choices": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fields": {
+        "5": {
+          "answer": "b"
+        }
+      }
+    },
+    "sb-86-2B-0": {
+      "source": "Original task cites recording 7.07 and exaggeration. Correct supplied key is 7C, How to … exaggerate, 3B; previous names belonged to a different activity. Stable exercise ID retained.",
+      "key": "1 forever\n2 killing, starving\n3 nothing\n4 fortune\n5 ten\n6 million\n7 centuries\n8 die of 9 dead\n10 green with envy",
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "forever"
+        },
+        {
+          "n": "2",
+          "answer": "killing, starving"
+        },
+        {
+          "n": "3",
+          "answer": "nothing"
+        },
+        {
+          "n": "4",
+          "answer": "fortune"
+        },
+        {
+          "n": "5",
+          "answer": "ten"
+        },
+        {
+          "n": "6",
+          "answer": "million"
+        },
+        {
+          "n": "7",
+          "answer": "centuries"
+        },
+        {
+          "n": "8",
+          "answer": "die of"
+        },
+        {
+          "n": "9",
+          "answer": "dead"
+        },
+        {
+          "n": "10",
+          "answer": "green with envy"
+        }
+      ]
+    },
+    "sb-101-2A-2": {
+      "source": "Supplied U8 Review 2A key; future forms is the next heading.",
+      "remove_key_suffix": "future forms",
+      "fields": {
+        "8": {
+          "answer": "At the same time"
+        }
+      }
+    },
+    "sb-102-7A-0": {
+      "source": "Original box contains six nouns/phrases and six numbered matches; OCR had added a seventh field.",
+      "choices": [
+        "curfew",
+        "greed",
+        "oppression",
+        "paranoia",
+        "social unrest",
+        "surveillance"
+      ],
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "paranoia"
+        },
+        {
+          "n": "2",
+          "answer": "oppression"
+        },
+        {
+          "n": "3",
+          "answer": "curfew"
+        },
+        {
+          "n": "4",
+          "answer": "greed"
+        },
+        {
+          "n": "5",
+          "answer": "surveillance"
+        },
+        {
+          "n": "6",
+          "answer": "social unrest"
+        }
+      ]
+    },
+    "sb-122-3-1": {
+      "source": "Original rubric explicitly says options A–C, so every item needs all three choices.",
+      "choices": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    "sb-137-1A-0": {
+      "source": "Original box contains three topics and three news stories; later numbers belong to another exercise.",
+      "choices": [
+        "climate change",
+        "homelessness",
+        "inequality"
+      ],
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "inequality"
+        },
+        {
+          "n": "2",
+          "answer": "climate change"
+        },
+        {
+          "n": "3",
+          "answer": "homelessness"
+        }
+      ]
+    },
+    "sb-137-1B-1": {
+      "source": "Original definitions a–i concern right/wrong idioms. Supplied Vocabulary bank 6B 1B is the correct key; the previous 5C key was for the other column. Old numbered responses remain accessible as saved extra fields.",
+      "key": "a be on the right track\nb rub (somebody) up the wrong way\nc go right\nd get the wrong end of the stick\ne get into the wrong hands\nf put (someone) right\ng be in the right\nh put it right\ni go wrong",
+      "replace_fields": [
+        {
+          "n": "a",
+          "answer": "be on the right track"
+        },
+        {
+          "n": "b",
+          "answer": "rub somebody up the wrong way / rub someone up the wrong way / rub (somebody) up the wrong way"
+        },
+        {
+          "n": "c",
+          "answer": "go right"
+        },
+        {
+          "n": "d",
+          "answer": "get the wrong end of the stick"
+        },
+        {
+          "n": "e",
+          "answer": "get into the wrong hands"
+        },
+        {
+          "n": "f",
+          "answer": "put someone right / put somebody right / put (someone) right"
+        },
+        {
+          "n": "g",
+          "answer": "be in the right"
+        },
+        {
+          "n": "h",
+          "answer": "put it right"
+        },
+        {
+          "n": "i",
+          "answer": "go wrong"
+        }
+      ]
+    }
+  }
+}
