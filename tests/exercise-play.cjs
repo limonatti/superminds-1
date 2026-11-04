@@ -14,7 +14,7 @@ if(process.argv.includes('--browser'))(async()=>{
  await p.route('https://**',r=>r.abort());
  await p.goto(base+'/speakout-a1-active-teach/index.html?book=sb&page=8');const open=()=>p.locator('#exerciseNav button').filter({hasText:/^2A/}).click();await open();
  assert.equal(await p.locator('.play-word').count(),0,'formation task must not suggest keys');
- for(const [i,value] of ['Are',"'m",'am'].entries()){await p.locator(`.play-slot[data-field="${i}"]`).first().click();await p.locator('.play-manual input').fill(value)}
+ for(const [i,value] of ['Are',"'m",'am'].entries()){await p.locator(`.play-slot[data-field="${i}"]`).first().click();await p.locator(`input.play-slot[data-field="${i}"]`).first().fill(value)}
  await p.locator('.play-check').click();assert.match(await p.locator('.play-feedback').innerText(),/3 из 3/);await p.reload();await open();assert.equal(await p.locator('[data-inline="3"]').inputValue(),'am');
  const cases=[['focus-1',14,'[data-ex]'],['solutions-int',4,'[data-ex]'],['solutions-el',4,'[data-ex]'],['outcomes-beginner',12,'[data-exercise]'],['speakout-b1',6,'#exerciseNav button'],['speakout-b1plus',9,'#exerciseNav button'],['speakout-b2plus',9,'.spot.book-exercise']];
  for(const [c,page,selector]of cases){await p.setViewportSize({width:1280,height:900});await p.goto(`${base}/${c}-active-teach/index.html?book=sb&page=${page}`);await p.locator(selector).first().click();assert(await p.locator('dialog[open] .coursework-save').isVisible(),c);await p.setViewportSize({width:390,height:844});assert(await p.locator('dialog[open]').evaluate(d=>d.scrollWidth<=d.clientWidth+1),c+' overflow');}

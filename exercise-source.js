@@ -15,7 +15,8 @@ function mount(host,id,fallback){
 }
 function render(doc){
  const s=doc._focus;let sources=s.model.sources;
- if(s.full)sources=[{...sources[0],box:[0,0,1,1],context:false}];
+ if(s.full)sources=sources.filter((source,i)=>sources.findIndex(other=>other.image===source.image)===i).map(source=>({...source,box:[0,0,1,1],context:false}));
+ s.renderedSources=sources;
  doc.replaceChildren();doc.style.width=(s.zoom*100)+'%';
  for(const source of sources){
   const section=document.createElement('figure');section.className='focus-sheet';

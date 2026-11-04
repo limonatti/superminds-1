@@ -36,3 +36,12 @@ dialog#exerciseDialog.focus-dialog.play-dialog,dialog#exercise.focus-dialog.play
 .play-key-locked{display:none!important}
 
 .play-dialog [data-pair-hint]{display:none!important}
+
+/* Cloze answers stay on the printed source, including keyboard entry. */
+.play-dialog .play-inline-only .play-answer-strip,.play-dialog .play-inline-only .play-manual{display:none!important}
+.play-dialog .play-gap-layer input.play-slot{box-sizing:border-box;text-align:center;text-overflow:clip;cursor:text;appearance:none}
+.play-dialog .play-gap-layer input.play-slot[readonly]{cursor:pointer}
+.play-dialog .play-gap-layer input.play-slot::placeholder{color:#6678a6;opacity:1}
+.play-dialog .play-gap-layer input.play-slot:focus{outline:2px solid #7758b1;outline-offset:1px;background:#fff3cc}
+.play-dialog .play-reposition{border:0;background:transparent;color:#665286;font-size:12px;padding:3px 0 8px;text-decoration:underline;text-underline-offset:3px}
+.play-dialog .play-target{position:absolute;width:22px;height:22px;border:2px solid #7758b1;border-radius:4px;background:#eee8ff99;transform:translate(-50%,-50%);pointer-events:none;z-index:3}.play-dialog .play-canvas:focus-visible{outline:2px solid #a99acb;outline-offset:2px}

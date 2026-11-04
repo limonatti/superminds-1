@@ -1,0 +1,2 @@
+/* Options transcribed from the printed exercise banks, including unused words. */
+window.EXERCISE_INLINE={"wb-9-531-154":{"bank":["else","like","much","thanks","anything","would"]},"wb-24-524-209":{"bank":["café","cinema","clothes shop","restaurant","town"]},"wb-25-529-93":{"bank":["afternoon","evening","from","morning","night","to"]},"wb-58-531-478":{"bank":["summer","weather","street","hand","police"]},"wb-67-74-331":{"bank":["have","live","start","was born","become","get"]}};

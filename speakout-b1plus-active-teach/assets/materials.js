@@ -47,9 +47,9 @@ window.SpeakoutMaterials = (() => {
    if(key){
     const sections=window.SPEAKOUT_MATERIAL_INTERACTIONS?.materials[item.id]?.sections;
     const attempted=()=>sections?.length?sections.every(ex=>{const st=answer.exercises?.[ex.id];return ex.mode==='review'?!!(st?.note?.trim()&&st.done):ex.fields.every(f=>st?.checked?.[f.n]&&String(st.values?.[f.n]||'').trim())}):!!(answer.note?.trim()&&answer.done);
-    const refreshKey=()=>{const b=$('#materialKey');if(b){const disabled=!attempted();if(b.disabled!==disabled)b.disabled=disabled;b.title=disabled?'Ключ ко всему материалу доступен после заполнения и проверки всех разделов':''}};
+    const refreshKey=()=>{if(active!==item)return;const b=$('#materialKey');if(b){const disabled=!attempted();if(b.disabled!==disabled)b.disabled=disabled;b.title=disabled?'Ключ ко всему материалу доступен после заполнения и проверки всех разделов':''}};
     $('#materialKey').onclick=()=>{if(attempted())show(key,item)};refreshKey();
-    const observer=new MutationObserver(refreshKey);observer.observe(body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-pressed']});$('#modal').addEventListener('close',()=>observer.disconnect(),{once:true});
+    const observer=new MutationObserver(refreshKey);observer.observe(body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-pressed']});dialog.addEventListener('close',()=>observer.disconnect(),{once:true});
    }
    $('#materialPrev').onclick=()=>{pageNumber--;renderPage()};$('#materialNext').onclick=()=>{pageNumber++;renderPage()};
    $('#materialPage').onchange=e=>{pageNumber=+e.target.value;renderPage()};
