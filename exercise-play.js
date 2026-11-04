@@ -42,13 +42,17 @@ async function printedGap(url,px,py,crop){
   if(!imagePixels.has(url)){if(imagePixels.size>=3)imagePixels.clear();imagePixels.set(url,new Promise(resolve=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');const scale=Math.min(1,1400/im.naturalWidth,2000/im.naturalHeight);c.width=Math.round(im.naturalWidth*scale);c.height=Math.round(im.naturalHeight*scale);const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(im,0,0,c.width,c.height);try{resolve({data:ctx.getImageData(0,0,c.width,c.height).data,W:c.width,H:c.height})}catch{resolve(null)}};im.onerror=()=>resolve(null);im.src=url;}));}
   const pixels=await imagePixels.get(url);if(!pixels)return fallback;const {data,W,H}=pixels,cx=Math.round(px*W),cy=Math.round(py*H),radius=Math.max(12,Math.round(H*.013)),minX=Math.ceil(x*W),maxX=Math.floor((x+w)*W)-1;
   const ink=(a,b)=>{if(a<0||a>=W||b<0||b>=H)return false;const i=(b*W+a)*4;return data[i]*.299+data[i+1]*.587+data[i+2]*.114<190};let best=null;
-  for(let row=Math.max(Math.ceil(y*H),cy-radius);row<=Math.min((y+h)*H-1,cy+radius*2);row++){
+  for(let row=Math.max(Math.ceil(y*H),cy-radius);row<=Math.min((y+h)*H-1,cy+radius);row++){
    if(![-3,-2,-1,0,1,2,3].some(dx=>ink(cx+dx,row)))continue;
    let l=cx,r=cx,gap=0;for(let a=cx;a>=minX;a--){gap=ink(a,row)?0:gap+1;if(gap>Math.max(4,W*.004))break;l=a+gap}gap=0;for(let a=cx;a<=maxX;a++){gap=ink(a,row)?0:gap+1;if(gap>Math.max(4,W*.004))break;r=a-gap}
+   // A dotted underline can run into punctuation or the next printed word.
+   // Trim those glyphs before judging the empty space above the line.
+   const inkAbove=a=>{let n=0;for(let b=row-Math.round(H*.012);b<row-4;b+=2)if(ink(a,b)&&++n>=2)return true;return false};
+   for(let a=cx;a>=l;a--)if(inkAbove(a)){l=a+1;break}for(let a=cx;a<=r;a++)if(inkAbove(a)){r=a-1;break}
    if(r-l<W*.02||r-l>W*.55)continue;
    let above=0,total=0,line=0;for(let a=l+2;a<r-2;a+=2){if(ink(a,row))line++;for(let b=row-Math.round(H*.012);b<row-4;b+=2){above+=ink(a,b)?1:0;total++;}}
    if(above/Math.max(1,total)>.04||line/Math.max(1,(r-l-4)/2)<.25)continue;
-   const score=Math.abs(row-cy-H*.006);if(!best||score<best.score)best={score,box:[l/W,Math.max(y,row/H-.013),(r-l)/W,Math.min(.016,y+h-(row/H-.013))]};
+   const score=Math.abs(row-cy-H*.004)-Math.min((r-l)/W,.15)*H*.02;if(!best||score<best.score)best={score,box:[l/W,Math.max(y,row/H-.013),(r-l)/W,Math.min(.016,y+h-(row/H-.013))]};
   }
   return best?.box||fallback;
  }catch{return fallback}
@@ -59,7 +63,16 @@ function attach(config){
  const geometry=config.geometry||root.EXERCISE_GAPS?.[id]||{};
  const layout=root.EXERCISE_INLINE?.[id];
  const inline=!!layout||Object.keys(geometry).length>0||(config.fields||[]).some(f=>f.geometry)||/\b(?:complet\w*|fill|insert|gaps?|blanks?|missing)\b|_{2,}|\.{4,}|\bwrite\b.{0,80}\b(?:word|verb|preposition|article)\b|\b(?:use|put)\b.{0,80}\bcorrect forms?\b|\b(?:put|write|use)\b.{0,100}\b(?:verbs?|past simple|present simple|present perfect)\b/i.test(text.slice(0,500).replace(/\s+/g,' '));
- const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&f.kind!=='multi'&&f.kind!=='set'&&(inline||f.input?.tagName!=='TEXTAREA'));
+ const setCloze=inline&&/\b(?:complet\w*|missing|gaps|blanks|fill (?:in|the))\b/i.test(text.slice(0,300).replace(/\s+/g,' '));
+ const givenFields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&Object.hasOwn(layout?.given||{},f.id)&&(!f.get()||norm(f.get())===norm(layout.given[f.id])));
+ for(const f of givenFields)if(!f.get())f.set(layout.given[f.id]);
+ const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&!givenFields.includes(f)&&f.kind!=='multi'&&(f.kind!=='set'||setCloze)&&(inline||f.input?.tagName!=='TEXTAREA'));
+ // A cloze item may store several words as one unordered answer. Keep that
+ // grading contract while giving each printed blank its own editable slot.
+ for(let i=fields.length-1;i>=0;i--){const f=fields[i];if(f.kind!=='set')continue;
+  const read=()=>{const value=String(f.get()),parts=value.split(/[;\n]/.test(value)?/[;\n]/:/,/).map(s=>s.trim());while(parts.length>1&&!parts.at(-1))parts.pop();return parts},count=Math.max(1,Number(f.count)||1,read().length);
+  fields.splice(i,1,...Array.from({length:count},(_,j)=>({...f,id:f.id+'.'+(j+1),label:count===1?f.label:f.label+'.'+(j+1),kind:'set-part',get:()=>read()[j]||'',set:value=>{const values=read();while(values.length<count)values.push('');values[j]=value;return f.set(values.join('; ')+(count===1?';':''))}})));
+ }
  // Split a legacy combined answer only when the source explicitly locates its parts.
  for(let i=fields.length-1;i>=0;i--){
   const f=fields[i],mapped=layout?.slots?.filter(g=>g.field===f.id&&g.parts>1)||[],parts=mapped.length?mapped:Object.keys(geometry).filter(key=>key.startsWith(f.id+'.')&&/^\d+$/.test(key.slice(f.id.length+1))).sort((a,b)=>Number(a.slice(f.id.length+1))-Number(b.slice(f.id.length+1))).map(key=>geometry[key]);
@@ -84,13 +97,13 @@ function attach(config){
  const releaseKeys=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,fields.length?fields:config.fields||[]);
  if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{releaseKeys();dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
  dialog.classList.remove('play-open-answer');
- let selected=Math.max(0,fields.findIndex(f=>!String(f.get()).trim())),ignoreClickUntil=0,destroyed=false,drag=null,hintMessage='',pendingWord=null;
+ let selected=Math.max(0,fields.findIndex(f=>!String(f.get()).trim())),ignoreClickUntil=0,destroyed=false,drag=null,hintMessage='',pendingWord=null,typingRequested=null;
  const doc=source.querySelector('.focus-document'),slots=new Map(),hidden=new Map();
  const hide=el=>{if(el&&!hidden.has(el)){hidden.set(el,el.hidden);el.hidden=true;el.classList.add('play-original-control')}};
  const bench=document.createElement('section');bench.className='play-workbench';bench.classList.toggle('play-inline-only',inline);bench.setAttribute('aria-label','Слова и ответы');
  bench.innerHTML='<div class="play-answer-strip" aria-label="Пропуски"></div><div class="play-bank-head"><span class="play-current"></span><button type="button" class="play-erase" aria-label="Очистить выбранный пропуск">Убрать слово</button></div><button type="button" class="play-reposition" hidden>Выбрать другое место</button><div class="play-bank" role="group" aria-label="Варианты ответа"></div><div class="play-manual"><label>Свой вариант <input autocomplete="off" spellcheck="false" aria-label="Написать ответ в выбранный пропуск"></label></div><div class="play-bottom"><span class="play-hint">Выбери пропуск и слово — или перетащи карточку.</span><button type="button" class="play-check">Проверить</button></div><p class="play-feedback" role="status" aria-live="polite"></p>';
  source.after(bench);const q=s=>bench.querySelector(s),strip=q('.play-answer-strip'),bank=q('.play-bank'),manual=q('.play-manual input');
- for(const f of fields)hide(f.scope);
+ for(const f of [...fields,...givenFields])hide(f.scope);
  if(freeAnswer?.id)hide(responses.querySelector('label[for="'+CSS.escape(freeAnswer.id)+'"]'));
  for(const selector of ['.instruction','.inline-instruction','.activity-bank-tray','.practice-help','.checkType','.responsePanel>h3','.responsePanel>p:not([role])'])responses.querySelectorAll(selector).forEach(hide);
  const originalCheck=config.check||dialog.querySelector('#check,#checkTask,#exerciseCheck,#practiceCheck');
@@ -114,7 +127,7 @@ function attach(config){
   const hint=q('.play-hint-button'),trigger=originalHint||current().scope?.querySelector('[data-reveal],[data-practice-reveal]');if(hint)hint.disabled=!trigger||trigger.disabled;
   if(feedback)q('.play-feedback').textContent=hintMessage||feedback.textContent;else {const statuses=fields.map(state);q('.play-feedback').textContent=hintMessage||(statuses.some(s=>s==='correct'||s==='incorrect')?`Верно: ${statuses.filter(s=>s==='correct').length} из ${fields.length}.`:'')}
  }
- function activate(index){hintMessage='';pendingWord=null;selected=index;manual.value=current().get();current().activate?.();renderBank();refresh()}
+ function activate(index){hintMessage='';pendingWord=null;typingRequested=null;selected=index;manual.value=current().get();current().activate?.();renderBank();refresh()}
  function commit(f,option,advance=true){
   if(f.input?.disabled)return;
   hintMessage='';
@@ -142,7 +155,7 @@ function attach(config){
   bank.hidden=!options.length;bench.classList.toggle('has-word-bank',!!options.length);q('.play-hint').textContent=options.length?'Выбери пропуск и слово — или перетащи карточку.':'Нажми на пропуск и впиши свой ответ.';
   q('.play-manual').hidden=inline||!!options.length;
   // Keyboard entry remains available without bringing back a second form.
-  let toggle=bench.querySelector('.play-type-toggle');if(!toggle){toggle=document.createElement('button');toggle.type='button';toggle.className='play-type-toggle';toggle.textContent='Написать самому';toggle.onclick=()=>{if(inline){const input=slots.get(current())?.[0];if(input?.tagName==='INPUT'){input.readOnly=false;input.focus()}else q('.play-hint').textContent=`Нажми на пропуск ${current().label} на картинке и напиши ответ.`}else{q('.play-manual').hidden=!q('.play-manual').hidden;if(!q('.play-manual').hidden)manual.focus()}};q('.play-bank-head').append(toggle)}toggle.hidden=!options.length||!f.input||f.input.tagName==='SELECT';
+  let toggle=bench.querySelector('.play-type-toggle');if(!toggle){toggle=document.createElement('button');toggle.type='button';toggle.className='play-type-toggle';toggle.textContent='Написать самому';toggle.onclick=()=>{if(inline){const input=slots.get(current())?.[0];if(input?.tagName==='INPUT'){input.readOnly=false;input.focus()}else{typingRequested=current();q('.play-hint').textContent=`Нажми на пропуск ${current().label} на картинке и напиши ответ.`}}else{q('.play-manual').hidden=!q('.play-manual').hidden;if(!q('.play-manual').hidden)manual.focus()}};q('.play-bank-head').append(toggle)}toggle.hidden=!options.length||!f.input||f.input.tagName==='SELECT';
  }
  function slot(f,index){const editable=inline&&f.input?.tagName!=='SELECT'&&!f.options?.some(o=>typeof o==='object'&&o.value!==o.label),b=document.createElement(editable?'input':'button');b.type=editable?'text':'button';b.className='play-slot';b.dataset.field=index;
   if(editable){b.autocomplete='off';b.spellcheck=false;b.placeholder='…';b.readOnly=!!candidates(f,fields,text).length;b.ondblclick=()=>{b.readOnly=false;b.focus();b.select()};b.onfocus=()=>{if(selected!==index)activate(index)};b.oninput=()=>{hintMessage='';f.set(b.value);refresh()};b.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(freeAnswer&&index===fields.length-1&&f.get()){freeValues.push('');fields.push(freeField(fields.length));}activate(Math.min(fields.length-1,index+1));(slots.get(current())?.[0]||doc.querySelector('.play-canvas[tabindex="0"]'))?.focus()}};}
@@ -170,7 +183,7 @@ function attach(config){
   const box=await printedGap(canvas.querySelector('image')?.getAttribute('href'),px,py,item.box);
   if(destroyed||current()!==f||f.input?.disabled)return;
   positions[f.id]={image:item.image,page:item.page,box};savePositions();pendingWord=null;place();
-  const input=slots.get(f)?.[0];if(option)commit(f,option);else if(input){input.readOnly=false;input.focus()}
+  const input=slots.get(f)?.[0];if(option)commit(f,option);else if(input){input.readOnly=!!candidates(f,fields,text).length&&typingRequested!==f;typingRequested=null;input.focus()}
  }
  function place(){
   if(!doc)return;slots.clear();strip.replaceChildren();doc.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());

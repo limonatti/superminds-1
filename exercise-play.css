@@ -1,7 +1,7 @@
 /* Compact, shared task surface. Colour identifies selection and feedback. */
 dialog#exerciseDialog.focus-dialog.play-dialog,dialog#exercise.focus-dialog.play-dialog,dialog#modal.focus-dialog.play-dialog,dialog#mdExercise.focus-dialog.play-dialog,#modal.materials-dialog.focus-material-dialog.play-dialog{width:min(860px,calc(100vw - 24px));height:fit-content;max-height:min(820px,calc(100dvh - 32px));padding:18px 22px;border-radius:18px;background:#fffdf9;color:#252538}
 .play-dialog .focus-columns,.play-dialog .material-study{display:flex!important;flex-direction:column!important;gap:12px!important;overflow:auto!important;align-items:stretch!important;flex:1;min-height:0;scrollbar-width:thin}
-.play-dialog .focus-original,.play-dialog .material-original{height:auto!important;flex:none;overflow:visible!important;padding:0!important;max-height:none!important;background:transparent!important}
+.play-dialog .focus-original,.play-dialog .material-original{align-self:stretch!important;width:100%!important;box-sizing:border-box;height:auto!important;flex:none;overflow:visible!important;padding:0!important;max-height:none!important;background:transparent!important}
 .play-dialog .focus-document{margin:auto;max-width:100%!important}.play-dialog .focus-sheet{margin:0 auto 14px}.play-dialog .focus-sheet figcaption{margin-bottom:5px;font-size:11px}.play-dialog .focus-sheet svg{border-radius:8px}
 .play-dialog .focus-responses,.play-dialog .material-practice{height:auto!important;overflow:visible!important;border:0!important;flex:none;padding:0!important;background:transparent!important}
 .play-dialog .play-original-control{display:none!important}.play-dialog .focus-answer-list:has(>.play-original-control){gap:0;margin:0}

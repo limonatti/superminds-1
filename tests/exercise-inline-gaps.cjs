@@ -59,6 +59,14 @@ const base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8772';
   await f.evaluate(()=>mountFree());assert.deepEqual(await f.locator('input.play-slot').evaluateAll(xs=>xs.map(x=>x.value)),['one','two']);
   await f.evaluate(()=>{const t=document.querySelector('#notes');t.value='1. remote\n2. draft\n3. restored';t.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await f.locator('input.play-slot').first().inputValue(),'remote');
   assert.equal(await f.locator('.play-manual input:visible,.play-answer-strip .play-slot:visible').count(),0);
+  await f.evaluate(()=>{
+   const responses=document.querySelector('#responses');responses.innerHTML='<div id="row"><textarea id="group"></textarea></div><button id="check">Проверить</button><button id="exerciseKeys">Ключ</button>';
+   ExerciseSource.mount(document.querySelector('#source'),'fixture-set',{label:'Set',sources:[fixtureModel.sources[0]]});
+   window.mountSet=()=>ExercisePlay.attach({dialog:document.querySelector('#exercise'),source:document.querySelector('#source'),responses,id:'fixture-set',text:'Complete the phrases.',fields:[ExercisePlay.inputField('Words',document.querySelector('#group'),[],undefined,document.querySelector('#row'),{kind:'set',count:2})],geometry:{'Words.1':{image:fixtureModel.sources[0].image,box:[.2,.25,.25,.05]},'Words.2':{image:fixtureModel.sources[0].image,box:[.2,.5,.25,.05]}}});mountSet();
+  });
+  await f.locator('input.play-slot').nth(0).fill('yes, it is');assert(await f.locator('#exerciseKeys').isDisabled());await f.locator('input.play-slot').nth(1).fill("no, it isn't");
+  const grouped=await f.locator('#group').inputValue();assert.equal(grouped,"yes, it is; no, it isn't");assert(require('../solutions-int-active-teach/assets/marking.js').checkField(grouped,{kind:'set',members:[['yes, it is'],["no, it isn't"]]}));
+  await f.evaluate(()=>mountSet());assert.deepEqual(await f.locator('input.play-slot').evaluateAll(xs=>xs.map(x=>x.value)),['yes, it is',"no, it isn't"]);
   await f.close();
   assert.deepEqual(errors,[]);
   console.log('PASS on-image card fill, grading, persistence, full page, mobile, unmarked tap/drop snapping, direct typing, repositioning, multipart storage, key gating, two full pages, keyboard placement and restored free drafts');
