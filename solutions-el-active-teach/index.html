@@ -1,55 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solutions Elementary · Active Teach · English with Asya</title>
-<meta name="description" content="Solutions Elementary 3rd edition: Student’s Book, Workbook, аудио и видео для уроков английского.">
-<link rel="icon" href="../favicon.svg">
-<link rel="canonical" href="https://english-with-asya.com/solutions-el-active-teach/">
-<link rel="stylesheet" href="style.css?v=1">
-</head>
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Solutions Elementary · English with Asya</title><link rel="icon" href="../favicon.svg"><link rel="stylesheet" href="../sm-skin.css?v=el-interactive-1"><link rel="stylesheet" href="assets/style.css?v=el-interactive-1"><link rel="stylesheet" href="../solutions-homework.css?v=el-interactive-1"><link rel="stylesheet" href="../exercise-source.css?v=el-interactive-1"><link rel="stylesheet" href="../exercise-play.css?v=el-interactive-1"></head>
 <body>
-<header id="bar">
-  <a class="platform-link" href="../index.html" aria-label="Вернуться к моим курсам">← Курсы</a>
-  <span class="logo">🎓 Solutions Elementary</span>
-  <button class="bkbtn on" data-b="sb">📘 Student's Book</button>
-  <button class="bkbtn" data-b="wb">📝 Workbook</button>
-  <input id="jump" type="number" min="0" aria-label="Номер страницы книги" placeholder="стр. →" title="Перейти на страницу книги">
-  <a id="keysA" href="Solutions_Elementary_WB_Keys.pdf" target="_blank" rel="noopener">🔑 Ключи + скрипты WB</a>
-  <a class="platform-link" id="practice" href="../solutions-el-u0.html">Практика</a>
-  <a class="platform-link" href="../vocabulary.html?course=solutions-el">Словарь</a>
-  <a class="platform-link" href="../trainer.html?course=solutions-el">Карточки</a>
-  <a class="platform-link" href="../homework.html">Домашка</a>
-  <a class="platform-link" id="lessonLink" href="../room.html?course=solutions-el">Онлайн-урок ↗</a>
-</header>
-<nav id="units" aria-label="Разделы учебника"></nav>
-<div id="main">
-  <div id="stagewrap">
-    <img id="pgimg" draggable="false" alt="страница">
-    <button class="nav" id="prev" aria-label="Предыдущая страница">‹</button>
-    <button class="nav" id="next" aria-label="Следующая страница">›</button>
-    <div id="pginfo"></div>
-  </div>
-  <div id="side">
-    <h3 id="pgh">🎧 Аудио этой страницы</h3>
-    <div id="pgtracks" class="list"></div>
-    <h3>🎵 Всё аудио темы</h3>
-    <div id="tracks" class="list"></div>
-    <h3>🎬 Видео</h3>
-    <div id="vids" class="list"></div>
-  </div>
-</div>
-<button id="sideToggle" aria-controls="side" aria-expanded="false">🎵 Медиа</button>
-<div id="dock">
-  <div id="thumbs"></div>
-  <div id="player"><span id="ptitle">Выбери трек…</span><audio id="aud" controls preload="none"></audio><select id="spd" aria-label="Скорость аудио"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></div>
-</div>
-<div id="voverlay" role="dialog" aria-modal="true" aria-label="Видео к уроку"><video id="vid" controls playsinline preload="none"></video><button id="vclose">Закрыть</button></div>
-<p id="mediaStatus" role="status"></p>
-<script src="manifest.js?v=1"></script>
-<script src="../sm-live-course.js"></script>
-<script src="../sm-live-audio.js?v=solutions-el-1"></script>
-<script src="app.js?v=1"></script>
-</body>
-</html>
+<header><a class="brand" href="../index.html"><small>← МОИ КУРСЫ</small><strong>Solutions <span>Elementary</span></strong></a><span class="edition">THIRD EDITION</span><nav aria-label="Разделы курса"><button data-book="sb">Student’s Book</button><button data-book="wb">Workbook</button><a id="vocabulary" href="../vocabulary.html?course=solutions-el">Словарь</a><a id="trainer" href="../trainer.html?course=solutions-el">Карточки</a></nav><button id="present" aria-pressed="false">Презентация</button></header>
+<main><section class="intro"><div><p class="eyebrow">ТВОЙ УЧЕБНИК · ТВОЙ ТЕМП</p><h1 id="heading">Introduction</h1><p id="hint">Нажми на номер упражнения на странице, чтобы выполнить задание.</p></div><div class="intro-actions"><a href="../homework.html">Моя домашка ↗</a><span id="saveStatus" role="status">Загрузка…</span></div></section>
+<section id="assignment" hidden aria-label="Назначенная домашка"></section>
+<nav id="units" aria-label="Выбрать юнит"></nav>
+<div class="toolbar"><label>Страница <select id="pages"></select></label><button id="prev" aria-label="Предыдущая страница">←</button><button id="next" aria-label="Следующая страница">→</button><label>Масштаб <select id="zoom"><option value="1">По ширине</option><option value="1.3">130%</option><option value="1.6">160%</option><option value="2">200%</option></select></label><button id="cover" aria-pressed="false">Шторка</button><button id="copy">Ссылка на страницу</button><button id="assignToggle" hidden aria-pressed="false" aria-controls="teacherAssignment">Задать домашку</button><button id="assignReview" type="button" hidden aria-controls="teacherAssignment">Выбрано: 0 → назначить</button></div>
+<div class="workspace"><section id="viewport" aria-label="Страница учебника"><div id="paper"><img id="pageImage" alt=""><div id="hotspots"></div><div id="curtain" hidden><button id="uncover">Открыть страницу</button></div></div><p id="imageError" hidden role="alert">Страница не загрузилась. <button id="retryImage">Повторить</button></p></section><aside><section id="teacherAssignment" hidden aria-label="Назначить упражнения ученику"><h2>Домашка из книги</h2><p id="assignCount" aria-live="polite">Выбрано: 0</p><div class="assign-tools"><button type="button" id="assignPage">Вся страница</button><button type="button" id="assignClear">Очистить выбор</button></div><ul id="assignItems"></ul><form id="assignForm"><label for="assignStudent">Ученик</label><select id="assignStudent" required><option value="">Выбери ученика</option></select><button type="button" id="assignReload">Обновить список</button><label for="assignDue">Срок · необязательно</label><input id="assignDue" type="date"><label for="assignComment">Комментарий</label><textarea id="assignComment" maxlength="2000" placeholder="Что сделать, на что обратить внимание…"></textarea><button type="submit" id="assignSend" disabled>Выдать домашку</button></form><p id="assignStatus" role="status"></p><a id="assignResultLink" href="../teacher-class.html" hidden>Открыть ученика в «Моём классе» →</a></section><h2>Упражнения <span id="count"></span></h2><div id="exerciseList"></div><h2>Аудио</h2><div id="audio"></div><details><summary>Все треки книги</summary><select id="allTracks" aria-label="Выбрать аудиотрек"></select><audio id="libraryAudio" controls preload="none"></audio></details><h2>Видео</h2><div id="video"></div><div class="course-resources"><a href="Solutions_Elementary_WB_Keys.pdf" target="_blank" rel="noopener">Ключи и скрипты Workbook ↗</a><a href="../solutions-el-u0.html">Дополнительная практика ↗</a></div><div class="progress"><h2>Мои ответы</h2><p id="progress"></p><button id="export">Скачать ответы</button><button id="sync">Синхронизировать</button></div></aside></div>
+</main>
+<dialog id="exercise" aria-labelledby="exerciseTitle"><div class="dialog-head"><div><small id="exerciseLocation"></small><h2 id="exerciseTitle"></h2></div><button id="close" aria-label="Закрыть упражнение">✕</button></div><button id="assignExercise" type="button" hidden>В домашку</button><button id="fullPage" aria-pressed="false">Вся страница</button><div id="exerciseAudio"></div><div class="focus-columns" id="solutionColumns"><section class="focus-original" id="solutionOriginal"><div id="crop"><img id="exerciseImage" alt="Условие упражнения из учебника"></div></section><section class="focus-responses"><p id="instruction"></p><form id="answerForm"><div id="fields"></div><div class="actions"><button id="check" type="submit">Проверить</button><button id="saveAnswer" type="button">Сохранить ответ</button></div></form><p id="feedback" role="status"></p><details id="keyPanel"><summary>Свериться с ответом</summary><pre id="keyText"></pre></details></section></div></dialog>
+<script src="../exercise-source.js?v=el-interactive-1"></script><script src="../exercise-play.js?v=el-interactive-1"></script><script src="assets/exercise-gaps.js?v=el-interactive-1"></script><script src="assets/exercise-sources.js?v=el-interactive-1"></script><script src="../sm-live-audio.js?v=el-interactive-1"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../sm-auth.js?v=el-interactive-1"></script><script src="../sm-live-course.js?v=el-interactive-1"></script><script src="assets/course.js?v=el-interactive-1"></script><script src="assets/marking.js?v=el-interactive-1"></script><script src="../solutions-el-homework.js?v=el-interactive-1"></script><script src="assets/assign.js?v=el-interactive-1"></script><script src="assets/app.js?v=el-interactive-1"></script>
+</body></html>

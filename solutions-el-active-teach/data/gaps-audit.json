@@ -1,0 +1,10 @@
+{
+  "solutions-el": {
+    "exercises": 147,
+    "gaps": 995,
+    "unmapped": {
+      "no_complete_set": 440,
+      "ambiguous_numbers": 27
+    }
+  }
+}

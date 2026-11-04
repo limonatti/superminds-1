@@ -59,7 +59,7 @@
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=64c9ed6c"></script>
-<script src="focus-homework.js?v=376b5d18"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
+<script src="focus-homework.js?v=376b5d18"></script><script src="solutions-el-homework.js?v=el-interactive-1"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -76,6 +76,7 @@ function partHref(course, unit, part){
   if(course==="speakout-b1"){const n=Math.max(1,Math.min(8,Number(unit)||1));return "speakout-b1-active-teach/index.html?unit="+n+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+(104+4*(n-1)):"");}
 
   if(course==="focus-1") return "focus-1-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+([124,126,127,128,130,131,132,133,135][Number(unit)]||124):"");
+  if(course==="solutions-el") return "solutions-el-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
   if(course==="solutions-int") return "solutions-int-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
   if(course==="outcomes-beginner"){
     const n=Math.max(1,Math.min(12,Number(unit)||1));
@@ -232,14 +233,15 @@ async function load(){
       title: k.l + " · " + unitLabel(x.unit_id), sub:"Super Minds", kicker:"Задание / Homework",
       desc: k.d, href: k.href + x.unit_id, blank: x.kind === "worksheet" });
   });
+  if(spk.some(h=>SolutionsElHW.ids(h).length)){try{await SolutionsElHW.load();}catch{}}
   if(spk.some(h=>FocusHW.ids(h).length)){try{await FocusHW.load();}catch{}}
   spk.forEach(x => {
     const meta = parseNote(x.note);
 
-    const bookHW=x.course==='focus-1'?FocusHW:SolutionsHW;const solIds=bookHW.ids(x);
+    const bookHW=x.course==='solutions-el'?SolutionsElHW:x.course==='focus-1'?FocusHW:SolutionsHW;const solIds=bookHW.ids(x);
     if(solIds.length){
       const href=bookHW.link(solIds[0],x.id);
-      ITEMS.push({type:'spk',solutions:true,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:(x.course==='focus-1'?'Focus 1':'Solutions Intermediate')+' · '+solIds.length+' упр.',sub:'Student’s Book / Workbook',kicker:'Домашнее задание',desc:meta.msg||'Выполни выбранные упражнения и отправь работу преподавателю.',href,
+      ITEMS.push({type:'spk',solutions:true,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:(x.course==='solutions-el'?'Solutions Elementary':x.course==='focus-1'?'Focus 1':'Solutions Intermediate')+' · '+solIds.length+' упр.',sub:'Student’s Book / Workbook',kicker:'Домашнее задание',desc:meta.msg||'Выполни выбранные упражнения и отправь работу преподавателю.',href,
         extra:'<div class="sect"><span>Назначенные упражнения</span></div><div class="rows">'+solIds.map(id=>'<a class="row" href="'+esc(bookHW.link(id,x.id))+'">'+esc(bookHW.label(id))+' →</a>').join('')+'</div>'});
       return;
     }
@@ -263,10 +265,10 @@ async function load(){
       return;
     }
 
-    const parts = (meta.parts && meta.parts.length) ? meta.parts : (x.course==="solutions-int"?["lesson","workbook"]:["lesson","grammar"]);
+    const parts = (meta.parts && meta.parts.length) ? meta.parts : (["solutions-int","solutions-el"].includes(x.course)?["lesson","workbook"]:["lesson","grammar"]);
     const rows = parts.map((pt,i) =>
       '<a class="row'+(i===0?" now":"")+'" href="'+partHref(x.course,x.unit,pt)+'"><span class="num">'+String(i+1).padStart(2,"0")+'</span>' +
-      '<span><span class="t">'+(["solutions-int","outcomes-beginner","speakout-b1","speakout-b2plus"].includes(x.course)&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(["solutions-int","outcomes-beginner","speakout-b1","speakout-b2plus"].includes(x.course)&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
+      '<span><span class="t">'+(["solutions-int","solutions-el","outcomes-beginner","speakout-b1","speakout-b2plus"].includes(x.course)&&pt==="lesson"?"Student’s Book":PART_L[pt]||pt)+'</span><span class="d">'+(["solutions-int","solutions-el","outcomes-beginner","speakout-b1","speakout-b2plus"].includes(x.course)&&pt==="lesson"?"упражнения учебника":PART_D[pt]||"")+'</span></span>' +
       '<span class="b '+(i===0?"pri ":"")+'sm">Открыть</span></a>').join("");
     const dd = meta.due ? dueInfo(meta.due) : null;
     ITEMS.push({ type:"spk", id:x.id, done:!!x.done, st: statusOf(x), due: meta.due || null,

@@ -1,0 +1,1381 @@
+{
+  "pages": 293,
+  "exercises": 1462,
+  "modes": {
+    "automatic": 733,
+    "open": 714,
+    "mixed": 15
+  },
+  "fallbackFullPage": [
+    "sb-6-6",
+    "sb-7-5",
+    "sb-12-1",
+    "sb-16-1",
+    "sb-22-1",
+    "sb-30-1",
+    "sb-32-1",
+    "sb-38-1",
+    "sb-40-1",
+    "sb-48-6",
+    "sb-52-2",
+    "sb-54-1",
+    "sb-54-7",
+    "sb-67-4",
+    "sb-74-1",
+    "sb-74-3",
+    "sb-75-7",
+    "sb-76-5",
+    "sb-78-7",
+    "sb-93-1",
+    "sb-96-1",
+    "sb-102-1",
+    "sb-102-7",
+    "sb-108-1",
+    "sb-109-4",
+    "sb-110-4",
+    "sb-116-9",
+    "sb-136-5",
+    "wb-18-1",
+    "wb-22-7",
+    "wb-25-1",
+    "wb-25-3",
+    "wb-29-11",
+    "wb-31-4",
+    "wb-32-3",
+    "wb-35-1",
+    "wb-40-1",
+    "wb-44-4",
+    "wb-57-1",
+    "wb-58-2",
+    "wb-62-1",
+    "wb-68-1",
+    "wb-69-1",
+    "wb-74-1",
+    "wb-76-1",
+    "wb-84-1",
+    "wb-91-3"
+  ],
+  "keys": 1310,
+  "keyedManual": [
+    {
+      "id": "sb-4-3",
+      "text": "3\n1.03\nListen and repeat the alphabet. What sound do\nthe blue letters share?\nabcdefghijklmnopqrstuvwxyz",
+      "key": "They share the /eɪ/ sound.\nit"
+    },
+    {
+      "id": "sb-4-8",
+      "text": "8\n1.05\nVOCABULARY Which country are the students\nin exercise 7 from? Listen again and match them with\ncountries from the list below.\nCountries Argentina Australia Brazil Canada China\nCroatia the Czech Republic Egypt France Germany\nGreece Hungary India Italy Japan Mexico Poland\nRussia Slovakia Spain ",
+      "key": "Antoine France Eszter Hungary\nMartyna Poland Alejandro Spain"
+    },
+    {
+      "id": "sb-4-10",
+      "text": "10 Answer the questions about the countries in exercise 8.\n1 Which are in Europe?\n2 Which are in Asia?\n3 Which are in North and South America?\n4 Which are English-speaking countries?\n5 Which are near your own country?",
+      "key": "1 Croatia, the Czech Republic, France, Germany, Greece,\nHungary, Italy, Poland, Russia, Slovakia, Spain, Turkey, the UK,\nUkraine 2 China, India, Japan, Russia, Turkey 3 Argentina,\nBrazil, Canada, Mexico, the USA 4 Australia, Canada, the UK,\nthe USA 5 Students’ own answers."
+    },
+    {
+      "id": "sb-5-2",
+      "text": "2 Find all the examples of be in the dialogue in exercise 1.\nComplete the Learn this! box. Use short forms.\nLEARN THIS! be\nAffirmative\nNegative\n11\nI'm not\nhe/she / it?\nhe/she / it isn't\nyou / we / they are\nyou /we /they 3\nInterrogative\nShort answers\nam I?\nYes, l am. / No, I'm not.\n4\nhe / she/ it?\nYe",
+      "key": "Here’s a photo of us. I ’m on the right. Are you twins? Y es,\nwe are, but we aren’t identical. I s that your dog … ? Y es, it\nis. She’s called Rosie. Rosie is Emma’s dog, really. H ow old\nis she? She’s sixteen … . T hat’s very old … . N o, Emma’s\nsixteen. Rosie is six.\n1 ’m 2 ’s 3 aren’t 4 is 5 are 6 is 7 are"
+    },
+    {
+      "id": "sb-5-3",
+      "text": "3 Write two sentences with the verb be, one affirmative and\none negative. Which is true for you? Which is false? Write T\nor F.\n1 We\nat school.\nWe are at school. T We aren't at school. F\n2 My teacher.\n_ very tall.\n3 L\n16 years old\n4 My friends_\n_all girls.\n5 It\n_ very cold today.\n6 My friends and I_\n",
+      "key": "2 My teacher is / isn’t very tall. 3 I’m / I’m not sixteen years\nold. 4 My friends are / aren’t all girls. 5 It’s / It isn’t very cold\ntoday. 6 My friends and I are / aren’t in an English lesson."
+    },
+    {
+      "id": "sb-5-6",
+      "text": "6 Complete the sentences with the correct form of have got,\naffirmative or negative. Make them true for you.\n1l\ntwo brothers.\n2 We\n_a maths lesson next.\n3 Our teacher\nshort hair.\n4 I\nblue eyes.\n5 Our teachers\na big teachers' room.",
+      "key": "1 ’ve got / h aven’t got 2 ’ve got / h aven’t got 3 ’s got /\nhasn’t got 4 ’ve got / h aven’t got 5 have got / h aven’t got"
+    },
+    {
+      "id": "sb-5-7",
+      "text": "71.07 Listen. Tick the things that Joe and Amy have got.\nJoe\nAmy\nYou\nYour partner\na pet\na skateboard\na bike\na smartphone\na laptop\na watch",
+      "key": "Joe a pet, a skateboard, a smartphone, a watch\nAmy a bike, a laptop, a watch"
+    },
+    {
+      "id": "sb-5-8",
+      "text": "8 Write sentences about Joe using the information in the\ntable in exercise 7. Use the correct form of have got.\nJoesgot.... Hehasn'tgot....",
+      "key": "Joe’s got a pet. He’s got a skateboard. He hasn’t got a bike. He’s\ngot a smartphone. He hasn’t got a laptop. He’s got a watch.\nAmy hasn’t got a pet. She hasn’t got a skateboard. She’s\ngot a bike. She hasn’t got a smartphone. She’s got a\nlaptop. She’s got a watch."
+    },
+    {
+      "id": "sb-6-1",
+      "text": "11.08\nRead and listen to the dialogue. What is Alfie's\nopinion of the girl in the photo? What is Rose's opinion?\nAlfie Let's stop and listen. This is a great song.\nRose Hmm. She isn't very good. She can't sing\nAlfie\nShe can play the guitar really well. And her voice\nisn't bad.\nI can't hear the words",
+      "key": "Alfie She can play the guitar really well. Her voice isn’t bad.\nRose She isn’t very good. She can’t sing."
+    },
+    {
+      "id": "sb-6-2",
+      "text": "2 Read the Learn this! box. Find an affirmative, negative and\ninterrogative form of can in the dialogue in exercise 1.\nLEARN THIS. can\n-O: a We use can to talk about ability.\nb The form of can is the same for all persons (l, you, he,\nshe, we, etc.).\nAffirmative: I can play football.\nNegative: They c",
+      "key": "Affirmative She can play the guitar really well. B ut I can play\nthe piano. Negative She can’t sing. I can’t hear the words.\nNo, I can’t. I can’t find my money. Interrogative Can you play\nthe guitar like that? C an I borrow £1, please?"
+    },
+    {
+      "id": "sb-7-1",
+      "text": "1 VOCABULARY Match the pictures with eight of the words\nbelow. Check the meaning of all the words.\nIn the classroom bin blackboard calculator chair\ncomputer cupboard desk eraser exercise book\ninteractive whiteboard pen pencil pencil case\npencil sharpener ruler schoolbag\nshelf",
+      "key": "Left to right, top row eraser, cupboard, pencil case, ruler\nLeft to right, bottom row pencil sharpener, shelf,\nexercise book, bin"
+    },
+    {
+      "id": "sb-7-3",
+      "text": "3 Read the Learn this! box. Underline all the examples of\na / an, some and the in the dialogue in exercise 2.\nLEARN THIS! Articles\nO a The definite article is the. We can use it with singular\nand plural nouns.\nthe chair the books\nb The indefinite article is a, or an if the noun begins with a\nvowel s",
+      "key": "Have you got a pencil and an eraser? I ’ve got a pencil, but\nI haven’t got an eraser. T he pencil is on my desk. H ave you\ngot a coloured pen? N o, but I’ve got some coloured pencils."
+    },
+    {
+      "id": "sb-8-1",
+      "text": "1\nVOCABULARY Work in pairs. Put the family members below into three\ngroups: a) female b) male c) male or female. Then listen and check.\nFamily members aunt brother child / children cousin daughter\nfather (dad) grandchild / grandchildren granddaughter grandfather (grandad)\ngrandmother (grandma)\ngrand",
+      "key": "a female aunt, daughter, granddaughter, grandmother\n(grandma), mother (mum), niece, sister, wife\nb male brother, father (dad), grandfather (grandad),\ngrandson, husband, nephew, son, uncle\nc male or female child / children, cousin, grandchild /\ngrandchildren, grandparent, parent"
+    },
+    {
+      "id": "sb-9-4",
+      "text": "4 Work in pairs. Write four more sentences like the ones in\nexercise 2.\nLOOK OUT!\na We add -in-law for relationships from a marriage.\nfather-in-law = your husband's father/ your wife's father\nbrother-in-law = your sister's husband/ your wife's brother\nb We add step for relationships from a remarriag",
+      "key": "(Possible answers)\nNathan is Rosie’s husband.\nClare is Tom’s wife.\nMartin is Harry’s grandfather / grandad.\nPoppy, Harry and Mia are Jessica’s cousins.\nJessica is Sophie’s daughter.\nMia and Poppy are Mike’s nieces.\nLiz is Harry’s aunt.\nHarry is Sophie’s nephew."
+    },
+    {
+      "id": "sb-9-8",
+      "text": "8 Complete the quiz with words from exercise 1. Then do the\nquiz in pairs.\nFamous families\n1\nWho is this man?\nIs he Beyoncé's ...\na\nb\nh\nb\n2\nThese girls have got a\nfamous f _ _ - -_. Who is he?\na Will Smith\nb Jay Z\nc Barack Obama\n3\nWhat is the relationship\nbetween these two\nHollywood stars - Jon Voig",
+      "key": "1 a cousin b husband (correct answer) c brother\n2 father, c\n3 a niece b daughter (correct answer) c husband\n4 a son b nephew c grandson (correct answer)"
+    },
+    {
+      "id": "sb-10-4",
+      "text": "4 Find all the other examples of the present simple in the\ntext in exercise 2. Which ones end in -s? Why?",
+      "key": "is a TV comedy are scientists They work together they\nshare a flat often visit them Penny lives opposite She\nworks in a restaurant She likes Leonard and Sheldon they\nare very different comes from this contrast It’s a simple\nidea w atch and enjoy people love shows\nSome of the verbs end in -s because the subject of the\nsentence is the third person singular."
+    },
+    {
+      "id": "sb-12-2",
+      "text": "21.21 Read and listen to the dialogue. Check your ideas\nfrom exercise 1.\nSarah What's this on TV?\nJake\nI don't know. It's a sitcom, I think. It's really funny.\nTom\nBut Sarah and I want to watch the football! It's\nBarcelona against Chelsea.\nJake\nI don't like football.\nSarah\nBut I hate sitcoms! And To",
+      "key": "They are probably brother and sister. They are fighting\nover the remote control because they want to watch\ndifferent programmes on TV."
+    },
+    {
+      "id": "sb-12-7",
+      "text": "7 Write true sentences about yourself. Use the present\nsimple affirmative or negative and the phrases below.\n1 get up early on Saturdays\nI don't get up early on Saturdays\n2 play ice hockey\nI play...\n3 walk to school every day\n4 use computers at schoo\n5 watch TV every evening\n6 argue a lot with my fr",
+      "key": "1 I get up / don’t get up early on Saturdays.\n2 I play / don’t play ice hockey.\n3 I walk / don’t walk to school every day.\n4 I use / don’t use computers at school.\n5 I watch / don’t watch TV every evening.\n6 I argue / don’t argue a lot with my friends.\n7 I speak / d on’t speak French.\n8 I like / don’t like dancing.\n9 I do / don’t do a lot of homework at weekends."
+    },
+    {
+      "id": "sb-13-3",
+      "text": "3 Read the Learn this! box. Match the nouns highlighted in\norange in the text with one of the rules (a-g). Give the\nsingular and plural forms of each noun.\nLEARN THIS! Singular and plural forms\na To make the plural of most nouns we add -s.\nbrother → brothers\nb If the noun ends in -s, -sh, -ch, -z, o",
+      "key": "a footballer – footballers, jacket – jackets, team – teams,\nfan – fans, son – sons, daughter – daughters b dress –\ndresses c tattoo – tattoos, hero – heroes d family –\nfamilies, company – companies, accessory – accessories,\ncharity – charities e boy – boys f wife – wives\ng child – children"
+    },
+    {
+      "id": "sb-13-8",
+      "text": "8 Work in pairs. Write three questions about the Beckhams.\nDo not show your partner.\nIs David Beckham American?",
+      "key": "(Possible questions)\nIs David Beckham British? (Yes, he is.)\nAre Romeo and Cruz boys? (Yes, they are.)\nIs Victoria David’s daughter? (No, she’s his wife.)\nAre Posh and Becks married? (Yes, they are.)\nIs Harper David’s son? (No, she isn’t. She’s his daughter.)"
+    },
+    {
+      "id": "sb-14-4",
+      "text": "4 Work in pairs. Choose the best summary of the text: a, b\nor c. What is wrong with the other summaries?\na A lot of teenagers do not get on well with their brothers\nand sisters. However, the relationship is usually good when\nthey are adults.\nb Some teenagers get on well with their brothers and siste",
+      "key": "The best summary is a.\nSummary b isn’t correct because the main idea is that\nit is common for siblings not to get along as children.\nHowever, this changes for most people when they\nbecome adults. Summary c isn’t correct because the\narticle says the opposite: people do change."
+    },
+    {
+      "id": "sb-16-2",
+      "text": "2\n1.23\nRead and listen to the dialogue. Identify Tom and\nBrendan in the photo above.\nAmy Do you know Tom?\nToby No, I don't. Is he here?\nAmy Yes, he's over there.\nToby Where? What does he look like?\nAmy He's tall and he's got short dark hair.\nToby Is he next to Milly?\nAmy No, that's Brendan. Tom's go",
+      "key": "Tom is the boy near the left side of the photo. Brendan is\nthe boy on the right."
+    },
+    {
+      "id": "sb-16-5",
+      "text": "5 1.24 Listen again. Correct the mistakes in the\ndescriptions.\n1 Dan is quite short, with long red hair. His T-shirt is blue and\nhe wears glasses.\n2 George has got a black jacket and blue trousers. He's got\ncurly fair hair and green eyes.\n3 Kate is tall, with curly fair hair. Her dress is blue.",
+      "key": "1 Dan is quite short, with medium-length red hair. His\nT-shirt is black and he wears glasses.\n2 George has got a blue jacket and black trousers. He’s\ngot wavy fair hair and blue eyes.\n3 Kate is tall, with curly dark hair. Her dress is green."
+    },
+    {
+      "id": "sb-17-1",
+      "text": "1 Read the personal profiles from a student website. What\ninformation does each person include? Tick the correct\nboxes in the table.\nLauren\nJames\nFamily\nHome\nSchool subjects\nHobbies\nAmbition\nIntroducing your new\nHead Girl and Head Boy\nHi! I'm Lauren, your friendly new\nHead Girl. I'm seventeen years ",
+      "key": "Family Lauren: n/a; James: a brother in Year nine, a step-\nsister at university\nHome Lauren: an apartment near the school; James: n/a\nSchool subjects Lauren: science, art, languages; James: n/a\nHobbies Lauren: films, dancing, reading, shopping; James:\nplaying the guitar, writing songs, listening to music,\nplaying football and tennis, surfing\nAmbition Lauren: be a vet, travel; James: be a song-writer"
+    },
+    {
+      "id": "sb-17-2",
+      "text": "2 SPEAKING Work in pairs. Ask and answer the questions.\nStudent A: Ask about Lauren. Student B: Ask about James.\n1 What year is Lauren / James in?\n2 What are Lauren's / James's hobbies?\n3 What is Lauren's / James's ambition?",
+      "key": "1 Lauren and James are in Year 12.\n2 Lauren’s hobbies are films, dancing, reading, shopping.\nJames’s hobbies are playing the guitar, writing songs,\nlistening to music, playing football and tennis, surfing.\n3 Lauren’s ambition is to be a vet. James’s ambition is to\nbe a song-writer."
+    },
+    {
+      "id": "sb-17-3",
+      "text": "3 VOCABULARY Which of the personality adjectives below\ndo Lauren and James use to describe themselves? Choose\ntwo from the list to describe yourself.\nPersonality adjectives creative friendly hard-working\nhonest patient polite sensible\n→ Vocabulary Builder Personality adjectives: page 117",
+      "key": "Lauren: friendly; James: creative and hard-working"
+    },
+    {
+      "id": "sb-17-5",
+      "text": "5 Read Writing Strategy 1. What contractions can you find in\nthe personal profiles in exercise 1? Say them in full.\nI am Lauren.. and l am in Year twelve.\nWriting Strategy 2\nAlways write in paragraphs. A paragraph usually contains\ntwo or more sentences about the same topic. When you\nprepare a piece ",
+      "key": "I’m – I am It’s – It is I’ve got – I have got My name’s – My\nname is She’s – She is"
+    },
+    {
+      "id": "sb-17-6",
+      "text": "6 Read Writing Strategy 2. How many paragraphs does each\nprofile in exercise 1 contain? Is each paragraph about one\ntopic or more than one topic?",
+      "key": "Lauren’s paragraph contains five paragraphs. James’s\ncontains four. Each paragraph is about one topic."
+    },
+    {
+      "id": "sb-17-7",
+      "text": "7 Plan a personal profile about yourself. Look at the table\nin exercise 1 and choose three or four topics you want to\ninclude. Make a paragraph plan. Begin like this:\nParagraph 1 Topic: ...\nInformation:...",
+      "key": "(Possible answer)\nParagraph 1 Topic: family; Information: brothers and sisters\nParagraph 2 Topic: school; Information: favourite subjects\nParagraph 3 Topic: hobbies; Information: playing the piano,\npainting, running\nParagraph 4 Topic: ambition; Information: personality, to be\na doctor"
+    },
+    {
+      "id": "sb-17-8",
+      "text": "8 Write your personal profile following your plan from\nexercise 7. Remember to use contractions.\nCHECK YOUR WORK\n• Have you ...\n• followed your paragraph plan?\n• used contractions?\n• checked your spelling and grammar?",
+      "key": "(Model answer)\nMy name is Dan. I’m in Year 10. I live with my parents and\ngrandmother.\nMy favourite subjects are English and science. I’m keen on\nscience because I’m interested in plants and animals.\nSport is an important part of my life. I love running and I’m\non the school athletics team. I love music too and I play\nthe piano.\nI’m patient and hard-working. My ambition is to become a\ndoctor. I want to do good in the world and to help people."
+    },
+    {
+      "id": "sb-19-5",
+      "text": "5 SPEAKING Work in pairs. Read the Recycle! box. Then\ncheck your answers to exercise 4 by asking about Sofia's\nroutine.\nWhat time does she get up?\nShe gets up at...",
+      "key": "(Possible answers)\n2 What time does she have breakfast? She has breakfast\nat quarter to eight.\n3 What time does she arrive at school? She arrives at\nschool at twenty past eight.\n4 What time does she have lunch? She has lunch at\nquarter past twelve.\n5 What time does she leave school? She leaves school at\nten to three.\n6 What time does she have dinner? She has dinner at half\npast seven.\n7 What time does she go to bed? She goes to bed at ten\no’clock."
+    },
+    {
+      "id": "sb-20-2",
+      "text": "2 Read the Learn this! box and then look at the table. How\nmany examples of have to can you find in exercise 1? Are\nthey affirmative, negative or interrogative?\nhave to\nAffirmative\n1/ You / We / They have to study music.\nHe / She/ It has to arrive at 9 o'clock.\nNegative\n1/ You / We / They don't have",
+      "key": "How old do you have to be to go to the BRIT School?\n(interrogative) You have to be between fourteen\nand nineteen years old to study at the BRIT School.\n(affirmative) You also have to live in or near London.\n(affirmative) Do you have to pay to study there?\n(interrogative) The BRIT School is a state school so the\nstudents don’t have to pay. (negative) Do the students\nhave to study all the normal subjects? (interrogative) As\na state school, the BRIT School has to follow the National\nCurriculum. (affirmative)"
+    },
+    {
+      "id": "sb-21-4",
+      "text": "4\n1,30\nListen to the sentences A-G. Write the number,\ndate or time that you hear in each sentence.",
+      "key": "A 3 October / October 3rd / the third of October\nB 1,100 / one thousand one hundred\nC 1 April 2001 / April 1st 2001 / 01.04.2001 / the first of\nApril, two thousand and one\nD 7.45 / quarter to eight\nE 1,000 / one thousand\nF June 2019 / June, two thousand and nineteen\nG 7.30 / seven thirty"
+    },
+    {
+      "id": "sb-21-7",
+      "text": "7\nSPEAKING Work in pairs. Compare your school with the\nBrooklyn Free School. Write five sentences and tell the\nclass.\nOur school has... students, but there are only\nabout 120 students in the Brooklyn Free School.\nAt our school we have to.., but at\nthe Brooklyn Free School they...",
+      "key": "(Possible answers) Brooklyn Free School students choose\ntheir own subjects. At our school, we have to do certain\nsubjects. Brooklyn Free School students don’t have to take\nexams, but we do. Brooklyn Free School teachers don’t\nusually mark students’ work, but our teachers mark our work.\nAt Brooklyn Free School, there are classes with students from\nages twelve to eighteen. At our school, classes aren’t mixed\nages. Brooklyn Free School starts at nine in the morning, but\nour school starts at half past eight. There aren’t many rules at\nBrooklyn Free School, but our school has got a lot of rules."
+    },
+    {
+      "id": "sb-22-1",
+      "text": "• Focus attention on the photo. Ask:\nWho are the people in the photo? (e.g. They’re students.)\nWhere are they? (e.g. at school, in a corridor)\nWhat are they doing? (They’re talking about something.)\n• Play the audio for students to answer the questions.",
+      "key": "Maisie is in photography club and music club. Ben plans\nto join photography club."
+    },
+    {
+      "id": "sb-22-9",
+      "text": "9 Think of possible answers to questions 1-5 in exercise 8\nusing the other question words.\n1 When do you get to school? At 8.30a.m.'",
+      "key": "(Possible answers)\n1 At nine o’clock. 2 I’m (name). 3 Every day.\n4 maths, English, French, chemistry, geography, history,\nbiology, P.E., R.E. and economics.\n5 At the shopping centre. 6 (none)"
+    },
+    {
+      "id": "sb-25-5",
+      "text": "5 VOCABULARY Put the highlighted adjectives in the text\ninto four pairs of opposites.",
+      "key": "safe – dangerous narrow – wide large – small wet – dry"
+    },
+    {
+      "id": "sb-26-3",
+      "text": "3 Read the Learn this! box. Find five more examples of should\nin the dialogue in exercise 1. Are they affirmative, negative\nor interrogative?\nLEARN THIS! should\nWe use should / shouldn't + infinitive without to to give advice.\nAffirmative\nShe should take her exam again.\nNegative\nYou shouldn't go out",
+      "key": "What do you think I should do? (interrogative) S hould I\ntell Mrs Jones? (interrogative) N o, you shouldn’t do that.\n(negative) B ut you should talk to Sophie. (affirmative) Y ou\nshould explain that copying work is a bad idea … (affirmative)"
+    },
+    {
+      "id": "sb-27-3",
+      "text": "3 Read the Learn this! box. Find nine examples of imperatives\nin the announcements in exercise 2.\nLEARN THIS! Imperatives\n- We use imperatives to give orders and instructions, and to\nmake requests.\nWe form affirmative imperatives with the infinitive form\nof the verb without to.\nBe quiet! Write the a",
+      "key": "Come to our musical! Please help us … Come and\nsee us dance! Come and hear us sing! Please bring\na friend! Buy your ticket … Then come to judo club\nDon’t worry! Call Sarah on 0990 237789 …"
+    },
+    {
+      "id": "sb-27-5",
+      "text": "5 Read the Writing Strategy. Then read the task and make\nnotes using the questions below to help you.\nYou are organising an event at your school. Write an\nannouncement to publicise the event and encourage people\nto attend. Remember to include information about the time\nand place of the event and how",
+      "key": "(Possible answers)\n1 sports day\n2 on the school playing fields\n3 Monday 7 March, 9.00–3.00\n4 a great way to have fun with your classmates and do sport\n5 races and competitions, delicious food, awards\n6 visit school website for more details"
+    },
+    {
+      "id": "sb-27-6",
+      "text": "6 Write an announcement for the event. Use your notes from\nexercise 5.\nCHECK YOUR WORK\n, Have you...\n• used some imperatives?\n• included all the information in exercise 5?\n• checked your spelling and grammar?",
+      "key": "(Possible answer)\nSports day!\nCome and run, jump and play on Monday 7 March,\n9.00–3.00 on the school playing fields!\nThis is a great way to have fun with your classmates and\ndo sport. There will be races and competitions, delicious\nfood and awards.\nVisit the school website for more details."
+    },
+    {
+      "id": "sb-28-2",
+      "text": "2 Read the text. Choose the correct answer, (A-D).\nHomeschooling - how does that work?\nOliver Kent is a thirteen-year-old student, but he doesn't go to\nschool. He's homeschooled. His dad is his teacher and teaches\nOliver at home.\n'People always ask me the same questions, says Oliver, who lives in\nLo",
+      "key": "1 B (he’s homeschooled; I can get up when I want to)\n2 D (I have got internet lessons on English, maths and\npolitics.) 3 D (Brazil, Greece, Cuba, Turkey and 24 other\ncountries say ‘no’ to homeschooling.) 4 B (I learn the same\nthings. It’s just that that I learn them in a different way.)\n\n\nListening"
+    },
+    {
+      "id": "sb-29-6",
+      "text": "6 Complete the text with the correct answer, (A-C).\nEmily and her sisters\nEmily Mathias is a normal teenage girl. She lives with her parents\nand three sisters. She likes animals and she can'\nthe cello very well. A cello is like a really big violin. But her\nfamily is different from most families.?\n? ",
+      "key": "1 A 2 C 3 C 4 A 5 A 6 A 7 B 8 C 9 C 10 C\nSpeaking"
+    },
+    {
+      "id": "sb-29-8",
+      "text": "8 Work in pairs. Ask and answer questions about one of the\nproblems below.\nYour brother isn't at home and he isn't at school.\nYou can't sleep at night\nYou don't want to go to your friend's party.\nYour English classes are very difficult.\nA Greet B. Ask if he or\nshe is OK.\nB Say how you feel. Say\nthat",
+      "key": "(Model answer)\nA Hi. Are you OK?\nB No, actually. I’m upset. Can I ask your advice about\nsomething?\nA Of course. What’s the problem?\nB My English classes are very difficult. I got a C on my\ntest, but I want an A.\nA Oh, that’s too bad. But you shouldn’t worry about it too\nmuch. You should speak to your teacher and ask him to\nhelp you. And you should study more for the next test.\nB Thanks!\nWriting"
+    },
+    {
+      "id": "sb-29-10",
+      "text": "10 A don't\nisn't\nC doesn't\nWhen you're doing a guided dialogue or conversation task,\nyou'll find it useful to know set phrases for a variety of\nsituations, such as for making requests, asking for help and\ngiving advice. Try to learn these set phrases and be prepared\nto adapt them for different situa",
+      "key": "(Model answer)\nCOOKING CLUB\nDo you want to make new friends and learn to cook?\nCome and join us at cooking club!\nWhere: The Food Tech room\nWhen: Every Wednesday at 3.30\nEvery week, we make a different dish. You will get a\nshopping list one week before each meeting and we\nwill all make the same recipe.\nIf you have any questions, contact Mrs Bailey on extension\n4211."
+    },
+    {
+      "id": "sb-31-5",
+      "text": "5 2.04\nListen to four people talking about their clothes.\nWhich clothes from exercise 2 does each person mention?\nSpeaker\nClothes\nArchie\ntracksuit, trainers\nViolet\nArthur\nLola\nRECYCLE! Adverbs of frequency\n•• We use adverbs of frequency to say how often something\nhappens. They usually go before the ",
+      "key": "Archie tracksuits, trainers\nViolet skirt, jacket, pyjamas\nArthur jeans, sweatshirt, tracksuit\nLola trousers, sweatshirt, leggings, T-shirt"
+    },
+    {
+      "id": "sb-32-3",
+      "text": "3 Read the Learn this! box. What examples of the present\ncontinuous can you find in the tweets in exercise 2?\nLEARN THIS! Present continuous\na We use the present continuous to talk about events\nthat are happening now.\nb We form the present continuous with the present\nsimple of be and the -ing form o",
+      "key": "We’re having a fantastic time … F inally, it isn’t raining!\nThe sun is shining! W e’re dancing … W hat are you doing?"
+    },
+    {
+      "id": "sb-33-1",
+      "text": "1\nVOCABULARY Put the adjectives into pairs of opposites.\nAdjectives to describe clothes baggy casual dark\nlight long long-sleeved patterned plain short\nshort-sleeved smart tight\nlong - short, baggy-",
+      "key": "baggy – tight; casual – smart; dark – light; long – short;\nlong-sleeved – short-sleeved; patterned – plain"
+    },
+    {
+      "id": "sb-33-2",
+      "text": "2 SPEAKING Describe the photos. What are the models\nwearing? Use clothes and colours from lesson 3A and\nadjectives from exercise 1. Do you like their clothes?\nListening Strategy\nn English, words with more than one syllable have\nthe stress on one of the syllables. This means that the\nsyllable is loud",
+      "key": "(Possible answers)\nTop left She’s wearing a red long-sleeved dress and long\nblack boots. (She’s also wearing large sunglasses, black\ntights and a red leather belt.)\nTop right He’s wearing a (light) blue long-sleeved top, a\ngrey scarf, dark blue jeans and white trainers.\nBottom left He’s wearing a long dark blue coat, a light\ngreen shirt and baggy grey shorts. He’s wearing black\nsocks and dark trainers.\nBottom right She’s wearing a patterned long-sleeved top,\ntight jeans and (high-heeled) boots."
+    },
+    {
+      "id": "sb-35-1",
+      "text": "1 SPEAKING Work in pairs. Describe the photo. What can\nyou see? Where are the people? What are they doing? Use\nthe words below to help you.\nverbs make sew sit work\nnouns clothes desk factory sewing machine\ntrousers woman worker",
+      "key": "(Possible answer)\nThe women are working in a factory. They’re making clothes.\nThey sit at a desk and sew things all day. They use sewing\nmachines. One woman in the photo is making trousers."
+    },
+    {
+      "id": "sb-35-3",
+      "text": "3 VOCABULARY Match the highlighted adjectives in the text\nwith adjectives below that have the opposite meaning.\nCommon adjectives awful bad different easy\nexpensive false fantastic high new right\nsafe small",
+      "key": "good – bad cheap – expensive large – small\nlow – high dangerous – safe terrible – fantastic\nsimilar – different true – false wrong – right\ndifficult – easy great – awful old – new"
+    },
+    {
+      "id": "sb-36-1",
+      "text": "1\n1 SPEAKING Look at photos 1-4. What are the people doing?\nUse the phrases below. How often do you do these things?\ngo weight training put on make-up straighten your hair\ntake a selfie",
+      "key": "1 A girl is straightening her hair in front of a mirror.\n2 The girl is taking a selfie.\n3 The boy is exercising / (going) weight training.\n4 The girl is putting on make-up."
+    },
+    {
+      "id": "sb-36-2",
+      "text": "2 Read the text quickly. How many of the writers believe that\nthere is a problem with teenagers and image?\nReading Strategy\nWhen you do a matching task, check your answers by\ntrying to match the extra headings with each paragraph.\nThey should not match any of them.",
+      "key": "Four of the writers believe that there is a problem with\nteenagers and image: Maria Baker, Sophie Ellis, Bob\nFrench and Luke Woods."
+    },
+    {
+      "id": "sb-36-4",
+      "text": "4 Explain why the extra headings in exercise 3 do not match\nany of the paragraphs.",
+      "key": "Heading E mentions fashion shows (catwalk) and clothes\nshops. The article doesn’t mention models or fashion shows.\nHeading G mentions the past. The article mentions hairstyles,\nbut it doesn’t say anything about hairstyles from the past."
+    },
+    {
+      "id": "sb-36-6",
+      "text": "6 VOCABULARY Find the eight highlighted adjectives in the\ntext. Write them as four pairs of opposites.",
+      "key": "female – male artificial – natural ordinary – special\nfake – real"
+    },
+    {
+      "id": "sb-38-2",
+      "text": "2\n• 2.13 Read and listen to the phone call. Find three free-\ntime activities in the dialogue.\nHarry\nHi, Imogen. How are things?\nImogen\nHi, Harry. Fine, thanks. What are you doing?\nHarry\nI'm just doing my homework.\nImogen\nDo you fancy going swimming on Saturday\nafternoon?\nHarry\nI'm afraid I can't. I'",
+      "key": "going swimming; going shopping; playing football"
+    },
+    {
+      "id": "sb-38-3",
+      "text": "3 Read the Learn this! box. How many examples of the\npresent continuous for future arrangements are there in\nthe dialogue in exercise 2?\nLEARN THIS! Present continuous for future\narrangements\nWe can use the present continuous to talk about future\narrangements.\nWhat are you doing on Saturday evening?",
+      "key": "There are two examples: I’m going shopping with my\nsister. I’m playing football."
+    },
+    {
+      "id": "sb-38-7",
+      "text": "7 KEY PHRASES Divide the key phrases below into two\ncategories: agreeing to a suggestion and declining a\nsuggestion.\nAgreeing to and declining suggestions\nCool.\nThat sounds fun.\nGreat idea.\nSorry, but I'm busy.\nI'm afraid I can't.\nYes, l'd love to.\nNo, thanks.",
+      "key": "Agreeing to suggestions Cool. Great idea.\nThat sounds fun. Yes, I’d love to.\nDeclining suggestions I’m afraid I can’t. No, thanks.\nSorry, but I’m busy."
+    },
+    {
+      "id": "sb-39-3",
+      "text": "3 Read the Learn this! box. Find examples of all five linking",
+      "key": "My sister loves it too, but she can’t borrow it.\nI’m listening to music and trying to finish my geography\nproject.\nMy brothers are playing football in the garden, so I want\nto go outside too!\nDo you fancy going to the cinema on Saturday or meeting\nfor a coffee?\nI can’t go on Saturday because my grandparents are\ncoming to dinner."
+    },
+    {
+      "id": "sb-39-5",
+      "text": "5 Plan an email for the task in exercise 2. Look at the\nquestions below and make notes.",
+      "key": "(Possible answers)\n1 at home, studying very hard for school 2 a wallet\n3 going to England to watch Manchester United play a\nfootball match 4 go walking or rock climbing in the\nmountains"
+    },
+    {
+      "id": "sb-39-6",
+      "text": "6 Write an email following your plan from exercise 5.\nRemember to include suitable phrases from exercise 4.\nCHECK YOUR WORK\n• Have you...\n• covered all four points in the task?\n• used a few social phrases?\n• used linking words to join your ideas?\n• checked your spelling and grammar?",
+      "key": "(Model answer)\nHello Dave,\nThanks for your email. How are things? I’m at home\nstudying tonight because we have got a science test\ntomorrow and a maths test on Friday. There’s a lot to learn,\nbut I think I’m ready for the tests.\nThanks so much for the wallet. It’s great! I need a new\nwallet, so this is the perfect gift!\nDo you fancy going walking or rock climbing in the\nmountains next weekend? I can’t go on Sunday because\nI’m going to England to watch Manchester United play a\nfootball match.\nThat’s all from me.\nTake care,\nJack"
+    },
+    {
+      "id": "sb-40-1",
+      "text": "• Focus attention on the photos. If students want to know\nthe words for the different foods, tell them they will find\nout a little later.\n• Then check the meaning of the words a–d, especially\nfilling (making your stomach feel full).\n• As a class, decide which meals look tasty, healthy, quick to\nmake",
+      "key": "(Possible answers)\na Students’ own answers b 2, 5, 6 c 2, 6 d 1, 3"
+    },
+    {
+      "id": "sb-40-2",
+      "text": "2\n62.16\nVOCABULARY Listen and repeat the words in the list. Then match them with\nthe photos in exercise 1. Which food items are not in any of the photos?\nFood apples beef bread carrots cheese chicken crisps cucumber\nfish green / red peppers lamb lemon lettuce melon mushrooms olives\nonion pasta peas ",
+      "key": "1 sausages, (mashed) potato, peas, onion\n2 bread, cheese, olives\n3 prawns, pasta\n4 crisps, tomatoes, sandwiches\n5 fish, mushrooms\n6 melon, strawberries, pineapple\nNot shown: apples, beef, carrots, chicken, cucumber,\ngreen / red peppers, lamb, lemon, lettuce, rice"
+    },
+    {
+      "id": "sb-41-3",
+      "text": "3 Work in pairs. Identify six types of food from exercise 1 in\nthe photos above. Use the phrases below to help you.\nIt looks like... I think it's... That's definitely...\nl agree. / I disagree. / I'm not sure about that.\nLEARN THIS! Countable and uncountable nouns\nstrawberry\nstrawberries\nb Uncountabl",
+      "key": "bread, mushroom, lemon / orange, potato, beef / lamb,\npasta, fish, pineapple"
+    },
+    {
+      "id": "sb-41-4",
+      "text": "4 Read the Learn this! box. Then add the words in exercise 2\nto the table below.\nCountable nouns\nUncountable nouns\napples,\nbeef,\n→→ Grammar Builder 4A page 130",
+      "key": "Countable: apples, carrots, crisps, cucumber, green /\nred peppers, lemon, melon, mushrooms, olives, onion,\npeas, pineapple, potato, prawns, sandwiches, sausages,\nstrawberries, tomatoes\nUncountable: beef, bread, cheese, chicken, fish, lamb,\nlettuce, pasta, rice"
+    },
+    {
+      "id": "sb-41-5",
+      "text": "5 Look at the breakfast menu below. Which five nouns in the\nmenu are countable? How do you know?\n2C 2\nbreakfast\n• cereal\n• tea\n• coffee\n• eggs\n• hot chocolate\n• pancakes\n• yoghurt\n• milk\n• toast (butter, jam, honey) • apple juice\n• cakes\n• orange juice\n• bananas\n• Water\n• oranges",
+      "key": "Eggs, pancakes, cakes, bananas and oranges are all\ncountable because they are plural."
+    },
+    {
+      "id": "sb-41-8",
+      "text": "8\n2.18\nListen to four people talking about meals. Which\nquestion (a-e) is each speaker answering? There is one\nextra question.\na What do you have for breakfast and when do you have it?\nb What do you usually have for lunch during the week?\nc What do you have for lunch at weekends?\nd What are your fav",
+      "key": "Speaker 1: d Speaker 2: e Speaker 3: b Speaker 4: a"
+    },
+    {
+      "id": "sb-42-5",
+      "text": "5 Read the Learn this! box. Then find all the examples of\nsome and any in the text in exercise 2. Are the nouns\ncountable or uncountable?",
+      "key": "There’s some meat and some fish. (uncountable)\nThere are some vegetables too. (countable)\nThere are some crisps … (countable)\n… there aren’t any biscuits or sweets … (countable)\n… there isn’t any chocolate. (uncountable)\nThere aren’t any ready-made meals … (countable)\n… there isn’t a microwave … (countable)\nAre there any things … (countable)"
+    },
+    {
+      "id": "sb-43-1",
+      "text": "1\nSPEAKING Work in pairs. Describe the photo. Use the\nwords below to help you.\nverbs not need throw away\nnouns egg fruit rubbish bin vegetables\nadjectives fresh old",
+      "key": "(Possible answer)\nThis person is throwing away food she doesn’t want. She’s\nputting an egg in the rubbish bin with some old fruit and\nvegetables, probably because it isn’t fresh."
+    },
+    {
+      "id": "sb-44-1",
+      "text": "1 • 2.23\nRead and listen to the dialogue. What does Jim\nwant to make? What ingredients does he need?\nSophie What are you doing, Jim?\nJim\nI'm looking for ingredients. How much flour have we\ngot? How many carrots are there?\nSophie\nThere's a little flour in the cupboard, and there are a\nfew carrots in ",
+      "key": "He wants to make a carrot cake. He needs flour, carrots,\nsugar and eggs."
+    },
+    {
+      "id": "sb-44-2",
+      "text": "2 Read the Learn this! box. Underline the examples of how\nmuch, how many, much, many and a lot of in the dialogue.\nLEARN THIS! how much / how many,\nmuch / many / a lot of\na We use how much...? with uncountable nouns.\nHow much rice is there?\nb We use how many...? with countable nouns.\nHow many onions",
+      "key": "How much flour have we got? How many carrots are\nthere? There isn’t much sugar in the bowl. And we\nhaven’t got many eggs. Look, there’s a lot of sugar in the\ncupboard."
+    },
+    {
+      "id": "sb-44-6",
+      "text": "6 Read the Learn this! box. Find an example of a little and an\nexample of a few in the dialogue in exercise 1.\nLEARN THIS! a little and a few\n*: a We use a little with uncountable nouns.\nWeve got a little butter.\nb We use a few with countable nouns.\nThere are a few onions.",
+      "key": "There’s a little flour in the cupboard, and there are a few\ncarrots in the fridge."
+    },
+    {
+      "id": "sb-44-8",
+      "text": "8 Write six sentences about the picture, three true and three\nfalse. Use a lot of, a few, a little, not much and not many.\nThere aren't many... There's a little...\nThere are a lot of...\nThere are a few...",
+      "key": "There are a lot of sandwiches. There are a lot of crisps.\nThere are a few sausages. / There aren’t many sausages.\nThere are a few olives. / There aren’t many olives. There\nare a few tomatoes. / There aren’t many tomatoes. There\nare a few grapes. / There aren’t many grapes. There’s a lot\nof pizza. There’s a little cheese. / There’s not much cheese.\nThere are a lot of strawberries."
+    },
+    {
+      "id": "sb-45-1",
+      "text": "1 SPEAKING Work in pairs. How many foods can\nyou identify in the photo?\nJUNK FOOD\nADVERTISING\nWhat can we do about junk food adverts for children?\nThe World Health Organisation (WHO) believes that\njunk food adverts are responsible for a lot of obesity in\nchildren. It is very worried about this probl",
+      "key": "chips, cheeseburger, doughnuts, crisps, pretzels, pizza,\nfizzy drink / soft drink"
+    },
+    {
+      "id": "sb-46-3",
+      "text": "3 Read the text. Match the names of the restaurants to the\nphotos. What other restaurants are in the text but not in\nthe photos?\nReading Strategy\nWhen you have to complete sentences with information\nfrom a text, start by deciding which part of the text\ncontains the information you need. Remember tha",
+      "key": "1 Zauo 2 Ithaa 3 Dinner in the Sky 4 Hammock Café\nOther restaurants: El Diablo; a restaurant in an old DC-10\naeroplane in Ghana; B.E.D in Miami"
+    },
+    {
+      "id": "sb-48-1",
+      "text": "1\nSPEAKING Describe the photo. What are the people doing?\nWhat are they saying, do you think? Use the words below\nto help you.\nlook at menu order (verb) restaurant\nsit table waiter write\nmenu\nStarters\nRed pepper soup • Thai prawn salad • Mushroom pâté\nMain courses\nRoast beef or lamb\n• Fish and chips",
+      "key": "(Example answer)\nA young couple are sitting at a table in a restaurant or\ncafé. They are ordering some food and the waitress is\nwriting down what they want. The man is looking at the\nmenu.\nThe waitress is asking: What would you like to drink / eat?\nThe customers are saying: Can I have … , please?"
+    },
+    {
+      "id": "sb-48-3",
+      "text": "3 Read the Learn this! box. How many examples of would like\n(affirmative or interrogative) can you find in the dialogue in\nexercise 2?\nLEARN THIS! would like\nD: a We use I'd like... to ask for something in a polite way.\nI'd like some milk, please.\nb We use the question form Would you like...? for of",
+      "key": "There are three examples: I’d like the salad to start, please.\nI’d like the soup to start, please. Would you like anything\nto drink?"
+    },
+    {
+      "id": "sb-49-1",
+      "text": "1 Read the invitations (1-4) and match one of them with\nthe photo. Which invitation is formal?",
+      "key": "The photo matches invitation 3.\nInvitation 2 is the formal one."
+    },
+    {
+      "id": "sb-49-2",
+      "text": "2 Find the following information for each invitation:\n• the event\n• the date and time\n• the place",
+      "key": "Invitation 1 event a BBQ to celebrate a birthday date and\ntime Sunday afternoon, 16 August place the beach\nInvitation 2 event a New Year party date and time Saturday 31\nJanuary from 8 p.m. place27 Stanton Road\nInvitation 3 event a sleepover date and time Saturday 18\nJanuary at 6 place Lisa’s house\nInvitation 4 event a party to celebrate the end of exams\ndate and time the end of June place the village hall in\nGreenwood"
+    },
+    {
+      "id": "sb-49-4",
+      "text": "4 Read the Writing Strategy. Then check the invitation below\nand find four mistakes for each category mentioned.\nHi Anna,\nI having a party at my hose on 16 Febuary to celebrate my\nbirthday. I'm inviting all my friends so it should be grate fun. You\ndon't have to take any food or drink, but can 1 ple",
+      "key": "Hi Anna,\nI’m (grammar) having a party at my house (spelling) on 16\nFebruary (spelling) to celebrate my birthday. I’m inviting\nall my friends so it should be great (spelling) fun. You don’t\nhave to bring (vocabulary) any food or drink, but can I\nplease borrow (vocabulary) your speakers? I’ve got a lot of\nmusic on my MP3 player but I haven’t got (grammar) any\n(grammar) speakers.\nThe (grammar) party starts at 6 p.m. but can you please\ntake (vocabulary) the speakers a few hours before that – in\nthe afternoon? Let me know (spelling) if you can come\n(vocabulary).\nTake care,\nSally"
+    },
+    {
+      "id": "sb-49-5",
+      "text": "5 Write an informal invitation for one of the occasions below.\nInclude the following information:\n• Say why you are holding the party/ event.\n• Say when and where the party / event is (day, date and\ntime.\n• Say what the person you are inviting should do or bring\nwith them.\n• Remind them to confirm i",
+      "key": "(Model answer)\nDear Barry,\nIt’s Children’s Day next week and I’m having a picnic on\nSaturday 20 June to celebrate. I hope you can come. It’s\nbetween 3.00 and 7.00 p.m. I’m inviting the whole class so\nit should be fun.\nYou don’t need to bring any food, but please bring a football.\nPut it in your diary!\nTake care,\nJoanne"
+    },
+    {
+      "id": "sb-50-1",
+      "text": "1 What are Tina and Emmy both wearing?\nA jeans\nB a long-sleeved top\nC trainers\nD a dress\n2 What does the presenter say about the Bath Farmer's\nMarket?\nA There are lots of places to buy clothes.\nB It's a food festival.\nC A festival is happening there at the moment.\nD There aren't many cakes at the ma",
+      "key": "People Places Food The senses\nTV presenter airport curry sight\nchef restaurant dish smell\nguest sweetshop peas sound\nrestaurant- university sausage taste\nowner touch\nscientist"
+    },
+    {
+      "id": "sb-51-5",
+      "text": "5 Read the Strategy. In sentences 1-7 below, write a word\nwhich can complete each gap. Then match the word to the\ncorrect part of speech below.\nadjective adverb article noun preposition verb\n1 I never\nmagazines.\n2 There's an apple in the\n3 He's worried\nMillie.\n4 My sister\nhelps me.\nfashion company.\n",
+      "key": "(Possible answers)\n1 read, verb 2 kitchen, noun 3 about, preposition\n4 often, adverb 5 famous, adjective 6 a, article"
+    },
+    {
+      "id": "sb-51-6",
+      "text": "6 Read the text and add ONE missing word in each gap.\nUpcycling\nLike most people, I know that recycling is good '\nthe environment. When I throw plastic, paper, metal or glass\nI always put it in the recycling box. I\nput it in the rubbish bin. These days I'm\ninterested 4\nupcycling too. That's when you",
+      "key": "1 for 2 away 3 never 4 in 5 There 6 of 7 The\n8 to 9 at 10 are\nSpeaking"
+    },
+    {
+      "id": "sb-51-8",
+      "text": "8 Work in pairs or in groups of three.\nStudents A and B: You are customers. Look at the menu and\nfollow the points below.\nStudent C: You work at the restaurant. Serve the customers.\n• Ask for a table\n• Ask for the menu\n• Order a main course, and a starter or a dessert\n• Ask for the bill\nmenu\nThe Int",
+      "key": "(Model answer)\nA Can we have a table for two, please?\nC Yes, of course. Come with me.\nB May we see the menu, please?\nC Of course. Here it is.\nA I’d like the soup to start, please.\nC Certainly. And for your main course?\nA I’ll have the curry.\nC Excellent. And for you?\nB I’d like to start with the Italian salad.\nC Certainly. And for your main course?\nA I’ll have the Japanese pizza.\nLater\nC Would you like anything else?\nA No, thank you. We’d like the bill, please.\nC Certainly.\n\n\nWriting"
+    },
+    {
+      "id": "sb-51-10",
+      "text": "10 You are studying fashion. It's the end of term next week.\nWrite an invitation for your end-of-term fashion party.\nInclude the information below.\n• why you are having the party\n• when and where it is\n• what you want the person you're inviting to wear\n• what you want them to bring with them",
+      "key": "(Model answer)\nWe’re planning a party to celebrate the end of term.\nWould you like to join us? We’re meeting on Friday 25\nNovember at Ruby’s Café. The theme of the evening is\nthe 1960s, so please come dressed in 1960s fashion. And\ndon’t forget to bring 1960s music to play on Ruby’s sound\nsystem!"
+    },
+    {
+      "id": "sb-53-8",
+      "text": "8 VOCABULARY Check the meaning of the prepositions of\nplace below. Find two pairs of opposites and one pair which\nmean the same\nPrepositions (place)\nin / inside in front of\nbehind between closeto\nnear\nnext to opposite outside",
+      "key": "Opposites behind / in front of; in or inside / outside\nMean the same close to / near (also in / inside)"
+    },
+    {
+      "id": "sb-54-1",
+      "text": "• Ask: What do you know about New York City?\n• Students may come up with ideas that you cannot\nconfirm, but do not worry about this. Say or elicit: New\nYork isn’t the capital of the USA, but it’s a very important city.\nIt’s in the east of the country. It’s cold in the winter and hot in\nthe summer. I",
+      "key": "Photo A is Los Angeles and photo B is New York."
+    },
+    {
+      "id": "sb-54-8",
+      "text": "8 Find one mistake in each sentence and correct it.\n1 The afternoons are often sunnyer than the mornings.\n2 The shops in the town centre are more expensive the\nshops in the shopping centre.\n3 lenjoy maths, but I'm gooder at English\n4 The houses are more expensive and more larger in the\nwest of the c",
+      "key": "1 The afternoons are often sunnier than the mornings.\n2 The shops in the town centre are more expensive than\nthe shops in the shopping centre. 3 I enjoy maths, but I’m\nbetter at English. 4 The houses are more expensive and\nlarger in the west of the city. 5 Big cities are always more\nexciting than small cities."
+    },
+    {
+      "id": "sb-55-1",
+      "text": "1 VOCABULARY Divide the words below into town' and\n'country'. Do some words belong to both groups?\nTown and country crowd farm field hill lake\noffice block shopping centre street traffic valley\nvillage wood",
+      "key": "Town crowd, hill, lake, office block, shopping centre, street,\ntraffic, wood Country farm, field, hill, lake, valley, village, wood"
+    },
+    {
+      "id": "sb-55-2",
+      "text": "2 SPEAKING Describe the photos below. Which of the things\nin exercise 1 can you see?",
+      "key": "Top photo: field, hill, valley, village, wood\nBottom photo: crowd, street, shopping centre, traffic"
+    },
+    {
+      "id": "sb-56-2",
+      "text": "• 2.34\n2\nRead and listen to the\ndialogue. How do they decide to\ntravel from Scotland to London?\nMartha Were going to London\nthis weekend. How shall we\nget there? Train, coach, or plane?\nWell, the plane is certainly the quickest\nand easiest, but it's also the most expensive.\nYes, the train and coach ",
+      "key": "They decide to travel from Scotland to London by train."
+    },
+    {
+      "id": "sb-56-7",
+      "text": "7 Compare the different ways of travelling in cities. Give\nyour opinions. Make sentences using comparative and\nsuperlative adjectives.\n1 quick - buses / walking / bicycles\nBicycles are quicker than walking, but buses are the\nquickest.\n2 convenient -trams / buses / taxis\n3 slow - the underground / bu",
+      "key": "(Possible answers)\n2 Trams are more convenient than buses, but taxis are\nthe most convenient. 3 The underground is slower\nthan motorbikes, but buses are the slowest. 4 Trams\nare more expensive than buses, but taxis are the most\nexpensive. 5 Motorbikes are dirtier than bikes, but cars\nare the dirtiest. 6 Bicycles are cheaper than buses, but\nwalking is the cheapest."
+    },
+    {
+      "id": "sb-57-2",
+      "text": "2 Read the text and check your ideas from exercise 1. Would\nyou like to race the tube? Why? / Why not?",
+      "key": "The man is trying to run between two underground\nstations faster than the tube train makes the journey."
+    },
+    {
+      "id": "sb-57-5",
+      "text": "5 Read the Look out! box. Find two examples of arrive at in\nthe text in exercise 2.",
+      "key": "When the train arrives at the station, and the doors open,\nyou get off the train … When you arrive at the second\nstation, you have to catch the same train."
+    },
+    {
+      "id": "sb-58-4",
+      "text": "4 Explain the significance of these numbers and\nmeasurements from the texts.\nText A: 1.7 million\n400 metres\n50 square metres\nText B: 2,000\n70\n300 km\nText C: eight million 60,000\n90%\nCuritiba has a population of about 1.7 million.",
+      "key": "Text A 1.7 million: the city’s population; 400 metres: the\nfurthest distance to a bus stop; 50 square metres: the\ngreen space per person\nText B 2,000: the city’s population; 70: the age of the city in\nyears; 300 km: the length of the roads in the city\nText C eight million: Cairo’s population; 60,000: Manshiyat\nNasser’s population; 90%: the percentage of Cairo’s\nrubbish that is recycled"
+    },
+    {
+      "id": "sb-60-4",
+      "text": "4 SPEAKING Look at the map. Ask and answer questions\nabout these places using the phrases for location.\ncar park hospital hotel post office swimming pool\nWhere's the hotel?\nIt's opposite the restaurant. / It's on the\ncorner, next to the police station.\n→ Vocabulary Builder In the street: page 119",
+      "key": "(Possible answers)\nWhere’s the hospital? Go along Victoria Street, under the\nbridge. Take the first right. Then turn left at the traffic\nlights. Go to the end of Queens Street and turn right. Go\nleft at the roundabout and go past the traffic lights. The\nhospital is on the right.\nWhere’s the swimming pool? Go along Victoria Street,\nunder the bridge. Go to the end of the road. Turn right into\nKings Road. Go straight on to the roundabout. Take the first\nleft at the roundabout. Go past the traffic lights to the next\nroundabout. Turn left at the roundabout into East Road. The\nswimming pool is on your left, next to the gym.\nWhere’s the car park? G o along Victoria Street, under the\nbridge. Take the first right. Go to the end of the road. Turn\nleft into North Street. The car park is on your right.\nWhere’s the post office? Go along Victoria Street, under the\nbridge. Take the first left. Go to the end of the road. Turn\nright. Go to the end of the road. The post office is opposite."
+    },
+    {
+      "id": "sb-61-1",
+      "text": "1 SPEAKING In pairs, look at the photo of Beverley, a town\nin the north of England. Compare it to your town or village\nusing the comparative form of these adjectives.\nattractive clean crowded exciting\nIt looks more / less attractive than my town. It's probably...\n→ Vocabulary Builder Describing town",
+      "key": "(Possible answer)\nIt looks more attractive / u glier than my town. It’s probably\nmore boring / exciting. My town is more modern / historic\nthan Beverley. I think it’s cleaner / more polluted than my\ntown. It also looks quieter / more crowded than my town."
+    },
+    {
+      "id": "sb-61-5",
+      "text": "5 Find six different places for eating and drinking in the\nparagraph in exercise 4.",
+      "key": "tea room, café, sandwich shop, restaurant, pub, fish and\nchip shop"
+    },
+    {
+      "id": "sb-61-7",
+      "text": "7 Write a sentence to introduce each topic that you chose in\nexercise 6.",
+      "key": "(Possible answers)\nEating out There is a wide choice of places to eat out, from\nthe cheap to the very expensive.\nEntertainment … is well known for its theatres and famous\nconcert hall.\nGetting around It’s easy to travel around when you’re in …\nHistory … is an ancient city with a long and interesting\nhistory.\nPlaces of interest There are many exciting things to do and\nsee in …\nPlaces to stay From inexpensive B&Bs to luxury hotels,\nthere’s accommodation for everyone.\nShopping For people who love shopping, … has a lot to\noffer."
+    },
+    {
+      "id": "sb-61-8",
+      "text": "8 Write your article using your plan from exercise 6. Begin\neach paragraph with your sentences from exercise 7.\nCHECK YOUR WORK\n• Have you ...\n• written in paragraphs?\n• started each paragraph with a sentence to introduce\nthe topic?\n• checked your spelling and grammar?",
+      "key": "(Model answer)\nExeter is a city in the south-west of England. It has a\npopulation of 125,000. It’s very popular with tourists.\nThey come to explore the city’s cathedral, museums, art\ngalleries and beautiful old streets.\nIt’s easy to travel around when you’re in Exeter. There\nare buses and plenty of taxis. It’s easy to cycle and many\ntourists like to explore the city on foot.\nFrom inexpensive rooms for backpackers to luxury\nhotels, there’s accommodation in Exeter for everyone.\nMost visitors stay in the centre of the city near the main\nattractions. This is the most interesting part of the city."
+    },
+    {
+      "id": "sb-62-3",
+      "text": "3 Work in pairs. Decide which animals from exercise 1 you usually see\na on land a bear,...\nb in water\nc in the air",
+      "key": "a a bear, a crocodile, an elephant, a frog, a giraffe,\na gorilla, a hippo, a kangaroo, a lion, a monkey, a snake,\na spider, a tiger, a wolf\nb a crocodile, a dolphin, a frog, a hippo, a shark, (a snake,)\na whale\nc a bee, a butterfly, an eagle"
+    },
+    {
+      "id": "sb-62-4",
+      "text": "4 Match the animals in exercise 1 with the correct category. Then check your\nanswers in pairs.\nInsects:\nMammals:\nBirds:\nReptiles:\nFish:\nOthers:",
+      "key": "Insects bee, butterfly\nBirds eagle\nFish shark\nMammals bear, dolphin, elephant, giraffe, gorilla, hippo,\nkangaroo, lion, monkey, tiger, whale, wolf\nReptiles crocodile, snake\nOthers frog, spider"
+    },
+    {
+      "id": "sb-64-3",
+      "text": "3\n• 3.06\nPRONUNCIATION Listen and repeat these past\nsimple forms. In which verbs is the -ed ending an extra\nsyllable pronounced /id/? What is the rule?\narrived chatted decided interrupted liked\nneeded planned visited worked",
+      "key": "When a verb ends in /t/ or /d/, we pronounce the extra\nsyllable as /ɪd/."
+    },
+    {
+      "id": "sb-64-4",
+      "text": "4 PRONUNCIATION Say the past simple forms of these\nregular verbs. Pay attention to the endings.\nend live start stop travel wait walk want watch",
+      "key": "/endɪd/ /lɪvd/ /stɑːtɪd/ /stɒpt/ /ˈtrævld/ /weɪtɪd/\n/wɔːkt/ /wɒntɪd/ /wɒtʃt/"
+    },
+    {
+      "id": "sb-65-1",
+      "text": "1\nSPEAKING Work in pairs. Describe the photo. Use the\nnouns below to help you.\nbear chair grass paw sleeping bag tent",
+      "key": "(Example answer)\nSome people are camping, but their camp is empty. We\ncan’t see them. A bear is looking at their tent. There’s a\nsleeping bag inside the tent. The bear pushed over the\nchair. I can see some rocks."
+    },
+    {
+      "id": "sb-65-5",
+      "text": "5\n3.08\nRead the Look out! box. Then listen to the two\nexample sentences. How do we know that the verbs are\npast simple, not present simple?",
+      "key": "We know they are in the past because of the words\nyesterday and this morning."
+    },
+    {
+      "id": "sb-66-1",
+      "text": "1\n3.12\nRead and listen to the dialogue. Where was Molly?\nWhich animals did she see?\nMax Were you on holiday last week?\nMolly Yes, I was. I was on safari.\nMax Lucky you! Was it fun?\nMolly Yes, it was amazing. We travelled to Cape Town to\nvisit my uncle and the next day we were in a jeep in\nthe middle",
+      "key": "Molly was in Cape Town (in South Africa). She saw giraffes,\nelephants, zebras, hippos and lions."
+    },
+    {
+      "id": "sb-66-4",
+      "text": "4 Complete the sentences. Use couldn't and because, and the\nphrases below.\nhe was full I wasn't well it was raining\nit was too windy\nshe wasn't tired the sea was very rough\n1 we / have a barbecue in the garden...\nWe couldn't have a barbecue in the garden because\nit was raining\n2 Josh / swim...\n3 l/ ",
+      "key": "2 Josh couldn’t swim because the sea was very rough.\n3 I couldn’t go to school because I wasn’t well.\n4 Liam couldn’t finish his burger because he was full.\n5 We couldn’t put up the tent because it was too windy.\n6 Harriet couldn’t sleep because she wasn’t tired."
+    },
+    {
+      "id": "sb-67-3",
+      "text": "3 VOCABULARY Match the prepositions of movement with\nthe diagrams. Which six can you find in the text in exercise 2?\nPrepositions of movement\nacross along\naway from down into off onto out of\npast round through to towards under up\nover\na\nb\nf\nP\nLEARN THIS! Prepositions of place: on, in and by\n* a We u",
+      "key": "a into b along c away from d round e down\nf across g to h onto i out of j over k under\nl through m off n towards o past p up\nalong the usual path; across a field; into the jungle; return\nto his workmates; through the trees; over tree trunks;\nunder bushes; along it"
+    },
+    {
+      "id": "sb-68-1",
+      "text": "1 SPEAKING In pairs, read the paragraph. Then answer\nthe questions below.\nHundreds of years ago, travellers shared stories about strange\nanimals from other parts of the world. But in most people's\nopinion, these stories were just myths: the animals were not\nreal. However, in a few cases, they were w",
+      "key": "1 A myth is a story that some people believe, but that isn’t\nactually true.\n2 People were wrong about some strange animals being\nmyths. They were actually real."
+    },
+    {
+      "id": "sb-69-6",
+      "text": "6 SPEAKING In pairs, choose one of the creatures below and\ndescribe it to your partner. What does it look like? Is it big\nor small? Does it live on land or in water?\nThe Loch Ness Monster\nBigfoot\nGiant Anaconda",
+      "key": "(Possible answers)\nThe Loch Ness Monster looks like a dragon or a dinosaur.\nIt’s big and it lives in the water.\nBigfoot looks like a gorilla. It’s about the same size as a\ngorilla. It lives in forests with large trees.\nThe giant anaconda is a huge snake. It lives in rivers in\ntropical countries."
+    },
+    {
+      "id": "sb-69-7",
+      "text": "7\nINTERNET RESEARCH Search online to find out more about\none of the creatures from exercise 6. Use the questions\nbelow to help you. Then share your answers with the class.\n• Are there a lot of stories about it or only a few?\n• Where does it live, according to the stories?\n• Are there any photos or v",
+      "key": "(Example answers)\nThere are a lot of stories about the Loch Ness Monster. It\nlives in a lake in Scotland according to the stories. There\nare photos and videos of the monster on the internet.\n\n\nThere are a lot of stories about Bigfoot. It lives in the\nforests of North America according to the stories. There\nare photos and videos of the creature on the internet.\nThere are a lot of stories about the giant anaconda. It\nlives in South America, according to the stories. There\nare photos and videos of this snake on the internet.\nAnacondas are real animals, but nobody knows if the\nGiant Anaconda is real."
+    },
+    {
+      "id": "sb-70-2",
+      "text": "2 VOCABULARY In pairs, match some of the words below\nwith one photo or both. Some words do not match either\nphoto.\nThe natural world beach cloud flower\ngrass\nground moon mountains rock sand sea sky\nsnow stars sunrise sunset tree water\n→→ Vocabulary Builder The weather: page 120",
+      "key": "Photo on the left: cloud, grass, ground, mountains, sky,\nsunrise, tree\nPhoto on the right: cloud, grass, ground, mountain, rock,\nsky, tree, water"
+    },
+    {
+      "id": "sb-70-3",
+      "text": "3\n3.14\nListen to a student describing the first photo.\nWhich words from exercise 2 does he use?\nSpeaking Strategy\nWhen you describe a photo, begin by saying what the\nphoto shows in general. Then describe different parts of\nthe photo using phrases like 'in the centre. Remember to\nuse present tenses i",
+      "key": "sunrise, ground, mountains, clouds, trees, grass"
+    },
+    {
+      "id": "sb-70-5",
+      "text": "5 Write four sentences describing the second photo in\nexercise 1. Use words and phrases from exercises 2 and 4.\nIn the centre, theres ...\nIn the distance, you can see...",
+      "key": "(Possible answer)\nThis photo shows some people camping. In the background,\nI see trees and some mountains with snow on the peaks. In\nthe foreground, on the left, there’s a car. A young woman is\ntaking something out of the car boot. In the centre, a man\nand two women are putting up a tent. On the right, I can see\na guitar and some camping equipment. A man is opening\nthe guitar case. Another man is walking towards the tent."
+    },
+    {
+      "id": "sb-70-8",
+      "text": "8 Look at the photos in exercise 1 again. Which phrases from\nexercise 7 can you use to describe them? Match two with\neach photo.",
+      "key": "(Possible answers)\nPhoto 1 She’s facing the sun. She’s sitting on the ground.\nPhoto 2 She’s standing next to the car. She’s / He’s walking.\nHe’s sitting on a rock."
+    },
+    {
+      "id": "sb-70-10",
+      "text": "10 SPEAKING Describe one of the photos on page 142 to your\npartner. Use words and phrases from this lesson and follow\nthe advice in the Strategy.",
+      "key": "(Possible answers)\nPhoto 1 In this photo, we can see a beautiful mountain\nscene. In the centre, there’s a big lake. On the left, there’s a\nman. He’s sitting on a rock and he’s facing the sun. I think\nhe’s looking at the mountains in the distance. At the top of\nthe photo, the sky is blue and there are white clouds.\nPhoto 2 In this photo, we can see a beautiful sunset. In\nthe distance, there are mountains and clouds. On the left,\nthere are some trees and a small stream. On the right,\nthere’s an orange tent and a man. The man is sitting on\nthe ground and looking down at the fire."
+    },
+    {
+      "id": "sb-71-2",
+      "text": "2 Read the postcards. Match each with three activities from\nexercise 1.\nPOST CARD\nHi Sam,\nI'm having a great time in Vietnam. We arrived three\ndays ago and now we're staying in a hostel by a river in\nthe jungle. The weather is very hot and sunny.\nYesterday we trekked into the jungle and explored. We",
+      "key": "Postcard 1 trek, explore, surf\nPostcard 2 kayak, abseil, cycle"
+    },
+    {
+      "id": "sb-71-4",
+      "text": "4 Read the Writing Strategy and find examples of the tenses\nin the postcards in exercise 2.",
+      "key": "Postcard 1 (Milla) I’m having a great time. We’re staying in a\nhostel. We arrived three days ago. Yesterday we trekked …\nTomorrow we’re travelling to the beach …\nPostcard 2 (Tom) We’re staying at a campsite near a lake\nin Ontario. Yesterday we kayaked down a river. Today\nI abseiled down a cliff. Tomorrow we’re cycling to the\nnearest village."
+    },
+    {
+      "id": "sb-71-5",
+      "text": "5 KEY PHRASES Tick the phrases that the writers use in the\npostcards in exercise 2.\nPostcards\nI'm having a great time in...\nThis is my third day in ...\nThe weather is (fabulous / OK / terrible).\nWe've only got two/three/four more days here.\nWish you were here!\nThinking of you!\nSay hello to (David).\n",
+      "key": "I’m having a great time in Vietnam.\nThis is my second day in Canada. The weather is very hot\nand sunny / OK.\nI’ve only got three more days here. Wish you were here.\nSay hello to Emma. See you soon."
+    },
+    {
+      "id": "sb-71-7",
+      "text": "7 Write your postcard. Use your notes from exercise 6. Include\nactivities from exercise 1, phrases from exercise 5, and the\ntenses mentioned in the Writing Strategy.\nCHECK YOUR WORK\n• Have you ...\n• included all the information in the task in exercise 6?\n• used three different tenses and useful phra",
+      "key": "(Model answer)\nHi Anna,\nThis is my third day in Scotland. We’re staying in a hostel in\nthe mountains. The weather is quite cold, but the country\nis beautiful.\nThe day before yesterday we went kayaking. It was scary\nbut it was also very exciting! Then in the evening, we went\nto a pub with traditional music and dancing.\nYesterday, we went trekking in the mountains. It was a\nsunny day and we saw some fantastic views.\nTomorrow, we’re going to visit my aunt and uncle in\nEdinburgh. We’re staying there for a week and then we’re\nflying back home.\nWish you were here!\nBye for now!\nLucy"
+    },
+    {
+      "id": "sb-72-2",
+      "text": "2 Read the texts and answer the questions (1-3). Choose the\ncorrect answer, (A-D).\nThe heart of Seoul\nSeoul is the capital city of Korea. It's 600 years old and it's a\nlarge, busy, noisy city. But a small river runs for 5.8 km through\nthe middle of the city. It's called the Cheonggyecheon Stream.\nTh",
+      "key": "1 D 2 C 3 B\n\n\nListening"
+    },
+    {
+      "id": "sb-72-3",
+      "text": "3 Read the Strategy. Add the words below to the correct\nplace in the table.\nclean long loud polluted quick quiet safe slow\nstart wait\nsimilar meaning\nopposite meaning\ndirty\nnoisy\nfast\nshort\n-\ndangerous\n-\nstop",
+      "key": "Similar meaning Opposite meaning\ndirty polluted clean\nnoisy loud quiet\nfast quick slow\nshort — long\ndangerous — safe\nstop wait start"
+    },
+    {
+      "id": "sb-73-6",
+      "text": "6 Read the text and choose the correct answer A, B or C\nto fill the gaps.\nCity Monkeys\nDo you like monkeys? Some people think they're the\n1\nanimals in the world. In India, however, a lot\nof people don't want to see monkeys. Their cities have a big\nmonkey problem.\nDelhi, there are tens of thousands o",
+      "key": "1 C 2 B 3 B 4 A 5 C 6 B 7 A 8 B\nSpeaking"
+    },
+    {
+      "id": "sb-73-7",
+      "text": "7 Read the Strategy. Complete the table with the words\nbelow.\nafternoon bridge city cloud cold evening ground\npark relax sit snow sunrise sunset travel\nplace\ntime\nweather\nactivity",
+      "key": "Place Time Weather Activity\nbridge afternoon cloud relax\ncity evening cold sit\nground sunrise snow travel\npark sunset"
+    },
+    {
+      "id": "sb-73-8",
+      "text": "8 Choose one of the photos to describe.\nWriting\nStrategy\nWhen you write a postcard, use adjectives when you give\nyour opinions of places, people and things. Give reasons for\nyour opinions.",
+      "key": "(Example answers)\nThis is a city scene. It’s very cloudy and snowy, so it could\nbe autumn or winter. A train is crossing a bridge. Maybe\npeople on the train are travelling to or from work.\nThis is a park in a city. There are some trees and a lake. It’s\nprobably afternoon. The weather is sunny, but there are\na few clouds. Some people are sitting on the ground and\nrelaxing.\nWriting"
+    },
+    {
+      "id": "sb-73-10",
+      "text": "10 Imagine you are on a city holiday. Write a postcard to a\nfriend. Include information about:\n• the city and the weather.\n• where you are staying (eg. a hotel).\n• activities you did and when you did them.\n• activities you are planning to do.",
+      "key": "(Example answer)\nDear Kev,\nHello from York, England! I’m sitting in Rowntree Park, near\nthe River Ouse. It’s a beautiful sunny day. The temperature\nis about 18ºC and there are only a few clouds.\nI’m staying in a hotel in the town centre. It’s clean and\ncomfortable. I had an amazing day yesterday. I walked on\nthe ancient wall around the city. The views were fantastic,\nand I watched the sunset from one of the towers.\nTomorrow, I’m planning to take a boat tour on the river\nand visit part of an old castle called Clifford’s Tower.\nI hope you’re having a good holiday!"
+    },
+    {
+      "id": "sb-75-4",
+      "text": "4 VOCABULARY Complete the phrases using the verbs in the 7 Work in pairs. Do the quiz in exercise 6.\nlist. Use each verb only once.\nComputing (verbs) connectto delete download\nenter post print scan surf upload\n1 scan a drawing / a photo / a document\n2\na comment (on a social networking site)\n3\n_ a ph",
+      "key": "2 post 3 upload 4 download 5 delete 6 connect\nto 7 enter 8 surf 9 print (delete / download / scan /\nupload)"
+    },
+    {
+      "id": "sb-75-5",
+      "text": "5\n• 3.18\nListen to four conversations. Which phrases from\nexercise 4 can you hear?",
+      "key": "scan a photo, upload (a photo) onto the internet, print a\ndocument, post a comment, delete a document, connect\nto the Wi-Fi network, enter a password, surf the Web,\ndownload a song"
+    },
+    {
+      "id": "sb-76-2",
+      "text": "2 Read the Learn this! box. Then find all the past simple\nforms of the verbs in the text in exercise 1. Which are\nregular and which are irregular?\nLEARN THIS! Past simple (affirmative): irregular\na Many verbs have irregular past simple forms. There are\nno rules for forming these, you need to learn t",
+      "key": "had (irregular), made (irregular), tried (regular), fell\n(irregular), broke (irregular), became (irregular), went\n(irregular), found (irregular), worked (regular), dreamed\n(regular), read (irregular), got (irregular), began (irregular),\nbuilt (irregular), drew (irregular), took (irregular), saw\n(irregular), offered (regular)"
+    },
+    {
+      "id": "sb-77-4",
+      "text": "4\n3.20 VOCABULARY Check the meaning of the\nsequencing words below. Then listen again. Which\nsequencing words did you hear that marked the start of\neach new stage?\nSequencing words after that finally first ofall next\nnow secondly then thirdly to start off with",
+      "key": "first of all; secondly; thirdly; then; next; after that; finally"
+    },
+    {
+      "id": "sb-77-5",
+      "text": "5\n3.21 Listen to three conversations with a computer\nHelp Desk. In each conversation, how many steps are there\nin the instructions: 3, 4 or 5?",
+      "key": "Conversation 1 There are 5 steps: 1 check the cable; 2 go to\n‘settings’; 3 click on network; 4 choose the network; 5 enter\nyour password\nConversation 2 There are 4 steps: 1 double click on the\nrecycle bin; 2 find documents; 3 drag the files onto the\ndesktop; 4 drag the documents into the folder\nConversation 3 There are 3 steps: 1 take out the memory\nstick; 2 plug it into a different USB port; 3 plug in a\ndifferent stick and see if the computer recognises it"
+    },
+    {
+      "id": "sb-78-1",
+      "text": "1\nSPEAKING Work in pairs. Write down five things you can\ndo with your phone.\nI can send messages.",
+      "key": "(Possible answers)\ntake photos, make videos, play games, surf the internet,\nlisten to music, look at maps, make telephone calls"
+    },
+    {
+      "id": "sb-78-2",
+      "text": "2\n3.22 Read and listen to the first part of the dialogue.\nWhat was the problem with James's videos?\nJames Did you go to the music festival in the park last\nweekend?\nChloe No, I didn't. Did you go?\nJames Yes, I did. It was fun.\nChloe Did Cool Heart play?\nJames Yes, they did. They were brilliant.\nChlo",
+      "key": "There's no sound. He probably had his finger over the\nmicrophone."
+    },
+    {
+      "id": "sb-78-3",
+      "text": "3 Find all the examples of the past simple negative and\ninterrogative in the dialogue in exercise 2. Then complete\nthe Learn this! box with did and didn't.\nLEARN THIS! Past simple (negative and interrogative)\na We form the past simple negative with\n+ the infinitive without to.\nb We form the past sim",
+      "key": "Negative No, I didn’t. No, I didn’t take any photos. It didn’t\nwork. I didn’t check.\nInterrogative Did you go to the music festival … ? Did you\ngo? Did Cool Heart play? Did you take any photos? Did\nyou have your finger over the microphone?\na didn’t (did not) b did c did, didn’t"
+    },
+    {
+      "id": "sb-78-8",
+      "text": "8 Complete the table with the verbs below. Then tick the\nthings that were true for you yesterday.\nbe eat go help meet play send surf use\nWhat did you do yesterday?\nYou Your partner\nto the cinema\n2\n_ with the housework\n3\nsocial media\n4\nout\n5\nyour friends\n6\ncomputer games\n7\n_a lot of texts\n8\nthe inter",
+      "key": "1 go 2 help 3 use 4 eat 5 meet 6 play 7 send\n8 surf 9 be"
+    },
+    {
+      "id": "sb-79-2",
+      "text": "2 Read the Learn this! box. Then find and underline five\nphrasal verbs in the teacher's speech bubble. Are they\ntransitive or intransitive?\nLEARN THIS! Phrasal verbs\nin, back, off, etc.) They are very common in English.\nb Some phrasal verbs are transitive. They take a direct\nobject, e.g.:\nsubject ve",
+      "key": "turn on (transitive); type in (transitive); log on\n(intransitive); log off (intransitive); shut down (transitive)"
+    },
+    {
+      "id": "sb-79-3",
+      "text": "3 VOCABULARY Match eight of the phrasal verbs below with\nthe pictures. Check the meaning of all the phrasal verbs.\nPhrasal verbs: computers\nTransitive back up (your work) plug in (a printer)\nscan in (a document) shut down (a computer)\nturn down (the radio) turn off (the light) turn on (the TV)\nturn ",
+      "key": "A log on B back up C scan in D turn down\nE turn up F turn on G turn on / shut down H type in\nback up prepare a second copy of a file, program, etc. that\nyou can use if the main one fails p lug in connect electrical\nequipment to the main supply of electricity s can in pass light\nover a picture or document using a scanner in order to copy\nit and put it in the memory of a computer s hut down stop a\nmachine working t urn down reduce the noise produced by\na piece of equipment by moving its controls t urn off stop\nthe flow of electricity by moving a switch, pressing a button,\netc. t urn on start the flow of electricity by moving a switch,\n\n\npressing a button, etc. t urn up increase the sound of a piece\nof equipment t ype in use the keyboard to put information\ninto a computer b reak down stop working because of a fault\nlog off perform the actions that allow you to finish using a\ncomputer system l og on perform the actions that allow you\nto begin using a computer system"
+    },
+    {
+      "id": "sb-79-7",
+      "text": "7 SPEAKING Take turns to say your sentences to each other.\nYour partner acts out the instructions.",
+      "key": "(Possible answer)\nFirst, plug in the computer. Secondly, turn it on. Then log\non. You have to type in your username and password.\nNext, do your work and remember to back it up. After that,\nlog off. Finally, shut the computer down."
+    },
+    {
+      "id": "sb-80-1",
+      "text": "1 SPEAKING Work in pairs. What is 'cyberbullying?\nGive one or two examples (real or invented).",
+      "key": "Cyberbullying is the use of electronic communication\nto bully a person, typically by sending messages of an\nintimidating or threatening nature."
+    },
+    {
+      "id": "sb-80-2",
+      "text": "2 Read the text, ignoring the gaps. What kind of\ncyberbullying does the text mention? Is it like the examples\nyou thought of in exercise 1?\nReading Strategy\nWhen you do a gapped sentence task, think about the\norder of events within a text. Having a clear idea of the\nsequence helps you to check that ",
+      "key": "The text mentions putting pictures of someone on the\ninternet so people will laugh at them."
+    },
+    {
+      "id": "sb-82-1",
+      "text": "1 SPEAKING Describe the photo. Where are the people?\nWhat are they doing?",
+      "key": "They’re probably in a shop. They’re discussing a mobile\nphone."
+    },
+    {
+      "id": "sb-82-3",
+      "text": "3 Read the Learn this! box. Find two prices in the dialogue in\nexercise 2 and say them correctly.",
+      "key": "£89.99 (eighty-nine, ninety-nine), £120.50 (one hundred\nand twenty pounds fifty)"
+    },
+    {
+      "id": "sb-82-4",
+      "text": "43.26 VOCABULARY Listen to three conversations in a\nshop. Answer the questions for each conversation.\n1 What product does the customer want to buy?\n2 Which features do the customer and the shop assistant\nmention? Choose from the items below.\n3 How much does the customer spend?\nFeatures of gadgets ba",
+      "key": "Conversation 1 1 a laptop; 2 touch-screens and a built-in\nwebcam; 3 £269.49\nConversation 2 1 a tablet; 2 battery life, a memory card slot\nand an HDMI port; 3 £105.99\nConversation 3 1 a video game controller; 2 a motion sensor\nand a case; 3 £30.75"
+    },
+    {
+      "id": "sb-82-6",
+      "text": "6\n3.26\nListen again. Which of the phrases in exercise 5 did\nthe speakers use?",
+      "key": "Conversation 1 That comes to £249.50, please. How much is\nit? Can I pay by debit card, please?\nConversation 2 How would you like to pay? Enter your PIN,\nplease.\nConversation 3 How much is it? Would you like anything\nelse? Here’s your change and receipt."
+    },
+    {
+      "id": "sb-83-2",
+      "text": "2 Read the text. Why did the phone become locked when\nEmily entered her PIN?\nWrite a story about a time when your phone (or another\nelectronic device) caused problems for you.\nA few months ago, I went out for the evening with my\nfriend Suzie. We planned to have a pizza at a café in\ntown. My dad kind",
+      "key": "The phone became locked when Emily entered her PIN\nbecause she entered it incorrectly three times. She and\nher friend had swapped phones by accident, so they had\nthe wrong phone."
+    },
+    {
+      "id": "sb-83-4",
+      "text": "4 Read the Learn this! box and answer the questions.\n1 Find five adverbs ending in -ly in the model text.\n2 Find two adverbs that have the same form as the adjective\n3 Are the adverbs use 1) or use 2)?\nLEARN THIS! Adverbs\n: a Most adverbs are formed by adding -ly to an adjective\nslow-slowly dangerou",
+      "key": "1 kindly, unfortunately, Amazingly, Luckily, safely\n2 late, hard\n3 kindly: use 1 u nfortunately: use 2 A mazingly: use 2\nLuckily: use 2 s afely: use 1 late: use 1 h ard: use 1"
+    },
+    {
+      "id": "sb-84-4",
+      "text": "4 Read the Learn this! box. Match the sports and hobbies from exercise 2 with the\ncorrect verb: play, go or do.\ngo: climbing,...\nplay: badminton,...\ndo: aerobics,...",
+      "key": "play badminton, basketball, football, golf, handball, ice\nhockey, table tennis, tennis, volleyball\ngo climbing, cycling, dancing, ice skating, roller skating,\nrunning, skateboarding, skiing, surfing, swimming\ndo aerobics, athletics, gymnastics, judo, karate, yoga"
+    },
+    {
+      "id": "sb-84-5",
+      "text": "5 Work in pairs. Can you add any more sports or hobbies to the verbs in exercise 4?",
+      "key": "(Possible answers)\nplay baseball, cricket, rugby\ngo bowling, sailing, snowboarding\ndo archery, boxing, fencing, motorcycle racing,\ntaekwondo, weightlifting, wrestling"
+    },
+    {
+      "id": "sb-85-7",
+      "text": "7 Work in pairs. Ask and answer the questions in the\nOlympics quiz below.\nWhich two are connected to the Olympics?\nHow often do the Olympic Games happen?\na every 2 years\nc every 3 years\nb every 4 years\nd every 5 years\nwhen do the Winter Olympics happen?\na the same year as the summer games\nb the year",
+      "key": "1 A (the Olympic torch) and C (the Olympic flag) 2 b\n3 c 4 ice hockey, ice skating, skiing 5 a (BMX) cycling;\nb (cross country) skiing; c (synchronised) swimming;\nd (beach) volleyball 6 b 7 a (2008) Beijing; b (2012)\nLondon; c (2016) Rio de Janeiro; d (2020) Tokyo"
+    },
+    {
+      "id": "sb-86-2",
+      "text": "2 Read the Learn this! box. Find examples of going to\n(affirmative, negative and interrogative) in the dialogue in\nexercise 1.\nLEARN THIS! going to\nD: a We use be + going to + infinitive without to to talk\nabout plans for the future.\nWere going to have dinner in a restaurant tonight.\nI'm not going t",
+      "key": "Affirmative I’m going to take part in a judo competition in\nNewcastle. I’m going to stay with my cousins, Luke and\nToby. You’re going to have lots of supporters. They’re\ngoing to take part in the competition!\nNegative My cousins aren’t going to support me.\nInterrogative What are you going to do this weekend? Are\nyou going to stay in a hotel? Are they going to be at the\ncompetition?"
+    },
+    {
+      "id": "sb-86-5",
+      "text": "5 VOCABULARY Work in pairs. Put the expressions below\ninto the correct order, starting with the soonest. Can you\nadd any other future time expressions to the list?\nFuture time expressions in a few days next month\nnext week next weekend next year\nthis evening\nthe day after tomorrow this afternoon\nthi",
+      "key": "this afternoon, this evening / tonight, tomorrow, the day\nafter tomorrow, in a few days / this weekend, in a few\ndays / next week, next weekend, next month, next year\nOther future time expressions tomorrow morning /\nafternoon / evening / night, next Saturday, the week after\nnext, in a few weeks / months / years"
+    },
+    {
+      "id": "sb-87-1",
+      "text": "1 What was Tommy and Kevin's ambition?\n2 What is the Dawn Wall?\n3 What is 'free climbing?\n4 How long did they train before attempting the climb?\n5 When did they attempt the climb?\nListening Strategy\nWhen you listen in your own language, you 'listen ahead'\nand can often predict how a phrase or senten",
+      "key": "(Possible answers)\nIn photo A, I think I can see a man in a tent. The tent is on\nthe side of a mountain. It doesn’t look safe. The man is\nprobably tired, so he’s resting. In photo B, two people are\nclimbing a steep rock face. They’re using ropes. In photo C,\nit’s dark. A man is looking at a rock. He’s wearing a light on\nhis head."
+    },
+    {
+      "id": "sb-87-2",
+      "text": "2 Read the text. Answer the questions.",
+      "key": "1 They wanted to climb the Dawn Wall.\n2 It’s a one thousand-metre rock face on El Capitan, a\nmountain in Yosemite National Park.\n3 It is using ropes only for safety, not for climbing.\n4 They trained for six years.\n5 They attempted it at the end of 2014."
+    },
+    {
+      "id": "sb-87-3",
+      "text": "3\n3.31 Read the Listening Strategy. Then listen and try to\npredict how each sentence will end. There are a number of\npossible answers.\n1 Look at those dark clouds. I think it's going to rain / going to\nsnow / starting to rain/ etc.",
+      "key": "(Possible answers)\n2 thirsty / hot 3 El Capitan / the mountain / the Dawn\nWall / t he hill 4 the world / Yosemite / Turkey 5 drove\naway / waited 6 cash / c redit card / debit card 7 ago\n8 internet / web"
+    },
+    {
+      "id": "sb-87-7",
+      "text": "7 Work in pairs. Prepare an interview between a journalist\nand one of the climbers.\nStudent A You are a journalist. Prepare six questions using the\nprompts below.\nStudent B You are Tommy or Kevin. Prepare the answers using\nthe information in the text and the news story.\n1 how long / train?\n2 when / ",
+      "key": "1 How long did you train for? We trained for six years.\n2 When did you start to climb? We started in December.\n3 How many hours did you climb each day? We climbed\nfor about seven hours.\n4 Did you get any injuries? I cut my finger badly and we\nhad to stop for a few days.\n5 Where did you sleep? We slept in our tent.\n6 What was the biggest danger? The weather."
+    },
+    {
+      "id": "sb-88-1",
+      "text": "1 SPEAKING Who competes in the Paralympics? Can you\nname any Paralympic sports people? What are their sports?",
+      "key": "People with physical disabilities compete in the Paralympics."
+    },
+    {
+      "id": "sb-88-3",
+      "text": "3 Read the Learn this! box. Then find all the examples of the\nwill future in the text.\nLEARN THIS! will\nD: a We use will to talk about the future and to make\npredictions.\nb We form the will future with will / 'Il or will not / won't\nand the infinitive of the verb without to. The form is the\nsame for",
+      "key": "Affirmative ‘I will never forget that moment,’ she says. ‘I\nthink I’ll probably take a short break,’ says Ellie. She’ll be a\nmember of the British Paralympic team for years to come.\nNegative She won’t stop swimming – that’s certain!\nInterrogative What will she do when she finishes her course?"
+    },
+    {
+      "id": "sb-88-5",
+      "text": "5 Read the Learn this! box. Find a prediction with / think in\nthe text in exercise 2.",
+      "key": "‘I think I’ll probably take a short break,’ says Ellie."
+    },
+    {
+      "id": "sb-89-2",
+      "text": "2 Read the text and check your ideas in exercise 1. Do you\nthink this is a good way to raise money? Give reasons.\nLEARN THIS! Noun suffixes\nnouns from verbs.\narrange - arrangement\nconverse - conversation\ndescribe - description\nb We sometimes add -ness to make nouns from\nadjectives\nsad - sadness happ",
+      "key": "She’s going to cycle through Japan to raise money for charity."
+    },
+    {
+      "id": "sb-89-3",
+      "text": "3 Read the Learn this! box. Then look through the text and\nfind nouns formed from the verbs and adjectives below.\nWhich have a change in spelling?\naccommodate\nachieve dark donate homesick\norganise permit prepare treat",
+      "key": "accommodate – accommodation (change: drop the e)\nachieve – achievement d ark – darkness d onate –\ndonations (change: drop the e) h omesick – homesickness\norganise – organisation (change: drop the e) p ermit –\npermission (change in spelling) p repare – preparation\n(change: drop the e) t reat – treatment"
+    },
+    {
+      "id": "sb-91-6",
+      "text": "6 Work in pairs. Look at the endings of the nationality\nadjectives in exercise 5. Divide them into three groups: -an,\n-ish and -ese. Which three do not fit?",
+      "key": "-an American, Australian, Brazilian, Canadian, German,\nHungarian, Italian, Russian\n-ish British, Polish, Spanish, Swedish, Turkish\n-ese Chinese, Japanese\nCzech, Slovak and French do not fit."
+    },
+    {
+      "id": "sb-92-5",
+      "text": "5 Read the Learn this! box. Find two examples of too +\nadjective in the dialogue in exercise 2.\nLEARN THIS! too + adjective\n: We use too + adjective to mean 'more than possible. We\noften use it to explain why we are rejecting something.\nWe can't go to the beach. It's too far.\n→ Grammar Builder 8G pa",
+      "key": "That’s too early! Those tickets are too expensive."
+    },
+    {
+      "id": "sb-92-6",
+      "text": "6\n3.37\nLook at the timetable of Olympic events and listen\nto two teenagers talking about tickets. How many events\ndo they agree to see? Tick the events that they agree to see.\nSATURDAY\nPool\nIndoor arena\nStadium\n08:00\nDiving\nBadminton\nWomen's marathon\n10:00\nBasketball\nMen's long jump\n12:00\nSwimming\nH",
+      "key": "They agree to see two events: basketball and water polo."
+    },
+    {
+      "id": "sb-93-2",
+      "text": "2 Read the letter. When and where will Emily's triathlon\ntake place?\n89 Stover Rd\nBirmingham\nB99 7HL\n4 July 2016\nDear Henry,\nThanks for your letter. Sorry I didn't reply sooner. My exams\nfinished last week, and tomorrow the summer holidays start.\nGuess what! I'm going to take part in a triathlon. It",
+      "key": "The triathlon will be at the end of July in Hyde Park in\nLondon."
+    },
+    {
+      "id": "sb-93-3",
+      "text": "3 VOCABULARY Find five of the pieces of sports equipment\nbelow in the letter.\nSports equipment bike boots goggles helmet\nrunning shoes wetsuit\n→• Vocabulary Builder Sports equipment and clothes: page 121",
+      "key": "bike, helmet, wetsuit, goggles, running shoes"
+    },
+    {
+      "id": "sb-93-5",
+      "text": "5 KEY PHRASES Add the phrases below to the correct group\nA, B or C. Which phrases did Emily use in her letter?\nListen, did I tell you that .../ about...\nOh, and another thing,...\nSorry, it's ages since I wrote to you.\nMaybe you / we could ...\nHow about (+-ing form)\nA Apologising\nSorry I didn't reply",
+      "key": "A Sorry, it’s ages since I wrote to you.\nB Listen, did I tell you that … / about … Oh, and another\nthing, …\nC Maybe you / we could … How about (+ -ing form)?\nEmily uses: Sorry I didn’t reply sooner. Guess what! It\nwould be great if you could …"
+    },
+    {
+      "id": "sb-94-2",
+      "text": "2 Read the text. Are the sentences true or false? Write Tor F.\n1 Tricking is a mix of gymnastics and dance._\n2 There is a long list of rules for tricking.\n3 Tricking started in sports like judo._\n4 Trickers post videos of tricks online.\n5 Trickers only learn tricks from social media._\n6 The first tr",
+      "key": "1 F 2 F 3 T 4 T 5 F 6 F 7 T 8 F\nListening"
+    },
+    {
+      "id": "sb-95-5",
+      "text": "5 Read the Strategy. Add the correct suffixes to the words\nbelow to make people, nationalities and things.\nachieve argue China climb discuss farm improve\nrun Sweden swim work\npeople\nnationalities\nthings\nclimber",
+      "key": "People Nationalities Things\nclimber Chinese achievement\nfarmer Swedish argument\nrunner discussion,\nswimmer improvement\nworker"
+    },
+    {
+      "id": "sb-95-6",
+      "text": "6 Complete the text with words formed from the words in\nbrackets.\nNick D'Aloisio\nNick D'Aloisio is a successful young computer programmer. In\n2011, he created a news story app called Summly. Summly allows\nusers to read the news very quickly. It takes all the important\n(INFORM) from big news stories ",
+      "key": "1 information 2 artist 3 photographer 4 British\n5 Australian 6 teenager 7 achievement\n8 invention\nSpeaking"
+    },
+    {
+      "id": "sb-95-10",
+      "text": "10 Write a letter to a friend about a ticket you won in a\ncompetition. Include information about the points below\nand suggest that your friend comes with you.\n• What is the ticket for? (eg. a holiday, a sporting event, a\nmusic festival)\n• How did you win it?\n• When are you going to go?\n• How are you",
+      "key": "(Example answer)\nDear Jess,\nGuess what! I won a ticket for a holiday in Croatia! A\nfew months ago, in a magazine, I saw some information\nabout a photo contest. It invited people to send in their\nbest travel photos. I sent a photo from my holiday in the\nCzech Republic last year. Then I forgot all about it. Then\nyesterday I received a letter saying I’m the winner!\nI’m going to take the trip next month. I want to go scuba\ndiving there, so right now I’m taking scuba diving lessons\nat my local swimming pool. I’m really enjoying it.\nI’ll send you a postcard from my holiday!\nLove,\nKate"
+    },
+    {
+      "id": "sb-97-5",
+      "text": "5 VOCABULARY Label the parts of the house 1-13 with the\nwords below. What types of room are in the photos in\nexercise 1?\nParts of a home basement bathroom bedroom\ndining room garage garden hall kitchen\nliving room loft study toilet utility room",
+      "key": "1 loft 2 bathroom 3 toilet 4 bedroom 5 study\n6 garage 7 living room 8 hall 9 dining room\n10 kitchen 11 utility room 12 basement 13 garden\nPhoto A living room Photo B bedroom\nPhoto C living room Photo D dining room"
+    },
+    {
+      "id": "sb-97-7",
+      "text": "7 Which items from exercise 2 do you usually find in the\nparts of the home below? You find some items in more\nthan one part of the home.\nbathroom bedroom dining room\nkitchen\nliving room study utility room",
+      "key": "(Possible answers)\nbathroom bath, bin, blinds, curtains, light, mirror, shelves,\nshower, sink, stool, toilet bedroom bed, bin, blinds,\nbookcase, carpet, chair, chest of drawers, clock, curtains,\ndesk, lamp, light, mirror, rug, shelves, stool, table,\nwardrobe d ining room blinds, carpet, chair, curtains, lamp,\nlight, rug, table k itchen bin, blinds, chair, clock, cooker,\ncupboard, curtains, dishwasher, light, shelves, stool, table,\nwashing machine l iving room bin, blinds, bookcase,\ncarpet, chair, clock, curtains, hi-fi, lamp, light, mirror, rug,\nshelves, sofa, table s tudy bin, blinds, bookcase, carpet,\nchair, clock, curtains, desk, lamp, light, rug, shelves utility\nroom bin, dishwasher, light, sink, washing machine"
+    },
+    {
+      "id": "sb-98-1",
+      "text": "1 What's my password? I\n(forget).\n2 She\n(try Greek food but she doesn't\nlike it.\n3 It isn't a secret - they\n(tell) lots of\npeople!\n4 |\n(do) my homework. Can I go out now?\n5 Oh no! We\n(leave) our bags on the train!\n6 We can't buy a snack. You\n(spend) all\nour money.\nLOOK OUT! just\nWe use just with the",
+      "key": "Laurie isn’t enjoying his stay in Germany. He misses his home.\nLanguage note"
+    },
+    {
+      "id": "sb-98-2",
+      "text": "2 Read the Learn this! box. Are the highlighted past\nparticiples in exercise 1 regular or irregular?\nLEARN THIS! Present perfect\n* a We use the present perfect simple to talk about recent\nevents and give news, especially when the events have\nan effect on the present.\nI can't phone her. She's changed",
+      "key": "arrived – regular; h ad – irregular; t ried – regular; p ut –\nirregular; g iven – irregular; s ent – irregular; r eplied – regular"
+    },
+    {
+      "id": "sb-98-3",
+      "text": "3 Put the past participles of these verbs into three groups:\n1) regular; 2) irregular - same as past simple; 3) irregular -\ndifferent from past simple. See the list on page 143.\nbe come do eat feel finish forget give help\nlearn leave make meet phone play say see sleep\nspeak spend take tell watch wri",
+      "key": "Group 1 finish – finished, h elp – helped, learn – learned, phone –\nphoned, play – played, watch – watched\nGroup 2 feel – felt, learn – learned, leave – left, make – made,\nmeet – met, say – said, sleep – slept, spend – spent, tell – told\nGroup 3 be – been, come – come, do – done, eat – eaten,\nforget – forgotten, give – given, see – seen, speak – spoken,\ntake – taken, write – written"
+    },
+    {
+      "id": "sb-98-5",
+      "text": "5 Read the Look out! box. Find an example of the present\nperfect with just in the email in exercise 1.",
+      "key": "We’ve just had dinner and now I’m in my bedroom."
+    },
+    {
+      "id": "sb-99-6",
+      "text": "6\n4.07\nListen to the conversation and complete the\nquestions.\n1 Can help you?\n2 What\n_ place\nlooking for?\n3 Or_\nlooking for your own flat?\n4\nshow me some houses?\n5\nvisit the house?\n6\nfree at the weekend?",
+      "key": "2 kind of, are you 3 are you 4 Can you\n5 Do you want to 6 Are you"
+    },
+    {
+      "id": "sb-99-8",
+      "text": "8 SPEAKING What are the advantages and disadvantages\nof sharing accommodation while at university? Use the\nphrases below to help you.\nYou can (probably) ... You don't have to...\nYou (probably) can't.. You (probably) have to...\nbe very tidy cook for others cook for yourself\nmake friends share a livin",
+      "key": "(Possible answer)\nYou can probably make friends easily and share the bills. You\nprobably can’t spend much time alone. You probably have to\ncook for others and share the housework. You probably have\nto share a living room. You probably don’t have to be very tidy."
+    },
+    {
+      "id": "sb-100-2",
+      "text": "2 KEY PHRASES Find all the examples of the present perfect\nnegative and interrogative in the dialogue. Then complete\nthe phrases with the correct form of the verb have.\nPresent perfect negative\n1/ You / We / They'\narrived\nHe / She / It?\narrived.\nPresent perfect interrogative\n1/ you/we / they arrived",
+      "key": "Negative No, I haven’t. She hasn’t done anything! I haven’t\nfinished decorating Uncle Mike’s birthday cake yet. But I\nhaven’t done my homework yet.\nInterrogative And have you hoovered the living room yet?\nWhat has she done to help?\n1 haven’t 2 hasn’t 3 Have 4 haven’t 5 Has"
+    },
+    {
+      "id": "sb-100-4",
+      "text": "4 Read the Learn this! box. Then find examples of sentences\nwith already and yet in the dialogue in exercise 1.",
+      "key": "I’ve already tidied it. And have you hoovered the living\nroom yet? I haven’t finished decorating Uncle Mike’s\nbirthday cake yet. But I haven’t done my homework yet."
+    },
+    {
+      "id": "sb-100-5",
+      "text": "5 Look at the list of things that need doing before the\nvisitors arrive. Write sentences using the present perfect\naffirmative with already and the present perfect negative\nwith yet.\nThey have already tidied the living room.\nThey haven't. yet.\ntidy the living room\nhoover the living room X\nbake a cak",
+      "key": "They haven’t hoovered the living room yet. They’ve\nalready baked a cake. They haven’t decorated the cake\nyet. They haven’t prepared dinner yet. They’ve already\nchanged the beds."
+    },
+    {
+      "id": "sb-100-6",
+      "text": "6 SPEAKING Work in pairs. Ask and answer questions about\nthe list in exercise 5. Use the present perfect interrogative\nwith yet.\nHave they tidied the\nliving room yet?\nYes, they have",
+      "key": "Have they hoovered the living room yet? No, they haven’t.\nHave they baked a cake yet? Yes, they have.\nHave they decorated the cake yet? No, they haven’t.\nHave they prepared dinner yet? No, they haven’t.\nHave they changed the beds? Yes, they have."
+    },
+    {
+      "id": "sb-101-1",
+      "text": "1\nSPEAKING Describe the photo. How often do you tidy and\nclean your bedroom?",
+      "key": "(Possible answer)\nThis is the bedroom of a teenage girl. The girl is sitting on\nher bed and using her laptop. The room is quite untidy:\nthere are clothes, a plastic bag and other things on the\nfloor, on the bed and on the desk."
+    },
+    {
+      "id": "sb-101-2",
+      "text": "24.09 Read and listen to three teenagers talking about\nhousehold chores. Who helps most with the housework:\nMarvin, Harriet, or James? Who helps least?\nC\n@Marvin How do I help round the house? I'm afraid I\ndon't do much housework, actually. I occasionally do\nthe hoovering, but I have to do a lot of ",
+      "key": "Harriet helps the most with the housework. Marvin helps\nthe least."
+    },
+    {
+      "id": "sb-102-1",
+      "text": "• Go through the adjectives and nouns and check meaning\nand pronunciation, especially remote /rɪˈməʊt/ (far away\nfrom places where other people live), ocean /ˈəʊʃn/ (a\nlarge area of sea) and palm tree /pɑːm triː/ (a straight tree\nwith long leaves at the top; it grows in tropical countries).\n• Focus ",
+      "key": "(Possible answer)\nPalmerston Island is beautiful and peaceful. It’s in the\nmiddle of the Pacific Ocean, so it’s very remote. It’s a\ntropical island, so the ocean around it is warm. The\nbeaches have got beautiful white sand. There are a lot of\npalm trees on the island."
+    },
+    {
+      "id": "sb-103-6",
+      "text": "6 Answer the questions.\n1 Why is part of the journey to Palmerston very dangerous?\n2 How many buildings are on the main road in Palmerston?\n3 How often do the islanders usually receive supplies?\n4 What problems do the islanders experience with internet\nand mobile phone signals?\n5 How has the number ",
+      "key": "1 It’s dangerous because of the rocks. (These have caused\nhundreds of boats to sink.)\n2 There are six buildings.\n3 They usually receive supplies twice a year.\n4 They only have access to the internet for one or two\nhours a day and they can’t always get a mobile phone\nsignal.\n5 The population has dropped from 300 to 62."
+    },
+    {
+      "id": "sb-104-1",
+      "text": "1 SPEAKING Look at the photos above. How many pieces of\nfurniture and household items can you identify?\nI can see a chest of drawers in the second photo.",
+      "key": "Photo 1: bed, posters, bookcase, stool, desk\nPhoto 2: bed, lamp, chest of drawers, rug"
+    },
+    {
+      "id": "sb-104-2",
+      "text": "2 VOCABULARY Find four pairs of opposites in the list of\nadjectives to describe rooms. Which adjectives would you\nuse to describe the rooms in exercise 1?\nAdjectives to describe rooms bright comfortable cosy\ndark large relaxing small tidy uncomfortable untidy\n→* Vocabulary Builder Adjectives to desc",
+      "key": "Opposites bright – dark; comfortable – uncomfortable;\nlarge – small; tidy – untidy\n(Possible answers)\nPhoto 1 bright, comfortable, large, relaxing, tidy\nPhoto 2 bright, comfortable, cosy, relaxing, small, tidy"
+    },
+    {
+      "id": "sb-104-3",
+      "text": "3\n1 4.11\nRead the Speaking Strategy. Then listen to two\nstudents comparing and contrasting photos 1 and 2. Which\nstudent followed the advice better? Give reasons for your\nopinion.",
+      "key": "Speaker 1 follows the advice better. He gives more details\nand includes some description of clothing. It is also easier\nto follow what he is saying."
+    },
+    {
+      "id": "sb-104-4",
+      "text": "4\n4.11\nKEY PHRASES Check the meaning of the phrases.\nThen listen again. Which phrases did the students use?\nComparing and contrasting\nThe first photo shows..., whereas the second photo shows ....\nIn the first photo..., but in the second photo...\nYou can see... in both photos.\nBoth photos show ...\nSp",
+      "key": "Speaker 1 In the first photo …, but in the second photo …;\nYou can see … in both photos. Both photos show …; It\nlooks as if …; I would say that …; Perhaps he …\nSpeaker 2 The first photo shows …, whereas the second\nphoto shows …; Both photos show …; In the first\nphoto …, but in the second photo …"
+    },
+    {
+      "id": "sb-105-1",
+      "text": "1 Read the task and the model texts. Which text matches the\nphoto? How do you know?\nYour family has agreed to offer a room to a foreign student\nfor three months. Write a description of your home and the\nstudent's room. Include information about the rooms, the\nlocation of the home and the activities ",
+      "key": "Model text A matches the photo because it is a small,\nlight, modern bedroom with a desk and chair."
+    },
+    {
+      "id": "sb-105-3",
+      "text": "3 Match the three paragraphs in each text in exercise 1 with\nthe three elements of the task: a) the rooms b) the location\nc) free-time activities.",
+      "key": "Both texts: a) paragraph 2; b) paragraph 1; c) paragraph 3"
+    },
+    {
+      "id": "sb-105-4",
+      "text": "4 Read the Learn this! box. Find an example of the three\nconjunctions (although, because and so) in each text in\nexercise 1. How do you say these conjunctions in your own\nlanguage?",
+      "key": "Model text A It’s a great location because it’s right in the\nmiddle of the city. The room is a bit small although it’s\nvery light. In the living room, we have a big 3D TV, so we\noften lie on the sofas and watch films in the evenings.\nModel text B It’s extremely cosy in the winter because we\nalways light the fire in the living room. Your bedroom\nwill be the one at the back of the house, so you’ll have\nan amazing view of the countryside. We’ve got a TV,\nalthough we don’t watch it much."
+    },
+    {
+      "id": "sb-105-5",
+      "text": "5 Circle the correct conjunction to complete these sentences.\n1 We can't live in the city centre although / because it's too\nexpensive\n2 We sometimes go the beach although / so the sea is too\ncold for swimming.\n3 Our street is in the town centre, because / so there's a lot\nof traffic\n4 There's a lot",
+      "key": "1 because 2 although 3 so 4 so 5 although"
+    },
+    {
+      "id": "sb-105-6",
+      "text": "6 VOCABULARY Read the Writing Strategy. Which modifiers\ncan you find in the texts in exercise 1. What adjectives are\nthey with?\nModifiers a bit extremely fairly pretty\nquite really (not) very\n| → Vocabulary Builder Modifiers: page 121",
+      "key": "fairly modern a bit small / remote very light\nreally relaxing not very expensive extremely cosy"
+    },
+    {
+      "id": "sb-106-2",
+      "text": "2 Read the text. Match the headings (A-F) to the gaps (1-5).\nThere is one extra heading which does not fit any of the\ngaps.\nA European-style houses, old and new\nB Old houses in many colours\nC Small houses for Mexico's richest people\nD New houses, old style\nE Colours have made life better\nF Big house",
+      "key": "1 B 2 D 3 A 4 F 5 E\nListening"
+    },
+    {
+      "id": "sb-107-6",
+      "text": "6 Read the email and complete each gap with ONE word.\nHi Matt,\nHelp! Why did I decide to have 1\nparty? It's four\no'clock and I'm still getting the house ready! I?\ntidied the living room, but there's still a lot to do! I\ncleaned the floors yet, and I need to finish\nmaking the food.\nDarren phoned you?",
+      "key": "1 a 2 ’ve / have 3 haven’t 4 Has 5 Will 6 at\n7 do 8 made 9 about 10 just\nSpeaking"
+    },
+    {
+      "id": "sb-107-7",
+      "text": "7 Read the Strategy. Write the adjectives in the correct place\nin the table.\nattractive awful cosy light relaxing ugly\nuncomfortable untidy\nPositive\nNegative",
+      "key": "Positive attractive cosy light relaxing\nNegative awful ugly uncomfortable untidy"
+    },
+    {
+      "id": "sb-107-10",
+      "text": "10 Think of a home that you know well (but not your own\nhome). Write a description. Include information about the\npoints below.\n• who lives there\n• the location\n• the rooms\n• when you last went there and what you did",
+      "key": "(Model answer)\nMy grandmother lives in a beautiful house in the\ncountryside in the south of England. It isn’t very big, but\nit’s cosy. Downstairs there’s a kitchen and a bright living\nroom. Upstairs, there are two bedrooms and a bathroom.\nOutside, there’s a small garden with lots of flowers. I go to\nher house during the school holidays. I went last summer\nfor a week. We went to the park, the cinema and the\nbeach. We also visited her sister, my great-aunt."
+    },
+    {
+      "id": "sb-108-1",
+      "text": "• Focus attention on the photos. Students answer the question.",
+      "key": "The photos show: (top, top row) Michael Middleton,\nPippa Middleton, James Middleton, Carole Middleton,\nPrince Charles, Camilla, Duchess of Cornwall, Prince Philip\n(bottom row) Prince William, Prince George, Kate, Duchess\nof Cambridge, Princess Charlotte, Queen Elizabeth II (right)\nKate and Prince George"
+    },
+    {
+      "id": "sb-108-5",
+      "text": "5 VOCABULARY Match the highlighted words in the text\nwith words below that have the opposite meaning.\nbusy cheap old sad small west",
+      "key": "busy – quiet cheap – expensive old – young\nsad – happy starts – finishes west – east"
+    },
+    {
+      "id": "sb-109-1",
+      "text": "1 SPEAKING Look at the photos. Where are the students?\nMatch photos A-D with the phrases below.\nat their degree ceremony in a college room\nin the dining hall in the library",
+      "key": "In photo A, the student is in her college room.\nIn photo B, the students are in the library.\nIn photo C, the students are in the dining hall.\nIn photo D, the students are at their degree ceremony."
+    },
+    {
+      "id": "sb-116-1",
+      "text": "1 SPEAKING Work in pairs or small groups. Who lives in this\nbuilding? In which country and city is it?",
+      "key": "The President of the United States lives in the White\nHouse. It’s in the U.S. in Washington D.C."
+    },
+    {
+      "id": "sb-116-6",
+      "text": "6\n4.31\nListen again. Answer the questions.",
+      "key": "1 the Roosevelt Room 2 President Nixon\n3 the Cabinet Room 4 the President’s secretary’s office\n5 because it’s 200 years old and is his favourite pieces\n6 each president"
+    },
+    {
+      "id": "sb-117-1",
+      "text": "1 SPEAKING Say the odd numbers 1-49 around the class.\nThen say the even numbers 2-50.\none, three, five...\ntwo, four, six...\n2 ~ 4.32\nListen and read the ordinals in the Learn this! box.\nLEARN THIS! Ordinal numbers and dates\n* 1st first and second 3rd third 4th fourth 5th fifth\n6th sixth 7th seventh ",
+      "key": "1 medium height 2 slim 3 attractive\n4 a beard 5 eyes 6 long 7 hair 8 curly\n2 (Possible answers)\n1 He’s tall and medium weight. He’s got dark, wavy\nhair and a beard. He’s got dark eyes.\n2 She’s slim and medium height. She’s got long,\nstraight, fair hair and glasses.\n3 Students’ own answers."
+    },
+    {
+      "id": "sb-121-1",
+      "text": "1 Match the photos with three of the athletics events below.\n100 metres 5,000 metres 10,000 metres\ncross-country running discus hammer high jump\nhurdles javelin longjump marathon\npole vault relay\nshot put triple jump",
+      "key": "A hurdles B shot put C cross-country running\n2 Running 5,000 metres, 10,000 metres, cross-country\nrunning, marathon, relay, hurdles\nThrowing hammer, javelin, shot put\nJumping hurdles, long jump, pole vault, triple jump"
+    },
+    {
+      "id": "sb-122-5",
+      "text": "5 Write true sentences about yourself with the affirmative or\nnegative form of have got. = I.3, I.4\n1 a bike\nI've got a bike. /I haven't got a bike.\n2 a laptop\n3 a pet\n4 a smartphone\n5 a TV in my bedroom\n6 an English dictionary",
+      "key": "2 I’ve got a laptop. / I haven’t got a laptop. 3 I’ve got\na pet. / I haven’t got a pet. 4 I’ve got a smartphone. /\nI haven’t got a smartphone. 5 I’ve got a TV in my\nbedroom. / I haven’t got a TV in my bedroom. 6 I’ve got\nan English dictionary. / I haven’t got an English dictionary."
+    },
+    {
+      "id": "sb-128-5",
+      "text": "5 SPEAKING Ask and answer in pairs using the present\ncontinuous. Choose from the prompts below. *- 3.1, 3.2, 3.3\n1 wear - trainers / boots / a T-shirt / socks / a dark top\n2 sit - near the door / near the window / near the board\n3 use - a pen / a pencil / your phone / a tablet\nAre you wearing traine",
+      "key": "1 Are you wearing trainers / boots / a T-shirt /\nsocks / a dark top? Yes, I am. / No, I’m not.\n2 Are you sitting near the door / near the window /\nnear the board? Yes, I am. / No, I’m not.\n3 Are you using a pen / a pencil / your phone / a\ntablet? Yes, I am. / No, I’m not."
+    },
+    {
+      "id": "sb-136-6",
+      "text": "6 Make the sentences negative. = 7.4, 7.5\n1 I went to school yesterday.\ndiant go to school yesterday\n2 I saw you at the party.\n3 Joe and Elli came to the cinema with us.\n4 Cathy spent a year in France.\n5 The lesson began on time.\n6 Tom wrote his name on his Workbook.",
+      "key": "2 I didn’t see you at the party.\n3 Joe and Elli didn’t come to the cinema with us.\n4 Cathy didn’t spend a year in France.\n5 The lesson didn’t begin on time.\n6 Tom didn’t write his name on his Workbook."
+    },
+    {
+      "id": "sb-138-3",
+      "text": "3 Look at the prompts. Write two sentences with going to,\none affirmative and one negative. = 8.1, 8.2\n1 I/ get a new bike / tomorrow X / next weekend /\nI'm not going to get a new bike tomorrow. I'm going to get a\nnew bike next weekend.\n2 we / take an exam / in a few days X / this afternoon /\n3 I / ",
+      "key": "2 We aren’t going to take an exam in a few days.\nWe’re going to take an exam this afternoon.\n3 I’m not going to write a letter tonight. I’m going\nto send an email (tonight).\n4 They aren’t going to move house tomorrow.\nThey’re going to move house tomorrow.\n5 She isn’t going to go running this evening. She’s\ngoing to do aerobics (this evening).\n6 I’m not going to start university next month. I’m\ngoing to start university next year."
+    },
+    {
+      "id": "sb-138-4",
+      "text": "4 Look at the prompts. Write questions with going to.\n→ 8.1, 8.2\n1 you/ use a computer next weekend?\nAre you going to use a computer next weekend?\n2 your best friend visit you / tonight?\n3 you / travel abroad next summer?\n4 your friends / start university next year?\n5 you / take any exams next year?",
+      "key": "2 Is your best friend going to visit you tonight? Yes,\nhe/ she is. / No, he/she isn’t.\n3 Are you going to travel abroad next summer? Yes,\nI am. / No, I’m not.\n4 Are your friends going to start university next\nyear? Yes, they are. / No, they aren’t.\n5 Are you going to take any exams next year? Yes, I\nam. / No, I’m not.\n6 Are you and your classmates going to have maths\ntomorrow? Yes, we are. / No, we aren’t."
+    },
+    {
+      "id": "wb-5-5",
+      "text": "5 Complete the email to a penfriend. Use be and have got,\naffirmative, negative and interrogative.\nTo:\nlucy@email.com\nHi Lucy,\nMy name!\nEmily.\n12\nseventeen\nyears old. How old\nyou?\nMy home town is Bristol, in\nEngland. But I4\nEnglish - I'm American. My\nparents\nfrom\nCalifornia. | 6\nlots of cousins in t",
+      "key": "1 is / ’s 2 am / ’m 3 are 4 ’m not 5 are 6 have\ngot / ’ve got 7 are 8 is 9 have got / ’ve got\n10 have got / ’ve got 11 has got / ’s got 12 haven’t got\n13 have got / ’ve got 14 is / ’s 15 Have 16 got\nIC Speaking\nTalking about ability and asking for\npermission"
+    },
+    {
+      "id": "wb-6-5",
+      "text": "5 Write true sentences about your abilities using can / can't\nand the verbs in brackets.\n1 (swim) I can swim. / I can't swim.\n2 (sing)\n3 (dance)\n4 (ski)\n5 (ride a horse)\n6 (speak French)",
+      "key": "2 I can/can’t sing.\n3 I can/can’t dance.\n4 I can/can’t ski\n5 I can/can’t ride a horse.\n6 I can/can’t speak French.\nID Grammar\nArticles: the, a / a n, some; this / t hat /\nthese / t hose"
+    },
+    {
+      "id": "wb-7-3",
+      "text": "3 There are one or two mistakes with articles in each\nsentence. Circle the mistakes and rewrite the sentences\ncorrectly\n1 I've got a cat and a dog. Acat is called Jimmy and the dog is\ncalled Rex.\nI've got a cat and a dog. The cat is called Jimmy and the\ndog is called Rex.\n2 There's a elephant and th",
+      "key": "2 There’s an elephant and some giraffes at our local zoo.\n3 We’ve got an apple tree in our garden.\n4 I’ve got a phone and an MP3 player. I’ve got the phone\nwith me, but the MP3 player is at home.\n5 There are some exercise books and a dictionary on my\ntable."
+    },
+    {
+      "id": "wb-10-6",
+      "text": "6 Look at the pairs of words. Are the underlined sounds the\nsame or different? Tick the correct answers.\nSame Different\n1 please\nclean\n2 unload\nsupermarket\n3 bedroom\ncook\n4 bathroom\nmaths\n5 nice\ntired\n6 worried\nclothes",
+      "key": "1 same 2 different 3 same (bedroom can also be\npronounced ˈbedruːm 4 different 5 same 6 different"
+    },
+    {
+      "id": "wb-11-5",
+      "text": "5 Put the words in the correct order to make questions. Then\nwrite true answers about yourself.\n1 best friend / Arabic / speak / does / your\n_?\n2 get up / you / on Sundays / do / early\n_?\n3 wash / does/ the dishes / your dad\n_?\n4 go / do / you and your friends / skateboarding\n_?\n5 do / at school / s",
+      "key": "1 Does your best friend speak Arabic? Yes, he/she does./\nNo, he/she doesn’t.\n2 Do you get up early on Sundays? Yes, I do./No, I don’t.\n3 Does your dad wash the dishes? Yes, he does./No, he\ndoesn’t.\n4 Do you and your friends go skateboarding? Yes, we do./\nNo, we don’t.\n5 Do you study German at school? Yes, I do./No, I don’t.\n6 Do your parents drive fast cars? Yes, they do./No, they\ndon’t.\n7 Does it rain a lot in your country? Yes, it does./No, it\ndoesn’t."
+    },
+    {
+      "id": "wb-14-2",
+      "text": "21.07 Read the Speaking Strategy. Then look at photos C\nand D. Listen and correct the sentences.\nShe hasn't got dark hair.\nShe's got dark hair.\nShe's got fair hair.",
+      "key": "Photo C: 2 She hasn’t got long hair. She’s got short hair.\n3 She hasn’t got curly hair. She’s got straight hair.\n\n\nPhoto D: 1 She hasn’t got medium-length hair. She’s got\nlong hair. 2 She hasn’t got straight hair. She’s got curly\nhair. 3 She hasn’t got dark hair. She’s got fair hair."
+    },
+    {
+      "id": "wb-23-7",
+      "text": "7 Write questions. Then write true answers for you.\n1 what time / usually / get up?\n2 how / get home from school?\n3 what / usually / have for lunch?\n4 who / usually / see / at weekends?\n5 what / usually / do on Friday evening?",
+      "key": "1 What time do you usually get up? (students’ own answers)\n2 How do you get home from school? (students’ own\nanswers)\n3 What do you usually have for lunch? (students’ own\nanswers)\n4 Who do you usually see at weekends? (students’ own\nanswers)\n5 What do you usually do on Friday evening? (students’\nown answers)"
+    },
+    {
+      "id": "wb-24-3",
+      "text": "3 In the text in exercise 2, underline examples of the\nprepositions below.\nafter before during from...to until",
+      "key": "after … we start lessons at ten, after breakfast.\nbefore I usually do it before dinner.\nduring During the break Mum lets me play computer games!\nfrom … to I have lessons from Monday to Thursday.\nuntil Mum lets me sleep until nine …"
+    },
+    {
+      "id": "wb-27-2",
+      "text": "2 Complete the announcements with the verbs below. Which\nare imperatives? Circle them.\nare come is meet phone play practise want\nyou already a badminton player?\nDo you?\nto learn to play badminton?\nEveryone'\nwelcome at our club,\nespecially beginners.\nWe 4\nin the school gym every\nThursday at 4 p.m. We",
+      "key": "1 Are 2 want 3 is 4 meet 5 play 6 practise\n7 Come 8 Phone 9 like 10 Are 11 come\n12 meet 13 learn 14 play 15 wait 16 visit\nStudents should circle: Come (7 and 11), Phone (8), wait\n(15), visit (16)"
+    },
+    {
+      "id": "wb-27-3",
+      "text": "3 Complete the table with information from the\nannouncements.\nBadminton Club\nComputer Club\nDay and time?\n2\nWhere?\n4\nActivities\n5\n8\n10\nContact for more information\n12",
+      "key": "Badminton Club 1 Thursday, 4 p.m., 3 in the school\ngym, 5 play for fun, 6 play matches, 7 practise skills,\n11 contact Laura\nComputer Club 2 Monday, from 3.30, 4 in the computer\nlab, 8 do programming, 9 learn to use software,\n10 play games online, 12 visit the website"
+    },
+    {
+      "id": "wb-30-1",
+      "text": "1 Find fifteen more items of clothing in the wordsearch and\nwrite them below.\nR\nU\nE\nR\nS\nL\nM\nC\nE\nS\nS\nC\nH\nW\nU\nE\nA\nH\nA\nM\nA\nM\nU\nK\nH\nM\nE\nR\nR\nY\nT\nA\nS\nN\nA\nD\nT\nE\nU\nS\nR\nT\nA\nR\nA\nC\nE\nE\nG\nL\nM\nE\nU\nC\nH\nW\nH\nA\nA\nQ\nA\nA\nN\nE\nG\nG\nN\nG\nS\nE\nS\nC\nX\nR\nA\nC\nS\nU\nA\nR\nT-shirt\n8\n9\n2\n10\n3\n11\n4\n12\n13\n14\n7\n15",
+      "key": "trousers, boots, skirt, jacket, leggings, trainers, scarf, tracksuit,\njumper, jeans, socks, sweatshirt, cardigan, shorts, pyjamas"
+    },
+    {
+      "id": "wb-30-2",
+      "text": "2 Write three items of clothing which:\n1 only girls and women usually wear.\n2 people often wear to do sport.\n3 people often wear on a cold day.\n4 people often wear on a hot, sunny day.",
+      "key": "(Possible answers)\n1 dress, skirt, leggings 2 trainers, tracksuit, shorts\n3 scarf, boots, coat 4 cap, T-shirt, shorts"
+    },
+    {
+      "id": "wb-30-6",
+      "text": "6 Look at the photo. Write a\ndescription of the woman's\nclothes or the man's clothes.",
+      "key": "He has got a jumper, jeans and shoes. He’s got a jacket.\nShe’s got a T-shirt, jeans and boots. She’s got a scarf."
+    },
+    {
+      "id": "wb-33-4",
+      "text": "4 Complete the sentences with the correct form of the verbs\nin brackets. Use the present simple in one gap and the\npresent continuous in the other.\n1 Tom often\ntrainers to school, but\ntoday he\nshoes. (wear)\n2 We\na DVD at the moment, but we\nTV most evenings. (watch)\n3 I usually\na sandwich for lunch, ",
+      "key": "1 Tom often wears trainers to school, but today he’s\nwearing shoes.\n2 We’re watching a DVD at the moment, but we watch\nTV most evenings.\n3 I usually have a sandwich for lunch, but today I’m\nhaving some soup.\n4 My mum works in an office in Manchester, but this\nmonth she’s working in Glasgow.\n5 It hardly ever snows here, but it is snowing at the moment.\n6 Jason and Tilly are tidying their bedrooms right now,\nbut they usually tidy them at the weekend."
+    },
+    {
+      "id": "wb-34-5",
+      "text": "5 Choose three adjectives from exercises 1 and 3 that you\ncould use to describe these things. Try not to use any\nadjective more than once.\nA a pair of jeans\n1\n2\n3\nB a city\n2\n3\nC an exercise\n1\n2\n3\nD the weather\n2\n3\nE a classmate\n1\n3\n2\nVOCAB BOOST!\nIn entries for adjectives in most learner's dictionar",
+      "key": "(Possible answers)\na cheap, expensive, comfortable b great, dangerous,\nlarge c easy, difficult, awful d good, fantastic, terrible\ne friendly, kind, happy"
+    },
+    {
+      "id": "wb-36-3",
+      "text": "3 Complete the suggestions below with five different\nactivities from exercise 2. Use the correct form of the verb\n(-ing form or the infinitive without to).\n1 Do you fancy\nthis evening?\n2 Shall we\ntomorrow night?\n3 Why don't we\nat the weekend?\n4 How about\non Sunday?\n5 Let's\ntomorrow morning.",
+      "key": "Do you fancy/How about + -ing\nShall we/Why don’t we/Let’s + infinitive without to"
+    },
+    {
+      "id": "wb-36-4",
+      "text": "4 Put the phrases below into the correct groups.\nCool I'm afraid Ican't Greatidea No, thanks\nSorry, but I'm busy That sounds fun Yes, I'd love to\nAgreeing to a suggestion\n1\n2\n3\n4\nDeclining a suggestion\n1\n2\n3",
+      "key": "Agreeing: 1 Cool. 2 Great idea. 3 That sounds fun.\n4 Yes, I’d love to.\nDeclining: 1 I’m afraid I can’t 2 No, thanks. 3 Sorry, but\nI’m busy."
+    },
+    {
+      "id": "wb-36-6",
+      "text": "6 1.20\nListen again. Tick the phrases in exercise 4 that you\nhear.",
+      "key": "Agreeing Cool. That sounds fun. Yes, I’d love to.\nDeclining I’m afraid I can’t No, thanks."
+    },
+    {
+      "id": "wb-37-2",
+      "text": "2 Read the Writing Strategy. Then choose three phrases from\nexercise 1 to complete the email below. (More than one\nanswer is possible.)\nTo:\njames@email.com\nHi James,\nI hope you and your family\nare well. What are you doing at the moment? I'm trying to finish\nmy homework, but / so it's taking a long t",
+      "key": "1 How are things? / Thanks for your email.\n2 That’s all from me.\n3 Best wishes / Give my love to your parents. / Say ‘Hi’ to\nyour sister. / Lots of love"
+    },
+    {
+      "id": "wb-37-4",
+      "text": "4 Complete the sentences with the correct linking words\nbelow. Sometimes more than one answer is possible.\nand because but or\nSO\n1 I'm tired\nI want to go to bed.\n2 l'd like to go out this evening,-\nI can't\n3 I can speak French\nmy mum's from\nFrance.\nbuy a\n4 Let's go to the newsagent's\nnewspaper.\n5 Do",
+      "key": "1 and / so 2 but 3 because 4 and 5 or 6 and"
+    },
+    {
+      "id": "wb-40-4",
+      "text": "4\nListen to four short recordings. Choose the correct\nanswer (A-D).\n1 Who is speaking to the students?\nA A doctor.\nC A parent.\nB A police officer.\nD A head teacher.\n2 When does Sean ask his mother about the jumper?\nA At the weekend.\nC After school.\nB Before school\nD At night.\n3 What do Rita and Karl",
+      "key": "1 D 2 B 3 C 4 A\n1 Now, I have a number of announcements today. The first is\nabout your uniforms. I know we usually say you have to wear\nyour long-sleeved shirts until 1st May, but this year it’s getting\nhot already. So, from Monday – that’s this Monday, 15 April –\nyou can wear your short-sleeved shirts to school. I’m sure\nyou’ll be more comfortable with those. Moving on …\n2 Sean Mum, have you seen my jumper?\nMum Which jumper’s that, Sean?\nS My school jumper. I can’t find it anywhere!\nM Well, is it in your bedroom?\nS No, I’ve looked there.\nM How about on the chair in the bathroom?\nS No! It isn’t there, either!\nM What about your bag? Is it in your schoolbag?\nS I’ll have a look. Yes, great! Thanks a lot, Mum. See you later.\nM Bye, then. Have a good day at school.\n3 Karl Rita, what do you think about school uniforms? Do\nyou think they’re necessary?\nRita Um, yes I do, Karl. The idea is that all the students\nare the same with a uniform. I think that’s a good\nthing. Karl Hmmm, I’m not so sure. The students in my\nclass really don’t like it. They want to choose their own\nclothes. I kind of understand them, really.\n4 With only two weeks of the summer holidays left,\nit’s time to think about going back to school. And you\nprobably need a new uniform! Where better to buy it than\nat Uniforms 4U. We’ve got a special offer of two-for-the-\nprice-of-one on all our skirts and trousers. So come and\nget your uniform at Uniforms 4U – you won’t regret it!"
+    },
+    {
+      "id": "wb-48-4",
+      "text": "41.27 Listen to three dialogues in the same restaurant.\nWhen does each dialogue take place? Choose the correct\nwords.\nDialogue 1 takes place before / during / after a meal.\nDialogue 2 takes place before / during / after a meal.\nDialogue 3 takes place before / during / after a meal.",
+      "key": "Dialogue 1 takes place during a meal.\nDialogue 2 takes place before a meal.\nDialogue 3 takes place after a meal."
+    },
+    {
+      "id": "wb-48-5",
+      "text": "5 Read and complete these lines from the dialogues. Write\none word in each gap. Then write 'Waiter' and 'Customer'\nnext to the correct lines.\n1 Waiter:\neverything OK for you?\n: Yes,\nfine, thanks\n2\n: Can I have\nwater, please?\n: Yes,\ncourse, sir.\n3\n_: Can we have a table\ntwo,\nplease?\n_: Certainly, sir",
+      "key": "1 Waiter: Is everything OK for you? Customer: Yes, it’s\nfine, thanks.\n2 Customer: Can I have some water, please? Waiter: Yes,\nof course, sir.\n\n\n3 Customer: Can we have a table for two, please?\nWaiter: Certainly, sir. Follow me.\n4 Waiter: Would you like to order some drinks?\nCustomer: Yes, please.\n5 Customer: Can we have the bill, please? Waiter:\nCertainly. One moment.\n6 Customer: Does it include service? Waiter: No, it doesn’t."
+    },
+    {
+      "id": "wb-53-5",
+      "text": "5 Write questions comparing the words below. Then write\nyour own opinion beginning with / think.\n1 Which / easy / English / German?\nWhich is easier, English or German?\nI think English is easier.\n2 Who / funny / Ben Stiller / Jim Carrey?\n3 Which / casual / a T-shirt / a shirt?\n4 Which / bad / a broke",
+      "key": "2 Who is funnier, Ben Stiller or Jim Carrey? (Students’ own\nanswers)\n3 Which is more casual, a T-shirt or a shirt? (Students’ own\nanswers)\n4 Which is worse, a broken leg or a broken arm?\n(Students’ own answers)\n5 Who is more famous, Lionel Messi or Taylor Swift?\n(Students’ own answers)\n6 Which is nicer, chocolate or cheese? (Students’ own\nanswers)\n7 Which is more attractive, a flower or a butterfly?\n(Students’ own answers)\n8 Which is better, a good exam result or a nice present?\n(Students’ own answers)"
+    },
+    {
+      "id": "wb-57-1",
+      "text": "",
+      "key": "Continents: 1 North America 2 Europe 3 Asia 4 Africa\n5 South America 6 Antarctica 7 Australia\nCompass points: a north b east c south d west"
+    },
+    {
+      "id": "wb-57-2",
+      "text": "2 Read the texts opposite (A-C). Which two cities are in the\nsame continent? Which continent are they in?\nand\nare in",
+      "key": "Punta Arenas and El Alto are in South America."
+    },
+    {
+      "id": "wb-58-5",
+      "text": "5\nRead the Speaking Strategy. Tick the two questions that\nthe speakers use.\n6 Prepare a dialogue giving directions from 'You are here' to\nthese places. Make notes.\n1 The police station:\n2 The restaurant:\n3 The library:",
+      "key": "Could you speak more slowly, please?, Could you repeat\nthat, please?"
+    },
+    {
+      "id": "wb-59-5",
+      "text": "5 Add sentences a-c to the paragraph plan in exercise 4.\na small shops in town centre\nb cinema - cheaper tickets on Thursdays\nc great fish and chip shop- cheap!",
+      "key": "Paragraph 1: great fish and chip shop – cheap!\nParagraph 2: small shops in town centre\nParagraph 3: cinema – cheaper tickets on Thursdays"
+    },
+    {
+      "id": "wb-62-1",
+      "text": "",
+      "key": "ice skating, swimming\nThe correct answer is B. A and D are incorrect because the\nice rink changes into a swimming pool in the summer."
+    },
+    {
+      "id": "wb-64-2",
+      "text": "2 Look at the pictures of a wolf and a bird. Match items 1-8\nin the pictures with the words below.\near\nlegs\npaw\ntail\neye\nmouth\nteeth\nwing\n1\n4\n8",
+      "key": "ear 1 legs 7 paw 4 tail 8 eye 5 mouth 2 teeth 3\nwing 6"
+    },
+    {
+      "id": "wb-64-3",
+      "text": "3 Answer the questions with animals from exercises 1 and 2.\nWhich animals...\n1 haven't got any legs?\n2 have got wings?\n3 have got six or eight legs?\n4 have got four arms / legs and a tail?",
+      "key": "1 dolphins, sharks, whales, snakes 2 bees, eagles, birds\n3 bees, spiders 4 bears, tigers, monkeys, giraffes, lions,\ncrocodiles, hippos, wolves, elephants, kangaroos"
+    },
+    {
+      "id": "wb-70-2",
+      "text": "2\n2.05 Listen to two students describing photos A and B\nabove. Which nouns from exercise 1 do the students use?\nStudent 1 uses\n. Student 2 uses\nand\nSpeaking Strategy\nWhen you describe a photo, begin by saying what the\nphoto shows in general. Then describe different parts of\nthe photo using phrases l",
+      "key": "Student 1 uses trees. Student 2 uses sea, sky, clouds and\nwater."
+    },
+    {
+      "id": "wb-70-4",
+      "text": "4 Circle the correct words to complete the sentences.\nPhoto A:\n1 In / On the centre, there's a bear.\n2 There's a man in / on the right.\n3 The man is facing / looking the bear.\n4 The bear is sitting / standing by the tent.\n5 There are some trees in the background / foreground\nPhoto B:\n1 In the backgr",
+      "key": "Photo A: 1 In 2 on 3 facing 4 standing\n5 background Photo B: 1 foreground 2 In 3 top\n4 standing 5 aren’t"
+    },
+    {
+      "id": "wb-71-1",
+      "text": "1 Read the postcard. Tick the activities that are mentioned.\nCircle the activity you can see in the photo.\n1 abseil |\n8 kite-surf\n2 bungee jump\n9 go riding\n3 climb C\n10 swim O\nU\n11 surf L\n4 cycle\n5 explore U\n12 trek\n6 go caving\n13 watch wildlife\n7 kayak\n14 windsurf C\nHi Caitlin,\nThis is my second da",
+      "key": "1 3 4 5 6 7 12\nStudents should circle ‘abseiling’."
+    },
+    {
+      "id": "wb-74-1",
+      "text": "",
+      "key": "laptop, computer, tablet, monitor\n1 headphones 2 keyboard 3 printer 4 webcam\n5 mouse 6 speakers 7 charger 8 router"
+    },
+    {
+      "id": "wb-76-3",
+      "text": "3\n2.07 Read the Listening Strategy. Then listen to three\ndialogues. Write the sequencing words from exercise 2 that\nyou hear.\nDialogue 1\na\nDialogue 2\na\nb\nd\nDialogue 3\na\nb",
+      "key": "Dialogue 1: a first\nDialogue 2: a to start off with b next c after that\nd finally\nDialogue 3: a first of all b next c now"
+    },
+    {
+      "id": "wb-80-5",
+      "text": "5\n2.09 Listen to another dialogue. Complete the\ninformation below about the gadget the boy buys.\nGadget:\nFeatures: 1\nWhat else does he buy?\nTotal price:\nPayment method:",
+      "key": "Gadget (Spiral 5) tablet\nFeatures 1 built-in 4G, 2 excellent battery life\nWhat else does he buy? a case\nTotal price £200\nPayment method debit card"
+    },
+    {
+      "id": "wb-80-7",
+      "text": "7 Imagine you are a sales assistant in a shop. Write answers\nto the questions in exercise 6.\n1\n2\n3\n4",
+      "key": "(Possible answers)\n1 Well, there are three popular phones, the Ultra 48, the\nCybernet 2000 and the Touch Plus 3.\n2 It has a touch-screen, built-in 4G and headphones.\n3 The Ultra 48 is £120, the Cybernet 2000 is £99 and the\nTouch Plus 3 is £75.\n4 No, I’m sorry. You have to pay in cash or by debit card."
+    },
+    {
+      "id": "wb-86-3",
+      "text": "3 Work in pairs. Match each group below (1-4) with as many\nsports and activities from exercises 1 and 2 as possible.\n1 You need a ball for these:\n2 You need water, ice or snow for these:\n3 You only need one person for these:\n4 These nearly always take place outside:",
+      "key": "1 basketball, football, golf, table tennis, volleyball,\nhandball, tennis\n2 ice hockey, ice skating, skiing, surfing, swimming\n3 climbing, cycling, dancing, golf, gymnastics, skiing,\nsurfing, swimming, yoga, roller skating, athletics,\naerobics, skateboarding, ice skating\n4 football, golf, skiing, surfing, skateboarding, tennis"
+    },
+    {
+      "id": "wb-88-4",
+      "text": "4 M2.13 Listen. Try to predict the end of each sentence.\nYou can write more than one word. There is more than one\npossible answer.\n3\n4\n5",
+      "key": "Transcript\n1 I’m not going out because I’ve got a bad …\n2 He’s wearing jeans and a baggy …\n3 Mum went to the supermarket and …\n4 We’re going to France to …\n5 I want to make a cake. Have we …"
+    },
+    {
+      "id": "wb-89-2",
+      "text": "2 Write questions with will. Then write true answers.\n1 tomorrow / be Tuesday?\nWill tomorrow be Tuesday?\nYes, it will. / No, it won't.\n2 you / go to university in another country?\n3 the World Cup / take place next year?\n4 you / leave home before you are 20?\n5 you / be rich and famous?\n6 it/ be warm ",
+      "key": "2 Will you go to university in another country? Yes, I will./\nNo, I won’t. 3 Will the World Cup take place next year?\nYes, it will./No, it won’t. 4 Will you leave home before\nyou are 20? Yes, I will./No, I won’t. 5 Will you be rich and\nfamous? Yes, I will./No, I won’t. 6 Will it be warm and\nsunny tomorrow? Yes, it will./No, it won’t. 7 Will you and\nyour family go abroad next summer? Yes, we will./No, we\nwon’t. 8 Will there be important exams at the end of the\nyear? Yes, there will./No, there won’t."
+    },
+    {
+      "id": "wb-90-4",
+      "text": "4 Read the Vocab boost! box. Write down the related noun\nfor each word below, and add an example sentence for\neach word. Use a dictionary to help you.\n1 Adjective: weak\nExample:\nNoun:\nExample:\n2 Verb: translate\nExample:\nNoun:\nExample:\n3 Adjective: high\nExample:\nNoun:\nExample:\n4 Verb: decide\nExample:",
+      "key": "(Possible answers)\n1 weak: He is still weak after his illness; weakness: Crying\nisn’t a sign of weakness. 2 translate: Can you help me\ntranslate this into English?; translation: He specialises\nin translations from English into Spanish. 3 high: She\nlikes wearing high heels; height: She is the same height\nas her sister. 4 decide: You decide what you want to do;\ndecision: He is bad at making decisions."
+    },
+    {
+      "id": "wb-92-3",
+      "text": "3 Which two sports do Sam and Kylie choose to do? Which\nother sports do they mention?\nThey choose:\nThey also mention:",
+      "key": "They choose athletics and judo.\nThey also mention water polo, hockey and climbing."
+    },
+    {
+      "id": "wb-93-2",
+      "text": "2 Read the letter. Where do we write these things? Write the\ncorrect numbers (1-3).\nExtra information Date\nWriter's address\nDear Bradley.\nThanks for your letter. Apologies for not replying sooner. I'm very\nbusy at the moment with revision for my exams. I have to study\nevery evening for two or three ",
+      "key": "Extra information 3 Date 2 Writer’s address 1"
+    },
+    {
+      "id": "wb-97-2",
+      "text": "2 Add these irregular past simple forms and past participles\nto the correct column in the table.\nate forgotten gave written come been broke took\nwas/ were broken seen spoke done eaten spoken\ntaken came did forgot given saw wrote\nInfinitive without to\nPast simple\nPast participle\nbe\nbreak\ncome\ndo\neat\n",
+      "key": "be was / were, been b reak broke, broken c ome came,\ncome d o did, done e at ate, eaten f orget forgot,\nforgotten g ive gave, given s ee saw, seen s peak spoke,\nspoken t ake took, taken w rite wrote, written"
+    },
+    {
+      "id": "wb-100-1",
+      "text": "1 Complete the table. Use the words below.\nan argument a bed the bus the cleaning a conversation\na drink friends the hoovering housework\nnothing/something a shower somebody's advice\ndo\nhave\nmake\ntake\n11\n12",
+      "key": "do 1 the cleaning 2 the hoovering 3 housework\n4 nothing / something have 5 an argument\n6 a conversation 7 a drink 8 a shower make 9 a bed\n10 friends take 11 the bus 12 somebody’s advice"
+    },
+    {
+      "id": "wb-102-2",
+      "text": "2 Which group do these key phrases belong to: comparing\nand contrasting (c) or speculating (s)? Write the correct\nletter in the box.\nBoth photos show ...\nI think ... probably.\nI would say that...\nIn the first photo..., but in the second photo...\nIt looks as if ... OC\nPerhaps he / she / it / they...\n",
+      "key": "A Comparing and contrasting:\n1 Both photos show …\n2 In the first photo … , but in the second photo …\n3 The first photos shows … , whereas the second photo\nshows …\n4 You can see … in both photos.\nB Speculating:\n5 I think … probably …\n6 I would say that …\n7 It looks as if …\n8 Perhaps he / she /it / they …\n9 They look (+ adjective). He / She / It looks (+ adjective)."
+    },
+    {
+      "id": "wb-103-2",
+      "text": "2 Rewrite each pair of sentences as a single sentence. Include\nthe conjunction in the brackets.\n1 The house is modern. It's very comfortable. although)\nAlthough the house is modern, it's very comfortable.\n2 We were tired. We went to bed early. (because)\n3 We stayed at home. It was a cold evening. (s",
+      "key": "2 We went to bed early because we were tired. / Because\nwe were tired, we went to bed early.\n3 It was a cold evening, so we stayed at home.\n4 The cinema is expensive although tickets for children\nare cheaper.\n5 The café closed because it was not very popular."
+    },
+    {
+      "id": "wb-103-3",
+      "text": "3 Read the Writing Strategy. Then complete the sentences\nusing a modifier and an adjective from the list below. More\nthan one answer is possible.\nModifiers: extremely fairly not very pretty really very\nAdjectives: busy expensive large modern noisy popular\n1 There's an\nFrench\nrestaurant in the next s",
+      "key": "(Possible answers)\n1 extremely expensive 2 fairly busy 3 really popular\n4 pretty large 5 very noisy 6 very modern"
+    },
+    {
+      "id": "wb-103-4",
+      "text": "4 Add the sentences (1-6) in exercise 3 to the paragraph plan\nbelow. Write the numbers in the boxes. Then add two ideas\nof your own for each paragraph.\nParagraph 1: location of the house\nSentences and • from exercise 3.\nMy ideas:\nParagraph 2: inside the house\nSentences and from exercise 3.\nMy ideas:",
+      "key": "Paragraph 1 Sentences 2 and 5 Paragraph 2 Sentences 4\nand 6 Paragraph 3 Sentences 1 and 2"
+    },
+    {
+      "id": "wb-107-8",
+      "text": "8 Read the Strategy. Then use a conjunction to rewrite the\ntwo sentences as one.\n1 It isn't in the city centre. It's quiet and peaceful.\n2 I'm not lonely. My friends often visit me.\n3 It's a large flat. It's on the tenth floor.\n4 It's got a lot of windows. The rooms are very bright.",
+      "key": "(Possible answers)\n1 It isn’t in the city centre, but it’s quiet and peaceful.\n2 I’m not lonely because my friends often visit me.\n3 It’s a large flat, but it’s on the tenth floor.\n4 It’s got a lot of windows, so the rooms are very bright."
+    }
+  ]
+}

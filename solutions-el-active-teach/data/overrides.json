@@ -1,0 +1,849 @@
+{
+  "sb-5-1": {
+    "answerSpec": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "sixteen",
+          "16",
+          "She is sixteen",
+          "She is 16",
+          "Joanna’s sister Emma is sixteen"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-5-1",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-7-2": {
+    "answerSpec": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "at home",
+          "It is at home",
+          "Olivia’s pencil case is at home"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-7-2",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-4-8": {
+    "answerSpec": [
+      {
+        "label": "Antoine",
+        "accepted": [
+          "France"
+        ]
+      },
+      {
+        "label": "Eszter",
+        "accepted": [
+          "Hungary"
+        ]
+      },
+      {
+        "label": "Martyna",
+        "accepted": [
+          "Poland"
+        ]
+      },
+      {
+        "label": "Alejandro",
+        "accepted": [
+          "Spain"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-4-8",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-8-2": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "’s father"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "’s parents"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "’s nephew"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "’s grandmother",
+          "’s grandma"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "’s aunts"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "’s grandchildren"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-8-2",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-8-1": {
+    "answerSpec": [
+      {
+        "label": "a · female",
+        "kind": "set",
+        "members": [
+          [
+            "aunt"
+          ],
+          [
+            "daughter"
+          ],
+          [
+            "granddaughter"
+          ],
+          [
+            "grandmother",
+            "grandma"
+          ],
+          [
+            "mother",
+            "mum"
+          ],
+          [
+            "niece"
+          ],
+          [
+            "sister"
+          ],
+          [
+            "wife"
+          ]
+        ]
+      },
+      {
+        "label": "b · male",
+        "kind": "set",
+        "members": [
+          [
+            "brother"
+          ],
+          [
+            "father",
+            "dad"
+          ],
+          [
+            "grandfather",
+            "grandad"
+          ],
+          [
+            "grandson"
+          ],
+          [
+            "husband"
+          ],
+          [
+            "nephew"
+          ],
+          [
+            "son"
+          ],
+          [
+            "uncle"
+          ]
+        ]
+      },
+      {
+        "label": "c · male or female",
+        "kind": "set",
+        "members": [
+          [
+            "child",
+            "children"
+          ],
+          [
+            "cousin"
+          ],
+          [
+            "grandchild",
+            "grandchildren"
+          ],
+          [
+            "grandparent"
+          ],
+          [
+            "parent"
+          ]
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-8-1",
+      "reason": "Проверка списков без учёта порядка.",
+      "instruction": "Распредели слова по группам. Ответы в каждой группе разделяй точкой с запятой."
+    }
+  },
+  "sb-4-10": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "kind": "set",
+        "members": [
+          [
+            "Croatia"
+          ],
+          [
+            "the Czech Republic",
+            "Czech Republic"
+          ],
+          [
+            "France"
+          ],
+          [
+            "Germany"
+          ],
+          [
+            "Greece"
+          ],
+          [
+            "Hungary"
+          ],
+          [
+            "Italy"
+          ],
+          [
+            "Poland"
+          ],
+          [
+            "Russia"
+          ],
+          [
+            "Slovakia"
+          ],
+          [
+            "Spain"
+          ],
+          [
+            "Turkey"
+          ],
+          [
+            "the UK",
+            "UK"
+          ],
+          [
+            "Ukraine"
+          ]
+        ]
+      },
+      {
+        "label": "2",
+        "kind": "set",
+        "members": [
+          [
+            "China"
+          ],
+          [
+            "India"
+          ],
+          [
+            "Japan"
+          ],
+          [
+            "Russia"
+          ],
+          [
+            "Turkey"
+          ]
+        ]
+      },
+      {
+        "label": "3",
+        "kind": "set",
+        "members": [
+          [
+            "Argentina"
+          ],
+          [
+            "Brazil"
+          ],
+          [
+            "Canada"
+          ],
+          [
+            "Mexico"
+          ],
+          [
+            "the USA",
+            "USA"
+          ]
+        ]
+      },
+      {
+        "label": "4",
+        "kind": "set",
+        "members": [
+          [
+            "Australia"
+          ],
+          [
+            "Canada"
+          ],
+          [
+            "the UK",
+            "UK"
+          ],
+          [
+            "the USA",
+            "USA"
+          ]
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "mixed",
+      "source": "sb-4-10",
+      "reason": "Проверка списков без учёта порядка.",
+      "instruction": "Ответь на вопросы 1–4 списками стран. Вопрос 5 — в свободном ответе."
+    }
+  },
+  "sb-26-4": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "should"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "shouldn't"
+        ]
+      },
+      {
+        "label": "2a",
+        "accepted": [
+          "shouldn't"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "should"
+        ]
+      },
+      {
+        "label": "3a",
+        "accepted": [
+          "should"
+        ]
+      },
+      {
+        "label": "3b",
+        "accepted": [
+          "shouldn't"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-26-4",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-75-4": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "post"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "upload"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "download"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "delete"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "connect to"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "enter"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "surf"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "print",
+          "delete",
+          "download",
+          "scan",
+          "upload"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-75-4",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "wb-10-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "same"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "different"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "same"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "different"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "same"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "different"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "wb-10-6",
+      "reason": "Ключ сверён с оригинальным заданием."
+    }
+  },
+  "sb-9-8": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-9-8",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-13-3": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-13-3",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-17-2": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-17-2",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-43-3": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-43-3",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-62-3": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-62-3",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-83-4": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-83-4",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "wb-93-1": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "wb-93-1",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-121-1": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-121-1",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-67-3": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "into"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "along"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "away from"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "round"
+        ]
+      },
+      {
+        "label": "e",
+        "accepted": [
+          "down"
+        ]
+      },
+      {
+        "label": "f",
+        "accepted": [
+          "across"
+        ]
+      },
+      {
+        "label": "g",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "h",
+        "accepted": [
+          "onto"
+        ]
+      },
+      {
+        "label": "i",
+        "accepted": [
+          "out of"
+        ]
+      },
+      {
+        "label": "j",
+        "accepted": [
+          "over"
+        ]
+      },
+      {
+        "label": "k",
+        "accepted": [
+          "under"
+        ]
+      },
+      {
+        "label": "l",
+        "accepted": [
+          "through"
+        ]
+      },
+      {
+        "label": "m",
+        "accepted": [
+          "off"
+        ]
+      },
+      {
+        "label": "n",
+        "accepted": [
+          "towards"
+        ]
+      },
+      {
+        "label": "o",
+        "accepted": [
+          "past"
+        ]
+      },
+      {
+        "label": "p",
+        "accepted": [
+          "up"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "mixed",
+      "source": "sb-67-3",
+      "reason": "Закрытая часть — по ключу, дополнительный ответ — преподавателю."
+    }
+  },
+  "sb-46-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Zauo"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Ithaa"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Dinner in the Sky"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Hammock Café"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "mixed",
+      "source": "sb-46-3",
+      "reason": "Закрытая часть — по ключу, дополнительный ответ — преподавателю."
+    }
+  },
+  "sb-13-7": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "My jeans are very old"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Put the knives and forks on the table"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "✓",
+          "correct",
+          "no change"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "I’d like some information about trains"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Can I see some photos of your family?"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "✓",
+          "correct",
+          "no change"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "She’s got very big feet"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "I’ve got lots of homework this evening"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-13-7",
+      "reason": "Ключ сверён; символ f в извлечённом PDF означает галочку.",
+      "instruction": "Исправь предложение полностью. Если ошибок нет, напиши correct или ✓."
+    }
+  },
+  "sb-27-2": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-27-2",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "sb-71-1": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "sb-71-1",
+      "reason": "Развёрнутый ответ проверяет преподаватель."
+    }
+  },
+  "wb-86-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "f"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "c"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "wb-86-5",
+      "reason": "Ключ сверён, пояснение об оставшихся предложениях отделено."
+    }
+  },
+  "wb-101-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "D"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "A"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "wb-101-3",
+      "reason": "Ключ сверён, пояснение об оставшихся предложениях отделено."
+    }
+  },
+  "sb-110-4": {
+    "answerSpec": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "c"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "sb-110-4",
+      "reason": "Выбор правильного резюме по ключу."
+    }
+  }
+}
