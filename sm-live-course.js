@@ -25,7 +25,7 @@ window.LiveCourse={connect(adapter){
   const d=e.data;if(d.kind==='connection'){online=!!d.online;paint();}
   else if(d.kind==='snapshot')tick(true);
   else if(d.kind==='view'&&role==='s'&&adapter.view()){
-   if(!['sb','wb'].includes(d.book)||!Number.isInteger(d.page)||!(d.exercise===null||typeof d.exercise==='string'))return;
+   if(!['sb','wb','ws'].includes(d.book)||!Number.isInteger(d.page)||!(d.exercise===null||typeof d.exercise==='string'))return;
    const view={book:d.book,page:d.page,exercise:d.exercise};if(JSON.stringify(view)!==JSON.stringify(adapter.view()))adapter.apply(view);tick(true);
   }else if(d.kind==='answers'&&role==='t'){
    if(!Array.isArray(d.items)||d.items.length>200||d.items.some(i=>!i||typeof i.text!=='string'||i.text.length>12000||typeof i.label!=='string'||i.label.length>100||i.result&&typeof i.result!=='string'))return;

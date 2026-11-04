@@ -98,7 +98,7 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-<script src="solutions-homework.js?v=f64fe5f1"></script>
+<script src="focus-homework.js?v=376b5d18"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -239,6 +239,9 @@ async function drawPane(){
   let solReport='';
   if(hw.some(h=>SolutionsHW.ids(h).length)||Object.keys(d.__coursework?.['solutions-int']||{}).length){
     try{await SolutionsHW.load();solReport=SolutionsHW.renderClass(hw,d);}catch(e){solReport='<p>'+esc(e.message)+'</p>';}
+  }
+  if(hw.some(h=>FocusHW.ids(h).length)||Object.keys(d.__coursework?.['focus-1']||{}).length){
+    try{await FocusHW.load();solReport+=FocusHW.renderClass(hw,d);const entries=Object.entries(d.__coursework?.['focus-1']||{}).filter(([,r])=>r?.values?.some(v=>String(v).trim()));solReport+='<div class="sect"><span>Focus 1 · все сохранённые ответы</span></div>'+entries.map(([id,r])=>'<details class="sh-ex"><summary>'+esc(FocusHW.label(id))+'</summary><a href="'+esc(FocusHW.link(id))+'" target="_blank" rel="noopener">Открыть условие ↗</a>'+FocusHW.renderAnswer(id,r)+'</details>').join('');}catch(e){solReport+='<p>'+esc(e.message)+'</p>';}
   }
   if(STUDENTS[sel]?.student_id!==sid)return;
   const kindOpts = '<option value="trainer">Тренажёр</option><option value="games">Игры</option><option value="worksheet">Лист</option>';
@@ -386,7 +389,7 @@ function hwChips(list, hw){
     const meta = parseNote(a.note);
     const parts = (meta.parts||[]).map(p => PART_L[p]||p).join(", ");
     all.push({ k:"spk", id:a.id, done:a.done,
-      txt:(SPK_L[a.course]||a.course)+(SolutionsHW.ids(a).length?" · "+SolutionsHW.ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
+      txt:(SPK_L[a.course]||a.course)+((a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length?" · "+(a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
   });
   if (!all.length) return "";
   return '<div class="chips">' + all.map(x =>
@@ -476,7 +479,7 @@ function fillUnits(){
   const course = document.getElementById("hCourse").value;
   const uSel = document.getElementById("hUnit");
   const page = PAGE_COURSES[course];
-  const solutions = course === "solutions-int";
+  const solutions = ["solutions-int","focus-1"].includes(course);
   const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
@@ -502,7 +505,7 @@ function fillUnits(){
     if(solutions){
       uSel.insertAdjacentHTML('beforeend','<option value="extra">Reference &amp; banks</option>');
       const holder=document.getElementById('hSolutions');holder.selectedIds=()=>[];
-      SolutionsHW.mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
+      (course==='focus-1'?FocusHW:SolutionsHW).mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
     }
     return;
   }
@@ -521,6 +524,7 @@ function bindStudent(sid){
   const $ = id => document.getElementById(id);
   fillUnits();
   if($("shRefresh"))$("shRefresh").onclick=()=>load();
+  if($("focusRefresh"))$("focusRefresh").onclick=()=>load();
   $("hCourse").onchange = fillUnits;
   /* Назначить ученику учебник */
   const acGo = $("acGo");
@@ -590,8 +594,8 @@ function bindStudent(sid){
     }
 
     let parts = null, note = null;
-    if(course==='solutions-int'){
-      try{note=SolutionsHW.makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
+    if(['solutions-int','focus-1'].includes(course)){
+      try{note=(course==='focus-1'?FocusHW:SolutionsHW).makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
     } else if (isPage){
       parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
       if (!parts.length){
