@@ -5,8 +5,8 @@ const I=root.SpeakoutInteractive,escape=s=>String(s??'').replace(/[&<>"']/g,c=>(
 function optionText(q,value){const o=q?.options?.find(o=>I.normalize(o.value)===I.normalize(value));return o?o.label.replace(/^[a-d]\.\s*/i,''):value}
 function canonical(q,value){const o=q?.options?.find(o=>I.normalize(optionText(q,o.value))===I.normalize(value));return o?o.value:value}
 function fromTemplate(template,value){const pattern=template.split('{}').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('(.*?)');return new RegExp('^'+pattern+'$','i').exec(value||'')?.slice(1)}
-function model(id,spec){
- const source=root.SPEAKOUT_INLINE_DATA?.[id];if(!source?.fields.length)return null;
+function model(id,spec,override){
+ const source=override||root.SPEAKOUT_INLINE_DATA?.[id];if(!source?.fields.length)return null;
  const fields=source.fields.map(f=>({...f})),groups={};
  const items=spec.items.filter(q=>!source.given?.includes(q.n)).map(q=>source.rank?{...q,originalAnswer:q.answer,answer:q.n,options:undefined}:q);
  for(const f of fields)if(f.n)(groups[f.n]||=[]).push(f);
@@ -18,7 +18,7 @@ function model(id,spec){
   else{const parts=q.answer.split(/\s*[;,]\s*/);if(parts.length===group.length)group.forEach((f,i)=>f.answer=parts[i]);else complete=false}
  }
  if(fields.some(f=>f.answer===undefined))complete=false;
- return {box:source.box,fields,groups,items,rank:source.rank,vowels:source.vowels,templates:source.templates,instruction:source.instruction,auto:complete};
+ return {box:source.box,distinct:source.distinct,fields,groups,items,rank:source.rank,vowels:source.vowels,templates:source.templates,instruction:source.instruction,auto:complete};
 }
 function mount({container,data,page,exercise,state,spec,key,keyHTML,url,teacher,index,last,onChange}){
  state.inline=state.inline||{};spec={...spec,items:data.items};
@@ -48,16 +48,18 @@ function mount({container,data,page,exercise,state,spec,key,keyHTML,url,teacher,
  }
  $('#inlineNextBlank').onclick=()=>inputs[(data.fields.findIndex(f=>f.id===selected)+1)%inputs.length].focus();
  $('#inlineHint').onclick=()=>{const f=byId.get(selected);if(f.answer===undefined)return;state.revealed[f.n]=true;state.done=false;state.score=null;const input=inputs.find(i=>i.dataset.inline===f.id);input.classList.remove('correct','incorrect');input.classList.add('revealed');$('#inlineFeedback').textContent=`Ответ${f.n&&!data.rank?' '+f.n:''}: ${f.answer}`;$('#checkResult').textContent='';onChange()};
- function correct(f){return data.groups[f.n]?.length===1?I.matches(state.values[f.n]||'',spec.items.find(q=>q.n===f.n).answer):I.matches(value(f),f.answer)}
+ function unique(n){return !(data.distinct||[]).some(group=>group.includes(n)&&group.some(other=>other!==n&&I.normalize(state.values[other]||'')===I.normalize(state.values[n]||'')))}
+ function correctQuestion(q){return I.matches(state.values[q.n]||'',q.answer)&&unique(q.n)}
+ function correct(f){return unique(f.n)&&( data.groups[f.n]?.length===1?I.matches(state.values[f.n]||'',spec.items.find(q=>q.n===f.n).answer):I.matches(value(f),f.answer))}
  function check(){
-  let right=0;for(const q of spec.items)if(I.matches(state.values[q.n]||'',q.answer))right++;
+  let right=0;for(const q of spec.items)if(correctQuestion(q))right++;
   for(const input of inputs){const f=byId.get(input.dataset.inline),ok=correct(f);input.classList.remove('revealed');input.classList.toggle('correct',ok);input.classList.toggle('incorrect',!ok);input.setAttribute('aria-invalid',!ok)}
   const helped=spec.items.some(q=>state.revealed[q.n]);state.score=right;state.total=spec.items.length;state.done=right===state.total&&!helped;
   $('#checkResult').textContent=`Верно: ${right} из ${state.total}${helped?' · Есть подсказки. Повтори эти ответы самостоятельно.':state.done?' · Всё выполнено!':''}`;
   $('#inlineFeedback').textContent=right===state.total?'Все ответы верны.':'Неверные и незаполненные пропуски выделены красным.';onChange();
  }
  if($('#check'))$('#check').onclick=check;
- if($('#retryMistakes'))$('#retryMistakes').onclick=()=>{for(const q of spec.items)if(!I.matches(state.values[q.n]||'',q.answer)||state.revealed[q.n]){delete state.values[q.n];delete state.revealed[q.n];for(const f of data.groups[q.n]||[])delete state.inline[f.id]}state.done=false;state.score=null;for(const input of inputs)input.value=value(byId.get(input.dataset.inline));layout();clearFeedback();onChange();inputs[0].focus()};
+ if($('#retryMistakes'))$('#retryMistakes').onclick=()=>{for(const q of spec.items.filter(q=>!correctQuestion(q)||state.revealed[q.n])){delete state.values[q.n];delete state.revealed[q.n];for(const f of data.groups[q.n]||[])delete state.inline[f.id]}state.done=false;state.score=null;for(const input of inputs)input.value=value(byId.get(input.dataset.inline));layout();clearFeedback();onChange();inputs[0].focus()};
  $('#retry').onclick=()=>{state.values={};state.inline={};state.revealed={};state.done=false;state.score=null;for(const input of inputs)input.value='';layout();clearFeedback();onChange()};
  if($('#inlineCompare'))$('#inlineCompare').onclick=()=>document.querySelector('#exerciseKeys').click();
  activate(data.fields[0]);layout();

@@ -6,8 +6,8 @@ for(const course of ['speakout-b1','speakout-b1plus']){
  const base=course+'-active-teach',w=load(base,['assets/course.js','assets/interactive.js','assets/exercise-sources.js']),d=w.COURSE;out[course]=[];
  for(const[book,b]of Object.entries(d.books))for(const p of b.pages)for(const e of p.exercises){const id=book+':'+p.page+':'+e.label,spec=w.SpeakoutInteractive.spec(e,d.keys[e.keyId||book+'|'+p.lesson+'|'+e.label]);if(spec.mode==='auto'&&w.EXERCISE_SOURCES[id])out[course].push({id,fields:spec.items.map(f=>({id:f.n,answers:w.SpeakoutInteractive.variants(f.answer)})),sources:w.EXERCISE_SOURCES[id].sources,pdf:p.pdf||b.path,pdfPage:p.pdfPage,text:e.text})}
 }
-{
- const c='solutions-int',w=load(c+'-active-teach',['assets/course.js','assets/exercise-sources.js']);out[c]=w.SOLUTIONS.pages.flatMap(p=>p.exercises.filter(e=>e.answerSpec?.length).map(e=>({id:e.id,fields:e.answerSpec.filter(f=>f.kind!=='set').map(f=>({id:f.label,answers:f.accepted})),sources:w.EXERCISE_SOURCES[e.id].sources,text:e.text})))
+for(const[c,global]of [['solutions-int','SOLUTIONS'],['focus-1','FOCUS']]){
+ const w=load(c+'-active-teach',['assets/course.js','assets/exercise-sources.js']);out[c]=w[global].pages.flatMap(p=>p.exercises.filter(e=>e.answerSpec?.length).map(e=>({id:e.id,fields:e.answerSpec.filter(f=>f.kind!=='set').map(f=>({id:f.label,answers:f.accepted})),sources:w.EXERCISE_SOURCES[e.id].sources,text:e.text})))
 }
 {
  const c='outcomes-beginner',w=load(c+'-active-teach',['assets/exercises.js','assets/exercise-sources.js']),d=Object.values(w).find(x=>x&&x['sb:10']);out[c]=Object.values(d).flat().filter(e=>e.check?.mode==='items').map(e=>({id:e.id,fields:e.check.items.filter(f=>!f.soft&&!f.self&&f.match!=='set').map(f=>({id:String(f.label),answers:[f.key].flat(Infinity)})),sources:w.EXERCISE_SOURCES[e.id].sources,text:e.instruction}))

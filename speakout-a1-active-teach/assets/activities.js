@@ -1,0 +1,84 @@
+/* Printed word banks and pair connections. Answers use the course's existing records. */
+(function(root){
+'use strict';
+const I=root.SpeakoutInteractive,N=root.SpeakoutInline,esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const equal=(a,b)=>I.normalize(a)===I.normalize(b),ns='http://www.w3.org/2000/svg';
+function key(id,original){original=root.SPEAKOUT_ANSWER_MAP?.[id]||original;const items=root.SPEAKOUT_ACTIVITY_DATA?.[id]?.keyItems;return items?{...original,items,raw:items.map(q=>q.n+' '+q.answer).join('\n')}:original}
+function model(id,spec){
+ const source=root.SPEAKOUT_ACTIVITY_DATA?.[id];if(!source)return null;
+ if(source.select)return {...source,kind:'match',type:'select',left:[{id:'selected',label:'Выбрано'}],right:source.bank.map(o=>({id:o.value,label:o.label,box:o.box})),items:source.keyItems,auto:true};
+ if(source.type==='bank'){
+  if(source.keyItems?.length)spec={...spec,mode:'auto',items:source.keyItems.map(q=>({...q,kind:'text'}))};
+  const original=root.SPEAKOUT_INLINE_DATA?.[id],inline=N.model(id,spec,source.fields?{...original,box:source.box,fields:source.fields,distinct:source.distinct,given:source.given||original?.given}:undefined);
+  if(inline?.rank)return {kind:'bank',...source,bank:inline.items.map(q=>({value:q.answer,label:q.answer})),inline,box:union(source.box,inline.box)};
+  if(inline&&!inline.rank&&!inline.vowels)return {kind:'bank',...source,inline,box:union(source.box,inline.box)};
+  if(!source.items?.length)return null;
+  const left=(source.targets||source.items.map(q=>({id:q.n,label:q.n}))).map(n=>({...n}));
+  return {kind:'match',...source,left,right:source.bank.map(o=>({id:o.value,label:o.label,box:o.box})),items:spec.items,auto:spec.mode==='auto'&&spec.items.length>0&&spec.items.every(q=>source.bank.some(o=>I.matches(o.value,q.answer))),box:source.box};
+ }
+ const data={...source,kind:'match',auto:spec.mode==='auto'||!!source.keyItems};
+ if(!data.left?.length||!data.right?.length)return null;
+ data.auto&&=data.items.length>0&&data.items.every(q=>split(q.answer).every(v=>data.right.some(n=>equal(n.id,v))));return data;
+}
+function union(a,b){const x=Math.min(a[0],b[0]),y=Math.min(a[1],b[1]);return[x,y,Math.max(a[0]+a[2],b[0]+b[2])-x,Math.max(a[1]+a[3],b[1]+b[3])-y]}
+function split(s){return String(s||'').split(/\s*[,;]\s*/).filter(Boolean)}
+function place(el,b,region){const[x,y,w,h]=region;Object.assign(el.style,{left:(b[0]-x)/w*100+'%',top:(b[1]-y)/h*100+'%',width:b[2]/w*100+'%',height:b[3]/h*100+'%'})}
+// Pointer events cover mouse, pen and touch. The click path also works with Enter/Space.
+function drag(button,rootElement,selector,drop){
+ let start=null,ghost=null,moved=false,suppress=false;
+ button.draggable=true;button.ondragstart=e=>e.preventDefault();
+ button.addEventListener('pointerdown',e=>{if(e.button!==0)return;start={x:e.clientX,y:e.clientY,id:e.pointerId};moved=false;button.setPointerCapture(e.pointerId)});
+ button.addEventListener('pointermove',e=>{if(!start)return;if(!moved&&Math.hypot(e.clientX-start.x,e.clientY-start.y)<5)return;moved=true;
+  if(!ghost){ghost=document.createElement('div');ghost.className='activity-drag-ghost';ghost.textContent=button.dataset.word||button.getAttribute('aria-label');(button.closest('dialog')||document.body).append(ghost)}
+  ghost.style.left=e.clientX+12+'px';ghost.style.top=e.clientY+12+'px';for(const t of rootElement.querySelectorAll(selector))t.classList.remove('drop-hover');const t=document.elementFromPoint(e.clientX,e.clientY)?.closest(selector);if(t&&rootElement.contains(t))t.classList.add('drop-hover');
+ });
+ const finish=e=>{if(!start)return;const target=document.elementFromPoint(e.clientX,e.clientY)?.closest(selector);if(moved&&e.type!=='pointercancel'&&target&&rootElement.contains(target))drop(target);suppress=moved;start=null;ghost?.remove();ghost=null;for(const t of rootElement.querySelectorAll(selector))t.classList.remove('drop-hover')};
+ button.addEventListener('pointerup',finish);button.addEventListener('pointercancel',finish);
+ button.addEventListener('click',e=>{if(suppress){e.preventDefault();e.stopImmediatePropagation();suppress=false}},true);
+}
+function bankMount(args){
+ const{container,data,state}=args;let full=false,zoom=1,picked=null;
+ const api=N.mount({...args,data:{...data.inline,box:data.box}}),stage=container.querySelector('.inline-stage'),inputs=[...container.querySelectorAll('[data-inline]')];
+ container.classList.add('has-activities');container.querySelector('.inline-instruction').textContent=data.inline.rank?'Перетащи номер в пропуск рядом со словом. Номера показывают правильный порядок.':'Перетащи слово в пропуск или нажми на слово, затем на пропуск.'+(data.form?' Измени форму слова, как указано в задании.':'');
+ const tray=document.createElement('div');tray.className='activity-bank-tray';tray.setAttribute('aria-label','Слова из задания');container.querySelector('.exercise-response').prepend(tray);
+ function put(input,word){input.value=word;input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});picked=null;buttons.forEach(b=>b.setAttribute('aria-pressed','false'));container.querySelector('#inlineFeedback').textContent=data.form?'Слово добавлено. Проверь нужную форму.':'Слово добавлено.'}
+ const buttons=data.bank.map(o=>{const b=document.createElement('button');b.type='button';b.className=o.box?'printed-bank-word':'activity-bank-word';b.dataset.word=o.value;b.setAttribute('aria-label','Слово: '+o.label);b.setAttribute('aria-pressed','false');if(!o.box)b.textContent=o.label;(o.box?stage:tray).append(b);b.onclick=()=>{picked=picked===o.value?null:o.value;buttons.forEach(x=>x.setAttribute('aria-pressed',picked===x.dataset.word));container.querySelector('#inlineFeedback').textContent=picked?'Теперь нажми на пропуск.':''};drag(b,container,'[data-inline]',input=>put(input,o.value));return b});
+ for(const input of inputs){input.addEventListener('click',()=>{if(picked!==null)put(input,picked)});input.addEventListener('keydown',e=>{if(picked!==null&&['Enter',' '].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();put(input,picked)}},true);input.addEventListener('dragover',e=>e.preventDefault());input.addEventListener('drop',e=>{e.preventDefault();const text=e.dataTransfer.getData('text/plain');if(data.bank.some(o=>o.value===text))put(input,text)})}
+ for(const id of ['retry','retryMistakes'])container.querySelector('#'+id)?.addEventListener('click',()=>{picked=null;buttons.forEach(b=>b.setAttribute('aria-pressed','false'))});
+ function layout(){const region=full?[0,0,595,842]:data.box;buttons.forEach((b,i)=>{if(data.bank[i].box)place(b,data.bank[i].box,region)})}
+ layout();return {...api,setZoom(v){zoom=v;api.setZoom(v);layout()},setFullPage(v){full=v;api.setFullPage(v);layout()},get full(){return full}};
+}
+function matchingMount({container,data,page,exercise,state,keyHTML,url,teacher,index,onChange}){
+ state.values||={};state.revealed||={};state.inline||={};let full=false,zoom=1,picked=null;
+ const item=n=>data.items.find(q=>q.n===n),multi=n=>split(item(n)?.answer).length>1;
+ const values=n=>data.type==='bank'?[state.values[n]||''].filter(Boolean):split(state.values[n]);
+ const gaps=data.gaps||[];const correct=n=>{const q=item(n);if(!q||gaps.some(f=>f.n===n&&!I.matches(state.inline[f.id]||'',f.answer)))return false;if(data.type==='bank')return I.matches(state.values[n]||'',q.answer);const actual=values(n),wanted=split(q.answer);const optional=data.optional?.[n]||[];return wanted.every(v=>actual.some(a=>equal(a,v)))&&actual.every(a=>[...wanted,...optional].some(v=>equal(v,a)))};
+ const nodes=side=>data[side].map((n,i)=>`<button type="button" class="pair-node ${n.box?'printed-pair-node':'pair-label'}" data-pair-side="${side}" data-pair-id="${esc(n.id)}" data-node="${side}:${i}" aria-label="${side==='left'?'Пункт':'Вариант'} ${esc(n.label)}" aria-pressed="false">${n.box?'':esc(n.label)}<span class="pair-dot" aria-hidden="true"></span></button>`).join('');
+ container.classList.add('has-inline','has-activities');
+ container.innerHTML=`<p class="inline-instruction">Соедини пары: перетащи один элемент к другому или нажми на оба по очереди. Повторное соединение убирает линию.</p><div class="exercise-source inline-source"><div class="pair-workspace"><div class="inline-stage"><img class="inline-original" src="${url(page.image)}" alt="Оригинал упражнения ${esc(exercise.label)}" draggable="false"></div><div class="pair-fallback"><div class="pair-column" data-side="left"></div><div class="pair-column" data-side="right"></div></div><svg class="pair-lines" aria-hidden="true"></svg></div></div><div class="exercise-response inline-response"><div class="pair-accessible-summary" aria-live="polite"></div><p id="inlineFeedback" role="status"></p><div class="actions">${data.auto?'<button id="check" class="primary">Проверить</button><button id="retryMistakes">Повторить ошибки</button>':'<button id="inlineCompare">Сверить с ключом</button>'}<button id="retry">Начать заново</button></div><p id="checkResult" class="statusline" role="status"></p><div class="actions"><button id="done">Отметить после сверки</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div>${state.note?`<details><summary>Сохранённые заметки</summary><p class="inline-old-note">${esc(state.note)}</p></details>`:""}<div id="keyArea" ${teacher?'':'hidden'}>${keyHTML}</div></div>`;
+ if(data.type==='select'){container.classList.add('selection-task');container.querySelector('.inline-instruction').textContent='Нажимай на подходящие слова прямо в задании. Повторное нажатие отменяет выбор.'}
+ const $=s=>container.querySelector(s),stage=$('.inline-stage'),workspace=$('.pair-workspace'),frames=[{page:page.page,box:data.box,element:stage}];
+ for(const f of data.frames||[]){const el=document.createElement('div');el.className='inline-stage activity-context';el.innerHTML=`<img class="inline-original" src="${url(f.image)}" alt="Материал к заданию · страница ${f.page}" draggable="false">`;workspace.insertBefore(el,$('.pair-fallback'));frames.push({...f,element:el})}
+ for(const side of ['left','right']){const temp=document.createElement('div');temp.innerHTML=nodes(side);for(const b of [...temp.children]){const n=data[side][+b.dataset.node.split(':')[1]];(n.box?(frames.find(f=>f.page===(n.page||page.page))?.element||stage):$(`[data-side="${side}"]`)).append(b)}}
+ for(const f of gaps){const input=document.createElement('input');input.className='inline-field';input.dataset.pairGap=f.id;input.value=state.inline[f.id]||'';input.setAttribute('aria-label','Пропуск '+f.n);input.autocomplete='off';input.spellcheck=false;input.oninput=()=>{state.inline[f.id]=input.value;changed()};stage.append(input)}
+ const buttons=[...container.querySelectorAll('[data-pair-side]')],find=(side,id)=>buttons.find(b=>b.dataset.pairSide===side&&b.dataset.pairId===id);
+ function lines(){const r=workspace.getBoundingClientRect(),svg=$('.pair-lines');svg.setAttribute('viewBox',`0 0 ${r.width||1} ${r.height||1}`);svg.replaceChildren();for(const n of data.left)for(const v of values(n.id)){const target=data.right.find(o=>equal(o.id,v)),a=find('left',n.id),b=target&&find('right',target.id);if(!a||!b)continue;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect(),x=A.x+A.width/2-r.x,y=A.y+A.height/2-r.y,X=B.x+B.width/2-r.x,Y=B.y+B.height/2-r.y,path=document.createElementNS(ns,'path');path.setAttribute('d',`M ${x} ${y} C ${x+(X-x)*.35} ${y},${X-(X-x)*.35} ${Y},${X} ${Y}`);path.setAttribute('class',typeof state.score==='number'?(correct(n.id)?'correct':'incorrect'):'');svg.append(path)}}
+ function render(){for(const b of buttons){const n=b.dataset.pairId,side=b.dataset.pairSide,on=data.type==='select'&&side==='right'?values('selected').some(v=>equal(v,n)):picked?.side===side&&picked.id===n;b.setAttribute('aria-pressed',on);b.classList.toggle('connected',side==='left'?values(n).length>0:data.left.some(l=>values(l.id).some(v=>equal(v,n))));const marked=side==='left'||data.type==='select'&&values('selected').some(v=>equal(v,n)),ok=side==='left'?correct(n):split(item('selected')?.answer).some(v=>equal(v,n)),checked=typeof state.score==='number';b.classList.toggle('correct',marked&&checked&&ok);b.classList.toggle('incorrect',marked&&checked&&!ok);b.setAttribute('aria-invalid',marked&&checked&&!ok)}
+  for(const input of container.querySelectorAll('[data-pair-gap]')){const f=gaps.find(f=>f.id===input.dataset.pairGap),checked=typeof state.score==='number',ok=I.matches(state.inline[f.id]||'',f.answer);input.classList.toggle('correct',checked&&ok);input.classList.toggle('incorrect',checked&&!ok);input.setAttribute('aria-invalid',checked&&!ok)}
+  $('.pair-accessible-summary').innerHTML=data.left.map(n=>`<div class="pair-summary-row"><span>${esc(n.label)} → ${esc(values(n.id).map(v=>data.right.find(o=>equal(o.id,v))?.label||v).join(', ')||'…')}</span><button type="button" data-clear-pair="${esc(n.id)}" aria-label="Убрать пару ${esc(n.label)}">×</button>${data.auto?`<button type="button" data-pair-hint="${esc(n.id)}">Подсказка</button>`:''}</div>`).join('');
+  for(const b of container.querySelectorAll('[data-clear-pair]'))b.onclick=()=>{delete state.values[b.dataset.clearPair];changed()};
+  for(const b of container.querySelectorAll('[data-pair-hint]'))b.onclick=()=>{const n=b.dataset.pairHint;state.revealed[n]=true;state.done=false;state.score=null;$('#inlineFeedback').textContent='Ответ '+n+': '+gaps.filter(f=>f.n===n).map(f=>f.answer+' → ').join('')+item(n).answer;onChange();render()};lines();
+ }
+ function changed(){state.done=false;state.score=null;$('#checkResult').textContent='';$('#inlineFeedback').textContent='';picked=null;render();onChange()}
+ function connect(a,b){if(a.side===b.side)return;const left=a.side==='left'?a:b,right=a.side==='right'?a:b,n=left.id,v=right.id,current=values(n);state.values[n]=multi(n)?(current.some(x=>equal(x,v))?current.filter(x=>!equal(x,v)):[...current,v]).join(', '):current.some(x=>equal(x,v))?'':v;changed()}
+ for(const b of buttons){const ref={side:b.dataset.pairSide,id:b.dataset.pairId};b.onclick=()=>{if(data.type==='select'&&ref.side==='right'){connect({side:'left',id:'selected'},ref);return}if(picked&&picked.side!==ref.side)connect(picked,ref);else{picked=picked?.side===ref.side&&picked.id===ref.id?null:ref;render()}};drag(b,container,`[data-pair-side="${ref.side==='left'?'right':'left'}"]`,target=>connect(ref,{side:target.dataset.pairSide,id:target.dataset.pairId}));}
+ if($('#check'))$('#check').onclick=()=>{state.score=data.items.filter(q=>correct(q.n)).length;state.total=data.items.length;const helped=data.items.some(q=>state.revealed[q.n]);state.done=state.score===state.total&&!helped;$('#checkResult').textContent=`Верно: ${state.score} из ${state.total}${helped?' · Повтори ответы с подсказками самостоятельно.':state.done?' · Всё выполнено!':''}`;render();onChange()};
+ if($('#retryMistakes'))$('#retryMistakes').onclick=()=>{for(const q of data.items)if(!correct(q.n)||state.revealed[q.n]){delete state.values[q.n];delete state.revealed[q.n];for(const f of gaps.filter(f=>f.n===q.n)){delete state.inline[f.id];container.querySelector(`[data-pair-gap="${f.id}"]`).value=''}}changed()};
+ $('#retry').onclick=()=>{for(const q of data.left){delete state.values[q.id];delete state.revealed[q.id]}for(const f of gaps){delete state.inline[f.id];container.querySelector(`[data-pair-gap="${f.id}"]`).value=''}changed()};
+ if($('#inlineCompare'))$('#inlineCompare').onclick=()=>document.querySelector('#exerciseKeys').click();
+ function layout(){for(const frame of frames){const region=full?[0,0,595,842]:frame.box,[x,y,w,h]=region,el=frame.element;el.style.width=zoom*100+'%';el.style.aspectRatio=`${w}/${h}`;Object.assign(el.querySelector('.inline-original').style,{width:595/w*100+'%',left:-x/w*100+'%',top:-y/h*100+'%'});for(const b of el.querySelectorAll('[data-node]')){const[side,i]=b.dataset.node.split(':');place(b,data[side][+i].box,region)}for(const input of el.querySelectorAll('[data-pair-gap]')){place(input,gaps.find(f=>f.id===input.dataset.pairGap).box,region);input.style.fontSize=10/w*100+'cqw'}}lines()}
+ const observer=new ResizeObserver(()=>{if(!workspace.isConnected){observer.disconnect();return}lines()});observer.observe(workspace);for(const im of container.querySelectorAll('.inline-original'))im.onload=lines;
+ render();layout();return {setZoom(v){zoom=v;layout()},setFullPage(v){full=v;layout()},get full(){return full},report(){return data.left.map(n=>({label:n.label,text:values(n.id).map(v=>data.right.find(o=>equal(o.id,v))?.label||v).join(', '),result:data.auto&&typeof state.score==='number'?(correct(n.id)?'✓ Верно':'✕ Ошибка'):''}))}};
+}
+root.SpeakoutActivities={key,model,mount:args=>args.data.kind==='bank'?bankMount(args):matchingMount(args)};
+})(window);

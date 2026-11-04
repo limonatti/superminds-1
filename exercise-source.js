@@ -28,7 +28,7 @@ function render(doc){
 }
 function fit(host){
  const doc=host.querySelector('.focus-document');if(!doc?._focus)return;
- if(host.closest('.play-dialog')){const available=host.clientWidth;for(const figure of doc.querySelectorAll('.focus-sheet'))figure.style.width=Math.min(available,Math.max(Math.min(460,available),Math.min(600,innerHeight*.48)*Number(figure.dataset.aspect))*doc._focus.zoom)+'px';return}
+ const dialog=host.closest('.play-dialog');if(dialog){const available=host.clientWidth,body=host.closest('.focus-columns,.material-study'),bank=dialog.querySelector('.play-workbench'),chrome=(body?body.getBoundingClientRect().top-dialog.getBoundingClientRect().top:160)+(host.querySelector('.focus-source-controls')?.offsetHeight||0)+52,height=Math.max(180,Math.min(820,innerHeight-32)-chrome-(bank?.offsetHeight||180));for(const figure of doc.querySelectorAll('.focus-sheet'))figure.style.setProperty('width',Math.min(available,Math.max(Math.min(300,available),height*Number(figure.dataset.aspect))*doc._focus.zoom)+'px','important');return}
  const height=host.clientHeight-(host.querySelector('.focus-source-controls')?.offsetHeight||0)-(doc.querySelector('figcaption')?.offsetHeight||18)-32;for(const figure of doc.querySelectorAll('.focus-sheet')){figure.style.width=innerWidth>760&&height>100&&figure.dataset.context==='false'?Math.min(doc.clientWidth,height*Number(figure.dataset.aspect)*doc._focus.zoom)+'px':'100%'}
 }
 function change(host,changes){const doc=host?.matches('.focus-document')?host:host?.querySelector('.focus-document');if(!doc?._focus)return;Object.assign(doc._focus,changes);render(doc)}
@@ -63,5 +63,5 @@ function regions(host,boxes){
   const label=document.createElement('span');label.className='exercise-region-label';label.textContent=button.textContent;button.replaceChildren(label);
  });
 }
-root.ExerciseSource={mount,change,columns,controls,regions};
+root.ExerciseSource={fit,mount,change,columns,controls,regions};
 })(window);

@@ -11,7 +11,7 @@ function persist(){clearTimeout(dirtyTimer);$('#saved').textContent='Сохра�
 function pages(){return D.books[S.book].pages}function page(){return pages().find(p=>p.page===S.page)||pages()[0]}
 function recordId(e){return `${S.book}:${S.page}:${e?.label||S.ex}`}
 function answerState(e=selectedEx){const id=recordId(e);return answers[id]||(answers[id]={values:{},checks:{},note:'',done:false})}
-function getKey(e){return I.cleanKey(D.keys[`${S.book}|${page().lesson}|${e.label}`])}
+function getKey(e){return I.cleanKey(window.SpeakoutActivities.key(recordId(e),D.keys[`${S.book}|${page().lesson}|${e.label}`]))}
 function unitOptions(){let html='<option value="0">Lead-in</option>';D.units.forEach((n,i)=>html+=`<option value="${i+1}">${i+1}. ${esc(n)}</option>`);html+='<option value="banks">Banks и повторение</option><option value="scripts">Тексты и ключи</option>';$('#unit').innerHTML=html;$('#unit').value=S.unit;$('#units').innerHTML=[...$('#unit').options].map(o=>`<button data-unit="${esc(o.value)}" class="${o.value===S.unit?'selected':''}" aria-pressed="${o.value===S.unit}">${esc(o.textContent)}</button>`).join('');$$('[data-unit]').forEach(b=>b.onclick=()=>{$('#unit').value=b.dataset.unit;$('#unit').dispatchEvent(new Event('change'))})}
 function belongs(p,u){if(u==='0')return p.lesson==='Lead-in';if(u==='banks')return S.book==='sb'?p.page>=88&&p.page<162:!/^\d/.test(p.lesson)&&p.page>=16&&p.page<68;if(u==='scripts')return S.book==='sb'?p.page>=162:p.page>=68;return p.lesson.startsWith(u)&&/^\d/.test(p.lesson)}
 function titleFor(lesson){const m=/^([1-8])([A-D])$/.exec(lesson);if(m)return D.titles[Number(m[1])-1]['ABCD'.indexOf(m[2])];if(/Intro$/.test(lesson))return 'Unit opener · Vlog';if(/^\dR$/.test(lesson))return 'Review';return lesson}
@@ -59,6 +59,7 @@ function exerciseAudio(){
 function focusExercise(){
  const body=$('#exerciseBody'),left=body.querySelector('.exercise-source'),right=body.querySelector('.exercise-response');
  if(!left||!right)return;
+ if(inlinePlayer?.nativePairs){const instruction=body.querySelector('.inline-instruction');if(instruction)right.prepend(instruction);window.ExerciseSource.columns($('#exerciseDialog'),body,left,right);return;}
  const instruction=body.querySelector('.inline-instruction');if(instruction){instruction.textContent='Выбери варианты или заполни ответы по оригиналу слева.';right.prepend(instruction)}
  const controls=[...left.querySelectorAll('.page-choice-group,[data-inline]')];
  if(controls.length){
@@ -76,12 +77,12 @@ function selectExercise(index){
  $('#exerciseTitle').textContent=`Упражнение ${e.label}`;$('#exerciseLocation').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;
  syncExerciseKeys();
  $$('[data-ex-index]').forEach(b=>{b.classList.toggle('selected',+b.dataset.exIndex===index);b.classList.toggle('active',+b.dataset.exIndex===index);b.setAttribute('aria-pressed',+b.dataset.exIndex===index)});
- inlinePlayer=null;$('#exerciseBody').classList.remove('has-inline','full-source');
- const choice=window.SpeakoutChoices?.model(recordId(e),spec),inline=choice||window.SpeakoutInline?.model(recordId(e),spec);
+ inlinePlayer=null;$('#exerciseBody').classList.remove('has-inline','has-activities','selection-task','full-source');
+ const activity=window.SpeakoutActivities.model(recordId(e),spec),choice=!activity&&window.SpeakoutChoices?.model(recordId(e),spec),inline=activity||choice||window.SpeakoutInline?.model(recordId(e),spec);
  if(inline){
-  const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
-  inlinePlayer=(choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
-  focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,inline,choice,text:e.text});return;
+  const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div>${key.pdf?`<a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:""}`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
+  inlinePlayer=(activity?window.SpeakoutActivities:choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
+  inlinePlayer.nativePairs=activity?.kind==='match';focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,inline:activity?.inline||inline,choice,activity,text:e.text});return;
  }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
  if(auto){
@@ -92,7 +93,7 @@ function selectExercise(index){
  }else{
   html+='<p class="instruction">Выполни задание по оригиналу. Для устного ответа подготовь реплики, для письменного — запиши свой вариант.</p><label for="freeNote">Твой ответ или заметки</label><textarea id="freeNote" class="note" placeholder="Напиши ответ…">'+esc(state.note)+'</textarea><p class="teacher-note">Это задание проверяется с преподавателем или по образцу в ключе.</p>';
  }
- html+=`<div class="actions"><button id="done" class="${state.done?'selected':''}">${state.done?'✓ Выполнено':auto?'Отметить после сверки':'Отметить выполненным'}</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div><div id="keyArea" ${S.teacher?'':'hidden'}>${key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div><a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:'<p>Отдельный ключ не привязан. Ответ можно обсудить с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>'}</div>`;
+ html+=`<div class="actions"><button id="done" class="${state.done?'selected':''}">${state.done?'✓ Выполнено':auto?'Отметить после сверки':'Отметить выполненным'}</button><button id="exercisePrevious" ${index===0?'disabled':''}>← Назад</button><button id="exerciseNext">Следующее →</button></div><div id="keyArea" ${S.teacher?'':'hidden'}>${key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div>${key.pdf?`<a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:""}`:'<p>Отдельный ключ не привязан. Ответ можно обсудить с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>'}</div>`;
  $('#exerciseBody').innerHTML=html+'</div>';setExerciseZoom(1);fullExercisePage(false);$('.cropZoom').onclick=()=>fullExercisePage(true);focusExercise();
  function invalidate(n){state.done=false;state.score=null;clearFeedback();persist()}
  function inputFor(n){return $$('[data-answer]').find(x=>x.dataset.answer===n)}

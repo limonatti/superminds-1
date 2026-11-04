@@ -23,6 +23,13 @@
       "ambiguous_numbers": 19
     }
   },
+  "focus-1": {
+    "exercises": 203,
+    "gaps": 1238,
+    "unmapped": {
+      "no_complete_set": 326
+    }
+  },
   "outcomes-beginner": {
     "exercises": 32,
     "gaps": 196,

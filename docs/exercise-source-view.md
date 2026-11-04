@@ -1,6 +1,6 @@
 # Complete exercise source view
 
-The six courses use a compact, single-column exercise dialog. The complete
+The seven courses use a compact, single-column exercise dialog. The complete
 original task appears above a shared bank of coloured word cards. Reviewed A1
 coordinates and conservative generated gap coordinates put answer slots directly
 on printed blanks; other answer types use a numbered strip just below the source.
@@ -30,8 +30,8 @@ full-page view, Escape and close remain available. On mobile the same surface
 uses the available width. Motion is limited to card hover/press feedback and
 respects reduced-motion preferences.
 
-Coverage: Speakout A1, B1, B1+, B2+, Solutions Intermediate and Outcomes Beginner.
-The six manifests contain 7,543 book exercise entries. The B1+ test manifest
+Coverage: Speakout A1, B1, B1+, B2+, Solutions Intermediate Outcomes Beginner and Focus 1.
+The seven manifests contain 8,854 book exercise entries. The B1+ test manifest
 covers all 739 sections of the 75 supplied test documents. Reading follow-ups
 include the preceding reading source. General notes on tests remain available
 in a disclosure below the test, including notes saved before this change.
@@ -78,7 +78,7 @@ COURSE_TEST_BASE=http://127.0.0.1:8768 node tests/exercise-regions-browser.cjs
 
 ## Word-card interaction and printed gaps
 
-New geometry maps contain 2,547 book blanks and 1,235 test blanks, in addition to
+New geometry maps contain 3,785 book blanks and 1,235 test blanks, in addition to
 A1's reviewed coordinates. Detected rules must match a complete numbered set or
 an unambiguous reading-order set. Uncertain positions fall back to numbered slots
 below the original; no image is modified and no answer is inferred from geometry.
@@ -94,6 +94,10 @@ python3 scripts/build-exercise-gaps.py /private/tmp/exercise-play-models.json --
 
 `tests/fixtures/exercise-gaps-audit.json` records mapped and unmapped fields.
 `node tests/exercise-play.cjs --browser` checks actual mouse/touch dragging,
-keyboard cards, six compact layouts, grading/retry, persisted values, multi-part
+keyboard cards, seven compact layouts, grading/retry, persisted values, multi-part
 answers, mobile overflow and B1+ test selection. The A1 inline/choice suites use
 the new surface while retaining their original exhaustive answer-engine checks.
+
+Focus 1 shares the compact card adapter and retains its marking, homework,
+assignment and live-lesson contracts. A1 printed pair connections and multi-select
+activities retain their dedicated gesture engine inside the same compact window.

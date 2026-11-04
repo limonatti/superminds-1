@@ -26,13 +26,13 @@ function inputField(id,input,answers=[],options,scope,extra={}){
 }
 function attach(config){
  const {dialog,source,responses,id,text=''}=config;if(!dialog||!source||!responses)return;
- mounted.get(dialog)?.destroy();dialog.classList.add('play-dialog');
+ mounted.get(dialog)?.destroy();dialog.classList.add('play-dialog');dialog.classList.toggle('play-native',!!config.native);
  const geometry=config.geometry||root.EXERCISE_GAPS?.[id]||{};
  const fields=(config.fields||[]).filter(f=>f&&f.get&&f.set&&f.kind!=='multi'&&f.kind!=='set'&&f.input?.tagName!=='TEXTAREA').flatMap(f=>{
   const answer=(f.answers||[])[0]||'',parts=answer.split(/\s*[,;]\s*/);if(f.tokens||f.options?.length||parts.length<2||parts.length>4||parts.some(p=>!p||p.length>52)||f.geometry)return [f];
   const separator=answer.includes(';')?'; ':', ';return parts.map((part,i)=>({...f,id:f.id+'.'+(i+1),label:f.label+'.'+(i+1),answers:[part],geometry:geometry[f.id+'.'+(i+1)],get:()=>f.get().split(/\s*[,;]\s*/)[i]||'',set:v=>{const values=f.get().split(/\s*[,;]\s*/);while(values.length<parts.length)values.push('');values[i]=v;return f.set(values.join(separator))}}));
  });
- if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{dialog.classList.remove('play-dialog','play-open-answer');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
+ if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
  dialog.classList.remove('play-open-answer');
  let selected=0,ignoreClickUntil=0,destroyed=false,drag=null,hintMessage='';
  const doc=source.querySelector('.focus-document'),slots=new Map(),hidden=new Map();
@@ -41,7 +41,7 @@ function attach(config){
  bench.innerHTML='<div class="play-answer-strip" aria-label="Пропуски"></div><div class="play-bank-head"><span class="play-current"></span><button type="button" class="play-erase" aria-label="Очистить выбранный пропуск">Убрать слово</button></div><div class="play-bank" role="group" aria-label="Варианты ответа"></div><div class="play-manual"><label>Свой вариант <input autocomplete="off" spellcheck="false" aria-label="Написать ответ в выбранный пропуск"></label></div><div class="play-bottom"><span class="play-hint">Выбери пропуск и слово — или перетащи карточку.</span><button type="button" class="play-check">Проверить</button></div><p class="play-feedback" role="status" aria-live="polite"></p>';
  source.after(bench);const q=s=>bench.querySelector(s),strip=q('.play-answer-strip'),bank=q('.play-bank'),manual=q('.play-manual input');
  for(const f of fields)hide(f.scope);
- for(const selector of ['.instruction','.inline-instruction','.practice-help','.checkType','.responsePanel>h3','.responsePanel>p:not([role])'])responses.querySelectorAll(selector).forEach(hide);
+ for(const selector of ['.instruction','.inline-instruction','.activity-bank-tray','.practice-help','.checkType','.responsePanel>h3','.responsePanel>p:not([role])'])responses.querySelectorAll(selector).forEach(hide);
  const originalCheck=config.check||dialog.querySelector('#check,#checkTask,#exerciseCheck,#practiceCheck');
  dialog.classList.toggle('play-graded',!!originalCheck);
  if(originalCheck){hide(originalCheck);q('.play-check').onclick=()=>{hintMessage='';originalCheck.click();if(!destroyed)refresh()}}else q('.play-check').hidden=true;
@@ -105,13 +105,14 @@ function attach(config){
  manual.addEventListener('input',()=>{hintMessage='';current().set(manual.value);refresh()});manual.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();activate(Math.min(fields.length-1,selected+1));manual.focus()}});
  q('.play-erase').onclick=()=>{hintMessage='';const f=current(),words=f.get().trim().split(/\s+/);words.pop();f.set(f.tokens?words.join(' '):'');renderBank();refresh()};
  const observer=new MutationObserver(refresh);for(const f of fields)if(f.scope)observer.observe(f.scope,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-invalid','aria-pressed','data-result','disabled']});if(feedback)observer.observe(feedback,{childList:true,subtree:true,characterData:true});
- const resize=new ResizeObserver(refresh);resize.observe(source);const onInput=()=>refresh();responses.addEventListener('input',onInput);responses.addEventListener('change',onInput);doc?.addEventListener('exercise-source-render',place);
+ const resize=new ResizeObserver(()=>{root.ExerciseSource?.fit(source);refresh()});resize.observe(source);resize.observe(bench);const onInput=()=>refresh();responses.addEventListener('input',onInput);responses.addEventListener('change',onInput);doc?.addEventListener('exercise-source-render',place);
  const resetButtons=[...dialog.querySelectorAll('#retry,#retryMistakes,#exerciseReset,#practiceRetry,#practiceReset')],onReset=()=>{hintMessage='';if(!destroyed)activate(Math.max(0,fields.findIndex(f=>!f.get())))};for(const b of resetButtons)b.addEventListener('click',onReset);
  function destroy(){destroyed=true;observer.disconnect();resize.disconnect();drag?.ghost?.remove();bench.remove();doc?.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());for(const [el,wasHidden]of hidden){el.hidden=wasHidden;el.classList.remove('play-original-control')}for(const b of resetButtons)b.removeEventListener('click',onReset);responses.removeEventListener('input',onInput);responses.removeEventListener('change',onInput);doc?.removeEventListener('exercise-source-render',place);dialog.removeEventListener('close',destroy);dialog.classList.remove('play-dialog','play-open-answer','play-graded')}
  mounted.set(dialog,{destroy,refresh});dialog.addEventListener('close',destroy,{once:true});place();root.ExerciseSource?.change(source,{});return {refresh,destroy};
 }
-function speakout({dialog,id,page,spec,inline,choice,text}){
+function speakout({dialog,id,page,spec,inline,choice,activity,text}){
  const body=dialog.querySelector('#exerciseBody'),source=body.querySelector('.exercise-source'),responses=body.querySelector('.exercise-response');
+ if(activity?.kind==='match')return attach({dialog,source,responses,id,text,fields:[],native:true});
  let fields=[];
  if(choice){
   fields=choice.groups.map((g,i)=>{const buttons=[...body.querySelectorAll('[data-page-choice]')].filter(b=>b.dataset.pageChoice.startsWith(i+':')),scope=buttons[0]?.closest('.page-choice-group').parentElement;
@@ -125,6 +126,7 @@ function speakout({dialog,id,page,spec,inline,choice,text}){
  }else if(inline){
   fields=inline.fields.map(f=>{const input=[...body.querySelectorAll('[data-inline]')].find(el=>el.dataset.inline===f.id),item=spec.items.find(q=>q.n===f.n);return inputField(f.id,input,f.answer===undefined?[]:[f.answer],inline.vowels?['a','e','i','o','u',...(f.answer?.length>1?[f.answer]:[])].map(v=>({value:v,label:v})):item?.options?.map(o=>({value:o.label.replace(/^[a-d]\.\s*/i,''),label:o.label.replace(/^[a-d]\.\s*/i,'')})),input?.parentElement,{geometry:{box:f.box.map((v,i)=>v/(i%2?842:595)),image:page.image,page:page.page}})});
  }else fields=spec.items.map(f=>{const input=[...body.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n);return input&&inputField(f.n,input,root.SpeakoutInteractive.variants(f.answer),f.options,input.closest('.answerrow'),{tokens:f.tokens})}).filter(Boolean);
+ if(activity?.kind==='bank')for(const f of fields)f.options=activity.bank.map(o=>({value:o.value,label:o.label}));
  return attach({dialog,source,responses,id,text,fields});
 }
 root.ExercisePlay={attach,inputField,candidates,shuffle,speakout};

@@ -343,10 +343,10 @@
     /* Учебники, у которых есть страницы уроков вида slug-uN.html.
        Раньше список был захардкожен тремя, и Solutions, Focus и Gateway
        на уроке открыть было нельзя. */
-    const PAGED=["speakout-b1plus","solutions-el","solutions-pi","focus-1","gateway-a1p"];
+    const PAGED=["speakout-b1plus","solutions-el","solutions-pi","gateway-a1p"];
     const courseSel=document.getElementById("course");
     const unitSel=document.getElementById("unit");
-    const LIVE_COURSES={"speakout-b1":{path:"speakout-b1-active-teach",title:"Speakout B1",count:8,start:1},"outcomes-beginner":{path:"outcomes-beginner-active-teach",title:"Outcomes Beginner",count:12,start:1},"solutions-int":{path:"solutions-int-active-teach",title:"Solutions Intermediate",count:10,start:0},"speakout-a1":{path:"speakout-a1-active-teach",title:"Speakout A1",count:8,start:1}};
+    const LIVE_COURSES={"focus-1":{path:"focus-1-active-teach",title:"Focus 1",count:9,start:0},"speakout-b1":{path:"speakout-b1-active-teach",title:"Speakout B1",count:8,start:1},"outcomes-beginner":{path:"outcomes-beginner-active-teach",title:"Outcomes Beginner",count:12,start:1},"solutions-int":{path:"solutions-int-active-teach",title:"Solutions Intermediate",count:10,start:0},"speakout-a1":{path:"speakout-a1-active-teach",title:"Speakout A1",count:8,start:1}};
     const OUTCOMES_UNITS=["Be", "Live, work, eat", "Love, want, need", "Where and when?", "Going places", "Away from home", "Going out and staying in", "Here and there", "Healthy and happy", "News", "Life and history", "Thank you and goodbye"];
     let course=LIVE_COURSES[params.get("course")]?params.get("course"):"sm", kind="trainer", unit="";
 

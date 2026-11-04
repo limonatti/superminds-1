@@ -1,0 +1,21 @@
+{
+  "pages": {
+    "sb": 142,
+    "wb": 144,
+    "ws": 20
+  },
+  "exercises": {
+    "sb": 749,
+    "wb": 495,
+    "ws": 0
+  },
+  "automatic": {
+    "sb": 180,
+    "wb": 366,
+    "ws": 0
+  },
+  "unmatchedKeys": [],
+  "sourceWarnings": [
+    "Workbook PDF includes repeated pages 1, 4 and 5; navigation uses printed page numbers."
+  ]
+}
