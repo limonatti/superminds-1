@@ -60,7 +60,7 @@
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=fed7ca58"></script>
+  <script src="sm-auth.js?v=a5833d47"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function confetti(){const em=["🎉","✨","⭐","💛"];for(let i=0;i<22;i++){const sp=document.createElement("span");sp.className="cfp";sp.textContent=em[i%em.length];sp.style.left=(Math.random()*100)+"vw";sp.style.fontSize=(15+Math.random()*18)+"px";sp.style.animationDuration=(1.5+Math.random()*1.8)+"s";document.body.appendChild(sp);setTimeout(()=>sp.remove(),4000);}}
@@ -80,7 +80,11 @@
     async function load(){
       const u=await SM.getUser();
       if(!u){root.innerHTML='<div class="empty">Питомец живёт в твоём аккаунте. Войди в <a href="cabinet.html">кабинет</a> 🙂</div>';return;}
-      P=await SM.loadProgress();
+      try { P=await SM.loadProgress(); }
+      catch(error){
+        root.textContent=error.message+" ";const retry=document.createElement("button");
+        retry.className="btn";retry.textContent="Повторить загрузку";retry.onclick=load;root.append(retry);return;
+      }
       pet=P.__pet||{};
       render();
     }

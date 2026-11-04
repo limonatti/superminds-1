@@ -65,7 +65,7 @@
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=fed7ca58"></script>
+  <script src="sm-auth.js?v=a5833d47"></script>
   <script src="sm-play.js?v=dd356834"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -166,11 +166,7 @@
           '<div style="font:800 13px \'Nunito\',sans-serif;color:#7d726a">'+(mistakes===0?"Без единой ошибки — вау!":"Ошибок: "+mistakes)+'</div>'+
           '<button class="primary" onclick="location.reload()">Пройти ещё раз</button></div>';
         try{
-          const u=await SM.getUser();
-          if(u){const p=await SM.loadProgress();p.__quest=p.__quest||{};
-            const prev=p.__quest[unit.id]||{};
-            p.__quest[unit.id]={done:true,stars:Math.max(prev.stars||0,stars),at:Date.now()};
-            await SM.saveProgress(p);}
+          await SM.saveQuestResult(unit.id,stars);
         }catch(e){}
       };
     }

@@ -139,7 +139,7 @@
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=fed7ca58"></script>
+  <script src="sm-auth.js?v=a5833d47"></script>
   <script>
     let authTab="in";
     const INVITE=(new URLSearchParams(location.search)).get("code")||"";
@@ -182,7 +182,13 @@
 
     async function renderDash(user){
       document.getElementById("sub").textContent="Твой прогресс, серия и бейджи";
-      const progress=await SM.loadProgress()||{};
+      let progress;
+      try { progress=await SM.loadProgress(); }
+      catch(error){
+        const root=document.getElementById("root");root.textContent=error.message+" ";
+        const retry=document.createElement("button");retry.className="btn";retry.textContent="Повторить загрузку";
+        retry.onclick=()=>renderDash(user);root.append(retry);return;
+      }
       const meta=progress.__meta||{};
       const stats=unitStats(progress);
       const totalLearned=stats.reduce((s,x)=>s+x.learned,0);

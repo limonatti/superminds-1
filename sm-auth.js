@@ -13,9 +13,179 @@ const SM_SUPABASE_ANON_KEY = "sb_publishable_K8vhCVG_jiEyHYQOgp3XWQ_bWobdeBG"; /
    Колонка done оставлена для старого кода — база держит её в согласии со status. */
 const HW_COLS = "id,course,unit,note,done,status,feedback,submitted_at,reviewed_at,created_at";
 
+/* BEGIN LEARNING STORE: durable, account-scoped operations, acknowledged by the server. */
+function SM_createLearningStore(client) {
+  const PREFIX='sm-learning-v1:';
+  const snapshots=new WeakMap(), memory=new Map(), acknowledged=new Set();
+  let owner=null, initialized=false, epoch=0, running=null, timer=null, retry=0, durable=true, sequence=0;
+  const copy=value=>JSON.parse(JSON.stringify(value));
+  const object=value=>value&&typeof value==='object'&&!Array.isArray(value);
+  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  const prefix=id=>PREFIX+id+':';
+  function list(id){
+    const found=new Map();
+    try{
+      for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);if(!key?.startsWith(prefix(id))||acknowledged.has(key))continue;
+        const event=JSON.parse(localStorage.getItem(key));
+        if(event?.id&&Array.isArray(event.actions))found.set(event.id,event);
+      }
+    }catch(e){durable=false;}
+    for(const [key,event] of memory)if(key.startsWith(prefix(id))&&!acknowledged.has(key))found.set(event.id,event);
+    return [...found.values()].sort((a,b)=>a.at-b.at||(a.order||0)-(b.order||0)||a.id.localeCompare(b.id));
+  }
+  function status(error){
+    const count=owner?list(owner).length:0;
+    window.dispatchEvent(new CustomEvent('sm-learning-status',{detail:{pending:count,durable,error:error||null}}));
+    if(!document.body)return;
+    let box=document.getElementById('smLearningStatus');
+    if(!box&&(count||error)){
+      box=document.createElement('div');box.id='smLearningStatus';box.setAttribute('role','status');box.setAttribute('aria-live','polite');
+      box.style.cssText='position:fixed;bottom:16px;left:16px;z-index:9999;max-width:min(460px,calc(100vw - 32px));padding:12px 16px;border:1px solid #d7c7ab;border-radius:12px;background:#fffaf0;color:#452d33;font:14px/1.5 system-ui;box-shadow:0 3px 14px #0002';
+      document.body.append(box);
+    }
+    if(box){box.hidden=!(count||error);box.textContent=!count&&error?error:!durable?'Результаты ещё не сохранены. Оставьте страницу открытой до восстановления связи.':error?'Результаты сохранены на этом устройстве. Отправим их, когда восстановится связь.':'Сохраняем результаты…';}
+  }
+  function schedule(delay=400){clearTimeout(timer);timer=setTimeout(()=>flush(),delay);}
+  function setOwner(session){
+    const next=session?.user?.id||null;
+    if(initialized&&next!==owner)epoch++;
+    initialized=true;owner=next;status();
+    if(owner&&list(owner).length)schedule();
+  }
+  const ready=client.auth.getSession().then(({data,error})=>{if(!error)setOwner(data.session);}).catch(()=>{});
+  client.auth.onAuthStateChange((event,session)=>setOwner(session));
+  window.addEventListener('online',()=>schedule(0));
+  window.addEventListener('pagehide',()=>{flush();});
+  window.addEventListener('storage',event=>{if(owner&&event.key?.startsWith(prefix(owner)))schedule();});
+  window.addEventListener('pageshow',()=>{if(owner&&list(owner).length)schedule();});
+  function enqueue(id,actions){
+    if(!actions.length)return {ok:true,pending:false};
+    const event={id:crypto.randomUUID(),at:Date.now(),order:++sequence,actions};
+    const key=prefix(id)+event.id;memory.set(key,event);
+    try{localStorage.setItem(key,JSON.stringify(event));}catch(e){durable=false;}
+    status();schedule();return {ok:durable,pending:true,durable};
+  }
+  async function session(){
+    await ready;
+    const {data,error}=await client.auth.getSession();if(error)throw error;
+    const current=data.session?.user?.id||null;
+    if(current!==owner)setOwner(data.session);
+    return current;
+  }
+  function flush(){
+    if(running)return running;
+    running=(async()=>{
+      try{
+        const id=await session();if(!id)return {ok:false,error:'Войдите в аккаунт'};
+        while(owner===id){
+          const batch=list(id).slice(0,100);if(!batch.length){retry=0;status();return {ok:true};}
+          const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
+          let result;
+          try{
+            let request=client.rpc('apply_learning_events',{p_user:id,p_events:batch});
+            if(request.abortSignal)request=request.abortSignal(controller.signal);
+            result=await request;
+          }finally{clearTimeout(timeout);}
+          if(result.error)throw result.error;
+          const ids=new Set(result.data||[]);
+          if(batch.some(event=>!ids.has(event.id)))throw Error('Сервер не подтвердил сохранение');
+          for(const event of batch){
+            const key=prefix(id)+event.id;acknowledged.add(key);memory.delete(key);
+            try{localStorage.removeItem(key);}catch(e){}
+          }
+          status();
+        }
+        return {ok:false,error:'Аккаунт изменился'};
+      }catch(error){
+        status(error.message||'Нет связи');
+        if(owner&&list(owner).length)schedule(Math.min(60000,2000*2**Math.min(retry++,5)));
+        return {ok:false,pending:true,error:error.message||'Не удалось сохранить результаты'};
+      }
+    })().finally(()=>{running=null;});
+    return running;
+  }
+  function changes(before,next){
+    const actions=[];
+    function walk(a,b,path){
+      if(same(a,b))return;
+      if(object(b)){
+        for(const key of new Set([...Object.keys(object(a)?a:{}),...Object.keys(b)]))walk(a?.[key],b[key],path.concat(key));
+        return;
+      }
+      const name=path[path.length-1];
+      if(b===undefined)actions.push({type:'remove',path});
+      else if(path[0]==='__meta'&&name==='badges')actions.push({type:'union',path,value:b});
+      else if(name==='stars'||name==='bestStreak')actions.push({type:'max',path,value:b});
+      else if(typeof b==='number'&&['totalPoints','fedCount','seen','correct'].includes(name))actions.push({type:'add',path,value:b-(typeof a==='number'?a:0)});
+      else actions.push({type:'set',path,value:b});
+    }
+    for(const key of new Set([...Object.keys(before),...Object.keys(next)])){
+      if(key==='__coursework'||same(before[key],next[key]))continue;
+      const a=before[key]||{},b=next[key];
+      if(!key.startsWith('__')&&object(b)&&b.seen-(a.seen||0)===1&&[0,1].includes((b.correct||0)-(a.correct||0))){
+        actions.push({type:'answer',word:key,correct:(b.correct||0)>(a.correct||0),trainer:true});continue;
+      }
+      if(key==='__meta'&&object(b)){
+        if(b.lastActive&&b.lastActive!==a.lastActive)actions.push({type:'activity',date:b.lastActive});
+        if(b.weekKey&&(b.weekKey!==a.weekKey||b.weekPoints!==a.weekPoints))actions.push({type:'weekly',week:b.weekKey,value:(b.weekPoints||0)-(b.weekKey===a.weekKey?(a.weekPoints||0):0)});
+        const skip=['lastActive','dayStreak','bestStreak','weekKey','weekPoints'];
+        for(const field of new Set([...Object.keys(a),...Object.keys(b)]))if(!skip.includes(field))walk(a[field],b[field],[key,field]);
+        continue;
+      }
+      if(key==='__pet'&&object(b)&&b.fed&&a.fed!==b.fed){
+        actions.push({type:'feed',date:b.fed});
+        for(const field of new Set([...Object.keys(a),...Object.keys(b)]))if(!['fed','fedCount','streak'].includes(field))walk(a[field],b[field],[key,field]);
+        continue;
+      }
+      walk(before[key],b,[key]);
+    }
+    return actions;
+  }
+  async function load(){
+    const id=await session();
+    if(!id){const empty={};snapshots.set(empty,{owner:null,base:{}});return empty;}
+    if(list(id).length){const saved=await flush();if(!saved.ok)throw Error('Результаты ждут отправки. Проверьте подключение и повторите загрузку.');}
+    const {data,error}=await client.from('progress').select('data').eq('user_id',id).maybeSingle();
+    if(error)throw Error('Не удалось загрузить прогресс. Проверьте подключение и попробуйте снова.');
+    if(owner!==id)throw Error('Аккаунт изменился. Обновите страницу.');
+    const progress=data?.data||{};
+    if(!object(progress))throw Error('Не удалось прочитать прогресс');
+    snapshots.set(progress,{owner:id,base:copy(progress)});return progress;
+  }
+  function save(progress){
+    const state=snapshots.get(progress);
+    if(!state?.owner||state.owner!==owner){
+      const error=!owner?'Войдите в аккаунт, чтобы сохранить результаты.':'Аккаунт изменился или прогресс не загружен. Обновите страницу перед продолжением.';
+      status(error);return Promise.resolve({ok:false,error});
+    }
+    const next=copy(progress),actions=changes(state.base,next),result=enqueue(state.owner,actions);
+    state.base=next;return Promise.resolve(result);
+  }
+  function enqueueForPage(actions){
+    // Once initialized, persistence is synchronous, including the last answer before navigation.
+    const accept=()=>{
+      if(epoch!==0||!owner){
+        const error=epoch?'Аккаунт изменился. Обновите страницу перед продолжением.':'Войдите в аккаунт, чтобы сохранить результаты.';
+        status(error);return {ok:false,error};
+      }
+      return enqueue(owner,actions);
+    };
+    return initialized?Promise.resolve(accept()):ready.then(accept);
+  }
+  const answer=(word,correct)=>enqueueForPage([{type:'answer',word,correct:!!correct,trainer:false}]);
+  const quest=(unit,stars)=>enqueueForPage([
+    {type:'set',path:['__quest',unit,'done'],value:true},
+    {type:'max',path:['__quest',unit,'stars'],value:stars},
+    {type:'max',path:['__quest',unit,'at'],value:Date.now()}
+  ]);
+  return {load,save,answer,quest,flush,pending:()=>owner?list(owner).length:0};
+}
+/* END LEARNING STORE */
+
 window.SM = (function () {
 const useCloud = !!(SM_SUPABASE_URL && SM_SUPABASE_ANON_KEY);
-let sb = null;
+let sb = null, learningStore = null;
 
 function ensureClient() {
 if (sb || !useCloud) return sb;
@@ -24,6 +194,8 @@ console.warn("Supabase SDK не загружен");
 return null;
 }
 sb = window.supabase.createClient(SM_SUPABASE_URL, SM_SUPABASE_ANON_KEY);
+learningStore = SM_createLearningStore(sb);
+sb.auth.onAuthStateChange(() => forgetUser());
 return sb;
 }
 
@@ -131,19 +303,26 @@ return { ok: !error, error: error && error.message };
 /* Прогресс: объект { wordId: {status:"learned"|"learning", correct, seen} } */
 async loadProgress() {
 if (!useCloud) return localProgress();
-const c = ensureClient(); if (!c) return {};
-const u = await this.getUser(); if (!u) return {};
-const { data, error } = await c.from("progress").select("data").eq("user_id", u.id).maybeSingle();
-if (error || !data) return {};
-return data.data || {};
+if (!ensureClient()) throw Error("Не удалось подключиться к аккаунту. Обновите страницу.");
+return learningStore.load();
 },
 
 async saveProgress(progress) {
 if (!useCloud) { localSetProgress(progress); return { ok: true }; }
-const c = ensureClient(); if (!c) return { ok: false };
-const u = await this.getUser(); if (!u) return { ok: false };
-const { error } = await c.rpc('save_learning_progress', {p_user:u.id,p_progress:progress});
-return { ok: !error, error: error && error.message };
+if (!ensureClient()) return { ok:false,error:"Нет подключения к аккаунту" };
+return learningStore.save(progress);
+},
+
+/* Completion must survive going offline, without fetching an old progress snapshot. */
+async saveQuestResult(unit,stars) {
+if (!unit || !Number.isInteger(stars) || stars<1 || stars>3) return {ok:false,error:"Некорректный результат квеста"};
+if (!useCloud) {
+  const p=localProgress();p.__quest=p.__quest||{};
+  p.__quest[unit]={done:true,stars:Math.max(p.__quest[unit]?.stars||0,stars),at:Date.now()};
+  localSetProgress(p);return {ok:true};
+}
+if (!ensureClient()) return {ok:false,error:"Нет подключения к аккаунту"};
+return learningStore.quest(unit,stars);
 },
 
 /* Ответы к заданиям книги: отдельное пространство, без выдуманной оценки. */
@@ -200,11 +379,15 @@ async savePresentationPage(userId, course, page, changes) {
 },
 
 srsQ: [],
-srsQueue(wordId, ok) { this.srsQ.push({ id: wordId, ok: !!ok }); if (this.srsQ.length >= 12) this.srsFlush(); },
+srsQueue(wordId, ok) {
+if (useCloud) { ensureClient(); return learningStore ? learningStore.answer(wordId,ok) : {ok:false}; }
+this.srsQ.push({ id: wordId, ok: !!ok }); return this.srsFlush();
+},
 async srsFlush() {
+if (useCloud) { ensureClient(); return learningStore ? learningStore.flush() : {ok:false}; }
 if (!this.srsQ.length) return { ok: true };
 const q = this.srsQ.splice(0, this.srsQ.length);
-const p = await this.loadProgress();
+const p = localProgress();
 const days = [0, 1, 2, 4, 7, 15];
 q.forEach(it => {
 const e = p[it.id] || { level: 0, correct: 0, seen: 0, status: "learning" };
@@ -214,7 +397,7 @@ e.due = Date.now() + days[e.b] * 864e5;
 if (!it.ok) e.status = "learning";
 p[it.id] = e;
 });
-return this.saveProgress(p);
+localSetProgress(p);return {ok:true};
 },
 
 /* ---------- Класс: учитель / ученики ---------- */
