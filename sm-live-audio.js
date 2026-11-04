@@ -2,7 +2,7 @@
 (()=>{
  const params=new URLSearchParams(location.search),role=params.get('lessonRole');
  if(params.get('embedded')!=='1'||parent===window||!['s','t'].includes(role))return;
- const root=new URL('.',location.href).pathname,videoCourse=root.endsWith('/speakout-a1-active-teach/');
+ const root=new URL('.',location.href).pathname,videoCourse=['/speakout-a1-active-teach/','/solutions-el-active-teach/'].some(path=>root.endsWith(path));
  const send=data=>parent.postMessage({type:'outcomes-lesson',...data},location.origin);
  function valid(d){try{const u=new URL(d.src);return u.origin===location.origin&&u.pathname.startsWith(root)&&(d.mediaType==='video'?videoCourse&&/\.(mp4|webm)$/i.test(u.pathname):/\.(mp3|m4a|ogg|wav|aac)$/i.test(u.pathname))&&Number.isFinite(d.time)&&d.time>=0&&Number.isFinite(d.rate)&&d.rate>=.25&&d.rate<=4&&typeof d.paused==='boolean'&&Number.isFinite(d.at)}catch{return false}}
  let localMuted=false;
