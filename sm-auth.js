@@ -179,7 +179,8 @@ function SM_createLearningStore(client) {
     {type:'max',path:['__quest',unit,'stars'],value:stars},
     {type:'max',path:['__quest',unit,'at'],value:Date.now()}
   ]);
-  return {load,save,answer,quest,flush,pending:()=>owner?list(owner).length:0};
+  const attempt=payload=>enqueueForPage([{type:'attempt',attempt:payload}]);
+  return {load,save,answer,quest,attempt,flush,pending:()=>owner?list(owner).length:0};
 }
 /* END LEARNING STORE */
 
@@ -909,11 +910,9 @@ return { ok: !error, error: error && error.message };
 /* ---------- Результаты упражнений (attempts) ---------- */
 async saveAttempt(a) {
 if (!useCloud) return { ok: false };
-const c = ensureClient(); if (!c) return { ok: false };
-const u = await this.getUser(); if (!u) return { ok: false };
-const row = { student_id: u.id, course: a.course || null, unit_id: a.unit_id || null, exercise_id: a.exercise_id || null, ex_type: a.ex_type || null, correct: !!a.correct };
-const { error } = await c.from("attempts").insert(row);
-return { ok: !error, error: error && error.message };
+if (!ensureClient()) return {ok:false,error:"Нет подключения к аккаунту"};
+return learningStore.attempt({course:a.course||null,unit_id:a.unit_id||null,
+  exercise_id:a.exercise_id||null,ex_type:a.ex_type||null,correct:!!a.correct,details:a.details||{}});
 },
 async myAttempts() {
 if (!useCloud) return [];
@@ -1137,7 +1136,7 @@ return data || [];
 			.select("id,student_id,weekday,at_msk,minutes,note,active")
 			.eq("teacher_id", u.id).eq("active", true)
 			.order("weekday", { ascending: true }).order("at_msk", { ascending: true });
-		if (error) { console.warn("myLessons:", error.message); return []; }
+		if (error) throw error;
 		return data || [];
 	},
 
@@ -1149,7 +1148,7 @@ return data || [];
 			.select("id,teacher_id,weekday,at_msk,minutes,note")
 			.eq("student_id", u.id).eq("active", true)
 			.order("weekday", { ascending: true }).order("at_msk", { ascending: true });
-		if (error) { console.warn("myLessonsAsStudent:", error.message); return []; }
+		if (error) throw error;
 		return data || [];
 	},
 
@@ -1195,12 +1194,17 @@ return data || [];
 	async lessonChanges(fromDate, toDate) {
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
-		let q = c.from("lesson_changes").select("id,lesson_id,on_date,status,new_date,new_at_msk,reason");
-		if (fromDate) q = q.gte("on_date", fromDate);
-		if (toDate)   q = q.lte("on_date", toDate);
-		const { data, error } = await q;
-		if (error) { console.warn("lessonChanges:", error.message); return []; }
-		return data || [];
+        const valid=d=>!d||/^\d{4}-\d{2}-\d{2}$/.test(d);
+        if(!valid(fromDate)||!valid(toDate))throw Error("Некорректный диапазон дат");
+        const bounds=column=>[fromDate&&column+'.gte.'+fromDate,toDate&&column+'.lte.'+toDate].filter(Boolean);
+        const filters=['on_date','new_date'].map(column=>{const terms=bounds(column);return terms.length>1?'and('+terms.join(',')+')':terms[0];}).filter(Boolean);
+        const rows=[];
+        for(let start=0;;start+=200){
+          let query=c.from("lesson_changes").select("id,lesson_id,on_date,status,new_date,new_at_msk,reason").order('id').range(start,start+199);
+          if(filters.length)query=query.or(filters.join(','));
+          const {data,error}=await query;if(error)throw error;
+          rows.push(...(data||[]));if(!data||data.length<200)return rows;
+        }
 	},
 
 	async cancelLesson(lessonId, onDate, reason) {
@@ -1213,6 +1217,10 @@ return data || [];
 	},
 
 	async moveLesson(lessonId, onDate, newDate, newAtMsk, reason) {
+        const validDate=value=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(value||''))return false;const date=new Date(value+'T00:00:00Z');return Number.isFinite(+date)&&date.toISOString().slice(0,10)===value;};
+        newDate=(newDate||onDate||'').trim();
+        if(!validDate(onDate)||!validDate(newDate))return {ok:false,error:"Укажите существующую дату в формате ГГГГ-ММ-ДД"};
+        if(newAtMsk){newAtMsk=newAtMsk.trim();if(!/^([01]?\d|2[0-3]):[0-5]\d$/.test(newAtMsk))return {ok:false,error:"Укажите время от 00:00 до 23:59"};newAtMsk=newAtMsk.padStart(5,'0');}
 		if (!useCloud) return { ok: false };
 		const c = ensureClient(); if (!c) return { ok: false };
 		const { error } = await c.from("lesson_changes").upsert(
@@ -1410,26 +1418,45 @@ return data || [];
 	/* ---------- Чат: учитель ↔ ученик ---------- */
 	/* Сообщения одной пары (учитель, ученик), по возрастанию времени.
 	   sinceIso — необязательно: только новее указанного времени (для опроса). */
-	async chatMessages(teacherId, studentId, sinceIso) {
-		if (!useCloud) return [];
-		const c = ensureClient(); if (!c) return [];
-		let q = c.from("messages")
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at")
-			.eq("teacher_id", teacherId).eq("student_id", studentId)
-			.order("created_at", { ascending: true });
-		if (sinceIso) q = q.gt("created_at", sinceIso);
-		const { data, error } = await q;
-		if (error) { console.warn("chatMessages:", error.message); return []; }
-		return data || [];
-	},
+    async chatPage(teacherId,studentId,options={}) {
+      if(!useCloud)return [];
+      const c=ensureClient();if(!c)throw Error("Нет подключения к аккаунту");
+      const columns="id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at";
+      const ascending=!!options.after,limit=Math.min(200,Math.max(1,options.limit||100));
+      let query=c.from('messages').select(columns).eq('teacher_id',teacherId).eq('student_id',studentId)
+        .order('created_at',{ascending}).order('id',{ascending}).limit(limit);
+      if(options.ids){if(!options.ids.length)return [];query=query.in('id',options.ids);}
+      const cursor=options.after||options.before;
+      if(cursor){
+        const time=typeof cursor==='string'?cursor:cursor.created_at;
+        if(!/^[0-9T:.+Z-]+$/.test(time||'')||!Number.isFinite(Date.parse(time)))throw Error('Некорректная дата сообщения');
+        if(typeof cursor==='string')query=query.gte('created_at',time);
+        else {
+          if(!/^[0-9a-f-]{36}$/i.test(cursor.id||''))throw Error('Некорректный указатель сообщения');
+          const op=options.after?'gt':'lt';
+          query=query.or('created_at.'+op+'.'+time+',and(created_at.eq.'+time+',id.'+op+'.'+cursor.id+')');
+        }
+      }
+      const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
+      try{
+        if(query.abortSignal)query=query.abortSignal(controller.signal);
+        const {data,error}=await query;if(error)throw error;
+        return ascending?(data||[]):(data||[]).reverse();
+      }finally{clearTimeout(timeout);}
+    },
+    async chatMessages(teacherId,studentId,sinceIso) {
+      return this.chatPage(teacherId,studentId,sinceIso?{after:sinceIso,limit:200}:{limit:100});
+    },
 	/* att — необязательное вложение: { url, kind, name, size } */
-	async chatSend(teacherId, studentId, body, att) {
+	async chatSend(teacherId, studentId, body, att, clientId, expectedUserId) {
 		if (!useCloud) return { ok: false, error: "нужен Supabase" };
 		const c = ensureClient(); if (!c) return { ok: false };
-		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
+		let u;try{u=await this.presentationSession();}catch(error){return {ok:false,error:'Не удалось проверить аккаунт. Повторите отправку.'};}
+    if(expectedUserId&&u?.id!==expectedUserId)return {ok:false,error:'Аккаунт изменился. Обновите страницу.'};
+    if (!u) return { ok: false, error: "not signed in" };
 		const text = (body || "").trim();
 		if (!text && !(att && att.url)) return { ok: false, error: "пусто" };
-		const row = { teacher_id: teacherId, student_id: studentId, sender_id: u.id, body: text.slice(0, 2000) };
+		const row = { id:clientId||crypto.randomUUID(), teacher_id: teacherId, student_id: studentId, sender_id: u.id, body: text.slice(0, 2000) };
 		if (att && att.url) {
 			row.att_url = att.url;
 			row.att_kind = att.kind || "file";
@@ -1439,7 +1466,12 @@ return data || [];
 		const { data, error } = await c.from("messages")
 			.insert(row)
 			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at").single();
-		return { ok: !error, msg: data, error: error && error.message };
+		if(error?.code==='23505'){
+      const prior=await c.from('messages').select('id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at')
+        .eq('id',row.id).eq('sender_id',u.id).eq('teacher_id',teacherId).eq('student_id',studentId).maybeSingle();
+      if(!prior.error&&prior.data)return {ok:true,msg:prior.data};
+    }
+    return { ok: !error, msg: data, error: error && error.message };
 	},
 	/* Удалить своё сообщение. Строка остаётся надгробием («сообщение удалено»),
 	   но текст и вложение стираются: из базы, из хранилища и из реакций.
@@ -1542,22 +1574,19 @@ return data || [];
 	   появилось новое сообщение или входящее отметили прочитанным.
 	   Возвращает функцию отписки; на неудачу — null, тогда вызывающий
 	   код остаётся на опросе. */
-	chatSubscribe(teacherId, studentId, onInsert, onUpdate) {
-		if (!useCloud) return null;
-		const c = ensureClient(); if (!c || !c.channel) return null;
-		const pair = "and(teacher_id=eq." + teacherId + ",student_id=eq." + studentId + ")";
-		try {
-			const ch = c.channel("chat:" + teacherId + ":" + studentId)
-				.on("postgres_changes",
-					{ event: "INSERT", schema: "public", table: "messages", filter: pair },
-					function (p) { if (onInsert) onInsert(p.new); })
-				.on("postgres_changes",
-					{ event: "UPDATE", schema: "public", table: "messages", filter: pair },
-					function (p) { if (onUpdate) onUpdate(p.new); })
-				.subscribe();
-			return function () { try { c.removeChannel(ch); } catch (e) {} };
-		} catch (e) { return null; }
-	},
+    chatSubscribe(teacherId,studentId,onInsert,onUpdate,onStatus) {
+      if(!useCloud)return null;
+      const c=ensureClient();if(!c?.channel)return null;
+      let stopped=false;
+      const receive=callback=>payload=>{const m=payload.new;if(!stopped&&m?.teacher_id===teacherId&&m.student_id===studentId)callback?.(m);};
+      try {
+        const channel=c.channel('chat:'+teacherId+':'+studentId+':'+Math.random().toString(36).slice(2))
+          .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'student_id=eq.'+studentId},receive(onInsert))
+          .on('postgres_changes',{event:'UPDATE',schema:'public',table:'messages',filter:'student_id=eq.'+studentId},receive(onUpdate))
+          .subscribe((status,error)=>{if(!stopped)onStatus?.(status,error);});
+        return ()=>{stopped=true;try{Promise.resolve(c.removeChannel(channel)).catch(()=>{});}catch(error){}};
+      }catch(error){onStatus?.('CHANNEL_ERROR',error);return null;}
+    },
 	/* Получатель отмечает входящие сообщения пары прочитанными */
 	async chatMarkRead(teacherId, studentId) {
 		if (!useCloud) return { ok: false };

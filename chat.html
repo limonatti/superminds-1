@@ -100,7 +100,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=a5833d47"></script>
+<script src="sm-auth.js?v=95220d51"></script>
+<script src="sm-chat.js?v=5d5bf2ea"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -112,13 +113,10 @@ let sel = 0;
 /* Состояние открытой переписки */
 let MSGS = [];          // то, что уже отрисовано
 let SEEN = new Set();   // id, чтобы не задваивать
-let unsub = null;       // отписка от живого канала
-let pollTimer = null;   // запасной опрос, если канал не поднялся
-
+let chatSession=null, chatGeneration=0, readBusy=false;
 function stopChat(){
-  if (unsub){ try{ unsub(); }catch(e){} unsub = null; }
-  if (pollTimer){ clearInterval(pollTimer); pollTimer = null; }
-  MSGS = []; SEEN = new Set();
+  chatGeneration++;chatSession?.stop();chatSession=null;readBusy=false;
+  MSGS=[];SEEN=new Set();
 }
 
 /* teacherId/studentId для текущей пары — зависит от роли */
@@ -360,13 +358,13 @@ function applyUpdate(m){
   if (tm) tm.textContent = hhmm(m.created_at) + " ✓✓";
 }
 
-function showError(txt){
+function showError(txt,id="chatErr"){
   const wrap = document.querySelector(".chatwrap"); if (!wrap) return;
-  let box = document.getElementById("chatErr");
-  if (!box){ box = document.createElement("div"); box.id="chatErr"; box.className="chat-err"; wrap.parentNode.insertBefore(box, wrap); }
+  let box = document.getElementById(id);
+  if (!box){ box = document.createElement("div"); box.id=id; box.className="chat-err"; wrap.parentNode.insertBefore(box, wrap); }
   box.textContent = txt;
 }
-function clearError(){ const b=document.getElementById("chatErr"); if (b) b.remove(); }
+function clearError(id="chatErr"){ const b=document.getElementById(id); if (b) b.remove(); }
 
 function drawPeople(){
   const box = document.getElementById("people");
@@ -403,6 +401,7 @@ function drawPane(){
   pane.innerHTML =
     '<div class="pane-hd"><span>'+esc(title)+'</span><span id="chatState">подключаюсь…</span></div>' +
     '<div class="chatwrap">' +
+      '<button class="b sm" id="chatOlder" hidden>Загрузить предыдущие сообщения</button>' +
       '<div class="chat-scroll" id="chatScroll"><div class="chat-empty">Загружаю…</div></div>' +
       '<div class="emopan" id="emoPan"></div>' +
       '<div class="gifpan" id="gifPan">' +
@@ -424,33 +423,40 @@ function drawPane(){
 
 /* ---------- первая загрузка и живой канал ---------- */
 
-async function firstLoad(person){
-  const scroll = document.getElementById("chatScroll");
-  const { teacherId, studentId } = pairFor(person);
-  let msgs = [];
-  try { msgs = await SM.chatMessages(teacherId, studentId); }
-  catch(e){ if (scroll) scroll.innerHTML = '<div class="chat-empty">Не удалось загрузить переписку. Обнови страницу.</div>'; return; }
-  if (!scroll || !document.body.contains(scroll)) return;
-
-  scroll.innerHTML = "";
-  MSGS = []; SEEN = new Set();
-  if (!msgs.length){
-    scroll.innerHTML = '<div class="chat-empty">Сообщений пока нет. Напиши первым</div>';
-  } else {
-    msgs.forEach(m => appendMsg(m, true));
-    loadReactions(msgs.map(m => m.id));
+function renderMessages(rows,meta={}){
+  const scroll=document.getElementById('chatScroll');if(!scroll)return;
+  const stick=atBottom(scroll),height=scroll.scrollHeight,top=scroll.scrollTop;
+  const confirmed=new Set(rows.map(m=>m.id));
+  const pending=MSGS.filter(m=>(m.__pending||m.__failed)&&!confirmed.has(m.id.replace(/^tmp-/,'')));
+  const byId=new Map([...rows,...pending].map(m=>[m.id,m]));
+  const ordered=[...byId.values()].sort(SMChat.compare);
+  const existing=new Map([...scroll.querySelectorAll('.bub[data-id]')].map(el=>[el.dataset.id,el]));
+  scroll.querySelectorAll('.daysep,.chat-empty').forEach(el=>el.remove());
+  for(const [id,el]of existing)if(!byId.has(id))el.remove();
+  let anchor=scroll.firstElementChild,lastDay=null;
+  for(const m of ordered){
+    let el=existing.get(m.id);
+    if(!el)el=bubbleEl(m);
+    else if(m.deleted_at&&!el.classList.contains('gone'))fillGone(el,m);
+    else if(m.read_at&&m.sender_id===ME.id&&!m.__pending){const tm=el.querySelector('.tm');if(tm)tm.textContent=hhmm(m.created_at)+' ✓✓';}
+    if(el!==anchor)scroll.insertBefore(el,anchor);
+    anchor=el.nextElementSibling;
+    const day=dayKey(m.created_at);if(day!==lastDay){const sep=document.createElement('div');sep.className='daysep';sep.textContent=dayLabel(new Date(m.created_at));scroll.insertBefore(sep,el);lastDay=day;}
   }
-  await markIncomingRead(person);
+  MSGS=ordered;SEEN=new Set(ordered.map(m=>m.id));
+  if(!ordered.length){const empty=document.createElement('div');empty.className='chat-empty';empty.textContent=meta.loaded?'Сообщений пока нет. Напиши первым':'Загружаю…';scroll.append(empty);}
+  const older=document.getElementById('chatOlder');if(older)older.hidden=!meta.hasOlder;
+  if(meta.reason==='older'||!stick)scroll.scrollTop=top+(scroll.scrollHeight-height);else scroll.scrollTop=scroll.scrollHeight;
 }
-
 async function markIncomingRead(person){
-  const { teacherId, studentId } = pairFor(person);
-  const unreadIn = MSGS.some(m => m.sender_id !== ME.id && !m.read_at);
-  if (!unreadIn) return;
-  try { await SM.chatMarkRead(teacherId, studentId); } catch(e){}
-  MSGS.forEach(m => { if (m.sender_id !== ME.id && !m.read_at) m.read_at = new Date().toISOString(); });
-  if (ROLE === "teacher" && person.unread){ person.unread = 0; drawPeople(); }
-  if (window.SM_shellRefreshUnread) SM_shellRefreshUnread();
+  if(readBusy||!MSGS.some(m=>m.sender_id!==ME.id&&!m.read_at))return;
+  readBusy=true;const generation=chatGeneration,{teacherId,studentId}=pairFor(person);
+  try{
+    const result=await SM.chatMarkRead(teacherId,studentId);if(generation!==chatGeneration||!result?.ok)return;
+    MSGS.forEach(m=>{if(m.sender_id!==ME.id&&!m.read_at)m.read_at=new Date().toISOString();});
+    if(ROLE==='teacher'&&person.unread){person.unread=0;drawPeople();}
+    if(window.SM_shellRefreshUnread)SM_shellRefreshUnread();
+  }catch(error){}finally{if(generation===chatGeneration)readBusy=false;}
 }
 
 function setState(txt){ const s=document.getElementById("chatState"); if (s) s.textContent = txt; }
@@ -461,30 +467,13 @@ function startChat(person){
   if (!inp || !snd) return;
   const { teacherId, studentId } = pairFor(person);
 
-  firstLoad(person);
-
-  /* Живой канал: база присылает новое сообщение сама, ждать нечего */
-  unsub = SM.chatSubscribe(teacherId, studentId,
-    function(m){
-      appendMsg(m);
-      if (m.sender_id !== ME.id) markIncomingRead(person);
-    },
-    function(m){ applyUpdate(m); }
-  );
-
-  if (unsub){
-    setState("онлайн");
-  } else {
-    /* Канал не поднялся — запасной опрос, но реже и только за новыми */
-    setState("обновление раз в 10 сек");
-    pollTimer = setInterval(async function(){
-      const last = MSGS[MSGS.length-1];
-      let fresh = [];
-      try { fresh = await SM.chatMessages(teacherId, studentId, last && last.created_at); } catch(e){ return; }
-      fresh.forEach(m => appendMsg(m));
-      if (fresh.some(m => m.sender_id !== ME.id)) markIncomingRead(person);
-    }, 10000);
-  }
+  const generation=chatGeneration,active=()=>generation===chatGeneration;
+  chatSession=SMChat.connect({api:SM,teacherId,studentId,
+    onRows(rows,meta){if(!active())return;renderMessages(rows,meta);markIncomingRead(person);if(meta.reason==='initial'||meta.reason==='older')loadReactions(rows.map(m=>m.id));},
+    onState(state){if(active())setState({online:'подключено',connecting:'подключаемся…',polling:'обновление раз в 10 сек',offline:'нет связи · повторяем подключение'}[state]);},
+    onError(error){if(!active())return;if(error)showError('Не удалось обновить переписку. Подключение восстановится автоматически.','chatSyncErr');else clearError('chatSyncErr');}
+  });
+  document.getElementById('chatOlder').onclick=async function(){this.disabled=true;try{await chatSession?.older();}finally{if(active())this.disabled=false;}};
 
   /* ---------- смайлы ---------- */
   const EMO = ["😀","😃","😄","😁","😊","🙂","😉","😍","🥰","😘","😎","🤓","🤗","🤔","😐","😴","😅","😂","🤣","😭",
@@ -574,23 +563,28 @@ function startChat(person){
     fi.click();
   };
 
-  async function send(att){
-    const v = (inp.value||"").trim();
+  async function send(att,retry){
+    if(!active())return;
+    const v = retry?retry.text:(inp.value||"").trim();
     if (!v && !att) return;
-    inp.value = ""; inp.focus();
+    if(!retry)inp.value = ""; inp.focus();
     if (emoPan) emoPan.classList.remove("on");
     if (gifPan) gifPan.classList.remove("on");
     clearError();
 
     /* Оптимистичная отправка: пузырёк виден сразу, не дожидаясь сервера */
-    const tempId = "tmp-" + Date.now();
+    const clientId=retry?.id||crypto.randomUUID();
+    const tempId = "tmp-" + clientId;
     appendMsg({ id: tempId, sender_id: ME.id, body: v, created_at: new Date().toISOString(), __pending: true,
                 att_url: att && att.url, att_kind: att && att.kind, att_name: att && att.name, att_size: att && att.size }, true);
 
-    const r = await SM.chatSend(teacherId, studentId, v, att);
+    let r;try{r=await SM.chatSend(teacherId,studentId,v,att,clientId,ME.id);}catch(error){r={ok:false,error:error.message};}
+    if(!active())return;
+    if(!r.ok){const saved=chatSession?.values().find(m=>m.id===clientId);if(saved)r={ok:true,msg:saved};}
     const el = document.querySelector('.bub[data-id="'+tempId+'"]');
 
     if (!r.ok){
+      const pending=MSGS.find(m=>m.id===tempId);if(pending){pending.__failed=true;pending.__pending=false;}
       if (el){
         el.classList.remove("pending"); el.classList.add("failed");
         const tm = el.querySelector(".tm");
@@ -602,7 +596,7 @@ function startChat(person){
             el.remove();
             MSGS = MSGS.filter(x => x.id !== tempId);
             SEEN.delete(tempId);
-            inp.value = v; send(att);
+            send(att,{id:clientId,text:v});
           };
           tm.appendChild(again);
         }
@@ -611,19 +605,9 @@ function startChat(person){
       return;
     }
 
-    /* Пришёл настоящий id — подменяем черновик, чтобы канал не задвоил сообщение */
-    const real = r.msg;
-    if (el && real){
-      el.dataset.id = real.id;
-      el.classList.remove("pending");
-      const tm = el.querySelector(".tm");
-      if (tm) tm.textContent = hhmm(real.created_at) + " ✓";
-      SEEN.delete(tempId); SEEN.add(real.id);
-      const i = MSGS.findIndex(x => x.id === tempId);
-      if (i >= 0) MSGS[i] = real;
-      /* черновик рисовался без кнопок — теперь id настоящий, добавляем */
-      if (!el.querySelector(".tools")) el.appendChild(toolsEl(el, real, true));
-    }
+    const real=r.msg;
+    if(real){el?.remove();MSGS=MSGS.filter(m=>m.id!==tempId);SEEN.delete(tempId);chatSession.merge([real],'sent');}
+
   }
 
   snd.onclick = () => send();
@@ -658,6 +642,9 @@ async function boot(){
   drawPane();
 }
 
+SM.watchPresentationAuth(user=>{
+  if(ME&&user?.id!==ME.id){stopChat();document.getElementById('pane').innerHTML='<div class="empty"><div class="p">Аккаунт изменился. Обновите страницу, чтобы открыть свою переписку.</div></div>';}
+});
 // перерисовать бейдж непрочитанных в меню при уходе со страницы
 window.addEventListener("beforeunload", stopChat);
 boot();

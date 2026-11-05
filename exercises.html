@@ -164,7 +164,7 @@
   <script src="words.js?v=26e6ae94"></script>
 <script src="course-words.js?v=7226df4b"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-  <script src="sm-auth.js?v=a5833d47"></script><script src="coursework-store.js?v=4635b5a8"></script><script src="coursework-ui.js?v=59aae6bf"></script><script src="course-practice.js?v=1179b2b9"></script><script src="course-authored.js?v=535f42dc"></script>
+  <script src="sm-auth.js?v=95220d51"></script><script src="coursework-store.js?v=4635b5a8"></script><script src="coursework-ui.js?v=59aae6bf"></script><script src="course-practice.js?v=6c1f7049"></script><script src="course-authored.js?v=535f42dc"></script>
   <script src="sm-play.js?v=dd356834"></script>
   <script>
     function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -745,7 +745,7 @@
           root.appendChild(sh); lastSection=e.section;
         }
         if(!e.section) lastSection=null;
-        /* data-exid и data-extype читает sm-progress.js, чтобы записать результат упражнения */
+        /* Идентификатор объединяет все блоки упражнения в одну завершённую попытку. */
         const wrap=document.createElement("div"); wrap.className="exwrap";
         wrap.dataset.ex=e.id; wrap.setAttribute("data-exid",e.id); wrap.setAttribute("data-extype",e.type);
         root.appendChild(wrap);
@@ -773,7 +773,7 @@
         /* Колесо — одно поле на все секторы, а не карточка на каждый */
         if(e.type==="wheel"){ try{const meta={course:cid,unit:uid,id:e.id,title:e.title||"Колесо заданий"};wrap.appendChild(CoursePractice.wrap(renderWheel(items,meta),meta)); }catch(err){
           wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Колесо не удалось показать.</div>')); } return; }
-        items.forEach((item,i)=>{ try{ const el=CourseAuthored.render(e,item,i,{course:cid,unit:uid,onCheck:result=>{if(!IS_TEACHER)SM.saveAttempt({course:cid,unit_id:uid,exercise_id:e.id,ex_type:e.type,correct:result.done}).catch(()=>{})}},fn);
+        items.forEach((item,i)=>{ try{ const el=CourseAuthored.render(e,item,i,{course:cid,unit:uid,onCheck:()=>IS_TEACHER?null:SMProgress.report({course:cid,unit:uid},e,items)},fn);
           if(item&&item.img){ const im=document.createElement("img"); im.src=item.img; im.alt=""; im.style.cssText="max-width:100%;border-radius:14px;display:block;margin:2px auto 12px"; const k=el.querySelector(".kind"); if(k) k.insertAdjacentElement("afterend",im); else el.insertBefore(im,el.firstChild); }
           wrap.appendChild(el); }catch(err){ wrap.appendChild(warnCard('<div class="kind">⚠️ ОШИБКА</div><div class="qt">Упражнение «'+esc(e.title||"без названия")+'» не удалось отобразить. Открой его в Конструкторе, проверь поля и пересохрани.</div>')); } });
       });
@@ -975,4 +975,4 @@
   </script>
 </body>
 </html>
-<script src=sm-progress.js?v=39a3410d></script>
+<script src=sm-progress.js?v=baa6f11f></script>

@@ -36,11 +36,11 @@ function open(spec,meta,store,trigger){
  if(spec.image){const img=el('img');img.src=spec.image;img.alt='Иллюстрация к упражнению';img.style.maxWidth='100%';dialog.append(img)}
  if(spec.audio){const audio=el('audio');audio.src=spec.audio;audio.controls=true;audio.preload='none';dialog.append(audio)}
  else if(spec.speech){const audio=el('button','Прослушать');audio.type='button';audio.onclick=()=>root.SM_speak?root.SM_speak(spec.speech):speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(spec.speech),{lang:'en-US'}));dialog.append(audio)}
- const prior=store.records[meta.id]||{},values=JSON.parse(JSON.stringify(prior.values||[]));let results=prior.results||[],done=!!prior.done;
+ const prior=store.records[meta.id]||{},values=JSON.parse(JSON.stringify(prior.values||[]));let results=prior.results||[],done=!!prior.done,revision=0;
  const rows=[],refreshers=[];
  const feedback=el('p','','practice-feedback');feedback.setAttribute('role','status');
  function save(){store.set(meta.id,{...store.records[meta.id],book:meta.book||'practice',unit:meta.unit,exercise:meta.title||spec.prompt||'Практика',section:meta.section,values,results,done,score:results.length?{correct:results.filter(r=>r==='correct').length,total:spec.fields.filter(f=>f.accepted?.length).length}:null,updatedAt:Date.now()})}
- function changed(){results=[];done=false;rows.forEach(r=>delete r.dataset.result);feedback.textContent='';save();refreshers.forEach(fn=>fn())}
+ function changed(){revision++;results=[];done=false;rows.forEach(r=>delete r.dataset.result);feedback.textContent='';save();refreshers.forEach(fn=>fn())}
  function showResults(){rows.forEach((r,i)=>r.dataset.result=results[i]||'');feedback.textContent=results.length?`Верно: ${results.filter(r=>r==='correct').length} из ${spec.fields.filter(f=>f.accepted?.length).length}.${results.includes('blank')?' Заполните все пункты.':''}${results.includes('incorrect')?' Исправьте отмеченные ответы.':''}${results.includes('review')?' Свободный ответ сохранён для обсуждения с преподавателем.':''}`:''}
  spec.fields.forEach((f,i)=>{
   const row=el('div','','practice-field'),label=el('label',f.prompt||String(i+1));rows.push(row);row.append(label);if(f.image){const img=el('img');img.src=f.image;img.alt=f.prompt||'Иллюстрация';img.style.maxWidth='140px';row.append(img)}
@@ -55,7 +55,14 @@ function open(spec,meta,store,trigger){
   dialog.append(row);
  });
  const check=el('button',spec.fields.some(f=>f.accepted?.length)?'Проверить':'Отметить как выполненное','practice-check');check.type='button';
- check.onclick=()=>{results=grade(spec,values);done=spec.fields.every((f,i)=>f.accepted?.length?results[i]==='correct':!!String(values[i]||'').trim());showResults();save();meta.onCheck?.({values,results,done});if(meta.log)spec.fields.forEach((f,i)=>{if(f.accepted?.length&&results[i]!=='blank')meta.log(meta.section||'practice',meta.attempt||i+1,f.prompt||spec.prompt||'Упражнение',Array.isArray(values[i])?values[i].join(', '):String(values[i]||''),results[i]==='correct')})};
+ check.onclick=()=>{results=grade(spec,values);done=spec.fields.every((f,i)=>f.accepted?.length?results[i]==='correct':!!String(values[i]||'').trim());showResults();save();
+ const checked=++revision;
+ Promise.resolve(meta.onCheck?.({values,results,done})).then(r=>{
+  if(checked!==revision||!feedback.isConnected)return;
+  if(r?.incomplete)feedback.textContent+=' Ответьте на остальные блоки упражнения.';
+  else if(r&&r.ok===false&&!r.pending&&!r.guest)feedback.textContent+=' Результат не сохранён. Нажмите «Проверить» ещё раз.';
+ }).catch(()=>{if(checked===revision&&feedback.isConnected)feedback.textContent+=' Не удалось сохранить результат. Повторите проверку.';});
+ if(meta.log)spec.fields.forEach((f,i)=>{if(f.accepted?.length&&results[i]!=='blank')meta.log(meta.section||'practice',meta.attempt||i+1,f.prompt||spec.prompt||'Упражнение',Array.isArray(values[i])?values[i].join(', '):String(values[i]||''),results[i]==='correct')})};
  dialog.append(check,feedback);dialog.addEventListener('close',()=>{dialog.querySelectorAll('audio').forEach(a=>a.pause());trigger.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(store);dialog.showModal();CourseWorkUI.mount();showResults();
 }
 function wrap(node,meta){

@@ -149,7 +149,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=a5833d47"></script>
+<script src="sm-auth.js?v=95220d51"></script>
+<script src="sm-schedule.js?v=5a7f50c9"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc;
@@ -164,8 +165,9 @@ let DAY_START = HOUR_FROM, DAY_END = HOUR_TO;
 /* Границы сетки: расширяем так, чтобы ни один урок не потерялся */
 function fitBounds(){
   DAY_START = HOUR_FROM; DAY_END = HOUR_TO;
-  LESSONS.forEach(l => {
-    const s = toMin(l.at_msk), e = s + (l.minutes || 50);
+  const dates=weekDates();
+  SMSchedule.occurrences(LESSONS,CHANGES,iso(dates[0]),iso(dates[6]),true).forEach(o => {
+    const l=o.lesson;const s = toMin(o.at), e = s + (l.minutes || 50);
     DAY_START = Math.min(DAY_START, Math.floor(s / 60));
     DAY_END   = Math.max(DAY_END,   Math.ceil(e / 60));
   });
@@ -176,7 +178,7 @@ function fitBounds(){
 let ME = null, STUDENTS = [], LESSONS = [], CHANGES = [];
 let weekOffset = 0;              /* 0 = текущая неделя */
 let armed = null;                /* {id, minutes} — кого ставим кликом */
-let dragId = null;
+let dragId = null, dragOrigin = null, loadGeneration = 0;
 
 /* ---------- время ---------- */
 function mskNow(){
@@ -195,14 +197,8 @@ function toMin(t){ const p = hhmm(t).split(":"); return (+p[0]||0)*60 + (+p[1]||
 function fromMin(m){ return String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0"); }
 function nameOf(sid){ const s = STUDENTS.filter(x => x.student_id === sid)[0]; return s ? s.name : "ученик"; }
 
-function weekDates(){
-  const now = new Date();
-  const wd = (now.getDay() + 6) % 7;
-  const mon = new Date(now);
-  mon.setDate(now.getDate() - wd + weekOffset*7);
-  mon.setHours(0,0,0,0);
-  return Array.from({length:7}, (_,i) => { const d = new Date(mon); d.setDate(mon.getDate()+i); return d; });
-}
+function weekDates(){return SMSchedule.weekDates(new Date(),weekOffset);}
+
 function iso(d){
   return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
 }
@@ -331,24 +327,25 @@ function popLesson(chip, lesson, dIso){
     const del = pop.querySelector("#aDel");
     if (del) del.onclick = async () => {
       if (!confirm("Убрать занятие из постоянного расписания?")) return;
-      await SM.removeLesson(lesson.id); closePop(); await load();
+      const r=await SM.removeLesson(lesson.id);if(!r.ok){fail(r.error||"Не удалось удалить занятие");return;}closePop();await load();
     };
     const can = pop.querySelector("#aCancel");
     if (can) can.onclick = async () => {
       const why = prompt("Отменить занятие " + dIso + ". Причина (необязательно):", "");
       if (why === null) return;
-      await SM.cancelLesson(lesson.id, dIso, why); closePop(); await load();
+      const r=await SM.cancelLesson(lesson.id,dIso,why);if(!r.ok){fail(r.error||"Не удалось отменить занятие");return;}closePop();await load();
     };
     const mov = pop.querySelector("#aMove");
     if (mov) mov.onclick = async () => {
       const nd = prompt("Перенести занятие " + dIso + " на дату (ГГГГ-ММ-ДД):", dIso);
       if (!nd) return;
       const nt = prompt("Новое время по Москве (ЧЧ:ММ), пусто — оставить прежнее:", "");
-      await SM.moveLesson(lesson.id, dIso, nd, nt || null, null); closePop(); await load();
+      if(nt===null)return;
+      const r=await SM.moveLesson(lesson.id,dIso,nd,nt||null,null);if(!r.ok){fail(r.error||"Не удалось перенести занятие");return;}closePop();await load();
     };
     const und = pop.querySelector("#aUndo");
     if (und) und.onclick = async () => {
-      await SM.undoLessonChange(lesson.id, dIso); closePop(); await load();
+      const r=await SM.undoLessonChange(lesson.id,dIso);if(!r.ok){fail(r.error||"Не удалось вернуть занятие");return;}closePop();await load();
     };
   });
 }
@@ -394,6 +391,7 @@ function gridHtml(){
   }
   times += '</div>';
 
+  const occurrences=SMSchedule.occurrences(LESSONS,CHANGES,iso(dates[0]),iso(dates[6]),true);
   /* дни */
   let cols = "";
   for (let i = 0; i < 7; i++){
@@ -402,19 +400,19 @@ function gridHtml(){
     let inner = "";
     for (let s = 0; s < slots; s++){
       const m = DAY_START*60 + s*30;
-      inner += '<div class="slot'+(m%60?"":" hour")+'" data-wd="'+wd+'" data-t="'+fromMin(m)+'"></div>';
+      inner += '<div class="slot'+(m%60?"":" hour")+'" data-wd="'+wd+'" data-date="'+dIso+'" data-t="'+fromMin(m)+'"></div>';
     }
-    LESSONS.filter(l => l.weekday === wd).forEach(l => {
-      const start = toMin(l.at_msk);
+    occurrences.filter(o=>o.dateIso===dIso).forEach(o => {
+      const l=o.lesson;const start = toMin(o.at);
       const top = Math.max(0, (start - DAY_START*60) / 30 * ROW);
       let h = Math.max(ROW - 2, (l.minutes||50) / 30 * ROW - 2);
       if (top + h > colH) h = Math.max(ROW - 2, colH - top);   /* не вылезать за низ */
-      const ch = changeFor(l.id, dIso);
+      const ch = o.change;
       const cls = ch ? (ch.status === "cancelled" ? " off" : " moved") : "";
-      inner += '<div class="les'+cls+'" draggable="true" data-les="'+esc(l.id)+'" data-date="'+dIso+'" ' +
+      inner += '<div class="les'+cls+'" draggable="true" data-les="'+esc(l.id)+'" data-date="'+o.originalDate+'" data-moved="'+(ch?.status==='moved'?'1':'0')+'" ' +
         'style="top:'+top+'px;height:'+h+'px">' +
         '<span class="w">'+esc(nameOf(l.student_id))+'</span>' +
-        '<span class="h">'+esc(hhmm(l.at_msk))+' · '+l.minutes+' мин' +
+        '<span class="h">'+esc(hhmm(o.at))+' · '+l.minutes+' мин' +
           (ch && ch.status==="cancelled" ? ' · отменён' : '') +
           (ch && ch.status==="moved" ? ' · перенесён' : '') + '</span></div>';
     });
@@ -495,9 +493,9 @@ function draw(){
 /* При первом открытии показываем рабочие часы, а не 8 утра:
    прокручиваем к самому раннему уроку, а если уроков нет — к 15:00. */
 function scrollToWork(box){
-  const first = LESSONS.length
-    ? Math.min.apply(null, LESSONS.map(l => toMin(l.at_msk)))
-    : 15*60;
+  const dates=weekDates();
+  const visible=SMSchedule.occurrences(LESSONS,CHANGES,iso(dates[0]),iso(dates[6]));
+  const first=visible.length?Math.min(...visible.map(o=>toMin(o.at))):15*60;
   return Math.max(0, (first - DAY_START*60) / 30 * ROW - ROW*2);
 }
 
@@ -537,8 +535,8 @@ function bind(){
     cell.ondrop = async e => {
       e.preventDefault(); cell.classList.remove("drop");
       if (!dragId) return;
-      const r = await SM.updateLesson(dragId, { weekday:+cell.dataset.wd, at_msk: cell.dataset.t });
-      dragId = null;
+      const r = dragOrigin ? await SM.moveLesson(dragId,dragOrigin,cell.dataset.date,cell.dataset.t,null) : await SM.updateLesson(dragId, { weekday:+cell.dataset.wd, at_msk: cell.dataset.t });
+      dragId = null;dragOrigin=null;
       if (r && r.ok) await load(); else alert((r && r.error) || "Не получилось перенести");
     };
   });
@@ -549,7 +547,7 @@ function bind(){
     if (!lesson) return;
     chip.onclick = e => { e.stopPropagation(); popLesson(chip, lesson, chip.dataset.date); };
     chip.ondragstart = e => {
-      dragId = lesson.id; chip.classList.add("dragging");
+      dragId = lesson.id;dragOrigin=chip.dataset.moved==='1'?chip.dataset.date:null; chip.classList.add("dragging");
       try { e.dataTransfer.setData("text/plain", lesson.id); } catch(err){}
       e.dataTransfer.effectAllowed = "move";
     };
@@ -561,16 +559,22 @@ document.addEventListener("keydown", e => { if (e.key === "Escape"){ closePop();
 
 /* ---------- загрузка ---------- */
 async function load(){
+  const generation=++loadGeneration;
   const pane = document.getElementById("pane");
   ME = await SMUI.requireAuth(pane, "teacher");
   if (!ME) return;
 
   closePop();
-  try { STUDENTS = (await SM.myStudents()) || []; } catch(e){ STUDENTS = []; }
-  try { LESSONS  = (await SM.myLessons()) || []; }  catch(e){ LESSONS = []; }
-
   const dates = weekDates();
-  try { CHANGES = (await SM.lessonChanges(iso(dates[0]), iso(dates[6]))) || []; } catch(e){ CHANGES = []; }
+  try {
+    const data=await Promise.all([SM.myStudents(),SM.myLessons(),SM.lessonChanges(iso(dates[0]),iso(dates[6]))]);
+    if(generation!==loadGeneration)return;
+    [STUDENTS,LESSONS,CHANGES]=data;
+  }catch(error){
+    if(generation!==loadGeneration)return;
+    pane.innerHTML='<div class="empty"><div class="p">Не удалось загрузить расписание и переносы.</div><button class="go" id="retrySchedule">Повторить загрузку</button></div>';
+    document.getElementById('retrySchedule').onclick=load;return;
+  }
 
   draw();
   SMUI.mount({ role:"teacher", active:"tsched" });

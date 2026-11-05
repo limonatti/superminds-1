@@ -39,7 +39,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=a5833d47"></script>
+<script src="sm-auth.js?v=95220d51"></script>
+<script src="sm-schedule.js?v=5a7f50c9"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
@@ -69,52 +70,18 @@ function mskNow(){
 function hhmm(t){ return String(t || "").slice(0,5); }
 
 /* Момент занятия: берём дату недели и московское время */
-function whenOf(dateObj, atMsk){
-  const [h,m] = hhmm(atMsk).split(":").map(Number);
-  /* Москва — UTC+3 круглый год, перехода на летнее время нет */
-  return new Date(Date.UTC(
-    dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate(), (h||0) - 3, m||0, 0));
-}
+function whenOf(dateObj, atMsk){ return SMSchedule.when(dateObj,atMsk); }
 /* Это же время в поясе ученика */
 function localOf(dateObj, atMsk){
   try {
     return new Intl.DateTimeFormat("ru-RU",
-      { timeZone: MY_TZ, hour:"2-digit", minute:"2-digit" }).format(whenOf(dateObj, atMsk));
+      { timeZone: MY_TZ, day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" }).format(whenOf(dateObj, atMsk));
   } catch(e){ return hhmm(atMsk); }
 }
 
-function weekDates(){
-  const now = new Date();
-  const wd = (now.getDay() + 6) % 7;
-  const mon = new Date(now); mon.setDate(now.getDate() - wd); mon.setHours(0,0,0,0);
-  return Array.from({length:7}, (_,i) => { const d = new Date(mon); d.setDate(mon.getDate()+i); return d; });
-}
-function iso(d){
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-function changeFor(lessonId, dateIso){
-  return CHANGES.filter(c => c.lesson_id === lessonId && c.on_date === dateIso)[0] || null;
-}
-
-/* Ближайшее занятие, которое ещё не прошло и не отменено */
-function nextLesson(){
-  const dates = weekDates(), now = new Date();
-  let best = null;
-  for (let i = 0; i < 14; i++){                    /* смотрим на две недели вперёд */
-    const d = new Date(dates[0]); d.setDate(dates[0].getDate() + i);
-    const wd = ((d.getDay() + 6) % 7) + 1;
-    LESSONS.filter(l => l.weekday === wd).forEach(l => {
-      const ch = changeFor(l.id, iso(d));
-      if (ch && ch.status === "cancelled") return;
-      const useDate = (ch && ch.status === "moved" && ch.new_date) ? new Date(ch.new_date + "T00:00:00") : d;
-      const useTime = (ch && ch.status === "moved" && ch.new_at_msk) ? ch.new_at_msk : l.at_msk;
-      const when = whenOf(useDate, useTime);
-      if (when > now && (!best || when < best.when)) best = { lesson: l, when: when, date: useDate, at: useTime };
-    });
-    if (best) break;
-  }
-  return best;
-}
+function weekDates(){return SMSchedule.weekDates();}
+function iso(d){return SMSchedule.iso(d);}
+function nextLesson(){return SMSchedule.next(LESSONS,CHANGES);}
 
 function untilText(when){
   const min = Math.round((when - new Date()) / 60000);
@@ -127,16 +94,17 @@ function untilText(when){
 function draw(){
   const pane = document.getElementById("pane");
   const dates = weekDates();
-  const todayIdx = (new Date().getDay() + 6) % 7;
+  const todayIdx = (SMSchedule.parse(SMSchedule.today()).getDay() + 6) % 7;
   const nxt = nextLesson();
   const perWeek = LESSONS.length;
+  const occurrences=SMSchedule.occurrences(LESSONS,CHANGES,iso(dates[0]),iso(dates[6]),true);
 
   const hero = nxt
     ? '<div class="ink"><div><div class="k">Ближайший урок</div>' +
         '<h2>' + SHORT[((nxt.date.getDay()+6)%7)] + ", " + nxt.date.getDate() + " " +
           nxt.date.toLocaleDateString("ru-RU",{month:"long"}) + " · " + hhmm(nxt.at) + " МСК</h2>" +
         '<p>' + untilText(nxt.when) +
-          (SAME_TZ ? "" : " · у тебя это " + localOf(nxt.date, nxt.at)) + '</p></div>' +
+          (SAME_TZ ? "" : " · у тебя " + new Intl.DateTimeFormat("ru-RU",{timeZone:MY_TZ,day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}).format(nxt.when)) + '</p></div>' +
         '<a class="go" href="room.html">'+icon("play",15)+' Войти в комнату</a></div>'
     : '<div class="ink calm"><div><div class="k">Урок / Lesson</div>' +
         '<h2>' + (perWeek ? "На ближайшие дни уроков нет" : "Расписания пока нет") + '</h2>' +
@@ -147,8 +115,7 @@ function draw(){
 
   const rows = DAYS.map((dayName, i) => {
     const wd = i + 1, date = dates[i], dIso = iso(date);
-    const list = LESSONS.filter(l => l.weekday === wd)
-      .sort((a,b) => hhmm(a.at_msk).localeCompare(hhmm(b.at_msk)));
+    const list = occurrences.filter(o=>o.dateIso===dIso);
 
     if (!list.length){
       return '<div class="row off" style="cursor:default">' +
@@ -158,16 +125,16 @@ function draw(){
         '<span class="when" style="opacity:.35">—</span></div>';
     }
 
-    return list.map(l => {
-      const ch = changeFor(l.id, dIso);
+    return list.map(o => {
+      const l=o.lesson,ch=o.change;
       const off = ch && ch.status === "cancelled";
       const moved = ch && ch.status === "moved";
-      const at = moved && ch.new_at_msk ? ch.new_at_msk : l.at_msk;
+      const at = o.at;
 
       let sub = l.minutes + " мин";
       if (l.note) sub += " · " + l.note;
       if (off) sub = "отменён" + (ch.reason ? ": " + ch.reason : "");
-      if (moved) sub = "перенесён на " + (ch.new_date || dIso) + (ch.new_at_msk ? " в " + hhmm(ch.new_at_msk) : "");
+      if (moved) sub += " · перенесён с " + o.originalDate.split("-").reverse().join(".");
 
       return '<div class="row'+(i===todayIdx && !off ? " now" : off ? " off" : "")+'" style="cursor:default">' +
         '<span class="num">'+SHORT[i]+'</span>' +
@@ -213,11 +180,10 @@ function draw(){
   const me = await SMUI.requireAuth(pane, "student");
   if (!me) return;
 
-  try { LESSONS = (await SM.myLessonsAsStudent()) || []; } catch(e){ LESSONS = []; }
-
   const dates = weekDates();
-  const till = new Date(dates[6]); till.setDate(till.getDate() + 7);
-  try { CHANGES = (await SM.lessonChanges(iso(dates[0]), iso(till))) || []; } catch(e){ CHANGES = []; }
+  const till = SMSchedule.parse(SMSchedule.today());till.setDate(till.getDate()+14);
+  try { [LESSONS,CHANGES]=await Promise.all([SM.myLessonsAsStudent(),SM.lessonChanges(iso(dates[0]),iso(till))]); }
+  catch(error){pane.innerHTML='<div class="empty"><div class="p">Не удалось загрузить расписание. Отмены и переносы пока не подтверждены.</div><button class="go" id="retrySchedule">Повторить загрузку</button></div>';document.getElementById('retrySchedule').onclick=()=>location.reload();return;}
 
   draw();
 })();

@@ -20,6 +20,10 @@ class Storage{
  await db.exec(fs.readFileSync('sql/coursework-atomic.sql','utf8'));
  const migration=fs.readdirSync('supabase/migrations').find(x=>x.endsWith('_durable_learning_progress.sql'));
  await db.exec(fs.readFileSync('supabase/migrations/'+migration,'utf8'));
+ await db.exec(`create table attempts(id bigint generated always as identity primary key,student_id uuid not null references auth.users,course text,unit_id text,exercise_id uuid,ex_type text,correct boolean,created_at timestamptz not null default now());
+ alter table attempts enable row level security;create policy own_attempt on attempts to authenticated using(student_id=auth.uid()) with check(student_id=auth.uid());grant select,insert on attempts to authenticated;`);
+ const attemptMigration=fs.readdirSync('supabase/migrations').find(x=>x.endsWith('_exercise_attempt_events.sql'));
+ await db.exec(fs.readFileSync('supabase/migrations/'+attemptMigration,'utf8'));
  const as=async(id,fn)=>db.transaction(async tx=>{await tx.exec(`set local role authenticated;select set_config('app.student_id','${id}',true);`);return fn(tx);});
  const read=id=>as(id,async tx=>(await tx.query('select data from progress where user_id=$1',[id])).rows[0]?.data||{});
  const apply=(id,events)=>as(id,async tx=>(await tx.query('select apply_learning_events($1,$2) as ids',[id,JSON.stringify(events)])).rows[0].ids);
@@ -65,6 +69,13 @@ class Storage{
  while(!release)await new Promise(resolve=>setImmediate(resolve));
  reloaded.store.answer('u1-3',true);reloaded.state.beforeRpc=null;release();await pending;
  assert.equal((await read(A))['u1-2'].seen,1);assert.equal((await read(A))['u1-3'].seen,1);
+ // Completed exercises use the same per-account outbox, including lost acknowledgements.
+ reloaded.state.writeError=true;await reloaded.store.attempt({course:'c',unit_id:'u',ex_type:'reading',correct:true,details:{answered:3,correct:3}});
+ assert.equal((await reloaded.store.flush()).ok,false);assert.equal(reloaded.storage.length,1);
+ const attemptsReloaded=browser(A,reloaded.storage);attemptsReloaded.state.loseResponse=true;
+ assert.equal((await attemptsReloaded.store.flush()).ok,false);assert.equal((await attemptsReloaded.store.flush()).ok,true);
+ const attempts=(await db.query('select * from attempts')).rows;assert.equal(attempts.length,1);assert.equal(attempts[0].details.answered,3);assert.equal(reloaded.storage.length,0);
+ reloaded.state.writeError=false;
  // Two stale snapshots of the same word retain both answers and their points.
  const x=browser(),y=browser();const px=await x.store.load(),py=await y.store.load();
  function correct(p,word){const old=p[word]||{seen:0,correct:0,level:0,b:0};p[word]={...old,seen:old.seen+1,correct:old.correct+1,level:Math.min(4,old.level+1),b:Math.min(5,old.b+1),status:'learning'};p.__meta={...(p.__meta||{}),totalPoints:(p.__meta?.totalPoints||0)+10,weekKey:'2026-45',weekPoints:(p.__meta?.weekPoints||0)+10};}

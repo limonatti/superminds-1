@@ -1,64 +1,43 @@
-/* sm-progress.js — тихая запись результатов упражнений.
-   Не трогает 24 функции рендера: слушает появление подсветки ответа
-   (.fb.ok/.no, .opt.correct/.wrong, .tf button.correct/.wrong) внутри
-   упражнения и по завершении пишет одну попытку в базу.
-   Работает только для залогиненного ученика (не учителя). */
-(function () {
-  if (!window.SM || !SM.isCloud) return;
-
-  var q = new URLSearchParams(location.search);
-  var UNIT = q.get("u") || "";
-  var reported = {};   // exId -> true (одна запись за загрузку страницы)
-  var state = {};      // exId -> {wrong:bool, right:bool, timer}
-  var isTeacher = false;
-
-  SM.myProfile().then(function (p) {
-    isTeacher = !!(p && p.role === "teacher");
-    if (!isTeacher) start();
-  }).catch(function () { start(); });
-
-  function start() {
-    var root = document.getElementById("root");
-    if (!root) return;
-    var obs = new MutationObserver(function (muts) {
-      muts.forEach(function (mu) {
-        var t = mu.target;
-        if (!(t instanceof Element)) return;
-        var cls = t.className || "";
-        var isFbOk = t.classList && t.classList.contains("fb") && t.classList.contains("ok");
-        var isFbNo = t.classList && t.classList.contains("fb") && t.classList.contains("no");
-        var isRight = (t.classList && t.classList.contains("correct"));
-        var isWrong = (t.classList && t.classList.contains("wrong"));
-        if (!(isFbOk || isFbNo || isRight || isWrong)) return;
-        var wrap = t.closest("[data-exid]");
-        if (!wrap) return;
-        var exId = wrap.getAttribute("data-exid");
-        if (!exId || reported[exId]) return;
-        var st = state[exId] || (state[exId] = { wrong: false, right: false, type: wrap.getAttribute("data-extype"), timer: null });
-        if (isFbNo || isWrong) st.wrong = true;
-        if (isFbOk || isRight) st.right = true;
-        // подождём 2с тишины и запишем итог по этому упражнению
-        clearTimeout(st.timer);
-        st.timer = setTimeout(function () { flush(exId); }, 2000);
-      });
-    });
-    obs.observe(root, { subtree: true, attributes: true, attributeFilter: ["class"] });
-  }
-
-  function flush(exId) {
-    if (reported[exId]) return;
-    var st = state[exId];
-    if (!st || (!st.right && !st.wrong)) return;
-    reported[exId] = true;
-    var correct = st.right && !st.wrong;   // без единой ошибки — зачёт
-    try {
-      SM.saveAttempt({
-        course: (window.SM_COURSE && SM_COURSE.id) || null,
-        unit_id: UNIT,
-        exercise_id: exId,
-        ex_type: st.type || null,
-        correct: correct,
-      });
-    } catch (e) {}
-  }
-})();
+/* Explicit assessment of all blocks in a teacher-authored exercise.
+   CSS feedback and elapsed time never constitute completion. */
+(function(root){
+'use strict';
+const submitted=new Map(),sending=new Map();
+function collect(exercise,items,records){
+ const parts=[],values=[];
+ for(let i=0;i<items.length;i++){
+  const spec=root.CourseAuthored.model(exercise.type,items[i]);
+  if(!spec?.fields.length||spec.fields.some(f=>!f.accepted?.length))return {review:true};
+  const record=records[`authored:${exercise.id}:${i}`];
+  if(!record||record.results?.length!==spec.fields.length)return {incomplete:true};
+  const results=root.CoursePractice.grade(spec,record.values||[]);
+  if(results.some(r=>r==='blank'))return {incomplete:true};
+  parts.push({part:i+1,results});values.push(record.values);
+ }
+ if(!parts.length)return {incomplete:true};
+ const results=parts.flatMap(p=>p.results);
+ return {correct:results.every(r=>r==='correct'),signature:JSON.stringify([values,parts]),
+   details:{items:parts,answered:results.length,correct:results.filter(r=>r==='correct').length}};
+}
+async function report(meta,exercise,items){
+ const store=root.CoursePractice.storeFor(meta.course).store;
+ if(!store.user)return {ok:false,guest:true};
+ const result=collect(exercise,items,store.records);
+ if(result.incomplete||result.review)return {ok:true,...result};
+ const key=store.user.id+':'+meta.course+':'+exercise.id;
+ if(submitted.get(key)===result.signature)return {ok:true,duplicate:true};
+ if(sending.get(key)?.signature===result.signature)return sending.get(key).promise;
+ const promise=(async()=>{
+  try{
+   const saved=await root.SM.saveAttempt({course:meta.course,unit_id:meta.unit,exercise_id:exercise.id,
+     ex_type:exercise.type,correct:result.correct,details:result.details});
+   // Accepted into the durable queue is different from a server acknowledgement.
+   if(saved.ok||saved.pending)submitted.set(key,result.signature);
+   return saved;
+  }catch(error){return {ok:false,error:error.message||'Не удалось сохранить результат'};}
+ })().finally(()=>{if(sending.get(key)?.promise===promise)sending.delete(key);});
+ sending.set(key,{signature:result.signature,promise});return promise;
+}
+root.SMProgress={collect,report};
+if(typeof module!=='undefined')module.exports={collect,report};
+})(typeof window==='undefined'?globalThis:window);
