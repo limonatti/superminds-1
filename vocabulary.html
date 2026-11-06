@@ -99,9 +99,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="words.js?v=26e6ae94"></script>
+<script src="words.js?v=3a3671b3"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-<script src="course-words.js?v=7226df4b"></script>
+<script src="course-words.js?v=39777793"></script>
 <script src="sm-auth.js?v=95220d51"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
@@ -147,7 +147,7 @@ function drawList(){
     const ids = u.words.map((w,j) => w.id || u.id+"-"+j);
     const done = ids.filter(isLearned).length;
     rows.push('<button class="li'+(sel===i?" on":"")+'" data-i="'+i+'">' +
-      '<span class="t">'+esc(u.title)+'</span>' +
+      '<span class="t">'+esc([u.unit,u.title].filter(Boolean).join(' · '))+'</span>' +
       '<span class="s">'+done+' из '+ids.length+' выучено</span>' +
       '<span class="bar"><i style="width:'+(ids.length?done/ids.length*100:0)+'%"></i></span></button>');
   });
@@ -307,17 +307,18 @@ function drawPane(){
   const us = units();
   const list = sel === -1 ? allWords()
     : (us[sel] ? us[sel].words.map((w,j) => Object.assign({ id: us[sel].id+"-"+j }, w)) : []);
-  const title = sel === -1 ? "Все слова курса" : (us[sel] ? us[sel].title : "");
+  const title = sel === -1 ? "Все слова курса" : (us[sel] ? [us[sel].unit,us[sel].title].filter(Boolean).join(' · ') : "");
   const rep = list.filter(w => isRepeat(w.id));
   const done = list.filter(w => isLearned(w.id));
 
+  history.replaceState(null,"",SM_vocabularyHref('vocabulary.html',sel===-1 ? null : [us[sel].id],sel===-1));
   p.innerHTML =
     '<div class="pane-hd"><span>Шаг 2 · '+esc(title)+'</span>'+courseSwitch()+'</div>' +
     '<div class="ink"><div><div class="k">Словарь / Vocabulary</div>' +
       '<h2>'+(rep.length ? rep.length+" слов ждут повторения" : "Всё повторено")+'</h2>' +
       '<p>'+(rep.length ? "Красным отмечены слова, которые ты уже видел, но ещё не закрепил."
                         : "Новые слова появятся здесь, как только начнёшь тренажёр.")+'</p></div>' +
-      '<a class="go" href="trainer.html'+(sel !== -1 && us[sel] ? '?unit='+encodeURIComponent(us[sel].id) : '')+'">'+icon("play",15)+' Карточки</a></div>' +
+      '<a class="go" href="'+esc(SM_vocabularyHref('trainer.html',sel !== -1 && us[sel] ? [us[sel].id] : null,sel===-1))+'">'+icon("play",15)+' Карточки</a></div>' +
     '<div class="tiles">' +
       '<div class="tile"><span class="k">Всего слов</span><span class="n">'+list.length+'</span></div>' +
       '<div class="tile"><span class="k">Выучено</span><span class="n">'+done.length+'</span></div>' +
@@ -359,16 +360,20 @@ function drawPane(){
      нарисоваться на курсе по умолчанию и показать чужие слова. */
   let st = {};
   try { st = (await (window.SM_ready || Promise.resolve({}))) || {}; } catch(e){}
-  const solutionsLink = new URLSearchParams(location.search).get("course") === "solutions-int";
-  if (solutionsLink) { SM_useCourse("solutions-int"); st.needsChoice = false; }
-  ASSIGNED = solutionsLink ? null : (st.assigned || null);
+  const q=new URLSearchParams(location.search), selection=SM_resolveVocabularyLink(location.search);
+  const linked=q.has("course")||q.has("unit")||q.has("u")||q.has("units");
+  if(linked) st.needsChoice=false;
+  ASSIGNED = linked ? null : (st.assigned || null);
   try { PROG = (await SM.loadProgress()) || {}; } catch(e){ PROG = {}; }
 
   /* Первый вход: курс ещё не выбран — предлагаем выбрать, а не решаем за ученика */
   if (st.needsChoice && new URLSearchParams(location.search).get("unit") !== "own") { drawPick(); return; }
 
-  if (new URLSearchParams(location.search).get("unit") === "own") {
-    sel = units().findIndex(u => u.id === "own");
+  if(selection.unitIds && selection.unitIds.length===1) sel=units().findIndex(u=>u.id===selection.unitIds[0]);
+  if(selection.error){
+    if(selection.courseFound) drawList();
+    document.getElementById("pane").textContent=selection.error;
+    return;
   }
   drawList(); drawPane();
 })();

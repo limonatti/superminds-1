@@ -9,7 +9,7 @@
  function localSave(){workStore.capture(answers);answers=workStore.records;if(active)shownRecord=JSON.stringify(answers[active.id]||{});return workStore.localOK}
  function renderTasks(){
   const list=pageTasks(), visible=enabled&&['sb','wb','grammar'].includes(S.book);
-  $('#wordCards').href=`../trainer.html?unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
+  $('#wordCards').href=`../trainer.html?course=outcomes-beginner&unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
   $('#exerciseHotspots').hidden=!visible;
   $('#exerciseHotspots').innerHTML=visible?list.map(e=>`<button class="exercisePin ${OutcomesGrader.isComplete(e.check,answers[e.id])?'done':''}" data-exercise="${e.id}" style="left:${(e.x+.005)*100}%;top:${e.y*100}%" aria-label="Открыть упражнение ${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?', выполнено':''}">${e.n}${OutcomesGrader.isComplete(e.check,answers[e.id])?' ✓':''}</button>`).join(''):'';
   window.ExerciseSource.regions($('#exerciseHotspots'),list.map(e=>window.OUTCOMES_INTERACTIONS?.[e.id]?.box));

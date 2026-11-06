@@ -40,7 +40,9 @@ def from_pages(pattern):
     out = []
     for f in sorted(glob.glob(os.path.join(HERE, pattern))):
         base = os.path.basename(f)
-        if "-grammar" in base or "-workbook" in base or "-course" in base:
+        # Section pages (u1a, u1b...) repeat their parent word bank. Only the
+        # canonical unit page may create a unit, otherwise IDs are duplicated.
+        if not re.fullmatch(r".+-u\d+\.html", base):
             continue
         src = open(f, encoding="utf-8").read()
         m = re.search(r'WORDS\s*=\s*(\[\[.*?\]\])\s*[;,\n]', src, re.S)
@@ -103,6 +105,9 @@ for slug, c in COURSES.items():
     if not c["units"]:
         print(f"  внимание: {slug} без слов, пропущен", file=sys.stderr)
         continue
+    unit_numbers = [u["n"] for u in c["units"]]
+    if len(set(unit_numbers)) != len(unit_numbers):
+        raise ValueError(f"{slug}: duplicate unit numbers: {unit_numbers}")
     n = sum(len(u["words"]) for u in c["units"])
     total += n
     print(f"  {slug}: юнитов {len(c['units'])}, слов {n}")

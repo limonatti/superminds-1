@@ -315,12 +315,50 @@ window.SM_wantedCourse = (function () {
 
 /* Найти курс, в котором есть такой юнит (когда ссылка ведёт в чужой учебник) */
 window.SM_courseOfUnit = function (unitId) {
-  var d = window.SM_COURSE_DATA;
-  for (var slug in d) {
-    if (!Object.prototype.hasOwnProperty.call(d, slug)) continue;
-    if ((d[slug] || []).some(function (u) { return u.id === unitId; })) return slug;
+  if (unitId === "own") return null;
+  var matches = Object.keys(window.SM_COURSE_DATA).filter(function (slug) {
+    return (window.SM_COURSE_DATA[slug] || []).some(function (u) { return u.id === unitId; });
+  });
+  return matches.length === 1 ? matches[0] : null;
+};
+
+/* Resolve only the requested course/unit. A broken link must never become
+   a practice session with unrelated words. Call after SM_ready. */
+window.SM_resolveVocabularyLink = function (search) {
+  var q = new URLSearchParams(search), course = q.get("course");
+  var raw = q.get("unit") || q.get("u");
+  var ids = raw ? [raw] : q.has("units") ? q.get("units").split(",").filter(Boolean) : null;
+  if (course) {
+    if (!Object.prototype.hasOwnProperty.call(window.SM_COURSE_DATA, course)) {
+      return { unitIds: [], error: "Учебник «" + course + "» не найден.", courseFound: false };
+    }
+    window.SM_useCourse(course);
+  } else if (ids && ids.length && ids[0] !== "own") {
+    var inferred = window.SM_courseOfUnit(ids[0]);
+    if (inferred) window.SM_useCourse(inferred);
   }
-  return null;
+  if (ids) {
+    ids = ids.map(function (id) {
+      var unit = window.SM_UNITS.find(function (u) {
+        return u.id === id || (course && /^\d+$/.test(id) && u.unit === "Unit " + Number(id));
+      });
+      return unit ? unit.id : null;
+    });
+    if (!ids.length || ids.some(function (id) { return !id; })) {
+      return { unitIds: [], error: "Юнит из ссылки не найден в этом учебнике. Выберите нужный юнит.", courseFound: true };
+    }
+    ids = Array.from(new Set(ids));
+  } else if (q.get("scope") === "all") {
+    ids = window.SM_UNITS.map(function (u) { return u.id; });
+  }
+  return { unitIds: ids, error: null, courseFound: true };
+};
+window.SM_vocabularyHref = function (page, ids, all) {
+  var q = new URLSearchParams({ course: window.SM_COURSE.id });
+  if (ids && ids.length === 1) q.set("unit", ids[0]);
+  else if (ids && ids.length > 1) q.set("units", ids.join(","));
+  else if (all) q.set("scope", "all");
+  return page + "?" + q.toString();
 };
 
 /* ---- Курсы Speakout: их слова лежат в speakout-words.js ------------------
@@ -371,7 +409,7 @@ window.SM_absorbSpeakout = function () {
 window.SM_absorbCourseWords = function () {
   var C = window.COURSE_WORDS;
   if (!C) return;
-  var PREFIX = { "speakout-a1": "sa1-u", "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
+  var PREFIX = { "outcomes-beginner": "outc-u", "solutions-int": "solu-u", "speakout-a1": "sa1-u", "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
   Object.keys(C).forEach(function (slug) {
     if ((window.SM_COURSE_DATA[slug] || []).length) return;
     var c = C[slug], pre = PREFIX[slug] || (slug.replace(/[^a-z0-9]/g, "").slice(0, 4) + "-u");

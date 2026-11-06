@@ -141,9 +141,9 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="words.js?v=26e6ae94"></script>
+  <script src="words.js?v=3a3671b3"></script>
   <script src="speakout-words.js?v=3094c556"></script>
-<script src="course-words.js?v=7226df4b"></script>
+<script src="course-words.js?v=39777793"></script>
   <script src="sm-auth.js?v=95220d51"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
@@ -164,7 +164,8 @@ window.SM_HANDLES_COURSE = true;
       { id: "pairs",   label: "🔗 Найди пару" }
     ];
 
-    let selectedUnits = SM_UNITS.map(u => u.id);
+    let selectedUnits = [];
+    let selectionError = null, greeting = "", roundTimer = null;
     let mode = "mix";
     let progress = {};   // { id:{level,correct,seen,status}, __meta:{...} }
     let meta = { totalPoints:0, dayStreak:0, bestStreak:0, lastActive:null, badges:[] };
@@ -263,20 +264,33 @@ window.SM_HANDLES_COURSE = true;
       const w=weighted[Math.floor(Math.random()*weighted.length)]; prevId=w.id; return w;
     }
     function distractors(word,n){
-      const seen={};seen[(word.en||"").toLowerCase()]=1;const out=[];
-      const pool=shuffle(SM_ALL_WORDS.filter(x=>x.unitId===word.unitId)).concat(shuffle(SM_ALL_WORDS));
-      for(const x of pool){const k=(x.en||"").toLowerCase();if(seen[k])continue;seen[k]=1;out.push(x);if(out.length>=n)break;}
-      return out; }
-
+      const seenEn=new Set([word.en.toLowerCase()]), seenRu=new Set([word.ru.toLowerCase()]), out=[];
+      for(const x of shuffle(SM_ALL_WORDS.filter(x=>x.unitId===word.unitId))){
+        const en=x.en.toLowerCase(), ru=x.ru.toLowerCase();
+        if(seenEn.has(en)||seenRu.has(ru))continue;
+        seenEn.add(en);seenRu.add(ru);out.push(x);if(out.length>=n)break;
+      }
+      return out;
+    }
+    function selectUnits(ids){
+      selectedUnits=ids; selectionError=null; prevId=null;
+      history.replaceState(null,"",SM_vocabularyHref("trainer.html",ids)+"&mode="+mode);
+      renderChips();renderModes();nextRound();
+    }
     function renderChips(){
       const box=document.getElementById("chips"); box.innerHTML="";
       const allOn=selectedUnits.length===SM_UNITS.length;
-      const all=document.createElement("button"); all.className="chip"+(allOn?" on":""); all.textContent="Все юниты";
-      all.onclick=()=>{selectedUnits=allOn?[]:SM_UNITS.map(u=>u.id);renderChips();nextRound();}; box.appendChild(all);
+      const all=document.createElement("button"); all.className="chip"+(allOn?" on":""); all.textContent="Все юниты · вперемешку";
+      all.setAttribute("aria-pressed",allOn);
+      all.onclick=()=>selectUnits(SM_UNITS.map(u=>u.id)); box.appendChild(all);
       SM_UNITS.forEach(u=>{const c=document.createElement("button");c.className="chip"+(selectedUnits.includes(u.id)?" on":"");
-        c.textContent=u.emoji+" "+u.title;
-        c.onclick=()=>{if(selectedUnits.includes(u.id))selectedUnits=selectedUnits.filter(x=>x!==u.id);else selectedUnits.push(u.id);renderChips();nextRound();};
-        box.appendChild(c);});
+        c.textContent=[u.emoji,u.unit,u.title].filter(Boolean).join(" · ");
+        c.setAttribute("aria-pressed",selectedUnits.includes(u.id));
+        c.onclick=()=>selectUnits([u.id]);box.appendChild(c);
+      });
+      const picked=SM_UNITS.filter(u=>selectedUnits.includes(u.id));
+      const label=allOn?"все юниты · вперемешку":picked.map(u=>[u.unit,u.title].filter(Boolean).join(" · ")).join(", ");
+      document.getElementById("greet").textContent=greeting+SM_COURSE.title+" · "+(label||"выберите юнит");
     }
     function renderModes(){
       const box=document.getElementById("modes"); box.innerHTML="";
@@ -290,15 +304,16 @@ window.SM_HANDLES_COURSE = true;
       const a=document.createElement("a");
       a.className="mode"; a.textContent = малыши ? "🎈 Игры" : "🎮 Игры";
       a.style.textDecoration="none";
-      a.href=(малыши ? "game-words.html?unit=" : "game-words-teen.html?unit=")
-             + encodeURIComponent(selectedUnits[0]||"");
-      box.appendChild(a);
+      if(selectedUnits.length===1){
+        a.href=SM_vocabularyHref(малыши ? "game-words.html" : "game-words-teen.html",selectedUnits);
+        box.appendChild(a);
+      }
     }
 
     function nextRound(){
-      busy=false; refreshStats();
+      clearTimeout(roundTimer); busy=false; refreshStats();
       const stage=document.getElementById("stage");
-      if(!pool().length){stage.innerHTML='<div class="card"><div class="prompt">Выбери хотя бы один юнит 👆</div></div>';return;}
+      if(!pool().length){stage.innerHTML='<div class="card"><div class="prompt">'+esc(selectionError||"В выбранном юните пока нет слов. Выберите другой юнит.")+'</div></div>';return;}
       if(mode==="pairs") return renderPairs();
       if(learnedCount()===pool().length && mode!=="flash") return renderDone();
       const w=pickWord(); let t=mode;
@@ -308,7 +323,7 @@ window.SM_HANDLES_COURSE = true;
       else if(t==="chooseEn")renderChoose(w,"toEn"); else if(t==="chooseRu")renderChoose(w,"toRu");
       else if(t==="type")renderType(w); else if(t==="assemble")renderAssemble(w);
     }
-    function autoNext(ms){ setTimeout(()=>{ if(mode!=="flash") nextRound(); }, ms||1100); }
+    function autoNext(ms){ roundTimer=setTimeout(()=>{ if(mode!=="flash") nextRound(); }, ms||1100); }
 
     function renderFlash(w){
       const stage=document.getElementById("stage");
@@ -384,7 +399,7 @@ window.SM_HANDLES_COURSE = true;
         const w=SM_ALL_WORDS.find(x=>x.id===c.dataset.id);
         if(sel.dataset.id===c.dataset.id){beep(true);const en=SM_ALL_WORDS.find(x=>x.id===c.dataset.id);if(en)speak(en.en);
           sel.classList.add("done");c.classList.add("done");sel.classList.remove("sel");record(w,true);sel=null;left_count--;
-          if(left_count===0)setTimeout(renderPairs,500);}
+          if(left_count===0)roundTimer=setTimeout(()=>{if(mode==="pairs")renderPairs();},500);}
         else{beep(false);const s=sel;s.classList.add("wrong");c.classList.add("wrong");const ww=SM_ALL_WORDS.find(x=>x.id===s.dataset.id);if(ww)record(ww,false);
           setTimeout(()=>{s.classList.remove("wrong","sel");c.classList.remove("wrong");},600);sel=null;}
       };});
@@ -398,39 +413,22 @@ window.SM_HANDLES_COURSE = true;
     document.getElementById("badgeOk").onclick=()=>document.getElementById("badgeToast").classList.remove("show");
     document.getElementById("badgeToast").onclick=e=>{ if(e.target.id==="badgeToast") document.getElementById("badgeToast").classList.remove("show"); };
 
-    /* Предвыбор юнита из ссылки: ?unit=u4 или ?units=u4,u5
-       Вызывается ПОСЛЕ загрузки курсов из базы — иначе нужного юнита ещё нет
-       в списке, он отсеивается, и остаются отмечены все юниты подряд. */
     function applyLinkParams(){
-      const q=new URLSearchParams(location.search);
-      let ids=[];
-      if(q.get("unit")) ids=[q.get("unit")];
-      else if(q.get("units")) ids=q.get("units").split(",").filter(Boolean);
-
-      /* Ссылка ведёт в юнит другого учебника — переключаем курс на нужный */
-      if(ids.length && !ids.some(id=>SM_UNITS.some(u=>u.id===id)) && window.SM_courseOfUnit){
-        const slug = window.SM_courseOfUnit(ids[0]);
-        if(slug && slug !== (window.SM_COURSE && window.SM_COURSE.id)){
-          SM.pickCourse(slug);   /* выбор учебника запоминается на сервере */
-        }
-      }
-
-      const found = ids.filter(id=>SM_UNITS.some(u=>u.id===id));
-      selectedUnits = found.length ? found : SM_UNITS.map(u=>u.id);
-
-      const m=q.get("mode");
-      if(m && MODES.some(x=>x.id===m)) mode=m;
-
-      /* Юнит просили, но его нигде нет — честно говорим, а не молчим */
-      return (ids.length && !found.length) ? ids[0] : null;
+      const q=new URLSearchParams(location.search), selection=SM_resolveVocabularyLink(location.search);
+      selectionError=selection.error;
+      selectedUnits=selection.unitIds===null ? SM_UNITS.filter(u=>u.words.length).slice(0,1).map(u=>u.id) : selection.unitIds;
+      const m=q.get("mode"); if(m && MODES.some(x=>x.id===m)) mode=m;
+      return selection;
     }
 
     (async function(){
       /* Ждём курсы из базы: без этого выбранный учеником учебник подменяется */
       try { await (window.SM_ready || Promise.resolve()); } catch(e){}
-      const requestedCourse = new URLSearchParams(location.search).get("course");
-      if (requestedCourse && window.SM_COURSE_DATA[requestedCourse]) SM_useCourse(requestedCourse);
-      const missing = applyLinkParams();
+      const selection = applyLinkParams();
+      if(!selection.courseFound){
+        document.getElementById("stage").textContent=selection.error;
+        return;
+      }
       const courseTitle = (window.SM_COURSE && SM_COURSE.title) || "";
       /* Заголовок вкладки — по реально выбранному учебнику, иначе кажется,
          что тренажёр показывает слова чужого курса. */
@@ -443,18 +441,10 @@ window.SM_HANDLES_COURSE = true;
 
       const user=await SM.getUser();
 
-      /* Подпись под заголовком: имя и какой учебник сейчас открыт */
-      const unitsPicked = selectedUnits.length, unitsAll = SM_UNITS.length;
-      const whatUnits = unitsPicked >= unitsAll ? "все юниты"
-                      : unitsPicked === 1
-                        ? ((SM_UNITS.filter(u=>u.id===selectedUnits[0])[0]||{}).title || "выбранный юнит")
-                        : unitsPicked + " юнита";
-      document.getElementById("greet").textContent =
-        (user ? "Привет, "+user.name+"! " : "") + courseTitle + " · " + whatUnits;
+      greeting=user ? "Привет, "+user.name+"! " : "";
 
       /* Один баннер на все предупреждения */
       const warns = [];
-      if(missing) warns.push("Юнит «"+missing+"» не найден в твоих учебниках — показываю все слова курса «"+courseTitle+"».");
       if(SM.isCloud && !user) warns.push('Ты не вошёл — прогресс не сохранится. <a href="cabinet.html">Войти в кабинет →</a>');
       if(warns.length){
         const b=document.getElementById("banner");
