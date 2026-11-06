@@ -4,12 +4,12 @@ const D=window.FOCUS,$=s=>document.querySelector(s),$$=s=>[...document.querySele
 const params=new URLSearchParams(location.search), NS='focus-1:responses:v1';
 let book=['wb','ws'].includes(params.get('book'))?params.get('book'):'sb',unit=params.get('unit')||'0',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve(),workStore=null;
 const M=window.FocusMarking;
-let previousAnswers=[],homework=null,submitting=false,assigner=null;
+let shownRecord='',previousAnswers=[],homework=null,submitting=false,assigner=null;
 const H=window.FocusHW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
 function status(text){$('#saveStatus').textContent=text;}
 function merge(a,b){const out={...a};Object.entries(b||{}).forEach(([k,v])=>{if(!out[k]||(v.updatedAt||0)>(out[k].updatedAt||0))out[k]=v;});return out;}
-function persist(){if(workStore){workStore.capture(responses);responses=workStore.records;}renderProgress();}
+function persist(){if(workStore){workStore.capture(responses);responses=workStore.records;if(active)shownRecord=JSON.stringify(responses[active.id]||{});}renderProgress();}
 function sync(){persist();return workStore.flush();}
 function renderProgress(){renderHomework();const all=D.pages.filter(p=>p.unit===page?.unit).flatMap(p=>p.exercises);const done=all.filter(e=>(responses[e.id]?.values?.some(v=>v.trim())||responses[e.id]?.reflection?.trim())).length;$('#progress').textContent=`${done} из ${all.length} упражнений с ответами в этом разделе.`;}
 function url(){const q=new URLSearchParams(location.search);q.set("book",book);q.set("unit",unit);q.set("page",page.page);q.delete("ex");return location.pathname+"?"+q;}
@@ -35,7 +35,7 @@ function render(){
 }
 function resizeCrop(){window.ExerciseSource.change($('#solutionOriginal'),{full:$('#fullPage').getAttribute('aria-pressed')==='true'});if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
 function openExercise(id){
- active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
+ active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
  $('#exerciseAudio').innerHTML=page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
@@ -136,7 +136,7 @@ async function loadHomework(){
  }catch(e){$('#assignment').textContent=e.message;}
 }
 (async()=>{
- workStore=new CourseWorkStore({course:"focus-1",legacy(u){try{return JSON.parse(localStorage.getItem(NS+':'+(u?.id||'guest'))||'{}')}catch{return {}}},onStatus:status,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){responses=rows;if(ready&&change.remote){renderProgress();}}});
+ workStore=new CourseWorkStore({course:"focus-1",legacy(u){try{return JSON.parse(localStorage.getItem(NS+':'+(u?.id||'guest'))||'{}')}catch{return {}}},onStatus:status,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){responses=rows;if(ready&&change.remote){renderProgress();if(active&&$('#exercise').open&&shownRecord!==JSON.stringify(rows[active.id]||{}))openExercise(active.id);}}});
  await workStore.start();user=workStore.user;responses=workStore.records;storageKey=workStore.key();CourseWorkUI.bind(workStore,()=>{save(false);return sync()});
  ready=true;page=params.has('page')?D.pages.find(p=>p.book===book&&p.page===Number(params.get('page'))):null;if(page)unit=String(page.unit);render();persist();assigner=window.FocusAssign.create({getUser:()=>user,getPage:()=>page,onChange:updateAssignMarkers});assigner.init();await loadHomework();const wanted=params.get('ex');if(wanted&&page.exercises.some(e=>e.id===wanted))openExercise(wanted);})();
 function renderMaterials(){const category=$('#resourceCategory').value,query=$('#resourceSearch').value.toLowerCase();$('#resourceList').innerHTML=D.resources.filter(r=>r.category===category&&r.title.toLowerCase().includes(query)).map(r=>`<a class="resource" href="${esc(r.path)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a>`).join('')||'<p>Материалов по этому запросу нет.</p>';}

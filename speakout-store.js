@@ -14,7 +14,7 @@ const store=new CourseWorkStore({course,onStatus:t=>{const el=document.getElemen
 });
 await store.start();
 function save(next){
- if(suspended)return false;
+ if(suspended||store.user===undefined)return false;
  Object.assign(state,next);
  for(const[id,v]of Object.entries(next.answers||{})){
   if(fingerprints[id]===JSON.stringify(v))continue;

@@ -965,7 +965,16 @@ if(window.SpeakoutAccountStore) {
   }});
   CourseWorkUI.bind({get message(){return $('#saveStatus').textContent},flush:async()=>{await B2Store.pull();await B2Store.flush()}});
   B2Store.current=pkey();
-  B2Store.start().then(()=>{$('#dock').inert=false;$('#bMark').disabled=false;refreshAccountMarks();});
+  B2Store.start().then(()=>{
+    if(!B2Store.ready)return;
+    $('#dock').inert=false;$('#bMark').disabled=false;refreshAccountMarks();
+    if(B2Store.guestAvailable()){
+      const box=document.createElement('details'),label=document.createElement('summary'),text=document.createElement('p'),button=document.createElement('button');
+      label.textContent='Прежние черновики этого браузера';text.textContent='У этих ответов нет подтверждённого владельца. Переносите их только если это ваша работа. Ответы из аккаунта останутся на месте.';
+      button.textContent='Это мои черновики — перенести';button.onclick=async()=>{button.disabled=true;const ok=await B2Store.importGuest();button.disabled=!!ok;button.textContent=ok?'Черновики перенесены':'Повторить перенос';};
+      box.append(label,text,button);$('#saveStatus').parentElement.append(box);
+    }
+  });
   $('#syncRetry').onclick=async()=>{await B2Store.pull();await B2Store.flush();};
   const sync=()=>{if(!document.hidden){B2Store.pull();B2Store.flush();}};
   window.addEventListener('online',sync);window.addEventListener('focus',sync);

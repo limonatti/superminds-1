@@ -1,12 +1,12 @@
 /* Student answers belong to the signed-in account, independently of teacher ink. */
 (()=>{
  const COURSE='outcomes-beginner', bank=window.OUTCOMES_EXERCISES||{};
- let workStore=null, user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false, exerciseTrigger=null, exerciseZoom=1, fullSource=false;
+ let shownRecord='',workStore=null, user=null, ready=false, answers={}, dirty={}, timer, busy=false, active=null, enabled=true, role='student', checked=false, revealed=false, exerciseTrigger=null, exerciseZoom=1, fullSource=false;
  const status=s=>document.getElementById('courseworkStatus').textContent=s;
  const key=()=>`outcomes-work-v1:${user?.id||'guest'}`;
  const pageTasks=()=>bank[pageKey()]||[];
  const parse=s=>{try{return JSON.parse(s)||{}}catch{return {}}};
- function localSave(){workStore.capture(answers);answers=workStore.records;return workStore.localOK}
+ function localSave(){workStore.capture(answers);answers=workStore.records;if(active)shownRecord=JSON.stringify(answers[active.id]||{});return workStore.localOK}
  function renderTasks(){
   const list=pageTasks(), visible=enabled&&['sb','wb','grammar'].includes(S.book);
   $('#wordCards').href=`../trainer.html?unit=outc-u${S.unit||S.lastUnit||1}&mode=flash`;
@@ -34,7 +34,7 @@
  }
  function navigateTask(delta){const tasks=pageTasks(),i=tasks.findIndex(e=>e.id===active?.id);if(tasks[i+delta]){saveDraft();openTask(tasks[i+delta])}}
  function openTask(e){
-  if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;
+  if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;shownRecord=JSON.stringify(answers[e.id]||{});
   if(!$('#modal').open)exerciseTrigger=document.activeElement;$$('audio').forEach(a=>a.pause());exerciseZoom=1;fullSource=false;active=e;const p=current(),record=answers[e.id]||{values:[],done:false},auto=e.check?.mode==='items';
   checked=Boolean(record.grade&&record.grade.revision===e.check?.revision);revealed=false;
   const tracks=/listen/i.test(e.instruction)?D.media.filter(m=>m.book===source()&&m.pages.includes(p.page)):[];
@@ -129,7 +129,7 @@
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
  $('#keys').hidden=true;
  async function init(){
-  workStore=new CourseWorkStore({course:COURSE,legacy(u){try{return parse(localStorage.getItem(`outcomes-work-v1:${u?.id||'guest'}`))}catch{return {}}},onStatus:t=>{status(t);if($('#taskSaveStatus'))$('#taskSaveStatus').textContent=t},onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){answers=rows;if(ready&&change.remote)renderTasks()}});
+  workStore=new CourseWorkStore({course:COURSE,legacy(u){try{return parse(localStorage.getItem(`outcomes-work-v1:${u?.id||'guest'}`))}catch{return {}}},onStatus:t=>{status(t);if($('#taskSaveStatus'))$('#taskSaveStatus').textContent=t},onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){answers=rows;if(ready&&change.remote){renderTasks();if(active&&$('#modal').open&&shownRecord!==JSON.stringify(rows[active.id]||{}))openTask(active)}}});
   await workStore.start();user=workStore.user;answers=workStore.records;CourseWorkUI.bind(workStore,()=>{saveDraft();return flush()});
   try{if(user){const profile=await SM.myProfile();role=profile?.role||'student'}}catch{}
   $('#keys').hidden=!['teacher','admin'].includes(role);$('#notesTab').hidden=!['teacher','admin'].includes(role);

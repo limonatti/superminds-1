@@ -2,9 +2,23 @@
 (function(root){
 'use strict';
 let current=null;const observed=new WeakSet();
-function update(message){document.querySelectorAll('.coursework-status').forEach(el=>{if(el.textContent!==message)el.textContent=message})}
+const blocked=new Map();
+function guard(){
+ const unknown=current&&'user' in current.store&&current.store.user===undefined;
+ if(unknown){
+  for(const el of document.querySelectorAll('main,dialog,.coursework-preview'))if(!blocked.has(el)){blocked.set(el,el.inert);el.inert=true;}
+  if(!document.getElementById('coursework-auth-retry')){
+   const box=document.createElement('div');box.id='coursework-auth-retry';box.className='coursework-savebar';box.setAttribute('role','alert');
+   const text=document.createElement('span');text.textContent='Не удалось проверить аккаунт. Подключитесь, чтобы ответы сохранились у нужного ученика.';
+   const retry=document.createElement('button');retry.className='coursework-save';retry.textContent='Повторить подключение';retry.onclick=async()=>{retry.disabled=true;try{await current.store.reconnect()}finally{retry.disabled=false;guard()}};
+   box.append(text,retry);document.body.prepend(box);
+  }
+ }else{for(const[el,inert]of blocked)el.inert=inert;blocked.clear();document.getElementById('coursework-auth-retry')?.remove();}
+}
+function update(message){document.querySelectorAll('.coursework-status').forEach(el=>{if(el.textContent!==message)el.textContent=message});guard()}
+
 function mount(){
- if(!current)return;
+ if(!current)return;guard();
  for(const dialog of document.querySelectorAll('dialog[open]')){
   if(!dialog.matches('.play-dialog,.coursework-dialog')&&!dialog.querySelector('[data-answer],[data-response],#practiceBody,#freeNote'))continue;
   if(dialog.querySelector('.coursework-savebar'))continue;

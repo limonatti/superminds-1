@@ -8,7 +8,7 @@ const el=(tag,text,cls)=>Object.assign(document.createElement(tag),{textContent:
 let dialog=null;
 function storeFor(course){
  if(!stores.has(course)){
-  const store=new CourseWorkStore({course,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(){for(const c of cards)if(c.course===course)c.refresh();const score=document.getElementById('sc');if(score)score.textContent=[...new Map(cards.map(c=>[c.course+':'+c.id,c])).values()].reduce((n,c)=>n+(stores.get(c.course)?.store.records[c.id]?.score?.correct||0),0)}});
+  const store=new CourseWorkStore({course,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){if(change?.remote&&dialog?.open&&dialog._courseworkCourse===course)dialog._restore?.();for(const c of cards)if(c.course===course)c.refresh();const score=document.getElementById('sc');if(score)score.textContent=[...new Map(cards.map(c=>[c.course+':'+c.id,c])).values()].reduce((n,c)=>n+(stores.get(c.course)?.store.records[c.id]?.score?.correct||0),0)}});
   stores.set(course,{store,ready:store.start()});
  }
  return stores.get(course);
@@ -63,6 +63,11 @@ function open(spec,meta,store,trigger){
   else if(r&&r.ok===false&&!r.pending&&!r.guest)feedback.textContent+=' Результат не сохранён. Нажмите «Проверить» ещё раз.';
  }).catch(()=>{if(checked===revision&&feedback.isConnected)feedback.textContent+=' Не удалось сохранить результат. Повторите проверку.';});
  if(meta.log)spec.fields.forEach((f,i)=>{if(f.accepted?.length&&results[i]!=='blank')meta.log(meta.section||'practice',meta.attempt||i+1,f.prompt||spec.prompt||'Упражнение',Array.isArray(values[i])?values[i].join(', '):String(values[i]||''),results[i]==='correct')})};
+ dialog._courseworkCourse=meta.course;dialog._restore=()=>{
+  const record=store.records[meta.id]||{};if(JSON.stringify([values,results,done])===JSON.stringify([record.values||[],record.results||[],!!record.done]))return;
+  revision++;values.splice(0,values.length,...JSON.parse(JSON.stringify(record.values||[])));results=record.results||[];done=!!record.done;
+  rows.forEach((row,i)=>{const input=row.querySelector('input,textarea,select');if(input)input.value=values[i]??''});refreshers.forEach(fn=>fn());showResults();
+ };
  dialog.append(check,feedback);dialog.addEventListener('close',()=>{dialog.querySelectorAll('audio').forEach(a=>a.pause());trigger.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(store);dialog.showModal();CourseWorkUI.mount();showResults();
 }
 function wrap(node,meta){
