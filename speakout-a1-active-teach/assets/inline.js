@@ -2,13 +2,14 @@
 (function(root){
 'use strict';
 const I=root.SpeakoutInteractive,escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function optionText(q,value){const o=q?.options?.find(o=>I.normalize(o.value)===I.normalize(value));return o?o.label.replace(/^[a-d]\.\s*/i,''):value}
-function canonical(q,value){const o=q?.options?.find(o=>I.normalize(optionText(q,o.value))===I.normalize(value));return o?o.value:value}
+const literal=value=>String(value??'').normalize('NFKC').replace(/[‘’`]/g,"'").toLowerCase().trim();
+function optionText(q,value){const o=q?.options?.find(o=>literal(o.value)===literal(value));return o?o.label.replace(/^[a-d]\.\s*/i,''):value}
+function canonical(q,value){const o=q?.options?.find(o=>literal(optionText(q,o.value))===literal(value));return o?o.value:value}
 function fromTemplate(template,value){const pattern=template.split('{}').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('(.*?)');return new RegExp('^'+pattern+'$','i').exec(value||'')?.slice(1)}
 function model(id,spec,override){
  const source=override||root.SPEAKOUT_INLINE_DATA?.[id];if(!source?.fields.length)return null;
  const fields=source.fields.map(f=>({...f})),groups={};
- const items=spec.items.filter(q=>!source.given?.includes(q.n)).map(q=>source.rank?{...q,originalAnswer:q.answer,answer:q.n,options:undefined}:q);
+ const items=spec.items.filter(q=>!source.given?.includes(q.n)).map(q=>source.rank?{...q,originalAnswer:q.answer,answer:q.n,options:undefined}:{...q,literal:source.literal||q.literal});
  for(const f of fields)if(f.n)(groups[f.n]||=[]).push(f);
  let complete=spec.mode==='auto'&&!(source.letters&&!source.vowels&&!source.templates&&fields.some(f=>f.kind==='shortline'));
  for(const q of items){const group=groups[q.n];if(!group){complete=false;continue}
@@ -49,8 +50,8 @@ function mount({container,data,page,exercise,state,spec,key,keyHTML,url,teacher,
  $('#inlineNextBlank').onclick=()=>inputs[(data.fields.findIndex(f=>f.id===selected)+1)%inputs.length].focus();
  $('#inlineHint').onclick=()=>{const f=byId.get(selected);if(f.answer===undefined)return;state.revealed[f.n]=true;state.done=false;state.score=null;const input=inputs.find(i=>i.dataset.inline===f.id);input.classList.remove('correct','incorrect');input.classList.add('revealed');$('#inlineFeedback').textContent=`Ответ${f.n&&!data.rank?' '+f.n:''}: ${f.answer}`;$('#checkResult').textContent='';onChange()};
  function unique(n){return !(data.distinct||[]).some(group=>group.includes(n)&&group.some(other=>other!==n&&I.normalize(state.values[other]||'')===I.normalize(state.values[n]||'')))}
- function correctQuestion(q){return I.matches(state.values[q.n]||'',q.answer)&&unique(q.n)}
- function correct(f){return unique(f.n)&&( data.groups[f.n]?.length===1?I.matches(state.values[f.n]||'',spec.items.find(q=>q.n===f.n).answer):I.matches(value(f),f.answer))}
+ function correctQuestion(q){return I.matches(state.values[q.n]||'',q.answer,q.literal)&&unique(q.n)}
+ function correct(f){const q=spec.items.find(q=>q.n===f.n);return unique(f.n)&&(data.groups[f.n]?.length===1?I.matches(state.values[f.n]||'',q.answer,q.literal):I.matches(value(f),f.answer,q?.literal))}
  function check(){
   let right=0;for(const q of spec.items)if(correctQuestion(q))right++;
   for(const input of inputs){const f=byId.get(input.dataset.inline),ok=correct(f);input.classList.remove('revealed');input.classList.toggle('correct',ok);input.classList.toggle('incorrect',!ok);input.setAttribute('aria-invalid',!ok)}

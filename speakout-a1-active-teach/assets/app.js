@@ -1,4 +1,5 @@
 'use strict';
+window.SpeakoutTaskCorrections?.apply(window.COURSE);
 const D=window.COURSE,I=window.SpeakoutInteractive,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const url=s=>window.SPEAKOUT_FILES?.get(s)||s.split('/').map(encodeURIComponent).join('/');
@@ -49,9 +50,10 @@ $('#exerciseFullPage').onclick=()=>fullExercisePage(inlinePlayer?!inlinePlayer.f
 $('#exerciseKeys').onclick=()=>{S.teacher=!S.teacher;syncExerciseKeys();$('#teacherToggle').textContent=S.teacher?'Ключи: показаны':'Ключи: скрыты';$('#teacherToggle').setAttribute('aria-pressed',S.teacher);$('#teacherToggle').classList.toggle('selected',S.teacher)};
 function exerciseAudio(){
  const tracks=mediaFor('lesson'),exact=tracks.filter(m=>m.track&&selectedEx?.text.includes(m.track));
- const media=exact.length?exact:tracks.filter(m=>m.type==='audio').slice(0,2);
+ const explicit=selectedEx?.mediaPaths?.map(path=>D.media.find(m=>m.path===path)).filter(Boolean);
+ const media=explicit|| (exact.length?exact:tracks.filter(m=>m.type==='audio').slice(0,2));
  $('#exerciseMedia').innerHTML=media.map(m=>`<div class="exercise-track"><label>${esc(mediaTitle(m))}<${m.type==='video'?'video':'audio'} controls preload="none" src="${url(m.path)}"></${m.type==='video'?'video':'audio'}></label><label>Скорость <select data-ex-speed><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label><button data-ex-loop aria-pressed="false">Повтор</button></div>`).join('')+(tracks.length?'<button id="exerciseAllMedia">Все аудио и видео урока</button>':'');
- if(!exact.length&&tracks.length)$('#exerciseMedia').innerHTML='<details><summary>Медиа урока</summary>'+$('#exerciseMedia').innerHTML+'</details>';
+ if(!explicit&&!exact.length&&tracks.length)$('#exerciseMedia').innerHTML='<details><summary>Медиа урока</summary>'+$('#exerciseMedia').innerHTML+'</details>';
  $$('[data-ex-loop]').forEach(b=>b.onclick=()=>{const player=b.closest('.exercise-track').querySelector('audio,video');player.loop=!player.loop;b.setAttribute('aria-pressed',player.loop);b.classList.toggle('selected',player.loop)});
  if($('#exerciseAllMedia'))$('#exerciseAllMedia').onclick=()=>{$('#exerciseDialog').close();$('#mediaFilter').value='lesson';showView('media');renderMedia()};
  $$('[data-ex-speed]').forEach(el=>el.onchange=()=>el.closest('.exercise-track').querySelector('audio,video').playbackRate=+el.value);bindExclusivePlayers();
@@ -74,6 +76,7 @@ function selectExercise(index){
  const p=page();selectedEx=p.exercises[index];
  if(!selectedEx){$('#exerciseBody').innerHTML='';$('#exerciseMedia').innerHTML='';if($('#exerciseDialog').open)$('#exerciseDialog').close();quickMedia();return}
  const e=selectedEx;S.ex=e.label;const state=answerState(e),key=getKey(e),spec=I.spec(e,key),auto=spec.mode==='auto';state.revealed=state.revealed||{};
+ $('#exerciseInstruction').textContent=e.instruction||'';$('#exerciseInstruction').hidden=!e.instruction;
  $('#exerciseTitle').textContent=`Упражнение ${e.label}`;$('#exerciseLocation').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;
  syncExerciseKeys();
  $$('[data-ex-index]').forEach(b=>{b.classList.toggle('selected',+b.dataset.exIndex===index);b.classList.toggle('active',+b.dataset.exIndex===index);b.setAttribute('aria-pressed',+b.dataset.exIndex===index)});
@@ -82,13 +85,13 @@ function selectExercise(index){
  if(inline){
   const keyHTML=key?`<h3>Ключ</h3><div class="keybox">${esc(key.items?.length?key.items.map(q=>q.n+'. '+q.answer).join('\n'):key.raw||'Отдельный ответ не требуется.')}</div>${key.pdf?`<a href="${url(key.pdf)}#page=${key.pdfPage}" target="_blank" rel="noopener">Оригинальный ключ ↗</a>`:""}`:'<p>Обсуди ответы с преподавателем.</p><button id="openKeys">Материалы преподавателя</button>';
   inlinePlayer=(activity?window.SpeakoutActivities:choice?window.SpeakoutChoices:window.SpeakoutInline).mount({container:$('#exerciseBody'),data:inline,page:p,exercise:e,state,spec,key,keyHTML,url,teacher:S.teacher,index,onChange(){updateProgress();persist()}});
-  inlinePlayer.nativePairs=activity?.kind==='match';focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,inline:activity?.inline||inline,choice,activity,text:e.text});return;
+  inlinePlayer.nativePairs=activity?.kind==='match';focusExercise();setExerciseZoom(1);fullExercisePage(false);wireExerciseNavigation(index,state);quickMedia();exerciseAudio();updateProgress();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,inline:activity?.inline||inline,choice,activity,text:e.text,responseMode:e.responseMode});return;
  }
  let html=`<div class="exercise-source">${cropHTML(e)}<div id="exercisePage" hidden><img src="${url(p.image)}" alt="Вся страница ${p.page}"></div></div><div class="exercise-response">`;
  if(auto){
   const kinds=new Set(spec.items.map(f=>f.kind));
   html+=`<p class="instruction">${kinds.has('order')?'Собери предложения: нажимай или перетаскивай слова. Чтобы убрать слово, нажми на него в ответе.':kinds.has('match')?'Выбери соответствие для каждого номера. Можно нажимать на варианты или перетаскивать их в поле ответа.':kinds.has('choice')?'Выбери правильные варианты и нажми «Проверить».':'Заполни ответы по номерам из задания и нажми «Проверить».'}</p>`;
-  html+=spec.items.map((f,i)=>{const v=state.values[f.n]||'';return `<section class="answerrow" data-n="${esc(f.n)}"><label for="ans${i}"><span class="num">${esc(f.n)}</span> ${f.kind==='order'?'Собери предложение':'Твой ответ'}</label>${f.kind==='order'?`<div class="sentence-answer" data-sentence="${esc(f.n)}" aria-label="Собранное предложение ${esc(f.n)}"></div><div class="wordbank" data-bank="${esc(f.n)}"></div>`:''}<input id="ans${i}" data-answer="${esc(f.n)}" value="${esc(v)}" autocomplete="off" spellcheck="false" aria-describedby="feedback${i}" placeholder="${f.kind==='order'?'Можно также написать ответ':'Ответ'}">${f.options?`<div class="choicegroup" role="group" aria-label="Варианты для ответа ${esc(f.n)}">${f.options.map(o=>`<button type="button" data-choice="${esc(o.value)}" data-for="${esc(f.n)}" draggable="${f.kind==='match'||f.kind==='bank'}" aria-pressed="false">${esc(o.label)}</button>`).join('')}</div>`:''}<div class="answer-feedback"><span id="feedback${i}" class="feedback" aria-live="polite"></span><button type="button" data-reveal="${esc(f.n)}" class="reveal-one">Показать ответ</button></div></section>`}).join('');
+  html+=spec.items.map((f,i)=>{const v=state.values[f.n]||'';return `<section class="answerrow" data-n="${esc(f.n)}"><label for="ans${i}"><span class="num">${esc(f.n)}</span> ${esc(f.prompt||(f.kind==='order'?'Собери предложение':'Твой ответ'))}</label>${f.kind==='order'?`<div class="sentence-answer" data-sentence="${esc(f.n)}" aria-label="Собранное предложение ${esc(f.n)}"></div><div class="wordbank" data-bank="${esc(f.n)}"></div>`:''}<input id="ans${i}" data-answer="${esc(f.n)}" value="${esc(v)}" autocomplete="off" spellcheck="false" aria-describedby="feedback${i}" placeholder="${f.kind==='order'?'Можно также написать ответ':'Ответ'}">${f.options?`<div class="choicegroup" role="group" aria-label="Варианты для ответа ${esc(f.n)}">${f.options.map(o=>`<button type="button" data-choice="${esc(o.value)}" data-for="${esc(f.n)}" draggable="${f.kind==='match'||f.kind==='bank'}" aria-pressed="false">${esc(o.label)}</button>`).join('')}</div>`:''}<div class="answer-feedback"><span id="feedback${i}" class="feedback" aria-live="polite"></span><button type="button" data-reveal="${esc(f.n)}" class="reveal-one">Показать ответ</button></div></section>`}).join('');
   html+='<div class="actions"><button id="check" class="primary">Проверить</button><button id="retryMistakes">Повторить ошибки</button><button id="retry">Начать заново</button></div><p id="checkResult" class="statusline" role="status"></p>';
  }else{
   html+='<p class="instruction">Выполни задание по оригиналу. Для устного ответа подготовь реплики, для письменного — запиши свой вариант.</p><label for="freeNote">Твой ответ или заметки</label><textarea id="freeNote" class="note" placeholder="Напиши ответ…">'+esc(state.note)+'</textarea><p class="teacher-note">Это задание проверяется с преподавателем или по образцу в ключе.</p>';
@@ -106,7 +109,7 @@ function selectExercise(index){
  if($('#freeNote'))$('#freeNote').oninput=ev=>{state.note=ev.target.value;state.done=false;updateProgress();persist()};
  wireExerciseNavigation(index,state);
  syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
- quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text});
+ quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text,responseMode:e.responseMode});
 }
 function wireExerciseNavigation(index,state){const p=page();
  $('#done').onclick=()=>{state.done=!state.done;selectExercise(index);updateProgress();persist()};
@@ -152,13 +155,18 @@ window.addEventListener('pagehide',()=>{finishStroke();window.B1Store.flush()});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')finishStroke()});
 window.addEventListener('coursework-ink-restored',drawBoard);
 const entry=new URLSearchParams(location.search);
+if(!['sb','wb'].includes(S.book))S.book='sb';
 if(['sb','wb'].includes(entry.get('book')))S.book=entry.get('book');
-const entryUnit=Number(entry.get('unit'));
-if(entryUnit>=1&&entryUnit<=8){S.unit=String(entryUnit);S.page=pages().find(p=>p.lesson===entryUnit+'A')?.page||8;S.ex='';}
+const entryUnit=entry.get('unit');
+if(entryUnit!==null){const target=pages().find(p=>belongs(p,entryUnit));if(target){S.unit=entryUnit;S.page=target.page;S.ex='';}}
 const entryPage=Number(entry.get('page'));
 if(entry.has('page')&&pages().some(p=>p.page===entryPage))S.page=entryPage;
 if(entry.has('exercise'))S.ex=entry.get('exercise');
-if(!['sb','wb'].includes(S.book))S.book='sb';if(!pages().some(p=>p.page===S.page))S.page=8;render();
+if(!pages().some(p=>p.page===S.page))S.page=pages()[0].page;
+const initialPage=page();
+S.unit=/^\d/.test(initialPage.lesson)?initialPage.lesson[0]:initialPage.lesson==='Lead-in'?'0':belongs(initialPage,'scripts')?'scripts':'banks';
+if(!initialPage.exercises.some(e=>e.label===S.ex))S.ex=initialPage.exercises[0]?.label||'';
+render();
 
 let pageZoom=100;function changeZoom(value){pageZoom=Math.min(300,Math.max(50,value));$("#pageFrame").style.width=pageZoom+"%";$("#zoomValue").textContent=pageZoom+"%";$("#zoomOut").disabled=pageZoom<=50;$("#zoomIn").disabled=pageZoom>=300;drawBoard()}$("#zoomOut").onclick=()=>changeZoom(pageZoom-25);$("#zoomIn").onclick=()=>changeZoom(pageZoom+25);$("#zoomFit").onclick=()=>{changeZoom(100);$("#pageScroll").scrollTo(0,0)};
 
@@ -195,9 +203,6 @@ pageScroll.addEventListener('wheel',ev=>{
  pageScroll.scrollTop+=rect.top+fy*rect.height-ev.clientY;
 },{passive:false});
 
-// Apply explicit lesson links independently of a previously visited page.
-const lessonParams=new URLSearchParams(location.search);
-if(lessonParams.has('unit')){const u=lessonParams.get('unit');if(lessonParams.get('book')==='wb')S.book='wb';S.unit=u;const target=pages().find(p=>belongs(p,u));if(target)go(target.page);}
 window.LiveCourse?.connect({
  course:'speakout-a1',
  view:()=>({book:S.book,page:S.page,exercise:$('#exerciseDialog').open?selectedEx?.label||null:null}),

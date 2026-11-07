@@ -25,7 +25,7 @@ const phraseAlternatives={
  'She isn’t / She’s not an office worker. She’s a shop assistant.':['She isn’t an office worker. She’s a shop assistant.','She’s not an office worker. She’s a shop assistant.']
 };
 function variants(answer){return phraseAlternatives[answer]||String(answer).split(/\s*\/\s*|\s+OR\s+/).map(s=>s.trim()).filter(Boolean)}
-function matches(value,answer){return !!String(value).trim()&&variants(answer).some(a=>normalize(a)===normalize(value))}
+function matches(value,answer,literal=false){const canonical=literal?s=>String(s).normalize('NFKC').replace(/[‘’`]/g,"'").toLowerCase().trim():normalize;return !!String(value).trim()&&variants(answer).some(a=>canonical(a)===canonical(value))}
 function numbered(text){
  const rows={};let n=null;
  for(const line of text.split('\n')){const m=/^\s*(\d{1,2})\s+(.+)$/.exec(line);if(m){n=m[1];rows[n]=m[2]}else if(n)rows[n]+=' '+line}
@@ -50,6 +50,7 @@ function sourceBank(text,items){
  return words.length>=2&&words.length<=22&&items.every(q=>words.some(w=>normalize(w)===normalize(q.answer)))?words:null;
 }
 function spec(ex,key){
+ if(ex.responseSpec)return ex.responseSpec;
  key=cleanKey(key);const text=String(ex.text||'').normalize('NFKC'),items=key?.items||[];
  // Crossed-out corrections, stress/intonation and model answers need human review.
  const review=/correct (?:the )?mistakes|correct the spelling|stressed syllable|word stress|underline|sample answer|students.? own|possible answers/i.test(text+' '+(key?.raw||''));

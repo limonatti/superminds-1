@@ -208,8 +208,9 @@ function attach(config){
  function destroy(){releaseKeys();destroyed=true;observer.disconnect();resize.disconnect();drag?.ghost?.remove();bench.remove();doc?.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());for(const [el,wasHidden]of hidden){el.hidden=wasHidden;el.classList.remove('play-original-control')}for(const b of resetButtons)b.removeEventListener('click',onReset);responses.removeEventListener('input',onInput);responses.removeEventListener('change',onInput);doc?.removeEventListener('exercise-source-render',place);dialog.removeEventListener('close',destroy);dialog.classList.remove('play-dialog','play-open-answer','play-graded')}
  mounted.set(dialog,{destroy,refresh});dialog.addEventListener('close',destroy,{once:true});place();root.ExerciseSource?.change(source,{});return {refresh,destroy};
 }
-function speakout({dialog,id,page,spec,inline,choice,activity,text}){
+function speakout({dialog,id,page,spec,inline,choice,activity,text,responseMode}){
  const body=dialog.querySelector('#exerciseBody'),source=body.querySelector('.exercise-source'),responses=body.querySelector('.exercise-response');
+ if(responseMode==='manual'||responseMode==='panel')return attach({dialog,source,responses,id,text,fields:[],native:true});
  if(activity?.kind==='match')return attach({dialog,source,responses,id,text,fields:[],native:true});
  let fields=[];
  if(choice){

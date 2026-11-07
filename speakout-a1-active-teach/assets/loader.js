@@ -1,7 +1,7 @@
 /* Prefer published course assets; retain the local source fallback. */
 'use strict';
 (async function(){
-  function start(){const s=document.createElement('script');s.src='../speakout-store.js?v=48aadddf';s.dataset.course='speakout-a1';s.dataset.app='assets/app.js?v=b2dfff7d';document.body.appendChild(s);}
+  function start(){const s=document.createElement('script');s.src='../speakout-store.js?v=48aadddf';s.dataset.course='speakout-a1';s.dataset.app='assets/app.js?v=f1a821971b';document.body.appendChild(s);}
   function parse(text){const prefix='window.COURSE=';if(!text.startsWith(prefix))throw Error('Неверный файл курса');return JSON.parse(text.slice(prefix.length).replace(/;\s*$/, ''));}
   const local=document.createElement('script');local.src='assets/course-web.js?v=d3e3e08c31';
   local.onload=()=>{if(window.COURSE)start();else choose();};local.onerror=()=>{if(new URL(local.src).pathname.endsWith('course-web.js')){local.src='assets/course.js';document.head.appendChild(local);}else choose();};document.head.appendChild(local);
