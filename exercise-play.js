@@ -104,6 +104,7 @@ function attach(config){
  const hide=el=>{if(el&&!hidden.has(el)){hidden.set(el,el.hidden);el.hidden=true;el.classList.add('play-original-control')}};
  const bench=document.createElement('section');bench.className='play-workbench';bench.classList.toggle('play-inline-only',inline);bench.setAttribute('aria-label','Слова и ответы');
  bench.innerHTML='<div class="play-answer-strip" aria-label="Пропуски"></div><div class="play-bank-head"><span class="play-current"></span><button type="button" class="play-erase" aria-label="Очистить выбранный пропуск">Убрать слово</button></div><button type="button" class="play-reposition" hidden>Выбрать другое место</button><div class="play-bank" role="group" aria-label="Варианты ответа"></div><div class="play-manual"><label>Свой вариант <input autocomplete="off" spellcheck="false" aria-label="Написать ответ в выбранный пропуск"></label></div><div class="play-bottom"><span class="play-hint">Выбери пропуск и слово — или перетащи карточку.</span><button type="button" class="play-check">Проверить</button></div><p class="play-feedback" role="status" aria-live="polite"></p>';
+ if(config.instruction){const instruction=document.createElement('p');instruction.className='play-task-instruction';instruction.textContent=config.instruction;bench.prepend(instruction)}
  source.after(bench);const q=s=>bench.querySelector(s),strip=q('.play-answer-strip'),bank=q('.play-bank'),manual=q('.play-manual input');
  for(const f of [...fields,...givenFields])hide(f.scope);
  if(freeAnswer?.id)hide(responses.querySelector('label[for="'+CSS.escape(freeAnswer.id)+'"]'));
@@ -224,7 +225,7 @@ function speakout({dialog,id,page,spec,inline,choice,activity,text}){
   fields=inline.fields.map(f=>{const input=[...body.querySelectorAll('[data-inline]')].find(el=>el.dataset.inline===f.id),item=spec.items.find(q=>q.n===f.n);return inputField(f.id,input,f.answer===undefined?[]:[f.answer],inline.vowels?undefined:item?.options?.map(o=>({value:o.label.replace(/^[a-d]\.\s*/i,''),label:o.label.replace(/^[a-d]\.\s*/i,'')})),input?.parentElement,{geometry:{box:f.box.map((v,i)=>v/(i%2?842:595)),image:page.image,page:page.page}})});
  }else fields=spec.items.map(f=>{const input=[...body.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n);return input&&inputField(f.n,input,root.SpeakoutInteractive.variants(f.answer),f.options,input.closest('.answerrow'),{tokens:f.tokens})}).filter(Boolean);
  if(activity?.kind==='bank')for(const f of fields)f.options=activity.bank.map(o=>({value:o.value,label:o.label}));
- return attach({dialog,source,responses,id,text,fields});
+ return attach({dialog,source,responses,id,text,fields,instruction:inline?.instruction});
 }
 root.ExercisePlay={attach,inputField,candidates,shuffle,sourceLetters,speakout};
 if(typeof module!=='undefined'&&module.exports)module.exports={candidates,shuffle,sourceLetters};

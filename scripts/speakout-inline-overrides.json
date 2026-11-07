@@ -1,4 +1,15 @@
 {
+  "sb:18:1C": {
+    "note": "Verified against the printed SB p.18 and key sb|2A|1D (web/194.pdf, PDF page 6). Thirty, forty, fifty and a hundred are printed examples; only 60, 70, 80 and 90 need answers.",
+    "instruction": "Напиши числа 60, 70, 80 и 90 английскими словами. Остальные слова уже даны как образец.",
+    "given": ["30", "40", "50", "100"],
+    "fields": [
+      {"n":"60", "id":"60", "box":[76,735,50,13.5], "kind":"dots"},
+      {"n":"70", "id":"70", "box":[189,692,50,13.5], "kind":"dots"},
+      {"n":"80", "id":"80", "box":[189,706.5,50,13.5], "kind":"dots"},
+      {"n":"90", "id":"90", "box":[189,721,50,13.5], "kind":"dots"}
+    ]
+  },
   "wb:10:1A": {
     "note": "The printed example eleven is already numbered 1. The remaining words take their numeric ranks.",
     "given": [

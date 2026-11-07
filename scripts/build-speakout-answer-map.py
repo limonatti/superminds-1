@@ -40,5 +40,9 @@ for page,keyPage,label in [(17,83,'12'),(45,89,'11')]:
   if row['pdfPage']==keyPage and row['label']==label and m:out[f'wb:{page}:{label}{m[1]}']={'raw':m[2],'items':parse(m[2]),'pdf':'web/298.pdf','pdfPage':keyPage}
 for row in rows:
  if row['pdfPage']==92 and row['label']=='11'and row['raw'].startswith('1 last'):out['wb:59:11']={'raw':row['raw'],'items':parse(row['raw']),'pdf':'web/298.pdf','pdfPage':92}
+# SB 2A 1D is the listen-and-check key for the written task 1C (p.18).
+# Keep the source PDF reference and recover the number labels from its raw key.
+number_key=D['keys']['sb|2A|1D']
+out['sb:18:1C']={**number_key,'items':parse(number_key['raw'])}
 (A/'answer-map.js').write_text('window.SPEAKOUT_ANSWER_MAP='+json.dumps(out,ensure_ascii=False,separators=(',',':'))+';\n')
 print('Recovered record-specific keys:',len(out))
