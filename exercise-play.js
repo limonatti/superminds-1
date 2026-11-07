@@ -20,11 +20,11 @@ function inputField(id,input,answers=[],options,scope,extra={}){
   get:()=>input?.value||'',activate:()=>input?.dispatchEvent(new FocusEvent('focus')),set:v=>{if(!input||input.disabled)return false;input.value=v;input.dispatchEvent(new Event(input.tagName==='SELECT'?'change':'input',{bubbles:true}));if(input.tagName==='SELECT')input.dispatchEvent(new Event('input',{bubbles:true}));return true},...extra};
 }
 // A key is a comparison after a filled attempt, never an initial suggestion.
-function gateKeys(dialog,responses,fields){
+function gateKeys(dialog,responses,fields,reviewComplete){
  const keySelector='#keyArea,#keyPanel,.practice-key,.exercise-key',buttonSelector='#exerciseKeys,#inlineHint,#inlineCompare,[data-reveal],[data-practice-reveal]';
  let attempted='';
  const values=()=>fields.length?fields.filter(f=>!f.optional||String(f.get?.()||'').trim()).map(f=>String(f.get?.()||'')):[...responses.querySelectorAll('textarea,input:not([type=checkbox])')].map(el=>el.value);
- const allowed=()=>{const v=values();return v.length&&v.every(s=>s.trim())&&JSON.stringify(v)===attempted};
+ const allowed=()=>{if(reviewComplete?.())return true;const v=values();return v.length&&v.every(s=>s.trim())&&JSON.stringify(v)===attempted};
  const update=()=>{const open=allowed();dialog.querySelectorAll(keySelector).forEach(el=>el.classList.toggle('play-key-locked',!open));dialog.querySelectorAll(buttonSelector).forEach(el=>{el.disabled=!open;el.title=open?'':'Сначала заполните и проверьте упражнение'});};
  const capture=ev=>{if(ev.target.closest(buttonSelector)&&!allowed()){ev.preventDefault();ev.stopImmediatePropagation()}};
  const checked=ev=>{if(ev.target.closest('#check,#checkTask,#exerciseCheck,#practiceCheck,#practiceCheckAll,#practiceDone,#done,#saveAnswer,.coursework-save'))attempted=JSON.stringify(values());update()};
@@ -96,7 +96,7 @@ function attach(config){
  const savePositions=()=>{try{localStorage.setItem(positionKey,JSON.stringify(positions))}catch{}};
  if(layout)for(const f of fields){const g=layout.slots?.find(g=>g.field===f.id&&g.parts===1);if(g)f.geometry=g;if(layout.bank?.length&&!f.options?.length)f.options=layout.bank.map(value=>({value,label:value}));}
  source.dataset.sourceFit='width';
- const releaseKeys=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,fields.length?fields:config.fields||[]);
+ const releaseKeys=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,fields.length?fields:config.fields||[],config.reviewComplete);
  if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{releaseKeys();dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
  dialog.classList.remove('play-open-answer');
  let selected=Math.max(0,fields.findIndex(f=>!String(f.get()).trim())),ignoreClickUntil=0,destroyed=false,drag=null,hintMessage='',pendingWord=null,typingRequested=null;
@@ -208,9 +208,9 @@ function attach(config){
  function destroy(){releaseKeys();destroyed=true;observer.disconnect();resize.disconnect();drag?.ghost?.remove();bench.remove();doc?.querySelectorAll('.play-gap-layer').forEach(el=>el.remove());for(const [el,wasHidden]of hidden){el.hidden=wasHidden;el.classList.remove('play-original-control')}for(const b of resetButtons)b.removeEventListener('click',onReset);responses.removeEventListener('input',onInput);responses.removeEventListener('change',onInput);doc?.removeEventListener('exercise-source-render',place);dialog.removeEventListener('close',destroy);dialog.classList.remove('play-dialog','play-open-answer','play-graded')}
  mounted.set(dialog,{destroy,refresh});dialog.addEventListener('close',destroy,{once:true});place();root.ExerciseSource?.change(source,{});return {refresh,destroy};
 }
-function speakout({dialog,id,page,spec,inline,choice,activity,text,responseMode}){
+function speakout({dialog,id,page,spec,inline,choice,activity,text,responseMode,isComplete}){
  const body=dialog.querySelector('#exerciseBody'),source=body.querySelector('.exercise-source'),responses=body.querySelector('.exercise-response');
- if(responseMode==='manual'||responseMode==='panel')return attach({dialog,source,responses,id,text,fields:[],native:true});
+ if(responseMode==='manual'||responseMode==='panel')return attach({dialog,source,responses,id,text,fields:[],native:true,reviewComplete:responseMode==='manual'?isComplete:undefined});
  if(activity?.kind==='match')return attach({dialog,source,responses,id,text,fields:[],native:true});
  let fields=[];
  if(choice){
