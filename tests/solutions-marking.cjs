@@ -23,6 +23,17 @@ vm.runInNewContext(fs.readFileSync('solutions-int-active-teach/assets/exercise-s
 const pictures=ctx.window.EXERCISE_SOURCES['sb-8-3'].sources;
 assert(pictures.some(s=>s.page===8&&s.box[1]>=.6),'photographs A–C must be shown');
 assert(pictures.some(s=>s.page===9&&s.box[1]>=.6),'photographs D–H must be shown');
+// Unit 1A p.9: thirteen printed gaps need independent answers, with the Recycle box.
+assert.equal(ex.get('sb-9-6').answerSpec.length,13);
+assert(M.checkField('did not leave',field('sb-9-6','2.1')));
+assert(M.checkField('got',field('sb-9-6','2.2')));
+assert(!M.checkField('leave',field('sb-9-6','2.1')));
+assert(!M.checkField('didn’t leave; got',field('sb-9-6','2.1')));
+assert(ctx.window.EXERCISE_SOURCES['sb-9-6'].sources.some(s=>s.context&&s.box[0]<.1&&s.box[1]===.4));
+const oldGapRecord={values:['emigrated','didn’t leave; got','grew up','bought','fell; got','was; moved','left; didn’t go','started; didn’t retire'],answerVersion:'69048e4ebeba'};
+const oldGapRestored=M.saved(ex.get('sb-9-6'),oldGapRecord);
+assert.equal(oldGapRestored.values.length,0);
+assert.equal(oldGapRestored.previous[0].values[1],'didn’t leave; got','previous learner answers must remain accessible');
 assert(M.checkField('WILL NOT', {accepted:["won't"]}));assert(M.checkField('I would rather', {accepted:["I'd rather"]}));
 assert(M.checkField('He has already seen it',{accepted:["He's already seen it"]}));
 assert(!M.checkField('He is already seen it',{accepted:["He's already seen it"]}));

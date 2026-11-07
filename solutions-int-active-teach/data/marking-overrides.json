@@ -12037,5 +12037,93 @@
     "mode": "mixed",
     "instruction": "Напиши ответ на загадку по-английски: одно слово или короткое словосочетание. Объясни устно, почему оно подходит; объяснение или заметки можно записать отдельно.",
     "responseMode": "panel"
+  },
+  "sb-9-5": {
+    "instruction": "Послушай оригинальную запись 1.08 и выбери a, b или c для каждого из четырёх вопросов.",
+    "responseMode": "panel"
+  },
+  "sb-9-6": {
+    "fields": [
+      {
+        "label": "1",
+        "accepted": [
+          "emigrated"
+        ]
+      },
+      {
+        "label": "2.1",
+        "accepted": [
+          "didn’t leave"
+        ]
+      },
+      {
+        "label": "2.2",
+        "accepted": [
+          "got"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "grew up"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "bought"
+        ]
+      },
+      {
+        "label": "5.1",
+        "accepted": [
+          "fell"
+        ]
+      },
+      {
+        "label": "5.2",
+        "accepted": [
+          "got"
+        ]
+      },
+      {
+        "label": "6.1",
+        "accepted": [
+          "was"
+        ]
+      },
+      {
+        "label": "6.2",
+        "accepted": [
+          "moved"
+        ]
+      },
+      {
+        "label": "7.1",
+        "accepted": [
+          "left"
+        ]
+      },
+      {
+        "label": "7.2",
+        "accepted": [
+          "didn’t go"
+        ]
+      },
+      {
+        "label": "8.1",
+        "accepted": [
+          "started"
+        ]
+      },
+      {
+        "label": "8.2",
+        "accepted": [
+          "didn’t retire"
+        ]
+      }
+    ],
+    "instruction": "Заполни все 13 пропусков глаголами из рамки в Past Simple. В каждое поле впиши только один пропуск: например, 2.1 — первый пропуск предложения 2, а 2.2 — второй. Затем послушай запись 1.08 и проверь ответы. Используй подсказку Recycle! в материалах к заданию.",
+    "responseMode": "panel"
   }
 }
