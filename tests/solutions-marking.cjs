@@ -13,6 +13,16 @@ for(const e of ex.values()){
  }
 }
 const field=(id,label)=>ex.get(id).answerSpec.find(f=>f.label===String(label));
+// Unit 1A: the source key includes an article, and the picture task spans both pages.
+assert(M.checkField('a human being',field('sb-8-1','Ответ')));
+assert(!M.checkField('a dog',field('sb-8-1','Ответ')));
+assert.equal(ex.get('sb-8-1').marking.mode,'mixed','the spoken explanation is not automatically graded');
+for(const [label,value]of [['B','a toddler'],['C','be a young child'],['D','in her teens'],['E','be in your twenties'],['H','a centenarian']])assert(M.checkField(value,field('sb-8-3',label)));
+assert(!M.checkField('elderly',field('sb-8-3','B')));
+vm.runInNewContext(fs.readFileSync('solutions-int-active-teach/assets/exercise-sources.js','utf8'),ctx);
+const pictures=ctx.window.EXERCISE_SOURCES['sb-8-3'].sources;
+assert(pictures.some(s=>s.page===8&&s.box[1]>=.6),'photographs A–C must be shown');
+assert(pictures.some(s=>s.page===9&&s.box[1]>=.6),'photographs D–H must be shown');
 assert(M.checkField('WILL NOT', {accepted:["won't"]}));assert(M.checkField('I would rather', {accepted:["I'd rather"]}));
 assert(M.checkField('He has already seen it',{accepted:["He's already seen it"]}));
 assert(!M.checkField('He is already seen it',{accepted:["He's already seen it"]}));

@@ -93,6 +93,11 @@ def build(course,pages):
       if not any(s['image']==r['image'] and s['box']==r['box'] for s in regions):regions.append({**r,'context':True})
    out[e['id']]={'label':e['label'],'sources':regions}
   report.append({'page':p['key'],'exercises':len(entries),'sourceGroups':len(groups),'gutter':split})
+ overrides=base/'data/source-context-overrides.json'
+ if overrides.exists():
+  for eid,record in json.loads(overrides.read_text()).items():
+   assert eid in out, f'Unknown source-context exercise: {course}/{eid}'
+   out[eid]=record
  write(base/'assets/exercise-sources.js',out)
  return {'course':course,'exercises':len(out),'pages':report}
 

@@ -4727,7 +4727,8 @@
           "7"
         ]
       }
-    ]
+    ],
+    "instruction": "Расположи этапы жизни по порядку: рядом с каждым выражением впиши цифру от 1 (самый ранний этап) до 9 (самый поздний). Затем послушай запись 1.07 и проверь порядок."
   },
   "sb-10-2": {
     "fields": [
@@ -9338,47 +9339,62 @@
       {
         "label": "B",
         "accepted": [
-          "toddler"
+          "toddler",
+          "a toddler",
+          "be a toddler"
         ]
       },
       {
         "label": "C",
         "accepted": [
-          "young child"
+          "young child",
+          "a young child",
+          "be a young child"
         ]
       },
       {
         "label": "D",
         "accepted": [
-          "teenager"
+          "teenager",
+          "a teenager",
+          "in her teens",
+          "in your teens",
+          "be in your teens"
         ]
       },
       {
         "label": "E",
         "accepted": [
-          "in her twenties"
+          "in her twenties",
+          "in your twenties",
+          "be in your twenties"
         ]
       },
       {
         "label": "F",
         "accepted": [
-          "middle-aged"
+          "middle-aged",
+          "be middle-aged"
         ]
       },
       {
         "label": "G",
         "accepted": [
-          "elderly"
+          "elderly",
+          "be elderly"
         ]
       },
       {
         "label": "H",
         "accepted": [
-          "centenarian"
+          "centenarian",
+          "a centenarian",
+          "be a centenarian"
         ]
       }
     ],
-    "instruction": "Впиши этап жизни для фотографий B–H. A уже дан как пример."
+    "instruction": "Впиши этап жизни для фотографий B–H, используя выражения из упражнения 2. Be можно не писать. A — готовый образец. Все фотографии показаны ниже.",
+    "responseMode": "panel"
   },
   "sb-16-2": {
     "fields": [
@@ -12003,5 +12019,23 @@
         "kind": "set"
       }
     ]
+  },
+  "sb-8-1": {
+    "fields": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "a human being",
+          "human being",
+          "a human",
+          "human",
+          "a person",
+          "person"
+        ]
+      }
+    ],
+    "mode": "mixed",
+    "instruction": "Напиши ответ на загадку по-английски: одно слово или короткое словосочетание. Объясни устно, почему оно подходит; объяснение или заметки можно записать отдельно.",
+    "responseMode": "panel"
   }
 }

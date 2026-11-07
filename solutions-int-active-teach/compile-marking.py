@@ -81,6 +81,7 @@ for page in D['pages']:
   ex['legacyCompatible']=bool(spec) and ex['answers']==legacy.get(eid) and [f['label'] for f in spec]==[str(i+1) for i in range(len(spec))]
   ex['marking']={'mode':mode,'source':source,'reason':reason}
   if ov.get('instruction'):ex['marking']['instruction']=ov['instruction']
+  if ov.get('responseMode'):ex['marking']['responseMode']=ov['responseMode']
   if mode in ('pending','open'):review.append({'id':eid,'mode':mode,'text':ex['text'],'key':raw,'reason':reason})
 unknown=set(overrides)-allids
 assert not unknown, sorted(unknown)

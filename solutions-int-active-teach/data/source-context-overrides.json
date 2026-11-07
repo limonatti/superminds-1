@@ -1,0 +1,66 @@
+{
+  "sb-8-3": {
+    "label": "3",
+    "sources": [
+      {
+        "image": "assets/sb-9.jpg",
+        "size": [
+          1448,
+          2048
+        ],
+        "box": [
+          0.31222,
+          0.29069,
+          0.65578,
+          0.05974
+        ],
+        "page": 8
+      },
+      {
+        "image": "assets/sb-9.jpg",
+        "size": [
+          1448,
+          2048
+        ],
+        "box": [
+          0.31222,
+          0.21693,
+          0.65578,
+          0.07275
+        ],
+        "page": 8,
+        "context": true
+      },
+      {
+        "image": "assets/sb-9.jpg",
+        "size": [
+          1448,
+          2048
+        ],
+        "page": 8,
+        "box": [
+          0.315,
+          0.61,
+          0.685,
+          0.39
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/sb-10.jpg",
+        "size": [
+          1448,
+          2048
+        ],
+        "page": 9,
+        "box": [
+          0,
+          0.6,
+          1,
+          0.4
+        ],
+        "context": true
+      }
+    ]
+  }
+}
