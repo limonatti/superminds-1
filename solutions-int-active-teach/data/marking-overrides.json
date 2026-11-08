@@ -4733,7 +4733,7 @@
   "sb-10-2": {
     "fields": [
       {
-        "label": "1",
+        "label": "Возраст",
         "accepted": [
           "122",
           "122 years old"
@@ -4741,7 +4741,8 @@
       }
     ],
     "mode": "mixed",
-    "instruction": "Впиши возраст. Объяснение, чем она знаменита, напиши отдельно."
+    "instruction": "Прочитай текст и проверь свои предположения из упражнения 1. В поле «Возраст» впиши число. Чем женщина знаменита, объясни устно или запиши отдельно.",
+    "responseMode": "panel"
   },
   "sb-10-3": {
     "fields": [
@@ -4774,44 +4775,19 @@
         "accepted": [
           "past perfect"
         ]
-      },
-      {
-        "label": "a",
-        "accepted": [
-          "she married Fernand Calment",
-          "gave birth"
-        ]
-      },
-      {
-        "label": "b",
-        "accepted": [
-          "the US army was still fighting Native Americans",
-          "Alexander Bell was working on a new invention"
-        ]
-      },
-      {
-        "label": "c",
-        "accepted": [
-          "While she was serving in the shop in 1888, she met"
-        ]
-      },
-      {
-        "label": "d",
-        "accepted": [
-          "who had come in to buy pencils",
-          "Yvonne had had a son",
-          "both she and her son had died many years earlier"
-        ]
       }
     ],
-    "instruction": "Заполни правила 1–5, затем выпиши по одному примеру для a–d. Можно указать соответствующую глагольную часть предложения."
+    "instruction": "Заполни пять пропусков 1–5 названиями времён из рамки. Затем найди в тексте упражнения 2 примеры правил a–d: покажи их преподавателю или выпиши в поле объяснений с метками a, b, c, d. Примеры проверяет преподаватель.",
+    "mode": "mixed",
+    "responseMode": "panel"
   },
   "sb-10-4": {
     "fields": [
       {
         "label": "past simple",
         "accepted": [
-          "learned"
+          "learned",
+          "learnt"
         ]
       },
       {
@@ -4823,12 +4799,14 @@
       {
         "label": "past perfect",
         "accepted": [
-          "had learned"
+          "had learned",
+          "had learnt"
         ]
       }
     ],
     "mode": "mixed",
-    "instruction": "Впиши три формы learn. Разницу в значении объясни отдельно."
+    "instruction": "Впиши три формы learn. Разницу в значении объясни отдельно.",
+    "responseMode": "panel"
   },
   "sb-11-3": {
     "fields": [
@@ -9966,44 +9944,101 @@
   "sb-10-5": {
     "fields": [
       {
-        "label": "1",
+        "label": "1.1",
         "accepted": [
-          "moved; was growing up"
+          "moved"
         ]
       },
       {
-        "label": "2",
+        "label": "1.2",
         "accepted": [
-          "had learned; bought",
-          "learned; bought"
+          "was growing up"
         ]
       },
       {
-        "label": "3",
+        "label": "2.1",
         "accepted": [
-          "left; went; studied"
+          "had learned",
+          "learned",
+          "had learnt",
+          "learnt"
         ]
       },
       {
-        "label": "4",
+        "label": "2.2",
         "accepted": [
-          "were you living; got",
-          "were living; got"
+          "bought"
         ]
       },
       {
-        "label": "5",
+        "label": "3.1",
         "accepted": [
-          "got; had fallen; were working"
+          "left"
         ]
       },
       {
-        "label": "6",
+        "label": "3.2",
         "accepted": [
-          "wanted; emigrated"
+          "went"
+        ]
+      },
+      {
+        "label": "3.3",
+        "accepted": [
+          "studied"
+        ]
+      },
+      {
+        "label": "4.1",
+        "accepted": [
+          "were"
+        ]
+      },
+      {
+        "label": "4.2",
+        "accepted": [
+          "living"
+        ]
+      },
+      {
+        "label": "4.3",
+        "accepted": [
+          "got"
+        ]
+      },
+      {
+        "label": "5.1",
+        "accepted": [
+          "got"
+        ]
+      },
+      {
+        "label": "5.2",
+        "accepted": [
+          "had fallen"
+        ]
+      },
+      {
+        "label": "5.3",
+        "accepted": [
+          "were working"
+        ]
+      },
+      {
+        "label": "6.1",
+        "accepted": [
+          "wanted"
+        ]
+      },
+      {
+        "label": "6.2",
+        "accepted": [
+          "emigrated"
         ]
       }
-    ]
+    ],
+    "responseMode": "panel",
+    "instruction": "Впиши формы глаголов в Past Simple, Past Continuous или Past Perfect. Всего 15 пропусков: 1.1 — первый пропуск предложения 1, 1.2 — второй и так далее. В предложении 4 слова you уже напечатаны: в поля 4.1 и 4.2 впиши только пропущенные части вопроса, в 4.3 — форму get."
   },
   "sb-15-5": {
     "fields": [
@@ -12125,5 +12160,9 @@
     ],
     "instruction": "Заполни все 13 пропусков глаголами из рамки в Past Simple. В каждое поле впиши только один пропуск: например, 2.1 — первый пропуск предложения 2, а 2.2 — второй. Затем послушай запись 1.08 и проверь ответы. Используй подсказку Recycle! в материалах к заданию.",
     "responseMode": "panel"
+  },
+  "sb-10-6": {
+    "responseMode": "panel",
+    "instruction": "Заполни 13 пронумерованных пропусков глаголами из рамки в Past Simple, Past Continuous или Past Perfect. В поле с номером впиши только форму глагола для соответствующего пропуска; каждое слово из рамки используется один раз, be дано дважды."
   }
 }

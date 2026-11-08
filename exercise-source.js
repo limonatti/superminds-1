@@ -20,6 +20,7 @@ function render(doc){
  doc.replaceChildren();doc.style.width=(s.zoom*100)+'%';
  for(const source of sources){
   const section=document.createElement('figure');section.className='focus-sheet';
+  if(!s.full&&Number.isFinite(source.maxWidth)&&source.maxWidth>0){section.style.maxWidth=source.maxWidth+'px';section.style.marginInline='auto'}
   const caption=document.createElement('figcaption');caption.textContent=(source.context?'Материал к заданию':'Упражнение '+s.model.label)+(source.page?' · стр. '+source.page:'');section.append(caption);
   const [pw,ph]=source.size||[595,842],[x,y,w,h]=source.box;
   const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`${x*pw} ${y*ph} ${w*pw} ${h*ph}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',caption.textContent);svg.style.aspectRatio=`${w*pw}/${h*ph}`;section.dataset.aspect=w*pw/(h*ph);section.dataset.context=!!source.context;
