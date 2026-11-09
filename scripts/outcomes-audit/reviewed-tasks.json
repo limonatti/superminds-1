@@ -133,9 +133,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        3
+      ]
     },
     {
       "n": 2,
@@ -152,15 +157,20 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        4
+      ]
     },
     {
       "n": 3,
       "x": 0.0657,
       "y": 0.6758,
-      "instruction": "Practise the conversation from Exercise 1 with",
+      "instruction": "Practise the conversation from Exercise 1 with other students. Say your names.",
       "count": 1,
       "id": "sb-11-66-676",
       "height": 0.04,
@@ -171,9 +181,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 4,
@@ -190,9 +203,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        5
+      ]
     },
     {
       "n": 5,
@@ -209,15 +227,18 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 6,
       "x": 0.5133,
       "y": 0.8616,
-      "instruction": "Look at the people in File 1 on page 144. Check",
+      "instruction": "Look at the people in File 1 on page 144. Check the names.",
       "count": 1,
       "id": "sb-11-513-862",
       "height": 0.04,
@@ -228,9 +249,12 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 7,
@@ -247,9 +271,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     }
   ],
   "sb:12": [
@@ -257,8 +284,8 @@
       "n": 8,
       "x": 0.0657,
       "y": 0.0712,
-      "instruction": "Look at the picture. Complete sentences 1-4",
-      "count": 4,
+      "instruction": "Look at the picture. Complete sentences 1–4 with the words from the box.",
+      "count": 6,
       "id": "sb-12-66-71",
       "height": 0.5784,
       "kind": "answers",
@@ -277,22 +304,64 @@
             "key": "husband"
           },
           {
-            "label": "3",
-            "key": "doctor; teacher"
+            "label": "3.1",
+            "key": "doctor"
           },
           {
-            "label": "4",
-            "key": "sister; friend"
+            "label": "3.2",
+            "key": "teacher"
+          },
+          {
+            "label": "4.1",
+            "key": "sister"
+          },
+          {
+            "label": "4.2",
+            "key": "friend"
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 11
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите по одному ответу в каждое поле. Номера 3.1, 3.2 и т. п. обозначают последовательные пропуски внутри одного пункта.",
         "revision": "8f5ce2951695"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "8f5ce2951695",
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 1,
+            "separator": ";"
+          }
+        ]
+      }
     },
     {
       "n": 9,
@@ -307,33 +376,19 @@
       "page": 9,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "son"
-          },
-          {
-            "label": "2",
-            "key": "husband"
-          },
-          {
-            "label": "3",
-            "key": "doctor; teacher"
-          },
-          {
-            "label": "4",
-            "key": "sister; friend"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 11
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "8f5ce2951695"
+        "note": "Прослушайте запись и проверьте задание 8. Ответы вводятся в задании 8; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        6
+      ]
     },
     {
       "n": 10,
@@ -350,16 +405,21 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        7
+      ]
     },
     {
       "n": 11,
       "x": 0.0554,
       "y": 0.7512,
       "instruction": "Write the names of five people in your life.",
-      "count": 1,
+      "count": 5,
       "id": "sb-12-55-751",
       "height": 0.1888,
       "kind": "answers",
@@ -371,7 +431,9 @@
         "reason": "personal",
         "revision": "af877e929493"
       },
-      "unit": 1
+      "unit": 1,
+      "audioTracks": [],
+      "responseMode": "panel"
     },
     {
       "n": 12,
@@ -388,16 +450,19 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 13,
       "x": 0.501,
       "y": 0.4287,
       "instruction": "Complete the sentences.",
-      "count": 5,
+      "count": 8,
       "id": "sb-12-501-429",
       "height": 0.2617,
       "kind": "answers",
@@ -420,22 +485,76 @@
             "key": "is"
           },
           {
-            "label": "4",
-            "key": "’re; ’m; ’s"
+            "label": "4.1",
+            "key": "’re"
           },
           {
-            "label": "5",
-            "key": "They; is"
+            "label": "4.2",
+            "key": "’m"
+          },
+          {
+            "label": "4.3",
+            "key": "’s"
+          },
+          {
+            "label": "5.1",
+            "key": "They"
+          },
+          {
+            "label": "5.2",
+            "key": "is"
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 12
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните восемь пропусков. Используйте ’m, ’s, ’re, is или местоимение, если форма be уже напечатана.",
         "revision": "186d444a2fc6"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "186d444a2fc6",
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 2,
+            "separator": ";"
+          },
+          {
+            "index": 4,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 4,
+            "part": 1,
+            "separator": ";"
+          }
+        ]
+      }
     },
     {
       "n": 14,
@@ -450,41 +569,19 @@
       "page": 9,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "’s"
-          },
-          {
-            "label": "2",
-            "key": "’s"
-          },
-          {
-            "label": "3",
-            "key": "is"
-          },
-          {
-            "label": "4",
-            "key": "’re; ’m; ’s"
-          },
-          {
-            "label": "5",
-            "key": "They; is"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 12
         },
-        "sameAs": {
-          "page": 9,
-          "exercise": 13
-        },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "776f2a757c7f"
+        "note": "Прослушайте запись и проверьте задание 13. Ответы вводятся в задании 13; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        8
+      ]
     },
     {
       "n": 15,
@@ -501,9 +598,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        8
+      ]
     },
     {
       "n": 16,
@@ -520,9 +622,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        9
+      ]
     }
   ],
   "sb:13": [
@@ -545,15 +652,18 @@
           "book": "Teacher’s Book",
           "page": 13
         },
-        "revision": "19eb6b63405f"
+        "revision": "19eb6b63405f",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 2,
       "x": 0.0657,
       "y": 0.1715,
-      "instruction": "Work in pairs. Read the conversations. Use your",
+      "instruction": "Work in pairs. Read the conversations. Use your own names.",
       "count": 1,
       "id": "sb-13-66-172",
       "height": 0.2412,
@@ -564,9 +674,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 3,
@@ -583,9 +696,12 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 4,
@@ -602,16 +718,21 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        10
+      ]
     },
     {
       "n": 5,
       "x": 0.0637,
       "y": 0.6829,
       "instruction": "Listen. Write the numbers.",
-      "count": 4,
+      "count": 16,
       "id": "sb-13-64-683",
       "height": 0.1063,
       "kind": "answers",
@@ -622,32 +743,170 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "10; 12; 14; 16"
+            "label": "1.1",
+            "key": "10"
           },
           {
-            "label": "2",
-            "key": "4; 8; 12; 16"
+            "label": "1.2",
+            "key": "12"
           },
           {
-            "label": "3",
-            "key": "7; 11; 13; 17"
+            "label": "1.3",
+            "key": "14"
           },
           {
-            "label": "4",
-            "key": "1; 3; 6; 10"
+            "label": "1.4",
+            "key": "16"
+          },
+          {
+            "label": "2.1",
+            "key": "4"
+          },
+          {
+            "label": "2.2",
+            "key": "8"
+          },
+          {
+            "label": "2.3",
+            "key": "12"
+          },
+          {
+            "label": "2.4",
+            "key": "16"
+          },
+          {
+            "label": "3.1",
+            "key": "7"
+          },
+          {
+            "label": "3.2",
+            "key": "11"
+          },
+          {
+            "label": "3.3",
+            "key": "13"
+          },
+          {
+            "label": "3.4",
+            "key": "17"
+          },
+          {
+            "label": "4.1",
+            "key": "1"
+          },
+          {
+            "label": "4.2",
+            "key": "3"
+          },
+          {
+            "label": "4.3",
+            "key": "6"
+          },
+          {
+            "label": "4.4",
+            "key": "10"
           }
         ],
-        "note": "Впишите услышанные числа в каждой строке по порядку.",
+        "note": "Впишите 16 услышанных чисел цифрами: четыре числа в каждой строке. Поля 1.1–1.4 относятся к первой строке, 2.1–2.4 — ко второй и т. д. Следующее число угадывается в задании 6.",
         "revision": "866cf6b29c2a"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        11
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "866cf6b29c2a",
+        "mapping": [
+          {
+            "index": 0,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 0,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 0,
+            "part": 2,
+            "separator": ";"
+          },
+          {
+            "index": 0,
+            "part": 3,
+            "separator": ";"
+          },
+          {
+            "index": 1,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 1,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 1,
+            "part": 2,
+            "separator": ";"
+          },
+          {
+            "index": 1,
+            "part": 3,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 2,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 3,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 2,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 3,
+            "separator": ";"
+          }
+        ]
+      }
     },
     {
       "n": 6,
       "x": 0.0674,
       "y": 0.7892,
-      "instruction": "Work in pairs. Look at Exercise 5 again. What's",
+      "instruction": "Work in pairs. Look at Exercise 5 again. What's the next number?",
       "count": 4,
       "id": "sb-13-67-789",
       "height": 0.0885,
@@ -679,10 +938,13 @@
           "book": "Teacher’s Book",
           "page": 14
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите цифрами следующее число для каждой из четырёх последовательностей задания 5.",
         "revision": "32fd2e38701e"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "relatedAnswers": "sb-13-64-683"
     },
     {
       "n": 7,
@@ -697,33 +959,19 @@
       "page": 10,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "18"
-          },
-          {
-            "label": "2",
-            "key": "20"
-          },
-          {
-            "label": "3",
-            "key": "19"
-          },
-          {
-            "label": "4",
-            "key": "15"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 14
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "32fd2e38701e"
+        "note": "Прослушайте запись и проверьте задание 6. Ответы вводятся в задании 6; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        12
+      ]
     },
     {
       "n": 8,
@@ -740,9 +988,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        13
+      ]
     },
     {
       "n": 9,
@@ -788,16 +1041,20 @@
           "book": "Teacher’s Book",
           "page": 14
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите вопросительное слово или сочетание целиком, затем прослушайте запись и проверьте.",
         "revision": "adcbfd5ce939"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        14
+      ]
     },
     {
       "n": 10,
       "x": 0.501,
       "y": 0.5872,
-      "instruction": "Listen to some questions and answers.",
+      "instruction": "Listen to some questions and answers. Choose the answer you hear (a, b or c).",
       "count": 8,
       "id": "sb-13-501-587",
       "height": 0.3528,
@@ -810,45 +1067,89 @@
         "items": [
           {
             "label": "1",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "2",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "3",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "4",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "5",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "6",
-            "key": "c"
+            "key": "c",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "7",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "8",
-            "key": "c"
+            "key": "c",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 14
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "b3680105eecd"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        15
+      ]
     }
   ],
   "sb:14": [
@@ -912,10 +1213,12 @@
           "book": "Teacher’s Book",
           "page": 15
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "В каждый пропуск впишите are или is.",
         "revision": "fe4cf6c01b63"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 12,
@@ -930,57 +1233,19 @@
       "page": 11,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "are"
-          },
-          {
-            "label": "2",
-            "key": "are"
-          },
-          {
-            "label": "3",
-            "key": "is"
-          },
-          {
-            "label": "4",
-            "key": "is"
-          },
-          {
-            "label": "5",
-            "key": "are"
-          },
-          {
-            "label": "6",
-            "key": "is"
-          },
-          {
-            "label": "7",
-            "key": "is"
-          },
-          {
-            "label": "8",
-            "key": "Is"
-          },
-          {
-            "label": "9",
-            "key": "is"
-          },
-          {
-            "label": "10",
-            "key": "is"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 15
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "fe4cf6c01b63"
+        "note": "Прослушайте запись и проверьте задание 11. Ответы вводятся в задании 11; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        16
+      ]
     },
     {
       "n": 13,
@@ -997,16 +1262,19 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 14,
       "x": 0.0554,
       "y": 0.5944,
-      "instruction": "Write answers to the questions. Use one or",
-      "count": 1,
+      "instruction": "Write answers to the questions. Use one or two words.",
+      "count": 5,
       "id": "sb-14-55-594",
       "height": 0.1251,
       "kind": "answers",
@@ -1022,7 +1290,9 @@
         },
         "revision": "348fd2eb396f"
       },
-      "unit": 1
+      "unit": 1,
+      "audioTracks": [],
+      "responseMode": "panel"
     },
     {
       "n": 15,
@@ -1039,9 +1309,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 16,
@@ -1101,10 +1374,14 @@
           "book": "Teacher’s Book",
           "page": 16
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Ответьте на вопросы по трём приглашениям. Свободные формулировки сравниваются с образцом; номер квартиры проверяется автоматически.",
         "revision": "0043cffe253f"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        17
+      ]
     },
     {
       "n": 17,
@@ -1125,15 +1402,24 @@
           "book": "Teacher’s Book",
           "page": 17
         },
-        "revision": "c075e42c1ded"
+        "revision": "c075e42c1ded",
+        "note": "Составьте свои вопросы для пунктов 2–5. Первый вопрос — готовый пример. Возможны разные правильные вопросы."
       },
-      "unit": 1
+      "unit": 1,
+      "audioTracks": [],
+      "responseMode": "panel",
+      "responseLabels": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
     },
     {
       "n": 18,
       "x": 0.501,
       "y": 0.3254,
-      "instruction": "Work in pairs. Ask and answer your questions",
+      "instruction": "Work in pairs. Ask and answer your questions from Exercise 17.",
       "count": 1,
       "id": "sb-14-501-325",
       "height": 0.6146,
@@ -1144,9 +1430,13 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [],
+      "relatedAnswers": "sb-14-503-199"
     }
   ],
   "sb:15": [
@@ -1165,9 +1455,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        18
+      ]
     },
     {
       "n": 2,
@@ -1221,16 +1516,20 @@
           "book": "Teacher’s Book",
           "page": 17
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Введите недостающую часть времени или цены. В пунктах 1 и 2 начало уже напечатано: 3.___ и £15.___. В остальных полях введите время или цену целиком.",
         "revision": "df34eb09d978"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        19
+      ]
     },
     {
       "n": 3,
       "x": 0.0657,
       "y": 0.8907,
-      "instruction": "Work in pairs. Remember the questions from",
+      "instruction": "Work in pairs. Remember the questions from Exercise 2. Ask and answer the questions.",
       "count": 1,
       "id": "sb-15-66-891",
       "height": 0.0493,
@@ -1241,9 +1540,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 4,
@@ -1260,9 +1562,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        20
+      ]
     },
     {
       "n": 5,
@@ -1279,9 +1586,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        21
+      ]
     },
     {
       "n": 6,
@@ -1327,14 +1639,21 @@
             "key": "6.50"
           }
         ],
-        "note": "Меню Student A на этой странице: впишите цены цифрами.",
+        "note": "Ученик A заполняет семь пустых цен в меню на странице 12. Попросите партнёра открыть File 3 на странице 145 и назвать цены. Вводите только числа, например 2.50.",
         "source": {
           "book": "Teacher’s Book",
           "page": 19
         },
         "revision": "529462b82c04"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "partnerPage": {
+        "book": "sb",
+        "page": 148,
+        "label": "Меню ученика B · стр. 145"
+      }
     },
     {
       "n": 7,
@@ -1351,9 +1670,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     }
   ],
   "sb:16": [
@@ -1372,15 +1694,20 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        22
+      ]
     },
     {
       "n": 9,
       "x": 0.0657,
       "y": 0.2672,
-      "instruction": "Use the menu on",
+      "instruction": "Have similar conversations. Use the menu on page 12.",
       "count": 1,
       "id": "sb-16-66-267",
       "height": 0.0631,
@@ -1391,15 +1718,18 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 10,
       "x": 0.0778,
       "y": 0.3303,
-      "instruction": "Listen to a man in a coffee shop. Tick (!",
+      "instruction": "Listen to a man in a coffee shop. Tick the food and drink on the menu. How much is it?",
       "count": 1,
       "id": "sb-16-78-330",
       "height": 0.04,
@@ -1413,7 +1743,8 @@
           {
             "label": "Заказ",
             "key": "one large cappuccino,one large americano with milk,one medium black tea,one small orange juice,two chocolate cakes",
-            "match": "set"
+            "match": "set",
+            "soft": true
           },
           {
             "label": "Total price (£)",
@@ -1424,16 +1755,20 @@
           "book": "Teacher’s Book",
           "page": 19
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Перечислите заказанные позиции через запятую: количество, размер, напиток или еда. Уточните milk / black там, где это сказано в записи. Во втором поле введите итоговую цену.",
         "revision": "44190d70faa5"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        23
+      ]
     },
     {
       "n": 11,
       "x": 0.0554,
       "y": 0.3692,
-      "instruction": "Listen to part 2 of the conversation.",
+      "instruction": "Listen to part 2 of the conversation. What's the problem (a, b or c)?",
       "count": 1,
       "id": "sb-16-55-369",
       "height": 0.2659,
@@ -1446,24 +1781,33 @@
         "items": [
           {
             "label": "1",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 20
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "76a3e8b074a4"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        24
+      ]
     },
     {
       "n": 12,
       "x": 0.0554,
       "y": 0.6351,
       "instruction": "Add not.",
-      "count": 6,
+      "count": 5,
       "id": "sb-16-55-635",
       "height": 0.2687,
       "kind": "answers",
@@ -1473,10 +1817,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "My tea – it’s not right."
-          },
           {
             "label": "2",
             "key": "My coffee – it’s not a cappuccino."
@@ -1498,10 +1838,33 @@
             "key": "It’s not right. It’s not 35 euros. It’s 29."
           }
         ],
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Перепишите ответы B в пунктах 2–6, добавив not в нужном месте. Пункт 1 уже решён. В пункте 6 отрицание нужно добавить дважды.",
         "revision": "9e31485bb453"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "9e31485bb453",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 13,
@@ -1516,37 +1879,16 @@
       "page": 13,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "My tea – it’s not right."
-          },
-          {
-            "label": "2",
-            "key": "My coffee – it’s not a cappuccino."
-          },
-          {
-            "label": "3",
-            "key": "Sorry. It’s a small tea – not large."
-          },
-          {
-            "label": "4",
-            "key": "No. It’s coffee cake – not chocolate."
-          },
-          {
-            "label": "5",
-            "key": "No. My tea’s not hot."
-          },
-          {
-            "label": "6",
-            "key": "It’s not right. It’s not 35 euros. It’s 29."
-          }
-        ],
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "9e31485bb453"
+        "mode": "self",
+        "reason": "oral",
+        "source": {},
+        "note": "Прослушайте запись и проверьте задание 12. Ответы вводятся в задании 12; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        25
+      ]
     },
     {
       "n": 14,
@@ -1563,15 +1905,20 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        26
+      ]
     },
     {
       "n": 15,
       "x": 0.501,
       "y": 0.0463,
-      "instruction": "Use the pictures.",
+      "instruction": "Have similar conversations. Use the pictures.",
       "count": 1,
       "id": "sb-16-501-46",
       "height": 0.3679,
@@ -1586,15 +1933,18 @@
           "book": "Teacher’s Book",
           "page": 20
         },
-        "revision": "690ebf9bbf68"
+        "revision": "690ebf9bbf68",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 16,
       "x": 0.501,
       "y": 0.4142,
-      "instruction": "Take turns.",
+      "instruction": "Have conversations. Take turns.",
       "count": 1,
       "id": "sb-16-501-414",
       "height": 0.2864,
@@ -1605,16 +1955,19 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 17,
       "x": 0.501,
       "y": 0.7006,
-      "instruction": "Listen to the sentences. They are fast.",
-      "count": 6,
+      "instruction": "Listen to the sentences. They are fast. Write the number.",
+      "count": 5,
       "id": "sb-16-501-701",
       "height": 0.1408,
       "kind": "answers",
@@ -1637,10 +1990,6 @@
             "key": "5"
           },
           {
-            "label": "4",
-            "key": "1"
-          },
-          {
             "label": "5",
             "key": "4"
           },
@@ -1653,16 +2002,41 @@
           "book": "Teacher’s Book",
           "page": 21
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите порядок услышанных фраз: числа 1–6. Четвёртая строка уже решена. Номера полей соответствуют строкам сверху вниз.",
         "revision": "68304bc3810f"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        27
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "68304bc3810f",
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 18,
       "x": 0.5031,
       "y": 0.8414,
-      "instruction": "Listen and check the answers. They are",
+      "instruction": "Listen and check the answers. They are slow then fast.",
       "count": 6,
       "id": "sb-16-503-841",
       "height": 0.04,
@@ -1671,45 +2045,19 @@
       "page": 13,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "3"
-          },
-          {
-            "label": "2",
-            "key": "2"
-          },
-          {
-            "label": "3",
-            "key": "5"
-          },
-          {
-            "label": "4",
-            "key": "1"
-          },
-          {
-            "label": "5",
-            "key": "4"
-          },
-          {
-            "label": "6",
-            "key": "6"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 21
         },
-        "sameAs": {
-          "page": 13,
-          "exercise": 17
-        },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "2de1674452d3"
+        "note": "Прослушайте запись и проверьте задание 17. Ответы вводятся в задании 17; повторять их здесь не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        28
+      ]
     },
     {
       "n": 19,
@@ -1726,9 +2074,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     }
   ],
   "sb:18": [
@@ -24648,7 +24999,7 @@
         "items": [
           {
             "label": "Найденные слова",
-            "key": "one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve",
+            "key": "two,three,four,five,six,seven,eight,nine,ten,eleven,twelve",
             "match": "set"
           }
         ],
@@ -24656,10 +25007,23 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Запишите все 12 чисел словами через запятую. Порядок не важен.",
+        "note": "Найдите ещё 11 числительных и запишите их через запятую. Слово one уже выделено в примере.",
         "revision": "b264c1426427"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "mapping": [
+          {
+            "index": 0,
+            "removeSet": [
+              "one"
+            ]
+          }
+        ]
+      }
     },
     {
       "n": 2,
@@ -24678,7 +25042,7 @@
         "items": [
           {
             "label": "Номера услышанных слов",
-            "key": "3,5,6,9,11,12",
+            "key": "5,6,9,11,12",
             "match": "set"
           }
         ],
@@ -24686,16 +25050,31 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Укажите через запятую остальные услышанные числа. Число 3 уже обведено как пример.",
         "revision": "07c99821a2d6"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.1"
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "mapping": [
+          {
+            "index": 0,
+            "removeSet": [
+              "3"
+            ]
+          }
+        ]
+      }
     },
     {
       "n": 3,
       "x": 0.0744,
       "y": 0.7455,
-      "instruction": "Listen to the conversation and tick (V) the",
+      "instruction": "Listen to the conversation and tick the correct picture (1 or 2).",
       "count": 1,
       "id": "wb-5-74-746",
       "height": 0.1945,
@@ -24708,24 +25087,32 @@
         "items": [
           {
             "label": "1",
-            "key": "2"
+            "key": "2",
+            "options": [
+              "1",
+              "2"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "9abbca558618"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.2"
+      ]
     },
     {
       "n": 4,
       "x": 0.5307,
       "y": 0.1672,
-      "instruction": "Listen again and number the sentences in the",
-      "count": 8,
+      "instruction": "Listen again and number the sentences in the correct order.",
+      "count": 7,
       "id": "wb-5-531-167",
       "height": 0.2311,
       "kind": "answers",
@@ -24756,10 +25143,6 @@
             "key": "4"
           },
           {
-            "label": "6",
-            "key": "1"
-          },
-          {
             "label": "7",
             "key": "8"
           },
@@ -24772,17 +25155,48 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите порядок реплик числами 1–8. Поля соответствуют строкам сверху вниз; строка 6 уже отмечена числом 1.",
         "revision": "bc3b409cf279"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.2"
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "bc3b409cf279",
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
+      }
     },
     {
       "n": 5,
       "x": 0.5289,
       "y": 0.3983,
       "instruction": "Read the conversations. Circle the correct words.",
-      "count": 4,
+      "count": 3,
       "id": "wb-5-529-398",
       "height": 0.0914,
       "kind": "answers",
@@ -24792,10 +25206,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "he"
-          },
           {
             "label": "2",
             "key": "She’s"
@@ -24813,17 +25223,34 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "6f6a2e4692ec"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "6f6a2e4692ec",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          }
+        ]
+      }
     },
     {
       "n": 6,
       "x": 0.5289,
       "y": 0.4897,
-      "instruction": "Complete the conversations with the words and phrases",
-      "count": 6,
+      "instruction": "Complete the conversations with the words and phrases in the box.",
+      "count": 5,
       "id": "wb-5-529-490",
       "height": 0.4503,
       "kind": "answers",
@@ -24833,10 +25260,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "I"
-          },
           {
             "label": "2",
             "key": "’s she"
@@ -24862,10 +25285,33 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "b44e998e9695"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "b44e998e9695",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     }
   ],
   "wb:6": [
@@ -24873,8 +25319,8 @@
       "n": 7,
       "x": 0.0745,
       "y": 0.2092,
-      "instruction": "Look at the photos. Put the letters in the correct order",
-      "count": 6,
+      "instruction": "Look at the photos. Put the letters in the correct order and write the words.",
+      "count": 5,
       "id": "wb-6-74-209",
       "height": 0.452,
       "kind": "answers",
@@ -24884,10 +25330,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "doctor"
-          },
           {
             "label": "2",
             "key": "teacher"
@@ -24913,17 +25355,40 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "b7b762fc9fe0"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "b7b762fc9fe0",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 8,
       "x": 0.0708,
       "y": 0.6612,
-      "instruction": "Complete the words for people with the vowels",
-      "count": 5,
+      "instruction": "Complete the words for people with the vowels (a, e, i, o, u).",
+      "count": 4,
       "id": "wb-6-71-661",
       "height": 0.0931,
       "kind": "answers",
@@ -24933,10 +25398,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "father"
-          },
           {
             "label": "2",
             "key": "daughter"
@@ -24958,17 +25419,37 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Дополните слова гласными и запишите каждое слово целиком. Пункт 1 уже решён.",
         "revision": "e5cf459b2993"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "e5cf459b2993",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 9,
       "x": 0.0588,
       "y": 0.7543,
-      "instruction": "Listen. Complete the sentences. Use words from",
-      "count": 4,
+      "instruction": "Listen. Complete the sentences. Use words from Exercises 7 and 8.",
+      "count": 6,
       "id": "wb-6-59-754",
       "height": 0.1857,
       "kind": "answers",
@@ -24979,40 +25460,85 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "husband"
+            "label": "2.1",
+            "key": "teacher"
           },
           {
-            "label": "2",
-            "key": "teacher, daughter",
-            "match": "set"
+            "label": "2.2",
+            "key": "daughter"
           },
           {
-            "label": "3",
-            "key": "brother, friend",
-            "match": "set"
+            "label": "3.1",
+            "key": "brother"
           },
           {
-            "label": "4",
-            "key": "mother, father",
-            "match": "set"
+            "label": "3.2",
+            "key": "friend"
+          },
+          {
+            "label": "4.1",
+            "key": "mother"
+          },
+          {
+            "label": "4.2",
+            "key": "father"
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните шесть пропусков по порядку: два в пункте 2, два в пункте 3 и два в пункте 4. Пункт 1 уже решён. Порядок слов важен.",
         "revision": "ebf7ff1e060a"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.3"
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "ebf7ff1e060a",
+        "mapping": [
+          {
+            "index": 1,
+            "part": 0,
+            "separator": ","
+          },
+          {
+            "index": 1,
+            "part": 1,
+            "separator": ","
+          },
+          {
+            "index": 2,
+            "part": 0,
+            "separator": ","
+          },
+          {
+            "index": 2,
+            "part": 1,
+            "separator": ","
+          },
+          {
+            "index": 3,
+            "part": 0,
+            "separator": ","
+          },
+          {
+            "index": 3,
+            "part": 1,
+            "separator": ","
+          }
+        ]
+      }
     },
     {
       "n": 10,
       "x": 0.5233,
       "y": 0.2078,
       "instruction": "Complete the sentences with 'm, 's, 're or is.",
-      "count": 8,
+      "count": 7,
       "id": "wb-6-523-208",
       "height": 0.1511,
       "kind": "answers",
@@ -25022,10 +25548,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "’s"
-          },
           {
             "label": "2",
             "key": "’m"
@@ -25059,17 +25581,46 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "3ed899aac4a7"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "3ed899aac4a7",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
+      }
     },
     {
       "n": 11,
       "x": 0.5251,
       "y": 0.3589,
-      "instruction": "Look at the pictures and complete the sentences. Use the",
-      "count": 5,
+      "instruction": "Look at the pictures and complete the sentences. Use the words from the box.",
+      "count": 4,
       "id": "wb-6-525-359",
       "height": 0.5811,
       "kind": "answers",
@@ -25079,10 +25630,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "We’re"
-          },
           {
             "label": "2",
             "key": "He’s"
@@ -25104,10 +25651,30 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "219ab54a633f"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "219ab54a633f",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     }
   ],
   "wb:7": [
@@ -25136,10 +25703,14 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "2cd2e3b2b610"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.4"
+      ]
     },
     {
       "n": 2,
@@ -25156,9 +25727,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        "1.4"
+      ]
     },
     {
       "n": 3,
@@ -25177,7 +25753,7 @@
         "items": [
           {
             "label": "Найденные слова",
-            "key": "thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twenty-one,twenty-two",
+            "key": "fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twenty-one,twenty-two",
             "match": "set"
           }
         ],
@@ -25185,17 +25761,30 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Найдите остальные девять числительных и запишите их через запятую. Thirteen уже выделено. Используйте дефис в числах после twenty.",
         "revision": "6bc71d44e9cb"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "mapping": [
+          {
+            "index": 0,
+            "removeSet": [
+              "thirteen"
+            ]
+          }
+        ]
+      }
     },
     {
       "n": 4,
       "x": 0.0681,
       "y": 0.6119,
       "instruction": "Circle the correct question words.",
-      "count": 6,
+      "count": 5,
       "id": "wb-7-68-612",
       "height": 0.1192,
       "kind": "answers",
@@ -25206,10 +25795,6 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "What time"
-          },
-          {
             "label": "2",
             "key": "How old"
           },
@@ -25234,17 +25819,40 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "1e02beefe6a6"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "1e02beefe6a6",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 5,
       "x": 0.0726,
       "y": 0.7311,
       "instruction": "Complete the conversations with question words.",
-      "count": 6,
+      "count": 5,
       "id": "wb-7-73-731",
       "height": 0.2089,
       "kind": "answers",
@@ -25255,10 +25863,6 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "Where"
-          },
-          {
             "label": "2",
             "key": "What time"
           },
@@ -25283,17 +25887,40 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "e08e7d90c5be"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "e08e7d90c5be",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 6,
       "x": 0.5307,
       "y": 0.1337,
       "instruction": "Read the questions. Circle the correct words.",
-      "count": 8,
+      "count": 7,
       "id": "wb-7-531-134",
       "height": 0.151,
       "kind": "answers",
@@ -25303,10 +25930,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "are"
-          },
           {
             "label": "2",
             "key": "is"
@@ -25340,17 +25963,46 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "6be1ac4f6d31"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "6be1ac4f6d31",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
+      }
     },
     {
       "n": 7,
       "x": 0.5307,
       "y": 0.2847,
       "instruction": "Write questions with these words.",
-      "count": 8,
+      "count": 7,
       "id": "wb-7-531-285",
       "height": 0.1496,
       "kind": "answers",
@@ -25360,10 +26012,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "What time is the break?"
-          },
           {
             "label": "2",
             "key": "How much are the books?"
@@ -25397,17 +26045,46 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "514997c62dfa"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "514997c62dfa",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
+      }
     },
     {
       "n": 8,
       "x": 0.5289,
       "y": 0.4343,
-      "instruction": "Match the answers (a-h) with the questions (1-8) in",
-      "count": 8,
+      "instruction": "Match the answers (a–h) with the questions (1–8) in Exercise 7.",
+      "count": 7,
       "id": "wb-7-529-434",
       "height": 0.2123,
       "kind": "answers",
@@ -25419,45 +26096,140 @@
         "items": [
           {
             "label": "a",
-            "key": "8"
+            "key": "8",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "b",
-            "key": "4"
+            "key": "4",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "c",
-            "key": "5"
+            "key": "5",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "d",
-            "key": "6"
-          },
-          {
-            "label": "e",
-            "key": "1"
+            "key": "6",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "f",
-            "key": "2"
+            "key": "2",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "g",
-            "key": "3"
+            "key": "3",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           },
           {
             "label": "h",
-            "key": "7"
+            "key": "7",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите номер вопроса 1–8 для каждого ответа. Ответ e уже сопоставлен с вопросом 1.",
         "revision": "3e22e4ec5831"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "3e22e4ec5831",
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
+      }
     },
     {
       "n": 9,
@@ -25495,10 +26267,12 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "7b68987c2555"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 10,
@@ -25536,10 +26310,12 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "0b0022331006"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     }
   ],
   "wb:8": [
@@ -25547,8 +26323,8 @@
       "n": 11,
       "x": 0.0689,
       "y": 0.093,
-      "instruction": "Write the correct words.",
-      "count": 5,
+      "instruction": "The words in bold are wrong. Write the correct words.",
+      "count": 4,
       "id": "wb-8-69-93",
       "height": 0.1801,
       "kind": "answers",
@@ -25558,10 +26334,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "her"
-          },
           {
             "label": "2",
             "key": "Ethan’s"
@@ -25583,16 +26355,36 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "1afd5fd09938"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "1afd5fd09938",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 12,
       "x": 0.067,
       "y": 0.2731,
-      "instruction": "Look at the photos and read the invitations. Match the",
+      "instruction": "Look at the photos and read the invitations. Match the photos (1–3) with the parties (a–c).",
       "count": 3,
       "id": "wb-8-67-273",
       "height": 0.6669,
@@ -25605,32 +26397,49 @@
         "items": [
           {
             "label": "1",
-            "key": "c"
+            "key": "c",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "2",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           },
           {
             "label": "3",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "0c3b1c486c9b"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 13,
       "x": 0.5233,
       "y": 0.6192,
-      "instruction": "Read about the parties again. Are these sentences true",
-      "count": 6,
+      "instruction": "Read about the parties again. Are these sentences true or false? Circle T or F.",
+      "count": 5,
       "id": "wb-8-523-619",
       "height": 0.3208,
       "kind": "answers",
@@ -25641,17 +26450,6 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "T",
-            "options": [
-              "T",
-              "F"
-            ],
-            "accept": [
-              "true"
-            ]
-          },
-          {
             "label": "2",
             "key": "F",
             "options": [
@@ -25711,17 +26509,40 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "81890a752333"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "81890a752333",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 14,
       "x": 0.523,
       "y": 0.754,
-      "instruction": "| Circle the correct words. Then answer the questions.",
-      "count": 6,
+      "instruction": "Circle the correct words. Then answer the questions.",
+      "count": 10,
       "id": "wb-8-523-754",
       "height": 0.1,
       "kind": "answers",
@@ -25732,38 +26553,137 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "How long; three hours"
+            "label": "2.1",
+            "key": "What",
+            "options": [
+              "What",
+              "Where"
+            ]
           },
           {
-            "label": "2",
-            "key": "What; 4pm–7pm"
+            "label": "2.2",
+            "key": "4pm–7pm",
+            "soft": true
           },
           {
-            "label": "3",
-            "key": "What; Friday"
+            "label": "3.1",
+            "key": "What",
+            "options": [
+              "How",
+              "What"
+            ]
           },
           {
-            "label": "4",
-            "key": "Who; Morgan and Sian’s older son"
+            "label": "3.2",
+            "key": "Friday",
+            "soft": true
           },
           {
-            "label": "5",
-            "key": "How; She’s 21."
+            "label": "4.1",
+            "key": "Who",
+            "options": [
+              "Who",
+              "How"
+            ]
           },
           {
-            "label": "6",
-            "key": "Where’s; a restaurant / Sam’s Restaurant / 18 Brown Street"
+            "label": "4.2",
+            "key": "Morgan and Sian’s older son",
+            "soft": true
+          },
+          {
+            "label": "5.1",
+            "key": "How",
+            "options": [
+              "How",
+              "Where"
+            ]
+          },
+          {
+            "label": "5.2",
+            "key": "She’s 21.",
+            "soft": true
+          },
+          {
+            "label": "6.1",
+            "key": "Where’s",
+            "options": [
+              "Who",
+              "Where’s"
+            ]
+          },
+          {
+            "label": "6.2",
+            "key": "a restaurant / Sam’s Restaurant / 18 Brown Street",
+            "soft": true
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Для пунктов 2–6 сначала выберите вопросительное слово, затем напишите ответ по приглашениям. Свободную формулировку ответа сравните с образцом; пункт 1 уже решён.",
         "revision": "8c6681d1b0e7"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "8c6681d1b0e7",
+        "mapping": [
+          {
+            "index": 1,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 1,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 2,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 3,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 4,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 4,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 5,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 5,
+            "part": 1,
+            "separator": ";"
+          }
+        ]
+      }
     }
   ],
   "wb:9": [
@@ -25771,8 +26691,8 @@
       "n": 1,
       "x": 0.0726,
       "y": 0.135,
-      "instruction": "Complete the words for numbers with the vowels",
-      "count": 1,
+      "instruction": "Complete the words for numbers with the vowels (a, e, i, o, u).",
+      "count": 7,
       "id": "wb-9-73-135",
       "height": 0.0772,
       "kind": "answers",
@@ -25783,26 +26703,64 @@
         "mode": "items",
         "items": [
           {
-            "label": "Найденные числительные",
-            "key": "eighty,fifty-seven,ninety-six,forty,seventy,sixty-three,thirty-two,twenty",
-            "match": "set"
+            "label": "2",
+            "key": "fifty-seven"
+          },
+          {
+            "label": "3",
+            "key": "ninety-six"
+          },
+          {
+            "label": "4",
+            "key": "forty"
+          },
+          {
+            "label": "5",
+            "key": "seventy"
+          },
+          {
+            "label": "6",
+            "key": "sixty-three"
+          },
+          {
+            "label": "7",
+            "key": "thirty-two"
+          },
+          {
+            "label": "8",
+            "key": "twenty"
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Дополните гласные и запишите числительные целиком, слева направо по строкам. Eighty уже решено; здесь семь полей для остальных слов.",
         "revision": "7f56a788afe3"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "7f56a788afe3",
+        "mapping": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
     {
       "n": 2,
       "x": 0.0745,
       "y": 0.2122,
       "instruction": "Read the sentences. Are they times (T) or prices (P)?",
-      "count": 6,
+      "count": 5,
       "id": "wb-9-74-212",
       "height": 0.3182,
       "kind": "answers",
@@ -25813,45 +26771,84 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "T"
-          },
-          {
             "label": "2",
-            "key": "P"
+            "key": "P",
+            "options": [
+              "T",
+              "P"
+            ]
           },
           {
             "label": "3",
-            "key": "P"
+            "key": "P",
+            "options": [
+              "T",
+              "P"
+            ]
           },
           {
             "label": "4",
-            "key": "T"
+            "key": "T",
+            "options": [
+              "T",
+              "P"
+            ]
           },
           {
             "label": "5",
-            "key": "T"
+            "key": "T",
+            "options": [
+              "T",
+              "P"
+            ]
           },
           {
             "label": "6",
-            "key": "P"
+            "key": "P",
+            "options": [
+              "T",
+              "P"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Выберите T (time) или P (price). Первый пункт уже решён.",
         "revision": "d3081bc9983a"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "d3081bc9983a",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 3,
       "x": 0.0745,
       "y": 0.5304,
       "instruction": "Listen and tick (v) the number you hear, a or b.",
-      "count": 5,
+      "count": 4,
       "id": "wb-9-74-530",
       "height": 0.1062,
       "kind": "answers",
@@ -25862,34 +26859,68 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "b"
-          },
-          {
             "label": "2",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "3",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "4",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "5",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Выберите услышанное число: a или b. Первый пункт уже решён.",
         "revision": "afd09caf5ae9"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.5"
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "afd09caf5ae9",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 4,
@@ -25906,16 +26937,21 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        "1.5"
+      ]
     },
     {
       "n": 5,
       "x": 0.0745,
       "y": 0.7122,
       "instruction": "Circle the word that is different in each group.",
-      "count": 5,
+      "count": 4,
       "id": "wb-9-74-712",
       "height": 0.2278,
       "kind": "answers",
@@ -25925,10 +26961,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "sandwich"
-          },
           {
             "label": "2",
             "key": "cake"
@@ -25950,17 +26982,37 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "a699022cb9ea"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "a699022cb9ea",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 6,
       "x": 0.5307,
       "y": 0.1539,
       "instruction": "Complete the conversation with the words in the box.",
-      "count": 6,
+      "count": 5,
       "id": "wb-9-531-154",
       "height": 0.1977,
       "kind": "answers",
@@ -25970,10 +27022,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "would"
-          },
           {
             "label": "2",
             "key": "like"
@@ -25999,10 +27047,33 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните пропуски 2–6 словами из рамки. Пропуск 1 уже заполнен.",
         "revision": "7bc753e7a5b9"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "7bc753e7a5b9",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 7,
@@ -26017,52 +27088,26 @@
       "page": 8,
       "quiz": false,
       "check": {
-        "mode": "items",
-        "items": [
-          {
-            "label": "1",
-            "key": "would"
-          },
-          {
-            "label": "2",
-            "key": "like"
-          },
-          {
-            "label": "3",
-            "key": "much"
-          },
-          {
-            "label": "4",
-            "key": "else"
-          },
-          {
-            "label": "5",
-            "key": "Anything"
-          },
-          {
-            "label": "6",
-            "key": "thanks"
-          }
-        ],
+        "mode": "self",
+        "reason": "oral",
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "sameAs": {
-          "page": 8,
-          "exercise": 6
-        },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
-        "revision": "83ead5310ed9"
+        "note": "Прослушайте запись и проверьте ответы в задании 6. Здесь вводить их повторно не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        "1.6"
+      ]
     },
     {
       "n": 8,
       "x": 0.5289,
       "y": 0.4288,
       "instruction": "Write not in the correct place.",
-      "count": 5,
+      "count": 4,
       "id": "wb-9-529-429",
       "height": 0.1817,
       "kind": "answers",
@@ -26072,10 +27117,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "My sandwich – it’s not right."
-          },
           {
             "label": "2",
             "key": "It’s not a chocolate cake."
@@ -26097,17 +27138,37 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Перепишите предложения 2–5 целиком, добавив not. Первое предложение — готовый пример.",
         "revision": "1c2d92a74c92"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "1c2d92a74c92",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 9,
       "x": 0.5289,
       "y": 0.6105,
       "instruction": "Write the words in the correct order to make sentences.",
-      "count": 5,
+      "count": 4,
       "id": "wb-9-529-610",
       "height": 0.2265,
       "kind": "writing",
@@ -26117,10 +27178,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "It’s not right"
-          },
           {
             "label": "2",
             "key": "It’s not small."
@@ -26142,16 +27199,36 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно.",
         "revision": "f77fbe28526b"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "f77fbe28526b",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 10,
       "x": 0.5233,
       "y": 0.837,
-      "instruction": "Listen to the conversation. Where are the people?",
+      "instruction": "Listen to the conversation. Where are the people? Tick the correct answer.",
       "count": 1,
       "id": "wb-9-523-837",
       "height": 0.103,
@@ -26164,17 +27241,26 @@
         "items": [
           {
             "label": "1",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "a83b365e3290"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.7"
+      ]
     }
   ],
   "wb:10": [
@@ -26183,7 +27269,7 @@
       "x": 0.0689,
       "y": 0.093,
       "instruction": "Listen again and circle the correct words.",
-      "count": 6,
+      "count": 5,
       "id": "wb-10-69-93",
       "height": 0.202,
       "kind": "answers",
@@ -26193,10 +27279,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "Hi"
-          },
           {
             "label": "2",
             "key": "latte"
@@ -26222,10 +27304,35 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Выберите верные слова для пропусков 2–6. Первое слово уже отмечено.",
         "revision": "e1846e7aec73"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.7"
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "e1846e7aec73",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          }
+        ]
+      }
     },
     {
       "n": 12,
@@ -26252,17 +27359,21 @@
           "book": "Teacher’s Book",
           "page": 217
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Укажите номера двух заказанных позиций через запятую.",
         "revision": "3aa579e2cbef"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [
+        "1.7"
+      ]
     },
     {
       "n": 13,
       "x": 0.067,
       "y": 0.391,
       "instruction": "Circle the CAPITAL letters in the sentences.",
-      "count": 5,
+      "count": 4,
       "id": "wb-10-67-391",
       "height": 0.106,
       "kind": "answers",
@@ -26272,12 +27383,6 @@
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "C,H,S",
-            "match": "set",
-            "requireUppercase": true
-          },
           {
             "label": "2",
             "key": "T,P",
@@ -26307,17 +27412,37 @@
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Укажите заглавные буквы каждого предложения через запятую.",
+        "note": "Запишите только заглавные буквы предложений 2–5, через запятую. Первое предложение — пример.",
         "revision": "5295b5dbc3d9"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "5295b5dbc3d9",
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          }
+        ]
+      }
     },
     {
       "n": 14,
       "x": 0.067,
       "y": 0.497,
-      "instruction": "Choose / or X.",
-      "count": 1,
+      "instruction": "When do we use capital letters? Choose ✓ or ✗.",
+      "count": 7,
       "id": "wb-10-67-497",
       "height": 0.1513,
       "kind": "answers",
@@ -26328,29 +27453,123 @@
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "1,3,5,6,7,8",
-            "match": "set"
+            "label": "2",
+            "key": "✗",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "x",
+              "X"
+            ]
+          },
+          {
+            "label": "3",
+            "key": "✓",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "v",
+              "V"
+            ]
+          },
+          {
+            "label": "4",
+            "key": "✗",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "x",
+              "X"
+            ]
+          },
+          {
+            "label": "5",
+            "key": "✓",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "v",
+              "V"
+            ]
+          },
+          {
+            "label": "6",
+            "key": "✓",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "v",
+              "V"
+            ]
+          },
+          {
+            "label": "7",
+            "key": "✓",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "v",
+              "V"
+            ]
+          },
+          {
+            "label": "8",
+            "key": "✓",
+            "options": [
+              "✓",
+              "✗"
+            ],
+            "accept": [
+              "v",
+              "V"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Отметьте каждый случай отдельно. Первый пункт уже решён.",
         "revision": "804eb7bde150"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": "804eb7bde150",
+        "mapping": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
     {
       "n": 15,
       "x": 0.0652,
       "y": 0.6483,
-      "instruction": "Tick the people in your life. Choose three people and write",
-      "count": 1,
+      "instruction": "Tick the people in your life. Choose three people and write sentences. What are their names? How old are they?",
+      "count": 3,
       "id": "wb-10-65-648",
       "height": 0.2917,
-      "kind": "answers",
+      "kind": "writing",
       "book": "wb",
       "page": 9,
       "quiz": false,
@@ -26359,13 +27578,15 @@
         "reason": "personal",
         "revision": "af877e929493"
       },
-      "unit": 1
+      "unit": 1,
+      "audioTracks": [],
+      "responseMode": "panel"
     },
     {
       "n": 1,
       "x": 0.5289,
       "y": 0.189,
-      "instruction": "Circle For D.",
+      "instruction": "Are the words for food (F) or drinks (D)? Circle F or D.",
       "count": 7,
       "id": "wb-10-529-189",
       "height": 0.1351,
@@ -26378,41 +27599,71 @@
         "items": [
           {
             "label": "1",
-            "key": "D"
+            "key": "D",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "2",
-            "key": "F"
+            "key": "F",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "3",
-            "key": "F"
+            "key": "F",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "4",
-            "key": "D"
+            "key": "D",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "5",
-            "key": "F"
+            "key": "F",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "6",
-            "key": "D"
+            "key": "D",
+            "options": [
+              "F",
+              "D"
+            ]
           },
           {
             "label": "7",
-            "key": "D"
+            "key": "D",
+            "options": [
+              "F",
+              "D"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "9c16a55e4b25"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 2,
@@ -26458,10 +27709,12 @@
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Впишите по одному слову из рамки в каждый пункт.",
         "revision": "a407cee516a1"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 3,
@@ -26507,16 +27760,18 @@
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно.",
         "revision": "44bc49ebaecc"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 4,
       "x": 0.5307,
       "y": 0.6204,
-      "instruction": "Complete the words in the sentences with the vowels",
+      "instruction": "Complete the words in the sentences with the vowels (a, e, i, o, u).",
       "count": 6,
       "id": "wb-10-531-620",
       "height": 0.3196,
@@ -26556,10 +27811,12 @@
           "book": "Teacher’s Book",
           "page": 218
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. В списках слов используйте запятые.",
+        "note": "Дополните каждое слово гласными и запишите слово целиком в соответствующее поле.",
         "revision": "d4c48a3b46eb"
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "panel",
+      "audioTracks": []
     }
   ],
   "wb:11": [
@@ -46708,8 +47965,13 @@
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": null
-        }
-      }
+        },
+        "note": "Выполните задание устно. Затем отметьте, что вы его выполнили."
+      },
+      "responseMode": "oral",
+      "audioTracks": [
+        187
+      ]
     },
     {
       "n": 2,
@@ -46765,8 +48027,12 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
-      }
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно."
+      },
+      "responseMode": "panel",
+      "audioTracks": [
+        188
+      ]
     },
     {
       "n": 3,
@@ -46781,15 +48047,10 @@
       "instruction": "Write the sentences with the 'm, 're, 's forms.",
       "section": "’m, ’s, ’re",
       "quiz": false,
-      "count": 8,
+      "count": 7,
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "I’m from Berlin.",
-            "requireContraction": true
-          },
           {
             "label": "2",
             "key": "He’s from London.",
@@ -46831,7 +48092,36 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
       }
     },
     {
@@ -46843,7 +48133,7 @@
       "id": "sb-g-114-513-552",
       "book": "sb",
       "grammar": true,
-      "kind": "response",
+      "kind": "writing",
       "instruction": "Write four sentences about you and four sentences about another person. Use a dictionary if you need to.",
       "section": "’m, ’s, ’re",
       "quiz": false,
@@ -46854,8 +48144,11 @@
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
-        }
-      }
+        },
+        "note": "Напишите восемь предложений целиком: четыре о себе и четыре о другом человеке. Ответы индивидуальные."
+      },
+      "audioTracks": [],
+      "responseMode": "panel"
     }
   ],
   "sb:118": [
@@ -46872,7 +48165,7 @@
       "instruction": "Complete the sentences with are, is or 's.",
       "section": "Questions with be",
       "quiz": false,
-      "count": 6,
+      "count": 9,
       "check": {
         "mode": "items",
         "items": [
@@ -46893,19 +48186,76 @@
             "key": "is"
           },
           {
-            "label": "5",
-            "key": "is; Is"
+            "label": "5.1",
+            "key": "is"
           },
           {
-            "label": "6",
-            "key": "’s; Is; ’s"
+            "label": "5.2",
+            "key": "Is"
+          },
+          {
+            "label": "6.1",
+            "key": "’s"
+          },
+          {
+            "label": "6.2",
+            "key": "Is"
+          },
+          {
+            "label": "6.3",
+            "key": "’s"
           }
         ],
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Заполните каждый пропуск отдельно: are, is или ’s. Номера 5.1/5.2 и 6.1/6.2/6.3 соответствуют пропускам внутри диалога."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 0
+          },
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 4,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 5,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 5,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 5,
+            "part": 2,
+            "separator": ";"
+          }
+        ]
       }
     },
     {
@@ -46918,17 +48268,13 @@
       "book": "sb",
       "grammar": true,
       "kind": "response",
-      "instruction": "Put the words in the correct order to make questions. 1 you / where / are / from Where are you from?",
+      "instruction": "Put the words in the correct order to make questions.",
       "section": "Questions with be",
       "quiz": false,
-      "count": 7,
+      "count": 6,
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "Where are you from?"
-          },
           {
             "label": "2",
             "key": "How much are they?"
@@ -46958,7 +48304,33 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          }
+        ]
       }
     },
     {
@@ -46971,7 +48343,7 @@
       "book": "sb",
       "grammar": true,
       "kind": "response",
-      "instruction": "Match the answers with the questions from Exercise 2. a Khalid and Fatima.",
+      "instruction": "Match the answers with the questions from Exercise 2.",
       "section": "Questions with be",
       "quiz": false,
       "count": 7,
@@ -47011,8 +48383,10 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
-      }
+        "note": "Номера полей соответствуют пунктам учебника. Введите недостающий ответ; готовые примеры повторять не нужно."
+      },
+      "responseMode": "panel",
+      "audioTracks": []
     },
     {
       "n": 4,
@@ -47027,18 +48401,10 @@
       "instruction": "Write a short answer to these questions.",
       "section": "Questions with be",
       "quiz": false,
-      "count": 10,
+      "count": 8,
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "Yes, I am."
-          },
-          {
-            "label": "2",
-            "key": "No, it’s not."
-          },
           {
             "label": "3",
             "key": "Yes, you are."
@@ -47076,7 +48442,39 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Заполните только нерешённые пункты. Уже напечатанный пример повторять не нужно."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          },
+          {
+            "index": 8
+          },
+          {
+            "index": 9
+          }
+        ]
       }
     },
     {
@@ -47092,18 +48490,10 @@
       "instruction": "A Complete the sentences with my, your, etc. or [name]'s.",
       "section": "his, her, our, their",
       "quiz": false,
-      "count": 10,
+      "count": 8,
       "check": {
         "mode": "items",
         "items": [
-          {
-            "label": "1",
-            "key": "His"
-          },
-          {
-            "label": "2",
-            "key": "Karen’s"
-          },
           {
             "label": "3",
             "key": "My"
@@ -47141,7 +48531,41 @@
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Заполните пункты 3–10. Пункты 9–10 находятся на продолжении страницы; 1–2 уже решены. Затем проверьте по записи 189."
+      },
+      "responseMode": "panel",
+      "audioTracks": [
+        189
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          },
+          {
+            "index": 8
+          },
+          {
+            "index": 9
+          }
+        ]
       }
     }
   ],
@@ -47156,67 +48580,208 @@
       "book": "sb",
       "grammar": true,
       "kind": "response",
-      "instruction": "Choose the correct words).",
+      "instruction": "Choose the correct word(s).",
       "section": "his, her, our, their",
       "quiz": false,
-      "count": 12,
+      "count": 15,
       "check": {
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "I"
-          },
-          {
             "label": "2",
-            "key": "My"
+            "key": "My",
+            "options": [
+              "I",
+              "My"
+            ]
           },
           {
             "label": "3",
-            "key": "you"
+            "key": "you",
+            "options": [
+              "you",
+              "your"
+            ]
           },
           {
             "label": "4",
-            "key": "your"
+            "key": "your",
+            "options": [
+              "you",
+              "your"
+            ]
           },
           {
             "label": "5",
-            "key": "he"
+            "key": "he",
+            "options": [
+              "he",
+              "him"
+            ]
           },
           {
             "label": "6",
-            "key": "their"
+            "key": "their",
+            "options": [
+              "they",
+              "their"
+            ]
           },
           {
             "label": "7",
-            "key": "our"
+            "key": "our",
+            "options": [
+              "we",
+              "our"
+            ]
           },
           {
             "label": "8",
-            "key": "they"
+            "key": "they",
+            "options": [
+              "they",
+              "their"
+            ]
           },
           {
-            "label": "9",
-            "key": "my; It’s"
+            "label": "9.1",
+            "key": "my",
+            "options": [
+              "I",
+              "my"
+            ]
           },
           {
-            "label": "10",
-            "key": "My; He’s"
+            "label": "9.2",
+            "key": "It’s",
+            "options": [
+              "It’s",
+              "He’s"
+            ]
           },
           {
-            "label": "11",
-            "key": "She; our"
+            "label": "10.1",
+            "key": "My",
+            "options": [
+              "I",
+              "My"
+            ]
           },
           {
-            "label": "12",
-            "key": "Her; my"
+            "label": "10.2",
+            "key": "He’s",
+            "options": [
+              "She’s",
+              "He’s"
+            ]
+          },
+          {
+            "label": "11.1",
+            "key": "She",
+            "options": [
+              "She",
+              "Her"
+            ]
+          },
+          {
+            "label": "11.2",
+            "key": "our",
+            "options": [
+              "we",
+              "our"
+            ]
+          },
+          {
+            "label": "12.1",
+            "key": "Her",
+            "options": [
+              "He",
+              "Her"
+            ]
+          },
+          {
+            "label": "12.2",
+            "key": "my",
+            "options": [
+              "I",
+              "my"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Выберите слово для каждого места. В пунктах 9–12 два отдельных выбора. Первый пункт уже решён."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          },
+          {
+            "index": 8,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 8,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 9,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 9,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 10,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 10,
+            "part": 1,
+            "separator": ";"
+          },
+          {
+            "index": 11,
+            "part": 0,
+            "separator": ";"
+          },
+          {
+            "index": 11,
+            "part": 1,
+            "separator": ";"
+          }
+        ]
       }
     },
     {
@@ -47229,51 +48794,104 @@
       "book": "sb",
       "grammar": true,
       "kind": "response",
-      "instruction": "Tick (v) the correct sentence. 1 a My name's not Chelsea. /",
+      "instruction": "Tick the correct sentence.",
       "section": "not",
       "quiz": false,
-      "count": 8,
+      "count": 7,
       "check": {
         "mode": "items",
         "items": [
           {
-            "label": "1",
-            "key": "a"
-          },
-          {
             "label": "2",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "3",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "4",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "5",
-            "key": "a"
+            "key": "a",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "6",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "7",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           },
           {
             "label": "8",
-            "key": "b"
+            "key": "b",
+            "options": [
+              "a",
+              "b"
+            ]
           }
         ],
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Выберите a или b в пунктах 2–8. Первый пункт уже решён."
+      },
+      "responseMode": "panel",
+      "audioTracks": [],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          {
+            "index": 1
+          },
+          {
+            "index": 2
+          },
+          {
+            "index": 3
+          },
+          {
+            "index": 4
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 6
+          },
+          {
+            "index": 7
+          }
+        ]
       }
     },
     {
@@ -47286,7 +48904,7 @@
       "book": "sb",
       "grammar": true,
       "kind": "response",
-      "instruction": "Listen and write the questions.",
+      "instruction": "Listen and complete the questions. They're fast. Then listen again and check; they're slow.",
       "section": "Pronunciation",
       "quiz": false,
       "count": 14,
@@ -47295,66 +48913,91 @@
         "items": [
           {
             "label": "1",
-            "key": "Who’s he?"
+            "key": "’s he"
           },
           {
             "label": "2",
-            "key": "Where is it?"
+            "key": "is it"
           },
           {
             "label": "3",
-            "key": "Where are you from?"
+            "key": "are you"
           },
           {
             "label": "4",
-            "key": "How much is it?"
+            "key": "is it"
           },
           {
             "label": "5",
-            "key": "What day is it?"
+            "key": "is it"
           },
           {
             "label": "6",
-            "key": "What’s your name?"
+            "key": "’s your name"
           },
           {
             "label": "7",
-            "key": "How old is she?"
+            "key": "is she"
           },
           {
             "label": "8",
-            "key": "What time is it?"
+            "key": "is it"
           },
           {
             "label": "9",
-            "key": "How much are they?"
+            "key": "are they"
           },
           {
             "label": "10",
-            "key": "How are you?"
+            "key": "are you"
           },
           {
             "label": "11",
-            "key": "How old are you?"
+            "key": "are you"
           },
           {
             "label": "12",
-            "key": "Where is he?"
+            "key": "is he"
           },
           {
             "label": "13",
-            "key": "Who’s she?"
+            "key": "’s she"
           },
           {
             "label": "14",
-            "key": "How long is it?"
+            "key": "is it"
           }
         ],
         "source": {
           "book": "Teacher’s Book · Grammar reference",
           "page": 161
         },
-        "note": "Впишите только ответы. Несколько пропусков одного пункта — по порядку через точку с запятой. Если предложение верное, впишите ✓."
+        "note": "Впишите только недостающие слова, без уже напечатанных частей вопроса. Сначала запись 190, затем 191 для проверки."
+      },
+      "responseMode": "panel",
+      "audioTracks": [
+        190,
+        191
+      ],
+      "answerMigration": {
+        "version": "unit1-20261109",
+        "fromRevision": null,
+        "mapping": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     },
     {

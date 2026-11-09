@@ -36,3 +36,19 @@ footer{border:1px solid var(--line);border-radius:0 0 16px 16px;background:#f8f2
 .responseField input[type=hidden]{display:none}.exerciseDragGhost{position:fixed;z-index:1000;pointer-events:none;background:#7c2340;color:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 4px 16px #211a1930;max-width:260px}.responseField[data-result=incorrect] .exerciseChoices{border-left:3px solid #a53637;padding-left:8px}.responseField[data-result=correct] .exerciseChoices{border-left:3px solid #386444;padding-left:8px}
 
 .liveLessonAnswers{border:2px solid #7c2340;border-radius:14px;padding:14px;margin-bottom:18px;background:#fff7e9}.liveLessonAnswers h3{margin:0 0 8px}.liveLessonAnswers ol{padding-left:24px}.liveLessonAnswers li{padding:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* Reviewed tasks keep their numbered fields visible beside the original. */
+#modal.focus-dialog.play-dialog.review-panel{width:min(1200px,calc(100vw - 32px));height:calc(100dvh - 32px);max-height:calc(100dvh - 32px)}
+#modal.review-panel #modalBody{flex:1!important}
+#modal.review-panel .focus-columns{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr)!important;gap:22px!important;flex:1!important;overflow:hidden!important}
+#modal.review-panel .focus-original,#modal.review-panel .focus-responses{height:100%!important;max-height:100%!important;overflow:auto!important;min-height:0;box-sizing:border-box}
+#modal.review-panel .focus-responses{padding:0 10px 24px 0!important}
+#modal.review-panel input[type=hidden]{display:none!important}
+#modal.review-panel .responseField input,#modal.review-panel .responseField textarea{box-sizing:border-box}
+#modal.review-panel .previousResponses{margin:14px 0;font-size:13px}
+@media(max-width:760px){
+ #modal.focus-dialog.play-dialog.review-panel{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px)}
+ #modal.review-panel .focus-columns{display:block!important;overflow:auto!important}
+ #modal.review-panel .focus-original,#modal.review-panel .focus-responses{height:auto!important;max-height:none!important;overflow:visible!important}
+ #modal.review-panel .focus-responses{padding:16px 0 24px!important}
+}

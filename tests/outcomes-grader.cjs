@@ -30,10 +30,10 @@ assert.equal(G.isComplete({mode:'items',revision:'new'},{done:true,grade:{revisi
 assert.equal(G.isComplete({mode:'items',revision:'new'},{done:true,grade:{revision:'new',correct:1,total:1,items:['correct']}}),true);
 assert.equal(G.isComplete({mode:'self'},{done:true}),true);
 const get=(b,p,n)=>bank[`${b}:${p+(b==='sb'?3:1)}`].find(e=>e.n===n);
-const negation=get('sb',13,12).check.items[5];assert.equal(G.checkField(negation,"It's not right. It's not 35 euros. It's 29."),'correct');assert.equal(G.checkField(negation,"It's not right. It's 35 euros. It's not 29."),'incorrect');
+const negation=get('sb',13,12).check.items.find(f=>f.label==='6');assert.equal(G.checkField(negation,"It's not right. It's not 35 euros. It's 29."),'correct');assert.equal(G.checkField(negation,"It's not right. It's 35 euros. It's not 29."),'incorrect');
 assert.equal(get('sb',101,13).check.items.length,8);assert.equal(get('sb',99,8).check.items[0].key,'3');
-assert.equal(get('wb',4,1).check.items[0].key.split(',').length,12);
-assert.equal(get('wb',60,2).check.items.length,5);assert.equal(get('wb',9,13).check.items[0].key,'C,H,S');
+assert.equal(get('wb',4,1).check.items[0].key.split(',').length,11);
+assert.equal(get('wb',60,2).check.items.length,5);assert.equal(get('wb',9,13).check.items[0].key,'T,P');
 const all=Object.values(bank).flat(),grammar=all.filter(e=>e.grammar);assert.equal(grammar.length,122);assert.equal(new Set(grammar.map(e=>e.unit)).size,12);
 for(const b of ['sb','wb'])assert.equal(new Set(all.filter(e=>e.book===b&&!e.grammar).map(e=>e.unit)).size,12);
 let slots=0;

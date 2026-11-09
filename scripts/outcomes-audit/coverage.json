@@ -198,24 +198,24 @@
   "totals": {
     "sb": {
       "exercises": 746,
-      "automatic": 284,
-      "mixed": 16,
-      "selfCheck": 446,
-      "scoredAnswers": 1736
+      "automatic": 277,
+      "mixed": 17,
+      "selfCheck": 452,
+      "scoredAnswers": 1715
     },
     "wb": {
       "exercises": 456,
-      "automatic": 395,
-      "mixed": 5,
-      "selfCheck": 56,
-      "scoredAnswers": 2272
+      "automatic": 393,
+      "mixed": 6,
+      "selfCheck": 57,
+      "scoredAnswers": 2257
     },
     "grammar": {
       "exercises": 122,
       "automatic": 112,
       "mixed": 3,
       "selfCheck": 7,
-      "scoredAnswers": 922
+      "scoredAnswers": 921
     }
   }
 }
