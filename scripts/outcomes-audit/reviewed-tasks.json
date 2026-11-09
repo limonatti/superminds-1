@@ -15,9 +15,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Послушайте запись 1 и следите за числами 1–12. Ничего вписывать не нужно. После прослушивания отметьте выполнение."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        1
+      ]
     },
     {
       "n": 2,
@@ -34,9 +39,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Включите запись 1 ещё раз и повторяйте числа вслух. Числа есть в материале задания. Ничего вписывать не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        1
+      ]
     },
     {
       "n": 3,
@@ -53,9 +63,12 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Рассмотрите все 12 фотографий на страницах 6–7 и слова с теми же номерами. Ничего вписывать не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     },
     {
       "n": 4,
@@ -72,9 +85,14 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Послушайте запись 2 и повторяйте слова и выражения из списка вслух. Ничего вписывать не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": [
+        2
+      ]
     },
     {
       "n": 5,
@@ -91,9 +109,12 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Работайте устно в паре: ученик A называет номер фотографии, ученик B — слово или выражение. Затем поменяйтесь ролями. Список слов здесь скрыт; ничего вписывать не нужно."
       },
-      "unit": 1
+      "unit": 1,
+      "responseMode": "oral",
+      "audioTracks": []
     }
   ],
   "sb:11": [

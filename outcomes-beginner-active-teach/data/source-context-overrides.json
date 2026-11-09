@@ -1,0 +1,198 @@
+{
+  "sb-10-454-363": {
+    "label": "2",
+    "sources": [
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.45,
+          0.357,
+          0.49,
+          0.025
+        ],
+        "page": 7
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.45,
+          0.21,
+          0.48,
+          0.138
+        ],
+        "page": 7,
+        "context": true
+      }
+    ]
+  },
+  "sb-10-452-417": {
+    "label": "3",
+    "sources": [
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.45,
+          0.411,
+          0.48,
+          0.112
+        ],
+        "page": 7
+      },
+      {
+        "image": "assets/sb-9.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0,
+          0.012,
+          1,
+          0.97
+        ],
+        "page": 6,
+        "context": true
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0,
+          0.012,
+          0.424,
+          0.97
+        ],
+        "page": 7,
+        "context": true
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.428,
+          0.625,
+          0.572,
+          0.357
+        ],
+        "page": 7,
+        "context": true
+      }
+    ]
+  },
+  "sb-10-452-532": {
+    "label": "4",
+    "sources": [
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.45,
+          0.525,
+          0.49,
+          0.023
+        ],
+        "page": 7
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.48,
+          0.435,
+          0.4,
+          0.087
+        ],
+        "page": 7,
+        "context": true
+      }
+    ]
+  },
+  "sb-10-456-555": {
+    "label": "5",
+    "sources": [
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.45,
+          0.549,
+          0.5,
+          0.07
+        ],
+        "page": 7
+      },
+      {
+        "image": "assets/sb-9.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0,
+          0.012,
+          1,
+          0.97
+        ],
+        "page": 6,
+        "context": true
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0,
+          0.012,
+          0.424,
+          0.97
+        ],
+        "page": 7,
+        "context": true
+      },
+      {
+        "image": "assets/sb-10.webp",
+        "size": [
+          1191,
+          1684
+        ],
+        "box": [
+          0.428,
+          0.625,
+          0.572,
+          0.357
+        ],
+        "page": 7,
+        "context": true
+      }
+    ]
+  }
+}
