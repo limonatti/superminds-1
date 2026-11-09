@@ -15,7 +15,9 @@
   const v=D.videos.find(v=>v.number===number);if(!v)return;
   document.querySelectorAll('audio').forEach(a=>a.pause());
   $('#videoTitle').textContent=`${v.number} · ${v.category} · ${v.title}`;
-  $('#videoExternal').href=v.url;$('#videoWorksheet').href=`?book=sb&page=${(v.category==='BBC'?v.pages.at(-1):v.pages[0])}`;
+  $('#videoExternal').href=v.url;
+  const worksheet=new URL(location.href);worksheet.searchParams.set('book','sb');worksheet.searchParams.set('page',v.category==='BBC'?v.pages.at(-1):v.pages[0]);worksheet.searchParams.delete('ex');
+  $('#videoWorksheet').href=worksheet.pathname+worksheet.search;
   $('#videoPlayer').replaceChildren();
   const frame=document.createElement('iframe');frame.src=`https://www.youtube-nocookie.com/embed/${v.youtube}?rel=0`;
   frame.title=v.title;frame.allow='accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
