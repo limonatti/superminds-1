@@ -1,0 +1,25 @@
+{
+  "checked": "2026-11-09",
+  "source": "https://www.youtube.com/playlist?list=PLdOdDgjDBFfEYuyHbEhr-WkMsvPOtUdv9",
+  "channel": "Lavender’s English",
+  "verification": "Public playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB; playback availability can change.",
+  "included": 56,
+  "unavailableFullCourseVideos": [
+    {
+      "number": 6,
+      "unit": 2,
+      "title": "Urban legends"
+    },
+    {
+      "number": 25,
+      "unit": 6,
+      "title": "Window cleaning"
+    },
+    {
+      "number": 36,
+      "unit": 8,
+      "title": "Keeping fit"
+    }
+  ],
+  "excluded": "Keeping fit 44-second preview; unrelated editions and unverified substitute clips."
+}

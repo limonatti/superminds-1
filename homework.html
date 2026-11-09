@@ -59,11 +59,11 @@
 <script src="course-words.js?v=39777793"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="sm-auth.js?v=95220d51"></script>
-<script src="focus-homework.js?v=376b5d18"></script><script src="solutions-el-homework.js?v=el-interactive-1"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
+<script src="focus-2-homework.js?v=dc4d91dc"></script><script src="focus-homework.js?v=376b5d18"></script><script src="solutions-el-homework.js?v=e8788678"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "focus-2":"Focus 2", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND = {
   trainer:  { l:"Тренажёр слов", d:"выучить слова юнита в карточках и квизе", href:"trainer.html?unit=" },
   games:    { l:"Игры юнита",    d:"пройти игры юнита",                        href:"games.html?u=" },
@@ -75,6 +75,7 @@ function partHref(course, unit, part){
   if(course==="speakout-b2plus") return "speakout-b2plus-active-teach/index.html?unit="+Math.max(1,Math.min(8,Number(unit)||1))+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&section=grammar":"");
   if(course==="speakout-b1"){const n=Math.max(1,Math.min(8,Number(unit)||1));return "speakout-b1-active-teach/index.html?unit="+n+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+(104+4*(n-1)):"");}
 
+  if(course==="focus-2") return "focus-2-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+(132+3*(Math.max(1,Number(unit))-1)):"");
   if(course==="focus-1") return "focus-1-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb")+(part==="grammar"?"&page="+([124,126,127,128,130,131,132,133,135][Number(unit)]||124):"");
   if(course==="solutions-el") return "solutions-el-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
   if(course==="solutions-int") return "solutions-int-active-teach/index.html?unit="+encodeURIComponent(unit)+"&book="+(part==="workbook"?"wb":"sb");
@@ -235,13 +236,14 @@ async function load(){
   });
   if(spk.some(h=>SolutionsElHW.ids(h).length)){try{await SolutionsElHW.load();}catch{}}
   if(spk.some(h=>FocusHW.ids(h).length)){try{await FocusHW.load();}catch{}}
+  if(spk.some(h=>Focus2HW.ids(h).length)){try{await Focus2HW.load();}catch{}}
   spk.forEach(x => {
     const meta = parseNote(x.note);
 
-    const bookHW=x.course==='solutions-el'?SolutionsElHW:x.course==='focus-1'?FocusHW:SolutionsHW;const solIds=bookHW.ids(x);
+    const bookHW=x.course==='solutions-el'?SolutionsElHW:x.course==='focus-2'?Focus2HW:x.course==='focus-1'?FocusHW:SolutionsHW;const solIds=bookHW.ids(x);
     if(solIds.length){
       const href=bookHW.link(solIds[0],x.id);
-      ITEMS.push({type:'spk',solutions:true,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:(x.course==='solutions-el'?'Solutions Elementary':x.course==='focus-1'?'Focus 1':'Solutions Intermediate')+' · '+solIds.length+' упр.',sub:'Student’s Book / Workbook',kicker:'Домашнее задание',desc:meta.msg||'Выполни выбранные упражнения и отправь работу преподавателю.',href,
+      ITEMS.push({type:'spk',solutions:true,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:(x.course==='solutions-el'?'Solutions Elementary':x.course==='focus-2'?'Focus 2':x.course==='focus-1'?'Focus 1':'Solutions Intermediate')+' · '+solIds.length+' упр.',sub:'Student’s Book / Workbook',kicker:'Домашнее задание',desc:meta.msg||'Выполни выбранные упражнения и отправь работу преподавателю.',href,
         extra:'<div class="sect"><span>Назначенные упражнения</span></div><div class="rows">'+solIds.map(id=>'<a class="row" href="'+esc(bookHW.link(id,x.id))+'">'+esc(bookHW.label(id))+' →</a>').join('')+'</div>'});
       return;
     }
