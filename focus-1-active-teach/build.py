@@ -4,8 +4,11 @@ No document text is executed. Original scans and content are preserved.
 from pathlib import Path
 import re,json,collections,hashlib
 from PIL import Image
+from source_parser import map_slots,margin_fields,instruction_from_spans
 R=Path(__file__).parent
 CHOICES=json.loads((R/'data/choice-marks.json').read_text());TB=json.loads((R/'data/teacher-spans.json').read_text());WK=json.loads((R/'data/workbook-keys.json').read_text())
+WB_ANCHORS=json.loads((R/'data/wb-anchors.json').read_text());WB_COLUMNS=json.loads((R/'data/wb-columns.json').read_text())
+MARGINS=json.loads((R/'data/sb-margin-keys.json').read_text())
 NAMES=['Intro Unit','Family and friends','Food','Work','People','Education','Health and sport','Travel','Nature']
 def ocr(b,i):return json.loads((R/f'data/ocr/{b}-{i}.jpg.json').read_text())
 def clean(t):return ' '.join(t.replace('\u00a0',' ').replace('ﬁ','fi').replace('ﬂ','fl').split())
@@ -15,7 +18,7 @@ def spec(fields):
   v=clean(v)
   if not v or len(v)>450 or re.search(r'Exercise|Workbook answer|Students.? own|Possible|Example|answers vary',v,re.I):return []
   vals=[v]
-  if '/' in v and all(len(x.split())<7 for x in v.split('/')):vals.extend(clean(x) for x in v.split('/'))
+  if '/' in v and all(len(x.split())==1 for x in v.split('/')):vals.extend(clean(x) for x in v.split('/'))
   # Parenthesized short auxiliaries are alternative forms in the supplied key.
   vals.append(re.sub(r'\s*\([^()]*\)','',v).strip())
   out.append({'label':n,'accepted':list(dict.fromkeys(x for x in vals if x))})
@@ -40,65 +43,59 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
     if not 0<x<.97 or not .025<y<.96:continue
     if any(a['label']==t and abs(a['y']-y)<.007 for a in anchors):continue
     # Align to OCR from the clean scan, never use the teacher image in the player.
-    candidates=[w for w in ws if re.match(r'^'+t+r'(?:\s|$)',w['text']) and abs(w['x']-x)<.035 and abs(w['y']-y)<.035]
+    candidates=[w for w in ws if re.match(r'^'+t+r'(?:\s|$)',w['text']) and abs(w['x']-x)<.014 and abs(w['y']-y)<.009]
     if candidates:
      a=min(candidates,key=lambda w:abs(w['y']-y)+abs(w['x']-x));x,y=a['x'],a['y']
     anchors.append({'label':t,'x':x,'y':y,'tb':[x0,y0], 'tbScale':[offset,width,height]})
-  elif book=='wb' and (4<=p<108 or 120<=p<136):
-   # Exercise labels occupy the outer margin; question numbers are indented.
-   for w in ws:
-    t=w['text'];m=CMD.match(t); x,y=w['x'],w['y']
-    near=(.035<x<.14 or .495<x<.60)
-    if not m and re.fullmatch(r'[1-9]|1[0-6]',t) and near:
-     neighbours=[q for q in ws if -.004<q['y']-y<.012 and .005<q['x']-x<.09 and re.match(r'(?:[★*]+\s*)?(?:Complete|Read|Write|Choose|Match|Put|Look|Use|Listen|In pairs|Label|Correct|Rewrite|Which|Answer)',q['text'])]
-     if neighbours:m=re.match(r'(\d+)',t)
-    if m and near and .025<y<.93 and 1<=int(m[1])<=16:
-     if not any(a['label']==m[1] and abs(a['y']-y)<.012 for a in anchors):anchors.append({'label':m[1],'x':x,'y':y})
-  if book=='wb' and anchors:
-   filtered=[]
-   for side in [False,True]:
-    group=[a for a in anchors if (a['x']>.49)==side]
-    if not group:continue
-    margin=min(a['x'] for a in group)
-    filtered.extend(a for a in group if a['x']<margin+.022)
-   anchors=filtered
-  anchors.sort(key=lambda a:(a['x']>.49,a['y']))
-  if book=='wb' and p<108:
-   ordered=[];last=0
-   for a in anchors:
-    if int(a['label'])>last:ordered.append(a);last=int(a['label'])
-   anchors=ordered
+  elif book=='wb':
+   anchors=[dict(a) for a in WB_ANCHORS.get(str(p),[])]
+   ws=WB_COLUMNS.get(str(p),ws)
+  columns=[]
+  for a in sorted(anchors,key=lambda a:a['x']):
+   if not columns or a['x']-columns[-1]>.1:columns.append(a['x'])
+   a['column']=len(columns)-1
+  anchors.sort(key=lambda a:(a['column'],a['y']))
   seen=collections.Counter();exercises=[]
   for a in anchors:
    n=a['label'];seen[n]+=1;exid=f'{book}-{p}-{n}'+(f'-b{seen[n]}' if seen[n]>1 else '')
-   side=a['x']>.49
-   nexts=[q['y'] for q in anchors if (q['x']>.49)==side and q['y']>a['y']+.01]
-   bottom=min(nexts,default=.978)
-   left=max(.025,a['x']-.012);right=.975 if side else .495
-   if .25<a['x']<.49:right=.975
-   box=[left,max(0,a['y']-.005),right-left,max(.018,bottom-a['y']-.004)]
-   region=[w for w in ws if left-.005<=w['x']<right and a['y']-.006<=w['y']<bottom-.005]
+   # Printed layouts include 60/40 and 2/3 + 1/3 columns, not only halves.
+   same=[q for q in anchors if abs(q['x']-a['x'])<.10]
+   nexts=[q['y'] for q in same if q['y']>a['y']+.01]
+   bottom=min(nexts,default=1.0)
+   following=[q['x'] for q in anchors if q['x']>a['x']+.15]
+   right=min(following)-.024 if following else 1.0
+   left=max(0,min(q['x'] for q in same)-.03)
+   if left<.12:left=0
+   top=max(0,a['y']-.008);end=min(1,bottom-.002 if nexts else 1)
+   region=[w for w in ws if left-.002<=w['x']<right-.003 and top<=w['y']<end-.002]
+   # Include complete OCR lines and descenders, with visible whitespace.
+   if region:
+    right=min(1,max(right,max(w['x']+w['w']+.008 for w in region)))
+    end=min(1,max(end,max(w['y']+w['h']+.006 for w in region)))
+   if book=='wb':
+    original=ocr(book,i)
+    crossing=[w for w in original if left<=w['x']<right and top<=w['y']<end and w['x']+w['w']>right+.05]
+    # Only expand for connected text; complete split lines are needed in several full-width tasks.
+    if crossing and (int(n)>=4 or p in [21,33,45,57,69,81,93,105]):
+     right=min(1,max(right,max(w['x']+w['w']+.012 for w in crossing)))
+   box=[left,top,right-left,max(.018,end-top)]
    text='\n'.join(w['text'] for w in sorted(region,key=lambda w:(round(w['y']/.007),w['x'])))
-   fields={};key='';reason='open';keysource=None
+   fields={};slots=[];regionS=[];key='';reason='open';keysource=None;instruction=a.get('instruction',text.split('\n')[0])
    if book=='sb' and 'tb' in a:
     x0,y0=a['tb'];off,scale,hs=a['tbScale'];
-    lower=[q['tb'][1] for q in anchors if 'tb' in q and (q['x']>.49)==side and q['tb'][1]>y0+7]
-    yend=min(lower,default=hs*.96);xb=off+left*scale;xe=off+right*scale
+    lower=[q['tb'][1] for q in anchors if 'tb' in q and abs(q['x']-a['x'])<.1 and q['tb'][1]>y0+7]
+    yend=min(lower,default=hs*.985);xb=off+left*scale;xe=off+right*scale
     regionS=[s for s in ss if xb-5<=s['bbox'][0]<xe+2 and y0-2<=s['bbox'][1]<yend-1]
-    reds=[s for s in regionS if s['color']==0xda2128 and s['text'].strip()]
-    numeric=[dict(s,text=re.match(r'^(\d{1,2}[a-z]?)(?:\s|$)',s['text'].strip())[1]) for s in regionS if re.match(r'^(\d{1,2}[a-z]?)(?:\s|$)',s['text'].strip()) and s['color']!=0xda2128 and (s['bbox'][1]>y0+8)]
-    unresolved=[]
-    for r in sorted(reds,key=lambda s:(round(s['bbox'][1]/4),s['bbox'][0])):
-     rx,ry,rx1,ry1=r['bbox'];t=clean(r['text']);
-     candidates=[q for q in numeric if q['bbox'][0]<rx+1 and -5<ry-q['bbox'][1]<(22 if r.get('marker') else 5)]
-     q=min(candidates,key=lambda q:abs(ry-q['bbox'][1])*35+(rx-q['bbox'][0])) if candidates else None
-     if q:
-      label=q['text'].strip();fields.setdefault(label,[]).append(t)
-     else:unresolved.append(t)
-    fields={label:' '.join(values) for label,values in fields.items()}
+    fields,slots,unresolved=map_slots(regionS,y0)
+    instruction=instruction_from_spans(regionS,y0)
     key='\n'.join(f'{label} {v}' for label,v in fields.items())
-    if unresolved:key+=('\n' if key else '')+' · '.join(unresolved)
-    if unresolved:fields={} # Never grade an incomplete extraction.
+    if unresolved:key+=('\n' if key else '')+' · '.join(r['text'] for r in unresolved)
+    margin=MARGINS.get(str(p),{}).get(n,'')
+    if margin:
+     key+=('\n' if key else '')+margin
+     mf=margin_fields(margin)
+     if mf and not fields:fields=mf
+    if unresolved:fields={}
     keysource={'book':'teacher','pdfPage':p+20}
    elif book=='wb':
     section=''
@@ -107,15 +104,18 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
      rel=(p-12)%12;part=1 if rel<2 else rel if rel<4 else 4 if rel<6 else rel-1 if rel<10 else 9
      section=f'{unit}.{part}'
     elif 128<=p<=135:section=f'grammar-{p-127}'
+    elif 120<=p<=127:
+     topics={120:['people','home'],121:['school','school'],122:['work','family-and-social'],123:['food','shopping-and'],124:['travelling-and','culture'],125:['sport','health'],126:['science-and','the-natural-world'],127:['state-and-society','english-speaking']}
+     section='vb-'+topics[p][int(a['x']>.49)]
     r=WK.get(section+'-'+n)
     if r:
      key=r['raw'];keysource={'book':'teacher','pdfPage':r['sourcePdfPage']}
-     if not r['ambiguous'] and all(re.fullmatch(r'(?:Conversation \d+ · )?\d+|[a-j]',f) for f in r['fields']):fields=r['fields']
+     if not r['ambiguous'] and all(re.fullmatch(r'(?:Conversation \d+ · )?\d+[a-z]?|[a-j]',f) for f in r['fields']):fields=r['fields']
    answerSpec=spec(fields)
    personal=bool(re.search(r'true for you|your own|about yourself|your (?:family|life|partner)|Then (?:answer|write|tell)|Which.*true for you',text,re.I))
    mode='mixed' if answerSpec and personal else 'automatic' if answerSpec else 'open'
    fingerprint=hashlib.sha256(json.dumps(answerSpec,sort_keys=True).encode()).hexdigest()[:12]
-   ex={'id':exid,'label':n if seen[n]==1 else n+f' (блок {seen[n]})','x':a['x'],'y':a['y'],'box':box,'text':text,'key':key,'keySource':keysource,'answerSpec':answerSpec,'answerVersion':fingerprint,'marking':{'mode':mode},'answers':[]}
+   ex={'id':exid,'label':n if seen[n]==1 else n+f' (блок {seen[n]})','x':a['x'],'y':a['y'],'box':box,'text':text,'instructionText':instruction,'sourceSlots':slots,'_spans':regionS,'key':key,'keySource':keysource,'answerSpec':answerSpec,'answerVersion':fingerprint,'marking':{'mode':mode},'answers':[]}
    exercises.append(ex)
   image=f'assets/pages/{book}-{i}.jpg';size=list(Image.open(R/image).size)
   tracks=sorted(set(re.findall(r'(?<!\d)([1-3][.,]\d{2})(?!\d)',' '.join(w['text'] for w in ws)))) if book in ['sb','ws'] else []
@@ -124,15 +124,32 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
   pg={'id':f'{book}-{p}','book':book,'page':p,'pdfPage':i,'image':image,'unit':unit,'title':title,'bank':bank,'exercises':exercises,'tracks':tracks};pages.append(pg)
   for ex in exercises:
    sources=[{'image':image,'page':p,'size':size,'box':ex['box']}]
-   if re.search(r'\b(?:text|article|blog|email|dialogue|photo|picture|questionnaire|advert|notice)\b',ex['text'],re.I):
+   if re.search(r'\b(?:texts?|articles?|blogs?|emails?|dialogues?|photos?|pictures?|questionnaires?|adverts?|notices?|website|table|Exercise\s+\d+)\b',ex['text'],re.I):
     # Include the complete source page as supporting context; the numbered task stays first.
-    sources.append({'image':image,'page':p,'size':size,'box':[.025,.02,.95,.94],'context':True})
+    sources.append({'image':image,'page':p,'size':size,'box':[0,0,1,1],'context':True})
    if book in ['sb','wb'] and 12<=p<108 and (p-12)%12==5:
     prev=next(z for z in pages if z['book']==book and z['page']==p-1)
-    sources.append({'image':prev['image'],'page':p-1,'size':list(Image.open(R/prev['image']).size),'box':[.025,.02,.95,.94],'context':True})
+    sources.append({'image':prev['image'],'page':p-1,'size':list(Image.open(R/prev['image']).size),'box':[0,0,1,1],'context':True})
+   if book=='wb' and ex['x']<.49:
+    right_anchors=[a for a in anchors if a['x']>.49]
+    left_anchors=[a for a in anchors if a['x']<.49]
+    if right_anchors and left_anchors and ex['y']==max(a['y'] for a in left_anchors) and min(a['y'] for a in right_anchors)>.16:
+     sources.insert(1,{'image':image,'page':p,'size':size,'box':[.49,0,.51,min(a['y'] for a in right_anchors)-.004],'continuation':True})
    source_manifest[ex['id']]={'label':ex['label'],'sources':sources}
  for k in ['pages','exercises','automatic']:
   ps=[p for p in pages if p['book']==book];audit[k][book]=len(ps) if k=='pages' else sum(len(p['exercises']) if k=='exercises' else sum(bool(e['answerSpec']) for e in p['exercises']) for p in ps)
+# Reading spreads and continued numbered tasks must carry their original context.
+for pg in pages:
+ if pg['book'] not in ['sb','wb']:continue
+ ps=pg['page'];adj=[]
+ if 12<=ps<108 and (ps-12)%12 in [4,5]:adj.append(ps+1 if (ps-12)%12==4 else ps-1)
+ if pg['exercises'] and min(int(e['label'].split()[0]) for e in pg['exercises'])>1:adj.append(ps-1)
+ for n in set(adj):
+  other=next((x for x in pages if x['book']==pg['book'] and x['page']==n and x['unit']==pg['unit']),None)
+  if not other:continue
+  for ex in pg['exercises']:
+   sources=source_manifest[ex['id']]['sources']
+   if not any(z['image']==other['image'] for z in sources):sources.append({'image':other['image'],'page':n,'size':list(Image.open(R/other['image']).size),'box':[0,0,1,1],'context':True})
 D={'units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':[],'ws':[]},'resources':json.loads((R/'data/resources.json').read_text()) if (R/'data/resources.json').exists() else []}
 (R/'assets/course.js').write_text('window.FOCUS = '+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';\n')
 (R/'assets/exercise-sources.js').write_text('window.EXERCISE_SOURCES = '+json.dumps(source_manifest,ensure_ascii=False,separators=(',',':'))+';\n')
@@ -141,3 +158,7 @@ D={'units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'me
 # Word Store is printed as an out-of-order booklet in the supplied PDF.
 import runpy
 runpy.run_path(str(R/"compile-wordstore.py"))
+
+runpy.run_path(str(R/"compile-activities.py"))
+
+runpy.run_path(str(R/"audit-sources.py"))

@@ -1,0 +1,57 @@
+{
+  "scope": "Focus 1 Second Edition",
+  "printedPages": 303,
+  "exercises": 1344,
+  "automaticActivities": 927,
+  "savedOpenActivities": 417,
+  "reviewedActivityOverrides": 209,
+  "sourceRectanglesExpanded": 404,
+  "legacyLinksRetained": 19,
+  "originalHumanAudioTracks": 163,
+  "suppliedTranscripts": 39,
+  "browserQA": {
+    "viewports": [
+      1440,
+      390
+    ],
+    "exerciseRuns": 2688,
+    "browserErrors": [],
+    "failedRuns": []
+  },
+  "integrationQA": [
+    "saved answers restore",
+    "cloud failure and retry",
+    "immutable homework submission",
+    "teacher multi-book assignment",
+    "account isolation",
+    "live lesson iframe and answers",
+    "keyboard choices",
+    "click and drag word banks",
+    "multiple selection restore",
+    "sentence building and undo",
+    "fit, zoom, full page and mobile tabs",
+    "muted audio decoding"
+  ],
+  "platformChecks": 88,
+  "coverage": {
+    "sb": {
+      "pages": 142,
+      "exercises": 749,
+      "automatic": 379
+    },
+    "wb": {
+      "pages": 144,
+      "exercises": 529,
+      "automatic": 483
+    },
+    "ws": {
+      "pages": 17,
+      "exercises": 66,
+      "automatic": 65
+    }
+  },
+  "limits": [
+    "Semantic source review uses targeted corrected fixtures and 209 reviewed overrides; the exhaustive browser run verifies runtime behavior, not every pedagogical answer independently.",
+    "Open-ended writing and speaking stay teacher-reviewed; no synthetic speech or substitute-edition video is supplied."
+  ]
+}

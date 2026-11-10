@@ -3,7 +3,7 @@
 'use strict';
 function normalize(value){
  let s=String(value??'').normalize('NFKC').toLowerCase().replace(/[‘’`]/g,"'").trim().replace(/^'(.+)'$/,'$1');
- if(/^(?:[-–—−]|no article|zero article|none|no match|∅)$/.test(s))return '∅';
+ if(/^(?:[-–—−]|no article|zero article|none|no match|ø|∅)$/.test(s))return '∅';
  if(/^(?:✓|✔|correct|no change|no changes)$/.test(s))return '✓';
  if(/^(?:true|t)$/.test(s))return 'true';if(/^(?:false|f)$/.test(s))return 'false';
  if(/^(?:ng|not given)$/.test(s))return 'not given';

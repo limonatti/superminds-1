@@ -1,5 +1,6 @@
 from pathlib import Path
 import json,re,hashlib
+from source_parser import map_slots,word_completions
 from PIL import Image
 R=Path(__file__).parent;teacher=json.loads((R/'data/wordstore-spans.json').read_text())
 def readjs(p):return json.loads(p.read_text().split('=',1)[1].strip().rstrip(';'))
@@ -18,20 +19,15 @@ for p in range(1,18):
   anchors.append({'label':label,'x':x,'y':y,'tb':s['bbox'],'group':bool(group)})
  anchors.sort(key=lambda a:(a['x']>.49,a['y']));exs=[];size=list(Image.open(R/f'assets/pages/ws-{i}.jpg').size)
  for ordinal,a in enumerate(anchors,1):
-  side=a['x']>.49;other=[b for b in anchors if (b['x']>.49)==side and b['y']>a['y']+.01];end=min([b['y'] for b in other],default=.97);left=max(.02,a['x']-.01);right=.97 if side else .497;box=[left,max(.0,a['y']-.004),right-left,end-a['y']-.004]
-  tbEnd=min([b['tb'][1] for b in other],default=800);tbX=269 if side else 20;tbRight=520 if side else 267
+  side=a['x']>.49;other=[b for b in anchors if (b['x']>.49)==side and b['y']>a['y']+.01];end=min([b['y'] for b in other],default=.97);left=max(0,a['x']-.02);right=1 if side or p==1 else .505;box=[left,max(.0,a['y']-.004),right-left,end-a['y']-.004]
+  tbEnd=min([b['tb'][1] for b in other],default=800);tbX=269 if side else 20;tbRight=525 if side or p==1 else 267
   region=[s for s in ss if tbX-3<s['bbox'][0]<tbRight and a['tb'][1]+12<s['bbox'][1]<tbEnd-1]
-  reds=[s for s in region if s['color']==0xda2128];nums=[dict(s,text=re.match(r'^(\d{1,2})(?:\s|$)',s['text'].strip())[1]) for s in region if s['color']!=0xda2128 and re.match(r'^(\d{1,2})(?:\s|$)',s['text'].strip())]
-  fields={};unresolved=[]
-  for r in sorted(reds,key=lambda s:(round(s['bbox'][1]/4),s['bbox'][0])):
-   x,y=r['bbox'][:2];t=clean(r['text']);cs=[n for n in nums if n['bbox'][0]<x+1 and -6<y-n['bbox'][1]<(100 if r.get('marker') else 8)]
-   if cs:
-    n=min(cs,key=lambda n:abs(y-n['bbox'][1])*100+x-n['bbox'][0]);fields.setdefault(n['text'],[]).append(t)
-   else:unresolved.append(t)
-  key='\n'.join(n+' '+' '.join(v) for n,v in fields.items())+('\n'+' · '.join(unresolved) if unresolved else '')
-  spec=[] if unresolved else [{'label':n,'accepted':[' '.join(v)]} for n,v in sorted(fields.items(),key=lambda x:int(x[0])) if any(v)]
+  region=word_completions(region)
+  fields,slots,unresolved=map_slots(region,a['tb'][1])
+  key='\n'.join(n+' '+v for n,v in fields.items())+('\n'+' · '.join(r['text'] for r in unresolved) if unresolved else '')
+  spec=[] if unresolved else [{'label':n,'accepted':[v]} for n,v in sorted(fields.items(),key=lambda x:tuple(int(z) if z.isdigit() else z for z in re.split(r'(\d+)',x[0])))]
   exid=f'ws-{p}-{ordinal}';label=a['label'];txt='\n'.join(w['text'] for w in ws if left<=w['x']<right and a['y']<=w['y']<end)
-  ex={'id':exid,'label':label,'x':a['x'],'y':a['y'],'box':box,'text':txt,'key':key,'keySource':{'book':'teacher','pdfPage':idx+1},'answerSpec':spec,'answerVersion':hashlib.sha256(json.dumps(spec).encode()).hexdigest()[:12],'marking':{'mode':'automatic' if spec else 'open'},'answers':[]}
+  ex={'id':exid,'label':label,'x':a['x'],'y':a['y'],'box':box,'text':txt,'sourceSlots':slots,'_spans':region,'key':key,'keySource':{'book':'teacher','pdfPage':idx+1},'answerSpec':spec,'answerVersion':hashlib.sha256(json.dumps(spec).encode()).hexdigest()[:12],'marking':{'mode':'automatic' if spec else 'open'},'answers':[]}
   exs.append(ex);sources[exid]={'label':label,'sources':[{'image':f'assets/pages/ws-{i}.jpg','size':size,'page':p,'box':box}]}
   if a['group']:groups[label]=ex
  D['pages'].append({'id':f'ws-{p}','book':'ws','page':p,'pdfPage':i,'image':f'assets/pages/ws-{i}.jpg','unit':unit,'title':('Word Practice' if p%2==0 else 'Word Store')+f' {unit}','bank':'Word Store','exercises':exs,'tracks':[]})
@@ -39,7 +35,7 @@ for p in range(1,18):
 for pg in D['pages']:
  if pg['book']!='sb':continue
  for e in pg['exercises']:
-  m=re.search(r'Complete WORD STORE (\d[A-F])',e['text'],re.I)
+  m=re.search(r'Complete WORD STORE (\d(?:[A-F]|\.[26]))',e['text'],re.I)
   if not m or m[1] not in groups:continue
   target=groups[m[1]];sources[e['id']]['sources']+=sources[target['id']]['sources'];e['wordStore']=target['id']
   if target['answerSpec']:

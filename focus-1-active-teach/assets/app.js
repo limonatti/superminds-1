@@ -28,42 +28,44 @@ function render(){
  window.ExerciseSource.regions($('#hotspots'),page.exercises.map(e=>e.box));
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Слова доступны в словаре и карточках.</p>';
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
- $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join(''):book==='wb'?'<p>В этой книге задания выполняются по текстам и диалогам на странице.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
+ $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/sb-${t}.mp3"></audio></label>`).join(''):book==='wb'?'<p>В этой книге задания выполняются по текстам и диалогам на странице.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
  $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book==='ws'?'sb':book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
  $('#extraPractice').href='legacy/focus-1-u'+(unit==='extra'?0:unit)+'.html';$('#trainer').href='../trainer.html?course=focus-1'+(unit==='extra'?'':'&unit=f1-u'+unit);$('#vocabulary').href='../vocabulary.html?course=focus-1';
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
 }
-function resizeCrop(){window.ExerciseSource.change($('#solutionOriginal'),{full:$('#fullPage').getAttribute('aria-pressed')==='true'});if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
 function openExercise(id){
- active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
+ $$('audio').forEach(a=>a.pause());
+ active=page.exercises.find(e=>e.id===id)||(D.legacyExercises||[]).find(e=>e.id===id&&e.book===page.book&&e.page===page.page);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
- $('#exerciseAudio').innerHTML=page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
+ $('#exerciseAudio').innerHTML=(active.tracks||[]).map(t=>`<div class="exercise-track"><label>Трек ${esc(t)}<audio controls preload="metadata" src="media/sb-${t}.mp3"></audio></label><button type="button" class="audio-repeat">Повторить сначала</button>${D.transcripts?.[t]?`<details class="audio-transcript"><summary>Текст записи</summary><div>${esc(typeof D.transcripts[t]==='string'?D.transcripts[t]:D.transcripts[t].text)}</div></details>`:''}</div>`).join('');
+ $$('#exerciseAudio .audio-repeat').forEach(b=>b.onclick=()=>{const a=b.parentElement.querySelector('audio');a.currentTime=0;a.play().catch(()=>{});});
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
  const vals=restored.values,spec=active.answerSpec||[],automatic=spec.length>0,mixed=active.marking.mode==='mixed';
- $('#instruction').textContent=active.marking.instruction||(automatic?'Впиши ответы в поля с номерами из задания. Несколько пропусков одного пункта разделяй запятой.':'Выполни задание по условию. Сохрани письменный ответ или заметки для устного ответа.');
+ $('#instruction').textContent=active.activity?.instruction||active.marking.instruction||(automatic?'Выполни задание по оригиналу. Номера полей соответствуют пунктам упражнения.':'Выполни задание по оригиналу. Сохрани свой ответ или заметки.');
  if(spec.some(f=>f.kind==='set'))$('#instruction').textContent+=' В полях «Список» разделяй ответы точкой с запятой; порядок не важен.';
  if(mixed)$('#instruction').textContent+=' Собственные примеры и объяснения запиши отдельно — их проверит преподаватель.';
- const printedLetters=window.ExercisePlay.sourceLetters(active.text);
- const allLetters=printedLetters.length>1&&automatic&&!spec.every(f=>f.accepted?.every(v=>/^(T|F)$/i.test(v)))&&spec.every(f=>f.kind!=='set'&&f.accepted.every(v=>/^[a-z]$/i.test(v)));
- $('#fields').innerHTML=automatic?spec.map((f,i)=>{
-  const tf=f.kind!=='set'&&f.accepted.every(v=>/^(T|F|true|false|NG|not given)$/i.test(v));
-  const choices=allLetters?printedLetters:tf?['T','F',...(/not given|not stated|doesn.t say|not mentioned/i.test(active.text)?['NG']:[])]:null;
-  return `<label class="answer-row"><span>${esc(f.label)}${f.kind==='set'?'<small>Список</small>':''}</span>${choices?`<select data-answer aria-label="Ответ ${esc(f.label)}"><option value="">—</option>${choices.map(v=>`<option value="${v}" ${String(vals[i]||'').toLowerCase()===v.toLowerCase()?'selected':''}>${v}</option>`).join('')}</select>`:f.kind==='set'?`<textarea data-answer rows="2" maxlength="4000" aria-label="Ответ ${esc(f.label)}" placeholder="Ответы через ;" spellcheck="false">${esc(vals[i]||'')}</textarea>`:`<input data-answer aria-label="Ответ ${esc(f.label)}" value="${esc(vals[i]||'')}" maxlength="2000" autocomplete="off" spellcheck="false">`}</label>`;
- }).join(''):`<label for="written">Мой ответ</label><textarea id="written" data-answer maxlength="12000" placeholder="Напиши ответ…">${esc(vals[0]||'')}</textarea>`;
+ $('#fields').innerHTML=window.FocusActivity.render(active,vals);
  if(mixed)$('#fields').insertAdjacentHTML('beforeend',`<label class="reflection-label" for="reflection">Объяснения и собственные примеры · проверяет преподаватель</label><textarea id="reflection" maxlength="12000" placeholder="Напиши свободную часть ответа…">${esc(restored.reflection)}</textarea>`);
  if(previousAnswers.length)$('#fields').insertAdjacentHTML('beforeend',`<details class="previous-answers"><summary>Ранее сохранённые ответы</summary><p>Поля задания уточнены. Твои предыдущие ответы сохранены; перенеси нужные в новые поля для проверки.</p>${previousAnswers.map(r=>`<ol>${r.values.map((v,i)=>`<li>${r.labels?.[i]?esc(r.labels[i])+': ':''}${esc(v||'—')}</li>`).join('')}</ol>${r.reflection?`<p>${esc(r.reflection)}</p>`:''}`).join('')}</details>`);
- $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
+ $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key||(!assigner?.allowed&&!responses[id]?.score&&!vals.some(v=>v.trim()));$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
- window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
- window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:active.text,fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
+ window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));if(!$('#exercise').open)$('#exercise').showModal();window.FocusSource.mount($('#solutionOriginal'),active.id);window.FocusActivity.bind($('#fields'),active);updateExerciseNavigation();updateAssignMarkers();
+
 }
+
+function exerciseSequence(){return D.pages.filter(p=>p.book===book).flatMap(p=>p.exercises.map(e=>({page:p,id:e.id})));}
+function updateExerciseNavigation(){const all=exerciseSequence(),i=all.findIndex(e=>e.id===(active?.canonicalId||active?.id));$('#exercisePrev').disabled=i<=0;$('#exerciseNext').disabled=i<0||i===all.length-1;$('#solutionColumns').scrollTop=0;$('#solutionColumns .focus-responses').scrollTop=0;}
+function moveExercise(delta){const all=exerciseSequence(),i=all.findIndex(e=>e.id===(active?.canonicalId||active?.id)),next=all[i+delta];if(!next)return;page=next.page;unit=String(page.unit);render();openExercise(next.id);}
+$('#exercisePrev').onclick=()=>moveExercise(-1);$('#exerciseNext').onclick=()=>moveExercise(1);
+$$('[data-exercise-pane]').forEach(button=>button.onclick=()=>{$('#exercise').dataset.pane=button.dataset.exercisePane;$$('[data-exercise-pane]').forEach(b=>b.setAttribute('aria-selected',String(b===button)))});
+
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
 function save(explicit){
  if(!active||!ready)return;
  const values=$$('[data-answer]').map(e=>e.value),old=responses[active.id];
  const score=old?.answerVersion===active.answerVersion&&JSON.stringify(old.values)===JSON.stringify(values)?old.score:undefined;
  responses[active.id]={values,score,checks:old?.checks||[],reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
- persist();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
+ persist();$('#keyPanel').hidden=!active.key||(!assigner?.allowed&&!values.some(v=>v.trim()));clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
  if(explicit)$('#feedback').textContent=user?'Ответ сохранён. Синхронизация с аккаунтом…':'Ответ сохранён на этом устройстве.';
 }
 $('#answerForm').onsubmit=ev=>{
@@ -80,8 +82,8 @@ $('#answerForm').onsubmit=ev=>{
  if(user)recordAttempts(values.map((answer,i)=>({course:'focus-1',unit:Number(page.unit)||0,section:(book==='wb'?'workbook':'lesson')+':focus',ex_index:M.attemptIndex(active.id,spec[i].label),question:`${book.toUpperCase()} p.${page.page} ex.${active.label}, ${spec[i].label}`,answer,correct:results[i]}))).catch(()=>{});
 };
 async function recordAttempts(rows){const current=await SM.getUser();if(current?.id!==user?.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return {ok:false};}return SM.saveHwAttempts(rows);}
-$('#fullPage').onclick=()=>{$('#fullPage').setAttribute('aria-pressed',$('#fullPage').getAttribute('aria-pressed')!=='true');resizeCrop();};
-$('#saveAnswer').onclick=()=>{save(true);sync()};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
+
+$('#saveAnswer').onclick=()=>{save(true);sync()};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{$$('audio').forEach(a=>a.pause());active=null;render();});
 $('#pages').onchange=ev=>{page=list().find(p=>p.id===ev.target.value);render();};
 for(const [id,dir] of [['prev',-1],['next',1]])$('#'+id).onclick=()=>{page=list()[list().indexOf(page)+dir]||page;render();};
 $$('[data-book]').forEach(b=>b.onclick=()=>{book=b.dataset.book;page=null;render();});
@@ -93,7 +95,7 @@ $('#present').onclick=async()=>{const on=document.body.classList.toggle('present
 $('#sync').onclick=sync;
 $('#export').onclick=()=>{const data=JSON.stringify({course:'Focus 1 2nd edition',responses},null,2);const href=URL.createObjectURL(new Blob([data],{type:'application/json'}));const a=document.createElement('a');a.href=href;a.download='focus-1-answers.json';a.click();setTimeout(()=>URL.revokeObjectURL(href),1000);};
 $('#pageImage').onerror=()=>$('#imageError').hidden=false;$('#retryImage').onclick=()=>{$('#pageImage').src=page.image+'?retry='+Date.now();$('#imageError').hidden=true;};
-window.addEventListener('online',sync);window.addEventListener('resize',resizeCrop);document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.body.classList.remove('present');$('#present').setAttribute('aria-pressed','false');}});
+window.addEventListener('online',sync);document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.body.classList.remove('present');$('#present').setAttribute('aria-pressed','false');}});
 document.addEventListener('play',ev=>{if(ev.target.tagName==='AUDIO')$$('audio').forEach(a=>{if(a!==ev.target)a.pause();});},true);
 function updateAssignMarkers(){
  const choosing=!!assigner?.mode;
@@ -138,7 +140,7 @@ async function loadHomework(){
 (async()=>{
  workStore=new CourseWorkStore({course:"focus-1",legacy(u){try{return JSON.parse(localStorage.getItem(NS+':'+(u?.id||'guest'))||'{}')}catch{return {}}},onStatus:status,onAccountChange:()=>CourseWorkUI.accountChanged(),onChange(rows,change){responses=rows;if(ready&&change.remote){renderProgress();if(active&&$('#exercise').open&&shownRecord!==JSON.stringify(rows[active.id]||{}))openExercise(active.id);}}});
  await workStore.start();user=workStore.user;responses=workStore.records;storageKey=workStore.key();CourseWorkUI.bind(workStore,()=>{save(false);return sync()});
- ready=true;page=params.has('page')?D.pages.find(p=>p.book===book&&p.page===Number(params.get('page'))):null;if(page)unit=String(page.unit);render();persist();assigner=window.FocusAssign.create({getUser:()=>user,getPage:()=>page,onChange:updateAssignMarkers});assigner.init();await loadHomework();const wanted=params.get('ex');if(wanted&&page.exercises.some(e=>e.id===wanted))openExercise(wanted);})();
+ ready=true;page=params.has('page')?D.pages.find(p=>p.book===book&&p.page===Number(params.get('page'))):null;if(page)unit=String(page.unit);render();persist();assigner=window.FocusAssign.create({getUser:()=>user,getPage:()=>page,onChange:updateAssignMarkers});assigner.init();await loadHomework();const wanted=params.get('ex');if(wanted&&(page.exercises.some(e=>e.id===wanted)||(D.legacyExercises||[]).some(e=>e.id===wanted&&e.book===page.book&&e.page===page.page)))openExercise(wanted);})();
 function renderMaterials(){const category=$('#resourceCategory').value,query=$('#resourceSearch').value.toLowerCase();$('#resourceList').innerHTML=D.resources.filter(r=>r.category===category&&r.title.toLowerCase().includes(query)).map(r=>`<a class="resource" href="${esc(r.path)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a>`).join('')||'<p>Материалов по этому запросу нет.</p>';}
 $('#materials').onclick=()=>{renderMaterials();$('#materialsDialog').showModal();};$('#closeMaterials').onclick=()=>$('#materialsDialog').close();$('#resourceCategory').onchange=renderMaterials;$('#resourceSearch').oninput=renderMaterials;
 window.LiveCourse?.connect({

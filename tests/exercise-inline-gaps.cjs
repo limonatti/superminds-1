@@ -2,37 +2,21 @@ const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||require.resolve('playwright',{paths:[require('node:path').join(require('node:os').homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node')]}));
 const base=process.env.EXERCISE_TEST_BASE||'http://127.0.0.1:8772';
 (async()=>{
- const b=await chromium.launch({channel:'chrome',headless:true});
+ const b=await chromium.launch({channel:'chrome',headless:true,args:['--mute-audio']});
  try{
   const p=await b.newPage({viewport:{width:1280,height:950}}),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.route('https://**',r=>r.abort());
   const open=async()=>{if(!await p.locator('dialog[open]').count())await p.locator('[data-ex="wb-12-1"]').first().click()};
   await p.goto(base+'/focus-1-active-teach/index.html?book=wb&page=12');await open();
-  assert.equal(await p.locator('.play-gap-layer input').count(),8);
-  assert.equal(await p.locator('.play-manual input:visible,.play-answer-strip .play-slot:visible').count(),0);
-  assert.deepEqual((await p.locator('.play-word').allTextContents()).sort(),['go','have','listen','play','read','watch']);
+  // Focus now owns explicit answer controls; it never guesses overlay positions.
+  assert.equal(await p.locator('[data-answer]').count(),8);assert.equal(await p.locator('.play-gap-layer').count(),0);
   for(const [i,word]of ['play','listen','watch','read','read','go','have','listen'].entries()){
-   await p.locator(`input.play-slot[data-field="${i}"]`).click();await p.getByRole('button',{name:word,exact:true}).click();
+   await p.locator('[data-answer]').nth(i).focus();await p.locator('[data-bank]').filter({hasText:new RegExp('^'+word+'$')}).click();
   }
-  await p.locator('.play-check').click();assert.match(await p.locator('.play-feedback').innerText(),/8.*8/);
-  await p.reload();await open();assert.equal(await p.locator('input.play-slot[data-field="7"]').inputValue(),'listen');
-  await p.locator('.focus-source-controls button').last().click();assert.equal(await p.locator('input.play-slot').count(),8);
+  await p.locator('#check').click();assert.match(await p.locator('#feedback').innerText(),/8.*8/);
+  await p.reload();await open();assert.equal(await p.locator('[data-answer]').nth(7).inputValue(),'listen');
+  await p.locator('[data-full]').click();assert.equal(await p.locator('[data-answer]').count(),8);
   await p.setViewportSize({width:390,height:844});assert(await p.locator('dialog[open]').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
   await p.screenshot({path:'/private/tmp/inline-gaps-focus-mobile.png'});
-  await p.setViewportSize({width:1280,height:950});
-  // An exercise without precomputed positions still has no second answer form.
-  await p.evaluate(()=>localStorage.clear());await p.reload();await p.keyboard.press('Escape');await p.evaluate(()=>{window.EXERCISE_GAPS['wb-12-1']={}});await open();
-  assert.equal(await p.locator('.play-slot').count(),0);
-  await p.getByRole('button',{name:'play',exact:true}).click();
-  const point=async(a,b)=>p.locator('.play-canvas').first().evaluate((el,[a,b])=>{const[x,y,w,h]=el._source.box,r=el.getBoundingClientRect();return{x:r.x+(a-x)/w*r.width,y:r.y+(b-y)/h*r.height}},[a,b]);
-  let pos=await point(.222,.328);await p.mouse.click(pos.x,pos.y);await p.waitForFunction(()=>document.querySelector('input.play-slot')?.value==='play');
-  const placed=await p.evaluate(()=>JSON.parse(localStorage.getItem('exercise-positions-v1:'+location.pathname+':wb-12-1'))['1']);assert(placed.box[2]<.065,'tap snaps to the actual printed blank');
-  const canvas=p.locator('.play-canvas').first(),rect=await canvas.boundingBox();pos=await point(.183,.355);
-  await p.getByRole('button',{name:'listen',exact:true}).dragTo(canvas,{targetPosition:{x:pos.x-rect.x,y:pos.y-rect.y}});
-  await p.waitForFunction(()=>document.querySelector('input.play-slot[data-field="1"]')?.value==='listen');
-  await p.locator('input.play-slot[data-field="1"]').click();await p.locator('.play-type-toggle').click();await p.locator('input.play-slot[data-field="1"]').fill('edited');
-  assert.equal(await p.locator('[data-answer]').nth(1).inputValue(),'edited');
-  await p.locator('.play-reposition').click();assert.equal(await p.locator('input.play-slot[data-field="1"]').count(),0);pos=await point(.183,.355);await p.mouse.click(pos.x,pos.y);await p.waitForFunction(()=>document.querySelector('input.play-slot[data-field="1"]')?.value==='edited');
-  await p.screenshot({path:'/private/tmp/inline-gaps-focus-desktop.png'});
   // Explicit multi-part source positions keep one original grading/storage contract.
   const f=await b.newPage({viewport:{width:1280,height:950}});f.on('pageerror',e=>errors.push(e.message));
   await f.goto(base+'/__inline_test_fixture__');await f.setContent('<dialog id="exercise"><div id="columns"><section id="source"></section><section id="responses"><div id="row"><input id="answer"></div><button id="check">Проверить</button><button id="exerciseKeys">Ключ</button><div id="keyArea">key</div></section></div></dialog>');
