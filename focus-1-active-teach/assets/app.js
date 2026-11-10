@@ -30,7 +30,7 @@ function render(){
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
  $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/sb-${t}.mp3"></audio></label>`).join(''):book==='wb'?'<p>В этой книге задания выполняются по текстам и диалогам на странице.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
  $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book==='ws'?'sb':book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
- $('#extraPractice').href='legacy/focus-1-u'+(unit==='extra'?0:unit)+'.html';$('#trainer').href='../trainer.html?course=focus-1'+(unit==='extra'?'':'&unit=f1-u'+unit);$('#vocabulary').href='../vocabulary.html?course=focus-1';
+ $('#trainer').href='../trainer.html?course=focus-1'+(unit==='extra'?'':'&unit=f1-u'+unit);$('#vocabulary').href='../vocabulary.html?course=focus-1';
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
 }
 function openExercise(id){

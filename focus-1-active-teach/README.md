@@ -8,7 +8,7 @@ Source rectangles preserve complete printed text, with independent scrolling, ad
 
 Included media: 163 original human-recorded Student’s Book audio tracks, plus 39 supplied transcripts extracted from the Teacher’s Book. Playback, repeat and transcript controls are attached to the corresponding activities. No speech synthesis is used. The 403 source resources include teacher/photocopiable books, lesson/video plans, tests and word lists (with their own audio). No verified Second Edition video files were available; video worksheets and plans are included, without substituting First Edition video.
 
-Responses are isolated per account under `focus-1`, synchronized through the existing coursework API, and retained locally on network failure. Homework uses `focusExercises` metadata, immutable submitted snapshots and existing teacher reports. LiveCourse synchronizes pages, tasks and student responses with the room. The original authored practice pages remain in `legacy/`; their prior data is not migrated or deleted.
+Responses are isolated per account under `focus-1`, synchronized through the existing coursework API, and retained locally on network failure. Homework uses `focusExercises` metadata, immutable submitted snapshots and existing teacher reports. LiveCourse synchronizes pages, tasks and student responses with the room. The original authored practice pages remain archived in `legacy/`; their prior data is not migrated or deleted. The current reader does not link to that older practice because it contains synthetic audio. All audio in the rebuilt reader uses the supplied human recordings.
 
 ## Rebuild and validate
 
