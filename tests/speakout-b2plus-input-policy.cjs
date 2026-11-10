@@ -26,7 +26,7 @@ for(const [page,exercises]of Object.entries(bank))for(const ex of exercises){
  }
  assert(!attempted(ex,{[ex.id+':extra']:{value:'done',checked:true}}),'extra fields cannot unlock unanswered tasks');
 }
-assert.equal(totals.sb.exercises,721);assert.equal(totals.wb.exercises,393);
+assert.equal(totals.sb.exercises,728);assert.equal(totals.wb.exercises,393);
 const ex=id=>Object.values(bank).flat().find(e=>e.id===id),field=(id,n)=>ex(id).fields.find(f=>f.n===n);
 const review=ex('sb-17-2A-2');
 for(const [i,answer]of ['working','designed','shaped','positioned','creating','acting'].entries()){
@@ -54,4 +54,4 @@ const host={dataset:{sourceFit:'width'},clientWidth:800,querySelector:()=>doc};
 view.window.ExerciseSource.fit(host);assert.equal(width,'800px');
 doc._focus.zoom=1.25;view.window.ExerciseSource.fit(host);assert.equal(width,'1000px');
 doc._focus.zoom=.5;view.window.ExerciseSource.fit(host);assert.equal(width,'400px');
-console.log('PASS all 1,114 exercises: no answer-derived suggestions; original choices retained; key access follows saved attempts.',totals);
+console.log('PASS all 1,121 exercises: no answer-derived suggestions; original choices retained; key access follows saved attempts.',totals);

@@ -35,3 +35,8 @@
 .save-account [hidden]{display:none!important}
 #saveStatus[data-state=saved]{color:#a0d9b0}#saveStatus[data-state=error]{color:#f4c18e}
 @media(max-width:600px){.exercise-fields{grid-template-columns:1fr}.exercise-head{padding:12px}.exercise-content{padding:12px}.exercise-footer{padding:10px 12px}.exercise-head h2{font-size:19px}.exercise-original{max-height:37dvh}.exercise-status{flex-basis:100%}}
+
+/* The shared focus dialog uses a light background. */
+#mdExercise.focus-dialog .exercise-note,#mdExercise.focus-dialog .exercise-status{color:#6b4d52}
+#mdExercise.focus-dialog .field-result{color:#8a4520}
+#mdExercise.focus-dialog .correct .field-result{color:#286342}

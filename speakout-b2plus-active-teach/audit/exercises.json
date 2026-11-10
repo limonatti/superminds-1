@@ -25,14 +25,14 @@
     "sheet": 8,
     "printed": 9,
     "exercises": 10,
-    "checked_fields": 16
+    "checked_fields": 21
   },
   {
     "book": "sb",
     "sheet": 9,
     "printed": 10,
-    "exercises": 3,
-    "checked_fields": 0
+    "exercises": 10,
+    "checked_fields": 6
   },
   {
     "book": "sb",

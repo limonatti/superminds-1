@@ -301,6 +301,854 @@
           "answer": "go wrong"
         }
       ]
+    },
+    "sb-7-1A-0": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.062,
+        "y": 0.482,
+        "w": 0.48,
+        "h": 0.038,
+        "text": "1 A Work in groups. How did you meet your closest friend(s)?\nWhat's the most common way in your group?",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Обсудите вопросы устно в группе. Письменный ответ не требуется."
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-7-1B-1": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.057,
+        "y": 0.524,
+        "w": 0.48,
+        "h": 0.432,
+        "text": "B Read the opinions. Discuss in your groups if you agree or\ndisagree with them. Why/Why not?\nIt's easier to make friends when you're a\nchild than when you're an adult.\nThe friendships you make as children\noutlast those you make as adults.\nIt's never a good idea to be friends\nwith people too similar to you.\nThe friends you've known the\nlongest know you best.\nIt's easier to make friends\nonline than it is to make friends\nface-to-face.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Прочитайте пять мнений. Обсудите, согласны ли вы с каждым из них, и объясните почему. Письменный ответ не требуется."
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-7-1C-2": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.57,
+        "y": 0.483,
+        "w": 0.4,
+        "h": 0.472,
+        "text": "C Read the app description and reviews and\ndiscuss the questions (1-2) in your groups.\n1 What are the advantages of an app like this?\n2 Would you ever use an app like this? Why/\nWhy not?\nFrendz\nThe app where\nyou'll meet your\nnew best friend.\n1 day ago\nAdamB\nThe app suggested some great people to chat\nto based on my profile. Good matching!\n* * 3 days ago\nElaineK\nI met some amazing people I'd never normally\nmeet. Love it!\n*** 1 week ago\nPete123\nIt's not the easiest app to use, but I met a few\nLike-minded people, so worth signing up.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Прочитайте описание приложения и отзывы. Обсудите оба вопроса устно. Письменный ответ не требуется."
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-8-2A-0": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.07,
+        "y": 0.062,
+        "w": 0.425,
+        "h": 0.05,
+        "text": "2A • 1.01 ] Listen to a podcast about apps like the one\nin Ex 1C. Why did Addy decide to use a friendship app?\nWhat was the outcome?",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/002_SO3_B2P_SB_1A_Audio_1_01.mp3",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Послушайте запись 1.01 и ответьте на оба вопроса своими словами. Ответы сравниваются с образцом, автоматической оценки нет."
+      },
+      "replace_fields": [
+        {
+          "n": "a",
+          "answer": "",
+          "prompt": "Почему Addy выбрал приложение?"
+        },
+        {
+          "n": "b",
+          "answer": "",
+          "prompt": "Каков результат?"
+        }
+      ],
+      "key": "Addy decided to use the friendship app because he\nmoved to a new area, didn’t know anyone and he\nwasn’t able to meet anyone similar to him at work.\nThe outcome of using the app was that he got to\nknow people in his local area and made some close\nfriends."
+    },
+    "sb-8-2B-1": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.082,
+        "y": 0.115,
+        "w": 0.413,
+        "h": 0.419,
+        "text": "B $ 1.01 | Listen to the podcast again. Choose the\ncorrect answers (a, b or c).\n1 Addy chose to use a friendship app because\na he had a colleague who'd recommended it.\nb he wanted to meet people similar to himself.\nc he was unable to find friends at local clubs.\n2 Addy believes that the best way to find a match is\nto look for people\na from a different culture to you.\nb of a similar character to you.\nc with similar passions to you.\n3 Addy liked the first app he used because it\nallowed him\na to build connections in his area.\nb to meet up with an old friend.\nc to use his regular social media page.\n4 Making friends with other music lovers\na meant he was more comfortable when attending\nb gave him a chance to discover new music that\nhe liked.\nc allowed him to become part of a band himself.\n5 Addy would recommend using friendship apps to\npeople who\na have found themselves in a similar situation to him.\nb are in a hurry to form new friendships.\nc want to expand their current friendship circle.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/002_SO3_B2P_SB_1A_Audio_1_01.mp3",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Послушайте запись 1.01. Выберите одну букву a, b или c для каждого из пяти вопросов."
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "b",
+          "choices": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "n": "2",
+          "answer": "c",
+          "choices": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "n": "3",
+          "answer": "a",
+          "choices": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "n": "4",
+          "answer": "b",
+          "choices": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "n": "5",
+          "answer": "a",
+          "choices": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      ],
+      "key": "1 b 2 c 3 a 4 b 5 a"
+    },
+    "sb-8-3A-2": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.07,
+        "y": 0.534,
+        "w": 0.425,
+        "h": 0.181,
+        "text": "3A + 1.02| Read and listen to the extract where Addy is\nbeing ironic. Answer the questions (1-2).\n1 Does Addy think his colleagues being older and\nmostly married is just what he wants, or does he\nmean the opposite?\n2 What helps us to understand this?\nMy colleagues are nice and all that, but they're\nat least a decade older than me and most are\nmarried - just what you want as a twenty-two-\nyear-old single person!",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/003_SO3_B2P_SB_1A_Audio_1_02.mp3",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Прочитайте и послушайте отрывок 1.02. Ответьте на два вопроса своими словами. Сохраните ответы, чтобы открыть образец для сравнения."
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": ""
+        },
+        {
+          "n": "2",
+          "answer": ""
+        }
+      ],
+      "key": "1 He means the opposite.\n2 He uses an ironic tone. An ironic tone is usually\none where the speaker’s tone falls lower at the end\nthan normal. Context also helps – it’s unlikely that\na twenty-two-year-old single person would want\nto hang out with colleagues who are all older and\nmarried."
+    },
+    "sb-8-3B-3": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.082,
+        "y": 0.721,
+        "w": 0.413,
+        "h": 0.188,
+        "text": "B + 1.03 | Listen to six more extracts. What words does\nAddy use to describe these things? How does he really\nfeel about them?\n1 The suitability of the sports app for him.\n2 The fact that he and someone he met on an app\nhad a friend in common.\n3 The time he spent getting to know a group of people.\n4 The way he began his friendship with the first group\nhe met up with.\n5 How his new friends felt about him leaving his\nwallet at home.\n6 The fact that he and his friends laugh a lot.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/004_SO3_B2P_SB_1A_Audio_1_03.mp3",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Послушайте шесть отрывков 1.03. Для каждого пункта запишите слова Addy и объясните их действительный смысл. Формулировки обсуждаются с преподавателем."
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "",
+          "prompt": "1 · Слова Addy и действительный смысл"
+        },
+        {
+          "n": "2",
+          "answer": "",
+          "prompt": "2 · Слова Addy и действительный смысл"
+        },
+        {
+          "n": "3",
+          "answer": "",
+          "prompt": "3 · Слова Addy и действительный смысл"
+        },
+        {
+          "n": "4",
+          "answer": "",
+          "prompt": "4 · Слова Addy и действительный смысл"
+        },
+        {
+          "n": "5",
+          "answer": "",
+          "prompt": "5 · Слова Addy и действительный смысл"
+        },
+        {
+          "n": "6",
+          "answer": "",
+          "prompt": "6 · Слова Addy и действительный смысл"
+        }
+      ],
+      "key": "1 Description: perfect\nReal meaning: not perfect (because he’s obviously\nnot a very fit sportsperson)\n2 Description: great\nReal meaning: great (he’s happy about this).\n3 Description: time well spent\nReal meaning: time wasted (he spent time talking\nto people that didn’t actually live nearby)\n4 Description: wonderful\nReal meaning: not wonderful (he was thirty\nminutes late)\n5 Description: thrilled\nReal meaning: not thrilled (they had to pay for his\nmeal as he’d forgotten his wallet).\n6 Description: brilliant\nReal meaning: brilliant (they laugh a lot and he’s\nhappy about that)."
+    },
+    "sb-8-3C-4": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.082,
+        "y": 0.911,
+        "w": 0.413,
+        "h": 0.04,
+        "text": "C Work in pairs. Have Addy's experiences changed your\nmind on the use of friendship apps? Why/Why not?",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Обсудите в паре, изменилось ли ваше мнение о приложениях для знакомства с друзьями. Письменный ответ не требуется."
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-8-4A-5": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.51,
+        "y": 0.118,
+        "w": 0.455,
+        "h": 0.329,
+        "text": "4A * 1.04| Replace the words in bold in the sentences\nwith the phrases in the box. Listen and check.\nbonded over click with confide in\nhave a mutual friend hit it off with\non the same wavelength party with\nsocialise with\n1 Obviously, I wanted people my own age to spend\ntime with.\n2 You know, people I can hang out with during the day\nand eat, dance, etc. with at night.\n3 I mean, I want to hang out with people that are of a\nsimilar opinion to me, yes, but not exact copies of me!\n4 I was able to like and understand a few people my\nage on there.\n5 l even discovered one guy and I have a friend in\ncommon, which was great.\n6 And four of us developed a connection over our love\nof a particular band.\n7 I know I can share personal things with them, too.\n8 Try, try and try again and eventually, you'll\nimmediately like someone.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Впишите только выражение из рамки, заменяющее выделенные слова в каждом предложении. Затем проверьте по записи 1.04. В пунктах 4 и 8 допустимы варианты.",
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/005_SO3_B2P_SB_1A_Audio_1_04.mp3"
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "socialise with"
+        },
+        {
+          "n": "2",
+          "answer": "party with"
+        },
+        {
+          "n": "3",
+          "answer": "on the same wavelength"
+        },
+        {
+          "n": "4",
+          "answer": "click with / hit it off with"
+        },
+        {
+          "n": "5",
+          "answer": "have a mutual friend"
+        },
+        {
+          "n": "6",
+          "answer": "bonded over"
+        },
+        {
+          "n": "7",
+          "answer": "confide in"
+        },
+        {
+          "n": "8",
+          "answer": "hit it off with / click with"
+        }
+      ],
+      "key": "1 socialise with\n2 party with\n3 on the same wavelength\n4 click with (also possible: hit it off with)\n5 have a mutual friend\n6 bonded over\n7 confide in\n8 hit it off with (also possible: click with)"
+    },
+    "sb-8-4B-6": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.53,
+        "y": 0.451,
+        "w": 0.435,
+        "h": 0.249,
+        "text": "B Choose the correct phrases to complete the sentences.\nSometimes both are possible.\n1 | never bond over / confide in Nuria because she\ncan't keep a secret.\n2 My sister and | just never hit it off / are just not on\nthe same wavelength.\n3 l've got a few friends that I socialise / party with.\n4 My brother-in-law and I bonded over / clicked with\neach other as soon as we met.\n5 Carl and I bonded over / socialised with our love for\ncrayons on our first day at kindergarten!\n6 |joined a running club so I can get fit and socialise\nwith / party with people at the same time.\n7 Sarka and I have a mutual friend / are on the same\nwavelength that we both used to work with.\n8 My neighbour João and I clicked / hit it off as soon\nas we met and became great friends.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Отметьте все подходящие варианты в каждом предложении. Иногда верны оба варианта."
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "confide in",
+          "mode": "set",
+          "choices": [
+            "bond over",
+            "confide in"
+          ]
+        },
+        {
+          "n": "2",
+          "answer": "hit it off,are just not on the same wavelength",
+          "mode": "set",
+          "choices": [
+            "hit it off",
+            "are just not on the same wavelength"
+          ]
+        },
+        {
+          "n": "3",
+          "answer": "socialise,party",
+          "mode": "set",
+          "choices": [
+            "socialise",
+            "party"
+          ]
+        },
+        {
+          "n": "4",
+          "answer": "clicked with",
+          "mode": "set",
+          "choices": [
+            "bonded over",
+            "clicked with"
+          ]
+        },
+        {
+          "n": "5",
+          "answer": "bonded over",
+          "mode": "set",
+          "choices": [
+            "bonded over",
+            "socialised with"
+          ]
+        },
+        {
+          "n": "6",
+          "answer": "socialise with",
+          "mode": "set",
+          "choices": [
+            "socialise with",
+            "party with"
+          ]
+        },
+        {
+          "n": "7",
+          "answer": "have a mutual friend",
+          "mode": "set",
+          "choices": [
+            "have a mutual friend",
+            "are on the same wavelength"
+          ]
+        },
+        {
+          "n": "8",
+          "answer": "clicked,hit it off",
+          "mode": "set",
+          "choices": [
+            "clicked",
+            "hit it off"
+          ]
+        }
+      ],
+      "key": "1 confide in\n5 bonded over\n2 both are possible\n6 socialise with\n3 both are possible\n7 have a mutual friend\n4 clicked with\n8 both are possible"
+    },
+    "sb-8-5A-7": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.515,
+        "y": 0.702,
+        "w": 0.45,
+        "h": 0.153,
+        "text": "5A Complete at least five sentences with your own ideas.\n1 A person I clicked immediately with was ...\n2 Someone on a similar wavelength to me is ...\n3 A mutual friend that ... and I have is ...\n4 One person I hit it off with immediately is...\n5 The person I confide in the most is ...\n6 lenjoy partying with ...\n7 One friend and I bonded over...\n8 The place where I usually socialise with my friends is ...",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Выберите любые пять или больше начал предложений и дополните их своими идеями. Остальные поля можно оставить пустыми. Автоматической оценки личных ответов нет.",
+        "minResponses": 5
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "2",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "3",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "4",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "5",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "6",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "7",
+          "answer": "",
+          "optional": true
+        },
+        {
+          "n": "8",
+          "answer": "",
+          "optional": true
+        }
+      ],
+      "key": ""
+    },
+    "sb-8-5B-8": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.53,
+        "y": 0.856,
+        "w": 0.435,
+        "h": 0.039,
+        "text": "B Share your sentences with a partner. Ask questions to\nfind out more.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Поделитесь предложениями из 5A с партнёром. Задавайте уточняющие вопросы. Письменный ответ не требуется."
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-8-5C-9": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.53,
+        "y": 0.896,
+        "w": 0.435,
+        "h": 0.057,
+        "text": "C Learn and practise. Go to the Vocabulary Bank.\n» page 134 VOCABULARY BANK phrasal verbs:\nfriendships",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "reference",
+        "hint": "Перейдите к Vocabulary Bank на странице 134. Здесь нет пропусков для заполнения.",
+        "referencePage": 134
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
+    },
+    "sb-9-6A-0": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.045,
+        "y": 0.12,
+        "w": 0.355,
+        "h": 0.063,
+        "text": "6A Listen to more from the podcast. In what ways are Addy and his new friends like-minded? In what ways are they different?",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/006_SO3_B2P_SB_1A_Audio_1_05.mp3",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Послушайте запись 1.05. Отдельно запишите сходства и различия между Addy и его друзьями. Сохраните ответы для сравнения с образцом."
+      },
+      "replace_fields": [
+        {
+          "n": "a",
+          "answer": "",
+          "prompt": "Сходства"
+        },
+        {
+          "n": "b",
+          "answer": "",
+          "prompt": "Различия"
+        }
+      ],
+      "key": "Like-minded: same taste in music, going out and\ndoing stuff together; Addy and Nicole both like\ncooking and healthy eating\nDifferent: character – Jak is loud and confident but\nAddy is quiet; interests – Dan and Nicole like\nsports but Addy doesn’t; Addy and Nicole are\ninto healthy eating but Jak and Dan aren’t"
+    },
+    "sb-9-6B-1": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.056,
+        "y": 0.19,
+        "w": 0.34,
+        "h": 0.323,
+        "text": "6B Look at the habits in bold from the interview and answer the questions (a–d).\n1 She's always shouting even though we're standing right next to her.\n2 And she'll voice her opinions very strongly – she's so confident.\n3 I tend to listen rather than speak.\n4 ... they were always trying to make us go to fast-food places.\n5 I used to sit and watch them eat ...\n6 I kept trying to get them to order the salad, but they'd order extra chips just to annoy me!\na Which sentences (1–6) describe past habits? Which describe present habits?\nb Which modal verb is used to describe present habits? And past habits?\nc Which tense is used to describe annoying present habits? And annoying past habits?\nd What other language is used to describe habits and typical behaviour?",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Ответьте на вопросы a–d по шести напечатанным примерам. Поля относятся к вопросам, а не к предложениям 1–6. В a–c укажите и настоящее, и прошедшее время."
+      },
+      "replace_fields": [
+        {
+          "n": "a",
+          "answer": "",
+          "prompt": "a · Предложения о прошлом и настоящем"
+        },
+        {
+          "n": "b",
+          "answer": "",
+          "prompt": "b · Модальные глаголы для настоящего и прошлого"
+        },
+        {
+          "n": "c",
+          "answer": "",
+          "prompt": "c · Времена для раздражающих привычек"
+        },
+        {
+          "n": "d",
+          "answer": "",
+          "prompt": "d · Другие выражения о привычках"
+        }
+      ],
+      "key": "a Past habits: sentences 4, 5 and 6\nPresent habits: sentences 1, 2 and 3\nb Present habits: will (sentence 2)\nPast habits: would (sentence 6)\nc Annoying present habits: present continuous\n(sentence 1)\nAnnoying past habits: past continuous (sentence 4)\nd tend to (sentence 3), used to (sentence 5), kept\ntrying (sentence 6)"
+    },
+    "sb-9-6C-2": {
+      "source": "Daily source review 2026-11-10: original SB printed8–10; Teacher Book printed28–33.",
+      "properties": {
+        "x": 0.056,
+        "y": 0.522,
+        "w": 0.31,
+        "h": 0.055,
+        "text": "6C Learn and practise. Go to the Grammar Bank. Page 110.",
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "reviewed1A": true,
+        "responseMode": "reference",
+        "hint": "Перейдите к Grammar Bank на странице 110. Здесь нет пропусков для заполнения.",
+        "referencePage": 110
+      },
+      "replace_fields": [
+        {
+          "n": "notes",
+          "answer": ""
+        }
+      ],
+      "key": ""
     }
+  },
+  "added_exercises": {
+    "sb:9": [
+      {
+        "id": "sb-9-7A-3",
+        "label": "7A",
+        "text": "7A Listen to the sentences. Notice the difference in sound between ’ll and ’d.\n1 She’ll voice her opinions very strongly.\n2 She’d order extra chips just to annoy me.",
+        "key": "",
+        "fields": [
+          {
+            "n": "notes",
+            "answer": ""
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "x": 0.415,
+        "y": 0.108,
+        "w": 0.52,
+        "h": 0.065,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Послушайте запись 1.06 и обратите внимание на различие в произношении ’ll и ’d. Ничего вписывать не нужно.",
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/007_SO3_B2P_SB_1A_Audio_1_06.mp3"
+      },
+      {
+        "id": "sb-9-7B-4",
+        "label": "7B",
+        "text": "7B Complete the sentences with ’ll or ’d. Listen and repeat the full sentences.\n1 We _____ meet up on Fridays and play squash.\n2 Jon _____ call me at all hours of the night just for a chat!\n3 I _____ message Alex on a Monday and not get a reply until Thursday!\n4 They _____ all come round to my house before we went out.\n5 Sam _____ spend more time at our flat than his own!\n6 She _____ borrow something and forget to give it back.",
+        "key": "1 ’d 2 ’ll 3 ’ll 4 ’d 5 ’d 6 ’ll",
+        "fields": [
+          {
+            "n": "1",
+            "answer": "’d",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          },
+          {
+            "n": "2",
+            "answer": "’ll",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          },
+          {
+            "n": "3",
+            "answer": "’ll",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          },
+          {
+            "n": "4",
+            "answer": "’d",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          },
+          {
+            "n": "5",
+            "answer": "’d",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          },
+          {
+            "n": "6",
+            "answer": "’ll",
+            "choices": [
+              "’ll",
+              "’d"
+            ]
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "x": 0.427,
+        "y": 0.184,
+        "w": 0.51,
+        "h": 0.139,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "В каждом из шести пропусков выберите ’ll или ’d. Проверьте по записи 1.07 и повторите полные предложения вслух.",
+        "audio": "Speakout_Third_edition_B2_Plus_Class_Audio_www.frenglish.ru/008_SO3_B2P_SB_1A_Audio_1_07.mp3"
+      },
+      {
+        "id": "sb-9-7C-5",
+        "label": "7C",
+        "text": "7C Work in pairs. Discuss these habits using ’ll and ’d.\n1 a good habit you once had in the past\n2 a habit you had in the past that you weren’t proud of\n3 a habit you have now that’s rewarding or beneficial\n4 a habit you have now that you’d like to stop\n5 a healthy habit someone you know has\n6 an annoying habit someone you once knew had",
+        "key": "",
+        "fields": [
+          {
+            "n": "notes",
+            "answer": ""
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "x": 0.427,
+        "y": 0.332,
+        "w": 0.52,
+        "h": 0.114,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Обсудите шесть пунктов в паре, используя ’ll и ’d. Письменный ответ не требуется."
+      },
+      {
+        "id": "sb-9-7D-6",
+        "label": "7D",
+        "text": "7D Read the Future Skills box and answer the question. Think about the English you hear in your life. How and when could you spend time noticing the pronunciation used?",
+        "key": "",
+        "fields": [
+          {
+            "n": "notes",
+            "answer": ""
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "x": 0.418,
+        "y": 0.456,
+        "w": 0.508,
+        "h": 0.181,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Прочитайте рамку Future Skills. Ответьте своими словами: как и когда вы можете обращать внимание на произношение в английской речи? Автоматической оценки нет."
+      },
+      {
+        "id": "sb-9-8A-7",
+        "label": "8A",
+        "text": "8A You are going to describe a friendship. Make notes on these things.\nwhere and how you met your friend\nyour first impressions of each other\nhow you bonded\nthings you have in common\nways in which you’re different\nthings you’d do together in the past\nthings you tend to do together in the present\nhabits one of you has which annoy the other",
+        "key": "",
+        "fields": [
+          {
+            "n": "1",
+            "answer": "",
+            "prompt": "Где и как вы познакомились"
+          },
+          {
+            "n": "2",
+            "answer": "",
+            "prompt": "Первые впечатления друг о друге"
+          },
+          {
+            "n": "3",
+            "answer": "",
+            "prompt": "Что вас сблизило"
+          },
+          {
+            "n": "4",
+            "answer": "",
+            "prompt": "Что у вас общего"
+          },
+          {
+            "n": "5",
+            "answer": "",
+            "prompt": "Чем вы отличаетесь"
+          },
+          {
+            "n": "6",
+            "answer": "",
+            "prompt": "Что вы делали вместе раньше"
+          },
+          {
+            "n": "7",
+            "answer": "",
+            "prompt": "Что обычно делаете вместе сейчас"
+          },
+          {
+            "n": "8",
+            "answer": "",
+            "prompt": "Какие привычки раздражают другого"
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": false,
+        "x": 0.415,
+        "y": 0.7,
+        "w": 0.53,
+        "h": 0.143,
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "hint": "Сделайте заметки по восьми пунктам о своей дружбе. Эти заметки помогут выполнить устные задания 8B и 8C; автоматической оценки нет."
+      },
+      {
+        "id": "sb-9-8B-8",
+        "label": "8B",
+        "text": "8B Work in pairs. Describe your friendships to each other. Find similarities and differences.",
+        "key": "",
+        "fields": [
+          {
+            "n": "notes",
+            "answer": ""
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "x": 0.427,
+        "y": 0.857,
+        "w": 0.523,
+        "h": 0.033,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Опишите дружбу партнёру, используя заметки 8A. Найдите сходства и различия. Письменный ответ не требуется."
+      },
+      {
+        "id": "sb-9-8C-9",
+        "label": "8C",
+        "text": "8C Tell another pair about the similarities and differences between your friendships.",
+        "key": "",
+        "fields": [
+          {
+            "n": "notes",
+            "answer": ""
+          }
+        ],
+        "lesson": "1A",
+        "type": "book",
+        "spoken": true,
+        "x": 0.427,
+        "y": 0.895,
+        "w": 0.523,
+        "h": 0.034,
+        "reviewed1A": true,
+        "responseMode": "oral",
+        "hint": "Расскажите другой паре о сходствах и различиях между вашей дружбой. Письменный ответ не требуется."
+      }
+    ]
   }
 }

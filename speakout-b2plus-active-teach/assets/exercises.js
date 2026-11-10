@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  let active=null,fields=[],requiredFields=[],key='',revealed=false;
+  let active=null,fields=[],requiredFields=[],archived=[],key='',revealed=false;
   const dialog=document.createElement('dialog');dialog.id='mdExercise';dialog.className='exercise-dialog';
   dialog.setAttribute('aria-labelledby','exerciseTitle');document.body.appendChild(dialog);
   const correct=(value,field)=>window.B2AnswerCheck.correct(value,field);
@@ -36,22 +36,24 @@
   function render(){
     if(!active)return;const s=active.s,img=document.querySelector('#pageImg');
     const [book,sheet]=active.page.split(':'),printed=Number(sheet)+(book==='sb'?1:2),disabled=!window.B2Store?.ready;
-    const result=f=>{const a=value(f);return !a.checked?'':!f.answer?'Сохранено для обсуждения':!String(a.value).trim()?'Введите ответ':correct(a.value,f)?'Верно':'Попробуйте ещё раз';};
+    const oral=s.responseMode==='oral',reference=s.responseMode==='reference',completed=window.B2Store?.answers(active.page)[active.id+':completion']?.value==='done';
+    const result=f=>{const a=value(f);return !a.checked?'':!String(a.value).trim()?(f.optional?'Можно оставить пустым':'Введите ответ'):!f.answer?'Сохранено для обсуждения':correct(a.value,f)?'Верно':'Попробуйте ещё раз';};
     dialog.innerHTML=`<header class="exercise-head"><div><p>${book==='sb'?"Student’s Book":'Workbook'} · стр. ${printed}</p><h2 id="exerciseTitle">Упражнение ${esc(s.label||'')}</h2></div><button class="btn" id="exerciseClose" aria-label="Закрыть упражнение">✕</button></header>
       <div class="exercise-content"><div class="exercise-original" data-source-fit="width"><svg role="img" aria-label="Оригинал упражнения ${esc(s.label)}" viewBox="${s.x*img.naturalWidth} ${s.y*img.naturalHeight} ${s.w*img.naturalWidth} ${s.h*img.naturalHeight}"><image href="${esc(img.src)}" width="${img.naturalWidth}" height="${img.naturalHeight}"/></svg></div>
-      <div class="focus-responses">${s.hint?`<p class="exercise-note">${esc(s.hint)}</p>`:''}${s.type==='gap'?`<p class="exercise-prompt">${esc(s.data.replace(/\{[^}]+\}/g,'_____'))}</p>`:''}
+      <div class="focus-responses">${s.hint?`<p class="exercise-note">${esc(s.hint)}</p>`:''}${reference?`<p><a class="btn" href="?book=sb&page=${Number(s.referencePage)}">Открыть ${s.referencePage===110?'Grammar Bank':'Vocabulary Bank'} · стр. ${Number(s.referencePage)}</a></p>`:''}${s.type==='gap'?`<p class="exercise-prompt">${esc(s.data.replace(/\{[^}]+\}/g,'_____'))}</p>`:''}
       <div class="exercise-fields ${fields.length===1?'single':''}">${fields.map(f=>{
         const a=value(f),id='exercise-field-'+f.n,message=result(f),ok=message==='Верно';
         const selected=String(a.value||'').split(',').map(v=>v.trim());
         const chosen=f.choices?.find(c=>String(c).toLowerCase()===String(a.value??'').trim().toLowerCase());
         const control=f.mode==='set'?`<div class="exercise-multiple" role="group" aria-labelledby="${id}-label">${f.choices.map((c,i)=>`<label><input type="checkbox" data-multi="${f.n}" value="${esc(c)}" ${selected.includes(c)?'checked':''} ${disabled?'disabled':''}><span>${esc(c)}</span></label>`).join('')}</div>`:f.choices?`<select id="${id}" data-answer="${f.n}" ${disabled?'disabled':''}><option value="">Выберите ответ</option>${String(a.value??'').trim()&&chosen===undefined?`<option selected value="${esc(a.value)}">Сохранённый ответ: ${esc(a.value)}</option>`:''}${f.choices.map(c=>`<option ${chosen===c?'selected':''} value="${esc(c)}">${esc(c)}</option>`).join('')}</select>`:
-          (f.n==='notes'||fields.length===1&&!f.answer)?`<textarea rows="4" id="${id}" data-answer="${f.n}" ${disabled?'disabled':''}>${esc(a.value)}</textarea>`:
+          (f.n==='notes'||!f.answer&&(fields.length===1||s.responseMode==='panel'))?`<textarea rows="4" id="${id}" data-answer="${f.n}" ${disabled?'disabled':''}>${esc(a.value)}</textarea>`:
           `<input id="${id}" data-answer="${f.n}" value="${esc(a.value)}" autocomplete="off" spellcheck="false" ${disabled?'disabled':''}>`;
         return `<div class="exercise-field ${f.prompt||f.n==='notes'||f.mode==='set'?'expanded':'compact'} ${message?(ok?'correct':f.answer?'retry':'discussion'):''}"><label id="${id}-label" ${f.mode==='set'?'':`for="${id}"`}>${f.n==='notes'?'Ваш ответ / заметки':esc(f.prompt||'Ответ '+f.n)}</label>${control}<span class="field-result" aria-live="polite">${message}</span></div>`;
       }).join('')}</div>
-      ${!fields.some(f=>f.answer)?'<p class="exercise-note">Ответы сохраняются. Это задание можно обсудить с преподавателем или сверить с образцом, если он доступен.</p>':''}
+      ${fields.length&&!fields.some(f=>f.answer)?'<p class="exercise-note">Ответы сохраняются. Это задание можно обсудить с преподавателем или сверить с образцом, если он доступен.</p>':''}
+      ${archived.length?`<details class="exercise-previous"><summary>Ранее сохранённые ответы</summary>${archived.map(a=>`<p>${esc(a.n)}: ${esc(typeof a.value==='object'?a.value.value:a.value)}</p>`).join('')}</details>`:''}
       ${key?`<div class="exercise-key-area">${keyMarkup()}</div>`:''}</div></div>
-      <footer class="exercise-footer"><span class="exercise-status">${esc(document.querySelector('#saveStatus').textContent)}</span>${s.audio?'<button class="btn" id="exerciseAudio">▶ Аудио / пауза</button>':''}${s.video?'<button class="btn" id="exerciseVideo">▶ Видео</button>':''}<button class="btn" id="exerciseAdd">+ Ответ</button><button class="btn" id="exerciseReset">Сбросить ответы</button><button class="btn pri" id="exerciseCheck" ${disabled?'disabled':''}>${fields.some(f=>f.answer)?'Проверить':'Сохранить ответы'}</button></footer>`;
+      <footer class="exercise-footer"><span class="exercise-status">${esc(document.querySelector('#saveStatus').textContent)}</span>${s.audio?'<button class="btn" id="exerciseAudio">▶ Аудио / пауза</button>':''}${s.video?'<button class="btn" id="exerciseVideo">▶ Видео</button>':''}${oral?`<button class="btn pri" id="exerciseDone" aria-pressed="${completed}" ${disabled?'disabled':''}>${completed?'Снять отметку выполнения':'Отметить выполнение'}</button>`:reference?'':`${s.reviewed1A?'':'<button class="btn" id="exerciseAdd">+ Ответ</button>'}<button class="btn" id="exerciseReset">Сбросить ответы</button><button class="btn pri" id="exerciseCheck" ${disabled?'disabled':''}>${fields.some(f=>f.answer)?'Проверить':'Сохранить ответы'}</button>`}</footer>`;
     window.ExerciseSource.columns(dialog,dialog.querySelector('.exercise-content'),dialog.querySelector('.exercise-original'),dialog.querySelector('.focus-responses'));
     window.ExerciseSource.mount(dialog.querySelector('.exercise-original'),active.id,{label:s.label,sources:[{image:img.src,size:[img.naturalWidth,img.naturalHeight],box:[s.x,s.y,s.w,s.h],page:printed}]});
     window.ExerciseSource.controls(dialog.querySelector('.exercise-original'));
@@ -68,27 +70,29 @@
       field.classList.remove('correct','retry');field.querySelector('.field-result').textContent='';
       updateKey();
     });
-    dialog.querySelector('#exerciseCheck').onclick=()=>{
+    if(dialog.querySelector('#exerciseCheck'))dialog.querySelector('#exerciseCheck').onclick=()=>{
+      if(s.minResponses&&fields.filter(f=>String(value(f).value||'').trim()).length<s.minResponses){dialog.querySelector('.exercise-status').textContent='Дополните хотя бы '+s.minResponses+' предложений. Остальные можно оставить пустыми.';return;}
       for(const f of fields){const a=value(f);window.B2Store.answer(storageKey(f),{value:a.value,checked:true});}
       render();window.B2Store.flush();
     };
-    dialog.querySelector('#exerciseReset').onclick=()=>{for(const f of fields)window.B2Store.answer(storageKey(f),null);render();};
-    dialog.querySelector('#exerciseAdd').onclick=()=>{if(fields.length>=40)return;let n=fields.length+1;while(fields.some(f=>f.n===String(n)))n++;fields.push({n:String(n),answer:''});window.B2Store.answer(active.id+':_count',fields.length);render();};
+    if(dialog.querySelector('#exerciseDone'))dialog.querySelector('#exerciseDone').onclick=()=>{window.B2Store.answer(active.id+':completion',{value:completed?'':'done',checked:!completed});render();window.B2Store.flush();};
+    if(dialog.querySelector('#exerciseReset'))dialog.querySelector('#exerciseReset').onclick=()=>{for(const f of fields)window.B2Store.answer(storageKey(f),null);render();};
+    if(dialog.querySelector('#exerciseAdd'))dialog.querySelector('#exerciseAdd').onclick=()=>{if(fields.length>=40)return;let n=fields.length+1;while(fields.some(f=>f.n===String(n)))n++;fields.push({n:String(n),answer:''});window.B2Store.answer(active.id+':_count',fields.length);render();};
     if(s.audio)dialog.querySelector('#exerciseAudio').onclick=()=>{if(!AU.src.endsWith(enc(s.audio)))playTrack(s.audio,'Упражнение '+s.label);else if(!AU.paused)AU.pause();else AU.play().catch(()=>{});};
     if(s.video)dialog.querySelector('#exerciseVideo').onclick=()=>openVideo(s.video,'Видео к упражнению '+s.label);
     updateKey();
-    window.ExercisePlay.attach({dialog,source:dialog.querySelector('.exercise-original'),responses:dialog.querySelector('.focus-responses'),id:active.id,text:s.text||s.data||'',fields:fields.filter(f=>f.n!=='notes'&&f.mode!=='set').map(f=>{const input=[...dialog.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n),display=window.B2ExercisePolicy.presentation(f);return input&&window.ExercisePlay.inputField(f.n,input,display.answers,display.options,input.closest('.exercise-field'))}).filter(Boolean)});
+    window.ExercisePlay.attach({dialog,source:dialog.querySelector('.exercise-original'),responses:dialog.querySelector('.focus-responses'),id:active.id,text:s.text||s.data||'',native:!!s.responseMode,fields:s.responseMode?[]:fields.filter(f=>f.n!=='notes'&&f.mode!=='set').map(f=>{const input=[...dialog.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n),display=window.B2ExercisePolicy.presentation(f);return input&&window.ExercisePlay.inputField(f.n,input,display.answers,display.options,input.closest('.exercise-field'))}).filter(Boolean)});
   }
   dialog.onkeydown=e=>e.stopPropagation();
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
   dialog.addEventListener('close',()=>{active=null;window.B2Store?.flush();window.renderPanel?.();});
   window.B2Exercises={
-    open(s,page){active={s,page,id:s.id||s.uid||'custom-'+s.label};const model=s.type==='book'?s:custom(s);fields=model.fields.map(f=>({...f}));requiredFields=[...fields];key=model.key;revealed=false;
+    open(s,page){active={s,page,id:s.id||s.uid||'custom-'+s.label};const model=s.type==='book'?s:custom(s);fields=['oral','reference'].includes(s.responseMode)?[]:model.fields.map(f=>({...f}));requiredFields=[...fields];archived=[];key=model.key;revealed=false;
       const saved=window.B2Store?.answers(page)||{};
       // Previously saved notes/extra fields survive changes to the reviewed model.
-      for(const [id,answer]of Object.entries(saved)){const n=id.slice(active.id.length+1);if(id.startsWith(active.id+':')&&/^(?:\d+[a-z]?|notes)$/.test(n)&&answer!=null&&!fields.some(f=>f.n===n))fields.push({n,answer:'',prompt:'Сохранённый ответ '+n});}
+      for(const [id,answer]of Object.entries(saved)){const n=id.slice(active.id.length+1);if(id.startsWith(active.id+':')&&/^(?:\d+[a-z]?|notes)$/.test(n)&&answer!=null&&!fields.some(f=>f.n===n)){if(s.reviewed1A)archived.push({n,value:answer});else fields.push({n,answer:'',prompt:'Сохранённый ответ '+n});}}
       for(const oldId of s.legacyIds||[])for(const [id,answer]of Object.entries(saved)){const n=id.slice(oldId.length+1);if(id.startsWith(oldId+':')&&/^(?:\d+[a-z]?|notes)$/.test(n)&&answer!=null)fields.push({n:'legacy-'+fields.length,storageKey:id,answer:'',prompt:'Ранее сохранённый ответ '+n});}
-      const count=Math.min(40,Number(saved[active.id+':_count'])||0);while(fields.length<count){let n=1;while(fields.some(f=>f.n===String(n)))n++;fields.push({n:String(n),answer:''});}render();if(!dialog.open)dialog.showModal();},
+      const count=Math.min(40,Number(saved[active.id+':_count'])||0);while(!s.reviewed1A&&fields.length<count){let n=1;while(fields.some(f=>f.n===String(n)))n++;fields.push({n:String(n),answer:''});}render();if(!dialog.open)dialog.showModal();},
     close(){if(dialog.open)dialog.close();active=null;},
     refresh(){if(dialog.open&&!dialog.contains(document.activeElement))render();}
   };
