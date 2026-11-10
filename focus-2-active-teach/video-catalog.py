@@ -1,5 +1,5 @@
-"""Verified titles/IDs from the public Focus 2 Second Edition YouTube playlist.
-Checked 2026-11-09 in YouTube. No video files are downloaded or republished.
+"""Verified Focus 2 playlist videos and a labelled original BBC source edition.
+Checked 2026-11-10 in YouTube. No video files are downloaded or republished.
 """
 import json
 from pathlib import Path
@@ -7,7 +7,7 @@ R=Path(__file__).resolve().parent
 PLAYLIST='https://www.youtube.com/playlist?list=PLdOdDgjDBFfEYuyHbEhr-WkMsvPOtUdv9'
 IDS={
  '1':'TAJtplVfngw','2':'uBQnkYxZERA','3':'Sh5S1V42uV8','4':'STy15IGxiKI','5':'o3ccZCHFIHE','5A':'zQx1CdO-8uU','5B':'0lBVtQFb7ks',
- '7':'iw4Ii9yrxe4','8':'WErIcIkFlDI','9':'bNYa8UNH9ZM','10':'C-QNV1Nuj_0','10A':'mI6tmMdiZ40','10B':'5R3Ezx6aBeg',
+ '6':'LK--3lXQ5BI','7':'iw4Ii9yrxe4','8':'WErIcIkFlDI','9':'bNYa8UNH9ZM','10':'C-QNV1Nuj_0','10A':'mI6tmMdiZ40','10B':'5R3Ezx6aBeg',
  '11':'O-AvvgmscXA','12':'kNZpzJAw0OA','13':'mC1W3EFhBY8','14':'yTOqamlKRCQ',
  '15':'dTINBUroGpU','16':'Dtx-zKZ9B4E','17':'qFOJ5UG-Jp4','18':'6VfRYiOdAmg','19':'rWJwgxNMBig','19A':'nByEvADstbo','19B':'OFG8lREb9r0',
  '20':'0oQPGxVZOHI','21':'7Thr1YZT_UE','22':'E4HcYud3CnY','23':'N6LEdck8F0c','24':'V5J5DJcfI5Q','24A':'xZ3O9MBapZk','24B':'z_aWSII4phA',
@@ -30,6 +30,22 @@ for number,youtube in IDS.items():
   unit,page,title=GRAMMAR[n];category='Grammar';pages=[page]
  else:
   unit,page,title=ROLE[n];category='Speaking';pages=[page];title+=' · '+('Person '+variant if variant else 'Scene')
- videos.append({'number':number,'unit':unit,'title':title,'category':category,'pages':pages,'youtube':youtube,'url':'https://www.youtube.com/watch?v='+youtube})
+ video={'number':number,'unit':unit,'title':title,'category':category,'pages':pages,'youtube':youtube,'url':'https://www.youtube.com/watch?v='+youtube}
+ if n==6:
+  video.update(sourceEdition='bbc-original',durationSeconds=246,sourceChannel='BBC Earth Science',
+   editionNote='Полный исходный сюжет BBC Earth Science (4:06). Монтаж отличается от учебной версии Focus 2 (3:13); используй таймкоды ниже для заданий на странице 118.',
+   worksheetTimings=[{'label':'Упр. 3–4 · Вступление','range':'0:00–0:16'}, {'label':'Упр. 5 · Место эксперимента','range':'1:14–1:43'}, {'label':'Упр. 6 · Эксперимент и вывод','range':'1:14–3:56'}])
+ videos.append(video)
 (R/'data/videos.json').write_text(json.dumps(videos,ensure_ascii=False,indent=2))
-(R/'audit/videos.json').write_text(json.dumps({'checked':'2026-11-09','source':PLAYLIST,'channel':"Lavender’s English",'verification':'Public playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB; playback availability can change.','included':len(videos),'unavailableFullCourseVideos':[{'number':n,'unit':BBC[n][0],'title':BBC[n][1]} for n in [6,25,36]],'excluded':'Keeping fit 44-second preview; unrelated editions and unverified substitute clips.'},ensure_ascii=False,indent=2))
+(R/'audit/videos.json').write_text(json.dumps({
+ 'checked':'2026-11-10','source':PLAYLIST,'channel':"Lavender’s English",
+ 'verification':'56 playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB. Video 6 is a separately labelled original BBC source cut, verified against its YouTube captions and SB p118/TB videoscript. Playback availability can change.',
+ 'included':len(videos),
+ 'originalBBCSources':[{'number':6,'youtube':'LK--3lXQ5BI','channel':'BBC Earth Science','title':'Can Humans Create an Earthquake? | Secrets of Everything | Earth Science','durationSeconds':246,'coverage':'Greg Foot and Paul Denton, Reading Festival, 50,000 people, 0.6/8 Richter and the conclusion match the worksheet. Original narration and timing differ; adapted worksheet timings appear beside the player.'}],
+ 'unavailableFullCourseVideos':[{'number':n,'unit':BBC[n][0],'title':BBC[n][1]} for n in [25,36]],
+ 'unverifiedExactPearsonEdits':[6,25,36],
+ 'excluded':[
+  {'youtube':'wcRuXrduj6Q','number':25,'reason':'Official BBC 4:20 source clip omits the arrival, floor 160 and pre-descent dialogue needed for the worksheet.'},
+  {'youtube':'vLZGA5jiIls','number':25,'reason':'Music montage without the required English dialogue.'},
+  {'youtube':'zMJfq8bYeeg','number':36,'reason':'44-second preview, not the full 3:34 lesson video.'}
+ ]},ensure_ascii=False,indent=2))

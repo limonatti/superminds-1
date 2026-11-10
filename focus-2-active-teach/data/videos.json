@@ -79,6 +79,36 @@
     "url": "https://www.youtube.com/watch?v=0lBVtQFb7ks"
   },
   {
+    "number": "6",
+    "unit": 2,
+    "title": "Urban legends",
+    "category": "BBC",
+    "pages": [
+      18,
+      118
+    ],
+    "youtube": "LK--3lXQ5BI",
+    "url": "https://www.youtube.com/watch?v=LK--3lXQ5BI",
+    "sourceEdition": "bbc-original",
+    "durationSeconds": 246,
+    "sourceChannel": "BBC Earth Science",
+    "editionNote": "Полный исходный сюжет BBC Earth Science (4:06). Монтаж отличается от учебной версии Focus 2 (3:13); используй таймкоды ниже для заданий на странице 118.",
+    "worksheetTimings": [
+      {
+        "label": "Упр. 3–4 · Вступление",
+        "range": "0:00–0:16"
+      },
+      {
+        "label": "Упр. 5 · Место эксперимента",
+        "range": "1:14–1:43"
+      },
+      {
+        "label": "Упр. 6 · Эксперимент и вывод",
+        "range": "1:14–3:56"
+      }
+    ]
+  },
+  {
     "number": "7",
     "unit": 2,
     "title": "Past Continuous and Past Simple",

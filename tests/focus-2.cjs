@@ -8,7 +8,8 @@ for(const r of D.resources)assert(fs.existsSync(path.join(base,r.path)),r.path);
 for(let u=1;u<=8;u++){assert.equal(pages.get('sb-'+(4+(u-1)*14)).unit,u);assert.equal(pages.get('wb-'+(4+(u-1)*14)).unit,u);assert.equal(pages.get('ws-'+(u*2)).unit,u);assert.equal(pages.get('ws-'+(u*2+1)).unit,u);assert(D.videos.some(v=>v.unit===u));}
 for(const p of [4,8,12,16])assert.equal(pages.get('ws-'+p).exercises.length,1);assert.deepEqual(pages.get('sb-40').exercises.map(e=>e.label),['1','2','3','4','5']);
 assert.equal(pages.get('wb-118').pdfPage,120);assert.equal(pages.get('wb-120').pdfPage,121);assert.equal(pages.get('wb-130').pdfPage,130);assert(!pages.has('wb-119')&&!pages.has('wb-129'));
-assert.deepEqual(pages.get('sb-6').tracks,['1.06','1.07']);assert.equal(D.videos.length,56);assert.equal(new Set(D.videos.map(v=>v.youtube)).size,56);for(const v of D.videos){assert(/^[\w-]{11}$/.test(v.youtube));for(const p of v.pages)assert(pages.has('sb-'+p));}assert(!D.videos.some(v=>['6','25','36'].includes(v.number)));
+assert.deepEqual(pages.get('sb-6').tracks,['1.06','1.07']);assert.equal(D.videos.length,57);assert.equal(new Set(D.videos.map(v=>v.youtube)).size,57);for(const v of D.videos){assert(/^[\w-]{11}$/.test(v.youtube));for(const p of v.pages)assert(pages.has('sb-'+p));}assert(!D.videos.some(v=>['25','36'].includes(v.number)));
+const originalBBC=D.videos.find(v=>v.number==='6');assert.equal(originalBBC.youtube,'LK--3lXQ5BI');assert.equal(originalBBC.sourceEdition,'bbc-original');assert.deepEqual(originalBBC.pages,[18,118]);assert.equal(originalBBC.worksheetTimings.length,3);
 const ex=id=>exercises.find(e=>e.id===id);
 assert.deepEqual(ex('wb-4-1').answerSpec.map(f=>f.accepted[0]),['unsociable','boring','relaxed','serious','funny']);
 assert.deepEqual(ex('wb-46-1').answerSpec.map(f=>f.accepted[0]),['shower','microwave','dining table','plant','chair']);

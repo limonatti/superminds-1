@@ -1,15 +1,20 @@
 {
-  "checked": "2026-11-09",
+  "checked": "2026-11-10",
   "source": "https://www.youtube.com/playlist?list=PLdOdDgjDBFfEYuyHbEhr-WkMsvPOtUdv9",
   "channel": "Lavender’s English",
-  "verification": "Public playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB; playback availability can change.",
-  "included": 56,
-  "unavailableFullCourseVideos": [
+  "verification": "56 playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB. Video 6 is a separately labelled original BBC source cut, verified against its YouTube captions and SB p118/TB videoscript. Playback availability can change.",
+  "included": 57,
+  "originalBBCSources": [
     {
       "number": 6,
-      "unit": 2,
-      "title": "Urban legends"
-    },
+      "youtube": "LK--3lXQ5BI",
+      "channel": "BBC Earth Science",
+      "title": "Can Humans Create an Earthquake? | Secrets of Everything | Earth Science",
+      "durationSeconds": 246,
+      "coverage": "Greg Foot and Paul Denton, Reading Festival, 50,000 people, 0.6/8 Richter and the conclusion match the worksheet. Original narration and timing differ; adapted worksheet timings appear beside the player."
+    }
+  ],
+  "unavailableFullCourseVideos": [
     {
       "number": 25,
       "unit": 6,
@@ -21,5 +26,26 @@
       "title": "Keeping fit"
     }
   ],
-  "excluded": "Keeping fit 44-second preview; unrelated editions and unverified substitute clips."
+  "unverifiedExactPearsonEdits": [
+    6,
+    25,
+    36
+  ],
+  "excluded": [
+    {
+      "youtube": "wcRuXrduj6Q",
+      "number": 25,
+      "reason": "Official BBC 4:20 source clip omits the arrival, floor 160 and pre-descent dialogue needed for the worksheet."
+    },
+    {
+      "youtube": "vLZGA5jiIls",
+      "number": 25,
+      "reason": "Music montage without the required English dialogue."
+    },
+    {
+      "youtube": "zMJfq8bYeeg",
+      "number": 36,
+      "reason": "44-second preview, not the full 3:34 lesson video."
+    }
+  ]
 }
