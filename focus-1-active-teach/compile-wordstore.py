@@ -35,9 +35,11 @@ for p in range(1,18):
 for pg in D['pages']:
  if pg['book']!='sb':continue
  for e in pg['exercises']:
-  m=re.search(r'Complete WORD STORE (\d(?:[A-F]|\.[26]))',e['text'],re.I)
+  instruction=clean(e.get('instructionText',''))
+  m=re.search(r'WORD STORE (\d(?:[A-F]|\.[26]))',instruction,re.I)
   if not m or m[1] not in groups:continue
   target=groups[m[1]];sources[e['id']]['sources']+=sources[target['id']]['sources'];e['wordStore']=target['id']
+  if not re.search(r'\bComplete\b',instruction,re.I):e.pop('wordStore');continue
   if target['answerSpec']:
    for k in ['answerSpec','answerVersion','key','keySource','marking']:e[k]=target[k]
 (R/'data/wordstore-spans.json').write_text(json.dumps(source_data,ensure_ascii=False,separators=(',',':')))

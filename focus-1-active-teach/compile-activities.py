@@ -1,14 +1,15 @@
 """Compile explicit activity models; never guess or hide fields in the browser.
-Options and word banks come from the printed exercise, not its answer key.
+Options and banks use the printed exercise and reviewed answer forms.
 Reviewed exceptions live in data/activity-overrides.json.
 """
 from pathlib import Path
 import json,re,hashlib,collections,copy
 from PIL import Image
 from source_parser import clean
+from interactive_models import adapt
 R=Path(__file__).parent
 read=lambda f:json.loads((R/f).read_text().split('=',1)[1].strip().rstrip(';'))
-D=read('assets/course.js');D['transcripts']=json.loads((R/'data/transcripts.json').read_text());S=read('assets/exercise-sources.js');O=json.loads((R/'data/activity-overrides.json').read_text())
+D=read('assets/course.js');D['transcripts']=json.loads((R/'data/transcripts.json').read_text());D['videoTranscripts']=json.loads((R/'data/video-transcripts.json').read_text());S=read('assets/exercise-sources.js');O=json.loads((R/'data/activity-overrides.json').read_text())
 E={e['id']:e for p in D['pages'] for e in p['exercises']};P={e['id']:p for p in D['pages'] for e in p['exercises']}
 RED=0xda2128
 
@@ -58,7 +59,6 @@ for pg in D['pages']:
  for e in pg['exercises']:
   ins=e.get('instructionText') or re.sub(r'^\d+\s*','',e['text'].split('\n')[0]);ins=re.sub(r'\s+REMEMBER THIS$','',ins)
   # These stray bold runs are examples, never part of the direction.
-  ins=re.sub(r'(?:\s+(?:\d+\s+)?[A-Za-z]:?){4,}$','',ins)
   ins=re.sub(r'\bfi\s+(rst|nd|ve|nish|lm|t)\b',r'fi\1',ins)
   e['instructionText']=ins
   e['tracks']=tracks(e)
@@ -136,6 +136,16 @@ for e in E.values():
   target=E[e['wordStore']]
   for key in ['answerSpec','key','keySource']:e[key]=copy.deepcopy(target[key])
   e['activity']=copy.deepcopy(target['activity'])
+  if e['id'] in O:apply(e,O[e['id']])
+# Workbook exam-speaking questions are printed in two columns. Keep their reading order.
+for pg in D['pages']:
+ if pg['book']!='wb' or pg['page'] not in range(21,106,12):continue
+ ocr=json.loads((R/f'data/ocr/wb-{pg["pdfPage"]}.jpg.json').read_text())
+ for i,e in enumerate(pg['exercises']):
+  end=min((n['y'] for n in pg['exercises'] if n['y']>e['y']+.01),default=.97)
+  rows=[w for w in ocr if e['y']+.008<w['y']<end-.004]
+  rows.sort(key=lambda w:(w['x']>.53,round(w['y']/.004),w['x']))
+  e['_cardText']='\n'.join(w['text'] for w in rows)
 # Review-specific meaning, no answer-derived distractors.
 for id in ['ws-3-1','ws-13-2']:
  E[id]['activity']['bank']=['have','go','play'] if id=='ws-3-1' else ['go','do','play']
@@ -144,6 +154,7 @@ for id in ['sb-6-7']:E[id]['activity']['fields']=[{'options':options(['it’s','
 for id in ['sb-8-3','sb-8-4']:E[id]['activity']['fields']=[{'options':options(['can','can’t'])} for _ in E[id]['answerSpec']]
 for id in ['sb-9-4','sb-9-5']:E[id]['activity']['fields']=[{'options':options(['there is','there are'])} for _ in E[id]['answerSpec']]
 for e in E.values():
+ e['_reviewedInstruction']=bool(O.get(e['id'],{}).get('activity',{}).get('instruction'))
  # Letter sets supplied as a source list have no meaningful answer order.
  for f in e['answerSpec']:
   if f.get('accepted') and re.fullmatch(r'[a-jA-J](?:,\s*[a-jA-J])+',f['accepted'][0]):
@@ -168,6 +179,8 @@ for e in E.values():
   elif any(f.get('options') for f in a['fields']):a['kind']='matching' if re.search('match',ins,re.I) else 'choice'
   elif any(f.get('kind')=='set' for f in e['answerSpec']):a['kind']='sort'
   elif a.get('bank'):a['kind']='bank'
+ adapt(e,E)
+ e.pop('_reviewedInstruction',None);e.pop('_cardText',None)
  e['answerVersion']=hashlib.sha256(json.dumps(e['answerSpec'],sort_keys=True).encode()).hexdigest()[:12]
  if e['answerSpec']:
   e['key']='\n'.join(str(f['label'])+' '+(' / '.join(f['accepted']) if f.get('accepted') else '; '.join('/'.join(x) for x in f['members'])) for f in e['answerSpec']) or e['key']
@@ -186,3 +199,7 @@ coverage={b:{'pages':sum(p['book']==b for p in D['pages']),'exercises':sum(len(p
 (R/'audit/coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
 print(coverage)
 print('Activities:',dict(collections.Counter(e['activity']['kind'] for e in E.values())),'word banks',sum(bool(e['activity'].get('bank')) for e in E.values()),'choices',sum(any(f.get('options') for f in e['activity']['fields']) for e in E.values()))
+
+# Keep the verified, human-recorded video catalogue reproducible.
+V=json.loads((R/"data/videos.json").read_text())
+(R/"assets/videos.js").write_text("window.FOCUS_VIDEOS = "+json.dumps(V,ensure_ascii=False,separators=(",",":"))+";\n")

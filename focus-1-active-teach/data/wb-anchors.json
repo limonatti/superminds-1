@@ -487,6 +487,12 @@
       "x": 0.0694980721481527,
       "y": 0.62575125235108,
       "instruction": "3 Complete the email with one word in each gap."
+    },
+    {
+      "label": "4",
+      "x": 0.5366726430079406,
+      "y": 0.06828488387932287,
+      "instruction": "4 You want to write to someone from a different"
     }
   ],
   "21": [
@@ -834,6 +840,12 @@
       "x": 0.07915059499081249,
       "y": 0.670843023428613,
       "instruction": "4 Complete the email with the words from the box."
+    },
+    {
+      "label": "5",
+      "x": 0.5402504504255277,
+      "y": 0.06438628142944117,
+      "instruction": "5 You are organising a party and you want to invite"
     }
   ],
   "33": [
@@ -1494,6 +1506,12 @@
       "x": 0.0598455773588947,
       "y": 0.6845058143378209,
       "instruction": "3 Complete the profile with one word in each gap."
+    },
+    {
+      "label": "4",
+      "x": 0.525939178086877,
+      "y": 0.06702034904423249,
+      "instruction": "Julia is planning to put up her profile on a website. Write her profile using the information below."
     }
   ],
   "57": [
@@ -1806,6 +1824,12 @@
       "x": 0.5327143975589907,
       "y": 0.051132783973387066,
       "instruction": "4 Complete the email with and, but, so and because."
+    },
+    {
+      "label": "5",
+      "x": 0.5366726307610763,
+      "y": 0.4931046931202727,
+      "instruction": "5 You are on holiday. Write an email to a friend at home."
     }
   ],
   "69": [
@@ -2777,6 +2801,12 @@
       "x": 0.5250053844261884,
       "y": 0.18568586799645148,
       "instruction": "4 Match sentence beginnings 1-6 with their endings a-f."
+    },
+    {
+      "label": "5",
+      "x": 0.5258462324237406,
+      "y": 0.45513085910753553,
+      "instruction": "5 You also live in Lindon and find it boring and not"
     }
   ],
   "105": [

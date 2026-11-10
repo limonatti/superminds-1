@@ -9,6 +9,7 @@ R=Path(__file__).parent
 CHOICES=json.loads((R/'data/choice-marks.json').read_text());TB=json.loads((R/'data/teacher-spans.json').read_text());WK=json.loads((R/'data/workbook-keys.json').read_text())
 WB_ANCHORS=json.loads((R/'data/wb-anchors.json').read_text());WB_COLUMNS=json.loads((R/'data/wb-columns.json').read_text())
 MARGINS=json.loads((R/'data/sb-margin-keys.json').read_text())
+IDENTITIES=json.loads((R/'data/exercise-identities.json').read_text())
 NAMES=['Intro Unit','Family and friends','Food','Work','People','Education','Health and sport','Travel','Nature']
 def ocr(b,i):return json.loads((R/f'data/ocr/{b}-{i}.jpg.json').read_text())
 def clean(t):return ' '.join(t.replace('\u00a0',' ').replace('ﬁ','fi').replace('ﬂ','fl').split())
@@ -38,10 +39,14 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
    width=535.75 if p<124 else 555.25;height=757.7 if p<124 else 785
    for s in ss:
     t=s['text'].strip();x0,y0,x1,y1=s['bbox']
-    if not re.fullmatch(r'\d{1,2}',t) or 'Heavy' not in s['font'] or not 8.8<s['size']<9.6 or y0>height-25:continue
+    combined=CMD.match(t)
+    near=' '.join(q['text'] for q in ss if 'Heavy' in q['font'] and x1-1<=q['bbox'][0]<x1+65 and abs(q['bbox'][1]-y0)<3)
+    small=8.2<s['size']<8.8 and s['color']==0x231f20 and (combined or CMD.match(t+' '+near))
+    if 'Heavy' not in s['font'] or not (re.fullmatch(r'\d{1,2}',t) and 8.8<s['size']<9.6 or small) or y0>height-25:continue
+    if combined:t=combined[1]
     x,y=(x0-offset)/width,(y0+2.8)/height
     if not 0<x<.97 or not .025<y<.96:continue
-    if any(a['label']==t and abs(a['y']-y)<.007 for a in anchors):continue
+    if any(a['label']==t and abs(a['y']-y)<.007 and abs(a['x']-x)<.05 for a in anchors):continue
     # Align to OCR from the clean scan, never use the teacher image in the player.
     candidates=[w for w in ws if re.match(r'^'+t+r'(?:\s|$)',w['text']) and abs(w['x']-x)<.014 and abs(w['y']-y)<.009]
     if candidates:
@@ -58,6 +63,14 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
   seen=collections.Counter();exercises=[]
   for a in anchors:
    n=a['label'];seen[n]+=1;exid=f'{book}-{p}-{n}'+(f'-b{seen[n]}' if seen[n]>1 else '')
+   if book=='sb':
+    published=IDENTITIES.get(f'sb-{p}',[])
+    matches=[q for q in published if q['label'].split()[0]==n and abs(q['x']-a['x'])<.03 and abs(q['y']-a['y'])<.02]
+    if matches:exid=min(matches,key=lambda q:abs(q['x']-a['x'])+abs(q['y']-a['y']))['id']
+    else:
+     reserved={q['id'] for q in published}|{q['id'] for q in exercises};suffix=1
+     while exid in reserved:
+      suffix+=1;exid=f'sb-{p}-{n}-b{suffix}'
    # Printed layouts include 60/40 and 2/3 + 1/3 columns, not only halves.
    same=[q for q in anchors if abs(q['x']-a['x'])<.10]
    nexts=[q['y'] for q in same if q['y']>a['y']+.01]
@@ -142,7 +155,7 @@ for book,indices in [('sb',[(i,i) for i in range(1,143)]),('wb',[(0,1),(1,2),(2,
 for pg in pages:
  if pg['book'] not in ['sb','wb']:continue
  ps=pg['page'];adj=[]
- if 12<=ps<108 and (ps-12)%12 in [4,5]:adj.append(ps+1 if (ps-12)%12==4 else ps-1)
+ if 12<=ps<108 and (ps-12)%12 in [0,1,4,5]:adj.append(ps+1 if (ps-12)%12 in [0,4] else ps-1)
  if pg['exercises'] and min(int(e['label'].split()[0]) for e in pg['exercises'])>1:adj.append(ps-1)
  for n in set(adj):
   other=next((x for x in pages if x['book']==pg['book'] and x['page']==n and x['unit']==pg['unit']),None)
