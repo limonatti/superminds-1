@@ -3,7 +3,11 @@
   "source": "https://www.youtube.com/playlist?list=PLdOdDgjDBFfEYuyHbEhr-WkMsvPOtUdv9",
   "channel": "Lavender’s English",
   "verification": "56 playlist titles, edition, video numbers and lesson numbers matched to the supplied SB/TB. Video 6 is a separately labelled original BBC source cut, verified against its YouTube captions and SB p118/TB videoscript. Playback availability can change.",
-  "included": 57,
+  "included": 59,
+  "providers": {
+    "youtube": 57,
+    "vk": 2
+  },
   "originalBBCSources": [
     {
       "number": 6,
@@ -14,22 +18,26 @@
       "coverage": "Greg Foot and Paul Denton, Reading Festival, 50,000 people, 0.6/8 Richter and the conclusion match the worksheet. Original narration and timing differ; adapted worksheet timings appear beside the player."
     }
   ],
-  "unavailableFullCourseVideos": [
+  "vkLessonRecordings": [
     {
       "number": 25,
-      "unit": 6,
-      "title": "Window cleaning"
+      "url": "https://vkvideo.ru/video-12983196_456241202",
+      "durationSeconds": 253
     },
     {
       "number": 36,
-      "unit": 8,
-      "title": "Keeping fit"
+      "url": "https://vkvideo.ru/video-12983196_456241215",
+      "durationSeconds": 231
     }
   ],
-  "unverifiedExactPearsonEdits": [
-    6,
+  "vkVerification": "Public Focus 2 playlist, lesson titles, durations and BBC footage checked in the browser. Keeping fit includes English subtitles, household tasks and the Birmingham MET results chart. Embedding code obtained via the VK player Share > Embed dialog; VK later requested human verification for the embedded player, so embedded playback was not tested. User approved VK as an alternative to YouTube on 2026-11-10.",
+  "unavailableFullCourseVideos": [],
+  "unavailableOnYouTube": [
     25,
     36
+  ],
+  "unverifiedExactPearsonEdits": [
+    6
   ],
   "excluded": [
     {

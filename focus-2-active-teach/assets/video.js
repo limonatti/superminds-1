@@ -1,4 +1,4 @@
-/* One on-demand YouTube player; no autoplay, downloads or tracking iframe until opened. */
+/* One on-demand video player; no autoplay, downloads or tracking iframe until opened. */
 (() => {
  'use strict';
  const $=s=>document.querySelector(s), D=window.FOCUS2;
@@ -18,13 +18,14 @@
   const note=$('#videoEdition');note.replaceChildren();note.hidden=!v.editionNote;
   if(v.editionNote){
    const description=document.createElement('p');description.textContent=v.editionNote;note.append(description);
-   const timings=document.createElement('ul');(v.worksheetTimings||[]).forEach(t=>{const li=document.createElement('li');li.textContent=`${t.label}: ${t.range}`;timings.append(li);});note.append(timings);
+   if(v.worksheetTimings?.length){const timings=document.createElement('ul');v.worksheetTimings.forEach(t=>{const li=document.createElement('li');li.textContent=`${t.label}: ${t.range}`;timings.append(li);});note.append(timings);}
   }
   $('#videoExternal').href=v.url;
+  $('#videoExternal').textContent=`Открыть на ${v.provider==='vk'?'VK Видео':'YouTube'} ↗`;
   const worksheet=new URL(location.href);worksheet.searchParams.set('book','sb');worksheet.searchParams.set('page',v.category==='BBC'?v.pages.at(-1):v.pages[0]);worksheet.searchParams.delete('ex');
   $('#videoWorksheet').href=worksheet.pathname+worksheet.search;
   $('#videoPlayer').replaceChildren();
-  const frame=document.createElement('iframe');frame.src=`https://www.youtube-nocookie.com/embed/${v.youtube}?rel=0`;
+  const frame=document.createElement('iframe');frame.src=v.provider==='vk'?v.embedUrl:`https://www.youtube-nocookie.com/embed/${v.youtube}?rel=0`;
   frame.title=v.title;frame.allow='accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
   $('#videoPlayer').append(frame);$('#videoDetails').hidden=false;
   if(!$('#videosDialog').open)$('#videosDialog').showModal();
