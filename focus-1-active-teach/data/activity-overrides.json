@@ -28543,7 +28543,7 @@
     ],
     "activity": {
       "kind": "choice",
-      "instruction": "Посмотри видео и выбери True или False. Пункт 6 уточнён: указан точный диапазон цен из ролика.",
+      "instruction": "Посмотри видео и выбери True или False. В интерактивной версии пункты 4 и 6 уточнены по записи: вместимость столовой и диапазон цен.",
       "fields": [
         {
           "label": "1",
@@ -28599,7 +28599,7 @@
               "label": "False"
             }
           ],
-          "prompt": "More than five giraffes come for breakfast."
+          "prompt": "Six giraffes can fit in the dining room at the same time."
         },
         {
           "label": "5",
@@ -28668,7 +28668,33 @@
       ]
     },
     "activity": {
-      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+      "instruction": "Посмотри фрагмент 02:59–03:22 и восстанови рассказ об отеле. Выбери пропуск, затем слово из банка.",
+      "fields": [
+        {
+          "label": "1",
+          "prompt": "All the ___ love the giraffes."
+        },
+        {
+          "label": "2",
+          "prompt": "The hotel offers many other ___ as well."
+        },
+        {
+          "label": "3",
+          "prompt": "You can visit Nairobi’s ___."
+        },
+        {
+          "label": "4",
+          "prompt": "You can go on a safari and see the top tourist ___."
+        },
+        {
+          "label": "5",
+          "prompt": "You can go with an experienced local ___."
+        },
+        {
+          "label": "6",
+          "prompt": "Kenya is waiting for your ___."
+        }
+      ]
     }
   },
   "sb-110-6": {
@@ -28683,12 +28709,134 @@
   },
   "sb-116-5": {
     "activity": {
-      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+      "instruction": "Посмотри фрагмент 00:12–02:16 и заполни карточку фактами из ролика. Выбери пропуск, затем слово из банка.",
+      "fields": [
+        {
+          "label": "1",
+          "prompt": "Liphook is a small ___ in Britain."
+        },
+        {
+          "label": "2",
+          "prompt": "The school is a local, mixed ___ school."
+        },
+        {
+          "label": "3",
+          "prompt": "Number of Chinese teachers in Liphook: ___"
+        },
+        {
+          "label": "4",
+          "prompt": "Number of students in a Chinese class: ___"
+        },
+        {
+          "label": "5",
+          "prompt": "Length of the Chinese school day in hours: ___"
+        },
+        {
+          "label": "6",
+          "prompt": "Number of meal breaks mentioned in the video: ___"
+        },
+        {
+          "label": "7",
+          "prompt": "The most important school subject in China: ___"
+        }
+      ]
     }
   },
   "sb-120-3": {
     "activity": {
-      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+      "instruction": "Посмотри фрагмент 01:29–02:59. Вставь слова в реплики гостей: нажми на подходящий вариант. Три слова лишние.",
+      "fields": [
+        {
+          "label": "1",
+          "prompt": "Amazing! I mean, she’s ___.",
+          "options": [
+            {
+              "value": "beautiful",
+              "label": "beautiful"
+            },
+            {
+              "value": "cute",
+              "label": "cute"
+            },
+            {
+              "value": "massive",
+              "label": "massive"
+            },
+            {
+              "value": "special",
+              "label": "special"
+            },
+            {
+              "value": "typical",
+              "label": "typical"
+            },
+            {
+              "value": "unique",
+              "label": "unique"
+            }
+          ]
+        },
+        {
+          "label": "2",
+          "prompt": "Look at this baby running! Oh, she’s ___.",
+          "options": [
+            {
+              "value": "beautiful",
+              "label": "beautiful"
+            },
+            {
+              "value": "cute",
+              "label": "cute"
+            },
+            {
+              "value": "massive",
+              "label": "massive"
+            },
+            {
+              "value": "special",
+              "label": "special"
+            },
+            {
+              "value": "typical",
+              "label": "typical"
+            },
+            {
+              "value": "unique",
+              "label": "unique"
+            }
+          ]
+        },
+        {
+          "label": "3",
+          "prompt": "Oh look, they’re so ___.",
+          "options": [
+            {
+              "value": "beautiful",
+              "label": "beautiful"
+            },
+            {
+              "value": "cute",
+              "label": "cute"
+            },
+            {
+              "value": "massive",
+              "label": "massive"
+            },
+            {
+              "value": "special",
+              "label": "special"
+            },
+            {
+              "value": "typical",
+              "label": "typical"
+            },
+            {
+              "value": "unique",
+              "label": "unique"
+            }
+          ]
+        }
+      ]
     }
   },
   "sb-122-4": {
@@ -28699,6 +28847,256 @@
   "sb-122-5": {
     "activity": {
       "instruction": "Смотри с 00:58 до конца — рассказ о зайце и орле. Выполни задание по видео. Здесь время уточнено с учётом заставки."
+    }
+  },
+  "sb-116-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "NG"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "NG"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "B"
+        ]
+      }
+    ],
+    "activity": {
+      "kind": "choice",
+      "instruction": "Сначала посмотри видео №20. В этой версии задания проверяем только то, что сказано или показано в ролике. B — обычная британская школа, C — китайская система обучения. Если ролик не подтверждает утверждение, выбирай NG («В ролике нет данных»).",
+      "fields": [
+        {
+          "label": "1",
+          "prompt": "They wear tracksuits in school.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "2",
+          "prompt": "Their typical school day is twelve hours long.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "3",
+          "prompt": "They start the day with a morning assembly (= large meeting).",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "4",
+          "prompt": "They start the day with morning exercise.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "5",
+          "prompt": "They talk and laugh a lot in class.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "6",
+          "prompt": "In PE classes, students can choose what they want.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "7",
+          "prompt": "After classes finish, they have two hours of self-study.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        },
+        {
+          "label": "8",
+          "prompt": "Classes finish at 3:30 p.m.",
+          "options": [
+            {
+              "value": "B",
+              "label": "B · British"
+            },
+            {
+              "value": "C",
+              "label": "C · Chinese"
+            },
+            {
+              "value": "NG",
+              "label": "NG · В ролике нет данных"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-116-4": {
+    "activity": {
+      "instruction": "Сравни предположения с тем, что сказано и показано в видео. Отделяй подтверждённые факты от того, о чём ролик не сообщает.",
+      "cards": [
+        {
+          "prompt": "What did you learn about Chinese schools? Which ideas in Exercise 2 does the video confirm?",
+          "options": [
+            "The video shows …",
+            "The narrator says …",
+            "The video does not tell us …"
+          ],
+          "hint": "Можно ответить устно. Если точного факта нет в записи, его не нужно угадывать."
+        }
+      ]
+    }
+  },
+  "sb-116-6": {
+    "activity": {
+      "instruction": "Обсуди первый день эксперимента, показанный в ролике. Это твоё мнение; единственного правильного ответа нет.",
+      "cards": [
+        {
+          "prompt": "What goes well on the first day? What problems do you notice? What could the teachers do differently?",
+          "options": [
+            "I think … because …",
+            "One problem is …",
+            "The teachers could …"
+          ],
+          "hint": "Ролик заканчивается после первого дня. Итоговых результатов эксперимента в нём нет."
+        }
+      ]
+    }
+  },
+  "sb-116-7": {
+    "activity": {
+      "instruction": "Прочитай итог четырёх недель в учебнике и вырази своё мнение. Эта информация дана в тексте под заданием, а не в коротком ролике.",
+      "cards": [
+        {
+          "prompt": "What do you think about the results in the written summary?",
+          "options": [
+            "The summary says …",
+            "In my opinion, …",
+            "I agree/disagree because …"
+          ],
+          "hint": "Используй текст учебника. Можно сначала сформулировать ответ устно; письменное мнение — до десяти предложений."
+        }
+      ]
     }
   }
 }

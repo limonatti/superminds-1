@@ -8,7 +8,7 @@
   "method": [
     "All embedded players: muted before Play; advancing playback at start, midpoint and near end; pause and iframe removal on close.",
     "YouTube content: available English captions (original language preferred), original Teacher Book scripts, printed worksheets and keys. ASR numbers were cross-checked with original scripts.",
-    "RUTUBE 20/28: embedded playback and exact course identity checked; worksheet facts checked against original Teacher Book scripts. No independent online captions are available for these two uploads.",
+    "RUTUBE 20/28: exact recordings independently transcribed in full locally without script prompts, plus visual contact-sheet inspection across their complete duration. All 14 worksheet exercises reviewed; see videos-20-28-direct.json.",
     "Selected visual checks: Scottish Highlands opening scenes and 00:57/00:58 boundary; not a claim of watching every video in real time from beginning to end."
   ],
   "findings": [
@@ -45,6 +45,27 @@
     {
       "video": 9,
       "fix": "Visual on-screen labels identify Mahak as the final speaker about groceries. Correct the Teacher Book transcript speaker prefix P to M; worksheet answer some eggs remains correct. Original English (US) audio track verified selected in player settings."
+    },
+    {
+      "video": 20,
+      "exercise": "sb-116-2",
+      "fix": "Full recording does not confirm PE free choice or exactly two hours of self-study. Add NG option and grade these two statements as not given; retain verified B/C facts."
+    },
+    {
+      "video": 28,
+      "exercise": "sb-120-4",
+      "fix": "Statement4 now describes how many giraffes can fit in the dining room, as the actual dialogue does; no inference about observed attendance."
+    },
+    {
+      "video": 20,
+      "fix": "Use first-day wording for video discussion; attribute four-week results to printed reading. Correct on-screen name Neave in supplied transcript."
+    },
+    {
+      "videos": [
+        20,
+        28
+      ],
+      "fix": "Verified replay intervals and complete prompts added for SB116ex5, SB120ex3/ex5."
     }
   ],
   "playback": [
@@ -1438,7 +1459,7 @@
         "sb-116-6",
         "sb-116-7"
       ],
-      "evidence": "original teacher script; embedded identity/playback"
+      "evidence": "full original audio ASR without script prompts; visual frame review; original worksheet/script comparison; embedded playback verified"
     },
     {
       "number": 21,
@@ -1584,7 +1605,7 @@
         "sb-120-6",
         "sb-120-7"
       ],
-      "evidence": "original teacher script; embedded identity/playback"
+      "evidence": "full original audio ASR without script prompts; visual frame review; original worksheet/script comparison; embedded playback verified"
     },
     {
       "number": 29,
@@ -1791,5 +1812,6 @@
       ],
       "evidence": "English captions / original script; embedded identity/playback"
     }
-  ]
+  ],
+  "directReview": "videos-20-28-direct.json"
 }

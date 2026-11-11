@@ -1,0 +1,345 @@
+{
+  "checked": "2026-11-11",
+  "scope": "All 14 exercises on SB116 and SB120, including all 33 automatically marked fields.",
+  "method": [
+    "Downloaded the exact public RUTUBE recordings attached to exercises; extracted complete original audio without playback.",
+    "Transcribed full audio using local mlx-whisper small (English, temperature 0), with no initial prompt or supplied textbook script. Re-transcribed four clips for critical figures and unsupported facts.",
+    "Inspected 4-second contact sheets spanning both recordings, including intros/outros; compared dialogue, visual content, original worksheets and current interactive keys.",
+    "No audible playback or generated teaching audio. Existing 2026-11-11 muted embedded playback results are retained in video-review.json."
+  ],
+  "limits": [
+    "ASR is fallible, especially names and overlapping classroom speech. Relevant numbers were checked in a second independently cropped pass and compared with the printed script.",
+    "Frame inspection samples visual content every four seconds; this is not a claim of real-time, frame-by-frame viewing.",
+    "Open speaking/writing activities have no single automatically graded answer. The four-week outcome of video 20 comes from the printed summary, not this clip."
+  ],
+  "videos": [
+    {
+      "number": 20,
+      "providerId": "11a836d3c966d02ce842b5efedde3475",
+      "durationSeconds": 229.76,
+      "exercises": [
+        {
+          "id": "sb-116-1",
+          "review": "Year Nine age 13/14 is derived from the printed age table; it is not a spoken video answer."
+        },
+        {
+          "id": "sb-116-2",
+          "review": "Changed pre-watch B/C classification to evidence-based B/C/NG. Statements 6 and 7 are not confirmed by the full recording."
+        },
+        {
+          "id": "sb-116-3",
+          "review": "Personal comparison with own school; ungraded."
+        },
+        {
+          "id": "sb-116-4",
+          "review": "Discussion checks evidence in the recording; added oral sentence starters and no guessing."
+        },
+        {
+          "id": "sb-116-5",
+          "review": "All seven facts verified in actual speech; added complete prompts and 00:12–02:16 replay interval."
+        },
+        {
+          "id": "sb-116-6",
+          "review": "Personal opinion about the first day; clarified that final results are not shown."
+        },
+        {
+          "id": "sb-116-7",
+          "review": "Opinion based on the printed four-week summary; clarified source to avoid attributing those results to the clip."
+        }
+      ],
+      "fields": [
+        {
+          "exercise": "sb-116-1",
+          "field": "1",
+          "answer": [
+            "thirteen or fourteen",
+            "13 or 14"
+          ],
+          "time": "printed age table",
+          "evidence": "Year Nine falls in the secondary 11–16/Years7–11 band."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "1",
+          "answer": "C",
+          "time": "00:58–01:07",
+          "evidence": "Chinese school footage shows students in tracksuits."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "2",
+          "answer": "C",
+          "time": "01:52–01:56",
+          "evidence": "Narration describes a twelve-hour Chinese school day."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "3",
+          "answer": "C",
+          "time": "00:56–01:07",
+          "evidence": "Chinese flag procession and assembled students; visual evidence."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "4",
+          "answer": "C",
+          "time": "01:13–01:28",
+          "evidence": "Morning exercise on sports field is shown and narrated, led by Chinese teacher."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "5",
+          "answer": "B",
+          "time": "01:29–01:46; 02:16–02:45",
+          "evidence": "British pupils talk and laugh in classroom; teachers intervene."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "6",
+          "answer": "NG",
+          "time": "whole clip",
+          "evidence": "No statement or scene establishing free choice of PE activities."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "7",
+          "answer": "NG",
+          "time": "02:46–03:23",
+          "evidence": "Independent revision is described, but its exact duration is not stated; two hours is unsupported."
+        },
+        {
+          "exercise": "sb-116-2",
+          "field": "8",
+          "answer": "B",
+          "time": "02:46–02:53",
+          "evidence": "British students normally finish classes at 3:30. Chinese experiment continues afterwards."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "1",
+          "answer": "village",
+          "time": "00:12–00:17",
+          "evidence": "Liphook described as small British village; place sign also visible."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "2",
+          "answer": "secondary",
+          "time": "00:17–00:20",
+          "evidence": "Local mixed secondary school."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "3",
+          "answer": "five",
+          "time": "00:20–00:26",
+          "evidence": "Five invited teachers from China."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "4",
+          "answer": "fifty",
+          "time": "01:33–01:37",
+          "evidence": "Fifty children in a Chinese classroom; Britain maximum usually thirty."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "5",
+          "answer": "twelve",
+          "time": "01:52–01:56",
+          "evidence": "Twelve-hour school day."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "6",
+          "answer": "two",
+          "time": "01:56–02:04",
+          "evidence": "Lunch at11:30 and another meal break in afternoon; prompt explicitly asks about meal breaks mentioned."
+        },
+        {
+          "exercise": "sb-116-5",
+          "field": "7",
+          "answer": "Maths",
+          "time": "02:08–02:16",
+          "evidence": "Teacher identifies Maths as most important subject."
+        }
+      ],
+      "url": "https://rutube.ru/video/11a836d3c966d02ce842b5efedde3475/",
+      "recordingSha256": "e1685f8d26806d50af813aa3304599bc2a3514359c4fa09b83e41a9dc4650893",
+      "asrSha256": "469f8ec99690d919584e33c55be47cec9c78a1ec760f2aefe012a571693b690e",
+      "transcriptCorrection": {
+        "time": "00:36–00:39",
+        "before": "Naeve",
+        "after": "Neave",
+        "evidence": "On-screen name label."
+      }
+    },
+    {
+      "number": 28,
+      "providerId": "b264f61aa96b7882423535dbea508222",
+      "durationSeconds": 218.48,
+      "exercises": [
+        {
+          "id": "sb-120-1",
+          "review": "Photo matches Giraffe Manor exterior shown in clip. Location is Kenya near Nairobi. Open discussion; no forced answer."
+        },
+        {
+          "id": "sb-120-2",
+          "review": "Open check of photo predictions against video; no forced answer."
+        },
+        {
+          "id": "sb-120-3",
+          "review": "All three adjectives verified; added complete quote prompts and 01:29–02:59 replay interval."
+        },
+        {
+          "id": "sb-120-4",
+          "review": "All eight judgments checked. Statement4 now asks capacity (six giraffes), not observed breakfast attendance. Exact price range retained."
+        },
+        {
+          "id": "sb-120-5",
+          "review": "All six words confirmed in closing narration; sights/sites both accepted. Added complete prompts and 02:59–03:22 replay interval."
+        },
+        {
+          "id": "sb-120-6",
+          "review": "Personal reasons for/against staying; ungraded."
+        },
+        {
+          "id": "sb-120-7",
+          "review": "Imaginary postcard based on hotel; arrival two days ago and personal plans belong to task scenario, not claims from clip."
+        }
+      ],
+      "fields": [
+        {
+          "exercise": "sb-120-3",
+          "field": "1",
+          "answer": "massive",
+          "time": "01:29–01:37",
+          "evidence": "Guest reacts to size of giraffe/head."
+        },
+        {
+          "exercise": "sb-120-3",
+          "field": "2",
+          "answer": "beautiful",
+          "time": "02:36–02:41",
+          "evidence": "Guest watches running baby giraffe."
+        },
+        {
+          "exercise": "sb-120-3",
+          "field": "3",
+          "answer": "cute",
+          "time": "02:46–02:50",
+          "evidence": "Guest reacts to giraffes."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "1",
+          "answer": "F",
+          "time": "00:33–00:37",
+          "evidence": "Hotel is five-star, not three-star."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "2",
+          "answer": "F",
+          "time": "00:49–00:57",
+          "evidence": "Staff member says22 guests, not32."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "3",
+          "answer": "T",
+          "time": "00:57–01:02",
+          "evidence": "Breakfast ready at half past six."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "4",
+          "answer": "T",
+          "time": "01:36–01:44",
+          "evidence": "Question asks how many giraffes can fit inside; answer six. Does not establish actual attendance."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "5",
+          "answer": "T",
+          "time": "02:05–02:10",
+          "evidence": "More than7,000 guests last year."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "6",
+          "answer": "T",
+          "time": "02:10–02:14",
+          "evidence": "Price range£500–£1,000 per night."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "7",
+          "answer": "F",
+          "time": "02:15–02:22",
+          "evidence": "Ten rooms, not fewer than ten."
+        },
+        {
+          "exercise": "sb-120-4",
+          "field": "8",
+          "answer": "F",
+          "time": "03:13–03:18",
+          "evidence": "Hotel can plan trip and book transport and accommodation."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "1",
+          "answer": "guests",
+          "time": "02:59–03:03",
+          "evidence": "Guests love giraffes."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "2",
+          "answer": "attractions",
+          "time": "03:03–03:06",
+          "evidence": "Other attractions offered."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "3",
+          "answer": "museums",
+          "time": "03:05–03:09",
+          "evidence": "Museums in Nairobi."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "4",
+          "answer": [
+            "sights",
+            "sites"
+          ],
+          "time": "03:09–03:12",
+          "evidence": "Homophones in phrase about top tourist places; both spellings accepted."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "5",
+          "answer": "guide",
+          "time": "03:10–03:14",
+          "evidence": "Experienced local guide."
+        },
+        {
+          "exercise": "sb-120-5",
+          "field": "6",
+          "answer": "visit",
+          "time": "03:17–03:22",
+          "evidence": "Closing invitation to visit Kenya."
+        }
+      ],
+      "url": "https://rutube.ru/video/b264f61aa96b7882423535dbea508222/",
+      "recordingSha256": "5774f8c1880e7dbdfaa0c459f0dc923ba93a158f76e0a448225152e909932265",
+      "asrSha256": "013bd1e7b567d0915fa17c69b341528d27a7bcd7ca786ba603715fc4f5ac3554"
+    }
+  ],
+  "validation": {
+    "automated": "tests/focus-1.cjs and tests/focus-1-video-content.cjs pass; check.py 88 checks pass.",
+    "browser": "SB116ex2 B/C/NG clicked: 8/8 with correct evidence-based answers; former unsupported B/C answers yield6/8. SB120ex4 clicked:8/8. No horizontal clipping in question controls at1280px viewport.",
+    "audio": "No playback started during this direct-content audit."
+  }
+}

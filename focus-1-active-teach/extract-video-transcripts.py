@@ -18,6 +18,8 @@ for v in out.values():v['text']=re.sub(r'\n(?![A-Z][A-Za-z =]{0,22}:)', ' ', '\n
 # Video 9's on-screen labels identify Mahak (left) as the final shopping speaker.
 # The printed script assigns that line to Palak; the worksheet correctly says Mahak.
 out['111']['text']=out['111']['text'].replace('P: So, every single week,','M: So, every single week,')
+# Video 20 identifies the first student as Neave in the on-screen lower third.
+out['116']['text']=out['116']['text'].replace('Na = Naeve','Na = Neave')
 assert len(out)==16
 (R/'data/video-transcripts.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 print(len(out),'original video scripts')
