@@ -3,7 +3,7 @@
 The platform course uses the supplied Student’s Book, Workbook, Word Store and Teacher’s Book. Its player follows Focus 1: original page navigation, exercise hotspots, source crops/full-page context, presentation mode, curtain, zoom, audio, saved responses and homework.
 
 - 8 units; 334 book/reference pages; 1,475 selectable exercises.
-- 601 exercises have structured answer keys; ambiguous, personal, speaking and writing answers are teacher reviewed. Teacher keys and original page context remain available. 158 activities have source-positioned fields.
+- 603 exercises have structured answer keys; ambiguous, personal, speaking and writing answers are teacher reviewed. Teacher keys and original page context remain available. 151 activities have source-positioned fields.
 - 139 SB audio tracks, 316 resource files (books, photocopiables, lesson/video plans and tests).
 - 59 videos: 57 from YouTube and 2 from VK Video (BBC, Focus Vlogs, grammar and speaking, including A/B roleplay versions). The iframe is created only when a video is selected and removed on closing. Every video has a direct source link and a worksheet link. Availability may change.
 - Existing per-account CourseWorkStore and SM homework APIs are used under `focus-2`; no database migration. Homework submissions preserve a snapshot. Focus 1 retains its separate catalog and records.

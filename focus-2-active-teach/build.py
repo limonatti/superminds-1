@@ -249,12 +249,17 @@ overrides=json.loads((R/'data/reviewed-answers.json').read_text()) if (R/'data/r
 for pg in pages:
     for e in pg['exercises']:
         if e['id'] in overrides:
-            e.update(overrides[e['id']]);e['answerVersion']=hashlib.sha256(json.dumps(e['answerSpec'],sort_keys=True).encode()).hexdigest()[:12]
+            e.update(overrides[e['id']])
+            signature=e['answerSpec'] if e.get('responseMode')!='oral' else {'fields':[],'responseMode':'oral'}
+            e['answerVersion']=hashlib.sha256(json.dumps(signature,sort_keys=True).encode()).hexdigest()[:12]
+            if e.get('reviewedUnit11'):gaps.pop(e['id'],None)
+sources.update(json.loads((R/'data/source-context-overrides.json').read_text()) if (R/'data/source-context-overrides.json').exists() else {})
 videos=json.loads((R/'data/videos.json').read_text()) if (R/'data/videos.json').exists() else []
 D={'id':'focus-2','units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':[],'ws':[]},'resources':json.loads((R/'data/resources.json').read_text()),'videos':videos}
 (R/'assets/course.js').write_text('window.FOCUS2 = '+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';\n')
 (R/'assets/exercise-sources.js').write_text('window.EXERCISE_SOURCES = '+json.dumps(sources,ensure_ascii=False,separators=(',',':'))+';\n')
 (R/'assets/exercise-gaps.js').write_text('window.EXERCISE_GAPS = '+json.dumps(gaps,ensure_ascii=False,separators=(',',':'))+';\n')
+audit['ungraded']=[e['id'] for p in pages for e in p['exercises'] if not e['answerSpec']]
 audit['coverage']={b:{'pages':sum(p['book']==b for p in pages),'exercises':sum(len(p['exercises']) for p in pages if p['book']==b),'automatic':sum(bool(e['answerSpec']) for p in pages if p['book']==b for e in p['exercises'])} for b in ['sb','wb','ws']}
 write('audit/coverage.json',audit)
 print(json.dumps(audit['coverage'],indent=2))

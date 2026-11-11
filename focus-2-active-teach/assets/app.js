@@ -36,7 +36,7 @@ function resizeCrop(){window.ExerciseSource.change($('#solutionOriginal'),{full:
 function openExercise(id){
  active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
- $('#exerciseAudio').innerHTML=page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
+ $('#exerciseAudio').innerHTML=(active.audioTracks||page.tracks).map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
  const vals=restored.values,spec=active.answerSpec||[],automatic=spec.length>0,mixed=active.marking.mode==='mixed';
  $('#instruction').textContent=active.marking.instruction||(automatic?'Впиши ответы в поля с номерами из задания. Несколько пропусков одного пункта разделяй запятой.':'Выполни задание по условию. Сохрани письменный ответ или заметки для устного ответа.');
@@ -44,25 +44,33 @@ function openExercise(id){
  if(mixed)$('#instruction').textContent+=' Собственные примеры и объяснения запиши отдельно — их проверит преподаватель.';
  const printedLetters=window.ExercisePlay.sourceLetters(active.text);
  const allLetters=printedLetters.length>1&&automatic&&!spec.every(f=>f.accepted?.every(v=>/^(T|F)$/i.test(v)))&&spec.every(f=>f.kind!=='set'&&f.accepted.every(v=>/^[a-z]$/i.test(v)));
- $('#fields').innerHTML=automatic?spec.map((f,i)=>{
+ $('#fields').innerHTML=active.responseMode==='oral'?'':automatic?spec.map((f,i)=>{
   const tf=f.kind!=='set'&&f.accepted.every(v=>/^(T|F|true|false|NG|not given)$/i.test(v));
   const choices=allLetters?printedLetters:tf?['T','F',...(/not given|not stated|doesn.t say|not mentioned/i.test(active.text)?['NG']:[])]:null;
   return `<label class="answer-row"><span>${esc(f.label)}${f.kind==='set'?'<small>Список</small>':''}</span>${choices?`<select data-answer aria-label="Ответ ${esc(f.label)}"><option value="">—</option>${choices.map(v=>`<option value="${v}" ${String(vals[i]||'').toLowerCase()===v.toLowerCase()?'selected':''}>${v}</option>`).join('')}</select>`:f.kind==='set'?`<textarea data-answer rows="2" maxlength="4000" aria-label="Ответ ${esc(f.label)}" placeholder="Ответы через ;" spellcheck="false">${esc(vals[i]||'')}</textarea>`:`<input data-answer aria-label="Ответ ${esc(f.label)}" value="${esc(vals[i]||'')}" maxlength="2000" autocomplete="off" spellcheck="false">`}</label>`;
  }).join(''):`<label for="written">Мой ответ</label><textarea id="written" data-answer maxlength="12000" placeholder="Напиши ответ…">${esc(vals[0]||'')}</textarea>`;
  if(mixed)$('#fields').insertAdjacentHTML('beforeend',`<label class="reflection-label" for="reflection">Объяснения и собственные примеры · проверяет преподаватель</label><textarea id="reflection" maxlength="12000" placeholder="Напиши свободную часть ответа…">${esc(restored.reflection)}</textarea>`);
+ if(active.personalChoices)$('#fields').insertAdjacentHTML('beforeend',`<fieldset class="personal-choices"><legend>Верно для меня · без оценки</legend>${active.personalChoices.map((t,i)=>`<label><input type="checkbox" data-personal="${i}" ${(responses[id]?.personalChecks||[]).includes(i)?'checked':''}><span>Пункт ${i+1} — верно для меня</span></label>`).join('')}</fieldset>`);
  if(previousAnswers.length)$('#fields').insertAdjacentHTML('beforeend',`<details class="previous-answers"><summary>Ранее сохранённые ответы</summary><p>Поля задания уточнены. Твои предыдущие ответы сохранены; перенеси нужные в новые поля для проверки.</p>${previousAnswers.map(r=>`<ol>${r.values.map((v,i)=>`<li>${r.labels?.[i]?esc(r.labels[i])+': ':''}${esc(v||'—')}</li>`).join('')}</ol>${r.reflection?`<p>${esc(r.reflection)}</p>`:''}`).join('')}</details>`);
- $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
+ $('#check').hidden=!automatic;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
+ $('#saveAnswer').textContent=active.responseMode==='oral'?(responses[id]?.completed?'Снять отметку выполнения':'Отметить выполнение'):'Сохранить ответ';if(active.responseMode==='oral')$('#saveAnswer').setAttribute('aria-pressed',String(!!responses[id]?.completed));else $('#saveAnswer').removeAttribute('aria-pressed');$('#resetAnswer').hidden=active.responseMode==='oral';updateKey();
+ $$('[data-personal]').forEach(el=>el.addEventListener('change',()=>save(false)));
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
  window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
- if(spec.length) window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:window.EXERCISE_GAPS?.[active.id]?active.text:'',fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
+ if(active.reviewedUnit11)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
+ else if(spec.length) window.ExercisePlay.attach({reviewComplete:()=>M.canReveal(active,responses[active?.id]),dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:window.EXERCISE_GAPS?.[active.id]?active.text:'',fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
 }
+function updateKey(){const allowed=M.canReveal(active,responses[active?.id]);$('#keyPanel').hidden=!allowed;$('#keyPanel').classList.toggle('play-key-locked',!allowed);if(!allowed)$('#keyPanel').open=false;}
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
 function save(explicit){
  if(!active||!ready)return;
  const values=$$('[data-answer]').map(e=>e.value),old=responses[active.id];
+ const personalChecks=$$('[data-personal]:checked').map(e=>Number(e.dataset.personal));
+ const reflection=active.personalChoices?(personalChecks.length?personalChecks.map(i=>(i+1)+'. '+active.personalChoices[i]).join('\n'):'Личные утверждения не отмечены.'):$('#reflection')?.value||'';
  const score=old?.answerVersion===active.answerVersion&&JSON.stringify(old.values)===JSON.stringify(values)?old.score:undefined;
- responses[active.id]={values,score,checks:old?.checks||[],reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
+ responses[active.id]={values,score,checks:old?.checks||[],reflection,personalChecks,attempted:!!((explicit||old?.attempted&&JSON.stringify(old.values)===JSON.stringify(values))&&values.some(v=>v.trim())),previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
  persist();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
+ updateKey();
  if(explicit)$('#feedback').textContent=user?'Ответ сохранён. Синхронизация с аккаунтом…':'Ответ сохранён на этом устройстве.';
 }
 $('#answerForm').onsubmit=ev=>{
@@ -72,7 +80,7 @@ $('#answerForm').onsubmit=ev=>{
  const results=values.map((v,i)=>M.checkField(v,spec[i])),correct=results.filter(Boolean).length;
  $$('.answer-row').forEach((row,i)=>{const ok=results[i];row.classList.toggle('correct',ok);row.classList.toggle('incorrect',!ok);row.querySelector('[data-answer]').setAttribute('aria-invalid',String(!ok));row.querySelector('.answer-result')?.remove();const result=document.createElement('span');result.className='answer-result';result.textContent=ok?'Верно':'Проверь ответ и форму записи';row.append(result);});
  $('#feedback').textContent=`${active.marking.mode==='mixed'?'Закрытая часть. ':''}Верно: ${correct} из ${values.length}.${active.marking.mode==='mixed'?' Свободную часть проверяет преподаватель.':''}`;
- responses[active.id].score={correct,total:values.length};
+ responses[active.id].score={correct,total:values.length};updateKey();
  const checks=responses[active.id].checks||[],last=checks.at(-1);
  if(!last||last.answerVersion!==active.answerVersion||JSON.stringify(last.values)!==JSON.stringify(values))checks.push({checkedAt:Date.now(),answerVersion:active.answerVersion,labels:spec.map(f=>f.label),values:[...values],results});
  responses[active.id].checks=checks.slice(-10);persist();
@@ -80,7 +88,11 @@ $('#answerForm').onsubmit=ev=>{
 };
 async function recordAttempts(rows){const current=await SM.getUser();if(current?.id!==user?.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return {ok:false};}return SM.saveHwAttempts(rows);}
 $('#fullPage').onclick=()=>{$('#fullPage').setAttribute('aria-pressed',$('#fullPage').getAttribute('aria-pressed')!=='true');resizeCrop();};
-$('#saveAnswer').onclick=()=>{save(true);sync()};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
+$('#saveAnswer').onclick=()=>{if(active?.responseMode==='oral'){
+ const done=!responses[active.id]?.completed;
+ responses[active.id]={values:done?['Устно выполнено']:[],completed:done,answerVersion:active.answerVersion,fieldLabels:['Устное задание'],previousAnswers,updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};persist();sync();openExercise(active.id);
+ }else{save(true);sync()}};
+$('#resetAnswer').onclick=()=>{if(!active)return;responses[active.id]={values:[],personalChecks:[],reflection:'',previousAnswers,checks:responses[active.id]?.checks||[],answerVersion:active.answerVersion,updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};persist();sync();openExercise(active.id);};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
 $('#pages').onchange=ev=>{page=list().find(p=>p.id===ev.target.value);render();};
 for(const [id,dir] of [['prev',-1],['next',1]])$('#'+id).onclick=()=>{page=list()[list().indexOf(page)+dir]||page;render();};
 $$('[data-book]').forEach(b=>b.onclick=()=>{book=b.dataset.book;page=null;render();});

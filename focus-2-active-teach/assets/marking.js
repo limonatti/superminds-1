@@ -37,6 +37,13 @@ function saved(ex,record={}){
  if(!compatible&&(record.values?.some(v=>String(v).trim())||record.reflection))previous.push({values:record.values||[],reflection:record.reflection||'',labels:record.fieldLabels||[],version:record.answerVersion||'original'});
  return {values:compatible?(record.values||[]):[],reflection:compatible?(record.reflection||''):'',previous};
 }
+function canReveal(ex,record={}){
+ if(!ex?.key||record?.answerVersion!==ex.answerVersion)return false;
+ if(ex.responseMode==='oral')return !!record.completed;
+ const values=record.values||[];
+ if(ex.answerSpec?.length)return !!record.score&&values.length===ex.answerSpec.length&&values.every(v=>String(v).trim());
+ return !!record.attempted&&values.some(v=>String(v).trim());
+}
 function attemptIndex(id,label){let hash=2166136261;for(const c of id+':'+label){hash^=c.charCodeAt(0);hash=Math.imul(hash,16777619);}return hash>>>1;}
-return {normalize,checkText,splitSet,checkField,saved,attemptIndex};
+return {normalize,checkText,splitSet,checkField,saved,canReveal,attemptIndex};
 });

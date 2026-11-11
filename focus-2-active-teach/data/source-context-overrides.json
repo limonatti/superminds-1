@@ -1,0 +1,681 @@
+{
+  "sb-4-2": {
+    "label": "2",
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.3,
+          0.55,
+          0.033
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.186,
+          0.55,
+          0.113
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-3": {
+    "label": "3",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.065,
+          0.045,
+          0.42,
+          0.094
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-7": {
+    "label": "7",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.318,
+          0.474,
+          0.027
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.106,
+          0.474,
+          0.207
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-10": {
+    "label": "10",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.6015,
+          0.474,
+          0.033
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.4178,
+          0.474,
+          0.179
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-13": {
+    "label": "13",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.8595,
+          0.474,
+          0.082
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.7185,
+          0.474,
+          0.136
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-4-1": {
+    "label": "1",
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.186,
+          0.55,
+          0.113
+        ]
+      }
+    ]
+  },
+  "sb-5-4": {
+    "label": "4",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.065,
+          0.144,
+          0.42,
+          0.034
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-6": {
+    "label": "6",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.106,
+          0.474,
+          0.207
+        ]
+      },
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.0420541677883602,
+          0.040514618271979067,
+          0.45519793572890993,
+          0.17559437308447262
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-9": {
+    "label": "9",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.4178,
+          0.474,
+          0.179
+        ]
+      },
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.042053403989260135,
+          0.22110899135645168,
+          0.45519869952800995,
+          0.18617734589236612
+        ],
+        "context": true
+      }
+    ]
+  },
+  "ws-3-1": {
+    "label": "1A",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.0420541677883602,
+          0.040514618271979067,
+          0.45519793572890993,
+          0.17559437308447262
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-5": {
+    "label": "5",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.0420541677883602,
+          0.040514618271979067,
+          0.45519793572890993,
+          0.17559437308447262
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.0679,
+          0.474,
+          0.0335
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "ws-3-2": {
+    "label": "1B",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.042053403989260135,
+          0.22110899135645168,
+          0.45519869952800995,
+          0.18617734589236612
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-8": {
+    "label": "8",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.042053403989260135,
+          0.22110899135645168,
+          0.45519869952800995,
+          0.18617734589236612
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.3794,
+          0.474,
+          0.0335
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "ws-3-3": {
+    "label": "1C",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.0420541677883602,
+          0.4122863372488178,
+          0.45519793572890993,
+          0.26006712388602626
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-11": {
+    "label": "11",
+    "sources": [
+      {
+        "image": "assets/pages/ws-6.jpg",
+        "page": 3,
+        "size": [
+          1600,
+          2569
+        ],
+        "box": [
+          0.0420541677883602,
+          0.4122863372488178,
+          0.45519793572890993,
+          0.26006712388602626
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.6625,
+          0.474,
+          0.051
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.4,
+          0.35,
+          0.595,
+          0.61
+        ],
+        "context": true
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.005,
+          0.18,
+          0.483,
+          0.76
+        ],
+        "context": true
+      }
+    ]
+  },
+  "sb-5-12": {
+    "label": "12",
+    "sources": [
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.504,
+          0.7185,
+          0.474,
+          0.136
+        ]
+      }
+    ]
+  }
+}

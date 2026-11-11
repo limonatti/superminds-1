@@ -1,0 +1,560 @@
+{
+  "sb-4-2": {
+    "reviewedUnit11": true,
+    "responseMode": "oral",
+    "marking": {
+      "mode": "open",
+      "instruction": "Опишите знакомых устно, используя прилагательные из задания 1. Письменный ответ не требуется."
+    },
+    "answerSpec": [],
+    "audioTracks": [],
+    "box": [
+      0.4,
+      0.3,
+      0.55,
+      0.033
+    ],
+    "x": 0.41200000000000003,
+    "y": 0.304
+  },
+  "sb-5-3": {
+    "reviewedUnit11": true,
+    "responseMode": "oral",
+    "marking": {
+      "mode": "open",
+      "instruction": "Рассмотрите фотографии на обеих страницах. Обсудите три вопроса устно, затем сравните свои идеи с записью 1.02."
+    },
+    "answerSpec": [],
+    "audioTracks": [
+      "1.02"
+    ],
+    "box": [
+      0.065,
+      0.045,
+      0.42,
+      0.094
+    ],
+    "x": 0.077,
+    "y": 0.049
+  },
+  "sb-5-7": {
+    "reviewedUnit11": true,
+    "responseMode": "oral",
+    "marking": {
+      "mode": "open",
+      "instruction": "Обсудите, согласны ли вы с утверждениями из задания 6. Объясните своё мнение устно."
+    },
+    "answerSpec": [],
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.318,
+      0.474,
+      0.027
+    ],
+    "x": 0.516,
+    "y": 0.322
+  },
+  "sb-5-10": {
+    "reviewedUnit11": true,
+    "responseMode": "oral",
+    "marking": {
+      "mode": "open",
+      "instruction": "Замените три имени в предложениях задания 9 именами знакомых и расскажите о них партнёру. Письменный ответ не требуется."
+    },
+    "answerSpec": [],
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.6015,
+      0.474,
+      0.033
+    ],
+    "x": 0.516,
+    "y": 0.6055
+  },
+  "sb-5-13": {
+    "reviewedUnit11": true,
+    "responseMode": "oral",
+    "marking": {
+      "mode": "open",
+      "instruction": "Составьте вопросы 2–6 по предложениям задания 12, используя you или your. Вопрос 1 уже дан как пример. Задайте вопросы партнёру устно."
+    },
+    "answerSpec": [],
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.8595,
+      0.474,
+      0.082
+    ],
+    "x": 0.516,
+    "y": 0.8635
+  },
+  "sb-4-1": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выберите букву a–f для каждого слова 2–6. Пункт 1 — готовый пример; заполнять его не нужно."
+    },
+    "audioTracks": [],
+    "box": [
+      0.4,
+      0.186,
+      0.55,
+      0.113
+    ],
+    "x": 0.41200000000000003,
+    "y": 0.19
+  },
+  "sb-5-4": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "open",
+      "instruction": "Прочитайте обе части текста. Кто получает больше пользы от общения — молодые или пожилые? Объясните своё мнение. Ответ сохраняется для обсуждения, без автоматической оценки."
+    },
+    "audioTracks": [],
+    "box": [
+      0.065,
+      0.144,
+      0.42,
+      0.034
+    ],
+    "x": 0.077,
+    "y": 0.148
+  },
+  "sb-5-6": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впишите по одному подходящему прилагательному из Word Store 1A в каждый из шести пропусков. Полные предложения переписывать не нужно."
+    },
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.106,
+      0.474,
+      0.207
+    ],
+    "x": 0.516,
+    "y": 0.11
+  },
+  "sb-5-9": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впишите по одному подходящему прилагательному из Word Store 1B в каждый из шести пропусков. Полные предложения переписывать не нужно."
+    },
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.4178,
+      0.474,
+      0.179
+    ],
+    "x": 0.516,
+    "y": 0.4218
+  },
+  "ws-3-1": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполните пропуски в Word Store 1A словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.03."
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "cheerful"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "generous"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "hard-working"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "outgoing"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "sensible"
+        ]
+      }
+    ],
+    "key": "2 cheerful\n3 generous\n4 hard-working\n5 outgoing\n6 sensible",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.03"
+    ],
+    "box": [
+      0.0420541677883602,
+      0.040514618271979067,
+      0.45519793572890993,
+      0.17559437308447262
+    ]
+  },
+  "sb-5-5": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполните пропуски в Word Store 1A словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.03."
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "cheerful"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "generous"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "hard-working"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "outgoing"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "sensible"
+        ]
+      }
+    ],
+    "key": "2 cheerful\n3 generous\n4 hard-working\n5 outgoing\n6 sensible",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.03"
+    ],
+    "wordStore": "ws-3-1",
+    "box": [
+      0.504,
+      0.0679,
+      0.474,
+      0.0335
+    ],
+    "x": 0.516,
+    "y": 0.0719
+  },
+  "ws-3-2": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполните пропуски в Word Store 1B словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.04."
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "independent"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "dishonest"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "polite"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "popular"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "irresponsible"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "sensitive"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "wise"
+        ]
+      }
+    ],
+    "key": "2 independent\n3 dishonest\n4 polite\n5 popular\n6 irresponsible\n7 sensitive\n8 wise",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.04"
+    ],
+    "box": [
+      0.042053403989260135,
+      0.22110899135645168,
+      0.45519869952800995,
+      0.18617734589236612
+    ]
+  },
+  "sb-5-8": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполните пропуски в Word Store 1B словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.04."
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "independent"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "dishonest"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "polite"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "popular"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "irresponsible"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "sensitive"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "wise"
+        ]
+      }
+    ],
+    "key": "2 independent\n3 dishonest\n4 polite\n5 popular\n6 irresponsible\n7 sensitive\n8 wise",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.04"
+    ],
+    "wordStore": "ws-3-2",
+    "box": [
+      0.504,
+      0.3794,
+      0.474,
+      0.0335
+    ],
+    "x": 0.516,
+    "y": 0.3834
+  },
+  "ws-3-3": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Перепишите три выделенных предложения из текста на страницах 4–5 в соответствующие строки Word Store 1C. Затем проверьте по записи 1.05."
+    },
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "She’s wise, sensitive and has a lot of experience.",
+          "She is wise, sensitive and has a lot of experience."
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "He’s got tattoos and long hair.",
+          "He has got tattoos and long hair."
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "I like being with young people."
+        ]
+      }
+    ],
+    "key": "1 She’s wise, sensitive and has a lot of experience.\n2 He’s got tattoos and long hair.\n3 I like being with young people.",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.05"
+    ],
+    "box": [
+      0.0420541677883602,
+      0.4122863372488178,
+      0.45519793572890993,
+      0.26006712388602626
+    ]
+  },
+  "sb-5-11": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Перепишите три выделенных предложения из текста на страницах 4–5 в соответствующие строки Word Store 1C. Затем проверьте по записи 1.05."
+    },
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "She’s wise, sensitive and has a lot of experience.",
+          "She is wise, sensitive and has a lot of experience."
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "He’s got tattoos and long hair.",
+          "He has got tattoos and long hair."
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "I like being with young people."
+        ]
+      }
+    ],
+    "key": "1 She’s wise, sensitive and has a lot of experience.\n2 He’s got tattoos and long hair.\n3 I like being with young people.",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 311
+    },
+    "audioTracks": [
+      "1.05"
+    ],
+    "wordStore": "ws-3-3",
+    "box": [
+      0.504,
+      0.6625,
+      0.474,
+      0.051
+    ],
+    "x": 0.516,
+    "y": 0.6665
+  },
+  "sb-5-12": {
+    "reviewedUnit11": true,
+    "responseMode": "panel",
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Для пунктов 2–6 напишите полное предложение, добавив like только там, где нужно. Если предложение уже верное, можно вписать его без изменений или поставить ✓. Пункт 1 — готовый пример. Отдельно отметьте утверждения, верные для вас; личные отметки не оцениваются."
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "My neighbours are kind and friendly.",
+          "My neighbors are kind and friendly.",
+          "✓"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "My mum looks like her mum."
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "My parents always look cheerful.",
+          "✓"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "My grandmother looks like Queen Elizabeth."
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "I like chocolate."
+        ]
+      }
+    ],
+    "personalChoices": [
+      "I look like my dad.",
+      "My neighbours are kind and friendly.",
+      "My mum looks like her mum.",
+      "My parents always look cheerful.",
+      "My grandmother looks like Queen Elizabeth.",
+      "I like chocolate."
+    ],
+    "key": "2 No change.\n3 My mum looks like her mum.\n4 No change.\n5 My grandmother looks like Queen Elizabeth.\n6 I like chocolate.",
+    "audioTracks": [],
+    "box": [
+      0.504,
+      0.7185,
+      0.474,
+      0.136
+    ],
+    "x": 0.516,
+    "y": 0.7225
+  }
+}
