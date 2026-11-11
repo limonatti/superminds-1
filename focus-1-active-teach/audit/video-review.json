@@ -1,0 +1,1791 @@
+{
+  "checked": "2026-11-11",
+  "scope": {
+    "players": 51,
+    "mainVideos": 37,
+    "roleVariants": 14
+  },
+  "method": [
+    "All embedded players: muted before Play; advancing playback at start, midpoint and near end; pause and iframe removal on close.",
+    "YouTube content: available English captions (original language preferred), original Teacher Book scripts, printed worksheets and keys. ASR numbers were cross-checked with original scripts.",
+    "RUTUBE 20/28: embedded playback and exact course identity checked; worksheet facts checked against original Teacher Book scripts. No independent online captions are available for these two uploads.",
+    "Selected visual checks: Scottish Highlands opening scenes and 00:57/00:58 boundary; not a claim of watching every video in real time from beginning to end."
+  ],
+  "findings": [
+    {
+      "video": 2,
+      "fix": "Replace non-embeddable 69vM6wPMKAc (error 150); second candidate _miHDiDeBt0 also fails. Verified 51ltEBMwcc8 original animation."
+    },
+    {
+      "video": 24,
+      "fix": "Audio 2.45 on SB67 has £17.50/£11.50 and group tours; video has £15.90/£9.50 and app. Attach video only to dialogue practice SB67 exercise6, preserve audio worksheet and keys."
+    },
+    {
+      "video": 36,
+      "exercise": "sb-123-4",
+      "fix": "Spain requires both Senthan and Ini. Explicit money question asks for Peter. Reject partial/extra names."
+    },
+    {
+      "video": 28,
+      "exercise": "sb-120-4",
+      "fix": "Clarify statement6 to between £500 and £1,000; preserve true answer."
+    },
+    {
+      "video": 28,
+      "exercise": "sb-120-5",
+      "fix": "Accept sights and sites, homophones used differently by supplied key and transcript."
+    },
+    {
+      "video": 33,
+      "fix": "Clarify actual upload times: first part through00:57; hare sequence starts00:58. Other BBC timed tasks use full clip to avoid incompatible printed offsets."
+    },
+    {
+      "fix": "Bind every clip to explicit exercise IDs; distinguish grammar explanations, dialogue practice and video worksheets."
+    }
+  ],
+  "playback": [
+    {
+      "number": 1,
+      "role": "",
+      "providerId": "KfrxJc0sSM8",
+      "exercise": "sb-108-1",
+      "label": "Little folk",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/KfrxJc0sSM8?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.1 Video 1 BBC",
+      "actualId": "KfrxJc0sSM8",
+      "duration": 179.661,
+      "samples": [
+        1.2061801239776613,
+        90.41607190272522,
+        174.07835405722045
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 2,
+      "role": "",
+      "providerId": "51ltEBMwcc8",
+      "exercise": "sb-14-1",
+      "label": "Present Simple",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/51ltEBMwcc8?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.2 Grammar: Present Simple",
+      "actualId": "51ltEBMwcc8",
+      "duration": 397.4,
+      "samples": [
+        1.3219828588562013,
+        199.46563097901915,
+        391.8856459904633
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 3,
+      "role": "",
+      "providerId": "tbXHdZnqw5I",
+      "exercise": "sb-18-1",
+      "label": "Yes/No and Wh- questions",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/tbXHdZnqw5I?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.5 Video 3",
+      "actualId": "tbXHdZnqw5I",
+      "duration": 285.341,
+      "samples": [
+        1.3416939904632568,
+        143.42906391416932,
+        279.8413450114441
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 4,
+      "role": "",
+      "providerId": "IHytqyH_QE8",
+      "exercise": "sb-109-1",
+      "label": "Music preferences",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/IHytqyH_QE8?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.5 Video 4 VLOG",
+      "actualId": "IHytqyH_QE8",
+      "duration": 140.841,
+      "samples": [
+        1.2055478931884767,
+        70.49939008392334,
+        135.29707506103514
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 5,
+      "role": "",
+      "providerId": "i5wK-B25zrM",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/i5wK-B25zrM?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 5",
+      "actualId": "i5wK-B25zrM",
+      "duration": 39.481,
+      "samples": [
+        1.319712005722046,
+        20.50582497138977,
+        34.01438708773804
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 5,
+      "role": "A",
+      "providerId": "uxPmDvoX000",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/uxPmDvoX000?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 5 (Person A)",
+      "actualId": "uxPmDvoX000",
+      "duration": 34,
+      "samples": [
+        1.2911710553131104,
+        17.53943890081787,
+        28.53465909727478
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 5,
+      "role": "B",
+      "providerId": "PVBxi02TNQ4",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/PVBxi02TNQ4?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 5 (Person B)",
+      "actualId": "PVBxi02TNQ4",
+      "duration": 25.841,
+      "samples": [
+        1.323712072479248,
+        13.532480024795532,
+        20.363927158309938
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 6,
+      "role": "",
+      "providerId": "LxcRu9A9D-k",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/LxcRu9A9D-k?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 6",
+      "actualId": "LxcRu9A9D-k",
+      "duration": 29.361,
+      "samples": [
+        1.329513803543091,
+        15.522130931335449,
+        23.892039921798705
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 6,
+      "role": "A",
+      "providerId": "9BjUhlRfQvI",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/9BjUhlRfQvI?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 6 (Person A)",
+      "actualId": "9BjUhlRfQvI",
+      "duration": 27.881,
+      "samples": [
+        1.2431809866485595,
+        14.538424003814697,
+        22.37394591798401
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 6,
+      "role": "B",
+      "providerId": "qc4dfgRRJSI",
+      "exercise": "sb-19-1",
+      "label": "Expressing preferences · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/qc4dfgRRJSI?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 1.6 Video 6 (Person B)",
+      "actualId": "qc4dfgRRJSI",
+      "duration": 30.161,
+      "samples": [
+        1.3289000305175782,
+        15.485241177383422,
+        24.70047494277954
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 7,
+      "role": "",
+      "providerId": "XSoMQL4D49s",
+      "exercise": "sb-110-1",
+      "label": "What’s for lunch?",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/XSoMQL4D49s?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.1 Video 7 BBC",
+      "actualId": "XSoMQL4D49s",
+      "duration": 210.701,
+      "samples": [
+        1.2595920133514404,
+        105.40293082833863,
+        205.21220405340577
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 8,
+      "role": "",
+      "providerId": "MclQ7FYhHxo",
+      "exercise": "sb-26-1",
+      "label": "Countable and uncountable nouns",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/MclQ7FYhHxo?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.2 Video 8",
+      "actualId": "MclQ7FYhHxo",
+      "duration": 341.021,
+      "samples": [
+        1.2708789027252196,
+        171.51927393133545,
+        335.52316705340576
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 9,
+      "role": "",
+      "providerId": "LA0fIshFpqs",
+      "exercise": "sb-111-1",
+      "label": "Things you eat",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/LA0fIshFpqs?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.2 Video 9 VLOG",
+      "actualId": "LA0fIshFpqs",
+      "duration": 122.441,
+      "samples": [
+        1.2640980438690186,
+        61.54922809918213,
+        116.95379199237061
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 10,
+      "role": "",
+      "providerId": "wmbs_GKDDgA",
+      "exercise": "sb-30-1",
+      "label": "Articles",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/wmbs_GKDDgA?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.5 Video 10",
+      "actualId": "wmbs_GKDDgA",
+      "duration": 308.881,
+      "samples": [
+        1.244251020980835,
+        154.44552811253357,
+        303.28455891226196
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 11,
+      "role": "",
+      "providerId": "WrjMAKIQBlo",
+      "exercise": "sb-31-1",
+      "label": "Ordering food",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/WrjMAKIQBlo?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.6 Video 11",
+      "actualId": "WrjMAKIQBlo",
+      "duration": 81.981,
+      "samples": [
+        1.2541548760223389,
+        41.51634697138977,
+        76.38135711825562
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 11,
+      "role": "A",
+      "providerId": "YlD3Z6mr6Do",
+      "exercise": "sb-31-1",
+      "label": "Ordering food",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/YlD3Z6mr6Do?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.6 Video 11 (Person A)",
+      "actualId": "YlD3Z6mr6Do",
+      "duration": 37.401,
+      "samples": [
+        1.2077900762939453,
+        19.533201828338623,
+        31.948691024795533
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 11,
+      "role": "B",
+      "providerId": "JGO0ta2lY24",
+      "exercise": "sb-31-1",
+      "label": "Ordering food",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/JGO0ta2lY24?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 2.6 Video 11 (Person B)",
+      "actualId": "JGO0ta2lY24",
+      "duration": 43.881,
+      "samples": [
+        1.2216321125335692,
+        22.430864017166137,
+        38.42097998474121
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 12,
+      "role": "",
+      "providerId": "W41sDOFYAgY",
+      "exercise": "sb-112-1",
+      "label": "Growing furniture",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/W41sDOFYAgY?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 3.1 Video 12 BBC",
+      "actualId": "W41sDOFYAgY",
+      "duration": 177.461,
+      "samples": [
+        1.3185930610351562,
+        89.50031410490418,
+        171.9231631449585
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 13,
+      "role": "",
+      "providerId": "ENCkyZOzQU4",
+      "exercise": "sb-38-1",
+      "label": "Present Continuous",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/ENCkyZOzQU4?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 3.2 Video 13",
+      "actualId": "ENCkyZOzQU4",
+      "duration": 303.101,
+      "samples": [
+        1.2141830591278076,
+        152.52036908583068,
+        297.63182102479556
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 14,
+      "role": "",
+      "providerId": "lr8DJz7phxg",
+      "exercise": "sb-42-1",
+      "label": "Present Simple and Present Continuous",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/lr8DJz7phxg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 3.5 Video 14",
+      "actualId": "lr8DJz7phxg",
+      "duration": 185.501,
+      "samples": [
+        1.2797198989105225,
+        93.50365112588501,
+        180.01558711634826
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 15,
+      "role": "",
+      "providerId": "sewq3wlcCI0",
+      "exercise": "sb-113-1",
+      "label": "Your work",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/sewq3wlcCI0?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 3.5 Video 15 VLOG",
+      "actualId": "sewq3wlcCI0",
+      "duration": 139.881,
+      "samples": [
+        1.3340089256134033,
+        70.42525491416932,
+        134.35883004196168
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 16,
+      "role": "",
+      "providerId": "dsnmpTn9JSg",
+      "exercise": "sb-114-1",
+      "label": "Super siblings",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/dsnmpTn9JSg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 4.1 Video 16 BBC",
+      "actualId": "dsnmpTn9JSg",
+      "duration": 167.281,
+      "samples": [
+        1.255086026702881,
+        84.41150809918213,
+        161.80273505531312
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 17,
+      "role": "",
+      "providerId": "mL0uIA-iPxA",
+      "exercise": "sb-50-1",
+      "label": "Comparative and superlative adjectives",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/mL0uIA-iPxA?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 4.2 Video 17",
+      "actualId": "mL0uIA-iPxA",
+      "duration": 255.661,
+      "samples": [
+        1.2995410972747803,
+        128.52634598283387,
+        250.19219478637694
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 18,
+      "role": "",
+      "providerId": "EVrsV9W6IRA",
+      "exercise": "sb-54-1",
+      "label": "Have to / don’t have to",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/EVrsV9W6IRA?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 4.5 Video 18",
+      "actualId": "EVrsV9W6IRA",
+      "duration": 422.181,
+      "samples": [
+        1.3025538054504395,
+        211.40860615068055,
+        416.70350015830996
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 19,
+      "role": "",
+      "providerId": "tr8nGx-ADpg",
+      "exercise": "sb-115-1",
+      "label": "Things to do",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/tr8nGx-ADpg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 4.5 Video 19 VLOG",
+      "actualId": "tr8nGx-ADpg",
+      "duration": 162.741,
+      "samples": [
+        1.2748220820159912,
+        81.50553409536744,
+        157.14961183978272
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 20,
+      "role": "",
+      "providerId": "11a836d3c966d02ce842b5efedde3475",
+      "exercise": "sb-116-1",
+      "label": "The Chinese school experiment",
+      "originalEmbed": "https://rutube.ru/play/embed/11a836d3c966d02ce842b5efedde3475/?autoplay=false&skinColor=7b2341",
+      "mutedBeforePlay": true,
+      "muteCheck": "Visual player mute confirmed before Play",
+      "duration": 229.76,
+      "samples": [
+        1.400909,
+        115.486962,
+        224.383554
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 21,
+      "role": "",
+      "providerId": "oaowLoLVYLU",
+      "exercise": "sb-62-1",
+      "label": "Must / mustn’t · should / shouldn’t",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/oaowLoLVYLU?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.2 Video 21",
+      "actualId": "oaowLoLVYLU",
+      "duration": 238.721,
+      "samples": [
+        1.2535990553131104,
+        119.4369918626709,
+        233.200796207901
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 22,
+      "role": "",
+      "providerId": "2_H58SDROfg",
+      "exercise": "sb-66-1",
+      "label": "Was / were · could",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/2_H58SDROfg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.5 Video 22",
+      "actualId": "2_H58SDROfg",
+      "duration": 329.581,
+      "samples": [
+        1.2758869752044677,
+        165.50615895040895,
+        323.9832219942779
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 23,
+      "role": "",
+      "providerId": "zINGP90bU5Q",
+      "exercise": "sb-117-1",
+      "label": "School memories",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/zINGP90bU5Q?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.5 Video 23 VLOG",
+      "actualId": "zINGP90bU5Q",
+      "duration": 149.581,
+      "samples": [
+        1.3444922098083496,
+        75.53895411825562,
+        144.11501021171568
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 24,
+      "role": "",
+      "providerId": "7hLje2F-8js",
+      "exercise": "sb-67-1",
+      "label": "Asking for and giving information",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/7hLje2F-8js?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.6 Video 24",
+      "actualId": "7hLje2F-8js",
+      "duration": 68.041,
+      "samples": [
+        1.3200060858306886,
+        34.49412689700318,
+        62.55899789891052
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 24,
+      "role": "A",
+      "providerId": "EMvSvkEn-wE",
+      "exercise": "sb-67-1",
+      "label": "Asking for and giving information",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/EMvSvkEn-wE?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.6 Video 24 Person A",
+      "actualId": "EMvSvkEn-wE",
+      "duration": 73.481,
+      "samples": [
+        1.2532228569488526,
+        37.462123906539915,
+        67.99436386839294
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 24,
+      "role": "B",
+      "providerId": "hKdY3ENtAy0",
+      "exercise": "sb-67-1",
+      "label": "Asking for and giving information",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/hKdY3ENtAy0?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 5.6 Video 24 Person B",
+      "actualId": "hKdY3ENtAy0",
+      "duration": 72.441,
+      "samples": [
+        1.2288109122619628,
+        36.51284787792969,
+        66.86767699618531
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 25,
+      "role": "",
+      "providerId": "5P_6Js_euII",
+      "exercise": "sb-118-1",
+      "label": "Bouldering",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/5P_6Js_euII?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 6.1 Video 25 BBC",
+      "actualId": "5P_6Js_euII",
+      "duration": 136.121,
+      "samples": [
+        1.2752791125335694,
+        68.54094592179871,
+        130.58792710299682
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 26,
+      "role": "",
+      "providerId": "fQPtttam7Yc",
+      "exercise": "sb-74-1",
+      "label": "Past Simple",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/fQPtttam7Yc?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 6.2 Video 26",
+      "actualId": "fQPtttam7Yc",
+      "duration": 233.241,
+      "samples": [
+        1.2630480915527345,
+        117.54712511825562,
+        227.73684599046325
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 27,
+      "role": "",
+      "providerId": "mKTT5gHZ4Rw",
+      "exercise": "sb-119-1",
+      "label": "Your weekend",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/mKTT5gHZ4Rw?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 6.5 Video 27 VLOG",
+      "actualId": "mKTT5gHZ4Rw",
+      "duration": 110.761,
+      "samples": [
+        1.3271781010894776,
+        55.43070911062622,
+        105.29272198283387
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 28,
+      "role": "",
+      "providerId": "b264f61aa96b7882423535dbea508222",
+      "exercise": "sb-120-1",
+      "label": "A special breakfast",
+      "originalEmbed": "https://rutube.ru/play/embed/b264f61aa96b7882423535dbea508222/?autoplay=false&skinColor=7b2341",
+      "mutedBeforePlay": true,
+      "muteCheck": "Visual player mute confirmed before Play",
+      "duration": 218.48,
+      "samples": [
+        1.393273,
+        109.478921,
+        212.96684
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 29,
+      "role": "",
+      "providerId": "yusMw30ovLI",
+      "exercise": "sb-86-1",
+      "label": "Present Perfect",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/yusMw30ovLI?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.2 Video 29",
+      "actualId": "yusMw30ovLI",
+      "duration": 287.581,
+      "samples": [
+        1.2696059217987061,
+        144.42762098664855,
+        282.1075448588562
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 30,
+      "role": "",
+      "providerId": "FBWdb8zOkLo",
+      "exercise": "sb-121-1",
+      "label": "Your experiences",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/FBWdb8zOkLo?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.2 Video 30 VLOG",
+      "actualId": "FBWdb8zOkLo",
+      "duration": 179.801,
+      "samples": [
+        1.2731969504089355,
+        90.47722411444092,
+        174.2791868664856
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 31,
+      "role": "",
+      "providerId": "yA9WQXgI2k0",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/yA9WQXgI2k0?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 31",
+      "actualId": "yA9WQXgI2k0",
+      "duration": 96.601,
+      "samples": [
+        1.237227066757202,
+        48.52939983787537,
+        91.0098469332428
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 31,
+      "role": "A",
+      "providerId": "FwNcxtoqdWQ",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/FwNcxtoqdWQ?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 31 Person A",
+      "actualId": "FwNcxtoqdWQ",
+      "duration": 79.601,
+      "samples": [
+        1.2602080400543212,
+        40.502266938964844,
+        74.13548701335144
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 31,
+      "role": "B",
+      "providerId": "ShagepeBpCY",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 1",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/ShagepeBpCY?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 31 Person B",
+      "actualId": "ShagepeBpCY",
+      "duration": 78.221,
+      "samples": [
+        1.2199210267028808,
+        39.466050927520754,
+        72.74106901335144
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 32,
+      "role": "",
+      "providerId": "D2p9-hUXqqI",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/D2p9-hUXqqI?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 32",
+      "actualId": "D2p9-hUXqqI",
+      "duration": 33.641,
+      "samples": [
+        1.3489549313354492,
+        17.547138066757203,
+        28.044166994277955
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 32,
+      "role": "A",
+      "providerId": "rYDh89Gb-W4",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/rYDh89Gb-W4?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 32 Person A",
+      "actualId": "rYDh89Gb-W4",
+      "duration": 33.641,
+      "samples": [
+        1.2337129446868897,
+        17.54717012969971,
+        28.183827994277955
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 32,
+      "role": "B",
+      "providerId": "lTONua18P3Q",
+      "exercise": "sb-91-1",
+      "label": "Asking for and giving directions · Dialogue 2",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/lTONua18P3Q?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 7.6 Video 32 Person B",
+      "actualId": "lTONua18P3Q",
+      "duration": 35.661,
+      "samples": [
+        1.231721093460083,
+        18.53800794277954,
+        30.185352889373778
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 33,
+      "role": "",
+      "providerId": "ZFjMKGWrwGg",
+      "exercise": "sb-122-1",
+      "label": "Scottish Highlands",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/ZFjMKGWrwGg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.1 Video 33 BBC",
+      "actualId": "ZFjMKGWrwGg",
+      "duration": 173.021,
+      "samples": [
+        1.3431749732971192,
+        87.41684709918214,
+        167.4459979961853
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 34,
+      "role": "",
+      "providerId": "7-qvedSnh5M",
+      "exercise": "sb-98-1",
+      "label": "Future with will",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/7-qvedSnh5M?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.2 Video 34",
+      "actualId": "7-qvedSnh5M",
+      "duration": 172.941,
+      "samples": [
+        1.2838638874664308,
+        86.43306082070923,
+        167.47684613923644
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 35,
+      "role": "",
+      "providerId": "YNntwwlBXuY",
+      "exercise": "sb-102-1",
+      "label": "Be going to",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/YNntwwlBXuY?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.5 Video 35",
+      "actualId": "YNntwwlBXuY",
+      "duration": 230.821,
+      "samples": [
+        1.2420909446868897,
+        115.44641183215332,
+        225.26424190463257
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 36,
+      "role": "",
+      "providerId": "JwGAI8YOOc4",
+      "exercise": "sb-123-1",
+      "label": "Your plans",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/JwGAI8YOOc4?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.5 Video 36 VLOG",
+      "actualId": "JwGAI8YOOc4",
+      "duration": 135.481,
+      "samples": [
+        1.299775891281128,
+        68.54833687030029,
+        129.94913993705748
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 37,
+      "role": "",
+      "providerId": "BTmiN9p767w",
+      "exercise": "sb-103-1",
+      "label": "Agreeing and disagreeing",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/BTmiN9p767w?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.6 Video 37",
+      "actualId": "BTmiN9p767w",
+      "duration": 78.381,
+      "samples": [
+        1.267934165939331,
+        39.45009499809265,
+        72.85235790653992
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 37,
+      "role": "A",
+      "providerId": "BazkICyMDmg",
+      "exercise": "sb-103-1",
+      "label": "Agreeing and disagreeing",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/BazkICyMDmg?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.6 Video 37 Person A",
+      "actualId": "BazkICyMDmg",
+      "duration": 54.461,
+      "samples": [
+        1.2702700381469727,
+        27.486995032424925,
+        48.96286714686585
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    },
+    {
+      "number": 37,
+      "role": "B",
+      "providerId": "ppHbN-sghkM",
+      "exercise": "sb-103-1",
+      "label": "Agreeing and disagreeing",
+      "originalEmbed": "https://www.youtube-nocookie.com/embed/ppHbN-sghkM?autoplay=0&playsinline=1&rel=0&hl=en&cc_lang_pref=en",
+      "mutedBeforePlay": true,
+      "title": "Focus 1 Unit 8.6 Video 37 Person B",
+      "actualId": "ppHbN-sghkM",
+      "duration": 46.241,
+      "samples": [
+        1.3105950305175782,
+        23.471097,
+        40.76474005531311
+      ],
+      "paused": true,
+      "removedOnClose": true,
+      "result": "pass"
+    }
+  ],
+  "content": [
+    {
+      "number": 1,
+      "role": "",
+      "providerId": "KfrxJc0sSM8",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-108-1",
+        "sb-108-2",
+        "sb-108-3",
+        "sb-108-4",
+        "sb-108-5",
+        "sb-108-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 2,
+      "role": "",
+      "providerId": "51ltEBMwcc8",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-14-1",
+        "sb-14-2",
+        "sb-14-3",
+        "sb-14-4",
+        "sb-14-5",
+        "sb-14-6",
+        "sb-14-7",
+        "sb-14-8"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 3,
+      "role": "",
+      "providerId": "tbXHdZnqw5I",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-18-1",
+        "sb-18-2",
+        "sb-18-3",
+        "sb-18-4",
+        "sb-18-5",
+        "sb-18-6",
+        "sb-18-7",
+        "sb-18-8"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 4,
+      "role": "",
+      "providerId": "IHytqyH_QE8",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-109-1",
+        "sb-109-2",
+        "sb-109-3",
+        "sb-109-4",
+        "sb-109-5",
+        "sb-109-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 5,
+      "role": "",
+      "providerId": "i5wK-B25zrM",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 5,
+      "role": "A",
+      "providerId": "uxPmDvoX000",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 5,
+      "role": "B",
+      "providerId": "PVBxi02TNQ4",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 6,
+      "role": "",
+      "providerId": "LxcRu9A9D-k",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 6,
+      "role": "A",
+      "providerId": "9BjUhlRfQvI",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 6,
+      "role": "B",
+      "providerId": "qc4dfgRRJSI",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-19-2",
+        "sb-19-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 7,
+      "role": "",
+      "providerId": "XSoMQL4D49s",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-110-1",
+        "sb-110-2",
+        "sb-110-3",
+        "sb-110-4",
+        "sb-110-5",
+        "sb-110-6",
+        "sb-110-7",
+        "sb-110-8",
+        "sb-110-9"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 8,
+      "role": "",
+      "providerId": "MclQ7FYhHxo",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-26-1",
+        "sb-26-2",
+        "sb-26-3",
+        "sb-26-4",
+        "sb-26-5",
+        "sb-26-6",
+        "sb-26-7",
+        "sb-26-8"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 9,
+      "role": "",
+      "providerId": "LA0fIshFpqs",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-111-1",
+        "sb-111-2",
+        "sb-111-3",
+        "sb-111-4",
+        "sb-111-5",
+        "sb-111-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 10,
+      "role": "",
+      "providerId": "wmbs_GKDDgA",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-30-1",
+        "sb-30-2",
+        "sb-30-3",
+        "sb-30-4",
+        "sb-30-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 11,
+      "role": "",
+      "providerId": "WrjMAKIQBlo",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-31-3",
+        "sb-31-4",
+        "sb-31-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 11,
+      "role": "A",
+      "providerId": "YlD3Z6mr6Do",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-31-3",
+        "sb-31-4",
+        "sb-31-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 11,
+      "role": "B",
+      "providerId": "JGO0ta2lY24",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-31-3",
+        "sb-31-4",
+        "sb-31-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 12,
+      "role": "",
+      "providerId": "W41sDOFYAgY",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-112-1",
+        "sb-112-2",
+        "sb-112-3",
+        "sb-112-4",
+        "sb-112-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 13,
+      "role": "",
+      "providerId": "ENCkyZOzQU4",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-38-1",
+        "sb-38-2",
+        "sb-38-3",
+        "sb-38-4",
+        "sb-38-5",
+        "sb-38-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 14,
+      "role": "",
+      "providerId": "lr8DJz7phxg",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-42-1",
+        "sb-42-2",
+        "sb-42-3",
+        "sb-42-4",
+        "sb-42-5",
+        "sb-42-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 15,
+      "role": "",
+      "providerId": "sewq3wlcCI0",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-113-1",
+        "sb-113-2",
+        "sb-113-3",
+        "sb-113-4",
+        "sb-113-5",
+        "sb-113-6",
+        "sb-113-7"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 16,
+      "role": "",
+      "providerId": "dsnmpTn9JSg",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-114-1",
+        "sb-114-2",
+        "sb-114-3",
+        "sb-114-4",
+        "sb-114-5",
+        "sb-114-6",
+        "sb-114-7",
+        "sb-114-8",
+        "sb-114-9"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 17,
+      "role": "",
+      "providerId": "mL0uIA-iPxA",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-50-1",
+        "sb-50-2",
+        "sb-50-3",
+        "sb-50-4",
+        "sb-50-5",
+        "sb-50-6",
+        "sb-50-7",
+        "sb-50-8"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 18,
+      "role": "",
+      "providerId": "EVrsV9W6IRA",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-54-1",
+        "sb-54-2",
+        "sb-54-3",
+        "sb-54-4",
+        "sb-54-5",
+        "sb-54-6",
+        "sb-54-7"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 19,
+      "role": "",
+      "providerId": "tr8nGx-ADpg",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-115-1",
+        "sb-115-2",
+        "sb-115-3",
+        "sb-115-4",
+        "sb-115-5",
+        "sb-115-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 20,
+      "role": "",
+      "providerId": "11a836d3c966d02ce842b5efedde3475",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-116-1",
+        "sb-116-2",
+        "sb-116-3",
+        "sb-116-4",
+        "sb-116-5",
+        "sb-116-6",
+        "sb-116-7"
+      ],
+      "evidence": "original teacher script; embedded identity/playback"
+    },
+    {
+      "number": 21,
+      "role": "",
+      "providerId": "oaowLoLVYLU",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-62-1",
+        "sb-62-2",
+        "sb-62-3",
+        "sb-62-4",
+        "sb-62-5",
+        "sb-62-6",
+        "sb-62-7",
+        "sb-62-8"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 22,
+      "role": "",
+      "providerId": "2_H58SDROfg",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-66-1",
+        "sb-66-2",
+        "sb-66-3",
+        "sb-66-4",
+        "sb-66-5",
+        "sb-66-6",
+        "sb-66-7"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 23,
+      "role": "",
+      "providerId": "zINGP90bU5Q",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-117-1",
+        "sb-117-2",
+        "sb-117-3",
+        "sb-117-4",
+        "sb-117-5",
+        "sb-117-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 24,
+      "role": "",
+      "providerId": "7hLje2F-8js",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-67-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 24,
+      "role": "A",
+      "providerId": "EMvSvkEn-wE",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-67-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 24,
+      "role": "B",
+      "providerId": "hKdY3ENtAy0",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-67-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 25,
+      "role": "",
+      "providerId": "5P_6Js_euII",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-118-1",
+        "sb-118-2",
+        "sb-118-3",
+        "sb-118-4",
+        "sb-118-5",
+        "sb-118-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 26,
+      "role": "",
+      "providerId": "fQPtttam7Yc",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-74-1",
+        "sb-74-2",
+        "sb-74-3",
+        "sb-74-4",
+        "sb-74-5",
+        "sb-74-6",
+        "sb-74-7",
+        "sb-74-8",
+        "sb-78-1",
+        "sb-78-2",
+        "sb-78-3",
+        "sb-78-4",
+        "sb-78-5",
+        "sb-78-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 27,
+      "role": "",
+      "providerId": "mKTT5gHZ4Rw",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-119-1",
+        "sb-119-2",
+        "sb-119-3",
+        "sb-119-4",
+        "sb-119-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 28,
+      "role": "",
+      "providerId": "b264f61aa96b7882423535dbea508222",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-120-1",
+        "sb-120-2",
+        "sb-120-3",
+        "sb-120-4",
+        "sb-120-5",
+        "sb-120-6",
+        "sb-120-7"
+      ],
+      "evidence": "original teacher script; embedded identity/playback"
+    },
+    {
+      "number": 29,
+      "role": "",
+      "providerId": "yusMw30ovLI",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-86-1",
+        "sb-86-2",
+        "sb-86-3",
+        "sb-86-4",
+        "sb-86-5",
+        "sb-86-6",
+        "sb-90-1",
+        "sb-90-2",
+        "sb-90-3",
+        "sb-90-4",
+        "sb-90-5",
+        "sb-90-6",
+        "sb-90-7"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 30,
+      "role": "",
+      "providerId": "FBWdb8zOkLo",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-121-1",
+        "sb-121-2",
+        "sb-121-3",
+        "sb-121-4",
+        "sb-121-5"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 31,
+      "role": "",
+      "providerId": "yA9WQXgI2k0",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-2",
+        "sb-91-3",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 31,
+      "role": "A",
+      "providerId": "FwNcxtoqdWQ",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-2",
+        "sb-91-3",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 31,
+      "role": "B",
+      "providerId": "ShagepeBpCY",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-2",
+        "sb-91-3",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 32,
+      "role": "",
+      "providerId": "D2p9-hUXqqI",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-4",
+        "sb-91-5",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 32,
+      "role": "A",
+      "providerId": "rYDh89Gb-W4",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-4",
+        "sb-91-5",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 32,
+      "role": "B",
+      "providerId": "lTONua18P3Q",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-91-4",
+        "sb-91-5",
+        "sb-91-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 33,
+      "role": "",
+      "providerId": "ZFjMKGWrwGg",
+      "kind": "BBC",
+      "exerciseIds": [
+        "sb-122-1",
+        "sb-122-2",
+        "sb-122-3",
+        "sb-122-4",
+        "sb-122-5",
+        "sb-122-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 34,
+      "role": "",
+      "providerId": "7-qvedSnh5M",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-98-1",
+        "sb-98-2",
+        "sb-98-3",
+        "sb-98-4",
+        "sb-98-5",
+        "sb-98-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 35,
+      "role": "",
+      "providerId": "YNntwwlBXuY",
+      "kind": "Grammar animation",
+      "exerciseIds": [
+        "sb-102-1",
+        "sb-102-2",
+        "sb-102-3",
+        "sb-102-4",
+        "sb-102-5",
+        "sb-102-6",
+        "sb-102-7"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 36,
+      "role": "",
+      "providerId": "JwGAI8YOOc4",
+      "kind": "Focus Vlog",
+      "exerciseIds": [
+        "sb-123-1",
+        "sb-123-2",
+        "sb-123-3",
+        "sb-123-4",
+        "sb-123-5",
+        "sb-123-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 37,
+      "role": "",
+      "providerId": "BTmiN9p767w",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-103-3",
+        "sb-103-4",
+        "sb-103-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 37,
+      "role": "A",
+      "providerId": "BazkICyMDmg",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-103-3",
+        "sb-103-4",
+        "sb-103-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    },
+    {
+      "number": 37,
+      "role": "B",
+      "providerId": "ppHbN-sghkM",
+      "kind": "Role-play",
+      "exerciseIds": [
+        "sb-103-3",
+        "sb-103-4",
+        "sb-103-6"
+      ],
+      "evidence": "English captions / original script; embedded identity/playback"
+    }
+  ]
+}

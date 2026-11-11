@@ -6,7 +6,7 @@ const base=typeof document==='undefined'?'':new URL('.',document.currentScript.s
 let catalog=new Map(),loading;
 function setData(d){catalog=new Map(d.pages.flatMap(p=>p.exercises.map(e=>[e.id,{...e,book:p.book,page:p.page,unit:p.unit}])));for(const e of d.legacyExercises||[])catalog.set(e.id,e);return catalog;}
 function script(path){return new Promise((resolve,reject)=>{const el=document.createElement('script');el.src=base+path;el.onload=resolve;el.onerror=()=>{el.remove();reject(new Error('Не удалось загрузить упражнения Focus. Обнови страницу.'));};document.head.append(el);});}
-async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.FOCUS)await script('focus-1-active-teach/assets/course.js?v=37a9f25928');if(!root.FocusMarking)await script('focus-1-active-teach/assets/marking.js?v=29f1e115fa');return setData(root.FOCUS);})().catch(e=>{loading=null;throw e;});return loading;}
+async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.FOCUS)await script('focus-1-active-teach/assets/course.js?v=1426bb8961');if(!root.FocusMarking)await script('focus-1-active-teach/assets/marking.js?v=29f1e115fa');return setData(root.FOCUS);})().catch(e=>{loading=null;throw e;});return loading;}
 function meta(hw){try{return JSON.parse(hw.note)||{};}catch{return {};}}
 function ids(hw){const a=meta(hw).focusExercises;return hw?.course==='focus-1'&&Array.isArray(a)?[...new Set(a.filter(x=>typeof x==='string'&&/^(sb|wb|ws)-\d+-\d+(?:-b\d+)?$/.test(x)))]:[];}
 const snapshotKey=id=>'__homework:'+id;

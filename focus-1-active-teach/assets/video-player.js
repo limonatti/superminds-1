@@ -4,13 +4,14 @@ window.FocusVideo=(()=>{
  const catalogue=window.FOCUS_VIDEOS||[];
  const url=v=>v.rutubeId?`https://rutube.ru/video/${v.rutubeId}/`:`https://www.youtube.com/watch?v=${v.youtubeId}`;
  function stop(host){host.querySelectorAll('.focus-video iframe').forEach(f=>f.remove());host.querySelectorAll('.focus-video[open]').forEach(d=>d.open=false);}
- function mount(host,page,data){
+ function mount(host,page,data,exercise){
   if(page.book!=='sb')return;
-  const videos=catalogue.filter(v=>v.pages.includes(page.page)),numbers=[...new Set(videos.map(v=>v.number))];
+  const videos=catalogue.filter(v=>v.exerciseIds?.includes(exercise?.canonicalId||exercise?.id)),numbers=[...new Set(videos.map(v=>v.number))];
   for(const n of numbers){
    const variants=videos.filter(v=>v.number===n),v=variants.find(v=>!v.role)||variants[0],script=data.videoTranscripts?.[v.transcriptPage];
+   const purpose=v.kind==='Grammar animation'?'Объяснение грамматики. Ответы к упражнению бери из его текста и указанной аудиозаписи.':v.kind==='Role-play'?'Посмотри образец диалога, затем выбери роль A или B для разговорной практики.':'Видео к заданиям этой страницы.';
    const details=document.createElement('details');details.className='focus-video';details.dataset.video=n;
-   details.innerHTML=`<summary>Видео ${n} · ${esc(v.label)}</summary><p>${esc(v.kind)} · Lesson ${esc(v.lesson)}</p>${variants.length>1?`<label>Вариант диалога<select aria-label="Вариант видео ${n}">${variants.map(x=>`<option value="${esc(x.youtubeId)}">${x.role?'Практика · Person '+esc(x.role):'Полный диалог'}</option>`).join('')}</select></label>`:''}<div class="focus-video-frame"></div><div class="focus-video-actions"><button type="button" data-video-repeat>К началу</button><a data-video-link target="_blank" rel="noopener">Открыть на ${v.rutubeId?'RUTUBE':'YouTube'} ↗</a></div>${script?`<details class="audio-transcript"><summary>Текст видео</summary><div>${esc(script.text)}</div></details>`:''}`;
+   details.innerHTML=`<summary>Видео ${n} · ${esc(v.label)}</summary><p>${esc(v.kind)} · Lesson ${esc(v.lesson)}</p><p class="focus-video-purpose">${esc(purpose)}</p>${variants.length>1?`<label>Вариант диалога<select aria-label="Вариант видео ${n}">${variants.map(x=>`<option value="${esc(x.youtubeId)}">${x.role?'Практика · Person '+esc(x.role):'Полный диалог'}</option>`).join('')}</select></label>`:''}<div class="focus-video-frame"></div><div class="focus-video-actions"><button type="button" data-video-repeat>К началу</button><a data-video-link target="_blank" rel="noopener">Открыть на ${v.rutubeId?'RUTUBE':'YouTube'} ↗</a></div>${script?`<details class="audio-transcript"><summary>Текст видео</summary><div>${esc(script.text)}</div></details>`:''}`;
    host.append(details);
    function load(){
     const id=details.querySelector('select')?.value||v.youtubeId,frame=document.createElement('iframe');

@@ -3128,7 +3128,8 @@
         {
           "label": "3"
         }
-      ]
+      ],
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
     }
   },
   "sb-110-8": {
@@ -21549,7 +21550,8 @@
         {
           "label": "serious →"
         }
-      ]
+      ],
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
     }
   },
   "sb-114-7": {
@@ -21575,7 +21577,8 @@
         {
           "label": "Super sibling guide"
         }
-      ]
+      ],
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
     }
   },
   "sb-115-1": {
@@ -21969,7 +21972,8 @@
         "a squirrel",
         "a waterfall",
         "snow"
-      ]
+      ],
+      "instruction": "Смотри первую часть до 00:57 в этом плеере — до появления зайца. Выбери всё, что увидишь. В печатной книге указан таймкод версии без заставки."
     }
   },
   "sb-123-2": {
@@ -22075,14 +22079,20 @@
       },
       {
         "label": "3",
-        "accepted": [
-          "Senthan"
+        "kind": "set",
+        "members": [
+          [
+            "Senthan"
+          ],
+          [
+            "Ini"
+          ]
         ]
       },
       {
         "label": "4",
         "accepted": [
-          "Senthan"
+          "Peter"
         ]
       },
       {
@@ -22099,39 +22109,127 @@
       }
     ],
     "activity": {
+      "instruction": "Смотри видео и выбирай ответы. Вопросы 3 и 4 уточнены по ролику: в №3 выбери двух людей, в №4 — того, кто прямо говорит о заработке.",
       "fields": [
         {
-          "label": "1"
+          "label": "1",
+          "prompt": "Where is Lindsay going to go?",
+          "options": [
+            {
+              "value": "Europe",
+              "label": "Europe"
+            },
+            {
+              "value": "Asia",
+              "label": "Asia"
+            },
+            {
+              "value": "Africa",
+              "label": "Africa"
+            }
+          ]
         },
         {
-          "label": "2"
+          "label": "2",
+          "prompt": "What sport is Mahak going to play in the evening?",
+          "options": [
+            {
+              "value": "Football",
+              "label": "Football"
+            },
+            {
+              "value": "Tennis",
+              "label": "Tennis"
+            },
+            {
+              "value": "Badminton",
+              "label": "Badminton"
+            }
+          ]
         },
         {
-          "label": "3"
+          "label": "3",
+          "prompt": "Who is going to visit Spain? Choose both people.",
+          "multiOptions": [
+            {
+              "value": "Lindsay",
+              "label": "Lindsay"
+            },
+            {
+              "value": "Senthan",
+              "label": "Senthan"
+            },
+            {
+              "value": "Nicky",
+              "label": "Nicky"
+            },
+            {
+              "value": "Ini",
+              "label": "Ini"
+            },
+            {
+              "value": "Peter",
+              "label": "Peter"
+            }
+          ]
         },
         {
-          "label": "4"
+          "label": "4",
+          "prompt": "Who explicitly says he wants to earn more money?",
+          "options": [
+            {
+              "value": "Peter",
+              "label": "Peter"
+            },
+            {
+              "value": "Senthan",
+              "label": "Senthan"
+            },
+            {
+              "value": "Ini",
+              "label": "Ini"
+            }
+          ]
         },
         {
-          "label": "5"
+          "label": "5",
+          "prompt": "What is Nicky going to do?",
+          "options": [
+            {
+              "value": "Travel around Peru.",
+              "label": "Travel around Peru."
+            },
+            {
+              "value": "Travel across Asia.",
+              "label": "Travel across Asia."
+            },
+            {
+              "value": "Work at a bank.",
+              "label": "Work at a bank."
+            }
+          ]
         },
         {
-          "label": "6"
+          "label": "6",
+          "prompt": "Where is Ini going after his holidays?",
+          "options": [
+            {
+              "value": "Back to Madrid",
+              "label": "Back to Madrid"
+            },
+            {
+              "value": "Back to London",
+              "label": "Back to London"
+            },
+            {
+              "value": "Back to Bath",
+              "label": "Back to Bath"
+            }
+          ]
         }
       ]
     },
-    "acceptedVariants": {
-      "3": [
-        "Senthan",
-        "Ini",
-        "Senthan and Ini"
-      ],
-      "4": [
-        "Peter",
-        "Senthan",
-        "Peter and Senthan"
-      ]
-    }
+    "key": "1 Asia\n2 Badminton\n3 Senthan and Ini\n4 Peter\n5 Travel around Peru.\n6 Back to London"
   },
   "sb-134-1-b2": {
     "answerSpec": [
@@ -28391,5 +28489,216 @@
       ]
     },
     "keySource": "Reviewed against the supplied Student’s Book and Teacher’s Book."
+  },
+  "sb-120-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "F"
+        ]
+      }
+    ],
+    "activity": {
+      "kind": "choice",
+      "instruction": "Посмотри видео и выбери True или False. Пункт 6 уточнён: указан точный диапазон цен из ролика.",
+      "fields": [
+        {
+          "label": "1",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "The hotel is a three-star hotel."
+        },
+        {
+          "label": "2",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "There are thirty-two guests at the hotel now."
+        },
+        {
+          "label": "3",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "Breakfast is ready at 6:30 a.m."
+        },
+        {
+          "label": "4",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "More than five giraffes come for breakfast."
+        },
+        {
+          "label": "5",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "Last year over 7,000 guests visited Giraffe Manor."
+        },
+        {
+          "label": "6",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "A night at the hotel costs between £500 and £1,000."
+        },
+        {
+          "label": "7",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "There are fewer than ten rooms in the hotel."
+        },
+        {
+          "label": "8",
+          "options": [
+            {
+              "value": "T",
+              "label": "True"
+            },
+            {
+              "value": "F",
+              "label": "False"
+            }
+          ],
+          "prompt": "If you want to go on a safari, you have to book all your transport and accommodation yourself."
+        }
+      ]
+    }
+  },
+  "sb-120-5": {
+    "acceptedVariants": {
+      "4": [
+        "sights",
+        "sites"
+      ]
+    },
+    "activity": {
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+    }
+  },
+  "sb-110-6": {
+    "activity": {
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+    }
+  },
+  "sb-114-5": {
+    "activity": {
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+    }
+  },
+  "sb-116-5": {
+    "activity": {
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+    }
+  },
+  "sb-120-3": {
+    "activity": {
+      "instruction": "Смотри ролик целиком и выполни задание. В этой версии есть заставка, поэтому временные отметки в печатной книге отличаются."
+    }
+  },
+  "sb-122-4": {
+    "activity": {
+      "instruction": "Смотри с 00:58 до конца — рассказ о зайце и орле. Выполни задание по видео. Здесь время уточнено с учётом заставки."
+    }
+  },
+  "sb-122-5": {
+    "activity": {
+      "instruction": "Смотри с 00:58 до конца — рассказ о зайце и орле. Выполни задание по видео. Здесь время уточнено с учётом заставки."
+    }
   }
 }

@@ -39,7 +39,7 @@ function openExercise(id){
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
  $('#exerciseAudio').innerHTML=(active.tracks||[]).map(t=>`<div class="exercise-track"><label>Трек ${esc(t)}<audio controls preload="metadata" src="media/sb-${t}.mp3"></audio></label><button type="button" class="audio-repeat">Повторить сначала</button>${D.transcripts?.[t]?`<details class="audio-transcript"><summary>Текст записи</summary><div>${esc(typeof D.transcripts[t]==='string'?D.transcripts[t]:D.transcripts[t].text)}</div></details>`:''}</div>`).join('');
  $$('#exerciseAudio .audio-repeat').forEach(b=>b.onclick=()=>{const a=b.parentElement.querySelector('audio');a.currentTime=0;a.play().catch(()=>{});});
- window.FocusVideo.mount($('#exerciseAudio'),page,D);
+ window.FocusVideo.mount($('#exerciseAudio'),page,D,active);
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
  const vals=restored.values,spec=active.answerSpec||[],automatic=spec.length>0,mixed=active.marking.mode==='mixed';
  $('#instruction').textContent=active.activity?.instruction||active.marking.instruction||(automatic?'Выполни задание по оригиналу. Номера полей соответствуют пунктам упражнения.':'Выполни задание по оригиналу. Сохрани свой ответ или заметки.');
