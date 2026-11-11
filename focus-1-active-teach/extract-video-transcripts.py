@@ -15,6 +15,9 @@ for i in range(188,194):
   if m:current=m[3];out[current]={'video':int(m[1]),'title':m[2],'source':f'Teacher’s Book · PDF p. {i+1}','lines':[]};continue
   if current and t:out[current]['lines'].append(t)
 for v in out.values():v['text']=re.sub(r'\n(?![A-Z][A-Za-z =]{0,22}:)', ' ', '\n'.join(v.pop('lines')))
+# Video 9's on-screen labels identify Mahak (left) as the final shopping speaker.
+# The printed script assigns that line to Palak; the worksheet correctly says Mahak.
+out['111']['text']=out['111']['text'].replace('P: So, every single week,','M: So, every single week,')
 assert len(out)==16
 (R/'data/video-transcripts.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 print(len(out),'original video scripts')

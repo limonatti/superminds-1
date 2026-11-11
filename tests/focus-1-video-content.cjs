@@ -10,6 +10,7 @@ assert(!attached('sb-67-3').includes(24),'Audio 2.45 has different prices and to
 assert(attached('sb-67-6').includes(24));assert.equal(attached('sb-19-1').length,0);assert(attached('sb-19-2').includes(5));
 assert(!attached('sb-91-4').includes(31));assert(attached('sb-91-4').includes(32));
 assert(videos.find(v=>v.number===2).youtubeId==='51ltEBMwcc8');
+assert.match(w.FOCUS.videoTranscripts['111'].text,/M: So, every single week,/);
 const plans=ex.get('sb-123-4');
 assert(M.checkField('Senthan; Ini',plans.answerSpec[2]));assert(M.checkField('Ini; Senthan',plans.answerSpec[2]));
 for(const v of ['Senthan','Ini','Senthan; Senthan','Senthan; Ini; Peter'])assert(!M.checkField(v,plans.answerSpec[2]),v);

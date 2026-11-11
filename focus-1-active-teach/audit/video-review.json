@@ -41,6 +41,10 @@
     },
     {
       "fix": "Bind every clip to explicit exercise IDs; distinguish grammar explanations, dialogue practice and video worksheets."
+    },
+    {
+      "video": 9,
+      "fix": "Visual on-screen labels identify Mahak as the final speaker about groceries. Correct the Teacher Book transcript speaker prefix P to M; worksheet answer some eggs remains correct. Original English (US) audio track verified selected in player settings."
     }
   ],
   "playback": [
