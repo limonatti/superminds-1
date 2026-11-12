@@ -113,7 +113,7 @@
     "responseMode": "panel",
     "marking": {
       "mode": "open",
-      "instruction": "Прочитайте обе части текста. Кто получает больше пользы от общения — молодые или пожилые? Объясните своё мнение. Ответ сохраняется для обсуждения, без автоматической оценки."
+      "instruction": "Прочитайте обе части текста. Выберите свою позицию: кто получает больше пользы от общения? Объясните почему устно или в необязательной заметке. Здесь нет единственного правильного ответа."
     },
     "audioTracks": [],
     "box": [
@@ -123,14 +123,38 @@
       0.034
     ],
     "x": 0.077,
-    "y": 0.148
+    "y": 0.148,
+    "interaction": {
+      "type": "opinion",
+      "format": "personal-choice-and-optional-note",
+      "rows": [
+        {
+          "prompt": "Who benefits most?",
+          "options": [
+            {
+              "label": "Young people",
+              "value": "Young people"
+            },
+            {
+              "label": "Older people",
+              "value": "Older people"
+            },
+            {
+              "label": "Both generations",
+              "value": "Both generations"
+            }
+          ]
+        }
+      ],
+      "source": "Original SB5ex4: discuss who benefits most and why. Personal opinion, no exact key."
+    }
   },
   "sb-5-6": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Впишите по одному подходящему прилагательному из Word Store 1A в каждый из шести пропусков. Полные предложения переписывать не нужно."
+      "instruction": "Заполните шесть пропусков в предложениях карточками из Word Store 1A. Выберите номер пропуска, затем нажмите слово. Переписывать предложения не нужно."
     },
     "audioTracks": [],
     "box": [
@@ -140,14 +164,34 @@
       0.207
     ],
     "x": 0.516,
-    "y": 0.11
+    "y": 0.11,
+    "interaction": {
+      "type": "bank",
+      "format": "word-bank",
+      "items": [
+        "shy",
+        "caring",
+        "miserable",
+        "outgoing",
+        "silly",
+        "hard-working",
+        "mean",
+        "sensible",
+        "lazy",
+        "cheerful",
+        "selfish",
+        "generous"
+      ],
+      "prompts": [],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "sb-5-9": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Впишите по одному подходящему прилагательному из Word Store 1B в каждый из шести пропусков. Полные предложения переписывать не нужно."
+      "instruction": "Заполните шесть пропусков в предложениях карточками из Word Store 1B. Выберите номер пропуска, затем нажмите слово. Переписывать предложения не нужно."
     },
     "audioTracks": [],
     "box": [
@@ -157,14 +201,38 @@
       0.179
     ],
     "x": 0.516,
-    "y": 0.4218
+    "y": 0.4218,
+    "interaction": {
+      "type": "bank",
+      "format": "word-bank",
+      "items": [
+        "wise",
+        "dishonest",
+        "unpopular",
+        "responsible",
+        "polite",
+        "independent",
+        "insensitive",
+        "adventurous",
+        "popular",
+        "unwise",
+        "honest",
+        "unadventurous",
+        "sensitive",
+        "dependent",
+        "irresponsible",
+        "impolite"
+      ],
+      "prompts": [],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "ws-3-1": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Заполните пропуски в Word Store 1A словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.03."
+      "instruction": "Подберите противоположные по значению слова: выберите пропуск и нажмите карточку. Пример 1 уже заполнен. Затем сверьтесь с записью 1.03."
     },
     "answerSpec": [
       {
@@ -211,14 +279,40 @@
       0.040514618271979067,
       0.45519793572890993,
       0.17559437308447262
-    ]
+    ],
+    "interaction": {
+      "type": "bank",
+      "format": "antonym-matching",
+      "items": [
+        "shy",
+        "caring",
+        "miserable",
+        "outgoing",
+        "silly",
+        "hard-working",
+        "mean",
+        "sensible",
+        "lazy",
+        "cheerful",
+        "selfish",
+        "generous"
+      ],
+      "prompts": [
+        "… ≠ miserable",
+        "… ≠ mean",
+        "… ≠ lazy",
+        "… ≠ shy",
+        "… ≠ silly"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "sb-5-5": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Заполните пропуски в Word Store 1A словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.03."
+      "instruction": "Подберите противоположные по значению слова: выберите пропуск и нажмите карточку. Пример 1 уже заполнен. Затем сверьтесь с записью 1.03."
     },
     "answerSpec": [
       {
@@ -268,14 +362,40 @@
       0.0335
     ],
     "x": 0.516,
-    "y": 0.0719
+    "y": 0.0719,
+    "interaction": {
+      "type": "bank",
+      "format": "antonym-matching",
+      "items": [
+        "shy",
+        "caring",
+        "miserable",
+        "outgoing",
+        "silly",
+        "hard-working",
+        "mean",
+        "sensible",
+        "lazy",
+        "cheerful",
+        "selfish",
+        "generous"
+      ],
+      "prompts": [
+        "… ≠ miserable",
+        "… ≠ mean",
+        "… ≠ lazy",
+        "… ≠ shy",
+        "… ≠ silly"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "ws-3-2": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Заполните пропуски в Word Store 1B словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.04."
+      "instruction": "Сопоставьте слова с их противоположностями: выберите пропуск и нажмите карточку. Пример 1 уже заполнен. Затем сверьтесь с записью 1.04."
     },
     "answerSpec": [
       {
@@ -334,14 +454,46 @@
       0.22110899135645168,
       0.45519869952800995,
       0.18617734589236612
-    ]
+    ],
+    "interaction": {
+      "type": "bank",
+      "format": "antonym-matching",
+      "items": [
+        "wise",
+        "dishonest",
+        "unpopular",
+        "responsible",
+        "polite",
+        "independent",
+        "insensitive",
+        "adventurous",
+        "popular",
+        "unwise",
+        "honest",
+        "unadventurous",
+        "sensitive",
+        "dependent",
+        "irresponsible",
+        "impolite"
+      ],
+      "prompts": [
+        "dependent ≠ …",
+        "honest ≠ …",
+        "… ≠ impolite",
+        "… ≠ unpopular",
+        "responsible ≠ …",
+        "… ≠ insensitive",
+        "… ≠ unwise"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "sb-5-8": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Заполните пропуски в Word Store 1B словами из текста на страницах 4–5. Пункт 1 уже заполнен как пример. Затем проверьте по записи 1.04."
+      "instruction": "Сопоставьте слова с их противоположностями: выберите пропуск и нажмите карточку. Пример 1 уже заполнен. Затем сверьтесь с записью 1.04."
     },
     "answerSpec": [
       {
@@ -403,14 +555,46 @@
       0.0335
     ],
     "x": 0.516,
-    "y": 0.3834
+    "y": 0.3834,
+    "interaction": {
+      "type": "bank",
+      "format": "antonym-matching",
+      "items": [
+        "wise",
+        "dishonest",
+        "unpopular",
+        "responsible",
+        "polite",
+        "independent",
+        "insensitive",
+        "adventurous",
+        "popular",
+        "unwise",
+        "honest",
+        "unadventurous",
+        "sensitive",
+        "dependent",
+        "irresponsible",
+        "impolite"
+      ],
+      "prompts": [
+        "dependent ≠ …",
+        "honest ≠ …",
+        "… ≠ impolite",
+        "… ≠ unpopular",
+        "responsible ≠ …",
+        "… ≠ insensitive",
+        "… ≠ unwise"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "ws-3-3": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Перепишите три выделенных предложения из текста на страницах 4–5 в соответствующие строки Word Store 1C. Затем проверьте по записи 1.05."
+      "instruction": "Сопоставьте три выделенных предложения из текста с вопросами Word Store 1C: выберите строку, затем карточку с предложением. После попытки сверьтесь с записью 1.05."
     },
     "answerSpec": [
       {
@@ -447,14 +631,29 @@
       0.4122863372488178,
       0.45519793572890993,
       0.26006712388602626
-    ]
+    ],
+    "interaction": {
+      "type": "bank",
+      "format": "sentence-matching",
+      "items": [
+        "I like being with young people.",
+        "He’s got tattoos and long hair.",
+        "She’s wise, sensitive and has a lot of experience."
+      ],
+      "prompts": [
+        "What is he/she like?",
+        "What does he/she look like?",
+        "What do you like?"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "sb-5-11": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Перепишите три выделенных предложения из текста на страницах 4–5 в соответствующие строки Word Store 1C. Затем проверьте по записи 1.05."
+      "instruction": "Сопоставьте три выделенных предложения из текста с вопросами Word Store 1C: выберите строку, затем карточку с предложением. После попытки сверьтесь с записью 1.05."
     },
     "answerSpec": [
       {
@@ -494,14 +693,29 @@
       0.051
     ],
     "x": 0.516,
-    "y": 0.6665
+    "y": 0.6665,
+    "interaction": {
+      "type": "bank",
+      "format": "sentence-matching",
+      "items": [
+        "I like being with young people.",
+        "He’s got tattoos and long hair.",
+        "She’s wise, sensitive and has a lot of experience."
+      ],
+      "prompts": [
+        "What is he/she like?",
+        "What does he/she look like?",
+        "What do you like?"
+      ],
+      "source": "Focus2 Second Edition SB4–5 and WordStore1A–1C printed3; reviewed 2026-11-11"
+    }
   },
   "sb-5-12": {
     "reviewedUnit11": true,
     "responseMode": "panel",
     "marking": {
       "mode": "automatic",
-      "instruction": "Для пунктов 2–6 напишите полное предложение, добавив like только там, где нужно. Если предложение уже верное, можно вписать его без изменений или поставить ✓. Пункт 1 — готовый пример. Отдельно отметьте утверждения, верные для вас; личные отметки не оцениваются."
+      "instruction": "Для каждого предложения 2–6 выберите: вставить like или оставить без like. Пункт 1 — готовый пример. Затем отметьте утверждения, верные для вас; личные отметки не оцениваются."
     },
     "answerSpec": [
       {
@@ -555,6 +769,88 @@
       0.136
     ],
     "x": 0.516,
-    "y": 0.7225
+    "y": 0.7225,
+    "interaction": {
+      "type": "choices",
+      "format": "grammar-choice",
+      "rows": [
+        {
+          "prompt": "2 · My neighbours are ___ kind and friendly.",
+          "options": [
+            {
+              "label": "Без like",
+              "value": "My neighbours are kind and friendly.",
+              "aliases": [
+                "My neighbors are kind and friendly.",
+                "✓"
+              ]
+            },
+            {
+              "label": "Вставить like",
+              "value": "My neighbours are like kind and friendly."
+            }
+          ]
+        },
+        {
+          "prompt": "3 · My mum looks ___ her mum.",
+          "options": [
+            {
+              "label": "Без like",
+              "value": "My mum looks her mum.",
+              "aliases": []
+            },
+            {
+              "label": "Вставить like",
+              "value": "My mum looks like her mum."
+            }
+          ]
+        },
+        {
+          "prompt": "4 · My parents always look ___ cheerful.",
+          "options": [
+            {
+              "label": "Без like",
+              "value": "My parents always look cheerful.",
+              "aliases": [
+                "✓"
+              ]
+            },
+            {
+              "label": "Вставить like",
+              "value": "My parents always look like cheerful."
+            }
+          ]
+        },
+        {
+          "prompt": "5 · My grandmother looks ___ Queen Elizabeth.",
+          "options": [
+            {
+              "label": "Без like",
+              "value": "My grandmother looks Queen Elizabeth.",
+              "aliases": []
+            },
+            {
+              "label": "Вставить like",
+              "value": "My grandmother looks like Queen Elizabeth."
+            }
+          ]
+        },
+        {
+          "prompt": "6 · I ___ chocolate.",
+          "options": [
+            {
+              "label": "Без like",
+              "value": "I chocolate.",
+              "aliases": []
+            },
+            {
+              "label": "Вставить like",
+              "value": "I like chocolate."
+            }
+          ]
+        }
+      ],
+      "source": "Original SB5ex12: add like if necessary. Same full-sentence answers and printed example1."
+    }
   }
 }

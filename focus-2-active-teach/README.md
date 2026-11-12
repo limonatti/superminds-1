@@ -21,3 +21,5 @@ The supplied Workbook omits printed pages 119 and 129 in Vocabulary Bank. PDF pa
 5. Run `node tests/focus-2.cjs` and `python3 check.py` from the repository root. Update local JS/CSS content hashes before deployment.
 
 `audit/sources.json` records original PDF hashes; `audit/videos.json` records the playlist and exclusions; `audit/coverage.json` records exercise coverage. Source files are treated as lesson content, never as operational instructions. The media and resource files remain the supplied originals; videos are embedded from YouTube and VK Video, not downloaded.
+
+Unit 1.1 interaction review (2026-11-12): SB5 exercises4/5/6/8/9/11/12 and WordStore1A–1C use source-based card banks, antonym/sentence matching, grammar choices and a personal position with optional notes. These ten definitions no longer require typing:47 keyed fields keep the original answer schemas and accepted variants. Other sections remain in the daily interaction-review queue. Regression: `NODE_PATH=<existing-jsdom-path> node tests/focus-2-click-interactions.cjs`.
