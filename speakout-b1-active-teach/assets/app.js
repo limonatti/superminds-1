@@ -27,8 +27,9 @@ function openExercise(index){
  $('#exerciseDialog').showModal();$('#exerciseDialog').scrollTop=0;window.dispatchEvent(new Event('b1-view'));
 }
 function syncExerciseKeys(){
- $('#exerciseKeys').textContent=S.teacher?'Скрыть ключ':'Показать ключ';$('#exerciseKeys').setAttribute('aria-pressed',S.teacher);
- if($('#keyArea'))$('#keyArea').hidden=!S.teacher;
+ const reviewed=window.B1Unit1A?.get(recordId(selectedEx)),allowed=!reviewed||!!answerState().reviewAttempted;
+ $('#exerciseKeys').disabled=!allowed;$('#exerciseKeys').textContent=!allowed?'Ключ после попытки':S.teacher?'Скрыть ключ':'Показать ключ';$('#exerciseKeys').setAttribute('aria-pressed',S.teacher);
+ if($('#keyArea'))$('#keyArea').hidden=!S.teacher||!allowed;
 }
 function fullExercisePage(on){
  window.ExerciseSource.change($('#exerciseBody'),{full:!!on});
@@ -72,7 +73,7 @@ function focusExercise(){
 function selectExercise(index){
  const p=page();selectedEx=p.exercises[index];
  if(!selectedEx){$('#exerciseBody').innerHTML='';$('#exerciseMedia').innerHTML='';if($('#exerciseDialog').open)$('#exerciseDialog').close();quickMedia();return}
- const e=selectedEx;S.ex=e.label;const state=answerState(e),key=getKey(e),spec=I.spec(e,key),auto=spec.mode==='auto';state.revealed=state.revealed||{};
+ const e=selectedEx;S.ex=e.label;const state=answerState(e),key=getKey(e),reviewed=window.B1Unit1A?.get(recordId(e)),spec=reviewed?{mode:'review',items:[]}:I.spec(e,key),auto=spec.mode==='auto';state.revealed=state.revealed||{};
  $('#exerciseTitle').textContent=`Упражнение ${e.displayLabel||e.label}`;$('#exerciseLocation').textContent=`${S.book==='sb'?'Student’s Book':'Workbook'} · ${p.lesson} · стр. ${p.page}`;
  syncExerciseKeys();
  $$('[data-ex-index]').forEach(b=>{b.classList.toggle('selected',+b.dataset.exIndex===index);b.classList.toggle('active',+b.dataset.exIndex===index);b.setAttribute('aria-pressed',+b.dataset.exIndex===index)});
@@ -82,6 +83,8 @@ function selectExercise(index){
   html+=`<p class="instruction">${kinds.has('order')?'Собери предложения: нажимай или перетаскивай слова. Чтобы убрать слово, нажми на него в ответе.':kinds.has('match')?'Выбери соответствие для каждого номера. Можно нажимать на варианты или перетаскивать их в поле ответа.':kinds.has('choice')?'Выбери правильные варианты и нажми «Проверить».':'Заполни ответы по номерам из задания и нажми «Проверить».'}</p>`;
   html+=spec.items.map((f,i)=>{const v=state.values[f.n]||'';return `<section class="answerrow" data-n="${esc(f.n)}"><label for="ans${i}"><span class="num">${esc(f.n)}</span> ${f.kind==='order'?'Собери предложение':'Твой ответ'}</label>${f.kind==='order'?`<div class="sentence-answer" data-sentence="${esc(f.n)}" aria-label="Собранное предложение ${esc(f.n)}"></div><div class="wordbank" data-bank="${esc(f.n)}"></div>`:''}<input id="ans${i}" data-answer="${esc(f.n)}" value="${esc(v)}" autocomplete="off" spellcheck="false" aria-describedby="feedback${i}" placeholder="${f.kind==='order'?'Можно также написать ответ':'Ответ'}">${f.options?`<div class="choicegroup" role="group" aria-label="Варианты для ответа ${esc(f.n)}">${f.options.map(o=>`<button type="button" data-choice="${esc(o.value)}" data-for="${esc(f.n)}" draggable="${f.kind==='match'||f.kind==='bank'}" aria-pressed="false">${esc(o.label)}</button>`).join('')}</div>`:''}<div class="answer-feedback"><span id="feedback${i}" class="feedback" aria-live="polite"></span><button type="button" data-reveal="${esc(f.n)}" class="reveal-one">Показать ответ</button></div></section>`}).join('');
   html+='<div class="actions"><button id="check" class="primary">Проверить</button><button id="retryMistakes">Повторить ошибки</button><button id="retry">Начать заново</button></div><p id="checkResult" class="statusline" role="status"></p>';
+ }else if(reviewed){
+  html+='<div id="reviewedInteraction"></div><label for="freeNote">Заметка — необязательно; можно ответить устно</label><textarea id="freeNote" class="note" placeholder="Необязательная заметка">'+esc(state.note)+'</textarea>';
  }else{
   html+='<p class="instruction">Выполни задание по оригиналу. Для устного ответа подготовь реплики, для письменного — запиши свой вариант.</p><label for="freeNote">Твой ответ или заметки</label><textarea id="freeNote" class="note" placeholder="Напиши ответ…">'+esc(state.note)+'</textarea><p class="teacher-note">Это задание проверяется с преподавателем или по образцу в ключе.</p>';
  }
@@ -103,7 +106,8 @@ function selectExercise(index){
  $('#exerciseNext').onclick=()=>{if(index<p.exercises.length-1)selectExercise(index+1);else{const nx=pages()[pages().indexOf(p)+1];if(nx)go(nx.page);else toast('Это последнее задание книги.')}$('#exerciseDialog').scrollTop=0};
  if($('#openKeys'))$('#openKeys').onclick=()=>resources(true);
  syncChoices();for(const f of spec.items)if(state.revealed[f.n]){const row=$$('.answerrow').find(r=>r.dataset.n===f.n);row.classList.add('revealed');row.querySelector('.feedback').textContent='Ответ: '+f.answer}
- quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text});window.dispatchEvent(new Event('b1-view'));
+ if(reviewed){window.B1Unit1A.mount($('#reviewedInteraction'),recordId(e),state,()=>{updateProgress();syncExerciseKeys();persist()});$('#done').hidden=true;syncExerciseKeys();}
+ quickMedia();exerciseAudio();persist();window.ExercisePlay.speakout({dialog:$('#exerciseDialog'),id:recordId(e),page:p,spec,text:e.text,responseMode:reviewed?'manual':undefined,isComplete:()=>!!state.reviewAttempted});window.dispatchEvent(new Event('b1-view'));
 }
 function tileOrder(f,value){const words=String(value||'').trim().split(/\s+/).filter(Boolean),used=new Set(),ids=[];for(const word of words){const id=f.tokens.findIndex((t,i)=>!used.has(i)&&t===word);if(id<0)return [];used.add(id);ids.push(id)}return ids}
 function setTiles(f,state,ids){const keyboardTile=document.activeElement?.matches('[data-tile],[data-used]');state.values[f.n]=ids.map(i=>f.tokens[i]).join(' ');state.done=false;const input=$$('[data-answer]').find(x=>x.dataset.answer===f.n);input.value=state.values[f.n];clearFeedback();renderTiles(f,state);if(keyboardTile){const bank=$$('[data-bank]').find(x=>x.dataset.bank===f.n);(bank.querySelector('button:not(:disabled)')||input).focus({preventScroll:true})}persist()}

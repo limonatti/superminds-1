@@ -57,3 +57,19 @@ Use Python with `pypdf`, `pypdfium2`, `pdfplumber` and Pillow:
 The browser test uses mock accounts and local storage; it does not create real
 student records or contact anyone. Generated OCR and intermediate files stay in
 ignored `work/`. Videos keep their source copies there.
+
+## Quality review: 13 November 2026
+
+SB printed page 8, Unit 1A exercises 1A, 1B, 2A, 2B, 2C and 2D now have
+source-reviewed click interactions: personal prompt cards, photo selection,
+paragraph/photo matching, category sorting, phrase matching and personal sentence
+prompts. The original page and `resources/keys.pdf` page 2 were checked. In 2C,
+the first meaning requires both highlighted expressions in either order. The
+photo letters A–F label interface cards; original exercise numbering is unchanged.
+
+The six tasks require no typing; optional notes and prior answers are preserved.
+Personal activities have no exact grading. Candidate phrases, bold words and
+categories come from the original task. Keys remain locked until a complete
+attempt. Other Unit 1A pages and remaining B1 sections still need separate review.
+Run `NODE_PATH=<jsdom location> node tests/speakout-b1-unit1a-reviewed.cjs` for
+interaction, legacy-answer, reset and shared key-gate regression checks.
