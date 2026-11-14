@@ -30,3 +30,13 @@ Image: scenes.png, built-in imagegen; one new four-panel educational illustratio
 Validation: python3 check.py; browser all closed stages solved through click controls, no correct answers initially selected, progress survives reload, personal notes persist, vocabulary dialog, 390px mobile overflow, screenshots, console errors; media metadata and muted playback verified separately. Source text and audio transcript are authored for the quest, not reused course exercises. Audio qualitative listening was not performed because QA is silent.
 
 Timeline QA: Mia departs 09:47, travels 20 minutes, arrives 10:07, and meets Alex at 10:15. The City train comparison in task 5 also uses 20 minutes. All three AI audio files were independently transcribed silently with local Whisper and checked against their scripts.
+
+
+## Quality audit — 2026-11-14
+
+- Hints in stages 8 and 12 now prompt reasoning without supplying the ordered solution or exact time/invitation answers.
+- All 15 stages offer a reversible per-stage retry. Up to 10 earlier retry snapshots per stage are retained locally; other stages are untouched. Optional personal notes and reflection can be restored too.
+- Empty/incomplete objective attempts request completion before grading. Match/build controls retain keyboard focus after rerender.
+- Match/gap banks are explicitly authored vocabulary lists, independent of the grading keys. Correct choices remain unselected.
+- Data/storage key and existing audio files are unchanged; no audio was generated or played during this audit.
+- Validation: tests/outcomes-unit5-review.cjs (jsdom, disposable storage, playback forbidden), browser keyboard/retry/reload and 390px checks. This is a regression review of changed interactions and hints, not a new claim that every source-book exercise was audited.

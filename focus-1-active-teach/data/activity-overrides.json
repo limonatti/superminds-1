@@ -29098,5 +29098,342 @@
         }
       ]
     }
+  },
+  "sb-13-6": {
+    "wordStore": null,
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "visit"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "play"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "watch"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "go"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "go"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "have"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "read"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "play"
+        ]
+      }
+    ],
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 33,
+      "review": "2026-11-14: SB13 ex6; red answers in teacher-spans[13], original SB13, Word Store1A/1B on WS3."
+    },
+    "marking": {
+      "mode": "mixed"
+    },
+    "activity": {
+      "instruction": "Заполни пропуски 2–9 в тексте Alefeya глаголами из WORD STORE 1A–1B. Пункт 1 (spend) уже дан как пример. Слова можно использовать повторно. Затем сравни её свободное время со своим: similar или different? Объясни устно.",
+      "bank": [
+        "go",
+        "have",
+        "play",
+        "read",
+        "spend",
+        "visit",
+        "watch"
+      ],
+      "fields": [
+        {
+          "label": "2",
+          "prompt": "___ your friends at home"
+        },
+        {
+          "label": "3",
+          "prompt": "___ video games together"
+        },
+        {
+          "label": "4",
+          "prompt": "___ videos"
+        },
+        {
+          "label": "5",
+          "prompt": "___ out to Forum"
+        },
+        {
+          "label": "6",
+          "prompt": "___ to the cinema"
+        },
+        {
+          "label": "7",
+          "prompt": "___ a good time"
+        },
+        {
+          "label": "8",
+          "prompt": "___ books"
+        },
+        {
+          "label": "9",
+          "prompt": "___ the piano"
+        }
+      ]
+    }
+  },
+  "sb-12-1": {
+    "activity": {
+      "instruction": "Вспомни занятия в свободное время. Три примера уже напечатаны в книге; используй их как начало и добавь свои устно или в необязательные заметки. Затем сравни идеи с партнёром.",
+      "cards": [
+        {
+          "prompt": "Free-time activities · примеры из книги",
+          "options": [
+            "go to the cinema",
+            "go for a walk",
+            "listen to music"
+          ],
+          "hint": "Выбери одну опору и назови другие занятия. Здесь нет единственного правильного ответа."
+        },
+        {
+          "prompt": "Compare with a partner.",
+          "options": [
+            "We both …",
+            "I …, but my partner …"
+          ],
+          "hint": "Сравни свои идеи с идеями партнёра. Записывать их необязательно."
+        }
+      ]
+    }
+  },
+  "sb-12-2": {
+    "activity": {
+      "instruction": "Пройди все три части анкеты на стр. 13. Для каждого утверждения выбери, подходит ли оно тебе. В конце расскажи о любимых занятиях и сравни ответы с партнёром.",
+      "cards": [
+        {
+          "prompt": "Part 1 · In my free time … · 1. I go out a lot.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 2. I listen to music.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 3. I go to the cinema or watch films at home.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 4. I play video games.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 5. I sometimes go for a walk.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 6. I play sports.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 7. I read books.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 8. I play the guitar/piano/drums.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 9. I visit my family.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 1 · In my free time … · 10. I have fun with my friends.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 2 · I spend a lot of time … · 1. at home.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 2 · I spend a lot of time … · 2. in my room.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 2 · I spend a lot of time … · 3. with my friends.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 2 · I spend a lot of time … · 4. with my family.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 2 · I spend a lot of time … · 5. alone.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 3 · My friends and I talk about … · 1. films.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 3 · My friends and I talk about … · 2. sport.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 3 · My friends and I talk about … · 3. books.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Part 3 · My friends and I talk about … · 4. people.",
+          "options": [
+            "True for me",
+            "Not true for me"
+          ],
+          "hint": "Отметь свой ответ и при желании расскажи подробнее. Личные ответы не оцениваются."
+        },
+        {
+          "prompt": "Which activities are your favourite? Compare with a partner.",
+          "options": [
+            "I like …",
+            "My favourite activity is …",
+            "We both like …"
+          ],
+          "hint": "Назови любимые занятия своими словами."
+        }
+      ]
+    }
+  },
+  "sb-13-8": {
+    "instructionText": "SPEAKING Tell your partner about the things you do in your free time. Use the words and phrases in WORD STORE 1A, 1B and 1C.",
+    "activity": {
+      "instruction": "Расскажи о своём свободном времени. Используй карточки и WORD STORE 1A–1C; продолжи выбранные опоры своими словами. Личный ответ не оценивается автоматически.",
+      "cards": [
+        {
+          "prompt": "I spend time with …",
+          "options": [
+            "my friends",
+            "my family"
+          ],
+          "hint": "Скажи, с кем ты проводишь время. Можно предложить свой вариант."
+        },
+        {
+          "prompt": "I/We play …",
+          "options": [
+            "video games",
+            "sports",
+            "chess",
+            "the guitar",
+            "the piano",
+            "the drums"
+          ],
+          "hint": "Выбери опору или назови своё занятие."
+        },
+        {
+          "prompt": "We talk about …",
+          "options": [
+            "films",
+            "sport",
+            "books",
+            "people"
+          ],
+          "hint": "Расскажи, о чём вы обычно разговариваете."
+        }
+      ]
+    }
   }
 }

@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-14",
+  "edition": "Focus 1 Second Edition, SB pp12–13; Word Store1A–1C printed p3",
+  "source_pdf_hashes": [
+    {
+      "file": "focus_second_edition_1_teachers_book.pdf",
+      "sha256": "b6345e5c08f3b754acecfe80b7a208b779bc4a35c6457f647fbe8fcb5b41eedd"
+    },
+    {
+      "file": "672_6- Focus 1. Workbook_2020, 2nd, 143p.pdf",
+      "sha256": "51fa632a8ea5df73056da4ae1051b942a64cc612b3a2514fd81b770ddd0ebd4c"
+    },
+    {
+      "file": "672_1- Focus 1. Student's Book_2020, 2nd, 142p.pdf",
+      "sha256": "fe67390d9dbc5067c756748e1c9de9d3d02cb743d570b00252664b59f7c0c64a"
+    }
+  ],
+  "source_images": [
+    {
+      "file": "assets/pages/sb-12.jpg",
+      "sha256": "d51f5bd2323dd07415ad61c4f5866d9930a72e9d732063b0bafeb3f65ed42d65"
+    },
+    {
+      "file": "assets/pages/sb-13.jpg",
+      "sha256": "6c4189e78203f6acedeff52284c8fd0d0e4dc7b5e42138e7e1b260aa6e0b7942"
+    },
+    {
+      "file": "assets/pages/ws-7.jpg",
+      "sha256": "12eca933222e2116a364258b872a270bb6dcf02906bf36378ba23674c611182f"
+    }
+  ],
+  "coverage": [
+    {
+      "id": "sb-12-1",
+      "status": "methodically_reviewed",
+      "format": "guided-cards",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "open",
+      "answer_labels": [],
+      "cards": 2,
+      "answerVersion": "4f53cda18c2b"
+    },
+    {
+      "id": "sb-12-2",
+      "status": "methodically_reviewed",
+      "format": "guided-cards",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "open",
+      "answer_labels": [],
+      "cards": 20,
+      "answerVersion": "4f53cda18c2b"
+    },
+    {
+      "id": "sb-13-3",
+      "status": "methodically_reviewed",
+      "format": "choice",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "automatic",
+      "answer_labels": [
+        "1",
+        "2",
+        "3"
+      ],
+      "cards": 0,
+      "answerVersion": "02b5854e802c"
+    },
+    {
+      "id": "sb-13-4",
+      "status": "methodically_reviewed",
+      "format": "choice",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "mixed",
+      "answer_labels": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "cards": 0,
+      "answerVersion": "b38803a81d2f"
+    },
+    {
+      "id": "sb-13-5",
+      "status": "methodically_reviewed",
+      "format": "choice",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "automatic",
+      "answer_labels": [
+        "2",
+        "3",
+        "4"
+      ],
+      "cards": 0,
+      "answerVersion": "0a9b745f4fe5"
+    },
+    {
+      "id": "sb-13-6",
+      "status": "methodically_reviewed",
+      "format": "bank",
+      "required_typing": 0,
+      "editable_text_fields": 8,
+      "grading": "mixed",
+      "answer_labels": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "cards": 0,
+      "answerVersion": "2ee30bafd2d8"
+    },
+    {
+      "id": "sb-13-7",
+      "status": "methodically_reviewed",
+      "format": "bank",
+      "required_typing": 0,
+      "editable_text_fields": 5,
+      "grading": "automatic",
+      "answer_labels": [
+        "2",
+        "3",
+        "4a",
+        "4b",
+        "5"
+      ],
+      "cards": 0,
+      "answerVersion": "df305a3e0aea"
+    },
+    {
+      "id": "sb-13-8",
+      "status": "methodically_reviewed",
+      "format": "guided-cards",
+      "required_typing": 0,
+      "editable_text_fields": 0,
+      "grading": "open",
+      "answer_labels": [],
+      "cards": 3,
+      "answerVersion": "4f53cda18c2b"
+    }
+  ],
+  "fixes": [
+    "SB13 ex6 inherited WS1A keys due to overbroad complete/WORD STORE binding. Reviewed override preserves WS as source context but removes grading inheritance, maps only gaps2–9, and retains old answers as prior-version records.",
+    "SB12 ex1/2 and SB13 ex8 use source-specific personal prompts without mandatory typing or false grading.",
+    "Old score from a superseded answerVersion no longer unlocks the new key before an attempt."
+  ],
+  "limits": [
+    "Original human audio1.22–1.24: files and loaded durations checked; no playback.",
+    "This review covers exactly8 SB tasks, not the whole unit/course or independent WS1D/E exercises.",
+    "Other WORD STORE inheritance candidates require separate source review. No bulk key reassignment."
+  ]
+}
