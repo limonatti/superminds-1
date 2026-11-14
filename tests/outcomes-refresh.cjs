@@ -1,0 +1,22 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const w={window:{}};for(const f of ['exercises','course','interactions-data','exercise-sources','transcripts'])vm.runInNewContext(fs.readFileSync(`outcomes-beginner-active-teach/assets/${f}.js`,'utf8'),w);
+const G=require('../outcomes-beginner-active-teach/assets/grader.js'),I=require('../outcomes-beginner-active-teach/assets/interactions.js'),tasks=Object.values(w.window.OUTCOMES_EXERCISES).flat(),byId=Object.fromEntries(tasks.map(e=>[e.id,e]));
+const travel=byId['wb-29-74-478'];let grade=G.check(travel.check,['','Take,','','','']);assert.equal(grade.parts[1][0],'correct');assert.equal(grade.parts[1][1],'blank');assert.equal(grade.total,7);assert.equal(grade.correct,1);assert.equal(grade.complete,false);
+const legacy=['get, walk','Take, change','go','wait, take','get'];grade=G.check(travel.check,legacy);assert.equal(grade.complete,true);assert.equal(grade.correct,7);assert.equal(grade.total,7);assert.deepEqual(legacy,['get, walk','Take, change','go','wait, take','get']);
+const going=byId['wb-33-73-482'];grade=G.check(going.check,['','re going','re going','m going','m going','re going']);assert.equal(grade.items[0],'given');assert.equal(grade.total,5);assert.equal(G.check(going.check,['']).correct,0);
+for(const e of tasks){assert(w.window.EXERCISE_SOURCES[e.id]?.sources.length,e.id+' missing original');const fields=I.spec(e,w.window.OUTCOMES_INTERACTIONS[e.id]);if(e.check.mode==='items'){
+ const keys=e.check.items.map(f=>G.variants(f.key||'')[0]);const complete=G.check(e.check,keys);assert.equal(complete.correct,complete.total,e.id+' legacy full answers');
+ for(const [i,f] of fields.entries())if(f.options&&f.kind!=='multi')assert(f.options.some(o=>G.checkField(e.check.items[i],o.value)==='correct'),e.id);
+ for(const [i,parts] of Object.entries(e.practice?.parts||{})){const rubric=e.check.items[i];if(rubric.given)continue;assert.equal(rubric.parts.length,parts.length);parts.forEach((p,j)=>{const options=p.options||e.practice.banks?.[i]||e.practice.bank;if(options&&!p.given)assert(options.some(v=>G.checkField(rubric.parts[j],v)==='correct'),`${e.id} part ${i}:${j}`)})}
+ }}
+assert.equal(tasks.length,1324);assert.equal(new Set(tasks.map(e=>e.id)).size,1324);assert.equal(w.window.EXERCISE_SOURCES['wb-30-71-580'].sources.length,2);assert.equal(w.window.EXERCISE_SOURCES['wb-34-67-455'].sources.length,2);
+for(const m of w.window.OUTCOMES.media){assert(fs.statSync('outcomes-beginner-active-teach/'+m.path).size>1000);const transcript=w.window.OUTCOMES_TRANSCRIPTS[m.book+':'+m.track];assert(transcript.pages.length,m.path);for(const id of transcript.pages){const p=w.window.OUTCOMES.books[m.book].pages.find(p=>p.id===id);assert(fs.existsSync('outcomes-beginner-active-teach/'+p.image))}}
+assert.equal(w.window.OUTCOMES.media.length,278);assert.deepEqual(Array.from(w.window.OUTCOMES_TRANSCRIPTS['wb:5.2'].pages),[80]);
+const phrases={options:[{value:"She's very well, thanks."},{value:"It's very nice."}]};assert.deepEqual(I.selected("She's very well, thanks., It's very nice.",phrases),phrases.options.map(o=>o.value));
+const html=fs.readFileSync('outcomes-beginner-active-teach/index.html','utf8');assert(!html.includes('trainer.html'));for(const file of ['practice','vocabulary-practice'])assert(!/speechSynthesis|SpeechSynthesisUtterance/.test(fs.readFileSync(`outcomes-beginner-active-teach/assets/${file}.js`,'utf8')));
+console.log('Outcomes refresh: all 1,324 IDs/rubrics/source views, independent gap feedback, legacy answers, printed examples, source banks and 278 local recordings with text-page links passed.');
+const M=require('../outcomes-beginner-active-teach/assets/answer-migration.js');
+const oldRecord={values:legacy.slice(),done:true,updatedAt:123,grade:{revision:'old',correct:5,total:5,items:Array(5).fill('correct'),revealed:false}};
+const revised=M.regrade(travel,oldRecord,G);assert.equal(revised.done,true);assert.equal(revised.grade.correct,7);assert.equal(revised.answerHistory.length,1);assert.deepEqual(revised.values,oldRecord.values);assert.equal(oldRecord.grade.total,5);assert.strictEqual(M.regrade(travel,revised,G),revised);assert.equal(revised.updatedAt,123);
+assert.equal(G.check({mode:'items',items:[{key:'a; b',soft:true,parts:[{key:'a',soft:true},{key:'b',soft:true}]}]},['other; wording']).items[0],'review');
+console.log('Checked-work migration keeps original values, completion, timestamp and assessment history; repeated opening is idempotent.');

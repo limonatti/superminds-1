@@ -37,3 +37,53 @@ Some teacher keys provide only fragments, show suggestions or omit a listening a
 these were resolved against the relevant exercise/transcript or retained as ungraded
 models. The checker does not claim semantic grading of arbitrary English responses.
 Published scan assets and existing account/cloud save mechanics are unchanged.
+
+## November 2026 interaction refresh
+
+The course now uses its own responsive answer panel; learners no longer position
+unmapped fields on the scan. Original exercise IDs, stored array indices and keys
+remain intact. `practice` metadata in `reviewed-tasks.json` supplies printed banks,
+separate gap controls, optional help and examples. Banks are transcribed from the
+printed material, not assembled from the answer key. `check.items[].given` excludes
+printed examples; generated `parts` check individual blanks while retaining the
+legacy combined answer string. Previously assessed records retain their values,
+completion where still valid, timestamp and original assessment in answer history.
+
+| Before | After |
+| --- | --- |
+| Phone document wider than viewport | Wrapping header, bounded dialog, 44 px controls |
+| Learner places fields on a scan | Stable numbered controls beside the original |
+| Several blanks share one required string | Independent gap controls and feedback; old strings retained |
+| Speaking activities demand typed answers | Personal practice steps and optional notes |
+| Some banks remain only in a picture | Source-based tap controls and optional typing |
+| Shared trainer uses generated speech | Outcomes cards with original unit recordings and no TTS |
+
+`node scripts/build-outcomes-refresh.cjs` builds `transcripts.js` and the separate
+`refresh-coverage.json` inventory. The latter distinguishes original pedagogical
+scope, available interaction formats and required typing. It is not a claim that
+every exercise has been manually rewritten or that every source scan was corrected.
+All 1,324 existing tasks (746 SB, 456 WB, 122 Grammar), 12 units, 63 Vocabulary
+Builder pages and 5 vocabulary-reference pages retain their original scope.
+The existing 887 word cards remain available, with browser-local self-assessment.
+
+Original audio files are unchanged. All 278 have source text-page links: dedicated
+audioscripts where printed, otherwise the material printed with the task. Workbook
+transcript regions use the original page image and verified track markers; the
+full-page link stays available. The file `resources/scripts.pdf` is teaching advice,
+not a transcript, and is not used as one. Missing media-page associations are explicitly
+listed in the refresh builder. No new speech is generated.
+
+Validation:
+
+- `python3 check.py`
+- `node tests/outcomes-refresh.cjs`, the existing Outcomes and coursework tests
+- Local server: `python3 -m http.server 8768 --bind 127.0.0.1`
+- `PLAYWRIGHT_MODULE=/path/to/playwright node tests/outcomes-refresh-browser-actions.cjs`
+- Same command for `browser-coverage.cjs` and `browser-media.cjs`
+
+Browser tests use a new guest context, block network writes and account services,
+and mute media before any test playback. They cover every task opening, real tap
+and keyboard actions, mode changes, independent blank feedback, guest reload,
+source images/transcripts, portrait/landscape and a reduced-height keyboard proxy.
+Physical iOS/Android keyboards and real account synchronization are not exercised;
+coursework transport, durability and account isolation are tested separately with mocks.

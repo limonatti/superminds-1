@@ -11,7 +11,10 @@ function spec(e,source={}){
  let wordBank=source.wordBank||[];const box=/\bbox[.!]?\s*\n([\s\S]+)/i.exec(text);
  if(box){const lines=[];for(const line of box[1].split('\n').slice(0,4)){if(!/^[A-Za-z’' ,–-]+$/.test(line.trim()))break;lines.push(line)}const words=[...new Set(lines.join(' ').split(/\s+/).filter(Boolean))];if(words.length>=2&&words.length<=24&&fields.length&&fields.every(f=>typeof f.key==='string'&&!f.soft&&!f.match&&words.some(w=>norm(w)===norm(f.key))))wordBank=words}
  return fields.map((f,i)=>{
-  const r={kind:'text',prompt:''},key=Array.isArray(f.key)?f.key[0]:f.key;if(f.self||f.soft)return r;
+  const r={kind:'text',prompt:''},key=Array.isArray(f.key)?f.key[0]:f.key;if(f.self||f.soft||f.given||e.practice?.parts?.[i])return r;
+  if(e.practice?.choices?.[i])return {...r,kind:'choice',options:e.practice.choices[i]};
+  if(e.practice?.letters)return {...r,kind:'match',options:e.practice.letters.map(value=>({value,label:value}))};
+  if(e.practice?.bank)return {...r,kind:f.match==='set'?'multi':'bank',options:e.practice.bank.map(value=>({value,label:value}))};
   if(f.options?.length){return {...r,kind:'choice',options:f.options.map(v=>({value:v,label:v==='T'?'True':v==='F'?'False':v==='DS'?'Doesn’t say':v}))}}
   if(matching&&letters.length>=2&&letters.length<=16&&/^[a-p]$/i.test(key)&&letters.includes(norm(key)))return {...r,kind:'match',options:letters.map(v=>({value:v,label:rows[v]?v+'. '+rows[v]:v}))};
   if(ordering&&(rows[String(f.label)]||'').split('/').length>=3)return {...r,kind:'order',tokens:rows[String(f.label)].split('/').map(s=>s.trim()).filter(Boolean)};
@@ -30,5 +33,9 @@ function spec(e,source={}){
   return r;
  });
 }
-const api={norm,numbered,shuffled,spec};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.OutcomesInteractions=api;
+function selected(value,ui){
+ const text=String(value||'');
+ return (ui?.options||[]).filter(o=>{const escaped=o.value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return new RegExp('(?:^|,\\s*)'+escaped+'(?=\\s*,|$)','i').test(text)}).map(o=>o.value);
+}
+const api={norm,numbered,shuffled,spec,selected};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.OutcomesInteractions=api;
 })(typeof window==='undefined'?globalThis:window);

@@ -1,7 +1,7 @@
 /* Deterministic practice checker. Only explicit alternatives are accepted. */
 (function(root){
  'use strict';
- const VERSION=1;
+ const VERSION=2;
  function normalize(value){
   let s=String(value??'').normalize('NFKC').replace(/[‘’ʼ`]/g,"'").replace(/[−–—]/g,'-').toLowerCase().trim();
   s=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -30,6 +30,7 @@
   return parts.map(normalize).filter(Boolean).sort();
  }
  function checkField(field,value){
+  if(field.given)return 'given';
   if(!String(value??'').trim())return 'blank';
   if(field.self)return 'review';
   if(field.requireContraction&&!/[a-z][’'](?:m|re|s|ll|t)\b/i.test(String(value)))return 'incorrect';
@@ -46,11 +47,13 @@
  }
  function check(spec,values){
   if(spec?.mode!=='items')return {version:VERSION,mode:'self',items:[],correct:0,total:0,complete:false};
-  const items=spec.items.map((f,i)=>checkField(f,values[i]));
-  const scored=spec.items.map((f,i)=>!f.soft?i:-1).filter(i=>i>=0);
-  return {version:VERSION,mode:'auto',items,correct:scored.filter(i=>items[i]==='correct').length,total:scored.length,complete:items.every(x=>x==='correct'),needsReview:items.includes('review')};
+  const parts=spec.items.map((f,i)=>f.parts&&!f.given?f.parts.map((p,j)=>checkField(p,String(values[i]||'').split(/[,;]\s*/)[j])):null);
+  parts.forEach((part,i)=>{if(part&&checkField(spec.items[i],values[i])==='correct')parts[i]=part.map((_,j)=>spec.items[i].parts[j].given?'given':'correct')});
+  const items=spec.items.map((f,i)=>parts[i]?(parts[i].every(x=>x==='correct'||x==='given')?'correct':parts[i].includes('incorrect')?'incorrect':parts[i].includes('blank')?'blank':'review'):checkField(f,values[i]));
+  const scored=spec.items.flatMap((f,i)=>f.soft||f.given?[]:parts[i]?parts[i].filter((_,j)=>!f.parts[j].given):[items[i]]);
+  return {version:VERSION,mode:'auto',items,parts,correct:scored.filter(s=>s==='correct').length,total:scored.length,complete:items.every(x=>x==='correct'||x==='given'),needsReview:items.includes('review')};
  }
- function isComplete(spec,record){return Boolean(record?.done&&(spec?.mode!=='items'||(record.grade?.revision===spec.revision&&record.grade.correct===record.grade.total&&record.grade.items.every(s=>s==='correct'||s==='review'))))}
+ function isComplete(spec,record){return Boolean(record?.done&&(spec?.mode!=='items'||(record.grade?.revision===spec.revision&&record.grade.correct===record.grade.total&&record.grade.items.every(s=>s==='correct'||s==='review'||s==='given'))))}
  const api={VERSION,normalize,variants,checkField,check,isComplete};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  root.OutcomesGrader=api;

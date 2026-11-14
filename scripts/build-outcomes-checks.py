@@ -9,6 +9,12 @@ for page,exercises in bank.items():
  for exercise in exercises:
   assert exercise['id'] not in ids,exercise['id'];ids.add(exercise['id'])
   check=exercise['check'];check.pop('revision',None)
+  for i,parts in exercise.get('practice',{}).get('parts',{}).items():
+   field=check['items'][int(i)]
+   keys=field['key'] if isinstance(field['key'],list) else [field['key']]
+   splits=[key.split(exercise.get('practice',{}).get('separator',',')) for key in keys]
+   assert all(len(s)==len(parts) for s in splits),(exercise['id'],i)
+   field['parts']=[{**({'soft':True} if field.get('soft') else {}),**({'given':part['given']} if part.get('given') else {}),'key':list(dict.fromkeys(s[j].strip() for s in splits))} for j,part in enumerate(parts)]
   assert check['mode'] in ('items','model','self'),exercise['id']
   if check['mode']=='items':
    assert check['items'],exercise['id']
@@ -25,7 +31,7 @@ for page,exercises in bank.items():
   totals['exercises']+=1
   fields=check.get('items',[])
   category='mixed' if any(f.get('soft') for f in fields) else 'automatic' if fields else 'selfCheck'
-  totals[category]+=1;totals['scoredAnswers']+=sum(not f.get('soft') for f in fields)
+  totals[category]+=1;totals['scoredAnswers']+=sum(sum(not p.get('given') for p in f['parts']) if f.get('parts') else 1 for f in fields if not f.get('soft') and not f.get('given'))
  report['pages'][page]=len(exercises)
 (ROOT/'outcomes-beginner-active-teach/assets/exercises.js').write_text('window.OUTCOMES_EXERCISES='+json.dumps(bank,ensure_ascii=False,separators=(',',':'))+';\n')
 (ROOT/'scripts/outcomes-audit/coverage.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

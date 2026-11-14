@@ -39,7 +39,7 @@ for(const b of ['sb','wb'])assert.equal(new Set(all.filter(e=>e.book===b&&!e.gra
 let slots=0;
 for(const e of all){assert.match(e.check.revision,/^[a-f0-9]{12}$/);assert.ok(e.instruction&&e.instruction!=='+'&&e.n);if(e.check.mode!=='items')continue;
  assert.equal(e.count,e.check.items.length);assert.equal(new Set(e.check.items.map(f=>f.label)).size,e.count);
- for(const f of e.check.items){if(f.self)continue;const variants=G.variants(f.key);assert.ok(variants.length);for(const v of variants){assert.ok(v.trim(),`${e.id} empty key`);assert.equal(G.checkField(f,v),'correct',`${e.id}/${f.label}: ${v}`)}
+ for(const f of e.check.items){if(f.given){assert.equal(G.checkField(f,''),'given');assert.equal(G.checkField(f,'legacy note'),'given');continue}if(f.self)continue;const variants=G.variants(f.key);assert.ok(variants.length);for(const v of variants){assert.ok(v.trim(),`${e.id} empty key`);assert.equal(G.checkField(f,v),'correct',`${e.id}/${f.label}: ${v}`)}
  assert.equal(G.checkField(f,'definitely_wrong_answer_999'),f.soft?'review':'incorrect',e.id);assert.equal(G.checkField(f,''),'blank');slots++;
  }
 }

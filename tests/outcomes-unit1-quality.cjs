@@ -22,7 +22,7 @@ assert.equal(models[tasks[1].id].sources.length,2,'repetition retains number lis
 assert.equal(models[tasks[3].id].sources.length,2,'repetition retains word list');
 // Old typed notes must stay available after an activity is corrected to oral mode.
 const src=fs.readFileSync('outcomes-beginner-active-teach/assets/student.js','utf8');
-const context={esc:s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;'),active:tasks[0],ready:true,answers:{},dirty:{},user:null,S:{unit:1},timer:null,source:()=> 'sb',current:()=>({page:7}),liveAnswer:()=>{},localSave:()=>true,renderTasks:()=>{},clearTimeout:()=>{},setTimeout:()=>0,flush:()=>{}};
+const context={window:{},esc:s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;'),active:tasks[0],ready:true,answers:{},dirty:{},user:null,S:{unit:1},timer:null,source:()=> 'sb',current:()=>({page:7}),liveAnswer:()=>{},localSave:()=>true,renderTasks:()=>{},clearTimeout:()=>{},setTimeout:()=>0,flush:()=>{}};
 const done={checked:true};context.$=selector=>selector==='#workDone'?done:null;context.$$=()=>[];
 vm.createContext(context);
 vm.runInContext(src.slice(src.indexOf(' function responseFields('),src.indexOf(' function cropExercise('))+src.slice(src.indexOf(' function saveDraft('),src.indexOf(' async function flush(')),context);

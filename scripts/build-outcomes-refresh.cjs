@@ -1,0 +1,25 @@
+/* Rebuild a transcript index and separate interaction / typing coverage from supplied local sources. */
+const fs=require('node:fs'),vm=require('node:vm');
+const base='outcomes-beginner-active-teach/',w={window:{}};
+for(const f of ['course','exercises','interactions-data'])vm.runInNewContext(fs.readFileSync(base+'assets/'+f+'.js','utf8'),w);
+const D=w.window.OUTCOMES,bank=w.window.OUTCOMES_EXERCISES,I=require('../'+base+'assets/interactions.js');
+// Missing page associations verified against the printed track markers.
+const mediaPages={38:18,41:19,61:29,76:36,77:37,78:38,79:38,89:46,103:52,108:55,113:57,124:65,125:66,131:71,139:74,149:83,159:91,171:100,180:108,192:117,193:118,194:118,199:121,200:122,204:124,205:124,208:126,212:128,213:128,216:130,218:132,219:132,223:133,225:135,228:137};
+for(const m of D.media){if(m.book==='sb'&&mediaPages[m.track])m.pages=[mediaPages[m.track]];if(m.book==='wb'&&m.track==='4.2')m.pages=[23]}
+fs.writeFileSync(base+'assets/course.js','window.OUTCOMES='+JSON.stringify(D)+';\n');
+const transcript={};
+const wbPages={78:['1.1','1.2','1.3','1.4','1.5','1.6','1.7','2.1','2.2','2.3'],79:['2.4','3.1','3.2','3.3','4.1','4.2','4.3'],80:['4.4','4.5','4.6','5.1','5.2','5.3'],81:['5.4','6.1','6.2','6.3','6.4','7.1'],82:['7.2','7.3','8.1','8.2','8.3','8.4'],83:['8.5','8.6','9.1','9.2','9.3','9.4','10.1','10.2'],84:['10.3','11.1','11.2','11.3','12.1'],85:['12.2']};
+// Page numbers here are image IDs (printed WB page + 1). Explicit continuation pages were checked against the originals.
+const continues={'2.3':79,'4.3':80,'7.1':82,'8.1':82,'10.2':84,'11.2':84,'12.1':85};
+for(const [page,tracks] of Object.entries(wbPages))for(const track of tracks)transcript['wb:'+track]={kind:'script',pages:[+page,...(continues[track]&&continues[track]!==+page?[continues[track]]:[])]};
+for(const p of D.books.sb.pages.filter(p=>p.page>=148&&p.page<=165))for(const match of p.text.matchAll(/TRACKS?\s+(\d+)(?:\s*&\s*(\d+))?/g))for(const track of match.slice(1).filter(Boolean))transcript['sb:'+track]={kind:'script',pages:[p.id,...(p.page<165?[p.id+1]:[])]};
+for(const media of D.media){const id=media.book+':'+media.track;if(!transcript[id])transcript[id]={kind:'printed',pages:D.books[media.book].pages.filter(p=>media.pages.includes(p.page)).map(p=>p.id)}}
+const regions=JSON.parse(fs.readFileSync(base+'data/transcript-regions.json'));for(const [track,boxes] of Object.entries(regions))transcript['wb:'+track].regions=boxes;
+fs.writeFileSync(base+'assets/transcripts.js','window.OUTCOMES_TRANSCRIPTS='+JSON.stringify(transcript)+';\n');
+const personal=e=>e.responseMode==='oral'||(e.check.mode!=='items'&&e.kind!=='writing'&&!/\bwrite|\bcomplete|\bcorrect|\bspell|\bfill|\brewrite/i.test(e.instruction));
+const report={version:1,scope:'Existing Outcomes Beginner only; source edition and IDs retained',pedagogy:{totalExisting:0,automatic:0,selfOrModel:0,manualSourceComparison:'Printed examples and compound gaps in reviewed-tasks.json plus Unit 5 context fixes. This inventory is NOT a claim of manual re-authoring of every task.'},interaction:{tasks:0,byKind:{},personalRoutes:0,compoundTasks:0,sourceViews:0},typing:{tasksWithRequiredTypedFields:0,requiredFields:0,optionalNotesTasks:0},units:{},tasks:[],vocabulary:{builderPages:D.books.vocab.pages.length,referencePages:D.books.sb.pages.filter(p=>p.section==='vocabulary').length},media:{files:D.media.length,scriptPages:0,printedTaskPages:0}};
+for(const [page,tasks] of Object.entries(bank))for(const e of tasks){const specs=I.spec(e,w.window.OUTCOMES_INTERACTIONS[e.id]),kind=personal(e)?'personal':e.check.mode!=='items'?'writing':'automatic',required=specs.reduce((n,f,i)=>n+(e.check.items[i].given?0:e.practice?.parts?.[i]?e.practice.parts[i].filter(p=>!p.given&&!p.options&&!e.practice.banks?.[i]&&!e.practice.bank).length:f.kind==='text'?1:0),0)+(kind==='writing'?e.count:0),kinds=[...new Set(specs.map((s,i)=>e.check.items[i].given?'printed-example':e.practice?.parts?.[i]?'separate-gaps':s.kind))];
+ report.pedagogy.totalExisting++;report.pedagogy[e.check.mode==='items'?'automatic':'selfOrModel']++;report.interaction.tasks++;report.interaction.sourceViews++;if(personal(e)){report.interaction.personalRoutes++;report.typing.optionalNotesTasks++}if(e.practice?.parts)report.interaction.compoundTasks++;for(const k of kinds)report.interaction.byKind[k]=(report.interaction.byKind[k]||0)+1;if(required){report.typing.tasksWithRequiredTypedFields++;report.typing.requiredFields+=required}
+ const u=report.units[e.unit]||={sb:0,wb:0,grammar:0};u[e.grammar?'grammar':e.book]++;report.tasks.push({id:e.id,page,unit:e.unit,goal:e.instruction,mode:kind,formats:kinds,requiredTypedFields:required,originalAnswerSlots:e.count,printedExamples:e.check.items?.filter(f=>f.given).length||0});}
+for(const m of D.media)report.media[transcript[m.book+':'+m.track].kind==='script'?'scriptPages':'printedTaskPages']++;
+fs.writeFileSync('scripts/outcomes-audit/refresh-coverage.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,tasks:undefined},null,2));
