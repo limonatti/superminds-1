@@ -87,3 +87,65 @@ and keyboard actions, mode changes, independent blank feedback, guest reload,
 source images/transcripts, portrait/landscape and a reduced-height keyboard proxy.
 Physical iOS/Android keyboards and real account synchronization are not exercised;
 coursework transport, durability and account isolation are tested separately with mocks.
+
+### Final required-typing audit
+
+The baseline is commit `680a36a89353802b817eeb0f0b362b3651aa4a9d`.
+`tests/outcomes-refresh-browser-typing.cjs` opens all 1,324 tasks in both versions,
+in separate guest contexts, and checks the mounted default controls. It detects
+native choices, word tiles, the former shared inline banks/given examples, new
+split inputs, optional personal notes and menu composition. The current DOM count
+must equal every row of `refresh-coverage.json`, not merely its total.
+
+| Comparable measure | Before | After |
+| --- | ---: | ---: |
+| Tasks presenting a required typed response | 1,136 | 533 |
+| Original saved response slots requiring typing | 4,670 | 2,929 |
+| Tasks without required typing | 188 | 791 |
+
+This is **1,741 fewer typed response slots (37.3%)**. A saved slot can contain
+several blanks: the new version exposes 3,144 separate typed fields. Comparing
+those directly with 4,670 old combined slots would mix different units. Personal
+notes are optional in 434 tasks. Extra text fields a learner voluntarily adds are
+not counted. “Required” means there is no supplied click path for that response;
+it is not a count of HTML `required` attributes or keystrokes.
+
+The final pass added learner-source controls to 181 tasks, including multiword
+slash alternatives, a/b/c labels, numeric matching, multi-selection, complete
+source word banks, nationality suffixes, sentence assembly and restaurant menu
+composition. Candidate banks are transcribed from learner content. Grading keys
+are used only to verify compatibility, never to generate the choices. Printed
+examples remain visible, without preselecting answers to active questions.
+
+Remaining typing has two categories: 254 tasks / 1,406 fields for writing,
+spelling, correction or producing grammatical forms; 279 tasks / 1,738 fields
+for independent recall or extraction from a recording, reading or picture.
+These categories use instruction-based rules, with source review of the flagged
+choice/bank/order candidates and the following representative exceptions. They
+are not a claim of a fresh manual pedagogical review of every source exercise.
+No unconverted prepared options remain among the candidates reviewed in this pass.
+
+| Unit | Source sample retaining typing | Reason |
+| --- | --- | --- |
+| 1 | WB `wb-10-67-391` | Identify capital letters; orthography is the objective |
+| 2 | WB `wb-12-73-487` | Construct questions, supplying question words and auxiliary forms |
+| 3 | WB `wb-21-74-134` | Picture crossword: recall and spell the words |
+| 4 | Grammar `sb-g-122-66-235` | Produce statements/questions with can; final forms are not supplied |
+| 5 | WB `wb-34-531-289` | Unscramble and spell the travel words |
+| 6 | WB `wb-37-529-522` | Form past endings before grouping them |
+| 7 | WB `wb-41-531-727` | Produce sentences and the correct -ing forms |
+| 8 | WB `wb-48-74-167` | Inflect printed base verbs in the present continuous |
+| 9 | WB `wb-53-74-209` | Picture crossword: body-word spelling |
+| 10 | WB `wb-63-529-471` | Produce past forms from printed present verbs |
+| 11 | SB `sb-102-55-772` | Add the missing auxiliary and construct questions |
+| 12 | WB `wb-75-529-93` | Produce positive/negative imperatives from base verbs |
+
+For exact unit totals and each task's classification, use `refresh-coverage.json`.
+The baseline browser measurements are retained in `typing-baseline.json`.
+`order-source-evidence.json` records manually checked text for four continuations
+where the earlier task OCR crop omitted words or read I as 1.
+
+To repeat the comparison, serve a read-only snapshot of the baseline on port 8769
+and the current checkout on port 8768, then run the browser-typing test with
+`PLAYWRIGHT_MODULE` pointing at the installed Playwright package. No login,
+audio playback, external write or learner account is needed.
