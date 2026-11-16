@@ -54,7 +54,9 @@
   return {version:VERSION,mode:'auto',items,parts,correct:scored.filter(s=>s==='correct').length,total:scored.length,complete:items.every(x=>x==='correct'||x==='given'),needsReview:items.includes('review')};
  }
  function isComplete(spec,record){return Boolean(record?.done&&(spec?.mode!=='items'||(record.grade?.revision===spec.revision&&record.grade.correct===record.grade.total&&record.grade.items.every(s=>s==='correct'||s==='review'||s==='given'))))}
- const api={VERSION,normalize,variants,checkField,check,isComplete};
+ // UI summaries count individual source blanks, including blanks beside a wrong answer.
+ function statuses(grade){return (grade.items||[]).flatMap((state,i)=>grade.parts?.[i]||[state]);}
+ const api={VERSION,normalize,variants,checkField,check,isComplete,statuses};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  root.OutcomesGrader=api;
 })(typeof window==='undefined'?globalThis:window);

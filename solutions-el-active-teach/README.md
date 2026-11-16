@@ -35,3 +35,11 @@ python3 check.py
 ```
 
 Browser tests use a local server on port 8897 and mock authentication/database methods. They never create real students or assignments. The smoke test can also use `SOLUTIONS_EL_ORIGIN` to inspect the deployed site in guest mode.
+
+### Reviewed Unit 1A — SB 8–9 (2026-11-16)
+
+The ten numbered tasks use `assets/unit1a-reviewed.js` and the original source images/Teacher’s Guide entries in `data/source-keys.json`. Ex1 sorts the complete printed bank; ex2 preserves the printed example and possessive form; ex3 is an ungraded listening check of ex2; ex5 has neutral a/b/c choices; ex6 has two independently fillable gaps per question; ex7 uses contextual short answers; ex8 separately checks ten missing words and four quiz choices. Ex4 retains its writing objective. Ex9–10 use ungraded personal prompts and optional notes. No audio was regenerated.
+
+`python3 scripts/build-solutions-el-reviewed.py` reapplies the reviewed content and source context without an OCR workspace. The full builder consumes the same overrides. Source banks and inflections are explicitly authored from the studied page, never derived from answer keys. Existing field schemas retain their versions; changed schemas retain old work in `previousAnswers`. Open responses preserve old notes, using a readable card/notes format only when edited. Reset can be undone.
+
+Checks: `node tests/solutions-el-active-teach.cjs`, `JSDOM_PATH=/path/to/jsdom node tests/solutions-el-unit1a-quality.cjs`, and `python3 check.py`. The DOM test does not launch a browser or play media. Manual browser QA must be silent. The older optional `--browser` test is not suitable for silent QA because it starts playback.

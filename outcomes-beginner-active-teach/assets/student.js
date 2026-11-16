@@ -99,9 +99,9 @@
   if(!active)return;
   grade.items.forEach((result,i)=>{const field=active.check.items[i],box=$(`#response-${i}`),input=box.querySelector('[data-response]'),feedback=$(`#feedback-${i}`);box.dataset.result=result;input.setAttribute('aria-invalid',result==='incorrect'?'true':'false');
   if(grade.parts?.[i])window.OutcomesPractice.partFeedback(i,grade.parts[i]);feedback.innerHTML=({correct:'✓ Верно',incorrect:'✕ Есть ошибка — попробуйте ещё раз',blank:'Заполните этот пункт',review:'Сравните свою формулировку с образцом',given:'Пример из учебника — заполнять не нужно'})[result]+((revealed||result==='review')?`<span class="answerKey">${field.self?'Самопроверка':field.soft?'Образец':'Ответ'}: ${esc(keyText(field))}</span>`:'')});
-  const blanks=grade.items.filter(v=>v==='blank').length,wrong=grade.items.filter(v=>v==='incorrect').length;
+  const states=OutcomesGrader.statuses(grade),blanks=states.filter(v=>v==='blank').length,wrong=states.filter(v=>v==='incorrect').length;
   $('#checkSummary').textContent=grade.total?`${grade.correct} из ${grade.total} верно.${blanks?' Не заполнено: '+blanks+'.':''}${wrong?' Исправьте отмеченные пункты.':''}${grade.needsReview?' Свободные ответы сравните с образцом.':''}${grade.complete?' Всё верно!':''}`:'Сравните ответы с образцами. Другие верные формулировки тоже возможны.';
-  $('#revealAnswers').hidden=grade.items.some(v=>v==='blank');$('#revealAnswers').textContent=revealed?'Скрыть ответы':'Показать ответы';
+  $('#revealAnswers').hidden=blanks>0;$('#revealAnswers').textContent=revealed?'Скрыть ответы':'Показать ответы';
   if(active.check.model&&revealed){$('#selfCheck').hidden=false;$('#selfCheck').innerHTML=`<h4>Пояснение к ключу</h4><p class="modelAnswer">${esc(active.check.model)}</p>`}
  }
  function checkTask(){

@@ -20,3 +20,9 @@ const oldRecord={values:legacy.slice(),done:true,updatedAt:123,grade:{revision:'
 const revised=M.regrade(travel,oldRecord,G);assert.equal(revised.done,true);assert.equal(revised.grade.correct,7);assert.equal(revised.answerHistory.length,1);assert.deepEqual(revised.values,oldRecord.values);assert.equal(oldRecord.grade.total,5);assert.strictEqual(M.regrade(travel,revised,G),revised);assert.equal(revised.updatedAt,123);
 assert.equal(G.check({mode:'items',items:[{key:'a; b',soft:true,parts:[{key:'a',soft:true},{key:'b',soft:true}]}]},['other; wording']).items[0],'review');
 console.log('Checked-work migration keeps original values, completion, timestamp and assessment history; repeated opening is idempotent.');
+
+// UI counts individual blanks, even when another part of that row is wrong.
+const partial=G.check(travel.check,['','Take,','','','']);assert.equal(G.statuses(partial).filter(s=>s==='blank').length,6);
+const mixed=G.check({mode:'items',items:[{key:'have, got',parts:[{key:'have'},{key:'got'}]}]},['wrong,']);assert.equal(mixed.items[0],'incorrect');assert.deepEqual(G.statuses(mixed),['incorrect','blank']);
+assert.equal(G.statuses(G.check(travel.check,legacy)).filter(s=>s==='blank').length,0);
+console.log('Individual blank counts include unfinished parts beside incorrect answers; printed examples excluded.');

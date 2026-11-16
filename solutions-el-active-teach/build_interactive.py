@@ -174,7 +174,7 @@ for pg in pages:
   if not own and ex['answerSpec']:
    n=int(re.match(r'\d+',ex['label'])[0]);following=next((e for e in pg['exercises'] if e['label']==str(n+1)),None)
    if following and re.search(r'listen.*check',following['text'][:100],re.I):own=[t for t in re.findall(r'[1-4]\.\d{2}',following['text'][:100]) if t in media[pg['book']]]
-  ex['tracks']=own
+  ex['tracks']=overrides.get(ex['id'],{}).get('tracks',own)
 D={'course':'solutions-el','units':names,'pages':pages,'tracks':{b:list(media[b]) for b in media},'media':media,'videos':manifest['video'],'markingVersion':1}
 (ROOT/'assets/course.js').write_text('window.SOLUTIONS_EL='+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';\n')
 # Complete source for each numbered exercise, with referenced tasks as context.
@@ -192,6 +192,8 @@ for pg in pages:
   if ex['id']=='sb-4-4':sources.append({'image':pg['image'],'size':size,'box':next(e['box'] for e in pg['exercises'] if e['id']=='sb-4-3'),'page':pg['page'],'context':True})
   if ex['id']=='sb-8-2':sources.append({'image':pg['image'],'size':size,'box':[.32,.13,.65,.43],'page':pg['page'],'context':True})
   views[ex['id']]={'label':ex['label'],'sources':sources}
+context_path=ROOT/'data/source-context-overrides.json'
+if context_path.exists():views.update(json.loads(context_path.read_text()))
 (ROOT/'assets/exercise-sources.js').write_text('window.EXERCISE_SOURCES='+json.dumps(views,ensure_ascii=False,separators=(',',':'))+';\n')
 if not (ROOT/'assets/exercise-gaps.js').exists():(ROOT/'assets/exercise-gaps.js').write_text('window.EXERCISE_GAPS={};\n')
 audit={'pages':len(pages),'exercises':len(views),'modes':dict(collections.Counter(e['marking']['mode'] for p in pages for e in p['exercises'])),'fallbackFullPage':missing,'keys':len(source),'keyedManual':review}

@@ -110,8 +110,9 @@
     ],
     "marking": {
       "mode": "automatic",
-      "source": "sb-8-2",
-      "reason": "Ключ сверён с оригинальным заданием."
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Ключ сверён с оригинальным заданием.",
+      "instruction": "Посмотри на семейное дерево. Выбери пропуск, затем притяжательную форму и слово о семье. Пункт 1 — готовый пример."
     }
   },
   "sb-8-1": {
@@ -206,10 +207,13 @@
     ],
     "marking": {
       "mode": "automatic",
-      "source": "sb-8-1",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
       "reason": "Проверка списков без учёта порядка.",
-      "instruction": "Распредели слова по группам. Ответы в каждой группе разделяй точкой с запятой."
-    }
+      "instruction": "Выбери слово, затем группу: female, male или male or female. Распредели все карточки. После проверки послушай запись 1.11."
+    },
+    "tracks": [
+      "1.11"
+    ]
   },
   "sb-4-10": {
     "answerSpec": [
@@ -486,11 +490,97 @@
     }
   },
   "sb-9-8": {
-    "answerSpec": [],
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "cousin"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "husband"
+        ]
+      },
+      {
+        "label": "1c",
+        "accepted": [
+          "brother"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "father"
+        ]
+      },
+      {
+        "label": "3a",
+        "accepted": [
+          "niece"
+        ]
+      },
+      {
+        "label": "3b",
+        "accepted": [
+          "daughter"
+        ]
+      },
+      {
+        "label": "3c",
+        "accepted": [
+          "husband"
+        ]
+      },
+      {
+        "label": "4a",
+        "accepted": [
+          "son"
+        ]
+      },
+      {
+        "label": "4b",
+        "accepted": [
+          "nephew"
+        ]
+      },
+      {
+        "label": "4c",
+        "accepted": [
+          "grandson"
+        ]
+      },
+      {
+        "label": "1 · quiz",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "2 · quiz",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "3 · quiz",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "4 · quiz",
+        "accepted": [
+          "c"
+        ]
+      }
+    ],
     "marking": {
-      "mode": "open",
-      "source": "sb-9-8",
-      "reason": "Развёрнутый ответ проверяет преподаватель."
+      "mode": "automatic",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Развёрнутый ответ проверяет преподаватель.",
+      "instruction": "Два шага: вставь слова из упражнения 1 в варианты викторины, затем выбери a, b или c в каждом вопросе. Фотографии — в оригинале рядом."
     }
   },
   "sb-13-3": {
@@ -844,6 +934,161 @@
       "mode": "automatic",
       "source": "sb-110-4",
       "reason": "Выбор правильного резюме по ключу."
+    }
+  },
+  "sb-9-3": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Проверка по ключу Teacher’s Guide / Workbook.",
+      "instruction": "Послушай запись 1.12 и сверь ответы упражнения 2. Отметь результат сверки; при необходимости вернись к упражнению 2."
+    },
+    "tracks": [
+      "1.12"
+    ],
+    "key": ""
+  },
+  "sb-9-4": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Свободный ответ или проверка преподавателем по условию.",
+      "instruction": "По семейному дереву напиши ещё четыре предложения, как в упражнении 2. Отмечай готовые предложения. Их проверит преподаватель."
+    }
+  },
+  "sb-9-5": {
+    "answerSpec": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "brother-in-law",
+          "c"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Проверка по ключу Teacher’s Guide / Workbook.",
+      "instruction": "Прочитай Look out!, послушай запись 1.13 и выбери a, b или c."
+    },
+    "tracks": [
+      "1.13"
+    ]
+  },
+  "sb-9-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Has, got"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Has, got"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Has, got"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Have, got"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Has, got"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Have, got"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Проверка по ключу Teacher’s Guide / Workbook.",
+      "instruction": "Заполни оба пропуска в каждом вопросе. Выбери пропуск и карточку have, has или got."
+    }
+  },
+  "sb-9-7": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Yes, he has"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "No, she hasn’t"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Yes, she has"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Yes, they have"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "No, she hasn’t"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Yes, they have"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Проверка по ключу Teacher’s Guide / Workbook.",
+      "instruction": "Послушай запись 1.13 ещё раз. Ответь на шесть вопросов упражнения 6: выбери короткий ответ."
+    },
+    "tracks": [
+      "1.13"
+    ]
+  },
+  "sb-9-9": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Свободный ответ или проверка преподавателем по условию.",
+      "instruction": "Задай партнёру вопросы о семье. Отметь его ответы; их не оценивает автоматическая проверка. Можно пропустить личный вопрос."
+    }
+  },
+  "sb-9-10": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "source": "Solutions Elementary Third Edition SB pp8–9; Teacher’s Guide Unit1A",
+      "reason": "Свободный ответ или проверка преподавателем по условию.",
+      "instruction": "Если партнёр ответил yes в упражнении 9, узнай имя и возраст. Используй карточки вопросов и отметь, что обсудили. Заметки необязательны."
     }
   }
 }

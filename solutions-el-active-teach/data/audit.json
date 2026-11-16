@@ -128,11 +128,6 @@
       "key": "(Possible answers)\nNathan is Rosie’s husband.\nClare is Tom’s wife.\nMartin is Harry’s grandfather / grandad.\nPoppy, Harry and Mia are Jessica’s cousins.\nJessica is Sophie’s daughter.\nMia and Poppy are Mike’s nieces.\nLiz is Harry’s aunt.\nHarry is Sophie’s nephew."
     },
     {
-      "id": "sb-9-8",
-      "text": "8 Complete the quiz with words from exercise 1. Then do the\nquiz in pairs.\nFamous families\n1\nWho is this man?\nIs he Beyoncé's ...\na\nb\nh\nb\n2\nThese girls have got a\nfamous f _ _ - -_. Who is he?\na Will Smith\nb Jay Z\nc Barack Obama\n3\nWhat is the relationship\nbetween these two\nHollywood stars - Jon Voig",
-      "key": "1 a cousin b husband (correct answer) c brother\n2 father, c\n3 a niece b daughter (correct answer) c husband\n4 a son b nephew c grandson (correct answer)"
-    },
-    {
       "id": "sb-10-4",
       "text": "4 Find all the other examples of the present simple in the\ntext in exercise 2. Which ones end in -s? Why?",
       "key": "is a TV comedy are scientists They work together they\nshare a flat often visit them Penny lives opposite She\nworks in a restaurant She likes Leonard and Sheldon they\nare very different comes from this contrast It’s a simple\nidea w atch and enjoy people love shows\nSome of the verbs end in -s because the subject of the\nsentence is the third person singular."
@@ -1377,5 +1372,17 @@
       "text": "8 Read the Strategy. Then use a conjunction to rewrite the\ntwo sentences as one.\n1 It isn't in the city centre. It's quiet and peaceful.\n2 I'm not lonely. My friends often visit me.\n3 It's a large flat. It's on the tenth floor.\n4 It's got a lot of windows. The rooms are very bright.",
       "key": "(Possible answers)\n1 It isn’t in the city centre, but it’s quiet and peaceful.\n2 I’m not lonely because my friends often visit me.\n3 It’s a large flat, but it’s on the tenth floor.\n4 It’s got a lot of windows, so the rooms are very bright."
     }
+  ],
+  "reviewedUnit1A": [
+    "sb-8-1",
+    "sb-8-2",
+    "sb-9-3",
+    "sb-9-4",
+    "sb-9-5",
+    "sb-9-6",
+    "sb-9-7",
+    "sb-9-8",
+    "sb-9-9",
+    "sb-9-10"
   ]
 }
