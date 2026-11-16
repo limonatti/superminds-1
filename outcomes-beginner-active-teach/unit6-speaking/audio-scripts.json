@@ -1,0 +1,17 @@
+[
+  {"id":"lena","voice":"en-GB-SoniaNeural","text":"Hi! It's Lena. My flight was two hours late. I was very tired. Then I went to the wrong hotel! I had a sandwich at the airport. How was your journey?"},
+  {"id":"max","voice":"en-GB-RyanNeural","text":"Hi! It's Max. I stayed in a little hotel in a forest. My room was small, but it was very quiet. There wasn't any noise. I had a great dinner. How was your hotel?"},
+  {"id":"zoe","voice":"en-GB-LibbyNeural","text":"Hi! It's Zoe. I went to the beach yesterday. It rained a lot. I was cold, so I went to a cafe. I had a very big pizza. It was great! How was your day?"},
+  {"id":"sorry-late","voice":"en-GB-RyanNeural","text":"Sorry I'm late. I went to the wrong hotel."},
+  {"id":"sorry-dinner","voice":"en-GB-SoniaNeural","text":"Sorry. I'm not hungry. I had dinner on the plane."},
+  {"id":"sorry-room","voice":"en-GB-RyanNeural","text":"Sorry. Your room isn't very big."},
+  {"id":"sorry-tired","voice":"en-GB-LibbyNeural","text":"Sorry. I don't want to go out. I did a lot yesterday. I'm very tired."},
+  {"id":"desk-1","voice":"en-GB-RyanNeural","text":"Hello. Welcome to the Treehouse Hotel. How can I help you?"},
+  {"id":"desk-2","voice":"en-GB-RyanNeural","text":"Can I have your passport, please?"},
+  {"id":"desk-3","voice":"en-GB-RyanNeural","text":"Thank you. Your booking is for one night. Is that right?"},
+  {"id":"desk-4","voice":"en-GB-RyanNeural","text":"You're right. Two nights. Here's your key. Your room number is twelve. Do you have any questions?"},
+  {"id":"desk-5","voice":"en-GB-RyanNeural","text":"Breakfast is at eight."},
+  {"id":"desk-6","voice":"en-GB-RyanNeural","text":"Check out is at eleven. Is there anything else?"},
+  {"id":"desk-7","voice":"en-GB-RyanNeural","text":"The password is Tree twelve. Enjoy your stay!"},
+  {"id":"holiday-model","voice":"en-GB-SoniaNeural","text":"I went to a treehouse hotel. My room was small, but it was nice. I had pizza. There was a goat! I went to the beach. It rained a lot. I was tired, so I went to bed early. It was a very strange holiday. I loved it!"}
+]
