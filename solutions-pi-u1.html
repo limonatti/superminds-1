@@ -103,6 +103,12 @@
     </div>
   </div>
 
+  <section class="card" style="border:2px solid #7c2340;margin:24px 0">
+    <h2>1A · How do you feel?</h2>
+    <p>Solutions Third Edition · Student’s Book, стр. 8–9 · оригинальные задания 1–5: фотографии, карточки чувств, сортировка и хештеги. Без обязательного печатания.</p>
+    <a class="home" href="solutions-pi-unit1a/">Открыть задания учебника →</a>
+  </section>
+  <h2>Дополнительная авторская практика</h2>
   <h2>📖 Грамматика юнита</h2>
   <div class="card" style="text-align:center">
     <div style="font-size:14.5px;margin-bottom:10px;color:#5a4f47;font-weight:800">Грамматика и рабочая тетрадь этого юнита — отдельными заданиями (ДЗ).</div>
@@ -110,23 +116,21 @@
     <a href="solutions-pi-u1-workbook.html" style="display:inline-block;background:#2e6f4e;color:#fff;font:800 14px 'Nunito',sans-serif;padding:11px 20px;border-radius:999px;text-decoration:none;margin:3px">📒 Workbook →</a>
   </div>
 
-  <h2>🔤 Слова юнита <span class="sec-i">(нажми 🔊 и повтори)</span></h2>
+  <h2>🔤 Слова юнита <span class="sec-i">(вспомни значение и открой перевод)</span></h2>
   <div class="words" id="words"></div>
 
   <h2>🗣️ Произношение <span class="sec-i">Окончание -ed в прилагательных</span></h2>
-  <div class="card"><div style="font-size:14px;margin-bottom:8px">bored /d/ · excited /ɪd/ · surprised /d/ — слушай окончание</div><div class="pronbox" id="pron"></div></div>
+  <div class="card"><div style="font-size:14px;margin-bottom:8px">bored /d/ · excited /ɪd/ · surprised /d/ — прочитай вслух с преподавателем и отметь повторённые слова. <a href="solutions-pi-unit1a/#2">Оригинальная запись 1.04 →</a></div><div class="pronbox" id="pron"></div></div>
 
   <h2>🧩 Chunks — выражения целиком <span class="sec-i">(учи фразой, не по словам)</span></h2>
   <div class="words" id="chunks"></div>
   <h2>🎯 Тренажёр чанков <span class="sec-i">(выбери перевод)</span></h2>
   <div id="chpr"></div>
 
-  <h2>🎧 Аудирование</h2>
+  <h2>💬 Диалог · чтение по ролям</h2>
   <div class="lc">
     <h3>Before the concert</h3>
-    <p>Послушай диалог (озвучивается прямо в браузере), потом ответь на вопросы. Слушай сколько угодно раз.</p>
-    <button class="lbtn" id="lplay">▶ Слушать</button>
-    <button class="lbtn sec" id="lstop">⏹ Стоп</button>
+    <p>Прочитайте авторский диалог по ролям, затем ответь на вопросы по тексту.</p>
     <button class="lbtn sec" id="lscript">📜 Показать текст</button>
     <div id="script"><b>Mia:</b> Hi Leo! You look really worried. What's the matter?<br>
       <b>Leo:</b> Hi Mia. I'm so nervous. We're playing a concert tonight and I feel scared.<br>
@@ -145,12 +149,10 @@
   </div>
   <div id="lq" style="margin-top:14px"></div>
 
-  <h2>🎧 Аудирование 2 <span class="sec-i">(ещё один диалог)</span></h2>
+  <h2>💬 Диалог 2 · чтение по ролям</h2>
   <div class="lc">
     <h3>Radio phone-in: How do you deal with stress?</h3>
-    <p>Послушай второй диалог и ответь на вопросы. Слушай сколько нужно.</p>
-    <button class="lbtn" id="lplay2">▶ Слушать</button>
-    <button class="lbtn sec" id="lstop2">⏹ Стоп</button>
+    <p>Прочитайте авторский диалог по ролям и ответь на вопросы по тексту.</p>
     <button class="lbtn sec" id="lscript2">📜 Показать текст</button>
     <div id="script2"><b>Presenter:</b> Welcome back to the show. Today we're talking about stress with psychologist Dr Hill. Hello!<br>
       <b>Dr Hill:</b> Hello, thanks for having me.<br>
@@ -245,69 +247,14 @@ const WBGAPS=[{"q": "I ___ (feel) scared last night. (past)", "a": ["felt"]}, {"
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(w[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div></div>';
-  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
-/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
-let SM_VOICES=[];
-function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
-SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
-const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
-const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
-function enVoice(g){
-  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
-  let best=null,bs=-1;
-  list.forEach(v=>{
-    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
-    if(lang.slice(0,2)!=="en")return;
-    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
-    const fem=_FEM.some(x=>n.indexOf(x)>=0);
-    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
-    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
-    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
-    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
-    if(n.indexOf("google")>=0)s+=20;
-    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
-    if(n.indexOf("compact")>=0)s-=15;
-    if(s>bs){bs=s;best=v;}
-  });
-  return best;
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(w[0])+'"><div class="wrow"><button>Перевод</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div></div>';
+  revealTranslation(d);wbox.appendChild(d);});
+/* Authored dialogues are read in roles; only the original 1.04 is recorded. */
+for(const suffix of ['', '2']){
+ const b=document.getElementById('lscript'+suffix), text=document.getElementById('script'+suffix);
+ if(b&&text){text.style.display='block';b.textContent='Скрыть текст';b.setAttribute('aria-expanded','true');b.onclick=()=>{const show=text.style.display==='none';text.style.display=show?'block':'none';b.textContent=show?'Скрыть текст':'Показать текст';b.setAttribute('aria-expanded',String(show));};}
 }
-function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
-/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
-function _voicePools(){
-  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
-  const male=[],female=[];
-  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
-    if(lang.slice(0,2)!=="en")return;
-    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
-    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
-    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
-    v._score=s;
-    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
-    if(mal&&!fem)male.push(v);else female.push(v);});
-  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
-  return {male:male,female:female};
-}
-let _POOLS=null;const _SPK={};
-function speakerStyle(who){
-  who=who||"m";if(_SPK[who])return _SPK[who];
-  if(!_POOLS)_POOLS=_voicePools();
-  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
-  const pool=isF?_POOLS.female:_POOLS.male;
-  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
-  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
-  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
-  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
-  _SPK[who]=st;return st;
-}
-function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
-var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
-var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
-var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
-/* Второе аудирование (если есть DIALOG2) */
-var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
-var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
-var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+function revealTranslation(card){const text=card.querySelector('.tr'),b=card.querySelector('button');text.hidden=true;b.textContent='Перевод';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Перевод: '+card.querySelector('.en').textContent);b.onclick=()=>{text.hidden=!text.hidden;b.setAttribute('aria-expanded',String(!text.hidden));};}
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"solutions-pi",unit:1};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -327,12 +274,12 @@ function tfngCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("t
 function matchCard(pairs,n,sec){tot+=pairs.length;const gi=++_GI;return CoursePractice.legacy("match",pairs,n,{course:HW.course,unit:HW.unit,section:sec||"match",attempt:gi,log:_log});}
 /* Произношение */
 const pbox=document.getElementById("pron");
-if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
-/* Чанки — учим (с озвучкой) */
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent=w;b.setAttribute("aria-pressed","false");b.onclick=()=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));b.textContent=(on?"✓ ":"")+w;};pbox.appendChild(b);});
+/* Чанки — учим с переводом */
 const cbox=document.getElementById("chunks");
 if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
-  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+  d.innerHTML='<img class="wimg" loading="lazy" alt="" onerror="this.remove()" src="https://img-gen.limonatti.workers.dev/card?w='+encodeURIComponent(c[0])+'"><div class="wrow"><button>Перевод</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div></div>';
+  revealTranslation(d);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
 function shuffle(a){return CoursePractice.shuffle(a)}
 const chpr=document.getElementById("chpr");

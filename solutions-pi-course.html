@@ -97,7 +97,7 @@ UNITS.forEach(u=>{const a=document.createElement("div");a.className="u "+(u.read
   if(u.ready){
     a.innerHTML='<a href="solutions-pi-u'+u.n+'.html">'+cover+'</a>'+
       '<div class="b"><div class="n">'+label+'</div><div class="t">'+u.t+'</div><div class="d">'+u.d+'</div>'+
-      '<div class="links"><a class="go" href="solutions-pi-u'+u.n+'.html">Урок →</a>'+
+      '<div class="links">'+(u.n===1?'<a class="go" href="solutions-pi-unit1a/">1A · задания 1–5 →</a>':'')+'<a class="go" href="solutions-pi-u'+u.n+'.html">Урок →</a>'+
       '<a class="go g2" href="solutions-pi-u'+u.n+'-grammar.html">Грамматика</a>'+
       '<a class="go g3" href="solutions-pi-u'+u.n+'-workbook.html">Workbook</a></div></div>';
   } else {
