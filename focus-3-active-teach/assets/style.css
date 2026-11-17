@@ -59,3 +59,23 @@
 #exercise .interaction-bank button:focus-visible,#exercise .choice-slot:focus-visible,#exercise .choice-buttons button:focus-visible{outline:3px solid #722f42;outline-offset:3px}
 
 #videoPlayer.video-external{aspect-ratio:auto}.video-launch{display:flex;min-height:220px;padding:28px 24px;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:#fff;text-decoration:none}.video-launch:hover{background:#34302e;color:#fff}.video-launch:focus-visible{outline:3px solid #fff;outline-offset:-6px}.video-launch-icon{font-size:38px;line-height:1}.video-launch strong{font-size:18px}.video-launch>span:last-child{font-size:14px;line-height:1.5;color:#ded9d5}
+
+/* Native answers must remain beside the source, never below a stack of scans. */
+dialog#exercise.focus-dialog.focus-task-panels[open]{width:min(1280px,calc(100vw - 24px));height:calc(100dvh - 24px);max-height:calc(100dvh - 24px);display:flex!important;overflow:hidden!important}
+#exercise.focus-task-panels #solutionColumns{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr)!important;gap:24px!important;flex:1!important;min-height:0;overflow:hidden!important}
+#exercise.focus-task-panels #solutionOriginal,#exercise.focus-task-panels #exerciseResponses{height:100%!important;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;padding:0 10px 16px 0!important}
+#exercise.focus-task-panels #instruction{margin-top:0}
+#exercise.focus-task-panels #exerciseAudio{flex:none;max-height:96px;overflow:auto}
+#exerciseViews{display:none;flex:none;gap:8px;padding-bottom:12px}
+#exerciseViews button{flex:1;min-height:44px;padding:8px;font-size:13px}
+#exerciseViews button[aria-pressed=true]{background:#722f42;color:#fff;border-color:#722f42}
+#exerciseViews button:focus-visible{outline:3px solid #722f42;outline-offset:2px}
+@media(max-width:760px){
+ dialog#exercise.focus-dialog.focus-task-panels[open]{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:12px}
+ #exercise.focus-task-panels #exerciseViews:not([hidden]){display:flex}
+ #exercise.focus-task-panels #solutionColumns{display:block!important}
+ #exercise.focus-task-panels[data-view=answers] #solutionOriginal,#exercise.focus-task-panels[data-view=source] #exerciseResponses{display:none!important}
+ #exercise.focus-task-panels #solutionOriginal,#exercise.focus-task-panels #exerciseResponses{padding-right:4px!important}
+ #exercise.focus-task-panels .coursework-savebar{gap:6px;margin-top:6px;padding-top:6px}
+ #exercise.focus-task-panels .coursework-savebar .coursework-status{flex-basis:auto;font-size:12px}
+}
