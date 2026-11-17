@@ -1,0 +1,15 @@
+{
+  "checked": "2026-11-17",
+  "playlist": "https://www.youtube.com/playlist?list=PLdOdDgjDBFfGwN8PZm8yGsKRuKvHTLrvd",
+  "channel": "Lavender’s English",
+  "additionalSources": "See sourceNote in data/video-additions.json for Pearson and individual teacher uploads.",
+  "alternateEditNumbers": [
+    1
+  ],
+  "verification": "Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Video 1 is an original BBC segment with different editing, labelled with timestamps. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.",
+  "included": 53,
+  "missingNumbers": [
+    10,
+    24
+  ]
+}

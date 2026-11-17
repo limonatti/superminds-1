@@ -1,0 +1,5802 @@
+{
+  "sb-4-1": {
+    "answerSpec": [
+      {
+        "label": "cheerful",
+        "accepted": [
+          "Personality"
+        ]
+      },
+      {
+        "label": "cotton",
+        "accepted": [
+          "Clothes / Materials"
+        ]
+      },
+      {
+        "label": "determined",
+        "accepted": [
+          "Personality"
+        ]
+      },
+      {
+        "label": "hoodie",
+        "accepted": [
+          "Clothes / Materials"
+        ]
+      },
+      {
+        "label": "leather",
+        "accepted": [
+          "Clothes / Materials"
+        ]
+      },
+      {
+        "label": "sensible",
+        "accepted": [
+          "Personality"
+        ]
+      },
+      {
+        "label": "sensitive",
+        "accepted": [
+          "Personality"
+        ]
+      },
+      {
+        "label": "slim",
+        "accepted": [
+          "Appearance"
+        ]
+      },
+      {
+        "label": "suit",
+        "accepted": [
+          "Clothes / Materials"
+        ]
+      },
+      {
+        "label": "wavy hair",
+        "accepted": [
+          "Appearance"
+        ]
+      },
+      {
+        "label": "well-built",
+        "accepted": [
+          "Appearance"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери категорию для каждого слова. Bald уже дано как пример."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "cheerful Personality\ncotton Clothes / Materials\ndetermined Personality\nhoodie Clothes / Materials\nleather Clothes / Materials\nsensible Personality\nsensitive Personality\nslim Appearance\nsuit Clothes / Materials\nwavy hair Appearance\nwell-built Appearance",
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "cheerful",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "cotton",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "determined",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "hoodie",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "leather",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "sensible",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "sensitive",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "slim",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "suit",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "wavy hair",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        },
+        {
+          "prompt": "well-built",
+          "options": [
+            {
+              "label": "Personality",
+              "value": "Personality"
+            },
+            {
+              "label": "Appearance",
+              "value": "Appearance"
+            },
+            {
+              "label": "Clothes / Materials",
+              "value": "Clothes / Materials"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-6-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "Dynamic"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic"
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 Dynamic\n2 State\n3 Dynamic\n4 Dynamic\n5 Dynamic\n6 State\n7 State\n8 State\n9 Dynamic\n10 Dynamic",
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "work",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "think",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "am working",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "am asking",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "are listening",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "believe",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "know",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "want",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "am speaking",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "are wearing",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-6-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "Dynamic"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "State"
+        ]
+      },
+      {
+        "label": "11",
+        "accepted": [
+          "Dynamic"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic"
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 Dynamic\n2 State\n3 Dynamic\n4 Dynamic\n5 State\n6 State\n7 Dynamic\n8 State\n9 State\n10 State\n11 Dynamic",
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "I’m reporting",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "I like",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "I don’t usually wear",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "I’m wearing",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "It belongs",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "He doesn’t need",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "He’s revising",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "My brother hates",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "He prefers",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "I really want",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        },
+        {
+          "prompt": "I listen",
+          "options": [
+            {
+              "label": "Dynamic",
+              "value": "Dynamic"
+            },
+            {
+              "label": "State",
+              "value": "State"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-5-3": {
+    "answerSpec": [],
+    "marking": {
+      "mode": "open",
+      "instruction": "Ответь на восемь утверждений, прочитай результат в книге и обсуди его. Здесь нет правильных или неправильных ответов."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "",
+    "interaction": {
+      "type": "opinion",
+      "rows": [
+        {
+          "prompt": "People say I’m trendy.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I always use hair products in the morning.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I get bored with my clothes quickly.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I love dressing up for parties.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I don’t mind where my clothes come from — I just want to look good.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I’d never shave my head for charity.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "Wearing make-up is not only for women.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        },
+        {
+          "prompt": "I’m interested in what’s in fashion and what’s out of fashion.",
+          "options": [
+            {
+              "label": "A · I agree",
+              "value": "A"
+            },
+            {
+              "label": "B · It depends",
+              "value": "B"
+            },
+            {
+              "label": "C · I disagree",
+              "value": "C"
+            }
+          ]
+        }
+      ]
+    },
+    "responseMode": "written"
+  },
+  "ws-3-1": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "a silk tie"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "a dark suit"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "a fleece"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "a denim jacket"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "bangles"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "faded jeans"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "a blouse"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "a necklace"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "a beanie"
+        ]
+      },
+      {
+        "label": "11",
+        "accepted": [
+          "a sweatshirt"
+        ]
+      },
+      {
+        "label": "12",
+        "accepted": [
+          "ankle boots"
+        ]
+      },
+      {
+        "label": "13",
+        "accepted": [
+          "high heels"
+        ]
+      },
+      {
+        "label": "14",
+        "accepted": [
+          "vintage sunglasses"
+        ]
+      },
+      {
+        "label": "15",
+        "accepted": [
+          "a leather belt"
+        ]
+      },
+      {
+        "label": "16",
+        "accepted": [
+          "leggings"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери номер на рисунке, затем подходящую карточку из списка."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "2 a silk tie\n3 a dark suit\n4 a fleece\n5 a denim jacket\n6 bangles\n7 faded jeans\n8 a blouse\n9 a necklace\n10 a beanie\n11 a sweatshirt\n12 ankle boots\n13 high heels\n14 vintage sunglasses\n15 a leather belt\n16 leggings",
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "a blouse",
+        "a dark suit",
+        "a denim jacket",
+        "faded jeans",
+        "a fleece",
+        "leggings",
+        "a sweatshirt",
+        "a waistcoat",
+        "ankle boots",
+        "bangles",
+        "a beanie",
+        "high heels",
+        "a leather belt",
+        "a necklace",
+        "a silk tie",
+        "vintage sunglasses"
+      ]
+    }
+  },
+  "sb-5-5": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "a silk tie"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "a dark suit"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "a fleece"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "a denim jacket"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "bangles"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "faded jeans"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "a blouse"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "a necklace"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "a beanie"
+        ]
+      },
+      {
+        "label": "11",
+        "accepted": [
+          "a sweatshirt"
+        ]
+      },
+      {
+        "label": "12",
+        "accepted": [
+          "ankle boots"
+        ]
+      },
+      {
+        "label": "13",
+        "accepted": [
+          "high heels"
+        ]
+      },
+      {
+        "label": "14",
+        "accepted": [
+          "vintage sunglasses"
+        ]
+      },
+      {
+        "label": "15",
+        "accepted": [
+          "a leather belt"
+        ]
+      },
+      {
+        "label": "16",
+        "accepted": [
+          "leggings"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери номер на рисунке, затем подходящую карточку из списка."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "2 a silk tie\n3 a dark suit\n4 a fleece\n5 a denim jacket\n6 bangles\n7 faded jeans\n8 a blouse\n9 a necklace\n10 a beanie\n11 a sweatshirt\n12 ankle boots\n13 high heels\n14 vintage sunglasses\n15 a leather belt\n16 leggings",
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "a blouse",
+        "a dark suit",
+        "a denim jacket",
+        "faded jeans",
+        "a fleece",
+        "leggings",
+        "a sweatshirt",
+        "a waistcoat",
+        "ankle boots",
+        "bangles",
+        "a beanie",
+        "high heels",
+        "a leather belt",
+        "a necklace",
+        "a silk tie",
+        "vintage sunglasses"
+      ]
+    }
+  },
+  "ws-3-3": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "down-to-earth"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "rebellious"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "shallow"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "easy-going"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "vain"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic"
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "2 down-to-earth\n3 rebellious\n4 shallow\n5 easy-going\n6 vain",
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "shallow",
+        "vain",
+        "down-to-earth",
+        "easy-going",
+        "rebellious"
+      ]
+    }
+  },
+  "sb-5-9": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "down-to-earth"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "rebellious"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "shallow"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "easy-going"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "vain"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic"
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "2 down-to-earth\n3 rebellious\n4 shallow\n5 easy-going\n6 vain",
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "shallow",
+        "vain",
+        "down-to-earth",
+        "easy-going",
+        "rebellious"
+      ]
+    }
+  },
+  "wb-4-1": {
+    "answerSpec": [
+      {
+        "label": "1 · Emma",
+        "kind": "set",
+        "members": [
+          [
+            "curly"
+          ],
+          [
+            "cheerful"
+          ],
+          [
+            "top"
+          ],
+          [
+            "outgoing"
+          ],
+          [
+            "relaxed"
+          ],
+          [
+            "sociable"
+          ],
+          [
+            "earring"
+          ],
+          [
+            "long"
+          ]
+        ],
+        "accepted": [
+          "curly; cheerful; top; outgoing; relaxed; sociable; earring; long"
+        ]
+      },
+      {
+        "label": "2 · Meg",
+        "kind": "set",
+        "members": [
+          [
+            "hoodie"
+          ],
+          [
+            "straight"
+          ],
+          [
+            "long"
+          ],
+          [
+            "serious"
+          ],
+          [
+            "trainers"
+          ],
+          [
+            "ring"
+          ],
+          [
+            "glasses"
+          ]
+        ],
+        "accepted": [
+          "hoodie; straight; long; serious; trainers; ring; glasses"
+        ]
+      },
+      {
+        "label": "3 · Ryan",
+        "kind": "set",
+        "members": [
+          [
+            "short"
+          ],
+          [
+            "shirt"
+          ],
+          [
+            "relaxed"
+          ],
+          [
+            "cheerful"
+          ],
+          [
+            "jacket"
+          ],
+          [
+            "outgoing"
+          ],
+          [
+            "boots"
+          ],
+          [
+            "watch"
+          ],
+          [
+            "sociable"
+          ]
+        ],
+        "accepted": [
+          "short; shirt; relaxed; cheerful; jacket; outgoing; boots; watch; sociable"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Для каждого человека выбери все подходящие слова. Одно слово лишнее; некоторые подходят нескольким людям."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 · Emma curly; cheerful; top; outgoing; relaxed; sociable; earring; long\n2 · Meg hoodie; straight; long; serious; trainers; ring; glasses\n3 · Ryan short; shirt; relaxed; cheerful; jacket; outgoing; boots; watch; sociable",
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "1 · Emma",
+          "options": [
+            {
+              "label": "belt",
+              "value": "belt"
+            },
+            {
+              "label": "boots",
+              "value": "boots"
+            },
+            {
+              "label": "cheerful",
+              "value": "cheerful"
+            },
+            {
+              "label": "curly",
+              "value": "curly"
+            },
+            {
+              "label": "earring",
+              "value": "earring"
+            },
+            {
+              "label": "glasses",
+              "value": "glasses"
+            },
+            {
+              "label": "hoodie",
+              "value": "hoodie"
+            },
+            {
+              "label": "jacket",
+              "value": "jacket"
+            },
+            {
+              "label": "long",
+              "value": "long"
+            },
+            {
+              "label": "outgoing",
+              "value": "outgoing"
+            },
+            {
+              "label": "relaxed",
+              "value": "relaxed"
+            },
+            {
+              "label": "ring",
+              "value": "ring"
+            },
+            {
+              "label": "serious",
+              "value": "serious"
+            },
+            {
+              "label": "shirt",
+              "value": "shirt"
+            },
+            {
+              "label": "short",
+              "value": "short"
+            },
+            {
+              "label": "sociable",
+              "value": "sociable"
+            },
+            {
+              "label": "straight",
+              "value": "straight"
+            },
+            {
+              "label": "top",
+              "value": "top"
+            },
+            {
+              "label": "trainers",
+              "value": "trainers"
+            },
+            {
+              "label": "watch",
+              "value": "watch"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Meg",
+          "options": [
+            {
+              "label": "belt",
+              "value": "belt"
+            },
+            {
+              "label": "boots",
+              "value": "boots"
+            },
+            {
+              "label": "cheerful",
+              "value": "cheerful"
+            },
+            {
+              "label": "curly",
+              "value": "curly"
+            },
+            {
+              "label": "earring",
+              "value": "earring"
+            },
+            {
+              "label": "glasses",
+              "value": "glasses"
+            },
+            {
+              "label": "hoodie",
+              "value": "hoodie"
+            },
+            {
+              "label": "jacket",
+              "value": "jacket"
+            },
+            {
+              "label": "long",
+              "value": "long"
+            },
+            {
+              "label": "outgoing",
+              "value": "outgoing"
+            },
+            {
+              "label": "relaxed",
+              "value": "relaxed"
+            },
+            {
+              "label": "ring",
+              "value": "ring"
+            },
+            {
+              "label": "serious",
+              "value": "serious"
+            },
+            {
+              "label": "shirt",
+              "value": "shirt"
+            },
+            {
+              "label": "short",
+              "value": "short"
+            },
+            {
+              "label": "sociable",
+              "value": "sociable"
+            },
+            {
+              "label": "straight",
+              "value": "straight"
+            },
+            {
+              "label": "top",
+              "value": "top"
+            },
+            {
+              "label": "trainers",
+              "value": "trainers"
+            },
+            {
+              "label": "watch",
+              "value": "watch"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Ryan",
+          "options": [
+            {
+              "label": "belt",
+              "value": "belt"
+            },
+            {
+              "label": "boots",
+              "value": "boots"
+            },
+            {
+              "label": "cheerful",
+              "value": "cheerful"
+            },
+            {
+              "label": "curly",
+              "value": "curly"
+            },
+            {
+              "label": "earring",
+              "value": "earring"
+            },
+            {
+              "label": "glasses",
+              "value": "glasses"
+            },
+            {
+              "label": "hoodie",
+              "value": "hoodie"
+            },
+            {
+              "label": "jacket",
+              "value": "jacket"
+            },
+            {
+              "label": "long",
+              "value": "long"
+            },
+            {
+              "label": "outgoing",
+              "value": "outgoing"
+            },
+            {
+              "label": "relaxed",
+              "value": "relaxed"
+            },
+            {
+              "label": "ring",
+              "value": "ring"
+            },
+            {
+              "label": "serious",
+              "value": "serious"
+            },
+            {
+              "label": "shirt",
+              "value": "shirt"
+            },
+            {
+              "label": "short",
+              "value": "short"
+            },
+            {
+              "label": "sociable",
+              "value": "sociable"
+            },
+            {
+              "label": "straight",
+              "value": "straight"
+            },
+            {
+              "label": "top",
+              "value": "top"
+            },
+            {
+              "label": "trainers",
+              "value": "trainers"
+            },
+            {
+              "label": "watch",
+              "value": "watch"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-6-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Does she really need"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "don’t know"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "don’t want"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "doesn’t hate"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Do you see"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впиши исправленную часть предложения. Для верного предложения введи ✓ или correct."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 Does she really need\n2 don’t know\n3 ✓\n4 don’t want\n5 doesn’t hate\n6 Do you see"
+  },
+  "wb-100-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "she was watching"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "hadn’t been"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "the day before"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "we’d meet"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "couldn’t have been",
+          "couldn’t be"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впиши исправленную часть каждого предложения."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 she was watching\n2 hadn’t been\n3 the day before\n4 we’d meet\n5 couldn’t have been"
+  },
+  "wb-46-1": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "lemon"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "vegetable"
+        ]
+      },
+      {
+        "label": "2a",
+        "accepted": [
+          "cucumber"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "fruit"
+        ]
+      },
+      {
+        "label": "3a",
+        "accepted": [
+          "milk"
+        ]
+      },
+      {
+        "label": "3b",
+        "accepted": [
+          "drink"
+        ]
+      },
+      {
+        "label": "4a",
+        "accepted": [
+          "leek"
+        ]
+      },
+      {
+        "label": "4b",
+        "accepted": [
+          "fruit"
+        ]
+      },
+      {
+        "label": "5a",
+        "accepted": [
+          "pasta"
+        ]
+      },
+      {
+        "label": "5b",
+        "accepted": [
+          "meat"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "В поле a впиши лишнее слово, в поле b — слово для объяснения."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1a lemon\n1b vegetable\n2a cucumber\n2b fruit\n3a milk\n3b drink\n4a leek\n4b fruit\n5a pasta\n5b meat"
+  },
+  "wb-56-2": {
+    "answerSpec": [
+      {
+        "label": "1 · phrase",
+        "accepted": [
+          "could I",
+          "can I"
+        ]
+      },
+      {
+        "label": "1 · W/C",
+        "accepted": [
+          "W"
+        ]
+      },
+      {
+        "label": "2 · phrase",
+        "accepted": [
+          "Do you"
+        ]
+      },
+      {
+        "label": "2 · W/C",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "3 · phrase",
+        "accepted": [
+          "Could I",
+          "Can I"
+        ]
+      },
+      {
+        "label": "3 · W/C",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "4 · phrase",
+        "accepted": [
+          "Do you"
+        ]
+      },
+      {
+        "label": "4 · W/C",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "5 · phrase",
+        "accepted": [
+          "Could I",
+          "Can I"
+        ]
+      },
+      {
+        "label": "5 · W/C",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "6 · phrase",
+        "accepted": [
+          "Could I",
+          "Can I"
+        ]
+      },
+      {
+        "label": "6 · W/C",
+        "accepted": [
+          "W"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполни фразу, затем укажи W (waiter) или C (customer)."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 · phrase could I\n1 · W/C W\n2 · phrase Do you\n2 · W/C C\n3 · phrase Could I\n3 · W/C C\n4 · phrase Do you\n4 · W/C C\n5 · phrase Could I\n5 · W/C C\n6 · phrase Could I\n6 · W/C W"
+  },
+  "wb-35-1": {
+    "answerSpec": [
+      {
+        "label": "1 · sentence",
+        "accepted": [
+          "Did you book online?"
+        ]
+      },
+      {
+        "label": "1 · R/G",
+        "accepted": [
+          "R"
+        ]
+      },
+      {
+        "label": "2 · sentence",
+        "accepted": [
+          "I thought it was included"
+        ]
+      },
+      {
+        "label": "2 · R/G",
+        "accepted": [
+          "G"
+        ]
+      },
+      {
+        "label": "3 · sentence",
+        "accepted": [
+          "I’ve booked a single room for two nights"
+        ]
+      },
+      {
+        "label": "3 · R/G",
+        "accepted": [
+          "G"
+        ]
+      },
+      {
+        "label": "4 · sentence",
+        "accepted": [
+          "We have a special online offer at the moment"
+        ]
+      },
+      {
+        "label": "4 · R/G",
+        "accepted": [
+          "R"
+        ]
+      },
+      {
+        "label": "5 · sentence",
+        "accepted": [
+          "Can you fill in this form please?",
+          "Can you fill this form in please?"
+        ]
+      },
+      {
+        "label": "5 · R/G",
+        "accepted": [
+          "R"
+        ]
+      },
+      {
+        "label": "6 · sentence",
+        "accepted": [
+          "Would you like breakfast?"
+        ]
+      },
+      {
+        "label": "6 · R/G",
+        "accepted": [
+          "R"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Собери фразу, затем укажи R (receptionist) или G (guest)."
+    },
+    "reviewed": true,
+    "nativeInteraction": true,
+    "key": "1 · sentence Did you book online?\n1 · R/G R\n2 · sentence I thought it was included\n2 · R/G G\n3 · sentence I’ve booked a single room for two nights\n3 · R/G G\n4 · sentence We have a special online offer at the moment\n4 · R/G R\n5 · sentence Can you fill in this form please?\n5 · R/G R\n6 · sentence Would you like breakfast?\n6 · R/G R"
+  },
+  "sb-5-4": {
+    "reviewed": true,
+    "nativeInteraction": true,
+    "answerSpec": [
+      {
+        "label": "Items in the picture",
+        "kind": "set",
+        "members": [
+          [
+            "a denim jacket"
+          ],
+          [
+            "faded jeans"
+          ],
+          [
+            "leggings"
+          ],
+          [
+            "a sweatshirt"
+          ],
+          [
+            "ankle boots"
+          ],
+          [
+            "bangles"
+          ],
+          [
+            "a beanie"
+          ],
+          [
+            "a necklace"
+          ],
+          [
+            "vintage sunglasses"
+          ]
+        ],
+        "accepted": [
+          "a denim jacket; faded jeans; leggings; a sweatshirt; ankle boots; bangles; a beanie; a necklace; vintage sunglasses"
+        ]
+      }
+    ],
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "Что видно на фотографии?",
+          "options": [
+            {
+              "label": "a dark suit",
+              "value": "a dark suit"
+            },
+            {
+              "label": "a denim jacket",
+              "value": "a denim jacket"
+            },
+            {
+              "label": "faded jeans",
+              "value": "faded jeans"
+            },
+            {
+              "label": "a fleece",
+              "value": "a fleece"
+            },
+            {
+              "label": "leggings",
+              "value": "leggings"
+            },
+            {
+              "label": "a sweatshirt",
+              "value": "a sweatshirt"
+            },
+            {
+              "label": "a waistcoat",
+              "value": "a waistcoat"
+            },
+            {
+              "label": "ankle boots",
+              "value": "ankle boots"
+            },
+            {
+              "label": "bangles",
+              "value": "bangles"
+            },
+            {
+              "label": "a beanie",
+              "value": "a beanie"
+            },
+            {
+              "label": "high heels",
+              "value": "high heels"
+            },
+            {
+              "label": "a leather belt",
+              "value": "a leather belt"
+            },
+            {
+              "label": "a necklace",
+              "value": "a necklace"
+            },
+            {
+              "label": "a silk tie",
+              "value": "a silk tie"
+            },
+            {
+              "label": "vintage sunglasses",
+              "value": "vintage sunglasses"
+            }
+          ]
+        }
+      ]
+    },
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Отметь все вещи, которые видны на фотографии. A blouse уже отмечено в книге как пример."
+    },
+    "key": "A blouse (example); a denim jacket, faded jeans, leggings, a sweatshirt, ankle boots, bangles, a beanie, a necklace, vintage sunglasses"
+  },
+  "wb-20-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "had already melted"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "was watching"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Did City beat"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "wasn’t concentrating"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "finished"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "had fought"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впиши исправленную часть каждого предложения."
+    },
+    "reviewed": true,
+    "key": "1 had already melted\n2 was watching\n3 Did City beat\n4 wasn’t concentrating\n5 finished\n6 had fought"
+  },
+  "wb-26-6": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "boiling"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "exhausted"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "terrified"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "awesome"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Замени выделенные прилагательные более сильными словами."
+    },
+    "reviewed": true,
+    "key": "a boiling\nb exhausted\nc terrified\nd awesome",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "awesome",
+        "awful",
+        "angry",
+        "boiling",
+        "exhausted",
+        "terrified"
+      ]
+    }
+  },
+  "wb-38-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a; b"
+        ],
+        "kind": "set",
+        "members": [
+          [
+            "a"
+          ],
+          [
+            "b"
+          ]
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Отметь все верные предложения в каждой паре. Можно выбрать оба."
+    },
+    "reviewed": true,
+    "key": "1 a; b\n2 a\n3 a\n4 b",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "1",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "2",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "3",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "4",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-39-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "has fallen out with his brother"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "wanted to try out badminton",
+          "wanted to try badminton out"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "cheer him on"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "take after my dad"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впиши пропущенную часть предложения с фразовым глаголом."
+    },
+    "reviewed": true,
+    "key": "1 has fallen out with his brother\n2 wanted to try out badminton / wanted to try badminton out\n3 cheer him on\n4 take after my dad"
+  },
+  "wb-44-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "was"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Did"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "didn’t use to"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "be"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Впиши исправленную часть; если предложение верное, напиши ✓ или correct."
+    },
+    "reviewed": true,
+    "key": "1 was\n2 Did\n3 ✓\n4 didn’t use to\n5 be"
+  },
+  "wb-48-1": {
+    "answerSpec": [
+      {
+        "label": "1 · ending",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "1 · future",
+        "accepted": [
+          "Yes"
+        ]
+      },
+      {
+        "label": "2 · ending",
+        "accepted": [
+          "e"
+        ]
+      },
+      {
+        "label": "2 · future",
+        "accepted": [
+          "Yes"
+        ]
+      },
+      {
+        "label": "3 · ending",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3 · future",
+        "accepted": [
+          "Yes"
+        ]
+      },
+      {
+        "label": "4 · ending",
+        "accepted": [
+          "f"
+        ]
+      },
+      {
+        "label": "4 · future",
+        "accepted": [
+          "No"
+        ]
+      },
+      {
+        "label": "5 · ending",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "5 · future",
+        "accepted": [
+          "Yes"
+        ]
+      },
+      {
+        "label": "6 · ending",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "6 · future",
+        "accepted": [
+          "Yes"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Соедини начало и окончание, затем укажи, говорится ли о будущем."
+    },
+    "reviewed": true,
+    "key": "1 · ending b\n1 · future Yes\n2 · ending e\n2 · future Yes\n3 · ending a\n3 · future Yes\n4 · ending f\n4 · future No\n5 · ending c\n5 · future Yes\n6 · ending d\n6 · future Yes",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "1 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "6 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "6 · Относится к будущему?",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-54-2": {
+    "answerSpec": [
+      {
+        "label": "1 · ending",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "1 · tip",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "2 · ending",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "2 · tip",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "3 · ending",
+        "accepted": [
+          "e"
+        ]
+      },
+      {
+        "label": "3 · tip",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "4 · ending",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "4 · tip",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "5 · ending",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "5 · tip",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "6 · ending",
+        "accepted": [
+          "f"
+        ]
+      },
+      {
+        "label": "6 · tip",
+        "accepted": [
+          "5"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери окончание фразы и номер соответствующего совета из Exercise 1."
+    },
+    "reviewed": true,
+    "key": "1 · ending d\n1 · tip 5\n2 · ending a\n2 · tip 2\n3 · ending e\n3 · tip 6\n4 · ending c\n4 · tip 4\n5 · ending b\n5 · tip 3\n6 · ending f\n6 · tip 5",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "1 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        },
+        {
+          "prompt": "6 · Окончание",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            },
+            {
+              "label": "f",
+              "value": "f"
+            },
+            {
+              "label": "g",
+              "value": "g"
+            }
+          ]
+        },
+        {
+          "prompt": "6 · Tip",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-54-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "does"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "it"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "is"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "do"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "do"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "is"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Укажи одно лишнее слово; если запрос верный, напиши ✓ или correct."
+    },
+    "reviewed": true,
+    "key": "1 does\n2 ✓\n3 it\n4 is\n5 do\n6 do\n7 ✓\n8 is"
+  },
+  "wb-56-3": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "What about fish?"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "The salmon is delicious."
+        ]
+      },
+      {
+        "label": "1 · S/A",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Can you tell me what the Chef’s Special Lamb is?"
+        ]
+      },
+      {
+        "label": "2 · S/A",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Could you tell me what the Farmer’s Lunch is?"
+        ]
+      },
+      {
+        "label": "3 · S/A",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "4a",
+        "accepted": [
+          "How about the Diavolo Pizza?"
+        ]
+      },
+      {
+        "label": "4b",
+        "accepted": [
+          "It’s very spicy."
+        ]
+      },
+      {
+        "label": "4 · S/A",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "I’d like to know if there are olives in the pasta."
+        ]
+      },
+      {
+        "label": "5 · S/A",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Where can I get the best pizza?"
+        ]
+      },
+      {
+        "label": "6 · S/A",
+        "accepted": [
+          "A"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Составь фразы, затем укажи S (предложение) или A (запрос информации)."
+    },
+    "reviewed": true,
+    "key": "1a What about fish?\n1b The salmon is delicious.\n1 · S/A S\n2 Can you tell me what the Chef’s Special Lamb is?\n2 · S/A A\n3 Could you tell me what the Farmer’s Lunch is?\n3 · S/A A\n4a How about the Diavolo Pizza?\n4b It’s very spicy.\n4 · S/A S\n5 I’d like to know if there are olives in the pasta.\n5 · S/A A\n6 Where can I get the best pizza?\n6 · S/A A"
+  },
+  "wb-68-1": {
+    "answerSpec": [
+      {
+        "label": "Countries often take pride…",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "Personally, I hope…",
+        "accepted": [
+          "8"
+        ]
+      },
+      {
+        "label": "On the one hand…",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "On the other hand…",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "For instance…",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "Furthermore…",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "However…",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "In conclusion…",
+        "accepted": [
+          "7"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Укажи место каждого фрагмента в эссе."
+    },
+    "reviewed": true,
+    "key": "Countries often take pride… 1\nPersonally, I hope… 8\nOn the one hand… 3\nOn the other hand… 5\nFor instance… 4\nFurthermore… 6\nHowever… 2\nIn conclusion… 7",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "Countries often take pride…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "Personally, I hope…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "On the one hand…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "On the other hand…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "For instance…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "Furthermore…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "However…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "In conclusion…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-89-7": {
+    "answerSpec": [
+      {
+        "label": "A1",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "A2",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "A3",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "A4",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "B1",
+        "accepted": [
+          "e"
+        ]
+      },
+      {
+        "label": "B2",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "B3",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "B4",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "B5",
+        "accepted": [
+          "d"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Подбери окончание для каждого предложения в частях A и B."
+    },
+    "reviewed": true,
+    "key": "A1 a\nA2 b\nA3 d\nA4 c\nB1 e\nB2 b\nB3 c\nB4 a\nB5 d",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "A1",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "A2",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "A3",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "A4",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "B1",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "B2",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "B3",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "B4",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        },
+        {
+          "prompt": "B5",
+          "options": [
+            {
+              "label": "a",
+              "value": "a"
+            },
+            {
+              "label": "b",
+              "value": "b"
+            },
+            {
+              "label": "c",
+              "value": "c"
+            },
+            {
+              "label": "d",
+              "value": "d"
+            },
+            {
+              "label": "e",
+              "value": "e"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-90-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "they were going to be on television the following week"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "he was meeting my sister there later that day"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "they had seen us the month before"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "he couldn’t give me her phone number then"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "our concert was cancelled"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "she’d see him the following day",
+          "she would see him the following day"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Переведи прямую речь в косвенную, дополнив предложения."
+    },
+    "reviewed": true,
+    "key": "1 they were going to be on television the following week\n2 he was meeting my sister there later that day\n3 they had seen us the month before\n4 he couldn’t give me her phone number then\n5 our concert was cancelled\n6 she’d see him the following day / she would see him the following day"
+  },
+  "wb-96-4": {
+    "answerSpec": [
+      {
+        "label": "A",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "B",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "C",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "D",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "E",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "Title",
+        "accepted": [
+          "3"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Расставь абзацы по порядку и выбери заголовок."
+    },
+    "reviewed": true,
+    "key": "A 2\nB 4\nC 1\nD 5\nE 3\nTitle 3",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "A",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "prompt": "B",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "prompt": "C",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "prompt": "D",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "prompt": "E",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "prompt": "Title",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-107-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "convict; inmate"
+        ],
+        "kind": "set",
+        "members": [
+          [
+            "convict"
+          ],
+          [
+            "inmate"
+          ]
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "jail"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "convicted"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "sentenced to life imprisonment"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "cell"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "released"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "reoffended"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Найди слова в тексте. В первом пункте нужны два слова, разделённые запятой или точкой с запятой."
+    },
+    "reviewed": true,
+    "key": "1 convict; inmate\n2 jail\n3 convicted\n4 sentenced to life imprisonment\n5 cell\n6 released\n7 reoffended"
+  },
+  "wb-110-5": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "2",
+          "4"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "8"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "e",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "f",
+        "accepted": [
+          "7"
+        ]
+      },
+      {
+        "label": "g",
+        "accepted": [
+          "6"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Укажи номера подходящих связок из Exercise 1."
+    },
+    "reviewed": true,
+    "key": "a 1\nb 2 / 4\nc 8\nd 3\ne 5\nf 7\ng 6",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "a",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "b",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "c",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "d",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "e",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "f",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "prompt": "g",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-24-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Delete to"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Keep to"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Delete to"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Keep to"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Delete to"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Keep to"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "Delete to"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Оставь to или вычеркни лишнее to в каждом пункте."
+    },
+    "reviewed": true,
+    "key": "1 Delete to\n2 Keep to\n3 Delete to\n4 Keep to\n5 Delete to\n6 Keep to\n7 Delete to",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "2",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "3",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "4",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "5",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "6",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        },
+        {
+          "prompt": "7",
+          "options": [
+            {
+              "label": "Keep to",
+              "value": "Keep to"
+            },
+            {
+              "label": "Delete to",
+              "value": "Delete to"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-20-1": {
+    "answerSpec": [
+      {
+        "label": "She tried to help him get up.",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "When the ambulance arrived…",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "He had only run three miles…",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "When Ray’s leg was better…",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "But he couldn’t stand…",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "Lisa was watching the race…",
+        "accepted": [
+          "2"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Укажи порядок событий между первой и последней фразами."
+    },
+    "reviewed": true,
+    "key": "She tried to help him get up. 3\nWhen the ambulance arrived… 5\nHe had only run three miles… 1\nWhen Ray’s leg was better… 6\nBut he couldn’t stand… 4\nLisa was watching the race… 2",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "She tried to help him get up.",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        },
+        {
+          "prompt": "When the ambulance arrived…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        },
+        {
+          "prompt": "He had only run three miles…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        },
+        {
+          "prompt": "When Ray’s leg was better…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        },
+        {
+          "prompt": "But he couldn’t stand…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        },
+        {
+          "prompt": "Lisa was watching the race…",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-62-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "the Germany"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "the passports"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "the women"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "the China; the Shanghai"
+        ],
+        "kind": "set",
+        "members": [
+          [
+            "the China"
+          ],
+          [
+            "the Shanghai"
+          ]
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "The pollution — general"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери сочетания, в которых нужно убрать the. В одном предложении всё верно."
+    },
+    "reviewed": true,
+    "key": "1 the Germany\n2 the passports\n3 ✓\n4 the women\n5 the China; the Shanghai\n6 The pollution — general",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "1",
+          "options": [
+            {
+              "label": "the Netherlands",
+              "value": "the Netherlands"
+            },
+            {
+              "label": "the Germany",
+              "value": "the Germany"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        },
+        {
+          "prompt": "2",
+          "options": [
+            {
+              "label": "the United States",
+              "value": "the United States"
+            },
+            {
+              "label": "the passports",
+              "value": "the passports"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        },
+        {
+          "prompt": "3",
+          "options": [
+            {
+              "label": "The population",
+              "value": "The population"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        },
+        {
+          "prompt": "4",
+          "options": [
+            {
+              "label": "The citizens",
+              "value": "The citizens"
+            },
+            {
+              "label": "the women",
+              "value": "the women"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        },
+        {
+          "prompt": "5",
+          "options": [
+            {
+              "label": "The biggest city",
+              "value": "The biggest city"
+            },
+            {
+              "label": "the China",
+              "value": "the China"
+            },
+            {
+              "label": "the Shanghai",
+              "value": "the Shanghai"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        },
+        {
+          "prompt": "6",
+          "options": [
+            {
+              "label": "The pollution — general",
+              "value": "The pollution — general"
+            },
+            {
+              "label": "the pollution — in this city",
+              "value": "the pollution — in this city"
+            },
+            {
+              "label": "✓",
+              "value": "✓"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wb-40-5": {
+    "answerSpec": [
+      {
+        "label": "1 · phrase",
+        "accepted": [
+          "I’m sure everything will be OK."
+        ]
+      },
+      {
+        "label": "1 · A–F",
+        "accepted": [
+          "E"
+        ]
+      },
+      {
+        "label": "2 · phrase",
+        "accepted": [
+          "While I remember, did you hear that…"
+        ]
+      },
+      {
+        "label": "2 · A–F",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "3 · phrase",
+        "accepted": [
+          "I understand what a difficult situation it is."
+        ]
+      },
+      {
+        "label": "3 · A–F",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "4 · phrase",
+        "accepted": [
+          "It’s a good idea to…"
+        ]
+      },
+      {
+        "label": "4 · A–F",
+        "accepted": [
+          "D"
+        ]
+      },
+      {
+        "label": "5 · phrase",
+        "accepted": [
+          "It was lovely to hear from you."
+        ]
+      },
+      {
+        "label": "5 · A–F",
+        "accepted": [
+          "A"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Составь фразы, затем сопоставь их с частями A–F из Exercise 4."
+    },
+    "reviewed": true,
+    "key": "1 · phrase I’m sure everything will be OK.\n1 · A–F E\n2 · phrase While I remember, did you hear that…\n2 · A–F F\n3 · phrase I understand what a difficult situation it is.\n3 · A–F B\n4 · phrase It’s a good idea to…\n4 · A–F D\n5 · phrase It was lovely to hear from you.\n5 · A–F A"
+  },
+  "sb-38-4": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "used to be",
+          "Air travel used to be more comfortable."
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "would take",
+          "The flight from London to New York would take longer."
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "would smoke",
+          "People would smoke on the plane."
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "would wear",
+          "People would wear their best clothes to travel by air."
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "didn’t use to have",
+          "Airports didn’t use to have so many security checks."
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Замени подчёркнутую часть, используя would или used to. Можно написать предложение целиком."
+    },
+    "reviewed": true,
+    "key": "2 used to be / Air travel used to be more comfortable.\n3 would take / The flight from London to New York would take longer.\n4 would smoke / People would smoke on the plane.\n5 would wear / People would wear their best clothes to travel by air.\n6 didn’t use to have / Airports didn’t use to have so many security checks."
+  },
+  "sb-38-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "F"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "T"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Прослушай запись 1.50 и отметь верные и неверные утверждения из Exercise 4."
+    },
+    "reviewed": true,
+    "key": "1 F\n2 T\n3 F\n4 T\n5 T\n6 T",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "prompt": "2",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "prompt": "3",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "prompt": "4",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "prompt": "5",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "prompt": "6",
+          "options": [
+            {
+              "label": "T",
+              "value": "T"
+            },
+            {
+              "label": "F",
+              "value": "F"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-64-10": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "sleep through"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "reach for"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "gone off"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "search for"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "came face to face with"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "dying from"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "sitting around"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Замени подчёркнутые фразы выражениями из WORD STORE 5E."
+    },
+    "reviewed": true,
+    "key": "1 sleep through\n2 reach for\n3 gone off\n4 search for\n5 came face to face with\n6 dying from\n7 sitting around"
+  },
+  "wb-33-7": {
+    "answerSpec": [
+      {
+        "label": "1 · word",
+        "accepted": [
+          "travel"
+        ]
+      },
+      {
+        "label": "1 · V/N",
+        "accepted": [
+          "N"
+        ]
+      },
+      {
+        "label": "2 · word",
+        "accepted": [
+          "travels"
+        ]
+      },
+      {
+        "label": "2 · V/N",
+        "accepted": [
+          "N"
+        ]
+      },
+      {
+        "label": "3 · word",
+        "accepted": [
+          "travel"
+        ]
+      },
+      {
+        "label": "3 · V/N",
+        "accepted": [
+          "V"
+        ]
+      },
+      {
+        "label": "4 · word",
+        "accepted": [
+          "travel"
+        ]
+      },
+      {
+        "label": "4 · V/N",
+        "accepted": [
+          "N"
+        ]
+      },
+      {
+        "label": "5 · word",
+        "accepted": [
+          "travels"
+        ]
+      },
+      {
+        "label": "5 · V/N",
+        "accepted": [
+          "V"
+        ]
+      },
+      {
+        "label": "6 · word",
+        "accepted": [
+          "travels"
+        ]
+      },
+      {
+        "label": "6 · V/N",
+        "accepted": [
+          "V"
+        ]
+      },
+      {
+        "label": "7 · word",
+        "accepted": [
+          "travels"
+        ]
+      },
+      {
+        "label": "7 · V/N",
+        "accepted": [
+          "N"
+        ]
+      },
+      {
+        "label": "8 · word",
+        "accepted": [
+          "travelled"
+        ]
+      },
+      {
+        "label": "8 · V/N",
+        "accepted": [
+          "V"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Вставь форму слова travel, затем укажи V (глагол) или N (существительное)."
+    },
+    "reviewed": true,
+    "key": "1 · word travel\n1 · V/N N\n2 · word travels\n2 · V/N N\n3 · word travel\n3 · V/N V\n4 · word travel\n4 · V/N N\n5 · word travels\n5 · V/N V\n6 · word travels\n6 · V/N V\n7 · word travels\n7 · V/N N\n8 · word travelled\n8 · V/N V"
+  },
+  "wb-80-1": {
+    "answerSpec": [
+      {
+        "label": "1 · verb",
+        "accepted": [
+          "had broken"
+        ]
+      },
+      {
+        "label": "1 · ending",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "2 · verb",
+        "accepted": [
+          "had forgotten"
+        ]
+      },
+      {
+        "label": "2 · ending",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3 · verb",
+        "accepted": [
+          "had lost touch"
+        ]
+      },
+      {
+        "label": "3 · ending",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "4 · verb",
+        "accepted": [
+          "hadn’t studied"
+        ]
+      },
+      {
+        "label": "4 · ending",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Вставь форму Past Perfect и выбери окончание a–e."
+    },
+    "reviewed": true,
+    "key": "1 · verb had broken\n1 · ending d\n2 · verb had forgotten\n2 · ending a\n3 · verb had lost touch\n3 · ending c\n4 · verb hadn’t studied\n4 · ending b"
+  },
+  "wb-98-3": {
+    "answerSpec": [
+      {
+        "label": "1 · response",
+        "accepted": [
+          "No"
+        ]
+      },
+      {
+        "label": "1 · G/R",
+        "accepted": [
+          "G"
+        ]
+      },
+      {
+        "label": "2 · response",
+        "accepted": [
+          "I’d like to help but"
+        ]
+      },
+      {
+        "label": "2 · G/R",
+        "accepted": [
+          "R"
+        ]
+      },
+      {
+        "label": "3 · response",
+        "accepted": [
+          "I’m sorry"
+        ]
+      },
+      {
+        "label": "3 · G/R",
+        "accepted": [
+          "R"
+        ]
+      },
+      {
+        "label": "4 · response",
+        "accepted": [
+          "Sure"
+        ]
+      },
+      {
+        "label": "4 · G/R",
+        "accepted": [
+          "G"
+        ]
+      },
+      {
+        "label": "5 · response",
+        "accepted": [
+          "so"
+        ]
+      },
+      {
+        "label": "5 · G/R",
+        "accepted": [
+          "G"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Выбери ответ, затем укажи G (разрешение) или R (отказ)."
+    },
+    "reviewed": true,
+    "key": "1 · response No\n1 · G/R G\n2 · response I’d like to help but\n2 · G/R R\n3 · response I’m sorry\n3 · G/R R\n4 · response Sure\n4 · G/R G\n5 · response so\n5 · G/R G",
+    "nativeInteraction": true,
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1 · Ответ",
+          "options": [
+            {
+              "label": "Yes",
+              "value": "Yes"
+            },
+            {
+              "label": "No",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "prompt": "1 · Разрешение или отказ?",
+          "options": [
+            {
+              "label": "G",
+              "value": "G"
+            },
+            {
+              "label": "R",
+              "value": "R"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Ответ",
+          "options": [
+            {
+              "label": "Yes that’s fine",
+              "value": "Yes that’s fine"
+            },
+            {
+              "label": "I’d like to help but",
+              "value": "I’d like to help but"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Разрешение или отказ?",
+          "options": [
+            {
+              "label": "G",
+              "value": "G"
+            },
+            {
+              "label": "R",
+              "value": "R"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Ответ",
+          "options": [
+            {
+              "label": "No problem",
+              "value": "No problem"
+            },
+            {
+              "label": "I’m sorry",
+              "value": "I’m sorry"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Разрешение или отказ?",
+          "options": [
+            {
+              "label": "G",
+              "value": "G"
+            },
+            {
+              "label": "R",
+              "value": "R"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Ответ",
+          "options": [
+            {
+              "label": "Sure",
+              "value": "Sure"
+            },
+            {
+              "label": "Not at all",
+              "value": "Not at all"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Разрешение или отказ?",
+          "options": [
+            {
+              "label": "G",
+              "value": "G"
+            },
+            {
+              "label": "R",
+              "value": "R"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Ответ",
+          "options": [
+            {
+              "label": "so",
+              "value": "so"
+            },
+            {
+              "label": "not",
+              "value": "not"
+            }
+          ]
+        },
+        {
+          "prompt": "5 · Разрешение или отказ?",
+          "options": [
+            {
+              "label": "G",
+              "value": "G"
+            },
+            {
+              "label": "R",
+              "value": "R"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-125-2": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "eco-friendly"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "cleanest"
+        ]
+      },
+      {
+        "label": "2a",
+        "accepted": [
+          "polluted"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "recycle"
+        ]
+      },
+      {
+        "label": "2c",
+        "accepted": [
+          "zone"
+        ]
+      }
+    ],
+    "marking": {
+      "mode": "automatic",
+      "instruction": "Заполни пять пропусков. Пункты 1a–1b относятся к первому предложению, 2a–2c — ко второму."
+    },
+    "reviewed": true,
+    "key": "1a eco-friendly\n1b cleanest\n2a polluted\n2b recycle\n2c zone"
+  }
+}

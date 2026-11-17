@@ -1,0 +1,70 @@
+{
+  "19": {
+    "youtube": "YC5m4AXVCkI",
+    "sourceNote": "Focus3 2E Unit5 Lesson1 Video 19 BBC — Лилия Бирецкая"
+  },
+  "6": {
+    "youtube": "hCm0y4hiHmw",
+    "sourceNote": "Pearson official: Focus 3, Grammar animation, Narrative tenses. Canoe storyline verified visually.",
+    "editionNote": "Анимация Pearson. Объяснение преподавателя — отдельный ролик 6T."
+  },
+  "6T": {
+    "youtube": "fWEd3Bnr75s",
+    "title": "Narrative tenses · Teacher’s comment",
+    "sourceNote": "Pearson official: matching teacher explanation."
+  },
+  "11": {
+    "youtube": "6MoBJVy5DOs",
+    "sourceNote": "Focus 3 2nd edition Unit 3 lesson 3.2 Grammar Present and Past speculation — Nataliia Mirgorod, 4:07"
+  },
+  "15": {
+    "youtube": "89YcZtMrS0Q",
+    "sourceNote": "Focus 3 BBC Umami — Nataliia Vilkhovyk, 4:19"
+  },
+  "7": {
+    "youtube": "ZOeBTomFWPg",
+    "sourceNote": "KidsEnglish: Focus 3 2.5 Verb patterns, 6:24. Original animation verified visually."
+  },
+  "12": {
+    "youtube": "-p-7sVopByk",
+    "sourceNote": "KidsEnglish: Focus 3, 3.5 Used to and would, 4:20"
+  },
+  "17": {
+    "youtube": "oqP7zlJwVI0",
+    "sourceNote": "Kateryna Balabukha: Focus 3 Unit 4 Future Continuous and Future Perfect, 3:56. Original Focus animation."
+  },
+  "20": {
+    "youtube": "3wex0Gs3yUw",
+    "sourceNote": "English Studio: Focus 3 5.2 Articles, 5:02. Original animation verified visually."
+  },
+  "22": {
+    "youtube": "_12us9v6LVc",
+    "sourceNote": "English Studio: Focus 3 5.5 Non-defining relative clauses, 4:43"
+  },
+  "29": {
+    "youtube": "xgotqbJtJYs",
+    "sourceNote": "English Studio: L3 7.2 / 7.5 Reported Speech, 4:40"
+  },
+  "36": {
+    "youtube": "_ljIApVrXK0",
+    "sourceNote": "English Studio: L3 8.5 Have something done"
+  },
+  "1": {
+    "youtube": "WRTc6fX9DDw",
+    "url": "https://www.youtube.com/watch?v=WRTc6fX9DDw&t=1755s",
+    "startSeconds": 1755,
+    "endSeconds": 1953,
+    "editionNote": "Оригинальный сюжет BBC с Алексом Райли, 29:15–32:33. Монтаж и закадровый текст отличаются от версии учебника; фабрика и этапы обработки джинсов те же.",
+    "worksheetTimings": [
+      {
+        "label": "Exercise 4 · интервью на фабрике",
+        "range": "29:15–31:20"
+      },
+      {
+        "label": "Exercise 6 · этапы обработки",
+        "range": "31:21–32:33"
+      }
+    ],
+    "sourceNote": "BBC Three Secrets of the Superbrands (Fashion). Transcript checked against supplied Teacher’s Book; exact textbook edit not found on YouTube."
+  }
+}

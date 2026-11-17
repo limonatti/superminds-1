@@ -1,0 +1,22 @@
+{
+  "sb": {
+    "name": "focus_second_edition_3_students_book.pdf",
+    "sha256": "20d52b1d6455f1dc329c15b8bd038084c81b7ca5e607a54cc98cb41b7f866b6b",
+    "pdfPages": 159
+  },
+  "wb": {
+    "name": "focus_second_edition_3_workbook.pdf",
+    "sha256": "91a63a10bf061de8e15e3d970131cea85fb632f72dd654edf5c2a0eeabf417ce",
+    "pdfPages": 180
+  },
+  "ws": {
+    "name": "focus_second_edition_3_word_store.pdf",
+    "sha256": "8ea62fc1b52d3452b90c073621f1a80cef4d60756841076629f8f637f7ecbaeb",
+    "pdfPages": 19
+  },
+  "tb": {
+    "name": "focus_second_edition_3_teachers_book.pdf",
+    "sha256": "2bcc3f954760a837297851e8364f3794dc65c67fc68e7ecd6cb2136732512f1c",
+    "pdfPages": 325
+  }
+}

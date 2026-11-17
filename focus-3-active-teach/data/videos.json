@@ -1,0 +1,680 @@
+[
+  {
+    "number": "1",
+    "unit": 1,
+    "title": "Distressing jeans",
+    "category": "BBC",
+    "pages": [
+      4,
+      116
+    ],
+    "provider": "youtube",
+    "youtube": "WRTc6fX9DDw",
+    "url": "https://www.youtube.com/watch?v=WRTc6fX9DDw&t=1755s",
+    "startSeconds": 1755,
+    "endSeconds": 1953,
+    "editionNote": "Оригинальный сюжет BBC с Алексом Райли, 29:15–32:33. Монтаж и закадровый текст отличаются от версии учебника; фабрика и этапы обработки джинсов те же.",
+    "worksheetTimings": [
+      {
+        "label": "Exercise 4 · интервью на фабрике",
+        "range": "29:15–31:20"
+      },
+      {
+        "label": "Exercise 6 · этапы обработки",
+        "range": "31:21–32:33"
+      }
+    ],
+    "sourceNote": "BBC Three Secrets of the Superbrands (Fashion). Transcript checked against supplied Teacher’s Book; exact textbook edit not found on YouTube."
+  },
+  {
+    "number": "2",
+    "unit": 1,
+    "title": "Dynamic and state verbs",
+    "category": "Grammar",
+    "pages": [
+      6
+    ],
+    "provider": "youtube",
+    "youtube": "apssL15W3hs",
+    "url": "https://www.youtube.com/watch?v=apssL15W3hs"
+  },
+  {
+    "number": "3",
+    "unit": 1,
+    "title": "Present Perfect Continuous",
+    "category": "Grammar",
+    "pages": [
+      10
+    ],
+    "provider": "youtube",
+    "youtube": "_sQaUaYrGVo",
+    "url": "https://www.youtube.com/watch?v=_sQaUaYrGVo"
+  },
+  {
+    "number": "4",
+    "unit": 1,
+    "title": "About clothes",
+    "category": "Focus Vlog",
+    "pages": [
+      10,
+      117
+    ],
+    "provider": "youtube",
+    "youtube": "IawtTkuC7ao",
+    "url": "https://www.youtube.com/watch?v=IawtTkuC7ao"
+  },
+  {
+    "number": "5",
+    "unit": 2,
+    "title": "The Brujas",
+    "category": "BBC",
+    "pages": [
+      18,
+      118
+    ],
+    "provider": "youtube",
+    "youtube": "mz46fYG8nlg",
+    "url": "https://www.youtube.com/watch?v=mz46fYG8nlg"
+  },
+  {
+    "number": "6",
+    "unit": 2,
+    "title": "Narrative tenses",
+    "category": "Grammar",
+    "pages": [
+      20
+    ],
+    "provider": "youtube",
+    "youtube": "hCm0y4hiHmw",
+    "url": "https://www.youtube.com/watch?v=hCm0y4hiHmw",
+    "sourceNote": "Pearson official: Focus 3, Grammar animation, Narrative tenses. Canoe storyline verified visually.",
+    "editionNote": "Анимация Pearson. Объяснение преподавателя — отдельный ролик 6T."
+  },
+  {
+    "number": "6T",
+    "unit": 2,
+    "title": "Narrative tenses · Teacher’s comment",
+    "category": "Grammar",
+    "pages": [
+      20
+    ],
+    "provider": "youtube",
+    "youtube": "fWEd3Bnr75s",
+    "url": "https://www.youtube.com/watch?v=fWEd3Bnr75s",
+    "sourceNote": "Pearson official: matching teacher explanation."
+  },
+  {
+    "number": "7",
+    "unit": 2,
+    "title": "Verb patterns",
+    "category": "Grammar",
+    "pages": [
+      24
+    ],
+    "provider": "youtube",
+    "youtube": "ZOeBTomFWPg",
+    "url": "https://www.youtube.com/watch?v=ZOeBTomFWPg",
+    "sourceNote": "KidsEnglish: Focus 3 2.5 Verb patterns, 6:24. Original animation verified visually."
+  },
+  {
+    "number": "8",
+    "unit": 2,
+    "title": "About sport",
+    "category": "Focus Vlog",
+    "pages": [
+      25,
+      119
+    ],
+    "provider": "youtube",
+    "youtube": "dPIfvIIcoQU",
+    "url": "https://www.youtube.com/watch?v=dPIfvIIcoQU"
+  },
+  {
+    "number": "9",
+    "unit": 2,
+    "title": "Asking for and giving an opinion · Scene",
+    "category": "Speaking",
+    "pages": [
+      28
+    ],
+    "provider": "youtube",
+    "youtube": "qQzWkiNDA1g",
+    "url": "https://www.youtube.com/watch?v=qQzWkiNDA1g"
+  },
+  {
+    "number": "9A",
+    "unit": 2,
+    "title": "Asking for and giving an opinion · Person A",
+    "category": "Speaking",
+    "pages": [
+      28
+    ],
+    "provider": "youtube",
+    "youtube": "byIeAJLS8h0",
+    "url": "https://www.youtube.com/watch?v=byIeAJLS8h0"
+  },
+  {
+    "number": "9B",
+    "unit": 2,
+    "title": "Asking for and giving an opinion · Person B",
+    "category": "Speaking",
+    "pages": [
+      28
+    ],
+    "provider": "youtube",
+    "youtube": "tRrpT0-qnGU",
+    "url": "https://www.youtube.com/watch?v=tRrpT0-qnGU"
+  },
+  {
+    "number": "11",
+    "unit": 3,
+    "title": "Present and past speculation",
+    "category": "Grammar",
+    "pages": [
+      34
+    ],
+    "provider": "youtube",
+    "youtube": "6MoBJVy5DOs",
+    "url": "https://www.youtube.com/watch?v=6MoBJVy5DOs",
+    "sourceNote": "Focus 3 2nd edition Unit 3 lesson 3.2 Grammar Present and Past speculation — Nataliia Mirgorod, 4:07"
+  },
+  {
+    "number": "12",
+    "unit": 3,
+    "title": "Used to and would",
+    "category": "Grammar",
+    "pages": [
+      38
+    ],
+    "provider": "youtube",
+    "youtube": "-p-7sVopByk",
+    "url": "https://www.youtube.com/watch?v=-p-7sVopByk",
+    "sourceNote": "KidsEnglish: Focus 3, 3.5 Used to and would, 4:20"
+  },
+  {
+    "number": "13",
+    "unit": 3,
+    "title": "About holidays",
+    "category": "Focus Vlog",
+    "pages": [
+      38,
+      121
+    ],
+    "provider": "youtube",
+    "youtube": "QUYPRqy1ieI",
+    "url": "https://www.youtube.com/watch?v=QUYPRqy1ieI"
+  },
+  {
+    "number": "14",
+    "unit": 3,
+    "title": "Asking for and giving advice · Scene",
+    "category": "Speaking",
+    "pages": [
+      42
+    ],
+    "provider": "youtube",
+    "youtube": "HOWl_mMnLU0",
+    "url": "https://www.youtube.com/watch?v=HOWl_mMnLU0"
+  },
+  {
+    "number": "14A",
+    "unit": 3,
+    "title": "Asking for and giving advice · Person A",
+    "category": "Speaking",
+    "pages": [
+      42
+    ],
+    "provider": "youtube",
+    "youtube": "Y6nFfs6ipRI",
+    "url": "https://www.youtube.com/watch?v=Y6nFfs6ipRI"
+  },
+  {
+    "number": "14B",
+    "unit": 3,
+    "title": "Asking for and giving advice · Person B",
+    "category": "Speaking",
+    "pages": [
+      42
+    ],
+    "provider": "youtube",
+    "youtube": "dScNaiiEJlw",
+    "url": "https://www.youtube.com/watch?v=dScNaiiEJlw"
+  },
+  {
+    "number": "15",
+    "unit": 4,
+    "title": "Umami",
+    "category": "BBC",
+    "pages": [
+      46,
+      122
+    ],
+    "provider": "youtube",
+    "youtube": "89YcZtMrS0Q",
+    "url": "https://www.youtube.com/watch?v=89YcZtMrS0Q",
+    "sourceNote": "Focus 3 BBC Umami — Nataliia Vilkhovyk, 4:19"
+  },
+  {
+    "number": "16",
+    "unit": 4,
+    "title": "About food",
+    "category": "Focus Vlog",
+    "pages": [
+      48,
+      123
+    ],
+    "provider": "youtube",
+    "youtube": "LlCv3H3KlqM",
+    "url": "https://www.youtube.com/watch?v=LlCv3H3KlqM"
+  },
+  {
+    "number": "17",
+    "unit": 4,
+    "title": "Future Continuous and Future Perfect",
+    "category": "Grammar",
+    "pages": [
+      52
+    ],
+    "provider": "youtube",
+    "youtube": "oqP7zlJwVI0",
+    "url": "https://www.youtube.com/watch?v=oqP7zlJwVI0",
+    "sourceNote": "Kateryna Balabukha: Focus 3 Unit 4 Future Continuous and Future Perfect, 3:56. Original Focus animation."
+  },
+  {
+    "number": "18",
+    "unit": 4,
+    "title": "In a restaurant · Scene",
+    "category": "Speaking",
+    "pages": [
+      56
+    ],
+    "provider": "youtube",
+    "youtube": "-zOPuNrjlHM",
+    "url": "https://www.youtube.com/watch?v=-zOPuNrjlHM"
+  },
+  {
+    "number": "18A",
+    "unit": 4,
+    "title": "In a restaurant · Person A",
+    "category": "Speaking",
+    "pages": [
+      56
+    ],
+    "provider": "youtube",
+    "youtube": "-IWx6MNvk74",
+    "url": "https://www.youtube.com/watch?v=-IWx6MNvk74"
+  },
+  {
+    "number": "18B",
+    "unit": 4,
+    "title": "In a restaurant · Person B",
+    "category": "Speaking",
+    "pages": [
+      56
+    ],
+    "provider": "youtube",
+    "youtube": "bv2JGeXnGds",
+    "url": "https://www.youtube.com/watch?v=bv2JGeXnGds"
+  },
+  {
+    "number": "19",
+    "unit": 5,
+    "title": "Chameleons",
+    "category": "BBC",
+    "pages": [
+      60,
+      124
+    ],
+    "provider": "youtube",
+    "youtube": "YC5m4AXVCkI",
+    "url": "https://www.youtube.com/watch?v=YC5m4AXVCkI",
+    "sourceNote": "Focus3 2E Unit5 Lesson1 Video 19 BBC — Лилия Бирецкая"
+  },
+  {
+    "number": "20",
+    "unit": 5,
+    "title": "Articles",
+    "category": "Grammar",
+    "pages": [
+      62
+    ],
+    "provider": "youtube",
+    "youtube": "3wex0Gs3yUw",
+    "url": "https://www.youtube.com/watch?v=3wex0Gs3yUw",
+    "sourceNote": "English Studio: Focus 3 5.2 Articles, 5:02. Original animation verified visually."
+  },
+  {
+    "number": "21",
+    "unit": 5,
+    "title": "About the environment",
+    "category": "Focus Vlog",
+    "pages": [
+      62,
+      125
+    ],
+    "provider": "youtube",
+    "youtube": "UvpN-9jkKuQ",
+    "url": "https://www.youtube.com/watch?v=UvpN-9jkKuQ"
+  },
+  {
+    "number": "22",
+    "unit": 5,
+    "title": "Non-defining relative clauses",
+    "category": "Grammar",
+    "pages": [
+      66
+    ],
+    "provider": "youtube",
+    "youtube": "_12us9v6LVc",
+    "url": "https://www.youtube.com/watch?v=_12us9v6LVc",
+    "sourceNote": "English Studio: Focus 3 5.5 Non-defining relative clauses, 4:43"
+  },
+  {
+    "number": "23",
+    "unit": 5,
+    "title": "Describing and contrasting pictures · Scene",
+    "category": "Speaking",
+    "pages": [
+      70
+    ],
+    "provider": "youtube",
+    "youtube": "eUX2tWb5JnE",
+    "url": "https://www.youtube.com/watch?v=eUX2tWb5JnE"
+  },
+  {
+    "number": "23A",
+    "unit": 5,
+    "title": "Describing and contrasting pictures · Person A",
+    "category": "Speaking",
+    "pages": [
+      70
+    ],
+    "provider": "youtube",
+    "youtube": "uh-cadq64YY",
+    "url": "https://www.youtube.com/watch?v=uh-cadq64YY"
+  },
+  {
+    "number": "23B",
+    "unit": 5,
+    "title": "Describing and contrasting pictures · Person B",
+    "category": "Speaking",
+    "pages": [
+      70
+    ],
+    "provider": "youtube",
+    "youtube": "F4ouiIVHLfE",
+    "url": "https://www.youtube.com/watch?v=F4ouiIVHLfE"
+  },
+  {
+    "number": "25",
+    "unit": 6,
+    "title": "Second Conditional; wish / if only",
+    "category": "Grammar",
+    "pages": [
+      76
+    ],
+    "provider": "youtube",
+    "youtube": "ZYrocyEeCoU",
+    "url": "https://www.youtube.com/watch?v=ZYrocyEeCoU"
+  },
+  {
+    "number": "26",
+    "unit": 6,
+    "title": "Third Conditional",
+    "category": "Grammar",
+    "pages": [
+      80
+    ],
+    "provider": "youtube",
+    "youtube": "KyF1Awxj978",
+    "url": "https://www.youtube.com/watch?v=KyF1Awxj978"
+  },
+  {
+    "number": "27",
+    "unit": 6,
+    "title": "About health and sleep",
+    "category": "Focus Vlog",
+    "pages": [
+      81,
+      127
+    ],
+    "provider": "youtube",
+    "youtube": "4V_zDVmWfRI",
+    "url": "https://www.youtube.com/watch?v=4V_zDVmWfRI"
+  },
+  {
+    "number": "28",
+    "unit": 7,
+    "title": "Shakespeare’s avatars",
+    "category": "BBC",
+    "pages": [
+      88,
+      128
+    ],
+    "provider": "youtube",
+    "youtube": "yIWejFgEqBc",
+    "url": "https://www.youtube.com/watch?v=yIWejFgEqBc"
+  },
+  {
+    "number": "29",
+    "unit": 7,
+    "title": "Reported Speech",
+    "category": "Grammar",
+    "pages": [
+      90,
+      94
+    ],
+    "provider": "youtube",
+    "youtube": "xgotqbJtJYs",
+    "url": "https://www.youtube.com/watch?v=xgotqbJtJYs",
+    "sourceNote": "English Studio: L3 7.2 / 7.5 Reported Speech, 4:40"
+  },
+  {
+    "number": "30",
+    "unit": 7,
+    "title": "About television",
+    "category": "Focus Vlog",
+    "pages": [
+      95,
+      129
+    ],
+    "provider": "youtube",
+    "youtube": "UbhFRlnVjYk",
+    "url": "https://www.youtube.com/watch?v=UbhFRlnVjYk"
+  },
+  {
+    "number": "31",
+    "unit": 7,
+    "title": "Asking for permission: scene 1 · Scene",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "JnmzWaJ7zC0",
+    "url": "https://www.youtube.com/watch?v=JnmzWaJ7zC0"
+  },
+  {
+    "number": "31A",
+    "unit": 7,
+    "title": "Asking for permission: scene 1 · Person A",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "XDdmGF9uyNs",
+    "url": "https://www.youtube.com/watch?v=XDdmGF9uyNs"
+  },
+  {
+    "number": "31B",
+    "unit": 7,
+    "title": "Asking for permission: scene 1 · Person B",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "kIX7Hc8cuhg",
+    "url": "https://www.youtube.com/watch?v=kIX7Hc8cuhg"
+  },
+  {
+    "number": "32",
+    "unit": 7,
+    "title": "Asking for permission: scene 2 · Scene",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "aCg74mStcB8",
+    "url": "https://www.youtube.com/watch?v=aCg74mStcB8"
+  },
+  {
+    "number": "32A",
+    "unit": 7,
+    "title": "Asking for permission: scene 2 · Person A",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "aGrwZfRs2os",
+    "url": "https://www.youtube.com/watch?v=aGrwZfRs2os"
+  },
+  {
+    "number": "32B",
+    "unit": 7,
+    "title": "Asking for permission: scene 2 · Person B",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "n4D0OVSF5NQ",
+    "url": "https://www.youtube.com/watch?v=n4D0OVSF5NQ"
+  },
+  {
+    "number": "33",
+    "unit": 7,
+    "title": "Asking for permission: scene 3 · Scene",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "VBIZZM7RAXE",
+    "url": "https://www.youtube.com/watch?v=VBIZZM7RAXE"
+  },
+  {
+    "number": "33A",
+    "unit": 7,
+    "title": "Asking for permission: scene 3 · Person A",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "YP3t6f2qP18",
+    "url": "https://www.youtube.com/watch?v=YP3t6f2qP18"
+  },
+  {
+    "number": "33B",
+    "unit": 7,
+    "title": "Asking for permission: scene 3 · Person B",
+    "category": "Speaking",
+    "pages": [
+      98
+    ],
+    "provider": "youtube",
+    "youtube": "SP0DyfB-dwo",
+    "url": "https://www.youtube.com/watch?v=SP0DyfB-dwo"
+  },
+  {
+    "number": "34",
+    "unit": 8,
+    "title": "Coffee stalls",
+    "category": "BBC",
+    "pages": [
+      102,
+      130
+    ],
+    "provider": "youtube",
+    "youtube": "GNEtp6bIbLc",
+    "url": "https://www.youtube.com/watch?v=GNEtp6bIbLc"
+  },
+  {
+    "number": "35",
+    "unit": 8,
+    "title": "The Passive",
+    "category": "Grammar",
+    "pages": [
+      104
+    ],
+    "provider": "youtube",
+    "youtube": "JQFib8bVCNk",
+    "url": "https://www.youtube.com/watch?v=JQFib8bVCNk"
+  },
+  {
+    "number": "36",
+    "unit": 8,
+    "title": "Have something done",
+    "category": "Grammar",
+    "pages": [
+      108
+    ],
+    "provider": "youtube",
+    "youtube": "_ljIApVrXK0",
+    "url": "https://www.youtube.com/watch?v=_ljIApVrXK0",
+    "sourceNote": "English Studio: L3 8.5 Have something done"
+  },
+  {
+    "number": "37",
+    "unit": 8,
+    "title": "About social media",
+    "category": "Focus Vlog",
+    "pages": [
+      109,
+      131
+    ],
+    "provider": "youtube",
+    "youtube": "_8Qr79Zwe8s",
+    "url": "https://www.youtube.com/watch?v=_8Qr79Zwe8s"
+  },
+  {
+    "number": "38",
+    "unit": 8,
+    "title": "Advantages and disadvantages · Scene",
+    "category": "Speaking",
+    "pages": [
+      112
+    ],
+    "provider": "youtube",
+    "youtube": "xalbOzqd8as",
+    "url": "https://www.youtube.com/watch?v=xalbOzqd8as"
+  },
+  {
+    "number": "38A",
+    "unit": 8,
+    "title": "Advantages and disadvantages · Person A",
+    "category": "Speaking",
+    "pages": [
+      112
+    ],
+    "provider": "youtube",
+    "youtube": "aseSVpLXbGY",
+    "url": "https://www.youtube.com/watch?v=aseSVpLXbGY"
+  },
+  {
+    "number": "38B",
+    "unit": 8,
+    "title": "Advantages and disadvantages · Person B",
+    "category": "Speaking",
+    "pages": [
+      112
+    ],
+    "provider": "youtube",
+    "youtube": "EYTEaCiZkaI",
+    "url": "https://www.youtube.com/watch?v=EYTEaCiZkaI"
+  }
+]

@@ -1,0 +1,3265 @@
+[
+  {
+    "topic": "PEOPLE",
+    "number": "1",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 hair straightener",
+      "2 beanie",
+      "3 faded jeans",
+      "4 cotton",
+      "5 scruffy",
+      "6 leather",
+      "7 unisex",
+      "8 fleece"
+    ],
+    "fields": {
+      "1": "hair straightener",
+      "2": "beanie",
+      "3": "faded jeans",
+      "4": "cotton",
+      "5": "scruffy",
+      "6": "leather",
+      "7": "unisex",
+      "8": "fleece"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "PEOPLE",
+    "number": "2",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 D",
+      "2 A",
+      "3 B",
+      "4 C",
+      "5 A",
+      "6 D"
+    ],
+    "fields": {
+      "1": "D",
+      "2": "A",
+      "3": "B",
+      "4": "C",
+      "5": "A",
+      "6": "D"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "HOME",
+    "number": "1",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 neighbourhood",
+      "2 wardrobes",
+      "3 creak",
+      "4 blinds",
+      "5 curtains",
+      "6 locks",
+      "7 burglar alarm",
+      "8 security firm"
+    ],
+    "fields": {
+      "1": "neighbourhood",
+      "2": "wardrobes",
+      "3": "creak",
+      "4": "blinds",
+      "5": "curtains",
+      "6": "locks",
+      "7": "burglar alarm",
+      "8": "security firm"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SCHOOL",
+    "number": "1",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 D",
+      "2 B",
+      "3 D",
+      "4 C",
+      "5 A"
+    ],
+    "fields": {
+      "1": "D",
+      "2": "B",
+      "3": "D",
+      "4": "C",
+      "5": "A"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SCHOOL",
+    "number": "2",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 express",
+      "2 distract",
+      "3 hand over",
+      "4 prepare",
+      "5 drop out of",
+      "6 uniform"
+    ],
+    "fields": {
+      "1": "express",
+      "2": "distract",
+      "3": "hand over",
+      "4": "prepare",
+      "5": "drop out of",
+      "6": "uniform"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "WORK",
+    "number": "1",
+    "sourcePdfPage": 188,
+    "lines": [
+      "1 tailor",
+      "2 model",
+      "3 tour leader",
+      "4 surgeon",
+      "5 detective",
+      "6 judge",
+      "7 politician",
+      "8 chef/cook",
+      "9 nutritionist",
+      "10 presenter",
+      "11 carpenter"
+    ],
+    "fields": {
+      "1": "tailor",
+      "2": "model",
+      "3": "tour leader",
+      "4": "surgeon",
+      "5": "detective",
+      "6": "judge",
+      "7": "politician",
+      "8": "chef/cook",
+      "9": "nutritionist",
+      "10": "presenter",
+      "11": "carpenter"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "WORK",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 d",
+      "2 e",
+      "3 a",
+      "4 f",
+      "5 b",
+      "6 c"
+    ],
+    "fields": {
+      "1": "d",
+      "2": "e",
+      "3": "a",
+      "4": "f",
+      "5": "b",
+      "6": "c"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "FAMILY AND SOCIAL LIFE",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 B",
+      "2 C",
+      "3 D",
+      "4 A",
+      "5 D"
+    ],
+    "fields": {
+      "1": "B",
+      "2": "C",
+      "3": "D",
+      "4": "A",
+      "5": "D"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "FAMILY AND SOCIAL LIFE",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 fallen out",
+      "2 call on",
+      "3 hang out",
+      "4 getting on",
+      "5 rely on",
+      "6 to let down"
+    ],
+    "fields": {
+      "1": "fallen out",
+      "2": "call on",
+      "3": "hang out",
+      "4": "getting on",
+      "5": "rely on",
+      "6": "to let down"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "FOOD",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 salads/sandwiches",
+      "2 delicious",
+      "3 dietary",
+      "4 meals",
+      "5 low-calorie",
+      "6 vegetable",
+      "7 curry",
+      "8 sauces"
+    ],
+    "fields": {
+      "1": "salads/sandwiches",
+      "2": "delicious",
+      "3": "dietary",
+      "4": "meals",
+      "5": "low-calorie",
+      "6": "vegetable",
+      "7": "curry",
+      "8": "sauces"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "FOOD",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 D",
+      "2 A",
+      "3 C",
+      "4 B",
+      "5 D",
+      "6 C",
+      "7 D",
+      "8 A"
+    ],
+    "fields": {
+      "1": "D",
+      "2": "A",
+      "3": "C",
+      "4": "B",
+      "5": "D",
+      "6": "C",
+      "7": "D",
+      "8": "A"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SHOPPING AND SERVICES",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 advertising",
+      "2 claim",
+      "3 queues",
+      "4 try on",
+      "5 sale",
+      "6 save",
+      "7 second-hand",
+      "8 affordable"
+    ],
+    "fields": {
+      "1": "advertising",
+      "2": "claim",
+      "3": "queues",
+      "4": "try on",
+      "5": "sale",
+      "6": "save",
+      "7": "second-hand",
+      "8": "affordable"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "TRAVELLING AND TOURISM",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 seatbelt",
+      "2 journey",
+      "3 flight",
+      "4 the tent",
+      "5 security",
+      "6 passengers"
+    ],
+    "fields": {
+      "1": "seatbelt",
+      "2": "journey",
+      "3": "flight",
+      "4": "the tent",
+      "5": "security",
+      "6": "passengers"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "TRAVELLING AND TOURISM",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 F",
+      "2 T",
+      "3 F",
+      "4 F",
+      "5 F",
+      "6 T",
+      "7 T",
+      "8 F",
+      "9 F",
+      "10 T",
+      "11 T",
+      "12 T"
+    ],
+    "fields": {
+      "1": "F",
+      "2": "T",
+      "3": "F",
+      "4": "F",
+      "5": "F",
+      "6": "T",
+      "7": "T",
+      "8": "F",
+      "9": "F",
+      "10": "T",
+      "11": "T",
+      "12": "T"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "CULTURE",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 B",
+      "2 D",
+      "3 B",
+      "4 C",
+      "5 A",
+      "6 D"
+    ],
+    "fields": {
+      "1": "B",
+      "2": "D",
+      "3": "B",
+      "4": "C",
+      "5": "A",
+      "6": "D"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "CULTURE",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 performer",
+      "2 competition",
+      "3 presenter",
+      "4 entertainment",
+      "5 hidden",
+      "6 recording",
+      "7 adaptation",
+      "8 accompaniment",
+      "9 sensuous",
+      "10 imagination"
+    ],
+    "fields": {
+      "1": "performer",
+      "2": "competition",
+      "3": "presenter",
+      "4": "entertainment",
+      "5": "hidden",
+      "6": "recording",
+      "7": "adaptation",
+      "8": "accompaniment",
+      "9": "sensuous",
+      "10": "imagination"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SPORT",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 D",
+      "2 A",
+      "3 C",
+      "4 B",
+      "5 C",
+      "6 B"
+    ],
+    "fields": {
+      "1": "D",
+      "2": "A",
+      "3": "C",
+      "4": "B",
+      "5": "C",
+      "6": "B"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SPORT",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 opponent",
+      "2 motor racing",
+      "3 helmet",
+      "4 kicking",
+      "5 pitch",
+      "6 golf",
+      "7 extreme",
+      "8 coach"
+    ],
+    "fields": {
+      "1": "opponent",
+      "2": "motor racing",
+      "3": "helmet",
+      "4": "kicking",
+      "5": "pitch",
+      "6": "golf",
+      "7": "extreme",
+      "8": "coach"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "HEALTH",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 pain",
+      "2 feel dizzy",
+      "3 symptoms",
+      "4 eye drops",
+      "5 feel sick",
+      "6 fall",
+      "7 nosebleed",
+      "8 count sheep",
+      "9 insomnia",
+      "10 injured"
+    ],
+    "fields": {
+      "1": "pain",
+      "2": "feel dizzy",
+      "3": "symptoms",
+      "4": "eye drops",
+      "5": "feel sick",
+      "6": "fall",
+      "7": "nosebleed",
+      "8": "count sheep",
+      "9": "insomnia",
+      "10": "injured"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "HEALTH",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 snore",
+      "2 infection",
+      "3 plaster",
+      "4 toe",
+      "5 sunburn",
+      "6 wrist",
+      "7 dislocate",
+      "8 weight"
+    ],
+    "fields": {
+      "1": "snore",
+      "2": "infection",
+      "3": "plaster",
+      "4": "toe",
+      "5": "sunburn",
+      "6": "wrist",
+      "7": "dislocate",
+      "8": "weight"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SCIENCE AND TECHNOLOGY",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 password",
+      "2 upload",
+      "3 social networking site",
+      "4 gadget",
+      "5 online purchases",
+      "6 post",
+      "7 anti-virus software",
+      "8 link",
+      "9 stream",
+      "10 go viral"
+    ],
+    "fields": {
+      "1": "password",
+      "2": "upload",
+      "3": "social networking site",
+      "4": "gadget",
+      "5": "online purchases",
+      "6": "post",
+      "7": "anti-virus software",
+      "8": "link",
+      "9": "stream",
+      "10": "go viral"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "SCIENCE AND TECHNOLOGY",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 cutting-edge",
+      "2 electricity",
+      "3 geniuses",
+      "4 innovation",
+      "5 multi-purpose",
+      "6 predict",
+      "7 provide",
+      "8 access"
+    ],
+    "fields": {
+      "1": "cutting-edge",
+      "2": "electricity",
+      "3": "geniuses",
+      "4": "innovation",
+      "5": "multi-purpose",
+      "6": "predict",
+      "7": "provide",
+      "8": "access"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "THE NATURAL WORLD",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 volcanic",
+      "2 pollution",
+      "3 recycling",
+      "4 running",
+      "5 strengthen",
+      "6 renewable",
+      "7 environmental",
+      "8 safety",
+      "9 winding",
+      "10 consumption"
+    ],
+    "fields": {
+      "1": "volcanic",
+      "2": "pollution",
+      "3": "recycling",
+      "4": "running",
+      "5": "strengthen",
+      "6": "renewable",
+      "7": "environmental",
+      "8": "safety",
+      "9": "winding",
+      "10": "consumption"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "THE NATURAL WORLD",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 change",
+      "2 hurricanes",
+      "3 evacuated",
+      "4 coast",
+      "5 islands",
+      "6 species",
+      "7 endangered",
+      "8 warming",
+      "9 inhabitants",
+      "10 energy",
+      "11 whales",
+      "12 dolphins"
+    ],
+    "fields": {
+      "1": "change",
+      "2": "hurricanes",
+      "3": "evacuated",
+      "4": "coast",
+      "5": "islands",
+      "6": "species",
+      "7": "endangered",
+      "8": "warming",
+      "9": "inhabitants",
+      "10": "energy",
+      "11": "whales",
+      "12": "dolphins"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "STATE AND SOCIETY",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 rebellion",
+      "2 population",
+      "3 majority",
+      "4 donate",
+      "5 participant",
+      "6 voluntary work",
+      "7 citizen",
+      "8 fake",
+      "9 beggar",
+      "10 elect"
+    ],
+    "fields": {
+      "1": "rebellion",
+      "2": "population",
+      "3": "majority",
+      "4": "donate",
+      "5": "participant",
+      "6": "voluntary work",
+      "7": "citizen",
+      "8": "fake",
+      "9": "beggar",
+      "10": "elect"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "STATE AND SOCIETY",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 C",
+      "2 C",
+      "3 A",
+      "4 A",
+      "5 D",
+      "6 D"
+    ],
+    "fields": {
+      "1": "C",
+      "2": "C",
+      "3": "A",
+      "4": "A",
+      "5": "D",
+      "6": "D"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "STATE AND SOCIETY",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 thief",
+      "2 burgled",
+      "3 burglary",
+      "4 criminal",
+      "5 escape",
+      "6 arrest",
+      "7 offender"
+    ],
+    "fields": {
+      "1": "thief",
+      "2": "burgled",
+      "3": "burglary",
+      "4": "criminal",
+      "5": "escape",
+      "6": "arrest",
+      "7": "offender"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "CULTURE OF ENGLISH- SPEAKING COUNTRIES",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 B",
+      "2 B",
+      "3 B",
+      "4 D",
+      "5 A"
+    ],
+    "fields": {
+      "1": "B",
+      "2": "B",
+      "3": "B",
+      "4": "D",
+      "5": "A"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "CULTURE OF ENGLISH- SPEAKING COUNTRIES",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 Coachella",
+      "2 Fisherman’s Wharf",
+      "3 MasterChef",
+      "4 Lord Byron",
+      "5 the Great Barrier Reef"
+    ],
+    "fields": {
+      "1": "Coachella",
+      "2": "Fisherman’s Wharf",
+      "3": "MasterChef",
+      "4": "Lord Byron",
+      "5": "the Great Barrier Reef"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present tenses – review",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 hasn’t cleaned",
+      "2 orders",
+      "3 are you waiting",
+      "4 ‘ve never lived",
+      "5 Do you really enjoy"
+    ],
+    "fields": {
+      "1": "hasn’t cleaned",
+      "2": "orders",
+      "3": "are you waiting",
+      "4": "‘ve never lived",
+      "5": "Do you really enjoy"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present tenses – review",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 hate",
+      "2 ‘ve had",
+      "3 ‘ve met",
+      "4 are packing",
+      "5 makes",
+      "6 ‘m going"
+    ],
+    "fields": {
+      "1": "hate",
+      "2": "‘ve had",
+      "3": "‘ve met",
+      "4": "are packing",
+      "5": "makes",
+      "6": "‘m going"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present tenses – review",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 At the moment Kate is",
+      "looking for a part-time job.",
+      "2 How often do you update",
+      "your profile?",
+      "3 Why is Paul looking after his",
+      "friend’s dog today?",
+      "4 Who has seen this thriller",
+      "before?",
+      "5 Martha hasn’t done any",
+      "sports since January."
+    ],
+    "fields": {
+      "1": "At the moment Kate is looking for a part-time job.",
+      "2": "How often do you update your profile?",
+      "3": "Why is Paul looking after his friend’s dog today?",
+      "4": "Who has seen this thriller before?",
+      "5": "Martha hasn’t done any sports since January."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present tenses – review",
+    "number": "4",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 lives",
+      "2 does",
+      "3 have you been",
+      "4 Has/Have your family ever",
+      "moved",
+      "5 does it usually take",
+      "6 are you learning"
+    ],
+    "fields": {
+      "1": "lives",
+      "2": "does",
+      "3": "have you been",
+      "4": "Has/Have your family ever moved",
+      "5": "does it usually take",
+      "6": "are you learning"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 some",
+      "2 many",
+      "3 few",
+      "4 any",
+      "5 much"
+    ],
+    "fields": {
+      "1": "some",
+      "2": "many",
+      "3": "few",
+      "4": "any",
+      "5": "much"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 much",
+      "2 some",
+      "3 lot",
+      "4 little",
+      "5 Few",
+      "6 little",
+      "7 many",
+      "8 any"
+    ],
+    "fields": {
+      "1": "much",
+      "2": "some",
+      "3": "lot",
+      "4": "little",
+      "5": "Few",
+      "6": "little",
+      "7": "many",
+      "8": "any"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "Example answers:",
+      "1 a lot of/a little/little/some",
+      "2 a lot of/some/few/a few",
+      "3 a lot of/a few/some",
+      "4 any/much",
+      "5 a lot of/a little/little/some",
+      "6 a lot of/a few/few/some",
+      "7 any/many/a lot of",
+      "8 a lot of/a little/little/some"
+    ],
+    "fields": {
+      "1": "a lot of/a little/little/some",
+      "2": "a lot of/some/few/a few",
+      "3": "a lot of/a few/some",
+      "4": "any/much",
+      "5": "a lot of/a little/little/some",
+      "6": "a lot of/a few/few/some",
+      "7": "any/many/a lot of",
+      "8": "a lot of/a little/little/some"
+    },
+    "ambiguous": [
+      "Example answers:"
+    ]
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "4",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 some",
+      "2 any",
+      "3 many",
+      "4 many",
+      "5 few"
+    ],
+    "fields": {
+      "1": "some",
+      "2": "any",
+      "3": "many",
+      "4": "many",
+      "5": "few"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "5",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 I don’t eat much meat.",
+      "2 There aren’t any good",
+      "restaurants near my house.",
+      "3 I drink very little cola.",
+      "4 My mother doesn’t bake",
+      "many cakes.",
+      "5 I didn’t have any cereal for",
+      "breakfast.",
+      "6 I used to eat very few",
+      "vegetables.",
+      "7 I don’t do much cooking at",
+      "home."
+    ],
+    "fields": {
+      "1": "I don’t eat much meat.",
+      "2": "There aren’t any good restaurants near my house.",
+      "3": "I drink very little cola.",
+      "4": "My mother doesn’t bake many cakes.",
+      "5": "I didn’t have any cereal for breakfast.",
+      "6": "I used to eat very few vegetables.",
+      "7": "I don’t do much cooking at home."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Quantifiers",
+    "number": "6",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 many",
+      "2 a few",
+      "3 few",
+      "4 a little/some",
+      "5 much",
+      "6 any",
+      "7 little"
+    ],
+    "fields": {
+      "1": "many",
+      "2": "a few",
+      "3": "few",
+      "4": "a little/some",
+      "5": "much",
+      "6": "any",
+      "7": "little"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present Perfect and Past Simple",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 have never paid",
+      "2 Did you look, did",
+      "3 Have you decided, haven’t",
+      "4 was she, didn’t see"
+    ],
+    "fields": {
+      "1": "have never paid",
+      "2": "Did you look, did",
+      "3": "Have you decided, haven’t",
+      "4": "was she, didn’t see"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present Perfect and Past Simple",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 haven’t finished yet",
+      "2 have you ever seen",
+      "3 saw",
+      "4 was",
+      "5 haven’t seen",
+      "6 ‘ve watched",
+      "7 watched",
+      "8 Have you asked",
+      "9 ‘ve already asked",
+      "10 spoke",
+      "11 haven’t chosen"
+    ],
+    "fields": {
+      "1": "haven’t finished yet",
+      "2": "have you ever seen",
+      "3": "saw",
+      "4": "was",
+      "5": "haven’t seen",
+      "6": "‘ve watched",
+      "7": "watched",
+      "8": "Have you asked",
+      "9": "‘ve already asked",
+      "10": "spoke",
+      "11": "haven’t chosen"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present Perfect and Past Simple",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 I learnt to play the guitar",
+      "three years ago.",
+      "2 Have you bought a new suit",
+      "yet?",
+      "3 Rob had his first driving",
+      "lesson yesterday.",
+      "4 When did Helen write this",
+      "song?",
+      "5 Tom hasn’t opened a bank",
+      "account yet."
+    ],
+    "fields": {
+      "1": "I learnt to play the guitar three years ago.",
+      "2": "Have you bought a new suit yet?",
+      "3": "Rob had his first driving lesson yesterday.",
+      "4": "When did Helen write this song?",
+      "5": "Tom hasn’t opened a bank account yet."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present Perfect and Past Simple",
+    "number": "4",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 saw",
+      "2 needed",
+      "3 contacted",
+      "4 offered",
+      "5 ‘s been",
+      "6 Have (you) met",
+      "7 has just entered",
+      "8 ‘ve never heard"
+    ],
+    "fields": {
+      "1": "saw",
+      "2": "needed",
+      "3": "contacted",
+      "4": "offered",
+      "5": "‘s been",
+      "6": "Have (you) met",
+      "7": "has just entered",
+      "8": "‘ve never heard"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Present Perfect and Past Simple",
+    "number": "5",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 has owned this vintage",
+      "cupboard since",
+      "2 got married twenty years",
+      "ago",
+      "3 haven’t been to the seaside",
+      "for",
+      "4 went on a diet two weeks",
+      "ago",
+      "5 has known Greg since",
+      "6 lost his job a few months ago",
+      "7 has (already) read"
+    ],
+    "fields": {
+      "1": "has owned this vintage cupboard since",
+      "2": "got married twenty years ago",
+      "3": "haven’t been to the seaside for",
+      "4": "went on a diet two weeks ago",
+      "5": "has known Greg since",
+      "6": "lost his job a few months ago",
+      "7": "has (already) read"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Comparative and superlative adjectives • too and enough",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 too expensive",
+      "2 too scared",
+      "3 not big enough",
+      "4 too mean",
+      "5 too dangerous"
+    ],
+    "fields": {
+      "1": "too expensive",
+      "2": "too scared",
+      "3": "not big enough",
+      "4": "too mean",
+      "5": "too dangerous"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Comparative and superlative adjectives • too and enough",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 more",
+      "2 worse",
+      "3 most",
+      "4 than",
+      "5 the",
+      "6 as"
+    ],
+    "fields": {
+      "1": "more",
+      "2": "worse",
+      "3": "most",
+      "4": "than",
+      "5": "the",
+      "6": "as"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Comparative and superlative adjectives • too and enough",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 than",
+      "2 richer",
+      "3 most",
+      "4 as",
+      "5 enough",
+      "6 more",
+      "7 too",
+      "8 than",
+      "9 the",
+      "10 than",
+      "11 the",
+      "12 as"
+    ],
+    "fields": {
+      "1": "than",
+      "2": "richer",
+      "3": "most",
+      "4": "as",
+      "5": "enough",
+      "6": "more",
+      "7": "too",
+      "8": "than",
+      "9": "the",
+      "10": "than",
+      "11": "the",
+      "12": "as"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Comparative and superlative adjectives • too and enough",
+    "number": "4",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 not tall enough",
+      "2 drier",
+      "3 weaker",
+      "4 worse",
+      "5 too small",
+      "6 not patient enough"
+    ],
+    "fields": {
+      "1": "not tall enough",
+      "2": "drier",
+      "3": "weaker",
+      "4": "worse",
+      "5": "too small",
+      "6": "not patient enough"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Comparative and superlative adjectives • too and enough",
+    "number": "5",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 best",
+      "2 more creative",
+      "3 the most amazing",
+      "4 further",
+      "5 more authentic",
+      "6 more popular"
+    ],
+    "fields": {
+      "1": "best",
+      "2": "more creative",
+      "3": "the most amazing",
+      "4": "further",
+      "5": "more authentic",
+      "6": "more popular"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "1",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 isn’t going to rain",
+      "2 ‘s going to have",
+      "3 ‘re taking",
+      "4 ‘ll be",
+      "5 ‘re announcing",
+      "6 ‘ll laugh"
+    ],
+    "fields": {
+      "1": "isn’t going to rain",
+      "2": "‘s going to have",
+      "3": "‘re taking",
+      "4": "‘ll be",
+      "5": "‘re announcing",
+      "6": "‘ll laugh"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "2",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 are playing",
+      "2 ‘s going to snow",
+      "3 ‘ll probably watch",
+      "4 is having",
+      "5 will win",
+      "6 ‘m not going to get married"
+    ],
+    "fields": {
+      "1": "are playing",
+      "2": "‘s going to snow",
+      "3": "‘ll probably watch",
+      "4": "is having",
+      "5": "will win",
+      "6": "‘m not going to get married"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "3",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 I will help you solve this",
+      "problem.",
+      "2 We are not doing our",
+      "homework on Saturday.",
+      "3 When are you going to do",
+      "the shopping?",
+      "4 My best friend is not moving",
+      "house next week.",
+      "5 My mum will probably take",
+      "a few days off.",
+      "6 Are the Smiths driving to the",
+      "mountains tomorrow",
+      "morning?"
+    ],
+    "fields": {
+      "1": "I will help you solve this problem.",
+      "2": "We are not doing our homework on Saturday.",
+      "3": "When are you going to do the shopping?",
+      "4": "My best friend is not moving house next week.",
+      "5": "My mum will probably take a few days off.",
+      "6": "Are the Smiths driving to the mountains tomorrow morning?"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "4",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 are",
+      "2 ‘m",
+      "3 ‘ll",
+      "4 are",
+      "5 ‘ll"
+    ],
+    "fields": {
+      "1": "are",
+      "2": "‘m",
+      "3": "‘ll",
+      "4": "are",
+      "5": "‘ll"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "5",
+    "sourcePdfPage": 189,
+    "lines": [
+      "1 ‘ll just check",
+      "2 ‘ll pay",
+      "3 ‘re going to do",
+      "4 ‘m meeting",
+      "5 ‘re going to play",
+      "6 will rain"
+    ],
+    "fields": {
+      "1": "‘ll just check",
+      "2": "‘ll pay",
+      "3": "‘re going to do",
+      "4": "‘m meeting",
+      "5": "‘re going to play",
+      "6": "will rain"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "6",
+    "sourcePdfPage": 190,
+    "lines": [
+      "Example answers:",
+      "1 I‘m meeting my grandma.",
+      "2 You’re going to be late.",
+      "3 I promise I won’t tell anyone.",
+      "4 I’ll help you look for it.",
+      "5 You’re going to break it."
+    ],
+    "fields": {
+      "1": "I‘m meeting my grandma.",
+      "2": "You’re going to be late.",
+      "3": "I promise I won’t tell anyone.",
+      "4": "I’ll help you look for it.",
+      "5": "You’re going to break it."
+    },
+    "ambiguous": [
+      "Example answers:"
+    ]
+  },
+  {
+    "topic": "Future forms",
+    "number": "7",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 Will you answer it, please?",
+      "2 The students are sitting their",
+      "final exam tomorrow at 9",
+      "a.m.",
+      "3 I’ll order some new books",
+      "online tonight if I have time.",
+      "4 Jane and I are meeting at 7",
+      "p.m. to talk about our",
+      "Science project.",
+      "5 We’re going to be late for",
+      "the appointment, I’m afraid."
+    ],
+    "fields": {
+      "1": "Will you answer it, please?",
+      "2": "The students are sitting their final exam tomorrow at 9 a.m.",
+      "3": "I’ll order some new books online tonight if I have time.",
+      "4": "Jane and I are meeting at 7 p.m. to talk about our Science project.",
+      "5": "We’re going to be late for the appointment, I’m afraid."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Future forms",
+    "number": "8",
+    "sourcePdfPage": 190,
+    "lines": [
+      "Example answers:",
+      "1 will know my exam results",
+      "2 am having my first job",
+      "interview",
+      "3 will have trouble getting",
+      "food",
+      "4 am going to visit my",
+      "grandparents in the",
+      "countryside",
+      "5 won’t be any wars in Europe"
+    ],
+    "fields": {
+      "1": "will know my exam results",
+      "2": "am having my first job interview",
+      "3": "will have trouble getting food",
+      "4": "am going to visit my grandparents in the countryside",
+      "5": "won’t be any wars in Europe"
+    },
+    "ambiguous": [
+      "Example answers:"
+    ]
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 Would",
+      "2 could",
+      "3 don’t",
+      "4 would",
+      "5 would",
+      "6 asks",
+      "7 will"
+    ],
+    "fields": {
+      "1": "Would",
+      "2": "could",
+      "3": "don’t",
+      "4": "would",
+      "5": "would",
+      "6": "asks",
+      "7": "will"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 would go crazy if he wasn’t",
+      "able to",
+      "2 last all day if she charges",
+      "3 is late again, we’ll get stuck",
+      "4 had more time, she would",
+      "talk to her friends",
+      "5 wouldn’t be able to go",
+      "online if"
+    ],
+    "fields": {
+      "1": "would go crazy if he wasn’t able to",
+      "2": "last all day if she charges",
+      "3": "is late again, we’ll get stuck",
+      "4": "had more time, she would talk to her friends",
+      "5": "wouldn’t be able to go online if"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 would take",
+      "2 knew, would understand",
+      "3 won’t become, doesn’t go",
+      "4 would wear, lived",
+      "5 doesn’t hurry, will miss",
+      "6 don’t eat, will be",
+      "7 lend, will you ride",
+      "8 looked, would get tired"
+    ],
+    "fields": {
+      "1": "would take",
+      "2": "knew, would understand",
+      "3": "won’t become, doesn’t go",
+      "4": "would wear, lived",
+      "5": "doesn’t hurry, will miss",
+      "6": "don’t eat, will be",
+      "7": "lend, will you ride",
+      "8": "looked, would get tired"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "Example answers:",
+      "1 he’ll start saving up for a new",
+      "car",
+      "2 I would read more books",
+      "3 you failed an important test",
+      "4 we call the meeting off",
+      "5 we would see the new",
+      "exhibition",
+      "6 you wouldn’t lie to me"
+    ],
+    "fields": {
+      "1": "he’ll start saving up for a new car",
+      "2": "I would read more books",
+      "3": "you failed an important test",
+      "4": "we call the meeting off",
+      "5": "we would see the new exhibition",
+      "6": "you wouldn’t lie to me"
+    },
+    "ambiguous": [
+      "Example answers:"
+    ]
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 found",
+      "2 don’t have/didn’t have",
+      "3 is",
+      "4 could drive",
+      "5 won",
+      "6 lived",
+      "7 thought"
+    ],
+    "fields": {
+      "1": "found",
+      "2": "don’t have/didn’t have",
+      "3": "is",
+      "4": "could drive",
+      "5": "won",
+      "6": "lived",
+      "7": "thought"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "First and Second Conditionals",
+    "number": "6",
+    "sourcePdfPage": 190,
+    "lines": [
+      "Example answers:",
+      "1 If the tickets are not too",
+      "expensive, I will go to",
+      "a concert.",
+      "2 If I weren’t so tired, I would",
+      "play with my little sister.",
+      "3 If it stops raining, I will go for",
+      "a jog.",
+      "4 My parents would buy",
+      "a bigger car if they could",
+      "afford it.",
+      "5 If I didn’t have so much work,",
+      "I would go for a walk.",
+      "6 If I didn’t need to study for",
+      "my exams, I would get",
+      "a part-time job."
+    ],
+    "fields": {
+      "1": "If the tickets are not too expensive, I will go to a concert.",
+      "2": "If I weren’t so tired, I would play with my little sister.",
+      "3": "If it stops raining, I will go for a jog.",
+      "4": "My parents would buy a bigger car if they could afford it.",
+      "5": "If I didn’t have so much work, I would go for a walk.",
+      "6": "If I didn’t need to study for my exams, I would get a part-time job."
+    },
+    "ambiguous": [
+      "Example answers:"
+    ]
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 must",
+      "2 have to",
+      "3 have to",
+      "4 must",
+      "5 has to",
+      "6 have to",
+      "7 have to"
+    ],
+    "fields": {
+      "1": "must",
+      "2": "have to",
+      "3": "have to",
+      "4": "must",
+      "5": "has to",
+      "6": "have to",
+      "7": "have to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 can",
+      "2 doesn’t have to",
+      "3 can’t",
+      "4 must",
+      "5 must",
+      "6 needs to",
+      "7 are allowed to"
+    ],
+    "fields": {
+      "1": "can",
+      "2": "doesn’t have to",
+      "3": "can’t",
+      "4": "must",
+      "5": "must",
+      "6": "needs to",
+      "7": "are allowed to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 can/are allowed to",
+      "2 have to",
+      "3 don’t have to/don’t need to/",
+      "needn’t",
+      "4 mustn’t/can’t",
+      "5 don’t have to/don’t need to/",
+      "needn’t",
+      "6 Are you allowed to/Can you",
+      "7 Does Tina have to/Does Tina",
+      "need to"
+    ],
+    "fields": {
+      "1": "can/are allowed to",
+      "2": "have to",
+      "3": "don’t have to/don’t need to/ needn’t",
+      "4": "mustn’t/can’t",
+      "5": "don’t have to/don’t need to/ needn’t",
+      "6": "Are you allowed to/Can you",
+      "7": "Does Tina have to/Does Tina need to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 allowed",
+      "2 mustn’t/can’t",
+      "3 to",
+      "4 can",
+      "5 to",
+      "6 don’t",
+      "7 mustn’t/can’t",
+      "8 has"
+    ],
+    "fields": {
+      "1": "allowed",
+      "2": "mustn’t/can’t",
+      "3": "to",
+      "4": "can",
+      "5": "to",
+      "6": "don’t",
+      "7": "mustn’t/can’t",
+      "8": "has"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 have to/need to",
+      "2 don’t have to/don’t need to/",
+      "needn’t",
+      "3 can/are allowed to",
+      "4 can’t/aren’t allowed to/",
+      "mustn’t",
+      "5 have to/need to"
+    ],
+    "fields": {
+      "1": "have to/need to",
+      "2": "don’t have to/don’t need to/ needn’t",
+      "3": "can/are allowed to",
+      "4": "can’t/aren’t allowed to/ mustn’t",
+      "5": "have to/need to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Modal verbs for obligation and permission",
+    "number": "6",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 must/have to/need to",
+      "2 can’t/aren’t allowed to",
+      "3 have to/need to",
+      "4 can’t/mustn’t/aren’t allowed",
+      "to",
+      "5 can/are allowed to",
+      "6 don’t have to/don’t need to/",
+      "needn’t",
+      "7 don’t have to/don’t need to/",
+      "needn’t",
+      "8 can/are allowed to"
+    ],
+    "fields": {
+      "1": "must/have to/need to",
+      "2": "can’t/aren’t allowed to",
+      "3": "have to/need to",
+      "4": "can’t/mustn’t/aren’t allowed to",
+      "5": "can/are allowed to",
+      "6": "don’t have to/don’t need to/ needn’t",
+      "7": "don’t have to/don’t need to/ needn’t",
+      "8": "can/are allowed to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Defining relative clauses",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 My father drives a car that",
+      "belongs to his company.",
+      "2 There’s a college in my city",
+      "where you can do business",
+      "studies.",
+      "3 I’ve got a sister that works in",
+      "a shop.",
+      "4 One day I’d like to get a job",
+      "which includes foreign travel.",
+      "5 I’ve got a part-time job that",
+      "I don’t enjoy."
+    ],
+    "fields": {
+      "1": "My father drives a car that belongs to his company.",
+      "2": "There’s a college in my city where you can do business studies.",
+      "3": "I’ve got a sister that works in a shop.",
+      "4": "One day I’d like to get a job which includes foreign travel.",
+      "5": "I’ve got a part-time job that I don’t enjoy."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Defining relative clauses",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 x",
+      "2 where",
+      "3 x",
+      "4 where",
+      "5 who/that",
+      "6 x",
+      "7 which/that"
+    ],
+    "fields": {
+      "1": "x",
+      "2": "where",
+      "3": "x",
+      "4": "where",
+      "5": "who/that",
+      "6": "x",
+      "7": "which/that"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Defining relative clauses",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 An igloo is a traditional type",
+      "of Inuit house which/that is",
+      "made of snow.",
+      "2 A puck is a small flat disc",
+      "which/that is used instead of",
+      "a ball in ice hockey.",
+      "3 An ice dancer is a performer",
+      "who/that skates to music.",
+      "4 Ski jumping and cross-",
+      "country skiing are winter",
+      "sports which/that are",
+      "becoming more and more",
+      "popular.",
+      "5 This amazing speed skating",
+      "track is the place where",
+      "three world records were",
+      "broken yesterday."
+    ],
+    "fields": {
+      "1": "An igloo is a traditional type of Inuit house which/that is made of snow.",
+      "2": "A puck is a small flat disc which/that is used instead of a ball in ice hockey.",
+      "3": "An ice dancer is a performer who/that skates to music.",
+      "4": "Ski jumping and cross-country skiing are winter sports which/that are becoming more and more popular.",
+      "5": "This amazing speed skating track is the place where three world records were broken yesterday."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Defining relative clauses",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 who/that",
+      "2 which/that/x",
+      "3 where",
+      "4 who/that",
+      "5 who/that",
+      "6 which/that",
+      "7 which/that"
+    ],
+    "fields": {
+      "1": "who/that",
+      "2": "which/that/x",
+      "3": "where",
+      "4": "who/that",
+      "5": "who/that",
+      "6": "which/that",
+      "7": "which/that"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Defining relative clauses",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 who/that/x",
+      "2 which/that/x",
+      "3 which/where/that/x",
+      "4 who/that/x",
+      "5 who/that",
+      "6 which/where/that/x"
+    ],
+    "fields": {
+      "1": "who/that/x",
+      "2": "which/that/x",
+      "3": "which/where/that/x",
+      "4": "who/that/x",
+      "5": "who/that",
+      "6": "which/where/that/x"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 think",
+      "2 am thinking",
+      "3 have",
+      "4 is having",
+      "5 look",
+      "6 are you looking",
+      "7 like",
+      "8 is having",
+      "9 need",
+      "10 Do they look"
+    ],
+    "fields": {
+      "1": "think",
+      "2": "am thinking",
+      "3": "have",
+      "4": "is having",
+      "5": "look",
+      "6": "are you looking",
+      "7": "like",
+      "8": "is having",
+      "9": "need",
+      "10": "Do they look"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 has promised",
+      "2 has been rising",
+      "3 hasn’t heard",
+      "4 has known",
+      "5 have cut",
+      "6 been waiting",
+      "7 haven’t met",
+      "8 been going",
+      "9 collected",
+      "10 been snowing"
+    ],
+    "fields": {
+      "1": "has promised",
+      "2": "has been rising",
+      "3": "hasn’t heard",
+      "4": "has known",
+      "5": "have cut",
+      "6": "been waiting",
+      "7": "haven’t met",
+      "8": "been going",
+      "9": "collected",
+      "10": "been snowing"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 Have you been",
+      "2 have you been doing",
+      "3 have had",
+      "4 have you been looking",
+      "5 have you had",
+      "6 has been producing",
+      "7 have never visited",
+      "8 ‘s been hanging",
+      "9 have been selling",
+      "10 have you ever worked"
+    ],
+    "fields": {
+      "1": "Have you been",
+      "2": "have you been doing",
+      "3": "have had",
+      "4": "have you been looking",
+      "5": "have you had",
+      "6": "has been producing",
+      "7": "have never visited",
+      "8": "‘s been hanging",
+      "9": "have been selling",
+      "10": "have you ever worked"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 I am having dinner at the",
+      "moment.",
+      "2 I have been looking for my",
+      "glasses for two hours!",
+      "3 Laura has known her for",
+      "ages.",
+      "4 I have always preferred",
+      "surfing to skiing."
+    ],
+    "fields": {
+      "1": "I am having dinner at the moment.",
+      "2": "I have been looking for my glasses for two hours!",
+      "3": "Laura has known her for ages.",
+      "4": "I have always preferred surfing to skiing."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 was waiting",
+      "2 met, has known",
+      "3 have you had, looks",
+      "4 have been, have never been",
+      "5 thinks",
+      "6 Is Tim thinking, has been",
+      "thinking, hasn’t made",
+      "7 look, have lost, have been",
+      "looking, am leaving"
+    ],
+    "fields": {
+      "1": "was waiting",
+      "2": "met, has known",
+      "3": "have you had, looks",
+      "4": "have been, have never been",
+      "5": "thinks",
+      "6": "Is Tim thinking, has been thinking, hasn’t made",
+      "7": "look, have lost, have been looking, am leaving"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 1",
+    "number": "6",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 haven’t seen",
+      "2 have you been",
+      "3 have just come",
+      "4 haven’t changed",
+      "5 look",
+      "6 have put",
+      "7 did we last see",
+      "8 believe",
+      "9 have you been doing",
+      "10 have been studying",
+      "11 have been",
+      "12 have been working/have",
+      "worked",
+      "13 live/am living",
+      "14 have you had",
+      "15 have been trying",
+      "16 have been looking"
+    ],
+    "fields": {
+      "1": "haven’t seen",
+      "2": "have you been",
+      "3": "have just come",
+      "4": "haven’t changed",
+      "5": "look",
+      "6": "have put",
+      "7": "did we last see",
+      "8": "believe",
+      "9": "have you been doing",
+      "10": "have been studying",
+      "11": "have been",
+      "12": "have been working/have worked",
+      "13": "live/am living",
+      "14": "have you had",
+      "15": "have been trying",
+      "16": "have been looking"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 was sitting",
+      "2 had just struck",
+      "3 kept",
+      "4 thought",
+      "5 had gone",
+      "6 expected/was expecting",
+      "7 didn’t make",
+      "8 answered",
+      "9 decided",
+      "10 went",
+      "11 had just gone out",
+      "12 moved"
+    ],
+    "fields": {
+      "1": "was sitting",
+      "2": "had just struck",
+      "3": "kept",
+      "4": "thought",
+      "5": "had gone",
+      "6": "expected/was expecting",
+      "7": "didn’t make",
+      "8": "answered",
+      "9": "decided",
+      "10": "went",
+      "11": "had just gone out",
+      "12": "moved"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 doing",
+      "2 to buy",
+      "3 to go",
+      "4 playing",
+      "5 telling"
+    ],
+    "fields": {
+      "1": "doing",
+      "2": "to buy",
+      "3": "to go",
+      "4": "playing",
+      "5": "telling"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 visiting",
+      "2 went",
+      "3 to visit",
+      "4 say",
+      "5 were visiting",
+      "6 disappeared",
+      "7 waited/were waiting",
+      "8 didn’t turn",
+      "9 had warned",
+      "10 not to get",
+      "11 to go",
+      "12 to find",
+      "13 had already been",
+      "14 were watching",
+      "15 got"
+    ],
+    "fields": {
+      "1": "visiting",
+      "2": "went",
+      "3": "to visit",
+      "4": "say",
+      "5": "were visiting",
+      "6": "disappeared",
+      "7": "waited/were waiting",
+      "8": "didn’t turn",
+      "9": "had warned",
+      "10": "not to get",
+      "11": "to go",
+      "12": "to find",
+      "13": "had already been",
+      "14": "were watching",
+      "15": "got"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 have had",
+      "2 have seen",
+      "3 has been reading",
+      "4 has become",
+      "5 both answers are correct"
+    ],
+    "fields": {
+      "1": "have had",
+      "2": "have seen",
+      "3": "has been reading",
+      "4": "has become",
+      "5": "both answers are correct"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 haven’t seen",
+      "2 was driving",
+      "3 have been studying",
+      "4 skiing",
+      "5 made them learn"
+    ],
+    "fields": {
+      "1": "haven’t seen",
+      "2": "was driving",
+      "3": "have been studying",
+      "4": "skiing",
+      "5": "made them learn"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 2",
+    "number": "6",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 was considering",
+      "2 had been",
+      "3 had committed",
+      "4 didn’t know, has he worked/",
+      "has he been working",
+      "5 have you known",
+      "6 had never been",
+      "7 had happened",
+      "8 had lost",
+      "9 were playing, slipped, broke",
+      "10 was having",
+      "11 Have you been waiting",
+      "12 arrived, had been",
+      "13 have been attending, signed",
+      "14 Have you met, joined, has",
+      "been working, decided"
+    ],
+    "fields": {
+      "1": "was considering",
+      "2": "had been",
+      "3": "had committed",
+      "4": "didn’t know, has he worked/ has he been working",
+      "5": "have you known",
+      "6": "had never been",
+      "7": "had happened",
+      "8": "had lost",
+      "9": "were playing, slipped, broke",
+      "10": "was having",
+      "11": "Have you been waiting",
+      "12": "arrived, had been",
+      "13": "have been attending, signed",
+      "14": "Have you met, joined, has been working, decided"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 3",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 must have missed",
+      "2 might have missed",
+      "3 may be",
+      "4 can’t be",
+      "5 must be",
+      "6 might have been",
+      "7 could be",
+      "8 can’t be, can’t have done"
+    ],
+    "fields": {
+      "1": "must have missed",
+      "2": "might have missed",
+      "3": "may be",
+      "4": "can’t be",
+      "5": "must be",
+      "6": "might have been",
+      "7": "could be",
+      "8": "can’t be, can’t have done"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 3",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 used to be",
+      "2 travelled",
+      "3 used to be",
+      "4 Did you use to",
+      "5 didn’t use to like",
+      "6 would use"
+    ],
+    "fields": {
+      "1": "used to be",
+      "2": "travelled",
+      "3": "used to be",
+      "4": "Did you use to",
+      "5": "didn’t use to like",
+      "6": "would use"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 3",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 may/might/could",
+      "2 would",
+      "3 can’t",
+      "4 used to",
+      "5 might/may/could",
+      "6 can’t have been",
+      "7 would",
+      "8 used to"
+    ],
+    "fields": {
+      "1": "may/might/could",
+      "2": "would",
+      "3": "can’t",
+      "4": "used to",
+      "5": "might/may/could",
+      "6": "can’t have been",
+      "7": "would",
+      "8": "used to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 3",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 have you been working, have",
+      "been working, might not",
+      "2 have seen, did you last see",
+      "3 was sitting, heard",
+      "4 had met",
+      "5 to know, had provoked",
+      "6 to talk, to keep",
+      "7 might have helped",
+      "8 feeling",
+      "9 broke",
+      "10 was, hadn’t expected",
+      "11 was he thinking, was painting",
+      "12 is, could"
+    ],
+    "fields": {
+      "1": "have you been working, have been working, might not",
+      "2": "have seen, did you last see",
+      "3": "was sitting, heard",
+      "4": "had met",
+      "5": "to know, had provoked",
+      "6": "to talk, to keep",
+      "7": "might have helped",
+      "8": "feeling",
+      "9": "broke",
+      "10": "was, hadn’t expected",
+      "11": "was he thinking, was painting",
+      "12": "is, could"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 3",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 see",
+      "2 must have",
+      "3 might have",
+      "4 may have",
+      "5 have been waiting",
+      "6 was going",
+      "7 met",
+      "8 used to be",
+      "9 would go",
+      "10 hadn’t seen",
+      "11 to know",
+      "12 going",
+      "13 might come",
+      "14 not to miss"
+    ],
+    "fields": {
+      "1": "see",
+      "2": "must have",
+      "3": "might have",
+      "4": "may have",
+      "5": "have been waiting",
+      "6": "was going",
+      "7": "met",
+      "8": "used to be",
+      "9": "would go",
+      "10": "hadn’t seen",
+      "11": "to know",
+      "12": "going",
+      "13": "might come",
+      "14": "not to miss"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 4",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 are coming",
+      "2 Shall I go",
+      "3 closes",
+      "4 won’t be able to",
+      "5 ‘ll be",
+      "6 am going to cook",
+      "7 will leave",
+      "8 ‘ll answer"
+    ],
+    "fields": {
+      "1": "are coming",
+      "2": "Shall I go",
+      "3": "closes",
+      "4": "won’t be able to",
+      "5": "‘ll be",
+      "6": "am going to cook",
+      "7": "will leave",
+      "8": "‘ll answer"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 4",
+    "number": "2",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 will you be doing",
+      "2 will have changed",
+      "3 will have finished",
+      "4 ‘ll be travelling",
+      "5 will be watching",
+      "6 will be having",
+      "7 will have had",
+      "8 Will you have checked",
+      "9 will be working",
+      "10 will you be doing, will be",
+      "having"
+    ],
+    "fields": {
+      "1": "will you be doing",
+      "2": "will have changed",
+      "3": "will have finished",
+      "4": "‘ll be travelling",
+      "5": "will be watching",
+      "6": "will be having",
+      "7": "will have had",
+      "8": "Will you have checked",
+      "9": "will be working",
+      "10": "will you be doing, will be having"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 4",
+    "number": "3",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 have you borrowed",
+      "2 have you been reading",
+      "3 met, was working",
+      "4 got, had lost",
+      "5 had already become",
+      "6 writing",
+      "7 might have left",
+      "8 used to be, haven’t seen,",
+      "since"
+    ],
+    "fields": {
+      "1": "have you borrowed",
+      "2": "have you been reading",
+      "3": "met, was working",
+      "4": "got, had lost",
+      "5": "had already become",
+      "6": "writing",
+      "7": "might have left",
+      "8": "used to be, haven’t seen, since"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 4",
+    "number": "4",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 had phoned",
+      "2 have never been, invites, will",
+      "travel",
+      "3 have you been queuing,",
+      "have been queuing, will give",
+      "up",
+      "4 finishes/has finished, will do",
+      "5 will have saved",
+      "6 will be revising",
+      "7 was raining, were leaving"
+    ],
+    "fields": {
+      "1": "had phoned",
+      "2": "have never been, invites, will travel",
+      "3": "have you been queuing, have been queuing, will give up",
+      "4": "finishes/has finished, will do",
+      "5": "will have saved",
+      "6": "will be revising",
+      "7": "was raining, were leaving"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 4",
+    "number": "5",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 had already been",
+      "2 am working/will be working",
+      "3 go",
+      "4 will go",
+      "5 will have finished",
+      "6 have you been working",
+      "7 have been working",
+      "8 made",
+      "9 ‘ve been writing"
+    ],
+    "fields": {
+      "1": "had already been",
+      "2": "am working/will be working",
+      "3": "go",
+      "4": "will go",
+      "5": "will have finished",
+      "6": "have you been working",
+      "7": "have been working",
+      "8": "made",
+      "9": "‘ve been writing"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "1",
+    "sourcePdfPage": 190,
+    "lines": [
+      "1 –, –",
+      "2 A, the, the, the",
+      "3 the, The, a, the, a",
+      "4 a, the, the, the, The",
+      "5 The, The, the, a"
+    ],
+    "fields": {
+      "1": "–, –",
+      "2": "A, the, the, the",
+      "3": "the, The, a, the, a",
+      "4": "a, the, the, the, The",
+      "5": "The, The, the, a"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "2",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 Barrie, who lives next door, is",
+      "having a party tonight.",
+      "2 She’s a teacher.",
+      "3 The Atlantic Ocean, which is",
+      "the second largest ocean in",
+      "the world, lies between",
+      "Europe and America.",
+      "4 Lewis Carroll, who wrote",
+      "Alice’s Adventures in",
+      "Wonderland, was a professor",
+      "at Oxford University.",
+      "5 Lots of people visit the",
+      "British Museum, where parts",
+      "of the Parthenon are",
+      "displayed.",
+      "6 That’s the film I’d like us to",
+      "see at the weekend.",
+      "7 The food we ate at the",
+      "restaurant by the sea was",
+      "awesome!",
+      "8 You will definitely need a pair",
+      "of jeans and a warm sweater."
+    ],
+    "fields": {
+      "1": "Barrie, who lives next door, is having a party tonight.",
+      "2": "She’s a teacher.",
+      "3": "The Atlantic Ocean, which is the second largest ocean in the world, lies between Europe and America.",
+      "4": "Lewis Carroll, who wrote Alice’s Adventures in Wonderland, was a professor at Oxford University.",
+      "5": "Lots of people visit the British Museum, where parts of the Parthenon are displayed.",
+      "6": "That’s the film I’d like us to see at the weekend.",
+      "7": "The food we ate at the restaurant by the sea was awesome!",
+      "8": "You will definitely need a pair of jeans and a warm sweater."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "3",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 A person who steals things is",
+      "a thief. (D)",
+      "2 The new film by Polański,",
+      "which was well reviewed by",
+      "the critics, was a great",
+      "success. (ND)",
+      "3 The BBC, which had begun",
+      "sound broadcasting in 1922,",
+      "launched the world’s first",
+      "public television service in",
+      "1936. (ND)",
+      "4 I need a person who can",
+      "speak English fluently. (D)",
+      "5 The new London guidebook",
+      "published in January this",
+      "year, which contains lots of",
+      "useful information, will",
+      "appear in bookshops next",
+      "month. (ND)"
+    ],
+    "fields": {
+      "1": "A person who steals things is a thief. (D)",
+      "2": "The new film by Polański, which was well reviewed by the critics, was a great success. (ND)",
+      "3": "The BBC, which had begun sound broadcasting in 1922, launched the world’s first public television service in 1936. (ND)",
+      "4": "I need a person who can speak English fluently. (D)",
+      "5": "The new London guidebook published in January this year, which contains lots of useful information, will appear in bookshops next month. (ND)"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "4",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 were going, started",
+      "2 had forgotten, stopped",
+      "3 was walking, saw, can’t have",
+      "been",
+      "4 didn’t always use to be",
+      "5 has",
+      "6 has bought",
+      "7 don’t believe",
+      "8 has been driving"
+    ],
+    "fields": {
+      "1": "were going, started",
+      "2": "had forgotten, stopped",
+      "3": "was walking, saw, can’t have been",
+      "4": "didn’t always use to be",
+      "5": "has",
+      "6": "has bought",
+      "7": "don’t believe",
+      "8": "has been driving"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "5",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 If you eat vegetables every",
+      "day, you’ll get all the",
+      "minerals you need.",
+      "2 If my friends are online, I’ll",
+      "chat with them.",
+      "3 Will you have finished by",
+      "eight o’clock? / Will you",
+      "finish by eight o’clock?",
+      "4 This time tomorrow we will",
+      "be skiing in the Alps.",
+      "5 By the end of the day, we will",
+      "have eaten our three",
+      "portions of vegetables.",
+      "6 I saw a shark swimming close",
+      "to the boat. The shark, which",
+      "was 2 metres long, followed",
+      "us for about three miles."
+    ],
+    "fields": {
+      "1": "If you eat vegetables every day, you’ll get all the minerals you need.",
+      "2": "If my friends are online, I’ll chat with them.",
+      "3": "Will you have finished by eight o’clock? / Will you finish by eight o’clock?",
+      "4": "This time tomorrow we will be skiing in the Alps.",
+      "5": "By the end of the day, we will have eaten our three portions of vegetables.",
+      "6": "I saw a shark swimming close to the boat. The shark, which was 2 metres long, followed us for about three miles."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 5",
+    "number": "6",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 –",
+      "2 –",
+      "3 –",
+      "4 –",
+      "5 –",
+      "6 the",
+      "7 The",
+      "8 –",
+      "9 used to be",
+      "10 the",
+      "11 will soon find out",
+      "12 will take",
+      "13 will have seen",
+      "14 still see",
+      "15 which",
+      "16 has been"
+    ],
+    "fields": {
+      "1": "–",
+      "2": "–",
+      "3": "–",
+      "4": "–",
+      "5": "–",
+      "6": "the",
+      "7": "The",
+      "8": "–",
+      "9": "used to be",
+      "10": "the",
+      "11": "will soon find out",
+      "12": "will take",
+      "13": "will have seen",
+      "14": "still see",
+      "15": "which",
+      "16": "has been"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "1",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 lived",
+      "2 would give up",
+      "3 had",
+      "4 had",
+      "5 would go, didn’t have to"
+    ],
+    "fields": {
+      "1": "lived",
+      "2": "would give up",
+      "3": "had",
+      "4": "had",
+      "5": "would go, didn’t have to"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "2",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 were, would put",
+      "2 would think",
+      "3 could choose, would you",
+      "have",
+      "4 was/were able to heal",
+      "5 didn’t need",
+      "6 wouldn’t play"
+    ],
+    "fields": {
+      "1": "were, would put",
+      "2": "would think",
+      "3": "could choose, would you have",
+      "4": "was/were able to heal",
+      "5": "didn’t need",
+      "6": "wouldn’t play"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "3",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 had seen, would have",
+      "applied",
+      "2 had got, would have become",
+      "3 had promoted, would have",
+      "earned",
+      "4 had made, would have",
+      "gambled",
+      "5 had kept, would have lost",
+      "6 hadn’t thought, wouldn’t",
+      "have been fired",
+      "7 had shown, would have",
+      "repeated"
+    ],
+    "fields": {
+      "1": "had seen, would have applied",
+      "2": "had got, would have become",
+      "3": "had promoted, would have earned",
+      "4": "had made, would have gambled",
+      "5": "had kept, would have lost",
+      "6": "hadn’t thought, wouldn’t have been fired",
+      "7": "had shown, would have repeated"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "4",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 c",
+      "2 h",
+      "3 g",
+      "4 f",
+      "5 b",
+      "6 a",
+      "7 e",
+      "8 d"
+    ],
+    "fields": {
+      "1": "c",
+      "2": "h",
+      "3": "g",
+      "4": "f",
+      "5": "b",
+      "6": "a",
+      "7": "e",
+      "8": "d"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "5",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 Would you have stopped",
+      "2 Would you tell",
+      "3 Will you invite",
+      "4 had known",
+      "5 knew",
+      "6 knows"
+    ],
+    "fields": {
+      "1": "Would you have stopped",
+      "2": "Would you tell",
+      "3": "Will you invite",
+      "4": "had known",
+      "5": "knew",
+      "6": "knows"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "6",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 We have travelled a lot since",
+      "we started working for",
+      "a travel agency.",
+      "2 We’ll be working at that",
+      "time, but by six o’clock we’ll",
+      "have finished.",
+      "3 I used to love reading comics",
+      "when I was a child.",
+      "4 The accident would have",
+      "been much worse if the",
+      "driver had been driving",
+      "faster.",
+      "5 They were walking to the",
+      "station when it began to rain.",
+      "It was then that they realised",
+      "they had forgotten their",
+      "umbrellas."
+    ],
+    "fields": {
+      "1": "We have travelled a lot since we started working for a travel agency.",
+      "2": "We’ll be working at that time, but by six o’clock we’ll have finished.",
+      "3": "I used to love reading comics when I was a child.",
+      "4": "The accident would have been much worse if the driver had been driving faster.",
+      "5": "They were walking to the station when it began to rain. It was then that they realised they had forgotten their umbrellas."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 6",
+    "number": "7",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 the,",
+      "2 –,",
+      "3 where",
+      "4 –,",
+      "5 had been",
+      "6 a",
+      "7 The",
+      "8 wouldn’t have recovered",
+      "9 had",
+      "10 –",
+      "11 as soon as",
+      "12 lived",
+      "13 will go",
+      "14 go",
+      "15 will be",
+      "16 who",
+      "17 will be surfing",
+      "18 have been surfing",
+      "19 doing"
+    ],
+    "fields": {
+      "1": "the,",
+      "2": "–,",
+      "3": "where",
+      "4": "–,",
+      "5": "had been",
+      "6": "a",
+      "7": "The",
+      "8": "wouldn’t have recovered",
+      "9": "had",
+      "10": "–",
+      "11": "as soon as",
+      "12": "lived",
+      "13": "will go",
+      "14": "go",
+      "15": "will be",
+      "16": "who",
+      "17": "will be surfing",
+      "18": "have been surfing",
+      "19": "doing"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "1",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 She said (that) she didn’t like",
+      "that picture.",
+      "2 He replied (that) they had",
+      "seen her the day before/the",
+      "previous day.",
+      "3 She explained (that) she was",
+      "late because she had missed",
+      "the train.",
+      "4 He added (that) he didn’t",
+      "want to see that man again.",
+      "5 They told us (that) they",
+      "couldn’t come because they",
+      "were doing their homework",
+      "then/at that time.",
+      "6 He pointed out (that) it had",
+      "been hot the day before/the",
+      "previous day."
+    ],
+    "fields": {
+      "1": "She said (that) she didn’t like that picture.",
+      "2": "He replied (that) they had seen her the day before/the previous day.",
+      "3": "She explained (that) she was late because she had missed the train.",
+      "4": "He added (that) he didn’t want to see that man again.",
+      "5": "They told us (that) they couldn’t come because they were doing their homework then/at that time.",
+      "6": "He pointed out (that) it had been hot the day before/the previous day."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "2",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 He asked me if/whether",
+      "I had seen the film the day",
+      "before/the previous day.",
+      "2 He asked me how my",
+      "grandmother was.",
+      "3 He asked her what her name",
+      "was.",
+      "4 She asked me where I had",
+      "found the key.",
+      "5 I asked her if she was writing",
+      "a new book.",
+      "6 The teacher told us to stop",
+      "talking.",
+      "7 The boss told us not to eat at",
+      "our desks."
+    ],
+    "fields": {
+      "1": "He asked me if/whether I had seen the film the day before/the previous day.",
+      "2": "He asked me how my grandmother was.",
+      "3": "He asked her what her name was.",
+      "4": "She asked me where I had found the key.",
+      "5": "I asked her if she was writing a new book.",
+      "6": "The teacher told us to stop talking.",
+      "7": "The boss told us not to eat at our desks."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "3",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 The woman added that John",
+      "would have to tell her the",
+      "whole story once again.",
+      "2 The girl said the children had",
+      "already finished the game.",
+      "3 The officer asked us if we",
+      "understood that message.",
+      "4 The boy asked the man to",
+      "play it again.",
+      "5 The policeman noticed it was",
+      "raining.",
+      "6 The manager wanted to",
+      "know why they hadn’t talked",
+      "to the shop assistant.",
+      "7 The little girl asked the",
+      "woman where they had",
+      "been."
+    ],
+    "fields": {
+      "1": "The woman added that John would have to tell her the whole story once again.",
+      "2": "The girl said the children had already finished the game.",
+      "3": "The officer asked us if we understood that message.",
+      "4": "The boy asked the man to play it again.",
+      "5": "The policeman noticed it was raining.",
+      "6": "The manager wanted to know why they hadn’t talked to the shop assistant.",
+      "7": "The little girl asked the woman where they had been."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "4",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 have you had",
+      "2 have you been reading",
+      "3 arrived, was waiting, had",
+      "been",
+      "4 used to like"
+    ],
+    "fields": {
+      "1": "have you had",
+      "2": "have you been reading",
+      "3": "arrived, was waiting, had been",
+      "4": "used to like"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "5",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 You won’t get a cat unless",
+      "you promise to look after it.",
+      "2 Pat will be cooking all day",
+      "tomorrow. She’s having",
+      "guests for dinner.",
+      "3 They will have finished",
+      "dinner by nine o’clock.",
+      "4 Mount Vesuvius, which is an",
+      "active volcano, overlooks the",
+      "Bay of Naples.",
+      "5 If I have enough money, I’ll",
+      "go to Australia./If I had",
+      "enough money, I’d go to",
+      "Australia.",
+      "6 If I had known the answer,",
+      "I wouldn’t have asked you to",
+      "help me./If I knew",
+      "the answer, I wouldn’t ask",
+      "you to help me.",
+      "7 She asked me if/whether",
+      "I was good at Maths."
+    ],
+    "fields": {
+      "1": "You won’t get a cat unless you promise to look after it.",
+      "2": "Pat will be cooking all day tomorrow. She’s having guests for dinner.",
+      "3": "They will have finished dinner by nine o’clock.",
+      "4": "Mount Vesuvius, which is an active volcano, overlooks the Bay of Naples.",
+      "5": "If I have enough money, I’ll go to Australia./If I had enough money, I’d go to Australia.",
+      "6": "If I had known the answer, I wouldn’t have asked you to help me./If I knew the answer, I wouldn’t ask you to help me.",
+      "7": "She asked me if/whether I was good at Maths."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 7",
+    "number": "6",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 who",
+      "2 haven’t hurt",
+      "3 can’t",
+      "4 had",
+      "5 be playing",
+      "6 told",
+      "7 had gone",
+      "8 said",
+      "9 have been",
+      "10 you have been"
+    ],
+    "fields": {
+      "1": "who",
+      "2": "haven’t hurt",
+      "3": "can’t",
+      "4": "had",
+      "5": "be playing",
+      "6": "told",
+      "7": "had gone",
+      "8": "said",
+      "9": "have been",
+      "10": "you have been"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "1",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 The film was directed by",
+      "Alfred Hitchcock.",
+      "2 A new house is being built.",
+      "3 The students were being",
+      "helped.",
+      "4 He will always be",
+      "remembered.",
+      "5 Cheese is made from milk.",
+      "6 The picture has been",
+      "painted by Peter.",
+      "7 The keys must be handed in",
+      "before leaving.",
+      "8 All the windows were",
+      "opened by the children.",
+      "9 The two criminals are going",
+      "to be arrested.",
+      "10 A new species of butterfly",
+      "has been found by scientists",
+      "in the Amazon rainforest."
+    ],
+    "fields": {
+      "1": "The film was directed by Alfred Hitchcock.",
+      "2": "A new house is being built.",
+      "3": "The students were being helped.",
+      "4": "He will always be remembered.",
+      "5": "Cheese is made from milk.",
+      "6": "The picture has been painted by Peter.",
+      "7": "The keys must be handed in before leaving.",
+      "8": "All the windows were opened by the children.",
+      "9": "The two criminals are going to be arrested.",
+      "10": "A new species of butterfly has been found by scientists in the Amazon rainforest."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "2",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 I had my teeth checked.",
+      "2 I’m having my camera",
+      "repaired at the moment.",
+      "3 They’ll have their house",
+      "painted soon.",
+      "4 I have my bank account",
+      "checked every month.",
+      "5 I had my eyes tested.",
+      "6 I have just had my car",
+      "serviced.",
+      "7 We’ve just had our computer",
+      "repaired."
+    ],
+    "fields": {
+      "1": "I had my teeth checked.",
+      "2": "I’m having my camera repaired at the moment.",
+      "3": "They’ll have their house painted soon.",
+      "4": "I have my bank account checked every month.",
+      "5": "I had my eyes tested.",
+      "6": "I have just had my car serviced.",
+      "7": "We’ve just had our computer repaired."
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "3",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 I think I’ll have my car",
+      "repaired.",
+      "2 The house was built in 1850.",
+      "3 Mr Smith is being",
+      "interviewed at the moment.",
+      "4 I had the meal sent up to my",
+      "room.",
+      "5 Where do you usually have",
+      "your shoes mended?",
+      "6 How often is the cat fed?",
+      "7 Can sports equipment be",
+      "hired?"
+    ],
+    "fields": {
+      "1": "I think I’ll have my car repaired.",
+      "2": "The house was built in 1850.",
+      "3": "Mr Smith is being interviewed at the moment.",
+      "4": "I had the meal sent up to my room.",
+      "5": "Where do you usually have your shoes mended?",
+      "6": "How often is the cat fed?",
+      "7": "Can sports equipment be hired?"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "4",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 be",
+      "2 it mended",
+      "3 told",
+      "4 to stay",
+      "5 my book was",
+      "6 I was",
+      "7 a The, had met",
+      "8 Unless"
+    ],
+    "fields": {
+      "1": "be",
+      "2": "it mended",
+      "3": "told",
+      "4": "to stay",
+      "5": "my book was",
+      "6": "I was",
+      "7": "a The, had met",
+      "8": "Unless"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "5",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 would think",
+      "2 would be",
+      "3 had seen",
+      "4 have left",
+      "5 Will you be working, ‘ll have",
+      "finished",
+      "6 was reading, heard",
+      "7 walked/had walked, stopped",
+      "8 have you visited",
+      "9 have you been studying"
+    ],
+    "fields": {
+      "1": "would think",
+      "2": "would be",
+      "3": "had seen",
+      "4": "have left",
+      "5": "Will you be working, ‘ll have finished",
+      "6": "was reading, heard",
+      "7": "walked/had walked, stopped",
+      "8": "have you visited",
+      "9": "have you been studying"
+    },
+    "ambiguous": []
+  },
+  {
+    "topic": "Unit 8",
+    "number": "6",
+    "sourcePdfPage": 191,
+    "lines": [
+      "1 who",
+      "2 led",
+      "3 were willing",
+      "4 The",
+      "5 by",
+      "6 were arrested",
+      "7 described",
+      "8 were employed",
+      "9 had changed",
+      "10 were given",
+      "11 granted",
+      "12 have gained"
+    ],
+    "fields": {
+      "1": "who",
+      "2": "led",
+      "3": "were willing",
+      "4": "The",
+      "5": "by",
+      "6": "were arrested",
+      "7": "described",
+      "8": "were employed",
+      "9": "had changed",
+      "10": "were given",
+      "11": "granted",
+      "12": "have gained"
+    },
+    "ambiguous": []
+  }
+]
