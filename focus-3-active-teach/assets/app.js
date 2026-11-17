@@ -4,7 +4,7 @@ const D=window.FOCUS3,$=s=>document.querySelector(s),$$=s=>[...document.querySel
 const params=new URLSearchParams(location.search), NS='focus-3:responses:v1';
 let book=['wb','ws'].includes(params.get('book'))?params.get('book'):'sb',unit=params.get('unit')||'1',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve(),workStore=null;
 const M=window.Focus3Marking;
-const audioPath=t=>'media/'+(String(t).startsWith('4.')?'ws':book==='wb'?'wb':'sb')+'-'+t+'.mp3';
+const audioPath=t=>'media/'+(String(t).startsWith('4.')?'ws':'sb')+'-'+t+'.mp3';
 let shownRecord='',previousAnswers=[],homework=null,submitting=false,assigner=null;
 const H=window.Focus3HW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
@@ -29,7 +29,7 @@ function render(){
  window.ExerciseSource.regions($('#hotspots'),page.exercises.map(e=>e.box));
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Читай и увеличивай её в режиме презентации.</p>';
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;window.Focus3Video?.render(page);
- $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="${audioPath(t)}"></audio></label>`).join(''):book==='wb'?'<p>Аудио Workbook в исходном комплекте нет.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
+ $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="${audioPath(t)}"></audio></label>`).join(''):'<p>Выбери аудио по номеру трека в учебнике.</p>';
  $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+(book==='wb'?D.tracks.wb:[...D.tracks.sb,...D.tracks.ws]).map(t=>`<option value="${t}">${t.startsWith('4.')?'Wordlist':'SB'} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
 }

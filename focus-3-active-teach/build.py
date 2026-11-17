@@ -7,6 +7,7 @@ from PIL import Image
 
 R = Path(__file__).resolve().parent
 TEXT = {b: json.loads((R/f'data/{b}-text.json').read_text()) for b in ['sb','wb','ws','tb']}
+WB_AUDIO = {7:'1.08',21:'1.24',35:'1.42',49:'2.08',63:'2.25',77:'2.44',91:'3.13',105:'3.30'}  # Explicit SB recording references printed in Workbook.
 NAMES = ['', 'A new look', 'It’s just a game', 'On the go', 'Eat, drink and be healthy', 'Planet Earth', 'Good health', 'Entertain me', 'Modern society']
 def clean(t):
     return ' '.join(t.replace('ﬁ','fi').replace('ﬂ','fl').replace('\x01',' ').split())
@@ -208,7 +209,7 @@ for book in ['sb','wb','ws']:
                     if x>=0 and y>=0 and x+w<1 and y+h<1:geometry[f['label']]={'image':image,'page':p,'box':[x,y,w,h]}
                 if len(geometry)==len(spec):gaps[exid]=geometry
             sources[exid]={'label':label,'sources':[{'image':image,'page':p,'size':size,'box':box},{'image':image,'page':p,'size':size,'box':[.01,.01,.98,.97],'context':True}]}
-        tracks=[]
+        tracks=[WB_AUDIO[p]] if book=='wb' and p in WB_AUDIO else []
         if book!='wb':
             audio_text=' '.join(s['text'] for s in TEXT[book][str(pdf)]['spans'] if 'Black' in s['font'] and s['color']==0xffffff)
             for match in re.finditer(r'(?<!\d)([1-4])[.,](\d{1,2})(?!\d)',audio_text):
@@ -256,7 +257,7 @@ for e in final_exercises.values():
             else:e.pop(k,None)
         if target.get('reviewed'):gaps.pop(e['id'],None)
 videos=json.loads((R/'data/videos.json').read_text()) if (R/'data/videos.json').exists() else []
-D={'id':'focus-3','units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':[],'ws':[p.stem[3:] for p in sorted((R/'media').glob('ws-*.mp3'))]},'resources':json.loads((R/'data/resources.json').read_text()),'videos':videos}
+D={'id':'focus-3','units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':list(WB_AUDIO.values()),'ws':[p.stem[3:] for p in sorted((R/'media').glob('ws-*.mp3'))]},'resources':json.loads((R/'data/resources.json').read_text()),'videos':videos}
 (R/'assets/course.js').write_text('window.FOCUS3 = '+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';\n')
 (R/'assets/exercise-sources.js').write_text('window.EXERCISE_SOURCES = '+json.dumps(sources,ensure_ascii=False,separators=(',',':'))+';\n')
 (R/'assets/exercise-gaps.js').write_text('window.EXERCISE_GAPS = '+json.dumps(gaps,ensure_ascii=False,separators=(',',':'))+';\n')

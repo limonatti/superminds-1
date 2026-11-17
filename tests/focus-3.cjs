@@ -24,6 +24,7 @@ for(let u=1;u<=8;u++){
 for(const p of [15,29,43,57,71,85,99,113,134,135,136,137,138,139,140,141])assert.deepEqual(pages.get('wb-'+p).exercises.map(e=>e.label),['1','2','3','4'],'speaking tasks '+p);
 assert(E.has('wb-111-7')&&E.has('wb-111-8'));assert.equal(E.get('wb-111-7').answerSpec.length,9);
 assert.equal(D.resources.length,227);for(const r of D.resources){const file=path.join(base,r.path);assert(fs.existsSync(file),r.path);assert(fs.statSync(file).size<100*1024*1024,r.path+' GitHub size');}
+assert.deepEqual(D.tracks.wb,['1.08','1.24','1.42','2.08','2.25','2.44','3.13','3.30']);for(const [i,p]of [7,21,35,49,63,77,91,105].entries())assert.deepEqual(pages.get('wb-'+p).tracks,[D.tracks.wb[i]]);
 assert.equal(D.tracks.sb.length,140);assert.equal(D.tracks.ws.length,64);for(const b of ['sb','ws'])for(const t of D.tracks[b])assert(fs.existsSync(path.join(base,'media/'+b+'-'+t+'.mp3')));for(const p of D.pages)for(const t of p.tracks)assert([...D.tracks.sb,...D.tracks.ws].includes(t));
 assert.equal(new Set(D.videos.map(v=>v.number)).size,D.videos.length);for(const v of D.videos){assert(/^[\w-]{11}$/.test(v.youtube));for(const p of v.pages)assert(pages.has('sb-'+p));}
 // Independent samples from each unit, plus edge cases in the scanned answer key.
