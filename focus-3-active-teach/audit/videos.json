@@ -6,8 +6,11 @@
   "alternateEditNumbers": [
     1
   ],
+  "partialNumbers": [
+    "10D"
+  ],
   "verification": "Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Video 1 is an original BBC segment with different editing, labelled with timestamps. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.",
-  "included": 53,
+  "included": 54,
   "missingNumbers": [
     10,
     24

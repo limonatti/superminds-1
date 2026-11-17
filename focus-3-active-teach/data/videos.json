@@ -166,6 +166,30 @@
     "url": "https://www.youtube.com/watch?v=tRrpT0-qnGU"
   },
   {
+    "number": "10D",
+    "unit": 3,
+    "title": "A hotel in the clouds · Dragonfly (фрагмент)",
+    "category": "BBC",
+    "pages": [
+      32,
+      120
+    ],
+    "provider": "youtube",
+    "youtube": "Q4dzhiGHeBo",
+    "url": "https://www.youtube.com/watch?v=Q4dzhiGHeBo&t=623s",
+    "startSeconds": 623,
+    "endSeconds": 861,
+    "partial": true,
+    "editionNote": "Фрагмент на официальном канале BBC The Travel Edit: канатная дорога Dragonfly и проверка спасательной системы. Подходит для Exercise 5, вопросы 6–8. Начало учебного видео про отель и смотровую башню здесь отсутствует.",
+    "worksheetTimings": [
+      {
+        "label": "Exercise 5 · вопросы 6–8",
+        "range": "10:23–14:21"
+      }
+    ],
+    "sourceNote": "BBC Studios / The Travel Edit, Five of the World’s Craziest Hotels. Visible English transcript compared with SB p.120 questions 5.6–5.8 and supplied TB videoscript. Full textbook edit 10 not found."
+  },
+  {
     "number": "11",
     "unit": 3,
     "title": "Present and past speculation",
