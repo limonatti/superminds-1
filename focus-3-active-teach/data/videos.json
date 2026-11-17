@@ -8,23 +8,13 @@
       4,
       116
     ],
-    "provider": "youtube",
-    "youtube": "WRTc6fX9DDw",
-    "url": "https://www.youtube.com/watch?v=WRTc6fX9DDw&t=1755s",
-    "startSeconds": 1755,
-    "endSeconds": 1953,
-    "editionNote": "Оригинальный сюжет BBC с Алексом Райли, 29:15–32:33. Монтаж и закадровый текст отличаются от версии учебника; фабрика и этапы обработки джинсов те же.",
-    "worksheetTimings": [
-      {
-        "label": "Exercise 4 · интервью на фабрике",
-        "range": "29:15–31:20"
-      },
-      {
-        "label": "Exercise 6 · этапы обработки",
-        "range": "31:21–32:33"
-      }
-    ],
-    "sourceNote": "BBC Three Secrets of the Superbrands (Fashion). Transcript checked against supplied Teacher’s Book; exact textbook edit not found on YouTube."
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-59019585_456239101",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "English Duet: Focus 3 Distressing jeans BBC Unit 1. Opening narration about the worldwide denim market and popular styles, sandpaper sequence at 2:10, crinkle discussion at 3:01 and closing credits inspected; matches supplied TB videoscript. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
   },
   {
     "number": "2",
@@ -84,11 +74,11 @@
     "pages": [
       20
     ],
-    "provider": "youtube",
     "youtube": "hCm0y4hiHmw",
-    "url": "https://www.youtube.com/watch?v=hCm0y4hiHmw",
     "sourceNote": "Pearson official: Focus 3, Grammar animation, Narrative tenses. Canoe storyline verified visually.",
-    "editionNote": "Анимация Pearson. Объяснение преподавателя — отдельный ролик 6T."
+    "editionNote": "Анимация Pearson. Объяснение преподавателя — отдельный ролик 6T.",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=hCm0y4hiHmw"
   },
   {
     "number": "6T",
@@ -98,10 +88,10 @@
     "pages": [
       20
     ],
-    "provider": "youtube",
     "youtube": "fWEd3Bnr75s",
-    "url": "https://www.youtube.com/watch?v=fWEd3Bnr75s",
-    "sourceNote": "Pearson official: matching teacher explanation."
+    "sourceNote": "Pearson official: matching teacher explanation.",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=fWEd3Bnr75s"
   },
   {
     "number": "7",
@@ -111,10 +101,10 @@
     "pages": [
       24
     ],
-    "provider": "youtube",
     "youtube": "ZOeBTomFWPg",
-    "url": "https://www.youtube.com/watch?v=ZOeBTomFWPg",
-    "sourceNote": "KidsEnglish: Focus 3 2.5 Verb patterns, 6:24. Original animation verified visually."
+    "sourceNote": "KidsEnglish: Focus 3 2.5 Verb patterns, 6:24. Original animation verified visually.",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=ZOeBTomFWPg"
   },
   {
     "number": "8",
@@ -166,28 +156,21 @@
     "url": "https://www.youtube.com/watch?v=tRrpT0-qnGU"
   },
   {
-    "number": "10D",
+    "number": "10",
     "unit": 3,
-    "title": "A hotel in the clouds · Dragonfly (фрагмент)",
+    "title": "A hotel in the clouds",
     "category": "BBC",
     "pages": [
       32,
       120
     ],
-    "provider": "youtube",
-    "youtube": "Q4dzhiGHeBo",
-    "url": "https://www.youtube.com/watch?v=Q4dzhiGHeBo&t=623s",
-    "startSeconds": 623,
-    "endSeconds": 861,
-    "partial": true,
-    "editionNote": "Фрагмент на официальном канале BBC The Travel Edit: канатная дорога Dragonfly и проверка спасательной системы. Подходит для Exercise 5, вопросы 6–8. Начало учебного видео про отель и смотровую башню здесь отсутствует.",
-    "worksheetTimings": [
-      {
-        "label": "Exercise 5 · вопросы 6–8",
-        "range": "10:23–14:21"
-      }
-    ],
-    "sourceNote": "BBC Studios / The Travel Edit, Five of the World’s Craziest Hotels. Visible English transcript compared with SB p.120 questions 5.6–5.8 and supplied TB videoscript. Full textbook edit 10 not found."
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-12983196_456241465",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "ЖИВОЙ АНГЛИЙСКИЙ: A hotel in the clouds - Level B1; description explicitly identifies Focus 3 Unit 3. 5:37 listing, 5:38 player. Opening private-reserve narration, observation tower / fear of heights at 2:35 and rope rescue at 5:03 checked against SB120 and TB videoscript. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
   },
   {
     "number": "11",
@@ -197,10 +180,10 @@
     "pages": [
       34
     ],
-    "provider": "youtube",
     "youtube": "6MoBJVy5DOs",
-    "url": "https://www.youtube.com/watch?v=6MoBJVy5DOs",
-    "sourceNote": "Focus 3 2nd edition Unit 3 lesson 3.2 Grammar Present and Past speculation — Nataliia Mirgorod, 4:07"
+    "sourceNote": "Focus 3 2nd edition Unit 3 lesson 3.2 Grammar Present and Past speculation — Nataliia Mirgorod, 4:07",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=6MoBJVy5DOs"
   },
   {
     "number": "12",
@@ -210,10 +193,10 @@
     "pages": [
       38
     ],
-    "provider": "youtube",
     "youtube": "-p-7sVopByk",
-    "url": "https://www.youtube.com/watch?v=-p-7sVopByk",
-    "sourceNote": "KidsEnglish: Focus 3, 3.5 Used to and would, 4:20"
+    "sourceNote": "KidsEnglish: Focus 3, 3.5 Used to and would, 4:20",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=-p-7sVopByk"
   },
   {
     "number": "13",
@@ -273,10 +256,10 @@
       46,
       122
     ],
-    "provider": "youtube",
     "youtube": "89YcZtMrS0Q",
-    "url": "https://www.youtube.com/watch?v=89YcZtMrS0Q",
-    "sourceNote": "Focus 3 BBC Umami — Nataliia Vilkhovyk, 4:19"
+    "sourceNote": "Focus 3 BBC Umami — Nataliia Vilkhovyk, 4:19",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=89YcZtMrS0Q"
   },
   {
     "number": "16",
@@ -299,10 +282,10 @@
     "pages": [
       52
     ],
-    "provider": "youtube",
     "youtube": "oqP7zlJwVI0",
-    "url": "https://www.youtube.com/watch?v=oqP7zlJwVI0",
-    "sourceNote": "Kateryna Balabukha: Focus 3 Unit 4 Future Continuous and Future Perfect, 3:56. Original Focus animation."
+    "sourceNote": "Kateryna Balabukha: Focus 3 Unit 4 Future Continuous and Future Perfect, 3:56. Original Focus animation.",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=oqP7zlJwVI0"
   },
   {
     "number": "18",
@@ -349,10 +332,10 @@
       60,
       124
     ],
-    "provider": "youtube",
     "youtube": "YC5m4AXVCkI",
-    "url": "https://www.youtube.com/watch?v=YC5m4AXVCkI",
-    "sourceNote": "Focus3 2E Unit5 Lesson1 Video 19 BBC — Лилия Бирецкая"
+    "sourceNote": "Focus3 2E Unit5 Lesson1 Video 19 BBC — Лилия Бирецкая",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=YC5m4AXVCkI"
   },
   {
     "number": "20",
@@ -362,10 +345,10 @@
     "pages": [
       62
     ],
-    "provider": "youtube",
     "youtube": "3wex0Gs3yUw",
-    "url": "https://www.youtube.com/watch?v=3wex0Gs3yUw",
-    "sourceNote": "English Studio: Focus 3 5.2 Articles, 5:02. Original animation verified visually."
+    "sourceNote": "English Studio: Focus 3 5.2 Articles, 5:02. Original animation verified visually.",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=3wex0Gs3yUw"
   },
   {
     "number": "21",
@@ -388,10 +371,10 @@
     "pages": [
       66
     ],
-    "provider": "youtube",
     "youtube": "_12us9v6LVc",
-    "url": "https://www.youtube.com/watch?v=_12us9v6LVc",
-    "sourceNote": "English Studio: Focus 3 5.5 Non-defining relative clauses, 4:43"
+    "sourceNote": "English Studio: Focus 3 5.5 Non-defining relative clauses, 4:43",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=_12us9v6LVc"
   },
   {
     "number": "23",
@@ -428,6 +411,23 @@
     "provider": "youtube",
     "youtube": "F4ouiIVHLfE",
     "url": "https://www.youtube.com/watch?v=F4ouiIVHLfE"
+  },
+  {
+    "number": "24",
+    "unit": 6,
+    "title": "Caffeine alternatives",
+    "category": "BBC",
+    "pages": [
+      74,
+      126
+    ],
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-59019585_456239102",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "English Duet: Focus 3 Caffeine Alternatives BBC. Opening Gabrielle Weston coffee-drinker narration, placebo/fudge results at 2:17, performance results at 3:44 and final cappuccino / leaf of sage line at 4:02 checked against SB126 and TB199–200. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
   },
   {
     "number": "25",
@@ -488,10 +488,10 @@
       90,
       94
     ],
-    "provider": "youtube",
     "youtube": "xgotqbJtJYs",
-    "url": "https://www.youtube.com/watch?v=xgotqbJtJYs",
-    "sourceNote": "English Studio: L3 7.2 / 7.5 Reported Speech, 4:40"
+    "sourceNote": "English Studio: L3 7.2 / 7.5 Reported Speech, 4:40",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=xgotqbJtJYs"
   },
   {
     "number": "30",
@@ -647,10 +647,10 @@
     "pages": [
       108
     ],
-    "provider": "youtube",
     "youtube": "_ljIApVrXK0",
-    "url": "https://www.youtube.com/watch?v=_ljIApVrXK0",
-    "sourceNote": "English Studio: L3 8.5 Have something done"
+    "sourceNote": "English Studio: L3 8.5 Have something done",
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=_ljIApVrXK0"
   },
   {
     "number": "37",

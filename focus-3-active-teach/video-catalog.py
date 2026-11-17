@@ -11,7 +11,13 @@ GRAMMAR={2:(1,[6],'Dynamic and state verbs'),3:(1,[10],'Present Perfect Continuo
 ROLE={9:(2,28,'Asking for and giving an opinion'),14:(3,42,'Asking for and giving advice'),18:(4,56,'In a restaurant'),23:(5,70,'Describing and contrasting pictures'),31:(7,98,'Asking for permission: scene 1'),32:(7,98,'Asking for permission: scene 2'),33:(7,98,'Asking for permission: scene 3'),38:(8,112,'Advantages and disadvantages')}
 videos=[]
 extra=json.loads((R/'data/video-additions.json').read_text()) if (R/'data/video-additions.json').exists()else{}
-for number,youtube in sorted({**IDS,**{n:v['youtube']for n,v in extra.items()}}.items(),key=lambda p:(int(re.sub('[A-Z]','',p[0])),p[0])):
+entries={n:{'provider':'youtube','youtube':youtube,'url':'https://www.youtube.com/watch?v='+youtube} for n,youtube in IDS.items()}
+for number,entry in extra.items():
+ entry=dict(entry)
+ entry.setdefault('provider','youtube')
+ if entry['provider']=='youtube':entry.setdefault('url','https://www.youtube.com/watch?v='+entry['youtube'])
+ entries[number]=entry
+for number,entry in sorted(entries.items(),key=lambda p:(int(re.sub('[A-Z]','',p[0])),p[0])):
  n=int(re.sub('[A-Z]','',number));variant=number[len(str(n)):]
  if n in BBC:
   unit,title=BBC[n];category='BBC';pages=[4+(unit-1)*14,116+(unit-1)*2]
@@ -20,9 +26,10 @@ for number,youtube in sorted({**IDS,**{n:v['youtube']for n,v in extra.items()}}.
  elif n in GRAMMAR:unit,pages,title=GRAMMAR[n];category='Grammar'
  else:
   unit,page,title=ROLE[n];category='Speaking';pages=[page];title+=' · '+('Person '+variant if variant else 'Scene')
- videos.append({'number':number,'unit':unit,'title':title,'category':category,'pages':pages,'provider':'youtube','youtube':youtube,'url':'https://www.youtube.com/watch?v='+youtube,**{k:v for k,v in extra.get(number,{}).items()if k!='youtube'}})
+ videos.append({'number':number,'unit':unit,'title':title,'category':category,'pages':pages,**entry})
 (R/'data/videos.json').write_text(json.dumps(videos,ensure_ascii=False,indent=2))
-(R/'audit/videos.json').write_text(json.dumps({'checked':'2026-11-17','playlist':'https://www.youtube.com/playlist?list=PLdOdDgjDBFfGwN8PZm8yGsKRuKvHTLrvd','channel':"Lavender’s English",'additionalSources':'See sourceNote in data/video-additions.json for Pearson and individual teacher uploads.', 'alternateEditNumbers':[1], 'partialNumbers':['10D'], 'verification':'Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Video 1 is an original BBC segment with different editing, labelled with timestamps. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.','included':len(videos),'missingNumbers':[n for n in range(1,39)if str(n)not in {v['number']for v in videos}]},ensure_ascii=False,indent=2))
+missing=[n for n in range(1,39)if str(n)not in {v['number']for v in videos}]
+(R/'audit/videos.json').write_text(json.dumps({'checked':'2026-11-17','playlist':'https://www.youtube.com/playlist?list=PLdOdDgjDBFfGwN8PZm8yGsKRuKvHTLrvd','channel':"Lavender’s English",'additionalSources':'See sourceNote in data/video-additions.json for Pearson and individual teacher uploads.', 'alternateEditNumbers':[], 'partialNumbers':[], 'verification':'Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Complete textbook edits of BBC 1, 10 and 24 found on VK Video: playback, opening/middle/closing scenes and visible English subtitles checked against supplied SB/TB videoscripts. Public watch pages play successfully; the embed endpoint returned unavailable during local testing and vk.ru was blocked by browser site-safety on retest. The course therefore opens VK watch pages in a new tab and does not load a VK iframe. The former alternative edit of 1 and partial clip 10D are replaced. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.','included':len(videos),'providers':{p:sum(v['provider']==p for v in videos)for p in sorted({v['provider']for v in videos})},'missingNumbers':missing},ensure_ascii=False,indent=2))
 print('Videos:',len(videos))
 
 # A shareable, searchable list of direct links, independent of the lesson dialog.
@@ -35,7 +42,7 @@ for unit,name in enumerate(names,1):
   if v['unit']!=unit:continue
   note='<p class="note">'+escape(v['editionNote'])+'</p>' if v.get('editionNote') else ''
   rows.append('<li><a target="_blank" rel="noopener" href="'+escape(v['url'],quote=True)+'">'+escape(v['number']+' · '+v['category']+' · '+v['title'])+'</a>'+note+'</li>')
- for number in [10,24]:
-  if BBC[number][0]==unit:rows.append('<li class="note">'+str(number)+' · BBC · '+escape(BBC[number][1])+' — полная учебная версия на YouTube пока не найдена.</li>')
+ for number in [n for n in missing if n in BBC]:
+  if BBC[number][0]==unit:rows.append('<li class="note">'+str(number)+' · BBC · '+escape(BBC[number][1])+' — полная учебная версия пока не найдена.</li>')
  sections.append('<section><h2>Unit '+str(unit)+' · '+escape(name)+'</h2><ul>'+''.join(rows)+'</ul></section>')
-(R/'videos.html').write_text('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Видео Focus 3 · English with Asya</title><link rel="icon" href="../favicon.svg"><style>body{font:17px/1.6 system-ui,sans-serif;margin:0;color:#202526;background:#f4f4ee}main{max-width:860px;margin:auto;padding:32px 24px}a{color:#087e8b;text-underline-offset:3px}h1{font-size:42px;line-height:1.15}h2{font-size:23px;margin-top:36px}li{margin:10px 0}.note{font-size:14px;color:#596466}section{border-top:1px solid #d3d8d6;margin-top:28px}ul{padding-left:22px}</style></head><body><main><a href="index.html">← Открыть курс Focus 3</a><h1>Видео Focus 3<br>Second Edition</h1><p>'+str(len(videos))+' ссылки: BBC, Focus Vlog, грамматика и Speaking, включая варианты Person A/B.</p><p class="note">Проверено 17 ноября 2026. Уроки сопоставлены со страницами учебника. №1 — исходный сюжет BBC с другим монтажом; полные версии №10 и №24 пока не найдены на YouTube. Для №10 добавлен официальный фрагмент 10D.</p>'+''.join(sections)+'</main></body></html>')
+(R/'videos.html').write_text('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Видео Focus 3 · English with Asya</title><link rel="icon" href="../favicon.svg"><style>body{font:17px/1.6 system-ui,sans-serif;margin:0;color:#202526;background:#f4f4ee}main{max-width:860px;margin:auto;padding:32px 24px}a{color:#087e8b;text-underline-offset:3px}h1{font-size:42px;line-height:1.15}h2{font-size:23px;margin-top:36px}li{margin:10px 0}.note{font-size:14px;color:#596466}section{border-top:1px solid #d3d8d6;margin-top:28px}ul{padding-left:22px}</style></head><body><main><a href="index.html">← Открыть курс Focus 3</a><h1>Видео Focus 3<br>Second Edition</h1><p>'+str(len(videos))+' видео: BBC, Focus Vlog, грамматика и Speaking, включая варианты Person A/B.</p><p class="note">Проверено 17 ноября 2026. Уроки сопоставлены со страницами учебника. Все 38 номеров видео из учебника представлены. Полные учебные версии BBC №1, №10 и №24 открываются на VK Видео в новой вкладке с английскими субтитрами; остальные ролики — на YouTube.</p>'+''.join(sections)+'</main></body></html>')

@@ -1,4 +1,4 @@
-/* One on-demand video player; no autoplay, downloads or tracking iframe until opened. */
+/* YouTube loads on demand; full VK videos open on their public watch pages. */
 (() => {
  'use strict';
  const $=s=>document.querySelector(s), D=window.FOCUS3;
@@ -22,16 +22,27 @@
   }
   $('#videoExternal').href=v.url;
   $('#videoExternal').textContent=`Открыть на ${v.provider==='vk'?'VK Видео':'YouTube'} ↗`;
+  $('#videoExternal').hidden=v.provider==='vk';
   const worksheet=new URL(location.href);worksheet.searchParams.set('book','sb');worksheet.searchParams.set('page',['BBC','Focus Vlog'].includes(v.category)?v.pages.at(-1):v.pages[0]);worksheet.searchParams.delete('ex');
   $('#videoWorksheet').href=worksheet.pathname+worksheet.search;
   $('#videoPlayer').replaceChildren();
+  $('#videoPlayer').classList.toggle('video-external',v.provider==='vk');
+  if(v.provider==='vk'){
+   const link=document.createElement('a');link.className='video-launch';link.href=v.url;link.target='_blank';link.rel='noopener';
+   const icon=document.createElement('span');icon.className='video-launch-icon';icon.textContent='▶';icon.setAttribute('aria-hidden','true');
+   const label=document.createElement('strong');label.textContent='Смотреть полное видео на VK Видео ↗';
+   const hint=document.createElement('span');hint.textContent='Откроется в новой вкладке. Задание останется здесь.';
+   link.append(icon,label,hint);$('#videoPlayer').append(link);
+  }else{
   const frame=document.createElement('iframe');
   const playback=new URLSearchParams({rel:'0'});
   if(Number.isInteger(v.startSeconds)&&v.startSeconds>=0)playback.set('start',v.startSeconds);
   if(Number.isInteger(v.endSeconds)&&v.endSeconds>v.startSeconds)playback.set('end',v.endSeconds);
-  frame.src=v.provider==='vk'?v.embedUrl:`https://www.youtube-nocookie.com/embed/${v.youtube}?${playback}`;
+  frame.src=`https://www.youtube-nocookie.com/embed/${v.youtube}?${playback}`;
   frame.title=v.title;frame.allow='accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
-  $('#videoPlayer').append(frame);$('#videoDetails').hidden=false;
+  $('#videoPlayer').append(frame);
+  }
+  $('#videoDetails').hidden=false;
   if(!$('#videosDialog').open)$('#videosDialog').showModal();
  }
  $('#videos').onclick=()=>{draw();$('#videosDialog').showModal();};

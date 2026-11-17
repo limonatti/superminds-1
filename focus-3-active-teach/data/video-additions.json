@@ -50,37 +50,30 @@
     "sourceNote": "English Studio: L3 8.5 Have something done"
   },
   "1": {
-    "youtube": "WRTc6fX9DDw",
-    "url": "https://www.youtube.com/watch?v=WRTc6fX9DDw&t=1755s",
-    "startSeconds": 1755,
-    "endSeconds": 1953,
-    "editionNote": "Оригинальный сюжет BBC с Алексом Райли, 29:15–32:33. Монтаж и закадровый текст отличаются от версии учебника; фабрика и этапы обработки джинсов те же.",
-    "worksheetTimings": [
-      {
-        "label": "Exercise 4 · интервью на фабрике",
-        "range": "29:15–31:20"
-      },
-      {
-        "label": "Exercise 6 · этапы обработки",
-        "range": "31:21–32:33"
-      }
-    ],
-    "sourceNote": "BBC Three Secrets of the Superbrands (Fashion). Transcript checked against supplied Teacher’s Book; exact textbook edit not found on YouTube."
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-59019585_456239101",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "English Duet: Focus 3 Distressing jeans BBC Unit 1. Opening narration about the worldwide denim market and popular styles, sandpaper sequence at 2:10, crinkle discussion at 3:01 and closing credits inspected; matches supplied TB videoscript. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
   },
-  "10D": {
-    "youtube": "Q4dzhiGHeBo",
-    "title": "A hotel in the clouds · Dragonfly (фрагмент)",
-    "url": "https://www.youtube.com/watch?v=Q4dzhiGHeBo&t=623s",
-    "startSeconds": 623,
-    "endSeconds": 861,
-    "partial": true,
-    "editionNote": "Фрагмент на официальном канале BBC The Travel Edit: канатная дорога Dragonfly и проверка спасательной системы. Подходит для Exercise 5, вопросы 6–8. Начало учебного видео про отель и смотровую башню здесь отсутствует.",
-    "worksheetTimings": [
-      {
-        "label": "Exercise 5 · вопросы 6–8",
-        "range": "10:23–14:21"
-      }
-    ],
-    "sourceNote": "BBC Studios / The Travel Edit, Five of the World’s Craziest Hotels. Visible English transcript compared with SB p.120 questions 5.6–5.8 and supplied TB videoscript. Full textbook edit 10 not found."
+  "10": {
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-12983196_456241465",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "ЖИВОЙ АНГЛИЙСКИЙ: A hotel in the clouds - Level B1; description explicitly identifies Focus 3 Unit 3. 5:37 listing, 5:38 player. Opening private-reserve narration, observation tower / fear of heights at 2:35 and rope rescue at 5:03 checked against SB120 and TB videoscript. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
+  },
+  "24": {
+    "provider": "vk",
+    "url": "https://vkvideo.ru/video-59019585_456239102",
+    "editionNote": "Полная учебная версия BBC с английскими субтитрами. Открывается на VK Видео в новой вкладке.",
+    "completeness": "full-textbook",
+    "verifiedDate": "2026-11-17",
+    "sourceNote": "English Duet: Focus 3 Caffeine Alternatives BBC. Opening Gabrielle Weston coffee-drinker narration, placebo/fudge results at 2:17, performance results at 3:44 and final cappuccino / leaf of sage line at 4:02 checked against SB126 and TB199–200. Embed URL copied from the public Share > Embed dialog; no video downloaded.",
+    "playback": "external"
   }
 }

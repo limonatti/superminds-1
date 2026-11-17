@@ -3,16 +3,13 @@
   "playlist": "https://www.youtube.com/playlist?list=PLdOdDgjDBFfGwN8PZm8yGsKRuKvHTLrvd",
   "channel": "Lavender’s English",
   "additionalSources": "See sourceNote in data/video-additions.json for Pearson and individual teacher uploads.",
-  "alternateEditNumbers": [
-    1
-  ],
-  "partialNumbers": [
-    "10D"
-  ],
-  "verification": "Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Video 1 is an original BBC segment with different editing, labelled with timestamps. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.",
-  "included": 54,
-  "missingNumbers": [
-    10,
-    24
-  ]
+  "alternateEditNumbers": [],
+  "partialNumbers": [],
+  "verification": "Playlist titles and video numbers inspected in YouTube, mapped against the supplied SB/TB. Individual grammar/BBC additions checked against book topics and animation footage. Complete textbook edits of BBC 1, 10 and 24 found on VK Video: playback, opening/middle/closing scenes and visible English subtitles checked against supplied SB/TB videoscripts. Public watch pages play successfully; the embed endpoint returned unavailable during local testing and vk.ru was blocked by browser site-safety on retest. The course therefore opens VK watch pages in a new tab and does not load a VK iframe. The former alternative edit of 1 and partial clip 10D are replaced. Three duplicate uploads of video 38 excluded. The lesson numbers in some uploader titles are incorrect; page mapping follows the book.",
+  "included": 55,
+  "providers": {
+    "vk": 3,
+    "youtube": 52
+  },
+  "missingNumbers": []
 }

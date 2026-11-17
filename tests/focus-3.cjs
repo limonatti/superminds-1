@@ -26,7 +26,7 @@ assert(E.has('wb-111-7')&&E.has('wb-111-8'));assert.equal(E.get('wb-111-7').answ
 assert.equal(D.resources.length,227);for(const r of D.resources){const file=path.join(base,r.path);assert(fs.existsSync(file),r.path);assert(fs.statSync(file).size<100*1024*1024,r.path+' GitHub size');}
 assert.deepEqual(D.tracks.wb,['1.08','1.24','1.42','2.08','2.25','2.44','3.13','3.30']);for(const [i,p]of [7,21,35,49,63,77,91,105].entries())assert.deepEqual(pages.get('wb-'+p).tracks,[D.tracks.wb[i]]);
 assert.equal(D.tracks.sb.length,140);assert.equal(D.tracks.ws.length,64);for(const b of ['sb','ws'])for(const t of D.tracks[b])assert(fs.existsSync(path.join(base,'media/'+b+'-'+t+'.mp3')));for(const p of D.pages)for(const t of p.tracks)assert([...D.tracks.sb,...D.tracks.ws].includes(t));
-assert.equal(new Set(D.videos.map(v=>v.number)).size,D.videos.length);for(const v of D.videos){assert(/^[\w-]{11}$/.test(v.youtube));for(const p of v.pages)assert(pages.has('sb-'+p));}
+assert.equal(new Set(D.videos.map(v=>v.number)).size,D.videos.length);for(let n=1;n<=38;n++)assert(D.videos.some(v=>v.number===String(n)),'complete textbook video '+n);assert(!D.videos.some(v=>v.partial||v.number==='10D'));for(const v of D.videos){if(v.provider==='youtube')assert(/^[\w-]{11}$/.test(v.youtube));else {assert.equal(v.provider,'vk');assert.equal(new URL(v.url).hostname,'vkvideo.ru');assert.equal(v.playback,'external');assert(!v.embedUrl);assert.equal(v.completeness,'full-textbook');assert(!v.startSeconds&&!v.endSeconds);}for(const p of v.pages)assert(pages.has('sb-'+p));}
 // Independent samples from each unit, plus edge cases in the scanned answer key.
 const samples={
  'sb-7-4':['F','T','T','T','F','T'],

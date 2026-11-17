@@ -57,3 +57,5 @@
 #exercise .answer-row.correct{border-color:#286141}#exercise .answer-row.incorrect{border-color:#a43a32}
 #exercise .interaction-previous{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
 #exercise .interaction-bank button:focus-visible,#exercise .choice-slot:focus-visible,#exercise .choice-buttons button:focus-visible{outline:3px solid #722f42;outline-offset:3px}
+
+#videoPlayer.video-external{aspect-ratio:auto}.video-launch{display:flex;min-height:220px;padding:28px 24px;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:#fff;text-decoration:none}.video-launch:hover{background:#34302e;color:#fff}.video-launch:focus-visible{outline:3px solid #fff;outline-offset:-6px}.video-launch-icon{font-size:38px;line-height:1}.video-launch strong{font-size:18px}.video-launch>span:last-child{font-size:14px;line-height:1.5;color:#ded9d5}
