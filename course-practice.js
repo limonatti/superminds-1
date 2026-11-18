@@ -35,7 +35,7 @@ function open(spec,meta,store,trigger){
  const instruction=el('div');instruction.style.whiteSpace='pre-wrap';if(spec.html)instruction.innerHTML=spec.html;else instruction.textContent=spec.prompt||'';dialog.append(instruction);
  if(spec.image){const img=el('img');img.src=spec.image;img.alt='Иллюстрация к упражнению';img.style.maxWidth='100%';dialog.append(img)}
  if(spec.audio){const audio=el('audio');audio.src=spec.audio;audio.controls=true;audio.preload='none';dialog.append(audio)}
- else if(spec.speech){const audio=el('button','Прослушать');audio.type='button';audio.onclick=()=>root.SM_speak?root.SM_speak(spec.speech):speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(spec.speech),{lang:'en-US'}));dialog.append(audio)}
+ else if(spec.speech){const text=el('p',spec.speech,'practice-reading');text.lang='en';dialog.append(text)}
  const prior=store.records[meta.id]||{},values=JSON.parse(JSON.stringify(prior.values||[]));let results=prior.results||[],done=!!prior.done,revision=0;
  const rows=[],refreshers=[];
  const feedback=el('p','','practice-feedback');feedback.setAttribute('role','status');
@@ -68,11 +68,11 @@ function open(spec,meta,store,trigger){
   revision++;values.splice(0,values.length,...JSON.parse(JSON.stringify(record.values||[])));results=record.results||[];done=!!record.done;
   rows.forEach((row,i)=>{const input=row.querySelector('input,textarea,select');if(input)input.value=values[i]??''});refreshers.forEach(fn=>fn());showResults();
  };
- dialog.append(check,feedback);dialog.addEventListener('close',()=>{dialog.querySelectorAll('audio').forEach(a=>a.pause());trigger.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(store);dialog.showModal();CourseWorkUI.mount();showResults();
+ dialog.append(check,feedback);dialog.addEventListener('close',()=>{dialog.querySelectorAll('audio').forEach(a=>a.pause());trigger.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(store);dialog.showModal();CourseWorkUI.mount();showResults();root.CourseFocus?.mount({dialog,id:meta.id,course:meta.course,title:meta.title||'Упражнение',location:meta.unit?'Unit '+meta.unit:'Практика',responses:dialog});
 }
 function wrap(node,meta){
  const holder=el('div'),preview=el('button',meta.title||'Открыть упражнение','coursework-preview');preview.type='button';holder.append(preview);
- preview.onclick=async()=>{const ctx=storeFor(meta.course);await ctx.ready;if(dialog?.open)dialog.close();dialog?.remove();dialog=el('dialog','','coursework-dialog');dialog.setAttribute('aria-label',meta.title||'Упражнение');const close=el('button','×','coursework-close');close.setAttribute('aria-label','Закрыть упражнение');close.onclick=()=>dialog.close();dialog.append(close,node);dialog.addEventListener('close',()=>{node.remove();preview.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(ctx.store);dialog.showModal();CourseWorkUI.mount()};return holder;
+ preview.onclick=async()=>{const ctx=storeFor(meta.course);await ctx.ready;if(dialog?.open)dialog.close();dialog?.remove();dialog=el('dialog','','coursework-dialog');dialog.setAttribute('aria-label',meta.title||'Упражнение');const close=el('button','×','coursework-close');close.setAttribute('aria-label','Закрыть упражнение');close.onclick=()=>dialog.close();dialog.append(close,node);dialog.addEventListener('close',()=>{node.remove();preview.focus()},{once:true});document.body.append(dialog);CourseWorkUI.bind(ctx.store);dialog.showModal();CourseWorkUI.mount();root.CourseFocus?.mount({dialog,id:meta.id||meta.title,course:meta.course,title:meta.title||'Упражнение',responses:dialog})};return holder;
 }
 function legacy(kind,t,n,meta){
  let spec={html:t.q||'Соедини пары',fields:[],normalize:meta.normalize};

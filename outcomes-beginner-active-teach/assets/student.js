@@ -18,6 +18,7 @@
   $$('[data-exercise]').forEach(b=>b.onclick=()=>openTask(list.find(e=>e.id===b.dataset.exercise)));
   if($('#workDownload'))$('#workDownload').onclick=download;
   window.OutcomesFocus?.home({book:S.book,unit:S.unit,answers,open:id=>{const entry=Object.entries(bank).find(([,tasks])=>tasks.some(e=>e.id===id));if(!entry)return;const task=entry[1].find(e=>e.id===id);saveDraft();active=null;if(S.id!==+entry[0].split(':')[1])go(+entry[0].split(':')[1]);openTask(task)}});
+  focusHome();
  }
  function download(){const blob=new Blob([JSON.stringify({course:COURSE,answers},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='outcomes-my-answers.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  function workLabel(e){const r=answers[e.id];if(r?.grade?.revision===e.check?.revision&&r.grade.total)return `${r.grade.correct}/${r.grade.total} верно${r.assisted?' · с подсказкой':''}`;return OutcomesGrader.isComplete(e.check,r)?'Выполнено':r?'Черновик':e.check?.mode==='items'?'Проверить':'Открыть'}
@@ -34,9 +35,10 @@
   Object.assign(frame.style,{width:width+'px',height:height*h+'px'});Object.assign(img.style,{width:full+'px',left:-full*x+'px',top:-height*y+'px'});
   $('#taskZoomReset').textContent=Math.round(exerciseZoom*100)+'%';$('#taskFullPage').textContent=fullSource?'Только задание':'Вся страница';$('#taskFullPage').setAttribute('aria-pressed',fullSource);
  }
- function taskSequence(){return allPages().filter(p=>!window.OutcomesFocus?.config(active)||p.unit===5).flatMap(p=>(bank[source()+':'+p.id]||[]).map(e=>({e,page:p.id})))}
+ function taskSequence(){return allPages().filter(p=>!active||p.unit===active.unit).flatMap(p=>(bank[source()+':'+p.id]||[]).map(e=>({e,page:p.id})))}
  function navigateTask(delta){const tasks=taskSequence(),i=tasks.findIndex(t=>t.e.id===active?.id),next=tasks[i+delta];if(!next)return;saveDraft();active=null;if(next.page!==S.id)go(next.page);openTask(next.e)}
  function openTask(e){
+  window.CourseFocus?.reset($('#modal'));
   if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;e=window.OutcomesFocus?.prepare(e)||e;shownRecord=JSON.stringify(answers[e.id]||{});if(e.answerMigration)answers[e.id]=OutcomesAnswerMigration.migrate(e,answers[e.id]);if(answers[e.id])answers[e.id]=OutcomesAnswerMigration.regrade(e,answers[e.id],OutcomesGrader);
   if(!$('#modal').open)exerciseTrigger=document.activeElement;$$('audio').forEach(a=>a.pause());exerciseZoom=1;fullSource=false;active=e;const p=current(),record=answers[e.id]||{values:[],done:false},auto=e.check?.mode==='items',oral=e.responseMode==='oral';
   checked=Boolean(record.grade&&record.grade.revision===e.check?.revision);revealed=false;
@@ -61,6 +63,7 @@
   liveView();renderLiveAnswers();
   OutcomesPractice.enhance({exercise:e,record,save:()=>saveDraft(),course:D});window.OutcomesFocus?.mount({exercise:e,record,save:()=>saveDraft(),sequence:taskSequence(),navigate:id=>{const next=taskSequence().find(t=>t.e.id===id);if(!next)return;saveDraft();active=null;if(next.page!==S.id)go(next.page);openTask(next.e)}});if(checked&&auto)renderFeedback(OutcomesGrader.check(e.check,record.values));
   $('#modalTitle').tabIndex=-1;$('#modalTitle').focus({preventScroll:true});
+  focusDialog();
  }
  let skipDragClick=false;
  document.addEventListener('click',ev=>{if(skipDragClick){ev.preventDefault();ev.stopImmediatePropagation();skipDragClick=false}},true);
@@ -196,4 +199,9 @@
  });
 
  renderTasks();init();
+
+ function focusTasks(){return allPages().filter(p=>p.unit===current().unit).flatMap(p=>(bank[source()+':'+p.id]||[]).map(e=>({id:e.id,label:e.n,title:e.instruction,page:p.page,done:OutcomesGrader.isComplete(e.check,answers[e.id]),hasAnswer:!!answers[e.id]?.values?.some(v=>String(v).trim())})));}
+ function focusOpen(id){const p=allPages().find(p=>(bank[source()+':'+p.id]||[]).some(e=>e.id===id));if(!p)return;saveDraft();go(p.id);openTask(bank[source()+':'+p.id].find(e=>e.id===id));}
+ function focusHome(){if(!window.CourseFocus)return;const custom=(source()==='wb'&&current().unit===5)||!['sb','wb','grammar'].includes(S.book);const host=$('main'),old=host.querySelector('.cf-home');if(custom){if(old)old.hidden=true;host.querySelectorAll('.cf-book-surface').forEach(el=>el.classList.remove('cf-book-surface'));return}CourseFocus.home({host,course:'Outcomes Beginner',location:(source()==='wb'?'Workbook':'Student’s Book')+' · Unit '+current().unit,title:D.units[current().unit-1]||$('#title').textContent,items:focusTasks(),open:focusOpen,surfaces:[$('.heading'),$('.toolbar'),$('.workspace'),$('#thumbs')]});}
+ function focusDialog(){if(!window.CourseFocus||!active||window.OutcomesFocus?.config(active))return;CourseFocus.mount({dialog:$('#modal'),id:active.id,course:'Outcomes Beginner',title:'Exercise '+active.n,instruction:active.instruction,location:(source()==='wb'?'Workbook':'Student’s Book')+' · стр. '+active.page,tasks:focusTasks(),navigate:focusOpen,onClose:focusHome});}
 })();

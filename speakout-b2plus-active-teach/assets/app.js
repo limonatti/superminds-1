@@ -117,6 +117,7 @@ function goPage(n) {
   url.searchParams.set('book', S.book); url.searchParams.set('page', printed);
   history.replaceState(null, '', url);
   if (window.B2Store?.ready) window.B2Store.openPage(pkey());
+  focusHome();
 }
 function lessonAt(book, sheet) {
   const printed = sheet - 1 + D.pages[book === 'sb' ? 'sbOffset' : 'wbOffset'];
@@ -984,3 +985,8 @@ if(window.SpeakoutAccountStore) {
     if(e.key?.startsWith('sb-')&&e.key.endsWith('-auth-token'))window.SM?.presentationSession().then(u=>B2Store.switchUser(u));
   });
 }
+
+function focusTasks(){const unit=lessonAt(S.book,S.page)?.unit;return Object.entries(window.SPEAKOUT_EXERCISES||{}).filter(([key])=>{const[b,n]=key.split(':');return b===S.book&&(unit?lessonAt(b,+n)?.unit===unit:key===pkey())}).flatMap(([key,items])=>items.map(e=>({id:e.id,label:e.label,title:CourseFocus.title(e),page:+key.split(':')[1]+(S.book==='sb'?1:2),key,exercise:e,hasAnswer:Object.entries(window.B2Store?.answers(key)||{}).some(([k,v])=>k.startsWith(e.id+':')&&String(v?.value||'').trim())})));}
+async function focusOpen(id){const t=focusTasks().find(t=>t.id===id);if(!t)return;goPage(+t.key.split(':')[1]);try{await $('#pageImg').decode()}catch{}if(pkey()===t.key)window.B2Exercises.open(t.exercise,t.key);}
+function focusHome(){if(!window.CourseFocus)return;const unit=lessonAt(S.book,S.page)?.unit;CourseFocus.home({host:$('#main'),course:'Speakout B2+',location:(S.book==='sb'?'Student’s Book':'Workbook')+(unit?' · Unit '+unit:''),title:unit?D.unitNames[unit]:$('#crumb').textContent,items:focusTasks(),open:focusOpen,units:Array.from({length:8},(_,i)=>({value:String(i+1),label:'Unit '+(i+1)+' · '+D.unitNames[i+1],selected:unit===i+1})),selectUnit:value=>{const l=D.lessons.find(l=>l.unit===Number(value)&&l.letter==='A');if(l)goPage(l[S.book+'Idx']+1)},surfaces:[$('#stage'),$('#dock')]});}
+window.B2Focus={tasks:focusTasks,open:focusOpen};

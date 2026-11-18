@@ -32,8 +32,10 @@ function render(){
  $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book==='ws'?'sb':book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
  $('#trainer').href='../trainer.html?course=focus-1'+(unit==='extra'?'':'&unit=f1-u'+unit);$('#vocabulary').href='../vocabulary.html?course=focus-1';
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
+ focusHome();
 }
 function openExercise(id){
+ window.CourseFocus?.reset($('#exercise'));
  $$('audio').forEach(a=>a.pause());
  active=page.exercises.find(e=>e.id===id)||(D.legacyExercises||[]).find(e=>e.id===id&&e.book===page.book&&e.page===page.page);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
@@ -50,8 +52,9 @@ function openExercise(id){
  $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key||(!assigner?.allowed&&!(responses[id]?.score&&responses[id]?.answerVersion===active.answerVersion)&&!vals.some(v=>v.trim()));$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
  $('#oralComplete')?.addEventListener('click',ev=>{const field=$('#reflection'),marker='Свободная часть выполнена устно.',done=field.value.includes(marker);field.value=done?field.value.replace(marker,'').trim():[field.value,marker].filter(Boolean).join('\n');ev.currentTarget.setAttribute('aria-pressed',String(!done));field.dispatchEvent(new Event('input',{bubbles:true}));});
- window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));if(!$('#exercise').open)$('#exercise').showModal();window.FocusSource.mount($('#solutionOriginal'),active.id);window.FocusActivity.bind($('#fields'),active);updateExerciseNavigation();updateAssignMarkers();
+ window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.mount($('#solutionOriginal'),active.id);window.ExerciseSource.controls($('#solutionOriginal'));window.FocusActivity.bind($('#fields'),active);updateExerciseNavigation();updateAssignMarkers();
 
+ focusDialog();
 }
 
 function exerciseSequence(){return D.pages.filter(p=>p.book===book).flatMap(p=>p.exercises.map(e=>({page:p,id:e.id})));}
@@ -153,4 +156,9 @@ window.LiveCourse?.connect({
  answer(){if(!active||!$('#exercise').open)return null;const r=responses[active.id]||{},values=r.values||[];return {exercise:active.id,items:values.map((text,i)=>({label:String(active.answerSpec?.[i]?.label||i+1),text,result:r.score?(M.checkField(text,active.answerSpec[i])?'✓ Верно':'✕ Ошибка'):''})).concat(r.reflection?[{label:'Свободная часть',text:r.reflection}]:[])};}
 });
 
+
+function focusTasks(){return D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit)).flatMap(p=>p.exercises.map(e=>{const r=responses[e.id];return {id:e.id,label:e.label,title:CourseFocus.title(e),page:p.page,done:!!(r?.completed||r?.score&&r.score.correct===r.score.total),hasAnswer:!!r?.values?.some(v=>String(v).trim())}}));}
+function focusOpen(id){const p=D.pages.find(p=>p.exercises.some(e=>e.id===id));if(!p)return;book=p.book;unit=String(p.unit);page=p;render();openExercise(id);}
+function focusHome(){if(!window.CourseFocus)return;CourseFocus.home({host:$('main'),course:'Focus 1',location:(book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook')+' · '+(unit==='extra'?'Reference':'Unit '+unit),title:$('#heading').textContent,items:focusTasks(),open:focusOpen,surfaces:[$('.toolbar'),$('.workspace'),$('.intro')]});}
+function focusDialog(){if(!window.CourseFocus||!active)return;CourseFocus.mount({dialog:$('#exercise'),id:active.id,course:'Focus 1',title:'Exercise '+active.label,instruction:CourseFocus.instruction(active),location:$('#exerciseLocation').textContent,tasks:focusTasks(),navigate:focusOpen,onClose:focusHome});}
 })();

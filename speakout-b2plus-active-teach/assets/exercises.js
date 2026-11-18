@@ -34,6 +34,7 @@
     const detail=area.querySelector('details');if(detail)detail.ontoggle=()=>{revealed=detail.open;};
   }
   function render(){
+    window.CourseFocus?.reset(dialog);
     if(!active)return;const s=active.s,img=document.querySelector('#pageImg');
     const [book,sheet]=active.page.split(':'),printed=Number(sheet)+(book==='sb'?1:2),disabled=!window.B2Store?.ready;
     const oral=s.responseMode==='oral',reference=s.responseMode==='reference',completed=window.B2Store?.answers(active.page)[active.id+':completion']?.value==='done';
@@ -82,6 +83,7 @@
     if(s.video)dialog.querySelector('#exerciseVideo').onclick=()=>openVideo(s.video,'Видео к упражнению '+s.label);
     updateKey();
     window.ExercisePlay.attach({dialog,source:dialog.querySelector('.exercise-original'),responses:dialog.querySelector('.focus-responses'),id:active.id,text:s.text||s.data||'',native:!!s.responseMode,fields:s.responseMode?[]:fields.filter(f=>f.n!=='notes'&&f.mode!=='set').map(f=>{const input=[...dialog.querySelectorAll('[data-answer]')].find(el=>el.dataset.answer===f.n),display=window.B2ExercisePolicy.presentation(f);return input&&window.ExercisePlay.inputField(f.n,input,display.answers,display.options,input.closest('.exercise-field'))}).filter(Boolean)});
+    window.CourseFocus?.mount({dialog,id:active.id,course:'Speakout B2+',title:'Exercise '+s.label,instruction:CourseFocus.instruction(s),location:(book==='sb'?'Student’s Book':'Workbook')+' · стр. '+printed,tasks:window.B2Focus?.tasks(),navigate:id=>window.B2Focus?.open(id)});
   }
   dialog.onkeydown=e=>e.stopPropagation();
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});

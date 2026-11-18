@@ -909,6 +909,51 @@
         }
       ],
       "key": ""
+    },
+    "sb-133-2A-1": {
+      "source": "Student’s Book printed page 134, Vocabulary Bank 1A Exercise 2A; supplied Teacher’s Book page 31 and SPEAKOUT_KEYS['1A'], Vocabulary bank: phrasal verbs: friendships, 2A. Two ordered blanks in 4 and 5 retain their original combined answer storage keys.",
+      "properties": {
+        "lesson": "1A",
+        "reviewed1A": true,
+        "instruction": "Complete the questions with the correct form of the phrasal verbs in Ex 1A.",
+        "hint": "В пунктах 4 и 5 два пропуска. Впишите оба ответа по порядку, через запятую.",
+        "text": "2A Complete the questions with the correct form of the phrasal verbs in Ex 1A.\n1 Who did you _____ with most at school?\n2 Are you still friends with this person or have you slowly _____ over the years?\n3 Have you ever _____ with a friend and stopped speaking? Did you make up again?\n4 Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?\n5 Where was the last place a friend _____ you _____ to?\n6 Who was the last friend you _____ in a shop?\n7 Whose home do you _____ to say hello if you’re in the area?\n8 What kinds of things tend to _____ people who are friends?\nB Work in pairs. Take turns to ask and answer the questions in Ex 2A."
+      },
+      "key": "1 hang around\n2 drifted apart\n3 fallen out\n4 take to, warm to\n5 invited, along\n6 bumped into\n7 stop by\n8 come between",
+      "fields": {
+        "1": {
+          "answer": "hang around",
+          "prompt": "1. Who did you _____ with most at school?"
+        },
+        "2": {
+          "answer": "drifted apart",
+          "prompt": "2. Are you still friends with this person or have you slowly _____ over the years?"
+        },
+        "3": {
+          "answer": "fallen out",
+          "prompt": "3. Have you ever _____ with a friend and stopped speaking? Did you make up again?"
+        },
+        "4": {
+          "answer": "take to, warm to",
+          "prompt": "4. Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?"
+        },
+        "5": {
+          "answer": "invited, along",
+          "prompt": "5. Where was the last place a friend _____ you _____ to?"
+        },
+        "6": {
+          "answer": "bumped into",
+          "prompt": "6. Who was the last friend you _____ in a shop?"
+        },
+        "7": {
+          "answer": "stop by",
+          "prompt": "7. Whose home do you _____ to say hello if you’re in the area?"
+        },
+        "8": {
+          "answer": "come between",
+          "prompt": "8. What kinds of things tend to _____ people who are friends?"
+        }
+      }
     }
   },
   "added_exercises": {

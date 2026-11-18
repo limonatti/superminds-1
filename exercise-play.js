@@ -95,6 +95,12 @@ function attach(config){
  if(!positions||typeof positions!=='object'||Array.isArray(positions))positions={};
  const savePositions=()=>{try{localStorage.setItem(positionKey,JSON.stringify(positions))}catch{}};
  if(layout)for(const f of fields){const g=layout.slots?.find(g=>g.field===f.id&&g.parts===1);if(g)f.geometry=g;if(layout.bank?.length&&!f.options?.length)f.options=layout.bank.map(value=>({value,label:value}));}
+ if(root.CourseFocus){
+  const release=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,fields.length?fields:config.fields||[],config.reviewComplete),restore=root.CourseFocus.prepareFields({...config,fields});
+  for(const f of givenFields)f.scope?.classList.add('cf-given');
+  const destroy=()=>{release();restore();for(const f of givenFields)f.scope?.classList.remove('cf-given');dialog.classList.remove('play-dialog','play-native');dialog.removeEventListener('close',destroy)};
+  mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});return;
+ }
  source.dataset.sourceFit='width';
  const releaseKeys=dialog.id==='mdExercise'?()=>{}:gateKeys(dialog,responses,fields.length?fields:config.fields||[],config.reviewComplete);
  if(!fields.length){dialog.classList.add('play-open-answer');const destroy=()=>{releaseKeys();dialog.classList.remove('play-dialog','play-open-answer','play-native');dialog.removeEventListener('close',destroy)};mounted.set(dialog,{destroy});dialog.addEventListener('close',destroy,{once:true});root.ExerciseSource?.change(source,{});return}
