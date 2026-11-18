@@ -39,6 +39,15 @@ function exerciseView(view){
  $$('[data-exercise-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.exerciseView===view)));
 }
 $$('[data-exercise-view]').forEach(button=>button.onclick=()=>exerciseView(button.dataset.exerciseView));
+function focusTaskSource(){
+ const doc=$('#solutionOriginal .focus-document');if(!doc||doc.querySelector('.task-context'))return;
+ const context=[...doc.children].filter(el=>el.matches('.focus-sheet[data-context="true"]'));if(!context.length)return;
+ const details=document.createElement('details');details.className='task-context';details.open=$('#solutionOriginal').dataset.contextOpen==='true';
+ const summary=document.createElement('summary');summary.textContent='Дополнительный материал из учебника';details.append(summary);
+ for(const figure of context)details.append(figure);doc.append(details);
+ details.addEventListener('toggle',()=>{$('#solutionOriginal').dataset.contextOpen=String(details.open);window.ExerciseSource.fit($('#solutionOriginal'));});
+}
+$('#solutionOriginal').addEventListener('exercise-source-render',focusTaskSource,true);
 function openExercise(id){
  active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
@@ -63,9 +72,12 @@ function openExercise(id){
  $('#saveAnswer').textContent=active.responseMode==='oral'?(responses[id]?.completed?'Снять отметку выполнения':'Отметить выполнение'):'Сохранить ответ';if(active.responseMode==='oral')$('#saveAnswer').setAttribute('aria-pressed',String(!!responses[id]?.completed));else $('#saveAnswer').removeAttribute('aria-pressed');$('#resetAnswer').hidden=active.responseMode==='oral';updateKey();
  $$('[data-personal]').forEach(el=>el.addEventListener('change',()=>save(false)));
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
- window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
- if(active.responseMode==='oral'||active.reviewedUnit11||active.nativeInteraction)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
- else if(spec.length) window.ExercisePlay.attach({reviewComplete:()=>M.canReveal(active,responses[active?.id]),dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:window.EXERCISE_GAPS?.[active.id]?active.text:'',fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
+ $('#solutionOriginal').dataset.contextOpen='false';
+ window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();document.body.classList.add('focus-exercise-open');window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
+ // Every task opens with its own visible answer controls. Full-page scans
+ // and the inline workbench must not push those controls below the task.
+ window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
+ focusTaskSource();
  const panels=!$('#exercise .play-workbench');
  $('#exercise').classList.toggle('focus-task-panels',panels);$('#exerciseViews').hidden=!panels;exerciseView('answers');
  for(const selector of ['#solutionColumns','#solutionOriginal','#exerciseResponses'])$(selector).scrollTop=0;
@@ -103,7 +115,7 @@ $('#saveAnswer').onclick=()=>{if(active?.responseMode==='oral'){
  const done=!responses[active.id]?.completed;
  responses[active.id]={values:done?['Устно выполнено']:[],completed:done,answerVersion:active.answerVersion,fieldLabels:['Устное задание'],previousAnswers,updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};persist();sync();openExercise(active.id);
  }else{save(true);sync()}};
-$('#resetAnswer').onclick=()=>{if(!active)return;responses[active.id]={values:[],personalChecks:[],reflection:'',previousAnswers,checks:responses[active.id]?.checks||[],answerVersion:active.answerVersion,updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};persist();sync();openExercise(active.id);};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
+$('#resetAnswer').onclick=()=>{if(!active)return;responses[active.id]={values:[],personalChecks:[],reflection:'',previousAnswers,checks:responses[active.id]?.checks||[],answerVersion:active.answerVersion,updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};persist();sync();openExercise(active.id);};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{document.body.classList.remove('focus-exercise-open');active=null;render();});
 $('#pages').onchange=ev=>{page=list().find(p=>p.id===ev.target.value);render();};
 for(const [id,dir] of [['prev',-1],['next',1]])$('#'+id).onclick=()=>{page=list()[list().indexOf(page)+dir]||page;render();};
 $$('[data-book]').forEach(b=>b.onclick=()=>{book=b.dataset.book;page=null;render();});
@@ -123,7 +135,7 @@ function updateAssignMarkers(){
   const picked=choosing&&assigner.has(e.id);b.classList.toggle('assign-selected',picked);b.classList.toggle('assign-choosing',choosing);
   b.setAttribute('aria-label',`${choosing?'Выбрать':'Открыть'} упражнение ${e.label}`);
   if(choosing)b.setAttribute('aria-pressed',String(picked));else b.removeAttribute('aria-pressed');
-  const span=b.querySelector('span');if(span)span.textContent=choosing?(picked?'✓ Выбрано':'Выбрать'):(responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ');
+  const span=b.matches('.exercise-link')?b.querySelector('span'):null;if(span)span.textContent=choosing?(picked?'✓ Выбрано':'Выбрать'):(responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ');
  });
  $('#assignExercise').hidden=!assigner?.allowed;
  $('#assignExercise').textContent=active&&assigner?.has(active.id)?'Убрать из домашки':'В домашку';

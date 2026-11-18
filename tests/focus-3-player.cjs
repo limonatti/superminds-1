@@ -11,7 +11,15 @@ for(const file of ['exercise-play.js','exercise-source.js','focus-3-active-teach
 const q=s=>w.document.querySelector(s),qa=s=>[...w.document.querySelectorAll(s)];
 (async()=>{await new Promise(r=>setImmediate(r));const fail=[],coverage={},tasks=w.FOCUS3.pages.flatMap(p=>p.exercises.map(e=>({p,e})));let n=0;
 for(const {p,e}of tasks){try{
- live.apply({book:p.book,page:p.page,exercise:e.id});assert(q('#exercise').open);assert(q('#solutionOriginal svg'));let fields=qa('[data-answer]');
+ live.apply({book:p.book,page:p.page,exercise:null});
+ q('#hotspots [data-ex="'+e.id+'"]').click();assert(q('#exercise').open);assert(q('#solutionOriginal svg'));let fields=qa('[data-answer]');
+ assert.equal(q('#exerciseTitle').textContent,'Упражнение '+e.label,e.id+' opens the selected exercise');
+ assert.equal(q('#hotspots [data-ex="'+e.id+'"] .exercise-region-label').textContent,e.label,e.id+' marker keeps its exercise number');
+ assert(w.document.body.classList.contains('focus-exercise-open'),e.id+' background scrolling locked');
+ assert(!q('.play-workbench'),e.id+' answers are separate from the scrolling source');
+ assert(!q('#solutionOriginal .focus-document>.focus-sheet[data-context="true"]'),e.id+' full pages are not mixed with the selected task');
+ assert(qa('#solutionOriginal .task-context').every(d=>!d.open),e.id+' supplementary pages start collapsed');
+ assert(qa('#solutionOriginal .focus-document>.focus-sheet').length,e.id+' selected task remains visible');
  assert(fields.length||e.responseMode==='oral',e.id+' no answer controls');
  if(e.answerSpec.length)assert.equal(fields.length,e.answerSpec.length,e.id+' all answer fields');
  if(e.responseFields)assert.equal(fields.length,e.responseFields.length,e.id+' all manual fields');

@@ -61,6 +61,11 @@
 #videoPlayer.video-external{aspect-ratio:auto}.video-launch{display:flex;min-height:220px;padding:28px 24px;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:#fff;text-decoration:none}.video-launch:hover{background:#34302e;color:#fff}.video-launch:focus-visible{outline:3px solid #fff;outline-offset:-6px}.video-launch-icon{font-size:38px;line-height:1}.video-launch strong{font-size:18px}.video-launch>span:last-child{font-size:14px;line-height:1.5;color:#ded9d5}
 
 /* Native answers must remain beside the source, never below a stack of scans. */
+body.focus-exercise-open{overflow:hidden}
+#exercise .task-context{margin-top:16px;border-top:1px solid var(--line);padding-top:4px}
+#exercise .task-context>summary{min-height:44px;font-weight:600;color:#722f42}
+#exercise .task-context>.focus-sheet{margin-top:12px}
+#exercise .responses-title{font-size:18px;margin:0 0 12px;color:#722f42}
 dialog#exercise.focus-dialog.focus-task-panels[open]{width:min(1280px,calc(100vw - 24px));height:calc(100dvh - 24px);max-height:calc(100dvh - 24px);display:flex!important;overflow:hidden!important}
 #exercise.focus-task-panels #solutionColumns{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr)!important;gap:24px!important;flex:1!important;min-height:0;overflow:hidden!important}
 #exercise.focus-task-panels #solutionOriginal,#exercise.focus-task-panels #exerciseResponses{height:100%!important;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;padding:0 10px 16px 0!important}

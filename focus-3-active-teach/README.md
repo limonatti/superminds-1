@@ -7,7 +7,7 @@ The course uses the existing Focus player, account storage, homework snapshots a
 
 - All 8 units, Student’s Book printed pages 2–159, Workbook 1–175 and Word Store 1–18: 351 page views.
 - 1,528 exercise entries with original task images and saved progress: 1,322 written/choice tasks and 206 oral tasks with a completion control. 914 have automatic checks; free responses and ambiguous answer keys remain available for teacher review.
-- 175 tasks use word banks, choice buttons, multiple selection or personal response controls. Other written exercises use labeled answer fields beside the source page or accurately positioned inline blanks. Printed alternatives and item labels supply controls independently of answer keys.
+- 175 tasks use word banks, choice buttons, multiple selection or personal response controls. Other written exercises use labeled answer fields beside the selected task. Full-page context is collapsed under “Дополнительный материал из учебника”; every task opens with visible native answer controls. Printed alternatives and item labels supply controls independently of answer keys.
 - 140 Student’s Book audio tracks, 64 Wordlist tracks, and 19 test audio files. All eight Workbook Listening Language Practice recording references link to the corresponding supplied Student’s Book tracks.
 - 227 resource files, including the books, photocopiable worksheets and test package. The large Workbook PDF is split losslessly into units and reference material to stay below the GitHub per-file limit.
 - 55 video entries (52 YouTube and 3 VK Video), covering all 38 textbook video numbers, 16 Person A/B variants and one separate teacher explanation. `videos.html` is the shareable link index.
