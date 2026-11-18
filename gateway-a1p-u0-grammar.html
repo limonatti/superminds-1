@@ -34,7 +34,7 @@
   .words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   @media(max-width:620px){.words{grid-template-columns:1fr}}
   .word{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 3px 0 #e3d3ba}
-  .word button{border:none;cursor:pointer;background:#f6ede0;border-radius:50%;width:36px;height:36px;font-size:16px;flex:none}
+  .word button{border:1px solid #dcc8c6;cursor:pointer;background:#f6ede0;border-radius:10px;min-width:78px;min-height:44px;padding:8px 10px;font-size:14px;flex:none}
   .word .en{font-weight:900;font-size:15px}
   .word .tr{font-size:12.5px;color:#8a7a68;font-weight:700}
   .pronbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
@@ -85,6 +85,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
 <link rel="stylesheet" href="coursework.css?v=6b0d7a29">
+<link rel="stylesheet" href="gateway-a1p-starter-review.css?v=59f6a556">
 </head>
 <body>
 <div class="wrap">
@@ -126,7 +127,7 @@
   <div class="foot">Made for @english.with_asya · авторские материалы по программе Gateway A1+ (2nd edition) · Starter unit · грамматика</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=95220d51"></script><script src="coursework-store.js?v=b780e7a7"></script><script src="coursework-ui.js?v=e0f79bf5"></script><script src="course-practice.js?v=233d64df"></script>
+<script src="sm-auth.js?v=95220d51"></script><script src="coursework-store.js?v=b780e7a7"></script><script src="coursework-ui.js?v=e0f79bf5"></script><script src="course-practice.js?v=233d64df"></script><script src="gateway-a1p-starter-review.js?v=38a520a4"></script>
 <script>
 const WORDS=[["bag","рюкзак/сумка"],["board","доска"],["book","книга"],["chair","стул"],["computer","компьютер"],["desk","парта"],["dictionary","словарь"],["door","дверь"],["pen","ручка"],["pencil","карандаш"],["ruler","линейка"],["window","окно"],["black","чёрный"],["blue","синий"],["brown","коричневый"],["green","зелёный"],["grey","серый"],["orange","оранжевый"],["pink","розовый"],["purple","фиолетовый"],["red","красный"],["white","белый"],["yellow","жёлтый"],["Monday","понедельник"],["Saturday","суббота"],["January","январь"],["o'clock","ровно (о времени)"]];
 const PRONWORDS=["dictionary","purple","o'clock","Wednesday","eighth","twelfth"];
@@ -150,69 +151,11 @@ const WBGAPS=[{"q":"Напиши словом 10: ___ .","a":["ten"]},{"q":"На
 
 const wbox=document.getElementById("words");
 if(wbox)WORDS.forEach(w=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<button>🔊</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
-  d.querySelector("button").onclick=()=>say(w[0]);wbox.appendChild(d);});
-/* Голосовой движок: приоритет живых голосов (Edge natural / Google / premium), выбор пола */
-let SM_VOICES=[];
-function SM_loadVoices(){try{SM_VOICES=speechSynthesis.getVoices()||[];}catch(e){SM_VOICES=[];}}
-SM_loadVoices();try{speechSynthesis.onvoiceschanged=SM_loadVoices;}catch(e){}
-const _FEM=["female","zira","jenny","aria","samantha","sonia","libby","hazel","karen","victoria","susan","ava","emma","joanna","salli","serena","kate"];
-const _MAL=["male","david","daniel","guy","ryan","george","alex","fred","brian","matthew","oliver","james","arthur","aaron","nathan","tom"];
-function enVoice(g){
-  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
-  let best=null,bs=-1;
-  list.forEach(v=>{
-    const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
-    if(lang.slice(0,2)!=="en")return;
-    let s=0;if(lang==="en-GB")s+=20;else if(lang==="en-US")s+=15;
-    const fem=_FEM.some(x=>n.indexOf(x)>=0);
-    const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
-    if(g==="f"&&fem)s+=25;if(g==="m"&&mal)s+=25;
-    if(g==="f"&&mal&&!fem)s-=20;if(g==="m"&&fem&&!mal)s-=20;
-    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=30;
-    if(n.indexOf("google")>=0)s+=20;
-    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=15;
-    if(n.indexOf("compact")>=0)s-=15;
-    if(s>bs){bs=s;best=v;}
-  });
-  return best;
-}
-function say(t,voice,rate){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voice||enVoice("f");if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-GB";u.rate=rate||0.95;u.pitch=1;speechSynthesis.speak(u);}
-/* Разные голоса для разных персонажей: код спикера "m","f","m2","f2","n"… → свой голос + свой тон/темп */
-function _voicePools(){
-  const list=SM_VOICES.length?SM_VOICES:(speechSynthesis.getVoices()||[]);
-  const male=[],female=[];
-  list.forEach(v=>{const n=(v.name||"").toLowerCase(),lang=(v.lang||"").replace("_","-");
-    if(lang.slice(0,2)!=="en")return;
-    let s=0;if(lang==="en-GB")s+=10;else if(lang==="en-US")s+=6;
-    if(n.indexOf("natural")>=0||n.indexOf("neural")>=0)s+=20;if(n.indexOf("google")>=0)s+=12;
-    if(n.indexOf("premium")>=0||n.indexOf("enhanced")>=0)s+=8;if(n.indexOf("compact")>=0)s-=10;
-    v._score=s;
-    const fem=_FEM.some(x=>n.indexOf(x)>=0);const nm=n.replace(/female/g,"");const mal=_MAL.some(x=>nm.indexOf(x)>=0);
-    if(mal&&!fem)male.push(v);else female.push(v);});
-  male.sort((a,b)=>b._score-a._score);female.sort((a,b)=>b._score-a._score);
-  return {male:male,female:female};
-}
-let _POOLS=null;const _SPK={};
-function speakerStyle(who){
-  who=who||"m";if(_SPK[who])return _SPK[who];
-  if(!_POOLS)_POOLS=_voicePools();
-  const isF=(who.charAt(0)==="f"||who.charAt(0)==="n");
-  const pool=isF?_POOLS.female:_POOLS.male;
-  const idx=Object.keys(_SPK).filter(k=>((k.charAt(0)==="f"||k.charAt(0)==="n"))===isF).length;
-  const voice=pool.length?pool[idx%pool.length]:enVoice(isF?"f":"m");
-  const pitches=[1,1.14,0.88,1.24,0.8,1.06],rates=[0.95,1.0,0.9,1.05,0.88,0.98];
-  const st={voice:voice,pitch:pitches[idx%pitches.length],rate:rates[idx%rates.length]};
-  _SPK[who]=st;return st;
-}
-function playDialog(dlg){speechSynthesis.cancel();dlg.forEach(([who,line])=>{const u=new SpeechSynthesisUtterance(line);const st=speakerStyle(who);if(st.voice){u.voice=st.voice;u.lang=st.voice.lang;}else u.lang="en-GB";u.rate=st.rate;u.pitch=st.pitch;speechSynthesis.speak(u);});}
-var _lp=document.getElementById("lplay");if(_lp)_lp.onclick=()=>playDialog(DIALOG);
-var _ls=document.getElementById("lstop");if(_ls)_ls.onclick=()=>speechSynthesis.cancel();
-var _lsc=document.getElementById("lscript");if(_lsc)_lsc.onclick=()=>{const s=document.getElementById("script");s.style.display=s.style.display==="block"?"none":"block";};
-/* Второе аудирование (если есть DIALOG2) */
-var _lp2=document.getElementById("lplay2");if(_lp2)_lp2.onclick=()=>playDialog(DIALOG2);
-var _ls2=document.getElementById("lstop2");if(_ls2)_ls2.onclick=()=>speechSynthesis.cancel();
-var _lsc2=document.getElementById("lscript2");if(_lsc2)_lsc2.onclick=()=>{const s=document.getElementById("script2");s.style.display=s.style.display==="block"?"none":"block";};
+  d.innerHTML='<button>Перевод</button><div><div class="en">'+w[0]+'</div><div class="tr">'+w[1]+'</div></div>';
+  revealTranslation(d);wbox.appendChild(d);});
+/* Authored dialogues are reading-in-roles tasks. No synthetic speech. */
+for(const suffix of ['', '2']){const b=document.getElementById('lscript'+suffix),text=document.getElementById('script'+suffix);if(b&&text){text.style.display='block';b.textContent='Скрыть текст';b.setAttribute('aria-expanded','true');b.onclick=()=>{const show=text.style.display==='none';text.style.display=show?'block':'none';b.textContent=show?'Скрыть текст':'Показать текст';b.setAttribute('aria-expanded',String(show));};}}
+function revealTranslation(card){const text=card.querySelector('.tr'),b=card.querySelector('button');text.hidden=true;b.textContent='Перевод';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Перевод: '+card.querySelector('.en').textContent);b.onclick=()=>{text.hidden=!text.hidden;b.setAttribute('aria-expanded',String(!text.hidden));};}
 /* ---- Логирование прогресса в Supabase (если ученик вошёл) ---- */
 const HW={course:"gateway-a1p",unit:0};
 const _T0=Date.now();let _GI=0;const _ATT=[];let _LOGGED=false,_flushT=null;
@@ -222,8 +165,8 @@ window.addEventListener("pagehide",_flush);document.addEventListener("visibility
 (async function(){try{if(window.SM&&SM.isCloud){const u=await SM.getUser();_LOGGED=!!u;_ATT_OWNER=u?.id||null;if(!u){const b=document.createElement("div");b.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#7c2340;color:#fff;font:800 12.5px 'Nunito',sans-serif;padding:9px 12px;text-align:center;z-index:99";b.innerHTML='Войди в <a href="cabinet.html" style="color:#ffd27a;text-decoration:underline">кабинет ученика</a>, чтобы результат увидел учитель';document.body.appendChild(b);}}}catch(e){}})();
 let _ATT_OWNER=null;let sc=0,tot=0;
 function bump(){sc++;document.getElementById("sc").textContent=sc;}
-function mcCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("mc",t,n,{course:HW.course,unit:HW.unit,section:sec||"grammar",attempt:gi,log:_log});}
-function gapCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("gap",t,n,{course:HW.course,unit:HW.unit,section:sec||"gap",attempt:gi,log:_log});}
+function mcCard(t,n,sec){tot+=1;const gi=++_GI,meta={course:HW.course,unit:HW.unit,section:sec||"grammar",attempt:gi,log:_log};if(sec==="listening"&&n===3){const spec={html:t.q,fields:[{kind:"choice",options:t.o.map((label,i)=>({label,value:String(i)})),accepted:[String(t.a)]}]};meta.id=GatewayStarterReviewed.legacyId(spec,meta);return CoursePractice.legacy("mc",{...t,q:"What two objects does Adam name?"},n,meta);}return CoursePractice.legacy("mc",t,n,meta);}
+function gapCard(t,n,sec){tot+=1;const gi=++_GI,meta={course:HW.course,unit:HW.unit,section:sec||"gap",attempt:gi,log:_log},index=GAPS.indexOf(t);if(sec==="gap"&&index>=0)return GatewayStarterReviewed.card({html:t.q,fields:[{accepted:t.a}]},{...meta,title:"Упражнение "+n},GatewayStarterReviewed.gapConfigs[index]);return CoursePractice.legacy("gap",t,n,meta);}
 /* Правда / Ложь */
 function tfCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("tf",t,n,{course:HW.course,unit:HW.unit,section:sec||"truefalse",attempt:gi,log:_log});}
 /* True / False / Not Given (IELTS) */
@@ -232,12 +175,12 @@ function tfngCard(t,n,sec){tot+=1;const gi=++_GI;return CoursePractice.legacy("t
 function matchCard(pairs,n,sec){tot+=pairs.length;const gi=++_GI;return CoursePractice.legacy("match",pairs,n,{course:HW.course,unit:HW.unit,section:sec||"match",attempt:gi,log:_log});}
 /* Произношение */
 const pbox=document.getElementById("pron");
-if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent="🔊 "+w;b.onclick=()=>say(w);pbox.appendChild(b);});
-/* Чанки — учим (с озвучкой) */
+if(pbox)PRONWORDS.forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent=w;b.setAttribute("aria-pressed","false");b.onclick=()=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));b.textContent=(on?"✓ ":"")+w;};pbox.appendChild(b);});
+/* Чанки — карточки с переводом */
 const cbox=document.getElementById("chunks");
 if(cbox)CHUNKS.forEach(c=>{const d=document.createElement("div");d.className="word";
-  d.innerHTML='<button>🔊</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
-  d.querySelector("button").onclick=()=>say(c[0]);cbox.appendChild(d);});
+  d.innerHTML='<button>Перевод</button><div><div class="en">'+c[0]+'</div><div class="tr">'+c[1]+'</div></div>';
+  revealTranslation(d);cbox.appendChild(d);});
 /* Чанки — тренажёр: выбери перевод */
 function shuffle(a){return CoursePractice.shuffle(a)}
 const chpr=document.getElementById("chpr");
@@ -315,7 +258,7 @@ if(wb){
 }
 var _tot=document.getElementById("tot");if(_tot)_tot.textContent=tot;
 
-for(const prompt of document.querySelectorAll('.spkcard,.hw')){const text=prompt.textContent.trim();if(text)prompt.after(CoursePractice.card({prompt:text,fields:[{kind:'open',prompt:'Мой ответ / заметки'}]},{course:HW.course,unit:HW.unit,section:'open',title:'Свой ответ'}));}
+for(const prompt of document.querySelectorAll('.spkcard,.hw')){const text=prompt.textContent.trim(),index=[...document.querySelectorAll('#spk .spkcard')].indexOf(prompt);if(text){const spec={prompt:text,fields:[{kind:'open',prompt:'Мой ответ / заметки'}]},meta={course:HW.course,unit:HW.unit,section:'open',title:index>=0?'Говорим · '+(index+1):'Свой ответ'};prompt.after(index>=0?GatewayStarterReviewed.card(spec,meta,{oral:index}):CoursePractice.card(spec,meta));}}
 </script>
 </body>
 </html>
