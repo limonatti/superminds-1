@@ -1,0 +1,33 @@
+{
+  "checked": 1528,
+  "fail": [],
+  "errors": [],
+  "coverage": {
+    "sb unit 1": 86,
+    "sb unit 2": 78,
+    "sb unit 3": 83,
+    "sb unit 4": 82,
+    "sb unit 5": 82,
+    "sb unit 6": 80,
+    "sb unit 7": 83,
+    "sb unit 8": 80,
+    "sb unit extra": 192,
+    "wb unit 1": 59,
+    "wb unit 2": 61,
+    "wb unit 3": 63,
+    "wb unit 4": 58,
+    "wb unit 5": 57,
+    "wb unit 6": 59,
+    "wb unit 7": 59,
+    "wb unit 8": 57,
+    "wb unit extra": 153,
+    "ws unit 1": 7,
+    "ws unit 2": 7,
+    "ws unit 3": 7,
+    "ws unit 4": 7,
+    "ws unit 5": 7,
+    "ws unit 6": 7,
+    "ws unit 7": 7,
+    "ws unit 8": 7
+  }
+}

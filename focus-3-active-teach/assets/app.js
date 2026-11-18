@@ -64,7 +64,7 @@ function openExercise(id){
  $$('[data-personal]').forEach(el=>el.addEventListener('change',()=>save(false)));
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
  window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
- if(active.reviewedUnit11||active.nativeInteraction)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
+ if(active.responseMode==='oral'||active.reviewedUnit11||active.nativeInteraction)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
  else if(spec.length) window.ExercisePlay.attach({reviewComplete:()=>M.canReveal(active,responses[active?.id]),dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:window.EXERCISE_GAPS?.[active.id]?active.text:'',fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
  const panels=!$('#exercise .play-workbench');
  $('#exercise').classList.toggle('focus-task-panels',panels);$('#exerciseViews').hidden=!panels;exerciseView('answers');
@@ -74,11 +74,12 @@ function updateKey(){const allowed=M.canReveal(active,responses[active?.id]);$('
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
 function save(explicit){
  if(!active||!ready)return;
+ if(active.responseMode==='oral'){persist();return;}
  const values=$$('[data-answer]').map(e=>e.value),old=responses[active.id];
  const personalChecks=$$('[data-personal]:checked').map(e=>Number(e.dataset.personal));
  const reflection=active.personalChoices?(personalChecks.length?personalChecks.map(i=>(i+1)+'. '+active.personalChoices[i]).join('\n'):'Личные утверждения не отмечены.'):$('#reflection')?.value||'';
  const score=old?.answerVersion===active.answerVersion&&JSON.stringify(old.values)===JSON.stringify(values)?old.score:undefined;
- responses[active.id]={values,score,checks:old?.checks||[],reflection,personalChecks,attempted:!!((explicit||old?.attempted&&JSON.stringify(old.values)===JSON.stringify(values))&&values.some(v=>v.trim())),previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
+ responses[active.id]={values,score,checks:old?.checks||[],reflection,personalChecks,attempted:!!((explicit||old?.attempted&&JSON.stringify(old.values)===JSON.stringify(values))&&values.some(v=>v.trim())),previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec?.length?active.answerSpec:active.responseFields||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
  persist();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
  updateKey();
  if(explicit)$('#feedback').textContent=user?'Ответ сохранён. Синхронизация с аккаунтом…':'Ответ сохранён на этом устройстве.';
@@ -168,7 +169,7 @@ window.LiveCourse?.connect({
  apply(v){const target=D.pages.find(p=>p.book===v.book&&p.page===v.page);if(!target||v.exercise&&!target.exercises.some(e=>e.id===v.exercise))return;
   book=v.book;page=target;unit=String(page.unit);render();if(v.exercise)openExercise(v.exercise);else if($('#exercise').open)$('#exercise').close();},
  host:()=>$('#exercise').open?$('#answerForm'):null,
- answer(){if(!active||!$('#exercise').open)return null;const r=responses[active.id]||{},values=r.values||[];return {exercise:active.id,items:values.map((text,i)=>({label:String(active.answerSpec?.[i]?.label||i+1),text,result:r.score?(M.checkField(text,active.answerSpec[i])?'✓ Верно':'✕ Ошибка'):''})).concat(r.reflection?[{label:'Свободная часть',text:r.reflection}]:[],r.completed?[{label:'Устное задание',text:'Отмечено выполненным'}]:[])};}
+ answer(){if(!active||!$('#exercise').open)return null;const r=responses[active.id]||{},values=r.values||[];return {exercise:active.id,items:values.map((text,i)=>({label:String(active.answerSpec?.[i]?.label||active.responseFields?.[i]?.label||i+1),text,result:r.score?(M.checkField(text,active.answerSpec[i])?'✓ Верно':'✕ Ошибка'):''})).concat(r.reflection?[{label:'Свободная часть',text:r.reflection}]:[],r.completed?[{label:'Устное задание',text:'Отмечено выполненным'}]:[])};}
 });
 
 })();

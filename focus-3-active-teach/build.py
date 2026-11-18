@@ -17,7 +17,7 @@ def key_spec(fields):
     result = []
     for label, value in fields.items():
         value = clean(value)
-        if not value or len(value)>300 or re.search(r'own answers|possible|e\.g\.|any order|Exercise|\baccept\b|example|answers vary',value,re.I): return []
+        if not value or len(value)>300 or re.search(r'own answers|possible|e\.g\.|any order|\bExercise\s+\d|\baccept\b|example|answers vary',value,re.I): return []
         variants = [value]
         if '/' in value:
             parts = [p.strip() for p in value.split('/')]
@@ -30,6 +30,7 @@ def key_spec(fields):
                         if left.endswith(('n’t', "n't")) and tail and tail[0]=='not':tail=tail[1:]
                         left += ' ' + ' '.join(tail)
                 variants += [left,right]
+            elif all(parts) and all(len(p.split())==1 for p in parts):variants=parts
             else: return []
         if '(' in value:
             variants.append(clean(re.sub(r'\([^)]*\)','',value)))
@@ -221,7 +222,7 @@ for book in ['sb','wb','ws']:
 groups={e['label']:(pg,e) for pg in pages if pg['book']=='ws' for e in pg['exercises'] if re.fullmatch(r'\d[A-F]',e['label'])}
 for pg in pages:
     for ex in pg['exercises']:
-        match=re.search(r'Complete WORD STORE (\d[A-F])',ex['text'],re.I)
+        match=re.search(r'(?:Complete(?: the collocations in)?|Match the (?:pictures|photos) in) WORD STORE (\d[A-F])',ex['text'],re.I)
         if pg['book']=='sb' and match and match[1] in groups:
             ws,target=groups[match[1]];sources[ex['id']]['sources']=sources[target['id']]['sources']+sources[ex['id']]['sources']
             ex['wordStore']=target['id']
@@ -256,6 +257,8 @@ for e in final_exercises.values():
             if k in target:e[k]=target[k]
             else:e.pop(k,None)
         if target.get('reviewed'):gaps.pop(e['id'],None)
+from interactivity import enrich_interactivity
+enrich_interactivity(pages,sources,gaps,TEXT,key_spec)
 videos=json.loads((R/'data/videos.json').read_text()) if (R/'data/videos.json').exists() else []
 D={'id':'focus-3','units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':list(WB_AUDIO.values()),'ws':[p.stem[3:] for p in sorted((R/'media').glob('ws-*.mp3'))]},'resources':json.loads((R/'data/resources.json').read_text()),'videos':videos}
 (R/'assets/course.js').write_text('window.FOCUS3 = '+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';\n')
