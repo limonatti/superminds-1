@@ -1,0 +1,41 @@
+/* Approved Focus shell for published legacy lessons and course catalogues.
+   Scoped to explicitly listed teaching pages, never the teacher/admin tools. */
+body.course-focus-surface{--bg:#faf7f2;--card:#fffdf9;--ink:#302b2a;--muted:#72665f;--shadow:none;--shadow-lg:none;background:#faf7f2;color:#302b2a;font-family:'Avenir Next','Trebuchet MS',Arial,sans-serif;line-height:1.55}
+.course-focus-surface :is(h1,h2,h3,.f,.home,.act,.go,.chip,.lbtn){font-family:inherit}
+.course-focus-surface :is(h1,h2,h3){color:#772e43;font-weight:650;letter-spacing:-.025em}
+.course-focus-surface h1{font-size:clamp(28px,4.5vw,44px);line-height:1.2}
+.course-focus-surface .wrap{max-width:1100px}
+.course-focus-surface :is(.head,.hb){text-align:left}
+.course-focus-surface :is(.sub,.d,.ru,.sec-i){color:#72665f;font-weight:400}
+.course-focus-surface :is(.home,.act,.go,.chip,.lbtn,.tab){min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:7px;font-size:14px;font-weight:500;padding:10px 14px;box-shadow:none;text-decoration:none}
+.course-focus-surface :is(.home,.act,.go,.lbtn){background:#772e43;color:#fffdf9;border:1px solid #772e43}
+.course-focus-surface :is(.home.alt,.g2,.g3,.chip){background:#fffdf9;color:#772e43;border:1px solid #cdb6b2}
+.course-focus-surface :is(.hero,.card,.word,.unit,.u.ready,.u.soon,.progwrap,.group){border:1px solid #d6ccc2;border-radius:12px;background:#fffdf9;box-shadow:none}
+.course-focus-surface :is(.u.ready:hover,.unit:hover){transform:none;box-shadow:none;border-color:#a98087}
+.course-focus-surface .hero img{max-height:320px;object-fit:contain}
+.course-focus-surface .hcover{max-height:320px;background-size:contain!important;background-repeat:no-repeat}
+.course-focus-surface .hero .hb{padding:20px 24px}
+.course-focus-surface .grid{gap:24px}
+.course-focus-surface .u .t{font-size:21px;font-weight:600;color:#302b2a}
+.course-focus-surface .u .n,.course-focus-surface .unit .u{color:#772e43}
+.course-focus-surface .u .links{gap:8px}
+.course-focus-surface .u .go{flex:1 1 90px}
+.course-focus-surface .lvl{background:#ece2d9;color:#772e43;border-radius:5px;letter-spacing:.04em}
+.course-focus-surface .lc{background:#efe6dd;border:1px solid #d6ccc2;border-radius:12px;color:#302b2a;box-shadow:none}
+.course-focus-surface .lc h3{color:#772e43}
+.course-focus-surface .lc p{opacity:1}
+.course-focus-surface :is(button,input,select,textarea){font-family:inherit;font-size:16px;max-width:100%;box-sizing:border-box;touch-action:manipulation}
+.course-focus-surface button{min-height:44px}
+.course-focus-surface :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #772e43;outline-offset:3px}
+.course-focus-surface :is(audio,video){max-width:100%}
+.course-focus-surface :is(.card,.group,.unit,.u){min-width:0;overflow-wrap:anywhere}
+@media(max-width:600px){
+ .course-focus-surface .wrap{padding-inline:16px}
+ .course-focus-surface .head{padding-inline:0}
+ .course-focus-surface .grid{grid-template-columns:minmax(0,1fr)}
+ .course-focus-surface :is(.list,.hero .hb){padding-inline:16px}
+ .course-focus-surface :is(.hero img,.hcover){max-height:210px}
+ .course-focus-surface .unit .acts{width:100%}
+ .course-focus-surface .unit .act{flex:1 1 105px}
+}
+@media(prefers-reduced-motion:reduce){.course-focus-surface *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

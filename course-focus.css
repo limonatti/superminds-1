@@ -48,3 +48,40 @@ dialog.cf-dialog .cf-given{display:none!important}.cf-part-label{flex-basis:100%
 dialog:is(#exercise,#exerciseDialog,#mdExercise,#modal).cf-dialog :is(.focus-columns,.exerciseDialog,.exercise-content,#exerciseBody){grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)!important}
 dialog#mdExercise.cf-dialog .exercise-field{display:block;grid-template-columns:none}
 @media(max-width:760px){dialog:is(#exercise,#exerciseDialog,#mdExercise,#modal).cf-dialog :is(.focus-columns,.exerciseDialog,.exercise-content,#exerciseBody){grid-template-columns:minmax(0,1fr)!important}}
+/* Focus learning flow: the active question gets the working space. */
+.cf-course>header .brand strong,.cf-course>header .brand span,.cf-course>header .edition{color:var(--cf-wine)!important}.cf-course>header button[aria-pressed=true],.cf-course>header button.selected,.cf-course>header button.on{background:var(--cf-wine)!important;color:#fffdf9!important;border-color:var(--cf-wine)!important}
+.cf-page-picker{display:flex;align-items:center;gap:12px;max-width:500px;margin:0 0 24px}.cf-page-picker>button{flex:0 0 44px;padding:8px}.cf-page-picker select{min-width:0;flex:1;border:1px solid var(--cf-line);background:#fffdf9;color:var(--cf-ink);border-radius:7px;padding:12px;font:inherit;min-height:44px}.cf-home .cf-home-list:not(.cf-all-pages){grid-template-columns:1fr;max-width:920px}.cf-home-list section[hidden]{display:none!important}.cf-home-list section>button{min-height:78px}.cf-home-list .cf-task-number{font-size:20px}.cf-home-intro{margin-bottom:28px}
+dialog.cf-dialog .cf-step-number{font-size:48px;line-height:1;letter-spacing:-.05em;font-weight:700;color:var(--cf-wine);margin-right:8px}.cf-stepper{padding:12px 0 20px;border-bottom:1px solid var(--cf-line)}
+dialog:is(#exercise,#exerciseDialog,#mdExercise,#modal).cf-dialog.cf-answer-focus :is(.focus-columns,.exerciseDialog,.exercise-content,#exerciseBody){grid-template-columns:minmax(0,1fr)!important}dialog.cf-dialog.cf-answer-focus .cf-source{display:none!important}dialog.cf-dialog.cf-answer-focus .cf-responses{max-width:740px!important;margin-inline:auto!important}
+dialog.cf-dialog.cf-answer-focus .choice-row>legend,dialog.cf-dialog.cf-answer-focus .interaction-prompt{font-size:clamp(24px,3vw,38px);line-height:1.3;letter-spacing:-.025em;margin:10px 0 28px;font-weight:600;text-wrap:pretty}dialog.cf-dialog .choice-buttons{gap:12px}dialog.cf-dialog .choice-buttons button{min-height:56px;flex:1 1 160px;padding:14px 20px;text-align:left;font-size:17px}
+dialog.cf-dialog .cf-native-proxy{display:none}dialog.cf-dialog.cf-native-select .cf-native-proxy{display:block;width:100%;min-height:52px;font-size:17px}dialog.cf-dialog.cf-native-select .cf-card-options{display:none!important}
+dialog.cf-dialog.cf-typing .interaction-bank,dialog.cf-dialog.cf-typing .bank-controls{display:none!important}
+dialog.cf-dialog .cf-native-check{display:none!important}dialog.cf-dialog.cf-all-items .cf-native-check{display:inline-block!important}dialog.cf-dialog.cf-all-items .cf-current-check{display:none!important}.cf-step-footer{justify-content:space-between;gap:12px;flex-wrap:wrap;padding:20px 0 8px;border-top:1px solid var(--cf-line)}.cf-step-footer .cf-current-check{background:var(--cf-wine)!important;color:#fffdf9!important;min-width:180px}.cf-step-footer>button:last-child:not(:first-child){background:transparent!important;color:var(--cf-wine)!important}.cf-item-feedback{font-size:15px;line-height:1.5;margin:18px 0 0;min-height:24px}.cf-item-feedback[data-result=correct]{color:#386344}.cf-item-feedback[data-result=incorrect]{color:#8f362e}
+@media(max-width:760px){dialog.cf-dialog .cf-step-number{font-size:34px;margin-right:0}.cf-stepper{gap:7px}.cf-stepper select{font-size:13px!important;padding:8px!important}.cf-page-picker{gap:8px}.cf-home-intro{margin-top:8px}.cf-home h1{font-size:30px}.cf-home-list section>button{min-height:70px}dialog.cf-dialog .choice-buttons button{flex-basis:100%;min-height:52px}dialog.cf-dialog .cf-step-footer button{flex:1 1 130px;padding:12px;font-size:14px}.cf-step-footer .cf-current-check{min-width:0}}
+
+/* Legible source questions, with optional source-provided word cards. */
+dialog.cf-dialog .cf-authored-row{display:block!important}
+dialog.cf-dialog .cf-authored-row>span:not(.cf-authored-prompt){display:none}
+dialog.cf-dialog .cf-authored-prompt{display:block;font-size:clamp(21px,2.5vw,29px);line-height:1.6;margin:0 0 20px;white-space:normal;overflow-wrap:anywhere;color:var(--cf-ink)}
+dialog.cf-dialog .cf-source-bank{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+dialog.cf-dialog .cf-source-bank .cf-bank-label{flex-basis:100%;font-size:12px;color:var(--cf-muted);margin-bottom:4px}
+dialog.cf-dialog .cf-source-bank button{font-size:16px;min-height:48px;padding:10px 16px}
+dialog.cf-dialog.cf-source-typing .cf-source-bank{display:none}
+/* A single active item also wins over source-prompt row layout. */
+dialog.cf-dialog .cf-authored-row.cf-away{display:none!important}
+.cf-course main:not(.cf-book-mode):has(>.cf-home:not([hidden])) #units{display:none}
+.cf-course main.cf-book-mode .cf-page-picker{display:none}
+@media(max-width:760px){
+ .cf-dialog .cf-heading .cf-location{display:none}
+ .cf-dialog .cf-heading h2{font-size:20px;margin:0 0 6px}
+ .cf-dialog .cf-heading{margin-bottom:6px}
+ .cf-dialog .cf-instruction{line-height:1.45;margin-bottom:0}
+ .cf-dialog .cf-task-nav{margin-bottom:12px}
+ .cf-dialog .cf-view-tools{margin-bottom:10px;padding-bottom:6px}
+ .cf-dialog .cf-stepper{padding:4px 0 12px;margin-bottom:16px}
+ dialog.cf-dialog .cf-authored-prompt{font-size:20px;line-height:1.45;margin-bottom:14px}
+ dialog.cf-dialog .cf-source-bank{margin:12px 0;gap:6px}
+ dialog.cf-dialog .cf-source-bank button{min-height:44px;padding:8px 12px;font-size:15px}
+ .cf-dialog .cf-step-footer{padding:12px 0 4px;margin-bottom:10px}
+}
+dialog.cf-dialog:has(.coursework-savebar) #saveAnswer:not([aria-pressed]){display:none}
