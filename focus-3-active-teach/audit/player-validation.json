@@ -1,5 +1,5 @@
 {
-  "checked": 1528,
+  "checked": 1529,
   "fail": [],
   "errors": [],
   "coverage": {
@@ -18,7 +18,7 @@
     "wb unit 4": 58,
     "wb unit 5": 57,
     "wb unit 6": 59,
-    "wb unit 7": 59,
+    "wb unit 7": 60,
     "wb unit 8": 57,
     "wb unit extra": 153,
     "ws unit 1": 7,

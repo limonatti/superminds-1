@@ -6,6 +6,8 @@ const pages=new Map(D.pages.map(p=>[p.id,p])),exercises=D.pages.flatMap(p=>p.exe
 for(const p of D.pages){
  assert(fs.existsSync(path.join(base,p.image)),p.image);
  for(const e of p.exercises){
+  const [left,top,width,height]=e.box;
+  for(const other of p.exercises)if(other!==e)assert(!(left<=other.x&&other.x<left+width&&top+.015<other.y&&other.y<top+height-.003),e.id+' contains neighbouring exercise '+other.id);
   assert(S[e.id]?.sources.length,e.id+' has original task');
   for(const box of [e.box,...S[e.id].sources.map(s=>s.box),...Object.values(G[e.id]||{}).map(g=>g.box)]){assert(box.every(Number.isFinite),e.id);assert(box[0]>=0&&box[1]>=0&&box[2]>0&&box[3]>0&&box[0]+box[2]<=1.001&&box[1]+box[3]<=1.001,e.id+' crop');}
   for(const src of S[e.id].sources)assert(fs.existsSync(path.join(base,src.image)),e.id+' context');
@@ -51,6 +53,12 @@ assert(M.checkField('finishes, will do',E.get('wb-157-4').answerSpec[3]));assert
 assert.equal(E.get('wb-158-1').answerSpec.length,20);assert(M.checkField('Ø',E.get('wb-158-1').answerSpec[0]));
 assert(M.checkText('no article',['Ø']));assert(!M.checkText('kind',E.get('sb-13-8').answerSpec.find(f=>f.label==='2').accepted));
 assert(E.get('ws-2-1').interaction.rows.every(r=>r.options.map(o=>o.value).join('')==='ABCD'),'all four source choices, including unused distractor D');
+assert.deepEqual(pages.get('wb-97').exercises.map(e=>e.label),['6','7','8'],'separate writing task, not merged into the gap-fill');
+for(const id of ['wb-97-6','wb-97-7','wb-145-4','wb-145-5','wb-145-6']){const [x,,width]=S[id].sources[0].box;assert(x+width<.48,id+' excludes the neighbouring column');}
+assert(S['wb-97-8'].sources[0].box[0]>.48);assert.equal(E.get('wb-97-8').answerSpec.length,0);assert(E.get('wb-97-8').responseFields[0].long);
+for(const id of ['sb-87-7','sb-87-8','sb-87-9'])assert(S[id].sources.filter(s=>!s.context).every(s=>s.box[0]+s.box[2]<=.5),id+' excludes unrelated reading exercise');
+assert.equal(S['sb-87-10'].sources.filter(s=>!s.context).length,2,'matching task retains complete A–F reading texts');
+assert.equal(S['sb-106-4'].sources.filter(s=>!s.context).length,5,'reading questions retain both complete texts across pages');
 const hw={id:'qa',course:'focus-3',note:H.makeNote(['sb-4-1','wb-6-4'],'2026-11-17','Practice'),status:'new'};assert.deepEqual(H.ids(hw),['sb-4-1','wb-6-4']);assert.equal(H1.ids(hw).length,0);assert.equal(H2.ids(hw).length,0);assert.throws(()=>H.snapshot(hw,{}));
 const responses=Object.fromEntries(H.ids(hw).map(id=>{const e=E.get(id);return[id,{values:e.answerSpec.map(f=>f.accepted[0]),answerVersion:e.answerVersion,score:{correct:e.answerSpec.length,total:e.answerSpec.length}}]}));const shot=H.snapshot(hw,responses);responses['wb-6-4'].values[0]='changed';assert.equal(shot.exercises['wb-6-4'].values[0],'Does she really need');assert.match(H.renderAssignment({...hw,status:'submitted'},{'__homework:qa':shot}),/копия сданной работы/);
 const oral=E.get('sb-5-6'),oralRecord={completed:true,answerVersion:oral.answerVersion,values:[]};assert.equal(H.readiness(oral.id,oralRecord),'');assert(H.readiness(oral.id,{...oralRecord,completed:false}));assert(H.readiness(oral.id,{...oralRecord,answerVersion:'old'}));const oralHW={id:'oral',course:'focus-3',note:H.makeNote([oral.id],'','')};assert(H.snapshot(oralHW,{[oral.id]:oralRecord}).exercises[oral.id].completed);assert.match(H.renderAnswer(oral.id,oralRecord),/отмечено выполненным/);

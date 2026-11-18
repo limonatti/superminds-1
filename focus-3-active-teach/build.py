@@ -257,6 +257,8 @@ for e in final_exercises.values():
             if k in target:e[k]=target[k]
             else:e.pop(k,None)
         if target.get('reviewed'):gaps.pop(e['id'],None)
+from task_views import apply_task_views
+apply_task_views(pages,sources,TEXT)
 from interactivity import enrich_interactivity
 enrich_interactivity(pages,sources,gaps,TEXT,key_spec)
 videos=json.loads((R/'data/videos.json').read_text()) if (R/'data/videos.json').exists() else []
