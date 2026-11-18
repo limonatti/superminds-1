@@ -17,6 +17,7 @@
   $('#exerciseList').innerHTML=visible?`<h3>Задания страницы</h3><p class="exerciseHelp">Нажмите на упражнение на странице или выберите задание ниже.</p>${list.length?list.map(e=>`<button data-exercise="${e.id}" class="exerciseRow"><span>№ ${e.n}</span><span>${esc(e.instruction)}</span><small>${workLabel(e)}</small></button>`).join(''):'<p>На этой странице нет упражнений.</p>'}<button id="workDownload">Скачать мои ответы</button>`:'';
   $$('[data-exercise]').forEach(b=>b.onclick=()=>openTask(list.find(e=>e.id===b.dataset.exercise)));
   if($('#workDownload'))$('#workDownload').onclick=download;
+  window.OutcomesFocus?.home({book:S.book,unit:S.unit,answers,open:id=>{const entry=Object.entries(bank).find(([,tasks])=>tasks.some(e=>e.id===id));if(!entry)return;const task=entry[1].find(e=>e.id===id);saveDraft();active=null;if(S.id!==+entry[0].split(':')[1])go(+entry[0].split(':')[1]);openTask(task)}});
  }
  function download(){const blob=new Blob([JSON.stringify({course:COURSE,answers},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='outcomes-my-answers.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  function workLabel(e){const r=answers[e.id];if(r?.grade?.revision===e.check?.revision&&r.grade.total)return `${r.grade.correct}/${r.grade.total} верно${r.assisted?' · с подсказкой':''}`;return OutcomesGrader.isComplete(e.check,r)?'Выполнено':r?'Черновик':e.check?.mode==='items'?'Проверить':'Открыть'}
@@ -33,10 +34,10 @@
   Object.assign(frame.style,{width:width+'px',height:height*h+'px'});Object.assign(img.style,{width:full+'px',left:-full*x+'px',top:-height*y+'px'});
   $('#taskZoomReset').textContent=Math.round(exerciseZoom*100)+'%';$('#taskFullPage').textContent=fullSource?'Только задание':'Вся страница';$('#taskFullPage').setAttribute('aria-pressed',fullSource);
  }
- function taskSequence(){return allPages().flatMap(p=>(bank[source()+':'+p.id]||[]).map(e=>({e,page:p.id})))}
+ function taskSequence(){return allPages().filter(p=>!window.OutcomesFocus?.config(active)||p.unit===5).flatMap(p=>(bank[source()+':'+p.id]||[]).map(e=>({e,page:p.id})))}
  function navigateTask(delta){const tasks=taskSequence(),i=tasks.findIndex(t=>t.e.id===active?.id),next=tasks[i+delta];if(!next)return;saveDraft();active=null;if(next.page!==S.id)go(next.page);openTask(next.e)}
  function openTask(e){
-  if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;shownRecord=JSON.stringify(answers[e.id]||{});if(e.answerMigration)answers[e.id]=OutcomesAnswerMigration.migrate(e,answers[e.id]);if(answers[e.id])answers[e.id]=OutcomesAnswerMigration.regrade(e,answers[e.id],OutcomesGrader);
+  if(!ready){toast('Дождитесь загрузки ответов.');return}if(!e)return;e=window.OutcomesFocus?.prepare(e)||e;shownRecord=JSON.stringify(answers[e.id]||{});if(e.answerMigration)answers[e.id]=OutcomesAnswerMigration.migrate(e,answers[e.id]);if(answers[e.id])answers[e.id]=OutcomesAnswerMigration.regrade(e,answers[e.id],OutcomesGrader);
   if(!$('#modal').open)exerciseTrigger=document.activeElement;$$('audio').forEach(a=>a.pause());exerciseZoom=1;fullSource=false;active=e;const p=current(),record=answers[e.id]||{values:[],done:false},auto=e.check?.mode==='items',oral=e.responseMode==='oral';
   checked=Boolean(record.grade&&record.grade.revision===e.check?.revision);revealed=false;
   const tracks=OutcomesPractice.tracks(e,D,source(),p);
@@ -58,7 +59,7 @@
   if($('#revealAnswers'))$('#revealAnswers').onclick=()=>{revealed=!revealed;checkTask()};
   $('#saveTask').onclick=async()=>{saveDraft();const saved=await flush();if(saved?.ok||!user)$('#modal').close()};
   liveView();renderLiveAnswers();
-  OutcomesPractice.enhance({exercise:e,record,save:()=>saveDraft(),course:D});if(checked&&auto)renderFeedback(OutcomesGrader.check(e.check,record.values));
+  OutcomesPractice.enhance({exercise:e,record,save:()=>saveDraft(),course:D});window.OutcomesFocus?.mount({exercise:e,record,save:()=>saveDraft(),sequence:taskSequence(),navigate:id=>{const next=taskSequence().find(t=>t.e.id===id);if(!next)return;saveDraft();active=null;if(next.page!==S.id)go(next.page);openTask(next.e)}});if(checked&&auto)renderFeedback(OutcomesGrader.check(e.check,record.values));
   $('#modalTitle').tabIndex=-1;$('#modalTitle').focus({preventScroll:true});
  }
  let skipDragClick=false;
@@ -102,6 +103,7 @@
   const states=OutcomesGrader.statuses(grade),blanks=states.filter(v=>v==='blank').length,wrong=states.filter(v=>v==='incorrect').length;
   $('#checkSummary').textContent=grade.total?`${grade.correct} из ${grade.total} верно.${blanks?' Не заполнено: '+blanks+'.':''}${wrong?' Исправьте отмеченные пункты.':''}${grade.needsReview?' Свободные ответы сравните с образцом.':''}${grade.complete?' Всё верно!':''}`:'Сравните ответы с образцами. Другие верные формулировки тоже возможны.';
   $('#revealAnswers').hidden=blanks>0;$('#revealAnswers').textContent=revealed?'Скрыть ответы':'Показать ответы';
+  window.OutcomesFocus?.sync();
   if(active.check.model&&revealed){$('#selfCheck').hidden=false;$('#selfCheck').innerHTML=`<h4>Пояснение к ключу</h4><p class="modelAnswer">${esc(active.check.model)}</p>`}
  }
  function checkTask(){
@@ -138,7 +140,7 @@
   try{if(user){const profile=await SM.myProfile();role=profile?.role||'student'}}catch{}
   $('#keys').hidden=!['teacher','admin'].includes(role);$('#notesTab').hidden=!['teacher','admin'].includes(role);
   if(!['teacher','admin'].includes(role))$('#resources').onclick=()=>{openModal('Материалы ученика',`<p>Student’s Book, Workbook и словарь доступны через вкладки. Нажимайте номера заданий, чтобы записывать ответы.</p><p>В комплекте Workbook ©2019 (ISBN 9780357042243). Название архива «3ed» не меняет издание книги.</p><a href="resources/workbook.pdf" target="_blank" rel="noopener">Workbook PDF</a> · <a href="resources/vocabulary.pdf" target="_blank" rel="noopener">Vocabulary Builder PDF</a>`)};
-  ready=true;renderTasks();flush();liveSend({kind:"ready"});liveView();
+  ready=true;renderTasks();const requested=params.get('exercise');if(requested){const e=pageTasks().find(e=>e.id===requested);if(e)openTask(e)}flush();liveSend({kind:"ready"});liveView();
  }
  // The room mediates transport; no student response is merged into the
  // teacher's coursework. Outside a room this adapter remains inactive.
