@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Missing Story · Speakout B1+ Review</title>
+<meta name="description" content="An interactive story quest reviewing Speakout B1+ Third Edition Units 1–2, with original illustrations, generated audio, a narrated film and gentle feedback.">
+<meta name="theme-color" content="#70253c">
+<link rel="icon" href="../../favicon.ico"><link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<a class="skip" href="#mission">Skip to the mission</a>
+<header class="masthead"><a href="../index.html">English with Asya <span>Speakout B1+</span></a><div><button id="teacher" type="button">Teacher notes</button><button id="export" type="button">Save answers</button></div></header>
+<main>
+<section class="intro" id="intro"><div class="intro-copy"><p class="eyebrow">Units 1–2 · A story quest</p><h1>The Missing<br>Story</h1><p>Ten clues. One exhibition to rescue.<br>Bring your English back, one discovery at a time.</p><button type="button" id="start" class="primary">Begin the quest</button><p class="quiet">No timer. Hints welcome. Your progress stays in this browser.</p></div><figure><img src="assets/objects.jpg" width="1672" height="941" alt="Museum evidence: a leather bag, a ceramic mug and a wireless speaker beside a sealed envelope."><figcaption>Every object has a story. Help Clara find this one.</figcaption></figure></section>
+<div class="quest-layout" id="quest" hidden>
+<aside><p class="eyebrow">Your investigation</p><nav id="route" aria-label="Quest missions"></nav><section class="notebook"><h2>Collected words</h2><p id="clues">Complete a mission to find a word.</p><p id="progress" aria-live="polite"></p></section><button id="back-intro" type="button">Back to the story</button></aside>
+<div class="workspace"><div class="top-nav"><button id="prev" type="button" aria-label="Previous mission">←</button><label for="jump" class="sr-only">Choose a mission</label><select id="jump"></select><button id="next" type="button" aria-label="Next mission">→</button></div><article id="mission" tabindex="-1"></article></div>
+</div>
+<p id="storage-status" class="storage" role="status">Answers are saved on this device. Use “Save answers” for a copy.</p>
+<footer>English with Asya · Original supplementary practice for Speakout B1+ Third Edition.<br>Images and voices are AI-generated. The film is an animated sequence of generated illustrations.</footer>
+</main>
+<dialog id="teacher-dialog" aria-labelledby="teacher-title"><div class="dialog-head"><h2 id="teacher-title">Teacher notes</h2><button type="button" id="close-teacher">Close</button></div><div id="teacher-body"></div></dialog>
+<noscript>This quest needs JavaScript. Enable it to use the activities.</noscript>
+<script src="data.js?v=1"></script><script src="quest.js?v=1"></script>
+</body></html>
