@@ -98,12 +98,12 @@
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-<script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
+<script src="focus-4-homework.js?v=be69e2f2"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="solutions-homework.js?v=f64fe5f1"></script>
 <script src="sm-shell.js?v=19d3e04e"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
-const SPK = [["solutions-el","Solutions Elementary"],["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["speakout-b2plus","Speakout B2+"],["focus-1","Focus 1"],["focus-3","Focus 3"],["focus-2","Focus 2"],["solutions-pi","Solutions Pre-Int"]];
-const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "focus-3":"Focus 3", "focus-2":"Focus 2", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
+const SPK = [["solutions-el","Solutions Elementary"],["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["speakout-b2plus","Speakout B2+"],["focus-1","Focus 1"],["focus-4","Focus 4"],["focus-3","Focus 3"],["focus-2","Focus 2"],["solutions-pi","Solutions Pre-Int"]];
+const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "focus-4":"Focus 4", "focus-3":"Focus 3", "focus-2":"Focus 2", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
 const KIND_L = { trainer:"Тренажёр", games:"Игры", worksheet:"Лист" };
 const PART_L = { lesson:"Урок", grammar:"Грамматика", workbook:"Workbook" };
 
@@ -245,6 +245,9 @@ async function drawPane(){
   }
   if(hw.some(h=>FocusHW.ids(h).length)||Object.keys(d.__coursework?.['focus-1']||{}).length){
     try{await FocusHW.load();solReport+=FocusHW.renderClass(hw,d);const entries=Object.entries(d.__coursework?.['focus-1']||{}).filter(([,r])=>r?.values?.some(v=>String(v).trim()));solReport+='<div class="sect"><span>Focus 1 · все сохранённые ответы</span></div>'+entries.map(([id,r])=>'<details class="sh-ex"><summary>'+esc(FocusHW.label(id))+'</summary><a href="'+esc(FocusHW.link(id))+'" target="_blank" rel="noopener">Открыть условие ↗</a>'+FocusHW.renderAnswer(id,r)+'</details>').join('');}catch(e){solReport+='<p>'+esc(e.message)+'</p>';}
+  }
+  if(hw.some(h=>Focus4HW.ids(h).length)||Object.keys(d.__coursework?.['focus-4']||{}).length){
+    try{await Focus4HW.load();solReport+=Focus4HW.renderClass(hw,d);const entries=Object.entries(d.__coursework?.['focus-4']||{}).filter(([,r])=>r?.values?.some(v=>String(v).trim())||r?.completed||r?.reflection?.trim());solReport+='<div class="sect"><span>Focus 4 · все сохранённые ответы</span></div>'+entries.map(([id,r])=>'<details class="sh-ex"><summary>'+esc(Focus4HW.label(id))+'</summary><a href="'+esc(Focus4HW.link(id))+'" target="_blank" rel="noopener">Открыть условие ↗</a>'+Focus4HW.renderAnswer(id,r)+'</details>').join('');}catch(e){solReport+='<p>'+esc(e.message)+'</p>';}
   }
   if(hw.some(h=>Focus3HW.ids(h).length)||Object.keys(d.__coursework?.['focus-3']||{}).length){
     try{await Focus3HW.load();solReport+=Focus3HW.renderClass(hw,d);const entries=Object.entries(d.__coursework?.['focus-3']||{}).filter(([,r])=>r?.values?.some(v=>String(v).trim())||r?.completed||r?.reflection?.trim());solReport+='<div class="sect"><span>Focus 3 · все сохранённые ответы</span></div>'+entries.map(([id,r])=>'<details class="sh-ex"><summary>'+esc(Focus3HW.label(id))+'</summary><a href="'+esc(Focus3HW.link(id))+'" target="_blank" rel="noopener">Открыть условие ↗</a>'+Focus3HW.renderAnswer(id,r)+'</details>').join('');}catch(e){solReport+='<p>'+esc(e.message)+'</p>';}
@@ -398,7 +401,7 @@ function hwChips(list, hw){
     const meta = parseNote(a.note);
     const parts = (meta.parts||[]).map(p => PART_L[p]||p).join(", ");
     all.push({ k:"spk", id:a.id, done:a.done,
-      txt:(SPK_L[a.course]||a.course)+((a.course==='solutions-el'?SolutionsElHW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length?" · "+(a.course==='solutions-el'?SolutionsElHW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
+      txt:(SPK_L[a.course]||a.course)+((a.course==='solutions-el'?SolutionsElHW:a.course==='focus-4'?Focus4HW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length?" · "+(a.course==='solutions-el'?SolutionsElHW:a.course==='focus-4'?Focus4HW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
   });
   if (!all.length) return "";
   return '<div class="chips">' + all.map(x =>
@@ -448,6 +451,7 @@ const PAGE_COURSES = {
   "speakout-b2plus": { title: "Speakout B2+", units: [1,2,3,4,5,6,7,8] },
   "speakout-b1plus": { title: "Speakout B1+",          units: [1,2,3,4,5,6,7,8] },
   "focus-1":         { title: "Focus 1",               units: [0,1,2,3,4,5,6,7,8] },
+  "focus-4":         { title: "Focus 4",               units: [1,2,3,4,5,6,7,8] },
   "focus-3":         { title: "Focus 3",               units: [1,2,3,4,5,6,7,8] },
   "focus-2":         { title: "Focus 2",               units: [1,2,3,4,5,6,7,8] },
   "solutions-el":    { title: "Solutions Elementary",  units: [0,1,2,3,4,5,6,7,8,9] },
@@ -490,7 +494,7 @@ function fillUnits(){
   const course = document.getElementById("hCourse").value;
   const uSel = document.getElementById("hUnit");
   const page = PAGE_COURSES[course];
-  const solutions = ["solutions-int","solutions-el","focus-1","focus-2","focus-3"].includes(course);
+  const solutions = ["solutions-int","solutions-el","focus-1","focus-2","focus-3","focus-4"].includes(course);
   const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
@@ -516,7 +520,7 @@ function fillUnits(){
     if(solutions){
       uSel.insertAdjacentHTML('beforeend','<option value="extra">Reference &amp; banks</option>');
       const holder=document.getElementById('hSolutions');holder.selectedIds=()=>[];
-      (course==='solutions-el'?SolutionsElHW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
+      (course==='solutions-el'?SolutionsElHW:course==='focus-4'?Focus4HW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
     }
     return;
   }
@@ -536,6 +540,7 @@ function bindStudent(sid){
   fillUnits();
   if($("shRefresh"))$("shRefresh").onclick=()=>load();
   if($("selRefresh"))$("selRefresh").onclick=()=>load();
+  if($("focus4Refresh"))$("focus4Refresh").onclick=()=>load();
   if($("focus3Refresh"))$("focus3Refresh").onclick=()=>load();
   if($("focus2Refresh"))$("focus2Refresh").onclick=()=>load();
   if($("focusRefresh"))$("focusRefresh").onclick=()=>load();
@@ -608,8 +613,8 @@ function bindStudent(sid){
     }
 
     let parts = null, note = null;
-    if(['solutions-int','solutions-el','focus-1','focus-2','focus-3'].includes(course)){
-      try{note=(course==='solutions-el'?SolutionsElHW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
+    if(['solutions-int','solutions-el','focus-1','focus-2','focus-3','focus-4'].includes(course)){
+      try{note=(course==='solutions-el'?SolutionsElHW:course==='focus-4'?Focus4HW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
     } else if (isPage){
       parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
       if (!parts.length){

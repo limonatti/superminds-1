@@ -1,0 +1,17 @@
+{
+  "checked": 20,
+  "failCount": 0,
+  "sample": [],
+  "errors": [],
+  "coverage": {
+    "sb unit 1": 1,
+    "sb unit 5": 2,
+    "sb unit extra": 2,
+    "wb unit 1": 4,
+    "wb unit 2": 2,
+    "wb unit 3": 2,
+    "wb unit 4": 1,
+    "wb unit 6": 3,
+    "wb unit 8": 3
+  }
+}

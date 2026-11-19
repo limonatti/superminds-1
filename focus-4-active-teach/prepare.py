@@ -1,0 +1,82 @@
+"""Prepare owner-supplied Focus 4 Second Edition PDFs/audio; never execute their contents.
+Usage: python prepare.py /path/to/extracted/archives
+Requires PyMuPDF and Pillow. Workbook includes an OCR text layer.
+"""
+from pathlib import Path
+import sys, json, re, shutil, hashlib
+import pymupdf as fitz
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parent
+source = Path(sys.argv[1])
+metadata_only = '--metadata-only' in sys.argv[2:]
+for folder in ['assets/pages', 'data', 'data/ocr', 'media', 'resources', 'audit']:
+    (ROOT / folder).mkdir(parents=True, exist_ok=True)
+manifest = {}
+for book, name in [('sb', 'students_book'), ('wb', 'workbook'), ('ws', 'word_store'), ('tb', 'teachers_book')]:
+    path = next(source.rglob('focus_second_edition_4_' + name + '.pdf'))
+    doc = fitz.open(path)
+    manifest[book] = {'name': path.name, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'pdfPages': len(doc)}
+    text = {}
+    for index, page in enumerate(doc, 1):
+        spans = [s for b in page.get_text('dict')['blocks'] if 'lines' in b for line in b['lines'] for s in line['spans']]
+        text[str(index)] = {'width': page.rect.width, 'height': page.rect.height, 'spans': [{k: s[k] for k in ['text', 'bbox', 'font', 'size', 'color']} for s in spans], 'text': page.get_text()}
+        if book != 'tb' and not metadata_only:
+            out = ROOT / f'assets/pages/{book}-{index}.jpg'
+            valid = False
+            if out.exists():
+                try:
+                    with Image.open(out) as existing:
+                        existing.load()
+                    valid = True
+                except OSError:
+                    pass
+            if not valid:
+                pix = page.get_pixmap(matrix=fitz.Matrix(1600/page.rect.width, 1600/page.rect.width), alpha=False)
+                temporary = out.with_suffix('.tmp.jpg')
+                pix.save(temporary, jpg_quality=86)
+                temporary.replace(out)
+    (ROOT / f'data/{book}-text.json').write_text(json.dumps(text, ensure_ascii=False, separators=(',', ':')))
+    print(book, len(doc), flush=True)
+resources = []
+media = []
+for path in sorted(source.rglob('*')):
+    if path.suffix.lower() not in ['.pdf', '.mp3']: continue
+    if path.name == 'focus_second_edition_4_wordstore.pdf': continue
+    if path.suffix == '.mp3' and 'students_book_audio' in str(path):
+        match = re.search(r'CLCD (\d)_(\d+)\.mp3$', path.name)
+        if not match: raise ValueError(path)
+        media.append(f'media/sb-{match[1]}.{int(match[2]):02}.mp3')
+        if not metadata_only: shutil.copyfile(path, ROOT / f'media/sb-{match[1]}.{int(match[2]):02}.mp3')
+        continue
+    if path.suffix == '.mp3' and 'wordlist_audio' in str(path):
+        match = re.search(r'WLAudio_(\d+)\.mp3$', path.name)
+        if not match: raise ValueError(path)
+        media.append(f'media/ws-4.{int(match[1]):02}.mp3')
+        if not metadata_only: shutil.copyfile(path, ROOT / f'media/ws-4.{int(match[1]):02}.mp3')
+        continue
+    category = 'tests' if 'test_package' in str(path) else 'video-plans' if re.search(r'BBC|Vlog', path.name, re.I) else 'lesson-plans' if 'lesson_plans' in str(path) else 'books'
+    if path.name=='focus_second_edition_4_workbook.pdf':
+        # GitHub rejects files over 100 MiB. Split the supplied scan losslessly.
+        doc=fitz.open(path)
+        for slug,title,start,end in [('units-1-4','Workbook · Units 1–4',0,68),('units-5-8','Workbook · Units 5–8',69,132),('reference','Workbook · Vocabulary, Grammar, Writing & Keys',133,len(doc)-1)]:
+            rel=Path('resources/books')/('focus-4-workbook-'+slug+'.pdf');(ROOT/rel).parent.mkdir(exist_ok=True)
+            if not metadata_only:
+                part=fitz.open();part.insert_pdf(doc,from_page=start,to_page=end);part.save(ROOT/rel,garbage=4,deflate=True);part.close()
+            resources.append({'category':'books','title':title,'path':str(rel)})
+        doc.close();continue
+    slug = re.sub(r'[^a-z0-9]+', '-', path.stem.lower()).strip('-') + path.suffix.lower()
+    rel = Path('resources') / category / slug
+    (ROOT / rel).parent.mkdir(exist_ok=True)
+    if (ROOT / rel).exists() and (ROOT / rel).read_bytes() != path.read_bytes():
+        raise ValueError('Resource filename collision: ' + str(path))
+    if not metadata_only: shutil.copyfile(path, ROOT / rel)
+    title = re.sub(r'Focus4_2E_|focus_second_edition_4_', '', path.stem).replace('_', ' ')
+    title = {'photocopiable': 'Photocopiable Resources · задания для печати', 'students book': 'Student’s Book', 'teachers book': 'Teacher’s Book · ключи и рекомендации', 'word store': 'Word Store'}.get(title, title)
+    resources.append({'category': category, 'title': title, 'path': str(rel)})
+(ROOT / 'data/resources.json').write_text(json.dumps(resources, ensure_ascii=False, indent=2))
+(ROOT / 'data/media.json').write_text(json.dumps(sorted(media), indent=2))
+(ROOT / 'audit/sources.json').write_text(json.dumps(manifest, indent=2))
+print('resources', len(resources), 'audio', len(list((ROOT / 'media').glob('*.mp3'))), flush=True)
+
+if metadata_only: print('Metadata only: page images, audio and PDFs still require a full preparation run.')
