@@ -301,6 +301,9 @@ for pg in pages:
                 if key in target:
                     e[key] = target[key]
 
+from presentation import enrich
+enrich(pages, TEXT)
+
 # Check the complete printed Workbook catalogue, not just the imported subset.
 from grading import RECORDS, workbook_record
 mapped = {}

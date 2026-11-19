@@ -8,9 +8,15 @@ The course uses the supplied Second Edition books; Focus 3 remains unchanged.
 
 - Eight units; Student’s Book, Workbook and Word Store, including reference pages.
 - 389 page entries and 1,527 source-linked exercise entries.
-- 181 exercises with clickable alternatives/matching, 28 printed word banks,
-  editable response fields, and oral completion. Original task images and
-  adjoining-page context remain accessible from each exercise.
+- Every one of the 1,527 entries has interactive controls: 188 choices/matching,
+  28 word banks, 1,152 editable written tasks, 154 oral tasks with saved notes,
+  three card-ordering tasks, one multiple-selection task and one opinion task.
+  The shared Focus player provides item navigation, individual checks and reset.
+  Original task images and adjoining-page context remain accessible.
+- 359 source presentation models supply 2,032 item prompts and nine additional
+  printed banks. Matching cards show the printed phrases when segmentation is
+  complete. Ambiguous inline numbering, missing OCR labels and mixed columns
+  retain the original image with editable answers. No options come from keys.
 - 1,198 exercises have source-aligned automatic keys: 553 Student’s Book,
   589 Workbook and all 56 Word Store exercises, with 7,209 checked fields.
   The complete Workbook catalogue contains 598 records; its nine explicit
@@ -37,6 +43,13 @@ task is graded. The builder rejects orphaned, duplicate and ungraded extracted k
 keys and complete words reconstructed from printed initials. `data/answer-variants.json`
 preserves ambiguous shared-prefix alternatives. Every override cites its Teacher
 page. Changed field schemas preserve existing answers in the previous-answer section.
+`presentation.py` runs after key alignment and linked worksheets. It preserves all
+answer fields and versions; a presentation-only change does not invalidate saved
+checks. `data/presentation-overrides.json` records reviewed printed cards, fixes
+OCR word-box pollution and adds ordering/multiple-selection formats.
+`audit/presentation.json` records the control type of every exercise. Oral notes
+autosave without marking the task completed and appear in the teacher report;
+completion can be toggled without losing the note.
 
 ## Rebuild
 
@@ -53,6 +66,7 @@ python3 focus-4-active-teach/stamp.py
 node tests/focus-4.cjs
 node tests/focus-4-assign.cjs
 node tests/focus-4-player.cjs
+python3 tests/focus-4-presentation.py
 python3 check.py
 ```
 
@@ -75,8 +89,13 @@ keeping every file below GitHub’s individual file size limit.
 The course checks validate source crops, all unit mappings, actual assets and
 audio references, printed choice options, source-verified marking samples,
 recovered headings, isolated progress and immutable homework snapshots. The
-player audit opens every task, selects choices/word cards or fills responses,
-checks finite keys, saves, reopens and resets. The assignment test checks the
+player audit opens every task, selects choices/word cards, assembles sequences,
+toggles multiple answers or fills responses, checks finite keys, saves, reopens
+and resets. It also checks oral-note autosave and completion undo. The source
+test poisons hidden answers and checks ambiguous-layout fallbacks.
+`audit/browser-interactivity.json` records the desktop and phone Chrome smoke
+checks of actual buttons, source prompts, ordering, marking and persistent notes.
+The assignment test checks the
 teacher gate, course, recipient and multi-book payload without sending real
 homework. The existing Focus 3 regression suite is also run after integration.
 

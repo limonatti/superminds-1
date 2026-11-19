@@ -1,0 +1,505 @@
+{
+  "sb-87-2": {
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1. Real name is Robin Gunningham.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "2. Was born in Bristol in 1973.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "3. Trained to be a butcher.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "4. Became famous in the 1990s.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "5. Has never been arrested.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "6. Authenticates his work on his website.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "prompt": "7. Is a multi-millionaire.",
+          "options": [
+            {
+              "label": "✓ Confirmed",
+              "value": "✓"
+            },
+            {
+              "label": "? Not confirmed",
+              "value": "?"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-90-5": {
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "1. If I’d watched the Twilight films, I’d know who Edward Cullen was.",
+          "options": [
+            {
+              "label": "a. I didn’t watch the Twilight films.",
+              "value": "a"
+            },
+            {
+              "label": "b. I know who Edward Cullen is.",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "2. If I was interested in Harry Potter, I’d have read the books.",
+          "options": [
+            {
+              "label": "a. I’m not interested in Harry Potter.",
+              "value": "a"
+            },
+            {
+              "label": "b. I haven’t read any of the books.",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "3. If Robert Pattinson was ugly, I might not have watched Twilight.",
+          "options": [
+            {
+              "label": "a. Robert Pattinson is handsome.",
+              "value": "a"
+            },
+            {
+              "label": "b. I watched Twilight.",
+              "value": "b"
+            }
+          ]
+        },
+        {
+          "prompt": "4. Pattinson and Radcliffe wouldn’t be enjoying so much success if they hadn’t worked hard on these roles.",
+          "options": [
+            {
+              "label": "a. They aren’t enjoying success.",
+              "value": "a"
+            },
+            {
+              "label": "b. They worked hard on these roles.",
+              "value": "b"
+            }
+          ]
+        }
+      ]
+    },
+    "model": {
+      "standalone": true,
+      "prompts": {
+        "1": "If I’d watched the Twilight films, I’d know who Edward Cullen was.",
+        "2": "If I was interested in Harry Potter, I’d have read the books.",
+        "3": "If Robert Pattinson was ugly, I might not have watched Twilight.",
+        "4": "Pattinson and Radcliffe wouldn’t be enjoying so much success if they hadn’t worked hard on these roles."
+      }
+    }
+  },
+  "wb-86-3": {
+    "interaction": {
+      "type": "order",
+      "rows": [
+        {
+          "prompt": "1. _____, could the space shuttle programme really have happened?",
+          "tokens": [
+            "been",
+            "suppose",
+            "the Apollo moon landings",
+            "had",
+            "fake"
+          ]
+        },
+        {
+          "prompt": "2. _____, what would you say?",
+          "tokens": [
+            "I",
+            "I",
+            "said",
+            "didn’t want",
+            "university",
+            "to go to",
+            "supposing"
+          ]
+        },
+        {
+          "prompt": "3. _____, what would we do instead?",
+          "tokens": [
+            "imagine",
+            "have to",
+            "didn’t",
+            "go to school",
+            "we",
+            "today"
+          ]
+        },
+        {
+          "prompt": "4. _____, how might life be different?",
+          "tokens": [
+            "you",
+            "been born",
+            "had",
+            "imagine",
+            "fifty years ago"
+          ]
+        },
+        {
+          "prompt": "5. _____, what would you like to be?",
+          "tokens": [
+            "you",
+            "imagine",
+            "any job",
+            "could have"
+          ]
+        }
+      ]
+    },
+    "model": {
+      "standalone": true,
+      "prompts": {
+        "1": "_____, could the space shuttle programme really have happened?",
+        "2": "_____, what would you say?",
+        "3": "_____, what would we do instead?",
+        "4": "_____, how might life be different?",
+        "5": "_____, what would you like to be?"
+      }
+    }
+  },
+  "wb-111-7": {
+    "interaction": {
+      "type": "order",
+      "rows": [
+        {
+          "prompt": "Put the events in the correct order.",
+          "separator": ", ",
+          "tokens": [
+            {
+              "label": "A. Robbie went in search of a place that he could explore.",
+              "value": "A"
+            },
+            {
+              "label": "B. Robbie was bored because he had nothing to do.",
+              "value": "B"
+            },
+            {
+              "label": "C. Robbie had a terrifying experience.",
+              "value": "C"
+            },
+            {
+              "label": "D. Robbie was told about an interesting place.",
+              "value": "D"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-43-1": {
+    "interaction": {
+      "type": "order",
+      "rows": [
+        {
+          "prompt": "Put these factors in order of importance when looking for a flat to share with friends.",
+          "separator": "; ",
+          "tokens": [
+            "decoration/furniture",
+            "location",
+            "privacy",
+            "rent",
+            "security",
+            "size"
+          ]
+        }
+      ]
+    },
+    "model": {
+      "standalone": true,
+      "prompts": {
+        "Мой ответ": "Put these factors in order of importance when looking for a flat to share with friends."
+      }
+    }
+  },
+  "sb-78-2": {
+    "interaction": {
+      "type": "opinion",
+      "rows": [
+        {
+          "prompt": "Do you agree with the author’s opinion?",
+          "options": [
+            {
+              "label": "I agree",
+              "value": "I agree"
+            },
+            {
+              "label": "I disagree",
+              "value": "I disagree"
+            },
+            {
+              "label": "I partly agree",
+              "value": "I partly agree"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sb-82-1": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "carry",
+        "find",
+        "improve",
+        "put",
+        "reach",
+        "speak",
+        "thrive"
+      ]
+    },
+    "model": {
+      "bank": [
+        "carry",
+        "find",
+        "improve",
+        "put",
+        "reach",
+        "speak",
+        "thrive"
+      ]
+    }
+  },
+  "sb-91-4": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "argued",
+        "emphasise",
+        "firmly",
+        "obvious",
+        "particularly"
+      ]
+    },
+    "model": {
+      "bank": [
+        "argued",
+        "emphasise",
+        "firmly",
+        "obvious",
+        "particularly"
+      ]
+    }
+  },
+  "sb-153-3": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "attention",
+        "come",
+        "interest",
+        "leave",
+        "neat",
+        "normal",
+        "quiet",
+        "smart",
+        "spare",
+        "strong"
+      ]
+    },
+    "model": {
+      "bank": [
+        "attention",
+        "come",
+        "interest",
+        "leave",
+        "neat",
+        "normal",
+        "quiet",
+        "smart",
+        "spare",
+        "strong"
+      ]
+    }
+  },
+  "wb-7-3": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "back",
+        "bear",
+        "bell",
+        "draw",
+        "escape",
+        "heart",
+        "slip"
+      ]
+    },
+    "model": {
+      "bank": [
+        "back",
+        "bear",
+        "bell",
+        "draw",
+        "escape",
+        "heart",
+        "slip"
+      ]
+    }
+  },
+  "wb-55-4": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "bag",
+        "belongings",
+        "goods",
+        "house",
+        "market",
+        "property",
+        "sale",
+        "stall"
+      ]
+    },
+    "model": {
+      "bank": [
+        "bag",
+        "belongings",
+        "goods",
+        "house",
+        "market",
+        "property",
+        "sale",
+        "stall"
+      ]
+    }
+  },
+  "wb-148-1": {
+    "interaction": {
+      "type": "bank",
+      "items": [
+        "background",
+        "blood-red",
+        "childhood",
+        "coffee",
+        "elderly",
+        "garment",
+        "jack",
+        "frills",
+        "master",
+        "memory",
+        "passionate",
+        "second-hand",
+        "soul",
+        "star",
+        "tea",
+        "upbringing"
+      ]
+    },
+    "model": {
+      "bank": [
+        "background",
+        "blood-red",
+        "childhood",
+        "coffee",
+        "elderly",
+        "garment",
+        "jack",
+        "frills",
+        "master",
+        "memory",
+        "passionate",
+        "second-hand",
+        "soul",
+        "star",
+        "tea",
+        "upbringing"
+      ]
+    }
+  },
+  "sb-6-6": {
+    "model": {
+      "prompts": {
+        "1": "For breakfast — Primary school: I’d … / Now: I’ll …",
+        "2": "Before setting off for school — Primary school: I’d … / Now: I’ll …",
+        "3": "At break time — Primary school: I’d … / Now: I’ll …",
+        "4": "At lunchtime — Primary school: I’d … / Now: I’ll …",
+        "5": "After school — Primary school: I’d … / Now: I’ll …",
+        "6": "Before going to bed — Primary school: I’d … / Now: I’ll …"
+      },
+      "standalone": true
+    }
+  },
+  "sb-143-1": {
+    "model": {
+      "prompts": {}
+    }
+  }
+}

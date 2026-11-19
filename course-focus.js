@@ -79,7 +79,7 @@ function mount(config){
   input.after(bank);listen(input,'input',update);update();sourceBanks++;
  }
  if(sourceBanks){const control=button('Только ввод текста','Показать или скрыть карточки слов',()=>{const typing=dialog.classList.toggle('cf-source-typing');control.textContent=typing?'Показать карточки слов':'Только ввод текста';control.setAttribute('aria-pressed',String(typing))});control.setAttribute('aria-pressed','false');settings.append(control)}
- const completePrompt=!!config.completePrompt||rows.length&&rows.every(row=>qa('.answer-prompt,.printedPrompt,.interaction-prompt,legend,.cf-complete-prompt,label',row).some(p=>{const text=p.textContent.trim();return text.length>(p.tagName==='LABEL'?35:2)&&!/^(?:Пункт|Ответ|Пропуск|Мой выбор)?\s*\d*[a-z]?[.)]?$/i.test(text)}));
+ const completePrompt=!config.requireSource&&(!!config.completePrompt||rows.length&&rows.every(row=>qa('.answer-prompt,.printedPrompt,.interaction-prompt,legend,.cf-complete-prompt,label',row).some(p=>{const text=p.textContent.trim();return text.length>(p.tagName==='LABEL'?35:2)&&!/^(?:Пункт|Ответ|Пропуск|Мой выбор)?\s*\d*[a-z]?[.)]?$/i.test(text)})));
  dialog.dataset.cfComplete=String(!!completePrompt);pane(!!source&&!completePrompt);
  if(config.instruction)qa('#instruction,.instruction,.practice-help',responses).forEach(el=>mark(el,'cf-original-instruction'));
  qa('#exerciseAudio,#exerciseMedia',dialog).filter(el=>!q('audio,video,a,button,summary',el)).forEach(el=>mark(el,'cf-empty-media'));

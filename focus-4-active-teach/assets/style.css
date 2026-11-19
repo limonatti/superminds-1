@@ -84,3 +84,10 @@ dialog#exercise.focus-dialog.focus-task-panels[open]{width:min(1280px,calc(100vw
  #exercise.focus-task-panels .coursework-savebar{gap:6px;margin-top:6px;padding-top:6px}
  #exercise.focus-task-panels .coursework-savebar .coursework-status{flex-basis:auto;font-size:12px}
 }
+/* Ordering cards share the full response width, including on phones. */
+#exercise.cf-dialog .order-row{display:block!important;min-width:0}
+#exercise.cf-dialog .order-row.cf-away{display:none!important}
+#exercise.cf-dialog .order-row .order-bank{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+#exercise.cf-dialog .order-bank button{flex:1 1 150px;overflow-wrap:normal}
+#exercise.cf-dialog .order-row>input{display:block;width:100%;min-width:0;box-sizing:border-box;margin:16px 0}
+#exercise.cf-dialog .order-row>button{margin:0 8px 8px 0;min-height:44px}

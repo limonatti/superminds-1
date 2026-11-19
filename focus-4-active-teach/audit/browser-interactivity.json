@@ -1,0 +1,30 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "exercises": [
+    "sb-4-1",
+    "sb-13-8",
+    "wb-86-3",
+    "sb-90-5",
+    "sb-4-3"
+  ],
+  "checks": [
+    "printed matching cards",
+    "per-item checking",
+    "source prompts",
+    "ordering cards and grading",
+    "multiple choice layout",
+    "oral notes survive reload and completion",
+    "no horizontal overflow",
+    "no JavaScript errors"
+  ],
+  "errors": []
+}
