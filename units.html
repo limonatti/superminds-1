@@ -89,6 +89,7 @@
         '</div>'+
         '<div class="info"><div class="u">'+esc(u.unit)+'</div><div class="n">'+esc(u.title)+'</div></div>'+
         '<div class="acts">'+
+          (SM_COURSE.id==='sm1'&&['welcome','numbers'].includes(u.id)?'<a class="act a-ex" href="sm1-welcome/#'+(u.id==='numbers'?'3':'1')+'">📖 Учебник · стр. 4–5</a>':'')+
           '<a class="act a-tr" href="trainer.html?unit='+u.id+'">🎯 Тренажёр</a>'+
           '<a class="act a-gm" href="games.html?u='+u.id+'">🎮 Игры</a>'+
           '<a class="act a-ws" href="worksheet.html?u='+u.id+'" target="_blank">✏️ Лист</a>'+

@@ -157,6 +157,7 @@
   <div class="wrap">
     <h1>🧩 Упражнения</h1>
     <div class="sub" id="sub">от твоего учителя</div>
+    <section id="source-exercises" class="card" hidden aria-label="Задания из учебника"></section>
     <div id="root"><div class="empty">Загрузка…</div></div>
     <div class="foot">Made for @english.with_asya</div>
   </div>
@@ -716,10 +717,14 @@
           if(u2) document.getElementById("sub").textContent = u2.emoji+" "+u2.title+" · упражнения";
         }
       }catch(e){}
+      const sourceWelcome=cid==='sm1'&&['welcome','numbers'].includes(uid);
+      const sourceBox=document.getElementById('source-exercises');
+      sourceBox.hidden=!sourceWelcome;
+      if(sourceWelcome)sourceBox.innerHTML='<div class="kind">SUPER MINDS 1 · SECOND EDITION</div><h2>Friends · страницы 4–5</h2><p>Пять заданий из учебника: герои, чант, числа, возраст и знакомство. Слушай оригинальные записи и отвечай нажатием.</p><a class="opt" style="display:block;color:#7c2340" href="sm1-welcome/#'+(uid==='numbers'?'3':'1')+'">Открыть задания учебника →</a>';
       let ex=[],loadErr=null; try{ ex=await SM.exercisesFor(cid, uid); }catch(e){ loadErr=e; }
       if(loadErr){ root.innerHTML='<div class="empty">Не удалось загрузить упражнения (нет связи с базой). Обнови страницу.</div>'; return; }
       if(!SM.isCloud){ root.innerHTML='<div class="empty">Упражнения работают с настоящими аккаунтами (Supabase).</div>'; return; }
-      if(!ex.length){ root.innerHTML='<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html?u='+encodeURIComponent(uid)+'">Конструкторе</a>.</div>'; return; }
+      if(!ex.length){ root.innerHTML=sourceWelcome?'':'<div class="empty">Для этого юнита пока нет упражнений.<br>Учитель может создать их в <a href="builder.html?u='+encodeURIComponent(uid)+'">Конструкторе</a>.</div>'; return; }
 
       EX_ALL = ex;
       /* Ученик пришёл по заданию — оставляем только заданные блоки, в порядке урока */

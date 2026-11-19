@@ -1,0 +1,68 @@
+/* Verbatim transcript text from the matching Second Edition Presentation Plus audio hotspots. */
+window.SM1Transcripts = {
+  "01": [
+    "NARRATOR: Friends, Page 4.",
+    "1.",
+    "Listen and look.",
+    "Then listen and say the words.",
+    "THUNDER: What’s your name?",
+    "WHISPER: I’m Whisper.",
+    "THUNDER: Hi, Whisper, I’m Thunder.",
+    "WHISPER: Hi, Thunder.",
+    "MISTY: Hi, I’m Misty. What’s your name?",
+    "FLASH: I’m Flash.",
+    "MISTY: Hi, Flash!",
+    "FLASH: Hi, Misty!",
+    "NARRATOR: Now say the words:",
+    "NARRATOR: 1",
+    "SPEAKER: Thunder",
+    "NARRATOR: 2",
+    "SPEAKER: Whisper",
+    "NARRATOR: 3",
+    "SPEAKER: Flash",
+    "NARRATOR: 4",
+    "SPEAKER: Misty"
+  ],
+  "02": [
+    "NARRATOR: Page 4.",
+    "2.",
+    "Listen and chant.",
+    "WHISPER: Hi, I’m Whisper.",
+    "What’s your name?",
+    "THUNDER: Hi, I’m Thunder.",
+    "WHISPER: What a nice name!",
+    "FLASH: Hi, I’m Flash.",
+    "What’s your name?",
+    "MISTY: Hi, I’m Misty.",
+    "FLASH: What a nice name!"
+  ],
+  "03": [
+    "NARRATOR: Page 5.",
+    "1.",
+    "Listen and point to the numbers.",
+    "MAN: One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten"
+  ],
+  "04": [
+    "NARRATOR: Page 5.",
+    "2.",
+    "How old are the Super Friends?",
+    "Listen and write.",
+    "TEACHER: How old are you Misty?",
+    "MISTY: I’m six.",
+    "TEACHER: How old are you Whisper?",
+    "WHISPER: I’m eight.",
+    "TEACHER: How old are you Flash?",
+    "FLASH: I’m eight.",
+    "TEACHER: How old are you Thunder?",
+    "THUNDER: I’m seven."
+  ]
+};
