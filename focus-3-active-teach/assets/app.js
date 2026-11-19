@@ -190,6 +190,18 @@ window.LiveCourse?.connect({
 
 function focusTasks(){return D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit)).flatMap(p=>p.exercises.map(e=>{const r=responses[e.id];return {id:e.id,label:e.label,title:CourseFocus.title(e),page:p.page,done:!!(r?.completed||r?.score&&r.score.correct===r.score.total),hasAnswer:!!r?.values?.some(v=>String(v).trim())}}));}
 function focusOpen(id){const p=D.pages.find(p=>p.exercises.some(e=>e.id===id));if(!p)return;book=p.book;unit=String(p.unit);page=p;render();openExercise(id);}
-function focusHome(){if(!window.CourseFocus)return;CourseFocus.home({host:$('main'),course:'Focus 3',location:(book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook')+' · '+(unit==='extra'?'Reference':'Unit '+unit),title:$('#heading').textContent,page:page.page,items:focusTasks(),open:focusOpen,surfaces:[$('.toolbar'),$('.workspace'),$('.intro')]});}
+function focusHome(){if(!window.CourseFocus)return;CourseFocus.home({host:$('main'),course:'Focus 3',location:(book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook')+' · '+(unit==='extra'?'Reference':'Unit '+unit),title:$('#heading').textContent,page:page.page,items:focusTasks(),open:focusOpen,surfaces:[$('.toolbar'),$('.workspace'),$('.intro')]});focusVocabularyLinks();}
+function focusVocabularyLinks(){
+ const lessons={6:['1.2','Grammar'],7:['1.3','Listening'],8:['1.4','Reading'],9:['1.4','Reading'],10:['1.5','Grammar'],11:['1.6','Use of English']};
+ const lessonFor=p=>book==='sb'?lessons[p]:null;
+ const setLink=(link,lesson)=>{link.href='lesson-kit/vocabulary-6-11.html?lesson='+lesson[0];link.textContent='Слова урока '+lesson[0]+' · '+lesson[1]+' →';};
+ let current=$('#lessonVocabularyLink');
+ if(!current){current=document.createElement('a');current.id='lessonVocabularyLink';$('.intro-actions').prepend(current);}
+ const selected=lessonFor(page.page);current.hidden=!selected;if(selected)setLink(current,selected);
+ $$('.cf-home-list > [data-cf-home-page]').forEach(group=>{
+  const lesson=lessonFor(group.dataset.cfHomePage);if(!lesson)return;
+  const link=document.createElement('a');link.className='resource';setLink(link,lesson);group.children[0].after(link);
+ });
+}
 function focusDialog(){if(!window.CourseFocus||!active)return;CourseFocus.mount({dialog:$('#exercise'),id:active.id,course:'Focus 3',title:'Exercise '+active.label,instruction:CourseFocus.instruction(active),location:$('#exerciseLocation').textContent,tasks:focusTasks(),navigate:focusOpen,onClose:focusHome,model:window.COURSE_FOCUS_MODELS?.[active.id],fieldLabels:(active.answerSpec?.length?active.answerSpec:active.responseFields||[]).map(f=>f.label),fieldKinds:(active.answerSpec||[]).map(f=>f.kind),checkItem:(i,value)=>active.answerSpec?.[i]?M.checkField(value,active.answerSpec[i]):null,singleChoice:active.interaction?.type==='choices'||active.activity?.kind==='choice',bankTyping:active.interaction?.type==='bank'});}
 })();
