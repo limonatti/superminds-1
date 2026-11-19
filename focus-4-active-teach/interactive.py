@@ -1,4 +1,4 @@
-"""Source-based controls and conservative finite keys for Focus 4.
+"""Source-based controls and complete finite keys for Focus 4.
 
 Choices and banks come from the student pages. Answers come from the supplied
 Teacher's Book. Ambiguous keys and personal responses remain teacher-reviewed.
@@ -6,9 +6,10 @@ Teacher's Book. Ambiguous keys and personal responses remain teacher-reviewed.
 from pathlib import Path
 import collections
 import hashlib
-import itertools
 import json
 import re
+from grading import key_spec as complete_key_spec, workbook_record, workbook_specs, key_order
+from student_keys import recover
 
 R = Path(__file__).resolve().parent
 RED = 0xda2128
@@ -63,48 +64,18 @@ def numbered_key(lines):
     return dict(sorted(fields.items(), key=lambda p: (int(re.match(r'\d+', p[0])[0]), p[0])))
 
 
-def key_spec(fields):
-    out = []
-    for label, raw in fields.items():
-        if label == '0':
-            continue
-        value = clean(raw)
-        # Separated red letters inside printed words are not complete answers.
-        # Keep these source tasks editable, without guessing the whole word.
-        if re.fullmatch(r'(?:[A-Za-z] ){2,}[A-Za-z]', value):
-            return []
-        if not value or len(value) > 180 or re.search(r'own answers|possible|suggested|e\.g\.|any order|\bExercise\b|\baccept\b|\bexample|answers vary|extra word|incorrect|\bUnit\b|\d+\s+[A-H]\b', value, re.I):
-            return []
-        variants = [value]
-        if '/' in value:
-            # Whole alternatives are explicit; compact word alternatives retain
-            # the shared prefix/suffix ("has burned/burnt out").
-            if re.search(r'\s/|/\s', value):
-                parts = [clean(p) for p in value.split('/')]
-                if len(parts) > 4 or any(not p for p in parts):
-                    return []
-                if max(map(lambda p: len(p.split()), parts)) - min(map(lambda p: len(p.split()), parts)) > 1:
-                    return []
-                variants = parts
-            else:
-                tokens = [token.split('/') for token in value.split()]
-                if any(not x for token in tokens for x in token) or sum(len(token) > 1 for token in tokens) > 3:
-                    return []
-                variants = [' '.join(p) for p in itertools.product(*tokens)]
-        if '(' in value:
-            if re.search(r'\([^)]*(?:answer|order|also|or|accept|optional)[^)]*\)', value, re.I):
-                return []
-            variants = [v for part in variants for v in [clean(re.sub(r'\([^)]*\)', '', part)), part.replace('(', '').replace(')', '')]]
-        if not all(re.fullmatch(r"[A-Za-z0-9’'“”\" ,.!?;:–—\-Øø°%]+", v) for v in variants):
-            return []
-        out.append({'label': label, 'accepted': list(dict.fromkeys(v for v in variants if v))})
-    return out
-
-
 def spans(texts, book, pdf):
     p = texts[book][str(pdf)]
-    return [dict(s, x=s['bbox'][0]/p['width'], y=s['bbox'][1]/p['height'],
+    result=[dict(s, x=s['bbox'][0]/p['width'], y=s['bbox'][1]/p['height'],
                  w=(s['bbox'][2]-s['bbox'][0])/p['width'], h=(s['bbox'][3]-s['bbox'][1])/p['height']) for s in p['spans']]
+    # A printed initial belongs to the completed word, although only its
+    # remaining letters are red in the Teacher's Book.
+    if book=='tb':
+        for s in result:
+            if s['color']!=RED or not re.match(r'^[a-z]',s['text']):continue
+            prefix=next((a for a in result if a['color']!=RED and re.fullmatch('[a-z]',a['text']) and -.0015<=s['x']-(a['x']+a['w'])<.003 and abs(s['y']-a['y'])<.0025),None)
+            if prefix:s['text']=prefix['text']+s['text']
+    return result
 
 
 def region_rows(pg, e, texts):
@@ -218,24 +189,22 @@ def controls(e, pg, texts):
 
 def enhance(pages, texts, workbook_keys):
     evidence = json.loads((R/'data/teacher-evidence.json').read_text())
-    report = {'automatic': [], 'review': [], 'controls': {}, 'units': {}}
+    overrides=json.loads((R/'data/key-overrides.json').read_text())
+    report = {'automatic': [], 'review': [], 'controls': {}, 'units': {}, 'decisions': []}
     for pg in pages:
         for e in pg['exercises']:
             intro = instruction(e)
-            personal = bool(re.search(r'\bSPEAKING\b|true (?:sentences|for you)|your own|about yourself', intro, re.I))
+            personal = bool(re.search(r'^SPEAKING\b|true (?:sentences|for you)|your own|about yourself|then ask and answer|discuss.*partner', intro, re.I))
             closed = bool(re.search(r'\b(?:complete|choose|match|fill|underline|circle)\b|\bput\b.*\border\b|\bwrite\b.*\bform\b|\bcorrect (?:the mistakes|the errors|form)\b', intro, re.I))
             fields = {}
             provenance = None
-            if pg['book'] == 'wb' and isinstance(pg['unit'], int):
-                part = [1, 1, 2, 3, 4, 4, 5, 6, 7, 7, 8, 8, 9, 9, 10, 10][(pg['page']-4) % 16]
-                record = workbook_keys.get(f'{pg["unit"]}.{part}-{e["label"]}')
-                if record and not record['ambiguous']:
-                    fields = numbered_key(record['lines'])
-                    present = set(re.findall(r'(?<!\d)(\d{1,2})(?!\d)', e['text']))
-                    if not fields or not set(fields).issubset(present):
-                        fields = {}
-                    else:
-                        provenance = {'book': 'teacher', 'pdfPage': record['pdfPage'], 'evidence': 'numbered workbook key'}
+            record = None
+            if pg['book'] == 'wb':
+                record = workbook_record(pg,e)
+                if record:
+                    fields = record['fields']
+                    provenance = {'book':'teacher','pdfPage':record['pdfPages'][0], 'pdfPages':record['pdfPages'],
+                                  'evidence':'Workbook answer key','record':record['id']}
             elif pg['book'] in ['sb', 'ws']:
                 pdf = pg['pdfPage'] + (22 if pg['book'] == 'sb' else 338)
                 ts = spans(texts, 'tb', pdf)
@@ -295,17 +264,41 @@ def enhance(pages, texts, workbook_keys):
                     provenance = {'book': 'teacher', 'pdfPage': pdf, 'evidence': 'margin panel'}
                 if pg['book'] == 'ws' and re.fullmatch(r'\d[A-F]', e['label']):
                     closed = True
-            spec = key_spec(fields) if fields and closed and not personal else []
+                if pg['book']=='sb':
+                    recovered,unmapped=recover(spans(texts,'tb',pdf),e['label'],e['x'],e['y'])
+                    if recovered and not unmapped and (not fields or len(recovered)>len(fields)):
+                        fields=recovered
+                        provenance={'book':'teacher','pdfPage':pdf,'evidence':'Teacher layout red answers'}
+                    if re.search(r'choose|correct option|circle',intro,re.I):
+                        recovered,unmapped=recover(spans(texts,'tb',pdf),e['label'],e['x'],e['y'],evidence.get(str(pdf),{}).get('circles'))
+                        if recovered and not unmapped and (not fields or len(recovered)>len(fields)):
+                            fields=recovered
+                            provenance={'book':'teacher','pdfPage':pdf,'evidence':'Teacher layout circles'}
+            spec = workbook_specs(record,e) if pg['book']=='wb' else complete_key_spec(fields)
+            override=overrides.get(e['id'])
+            if override:
+                spec=override['answerSpec']
+                provenance=override['source']
+                personal=override.get('mixed',personal)
+            report['decisions'].append({'id':e['id'], 'instruction':intro, 'fields':fields, 'source':provenance,
+                                        'closed':closed, 'personal':personal, 'accepted':bool(spec)})
             if spec:
                 # Keep source item order even when teacher PDF columns differ.
-                spec.sort(key=lambda f: (int(re.match(r'\d+', f['label'])[0]), f['label']))
+                spec.sort(key=lambda f: key_order(f['label']))
                 e['answerSpec'] = spec
                 e['key'] = '\n'.join(f['label']+' '+ ' / '.join(f['accepted']) for f in spec)
                 e['keySource'] = provenance
-                e['marking'] = {'mode': 'automatic', 'instruction': 'Заполни пункты по условию. Пиши полные слова, включая напечатанные буквы. Несколько ответов одного пункта разделяй запятой.'}
+                e['marking'] = {'mode': 'mixed' if personal else 'automatic', 'instruction': 'Заполни пункты по условию. Пиши полные слова, включая напечатанные буквы. Несколько ответов одного пункта разделяй запятой.'}
+                if any(f.get('kind')=='set' for f in spec):
+                    e['marking']['instruction'] += ' Списки ответов разделяй точкой с запятой; их порядок не важен.'
+                if override and override.get('instruction'):
+                    e['marking']['instruction']=override['instruction']
                 e.pop('responseMode', None)
                 e.pop('responseFields', None)
                 e.pop('interaction', None)
+                if any(f.get('long') for f in spec):
+                    e['interaction']={'type':'fields'}
+                    e['nativeInteraction']=True
                 report['automatic'].append(e['id'])
             elif fields and not e.get('responseMode') and set(fields) != {'0'}:
                 e['responseFields'] = [{'label': k} for k in fields if k != '0']

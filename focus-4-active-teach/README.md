@@ -7,13 +7,18 @@ The course uses the supplied Second Edition books; Focus 3 remains unchanged.
 ## Contents and interaction
 
 - Eight units; Student’s Book, Workbook and Word Store, including reference pages.
-- 389 page entries and 1,498 source-linked exercise entries.
-- 135 exercises with clickable alternatives/matching, 20 printed word banks,
+- 389 page entries and 1,527 source-linked exercise entries.
+- 181 exercises with clickable alternatives/matching, 28 printed word banks,
   editable response fields, and oral completion. Original task images and
   adjoining-page context remain accessible from each exercise.
-- 619 exercises have finite, source-aligned automatic keys (including linked
-  Word Store tasks). Open responses, ambiguous keys and fragmented letter keys
-  remain for teacher review. Automatic coverage is deliberately incomplete.
+- 1,198 exercises have source-aligned automatic keys: 553 Student’s Book,
+  589 Workbook and all 56 Word Store exercises, with 7,209 checked fields.
+  The complete Workbook catalogue contains 598 records; its nine explicit
+  “Students’ own answers” tasks remain manual. Personal and creative responses
+  remain for teacher review; mixed tasks check their fixed part automatically.
+- The checker handles printed alternatives, optional words, unordered lists,
+  separate subparts, corrections, punctuation and stress. Factual text responses
+  are checked against the supplied key formulations, without an AI semantic grader.
 - 123 supplied audio tracks and 315 downloadable resources: books, tests with
   audio, photocopiable materials, lesson plans and video lesson plans.
   Video recordings were not supplied; the player does not promise playback.
@@ -25,7 +30,13 @@ the referenced Desktop folder was empty. Originals were not modified.
 `audit/sources.json` records source PDF hashes. `data/teacher-evidence.json`
 records red answer circles and margin panels from the Teacher’s Book.
 `audit/coverage.json` and `audit/interactivity.json` record import coverage.
-The interactivity audit precedes the linked Word Store copies.
+The interactivity audit precedes linked Word Store copies; `audit/key-coverage.json`
+records final coverage and asserts that every finite Workbook key and Word Store
+task is graded. The builder rejects orphaned, duplicate and ungraded extracted keys.
+`data/key-overrides.json` preserves reviewed tables, cross-page keys, correction
+keys and complete words reconstructed from printed initials. `data/answer-variants.json`
+preserves ambiguous shared-prefix alternatives. Every override cites its Teacher
+page. Changed field schemas preserve existing answers in the previous-answer section.
 
 ## Rebuild
 
@@ -36,6 +47,7 @@ the repository root:
 ```sh
 python3 focus-4-active-teach/prepare.py /tmp/focus4-source
 python3 focus-4-active-teach/evidence.py
+python3 focus-4-active-teach/key_catalog.py
 python3 focus-4-active-teach/build.py
 python3 focus-4-active-teach/stamp.py
 node tests/focus-4.cjs
@@ -45,7 +57,8 @@ python3 check.py
 ```
 
 The two browser-runtime tests require `jsdom`. The importer uses checked-in
-Workbook OCR to recover reviewed headings with missing PDF numerals. To
+Workbook OCR and `data/workbook-heading-repairs.json` to recover reviewed headings
+with missing PDF numerals. To
 regenerate that OCR on macOS (requires Apple Vision):
 
 ```sh

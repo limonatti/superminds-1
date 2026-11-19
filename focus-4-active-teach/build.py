@@ -13,6 +13,7 @@ import math
 R = Path(__file__).resolve().parent
 TEXT = {b: json.loads((R / f'data/{b}-text.json').read_text()) for b in ['sb', 'wb', 'ws', 'tb']}
 MEDIA = set(json.loads((R / 'data/media.json').read_text()))
+WB_REPAIRS = json.loads((R/'data/workbook-heading-repairs.json').read_text())
 NAMES = ['', 'Live and learn', 'Human nature', 'Living spaces', 'Shopping around',
          'Off to work', 'A matter of fact', 'It’s not rocket science!', 'Costing the earth']
 # Printed "Extract from Student's Book recording" references, including OCR-spaced 3.17.
@@ -148,6 +149,20 @@ def anchors_for(book, printed, spans):
                 if match and match[1] in recovered[printed] and (.015 < s['x'] < .055 or .51 < s['x'] < .54):
                     if not any(abs(a['x']-s['x']) < .04 and abs(a['y']-s['y']) < .017 for a in result):
                         result.append({'label': match[1], 'x': s['x'], 'y': s['y']})
+        for repair in WB_REPAIRS:
+            if repair['page'] != printed:
+                continue
+            near=next((a for a in result if abs(a['x']-repair['x'])<.035 and abs(a['y']-repair['y'])<.018),None)
+            if near:
+                near['label']=repair['label']
+            else:
+                result.append({k:repair[k] for k in ['label','x','y']})
+        # Numbered planning steps and examples inside tasks are not new tasks.
+        result=[a for a in result if not (
+            (printed==31 and a['label'] in ['2','3']) or
+            (printed==56 and a['label']=='3' and a['x']>.45) or
+            (printed==167 and a['label']=='3' and a['x']<.45) or
+            (printed==172 and a['label']=='7'))]
     return result
 
 
@@ -196,6 +211,10 @@ for book in ['sb', 'wb', 'ws']:
             ident = f'{book}-{printed}-{ordinal if book == "ws" else label}'
             if book != 'ws' and seen[label] > 1:
                 ident += f'-b{seen[label]}'
+            # Preserve progress IDs for real tasks whose printed numbers were
+            # previously misread or shadowed by a numbered example.
+            if book=='wb' and printed==159 and label=='3':ident='wb-159-2-b2'
+            if book=='wb' and printed==167 and label=='3':ident='wb-167-3-b2'
             bottom = min((b['y'] for b in anchors if b['col'] == a['col'] and b['y'] > a['y']+.01), default=.955)
             left = max(.001, a['x']-.01)
             right = columns[a['col']+1]-.014 if a['col']+1 < len(columns) else .985
@@ -271,7 +290,7 @@ for pg in pages:
             peer = lookup.get((pg['book'], pg['page']+1 if pg['page'] % 2 == 0 else pg['page']-1))
             if peer and peer['unit'] == pg['unit']:
                 sources[e['id']]['sources'].append({'image': peer['image'], 'page': peer['page'], 'size': image_size(peer['book'], peer['pdfPage']), 'box': [0, 0, 1, 1], 'context': True})
-        m = re.search(r'Complete\s+WORD STORE\s+(\d[A-F])', clean(e['text']), re.I)
+        m = re.search(r'(?:Complete|Label the pictures in)\s+WORD STORE\s+(\d[A-F])', clean(e['text']), re.I)
         if pg['book'] == 'sb' and m and m[1] in groups:
             target = groups[m[1]]
             e['wordStore'] = target['id']
@@ -281,6 +300,35 @@ for pg in pages:
             for key in ['answerSpec', 'answerVersion', 'key', 'keySource', 'marking', 'responseFields', 'interaction', 'nativeInteraction']:
                 if key in target:
                     e[key] = target[key]
+
+# Check the complete printed Workbook catalogue, not just the imported subset.
+from grading import RECORDS, workbook_record
+mapped = {}
+for pg in pages:
+    if pg['book'] != 'wb':
+        continue
+    for e in pg['exercises']:
+        record = workbook_record(pg, e)
+        if record:
+            assert record['id'] not in mapped, ('Repeated key', record['id'])
+            mapped[record['id']] = e
+assert set(mapped) == {r['id'] for r in RECORDS}, 'Workbook key missing its exercise'
+assert all(mapped[r['id']]['answerSpec'] for r in RECORDS if not r.get('open')), 'Unmarked finite Workbook key'
+assert all(e['answerSpec'] for pg in pages if pg['book']=='ws' for e in pg['exercises']), 'Unmarked Word Store key'
+decisions = {d['id']: d for d in json.loads((R/'audit/interactivity.json').read_text())['decisions']}
+unresolved = [e['id'] for pg in pages for e in pg['exercises']
+              if decisions[e['id']]['fields'] and not e['answerSpec'] and e['id'] != 'sb-78-2']
+assert not unresolved, ('Extracted keys still ungraded', unresolved)
+write('audit/key-coverage.json', {
+    'workbook': [{'record':r['id'], 'exercise':mapped[r['id']]['id'], 'automatic':bool(mapped[r['id']]['answerSpec']),
+                  'reason':'Students’ own answers' if r.get('open') else 'Explicit printed key', 'pdfPages':r['pdfPages']} for r in RECORDS],
+    'exercises': [{'id':e['id'],'automatic':bool(e['answerSpec']), 'fields':len(e['answerSpec']),
+                   'source':e.get('keySource'), 'wordStore':e.get('wordStore'),
+                   'reason': 'Fixed key' if e['answerSpec'] else 'Personal, creative, practice or discussion task without a fixed answer key'}
+                  for pg in pages for e in pg['exercises']],
+    'unresolvedExtractedKeys': unresolved,
+    'reviewedExclusion': {'sb-78-2':'Personal opinion; red numbers inside its essay belong to Exercise 3, whose six answers are graded separately.'}
+})
 
 data = {'id': 'focus-4', 'units': NAMES, 'pages': pages,
         'tracks': {'sb': [Path(p).stem[3:] for p in sorted(MEDIA) if p.startswith('media/sb-')],

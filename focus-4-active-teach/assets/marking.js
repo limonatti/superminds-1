@@ -5,6 +5,7 @@ function normalize(value){
  let s=String(value??'').normalize('NFKC').toLowerCase().replace(/[‘’`]/g,"'").trim().replace(/^'(.+)'$/,'$1');
  if(/^(?:[-–—−]|no article|zero article|none|no match|∅|ø)$/.test(s))return '∅';
  if(/^(?:✓|✔|correct|no change|no changes)$/.test(s))return '✓';
+ if(/^(?:\?|not confirmed|unknown)$/.test(s))return '?';
  if(/^(?:true|t)$/.test(s))return 'true';if(/^(?:false|f)$/.test(s))return 'false';
  if(/^(?:ng|not given)$/.test(s))return 'not given';
  s=s.replace(/[–—−]/g,'-').replace(/\bwon't\b/g,'will not').replace(/\bcan't\b/g,'cannot').replace(/\bshan't\b/g,'shall not').replace(/n't\b/g,' not').replace(/\bcan not\b/g,'cannot')
@@ -19,10 +20,17 @@ function normalize(value){
  .replace(/(?<!\d)[.,:](?!\d)|[.,:]$/g,' ').replace(/[!?;(),]/g,' ').replace(/\s+/g,' ').trim();
  return s;
 }
-function checkText(value,accepted){const v=normalize(value);return !!String(value??'').trim()&&accepted.some(a=>v===normalize(a)||(v==='0'&&normalize(a)==='∅'));}
+function checkText(value,accepted){const v=normalize(value);return !!v&&accepted.some(a=>v===normalize(a)||(v==='0'&&normalize(a)==='∅'));}
 function splitSet(value){const s=String(value).trim();if(/[;\n]/.test(s))return s.split(/[;\n]+/).map(x=>x.trim()).filter(Boolean);return s.replace(/(?<=\d),(?=\d{3}(?:\D|$))/g,'').split(/\s*,\s*|\s+and\s+/i).map(x=>x.trim()).filter(Boolean);}
 function checkField(value,spec){
  if(!String(value??'').trim()||!spec)return false;
+ if(spec.kind==='stress')return (spec.accepted||[]).some(a=>String(value).normalize('NFKC').trim()===a);
+ if(spec.kind==='punctuation'){
+  // Typography and paragraph whitespace may vary; punctuation and capitals
+  // are the actual target of this exercise and must not be discarded.
+  const canonical=s=>String(s).normalize('NFKC').replace(/[‘’“”"]/g,"'").replace(/…/g,'...').replace(/\s+/g,' ').replace(/\s*([,.;:!?])\s*/g,'$1 ').trim();
+  return (spec.accepted||[]).some(a=>canonical(value)===canonical(a));
+ }
  if(spec.kind!=='set')return checkText(value,spec.accepted||[]);
  const parts=splitSet(value),members=spec.members||[],required=spec.minimum??members.length;
  if(parts.length<required||parts.length>members.length)return false;

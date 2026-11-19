@@ -5,7 +5,7 @@ from pathlib import Path
 import sys,json,re
 import pymupdf as fitz
 R=Path(__file__).resolve().parent
-doc=fitz.open(next(Path(sys.argv[1]).rglob('focus_second_edition_4_teachers_book.pdf')))
+doc=fitz.open(next(Path(sys.argv[1]).rglob('focus_second_edition_4_teachers_book.pdf')) if len(sys.argv)>1 else R/'resources/books/focus-second-edition-4-teachers-book.pdf')
 def red(c):return c and .83<c[0]<.87 and .1<c[1]<.15 and .14<c[2]<.18
 result={}
 for number,page in enumerate(doc,1):
@@ -18,7 +18,7 @@ for number,page in enumerate(doc,1):
  for d in shapes:
   r=d['rect']
   if r.x0<0 or r.x1>w or r.y0<0 or r.y1>h:continue
-  if 7<r.height<28 and 6<r.width<330 and sum(i[0]=='c' for i in d['items'])>=6:
+  if 7<r.height<28 and 6<r.width<330 and sum(i[0]=='c' for i in d['items'])>=4:
    selected=[c for c in chars if r.x0<(c['bbox'][0]+c['bbox'][2])/2<r.x1 and r.y0<(c['bbox'][1]+c['bbox'][3])/2<r.y1]
    text=''.join(c['c']for c in sorted(selected,key=lambda c:c['bbox'][0])).strip()
    if text:circles.append({'text':text,'box':[r.x0/w,r.y0/h,r.width/w,r.height/h]})

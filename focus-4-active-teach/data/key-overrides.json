@@ -1,0 +1,5727 @@
+{
+  "wb-8-1": {
+    "answerSpec": [
+      {
+        "label": "Заголовок",
+        "accepted": [
+          "3"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        197
+      ],
+      "pdfPage": 197,
+      "record": "main/14/1",
+      "evidence": "Heading number, followed by explanation in printed key"
+    }
+  },
+  "wb-30-3": {
+    "answerSpec": [
+      {
+        "label": "Пары предложений",
+        "kind": "set",
+        "members": [
+          [
+            "B F"
+          ],
+          [
+            "H D"
+          ],
+          [
+            "G E"
+          ]
+        ],
+        "accepted": [
+          "B F; H D; G E"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        199
+      ],
+      "pdfPage": 199,
+      "record": "main/28/3",
+      "evidence": "Three ordered pairs; example A C already supplied"
+    },
+    "instruction": "Введи три пары через ;. Внутри пары сохраняй порядок: сначала первое предложение, затем второе."
+  },
+  "wb-110-3": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "7"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "e",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "f",
+        "accepted": [
+          "1"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        206
+      ],
+      "pdfPage": 206,
+      "record": "main/78/3",
+      "evidence": "Underlined sentences a–f matched to features 1–7"
+    }
+  },
+  "wb-123-4": {
+    "answerSpec": [
+      {
+        "label": "Beginning B",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "Beginning C",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "Beginning D",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "Beginning E",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "Ending B",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "Ending C",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "Ending D",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "Ending E",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "Ending F",
+        "accepted": [
+          "4"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        207
+      ],
+      "pdfPage": 207,
+      "record": "main/86/4",
+      "evidence": "Separate Beginning and Ending sequences; A is given in both"
+    },
+    "instruction": "Укажи порядковый номер для каждого предложения B–F отдельно в Beginning и Ending."
+  },
+  "wb-103-2": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "basic"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "top-of-the-range"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        205
+      ],
+      "pdfPage": 205,
+      "record": "main/73/2",
+      "evidence": "Two separately labelled adjectives"
+    }
+  },
+  "wb-78-2": {
+    "answerSpec": [
+      {
+        "label": "Express certainty",
+        "kind": "set",
+        "members": [
+          [
+            "Undoubtedly"
+          ],
+          [
+            "Undeniably"
+          ],
+          [
+            "Without doubt"
+          ]
+        ],
+        "accepted": [
+          "Undoubtedly; Undeniably; Without doubt"
+        ]
+      },
+      {
+        "label": "Describe consequences",
+        "kind": "set",
+        "members": [
+          [
+            "this could also lead to"
+          ],
+          [
+            "As a result"
+          ],
+          [
+            "the outcome of",
+            "the outcome of working less"
+          ]
+        ],
+        "accepted": [
+          "this could also lead to; As a result; the outcome of"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        203
+      ],
+      "pdfPage": 203,
+      "record": "main/58/2",
+      "evidence": "Two groups of three phrases"
+    },
+    "instruction": "Для каждой группы перечисли три выражения через ;. Порядок внутри группы не важен."
+  },
+  "wb-89-4": {
+    "answerSpec": [
+      {
+        "label": "Compound adjectives",
+        "kind": "set",
+        "members": [
+          [
+            "well-informed"
+          ],
+          [
+            "24-hour"
+          ],
+          [
+            "hard-wired"
+          ],
+          [
+            "ever-increasing"
+          ],
+          [
+            "long-term"
+          ]
+        ],
+        "accepted": [
+          "well-informed; 24-hour; hard-wired; ever-increasing; long-term"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        204
+      ],
+      "pdfPage": 204,
+      "record": "main/64/4",
+      "evidence": "Five compound adjectives, including line-wrapped long-term"
+    }
+  },
+  "wb-110-2": {
+    "answerSpec": [
+      {
+        "label": "Описание истории",
+        "accepted": [
+          "Scary with a humorous ending",
+          "Full of suspense with a humorous ending"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        206
+      ],
+      "pdfPage": 206,
+      "record": "main/78/2",
+      "evidence": "Scary / Full of suspense share the phrase with a humorous ending"
+    }
+  },
+  "wb-68-2": {
+    "answerSpec": [
+      {
+        "label": "1 · глагол",
+        "accepted": [
+          "speak"
+        ]
+      },
+      {
+        "label": "2 · глагол",
+        "accepted": [
+          "increase"
+        ]
+      },
+      {
+        "label": "3 · глагол",
+        "accepted": [
+          "achieve"
+        ]
+      },
+      {
+        "label": "4 · глагол",
+        "accepted": [
+          "enter"
+        ]
+      },
+      {
+        "label": "5 · глагол",
+        "accepted": [
+          "reach"
+        ]
+      },
+      {
+        "label": "6 · глагол",
+        "accepted": [
+          "put"
+        ]
+      },
+      {
+        "label": "7 · глагол",
+        "accepted": [
+          "improve"
+        ]
+      },
+      {
+        "label": "8 · глагол",
+        "accepted": [
+          "work"
+        ]
+      },
+      {
+        "label": "9 · глагол",
+        "accepted": [
+          "do"
+        ]
+      },
+      {
+        "label": "1 · буква",
+        "accepted": [
+          "g"
+        ]
+      },
+      {
+        "label": "2 · буква",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3 · буква",
+        "accepted": [
+          "i"
+        ]
+      },
+      {
+        "label": "4 · буква",
+        "accepted": [
+          "f"
+        ]
+      },
+      {
+        "label": "5 · буква",
+        "accepted": [
+          "j"
+        ]
+      },
+      {
+        "label": "6 · буква",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "7 · буква",
+        "accepted": [
+          "h"
+        ]
+      },
+      {
+        "label": "8 · буква",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "9 · буква",
+        "accepted": [
+          "e"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPages": [
+        202
+      ],
+      "pdfPage": 202,
+      "record": "main/51/2",
+      "evidence": "Two required parts: complete verb and match definition"
+    }
+  },
+  "ws-3-2": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "lenient"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "strict"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "swot"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "bully"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "disruptive"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "gifted"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "self-disciplined"
+        ]
+      },
+      {
+        "label": "Mystery word",
+        "accepted": [
+          "lectures"
+        ]
+      },
+      {
+        "label": "2 · S/T",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "3 · S/T",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "4 · S/T",
+        "accepted": [
+          "T"
+        ]
+      },
+      {
+        "label": "5 · S/T",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "6 · S/T",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "7 · S/T",
+        "accepted": [
+          "S",
+          "T"
+        ]
+      },
+      {
+        "label": "8 · S/T",
+        "accepted": [
+          "S"
+        ]
+      },
+      {
+        "label": "1 · S/T",
+        "accepted": [
+          "S"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 342,
+      "evidence": "Crossword whole words, mystery word and printed S/T classification"
+    },
+    "instruction": "Впиши полные слова кроссворда и Mystery word. В полях S/T укажи, к кому относится описание: S — student, T — teacher. Для gifted допустимы оба варианта."
+  },
+  "ws-7-4": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "appliance"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "development"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "multi-storey"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "residential"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "second"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "self-contained"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "tower"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 346,
+      "evidence": "Vowels restored to complete printed words"
+    },
+    "instruction": "Впиши слово целиком, включая напечатанные согласные."
+  },
+  "ws-9-3": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "enter your PIN"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "go bargain-hunting"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "have a bad reputation"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "support local producers"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "treat yourself to sth"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 348,
+      "evidence": "Picture labels 2–6 read in image order"
+    }
+  },
+  "ws-17-2": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "ditch"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "foothills"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "meadow"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "orchard"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "plain"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "ploughed field"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "stream"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 356,
+      "evidence": "Landscape picture labels 2–8 read in image order"
+    }
+  },
+  "wb-54-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "would you?"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "will you?"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "shall we?"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "did it?"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Are they?"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "isn’t it?"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 201,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "wb-58-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "✓"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "✓"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 201,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Введи to там, где его нужно вычеркнуть, и ✓ там, где предложение уже верно."
+  },
+  "wb-85-8": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "with"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "close"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "gain"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "eye-catching"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "alarming"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 203,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "wb-118-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "had remembered"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "high"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "could"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "have"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "was",
+          "were"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "liked"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 207,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "wb-128-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "no"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Never"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "What"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "It"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Not"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 208,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "wb-163-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "is going to win"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "will ever live"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "are going to have"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "starts"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "am going"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "will be studying"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "pay"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "will have read"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 209,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "wb-174-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "better not"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "had to"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "weren’t there"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "other"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "a little"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "they’ll have been"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "teaching",
+          "which teaches"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "spending"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 211,
+      "evidence": "Reviewed correction key: incorrect text excluded; separate item labels retained"
+    },
+    "instruction": "Впиши исправленный фрагмент для каждого пункта. Если исправление не нужно, введи ✓."
+  },
+  "sb-15-11": {
+    "answerSpec": [
+      {
+        "label": "Фразы",
+        "kind": "set",
+        "members": [
+          [
+            "I would welcome the opportunity to work with and learn from a successful organisation such as"
+          ],
+          [
+            "I feel confident I possess relevant skills and would be well suited to the position"
+          ],
+          [
+            "Please do not hesitate to contact me if you require any further information"
+          ]
+        ],
+        "accepted": [
+          "I would welcome the opportunity to work with and learn from a successful organisation such as; I feel confident I possess relevant skills and would be well suited to the position; Please do not hesitate to contact me if you require any further information"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 37,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-20-1": {
+    "answerSpec": [
+      {
+        "label": "friendliness · positive",
+        "accepted": [
+          "friendly"
+        ]
+      },
+      {
+        "label": "friendliness · negative",
+        "accepted": [
+          "unfriendly"
+        ]
+      },
+      {
+        "label": "honesty · positive",
+        "accepted": [
+          "honest"
+        ]
+      },
+      {
+        "label": "honesty · negative",
+        "accepted": [
+          "dishonest"
+        ]
+      },
+      {
+        "label": "kindness · positive",
+        "accepted": [
+          "kind"
+        ]
+      },
+      {
+        "label": "kindness · negative",
+        "accepted": [
+          "unkind"
+        ]
+      },
+      {
+        "label": "patience · positive",
+        "accepted": [
+          "patient"
+        ]
+      },
+      {
+        "label": "patience · negative",
+        "accepted": [
+          "impatient"
+        ]
+      },
+      {
+        "label": "politeness · positive",
+        "accepted": [
+          "polite"
+        ]
+      },
+      {
+        "label": "politeness · negative",
+        "accepted": [
+          "impolite"
+        ]
+      },
+      {
+        "label": "responsibility · positive",
+        "accepted": [
+          "responsible"
+        ]
+      },
+      {
+        "label": "responsibility · negative",
+        "accepted": [
+          "irresponsible"
+        ]
+      },
+      {
+        "label": "sensitivity · positive",
+        "accepted": [
+          "sensitive"
+        ]
+      },
+      {
+        "label": "sensitivity · negative",
+        "accepted": [
+          "insensitive"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 42,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-21-9": {
+    "answerSpec": [
+      {
+        "label": "Positive",
+        "kind": "set",
+        "members": [
+          [
+            "fair-minded"
+          ],
+          [
+            "good-natured"
+          ],
+          [
+            "kind-hearted"
+          ],
+          [
+            "laid-back"
+          ],
+          [
+            "level-headed"
+          ],
+          [
+            "self-critical"
+          ],
+          [
+            "strong-willed"
+          ]
+        ],
+        "accepted": [
+          "fair-minded; good-natured; kind-hearted; laid-back; level-headed; self-critical; strong-willed"
+        ]
+      },
+      {
+        "label": "Negative",
+        "kind": "set",
+        "members": [
+          [
+            "self-centred"
+          ],
+          [
+            "self-conscious"
+          ],
+          [
+            "short-tempered"
+          ]
+        ],
+        "accepted": [
+          "self-centred; self-conscious; short-tempered"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 43,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-22-3": {
+    "answerSpec": [
+      {
+        "label": "Past Perfect",
+        "kind": "set",
+        "members": [
+          [
+            "had remained single and had never forgotten"
+          ],
+          [
+            "had been thinking about Amelie too"
+          ],
+          [
+            "had passed"
+          ],
+          [
+            "had first met"
+          ]
+        ],
+        "accepted": [
+          "had remained single and had never forgotten; had been thinking about Amelie too; had passed; had first met"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 44,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true,
+    "instruction": "Перечисли четыре фрагмента с Past Perfect через ;. Объяснения напиши в свободной части."
+  },
+  "sb-38-2": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "Future Continuous"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "Future Continuous"
+        ]
+      },
+      {
+        "label": "2a",
+        "accepted": [
+          "Future Perfect Simple"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "Future Perfect Simple"
+        ]
+      },
+      {
+        "label": "3a",
+        "accepted": [
+          "Future Perfect Continuous"
+        ]
+      },
+      {
+        "label": "3b",
+        "accepted": [
+          "Future Perfect Continuous"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 60,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-42-3": {
+    "answerSpec": [
+      {
+        "label": "Rule 1",
+        "kind": "set",
+        "members": [
+          [
+            "no space"
+          ],
+          [
+            "much time"
+          ],
+          [
+            "a few speed-cleaning tips"
+          ]
+        ],
+        "accepted": [
+          "no space; much time; a few speed-cleaning tips"
+        ]
+      },
+      {
+        "label": "Rule 2",
+        "kind": "set",
+        "members": [
+          [
+            "all of you"
+          ],
+          [
+            "most of them"
+          ],
+          [
+            "very few of your friends"
+          ]
+        ],
+        "accepted": [
+          "all of you; most of them; very few of your friends"
+        ]
+      },
+      {
+        "label": "Rule 3",
+        "kind": "set",
+        "members": [
+          [
+            "loads of dirty washing"
+          ],
+          [
+            "plenty of clothes"
+          ],
+          [
+            "a number of opportunities"
+          ]
+        ],
+        "accepted": [
+          "loads of dirty washing; plenty of clothes; a number of opportunities"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 64,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-44-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a sheep farm in New Zealand",
+          "It’s located on a sheep farm in New Zealand"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "loved it",
+          "The tourists loved it"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 66,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-47-7": {
+    "answerSpec": [
+      {
+        "label": "Предложения",
+        "kind": "set",
+        "members": [
+          [
+            "Although there are several potential downsides to this communal way of living, there are also numerous benefits"
+          ],
+          [
+            "Despite these clear advantages, there are also considerable drawbacks"
+          ]
+        ],
+        "accepted": [
+          "Although there are several potential downsides to this communal way of living, there are also numerous benefits; Despite these clear advantages, there are also considerable drawbacks"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 69,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-54-5": {
+    "answerSpec": [
+      {
+        "label": "Reply questions",
+        "kind": "set",
+        "members": [
+          [
+            "Did he?"
+          ],
+          [
+            "Did you?"
+          ],
+          [
+            "Is it?"
+          ]
+        ],
+        "accepted": [
+          "Did he?; Did you?; Is it?"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 76,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-74-2": {
+    "answerSpec": [
+      {
+        "label": "told",
+        "accepted": [
+          "assured"
+        ]
+      },
+      {
+        "label": "said",
+        "kind": "set",
+        "members": [
+          [
+            "claimed"
+          ],
+          [
+            "explained"
+          ],
+          [
+            "suggested"
+          ],
+          [
+            "insisted"
+          ],
+          [
+            "added"
+          ]
+        ],
+        "accepted": [
+          "claimed; explained; suggested; insisted; added"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 96,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-74-3": {
+    "answerSpec": [
+      {
+        "label": "verb + object + preposition + -ing",
+        "accepted": [
+          "accuse"
+        ]
+      },
+      {
+        "label": "verb + to infinitive",
+        "accepted": [
+          "refuse"
+        ]
+      },
+      {
+        "label": "verb + -ing",
+        "accepted": [
+          "deny"
+        ]
+      },
+      {
+        "label": "verb + object + to infinitive",
+        "kind": "set",
+        "members": [
+          [
+            "encourage"
+          ],
+          [
+            "beg"
+          ]
+        ],
+        "accepted": [
+          "encourage; beg"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 96,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-86-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "they had had a flat tyre",
+          "They said they had had a flat tyre"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "They sat the exam and the second question was Which tyre"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 108,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-86-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "if you were taking an important exam on Monday"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "if they didn’t get back in time for the exam"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "if they hadn’t had a flat tyre"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "if they arrived before 9 a.m."
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 108,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-91-5": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "I firmly believe",
+          "I’m not convinced they do, because"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "It’s absolutely vital I think, because",
+          "It’s quite important I think, because"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "I think the main reason is that",
+          "I think one reason is that",
+          "I think a significant reason is that"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "One obvious advantage is that",
+          "One clear advantage is that",
+          "One obvious disadvantage is that",
+          "One clear disadvantage is that"
+        ]
+      },
+      {
+        "label": "e",
+        "accepted": [
+          "As well as , other include",
+          "As well as , other things that can help include",
+          "As well as avoiding fur products, other include",
+          "As well as avoiding fur products, other things that can help include"
+        ]
+      },
+      {
+        "label": "f",
+        "accepted": [
+          "I think I’d emphasise that",
+          "I think I’d emphasise how",
+          "I think I’d explain that",
+          "I think I’d explain how"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 113,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-95-5": {
+    "answerSpec": [
+      {
+        "label": "Opening sentence",
+        "accepted": [
+          "Take a nostalgic journey back to small-town America in the 1980s with Netflix’s dark mystery Stranger Things"
+        ]
+      },
+      {
+        "label": "Overall opinion",
+        "accepted": [
+          "As far as I’m concerned, it’s a TV classic"
+        ]
+      },
+      {
+        "label": "Details about the plot",
+        "accepted": [
+          "In season one of Stranger Things, a schoolboy named Will goes missing"
+        ]
+      },
+      {
+        "label": "What you liked/disliked",
+        "accepted": [
+          "Unlike many modern shows, it doesn’t rely too heavily on special effects"
+        ]
+      },
+      {
+        "label": "Summary",
+        "accepted": [
+          "All in all, Stranger Things offers viewers a gripping story with plenty of twists and turns"
+        ]
+      },
+      {
+        "label": "Recommendation",
+        "accepted": [
+          "I can’t recommend it enough"
+        ]
+      },
+      {
+        "label": "Adjectives and modifiers",
+        "kind": "set",
+        "members": [
+          [
+            "unforgettable soundtrack"
+          ],
+          [
+            "wonderful performances"
+          ],
+          [
+            "beautifully shot"
+          ]
+        ],
+        "accepted": [
+          "unforgettable soundtrack; wonderful performances; beautifully shot"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 117,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-100-1": {
+    "answerSpec": [
+      {
+        "label": "astronomical · discipline",
+        "accepted": [
+          "astronomy"
+        ]
+      },
+      {
+        "label": "astronomical · person",
+        "accepted": [
+          "astronomer"
+        ]
+      },
+      {
+        "label": "biological · discipline",
+        "accepted": [
+          "biology"
+        ]
+      },
+      {
+        "label": "biological · person",
+        "accepted": [
+          "biologist"
+        ]
+      },
+      {
+        "label": "botanical · discipline",
+        "accepted": [
+          "botany"
+        ]
+      },
+      {
+        "label": "botanical · person",
+        "accepted": [
+          "botanist"
+        ]
+      },
+      {
+        "label": "chemical · discipline",
+        "accepted": [
+          "chemistry"
+        ]
+      },
+      {
+        "label": "chemical · person",
+        "accepted": [
+          "chemist"
+        ]
+      },
+      {
+        "label": "geological · discipline",
+        "accepted": [
+          "geology"
+        ]
+      },
+      {
+        "label": "geological · person",
+        "accepted": [
+          "geologist"
+        ]
+      },
+      {
+        "label": "mathematical · discipline",
+        "accepted": [
+          "mathematics"
+        ]
+      },
+      {
+        "label": "mathematical · person",
+        "accepted": [
+          "mathematician"
+        ]
+      },
+      {
+        "label": "physical · discipline",
+        "accepted": [
+          "physics"
+        ]
+      },
+      {
+        "label": "physical · person",
+        "accepted": [
+          "physicist"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 122,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-100-4": {
+    "answerSpec": [
+      {
+        "label": "Marie Curie",
+        "accepted": [
+          "physicist and chemist"
+        ]
+      },
+      {
+        "label": "Mary Anning",
+        "accepted": [
+          "geologist"
+        ]
+      },
+      {
+        "label": "Rosalind Franklin",
+        "accepted": [
+          "chemist"
+        ]
+      },
+      {
+        "label": "Jocelyn Bell Burnell",
+        "accepted": [
+          "astrophysicist"
+        ]
+      },
+      {
+        "label": "Dorothy Hodgkin",
+        "accepted": [
+          "chemist"
+        ]
+      },
+      {
+        "label": "In common",
+        "accepted": [
+          "They were all women and they were all discriminated against because they were women"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 122,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-103-1": {
+    "answerSpec": [
+      {
+        "label": "A",
+        "accepted": [
+          "stealing a phone from a moped"
+        ]
+      },
+      {
+        "label": "B",
+        "accepted": [
+          "following sat-nav to the wrong place"
+        ]
+      },
+      {
+        "label": "C",
+        "accepted": [
+          "breaking a mobile phone screen"
+        ]
+      },
+      {
+        "label": "D",
+        "accepted": [
+          "not having enough money and",
+          "or not being tech savvy"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 125,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-110-4": {
+    "answerSpec": [
+      {
+        "label": "Get the reader’s attention",
+        "accepted": [
+          "Robert Weaver discovered he was not in fact Robert Weaver on Independence Day, 2092"
+        ]
+      },
+      {
+        "label": "Set the scene",
+        "accepted": [
+          "His mother and father were celebrating at their company headquarters on Earth-Station One and had left Robert home alone for the weekend"
+        ]
+      },
+      {
+        "label": "Use narrative tenses",
+        "accepted": [
+          "With his parents away, Robert had decided to throw a party. It was going well"
+        ]
+      },
+      {
+        "label": "Shorter sentences",
+        "accepted": [
+          "But word had spread, and soon the house was full"
+        ]
+      },
+      {
+        "label": "Appealing to the senses",
+        "accepted": [
+          "A small group had gone downstairs and seen a strange blue glow coming from under one of the doors"
+        ]
+      },
+      {
+        "label": "Report speech",
+        "accepted": [
+          "he insisted they find out what it was",
+          "she insisted they find out what it was"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 132,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-116-1": {
+    "answerSpec": [
+      {
+        "label": "Collocations",
+        "kind": "set",
+        "members": [
+          [
+            "climate change"
+          ],
+          [
+            "endangered species"
+          ],
+          [
+            "global warming"
+          ],
+          [
+            "water shortages"
+          ],
+          [
+            "recycling bins"
+          ],
+          [
+            "renewable energy"
+          ],
+          [
+            "solar panels"
+          ],
+          [
+            "economic growth"
+          ]
+        ],
+        "accepted": [
+          "climate change; endangered species; global warming; water shortages; recycling bins; renewable energy; solar panels; economic growth"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 138,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-116-2": {
+    "answerSpec": [
+      {
+        "label": "Problems",
+        "kind": "set",
+        "members": [
+          [
+            "climate change"
+          ],
+          [
+            "endangered species"
+          ],
+          [
+            "global warming"
+          ],
+          [
+            "water shortages"
+          ]
+        ],
+        "accepted": [
+          "climate change; endangered species; global warming; water shortages"
+        ]
+      },
+      {
+        "label": "Solutions",
+        "kind": "set",
+        "members": [
+          [
+            "recycling bins"
+          ],
+          [
+            "renewable energy"
+          ],
+          [
+            "solar panels"
+          ]
+        ],
+        "accepted": [
+          "recycling bins; renewable energy; solar panels"
+        ]
+      },
+      {
+        "label": "Both",
+        "kind": "set",
+        "members": [
+          [
+            "economic growth"
+          ]
+        ],
+        "accepted": [
+          "economic growth"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 138,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-126-3": {
+    "answerSpec": [
+      {
+        "label": "Причина",
+        "accepted": [
+          "He writes about Zakynthos because he’s been there recently, and because it is an example of a place where environmental protection takes priority over development of facilities for tourists"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 148,
+      "evidence": "Reviewed Teacher margin key"
+    },
+    "mixed": true
+  },
+  "sb-134-8": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "She realises that genetics plays a big role in who they are"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "She wonders how much control she really has"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "She thinks she should help Mia become who Mia wants to be, rather than who she wants Mia to be"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 156,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-136-3": {
+    "answerSpec": [
+      {
+        "label": "Ответ",
+        "accepted": [
+          "On weekdays the streets are extremely busy. There are traffic-free Sundays when cars are banned from the city centre and only pollution-free means of transport are allowed"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 158,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-136-6": {
+    "answerSpec": [
+      {
+        "label": "Виды транспорта",
+        "kind": "set",
+        "members": [
+          [
+            "skateboard"
+          ],
+          [
+            "bicycle"
+          ],
+          [
+            "tricycle"
+          ],
+          [
+            "roller skates"
+          ],
+          [
+            "wheelchair"
+          ],
+          [
+            "go-cart"
+          ],
+          [
+            "bicycle trailers for baby"
+          ],
+          [
+            "bicycle trailers for dog"
+          ],
+          [
+            "walking"
+          ],
+          [
+            "running"
+          ]
+        ],
+        "accepted": [
+          "skateboard; bicycle; tricycle; roller skates; wheelchair; go-cart; bicycle trailers for baby; bicycle trailers for dog; walking; running"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 158,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-160-4": {
+    "answerSpec": [
+      {
+        "label": "Interviewer 1",
+        "accepted": [
+          "What’s your biggest weakness?"
+        ]
+      },
+      {
+        "label": "Nina",
+        "accepted": [
+          "I’m not very good at speaking in public. I get nervous in front of a big group of people. Will I need to speak in front of people?"
+        ]
+      },
+      {
+        "label": "Interviewer 2",
+        "accepted": [
+          "Don’t worry. You might need to give presentations in meetings occasionally, but it won’t be in front of a lot of people."
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 182,
+      "evidence": "Reviewed Teacher margin key"
+    }
+  },
+  "sb-8-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "fiction"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "fiction"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 31,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-8-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "fiction"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "fact"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "fiction"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 31,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-8-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "E"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "D"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 31,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-7-2": {
+    "answerSpec": [
+      {
+        "label": "Method 1",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "Method 2",
+        "accepted": [
+          "E"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 29,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-7-8": {
+    "answerSpec": [
+      {
+        "label": "Одинаковый гласный звук?",
+        "accepted": [
+          "No",
+          "No, all six are different"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 29,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-11-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "2"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 33,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-11-7": {
+    "answerSpec": [
+      {
+        "label": "Фразы из записи",
+        "kind": "set",
+        "members": [
+          [
+            "Personally, I think"
+          ],
+          [
+            "Actually"
+          ],
+          [
+            "I intend to"
+          ],
+          [
+            "For this reason, I feel"
+          ]
+        ],
+        "accepted": [
+          "Personally, I think; Actually; I intend to; For this reason, I feel"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 33,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-14-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Children’s activity coordinator at a zoo’s summer activity programme"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Experience with childcare, artistic and sporting skills, works well in a team"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 36,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-14-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Personal profile"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Skills and achievements"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Education and qualifications"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Employment history"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Interests"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "Referees"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 36,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-22-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Because a love letter Steve had sent to Amelie had been lost"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 44,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-22-2": {
+    "answerSpec": [
+      {
+        "label": "After her course finished",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "It had been there for ten years",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "Steve had been working",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "She had got married",
+        "accepted": [
+          "1"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 44,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-22-7": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "had made"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "had heard"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "had moved"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "had been working"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "had seen"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "had been living"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "had been searching"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "had grown"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "had met"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 44,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-23-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "be attracted to"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "be madly in love with"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "split up with"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "fall for"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "go out with"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "be obsessed with"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 45,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-29-5": {
+    "answerSpec": [
+      {
+        "label": "Collocations",
+        "kind": "set",
+        "members": [
+          [
+            "deeply depressed"
+          ],
+          [
+            "free spirit"
+          ],
+          [
+            "good company"
+          ],
+          [
+            "highly intelligent"
+          ],
+          [
+            "supremely confident"
+          ]
+        ],
+        "accepted": [
+          "deeply depressed; free spirit; good company; highly intelligent; supremely confident"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 51,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-39-1": {
+    "answerSpec": [
+      {
+        "label": "1 · название",
+        "accepted": [
+          "Smart home"
+        ]
+      },
+      {
+        "label": "2 · название",
+        "accepted": [
+          "Co-housing"
+        ]
+      },
+      {
+        "label": "3 · название",
+        "accepted": [
+          "Freedom Ship"
+        ]
+      },
+      {
+        "label": "1 · фото",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "2 · фото",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "3 · фото",
+        "accepted": [
+          "A"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 61,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-39-8": {
+    "answerSpec": [
+      {
+        "label": "B1",
+        "accepted": [
+          "will you have"
+        ]
+      },
+      {
+        "label": "B2",
+        "accepted": [
+          "will you be"
+        ]
+      },
+      {
+        "label": "B3",
+        "accepted": [
+          "will you have"
+        ]
+      },
+      {
+        "label": "B4",
+        "accepted": [
+          "will you have been"
+        ]
+      },
+      {
+        "label": "B5",
+        "accepted": [
+          "will you have"
+        ]
+      },
+      {
+        "label": "B6",
+        "accepted": [
+          "will you have been"
+        ]
+      },
+      {
+        "label": "B7",
+        "accepted": [
+          "will you have"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 61,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "instruction": "Введи пропущенные слова для каждой строки раздела B, сверху вниз."
+  },
+  "sb-61-6": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "manage"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "supposed",
+          "allowed"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "have",
+          "need"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "able",
+          "supposed",
+          "allowed"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "am",
+          "’m"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "forbidden",
+          "banned"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "sure",
+          "likely",
+          "certain",
+          "bound"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 83,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-62-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "behalf"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "draw"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "make"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "matters"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "truth",
+          "fact"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "part"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "urge"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 84,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-63-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "took place"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "reason with"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "accused"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "approached"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "humiliated"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "threatened"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 85,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-63-6": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "b",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "c",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "d",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "e",
+        "accepted": [
+          "4"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 85,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-70-2": {
+    "answerSpec": [
+      {
+        "label": "1 · Interviewer",
+        "accepted": [
+          "about your weaknesses"
+        ]
+      },
+      {
+        "label": "1 · Candidate",
+        "accepted": [
+          "’m not a morning person. In fact, I struggled to get up this morning. I’d like to start work after lunch"
+        ]
+      },
+      {
+        "label": "2 · Interviewer",
+        "accepted": [
+          "pity that you haven’t had any experience of restaurant work"
+        ]
+      },
+      {
+        "label": "2 · Candidates 1",
+        "accepted": [
+          "worry. We’re very good at eating"
+        ]
+      },
+      {
+        "label": "2 · Candidates 2",
+        "accepted": [
+          "’s why we think we should get the job"
+        ]
+      },
+      {
+        "label": "3 · Interviewer",
+        "accepted": [
+          "you like the job you have now"
+        ]
+      },
+      {
+        "label": "3 · Candidate",
+        "accepted": [
+          "I don’t because I have to answer the phone a lot and I hate that"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 92,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "instruction": "Впиши только подчёркнутые фрагменты, преобразованные в прямую речь; начало реплик уже дано на странице."
+  },
+  "sb-90-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-90-4": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "past"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "past"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "present"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-101-8": {
+    "answerSpec": [
+      {
+        "label": "1a",
+        "accepted": [
+          "saw"
+        ]
+      },
+      {
+        "label": "1b",
+        "accepted": [
+          "recognised"
+        ]
+      },
+      {
+        "label": "2a",
+        "accepted": [
+          "coined"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "receives"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "awarded"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "won"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 123,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-106-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "have"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "is"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "have"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "is"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "have"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "be"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 128,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-139-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Shaelyn"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "Kat"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Lucy"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "Lilee"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Sam"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 161,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-147-2": {
+    "answerSpec": [
+      {
+        "label": "Lilee",
+        "accepted": [
+          "did dancing"
+        ]
+      },
+      {
+        "label": "Hannah",
+        "accepted": [
+          "didn’t learn a language"
+        ]
+      },
+      {
+        "label": "Nick",
+        "accepted": [
+          "was a trouble maker at school"
+        ]
+      },
+      {
+        "label": "Shaelyn",
+        "accepted": [
+          "did theatre studies",
+          "did theatre studies loved playing, read plays, learned scripts"
+        ]
+      },
+      {
+        "label": "Kat",
+        "accepted": [
+          "didn’t know what she wanted to do"
+        ]
+      },
+      {
+        "label": "Harriet",
+        "accepted": [
+          "didn’t learn a musical instrument"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 169,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-147-3": {
+    "answerSpec": [
+      {
+        "label": "Lilee",
+        "accepted": [
+          "had done ice skating"
+        ]
+      },
+      {
+        "label": "Hannah",
+        "accepted": [
+          "had learnt a language when she was younger"
+        ]
+      },
+      {
+        "label": "Nick",
+        "accepted": [
+          "had paid more attention at school"
+        ]
+      },
+      {
+        "label": "Shaelyn",
+        "accepted": [
+          "hadn’t given up theatre"
+        ]
+      },
+      {
+        "label": "Kat",
+        "accepted": [
+          "had known what she wanted to do and hadn’t been afraid to pursue it"
+        ]
+      },
+      {
+        "label": "Harriet",
+        "accepted": [
+          "had learnt a musical instrument when she was a child"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 169,
+      "evidence": "Reviewed inline key and exercise association"
+    },
+    "mixed": true
+  },
+  "sb-26-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "∅"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "whose"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "which"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "∅"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "which"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "who"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "who"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "which"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "who"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "which"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 48,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-144-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "Britain"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "20",
+          "20 miles"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "12",
+          "12 hours"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "120",
+          "120 metres"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "3,000",
+          "3,000 houses"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 166,
+      "evidence": "Reviewed inline key and exercise association"
+    }
+  },
+  "sb-10-1": {
+    "answerSpec": [
+      {
+        "label": "Jobs",
+        "kind": "set",
+        "members": [
+          [
+            "creative",
+            "visual jobs"
+          ],
+          [
+            "music"
+          ],
+          [
+            "the arts"
+          ],
+          [
+            "media"
+          ],
+          [
+            "architects"
+          ],
+          [
+            "sports people"
+          ]
+        ],
+        "accepted": [
+          "creative; music; the arts; media; architects; sports people"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 32,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-10-4": {
+    "answerSpec": [
+      {
+        "label": "advise",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "allow",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "arrange",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "avoid",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "can’t afford",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "can’t help",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "can’t stand",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "cause",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "decide",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "encourage",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "fancy",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "force",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "imagine",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "intend",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "let",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "manage",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "offer",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "refuse",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "remind",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "seem",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "spend/waste time",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "urge",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "warn (not)",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "expect",
+        "kind": "set",
+        "members": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ],
+        "accepted": [
+          "1; 2"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 32,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-10-6": {
+    "answerSpec": [
+      {
+        "label": "Примеры",
+        "kind": "set",
+        "members": [
+          [
+            "remember to make"
+          ],
+          [
+            "remember deciding"
+          ],
+          [
+            "saw me using"
+          ],
+          [
+            "didn’t stop writing"
+          ],
+          [
+            "heard someone say"
+          ],
+          [
+            "stop to think"
+          ]
+        ],
+        "accepted": [
+          "remember to make; remember deciding; saw me using; didn’t stop writing; heard someone say; stop to think"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 32,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-28-3": {
+    "answerSpec": [
+      {
+        "label": "adjective + noun",
+        "kind": "set",
+        "members": [
+          [
+            "spare room"
+          ],
+          [
+            "full-time course"
+          ],
+          [
+            "healthy lifestyle"
+          ],
+          [
+            "quiet life"
+          ]
+        ],
+        "accepted": [
+          "spare room; full-time course; healthy lifestyle; quiet life"
+        ]
+      },
+      {
+        "label": "adverb + adjective",
+        "kind": "set",
+        "members": [
+          [
+            "equally important"
+          ],
+          [
+            "painfully shy"
+          ]
+        ],
+        "accepted": [
+          "equally important; painfully shy"
+        ]
+      },
+      {
+        "label": "noun + verb",
+        "kind": "set",
+        "members": [
+          [
+            "lights go out"
+          ]
+        ],
+        "accepted": [
+          "lights go out"
+        ]
+      },
+      {
+        "label": "verb + noun",
+        "kind": "set",
+        "members": [
+          [
+            "meet the requirements"
+          ],
+          [
+            "roar with laughter"
+          ]
+        ],
+        "accepted": [
+          "meet the requirements; roar with laughter"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 50,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-37-9": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "picturesque"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "medieval"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "quaint"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "bustling"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "vibrant"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 59,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-40-3": {
+    "answerSpec": [
+      {
+        "label": "Слова",
+        "kind": "set",
+        "members": [
+          [
+            "canvas camp bed"
+          ],
+          [
+            "cramped"
+          ],
+          [
+            "damp"
+          ],
+          [
+            "draughty"
+          ],
+          [
+            "minimalist"
+          ],
+          [
+            "fireplace"
+          ],
+          [
+            "snug"
+          ],
+          [
+            "inaccessible"
+          ]
+        ],
+        "accepted": [
+          "canvas camp bed; cramped; damp; draughty; minimalist; fireplace; snug; inaccessible"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 62,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-42-4": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "all"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "many"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "a couple"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "both"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "either"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "a few"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "every"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "a number"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "no"
+        ]
+      },
+      {
+        "label": "10",
+        "accepted": [
+          "all"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 64,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-43-3": {
+    "answerSpec": [
+      {
+        "label": "Не упоминаются",
+        "kind": "set",
+        "members": [
+          [
+            "decoration",
+            "furniture"
+          ],
+          [
+            "security"
+          ]
+        ],
+        "accepted": [
+          "decoration; security"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 65,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-46-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "5"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 68,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-54-1": {
+    "answerSpec": [
+      {
+        "label": "Причины беспокойства",
+        "kind": "set",
+        "members": [
+          [
+            "buying tickets online"
+          ],
+          [
+            "Laura is wearing her earrings"
+          ],
+          [
+            "Jamie driving"
+          ]
+        ],
+        "accepted": [
+          "buying tickets online; Laura is wearing her earrings; Jamie driving"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 76,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-56-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a grandmother"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 78,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-56-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a grandmother"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 78,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-71-1": {
+    "answerSpec": [
+      {
+        "label": "actor",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "artist",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "body-part maker",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "dentist",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "factory worker",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "fire fighter",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "lawyer",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "office worker",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "politician",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "robot mechanic",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "shop assistant",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "teacher",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "solar panel engineer",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "space tourist guide",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "wind turbine technician",
+        "accepted": [
+          "A"
+        ]
+      },
+      {
+        "label": "writer",
+        "accepted": [
+          "A"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 93,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-71-10": {
+    "answerSpec": [
+      {
+        "label": "export · noun",
+        "accepted": [
+          "EXport"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "export · verb",
+        "accepted": [
+          "exPORT"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "import · noun",
+        "accepted": [
+          "IMport"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "import · verb",
+        "accepted": [
+          "imPORT"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "increase · noun",
+        "accepted": [
+          "INcrease"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "increase · verb",
+        "accepted": [
+          "inCREASE"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "market · noun",
+        "accepted": [
+          "MARket"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "market · verb",
+        "accepted": [
+          "MARket"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "recruit · noun",
+        "accepted": [
+          "reCRUIT"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "recruit · verb",
+        "accepted": [
+          "reCRUIT"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "review · noun",
+        "accepted": [
+          "reVIEW"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "review · verb",
+        "accepted": [
+          "reVIEW"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "target · noun",
+        "accepted": [
+          "TARget"
+        ],
+        "kind": "stress"
+      },
+      {
+        "label": "target · verb",
+        "accepted": [
+          "TARget"
+        ],
+        "kind": "stress"
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 93,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "instruction": "Выдели ударный слог ЗАГЛАВНЫМИ буквами: например, EXport."
+  },
+  "sb-72-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "career guidance"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "counsellors"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "career path"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "workplace"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "job-sharing"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "thrive"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "freelancer"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "flexitime"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "part-timer"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 94,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-78-2": {
+    "answerSpec": [],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 100,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-76-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "5"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 98,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-83-7": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "C"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "D"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "D"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "B"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "C"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 105,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-90-1": {
+    "answerSpec": [
+      {
+        "label": "Radcliffe",
+        "accepted": [
+          "Radcliffe doesn’t mind being called Harry Potter"
+        ]
+      },
+      {
+        "label": "Pattinson",
+        "accepted": [
+          "Pattinson didn’t like Edward Cullen"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-90-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "d"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-90-6": {
+    "answerSpec": [
+      {
+        "label": "1b",
+        "accepted": [
+          "I don’t know who Edward Cullen is"
+        ]
+      },
+      {
+        "label": "4a",
+        "accepted": [
+          "Pattinson and Radcliffe are enjoying success"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-106-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "one"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "6,000"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Egyptians"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "astrology"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "unlimited"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "An increasing"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 128,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-107-4": {
+    "answerSpec": [
+      {
+        "label": "Фразы",
+        "kind": "set",
+        "members": [
+          [
+            "I’m afraid you’ve lost me there"
+          ],
+          [
+            "Are you saying"
+          ],
+          [
+            "Yes, precisely",
+            "exactly"
+          ]
+        ],
+        "accepted": [
+          "I’m afraid you’ve lost me there; Are you saying; Yes, precisely"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 129,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-119-8": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "cuts"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "back"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "sheep"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "kiss"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "prove"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 141,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-133-3": {
+    "answerSpec": [
+      {
+        "label": "Aaron",
+        "kind": "set",
+        "members": [
+          [
+            "2"
+          ],
+          [
+            "8"
+          ]
+        ],
+        "accepted": [
+          "2; 8"
+        ]
+      },
+      {
+        "label": "Hannah",
+        "kind": "set",
+        "members": [
+          [
+            "4"
+          ],
+          [
+            "6"
+          ]
+        ],
+        "accepted": [
+          "4; 6"
+        ]
+      },
+      {
+        "label": "Harriet",
+        "kind": "set",
+        "members": [
+          [
+            "1"
+          ]
+        ],
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "Natasha",
+        "kind": "set",
+        "members": [
+          [
+            "5"
+          ],
+          [
+            "7"
+          ]
+        ],
+        "accepted": [
+          "5; 7"
+        ]
+      },
+      {
+        "label": "Nobuse",
+        "kind": "set",
+        "members": [
+          [
+            "3"
+          ]
+        ],
+        "accepted": [
+          "3"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 155,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-134-6": {
+    "answerSpec": [
+      {
+        "label": "Feelings",
+        "accepted": [
+          "Really excited"
+        ]
+      },
+      {
+        "label": "First reaction",
+        "accepted": [
+          "Shy, but they can’t take their eyes off one another. They both look to their parents"
+        ]
+      },
+      {
+        "label": "Inside the house",
+        "accepted": [
+          "They go straight upstairs, get changed and start playing in the pool"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 156,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-134-7": {
+    "answerSpec": [
+      {
+        "label": "Feelings",
+        "accepted": [
+          "Really excited"
+        ]
+      },
+      {
+        "label": "First reaction",
+        "accepted": [
+          "Shy, but they can’t take their eyes off one another. They both look to their parents"
+        ]
+      },
+      {
+        "label": "Inside the house",
+        "accepted": [
+          "They go straight upstairs, get changed and start playing in the pool"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 156,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-138-7": {
+    "answerSpec": [
+      {
+        "label": "get orders",
+        "accepted": [
+          "6"
+        ]
+      },
+      {
+        "label": "bake cakes",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "big boost",
+        "accepted": [
+          "3"
+        ]
+      },
+      {
+        "label": "Cara Delevingne",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "upload more photos",
+        "accepted": [
+          "8"
+        ]
+      },
+      {
+        "label": "Instagram tag",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "bake more cakes",
+        "accepted": [
+          "7"
+        ]
+      },
+      {
+        "label": "upload photos",
+        "accepted": [
+          "5"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 160,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-139-3": {
+    "answerSpec": [
+      {
+        "label": "Sam",
+        "accepted": [
+          "4"
+        ]
+      },
+      {
+        "label": "Kat",
+        "accepted": [
+          "5"
+        ]
+      },
+      {
+        "label": "Lilee",
+        "accepted": [
+          "1"
+        ]
+      },
+      {
+        "label": "Shaelyn",
+        "accepted": [
+          "2"
+        ]
+      },
+      {
+        "label": "Lucy",
+        "accepted": [
+          "3"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 161,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-140-2": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "BIG GESTURES"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "EYE CONTACT"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "HEAD UP HIGH"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "GOOD PRESENTATION"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 162,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-142-4": {
+    "answerSpec": [
+      {
+        "label": "Positive",
+        "kind": "set",
+        "members": [
+          [
+            "being creative"
+          ],
+          [
+            "connectivity"
+          ],
+          [
+            "makes you more mindful"
+          ],
+          [
+            "opened up so many new activities"
+          ]
+        ],
+        "accepted": [
+          "being creative; connectivity; makes you more mindful; opened up so many new activities"
+        ]
+      },
+      {
+        "label": "Negative",
+        "kind": "set",
+        "members": [
+          [
+            "be very careful with your privacy"
+          ],
+          [
+            "easy to get addicted"
+          ],
+          [
+            "low-quality content"
+          ],
+          [
+            "scrolling through mindlessly"
+          ]
+        ],
+        "accepted": [
+          "be very careful with your privacy; easy to get addicted; low-quality content; scrolling through mindlessly"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 164,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-143-2": {
+    "answerSpec": [
+      {
+        "label": "Nick · When",
+        "accepted": [
+          "late 1930s",
+          "early 1940s"
+        ]
+      },
+      {
+        "label": "Nick · Why",
+        "accepted": [
+          "to see Spitfires and Lancasters flying"
+        ]
+      },
+      {
+        "label": "Kat · When",
+        "accepted": [
+          "early 1960s"
+        ]
+      },
+      {
+        "label": "Kat · Why",
+        "accepted": [
+          "to see how her grandmother dealt with the same problems Kat has"
+        ]
+      },
+      {
+        "label": "Sam · When",
+        "accepted": [
+          "Ancient Babylon or Egypt"
+        ]
+      },
+      {
+        "label": "Sam · Why",
+        "accepted": [
+          "to see the desert setting"
+        ]
+      },
+      {
+        "label": "Hassan · When",
+        "accepted": [
+          "the Middle Ages"
+        ]
+      },
+      {
+        "label": "Hassan · Why",
+        "accepted": [
+          "to see how people lived without technology"
+        ]
+      },
+      {
+        "label": "Luke · When",
+        "accepted": [
+          "Dickensian period in England"
+        ]
+      },
+      {
+        "label": "Luke · Why",
+        "accepted": [
+          "to understand the very different circumstances in which people lived"
+        ]
+      },
+      {
+        "label": "Ellie · When",
+        "accepted": [
+          "the 1980s"
+        ]
+      },
+      {
+        "label": "Ellie · Why",
+        "accepted": [
+          "a good decade for music"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 165,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    },
+    "mixed": true
+  },
+  "sb-145-3": {
+    "answerSpec": [
+      {
+        "label": "Lilee",
+        "accepted": [
+          "cool, great for environment"
+        ]
+      },
+      {
+        "label": "Luke",
+        "accepted": [
+          "easier to travel"
+        ]
+      },
+      {
+        "label": "Sam",
+        "accepted": [
+          "could solve the world’s energy crisis problems"
+        ]
+      },
+      {
+        "label": "Nick",
+        "accepted": [
+          "interesting what kind of sounds you could get from them"
+        ]
+      },
+      {
+        "label": "Nobuse",
+        "accepted": [
+          "more engaging and fun, more in tune with the modern-day student"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 167,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-145-4": {
+    "answerSpec": [
+      {
+        "label": "Lilee",
+        "accepted": [
+          "access to electricity"
+        ]
+      },
+      {
+        "label": "Luke",
+        "accepted": [
+          "expensive medical technology"
+        ]
+      },
+      {
+        "label": "Sam",
+        "accepted": [
+          "universal access to the Internet"
+        ]
+      },
+      {
+        "label": "Nick",
+        "accepted": [
+          "tablets"
+        ]
+      },
+      {
+        "label": "Nobuse",
+        "accepted": [
+          "online education"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 167,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-147-4": {
+    "answerSpec": [
+      {
+        "label": "Wouldn’t change anything",
+        "kind": "set",
+        "members": [
+          [
+            "Lilee"
+          ],
+          [
+            "Kat"
+          ],
+          [
+            "Harriet"
+          ]
+        ],
+        "accepted": [
+          "Lilee; Kat; Harriet"
+        ]
+      },
+      {
+        "label": "Most enthusiastic",
+        "accepted": [
+          "Lilee"
+        ]
+      },
+      {
+        "label": "Would change where she lives",
+        "accepted": [
+          "Shaelyn"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 169,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-147-5": {
+    "answerSpec": [
+      {
+        "label": "Lilee",
+        "accepted": [
+          "along"
+        ]
+      },
+      {
+        "label": "Hannah",
+        "accepted": [
+          "from"
+        ]
+      },
+      {
+        "label": "Nick",
+        "accepted": [
+          "in"
+        ]
+      },
+      {
+        "label": "Shaelyn",
+        "accepted": [
+          "in"
+        ]
+      },
+      {
+        "label": "Kat",
+        "accepted": [
+          "for"
+        ]
+      },
+      {
+        "label": "Harriet",
+        "accepted": [
+          "with"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 169,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-169-3": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "hadn’t flown"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "switched"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "didn’t assume"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "did"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "had known"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "had warned"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 191,
+      "evidence": "Reviewed table, unnumbered list or cross-exercise key"
+    }
+  },
+  "sb-23-7": {
+    "answerSpec": [
+      {
+        "label": "Пары слов",
+        "kind": "set",
+        "members": [
+          [
+            "official pressure"
+          ],
+          [
+            "confusion measure"
+          ],
+          [
+            "courage Japan"
+          ]
+        ],
+        "accepted": [
+          "official pressure; confusion measure; courage Japan"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 45,
+      "evidence": "Reviewed two-part answer key"
+    },
+    "instruction": "Введи три пары через ;, например official pressure. Порядок пар не важен."
+  },
+  "sb-45-6": {
+    "answerSpec": [
+      {
+        "label": "A1",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "A2",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "B1",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "B2",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "C1",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "C2",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 67,
+      "evidence": "Reviewed two-part answer key"
+    }
+  },
+  "sb-90-5": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "2",
+        "kind": "set",
+        "members": [
+          [
+            "a"
+          ],
+          [
+            "b"
+          ]
+        ],
+        "accepted": [
+          "a; b"
+        ]
+      },
+      {
+        "label": "3",
+        "kind": "set",
+        "members": [
+          [
+            "a"
+          ],
+          [
+            "b"
+          ]
+        ],
+        "accepted": [
+          "a; b"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "b"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 112,
+      "evidence": "Reviewed two-part answer key"
+    }
+  },
+  "sb-8-6": {
+    "answerSpec": [
+      {
+        "label": "1 · пропуск",
+        "accepted": [
+          "remain"
+        ]
+      },
+      {
+        "label": "2 · пропуск",
+        "accepted": [
+          "left"
+        ]
+      },
+      {
+        "label": "3 · пропуск",
+        "accepted": [
+          "acquired"
+        ]
+      },
+      {
+        "label": "4 · пропуск",
+        "accepted": [
+          "fall into"
+        ]
+      },
+      {
+        "label": "5 · пропуск",
+        "accepted": [
+          "suffered"
+        ]
+      },
+      {
+        "label": "6 · пропуск",
+        "accepted": [
+          "was struck",
+          "hit"
+        ]
+      },
+      {
+        "label": "7 · пропуск",
+        "accepted": [
+          "feel",
+          "get"
+        ]
+      },
+      {
+        "label": "8 · пропуск",
+        "accepted": [
+          "consciousness"
+        ]
+      },
+      {
+        "label": "1 · ответ",
+        "accepted": [
+          "Things like consciousness, intelligence and creativity"
+        ]
+      },
+      {
+        "label": "2 · ответ",
+        "accepted": [
+          "Outside a karaoke bar"
+        ]
+      },
+      {
+        "label": "3 · ответ",
+        "accepted": [
+          "Not common"
+        ]
+      },
+      {
+        "label": "4 · ответ",
+        "accepted": [
+          "He had a car crash"
+        ]
+      },
+      {
+        "label": "5 · ответ",
+        "accepted": [
+          "Playing basketball"
+        ]
+      },
+      {
+        "label": "6 · ответ",
+        "accepted": [
+          "Near a public payphone"
+        ]
+      },
+      {
+        "label": "7 · ответ",
+        "accepted": [
+          "Soon after the boot of her car crashed down on her head"
+        ]
+      },
+      {
+        "label": "8 · ответ",
+        "accepted": [
+          "No, she didn’t"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 30,
+      "evidence": "Reviewed two-part answer key"
+    },
+    "instruction": "Для каждого пункта заполни пропуск и отдельно ответь на получившийся вопрос."
+  },
+  "sb-88-5": {
+    "answerSpec": [
+      {
+        "label": "1 · пропуск",
+        "accepted": [
+          "mainstream"
+        ]
+      },
+      {
+        "label": "2 · пропуск",
+        "accepted": [
+          "claim"
+        ]
+      },
+      {
+        "label": "3 · пропуск",
+        "accepted": [
+          "to"
+        ]
+      },
+      {
+        "label": "4 · пропуск",
+        "accepted": [
+          "of"
+        ]
+      },
+      {
+        "label": "5 · пропуск",
+        "accepted": [
+          "seeking"
+        ]
+      },
+      {
+        "label": "6 · пропуск",
+        "accepted": [
+          "off"
+        ]
+      },
+      {
+        "label": "7 · пропуск",
+        "accepted": [
+          "popularity"
+        ]
+      },
+      {
+        "label": "8 · пропуск",
+        "accepted": [
+          "trigger"
+        ]
+      },
+      {
+        "label": "1 · ответ",
+        "accepted": [
+          "In the early 2000s"
+        ]
+      },
+      {
+        "label": "2 · ответ",
+        "accepted": [
+          "Britney Spears and Paris Hilton"
+        ]
+      },
+      {
+        "label": "3 · ответ",
+        "accepted": [
+          "1839 – self-portrait taken by Robert Cornelius with fifteen minutes of posing"
+        ]
+      },
+      {
+        "label": "4 · ответ",
+        "accepted": [
+          "-ie"
+        ]
+      },
+      {
+        "label": "5 · ответ",
+        "accepted": [
+          "To be part of a group"
+        ]
+      },
+      {
+        "label": "6 · ответ",
+        "accepted": [
+          "Depressive thoughts"
+        ]
+      },
+      {
+        "label": "7 · ответ",
+        "accepted": [
+          "Airbrushing apps"
+        ]
+      },
+      {
+        "label": "8 · ответ",
+        "accepted": [
+          "Body dysmorphic disorder. Filtered images can trigger it"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 110,
+      "evidence": "Reviewed two-part answer key"
+    },
+    "instruction": "Для каждого пункта заполни пропуск и отдельно ответь на получившийся вопрос."
+  },
+  "sb-95-7": {
+    "answerSpec": [
+      {
+        "label": "2 · слово",
+        "accepted": [
+          "unforgettable"
+        ]
+      },
+      {
+        "label": "3 · слово",
+        "accepted": [
+          "terrifying"
+        ]
+      },
+      {
+        "label": "4 · слово",
+        "accepted": [
+          "gripping"
+        ]
+      },
+      {
+        "label": "5 · слово",
+        "accepted": [
+          "nostalgic"
+        ]
+      },
+      {
+        "label": "6 · слово",
+        "accepted": [
+          "far-fetched"
+        ]
+      },
+      {
+        "label": "7 · слово",
+        "accepted": [
+          "well-reviewed"
+        ]
+      },
+      {
+        "label": "8 · слово",
+        "accepted": [
+          "predictable"
+        ]
+      },
+      {
+        "label": "1 · оценка",
+        "accepted": [
+          "positive"
+        ]
+      },
+      {
+        "label": "2 · оценка",
+        "accepted": [
+          "positive"
+        ]
+      },
+      {
+        "label": "3 · оценка",
+        "accepted": [
+          "a matter of taste"
+        ]
+      },
+      {
+        "label": "4 · оценка",
+        "accepted": [
+          "positive"
+        ]
+      },
+      {
+        "label": "5 · оценка",
+        "accepted": [
+          "a matter of taste"
+        ]
+      },
+      {
+        "label": "6 · оценка",
+        "accepted": [
+          "negative"
+        ]
+      },
+      {
+        "label": "7 · оценка",
+        "accepted": [
+          "positive"
+        ]
+      },
+      {
+        "label": "8 · оценка",
+        "accepted": [
+          "negative"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 117,
+      "evidence": "Reviewed two-part answer key"
+    },
+    "instruction": "Впиши слово и его оценку: positive, negative или a matter of taste. В пункте 1 слово уже дано."
+  },
+  "sb-160-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "I need to fill out an application form",
+          "we need to fill out an application form"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "candidates must speak good English",
+          "that candidates must speak good English"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "he really wants to improve his career prospects",
+          "that he really wants to improve his career prospects"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "he’d like to express his interest in that vacant post",
+          "that he’d like to express his interest in that vacant post"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "Magda hadn’t really achieved her goals",
+          "that Magda hadn’t really achieved her goals"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "she had never had a job interview before",
+          "that she had never had a job interview before"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "they were struggling to meet their deadline"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "they had found the perfect candidate for the job"
+        ]
+      },
+      {
+        "label": "Без изменения времени",
+        "kind": "set",
+        "members": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "6"
+          ]
+        ],
+        "accepted": [
+          "1; 2; 3; 4; 6"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 182,
+      "evidence": "Reviewed two-part answer key"
+    },
+    "instruction": "Впиши преобразованные фрагменты, затем перечисли через ; номера предложений без сдвига времени."
+  },
+  "wb-178-1": {
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "wanted was success"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "stopped annoying her",
+          "didn’t annoy her any more",
+          "didn’t keep annoying her"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "have we seen such careless work"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "did he seem to realise how important the discussion was"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "must this leak out to the press"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "wants to know is your time of arrival"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "I hadn’t gone on that trip with them"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "Julia had invited Richard to her birthday party",
+          "Julia had not forgotten to invite Richard to her birthday party"
+        ]
+      },
+      {
+        "label": "9",
+        "accepted": [
+          "that camera was cheaper",
+          "that camera were cheaper",
+          "that camera was less expensive",
+          "that camera were less expensive",
+          "that camera wasn’t so expensive",
+          "that camera weren’t so expensive"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 211,
+      "pdfPages": [
+        211
+      ],
+      "evidence": "Reviewed full-word and shared-prefix alternatives",
+      "record": "train/unit8/1"
+    }
+  },
+  "ws-17-4": {
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "competitive"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "misconception"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "deceptive"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "undoubtedly"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "reputation"
+        ]
+      },
+      {
+        "label": "7",
+        "accepted": [
+          "resemble"
+        ]
+      },
+      {
+        "label": "8",
+        "accepted": [
+          "undervalued"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 356,
+      "evidence": "Reviewed full-word and shared-prefix alternatives"
+    }
+  },
+  "sb-31-5": {
+    "answerSpec": [
+      {
+        "label": "a",
+        "kind": "set",
+        "members": [
+          [
+            "7"
+          ],
+          [
+            "6"
+          ]
+        ],
+        "accepted": [
+          "7; 6"
+        ]
+      },
+      {
+        "label": "b",
+        "kind": "set",
+        "members": [
+          [
+            "8"
+          ],
+          [
+            "5"
+          ]
+        ],
+        "accepted": [
+          "8; 5"
+        ]
+      },
+      {
+        "label": "c",
+        "kind": "set",
+        "members": [
+          [
+            "12"
+          ],
+          [
+            "11"
+          ]
+        ],
+        "accepted": [
+          "12; 11"
+        ]
+      },
+      {
+        "label": "d",
+        "kind": "set",
+        "members": [
+          [
+            "9"
+          ],
+          [
+            "10"
+          ]
+        ],
+        "accepted": [
+          "9; 10"
+        ]
+      }
+    ],
+    "source": {
+      "book": "teacher",
+      "pdfPage": 53,
+      "evidence": "Reviewed two-part answer key"
+    }
+  }
+}
