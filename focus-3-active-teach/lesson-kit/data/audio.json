@@ -1,12 +1,20 @@
 {
-  "style-message": {
-    "text": "I'm Mia. I usually go for a casual look. I love my denim jacket and faded jeans. I don't like being the centre of attention. My friends say I'm easy-going because I never lose my temper.",
-    "voice": "en-GB-SoniaNeural",
-    "file": "assets/style-message.mp3"
+  "word-store-1b": {
+    "label": "Fashion and style · запись 1.3",
+    "text": "1. He/she knows what’s in fashion or out of fashion.\n2. He/she likes to be the centre of attention.\n3. He/she goes for a casual look.\n4. He/she comes across as kind and friendly.\n5. He/she cares a lot about his/her appearance.\n6. He/she feels comfortable in his/her own skin.\n7. He/she likes to go with the flow.\n8. He/she is trendy.",
+    "textLabel": "Фразы из Word Store 1B для сверки",
+    "file": "../media/sb-1.03.mp3",
+    "source": "Focus 3 Second Edition · SB стр. 5, упр. 7 · Word Store стр. 3, 1B",
+    "recording": "original-human-course-audio",
+    "sha256": "2a920b32c82d22ae1b5320cc8e3e4eef7df67bb795ebd9614092d113bef75373"
   },
-  "speaking-model": {
-    "text": "This is my friend. She has wavy hair. She usually wears a denim jacket and ankle boots. She goes for a casual look. She's easy-going and down-to-earth. She feels comfortable in her own skin.",
-    "voice": "en-GB-SoniaNeural",
-    "file": "assets/speaking-model.mp3"
+  "word-store-1c": {
+    "label": "Personality · запись 1.4",
+    "text": "carefree — happy and without worries\ndown-to-earth — sensible and practical\nrebellious — difficult or disobedient\nshallow — not interested in serious things\neasy-going — not easily upset or annoyed\nvain — too proud of the way you look",
+    "textLabel": "Слова и определения из Word Store 1C",
+    "file": "../media/sb-1.04.mp3",
+    "source": "Focus 3 Second Edition · SB стр. 5, упр. 9 · Word Store стр. 3, 1C",
+    "recording": "original-human-course-audio",
+    "sha256": "09398c42904cb194f7253acaad551e2bfa9f5629e781cbd4948496287d025eb2"
   }
 }
