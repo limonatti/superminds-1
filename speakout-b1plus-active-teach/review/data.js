@@ -253,50 +253,53 @@ window.QUEST = {
       "id": "voicemail",
       "title": "Decode the voicemail",
       "unit": "1C–1D · Messages & gadgets",
-      "story": "Clara has sent a new message. Listen before opening the transcript, then collect the right equipment.",
+      "story": "Before leaving a message for Clara, practise with seven original phone messages from Lesson 1C. For questions 1–3, focus on messages 1, 2 and 4. Then return to the museum story and record your own practice with the checklist.",
       "audio": "voicemail",
       "image": "objects",
       "hint": "Listen for the place, the object to keep, and the power source. Replay as often as you need.",
       "tasks": [
         {
           "type": "choice",
-          "prompt": "Where is the bag?",
+          "prompt": "In message 1, what did Marcelo leave at the restaurant?",
           "options": [
-            "Under the desk",
-            "Beside the window",
-            "Next to the door"
+            "His folder",
+            "His leather jacket",
+            "Some pizzas"
           ],
-          "answer": "Beside the window",
-          "why": "Clara says: You will find it beside the window.",
-          "id": "m5q1"
+          "answer": "His leather jacket",
+          "why": "Marcelo says he left his leather jacket on the hook by the stairs.",
+          "id": "m5q1-original",
+          "listen": true
         },
         {
           "type": "choice",
-          "prompt": "Which item must you keep?",
+          "prompt": "In message 2, where is the garage key?",
           "options": [
-            "The envelope",
-            "The old batteries",
-            "The box under the desk"
+            "On the kitchen table next to the window",
+            "On a hook by the stairs",
+            "On a desk in the office"
           ],
-          "answer": "The envelope",
-          "why": "She asks you not to throw out the envelope inside the bag.",
-          "id": "m5q2"
+          "answer": "On the kitchen table next to the window",
+          "why": "Sam’s mum says the key is in the kitchen, on the table next to the window.",
+          "id": "m5q2-original",
+          "listen": true
         },
         {
           "type": "choice",
-          "prompt": "Why is no socket needed?",
+          "prompt": "In message 4, what does Patricia ask Jacob to bring?",
           "options": [
-            "The speaker uses solar power.",
-            "The speaker runs on batteries.",
-            "The speaker does not work."
+            "Some plants",
+            "A leather jacket",
+            "Her folder"
           ],
-          "answer": "The speaker runs on batteries.",
-          "why": "A battery-powered gadget does not need a socket while its batteries have power.",
-          "id": "m5q3"
+          "answer": "Her folder",
+          "why": "Patricia asks Jacob to bring her folder to the meeting.",
+          "id": "m5q3-original",
+          "listen": true
         },
         {
           "type": "talk",
-          "prompt": "Leave Clara a short reply and describe the gadget you are bringing.",
+          "prompt": "Back in the museum story: leave Clara a short message to say you have found the bag. Describe a gadget you are bringing and ask her to call back.",
           "checks": [
             "I said who I am and why I am calling.",
             "I described the gadget and asked for a call back."
@@ -311,33 +314,35 @@ window.QUEST = {
       "id": "habits",
       "title": "Find a better routine",
       "unit": "2A · Habits & present perfect continuous",
-      "story": "The notebook includes Clara’s progress update. Find out what has been changing.",
+      "story": "Listen to four original practice sentences from Lesson 2A. Choose the time details, then replay and repeat the sentences, paying attention to the weak form of been. Questions 3–5 return to Clara’s fictional exhibition plans.",
       "audio": "habit",
       "hint": "Have/has been + -ing: activity over a period. Since + starting point; for + duration. Finished results often use Present Perfect Simple.",
       "tasks": [
         {
           "type": "choice",
-          "prompt": "How long has Clara been working on the exhibition?",
+          "prompt": "In sentence 2, when did the speaker start studying English?",
           "options": [
-            "Since last year",
-            "For three days",
-            "For three weeks"
+            "Five years ago",
+            "Last week",
+            "At the age of ten"
           ],
-          "answer": "For three weeks",
-          "why": "The recording gives the duration: three weeks.",
-          "id": "m6q1"
+          "answer": "At the age of ten",
+          "why": "The speaker says “since I was ten”.",
+          "id": "m6q1-original",
+          "listen": true
         },
         {
           "type": "choice",
-          "prompt": "What has she been doing since Monday?",
+          "prompt": "In sentence 4, how long has the speaker been living there?",
           "options": [
-            "Leaving her phone in another room",
-            "Working without lunch",
-            "Finishing a new exhibition every day"
+            "For three weeks",
+            "For five years",
+            "Since Monday"
           ],
-          "answer": "Leaving her phone in another room",
-          "why": "This is the new habit she describes.",
-          "id": "m6q2"
+          "answer": "For five years",
+          "why": "The speaker says “for five years”.",
+          "id": "m6q2-original",
+          "listen": true
         },
         {
           "type": "match",
@@ -524,7 +529,7 @@ window.QUEST = {
       "id": "annoying",
       "title": "A delay at the station",
       "unit": "2C · Annoying behaviour",
-      "story": "Look at the station scene, then listen to the traveller. Discover what helped her solve the problem.",
+      "story": "Look at the station illustration for question 1. Then listen to the original Lesson 2C conversation for questions 2–3: a traveller explains a difficult journey. Questions 4–5 practise ways of describing annoyance.",
       "image": "station",
       "audio": "station",
       "hint": "I can’t stand it when… / It gets on my nerves. Present Continuous + always can express annoyance.",
@@ -543,27 +548,29 @@ window.QUEST = {
         },
         {
           "type": "choice",
-          "prompt": "What solved the music problem in the recording?",
+          "prompt": "Why did the traveller have to queue for a ticket?",
           "options": [
-            "She shouted at the man.",
-            "She made a polite request.",
-            "She called the police."
+            "The ticket machines were broken.",
+            "The train had no empty seats.",
+            "A window was open."
           ],
-          "answer": "She made a polite request.",
-          "why": "She asked if he could turn it down; he apologised and used headphones.",
-          "id": "m9q2"
+          "answer": "The ticket machines were broken.",
+          "why": "The traveller had to queue because the ticket machines were broken.",
+          "id": "m9q2-original",
+          "listen": true
         },
         {
           "type": "choice",
-          "prompt": "Did she arrive late?",
+          "prompt": "Did the traveller arrive late?",
           "options": [
-            "Yes, an hour late",
-            "No, she arrived on time",
-            "The recording does not say"
+            "The recording does not say.",
+            "Yes — the traveller missed a stop.",
+            "No — the traveller arrived on time."
           ],
-          "answer": "No, she arrived on time",
-          "why": "The final sentence says she arrived on time.",
-          "id": "m9q3"
+          "answer": "Yes — the traveller missed a stop.",
+          "why": "The conversation starts with “Sorry I’m late” and ends with the explanation that the traveller missed a stop.",
+          "id": "m9q3-original",
+          "listen": true
         },
         {
           "type": "order",
@@ -597,22 +604,23 @@ window.QUEST = {
       "id": "jungle",
       "title": "Fight, flight or freeze?",
       "unit": "2D · Reactions & clarification",
-      "story": "Watch the illustrated story film. The final scene gives you a question to discuss before restoring the last word.",
-      "video": "story",
+      "story": "Watch the original BBC clip Planet Earth II: Jungles from Lesson 2D. Find out how a Draco lizard escapes, then discuss possible reactions to difficult situations before collecting your last clue.",
+      "video": "jungle",
       "image": "jungle",
       "hint": "Fight: face the threat. Flight: move away. Freeze: stay still. Ask: How do you mean? / Why’s that?",
       "tasks": [
         {
           "type": "choice",
-          "prompt": "In the final scene, what does the moving lizard do?",
+          "prompt": "In the BBC clip, how does the Draco lizard escape?",
           "options": [
-            "Swims across a river",
-            "Glides between trees",
-            "Runs through a station"
+            "It swims across a river.",
+            "It glides between trees.",
+            "It wins a fight with the larger lizard."
           ],
-          "answer": "Glides between trees",
-          "why": "The narration describes a lizard gliding between trees.",
-          "id": "m10q1"
+          "answer": "It glides between trees.",
+          "why": "The documentary shows the lizard gliding to another tree; the narrator describes lizards that can soar like dragons.",
+          "id": "m10q1-original",
+          "listen": true
         },
         {
           "type": "match",
@@ -662,28 +670,28 @@ window.QUEST = {
   ],
   "media": {
     "voicemail": {
-      "title": "A message from the curator",
-      "text": "Hello, it's Clara from the museum. I'm calling about the exhibition. Could you pick up the leather bag from my office? You'll find it beside the window, not under the desk. Please don't throw out the envelope inside it. I'd also like you to bring the wireless speaker. It runs on batteries, so we won't need a socket. I was testing it when the lights went out, but I had already saved all the recordings. Could you call me back when you arrive? Thanks so much."
+      "title": "Phone messages · 1.04",
+      "src": "../media/so3-b1-sb-1c-audio-1-04.mp3",
+      "source": "Speakout B1+ Third Edition · SB p.15 ex.3B; audioscript p.157",
+      "text": "1 A: You’ve reached Café Roma. I’m afraid we’re busy at the moment. Please leave a message and we’ll get back to you. B: Hello. This is Marcelo Fagundes. I’m calling about my jacket. I was having dinner in your restaurant an hour ago and I left my jacket. Do you think you could have a look for it for me? It’s the leather jacket hanging on the hook by the stairs. Can you call me back? You can reach me on this number – 0779542867.\n\n2 A: You’ve reached Sam’s mobile. Please leave a message. B: Hi Sam. It’s Mum. Could you check that the garage door is locked? I think I might have left it open. The key’s in the kitchen. You’ll find it on the table next to the window. Also, before you leave, will you take out the rubbish please, and make sure you turn the heating off? Thanks. See you later.\n\n3 A: I’m sorry I can’t take your call at the moment. Please leave a message B: Hi Riccardo. It’s Gemma. I’ve got a guest coming to stay in the apartment later. Would you explain the alarm system to her? You’ll need to unlock the box and show her how it works. That would be really helpful. Thanks.\n\n4 A: Hi, you’re through to Jacob. I can’t take your call right now, but if you leave a message with your name and number, I’ll get back to you as soon as I can. B: Hi Jacob, it’s Patricia here. I wonder if you could bring my folder to the meeting? You’ll find it on my desk in the office. The meeting starts at 4 p.m., so we’ll need to be there at least fifteen minutes earlier. Could you please let me know that you’ve got this message? Thanks.\n\n5 A: Noelie, it’s Pete. Listen, I was going to cook, but there’s no food in the house. Do you think you’ll be able to pick up some pizzas on the way home? There’s a great place just on the corner by the station. You choose the toppings. That would be great. Bye.\n\n6 A: Thank you for calling Smiths and Co. Our office hours are 8 a.m. to 6 p.m. If it’s urgent, please leave a message with your name and number and we’ll contact you as soon as possible. B: Hello. This is Natalie Ivanov. I’m calling because we have a broken pipe in our house and the water is going everywhere! I need someone to come and fix it, please. Will you please call me back as soon as possible? It’s urgent. You can reach me on this number.\n\n7 A: Hi, you’re through to Teresa. Please leave me a message and I’ll call you right back. B: Hi Teresa, it’s Yumi. I’m calling to ask a favour. I’m going away in a couple of weeks. I wonder if you’d mind watering the plants for me, like you did last time. I can leave the key with my neighbour. That would be so kind. Let me know. Bye."
     },
     "habit": {
-      "title": "Small changes",
-      "text": "I've been working on this exhibition for three weeks. At first, I kept putting off the difficult jobs. Then I decided to set one small goal each morning. I've been leaving my phone in another room since Monday, and it really helps. I've finished six labels today, but I haven't finished the whole exhibition yet. I'm also trying to give up checking messages during lunch. It isn't easy, but I'm sticking to my plan."
+      "title": "Present perfect continuous · 2.01",
+      "src": "../media/so3-b1-sb-2a-audio-2-01.mp3",
+      "source": "Speakout B1+ Third Edition · SB p.22 ex.7A; audioscript p.158",
+      "text": "1 How long have you been studying English?\n2 I’ve been studying since I was ten.\n3 Have you been living in the same place for a long time?\n4 I’ve been living there for five years."
     },
     "station": {
-      "title": "The journey to the museum",
-      "text": "I had such an annoying journey this morning. While I was waiting to buy a ticket, someone jumped the queue. Then a man on the platform started playing music on his phone without headphones. I can't stand it when people do that. It really gets on my nerves. I wanted to say something, but I didn't want to start an argument. So I asked politely if he could turn it down. He apologised and put on his headphones. In the end, I arrived at the museum on time."
+      "title": "An annoying journey · 2.07",
+      "src": "../media/so3-b1-sb-2c-audio-2-07.mp3",
+      "source": "Speakout B1+ Third Edition · SB p.27 ex.2B; audioscript p.159",
+      "text": "A: Sorry I’m late. I had a really bad journey.\nB: Why? Were there a lot of people on the train?\nA: No, not many, but it’s just the way some people behave. I can’t stand it.\nB: Why, what happened?\nA: Everything. First I had to queue to buy a ticket because the ticket machines were broken.\nB: I hate it when that happens.\nA: And of course people were jumping the queue, saying they were in a hurry and could they please go in front of me.\nB: Maybe they were in a hurry.\nA: Right. Like I wasn’t?\nB: All right.\nA: Then I got on the train, sat down – there were lots of empty seats – and this guy sat down next to me, took out a burger and started to eat it.\nB: Yuk! People are always doing that on trains! I expect it smelled bad.\nA: Yeah, the smell was terrible! It really got on my nerves. I kept looking at him, you know like this, but he didn’t react. So annoying.\nB: Sometimes it’s better if you don’t react.\nA: You mean do nothing? Maybe. Anyway, after two stops he got off … but then three teenagers got on and they were watching a football match. Really loud.\nB: You really did have a bad time.\nA: And then one of them opened some windows and it was like a tornado. It blew my hair all over the place.\nB: I know what you mean, without asking anyone?\nA: Yeah, it really annoys me when they do that.\nB: You’re always getting so upset about things. And you’re here now.\nA: But that sort of behaviour really bugs me. And I’m not finished.\nB: There’s more?\nA: I was so annoyed that I didn’t pay attention to where we were, and I missed my stop.\nB: It really doesn’t matter. Look, let’s get something to eat.\nA: OK, sorry …"
     },
-    "film-1": {
-      "title": "The Missing Story: the archive",
-      "text": "Welcome to the Museum of Everyday Stories. I'm Clara, the curator. Our new exhibition opens soon, but its story cards have gone missing. Three objects are waiting on the table: a leather bag, a ceramic mug, and a wireless speaker. The bag belonged to a traveller. Your job is to put the exhibition back together."
-    },
-    "film-2": {
-      "title": "The Missing Story: the station",
-      "text": "The traveller was waiting at a station when she noticed something interesting. Some people were getting upset, but one calm, polite request changed the situation. She began collecting stories about ordinary objects and human behaviour. She wanted to understand why small changes can make a big difference."
-    },
-    "film-3": {
-      "title": "The Missing Story: the jungle",
-      "text": "Later, in a jungle, she watched a small lizard glide between trees. Another lizard stayed perfectly still. It made her think about our own reactions. Do we fight, run away, or freeze? Follow the clues, restore the missing words, and discover the message of her exhibition. Take your time. Every clue can be tried again."
+    "jungle": {
+      "title": "Planet Earth II: Jungles · BBC documentary",
+      "src": "../media/so3-b1-u2-bbc-programmes.mp4",
+      "source": "Speakout B1+ Third Edition · SB p.28 ex.2A–B; videoscript p.170",
+      "text": "If you are small, finding the right tree can mean a home for life. He’s a Draco lizard. He’s only the size of a pencil and he eats ants. This one tree could provide him with all he will ever need, a conveyor belt of food. It’s a perfect place to settle down. Well, it would be, but there’s already someone here. This larger male is the tree’s owner and Dracos don’t share. The owner’s flag is a warning – trespassers won’t be tolerated. The owner’s not only intimidating, he’s prepared to battle. A dead end. Safety is a long way away. Now he must choose – fight or flee. Only in the jungle do you find lizards that can soar like dragons. He can travel over 30 metres in a single leap. It’s a very fast and efficient way to move through the jungle. Maybe this new tree will have food and no resident owner."
     }
   },
   "solution": [

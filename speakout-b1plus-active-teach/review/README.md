@@ -1,36 +1,35 @@
 # The Missing Story
 
-Original interactive review for Speakout B1+ Third Edition, Units 1–2.
-Open `index.html` directly or serve this directory. The course links to it from its navigation.
+Supplementary interactive review for Speakout B1+ Third Edition, Units 1–2.
+Ten missions contain 40 activities plus a final sentence and oral reflection.
+The museum story and review questions are authored practice, not textbook exercises.
+Keep this folder alongside the parent course `media` folder when using it offline.
 
-Ten missions contain 40 activities: image matching, narrative tenses, verb patterns,
-housework and polite requests, voicemail and gadgets, habit changes and Present
-Perfect Continuous, relative clauses and feelings, declining invitations, annoying
-behaviour, imagined reactions and clarification. The final activity assembles ten
-collected words and prompts a personal story. Source scope was checked against
-`../assets/course.js`, Student’s Book pages 8–29. This is supplementary practice,
-not a reproduction of the textbook exercises.
+The audio/video in missions 5, 6, 9 and 10 are original human course recordings.
+See AUDIO-SOURCES.md for exact pages, tracks, archive provenance and hashes.
+The corresponding eight listening questions were adapted to those recordings on
+2026-11-21. Other mission activities and illustration assets are retained.
 
-Answers and checklists are stored under `asya-speakout-b1plus-quest-v1` in browser
-localStorage. There is no account synchronisation. Export downloads a text copy.
-Open speaking/writing responses are self-/teacher-reviewed and never automatically
-assigned a language grade. Hints and retries have no penalty. Teacher notes contain
-all keys and are intentionally accessible.
+## Answers and access
 
-## Generated media
+State uses `asya-speakout-b1plus-quest-v1` in localStorage, without account or
+server synchronisation. All legacy answers, optional notes and checklists remain.
+Changed questions use new IDs; old completion is retained in `legacyMediaV1` and
+only the four affected mission clues need a new attempt. Other clues stay intact.
 
-Created on 2026-11-19 at Asya’s explicit request for new audio, video and images.
-This task-specific instruction supersedes the earlier human-recording preference.
+Transcripts open after a complete attempt at the listening questions (even wrong).
+Teacher keys open per activity after a complete attempt. Oral/writing models are
+supports and remain available. These are learning controls, not security barriers.
+Open responses use self-/teacher-review, not automatic language grading.
+Try this mission again resets just the current mission, with Undo during that visit.
+Save answers exports a text copy. Native controls, replay, speed and mute are available;
+mute is a session preference and ordinary learner playback starts unmuted.
 
-- `assets/objects.jpg`, `assets/station.jpg`, `assets/jungle.jpg`: built-in image_gen;
-  original generated PNGs converted to JPEG without changing composition.
-- `assets/voicemail.mp3`, `assets/habit.mp3`, `assets/station.mp3`: synthetic British
-  female voice, Microsoft en-GB-SoniaNeural, rate -6%. Each exact script is in the
-  matching `.txt`, with service-generated timing in `.srt`.
-- `assets/story.mp4`: 67-second illustrated story, 1280×720 H.264/AAC. Three generated
-  still scenes with slow camera motion, narrated using `film-1`–`film-3`. This is an
-  animated illustration montage, not generated live-action footage.
-- `assets/story.vtt`: selectable English captions, synchronised from narration.
+## Illustrations
+
+The three original AI-created illustrations are retained. Obsolete synthetic speech,
+its scripts/timing files and the narrated montage were removed on 2026-11-21 to follow
+the current standing human-voices-only instruction. No new speech was generated.
 
 Image prompt set (built-in image_gen, no CLI image-generation fallback):
 
@@ -61,10 +60,9 @@ Image prompt set (built-in image_gen, no CLI image-generation fallback):
 
 ## Checks
 
-- `node tests/speakout-b1plus-review-quest.cjs` from repository root (requires jsdom).
-- `python3 check.py` from repository root.
-- Headless Chrome: desktop 1365×1000 and mobile 390×844; no overflow or JS exceptions;
-  audio metadata, video dimensions/duration and 17 subtitle cues verified.
-- All six narration files decode; every script word matches the generated subtitle
-  text. The entire video decodes. QA was muted; subjective voice naturalness was
-  not assessed by listening.
+- `node tests/speakout-b1plus-review-quest.cjs` (jsdom): all existing activities.
+- `node tests/speakout-b1plus-review-human-media.cjs` (jsdom): source answers,
+  transcript/key gates, empty/wrong/correct attempts, mute/replay, reset/undo,
+  reload and legacy records.
+- `python3 check.py`.
+- Source review covers the four changed media blocks, not the whole course.
