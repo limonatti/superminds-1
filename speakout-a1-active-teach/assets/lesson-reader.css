@@ -1,0 +1,27 @@
+/* Speakout reader: source stays readable and zooms independently of answers. */
+dialog#exerciseDialog.cf-dialog{width:min(1440px,98vw)!important;max-width:1440px!important}
+dialog#exerciseDialog.cf-dialog .exercise-toolbar.cf-original-tools{display:flex!important;flex-wrap:wrap;position:sticky!important;top:88px;z-index:8;background:var(--cf-paper);padding:8px 0;gap:8px}
+dialog#exerciseDialog.cf-dialog .exercise-source{overflow:auto!important;max-height:75dvh!important}
+dialog#exerciseDialog.cf-dialog .focus-document{max-width:none!important}
+dialog#exerciseDialog.cf-dialog .focus-sheet{max-width:none!important}
+dialog#exerciseDialog.cf-dialog.source-wide #exerciseBody{grid-template-columns:minmax(0,1fr)!important}
+dialog#exerciseDialog.cf-dialog.source-wide .cf-source{display:block!important}
+dialog#exerciseDialog.cf-dialog.source-wide .cf-responses{width:100%!important;max-width:800px;margin:auto}
+.lesson-audio{padding:10px;border:1px solid #d6ccc2;border-radius:8px;background:#f4eee5;margin:6px 0;color:#302b2a}.lesson-audio b{font-size:13px}.lesson-audio-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.lesson-audio button,.lesson-audio select{min-height:40px;font:inherit;font-size:13px}.lesson-audio label{font-size:12px}.lesson-audio-progress{display:flex;align-items:center;gap:12px}.lesson-audio-progress input{flex:1;min-width:50px;accent-color:#772e43}.lesson-audio output{white-space:nowrap}.lesson-audio [data-audio-error]{color:#8f362e;font-size:13px}#lessonAudioDock{position:sticky;bottom:0;z-index:20;max-width:1000px;margin:0 auto}#lessonAudioDock[hidden]{display:none}
+.oral-practice{font-size:16px;line-height:1.6}.oral-marks{display:grid;gap:10px;margin:16px 0}.oral-marks>button{text-align:left!important}.oral-marks>div{display:flex;flex-wrap:wrap;gap:6px}.source-notice{padding:10px;border-left:3px solid #772e43}.oral-practice [aria-pressed=true]{background:#772e43!important;color:#fff!important}
+@media(max-width:760px){dialog#exerciseDialog.cf-dialog{padding:12px!important}dialog#exerciseDialog.cf-dialog .exercise-toolbar.cf-original-tools{top:86px}.exercise-toolbar #exerciseKeys{margin-left:auto}.exercise-toolbar .exercise-source-zoom{margin:0;flex:1}dialog#exerciseDialog.cf-dialog .focus-document{width:auto;min-width:100%}dialog#exerciseDialog.cf-dialog .exercise-source{max-height:65dvh!important}.lesson-audio-progress{flex-wrap:wrap}.lesson-audio-progress input{flex-basis:55%}}
+
+dialog#exerciseDialog.cf-dialog #exerciseInstruction{display:none}
+/* Keep the task, not the window chrome, in the first screenful. */
+dialog#exerciseDialog.cf-dialog .cf-head{padding-bottom:8px!important;min-height:40px}
+dialog#exerciseDialog.cf-dialog .cf-head .cf-brand{font-size:18px}
+dialog#exerciseDialog.cf-dialog .cf-task-nav{padding:6px 0;margin-bottom:10px;top:-12px}
+dialog#exerciseDialog.cf-dialog .cf-heading{margin-bottom:8px}
+dialog#exerciseDialog.cf-dialog .cf-location{display:none}
+dialog#exerciseDialog.cf-dialog .cf-heading h2{font-size:24px;margin-bottom:6px}
+dialog#exerciseDialog.cf-dialog .cf-instruction{margin:0;line-height:1.45}
+dialog#exerciseDialog.cf-dialog .cf-view-tools{margin-bottom:8px;padding-bottom:0;top:44px}
+dialog#exerciseDialog.cf-dialog .exercise-toolbar.cf-original-tools{margin:0 0 8px;padding:4px 0}
+dialog#exerciseDialog.cf-dialog #exerciseMedia{padding:8px;margin-bottom:12px}
+dialog#exerciseDialog.cf-dialog #exerciseMedia:has(>#exerciseAllMedia:only-child){padding:0;background:transparent}
+dialog#exerciseDialog.cf-dialog #exerciseAllMedia{margin:0}

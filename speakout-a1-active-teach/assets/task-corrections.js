@@ -3466,10 +3466,1312 @@ const fixes={
     }
   }
 };
+Object.assign(fixes, {
+  "sb:52:1A": {
+    "sources": {
+      "label": "1A",
+      "sources": [
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.052,
+            0.377,
+            0.45,
+            0.124
+          ],
+          "context": false
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0,
+            0.5,
+            0.295
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.295,
+            0.5,
+            0.23
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.525,
+            0.5,
+            0.24
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.765,
+            0.5,
+            0.215
+          ],
+          "context": true
+        }
+      ]
+    },
+    "instruction": "Назови места на фотографиях, затем выбери фотографию A–D для каждой реплики.",
+    "responseMode": "panel",
+    "responseSpec": {
+      "mode": "auto",
+      "items": [
+        {
+          "n": "1",
+          "prompt": "I can’t send this email.",
+          "answer": "B",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "I don’t understand some words.",
+          "answer": "D",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "I don’t have the shopping list.",
+          "answer": "C",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "I can’t find my hotel.",
+          "answer": "A",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        }
+      ]
+    },
+    "activity": null,
+    "inline": null,
+    "choice": null,
+    "mediaPaths": [],
+    "box": [
+      5.2,
+      37.7,
+      45.0,
+      12.4
+    ]
+  },
+  "sb:52:1B": {
+    "sources": {
+      "label": "1B",
+      "sources": [
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.058,
+            0.503,
+            0.435,
+            0.317
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "box": [
+      5.8,
+      50.3,
+      43.5,
+      31.7
+    ]
+  },
+  "sb:52:1C": {
+    "sources": {
+      "label": "1C",
+      "sources": [
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.058,
+            0.824,
+            0.435,
+            0.059
+          ],
+          "context": false
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.08,
+            0.525,
+            0.41,
+            0.135
+          ],
+          "context": true
+        }
+      ]
+    },
+    "instruction": "Выбери изученное прилагательное из Ex 1B в каждой реплике 2–8. Expensive в первом предложении уже подчёркнуто как образец.",
+    "responseMode": "panel",
+    "responseSpec": {
+      "mode": "auto",
+      "items": [
+        {
+          "n": "2",
+          "prompt": "This pasta is cheap.",
+          "answer": "cheap",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "pasta",
+              "label": "pasta"
+            },
+            {
+              "value": "cheap",
+              "label": "cheap"
+            }
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "Is this sentence right?",
+          "answer": "right",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "sentence",
+              "label": "sentence"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            }
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "That’s the wrong answer.",
+          "answer": "wrong",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "wrong",
+              "label": "wrong"
+            },
+            {
+              "value": "answer",
+              "label": "answer"
+            }
+          ]
+        },
+        {
+          "n": "5",
+          "prompt": "Is the café open?",
+          "answer": "open",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "café",
+              "label": "café"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            }
+          ]
+        },
+        {
+          "n": "6",
+          "prompt": "Oh no, the café is closed.",
+          "answer": "closed",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "café",
+              "label": "café"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            }
+          ]
+        },
+        {
+          "n": "7",
+          "prompt": "I’m early. It’s quarter to nine.",
+          "answer": "early",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "quarter",
+              "label": "quarter"
+            }
+          ]
+        },
+        {
+          "n": "8",
+          "prompt": "I’m sorry I’m late.",
+          "answer": "late",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "sorry",
+              "label": "sorry"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            }
+          ]
+        }
+      ]
+    },
+    "activity": null,
+    "inline": null,
+    "choice": null,
+    "mediaPaths": [],
+    "box": [
+      5.8,
+      82.4,
+      43.5,
+      5.9
+    ]
+  },
+  "sb:52:1D": {
+    "sources": {
+      "label": "1D",
+      "sources": [
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.065,
+            0.886,
+            0.43,
+            0.065
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "responseMode": "manual",
+    "practice": [
+      "expensive → …",
+      "cheap → …",
+      "right → …",
+      "wrong → …",
+      "open → …",
+      "closed → …",
+      "early → …",
+      "late → …"
+    ],
+    "instruction": "Называйте прилагательное и его противоположность по очереди. Отмечай пары, которые вы произнесли; это устная практика без автоматической оценки.",
+    "box": [
+      6.5,
+      88.6,
+      43.0,
+      6.5
+    ]
+  },
+  "sb:53:2A": {
+    "sources": {
+      "label": "2A",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.08,
+            0.115,
+            0.36,
+            0.05
+          ],
+          "context": false
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0,
+            0.5,
+            0.295
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.295,
+            0.5,
+            0.23
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.525,
+            0.5,
+            0.24
+          ],
+          "context": true
+        },
+        {
+          "image": "assets/sb-52.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 52,
+          "box": [
+            0.5,
+            0.765,
+            0.5,
+            0.215
+          ],
+          "context": true
+        }
+      ]
+    },
+    "instruction": "Послушай 5.05 и выбери фотографию со стр. 52 для каждого разговора. Одна фотография лишняя.",
+    "responseMode": "panel",
+    "responseSpec": {
+      "mode": "auto",
+      "items": [
+        {
+          "n": "1",
+          "prompt": "Conversation 1",
+          "answer": "C",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "Conversation 2",
+          "answer": "B",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "Conversation 3",
+          "answer": "D",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "A",
+              "label": "A"
+            },
+            {
+              "value": "B",
+              "label": "B"
+            },
+            {
+              "value": "C",
+              "label": "C"
+            },
+            {
+              "value": "D",
+              "label": "D"
+            }
+          ]
+        }
+      ]
+    },
+    "activity": null,
+    "inline": null,
+    "choice": null,
+    "mediaPaths": [
+      "web/107.mp3"
+    ],
+    "box": [
+      8.0,
+      11.5,
+      36.0,
+      5.0
+    ]
+  },
+  "sb:53:2B": {
+    "sources": {
+      "label": "2B",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.17,
+            0.345,
+            0.2
+          ],
+          "context": false
+        }
+      ]
+    },
+    "instruction": "Послушай 5.05 и выбери прилагательное для каждого пункта. Два слова лишние.",
+    "responseMode": "panel",
+    "responseSpec": {
+      "mode": "auto",
+      "items": [
+        {
+          "n": "1",
+          "prompt": "the shop",
+          "answer": "open",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "the steaks",
+          "answer": "expensive",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "the pasta",
+          "answer": "cheap",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "Kayla",
+          "answer": "late",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        },
+        {
+          "n": "5",
+          "prompt": "the answer",
+          "answer": "right",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        },
+        {
+          "n": "6",
+          "prompt": "the spelling of young",
+          "answer": "wrong",
+          "kind": "choice",
+          "options": [
+            {
+              "value": "cheap",
+              "label": "cheap"
+            },
+            {
+              "value": "closed",
+              "label": "closed"
+            },
+            {
+              "value": "early",
+              "label": "early"
+            },
+            {
+              "value": "expensive",
+              "label": "expensive"
+            },
+            {
+              "value": "late",
+              "label": "late"
+            },
+            {
+              "value": "open",
+              "label": "open"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "wrong",
+              "label": "wrong"
+            }
+          ]
+        }
+      ]
+    },
+    "activity": null,
+    "inline": null,
+    "choice": null,
+    "mediaPaths": [
+      "web/107.mp3"
+    ],
+    "box": [
+      9.0,
+      17.0,
+      34.5,
+      20.0
+    ]
+  },
+  "sb:53:2C": {
+    "sources": {
+      "label": "2C",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.378,
+            0.345,
+            0.265
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [
+      "web/108.mp3"
+    ],
+    "box": [
+      9.0,
+      37.8,
+      34.5,
+      26.5
+    ]
+  },
+  "sb:53:2D": {
+    "sources": {
+      "label": "2D",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.644,
+            0.345,
+            0.055
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "responseMode": "manual",
+    "instruction": "Открой Grammar Bank 5C на стр. 110 и выполни практику.",
+    "practice": [
+      "Открыть Grammar Bank на стр. 110"
+    ],
+    "destination": 110,
+    "box": [
+      9.0,
+      64.4,
+      34.5,
+      5.5
+    ]
+  },
+  "sb:53:3A": {
+    "sources": {
+      "label": "3A",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.08,
+            0.737,
+            0.355,
+            0.103
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [
+      "web/109.mp3"
+    ],
+    "responseMode": "manual",
+    "responseSpec": {
+      "mode": "review",
+      "items": []
+    },
+    "instruction": "Послушай 5.07, произнеси предложения и отметь слова с ударением. Сверь произношение с преподавателем.",
+    "stress": [
+      "Could you get some eggs?",
+      "Could you help me?"
+    ],
+    "box": [
+      8.0,
+      73.7,
+      35.5,
+      10.3
+    ]
+  },
+  "sb:53:3B": {
+    "sources": {
+      "label": "3B",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.846,
+            0.345,
+            0.055
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [
+      "web/110.mp3"
+    ],
+    "instruction": "Послушай 5.08 и запиши четыре просьбы. Затем произнеси их, выделяя ударные слова: это упражнение на запись услышанного.",
+    "box": [
+      9.0,
+      84.6,
+      34.5,
+      5.5
+    ]
+  },
+  "sb:53:3C": {
+    "sources": {
+      "label": "3C",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.904,
+            0.345,
+            0.045
+          ],
+          "context": false
+        },
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.09,
+            0.846,
+            0.345,
+            0.055
+          ],
+          "context": true
+        }
+      ]
+    },
+    "mediaPaths": [
+      "web/110.mp3"
+    ],
+    "responseMode": "manual",
+    "practice": [
+      "Произнесли просьбу 1 и ответили",
+      "Произнесли просьбу 2 и ответили",
+      "Произнесли просьбу 3 и ответили",
+      "Произнесли просьбу 4 и ответили"
+    ],
+    "instruction": "Разыграйте просьбы из 3B. Можно вернуться к записи 5.08; собственные реплики оценивает преподаватель.",
+    "box": [
+      9.0,
+      90.4,
+      34.5,
+      4.5
+    ]
+  },
+  "sb:53:4A": {
+    "sources": {
+      "label": "4A",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.475,
+            0.097,
+            0.49,
+            0.285
+          ],
+          "context": false
+        }
+      ]
+    },
+    "instruction": "Собери четыре вопроса из карточек. Добавь недостающие слова к подсказкам; в вопросах 1 и 2 выбери a или some. Затем произнеси диалог.",
+    "responseMode": "panel",
+    "responseSpec": {
+      "mode": "auto",
+      "items": [
+        {
+          "n": "1",
+          "prompt": "Can / make / you / tea?",
+          "answer": "Can I make you some/a tea?",
+          "kind": "order",
+          "tokens": [
+            "Can",
+            "I",
+            "make",
+            "you",
+            "a",
+            "some",
+            "tea"
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "Could / make / coffee / please?",
+          "answer": "Could you make me some/a coffee, please?",
+          "kind": "order",
+          "tokens": [
+            "Could",
+            "you",
+            "make",
+            "me",
+            "a",
+            "some",
+            "coffee",
+            "please"
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "Can / make / you / sandwich?",
+          "answer": "Can I make you a sandwich?",
+          "kind": "order",
+          "tokens": [
+            "Can",
+            "I",
+            "make",
+            "you",
+            "a",
+            "sandwich"
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "Could / have / egg sandwich / please?",
+          "answer": "Could I have an egg sandwich, please?",
+          "kind": "order",
+          "tokens": [
+            "Could",
+            "I",
+            "have",
+            "an",
+            "egg",
+            "sandwich",
+            "please"
+          ]
+        }
+      ]
+    },
+    "activity": null,
+    "inline": null,
+    "choice": null,
+    "mediaPaths": [],
+    "box": [
+      47.5,
+      9.7,
+      49.0,
+      28.5
+    ]
+  },
+  "sb:53:4B": {
+    "sources": {
+      "label": "4B",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.475,
+            0.097,
+            0.49,
+            0.34
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "responseMode": "manual",
+    "instruction": "Произнесите четыре вопроса из 4A. Отмечайте каждый после устной практики.",
+    "practice": [
+      "Вопрос 1: tea",
+      "Вопрос 2: coffee",
+      "Вопрос 3: sandwich",
+      "Вопрос 4: egg sandwich"
+    ],
+    "roles": [
+      "Student A",
+      "Student B"
+    ],
+    "box": [
+      47.5,
+      9.7,
+      49.0,
+      34.0
+    ]
+  },
+  "sb:53:4C": {
+    "sources": {
+      "label": "4C",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.475,
+            0.097,
+            0.49,
+            0.34
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "responseMode": "manual",
+    "instruction": "Разыграйте диалог по схеме: выбери роль и отмечай произнесённые реплики. Затем поменяйтесь ролями.",
+    "practice": [
+      "Вопрос 1: tea",
+      "Вопрос 2: coffee",
+      "Вопрос 3: sandwich",
+      "Вопрос 4: egg sandwich"
+    ],
+    "roles": [
+      "Student A",
+      "Student B"
+    ],
+    "box": [
+      47.5,
+      9.7,
+      49.0,
+      34.0
+    ]
+  },
+  "sb:53:5": {
+    "sources": {
+      "label": "5",
+      "sources": [
+        {
+          "image": "assets/sb-53.webp",
+          "size": [
+            1190,
+            1684
+          ],
+          "page": 53,
+          "box": [
+            0.475,
+            0.443,
+            0.49,
+            0.49
+          ],
+          "context": false
+        }
+      ]
+    },
+    "mediaPaths": [],
+    "responseMode": "manual",
+    "instruction": "Выбери ситуацию и проговори роль Student A по карточкам. Отмечай выполненные шаги; ответы обсуждаются с преподавателем.",
+    "practice": [
+      "Situation 1 · manager · use / computer",
+      "Situation 1 · manager · work / Saturday",
+      "Situation 1 · manager · finish / report",
+      "Situation 1 · ответить на предложения Student B",
+      "Situation 2 · flight attendant · ответить на просьбы",
+      "Situation 2 · offer · get / a cup of tea",
+      "Situation 2 · offer · get / newspaper"
+    ],
+    "sourceNotice": "В загруженном оригинале страница 145 с ролью Student B пустая. Здесь доступна роль Student A со стр. 53; для второй роли нужен полный оригинал.",
+    "box": [
+      47.5,
+      44.3,
+      49.0,
+      49.0
+    ]
+  }
+});
 function apply(course){
  for(const [id,patch] of Object.entries(fixes)){
   const [book,page,label]=id.split(':');const e=course.books[book]?.pages.find(p=>p.page===Number(page))?.exercises.find(e=>e.label===label);if(!e)continue;
-  for(const prop of ['text','instruction','responseMode','responseSpec','mediaPaths'])if(Object.hasOwn(patch,prop))e[prop]=patch[prop];
+  for(const prop of ['text','instruction','responseMode','responseSpec','mediaPaths','box','practice','roles','stress','destination','sourceNotice'])if(Object.hasOwn(patch,prop))e[prop]=patch[prop];
   for(const [prop,name]of [['key','SPEAKOUT_ANSWER_MAP'],['inline','SPEAKOUT_INLINE_DATA'],['choice','SPEAKOUT_CHOICE_DATA'],['activity','SPEAKOUT_ACTIVITY_DATA'],['sources','EXERCISE_SOURCES']])if(Object.hasOwn(patch,prop)){if(patch[prop]===null)delete root[name][id];else root[name][id]=patch[prop];}
  }
 }
