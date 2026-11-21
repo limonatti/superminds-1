@@ -4768,6 +4768,9 @@ Object.assign(fixes, {
     ]
   }
 });
+// Click regions identify the short subtask line; source context may be larger.
+fixes['sb:53:4B'].box=[48.26,39.5,47,2.4];
+fixes['sb:53:4C'].box=[48.26,42,47,2.2];
 function apply(course){
  for(const [id,patch] of Object.entries(fixes)){
   const [book,page,label]=id.split(':');const e=course.books[book]?.pages.find(p=>p.page===Number(page))?.exercises.find(e=>e.label===label);if(!e)continue;
