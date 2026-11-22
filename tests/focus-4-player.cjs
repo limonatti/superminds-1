@@ -41,7 +41,7 @@ for(const {p,e}of tasks){try{
    }else if(e.interaction?.type==='multi'){
     const buttons=[...input.closest('.answer-row').querySelectorAll('.choice-buttons button')],options=e.interaction.rows[i].options,spec=e.answerSpec[i];
     const selected=options.map((o,j)=>spec?.kind==='set'?(spec.members.some(a=>w.Focus4Marking.checkText(o.value,a))?j:-1):(correct(o.value)?j:-1)).filter(j=>j>=0);
-    selected.forEach(j=>buttons[j].click());assert(correct(input.value),e.id+' all required options checked');buttons[selected[0]].click();assert(!correct(input.value),e.id+' multiple selection toggles off');buttons[selected[0]].click();
+    selected.slice(0,e.interaction.rows[i].maxSelections||selected.length).forEach(j=>buttons[j].click());assert(correct(input.value),e.id+' all required options checked');const before=input.value;buttons[selected[0]].click();assert.notEqual(input.value,before,e.id+' multiple selection toggles off');if(spec)assert(!correct(input.value),e.id+' missing answer is rejected');buttons[selected[0]].click();
    }else if(e.interaction?.type==='order'){
     const buttons=[...input.closest('.answer-row').querySelectorAll('.order-bank button')];
     const sequences={'wb-86-3':[[1,2,3,0,4],[6,0,2,1,3,5,4],[0,4,2,1,3,5],[3,0,2,1,4],[1,0,3,2]],'wb-111-7':[[1,3,0,2]],'sb-43-1':[[0,1,2,3,4,5]]};

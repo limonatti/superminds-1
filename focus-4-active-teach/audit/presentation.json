@@ -1,12 +1,12 @@
 {
   "controls": {
     "choices": 188,
-    "fields": 1152,
-    "oral": 154,
+    "fields": 1151,
+    "multi": 2,
+    "opinion": 2,
+    "oral": 153,
     "bank": 28,
-    "order": 3,
-    "opinion": 1,
-    "multi": 1
+    "order": 3
   },
   "sourceModels": 359,
   "prompts": 2032,
@@ -34,7 +34,7 @@
       "id": "sb-4-3",
       "book": "sb",
       "unit": 1,
-      "type": "oral",
+      "type": "multi",
       "prompts": 0,
       "originalAvailable": true,
       "automatic": false
@@ -43,7 +43,7 @@
       "id": "sb-4-4",
       "book": "sb",
       "unit": 1,
-      "type": "fields",
+      "type": "opinion",
       "prompts": 0,
       "originalAvailable": true,
       "automatic": false

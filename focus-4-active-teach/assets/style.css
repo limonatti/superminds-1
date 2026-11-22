@@ -91,3 +91,16 @@ dialog#exercise.focus-dialog.focus-task-panels[open]{width:min(1280px,calc(100vw
 #exercise.cf-dialog .order-bank button{flex:1 1 150px;overflow-wrap:normal}
 #exercise.cf-dialog .order-row>input{display:block;width:100%;min-width:0;box-sizing:border-box;margin:16px 0}
 #exercise.cf-dialog .order-row>button{margin:0 8px 8px 0;min-height:44px}
+
+/* Reviewed tasks keep every required source fragment readable at the chosen zoom. */
+dialog#exercise.reviewed-task #solutionOriginal{overflow:auto!important;max-height:72dvh!important;min-width:0}
+dialog#exercise.reviewed-task .focus-document,dialog#exercise.reviewed-task .focus-sheet{max-width:none!important}
+dialog#exercise.reviewed-task .focus-source-controls{display:flex!important;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:3;background:var(--cf-paper,#fffaf4);padding:8px 0}
+dialog#exercise.reviewed-task.cf-dialog .cf-head{padding-bottom:8px!important;min-height:40px}
+dialog#exercise.reviewed-task.cf-dialog .cf-head .cf-brand{font-size:18px}
+dialog#exercise.reviewed-task.cf-dialog .cf-task-nav{padding:6px 0;margin-bottom:10px;top:-12px}
+dialog#exercise.reviewed-task.cf-dialog .cf-heading{margin-bottom:8px}
+dialog#exercise.reviewed-task.cf-dialog .cf-location{display:none}
+dialog#exercise.reviewed-task.cf-dialog .cf-heading h2{font-size:24px;margin-bottom:6px}
+dialog#exercise.reviewed-task.cf-dialog .cf-instruction{margin:0;line-height:1.45}
+dialog#exercise.reviewed-task.cf-dialog .cf-view-tools{margin-bottom:8px;padding-bottom:0;top:44px}

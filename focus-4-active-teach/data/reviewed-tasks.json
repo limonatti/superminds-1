@@ -1,0 +1,329 @@
+{
+  "sb-4-1": {
+    "update": {
+      "sourceReviewed": true,
+      "marking": {
+        "mode": "automatic",
+        "instruction": "Сопоставь пункты 2–6 со словами a–f: нажми на подходящий вариант. Пункт 1 уже дан как пример."
+      }
+    },
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.402,
+          0.188,
+          0.53,
+          0.108
+        ]
+      }
+    ],
+    "evidence": {
+      "edition": "Focus 4 Second Edition",
+      "studentPages": [
+        4,
+        5
+      ],
+      "teacherPdfPage": 26,
+      "reviewed": "2026-11-22"
+    }
+  },
+  "sb-4-2": {
+    "update": {
+      "sourceReviewed": true,
+      "marking": {
+        "mode": "open",
+        "instruction": "Напиши три собственных предложения с сочетаниями из упражнения 1: два правдивых и одно ложное. Не отмечай ложное заранее — предложи партнёру угадать. Пример дан в учебнике."
+      }
+    },
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.402,
+          0.188,
+          0.53,
+          0.108
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.402,
+          0.301,
+          0.53,
+          0.056
+        ]
+      }
+    ],
+    "evidence": {
+      "edition": "Focus 4 Second Edition",
+      "studentPages": [
+        4,
+        5
+      ],
+      "teacherPdfPage": 26,
+      "reviewed": "2026-11-22"
+    }
+  },
+  "sb-4-3": {
+    "remove": [
+      "responseMode"
+    ],
+    "update": {
+      "sourceReviewed": true,
+      "instruction": "SPEAKING Look at some traditional fields of study on the signpost. What are the three most/least appealing subjects? Which way would you go? Discuss your ideas with a partner.",
+      "marking": {
+        "mode": "open",
+        "instruction": "Отметь три самых привлекательных и три наименее привлекательных направления. Объясни свой выбор партнёру устно. Это личное мнение, без оценки."
+      },
+      "responseFields": [
+        {
+          "label": "Most appealing"
+        },
+        {
+          "label": "Least appealing"
+        }
+      ],
+      "interaction": {
+        "type": "multi",
+        "notes": true,
+        "rows": [
+          {
+            "prompt": "Three most appealing subjects",
+            "maxSelections": 3,
+            "options": [
+              {
+                "label": "Architecture",
+                "value": "Architecture"
+              },
+              {
+                "label": "Business Administration",
+                "value": "Business Administration"
+              },
+              {
+                "label": "Economics",
+                "value": "Economics"
+              },
+              {
+                "label": "Engineering",
+                "value": "Engineering"
+              },
+              {
+                "label": "History",
+                "value": "History"
+              },
+              {
+                "label": "Mathematics",
+                "value": "Mathematics"
+              },
+              {
+                "label": "Medicine",
+                "value": "Medicine"
+              },
+              {
+                "label": "Humanities",
+                "value": "Humanities"
+              },
+              {
+                "label": "Modern Languages",
+                "value": "Modern Languages"
+              },
+              {
+                "label": "Law",
+                "value": "Law"
+              },
+              {
+                "label": "Philosophy",
+                "value": "Philosophy"
+              },
+              {
+                "label": "Sociology",
+                "value": "Sociology"
+              }
+            ]
+          },
+          {
+            "prompt": "Three least appealing subjects",
+            "maxSelections": 3,
+            "options": [
+              {
+                "label": "Architecture",
+                "value": "Architecture"
+              },
+              {
+                "label": "Business Administration",
+                "value": "Business Administration"
+              },
+              {
+                "label": "Economics",
+                "value": "Economics"
+              },
+              {
+                "label": "Engineering",
+                "value": "Engineering"
+              },
+              {
+                "label": "History",
+                "value": "History"
+              },
+              {
+                "label": "Mathematics",
+                "value": "Mathematics"
+              },
+              {
+                "label": "Medicine",
+                "value": "Medicine"
+              },
+              {
+                "label": "Humanities",
+                "value": "Humanities"
+              },
+              {
+                "label": "Modern Languages",
+                "value": "Modern Languages"
+              },
+              {
+                "label": "Law",
+                "value": "Law"
+              },
+              {
+                "label": "Philosophy",
+                "value": "Philosophy"
+              },
+              {
+                "label": "Sociology",
+                "value": "Sociology"
+              }
+            ]
+          }
+        ]
+      },
+      "answerVersion": "sb4-3-choice-20261122"
+    },
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.679,
+          0.363,
+          0.312,
+          0.28
+        ]
+      },
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.405,
+          0.371,
+          0.275,
+          0.108
+        ]
+      }
+    ],
+    "evidence": {
+      "edition": "Focus 4 Second Edition",
+      "studentPages": [
+        4,
+        5
+      ],
+      "teacherPdfPage": 26,
+      "reviewed": "2026-11-22"
+    }
+  },
+  "sb-4-4": {
+    "update": {
+      "sourceReviewed": true,
+      "marking": {
+        "mode": "open",
+        "instruction": "Прочитай весь текст на стр. 4–5 и выбери курс, который больше всего хотел(а) бы изучать. Объясни выбор устно или оставь необязательную заметку. Единственного правильного ответа нет."
+      },
+      "interaction": {
+        "type": "opinion",
+        "rows": [
+          {
+            "prompt": "Which degree would you like to do the most?",
+            "options": [
+              {
+                "label": "The Science of Superheroes",
+                "value": "The Science of Superheroes"
+              },
+              {
+                "label": "Surf Science and Technology",
+                "value": "Surf Science and Technology"
+              },
+              {
+                "label": "The Beatles, Popular Music and Society",
+                "value": "The Beatles, Popular Music and Society"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sources": [
+      {
+        "image": "assets/pages/sb-4.jpg",
+        "page": 4,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.39,
+          0.539,
+          0.34,
+          0.374
+        ]
+      },
+      {
+        "image": "assets/pages/sb-5.jpg",
+        "page": 5,
+        "size": [
+          1600,
+          2264
+        ],
+        "box": [
+          0.054,
+          0.423,
+          0.435,
+          0.49
+        ]
+      }
+    ],
+    "evidence": {
+      "edition": "Focus 4 Second Edition",
+      "studentPages": [
+        4,
+        5
+      ],
+      "teacherPdfPage": 26,
+      "reviewed": "2026-11-22"
+    }
+  }
+}

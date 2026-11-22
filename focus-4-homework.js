@@ -6,7 +6,7 @@ const base=typeof document==='undefined'?'':new URL('.',document.currentScript.s
 let catalog=new Map(),loading;
 function setData(d){catalog=new Map(d.pages.flatMap(p=>p.exercises.map(e=>[e.id,{...e,book:p.book,page:p.page,unit:p.unit}])));return catalog;}
 function script(path){return new Promise((resolve,reject)=>{const el=document.createElement('script');el.src=base+path;el.onload=resolve;el.onerror=()=>{el.remove();reject(new Error('Не удалось загрузить упражнения Focus 4. Обнови страницу.'));};document.head.append(el);});}
-async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.FOCUS4)await script('focus-4-active-teach/assets/course.js?v=23b7f07f');if(!root.Focus4Marking)await script('focus-4-active-teach/assets/marking.js?v=74e769c7');return setData(root.FOCUS4);})().catch(e=>{loading=null;throw e;});return loading;}
+async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.FOCUS4)await script('focus-4-active-teach/assets/course.js?v=c146695d');if(!root.Focus4Marking)await script('focus-4-active-teach/assets/marking.js?v=74e769c7');return setData(root.FOCUS4);})().catch(e=>{loading=null;throw e;});return loading;}
 function meta(hw){try{return JSON.parse(hw.note)||{};}catch{return {};}}
 function ids(hw){const a=meta(hw).focusExercises;return hw?.course==='focus-4'&&Array.isArray(a)?[...new Set(a.filter(x=>typeof x==='string'&&/^(sb|wb|ws)-\d+-\d+(?:-b\d+)?$/.test(x)))]:[];}
 const snapshotKey=id=>'__homework:'+id;

@@ -51,7 +51,7 @@ function focusTaskSource(){
 $('#solutionOriginal').addEventListener('exercise-source-render',focusTaskSource,true);
 function openExercise(id){
  window.CourseFocus?.reset($('#exercise'));
- active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
+ active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;$('#exercise').classList.toggle('reviewed-task',!!active.sourceReviewed);$('#solutionOriginal').dataset.sourceFit=active.sourceReviewed?'width':'';shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
  $('#exerciseAudio').innerHTML=(active.audioTracks||page.tracks).map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="${audioPath(t)}"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;

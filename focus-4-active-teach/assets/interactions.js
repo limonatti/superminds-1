@@ -60,12 +60,13 @@ function mount(host,exercise,values=[],reflection='',source={}){
  if(model.type==='choices'||model.type==='opinion'||model.type==='multi'){
   model.rows.forEach((item,i)=>{
    const row=make('fieldset',undefined,'answer-row choice-row');row.append(make('legend',item.prompt));const label=fields[i]?.label||'Мой выбор',input=inputFor(row,i,label),choices=make('div',undefined,'choice-buttons');row.append(choices);host.append(row);
-   const options=item.options.map(option=>{const b=button(option.label);choices.append(b);b.onclick=()=>{if(model.type==='multi'){const chosen=new Set(input.value.split(';').map(v=>v.trim()).filter(Boolean));if(chosen.has(option.value))chosen.delete(option.value);else chosen.add(option.value);input.value=[...chosen].join('; ');}else input.value=option.value;refresh();emit(input);};return {b,option};});
+   const options=item.options.map(option=>{const b=button(option.label);choices.append(b);b.onclick=()=>{if(model.type==='multi'){const chosen=new Set(input.value.split(';').map(v=>v.trim()).filter(Boolean));if(chosen.has(option.value))chosen.delete(option.value);else if(!item.maxSelections||chosen.size<item.maxSelections)chosen.add(option.value);input.value=[...chosen].join('; ');}else input.value=option.value;refresh();emit(input);};return {b,option};});
    const previous=make('p','','interaction-previous');row.append(previous);
+   const count=item.maxSelections?make('p','','interaction-status'):null;if(count){count.setAttribute('aria-live','polite');row.append(count);}
    const selected=option=>model.type==='multi'?input.value.split(';').map(v=>v.trim()).includes(option.value):[option.value,...option.aliases||[]].includes(input.value);
-   const refresh=()=>{options.forEach(({b,option})=>b.setAttribute('aria-pressed',String(selected(option))));previous.textContent=input.value&&!options.some(({option})=>selected(option))?'Ранее сохранённый ответ: '+input.value:'';previous.hidden=!previous.textContent;};refresh();
+   const refresh=()=>{if(count)count.textContent='Выбрано: '+input.value.split(';').filter(v=>v.trim()).length+' из '+item.maxSelections+'. Нажми ещё раз, чтобы снять выбор.';options.forEach(({b,option})=>b.setAttribute('aria-pressed',String(selected(option))));previous.textContent=input.value&&!options.some(({option})=>selected(option))?'Ранее сохранённый ответ: '+input.value:'';previous.hidden=!previous.textContent;};refresh();
   });
-  if(model.type==='opinion'){
+  if(model.type==='opinion'||model.notes){
    const label=make('label','Почему? Можно объяснить устно или оставить заметку.');label.htmlFor='reflection';const notes=make('textarea');notes.id='reflection';notes.value=reflection;notes.maxLength=12000;notes.placeholder='Заметка — необязательно';host.append(label,notes);
   }
   return true;

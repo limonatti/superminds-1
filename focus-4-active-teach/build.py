@@ -303,6 +303,8 @@ for pg in pages:
 
 from presentation import enrich
 enrich(pages, TEXT)
+from reviewed_tasks import apply as apply_reviewed_tasks
+apply_reviewed_tasks(pages, sources)
 
 # Check the complete printed Workbook catalogue, not just the imported subset.
 from grading import RECORDS, workbook_record
