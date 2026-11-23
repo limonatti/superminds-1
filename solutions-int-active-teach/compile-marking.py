@@ -94,3 +94,7 @@ audit_path=ROOT/'audit.json'
 audit=json.loads(audit_path.read_text()) if audit_path.exists() else {}
 audit.update(pages=len(D['pages']),exercises=len(allids),automatic=counts['automatic']+counts['mixed'],mixed=counts['mixed'],open=counts['open'],pending=counts['pending'],withKeys=sum(bool(e['key']) for p in D['pages'] for e in p['exercises']))
 audit_path.write_text(json.dumps(audit,indent=2)+'\n')
+
+# Preserve exact-source reviews after regenerated marking.
+import runpy
+runpy.run_path(str(ROOT / "apply-reviewed.py"))

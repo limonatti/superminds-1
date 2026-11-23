@@ -6,7 +6,7 @@ const base=typeof document==='undefined'?'':new URL('.',document.currentScript.s
 let catalog=new Map(),loading;
 function setData(d){catalog=new Map(d.pages.flatMap(p=>p.exercises.map(e=>[e.id,{...e,book:p.book,page:p.page,unit:p.unit}])));return catalog;}
 function script(path){return new Promise((resolve,reject)=>{const el=document.createElement('script');el.src=base+path;el.onload=resolve;el.onerror=()=>{el.remove();reject(new Error('Не удалось загрузить упражнения Solutions. Обнови страницу.'));};document.head.append(el);});}
-async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.SOLUTIONS)await script('solutions-int-active-teach/assets/course.js?v=fb254567');if(!root.SolutionsMarking)await script('solutions-int-active-teach/assets/marking.js?v=7a80114b');return setData(root.SOLUTIONS);})().catch(e=>{loading=null;throw e;});return loading;}
+async function load(){if(catalog.size)return catalog;if(!loading)loading=(async()=>{if(!root.SOLUTIONS)await script('solutions-int-active-teach/assets/course.js?v=652e6ce4');if(!root.SolutionsMarking)await script('solutions-int-active-teach/assets/marking.js?v=3c602f83');return setData(root.SOLUTIONS);})().catch(e=>{loading=null;throw e;});return loading;}
 function meta(hw){try{return JSON.parse(hw.note)||{};}catch{return {};}}
 function ids(hw){const a=meta(hw).solutionsExercises;return hw?.course==='solutions-int'&&Array.isArray(a)?[...new Set(a.filter(x=>typeof x==='string'&&/^(sb|wb)-\d+-\d+(?:-b\d+)?$/.test(x)))]:[];}
 const snapshotKey=id=>'__homework:'+id;

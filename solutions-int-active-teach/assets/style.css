@@ -31,3 +31,22 @@
 #assignExercise{margin:0 8px 8px 0;font-size:12px}
 @media(max-width:900px){#teacherAssignment{display:grid;grid-template-columns:1fr 1fr;gap:12px}#teacherAssignment[hidden]{display:none!important}#teacherAssignment h2,#assignStatus,#assignResultLink{grid-column:1/-1}#assignForm{grid-column:2;grid-row:2/5}#assignItems{max-height:300px;margin:0}.assign-tools{align-items:start}}
 @media(max-width:520px){#teacherAssignment{display:block}#assignItems{max-height:180px}}
+
+/* Reviewed tasks keep every required source fragment readable at the chosen zoom. */
+dialog#exercise.reviewed-task #solutionOriginal{overflow:auto!important;max-height:72dvh!important;min-width:0}
+dialog#exercise.reviewed-task .focus-document,dialog#exercise.reviewed-task .focus-sheet{max-width:none!important}
+dialog#exercise.reviewed-task .focus-source-controls{display:flex!important;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:3;background:var(--cf-paper,#fffaf4);padding:8px 0}
+dialog#exercise.reviewed-task.cf-dialog .cf-head{padding-bottom:8px!important;min-height:40px}
+dialog#exercise.reviewed-task.cf-dialog .cf-head .cf-brand{font-size:18px}
+dialog#exercise.reviewed-task.cf-dialog .cf-task-nav{padding:6px 0;margin-bottom:10px;top:-12px}
+dialog#exercise.reviewed-task.cf-dialog .cf-heading{margin-bottom:8px}
+dialog#exercise.reviewed-task.cf-dialog .cf-location{display:none}
+dialog#exercise.reviewed-task.cf-dialog .cf-heading h2{font-size:24px;margin-bottom:6px}
+dialog#exercise.reviewed-task.cf-dialog .cf-instruction{margin:0;line-height:1.45}
+dialog#exercise.reviewed-task.cf-dialog .cf-view-tools{margin-bottom:8px;padding-bottom:0;top:44px}
+
+.lesson-audio{padding:10px;border:1px solid #d6ccc2;border-radius:8px;background:#f4eee5;margin:6px 0;color:#302b2a}.lesson-audio b{font-size:13px}.lesson-audio-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.lesson-audio button,.lesson-audio select{min-height:40px;font:inherit;font-size:13px}.lesson-audio label{font-size:12px}.lesson-audio-progress{display:flex;align-items:center;gap:12px}.lesson-audio-progress input{flex:1;min-width:50px;accent-color:#772e43}.lesson-audio output{white-space:nowrap}.lesson-audio [data-audio-error]{color:#8f362e;font-size:13px}#lessonAudioDock{position:sticky;bottom:0;z-index:20;max-width:1000px;margin:0 auto}#lessonAudioDock[hidden]{display:none}
+
+#exercise.reviewed-task .choice-row{display:block!important;min-width:0;border:1px solid #d6ccc2;padding:14px;margin:12px 0;border-radius:8px}#exercise.reviewed-task .choice-row.cf-away{display:none!important}.choice-buttons{display:flex;flex-wrap:wrap;gap:8px}.choice-buttons button{min-height:44px;flex:1 1 140px}.choice-buttons [aria-pressed=true]{background:#772e43;color:#fff}.interaction-previous{overflow-wrap:anywhere}#exercise.reviewed-task #instruction{display:none}#recordings{width:min(700px,95vw);max-height:90dvh;overflow:auto}#recordings::backdrop{background:#302b2a99}#recordings #returnToExercise{position:sticky;bottom:0;min-height:44px;background:#fffaf4}#exerciseAudio{margin-bottom:12px}#exercise.reviewed-task #keyPanel[hidden]{display:none!important}
+
+#exercise.reviewed-task #exerciseAudio:has(>#openAudioList:only-child){padding:0;background:transparent}

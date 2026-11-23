@@ -1,0 +1,805 @@
+{
+  "sb-11-1": {
+    "interaction": {
+      "type": "multi",
+      "notes": true,
+      "rows": [
+        {
+          "prompt": "Look at the photo. Обсуди вопросы и отметь, на какие ответил устно.",
+          "options": [
+            {
+              "value": "What do you think this app does?",
+              "label": "What do you think this app does?"
+            },
+            {
+              "value": "Why might some people need it?",
+              "label": "Why might some people need it?"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [],
+    "box": [
+      0.053,
+      0.114,
+      0.43,
+      0.032
+    ],
+    "markingInstruction": "Рассмотри фотографию и обсуди оба вопроса. Отметь вопросы, на которые уже ответил. Заметки необязательны; автоматической оценки нет.",
+    "responseFields": [
+      {
+        "label": "1"
+      }
+    ],
+    "answerVersion": "1c-oral-v2-1",
+    "legacyCompatible": false,
+    "instruction": "Рассмотри фотографию и обсуди оба вопроса. Отметь вопросы, на которые уже ответил. Заметки необязательны; автоматической оценки нет."
+  },
+  "sb-11-2": {
+    "interaction": {
+      "type": "opinion",
+      "rows": [
+        {
+          "prompt": "Would the app increase or decrease arguments in your family?",
+          "options": [
+            {
+              "value": "increase",
+              "label": "increase"
+            },
+            {
+              "value": "decrease",
+              "label": "decrease"
+            },
+            {
+              "value": "it depends",
+              "label": "it depends"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [],
+    "box": [
+      0.053,
+      0.154,
+      0.525,
+      0.048
+    ],
+    "markingInstruction": "Прочитай статью и проверь свою догадку из упражнения 1. Выбери свою позицию и объясни её устно или в заметке. Единственного верного ответа нет.",
+    "responseFields": [
+      {
+        "label": "1"
+      }
+    ],
+    "answerVersion": "1c-oral-v2-2",
+    "legacyCompatible": false,
+    "instruction": "Прочитай статью и проверь свою догадку из упражнения 1. Выбери свою позицию и объясни её устно или в заметке. Единственного верного ответа нет."
+  },
+  "sb-11-3": {
+    "interaction": {
+      "type": "multi",
+      "rows": [
+        {
+          "prompt": "Positive attitude",
+          "options": [
+            {
+              "value": "accusing",
+              "label": "accusing"
+            },
+            {
+              "value": "aggressive",
+              "label": "aggressive"
+            },
+            {
+              "value": "arrogant",
+              "label": "arrogant"
+            },
+            {
+              "value": "bitter",
+              "label": "bitter"
+            },
+            {
+              "value": "calm",
+              "label": "calm"
+            },
+            {
+              "value": "complimentary",
+              "label": "complimentary"
+            },
+            {
+              "value": "enthusiastic",
+              "label": "enthusiastic"
+            },
+            {
+              "value": "grateful",
+              "label": "grateful"
+            },
+            {
+              "value": "miserable",
+              "label": "miserable"
+            },
+            {
+              "value": "nostalgic",
+              "label": "nostalgic"
+            },
+            {
+              "value": "optimistic",
+              "label": "optimistic"
+            },
+            {
+              "value": "pessimistic",
+              "label": "pessimistic"
+            },
+            {
+              "value": "sarcastic",
+              "label": "sarcastic"
+            },
+            {
+              "value": "sympathetic",
+              "label": "sympathetic"
+            },
+            {
+              "value": "urgent",
+              "label": "urgent"
+            }
+          ]
+        },
+        {
+          "prompt": "Negative attitude",
+          "options": [
+            {
+              "value": "accusing",
+              "label": "accusing"
+            },
+            {
+              "value": "aggressive",
+              "label": "aggressive"
+            },
+            {
+              "value": "arrogant",
+              "label": "arrogant"
+            },
+            {
+              "value": "bitter",
+              "label": "bitter"
+            },
+            {
+              "value": "calm",
+              "label": "calm"
+            },
+            {
+              "value": "complimentary",
+              "label": "complimentary"
+            },
+            {
+              "value": "enthusiastic",
+              "label": "enthusiastic"
+            },
+            {
+              "value": "grateful",
+              "label": "grateful"
+            },
+            {
+              "value": "miserable",
+              "label": "miserable"
+            },
+            {
+              "value": "nostalgic",
+              "label": "nostalgic"
+            },
+            {
+              "value": "optimistic",
+              "label": "optimistic"
+            },
+            {
+              "value": "pessimistic",
+              "label": "pessimistic"
+            },
+            {
+              "value": "sarcastic",
+              "label": "sarcastic"
+            },
+            {
+              "value": "sympathetic",
+              "label": "sympathetic"
+            },
+            {
+              "value": "urgent",
+              "label": "urgent"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [],
+    "box": [
+      0.053,
+      0.435,
+      0.51,
+      0.097
+    ],
+    "markingInstruction": "Проверь значение слов, затем выбери прилагательные для каждой группы. Одно слово может подходить к обеим группам. Повторное нажатие снимает выбор.",
+    "instruction": "Проверь значение слов, затем выбери прилагательные для каждой группы. Одно слово может подходить к обеим группам. Повторное нажатие снимает выбор."
+  },
+  "sb-11-4": {
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1",
+          "options": [
+            {
+              "value": "arrogant",
+              "label": "arrogant"
+            },
+            {
+              "value": "pessimistic",
+              "label": "pessimistic"
+            },
+            {
+              "value": "confident",
+              "label": "confident"
+            }
+          ]
+        },
+        {
+          "prompt": "2",
+          "options": [
+            {
+              "value": "aggressive",
+              "label": "aggressive"
+            },
+            {
+              "value": "miserable",
+              "label": "miserable"
+            },
+            {
+              "value": "sarcastic",
+              "label": "sarcastic"
+            }
+          ]
+        },
+        {
+          "prompt": "3",
+          "options": [
+            {
+              "value": "calm",
+              "label": "calm"
+            },
+            {
+              "value": "complimentary",
+              "label": "complimentary"
+            },
+            {
+              "value": "optimistic",
+              "label": "optimistic"
+            }
+          ]
+        },
+        {
+          "prompt": "4",
+          "options": [
+            {
+              "value": "accusing",
+              "label": "accusing"
+            },
+            {
+              "value": "enthusiastic",
+              "label": "enthusiastic"
+            },
+            {
+              "value": "sympathetic",
+              "label": "sympathetic"
+            }
+          ]
+        },
+        {
+          "prompt": "5",
+          "options": [
+            {
+              "value": "grateful",
+              "label": "grateful"
+            },
+            {
+              "value": "optimistic",
+              "label": "optimistic"
+            },
+            {
+              "value": "sympathetic",
+              "label": "sympathetic"
+            }
+          ]
+        },
+        {
+          "prompt": "6",
+          "options": [
+            {
+              "value": "aggressive",
+              "label": "aggressive"
+            },
+            {
+              "value": "bitter",
+              "label": "bitter"
+            },
+            {
+              "value": "urgent",
+              "label": "urgent"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [
+      "1.09"
+    ],
+    "box": [
+      0.053,
+      0.644,
+      0.51,
+      0.142
+    ],
+    "markingInstruction": "Прочитай Listening Strategy. Слушай трек 1.09 и выбери по одному прилагательному для каждого из шести говорящих, обращая внимание на интонацию.",
+    "instruction": "Прочитай Listening Strategy. Слушай трек 1.09 и выбери по одному прилагательному для каждого из шести говорящих, обращая внимание на интонацию."
+  },
+  "sb-11-5": {
+    "interaction": {
+      "type": "multi",
+      "notes": true,
+      "rows": [
+        {
+          "prompt": "1. Thanks, Andy. That’s really helpful.",
+          "options": [
+            {
+              "value": "grateful",
+              "label": "grateful"
+            },
+            {
+              "value": "sarcastic",
+              "label": "sarcastic"
+            }
+          ]
+        },
+        {
+          "prompt": "2. Our train leaves in ten minutes.",
+          "options": [
+            {
+              "value": "calm",
+              "label": "calm"
+            },
+            {
+              "value": "urgent",
+              "label": "urgent"
+            }
+          ]
+        },
+        {
+          "prompt": "3. You and your sister always argued during dinner.",
+          "options": [
+            {
+              "value": "nostalgic",
+              "label": "nostalgic"
+            },
+            {
+              "value": "accusing",
+              "label": "accusing"
+            }
+          ]
+        },
+        {
+          "prompt": "4. You need to stop and think about what’s happened.",
+          "options": [
+            {
+              "value": "sympathetic",
+              "label": "sympathetic"
+            },
+            {
+              "value": "aggressive",
+              "label": "aggressive"
+            }
+          ]
+        },
+        {
+          "prompt": "5. I think we’ll win one or two of our matches.",
+          "options": [
+            {
+              "value": "optimistic",
+              "label": "optimistic"
+            },
+            {
+              "value": "pessimistic",
+              "label": "pessimistic"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [
+      "1.10"
+    ],
+    "box": [
+      0.053,
+      0.79,
+      0.515,
+      0.171
+    ],
+    "markingInstruction": "Слушай трек 1.10 и сравни две интонации. Произнеси фразы с указанными интонациями; партнёр угадывает прилагательное. Отмечай отработанные варианты. Это устная практика без автоматической оценки.",
+    "responseFields": [
+      {
+        "label": "1"
+      },
+      {
+        "label": "2"
+      },
+      {
+        "label": "3"
+      },
+      {
+        "label": "4"
+      },
+      {
+        "label": "5"
+      }
+    ],
+    "answerVersion": "1c-oral-v2-5",
+    "legacyCompatible": false,
+    "instruction": "Слушай трек 1.10 и сравни две интонации. Произнеси фразы с указанными интонациями; партнёр угадывает прилагательное. Отмечай отработанные варианты. Это устная практика без автоматической оценки."
+  },
+  "sb-11-6": {
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "Speaker 1",
+          "options": [
+            {
+              "value": "a",
+              "label": "a. urgent"
+            },
+            {
+              "value": "b",
+              "label": "b. calm"
+            },
+            {
+              "value": "c",
+              "label": "c. enthusiastic"
+            },
+            {
+              "value": "d",
+              "label": "d. arrogant"
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 2",
+          "options": [
+            {
+              "value": "a",
+              "label": "a. urgent"
+            },
+            {
+              "value": "b",
+              "label": "b. calm"
+            },
+            {
+              "value": "c",
+              "label": "c. enthusiastic"
+            },
+            {
+              "value": "d",
+              "label": "d. arrogant"
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 3",
+          "options": [
+            {
+              "value": "a",
+              "label": "a. urgent"
+            },
+            {
+              "value": "b",
+              "label": "b. calm"
+            },
+            {
+              "value": "c",
+              "label": "c. enthusiastic"
+            },
+            {
+              "value": "d",
+              "label": "d. arrogant"
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 4",
+          "options": [
+            {
+              "value": "a",
+              "label": "a. urgent"
+            },
+            {
+              "value": "b",
+              "label": "b. calm"
+            },
+            {
+              "value": "c",
+              "label": "c. enthusiastic"
+            },
+            {
+              "value": "d",
+              "label": "d. arrogant"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [
+      "1.11"
+    ],
+    "box": [
+      0.574,
+      0.439,
+      0.359,
+      0.068
+    ],
+    "markingInstruction": "Слушай четырёх говорящих в треке 1.11. Для каждого выбери соответствующее прилагательное a–d и сравни выбор с партнёром.",
+    "instruction": "Слушай четырёх говорящих в треке 1.11. Для каждого выбери соответствующее прилагательное a–d и сравни выбор с партнёром."
+  },
+  "sb-11-7": {
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "Speaker 1",
+          "options": [
+            {
+              "value": "A",
+              "label": "A. The speaker is giving advice about winning family arguments."
+            },
+            {
+              "value": "B",
+              "label": "B. We learn how a bad argument had a positive result for the speaker."
+            },
+            {
+              "value": "C",
+              "label": "C. The speaker is advertising a course for families who want to argue less."
+            },
+            {
+              "value": "D",
+              "label": "D. The speaker is persuading somebody to attend a family reunion."
+            },
+            {
+              "value": "E",
+              "label": "E. The speaker describes how a relative lost his job because of a family argument."
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 2",
+          "options": [
+            {
+              "value": "A",
+              "label": "A. The speaker is giving advice about winning family arguments."
+            },
+            {
+              "value": "B",
+              "label": "B. We learn how a bad argument had a positive result for the speaker."
+            },
+            {
+              "value": "C",
+              "label": "C. The speaker is advertising a course for families who want to argue less."
+            },
+            {
+              "value": "D",
+              "label": "D. The speaker is persuading somebody to attend a family reunion."
+            },
+            {
+              "value": "E",
+              "label": "E. The speaker describes how a relative lost his job because of a family argument."
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 3",
+          "options": [
+            {
+              "value": "A",
+              "label": "A. The speaker is giving advice about winning family arguments."
+            },
+            {
+              "value": "B",
+              "label": "B. We learn how a bad argument had a positive result for the speaker."
+            },
+            {
+              "value": "C",
+              "label": "C. The speaker is advertising a course for families who want to argue less."
+            },
+            {
+              "value": "D",
+              "label": "D. The speaker is persuading somebody to attend a family reunion."
+            },
+            {
+              "value": "E",
+              "label": "E. The speaker describes how a relative lost his job because of a family argument."
+            }
+          ]
+        },
+        {
+          "prompt": "Speaker 4",
+          "options": [
+            {
+              "value": "A",
+              "label": "A. The speaker is giving advice about winning family arguments."
+            },
+            {
+              "value": "B",
+              "label": "B. We learn how a bad argument had a positive result for the speaker."
+            },
+            {
+              "value": "C",
+              "label": "C. The speaker is advertising a course for families who want to argue less."
+            },
+            {
+              "value": "D",
+              "label": "D. The speaker is persuading somebody to attend a family reunion."
+            },
+            {
+              "value": "E",
+              "label": "E. The speaker describes how a relative lost his job because of a family argument."
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [
+      "1.11"
+    ],
+    "box": [
+      0.574,
+      0.512,
+      0.359,
+      0.198
+    ],
+    "markingInstruction": "Слушай трек 1.11 ещё раз. Сопоставь говорящих 1–4 с утверждениями A–E. Одно утверждение лишнее.",
+    "instruction": "Слушай трек 1.11 ещё раз. Сопоставь говорящих 1–4 с утверждениями A–E. Одно утверждение лишнее."
+  },
+  "sb-11-8": {
+    "interaction": {
+      "type": "opinion",
+      "rows": [
+        {
+          "prompt": "Which topic is most likely to cause arguments in your family? Why?",
+          "options": [
+            {
+              "value": "doing chores",
+              "label": "doing chores"
+            },
+            {
+              "value": "doing schoolwork",
+              "label": "doing schoolwork"
+            },
+            {
+              "value": "staying out late",
+              "label": "staying out late"
+            },
+            {
+              "value": "sharing a family computer",
+              "label": "sharing a family computer"
+            },
+            {
+              "value": "what to watch on TV",
+              "label": "what to watch on TV"
+            },
+            {
+              "value": "when to watch TV",
+              "label": "when to watch TV"
+            },
+            {
+              "value": "too much time spent on social media and games",
+              "label": "too much time spent on social media and games"
+            },
+            {
+              "value": "what to eat",
+              "label": "what to eat"
+            },
+            {
+              "value": "another topic",
+              "label": "another topic"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [],
+    "box": [
+      0.574,
+      0.719,
+      0.359,
+      0.181
+    ],
+    "markingInstruction": "Обсуди темы с партнёром. Выбери наиболее вероятную причину споров в твоей семье и объясни почему. Можно предложить другую тему устно или в необязательной заметке.",
+    "responseFields": [
+      {
+        "label": "1"
+      }
+    ],
+    "answerVersion": "1c-oral-v2-8",
+    "legacyCompatible": false,
+    "instruction": "Обсуди темы с партнёром. Выбери наиболее вероятную причину споров в твоей семье и объясни почему. Можно предложить другую тему устно или в необязательной заметке."
+  },
+  "sb-11-9": {
+    "interaction": {
+      "type": "opinion",
+      "rows": [
+        {
+          "prompt": "Compare your ideas with the class. Which topic causes the most family arguments?",
+          "options": [
+            {
+              "value": "doing chores",
+              "label": "doing chores"
+            },
+            {
+              "value": "doing schoolwork",
+              "label": "doing schoolwork"
+            },
+            {
+              "value": "staying out late",
+              "label": "staying out late"
+            },
+            {
+              "value": "sharing a family computer",
+              "label": "sharing a family computer"
+            },
+            {
+              "value": "what to watch on TV",
+              "label": "what to watch on TV"
+            },
+            {
+              "value": "when to watch TV",
+              "label": "when to watch TV"
+            },
+            {
+              "value": "too much time spent on social media and games",
+              "label": "too much time spent on social media and games"
+            },
+            {
+              "value": "what to eat",
+              "label": "what to eat"
+            },
+            {
+              "value": "another topic",
+              "label": "another topic"
+            }
+          ]
+        }
+      ]
+    },
+    "sourceReviewed": "2026-11-23: Solutions Third Edition SB11 / TB7–8",
+    "audioTracks": [],
+    "box": [
+      0.574,
+      0.911,
+      0.359,
+      0.045
+    ],
+    "markingInstruction": "Сравните идеи с классом. Отметь тему, которая вызывает больше всего семейных споров у участников обсуждения. Свой ответ, без автоматической оценки.",
+    "responseFields": [
+      {
+        "label": "1"
+      }
+    ],
+    "answerVersion": "1c-oral-v2-9",
+    "legacyCompatible": false,
+    "instruction": "Сравните идеи с классом. Отметь тему, которая вызывает больше всего семейных споров у участников обсуждения. Свой ответ, без автоматической оценки."
+  }
+}

@@ -3,7 +3,15 @@
 const D=window.SOLUTIONS,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const params=new URLSearchParams(location.search), NS='solutions-int:responses:v1';
 let book=params.get('book')==='wb'?'wb':'sb',unit=params.get('unit')||'0',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve(),workStore=null;
-const M=window.SolutionsMarking;
+const M=window.SolutionsMarking,A=window.SolutionsAudio;
+function audioHtml(t){const path=`media/${book}-${t}.mp3`;return A.html({path,track:t},`${book.toUpperCase()} · ${t}`,path)}
+function renderExerciseAudio(){if(!active)return;const tracks=active.audioTracks??page.tracks,current=A.current();$('#exerciseAudio').innerHTML=tracks.map(audioHtml).join('')+(current&&!tracks.some(t=>current.path===`media/${book}-${t}.mp3`)?'<p>Продолжается выбранная запись</p>'+A.html(current,current.title,current.src):'')+'<button type="button" id="openAudioList">Все аудиозаписи</button>';A.bind($('#exerciseAudio'));$('#openAudioList').onclick=showAudioList;}
+$('#recordings').addEventListener('close',renderExerciseAudio);
+function showAudioList(){const current=A.current();$('#recordingTrack').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#recordingPlayer').innerHTML=current?A.html(current,current.title,current.src):'';A.bind($('#recordings'));$('#recordings').showModal()}
+$('#recordingTrack').onchange=e=>{$('#recordingPlayer').innerHTML=e.target.value?audioHtml(e.target.value):'';A.bind($('#recordings'))};
+$('#returnToExercise').onclick=()=>$('#recordings').close();
+function updateKey(){if(!active?.interaction)return;const r=responses[active.id],attempt=r?.answerVersion===active.answerVersion&&r?.attempted;$('#keyPanel').hidden=!active.key||!attempt;$('#keyText').textContent=attempt?active.key:'';if(!attempt)$('#keyPanel').open=false;}
+
 let shownRecord='',previousAnswers=[],homework=null,submitting=false,assigner=null;
 const H=window.SolutionsHW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
@@ -28,22 +36,22 @@ function render(){
  window.ExerciseSource.regions($('#hotspots'),page.exercises.map(e=>e.box));
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Слова доступны в словаре и карточках.</p>';
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;
- $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book}-${t}.mp3"></audio></label>`).join(''):'<p>Выбери аудио по номеру трека в учебнике.</p>';
- $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
+ $('#audio').innerHTML=page.tracks.map(audioHtml).join('');A.bind($('#audio'));
+ $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');
  $('#trainer').href='../trainer.html?course=solutions-int'+(unit==='extra'?'':'&unit=solu-u'+unit);$('#vocabulary').href='../vocabulary.html?course=solutions-int';
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
  focusHome();
 }
-function resizeCrop(){window.ExerciseSource.change($('#solutionOriginal'),{full:$('#fullPage').getAttribute('aria-pressed')==='true'});if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
+function resizeCrop(){if(!active?.sourceReviewed)window.ExerciseSource.change($('#solutionOriginal'),{full:$('#fullPage').getAttribute('aria-pressed')==='true'});if(!active||!$('#exerciseImage').naturalWidth)return;const [x,y,w,h]=$('#fullPage').getAttribute('aria-pressed')==='true'?[0,0,1,1]:active.box;const width=$('#crop').clientWidth;const full=width/w;const height=full*$('#exerciseImage').naturalHeight/$('#exerciseImage').naturalWidth;$('#crop').style.height=`${height*h}px`;Object.assign($('#exerciseImage').style,{width:`${full}px`,left:`${-full*x}px`,top:`${-height*y}px`});}
 function openExercise(id){
  window.CourseFocus?.reset($('#exercise'));
- active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
+ active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;$('#exercise').classList.toggle('reviewed-task',!!active.sourceReviewed);$('#solutionOriginal').dataset.sourceFit=active.sourceReviewed?'width':'';shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':'Workbook'} · стр. ${page.page}`;
- $('#exerciseAudio').innerHTML=page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
+ renderExerciseAudio();$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
  const vals=restored.values,spec=active.answerSpec||[],automatic=spec.length>0,mixed=active.marking.mode==='mixed';
  $('#instruction').textContent=active.marking.instruction||(automatic?'Впиши ответы в поля с номерами из задания. Несколько пропусков одного пункта разделяй запятой.':'Выполни задание по условию. Сохрани письменный ответ или заметки для устного ответа.');
- if(spec.some(f=>f.kind==='set'))$('#instruction').textContent+=' В полях «Список» разделяй ответы точкой с запятой; порядок не важен.';
+ if(!active.interaction&&spec.some(f=>f.kind==='set'))$('#instruction').textContent+=' В полях «Список» разделяй ответы точкой с запятой; порядок не важен.';
  if(mixed)$('#instruction').textContent+=' Собственные примеры и объяснения запиши отдельно — их проверит преподаватель.';
  const printedLetters=window.ExercisePlay.sourceLetters(active.text);
  const allLetters=printedLetters.length>1&&automatic&&!spec.every(f=>f.accepted?.every(v=>/^(T|F)$/i.test(v)))&&spec.every(f=>f.kind!=='set'&&f.accepted.every(v=>/^[a-z]$/i.test(v)));
@@ -52,12 +60,13 @@ function openExercise(id){
   const choices=allLetters?printedLetters:tf?['T','F',...(/not given|not stated|doesn.t say|not mentioned/i.test(active.text)?['NG']:[])]:null;
   return `<label class="answer-row"><span>${esc(f.label)}${f.kind==='set'?'<small>Список</small>':''}</span>${choices?`<select data-answer aria-label="Ответ ${esc(f.label)}"><option value="">—</option>${choices.map(v=>`<option value="${v}" ${String(vals[i]||'').toLowerCase()===v.toLowerCase()?'selected':''}>${v}</option>`).join('')}</select>`:f.kind==='set'?`<textarea data-answer rows="2" maxlength="4000" aria-label="Ответ ${esc(f.label)}" placeholder="Ответы через ;" spellcheck="false">${esc(vals[i]||'')}</textarea>`:`<input data-answer aria-label="Ответ ${esc(f.label)}" value="${esc(vals[i]||'')}" maxlength="2000" autocomplete="off" spellcheck="false">`}</label>`;
  }).join(''):`<label for="written">Мой ответ</label><textarea id="written" data-answer maxlength="12000" placeholder="Напиши ответ…">${esc(vals[0]||'')}</textarea>`;
+ if(active.interaction)window.SolutionsInteractions.mount($('#fields'),active,vals,restored.reflection);
  if(mixed)$('#fields').insertAdjacentHTML('beforeend',`<label class="reflection-label" for="reflection">Объяснения и собственные примеры · проверяет преподаватель</label><textarea id="reflection" maxlength="12000" placeholder="Напиши свободную часть ответа…">${esc(restored.reflection)}</textarea>`);
  if(previousAnswers.length)$('#fields').insertAdjacentHTML('beforeend',`<details class="previous-answers"><summary>Ранее сохранённые ответы</summary><p>Поля задания уточнены. Твои предыдущие ответы сохранены; перенеси нужные в новые поля для проверки.</p>${previousAnswers.map(r=>`<ol>${r.values.map((v,i)=>`<li>${r.labels?.[i]?esc(r.labels[i])+': ':''}${esc(v||'—')}</li>`).join('')}</ol>${r.reflection?`<p>${esc(r.reflection)}</p>`:''}`).join('')}</details>`);
- $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';
+ $('#check').hidden=!automatic;$('#keyPanel').hidden=!active.key;$('#keyPanel').open=false;$('#keyText').textContent=active.key;$('#feedback').textContent='';$('#resetAnswer').hidden=!active.interaction;updateKey();
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
- window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();resizeCrop();updateAssignMarkers();
- window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:active.text,native:!automatic||active.marking.responseMode==='panel',fields:active.marking.responseMode==='panel'?[]:spec.map((f,i)=>{const input=$$('[data-answer]')[i],options=input.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.textContent})):undefined;return window.ExercisePlay.inputField(f.label,input,f.accepted||[],options,input.closest('.answer-row'),{kind:f.kind,count:f.kind==='set'?(f.minimum??f.members?.length):undefined})})});
+ window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();if(active.sourceReviewed)window.ExerciseSource.controls($('#solutionOriginal'));const sourceTools=$('#solutionOriginal .focus-source-controls');if(sourceTools)sourceTools.hidden=!active.sourceReviewed;$('#fullPage').hidden=!!active.sourceReviewed;resizeCrop();updateAssignMarkers();
+ window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:active.text,native:!!active.interaction||!automatic||active.marking.responseMode==='panel',fields:active.marking.responseMode==='panel'?[]:spec.map((f,i)=>{const input=$$('[data-answer]')[i],options=input.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.textContent})):undefined;return window.ExercisePlay.inputField(f.label,input,f.accepted||[],options,input.closest('.answer-row'),{kind:f.kind,count:f.kind==='set'?(f.minimum??f.members?.length):undefined})})});
  focusDialog();
 }
 function clearMarking(){$$('.answer-row').forEach(row=>{row.classList.remove('correct','incorrect');row.querySelector('.answer-result')?.remove();row.querySelector('[data-answer]')?.removeAttribute('aria-invalid');});$('#feedback').textContent='';}
@@ -65,8 +74,8 @@ function save(explicit){
  if(!active||!ready)return;
  const values=$$('[data-answer]').map(e=>e.value),old=responses[active.id];
  const score=old?.answerVersion===active.answerVersion&&JSON.stringify(old.values)===JSON.stringify(values)?old.score:undefined;
- responses[active.id]={values,score,checks:old?.checks||[],reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,fieldLabels:(active.answerSpec||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
- persist();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
+ responses[active.id]={values,score,checks:old?.checks||[],reflection:$('#reflection')?.value||'',previousAnswers,answerVersion:active.answerVersion,attempted:explicit?values.length>0&&values.every(v=>v.trim()):score?old?.attempted:false,fieldLabels:(active.answerSpec?.length?active.answerSpec:active.responseFields||[]).map(f=>f.label),updatedAt:Date.now(),page:page.page,book,unit:page.unit,exercise:active.label};
+ persist();updateKey();clearTimeout(syncTimer);if(user)syncTimer=setTimeout(sync,1800);
  if(explicit)$('#feedback').textContent=user?'Ответ сохранён. Синхронизация с аккаунтом…':'Ответ сохранён на этом устройстве.';
 }
 $('#answerForm').onsubmit=ev=>{
@@ -76,7 +85,7 @@ $('#answerForm').onsubmit=ev=>{
  const results=values.map((v,i)=>M.checkField(v,spec[i])),correct=results.filter(Boolean).length;
  $$('.answer-row').forEach((row,i)=>{const ok=results[i];row.classList.toggle('correct',ok);row.classList.toggle('incorrect',!ok);row.querySelector('[data-answer]').setAttribute('aria-invalid',String(!ok));row.querySelector('.answer-result')?.remove();const result=document.createElement('span');result.className='answer-result';result.textContent=ok?'Верно':'Проверь ответ и форму записи';row.append(result);});
  $('#feedback').textContent=`${active.marking.mode==='mixed'?'Закрытая часть. ':''}Верно: ${correct} из ${values.length}.${active.marking.mode==='mixed'?' Свободную часть проверяет преподаватель.':''}`;
- responses[active.id].score={correct,total:values.length};
+ responses[active.id].score={correct,total:values.length};responses[active.id].attempted=true;updateKey();
  const checks=responses[active.id].checks||[],last=checks.at(-1);
  if(!last||last.answerVersion!==active.answerVersion||JSON.stringify(last.values)!==JSON.stringify(values))checks.push({checkedAt:Date.now(),answerVersion:active.answerVersion,labels:spec.map(f=>f.label),values:[...values],results});
  responses[active.id].checks=checks.slice(-10);persist();
@@ -84,13 +93,14 @@ $('#answerForm').onsubmit=ev=>{
 };
 async function recordAttempts(rows){const current=await SM.getUser();if(current?.id!==user?.id){status('Аккаунт изменился. Обнови страницу перед продолжением.');return {ok:false};}return SM.saveHwAttempts(rows);}
 $('#fullPage').onclick=()=>{$('#fullPage').setAttribute('aria-pressed',$('#fullPage').getAttribute('aria-pressed')!=='true');resizeCrop();};
+$('#resetAnswer').onclick=()=>{if(!active?.interaction)return;$$('[data-answer]').forEach(e=>e.value='');if($('#reflection'))$('#reflection').value='';save(false);openExercise(active.id)};
 $('#saveAnswer').onclick=()=>{save(true);sync()};$('#close').onclick=()=>$('#exercise').close();$('#exercise').addEventListener('close',()=>{active=null;render();});
 $('#pages').onchange=ev=>{page=list().find(p=>p.id===ev.target.value);render();};
 for(const [id,dir] of [['prev',-1],['next',1]])$('#'+id).onclick=()=>{page=list()[list().indexOf(page)+dir]||page;render();};
 $$('[data-book]').forEach(b=>b.onclick=()=>{book=b.dataset.book;page=null;render();});
 $('#zoom').onchange=ev=>$('#paper').style.width=Number(ev.target.value)*100+'%';
 $('#cover').onclick=()=>{const hide=!$('#curtain').hidden;$('#curtain').hidden=hide;$('#cover').setAttribute('aria-pressed',String(!hide));};$('#uncover').onclick=()=>{$('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');};
-$('#allTracks').onchange=ev=>{if(ev.target.value){$('#libraryAudio').src=`media/${book}-${ev.target.value}.mp3`;$('#libraryAudio').play().catch(()=>{});}};
+$('#allTracks').onchange=ev=>{$('#libraryPlayer').innerHTML=ev.target.value?audioHtml(ev.target.value):'';A.bind($('#libraryPlayer'))};
 $('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);status('Ссылка на страницу скопирована');}catch{status('Скопируй адрес страницы из строки браузера');}};
 $('#present').onclick=async()=>{const on=document.body.classList.toggle('present');$('#present').setAttribute('aria-pressed',on);try{if(on)await document.documentElement.requestFullscreen();else if(document.fullscreenElement)await document.exitFullscreen();}catch{}};
 $('#sync').onclick=sync;
