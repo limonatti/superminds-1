@@ -16,7 +16,7 @@ async function page(role){
  const rows=urls.map((url,i)=>({id:'message-'+i,teacher_id:teacher,student_id:student,sender_id:teacher,body:url,created_at:'2026-11-24T10:00:00Z'}));
  w.SMUI={esc:s=>String(s),icon:()=>'',mount(){},requireAuth:async()=>({id:me}),empty:()=>''};
  w.SM={myProfile:async()=>({role}),myStudents:async()=>[{student_id:student,name:'Карима'}],myTeacher:async()=>({teacher_id:teacher,name:'Ася'}),teacherUnread:async()=>({}),watchPresentationAuth(){},chatReactions:async()=>({}),chatMarkRead:async()=>({ok:true}),chatPage:async()=>rows,chatSubscribe:()=>()=>{},chatSend:async(t,s,body)=>{sends.push(body);return {ok:false,error:'Test offline'};}};
- for(const file of ['sm-chat.js','sm-chat-content.js'])w.eval(fs.readFileSync(file,'utf8'));
+ for(const file of ['sm-chat.js','sm-chat-content.js','sm-homework.js','sm-chat-recorder.js'])w.eval(fs.readFileSync(file,'utf8'));
  w.eval([...w.document.scripts].find(s=>!s.src&&s.textContent.includes('function startChat')).textContent);
  await tick();await tick();
  assert.equal(w.document.querySelectorAll('.message-link').length,3,'existing history links for '+role);

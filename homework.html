@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
-<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
+<link rel="stylesheet" href="solutions-homework.css?v=68c43ca6">
 </head>
 <body>
 <div class="app">
@@ -58,9 +58,9 @@
 <script src="words.js?v=3a3671b3"></script>
 <script src="course-words.js?v=39777793"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-<script src="sm-auth.js?v=95220d51"></script>
-<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="solutions-homework.js?v=cd998778"></script>
-<script src="sm-shell.js?v=19d3e04e"></script>
+<script src="sm-auth.js?v=c859cc9d"></script>
+<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="sm-homework.js?v=f235492f"></script><script src="solutions-homework.js?v=cd998778"></script>
+<script src="sm-shell.js?v=d0bc2de0"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const SPK_L = { "outcomes-beginner":"Outcomes Beginner", "solutions-int":"Solutions Intermediate", "speakout-b1":"Speakout B1", "speakout-b1plus":"Speakout B1+", "speakout-b2plus":"Speakout B2+", "focus-1":"Focus 1", "focus-4":"Focus 4", "focus-3":"Focus 3", "focus-2":"Focus 2", "solutions-el":"Solutions Elementary", "solutions-pi":"Solutions Pre-Int", "gateway-a1p":"Gateway A1+", "superminds-1":"Super Minds 1" };
@@ -189,10 +189,12 @@ function drawPane(){
     (it.extra || "") +
     matsHtml();
 
+  if(it.textbook){const currentId=it.id;SMHomework.load(it.hw.course).then(d=>{if(ITEMS[sel]?.id!==currentId)return;const entries=SMHomework.ids(it.hw).map(id=>d.map.get(id)).filter(Boolean);const box=p.querySelector('[data-textbook]');if(box)box.innerHTML=entries.map(e=>'<a class="row hw-exercise-link" href="'+esc(SMHomework.link(e,it.id))+'"><span>'+esc(SMHomework.label(e))+'</span><span aria-hidden="true">→</span></a>').join('');const start=p.querySelector('.ink .go');if(start&&entries.length)start.href=SMHomework.link(entries[0],it.id);}).catch(e=>{const box=p.querySelector('[data-textbook]');if(box)box.textContent=e.message;});}
   const mk = document.getElementById("mark");
   if(mk&&it.solutions)mk.textContent='Открыть и отправить работу';
   if (mk) mk.onclick = async () => {
     if(it.solutions){location.href=it.href;return;}
+    if(it.textbook){mk.disabled=true;mk.textContent='Сохраняю работу…';try{const u=await SM.getUser();await SMHomework.submit(it.hw,u.id);await load();}catch(e){mk.disabled=false;mk.textContent='Отправить на проверку';alert(e.message);}return;}
     const old = mk.textContent;
     mk.disabled = true; mk.textContent = "Отправляю…";
     const r = it.type === "spk" ? await SM.hwSubmit(it.id) : await SM.markAssignment(it.id, true);
@@ -239,9 +241,13 @@ async function load(){
   if(spk.some(h=>SolutionsElHW.ids(h).length)){try{await SolutionsElHW.load();}catch{}}
   if(spk.some(h=>FocusHW.ids(h).length)){try{await FocusHW.load();}catch{}}
   if(spk.some(h=>Focus2HW.ids(h).length)){try{await Focus2HW.load();}catch{}}
+  await Promise.allSettled([...new Set(spk.filter(h=>SMHomework.meta(h).textbookExercises?.length).map(h=>h.course))].map(c=>SMHomework.load(c)));
   spk.forEach(x => {
     const meta = parseNote(x.note);
 
+    if(meta.textbookExercises?.length){
+      ITEMS.push({type:'spk',textbook:true,hw:x,id:x.id,done:!!x.done,st:statusOf(x),due:meta.due||null,feedback:x.feedback||'',title:(SMHomework.titles[x.course]||x.course)+' · '+meta.textbookExercises.length+' упр.',sub:'Выбранные упражнения',kicker:'Домашнее задание',desc:meta.msg||'Выполни упражнения, сохрани ответы и вернись сюда, чтобы отправить работу преподавателю.',href:'#',extra:'<div class="rows" data-textbook="'+x.id+'">Загружаю упражнения…</div>'});return;
+    }
     const bookHW=x.course==='solutions-el'?SolutionsElHW:x.course==='focus-4'?Focus4HW:x.course==='focus-3'?Focus3HW:x.course==='focus-2'?Focus2HW:x.course==='focus-1'?FocusHW:SolutionsHW;const solIds=bookHW.ids(x);
     if(solIds.length){
       const href=bookHW.link(solIds[0],x.id);
@@ -292,6 +298,7 @@ async function load(){
     const dy = y.due ? new Date(y.due).getTime() : Infinity;
     return dx - dy;
   });
+  const requested=new URLSearchParams(location.search).get("hw"),index=ITEMS.findIndex(x=>x.id===requested);if(index>=0)sel=index;
   if (sel >= ITEMS.length) sel = 0;
 
   drawList(); drawPane();

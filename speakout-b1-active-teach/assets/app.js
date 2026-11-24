@@ -205,3 +205,5 @@ function focusTasks(){return pages().filter(p=>belongs(p,S.unit)).flatMap(p=>p.e
 function focusOpen(id){const p=pages().find(p=>p.exercises.some(e=>S.book+':'+p.page+':'+e.label===id));if(!p)return;const i=p.exercises.findIndex(e=>S.book+':'+p.page+':'+e.label===id);go(p.page,p.exercises[i].label);openExercise(i);}
 function focusHome(){if(!window.CourseFocus)return;CourseFocus.home({host:$('main'),page:S.page,course:'Speakout B1',location:(S.book==='sb'?'Student’s Book':'Workbook')+' · Unit '+S.unit,title:D.units[Number(S.unit)-1]||$('#lessonTitle').textContent,items:focusTasks(),open:focusOpen,surfaces:[$('#pageView'),$('.lessonhead'),$('.worktabs')]});}
 function focusDialog(){if(!window.CourseFocus||!selectedEx)return;CourseFocus.mount({dialog:$('#exerciseDialog'),id:recordId(selectedEx),course:'Speakout B1',title:'Exercise '+(selectedEx.displayLabel||selectedEx.label),instruction:CourseFocus.instruction(selectedEx),location:$('#exerciseLocation').textContent,tasks:focusTasks(),navigate:focusOpen,onClose:focusHome});}
+
+window.SMHomeworkContext=()=>({book:S.book,page:S.page,unit:page().group});

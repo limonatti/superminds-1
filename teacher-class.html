@@ -73,7 +73,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
-<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
+<link rel="stylesheet" href="solutions-homework.css?v=68c43ca6">
 </head>
 <body>
 <div class="app">
@@ -93,13 +93,13 @@
 <script src="words.js?v=3a3671b3"></script>
 <script src="speakout-words.js?v=3094c556"></script>
 <script src="course-words.js?v=39777793"></script>
-<script src="sm-auth.js?v=95220d51"></script>
+<script src="sm-auth.js?v=c859cc9d"></script>
 <script src="sm-lookup.js?v=f51c8a4a"></script>
 <script>/* Эта страница сама ждёт SM_ready и перерисовывается — перезагрузка не нужна */
 window.SM_HANDLES_COURSE = true;
 </script>
-<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="solutions-homework.js?v=cd998778"></script>
-<script src="sm-shell.js?v=19d3e04e"></script>
+<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="sm-homework.js?v=f235492f"></script><script src="solutions-homework.js?v=cd998778"></script>
+<script src="sm-shell.js?v=d0bc2de0"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const SPK = [["solutions-el","Solutions Elementary"],["solutions-int","Solutions Intermediate"],["speakout-b1","Speakout B1"],["speakout-b1plus","Speakout B1+"],["speakout-b2plus","Speakout B2+"],["focus-1","Focus 1"],["focus-4","Focus 4"],["focus-3","Focus 3"],["focus-2","Focus 2"],["solutions-pi","Solutions Pre-Int"]];
@@ -295,7 +295,7 @@ async function drawPane(){
       '<div class="res" id="acRes" style="display:none"></div>' +
     '</div>' +
 
-    '<div class="sect"><span>Выдать домашнее задание</span><span>кому · курс · юнит · части · срок</span></div>' +
+    '<div class="sect"><span>Выдать домашнее задание</span><span>ученик → учебник → раздел → упражнения → срок</span></div>' +
     '<div class="hwform">' +
       whoRow(sid) +
       '<div class="hf-row"><label>Курс</label><select id="hCourse">' +
@@ -303,9 +303,9 @@ async function drawPane(){
       '</select></div>' +
       '<div class="hf-row"><label>Юнит</label><select id="hUnit"></select></div>' +
       '<div class="hf-row" id="hPartsRow"><label>Что задать</label><span class="parts">' +
-        '<label class="cb"><input type="checkbox" class="hPart" value="lesson" checked> Урок · лексика/чанки</label>' +
-        '<label class="cb"><input type="checkbox" class="hPart" value="grammar" checked> Грамматика</label>' +
-        '<label class="cb"><input type="checkbox" class="hPart" value="workbook" checked> Workbook</label>' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="lesson"> Урок · лексика/чанки</label>' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="grammar"> Грамматика</label>' +
+        '<label class="cb"><input type="checkbox" class="hPart" value="workbook"> Workbook</label>' +
       '</span></div>' +
       '<div id="hSolutions" hidden></div>' +
       '<div class="hf-row" id="hKindRow" style="display:none"><label>Формат</label><select id="hKind">'+kindOpts+'</select></div>' +
@@ -317,6 +317,7 @@ async function drawPane(){
           '<button type="button" class="mini" data-due="">Без срока</button>' +
         '</span></div>' +
       '<div class="hf-row"><label>Комментарий</label><input type="text" id="hMsg" placeholder="что сделать, на что обратить внимание (необязательно)"></div>' +
+      '<label class="hw-share"><input type="checkbox" id="hShare" checked>Отправить карточку домашки в чат</label>'+
       '<button class="go big" id="hGo">Выдать домашнее задание</button>' +
       '<div class="res" id="hRes" style="display:none"></div>' +
     '</div>' +
@@ -400,12 +401,12 @@ function hwChips(list, hw){
   hw.forEach(a => {
     const meta = parseNote(a.note);
     const parts = (meta.parts||[]).map(p => PART_L[p]||p).join(", ");
-    all.push({ k:"spk", id:a.id, done:a.done,
-      txt:(SPK_L[a.course]||a.course)+((a.course==='solutions-el'?SolutionsElHW:a.course==='focus-4'?Focus4HW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length?" · "+(a.course==='solutions-el'?SolutionsElHW:a.course==='focus-4'?Focus4HW:a.course==='focus-3'?Focus3HW:a.course==='focus-2'?Focus2HW:a.course==='focus-1'?FocusHW:SolutionsHW).ids(a).length+" упр.":" · Unit "+a.unit) + (parts?" · "+parts:"") + (meta.due?" · до "+meta.due:"") });
+    all.push({k:'spk',id:a.id,done:a.done,detail:meta.selectionSummary||'',
+      txt:(SMHomework.titles[a.course]||SPK_L[a.course]||a.course)+(SMHomework.ids(a).length?' · '+SMHomework.ids(a).length+' упр.':' · Unit '+a.unit)+' · '+SMHomework.status(a)+(meta.due?' · до '+meta.due:'')});
   });
   if (!all.length) return "";
   return '<div class="chips">' + all.map(x =>
-    '<span class="chip'+(x.done?" done":"")+'">'+esc(x.txt)+(x.done?" ✓":"") +
+    '<span class="chip'+(x.done?" done":"")+'" id="hw-'+x.id+'">'+(x.detail?'<details><summary>'+esc(x.txt)+'</summary><p style="white-space:pre-line">'+esc(x.detail)+'</p></details>':esc(x.txt))+(x.done?" ✓":"") +
     '<button data-'+(x.k==="sm"?"del":"delhw")+'="'+x.id+'" title="Удалить">✕</button></span>').join("") + '</div>';
 }
 
@@ -445,6 +446,7 @@ function speakoutB1Responses(data){
 }
 
 const PAGE_COURSES = {
+  "speakout-a1": {title:"Speakout A1",units:[0,1,2,3,4,5,6,7,8]},
   "outcomes-beginner": { title: "Outcomes Beginner", units: [1,2,3,4,5,6,7,8,9,10,11,12] },
   "solutions-int": { title: "Solutions Intermediate", units: [0,1,2,3,4,5,6,7,8,9] },
   "speakout-b1":     { title: "Speakout B1",           units: [1,2,3,4,5,6,7,8] },
@@ -494,7 +496,8 @@ function fillUnits(){
   const course = document.getElementById("hCourse").value;
   const uSel = document.getElementById("hUnit");
   const page = PAGE_COURSES[course];
-  const solutions = ["solutions-int","solutions-el","focus-1","focus-2","focus-3","focus-4"].includes(course);
+  const share=document.getElementById("hShare");if(share){share.disabled=!page;share.closest("label").hidden=!page;}
+  const solutions = !!SMHomework.titles[course];
   const holder=document.getElementById("hSolutions");holder.mountVersion=(holder.mountVersion||0)+1;
   const lessonPart = document.querySelector('.hPart[value="lesson"]');
   const grammarPart = document.querySelector('.hPart[value="grammar"]');
@@ -520,7 +523,7 @@ function fillUnits(){
     if(solutions){
       uSel.insertAdjacentHTML('beforeend','<option value="extra">Reference &amp; banks</option>');
       const holder=document.getElementById('hSolutions');holder.selectedIds=()=>[];
-      (course==='solutions-el'?SolutionsElHW:course==='focus-4'?Focus4HW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).mountPicker(holder,uSel).catch(e=>{holder.textContent=e.message;});
+      SMHomework.mountPicker(holder,uSel,course,Object.fromEntries(new URLSearchParams(location.search))).catch(e=>{holder.textContent=e.message;});
     }
     return;
   }
@@ -537,6 +540,8 @@ function fillUnits(){
 
 function bindStudent(sid){
   const $ = id => document.getElementById(id);
+  const initialCourse=new URLSearchParams(location.search).get('course');if(initialCourse&&PAGE_COURSES[initialCourse])$('hCourse').value=initialCourse;
+  const requestIds=new Map();
   fillUnits();
   if($("shRefresh"))$("shRefresh").onclick=()=>load();
   if($("selRefresh"))$("selRefresh").onclick=()=>load();
@@ -613,8 +618,8 @@ function bindStudent(sid){
     }
 
     let parts = null, note = null;
-    if(['solutions-int','solutions-el','focus-1','focus-2','focus-3','focus-4'].includes(course)){
-      try{note=(course==='solutions-el'?SolutionsElHW:course==='focus-4'?Focus4HW:course==='focus-3'?Focus3HW:course==='focus-2'?Focus2HW:course==='focus-1'?FocusHW:SolutionsHW).makeNote($("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
+    if(SMHomework.titles[course]){
+      try{note=SMHomework.makeNote(course,$("hSolutions").selectedIds?.()||[],$("hDue").value,$("hMsg").value);}catch(err){res.style.display='block';res.textContent=err.message;return;}
     } else if (isPage){
       parts = [].slice.call(document.querySelectorAll(".hPart")).filter(c=>c.checked).map(c=>c.value);
       if (!parts.length){
@@ -634,8 +639,8 @@ function bindStudent(sid){
       let r;
       try {
         if (isPage){
-          if(course!=="solutions-int")try { await SM.enrolCourse(t, course); } catch(e2){}
-          r = await SM.addHW(t, course, (Number($("hUnit").value)||0), note);
+          const key=JSON.stringify([t,course,$('hUnit').value,note,$('hShare').checked]);if(!requestIds.has(key))requestIds.set(key,crypto.randomUUID());
+          r = await SM.addHW(t, course, (Number($("hUnit").value)||0), note,{id:requestIds.get(key),share:$('hShare').checked});
         } else {
           /* Учебник из конструктора: тренажёр, игры или рабочий лист по юниту */
           r = await SM.assignTo(t, $("hUnit").value, $("hKind").value);
@@ -653,7 +658,7 @@ function bindStudent(sid){
       (okList.length ? "Выдано " + okList.length + " " + studentsWord(okList.length) + ": " + okList.join(", ") : "") +
       (failList.length ? (okList.length ? " · " : "") + "Не получилось: " + failList.join("; ") : "");
 
-    if (okList.length){ drawPane(); load(); }
+    if(okList.length&&!failList.length){const success=res.textContent;await load();const result=document.getElementById('hRes');result.style.display='block';result.className='res ok';result.textContent=success+' · Готово.';}
   };
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
     if (!confirm("Удалить задание?")) return;
@@ -826,6 +831,7 @@ async function load(){
 
   drawList();
   await drawPane();
+  const requestedHW=new URLSearchParams(location.search).get('hw');if(requestedHW){const item=document.getElementById('hw-'+requestedHW);if(item){item.querySelector('details')?.setAttribute('open','');item.scrollIntoView({block:'center'});}}
 
   let queue = 0;
   try { queue = ((await SM.classAssignments()) || []).filter(a => !a.done).length; } catch(e){}

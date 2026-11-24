@@ -1066,14 +1066,30 @@ return data || [];
 		return data ? data.course : null;
 	},
 	/* Учитель: выдать ДЗ по юниту Speakout */
-	async addHW(studentId, course, unit, note) {
-		if (!useCloud) return { ok: false, error: "нужен Supabase" };
-		const c = ensureClient(); if (!c) return { ok: false };
-		const u = await this.getUser(); if (!u) return { ok: false, error: "not signed in" };
-		const { error } = await c.from("hw").insert(
-			{ teacher_id: u.id, student_id: studentId, course: course, unit: unit, note: note || null });
-		return { ok: !error, error: error && error.message };
-	},
+	async addHW(studentId, course, unit, note, options={}) {
+    const c=ensureClient();if(!c)return {ok:false,error:'Нет связи'};
+    const {data,error}=await c.rpc('assign_homework',{p_id:options.id||crypto.randomUUID(),p_student:studentId,p_course:course,p_unit:unit,p_note:note||null,p_share:!!options.share});
+    return {ok:!error,id:data,error:error?.message};
+  },
+  async shareHomework(id){const c=ensureClient();if(!c)return {ok:false};const {data,error}=await c.rpc('share_homework',{p_id:id});return {ok:!error,id:data,error:error?.message};},
+  async homeworkCards(ids){const c=ensureClient();if(!c||!ids.length)return [];const {data,error}=await c.from('hw').select(HW_COLS+',student_id,teacher_id').in('id',ids);if(error)throw error;return data||[];},
+  async chatIncoming(since){const c=ensureClient(),u=await this.getUser();if(!c||!u)return [];const {data,error}=await c.from('messages').select('id,sender_id,teacher_id,student_id,created_at,read_at').neq('sender_id',u.id).is('deleted_at',null).gt('created_at',since).order('created_at',{ascending:false}).limit(100);if(error)throw error;return data||[];},
+  async recordingUpload(blob,teacherId,studentId,expectedUserId,id,meta){
+    const c=ensureClient();if(!c)return {ok:false,error:'Нет связи'};
+    const u=await this.presentationSession();if(u?.id!==expectedUserId)return {ok:false,error:'Аккаунт изменился. Обнови страницу.'};
+    if(!blob.size||blob.size>25*1024*1024)return {ok:false,error:'Запись должна быть меньше 25 МБ'};
+    const type=blob.type.split(';')[0],ext=type.includes('mp4')?'mp4':type.includes('ogg')?'ogg':'webm';
+    const path=[teacherId,studentId,u.id,id+'.'+ext].join('/');
+    const {error}=await c.storage.from('chat-recordings').upload(path,blob,{contentType:type,upsert:false});
+    if(error&&!(['409','Duplicate'].includes(String(error.statusCode||error.error))))return {ok:false,error:error.message};
+    return {ok:true,url:'chat-recordings:'+path,kind:meta.recording==='circle'?'video':'audio',name:meta.recording==='circle'?'Видеокружок':'Голосовое сообщение',size:blob.size,meta};
+  },
+  async recordingUrl(value){
+    if(!value?.startsWith('chat-recordings:'))return value;
+    const c=ensureClient();if(!c)throw Error('Нет связи');
+    const {data,error}=await c.storage.from('chat-recordings').createSignedUrl(value.slice(16),3600);if(error)throw error;return data.signedUrl;
+  },
+
 	async listHW(studentId) { /* учитель */
 		if (!useCloud) return [];
 		const c = ensureClient(); if (!c) return [];
@@ -1421,7 +1437,7 @@ return data || [];
     async chatPage(teacherId,studentId,options={}) {
       if(!useCloud)return [];
       const c=ensureClient();if(!c)throw Error("Нет подключения к аккаунту");
-      const columns="id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at";
+      const columns="id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at,media_meta,homework_id";
       const ascending=!!options.after,limit=Math.min(200,Math.max(1,options.limit||100));
       let query=c.from('messages').select(columns).eq('teacher_id',teacherId).eq('student_id',studentId)
         .order('created_at',{ascending}).order('id',{ascending}).limit(limit);
@@ -1462,12 +1478,13 @@ return data || [];
 			row.att_kind = att.kind || "file";
 			row.att_name = (att.name || "").slice(0, 200);
 			row.att_size = att.size || null;
+      row.media_meta = att.meta || {};
 		}
 		const { data, error } = await c.from("messages")
 			.insert(row)
-			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at").single();
+			.select("id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at,media_meta,homework_id").single();
 		if(error?.code==='23505'){
-      const prior=await c.from('messages').select('id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at')
+      const prior=await c.from('messages').select('id,sender_id,teacher_id,student_id,body,read_at,created_at,att_url,att_kind,att_name,att_size,deleted_at,media_meta,homework_id')
         .eq('id',row.id).eq('sender_id',u.id).eq('teacher_id',teacherId).eq('student_id',studentId).maybeSingle();
       if(!prior.error&&prior.data)return {ok:true,msg:prior.data};
     }
@@ -1480,6 +1497,7 @@ return data || [];
 	async chatDelete(messageId, attUrl) {
 		if (!useCloud) return { ok: false, error: "нужен Supabase" };
 		const c = ensureClient(); if (!c) return { ok: false };
+		if(attUrl?.startsWith("chat-recordings:")){await c.storage.from("chat-recordings").remove([attUrl.slice(16)]);}
 		if (attUrl) {
 			try {
 				const mark = "/chat-media/";

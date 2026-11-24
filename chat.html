@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="sm-warm.css?v=33876983">
-<link rel="stylesheet" href="sm-chat.css?v=1d500276">
+<link rel="stylesheet" href="sm-chat.css?v=0199821f">
 <!-- app: установка как приложение (manifest + sw) -->
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#5d1930">
@@ -36,14 +36,19 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sm-auth.js?v=95220d51"></script>
+<script src="sm-auth.js?v=c859cc9d"></script>
 <script src="sm-chat.js?v=5d5bf2ea"></script>
+<script src="sm-chat-recorder.js?v=f6558312"></script>
+<script src="sm-homework.js?v=f235492f"></script>
 <script src="sm-chat-content.js?v=15aa5a2c"></script>
-<script src="sm-shell.js?v=19d3e04e"></script>
+<script src="sm-shell.js?v=d0bc2de0"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 function chatIcon(name){
   const paths={
+    mic:'<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/>',
+    camera:'<rect x="3" y="5" width="12" height="14" rx="3"/><path d="m15 10 6-4v12l-6-4"/>',
+    book:'<path d="M12 5v16M3 3l9 2 9-2v16l-9 2-9-2z"/>',
     smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
     clip:'<path d="m21 11-8 8a6 6 0 0 1-8.5-8.5l8-8a4 4 0 0 1 5.7 5.7l-8 8a2 2 0 0 1-2.8-2.8L15 6"/>',
     send:'<path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/>',
@@ -84,8 +89,10 @@ let sel = 0;
 /* Состояние открытой переписки */
 let MSGS = [];          // то, что уже отрисовано
 let SEEN = new Set();   // id, чтобы не задваивать
+let recorderUI=null;
 let chatSession=null, chatGeneration=0, readBusy=false;
 function stopChat(){
+  recorderUI?.destroy();recorderUI=null;window.SMChatSounds?.active(null);
   chatGeneration++;chatSession?.stop();chatSession=null;readBusy=false;
   MSGS=[];SEEN=new Set();
 }
@@ -132,11 +139,13 @@ function attEl(m){
     wrap.appendChild(img);
   } else if (m.att_kind === "video"){
     const v = document.createElement("video");
-    v.src = m.att_url; v.controls = true; v.preload = "metadata";
+    v.controls = true; v.preload = "metadata"; v.playsInline=true;
+    if(m.media_meta?.recording==='circle')v.className='video-circle';
+    mediaSource(v,m.att_url);
     wrap.appendChild(v);
   } else if (m.att_kind === "audio"){
     const a = document.createElement("audio");
-    a.src = m.att_url; a.controls = true; a.preload = "metadata";
+    a.controls = true; a.preload = "metadata";mediaSource(a,m.att_url);
     wrap.appendChild(a);
   } else {
     const a = document.createElement("a");
@@ -150,6 +159,11 @@ function attEl(m){
   }
   return wrap;
 }
+function mediaSource(player,value){
+  if(!value?.startsWith('chat-recordings:')){player.src=value;return;}
+  let busy=false;async function resolve(){if(busy)return;busy=true;try{const url=await SM.recordingUrl(value);if(player.isConnected){player.src=url;player.dataset.signedAt=Date.now();}}catch{const b=document.createElement('button');b.textContent='Загрузить запись повторно';b.onclick=()=>{b.remove();resolve();};player.after(b);}finally{busy=false;}}
+  queueMicrotask(resolve);player.addEventListener('error',()=>{if(Date.now()-Number(player.dataset.signedAt)>300000)resolve();});
+}
 function openLink(u){ window.open(u, "_blank", "noopener"); }
 
 const RX = ["👍","❤️","😂","👏","🔥","😮","😢","🎉"];
@@ -162,8 +176,9 @@ function bubbleEl(m){
 
   if (m.deleted_at){ fillGone(el, m); return el; }
 
+  if(m.homework_id)el.appendChild(SMHomework.card(m.homework_id,ROLE));
   if (m.att_url) el.appendChild(attEl(m));
-  if (m.body){
+  if (m.body&&!m.homework_id){
     el.appendChild(SMChatContent.render(m.body));
   }
 
@@ -355,6 +370,7 @@ function drawPeople(){
 }
 
 function drawPane(){
+  recorderUI?.destroy();
   document.querySelectorAll('.rxpick').forEach(p=>p.remove());
   const pane = document.getElementById("pane");
   const person = PEOPLE[sel];
@@ -371,7 +387,7 @@ function drawPane(){
   pane.innerHTML =
     '<div class="pane-hd chat-header"><span class="chat-avatar" aria-hidden="true">'+esc(initials(person.name))+'</span>'+
       '<div class="chat-heading"><h2>'+esc(person.name)+'</h2><p>'+(ROLE==='teacher'?'Личная переписка':'Твой преподаватель')+'</p></div>'+
-      '<span id="chatState" role="status">подключаюсь…</span></div>' +
+      '<button class="sound-toggle" id="chatSound" type="button" aria-pressed="false">Звук: выкл</button><span id="chatState" role="status">подключаюсь…</span></div>' +
     '<div class="chatwrap">' +
       '<button class="b sm" id="chatOlder" hidden>Загрузить предыдущие сообщения</button>' +
       '<div class="chat-scroll" id="chatScroll" role="region" aria-label="Переписка" tabindex="0"><div class="chat-empty">Загружаю…</div></div>' +
@@ -387,6 +403,9 @@ function drawPane(){
           '<button class="tool" id="btnEmo" type="button" title="Эмодзи" aria-label="Эмодзи" aria-expanded="false" aria-controls="emoPan">'+chatIcon('smile')+'</button>'+
           '<button class="tool gif" id="btnGif" type="button" title="Гифки" aria-label="Гифки" aria-expanded="false" aria-controls="gifPan">GIF</button>'+
           '<button class="tool" id="btnClip" type="button" title="Прикрепить файл" aria-label="Прикрепить файл">'+chatIcon('clip')+'</button>'+
+          '<button class="tool" id="btnVoice" type="button" title="Голосовое сообщение" aria-label="Голосовое сообщение">'+chatIcon('mic')+'</button>'+
+          '<button class="tool" id="btnVideo" type="button" title="Видеокружок" aria-label="Видеокружок">'+chatIcon('camera')+'</button>'+
+          (ROLE==='teacher'?'<button class="tool" id="btnHomework" type="button" title="Домашнее задание" aria-label="Домашнее задание">'+chatIcon('book')+'</button>':'')+
           '<button class="go" id="chatSend" type="button" aria-label="Отправить"><span>Отправить</span>'+chatIcon('send')+'</button>'+
         '</div></div><p class="composer-hint" id="composerHint">Enter: отправить · Shift + Enter: новая строка</p></div>'+
     '</div><div class="chat-note">'+icon('lock',12)+'<span>Переписку видите только вы и собеседник</span></div>';
@@ -415,13 +434,14 @@ function renderMessages(rows,meta={}){
     anchor=el.nextElementSibling;
     const day=dayKey(m.created_at);if(day!==lastDay){const sep=document.createElement('div');sep.className='daysep';sep.textContent=dayLabel(new Date(m.created_at));scroll.insertBefore(sep,el);lastDay=day;}
   }
+  SMHomework.refreshCards(scroll,ROLE);
   MSGS=ordered;SEEN=new Set(ordered.map(m=>m.id));
   if(!ordered.length){const empty=document.createElement('div');empty.className='chat-empty';empty.textContent=meta.loaded?'Сообщений пока нет. Напиши первым':'Загружаю…';scroll.append(empty);}
   const older=document.getElementById('chatOlder');if(older)older.hidden=!meta.hasOlder;
   if(meta.reason==='older'||!stick)scroll.scrollTop=top+(scroll.scrollHeight-height);else scroll.scrollTop=scroll.scrollHeight;
 }
 async function markIncomingRead(person){
-  if(readBusy||!MSGS.some(m=>m.sender_id!==ME.id&&!m.read_at))return;
+  if(document.hidden||!document.hasFocus()||readBusy||!MSGS.some(m=>m.sender_id!==ME.id&&!m.read_at))return;
   readBusy=true;const generation=chatGeneration,{teacherId,studentId}=pairFor(person);
   try{
     const result=await SM.chatMarkRead(teacherId,studentId);if(generation!==chatGeneration||!result?.ok)return;
@@ -440,6 +460,10 @@ function startChat(person){
   const { teacherId, studentId } = pairFor(person);
 
   const generation=chatGeneration,active=()=>generation===chatGeneration;
+  const bindSound=()=>{window.SMChatSounds?.bind(document.getElementById('chatSound'));window.SMChatSounds?.active({teacherId,studentId},()=>active()&&atBottom(document.getElementById('chatScroll')));};bindSound();
+  for(const [id,kind]of [['btnVoice','audio'],['btnVideo','video']])document.getElementById(id).onclick=()=>{recorderUI?.destroy();recorderUI=SMChatRecorder.open({kind,teacherId,studentId,userId:ME.id,isActive:active,onSent:m=>chatSession?.merge([m],'sent')});};
+  const homeworkButton=document.getElementById('btnHomework');if(homeworkButton)homeworkButton.onclick=()=>SMHomework.chatPicker({studentId,active,onSent:()=>chatSession?.sync()});
+
   chatSession=SMChat.connect({api:SM,teacherId,studentId,
     onRows(rows,meta){if(!active())return;renderMessages(rows,meta);markIncomingRead(person);if(meta.reason==='initial'||meta.reason==='older')loadReactions(rows.map(m=>m.id));},
     onState(state){if(active())setState({online:'подключено',connecting:'подключаемся…',polling:'обновление раз в 10 сек',offline:'нет связи · повторяем подключение'}[state]);},
@@ -540,6 +564,7 @@ function startChat(person){
       say("Загружаю «" + file.name + "»…");
       btnClip.disabled = true;
       const up = await SM.chatUpload(file);
+      if(!active())return;
       btnClip.disabled = false; say("");
       if (!up.ok){ showError(up.error || "Файл не загрузился"); return; }
       send(up);
@@ -596,6 +621,8 @@ function startChat(person){
   inp.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing){ e.preventDefault(); send(); } });
 }
 
+window.addEventListener('chat-sounds-ready',()=>{const b=document.getElementById('chatSound');if(b)SMChatSounds.bind(b);if(ME&&PEOPLE[sel])SMChatSounds.active(pairFor(PEOPLE[sel]),()=>!!document.getElementById('chatScroll')&&atBottom(document.getElementById('chatScroll')));});
+window.addEventListener('focus',()=>{if(PEOPLE[sel]){markIncomingRead(PEOPLE[sel]);SMHomework.refreshCards(document.getElementById('chatScroll'),ROLE,true);}});
 async function boot(){
   const pane = document.getElementById("pane");
   // роль определяем по профилю
@@ -620,6 +647,7 @@ async function boot(){
     try { t = await SM.myTeacher(); } catch(e){}
     PEOPLE = t ? [{ id: t.teacher_id, name: t.name || "Учитель", unread: 0 }] : [];
   }
+  const requested=new URLSearchParams(location.search).get("s"),match=PEOPLE.findIndex(p=>p.id===requested);if(match>=0)sel=match;
   drawPeople();
   drawPane();
 }

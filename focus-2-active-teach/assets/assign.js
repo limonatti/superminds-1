@@ -6,6 +6,8 @@ window.Focus2Assign={create({getUser,getPage,onChange}){
  const selected=new Set(),exercises=new Map(window.FOCUS2.pages.flatMap(p=>p.exercises.map(e=>[e.id,{...e,unit:p.unit}])));
  let allowed=false,mode=false,sending=false,students=[],owner=null;
  const button=$('#assignToggle'),panel=$('#teacherAssignment');
+ let requestId=null,requestKey=null;
+ const shareLabel=document.createElement('label');shareLabel.className='hw-share';shareLabel.innerHTML='<input type="checkbox" id="assignShareChat" checked>Отправить карточку в чат';$('#assignSend').before(shareLabel);
  function message(text){$('#assignStatus').textContent=text;}
  function edited(){message('Выбери ученика и нажми «Выдать домашку», когда список готов.');$('#assignResultLink').hidden=true;}
  function update(){
@@ -17,7 +19,7 @@ window.Focus2Assign={create({getUser,getPage,onChange}){
   panel.querySelectorAll('[data-remove-assignment]').forEach(b=>b.onclick=()=>toggle(b.dataset.removeAssignment));
   $('#assignSend').disabled=!allowed||sending||!selected.size||!$('#assignStudent').value;
   $('#assignClear').disabled=sending||!selected.size;$('#assignPage').disabled=sending||!getPage()?.exercises.length;
-  for(const id of ['assignStudent','assignDue','assignComment','assignReload'])$('#'+id).disabled=sending;
+  for(const id of ['assignStudent','assignDue','assignComment','assignReload','assignShareChat'])$('#'+id).disabled=sending;
   $('#assignSend').textContent=sending?'Назначаю…':'Выдать домашку';button.disabled=sending;
   onChange();
  }
@@ -43,7 +45,8 @@ window.Focus2Assign={create({getUser,getPage,onChange}){
    const user=await SM.getUser();if(!user||user.id!==owner)throw Error('Аккаунт изменился. Обнови страницу перед назначением.');
    const profile=await SM.myProfile();if(!['teacher','admin'].includes(profile?.role))throw Error('Назначать домашку может преподаватель.');
    const current=await SM.myStudents();if(!current?.some(s=>s.student_id===sid))throw Error('Ученик не найден в твоём классе. Обнови список учеников.');
-   const r=await SM.addHW(sid,'focus-2',Number(exercises.get(ids[0]).unit)||0,note);
+   const nextKey=JSON.stringify([sid,note,$('#assignShareChat').checked]);if(nextKey!==requestKey){requestKey=nextKey;requestId=crypto.randomUUID();}
+   const r=await SM.addHW(sid,'focus-2',Number(exercises.get(ids[0]).unit)||0,note,{id:requestId,share:$('#assignShareChat').checked});
    if(!r?.ok)throw Error(r?.error||'Не удалось назначить домашку. Попробуй ещё раз.');
    selected.clear();message(`Домашка назначена: ${student.name||'ученик'} · ${ids.length} упр. Она появится в «Моей домашке» ученика.`);
    $('#assignResultLink').href='../teacher-class.html?s='+encodeURIComponent(sid);$('#assignResultLink').hidden=false;

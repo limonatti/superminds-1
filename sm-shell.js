@@ -428,3 +428,6 @@ var SMUI = {
 
 window.SMUI = SMUI;
 })();
+
+/* Shared notification audio on authenticated platform pages. */
+(function(){if(document.querySelector('script[data-chat-sounds]'))return;const script=document.createElement('script');script.dataset.chatSounds='1';script.src=new URL('sm-chat-sounds.js?v=5a3837e5',document.currentScript.src).href;document.head.append(script);})();

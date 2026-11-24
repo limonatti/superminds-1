@@ -254,3 +254,6 @@ function mountPractice(){
  if(e.destination){const link=document.createElement('button');link.textContent='Открыть стр. '+e.destination;link.onclick=()=>{go(e.destination);openExercise(0)};box.append(link)}
  host.prepend(box);const note=$('#freeNote');if(note){note.placeholder='Заметки по желанию';note.previousElementSibling.textContent='Заметки (необязательно)';}
 }
+
+window.SMHomeworkContext=()=>({book:S.book,page:S.page,unit:S.unit});
+if(entry.has('exercise')){const i=page().exercises.findIndex(e=>e.label===entry.get('exercise'));if(i>=0)openExercise(i);}

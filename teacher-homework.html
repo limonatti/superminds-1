@@ -39,7 +39,7 @@
 <meta name="apple-mobile-web-app-title" content="Asya English">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script src="sm-pwa.js?v=cadf7459" defer></script>
-<link rel="stylesheet" href="solutions-homework.css?v=94e10999">
+<link rel="stylesheet" href="solutions-homework.css?v=68c43ca6">
 </head>
 <body>
 <div class="app">
@@ -59,9 +59,9 @@
 <script src="words.js?v=3a3671b3"></script>
 <script src="course-words.js?v=39777793"></script>
 <script src="speakout-words.js?v=3094c556"></script>
-<script src="sm-auth.js?v=95220d51"></script>
-<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="solutions-homework.js?v=cd998778"></script>
-<script src="sm-shell.js?v=19d3e04e"></script>
+<script src="sm-auth.js?v=c859cc9d"></script>
+<script src="focus-4-homework.js?v=c1031d1f"></script><script src="focus-3-homework.js?v=bca9b981"></script><script src="focus-2-homework.js?v=4dcbc2ca"></script><script src="focus-homework.js?v=e0da4f64"></script><script src="solutions-el-homework.js?v=d20d4749"></script><script src="sm-homework.js?v=f235492f"></script><script src="solutions-homework.js?v=cd998778"></script>
+<script src="sm-shell.js?v=d0bc2de0"></script>
 <script>
 const esc = SMUI.esc, icon = SMUI.icon;
 const KIND_L = { trainer:"Тренажёр слов", games:"Игры юнита", worksheet:"Рабочий лист" };
@@ -158,7 +158,8 @@ async function drawPane(){
   let detail = "";
 
   /* Блочная домашка: показываем каждое заданное упражнение и результат по нему */
-  if(q.type==='spk'&&SolutionsElHW.ids(q.hw).length){try{await SolutionsElHW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=SolutionsElHW.renderAssignment(q.hw,student?.data?.__coursework?.['solutions-el']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}
+  if(q.type==='spk'&&SMHomework.meta(q.hw).textbookExercises?.length){try{await SMHomework.load(q.hw.course);const student=STUDENTS.find(s=>s.student_id===q.sid);detail=SMHomework.report(q.hw,student?.data?.__coursework?.[q.hw.course]||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}
+  else if(q.type==='spk'&&SolutionsElHW.ids(q.hw).length){try{await SolutionsElHW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=SolutionsElHW.renderAssignment(q.hw,student?.data?.__coursework?.['solutions-el']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}
   else if(q.type==='spk'&&FocusHW.ids(q.hw).length){try{await FocusHW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=FocusHW.renderAssignment(q.hw,student?.data?.__coursework?.['focus-1']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}
   else if(q.type==='spk'&&Focus4HW.ids(q.hw).length){try{await Focus4HW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=Focus4HW.renderAssignment(q.hw,student?.data?.__coursework?.['focus-4']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}
   else if(q.type==='spk'&&Focus3HW.ids(q.hw).length){try{await Focus3HW.load();const student=STUDENTS.find(s=>s.student_id===q.sid);detail=Focus3HW.renderAssignment(q.hw,student?.data?.__coursework?.['focus-3']||{});}catch(e){detail='<p>'+esc(e.message)+'</p>';}}

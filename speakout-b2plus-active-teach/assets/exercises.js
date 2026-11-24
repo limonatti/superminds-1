@@ -99,3 +99,6 @@
     refresh(){if(dialog.open&&!dialog.contains(document.activeElement))render();}
   };
 })();
+
+// A homework link opens the selected exercise after the account store has loaded.
+(async()=>{const id=new URLSearchParams(location.search).get('exercise');if(!id)return;for(let n=0;n<100;n++){if(window.B2Store?.ready&&window.B2Focus){const task=B2Focus.tasks().find(e=>e.id===id);if(task){await B2Focus.open(id);return;}}await new Promise(r=>setTimeout(r,100));}})();

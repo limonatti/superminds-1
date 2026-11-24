@@ -990,3 +990,5 @@ function focusTasks(){const unit=lessonAt(S.book,S.page)?.unit;return Object.ent
 async function focusOpen(id){const t=focusTasks().find(t=>t.id===id);if(!t)return;goPage(+t.key.split(':')[1]);try{await $('#pageImg').decode()}catch{}if(pkey()===t.key)window.B2Exercises.open(t.exercise,t.key);}
 function focusHome(){if(!window.CourseFocus)return;const unit=lessonAt(S.book,S.page)?.unit;CourseFocus.home({host:$('#main'),course:'Speakout B2+',location:(S.book==='sb'?'Student’s Book':'Workbook')+(unit?' · Unit '+unit:''),title:unit?D.unitNames[unit]:$('#crumb').textContent,items:focusTasks(),open:focusOpen,units:Array.from({length:8},(_,i)=>({value:String(i+1),label:'Unit '+(i+1)+' · '+D.unitNames[i+1],selected:unit===i+1})),selectUnit:value=>{const l=D.lessons.find(l=>l.unit===Number(value)&&l.letter==='A');if(l)goPage(l[S.book+'Idx']+1)},surfaces:[$('#stage'),$('#dock')]});}
 window.B2Focus={tasks:focusTasks,open:focusOpen};
+
+window.SMHomeworkContext=()=>({book:S.book,page:S.page+(S.book==='sb'?1:2),unit:lessonAt(S.book,S.page)?.unit||'extra'});
