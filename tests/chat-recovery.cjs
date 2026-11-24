@@ -63,7 +63,7 @@ function server(initial=[]){
   watchPresentationAuth:fn=>{authChanged=fn;},chatReactions:async()=>({}),chatMarkRead:async()=>({ok:false}),chatPage:async()=>pageRows,
   chatSubscribe:(t,s,insert,update,status)=>{statuses.push(status);return ()=>{};},
   chatSend:(t,s,body,att,clientId)=>new Promise(resolve=>sends.push({t,s,body,clientId,resolve}))};
- w.eval(fs.readFileSync('sm-chat.js','utf8'));w.eval([...w.document.scripts].find(s=>!s.src&&s.textContent.includes('function startChat')).textContent+';window.__readMessages=()=>MSGS;');
+ w.eval(fs.readFileSync('sm-chat.js','utf8'));w.eval(fs.readFileSync('sm-chat-content.js','utf8'));w.eval([...w.document.scripts].find(s=>!s.src&&s.textContent.includes('function startChat')).textContent+';window.__readMessages=()=>MSGS;');
  await tick();await tick();assert(w.document.querySelector('#chatText'));assert.equal(w.__readMessages()[0].read_at,null,'failed read acknowledgement remains unread');assert(!w.document.querySelector('#chatState').textContent.includes('подключено'));
  statuses[0]('SUBSCRIBED');await tick();assert.equal(w.document.querySelector('#chatState').textContent,'подключено');
  w.document.querySelector('#chatText').value='Original';w.document.querySelector('#chatSend').click();await tick();assert.equal(sends.length,1);
