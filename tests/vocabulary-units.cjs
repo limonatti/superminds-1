@@ -24,6 +24,14 @@ for(const f of ['course-words.js','speakout-words.js','words.js'])vm.runInContex
  for(const query of ['?course=outcomes-beginner&unit=sel-u5','?course=outcomes-beginner&unit=outc-u99','?course=missing&unit=outc-u5','?course=outcomes-beginner&units=outc-u5,outc-u99']){
   const bad=ctx.SM_resolveVocabularyLink(query);assert(bad.error);assert.deepEqual(clean(bad.unitIds),[]);
  }
+ for(const course of ['focus-2','focus-3','focus-4']){
+  const options=ctx.SM_COURSES.filter(c=>c.id===course&&c.ready&&(c.presentation||ctx.SM_COURSE_DATA[c.id]?.length));
+  assert.equal(options.length,1,course+' must be assignable exactly once');
+  assert(fs.existsSync(options[0].hub));
+  ctx.SM_useCourse('sm1');ctx.SM_resolveVocabularyLink('?course='+course);
+  assert.equal(ctx.SM_COURSE.id,course);
+  assert.equal(ctx.SM_ALL_WORDS.filter(w=>!w.own).length,0,'do not substitute another book’s vocabulary');
+ }
  const source=JSON.parse(fs.readFileSync('tests/fixtures/outcomes-vocabulary-units.json'));
  const words=JSON.parse(fs.readFileSync('outcomes-beginner-active-teach/assets/words.json'));
  assert.deepEqual(clean(ctx.COURSE_WORDS['outcomes-beginner'].units),words.units);

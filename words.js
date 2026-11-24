@@ -3,8 +3,11 @@
    id слова: unitId + "-" + индекс — используется для прогресса.
    Добавить новый учебник = добавить SM_COURSE_DATA["xxx"]=[...] и запись в SM_COURSES. */
 window.SM_COURSE_DATA = window.SM_COURSE_DATA || {};
-// Presentation course: keep it selectable without falling back to another book's vocabulary.
-window.SM_COURSE_DATA["speakout-b2plus"] = window.SM_COURSE_DATA["speakout-b2plus"] || [];
+// Interactive books can be assigned before their separate vocabulary bank is ready.
+// Empty arrays also prevent the trainer from silently switching to Super Minds.
+["speakout-b2plus", "focus-2", "focus-3", "focus-4"].forEach(function (slug) {
+  window.SM_COURSE_DATA[slug] = window.SM_COURSE_DATA[slug] || [];
+});
 window.SM_COURSE_DATA["sm1"] = [
   {
     id: "welcome", unit: "Welcome", title: "Friends · цвета", emoji: "👋", color: "#f6e2cf",
@@ -196,6 +199,9 @@ window.SM_COURSE_DATA["sm1"] = [
 window.SM_COURSES = [
   { id: "sm1",  title: "Super Minds 1", subtitle: "2nd edition · 6–8 лет", emoji: "📗", color: "#dfeadd", ready: true, img: "https://d8j0ntlcm91z4.cloudfront.net/user_3F1b5KRx5p4EogfpaQRR3sEXIP5/hf_20260713_054541_850dabec-bbfc-4814-8d79-266c06b5b0b2_min.webp" },
   { id: "speakout-b2plus", title: "Speakout B2+", subtitle: "Presentation Tool · 8 юнитов", emoji: "📘", color: "#f6e2cf", ready: true, presentation: true, hub: "speakout-b2plus-active-teach/index.html", img: "img/course-icons/speakout-b2plus.jpg" },
+  { id: "focus-2", title: "Focus 2", subtitle: "2nd edition · 8 юнитов", emoji: "📙", color: "#f2e6df", ready: true, presentation: true, hub: "focus-2-active-teach/index.html" },
+  { id: "focus-3", title: "Focus 3", subtitle: "2nd edition · 8 юнитов", emoji: "📙", color: "#f2e6df", ready: true, presentation: true, hub: "focus-3-active-teach/index.html" },
+  { id: "focus-4", title: "Focus 4", subtitle: "2nd edition · 8 юнитов", emoji: "📙", color: "#f2e6df", ready: true, presentation: true, hub: "focus-4-active-teach/index.html" },
   { id: "own",  title: "Свой учебник",  subtitle: "создай в конструкторе",  emoji: "➕", color: "#f6e2cf", ready: false, admin: true }
 ];
 
@@ -409,7 +415,7 @@ window.SM_absorbSpeakout = function () {
 window.SM_absorbCourseWords = function () {
   var C = window.COURSE_WORDS;
   if (!C) return;
-  var PREFIX = { "outcomes-beginner": "outc-u", "solutions-int": "solu-u", "speakout-a1": "sa1-u", "focus-1": "f1-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
+  var PREFIX = { "outcomes-beginner": "outc-u", "solutions-int": "solu-u", "speakout-a1": "sa1-u", "focus-1": "f1-u", "focus-2": "f2-u", "focus-3": "f3-u", "focus-4": "f4-u", "solutions-pi": "spi-u", "solutions-el": "sel-u", "gateway-a1p": "gwa-u" };
   Object.keys(C).forEach(function (slug) {
     if ((window.SM_COURSE_DATA[slug] || []).length) return;
     var c = C[slug], pre = PREFIX[slug] || (slug.replace(/[^a-z0-9]/g, "").slice(0, 4) + "-u");
