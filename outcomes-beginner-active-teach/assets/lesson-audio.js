@@ -3,7 +3,7 @@
 (function(root){
 'use strict';
 const player=document.createElement('audio');player.id='lessonAudioTransport';player.preload='metadata';player.hidden=true;document.body.append(player);
-let current=null,error='',pending=false,loopA=0,loopB=null,fragment=false;const positions=new Map();
+let current=null,error='',pending=false,loopA=0,loopB=null,fragment=false,external=false;const positions=new Map();
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const views=()=>[...document.querySelectorAll('[data-lesson-audio]')];
 const time=n=>Number.isFinite(n)?Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0'):'0:00';
@@ -15,9 +15,9 @@ function update(){for(const v of views()){
  for(const sel of ['[data-audio-back]','[data-audio-seek]'])q(sel).disabled=!active||!Number.isFinite(player.duration);
  q('[data-audio-seek]').max=active&&Number.isFinite(player.duration)?player.duration:0;q('[data-audio-seek]').value=active?player.currentTime:0;q('output').textContent=active?time(player.currentTime)+' / '+time(player.duration):'0:00';
  q('[data-audio-ab]').setAttribute('aria-pressed',String(active&&fragment));q('[data-audio-a]').disabled=!active;q('[data-audio-b]').disabled=!active;q('[data-audio-ab]').disabled=!active||loopB===null;q('[data-audio-ab]').textContent=active&&loopB!==null?'A–B '+time(loopA)+' – '+time(loopB):'Повтор A–B';q('[data-audio-loop]').setAttribute('aria-pressed',String(active&&player.loop));q('[data-audio-rate]').value=String(player.playbackRate);q('[data-audio-error]').textContent=active?error:'';
- }const dock=document.querySelector('#lessonAudioDock');if(dock)dock.hidden=!current||!!document.querySelector('dialog[open]');}
+ }const dock=document.querySelector('#lessonAudioDock');if(dock)dock.hidden=external||!current||!!document.querySelector('dialog[open]');}
 async function play(v,restart=false){
- if(pending)return;error='';
+ if(pending)return;error='';external=false;
  if(current?.path!==v.dataset.lessonAudio){if(current)positions.set(current.path,player.currentTime);player.pause();current={path:v.dataset.lessonAudio,title:v.dataset.title,src:v.dataset.src};player.src=current.src;player.loop=false;loopA=0;loopB=null;fragment=false;player.addEventListener('loadedmetadata',()=>{player.currentTime=restart?0:Math.min(positions.get(current.path)||0,player.duration||0)},{once:true});dock();}
  else if(restart)player.currentTime=0;
  else if(!player.paused){player.pause();update();return;}
@@ -31,7 +31,7 @@ function dock(){let el=document.querySelector('#lessonAudioDock');if(!el){el=doc
 for(const event of ['timeupdate','play','pause','loadedmetadata','durationchange','ratechange','volumechange','ended'])player.addEventListener(event,update);
 player.addEventListener('timeupdate',()=>{if(fragment&&loopB!==null&&player.currentTime>=loopB)player.currentTime=loopA});
 player.addEventListener('error',()=>{error='Не удалось загрузить запись. Проверь соединение и повтори.';update()});
-document.addEventListener('play',e=>{if(e.target===player)document.querySelectorAll('audio,video').forEach(a=>{if(a!==player)a.pause()});else if(e.target.matches?.('audio,video'))player.pause()},true);
+document.addEventListener('play',e=>{if(e.target===player)document.querySelectorAll('audio,video').forEach(a=>{if(a!==player)a.pause()});else if(e.target.matches?.('audio,video')){external=true;player.pause();update()}},true);
 new MutationObserver(update).observe(document.body,{attributes:true,subtree:true,attributeFilter:['open']});
 root.OutcomesAudio={html,bind,update,playTrack:m=>play({dataset:{lessonAudio:m.path,src:m.path,title:'Аудио '+m.track}}),current:()=>current,player};
 })(window);

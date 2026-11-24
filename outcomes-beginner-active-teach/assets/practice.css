@@ -14,3 +14,5 @@ body{max-width:100%;overflow-wrap:break-word}.headerActions{flex-wrap:wrap;max-w
 dialog#modal.photo-opener.cf-dialog{padding:12px 24px;max-height:calc(100dvh - 24px)}
 dialog#modal.photo-opener.cf-dialog .cf-head{padding-bottom:8px;margin-bottom:8px}dialog#modal.photo-opener.cf-dialog .cf-task-nav{padding:6px 0;margin-bottom:10px;top:-12px}dialog#modal.photo-opener.cf-dialog .cf-heading{margin-bottom:8px}dialog#modal.photo-opener.cf-dialog .cf-location{display:none}dialog#modal.photo-opener.cf-dialog .cf-heading h2{font-size:24px;margin-bottom:6px}dialog#modal.photo-opener.cf-dialog .cf-instruction{margin:0;line-height:1.45}dialog#modal.photo-opener.cf-dialog .cf-view-tools{margin-bottom:8px;padding-bottom:0;top:44px}dialog#modal.photo-opener .practiceSettings[hidden],dialog#modal.photo-opener .responseStepper[hidden],dialog#modal.photo-opener .checkType,dialog#modal.photo-opener .responsePanel>h3{display:none!important}
 @media(max-width:600px){dialog#modal.photo-opener.cf-dialog{padding:10px;max-width:100vw}.photo-scroll{max-height:48dvh}}
+
+body:has(>#lessonAudioDock:not([hidden]))>footer{display:none}
