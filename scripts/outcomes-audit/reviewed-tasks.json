@@ -2108,9 +2108,162 @@
       "check": {
         "mode": "self",
         "reason": "personal",
-        "revision": "af877e929493"
+        "revision": "af877e929493",
+        "note": "Рассмотрите все 12 фотографий со страниц 14–15 и прочитайте подписи. Выбирайте номер фотографии. Вписывать ничего не нужно."
       },
-      "unit": 2
+      "unit": 2,
+      "responseMode": "oral",
+      "audioTracks": [],
+      "photoPractice": {
+        "recall": false,
+        "mode": "observe",
+        "photos": [
+          {
+            "n": 1,
+            "text": "a big city",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.119,
+              0.66,
+              0.263
+            ]
+          },
+          {
+            "n": 2,
+            "text": "near and far",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.014,
+              0.336,
+              0.406
+            ]
+          },
+          {
+            "n": 3,
+            "text": "a lot of children",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.013,
+              0.424,
+              0.241
+            ]
+          },
+          {
+            "n": 4,
+            "text": "it’s expensive",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.258,
+              0.424,
+              0.257
+            ]
+          },
+          {
+            "n": 5,
+            "text": "some nurses",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.385,
+              0.66,
+              0.306
+            ]
+          },
+          {
+            "n": 6,
+            "text": "I don’t like it",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.431,
+              0.336,
+              0.26
+            ]
+          },
+          {
+            "n": 7,
+            "text": "some meat",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.447,
+              0.23,
+              0.22
+            ]
+          },
+          {
+            "n": 8,
+            "text": "a taxi driver",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.661,
+              0.447,
+              0.339,
+              0.22
+            ]
+          },
+          {
+            "n": 9,
+            "text": "fresh fruit",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.694,
+              0.432,
+              0.306
+            ]
+          },
+          {
+            "n": 10,
+            "text": "work in an office",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.436,
+              0.694,
+              0.564,
+              0.306
+            ]
+          },
+          {
+            "n": 11,
+            "text": "walk in the park",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.518,
+              0.424,
+              0.482
+            ]
+          },
+          {
+            "n": 12,
+            "text": "a small village",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.67,
+              0.572,
+              0.33
+            ]
+          }
+        ]
+      }
     },
     {
       "n": 2,
@@ -2127,9 +2280,164 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Включите запись 29 и повторяйте слова. Выбирайте соответствующую фотографию. Вписывать ничего не нужно."
       },
-      "unit": 2
+      "unit": 2,
+      "responseMode": "oral",
+      "audioTracks": [
+        29
+      ],
+      "photoPractice": {
+        "recall": false,
+        "mode": "repeat",
+        "photos": [
+          {
+            "n": 1,
+            "text": "a big city",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.119,
+              0.66,
+              0.263
+            ]
+          },
+          {
+            "n": 2,
+            "text": "near and far",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.014,
+              0.336,
+              0.406
+            ]
+          },
+          {
+            "n": 3,
+            "text": "a lot of children",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.013,
+              0.424,
+              0.241
+            ]
+          },
+          {
+            "n": 4,
+            "text": "it’s expensive",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.258,
+              0.424,
+              0.257
+            ]
+          },
+          {
+            "n": 5,
+            "text": "some nurses",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.385,
+              0.66,
+              0.306
+            ]
+          },
+          {
+            "n": 6,
+            "text": "I don’t like it",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.431,
+              0.336,
+              0.26
+            ]
+          },
+          {
+            "n": 7,
+            "text": "some meat",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.447,
+              0.23,
+              0.22
+            ]
+          },
+          {
+            "n": 8,
+            "text": "a taxi driver",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.661,
+              0.447,
+              0.339,
+              0.22
+            ]
+          },
+          {
+            "n": 9,
+            "text": "fresh fruit",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.694,
+              0.432,
+              0.306
+            ]
+          },
+          {
+            "n": 10,
+            "text": "work in an office",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.436,
+              0.694,
+              0.564,
+              0.306
+            ]
+          },
+          {
+            "n": 11,
+            "text": "walk in the park",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.518,
+              0.424,
+              0.482
+            ]
+          },
+          {
+            "n": 12,
+            "text": "a small village",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.67,
+              0.572,
+              0.33
+            ]
+          }
+        ]
+      }
     },
     {
       "n": 3,
@@ -2146,9 +2454,162 @@
       "check": {
         "mode": "self",
         "reason": "oral",
-        "revision": "946caa9b63a6"
+        "revision": "946caa9b63a6",
+        "note": "Работайте в паре: Student A выбирает фотографию и называет номер; Student B произносит слово или фразу, не глядя на подпись. После устной попытки можно открыть подпись для сравнения. Затем поменяйтесь ролями. Вписывать ничего не нужно."
       },
-      "unit": 2
+      "unit": 2,
+      "responseMode": "oral",
+      "audioTracks": [],
+      "photoPractice": {
+        "recall": true,
+        "mode": "recall",
+        "photos": [
+          {
+            "n": 1,
+            "text": "a big city",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.119,
+              0.66,
+              0.263
+            ]
+          },
+          {
+            "n": 2,
+            "text": "near and far",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.014,
+              0.336,
+              0.406
+            ]
+          },
+          {
+            "n": 3,
+            "text": "a lot of children",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.013,
+              0.424,
+              0.241
+            ]
+          },
+          {
+            "n": 4,
+            "text": "it’s expensive",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.258,
+              0.424,
+              0.257
+            ]
+          },
+          {
+            "n": 5,
+            "text": "some nurses",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.385,
+              0.66,
+              0.306
+            ]
+          },
+          {
+            "n": 6,
+            "text": "I don’t like it",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.664,
+              0.431,
+              0.336,
+              0.26
+            ]
+          },
+          {
+            "n": 7,
+            "text": "some meat",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.447,
+              0.23,
+              0.22
+            ]
+          },
+          {
+            "n": 8,
+            "text": "a taxi driver",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.661,
+              0.447,
+              0.339,
+              0.22
+            ]
+          },
+          {
+            "n": 9,
+            "text": "fresh fruit",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0,
+              0.694,
+              0.432,
+              0.306
+            ]
+          },
+          {
+            "n": 10,
+            "text": "work in an office",
+            "image": "assets/sb-17.webp",
+            "page": 14,
+            "box": [
+              0.436,
+              0.694,
+              0.564,
+              0.306
+            ]
+          },
+          {
+            "n": 11,
+            "text": "walk in the park",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0,
+              0.518,
+              0.424,
+              0.482
+            ]
+          },
+          {
+            "n": 12,
+            "text": "a small village",
+            "image": "assets/sb-18.webp",
+            "page": 15,
+            "box": [
+              0.428,
+              0.67,
+              0.572,
+              0.33
+            ]
+          }
+        ]
+      }
     }
   ],
   "sb:19": [
