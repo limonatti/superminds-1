@@ -911,49 +911,494 @@
       "key": ""
     },
     "sb-133-2A-1": {
-      "source": "Student’s Book printed page 134, Vocabulary Bank 1A Exercise 2A; supplied Teacher’s Book page 31 and SPEAKOUT_KEYS['1A'], Vocabulary bank: phrasal verbs: friendships, 2A. Two ordered blanks in 4 and 5 retain their original combined answer storage keys.",
       "properties": {
         "lesson": "1A",
         "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.095,
+        "y": 0.658,
+        "w": 0.375,
+        "h": 0.232,
+        "hint": "Выберите фразовый глагол в нужной форме. В пунктах 4 и 5 два пропуска: варианты записаны в порядке пропусков, через запятую.",
+        "audio": null,
+        "text": "2A Complete the questions with the correct form of the phrasal verbs in Ex 1A.\n1 Who did you _____ with most at school?\n2 Are you still friends with this person or have you slowly _____ over the years?\n3 Have you ever _____ with a friend and stopped speaking? Did you make up again?\n4 Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?\n5 Where was the last place a friend _____ you _____ to?\n6 Who was the last friend you _____ in a shop?\n7 Whose home do you _____ to say hello if you’re in the area?\n8 What kinds of things tend to _____ people who are friends?",
         "instruction": "Complete the questions with the correct form of the phrasal verbs in Ex 1A.",
-        "hint": "В пунктах 4 и 5 два пропуска. Впишите оба ответа по порядку, через запятую.",
-        "text": "2A Complete the questions with the correct form of the phrasal verbs in Ex 1A.\n1 Who did you _____ with most at school?\n2 Are you still friends with this person or have you slowly _____ over the years?\n3 Have you ever _____ with a friend and stopped speaking? Did you make up again?\n4 Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?\n5 Where was the last place a friend _____ you _____ to?\n6 Who was the last friend you _____ in a shop?\n7 Whose home do you _____ to say hello if you’re in the area?\n8 What kinds of things tend to _____ people who are friends?\nB Work in pairs. Take turns to ask and answer the questions in Ex 2A."
+        "requireSource": true
       },
-      "key": "1 hang around\n2 drifted apart\n3 fallen out\n4 take to, warm to\n5 invited, along\n6 bumped into\n7 stop by\n8 come between",
-      "fields": {
-        "1": {
+      "replace_fields": [
+        {
+          "n": "1",
           "answer": "hang around",
-          "prompt": "1. Who did you _____ with most at school?"
+          "prompt": "1. Who did you _____ with most at school?",
+          "choices": [
+            "hang around",
+            "hung around",
+            "drift apart"
+          ]
         },
-        "2": {
+        {
+          "n": "2",
           "answer": "drifted apart",
-          "prompt": "2. Are you still friends with this person or have you slowly _____ over the years?"
+          "prompt": "2. Are you still friends with this person or have you slowly _____ over the years?",
+          "choices": [
+            "drift apart",
+            "drifting apart",
+            "drifted apart"
+          ]
         },
-        "3": {
+        {
+          "n": "3",
           "answer": "fallen out",
-          "prompt": "3. Have you ever _____ with a friend and stopped speaking? Did you make up again?"
+          "prompt": "3. Have you ever _____ with a friend and stopped speaking? Did you make up again?",
+          "choices": [
+            "fell out",
+            "fallen out",
+            "fall out"
+          ]
         },
-        "4": {
+        {
+          "n": "4",
           "answer": "take to, warm to",
-          "prompt": "4. Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?"
+          "prompt": "4. Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?",
+          "choices": [
+            "warm to, take to",
+            "take to, warm to",
+            "fall out, make up"
+          ]
         },
-        "5": {
+        {
+          "n": "5",
           "answer": "invited, along",
-          "prompt": "5. Where was the last place a friend _____ you _____ to?"
+          "prompt": "5. Where was the last place a friend _____ you _____ to?",
+          "choices": [
+            "invites, along",
+            "invite, along",
+            "invited, along"
+          ]
         },
-        "6": {
+        {
+          "n": "6",
           "answer": "bumped into",
-          "prompt": "6. Who was the last friend you _____ in a shop?"
+          "prompt": "6. Who was the last friend you _____ in a shop?",
+          "choices": [
+            "bump into",
+            "bumped into",
+            "made up"
+          ]
         },
-        "7": {
+        {
+          "n": "7",
           "answer": "stop by",
-          "prompt": "7. Whose home do you _____ to say hello if you’re in the area?"
+          "prompt": "7. Whose home do you _____ to say hello if you’re in the area?",
+          "choices": [
+            "stopped by",
+            "stop by",
+            "stops by"
+          ]
         },
-        "8": {
+        {
+          "n": "8",
           "answer": "come between",
-          "prompt": "8. What kinds of things tend to _____ people who are friends?"
+          "prompt": "8. What kinds of things tend to _____ people who are friends?",
+          "choices": [
+            "came between",
+            "coming between",
+            "come between"
+          ]
         }
-      }
+      ],
+      "key": "1 hang around\n2 drifted apart\n3 fallen out\n4 take to, warm to\n5 invited, along\n6 bumped into\n7 stop by\n8 come between"
+    },
+    "sb-109-1-0": {
+      "properties": {
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.517,
+        "y": 0.14,
+        "w": 0.427,
+        "h": 0.181,
+        "hint": "Выберите would, если это возможно; иначе used to. Одно нажатие заполняет один пропуск.",
+        "audio": null,
+        "instruction": "Complete the sentences with would where possible. Use used to if not.",
+        "requireSource": true
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "prompt": "I _____ have lots of friends but not these days.",
+          "answer": "used to",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "When I was young, my aunt _____ bring me a gift every time she visited.",
+          "answer": "would",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "I _____ live in a flat up the road, but I moved here last year.",
+          "answer": "used to",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "Every day after school, my friends and I _____ cycle to the park.",
+          "answer": "would",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        },
+        {
+          "n": "5",
+          "prompt": "Zach _____ be a real party animal, but not now he’s got kids.",
+          "answer": "used to",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        },
+        {
+          "n": "6",
+          "prompt": "My friend Toluwani and I _____ meet up once a week when we lived near each other.",
+          "answer": "would",
+          "choices": [
+            "would",
+            "used to"
+          ]
+        }
+      ],
+      "key": "1 used to\n2 would\n3 used to\n4 would\n5 used to\n6 would"
+    },
+    "sb-109-2-1": {
+      "properties": {
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.517,
+        "y": 0.33,
+        "w": 0.427,
+        "h": 0.195,
+        "hint": "Сначала выберите слова в шести предложениях. Затем отметьте номера предложений, которые выражают раздражение.",
+        "audio": null,
+        "instruction": "Choose the correct words to complete the sentences. Which sentences express annoyance?",
+        "requireSource": true
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "prompt": "When my parents were out, I _____ put on some music and dance around the house.",
+          "answer": "’d",
+          "choices": [
+            "’d",
+            "’ll"
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "Erik _____ stare at his phone instead of talking to me these days!",
+          "answer": "will",
+          "choices": [
+            "will",
+            "would"
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "At primary school, I _____ call my teacher ‘mum’ by mistake! Embarrassing!",
+          "answer": "’d",
+          "choices": [
+            "’d",
+            "’ll"
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "My friend Jen _____ often complain about her job when we’re together.",
+          "answer": "will",
+          "choices": [
+            "will",
+            "would"
+          ]
+        },
+        {
+          "n": "5",
+          "prompt": "I _____ sometimes think of things to get from the supermarket but forget them again two minutes later.",
+          "answer": "’ll",
+          "choices": [
+            "’d",
+            "’ll"
+          ]
+        },
+        {
+          "n": "6",
+          "prompt": "My parents _____ always come into my room without knocking and it drove me mad!",
+          "answer": "would",
+          "choices": [
+            "will",
+            "would"
+          ]
+        },
+        {
+          "n": "annoyance",
+          "prompt": "Which sentences express annoyance? Отметьте все подходящие номера.",
+          "answer": "2,4,6",
+          "mode": "set",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        }
+      ],
+      "key": "1 ’d\n2 will\n3 ’d\n4 will\n5 ’ll\n6 would\nannoyance 2,4,6"
+    },
+    "sb-109-3-2": {
+      "properties": {
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.517,
+        "y": 0.531,
+        "w": 0.427,
+        "h": 0.17,
+        "hint": "Напишите полные предложения по опорам: present continuous или past continuous. Здесь тренируется самостоятельное построение предложений; сокращения принимаются.",
+        "audio": null,
+        "text": "3 Use the prompts to write sentences using either the present continuous or the past continuous.",
+        "instruction": "Use the prompts to write sentences using either the present continuous or the past continuous.",
+        "requireSource": true
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "prompt": "Anna / always / forget / my birthday / these days",
+          "answer": "Anna is always forgetting my birthday these days./Anna’s always forgetting my birthday these days.",
+          "grading": "workbook"
+        },
+        {
+          "n": "2",
+          "prompt": "One of my friends / always / get / into trouble / when / younger",
+          "answer": "One of my friends was always getting into trouble when he was younger./One of my friends was always getting into trouble when she was younger./One of my friends was always getting into trouble when they were younger.",
+          "grading": "workbook"
+        },
+        {
+          "n": "3",
+          "prompt": "I / always / get told off / for talking / when / I / at school",
+          "answer": "I was always getting told off for talking when I was at school.",
+          "grading": "workbook"
+        },
+        {
+          "n": "4",
+          "prompt": "My little brother / always / steal / my stuff / when / we / kids",
+          "answer": "My little brother was always stealing my stuff when we were kids.",
+          "grading": "workbook"
+        },
+        {
+          "n": "5",
+          "prompt": "I / always / leave / my phone / in strange places",
+          "answer": "I am always leaving my phone in strange places.",
+          "grading": "workbook"
+        },
+        {
+          "n": "6",
+          "prompt": "My friends and I / always / struggling / think of things to do",
+          "answer": "My friends and I are always struggling to think of things to do.",
+          "grading": "workbook"
+        }
+      ],
+      "key": "1 Anna is always forgetting my birthday these days./Anna’s always forgetting my birthday these days.\n2 One of my friends was always getting into trouble when he was younger./One of my friends was always getting into trouble when she was younger./One of my friends was always getting into trouble when they were younger.\n3 I was always getting told off for talking when I was at school.\n4 My little brother was always stealing my stuff when we were kids.\n5 I am always leaving my phone in strange places.\n6 My friends and I are always struggling to think of things to do."
+    },
+    "sb-133-1A-0": {
+      "properties": {
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.095,
+        "y": 0.146,
+        "w": 0.375,
+        "h": 0.452,
+        "hint": "Сопоставьте значения с фразовыми глаголами из истории. Карточки даны в начальной форме. Для значения 7 выберите два глагола.",
+        "audio": null,
+        "text": "1 A Read about a friendship. Match the phrasal verbs\nin bold with the meanings (1-9). Two of the phrasal\nverbs have the same meaning.\nClaire and I didn't take to each other at first.\nWe were only eleven when we met. I was new\nat the school and got on well with her best\nfriend, so I suppose I came between them\nand their friendship. However, over time, we\nwarmed to each other and by the time we\nstarted secondary school, we were really close.\nI hung around with her all the time and we\nonly ever fell out once over something really\nsilly. We made up after just a day of not talking\nto each other. Unfortunately, life took us in\ndifferent directions after school and we drifted\napart. We still see each other occasionally. I\ninvite her along to my birthday celebrations\nevery year and she stops by my flat if she's\npassing. We bump into each other in the\nsupermarket, too. So, we're still friends, just\nnot as close as we once were.\n1 ask someone to go with you somewhere\n2 gradually stop being friends\n3 spend a lot of time with\n4 have an argument\n5 meet someone when not expecting to\n6 make a short visit to a person or place\n7 start to like\n8 become friends again after an argument\n9 cause trouble between people",
+        "instruction": "Read about a friendship. Match the phrasal verbs in bold with the meanings (1–9). Two of the phrasal verbs have the same meaning.",
+        "requireSource": true
+      },
+      "replace_fields": [
+        {
+          "n": "1",
+          "prompt": "ask someone to go with you somewhere",
+          "answer": "invite along/invite someone along/invite (someone) along",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "2",
+          "prompt": "gradually stop being friends",
+          "answer": "drift apart",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "3",
+          "prompt": "spend a lot of time with",
+          "answer": "hang around/hang around with/hang around (with)",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "4",
+          "prompt": "have an argument",
+          "answer": "fall out",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "5",
+          "prompt": "meet someone when not expecting to",
+          "answer": "bump into",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "6",
+          "prompt": "make a short visit to a person or place",
+          "answer": "stop by",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "7",
+          "prompt": "start to like",
+          "answer": "take to,warm to",
+          "mode": "set",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "8",
+          "prompt": "become friends again after an argument",
+          "answer": "make up",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        },
+        {
+          "n": "9",
+          "prompt": "cause trouble between people",
+          "answer": "come between",
+          "choices": [
+            "take to",
+            "come between",
+            "warm to",
+            "hang around",
+            "fall out",
+            "make up",
+            "drift apart",
+            "invite along",
+            "stop by",
+            "bump into"
+          ]
+        }
+      ],
+      "key": "1 invite along/invite someone along/invite (someone) along\n2 drift apart\n3 hang around/hang around with/hang around (with)\n4 fall out\n5 bump into\n6 stop by\n7 take to,warm to\n8 make up\n9 come between"
     }
   },
   "added_exercises": {
@@ -1194,6 +1639,335 @@
         "responseMode": "oral",
         "hint": "Расскажите другой паре о сходствах и различиях между вашей дружбой. Письменный ответ не требуется."
       }
+    ],
+    "sb:109": [
+      {
+        "id": "sb-109-4-reviewed",
+        "label": "4",
+        "type": "book",
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.517,
+        "y": 0.709,
+        "w": 0.427,
+        "h": 0.218,
+        "hint": "Для каждого начала выберите окончание a–f. Составьте и прочитайте предложение целиком.",
+        "text": "4 Match the sentence beginnings (1–6) with the endings (a–f).",
+        "fields": [
+          {
+            "n": "1",
+            "prompt": "We’re all prone",
+            "answer": "e — to losing things in our house./e",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          },
+          {
+            "n": "2",
+            "prompt": "I’m inclined",
+            "answer": "b — to do my homework in the mornings./b",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          },
+          {
+            "n": "3",
+            "prompt": "I have a tendency to",
+            "answer": "c — bite my bottom lip when I’m stressed./c",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          },
+          {
+            "n": "4",
+            "prompt": "Nine times out of ten,",
+            "answer": "d — I sleep through my alarm./d",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          },
+          {
+            "n": "5",
+            "prompt": "Annoyingly, I keep on",
+            "answer": "a — dropping my phone and breaking it./a",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          },
+          {
+            "n": "6",
+            "prompt": "My family and I tend not",
+            "answer": "f — to speak much during the week./f",
+            "choices": [
+              "a — dropping my phone and breaking it.",
+              "b — to do my homework in the mornings.",
+              "c — bite my bottom lip when I’m stressed.",
+              "d — I sleep through my alarm.",
+              "e — to losing things in our house.",
+              "f — to speak much during the week."
+            ]
+          }
+        ],
+        "key": "1 e — to losing things in our house./e\n2 b — to do my homework in the mornings./b\n3 c — bite my bottom lip when I’m stressed./c\n4 d — I sleep through my alarm./d\n5 a — dropping my phone and breaking it./a\n6 f — to speak much during the week./f",
+        "requireSource": true,
+        "instruction": "Match the sentence beginnings (1–6) with the endings (a–f)."
+      }
+    ],
+    "sb:133": [
+      {
+        "id": "sb-133-1B-reviewed",
+        "label": "1B",
+        "type": "book",
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.108,
+        "y": 0.607,
+        "w": 0.362,
+        "h": 0.042,
+        "hint": "Распределите фразовые глаголы из истории по смыслу: отношения с друзьями или совместное общение и встречи.",
+        "text": "1B Which of the phrasal verbs in Ex 1A refer to relationships with friends? Which refer to socialising with friends?",
+        "fields": [
+          {
+            "n": "1",
+            "prompt": "take to",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "2",
+            "prompt": "come between",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "3",
+            "prompt": "warm to",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "4",
+            "prompt": "hang around",
+            "answer": "Socialising",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "5",
+            "prompt": "fall out",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "6",
+            "prompt": "make up",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "7",
+            "prompt": "drift apart",
+            "answer": "Relationships",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "8",
+            "prompt": "invite along",
+            "answer": "Socialising",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "9",
+            "prompt": "stop by",
+            "answer": "Socialising",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          },
+          {
+            "n": "10",
+            "prompt": "bump into",
+            "answer": "Socialising",
+            "choices": [
+              "Relationships",
+              "Socialising"
+            ]
+          }
+        ],
+        "key": "1 Relationships\n2 Relationships\n3 Relationships\n4 Socialising\n5 Relationships\n6 Relationships\n7 Relationships\n8 Socialising\n9 Socialising\n10 Socialising",
+        "requireSource": true,
+        "instruction": "Which of the phrasal verbs in Ex 1A refer to relationships with friends? Which refer to socialising with friends?"
+      },
+      {
+        "id": "sb-133-2B-reviewed",
+        "label": "2B",
+        "type": "book",
+        "lesson": "1A",
+        "reviewed1A": true,
+        "responseMode": "panel",
+        "spoken": false,
+        "x": 0.108,
+        "y": 0.9,
+        "w": 0.362,
+        "h": 0.029,
+        "hint": "По очереди задавайте вопросы из 2A и отвечайте устно. Используйте свои варианты из 2A или дополните вопрос вслух. Отмечайте обсуждённые вопросы; личные ответы не оцениваются автоматически.",
+        "text": "2B Work in pairs. Take turns to ask and answer the questions in Ex 2A.",
+        "fields": [
+          {
+            "n": "1",
+            "prompt": "1. Who did you _____ with most at school?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "2",
+            "prompt": "2. Are you still friends with this person or have you slowly _____ over the years?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "3",
+            "prompt": "3. Have you ever _____ with a friend and stopped speaking? Did you make up again?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "4",
+            "prompt": "4. Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "5",
+            "prompt": "5. Where was the last place a friend _____ you _____ to?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "6",
+            "prompt": "6. Who was the last friend you _____ in a shop?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "7",
+            "prompt": "7. Whose home do you _____ to say hello if you’re in the area?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          },
+          {
+            "n": "8",
+            "prompt": "8. What kinds of things tend to _____ people who are friends?",
+            "answer": "",
+            "optional": true,
+            "choices": [
+              "Обсудили",
+              "Хочу вернуться"
+            ]
+          }
+        ],
+        "key": "",
+        "requireSource": true,
+        "instruction": "Work in pairs. Take turns to ask and answer the questions in Ex 2A."
+      }
+    ]
+  },
+  "page_order": {
+    "sb:109": [
+      "sb-109-1-0",
+      "sb-109-2-1",
+      "sb-109-3-2",
+      "sb-109-4-reviewed"
+    ],
+    "sb:133": [
+      "sb-133-1A-0",
+      "sb-133-1B-reviewed",
+      "sb-133-2A-1",
+      "sb-133-2B-reviewed",
+      "sb-133-1-2",
+      "sb-133-2A-3",
+      "sb-133-2B-4"
     ]
   }
 }

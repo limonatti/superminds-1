@@ -40,3 +40,9 @@
 #mdExercise.focus-dialog .exercise-note,#mdExercise.focus-dialog .exercise-status{color:#6b4d52}
 #mdExercise.focus-dialog .field-result{color:#8a4520}
 #mdExercise.focus-dialog .correct .field-result{color:#286342}
+
+/* Zoom the source inside its own scroll area, without widening the answer pane. */
+dialog#mdExercise.cf-dialog .exercise-original{overflow:auto!important;max-height:75dvh!important}
+dialog#mdExercise.cf-dialog .focus-sheet{max-width:none!important}
+dialog#mdExercise.cf-dialog .focus-document{max-width:none!important}
+@media(max-width:760px){dialog#mdExercise.cf-dialog .exercise-original{max-height:65dvh!important}}

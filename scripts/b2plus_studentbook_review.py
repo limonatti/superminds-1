@@ -28,6 +28,9 @@ def apply_review(bank):
                 current[exercise['id']].update(exercise)
             else:
                 bank[page].append(exercise)
+    for page, order in review.get("page_order", {}).items():
+        rank = {id: i for i, id in enumerate(order)}
+        bank[page].sort(key=lambda e: rank.get(e["id"], len(rank)))
     return bank
 
 if __name__ == '__main__':
