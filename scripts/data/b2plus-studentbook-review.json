@@ -962,9 +962,9 @@
           "answer": "take to, warm to",
           "prompt": "4. Did you _____ your closest friend instantly when you first met, or did it take time to _____ them?",
           "choices": [
-            "warm to, take to",
+            "taken to, warm to",
             "take to, warm to",
-            "fall out, make up"
+            "take to, warmed to"
           ]
         },
         {
