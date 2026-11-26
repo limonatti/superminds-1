@@ -98,6 +98,24 @@ root.QuestCatalog=[
     "image": "/quests/focus4-pattern-workshop/assets/workshop-scenes.png"
   },
   {
+    "id": "focus4-photo-bureau",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.6 Speaking · Describing a photo",
+    "book": "sb",
+    "afterPage": 11,
+    "title": "The Photo Bureau",
+    "description": "Read visible clues, distinguish guesses from facts and give a photo report and a personal opinion.",
+    "level": "B2",
+    "challenges": 6,
+    "images": 1,
+    "web": "/quests/focus4-photo-bureau/",
+    "pdf": "/quests/focus4-photo-bureau/focus4-photo-bureau.pdf",
+    "image": "/quests/focus4-photo-bureau/assets/learning-moments.png"
+  },
+  {
     "id": "focus4-unit1-finale",
     "scope": "unit",
     "course": "focus-4",

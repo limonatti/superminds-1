@@ -4,8 +4,8 @@
   "courseCount": 15,
   "unitFinalCount": 136,
   "sourceEntryCount": 3105,
-  "readyPairs": 6,
-  "verifiedPublishedPairs": 3,
+  "readyPairs": 7,
+  "verifiedPublishedPairs": 5,
   "limitations": "Source entries include page-level and reference rows. Their total must not be reported as an exact textbook-subsection denominator. Only explicitly verified/source-defined boundaries are named subsections.",
   "courses": [
     {
@@ -31607,7 +31607,7 @@
       "pages": [
         7
       ],
-      "status": "ready-for-publication",
+      "status": "published",
       "web": "/quests/focus4-memory-museum/",
       "pdf": "/quests/focus4-memory-museum/focus4-memory-museum.pdf",
       "unit": "1",
@@ -31630,7 +31630,7 @@
         8,
         9
       ],
-      "status": "ready-for-publication",
+      "status": "published",
       "web": "/quests/focus4-idea-observatory/",
       "pdf": "/quests/focus4-idea-observatory/focus4-idea-observatory.pdf",
       "unit": "1",
@@ -31675,9 +31675,9 @@
       "pages": [
         11
       ],
-      "status": "needs-authoring",
-      "web": null,
-      "pdf": null,
+      "status": "ready-for-publication",
+      "web": "/quests/focus4-photo-bureau/",
+      "pdf": "/quests/focus4-photo-bureau/focus4-photo-bureau.pdf",
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
       "boundaryStatus": "cross-checked-against-source",
@@ -31686,7 +31686,8 @@
       "teacherPdfPages": [
         33
       ],
-      "sourceVerification": "section number in source PDF page/spread text"
+      "sourceVerification": "section number in source PDF page/spread text",
+      "quest": "focus4-photo-bureau"
     },
     {
       "course": "focus-4",

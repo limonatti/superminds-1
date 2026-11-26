@@ -26,7 +26,7 @@
   "errors": [],
   "date": "2026-11-26",
   "quest": "focus4-memory-museum",
-  "stage": "local-verified-ready-to-publish",
+  "stage": "published-and-live-verified",
   "closedAnswers": 20,
   "challenges": 6,
   "pdfPages": 9,
@@ -34,5 +34,34 @@
     "1.3"
   ],
   "pdfForm": "printable worksheet",
-  "publicTeacherKey": false
+  "publicTeacherKey": false,
+  "commit": "67823c6f4b47fd9d6424da3ec7b76ca383cb196f",
+  "deployment": "https://github.com/limonatti/superminds-1/actions/runs/45787475677",
+  "live": {
+    "layouts": 24,
+    "keyboard": true,
+    "personalWritingReload": true,
+    "pictureRecallToggle": true,
+    "oralReview": true,
+    "english": true,
+    "print": true,
+    "pdfBytes": 5445912,
+    "pdfSHA256": "9e55f9586ba3684c269af050e3f094022127c24286eb35f7a498e3c601e19ecf",
+    "audio": [
+      {
+        "source": "../../focus-4-active-teach/media/sb-1.08.mp3",
+        "muted": true,
+        "volume": 0,
+        "duration": 168.285563
+      },
+      {
+        "source": "../../focus-4-active-teach/media/sb-1.10.mp3",
+        "muted": true,
+        "volume": 0,
+        "duration": 20.719688
+      }
+    ],
+    "placement": "after Unit 1.3 SB page 7; top-of-unit shortcut",
+    "errors": []
+  }
 }

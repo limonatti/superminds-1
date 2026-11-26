@@ -1,0 +1,32 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "personalNotesReload": true,
+  "evidenceAndSpeculation": true,
+  "oralReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 4938894,
+  "pdfSHA256": "0821975bfbdb99e9da5950a3e435fe1bedf910a52c17fe49f47e8018fafef548",
+  "audio": [
+    {
+      "source": "../../focus-4-active-teach/media/sb-1.19.mp3",
+      "muted": true,
+      "volume": 0,
+      "duration": 31.457438
+    }
+  ],
+  "placement": "after Unit 1.6 SB page 11; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-photo-bureau",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 20,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.6"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}
