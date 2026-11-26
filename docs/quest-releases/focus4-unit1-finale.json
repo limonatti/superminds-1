@@ -16,7 +16,7 @@
   "errors": [],
   "date": "2026-11-26",
   "quest": "focus4-unit1-finale",
-  "stage": "local-verified-ready-to-publish",
+  "stage": "published-and-live-verified",
   "closedAnswers": 50,
   "challenges": 12,
   "pdfPages": 16,
@@ -31,5 +31,24 @@
     "1.8"
   ],
   "pdfForm": "printable worksheet",
-  "publicTeacherKey": false
+  "publicTeacherKey": false,
+  "commit": "1a19eacbfdc489a76766120266b53f68156765e2",
+  "deployment": "https://github.com/limonatti/superminds-1/actions/runs/45778227662",
+  "live": {
+    "layouts": 48,
+    "keyboard": true,
+    "twoWritingDraftsReload": true,
+    "oralReview": true,
+    "english": true,
+    "print": true,
+    "pdfBytes": 5647413,
+    "pdfSHA256": "15418599f0ea2da400f32d5083540ea0de95168f75a9f31c57a1ba689f57b696",
+    "audio": {
+      "muted": true,
+      "volume": 0,
+      "duration": 168.285563
+    },
+    "placement": "after Focus Review 1 SB page 19; top-of-unit shortcut",
+    "errors": []
+  }
 }

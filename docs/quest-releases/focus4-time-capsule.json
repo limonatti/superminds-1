@@ -1,0 +1,28 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "personalWritingReload": true,
+  "oralReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5477935,
+  "pdfSHA256": "28930d0edabc81f5cd85cb08bb8f38ee535abd4cc56e51e4839fc7912247f285",
+  "audio": {
+    "muted": true,
+    "volume": 0,
+    "duration": 73.809
+  },
+  "placement": "after Unit 1.2 SB page 6; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-time-capsule",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 19,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.2"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}

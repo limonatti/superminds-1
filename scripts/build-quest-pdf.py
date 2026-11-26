@@ -36,12 +36,12 @@ def lines(count=1,height=22):
 def image(file,width=460):
  from PIL import Image as PILImage
  im=PILImage.open(file);return Image(str(file),width=width,height=width*im.height/im.width)
-story=[p(data['title'],'title'),p(data['edition']+' · '+data['section']+' · '+data['level'],'label'),image(folder/'assets/open-day-scenes.png'),Spacer(1,18),p(data['story']),p('Work at your own pace. Use the hints, revisit your answers and discuss open tasks with your teacher. Complete the six stations to collect a six-letter code.'),p('Name: __________________________________    Date: ____________________'),p('Play online: english-with-asya.com/quests/'+slug+'/','small')]
+story=[p(data['title'],'title'),p(data['edition']+' · '+data['section']+' · '+data['level'],'label'),image(folder/data.get('coverImage','assets/open-day-scenes.png')),Spacer(1,18),p(data['story']),p('Work at your own pace. Use the hints, revisit your answers and discuss open tasks with your teacher. Complete '+str(len(data['stations']))+' stations to collect a '+str(len(data['stations']))+'-letter code.'),p('Name: __________________________________    Date: ____________________'),p('Play online: english-with-asya.com/quests/'+slug+'/','small')]
 for index,t in enumerate(data['tasks']):
  story.append(PageBreak());station=data['stations'][index//2]
  story.extend([p('STATION '+str(index//2+1)+' / '+station['name'],'label'),p(t['id']+' / '+t['title'],'h'),p(t['source'],'small'),p(t['instruction'],'label')])
  if t.get('image'):
-  story.append(image(folder/t['image'],280));story.append(p('Pictures: A = top left; B = top right; C = bottom left; D = bottom right.','small'))
+  story.append(image(folder/t['image'],220 if t.get('compactPrint') else 280));story.append(p('Pictures: A = top left; B = top right; C = bottom left; D = bottom right.','small'))
  if t.get('passage'):story.append(p(t['passage'],'small' if t.get('compactPrint') else 'body'))
  if t.get('bank'):
   story.append(p('CARDS: '+' · '.join(o['label'] for o in t['bank']),'small' if t.get('compactPrint') else 'label'))
@@ -49,19 +49,21 @@ for index,t in enumerate(data['tasks']):
   for i,row in enumerate(t['rows']):
    if i:story.append(PageBreak());story.extend([p(t['id']+' / '+t['title']+' (continued)','h'),p('Keep your email separate from your CV.','small')])
    story.append(p(row['prompt'],'label'))
-   story.append(lines(15 if i==0 else 22))
+   story.append(lines(t.get('printLines',15 if i==0 else 22)))
   story.append(p('REVIEW: '+'  /  '.join(t['criteria']),'small'))
  else:
   for row in t['rows']:
-   group=[p(row['id']+'. '+row['prompt'],'small' if t.get('compactPrint') else 'body')]
+   label=html.escape(row['id']+'. '+row['prompt'])
+   if row.get('wrong'):label=label.replace(html.escape(row['wrong']),'<b>'+html.escape(row['wrong'])+'</b>',1)
+   group=[Paragraph(label,styles['small' if t.get('compactPrint') else 'body'])]
    if row.get('options'):group.append(p('   /   '.join(o['label'] for o in row['options']),'small'))
    group.append(lines(1,18 if t['type']=='dialogue' or t.get('compactPrint') else 25));group.append(Spacer(1,9));story.append(KeepTogether(group))
   if t.get('criteria'):story.append(p('YOUR REVIEW: '+'  /  '.join(t['criteria']),'small'))
  story.append(Spacer(1,10));story.append(p('HINT: '+t['hint'],'small'))
  if index%2:story.extend([p('CODE FRAGMENT '+str(index//2+1)+': '+station['clue'],'label'),p('My letter: ______','label')])
-story.append(PageBreak());story.extend([p('The final invitation','title'),p('Write your six letters in station order.','label'),p('____    ____    ____    ____    ____    ____','h'),p('Check your code with your teacher or in the web quest. Then reflect on the skills you have practised.'),p('Mission debrief','h')]);story.extend(p('[  ] '+o) for o in data['outcomes']);story.extend([Spacer(1,20),p('My next learning goal:'),lines(3),Spacer(1,22),p('Original practice by English with Asya. Based on Focus 4 Second Edition, Unit 1, sections 1.1–1.8. The stories and exercises are newly authored; this is not an official Pearson publication.','small'),p('Human audio with a transcript and replay is available in the web quest.','small')])
+story.append(PageBreak());story.extend([p('The final invitation','title'),p('Write your letters in station order.','label'),p('    '.join(['____']*len(data['stations'])),'h'),p('Check your code with your teacher or in the web quest. Then reflect on the skills you have practised.'),p('Mission debrief','h')]);story.extend(p('[  ] '+o) for o in data['outcomes']);story.extend([Spacer(1,20),p('My next learning goal:'),lines(3),Spacer(1,22),p('Original practice by English with Asya. Based on '+data['edition']+', '+data['section']+'. The stories and exercises are newly authored; this is not an official Pearson publication.','small'),p('Human audio with a transcript and replay is available in the web quest.','small')])
 if (folder/'listening.json').exists():
- audio=json.loads((folder/'listening.json').read_text());story.extend([PageBreak(),p('Listening transcript','h'),p('Companion to Challenge 5','label'),p(audio['track'],'small'),p(audio['transcriptSource'],'small')]);story.extend(KeepTogether([p(line),Spacer(1,8)]) for line in audio['transcript'])
+ audio=json.loads((folder/'listening.json').read_text());story.extend([PageBreak(),p('Listening transcript','h'),p('Companion to Challenge '+str(int(audio.get('challenge','05'))),'label'),p(audio['track'],'small'),p(audio['transcriptSource'],'small')]);story.extend(KeepTogether([p(line),Spacer(1,8)]) for line in audio['transcript'])
 def footer(c,doc):
  c.saveState();c.setStrokeColor(LINE);c.line(48,42,547,42);c.setFont('QuestBody',8);c.setFillColor(WINE);c.drawString(48,28,'ENGLISH WITH ASYA · '+data['title'].upper());c.drawRightString(547,28,str(doc.page));c.restoreState()
 out=folder/data['pdf'];doc=SimpleDocTemplate(str(out),pagesize=(595.276,841.89),rightMargin=48,leftMargin=48,topMargin=44,bottomMargin=58,title=data['title'],author='English with Asya')

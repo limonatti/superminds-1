@@ -3,7 +3,7 @@ const base=process.env.QUEST_BASE||'http://127.0.0.1:8766/',out=process.env.QUES
 (async()=>{fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch({channel:'chrome',headless:true,args:['--mute-audio']});
 try{const ctx=await browser.newContext({viewport:{width:1440,height:1000}}),page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
 if(!process.env.QUEST_LIVE){await ctx.route('**/sm-auth.js?*',r=>r.fulfill({contentType:'text/javascript',body:'window.SM={presentationSession:async()=>null,getUser:async()=>null,watchPresentationAuth:()=>()=>{}};'}));await ctx.route('**/npm/@supabase/**',r=>r.fulfill({body:''}));}
-await page.goto(base+'focus-4-active-teach/index.html',{waitUntil:'networkidle'});await page.waitForSelector('.course-quest-shortcuts');
+await page.goto(base+'focus-4-active-teach/index.html',{waitUntil:'domcontentloaded',timeout:60000});await page.waitForSelector('.course-quest-shortcuts');
 assert.equal(await page.locator('[data-cf-page]').inputValue(),'4');
 const nav=page.locator('.course-quest-shortcuts'),start=nav.getByRole('link',{name:'Start The Future Academy',exact:true}),pdf=nav.getByRole('link',{name:'Open or print The Future Academy PDF',exact:true});
 assert(await start.isVisible());assert(await pdf.isVisible());assert((await nav.boundingBox()).y<600);

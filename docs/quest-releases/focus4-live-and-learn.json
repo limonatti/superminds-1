@@ -45,5 +45,19 @@
     },
     "placement": "after SB page 5; absent from Word Store",
     "errors": []
+  },
+  "courseEntry": {
+    "commit": "49423eeba1187fc3a9466f919ac54964045d93eb",
+    "deployment": "https://github.com/limonatti/superminds-1/actions/runs/45776914559",
+    "stage": "published-and-live-verified",
+    "defaultPage": 4,
+    "visibleButtons": [
+      "Start quest →",
+      "Open / print PDF ↗"
+    ],
+    "desktop": true,
+    "mobile": true,
+    "afterPage5Preserved": true,
+    "otherUnitsAndWordStoreAbsent": true
   }
 }

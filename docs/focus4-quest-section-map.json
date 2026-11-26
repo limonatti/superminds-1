@@ -1,0 +1,1032 @@
+{
+  "edition": "Focus 4 Second Edition",
+  "date": "2026-11-26",
+  "scope": "Student’s Book lesson subsections only; review, Word List, Word Store, Workbook and reference materials remain separate inventory rows.",
+  "verification": "Teacher’s Book page offset and lesson headings cross-checked; image-only Unit 7 headings 7.3, 7.4, 7.6 and 7.8 visually checked. Detailed language objectives still require reading each lesson before authoring.",
+  "sections": [
+    {
+      "course": "focus-4",
+      "code": "1.1",
+      "unit": 1,
+      "pages": [
+        4,
+        5
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        26,
+        27
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.2",
+      "unit": 1,
+      "pages": [
+        6
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        28
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.3",
+      "unit": 1,
+      "pages": [
+        7
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        29
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.4",
+      "unit": 1,
+      "pages": [
+        8,
+        9
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        30,
+        31
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.5",
+      "unit": 1,
+      "pages": [
+        10
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        32
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.6",
+      "unit": 1,
+      "pages": [
+        11
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        33
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.7",
+      "unit": 1,
+      "pages": [
+        12,
+        13
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        34,
+        35
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "1.8",
+      "unit": 1,
+      "pages": [
+        14,
+        15
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        36,
+        37
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.1",
+      "unit": 2,
+      "pages": [
+        20,
+        21
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        42,
+        43
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.2",
+      "unit": 2,
+      "pages": [
+        22
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        44
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.3",
+      "unit": 2,
+      "pages": [
+        23
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        45
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.4",
+      "unit": 2,
+      "pages": [
+        24,
+        25
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        46,
+        47
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.5",
+      "unit": 2,
+      "pages": [
+        26
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        48
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.6",
+      "unit": 2,
+      "pages": [
+        27
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        49
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.7",
+      "unit": 2,
+      "pages": [
+        28,
+        29
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        50,
+        51
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "2.8",
+      "unit": 2,
+      "pages": [
+        30,
+        31
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        52,
+        53
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.1",
+      "unit": 3,
+      "pages": [
+        36,
+        37
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        58,
+        59
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.2",
+      "unit": 3,
+      "pages": [
+        38
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        60
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.3",
+      "unit": 3,
+      "pages": [
+        39
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        61
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.4",
+      "unit": 3,
+      "pages": [
+        40,
+        41
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        62,
+        63
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.5",
+      "unit": 3,
+      "pages": [
+        42
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        64
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.6",
+      "unit": 3,
+      "pages": [
+        43
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        65
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.7",
+      "unit": 3,
+      "pages": [
+        44,
+        45
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        66,
+        67
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "3.8",
+      "unit": 3,
+      "pages": [
+        46,
+        47
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        68,
+        69
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.1",
+      "unit": 4,
+      "pages": [
+        52,
+        53
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        74,
+        75
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.2",
+      "unit": 4,
+      "pages": [
+        54
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        76
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.3",
+      "unit": 4,
+      "pages": [
+        55
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        77
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.4",
+      "unit": 4,
+      "pages": [
+        56,
+        57
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        78,
+        79
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.5",
+      "unit": 4,
+      "pages": [
+        58
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        80
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.6",
+      "unit": 4,
+      "pages": [
+        59
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        81
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.7",
+      "unit": 4,
+      "pages": [
+        60,
+        61
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        82,
+        83
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "4.8",
+      "unit": 4,
+      "pages": [
+        62,
+        63
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        84,
+        85
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.1",
+      "unit": 5,
+      "pages": [
+        68,
+        69
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        90,
+        91
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.2",
+      "unit": 5,
+      "pages": [
+        70
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        92
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.3",
+      "unit": 5,
+      "pages": [
+        71
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        93
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.4",
+      "unit": 5,
+      "pages": [
+        72,
+        73
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        94,
+        95
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.5",
+      "unit": 5,
+      "pages": [
+        74
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        96
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.6",
+      "unit": 5,
+      "pages": [
+        75
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        97
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.7",
+      "unit": 5,
+      "pages": [
+        76,
+        77
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        98,
+        99
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "5.8",
+      "unit": 5,
+      "pages": [
+        78,
+        79
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        100,
+        101
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.1",
+      "unit": 6,
+      "pages": [
+        84,
+        85
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        106,
+        107
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.2",
+      "unit": 6,
+      "pages": [
+        86
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        108
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.3",
+      "unit": 6,
+      "pages": [
+        87
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        109
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.4",
+      "unit": 6,
+      "pages": [
+        88,
+        89
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        110,
+        111
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.5",
+      "unit": 6,
+      "pages": [
+        90
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        112
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.6",
+      "unit": 6,
+      "pages": [
+        91
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        113
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.7",
+      "unit": 6,
+      "pages": [
+        92,
+        93
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        114,
+        115
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "6.8",
+      "unit": 6,
+      "pages": [
+        94,
+        95
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        116,
+        117
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.1",
+      "unit": 7,
+      "pages": [
+        100,
+        101
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        122,
+        123
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.2",
+      "unit": 7,
+      "pages": [
+        102
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        124
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.3",
+      "unit": 7,
+      "pages": [
+        103
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        125
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.4",
+      "unit": 7,
+      "pages": [
+        104,
+        105
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        126,
+        127
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.5",
+      "unit": 7,
+      "pages": [
+        106
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        128
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.6",
+      "unit": 7,
+      "pages": [
+        107
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        129
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.7",
+      "unit": 7,
+      "pages": [
+        108,
+        109
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        130,
+        131
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "7.8",
+      "unit": 7,
+      "pages": [
+        110,
+        111
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        132,
+        133
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.1",
+      "unit": 8,
+      "pages": [
+        116,
+        117
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        138,
+        139
+      ],
+      "title": "Vocabulary",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.2",
+      "unit": 8,
+      "pages": [
+        118
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        140
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.3",
+      "unit": 8,
+      "pages": [
+        119
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        141
+      ],
+      "title": "Listening",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.4",
+      "unit": 8,
+      "pages": [
+        120,
+        121
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        142,
+        143
+      ],
+      "title": "Reading",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.5",
+      "unit": 8,
+      "pages": [
+        122
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        144
+      ],
+      "title": "Grammar",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.6",
+      "unit": 8,
+      "pages": [
+        123
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        145
+      ],
+      "title": "Speaking",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.7",
+      "unit": 8,
+      "pages": [
+        124,
+        125
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        146,
+        147
+      ],
+      "title": "Use of English",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "code": "8.8",
+      "unit": 8,
+      "pages": [
+        126,
+        127
+      ],
+      "source": "Focus 4 Second Edition Teacher’s Book",
+      "teacherPdfPages": [
+        148,
+        149
+      ],
+      "title": "Writing",
+      "boundaryStatus": "cross-checked-against-source",
+      "verification": "section number in source PDF page/spread text"
+    }
+  ]
+}

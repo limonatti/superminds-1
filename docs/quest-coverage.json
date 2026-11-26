@@ -3,8 +3,8 @@
   "catalogueSource": "index.html COURSES",
   "courseCount": 15,
   "unitFinalCount": 136,
-  "sourceEntryCount": 3049,
-  "verifiedPublishedPairs": 2,
+  "sourceEntryCount": 3105,
+  "verifiedPublishedPairs": 3,
   "limitations": "Source entries include page-level and reference rows. Their total must not be reported as an exact textbook-subsection denominator. Only explicitly verified/source-defined boundaries are named subsections.",
   "courses": [
     {
@@ -89,9 +89,9 @@
       "source": "focus-4-active-teach/assets/course.js",
       "inventoryMode": "source-pages-with-boundary-review",
       "unitCount": 8,
-      "sourceEntryCount": 350,
+      "sourceEntryCount": 406,
       "gaps": [
-        "The page inventory is complete. Exact subsection boundaries still need source verification; page counts below are not subsection counts."
+        "All 64 Student’s Book lesson subsections are mapped to their source pages. Workbook, Word Store, reviews and reference boundaries still require separate mapping; unfilled lesson quests still require authoring."
       ]
     },
     {
@@ -23136,7 +23136,7 @@
         "sb-4-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.1"
     },
@@ -23166,7 +23166,7 @@
         "sb-5-13"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.1"
     },
@@ -23194,7 +23194,7 @@
         "sb-6-8"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.2"
     },
@@ -23224,7 +23224,7 @@
         "sb-7-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.3"
     },
@@ -23255,7 +23255,7 @@
         "sb-8-10"
       ],
       "sourceExerciseCount": 10,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.4"
     },
@@ -23275,7 +23275,7 @@
       "sourceImage": "assets/pages/sb-9.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.4"
     },
@@ -23303,7 +23303,7 @@
         "sb-10-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.5"
     },
@@ -23332,7 +23332,7 @@
         "sb-11-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.6"
     },
@@ -23357,7 +23357,7 @@
         "sb-12-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.7"
     },
@@ -23384,7 +23384,7 @@
         "sb-13-10"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.7"
     },
@@ -23409,7 +23409,7 @@
         "sb-14-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.8"
     },
@@ -23439,7 +23439,7 @@
         "sb-15-13"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "sourceAvailable": true,
       "subsection": "1.8"
     },
@@ -23550,8 +23550,9 @@
         "sb-20-2"
       ],
       "sourceExerciseCount": 2,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.1"
     },
     {
       "course": "focus-4",
@@ -23579,8 +23580,9 @@
         "sb-21-11"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.1"
     },
     {
       "course": "focus-4",
@@ -23607,8 +23609,9 @@
         "sb-22-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.2"
     },
     {
       "course": "focus-4",
@@ -23635,8 +23638,9 @@
         "sb-23-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.3"
     },
     {
       "course": "focus-4",
@@ -23664,8 +23668,9 @@
         "sb-24-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.4"
     },
     {
       "course": "focus-4",
@@ -23683,8 +23688,9 @@
       "sourceImage": "assets/pages/sb-25.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.4"
     },
     {
       "course": "focus-4",
@@ -23710,8 +23716,9 @@
         "sb-26-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.5"
     },
     {
       "course": "focus-4",
@@ -23737,8 +23744,9 @@
         "sb-27-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.6"
     },
     {
       "course": "focus-4",
@@ -23760,8 +23768,9 @@
         "sb-28-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.7"
     },
     {
       "course": "focus-4",
@@ -23787,8 +23796,9 @@
         "sb-29-10"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.7"
     },
     {
       "course": "focus-4",
@@ -23810,8 +23820,9 @@
         "sb-30-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.8"
     },
     {
       "course": "focus-4",
@@ -23836,8 +23847,9 @@
         "sb-31-9"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "2.8"
     },
     {
       "course": "focus-4",
@@ -23947,8 +23959,9 @@
         "sb-36-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.1"
     },
     {
       "course": "focus-4",
@@ -23975,8 +23988,9 @@
         "sb-37-11"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.1"
     },
     {
       "course": "focus-4",
@@ -24001,8 +24015,9 @@
         "sb-38-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.2"
     },
     {
       "course": "focus-4",
@@ -24029,8 +24044,9 @@
         "sb-39-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.3"
     },
     {
       "course": "focus-4",
@@ -24053,8 +24069,9 @@
         "sb-40-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.4"
     },
     {
       "course": "focus-4",
@@ -24078,8 +24095,9 @@
         "sb-41-9"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.4"
     },
     {
       "course": "focus-4",
@@ -24105,8 +24123,9 @@
         "sb-42-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.5"
     },
     {
       "course": "focus-4",
@@ -24132,8 +24151,9 @@
         "sb-43-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.6"
     },
     {
       "course": "focus-4",
@@ -24154,8 +24174,9 @@
         "sb-44-2"
       ],
       "sourceExerciseCount": 2,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.7"
     },
     {
       "course": "focus-4",
@@ -24180,8 +24201,9 @@
         "sb-45-8"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.7"
     },
     {
       "course": "focus-4",
@@ -24203,8 +24225,9 @@
         "sb-46-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.8"
     },
     {
       "course": "focus-4",
@@ -24229,8 +24252,9 @@
         "sb-47-9"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "3.8"
     },
     {
       "course": "focus-4",
@@ -24331,8 +24355,9 @@
         "sb-52-2"
       ],
       "sourceExerciseCount": 2,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.1"
     },
     {
       "course": "focus-4",
@@ -24360,8 +24385,9 @@
         "sb-53-11"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.1"
     },
     {
       "course": "focus-4",
@@ -24388,8 +24414,9 @@
         "sb-54-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.2"
     },
     {
       "course": "focus-4",
@@ -24416,8 +24443,9 @@
         "sb-55-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.3"
     },
     {
       "course": "focus-4",
@@ -24446,8 +24474,9 @@
         "sb-56-10"
       ],
       "sourceExerciseCount": 10,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.4"
     },
     {
       "course": "focus-4",
@@ -24465,8 +24494,9 @@
       "sourceImage": "assets/pages/sb-57.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.4"
     },
     {
       "course": "focus-4",
@@ -24494,8 +24524,9 @@
         "sb-58-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.5"
     },
     {
       "course": "focus-4",
@@ -24520,8 +24551,9 @@
         "sb-59-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.6"
     },
     {
       "course": "focus-4",
@@ -24542,8 +24574,9 @@
         "sb-60-2"
       ],
       "sourceExerciseCount": 2,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.7"
     },
     {
       "course": "focus-4",
@@ -24567,8 +24600,9 @@
         "sb-61-7"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.7"
     },
     {
       "course": "focus-4",
@@ -24591,8 +24625,9 @@
         "sb-62-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.8"
     },
     {
       "course": "focus-4",
@@ -24616,8 +24651,9 @@
         "sb-63-9"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "4.8"
     },
     {
       "course": "focus-4",
@@ -24728,8 +24764,9 @@
         "sb-68-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.1"
     },
     {
       "course": "focus-4",
@@ -24755,8 +24792,9 @@
         "sb-69-11"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.1"
     },
     {
       "course": "focus-4",
@@ -24781,8 +24819,9 @@
         "sb-70-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.2"
     },
     {
       "course": "focus-4",
@@ -24812,8 +24851,9 @@
         "sb-71-11"
       ],
       "sourceExerciseCount": 11,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.3"
     },
     {
       "course": "focus-4",
@@ -24840,8 +24880,9 @@
         "sb-72-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.4"
     },
     {
       "course": "focus-4",
@@ -24859,8 +24900,9 @@
       "sourceImage": "assets/pages/sb-73.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.4"
     },
     {
       "course": "focus-4",
@@ -24886,8 +24928,9 @@
         "sb-74-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.5"
     },
     {
       "course": "focus-4",
@@ -24912,8 +24955,9 @@
         "sb-75-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.6"
     },
     {
       "course": "focus-4",
@@ -24936,8 +24980,9 @@
         "sb-76-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.7"
     },
     {
       "course": "focus-4",
@@ -24962,8 +25007,9 @@
         "sb-77-10"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.7"
     },
     {
       "course": "focus-4",
@@ -24985,8 +25031,9 @@
         "sb-78-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.8"
     },
     {
       "course": "focus-4",
@@ -25012,8 +25059,9 @@
         "sb-79-10"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "5.8"
     },
     {
       "course": "focus-4",
@@ -25121,8 +25169,9 @@
         "sb-84-2"
       ],
       "sourceExerciseCount": 2,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.1"
     },
     {
       "course": "focus-4",
@@ -25152,8 +25201,9 @@
         "sb-85-13"
       ],
       "sourceExerciseCount": 11,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.1"
     },
     {
       "course": "focus-4",
@@ -25179,8 +25229,9 @@
         "sb-86-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.2"
     },
     {
       "course": "focus-4",
@@ -25208,8 +25259,9 @@
         "sb-87-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.3"
     },
     {
       "course": "focus-4",
@@ -25235,8 +25287,9 @@
         "sb-88-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.4"
     },
     {
       "course": "focus-4",
@@ -25254,8 +25307,9 @@
       "sourceImage": "assets/pages/sb-89.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.4"
     },
     {
       "course": "focus-4",
@@ -25282,8 +25336,9 @@
         "sb-90-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.5"
     },
     {
       "course": "focus-4",
@@ -25309,8 +25364,9 @@
         "sb-91-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.6"
     },
     {
       "course": "focus-4",
@@ -25334,8 +25390,9 @@
         "sb-92-5"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.7"
     },
     {
       "course": "focus-4",
@@ -25359,8 +25416,9 @@
         "sb-93-10"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.7"
     },
     {
       "course": "focus-4",
@@ -25386,8 +25444,9 @@
         "sb-94-4"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.8"
     },
     {
       "course": "focus-4",
@@ -25413,8 +25472,9 @@
         "sb-95-10"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "6.8"
     },
     {
       "course": "focus-4",
@@ -25525,8 +25585,9 @@
         "sb-100-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.1"
     },
     {
       "course": "focus-4",
@@ -25553,8 +25614,9 @@
         "sb-101-12"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.1"
     },
     {
       "course": "focus-4",
@@ -25578,8 +25640,9 @@
         "sb-102-5"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.2"
     },
     {
       "course": "focus-4",
@@ -25608,8 +25671,9 @@
         "sb-103-8"
       ],
       "sourceExerciseCount": 10,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.3"
     },
     {
       "course": "focus-4",
@@ -25636,8 +25700,9 @@
         "sb-104-8"
       ],
       "sourceExerciseCount": 8,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.4"
     },
     {
       "course": "focus-4",
@@ -25655,8 +25720,9 @@
       "sourceImage": "assets/pages/sb-105.jpg",
       "sourceExerciseIds": [],
       "sourceExerciseCount": 0,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.4"
     },
     {
       "course": "focus-4",
@@ -25681,8 +25747,9 @@
         "sb-106-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.5"
     },
     {
       "course": "focus-4",
@@ -25707,8 +25774,9 @@
         "sb-107-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.6"
     },
     {
       "course": "focus-4",
@@ -25731,8 +25799,9 @@
         "sb-108-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.7"
     },
     {
       "course": "focus-4",
@@ -25758,8 +25827,9 @@
         "sb-109-11"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.7"
     },
     {
       "course": "focus-4",
@@ -25782,8 +25852,9 @@
         "sb-110-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.8"
     },
     {
       "course": "focus-4",
@@ -25806,8 +25877,9 @@
         "sb-111-8"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "7.8"
     },
     {
       "course": "focus-4",
@@ -25918,8 +25990,9 @@
         "sb-116-3"
       ],
       "sourceExerciseCount": 3,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.1"
     },
     {
       "course": "focus-4",
@@ -25948,8 +26021,9 @@
         "sb-117-13"
       ],
       "sourceExerciseCount": 10,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.1"
     },
     {
       "course": "focus-4",
@@ -25977,8 +26051,9 @@
         "sb-118-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.2"
     },
     {
       "course": "focus-4",
@@ -26006,8 +26081,9 @@
         "sb-119-9"
       ],
       "sourceExerciseCount": 9,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.3"
     },
     {
       "course": "focus-4",
@@ -26031,8 +26107,9 @@
         "sb-120-5"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.4"
     },
     {
       "course": "focus-4",
@@ -26056,8 +26133,9 @@
         "sb-121-10"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.4"
     },
     {
       "course": "focus-4",
@@ -26082,8 +26160,9 @@
         "sb-122-6"
       ],
       "sourceExerciseCount": 6,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.5"
     },
     {
       "course": "focus-4",
@@ -26109,8 +26188,9 @@
         "sb-123-7"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.6"
     },
     {
       "course": "focus-4",
@@ -26134,8 +26214,9 @@
         "sb-124-5"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.7"
     },
     {
       "course": "focus-4",
@@ -26161,8 +26242,9 @@
         "sb-125-12"
       ],
       "sourceExerciseCount": 7,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.7"
     },
     {
       "course": "focus-4",
@@ -26185,8 +26267,9 @@
         "sb-126-4"
       ],
       "sourceExerciseCount": 4,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.8"
     },
     {
       "course": "focus-4",
@@ -26210,8 +26293,9 @@
         "sb-127-9"
       ],
       "sourceExerciseCount": 5,
-      "boundaryStatus": "needs-subsection-mapping",
-      "sourceAvailable": true
+      "boundaryStatus": "cross-checked-against-source",
+      "sourceAvailable": true,
+      "subsection": "8.8"
     },
     {
       "course": "focus-4",
@@ -31471,7 +31555,7 @@
     {
       "course": "focus-4",
       "id": "sb-section-1.1",
-      "title": "1.1 Vocabulary",
+      "title": "1.1 Vocabulary · Live and learn",
       "book": "sb",
       "pages": [
         4,
@@ -31482,9 +31566,14 @@
       "pdf": "/quests/focus4-live-and-learn/focus4-live-and-learn-quest.pdf",
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
       "sourceAvailable": true,
+      "teacherPdfPages": [
+        26,
+        27
+      ],
+      "sourceVerification": "section number in source PDF page/spread text",
       "quest": "focus4-live-and-learn"
     },
     {
@@ -31495,14 +31584,19 @@
       "pages": [
         6
       ],
-      "status": "needs-authoring",
-      "web": null,
-      "pdf": null,
+      "status": "published",
+      "web": "/quests/focus4-time-capsule/",
+      "pdf": "/quests/focus4-time-capsule/focus4-time-capsule.pdf",
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        28
+      ],
+      "sourceVerification": "section number in source PDF page/spread text",
+      "quest": "focus4-time-capsule"
     },
     {
       "course": "focus-4",
@@ -31517,9 +31611,13 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        29
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
     },
     {
       "course": "focus-4",
@@ -31535,9 +31633,14 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        30,
+        31
+      ],
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
     },
     {
       "course": "focus-4",
@@ -31552,9 +31655,13 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        32
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
     },
     {
       "course": "focus-4",
@@ -31569,9 +31676,13 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        33
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
     },
     {
       "course": "focus-4",
@@ -31587,9 +31698,14 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        34,
+        35
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
     },
     {
       "course": "focus-4",
@@ -31605,9 +31721,1246 @@
       "pdf": null,
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
-      "boundaryStatus": "verified",
+      "boundaryStatus": "cross-checked-against-source",
       "kind": "subsection",
-      "sourceAvailable": true
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        36,
+        37
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.1",
+      "title": "2.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        20,
+        21
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        42,
+        43
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.2",
+      "title": "2.2 Grammar",
+      "book": "sb",
+      "pages": [
+        22
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        44
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.3",
+      "title": "2.3 Listening",
+      "book": "sb",
+      "pages": [
+        23
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        45
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.4",
+      "title": "2.4 Reading",
+      "book": "sb",
+      "pages": [
+        24,
+        25
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        46,
+        47
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.5",
+      "title": "2.5 Grammar",
+      "book": "sb",
+      "pages": [
+        26
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        48
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.6",
+      "title": "2.6 Speaking",
+      "book": "sb",
+      "pages": [
+        27
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        49
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.7",
+      "title": "2.7 Use of English",
+      "book": "sb",
+      "pages": [
+        28,
+        29
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        50,
+        51
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-2.8",
+      "title": "2.8 Writing",
+      "book": "sb",
+      "pages": [
+        30,
+        31
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "2",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        52,
+        53
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.1",
+      "title": "3.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        36,
+        37
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        58,
+        59
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.2",
+      "title": "3.2 Grammar",
+      "book": "sb",
+      "pages": [
+        38
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        60
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.3",
+      "title": "3.3 Listening",
+      "book": "sb",
+      "pages": [
+        39
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        61
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.4",
+      "title": "3.4 Reading",
+      "book": "sb",
+      "pages": [
+        40,
+        41
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        62,
+        63
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.5",
+      "title": "3.5 Grammar",
+      "book": "sb",
+      "pages": [
+        42
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        64
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.6",
+      "title": "3.6 Speaking",
+      "book": "sb",
+      "pages": [
+        43
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        65
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.7",
+      "title": "3.7 Use of English",
+      "book": "sb",
+      "pages": [
+        44,
+        45
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        66,
+        67
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-3.8",
+      "title": "3.8 Writing",
+      "book": "sb",
+      "pages": [
+        46,
+        47
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "3",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        68,
+        69
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.1",
+      "title": "4.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        52,
+        53
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        74,
+        75
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.2",
+      "title": "4.2 Grammar",
+      "book": "sb",
+      "pages": [
+        54
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        76
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.3",
+      "title": "4.3 Listening",
+      "book": "sb",
+      "pages": [
+        55
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        77
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.4",
+      "title": "4.4 Reading",
+      "book": "sb",
+      "pages": [
+        56,
+        57
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        78,
+        79
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.5",
+      "title": "4.5 Grammar",
+      "book": "sb",
+      "pages": [
+        58
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        80
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.6",
+      "title": "4.6 Speaking",
+      "book": "sb",
+      "pages": [
+        59
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        81
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.7",
+      "title": "4.7 Use of English",
+      "book": "sb",
+      "pages": [
+        60,
+        61
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        82,
+        83
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-4.8",
+      "title": "4.8 Writing",
+      "book": "sb",
+      "pages": [
+        62,
+        63
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "4",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        84,
+        85
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.1",
+      "title": "5.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        68,
+        69
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        90,
+        91
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.2",
+      "title": "5.2 Grammar",
+      "book": "sb",
+      "pages": [
+        70
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        92
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.3",
+      "title": "5.3 Listening",
+      "book": "sb",
+      "pages": [
+        71
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        93
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.4",
+      "title": "5.4 Reading",
+      "book": "sb",
+      "pages": [
+        72,
+        73
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        94,
+        95
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.5",
+      "title": "5.5 Grammar",
+      "book": "sb",
+      "pages": [
+        74
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        96
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.6",
+      "title": "5.6 Speaking",
+      "book": "sb",
+      "pages": [
+        75
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        97
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.7",
+      "title": "5.7 Use of English",
+      "book": "sb",
+      "pages": [
+        76,
+        77
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        98,
+        99
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-5.8",
+      "title": "5.8 Writing",
+      "book": "sb",
+      "pages": [
+        78,
+        79
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "5",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        100,
+        101
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.1",
+      "title": "6.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        84,
+        85
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        106,
+        107
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.2",
+      "title": "6.2 Grammar",
+      "book": "sb",
+      "pages": [
+        86
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        108
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.3",
+      "title": "6.3 Listening",
+      "book": "sb",
+      "pages": [
+        87
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        109
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.4",
+      "title": "6.4 Reading",
+      "book": "sb",
+      "pages": [
+        88,
+        89
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        110,
+        111
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.5",
+      "title": "6.5 Grammar",
+      "book": "sb",
+      "pages": [
+        90
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        112
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.6",
+      "title": "6.6 Speaking",
+      "book": "sb",
+      "pages": [
+        91
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        113
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.7",
+      "title": "6.7 Use of English",
+      "book": "sb",
+      "pages": [
+        92,
+        93
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        114,
+        115
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-6.8",
+      "title": "6.8 Writing",
+      "book": "sb",
+      "pages": [
+        94,
+        95
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "6",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        116,
+        117
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.1",
+      "title": "7.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        100,
+        101
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        122,
+        123
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.2",
+      "title": "7.2 Grammar",
+      "book": "sb",
+      "pages": [
+        102
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        124
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.3",
+      "title": "7.3 Listening",
+      "book": "sb",
+      "pages": [
+        103
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        125
+      ],
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.4",
+      "title": "7.4 Reading",
+      "book": "sb",
+      "pages": [
+        104,
+        105
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        126,
+        127
+      ],
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.5",
+      "title": "7.5 Grammar",
+      "book": "sb",
+      "pages": [
+        106
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        128
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.6",
+      "title": "7.6 Speaking",
+      "book": "sb",
+      "pages": [
+        107
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        129
+      ],
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.7",
+      "title": "7.7 Use of English",
+      "book": "sb",
+      "pages": [
+        108,
+        109
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        130,
+        131
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-7.8",
+      "title": "7.8 Writing",
+      "book": "sb",
+      "pages": [
+        110,
+        111
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "7",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        132,
+        133
+      ],
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.1",
+      "title": "8.1 Vocabulary",
+      "book": "sb",
+      "pages": [
+        116,
+        117
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        138,
+        139
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.2",
+      "title": "8.2 Grammar",
+      "book": "sb",
+      "pages": [
+        118
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        140
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.3",
+      "title": "8.3 Listening",
+      "book": "sb",
+      "pages": [
+        119
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        141
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.4",
+      "title": "8.4 Reading",
+      "book": "sb",
+      "pages": [
+        120,
+        121
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        142,
+        143
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.5",
+      "title": "8.5 Grammar",
+      "book": "sb",
+      "pages": [
+        122
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        144
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.6",
+      "title": "8.6 Speaking",
+      "book": "sb",
+      "pages": [
+        123
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        145
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.7",
+      "title": "8.7 Use of English",
+      "book": "sb",
+      "pages": [
+        124,
+        125
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        146,
+        147
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
+    },
+    {
+      "course": "focus-4",
+      "id": "sb-section-8.8",
+      "title": "8.8 Writing",
+      "book": "sb",
+      "pages": [
+        126,
+        127
+      ],
+      "status": "needs-authoring",
+      "web": null,
+      "pdf": null,
+      "unit": "8",
+      "source": "focus-4-active-teach/assets/course.js",
+      "boundaryStatus": "cross-checked-against-source",
+      "kind": "subsection",
+      "sourceAvailable": true,
+      "teacherPdfPages": [
+        148,
+        149
+      ],
+      "sourceVerification": "section number in source PDF page/spread text"
     },
     {
       "course": "focus-3",

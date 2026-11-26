@@ -1,7 +1,7 @@
 # Реестр покрытия квестами
 
-Дата: 2026-11-26. Фактический каталог: **15 курсов**. Реестр содержит **136 юнитов/учебных групп** для итоговых квестов и **3049 исходных записей** (именованные разделы, страницы, справочные блоки).
-Готовых проверенных пар веб + PDF в новом каталоге: **2**.
+Дата: 2026-11-26. Фактический каталог: **15 курсов**. Реестр содержит **136 юнитов/учебных групп** для итоговых квестов и **3105 исходных записей** (именованные разделы, страницы, справочные блоки).
+Готовых проверенных пар веб + PDF в новом каталоге: **3**.
 
 Количество исходных записей **не равно** количеству подразделов учебника. Там, где данные платформы описывают только страницы, точные границы подразделов отмечены как требующие сверки. Все такие страницы перечислены в JSON, а не скрыты из охвата.
 
@@ -13,7 +13,7 @@
 | Speakout B2+ | 8 | 76 | 0 |
 | Speakout B1+ | 8 | 133 | 0 |
 | Speakout B1 | 8 | 136 | 0 |
-| Focus 4 | 8 | 350 | 2 |
+| Focus 4 | 8 | 406 | 3 |
 | Focus 3 | 8 | 313 | 0 |
 | Focus 2 | 8 | 305 | 0 |
 | Focus 1 | 9 | 276 | 0 |
@@ -26,6 +26,7 @@
 ## Готовые материалы
 
 - Focus 4, 1.1 Vocabulary · Live and learn: [The Future Academy](https://english-with-asya.com/quests/focus4-live-and-learn/) · [PDF](https://english-with-asya.com/quests/focus4-live-and-learn/focus4-live-and-learn-quest.pdf).
+- Focus 4, 1.2 Grammar · Present and past habits: [The Time Capsule](https://english-with-asya.com/quests/focus4-time-capsule/) · [PDF](https://english-with-asya.com/quests/focus4-time-capsule/focus4-time-capsule.pdf).
 - Focus 4, Unit 1 · Live and learn: [The Academy Open Day](https://english-with-asya.com/quests/focus4-unit1-finale/) · [PDF](https://english-with-asya.com/quests/focus4-unit1-finale/focus4-unit1-finale.pdf).
 
 ## Точные пробелы и оставшаяся работа
@@ -43,7 +44,7 @@
 - Source importer reports missing pages: {"sb":[146,147,148,149],"wb":[]}
 
 **Focus 4**
-- The page inventory is complete. Exact subsection boundaries still need source verification; page counts below are not subsection counts.
+- All 64 Student’s Book lesson subsections are mapped to their source pages. Workbook, Word Store, reviews and reference boundaries still require separate mapping; unfilled lesson quests still require authoring.
 
 **Focus 3**
 - The page inventory is complete. Exact subsection boundaries still need source verification; page counts below are not subsection counts.
