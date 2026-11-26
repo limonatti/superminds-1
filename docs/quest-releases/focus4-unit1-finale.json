@@ -1,0 +1,35 @@
+{
+  "layouts": 48,
+  "keyboard": true,
+  "twoWritingDraftsReload": true,
+  "oralReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5647413,
+  "pdfSHA256": "15418599f0ea2da400f32d5083540ea0de95168f75a9f31c57a1ba689f57b696",
+  "audio": {
+    "muted": true,
+    "volume": 0,
+    "duration": 168.285563
+  },
+  "placement": "after Focus Review 1 SB page 19; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-unit1-finale",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 50,
+  "challenges": 12,
+  "pdfPages": 16,
+  "sourceSections": [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.4",
+    "1.5",
+    "1.6",
+    "1.7",
+    "1.8"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}

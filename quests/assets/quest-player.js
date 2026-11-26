@@ -5,7 +5,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const normal=s=>String(s??'').normalize('NFKC').toLowerCase().replace(/[’‘]/g,"'").replace(/[‐‑–]/g,'-').replace(/[.!?]+$/g,'').trim().replace(/\s+/g,' ');
 const matches=(value,row)=>(row.accepted||[]).some(a=>normal(a)===normal(value));
 const key=id=>'quest:'+Q.id+':'+id;
-let store=null,records={},active=0,selectedSlot=0,selectedWord=null,ready=false,view='map',undo=null;
+let store=null,records={},active=0,selectedSlot=0,selectedWord=null,ready=false,view='map',undo=null,shownRecord='',shownFinal='';
 const task=()=>Q.tasks[active],record=id=>records[key(id)]||{},values=t=>t.rows.map((r,i)=>String(record(t.id).values?.[i]||''));
 const isOpen=t=>['dialogue','writing'].includes(t.type);
 function reviewed(t){const r=record(t.id);return isOpen(t)?!!r.reviewed:!!r.checked&&t.rows.every((row,i)=>matches(r.values?.[i],row));}
@@ -36,8 +36,9 @@ function renderTask(){
  $('#stationStory').textContent=station.story;$('#taskTitle').textContent=`${t.id} / ${t.title}`;$('#taskPicker').value=String(active);$('#previous').disabled=active===0;$('#next').setAttribute('aria-label',active===Q.tasks.length-1?'Open the final lock':'Next challenge');
  $('#hintText').textContent=t.hint;$('#hintPanel').open=false;$('#feedback').textContent='';$('#checkAnswers').textContent=isOpen(t)?'Save my review':'Check answers';$('#clearAnswer').textContent='Clear this challenge';
  let html=`<p class="instruction">${esc(t.instruction)}</p>`;
- if(t.image)html+=`<figure class="picture-clues"><div class="picture-grid"><img src="${esc(t.image)}" width="1536" height="1024" alt="${esc(t.imageAlt)}"><div class="picture-labels" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div></div><figcaption>Use both the scene and the phrase bank to choose each caption.</figcaption></figure>`;
+ if(t.image)html+=`<figure class="picture-clues"><div class="picture-grid"><img src="${esc(t.image)}" width="1536" height="1024" alt="${esc(t.imageAlt)}"><div class="picture-labels" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div></div><figcaption>${esc(t.imageCaption||'Use both the scene and the phrase bank to choose each caption.')}</figcaption></figure>`;
  if(t.passage)html+=`<p class="passage">${esc(t.passage)}</p>`;
+ if(root.QuestTaskAudio?.[t.id]){const a=root.QuestTaskAudio[t.id];html+=`<section class="transcript"><h3>Listen to the four speakers</h3><p>${esc(a.track)}</p><div class="audio-actions"><audio id="courseAudio" controls preload="none" src="${esc(a.source)}" aria-label="Memory: four speakers"></audio><button id="repeatAudio" type="button">↺ Repeat</button><a href="${esc(a.source)}" download>Download recording</a></div><p id="audioStatus" role="status"></p><details><summary>Read the transcript</summary><p>${esc(a.transcriptSource)}</p>${a.transcript.map(line=>`<p>${esc(line)}</p>`).join('')}</details></section>`;}
  if(t.bank)html+=`<div class="bank" aria-label="Phrase bank"><p id="bankInstruction">Select a gap, then a card. You can also choose a card first, then its gap. Used cards can move to a new gap.</p><div class="bank-buttons">${t.bank.map((o,i)=>`<button type="button" data-token="${i}" aria-pressed="false">${esc(o.label)}</button>`).join('')}</div></div>`;
  if(t.type==='dialogue')html+=`<fieldset class="mode-choices"><legend>Choose how to practise</legend><label><input type="radio" name="dialogueMode" value="written" ${!r.spoken?'checked':''}>Write both roles</label><label><input type="radio" name="dialogueMode" value="spoken" ${r.spoken?'checked':''}>Speak with a partner</label></fieldset><p class="review-note">${r.spoken?'Use the four turn cards below. Add optional notes, then mark the criteria after your conversation.':'Write your four turns below. Your teacher will review the language; there is no automatic mark.'}</p>`;
  html+='<div class="answer-rows">'+t.rows.map((row,i)=>{
@@ -50,7 +51,7 @@ function renderTask(){
  }).join('')+'</div>';
  if(t.type==='writing')html+='<p id="wordCount" class="word-count" role="status"></p>';
  if(t.criteria)html+=`<fieldset class="criteria"><legend>Review your work</legend>${t.criteria.map((c,i)=>`<label><input type="checkbox" data-criterion="${i}" ${r.criteria?.[i]?'checked':''}>${esc(c)}</label>`).join('')}</fieldset><p class="review-note">These are your own review notes. Your teacher will give feedback on meaning, vocabulary and accuracy.</p>`;
- if(t.id==='08'&&root.QuestAudio){const a=root.QuestAudio;html+=`<details class="transcript"><summary>Listen again: the original Unit 1.1 conversation</summary><p>${esc(a.track)}</p><p>Listen for the words that describe the father and daughter. Pause and repeat a phrase you want to use in your own conversation.</p><div class="audio-actions"><audio id="courseAudio" controls preload="none" src="${esc(a.source)}" aria-label="Father and daughter conversation"></audio><button id="repeatAudio" type="button">↺ Repeat</button><a href="${esc(a.source)}" download>Download recording</a></div><p id="audioStatus" role="status"></p><details><summary>Read the transcript</summary><p>${esc(a.transcriptSource)}</p>${a.transcript.map(line=>`<p>${esc(line)}</p>`).join('')}</details></details>`;}
+ if(t.id===(Q.audioTask||'08')&&root.QuestAudio){const a=root.QuestAudio;html+=`<details class="transcript"><summary>Listen again: the original Unit 1.1 conversation</summary><p>${esc(a.track)}</p><p>Listen for the words that describe the father and daughter. Pause and repeat a phrase you want to use in your own conversation.</p><div class="audio-actions"><audio id="courseAudio" controls preload="none" src="${esc(a.source)}" aria-label="Father and daughter conversation"></audio><button id="repeatAudio" type="button">↺ Repeat</button><a href="${esc(a.source)}" download>Download recording</a></div><p id="audioStatus" role="status"></p><details><summary>Read the transcript</summary><p>${esc(a.transcriptSource)}</p>${a.transcript.map(line=>`<p>${esc(line)}</p>`).join('')}</details></details>`;}
  $('#taskContent').innerHTML=html;
  $$('[data-slot]').forEach(b=>b.onclick=()=>{selectedSlot=+b.dataset.slot;if(selectedWord!==null){put(selectedSlot,t.bank[selectedWord].value);selectedWord=null;}paint();});
  $$('[data-token]').forEach(b=>b.onclick=()=>{const i=+b.dataset.token;if(selectedSlot===null){selectedWord=i;paint();}else{put(selectedSlot,t.bank[i].value);selectedWord=null;selectedSlot=null;paint();}});
@@ -61,6 +62,7 @@ function renderTask(){
  if($('#courseAudio')){const audio=$('#courseAudio');$('#repeatAudio').onclick=()=>{audio.currentTime=0;audio.play().catch(()=>$('#audioStatus').textContent='Playback could not start. Use the audio controls or download the recording.');};audio.onerror=()=>$('#audioStatus').textContent='The recording could not load. Try again when you are online.';}
  paint();wordCount();renderFragment();if(r.checked)mark();
  if(r.reviewed)$('#feedback').textContent='Your review is saved. Discuss your work with your teacher.';
+ shownRecord=JSON.stringify(record(t.id));
  status();
 }
 function paint(){
@@ -75,14 +77,14 @@ function put(i,value,repaint=true){
  write(t.id,{values:v,checked:false,reviewed:false});clearFeedback();paint();if(repaint){$$('[data-written]').forEach(el=>el.value=v[+el.dataset.written]);}
  undo=null;$('#clearAnswer').textContent='Clear this challenge';
 }
-function wordCount(){const el=$('#wordCount');if(el){const n=values(task())[0].trim().split(/\s+/).filter(Boolean).length;el.textContent=`${n} words · aim for 60–80`;}}
+function wordCount(){const el=$('#wordCount');if(el){const t=task(),n=values(t).join(' ').trim().split(/\s+/).filter(Boolean).length,range=t.wordRange===undefined?[60,80]:t.wordRange;el.textContent=range?`${n} words · aim for ${range[0]}–${range[1]}`:`${n} words across your drafts · use the criteria below`;}}
 function mark(){const t=task(),v=values(t);t.rows.forEach((row,i)=>{const host=$(`[data-row="${i}"]`),ok=matches(v[i],row);host.dataset.result=ok?'correct':v[i]?'incorrect':'blank';$('#result-'+i).textContent=ok?'✓ That expression fits.':v[i]?'Try again. Read the surrounding words or open the hint.':'Choose an answer when you are ready.';const input=host.querySelector('.slot,input');if(input)input.setAttribute('aria-invalid',String(!!v[i]&&!ok));});}
 function check(){
  const t=task(),r=record(t.id),v=values(t);
  if(isOpen(t)){
   const content=t.type==='dialogue'&&r.spoken||v.every(s=>s.trim());
-  if(!content){$('#feedback').textContent=t.type==='dialogue'?'Complete the four turns, or choose “Speak with a partner” to review an oral dialogue.':'Write your future mission before saving your review.';return;}
-  if(t.type==='writing'){const count=v[0].trim().split(/\s+/).filter(Boolean).length;if(count<60||count>80){$('#feedback').textContent=`Your ${count}-word draft is saved. Revise it to 60–80 words before marking your review complete.`;return;}}
+  if(!content){$('#feedback').textContent=t.type==='dialogue'?'Complete the four turns, or choose “Speak with a partner” to review an oral dialogue.':'Complete each writing draft before saving your review.';return;}
+  if(t.type==='writing'){const range=t.wordRange===undefined?[60,80]:t.wordRange,count=v[0].trim().split(/\s+/).filter(Boolean).length;if(range&&(count<range[0]||count>range[1])){$('#feedback').textContent=`Your ${count}-word draft is saved. Revise it to ${range[0]}–${range[1]} words before marking your review complete.`;return;}}
   if(!t.criteria.every((_,i)=>r.criteria?.[i])){$('#feedback').textContent='Your work is saved. Read the criteria and tick the ones you have met; keep revising any others.';return;}
   write(t.id,{reviewed:true});$('#feedback').textContent='Your review is saved. Discuss your work with your teacher; this is not an automatic grade.';
  }else{write(t.id,{checked:true});mark();$('#feedback').textContent=v.every((val,i)=>matches(val,t.rows[i]))?'All the expressions fit. Read them aloud, then move on when you are ready.':'Your choices are saved. Keep the ones that fit and try the other items again.';}
@@ -101,6 +103,7 @@ function showFinal(){
  const r=record('final');$('#password').value=r.password||'';$('#lockFeedback').textContent=r.unlocked?'The gate is open. Your next chapter starts here.':'';
  $('#outcomes').innerHTML=Q.outcomes.map((o,i)=>`<label><input type="checkbox" data-outcome="${i}" ${r.outcomes?.[i]?'checked':''}>${esc(o)}</label>`).join('');
  $$('[data-outcome]').forEach(el=>el.onchange=()=>write('final',{outcomes:Q.outcomes.map((_,i)=>$(`[data-outcome="${i}"]`).checked)}));
+ shownFinal=JSON.stringify(record('final'));
  address('final');$('#finale').scrollIntoView({block:'start'});$('#finalTitle').focus({preventScroll:true});status();
 }
 function printSheet(){
@@ -120,7 +123,7 @@ renderMap();printSheet();
 (async()=>{
  try{
   if(!root.CourseWorkStore||!root.SM)throw Error('Storage unavailable');
-  store=new root.CourseWorkStore({course:Q.course,onStatus:status,onAccountChange(){selectedWord=null;undo=null;},onChange(rows,change){records=rows;if(ready){renderMap();printSheet();if(change.account||change.remote){if(view==='task')renderTask();else if(view==='final')showFinal();}}}});
+  store=new root.CourseWorkStore({course:Q.course,onStatus:status,onAccountChange(){selectedWord=null;undo=null;},onChange(rows,change){records=rows;if(ready){renderMap();printSheet();if(change.local){shownRecord=JSON.stringify(record(task().id));shownFinal=JSON.stringify(record('final'));}if(change.account||change.remote){if(view==='task'&&(change.account||shownRecord!==JSON.stringify(record(task().id))))renderTask();else if(view==='final'&&(change.account||shownFinal!==JSON.stringify(record('final'))))showFinal();}}}});
   await store.start();records=store.records;ready=true;status();renderMap();printSheet();
   const match=location.hash.match(/^#challenge-(\d+)$/);if(match){const i=Q.tasks.findIndex(t=>t.id===match[1]);if(i>=0)go(i,false);}else if(location.hash==='#final')showFinal();
  }catch{ready=false;$('#saveStatus').textContent='Saved work is unavailable. Reload to try again, or use the downloadable PDF.';$('#taskControls').disabled=true;$('#startQuest').disabled=true;$('#sync').disabled=true;}

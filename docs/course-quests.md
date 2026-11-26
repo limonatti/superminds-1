@@ -20,7 +20,7 @@ Asya requested a distinct, colourful quest after **every actual subsection** of 
 
 ## Implementation
 
-`quests/catalog.js` contains only actual reviewed web/PDF pairs. `quests/course-entry.js` inserts the relevant entry after its source page in the course's activity list. `quests/assets/quest-player.js` provides the shared account-scoped player. Each quest owns its content, illustrations, PDF and source evidence.
+`quests/catalog.js` contains only actual reviewed web/PDF pairs. `quests/course-entry.js` inserts the relevant entry after its source page in the course's activity list and adds a visible Start quest / Open or print PDF shortcut at the top of the current unit. The shortcut stays visible when page 4 is selected; it is not shown in another unit or Word Store. `quests/assets/quest-player.js` provides the shared account-scoped player. Each quest owns its content, illustrations, PDF and source evidence.
 
 The Future Academy is **Focus 4 Second Edition, Unit 1.1 Vocabulary, Live and learn, SB pp. 4–5**. Its insertion point is after `sb-5`, before `sb-6` (Unit 1.2). It is not Word Store 1A and not textbook exercises 10–15: it has twelve new authored challenges. Its optional human conversation is SB track 1.02, with transcript from Teacher's Book printed p. 197 (PDF p. 219).
 

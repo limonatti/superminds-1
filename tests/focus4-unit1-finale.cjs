@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{JSDOM,VirtualConsole}=require('jsdom');
+const root=path.resolve(__dirname,'..'),Q=require('../quests/focus4-unit1-finale/quest.js'),file=p=>fs.readFileSync(path.join(root,p),'utf8');
+const vc=new VirtualConsole(),errors=[];vc.on('jsdomError',e=>errors.push(e.message));const d=new JSDOM(file('quests/focus4-unit1-finale/index.html').replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,''),{url:'https://example.test/quests/focus4-unit1-finale/',runScripts:'outside-only',virtualConsole:vc}),w=d.window;
+w.HTMLElement.prototype.scrollIntoView=()=>{};w.HTMLMediaElement.prototype.pause=()=>{};w.SM={presentationSession:async()=>null,watchPresentationAuth:()=>()=>{}};
+for(const f of ['coursework-store.js','quests/focus4-unit1-finale/quest.js','quests/focus4-unit1-finale/audio.js','quests/focus4-unit1-finale/listening.js','quests/assets/quest-player.js'])w.eval(file(f));
+const q=s=>w.document.querySelector(s),qa=s=>[...w.document.querySelectorAll(s)],input=(el,v)=>{el.value=v;el.dispatchEvent(new w.Event('input',{bubbles:true}))};
+(async()=>{await new Promise(r=>setImmediate(r));try{let count=0;assert.equal(Q.tasks.length,12);assert.equal(new Set(Q.tasks.flatMap(t=>[...t.source.matchAll(/1\.[1-8]/g)].map(m=>m[0]))).size,8);
+ for(const [n,t]of Q.tasks.entries()){w.QuestPlayer.go(n);assert(!/[А-Яа-яЁё]/.test(q('#workbench').textContent));assert(!qa('.choice[aria-pressed=true]').length);
+  if(t.rows[0].accepted){q('#checkAnswers').click();assert(!qa('[data-result=correct]').length);
+   t.rows.forEach((row,i)=>{if(t.type==='choice'){const j=row.options.findIndex(o=>w.QuestPlayer.matches(o.value,row));q(`[data-choice="${i}:${j}"]`).click();}else{q(`[data-slot="${i}"]`).click();const j=t.bank.findIndex(o=>w.QuestPlayer.matches(o.value,row));assert(j>=0,t.id+': authored option missing');q(`[data-token="${j}"]`).click();}});q('#checkAnswers').click();assert.equal(qa('[data-result=correct]').length,t.rows.length,t.id);count+=t.rows.length;
+  }else{assert.equal(qa('textarea').length,t.rows.length);q('#checkAnswers').click();assert(!w.QuestPlayer.getStore().records['quest:'+Q.id+':'+t.id]?.reviewed);t.rows.forEach((r,i)=>input(q(`[data-written="${i}"]`),'My original response for '+r.prompt));qa('[data-criterion]').forEach(e=>e.click());q('#checkAnswers').click();assert(w.QuestPlayer.getStore().records['quest:'+Q.id+':'+t.id].reviewed);assert(!w.QuestPlayer.getStore().records['quest:'+Q.id+':'+t.id].score);}
+  if(n%2){input(q('#codeLetter'),Q.stations[Math.floor(n/2)].letter);q('#checkLetter').click();assert.match(q('#letterFeedback').textContent,/collected/);}
+ }
+ w.QuestPlayer.showFinal();input(q('#password'),'CREATE');q('#unlockForm').dispatchEvent(new w.Event('submit',{cancelable:true}));assert.match(q('#lockFeedback').textContent,/gate is open/);assert.equal(qa('[data-outcome]').length,8);assert.equal(count,50);assert.deepEqual(errors,[]);console.log('PASS Unit 1 finale: all eight source sections, 50 closed responses, six language clues, picture interpretation, oral guide, CV and email without fake grading.');
+ }finally{w.QuestPlayer.getStore().destroy();d.window.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});
