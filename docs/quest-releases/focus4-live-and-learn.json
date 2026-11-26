@@ -1,0 +1,31 @@
+{
+  "layouts": 48,
+  "keyboard": true,
+  "reload": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 17247064,
+  "pdfSHA256": "d860738b0c53943f36132bf3a8ea089cf3899611639f660c828debc8f0a2fcde",
+  "audio": {
+    "muted": true,
+    "volume": 0,
+    "duration": 109.540688
+  },
+  "placement": "after SB page 5; absent from Word Store",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-live-and-learn",
+  "stage": "local-verified",
+  "closedAnswers": 47,
+  "challenges": 12,
+  "pdfPages": 9,
+  "pdfFields": 75,
+  "checks": [
+    "future-academy.cjs",
+    "future-academy-browser.cjs",
+    "focus-4-sb4-quality.cjs",
+    "coursework-durability.cjs",
+    "check.py: 97 passed"
+  ],
+  "publicTeacherKey": false
+}
