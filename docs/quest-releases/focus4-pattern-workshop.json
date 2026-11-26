@@ -1,0 +1,33 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "personalNotesReload": true,
+  "reusablePatternBank": true,
+  "staticSentenceBank": true,
+  "oralReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5633405,
+  "pdfSHA256": "3bd06253e4dbb349adc46451009b588e7855a486df4c75269a50c6c13726bbe3",
+  "audio": [
+    {
+      "source": "../../focus-4-active-teach/media/sb-1.17.mp3",
+      "muted": true,
+      "volume": 0,
+      "duration": 71.359125
+    }
+  ],
+  "placement": "after Unit 1.5 SB page 10; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-pattern-workshop",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 28,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.5"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}

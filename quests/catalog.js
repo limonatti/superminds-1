@@ -66,7 +66,10 @@ root.QuestCatalog=[
     "section": "1.4 Reading · Hidden talents",
     "book": "sb",
     "afterPage": 9,
-    "sourcePages": [8, 9],
+    "sourcePages": [
+      8,
+      9
+    ],
     "title": "The Idea Observatory",
     "description": "Restore an exhibition guide, follow its evidence and connect brain expressions to illustrated scenes.",
     "level": "B2",
@@ -75,6 +78,24 @@ root.QuestCatalog=[
     "web": "/quests/focus4-idea-observatory/",
     "pdf": "/quests/focus4-idea-observatory/focus4-idea-observatory.pdf",
     "image": "/quests/focus4-idea-observatory/assets/idea-scenes.png"
+  },
+  {
+    "id": "focus4-pattern-workshop",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.5 Grammar · Verb patterns",
+    "book": "sb",
+    "afterPage": 10,
+    "title": "The Pattern Workshop",
+    "description": "Rebuild verb patterns, interpret workshop scenes and distinguish intentions, memories and pauses.",
+    "level": "B2",
+    "challenges": 6,
+    "images": 1,
+    "web": "/quests/focus4-pattern-workshop/",
+    "pdf": "/quests/focus4-pattern-workshop/focus4-pattern-workshop.pdf",
+    "image": "/quests/focus4-pattern-workshop/assets/workshop-scenes.png"
   },
   {
     "id": "focus4-unit1-finale",

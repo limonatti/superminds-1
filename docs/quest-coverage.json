@@ -4,7 +4,7 @@
   "courseCount": 15,
   "unitFinalCount": 136,
   "sourceEntryCount": 3105,
-  "readyPairs": 5,
+  "readyPairs": 6,
   "verifiedPublishedPairs": 3,
   "limitations": "Source entries include page-level and reference rows. Their total must not be reported as an exact textbook-subsection denominator. Only explicitly verified/source-defined boundaries are named subsections.",
   "courses": [
@@ -31653,9 +31653,9 @@
       "pages": [
         10
       ],
-      "status": "needs-authoring",
-      "web": null,
-      "pdf": null,
+      "status": "ready-for-publication",
+      "web": "/quests/focus4-pattern-workshop/",
+      "pdf": "/quests/focus4-pattern-workshop/focus4-pattern-workshop.pdf",
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
       "boundaryStatus": "cross-checked-against-source",
@@ -31664,7 +31664,8 @@
       "teacherPdfPages": [
         32
       ],
-      "sourceVerification": "section number in source PDF page/spread text"
+      "sourceVerification": "section number in source PDF page/spread text",
+      "quest": "focus4-pattern-workshop"
     },
     {
       "course": "focus-4",
