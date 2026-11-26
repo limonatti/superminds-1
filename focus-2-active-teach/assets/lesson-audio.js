@@ -15,7 +15,12 @@ function update(){for(const v of views()){
  for(const sel of ['[data-audio-back]','[data-audio-seek]'])q(sel).disabled=!active||!Number.isFinite(player.duration);
  q('[data-audio-seek]').max=active&&Number.isFinite(player.duration)?player.duration:0;q('[data-audio-seek]').value=active?player.currentTime:0;q('output').textContent=active?time(player.currentTime)+' / '+time(player.duration):'0:00';
  q('[data-audio-ab]').setAttribute('aria-pressed',String(active&&fragment));q('[data-audio-a]').disabled=!active;q('[data-audio-b]').disabled=!active;q('[data-audio-ab]').disabled=!active||loopB===null;q('[data-audio-ab]').textContent=active&&loopB!==null?'A–B '+time(loopA)+' – '+time(loopB):'Повтор A–B';q('[data-audio-loop]').setAttribute('aria-pressed',String(active&&player.loop));q('[data-audio-rate]').value=String(player.playbackRate);q('[data-audio-error]').textContent=active?error:'';
- }const dock=document.querySelector('#lessonAudioDock');if(dock)dock.hidden=!current||!!document.querySelector('dialog[open]');}
+ }const dock=document.querySelector('#lessonAudioDock');if(dock){
+ const dialog=document.querySelector('dialog[open]');
+ const hasControls=dialog&&[...dialog.querySelectorAll('[data-lesson-audio]')].some(v=>!dock.contains(v)&&v.dataset.lessonAudio===current?.path);
+ const host=dialog&&!hasControls?dialog:document.body;if(dock.parentElement!==host)host.append(dock);
+ dock.hidden=!current||!!hasControls;
+ }}
 async function play(v,restart=false){
  if(pending)return;error='';
  if(current?.path!==v.dataset.lessonAudio){if(current)positions.set(current.path,player.currentTime);player.pause();current={path:v.dataset.lessonAudio,title:v.dataset.title,src:v.dataset.src};player.src=current.src;player.loop=false;loopA=0;loopB=null;fragment=false;player.addEventListener('loadedmetadata',()=>{player.currentTime=restart?0:Math.min(positions.get(current.path)||0,player.duration||0)},{once:true});dock();}
