@@ -1,0 +1,34 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "personalNotesReload": true,
+  "readingReference": true,
+  "paragraphs": true,
+  "staticSentenceBank": true,
+  "oralReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5701387,
+  "pdfSHA256": "d29cd39183f06b2b7fded8e55aa7911bb9cfd19fb1c247052f28009779c7c791",
+  "audio": [
+    {
+      "source": "../../focus-4-active-teach/media/sb-1.15.mp3",
+      "muted": true,
+      "volume": 0,
+      "duration": 37.947
+    }
+  ],
+  "placement": "after all tasks for Unit 1.4 SB pp. 8\u20139 (page 9 is text-only); top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-idea-observatory",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 22,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.4"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}

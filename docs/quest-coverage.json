@@ -4,7 +4,7 @@
   "courseCount": 15,
   "unitFinalCount": 136,
   "sourceEntryCount": 3105,
-  "readyPairs": 4,
+  "readyPairs": 5,
   "verifiedPublishedPairs": 3,
   "limitations": "Source entries include page-level and reference rows. Their total must not be reported as an exact textbook-subsection denominator. Only explicitly verified/source-defined boundaries are named subsections.",
   "courses": [
@@ -31630,9 +31630,9 @@
         8,
         9
       ],
-      "status": "needs-authoring",
-      "web": null,
-      "pdf": null,
+      "status": "ready-for-publication",
+      "web": "/quests/focus4-idea-observatory/",
+      "pdf": "/quests/focus4-idea-observatory/focus4-idea-observatory.pdf",
       "unit": "1",
       "source": "focus-4-active-teach/assets/course.js",
       "boundaryStatus": "cross-checked-against-source",
@@ -31642,7 +31642,8 @@
         30,
         31
       ],
-      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map"
+      "sourceVerification": "source lesson heading and page verified visually or against the authored Unit 1 source map",
+      "quest": "focus4-idea-observatory"
     },
     {
       "course": "focus-4",

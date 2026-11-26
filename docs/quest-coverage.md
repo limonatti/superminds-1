@@ -1,7 +1,7 @@
 # Реестр покрытия квестами
 
 Дата: 2026-11-26. Фактический каталог: **15 курсов**. Реестр содержит **136 юнитов/учебных групп** для итоговых квестов и **3105 исходных записей** (именованные разделы, страницы, справочные блоки).
-Готовых проверенных пар веб + PDF в новом каталоге: **4**. Из них публикация и работа на живом сайте подтверждены для **3**.
+Готовых проверенных пар веб + PDF в новом каталоге: **5**. Из них публикация и работа на живом сайте подтверждены для **3**.
 
 Количество исходных записей **не равно** количеству подразделов учебника. Там, где данные платформы описывают только страницы, точные границы подразделов отмечены как требующие сверки. Все такие страницы перечислены в JSON, а не скрыты из охвата.
 
@@ -13,7 +13,7 @@
 | Speakout B2+ | 8 | 76 | 0 |
 | Speakout B1+ | 8 | 133 | 0 |
 | Speakout B1 | 8 | 136 | 0 |
-| Focus 4 | 8 | 406 | 4 |
+| Focus 4 | 8 | 406 | 5 |
 | Focus 3 | 8 | 313 | 0 |
 | Focus 2 | 8 | 305 | 0 |
 | Focus 1 | 9 | 276 | 0 |
@@ -28,6 +28,7 @@
 - Focus 4, 1.1 Vocabulary · Live and learn: [The Future Academy](https://english-with-asya.com/quests/focus4-live-and-learn/) · [PDF](https://english-with-asya.com/quests/focus4-live-and-learn/focus4-live-and-learn-quest.pdf) — публикация проверена.
 - Focus 4, 1.2 Grammar · Present and past habits: [The Time Capsule](https://english-with-asya.com/quests/focus4-time-capsule/) · [PDF](https://english-with-asya.com/quests/focus4-time-capsule/focus4-time-capsule.pdf) — публикация проверена.
 - Focus 4, 1.3 Listening · Memory: [The Memory Museum](https://english-with-asya.com/quests/focus4-memory-museum/) · [PDF](https://english-with-asya.com/quests/focus4-memory-museum/focus4-memory-museum.pdf) — готово, проверка публикации ещё не подтверждена.
+- Focus 4, 1.4 Reading · Hidden talents: [The Idea Observatory](https://english-with-asya.com/quests/focus4-idea-observatory/) · [PDF](https://english-with-asya.com/quests/focus4-idea-observatory/focus4-idea-observatory.pdf) — готово, проверка публикации ещё не подтверждена.
 - Focus 4, Unit 1 · Live and learn: [The Academy Open Day](https://english-with-asya.com/quests/focus4-unit1-finale/) · [PDF](https://english-with-asya.com/quests/focus4-unit1-finale/focus4-unit1-finale.pdf) — публикация проверена.
 
 ## Точные пробелы и оставшаяся работа

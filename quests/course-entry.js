@@ -22,7 +22,10 @@ function mount({course,book,page,host=document}){
   intro.after(nav);
  }
  for(const q of root.QuestCatalog||[]){if(q.course!==course||q.book!==book)continue;
-  const group=host.querySelector(`.cf-home-list>[data-cf-home-page="${q.afterPage}"]`);if(group)group.append(card(q));
+  // A reading spread can end on a text-only page, omitted from the exercise
+  // list. Anchor to its last actual task page, within the verified spread.
+  const anchorPages=[q.afterPage,...(q.sourcePages||[]).filter(p=>p!==q.afterPage).sort((a,b)=>b-a)];
+  const group=anchorPages.map(p=>host.querySelector(`.cf-home-list>[data-cf-home-page="${p}"]`)).find(Boolean);if(group)group.append(card(q));
   if(Number(page)===q.afterPage){const list=host.querySelector('#exerciseList');if(list)list.after(card(q));}
  }
 }

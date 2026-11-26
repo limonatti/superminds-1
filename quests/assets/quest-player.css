@@ -7,3 +7,6 @@
 
 .hero img.scene-sheet,.finale>img.scene-sheet{aspect-ratio:1.5;object-fit:contain}
 #togglePicture{margin-bottom:16px}
+.passage{white-space:pre-line}
+.bank-sentences{position:static}.bank-sentences .bank-buttons{display:grid;grid-template-columns:1fr}.bank-sentences button{justify-content:flex-start;text-align:left}
+.reading-reference{margin:20px 0 28px}.reading-reference>summary{cursor:pointer;padding:14px 0;color:var(--wine);font-weight:600}

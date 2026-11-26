@@ -58,6 +58,25 @@ root.QuestCatalog=[
     "image": "/quests/focus4-memory-museum/assets/memory-route.png"
   },
   {
+    "id": "focus4-idea-observatory",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.4 Reading · Hidden talents",
+    "book": "sb",
+    "afterPage": 9,
+    "sourcePages": [8, 9],
+    "title": "The Idea Observatory",
+    "description": "Restore an exhibition guide, follow its evidence and connect brain expressions to illustrated scenes.",
+    "level": "B2",
+    "challenges": 6,
+    "images": 1,
+    "web": "/quests/focus4-idea-observatory/",
+    "pdf": "/quests/focus4-idea-observatory/focus4-idea-observatory.pdf",
+    "image": "/quests/focus4-idea-observatory/assets/idea-scenes.png"
+  },
+  {
     "id": "focus4-unit1-finale",
     "scope": "unit",
     "course": "focus-4",
