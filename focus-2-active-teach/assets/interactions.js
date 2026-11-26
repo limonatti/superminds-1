@@ -2,12 +2,37 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.FocusInteractions=api;})(typeof window==='undefined'?globalThis:window,()=>{
 'use strict';
 function mount(host,exercise,values=[],reflection=''){
- const model=exercise.interaction;if(!model||!['bank','choices','opinion'].includes(model.type))return false;
+ const model=exercise.interaction;if(!model||!['bank','choices','opinion','builder','practice'].includes(model.type))return false;
  const doc=host.ownerDocument;host.replaceChildren();
  const make=(tag,text,cls)=>{const el=doc.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
  const button=(text,label)=>{const el=make('button',text);el.type='button';if(label)el.setAttribute('aria-label',label);return el;};
  const emit=input=>input.dispatchEvent(new doc.defaultView.Event('input',{bubbles:true}));
  const inputFor=(row,i,label)=>{const input=make('input');input.type='hidden';input.dataset.answer='';input.value=values[i]||'';input.setAttribute('aria-label','Ответ '+label);row.append(input);return input;};
+ if(model.help&&model.type!=='bank')host.append(make('p',model.help,'interaction-help'));
+ if(model.type==='builder'||model.type==='practice'){
+  model.rows.forEach((item,i)=>{
+   const row=make('fieldset',undefined,'answer-row build-row');row.append(make('legend',item.prompt));host.append(row);
+   const label=exercise.answerSpec?.[i]?.label||String(i+1),input=inputFor(row,i,label);
+   if(model.type==='practice'){
+    const done=button('Обсудили');done.className='practice-mark';row.append(done);
+    const refresh=()=>{done.setAttribute('aria-pressed',String(!!input.value));done.textContent=input.value?'✓ Обсудили':'Обсудили';};
+    done.onclick=()=>{input.value=input.value?'':'Обсудили устно';refresh();emit(input);};refresh();return;
+   }
+   const output=make('p','','built-answer');output.setAttribute('aria-live','polite');row.append(output);
+   const bank=make('div',undefined,'builder-tokens');bank.setAttribute('role','group');bank.setAttribute('aria-label','Слова для пункта '+label);row.append(bank);
+   const edit=make('details'),summary=make('summary','Ввести свой вариант — необязательно'),manual=make('input');manual.type='text';manual.maxLength=2000;manual.setAttribute('aria-label','Свой вариант '+label);edit.append(summary,manual);
+   const refresh=()=>{output.textContent=input.value||'Нажимай на слова по порядку';manual.value=input.value;};
+   for(const word of item.tokens){const token=button(word);bank.append(token);token.onclick=()=>{input.value=[input.value,word].filter(Boolean).join(' ');refresh();emit(input);};}
+   const undo=button('Убрать последнее слово'),clear=button('Очистить');row.append(undo,clear,edit);
+   undo.onclick=()=>{input.value=input.value.trim().split(/\s+/).slice(0,-1).join(' ');refresh();emit(input);};
+   clear.onclick=()=>{input.value='';refresh();emit(input);};
+   manual.oninput=()=>{input.value=manual.value;output.textContent=input.value||'Нажимай на слова по порядку';emit(input);};refresh();
+  });
+  if(model.type==='practice'){
+   const label=make('label','Заметка — необязательно, можно ответить устно');label.htmlFor='reflection';const notes=make('textarea');notes.id='reflection';notes.value=reflection;notes.maxLength=12000;host.append(label,notes);
+  }
+  return true;
+ }
  if(model.type==='bank'){
   const help=make('p',model.help||'Выбери пропуск, затем нажми на подходящую карточку.','interaction-help');host.append(help);
   const bank=make('div',undefined,'interaction-bank');bank.setAttribute('role','group');bank.setAttribute('aria-label',model.bankLabel||'Карточки для вставки');host.append(bank);

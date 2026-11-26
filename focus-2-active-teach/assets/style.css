@@ -57,3 +57,21 @@
 #exercise .answer-row.correct{border-color:#286141}#exercise .answer-row.incorrect{border-color:#a43a32}
 #exercise .interaction-previous{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
 #exercise .interaction-bank button:focus-visible,#exercise .choice-slot:focus-visible,#exercise .choice-buttons button:focus-visible{outline:3px solid #722f42;outline-offset:3px}
+
+/* Reviewed SB6 grammar and oral practice. */
+#exercise .build-row{display:block;min-width:0;margin:16px 0;padding:16px;border:1px solid #d6ccc2;border-radius:10px}
+#exercise .build-row legend{font-weight:600;max-width:100%;overflow-wrap:anywhere}
+#exercise .builder-tokens{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+#exercise .builder-tokens button{border-radius:8px;background:#fffcf7;color:#682b3e;min-height:44px}
+#exercise .built-answer{min-height:44px;overflow-wrap:anywhere;padding:10px;background:#f2ece3;border-radius:6px}
+#exercise .build-row details input{width:100%;min-width:0}
+#exercise.cf-dialog .cf-source{overflow:auto!important;max-width:100%;max-height:72dvh!important}
+#exercise.cf-dialog .focus-document{max-width:none!important}
+#exercise.cf-dialog .focus-source-controls{position:sticky;top:0;width:100%;z-index:2}
+#exercise.cf-dialog .focus-sheet{max-width:none!important}
+
+.lesson-audio{padding:10px;border:1px solid #d6ccc2;border-radius:8px;background:#f4eee5;margin:6px 0;color:#302b2a}.lesson-audio b{font-size:13px}.lesson-audio-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.lesson-audio button,.lesson-audio select{min-height:40px;font:inherit;font-size:13px}.lesson-audio label{font-size:12px}.lesson-audio-progress{display:flex;align-items:center;gap:12px}.lesson-audio-progress input{flex:1;min-width:50px;accent-color:#772e43}.lesson-audio output{white-space:nowrap}.lesson-audio [data-audio-error]{color:#8f362e;font-size:13px}#lessonAudioDock{position:sticky;bottom:0;z-index:20;max-width:1000px;margin:0 auto}#lessonAudioDock[hidden]{display:none}
+#exerciseAudio:has(.lesson-audio){max-height:none;display:block;overflow:visible}#exerciseAudio .lesson-audio label{display:flex;min-width:0}#lessonAudioDock{max-height:40dvh;overflow:auto;padding:8px;background:#faf7f1;border:1px solid #d6ccc2}#exerciseAudio .lesson-audio{width:100%}
+#exerciseAudio .lesson-audio-controls>label{flex:0 0 auto;min-width:130px}#exerciseAudio .lesson-audio-controls select{width:auto;flex:none}#exerciseAudio .lesson-audio-progress{width:100%;flex:none}
+
+.lesson-audio-options{flex-basis:100%;min-width:0}.lesson-audio-options>summary{font-size:12px;padding:6px 0}

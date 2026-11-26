@@ -852,5 +852,803 @@
       ],
       "source": "Original SB5ex12: add like if necessary. Same full-sentence answers and printed example1."
     }
+  },
+  "sb-6-1": {
+    "label": "1",
+    "text": "1\nSPEAKING\n\nWho are your role models? Think about\nfamous people or people you know and tell your\npartner.",
+    "key": "",
+    "keySource": null,
+    "answerSpec": [],
+    "answerVersion": "unit12-practice-1",
+    "marking": {
+      "mode": "open",
+      "instruction": "Назови человека, который служит для тебя примером, и расскажи о нём партнёру. Отметь обсуждение; заметка необязательна."
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [],
+    "interaction": {
+      "type": "practice",
+      "rows": [
+        {
+          "prompt": "Who are your role models? Think about famous people or people you know."
+        }
+      ],
+      "help": "Назови человека, который служит для тебя примером, и расскажи о нём партнёру. Отметь обсуждение; заметка необязательна."
+    },
+    "responseFields": [
+      {
+        "label": "1"
+      }
+    ]
+  },
+  "sb-6-2": {
+    "label": "2",
+    "text": "2\n1.6\nMatch questions 1–6 with answers a–f. Then\nlisten and check.\nd\n1\nWho inspires you?\n2\nWhy do you admire him?\n3\nDoes he give money to environmental charities?\n4\nHave you ever met him?\n5\nWhat is he doing now?\n6\nAre you following him on Twitter?\na\nNo, never.\nb\nNot exactly. He runs\nThe Leonardo\nDiCaprio Foundation.\nc\nHe’s working on\na new fi lm.\nd\nLeonardo DiCaprio.\ne\nYes, I am.\nf\nBecause he’s passionate\nabout the environment.",
+    "key": "2 f\n3 b\n4 a\n5 c\n6 e",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 26
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "f"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "b"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "a"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "c"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "e"
+        ]
+      }
+    ],
+    "answerVersion": "f82488c07923",
+    "marking": {
+      "mode": "automatic"
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [
+      "1.06"
+    ],
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "2 · Why do you admire him?",
+          "options": [
+            {
+              "value": "a",
+              "label": "a · No, never."
+            },
+            {
+              "value": "b",
+              "label": "b · Not exactly. He runs The Leonardo DiCaprio Foundation."
+            },
+            {
+              "value": "c",
+              "label": "c · He’s working on a new film."
+            },
+            {
+              "value": "d",
+              "label": "d · Leonardo DiCaprio."
+            },
+            {
+              "value": "e",
+              "label": "e · Yes, I am."
+            },
+            {
+              "value": "f",
+              "label": "f · Because he’s passionate about the environment."
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Does he give money to environmental charities?",
+          "options": [
+            {
+              "value": "a",
+              "label": "a · No, never."
+            },
+            {
+              "value": "b",
+              "label": "b · Not exactly. He runs The Leonardo DiCaprio Foundation."
+            },
+            {
+              "value": "c",
+              "label": "c · He’s working on a new film."
+            },
+            {
+              "value": "d",
+              "label": "d · Leonardo DiCaprio."
+            },
+            {
+              "value": "e",
+              "label": "e · Yes, I am."
+            },
+            {
+              "value": "f",
+              "label": "f · Because he’s passionate about the environment."
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Have you ever met him?",
+          "options": [
+            {
+              "value": "a",
+              "label": "a · No, never."
+            },
+            {
+              "value": "b",
+              "label": "b · Not exactly. He runs The Leonardo DiCaprio Foundation."
+            },
+            {
+              "value": "c",
+              "label": "c · He’s working on a new film."
+            },
+            {
+              "value": "d",
+              "label": "d · Leonardo DiCaprio."
+            },
+            {
+              "value": "e",
+              "label": "e · Yes, I am."
+            },
+            {
+              "value": "f",
+              "label": "f · Because he’s passionate about the environment."
+            }
+          ]
+        },
+        {
+          "prompt": "5 · What is he doing now?",
+          "options": [
+            {
+              "value": "a",
+              "label": "a · No, never."
+            },
+            {
+              "value": "b",
+              "label": "b · Not exactly. He runs The Leonardo DiCaprio Foundation."
+            },
+            {
+              "value": "c",
+              "label": "c · He’s working on a new film."
+            },
+            {
+              "value": "d",
+              "label": "d · Leonardo DiCaprio."
+            },
+            {
+              "value": "e",
+              "label": "e · Yes, I am."
+            },
+            {
+              "value": "f",
+              "label": "f · Because he’s passionate about the environment."
+            }
+          ]
+        },
+        {
+          "prompt": "6 · Are you following him on Twitter?",
+          "options": [
+            {
+              "value": "a",
+              "label": "a · No, never."
+            },
+            {
+              "value": "b",
+              "label": "b · Not exactly. He runs The Leonardo DiCaprio Foundation."
+            },
+            {
+              "value": "c",
+              "label": "c · He’s working on a new film."
+            },
+            {
+              "value": "d",
+              "label": "d · Leonardo DiCaprio."
+            },
+            {
+              "value": "e",
+              "label": "e · Yes, I am."
+            },
+            {
+              "value": "f",
+              "label": "f · Because he’s passionate about the environment."
+            }
+          ]
+        }
+      ],
+      "help": "Соедини каждый вопрос с ответом: нажми на карточку. Пункт 1 → d уже дан как пример. Затем послушай запись 1.06 и проверь."
+    }
+  },
+  "sb-6-3": {
+    "label": "3",
+    "text": "3\nRead the GRAMMAR FOCUS. Complete the\nexamples using the questions in blue in Exercise 2.\nGRAMMAR FOCUS\n2\nPresent tenses – question forms\nTo make questions, you put an auxiliary verb (\ndo\n,\nbe\n,\n•\nhave\n) before the subject of the main verb.\nPresent Simple\n\n➞\n\nWhy\n1\nyou admire\nhim?\nPresent Continuous\n\n➞\n\nWhat\n2\n\nhe doing\n\nnow?\nPresent Perfect\n\n➞\n\n3\nyou ever met\nhim?\n•\nWhen you ask about the subject, you don’t use the\nPresent Simple auxiliary\ndo/does\n.\n4\n\nWho\n\n\nyou?\nNOT\n\nWho does inspire you?",
+    "key": "1 do\n2 is\n3 Have\n4 inspires",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 26
+    },
+    "answerSpec": [
+      {
+        "label": "1",
+        "accepted": [
+          "do"
+        ]
+      },
+      {
+        "label": "2",
+        "accepted": [
+          "is"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "Have"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "inspires"
+        ]
+      }
+    ],
+    "answerVersion": "a85397fa0fc4",
+    "marking": {
+      "mode": "automatic"
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [],
+    "interaction": {
+      "type": "choices",
+      "rows": [
+        {
+          "prompt": "1 · Present Simple · Why _____ you admire him?",
+          "options": [
+            {
+              "value": "are",
+              "label": "are"
+            },
+            {
+              "value": "Have",
+              "label": "Have"
+            },
+            {
+              "value": "does",
+              "label": "does"
+            },
+            {
+              "value": "inspires",
+              "label": "inspires"
+            },
+            {
+              "value": "is",
+              "label": "is"
+            },
+            {
+              "value": "do",
+              "label": "do"
+            }
+          ]
+        },
+        {
+          "prompt": "2 · Present Continuous · What _____ he doing now?",
+          "options": [
+            {
+              "value": "are",
+              "label": "are"
+            },
+            {
+              "value": "Have",
+              "label": "Have"
+            },
+            {
+              "value": "does",
+              "label": "does"
+            },
+            {
+              "value": "inspires",
+              "label": "inspires"
+            },
+            {
+              "value": "is",
+              "label": "is"
+            },
+            {
+              "value": "do",
+              "label": "do"
+            }
+          ]
+        },
+        {
+          "prompt": "3 · Present Perfect · _____ you ever met him?",
+          "options": [
+            {
+              "value": "are",
+              "label": "are"
+            },
+            {
+              "value": "Have",
+              "label": "Have"
+            },
+            {
+              "value": "does",
+              "label": "does"
+            },
+            {
+              "value": "inspires",
+              "label": "inspires"
+            },
+            {
+              "value": "is",
+              "label": "is"
+            },
+            {
+              "value": "do",
+              "label": "do"
+            }
+          ]
+        },
+        {
+          "prompt": "4 · Subject question · Who _____ you?",
+          "options": [
+            {
+              "value": "are",
+              "label": "are"
+            },
+            {
+              "value": "Have",
+              "label": "Have"
+            },
+            {
+              "value": "does",
+              "label": "does"
+            },
+            {
+              "value": "inspires",
+              "label": "inspires"
+            },
+            {
+              "value": "is",
+              "label": "is"
+            },
+            {
+              "value": "do",
+              "label": "do"
+            }
+          ]
+        }
+      ],
+      "help": "Выбери слово для каждого пропуска. Сверься с синими вопросами упражнения 2 и правилом в исходнике."
+    }
+  },
+  "sb-6-4": {
+    "label": "4",
+    "text": "4\nComplete the questions for the interview about Michelle Obama. Then listen and check.\n1 Who inspires you? The person who inspires me is Michelle Obama.\n2 Who _____ ? She’s the ex-first lady of the United States.\n3 Why _____ ? I admire her because she does a lot of good work with young people.\n4 What _____ ? She’s trying to teach children about exercise and health.\n5 Have _____ ? No, I haven’t seen her in person, but I’ve watched her online.\n6 What _____ ? She is still working with young people.",
+    "key": "2 is she\n3 do you admire her\n4 is she trying to do\n5 you ever seen her in person\n6 is she doing now",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 26
+    },
+    "answerSpec": [
+      {
+        "label": "2",
+        "accepted": [
+          "is she"
+        ]
+      },
+      {
+        "label": "3",
+        "accepted": [
+          "do you admire her"
+        ]
+      },
+      {
+        "label": "4",
+        "accepted": [
+          "is she trying to do"
+        ]
+      },
+      {
+        "label": "5",
+        "accepted": [
+          "you ever seen her in person",
+          "you seen her in person"
+        ]
+      },
+      {
+        "label": "6",
+        "accepted": [
+          "is she doing now",
+          "is she doing",
+          "is she still doing"
+        ]
+      }
+    ],
+    "answerVersion": "7098e6865541",
+    "marking": {
+      "mode": "automatic"
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [
+      "1.07"
+    ],
+    "interaction": {
+      "type": "builder",
+      "help": "Собери недостающую часть вопроса нажатием на слова. Начальное вопросительное слово уже напечатано. Пункт 1 — пример. Затем послушай 1.07.",
+      "rows": [
+        {
+          "prompt": "2 · Who _____ ? — She’s the ex-first lady of the United States.",
+          "tokens": [
+            "she",
+            "does",
+            "is"
+          ]
+        },
+        {
+          "prompt": "3 · Why _____ ? — I admire her because she does a lot of good work with young people.",
+          "tokens": [
+            "her",
+            "admire",
+            "does",
+            "you",
+            "do"
+          ]
+        },
+        {
+          "prompt": "4 · What _____ ? — She’s trying to teach children about exercise and health.",
+          "tokens": [
+            "do",
+            "trying",
+            "she",
+            "to",
+            "does",
+            "is"
+          ]
+        },
+        {
+          "prompt": "5 · Have _____ ? — No, I haven’t seen her in person, but I’ve watched her online.",
+          "tokens": [
+            "her",
+            "in person",
+            "seen",
+            "you",
+            "ever",
+            "see"
+          ]
+        },
+        {
+          "prompt": "6 · What _____ ? — She is still working with young people.",
+          "tokens": [
+            "now",
+            "she",
+            "does",
+            "doing",
+            "is"
+          ]
+        }
+      ]
+    }
+  },
+  "sb-6-5": {
+    "label": "5",
+    "text": "5\nComplete the questions about the subject (a) and about the object (b) of each statement.\n1 Emily and Peter like watching science-fiction films.\na Who likes watching science-fiction films?\nb What do Emily and Peter like watching?\n2a Neil has joined Amnesty International. Who _____ ?\n2b Neil has joined Amnesty International. Which organisation _____ ?\n3a Rosie can speak three languages. Who _____ ?\n3b Rosie can speak three languages. How many languages _____ ?\n4a Dave has visited London. Who _____ ?\n4b Dave has visited London. Which capital city _____ ?\n5a Tom is reading Barack Obama’s biography. Who _____ ?\n5b Tom is reading Barack Obama’s biography. What _____ ?\n6a Viv admires Emma Watson. Who _____ ?\n6b Viv admires Emma Watson. Who _____ ?",
+    "key": "2a has joined Amnesty International\n2b has Neil joined\n3a can speak three languages\n3b can Rosie speak\n4a has visited London\n4b has Dave visited\n5a is reading Barack Obama’s biography\n5b is Tom reading\n6a admires Emma Watson\n6b does Viv admire",
+    "keySource": {
+      "book": "teacher",
+      "pdfPage": 26
+    },
+    "answerSpec": [
+      {
+        "label": "2a",
+        "accepted": [
+          "has joined Amnesty International"
+        ]
+      },
+      {
+        "label": "2b",
+        "accepted": [
+          "has Neil joined"
+        ]
+      },
+      {
+        "label": "3a",
+        "accepted": [
+          "can speak three languages"
+        ]
+      },
+      {
+        "label": "3b",
+        "accepted": [
+          "can Rosie speak"
+        ]
+      },
+      {
+        "label": "4a",
+        "accepted": [
+          "has visited London"
+        ]
+      },
+      {
+        "label": "4b",
+        "accepted": [
+          "has Dave visited"
+        ]
+      },
+      {
+        "label": "5a",
+        "accepted": [
+          "is reading Barack Obama’s biography"
+        ]
+      },
+      {
+        "label": "5b",
+        "accepted": [
+          "is Tom reading"
+        ]
+      },
+      {
+        "label": "6a",
+        "accepted": [
+          "admires Emma Watson"
+        ]
+      },
+      {
+        "label": "6b",
+        "accepted": [
+          "does Viv admire"
+        ]
+      }
+    ],
+    "answerVersion": "unit12-subject-object-v1",
+    "marking": {
+      "mode": "automatic"
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [],
+    "interaction": {
+      "type": "builder",
+      "help": "Собери часть вопроса после напечатанного начала: a — о подлежащем, b — о дополнении. Не все карточки нужны. Два вопроса пункта 1 уже даны как пример.",
+      "rows": [
+        {
+          "prompt": "2a · Neil has joined Amnesty International. → Who _____ ?",
+          "tokens": [
+            "Amnesty International",
+            "joined",
+            "Neil",
+            "has"
+          ]
+        },
+        {
+          "prompt": "2b · Neil has joined Amnesty International. → Which organisation _____ ?",
+          "tokens": [
+            "joined",
+            "Neil",
+            "Amnesty International",
+            "has"
+          ]
+        },
+        {
+          "prompt": "3a · Rosie can speak three languages. → Who _____ ?",
+          "tokens": [
+            "three languages",
+            "Rosie",
+            "speak",
+            "can"
+          ]
+        },
+        {
+          "prompt": "3b · Rosie can speak three languages. → How many languages _____ ?",
+          "tokens": [
+            "speak",
+            "can",
+            "three languages",
+            "Rosie"
+          ]
+        },
+        {
+          "prompt": "4a · Dave has visited London. → Who _____ ?",
+          "tokens": [
+            "London",
+            "Dave",
+            "visited",
+            "has"
+          ]
+        },
+        {
+          "prompt": "4b · Dave has visited London. → Which capital city _____ ?",
+          "tokens": [
+            "visited",
+            "London",
+            "has",
+            "Dave"
+          ]
+        },
+        {
+          "prompt": "5a · Tom is reading Barack Obama’s biography. → Who _____ ?",
+          "tokens": [
+            "reading",
+            "Tom",
+            "Barack Obama’s biography",
+            "is"
+          ]
+        },
+        {
+          "prompt": "5b · Tom is reading Barack Obama’s biography. → What _____ ?",
+          "tokens": [
+            "reading",
+            "Barack Obama’s biography",
+            "is",
+            "Tom"
+          ]
+        },
+        {
+          "prompt": "6a · Viv admires Emma Watson. → Who _____ ?",
+          "tokens": [
+            "Emma Watson",
+            "does",
+            "admires",
+            "Viv",
+            "admire"
+          ]
+        },
+        {
+          "prompt": "6b · Viv admires Emma Watson. → Who _____ ?",
+          "tokens": [
+            "admire",
+            "Emma Watson",
+            "Viv",
+            "does",
+            "admires"
+          ]
+        }
+      ]
+    }
+  },
+  "sb-6-6": {
+    "label": "6",
+    "text": "6\nComplete the sentences to make them true for you.\n1\nI’m reading\nat the moment.\n2\nIt takes me\nminutes to get to school.\n3\nI go shopping for clothes\na month.\n4\nI’ve been to\nforeign countries.\n5\ninspires me.",
+    "key": "",
+    "keySource": null,
+    "answerSpec": [],
+    "answerVersion": "unit12-practice-6",
+    "marking": {
+      "mode": "open",
+      "instruction": "Дополни каждую фразу правдой о себе устно или в необязательной заметке. Отмечай готовые пункты; правильного ответа здесь нет."
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [],
+    "interaction": {
+      "type": "practice",
+      "rows": [
+        {
+          "prompt": "1 · I’m reading _____ at the moment."
+        },
+        {
+          "prompt": "2 · It takes me _____ minutes to get to school."
+        },
+        {
+          "prompt": "3 · I go shopping for clothes _____ a month."
+        },
+        {
+          "prompt": "4 · I’ve been to _____ foreign countries."
+        },
+        {
+          "prompt": "5 · _____ inspires me."
+        }
+      ],
+      "help": "Дополни каждую фразу правдой о себе устно или в необязательной заметке. Отмечай готовые пункты; правильного ответа здесь нет."
+    },
+    "responseFields": [
+      {
+        "label": "1"
+      },
+      {
+        "label": "2"
+      },
+      {
+        "label": "3"
+      },
+      {
+        "label": "4"
+      },
+      {
+        "label": "5"
+      }
+    ]
+  },
+  "sb-6-7": {
+    "label": "7",
+    "text": "7\nSPEAKING\nAsk and answer the questions about the information in Exercise 6. Use different question words, e.g. what, how long or how often.\nA: What are you reading at the moment?\nB: A book about Steve Jobs.",
+    "key": "",
+    "keySource": null,
+    "answerSpec": [],
+    "answerVersion": "unit12-practice-7",
+    "marking": {
+      "mode": "open",
+      "instruction": "По информации из упражнения 6 составь вопросы и ответь на вопросы партнёра. Нажимай «Обсудили» после каждого обмена. Образец и фразы упражнения 6 доступны в исходнике."
+    },
+    "answers": [],
+    "reviewedUnit12": true,
+    "responseMode": "panel",
+    "audioTracks": [],
+    "interaction": {
+      "type": "practice",
+      "rows": [
+        {
+          "prompt": "1 · Reading at the moment · what"
+        },
+        {
+          "prompt": "2 · Time to get to school · how long"
+        },
+        {
+          "prompt": "3 · Shopping for clothes · how often"
+        },
+        {
+          "prompt": "4 · Foreign countries visited · how many"
+        },
+        {
+          "prompt": "5 · A role model · who"
+        }
+      ],
+      "help": "По информации из упражнения 6 составь вопросы и ответь на вопросы партнёра. Нажимай «Обсудили» после каждого обмена. Образец и фразы упражнения 6 доступны в исходнике."
+    },
+    "responseFields": [
+      {
+        "label": "1"
+      },
+      {
+        "label": "2"
+      },
+      {
+        "label": "3"
+      },
+      {
+        "label": "4"
+      },
+      {
+        "label": "5"
+      }
+    ],
+    "box": [
+      0.497,
+      0.755,
+      0.481,
+      0.08
+    ]
   }
 }

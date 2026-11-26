@@ -2,7 +2,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require
 const base='focus-2-active-teach/',read=f=>fs.readFileSync(base+f,'utf8');
 const D=JSON.parse(read('assets/course.js').split('=').slice(1).join('=').trim().replace(/;$/,''));
 const M=require('../focus-2-active-teach/assets/marking.js'),UI=require('../focus-2-active-teach/assets/interactions.js');
-const tasks=D.pages.flatMap(p=>p.exercises).filter(e=>e.interaction);assert.equal(tasks.length,10);
+const tasks=D.pages.flatMap(p=>p.exercises).filter(e=>e.interaction&&e.reviewedUnit11);assert.equal(tasks.length,10);
 const expected={'sb-5-5':['cheerful','generous','hard-working','outgoing','sensible'],'sb-5-6':['caring','miserable','hard-working','generous','shy','silly'],'sb-5-8':['independent','dishonest','polite','popular','irresponsible','sensitive','wise'],'sb-5-9':['honest','wise','independent','polite','unadventurous','popular'],'sb-5-11':['She’s wise, sensitive and has a lot of experience.','He’s got tattoos and long hair.','I like being with young people.']};
 for(const [ws,sb]of [['ws-3-1','sb-5-5'],['ws-3-2','sb-5-8'],['ws-3-3','sb-5-11']])expected[ws]=expected[sb];
 let count=0;

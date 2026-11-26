@@ -251,8 +251,8 @@ for pg in pages:
         if e['id'] in overrides:
             e.update(overrides[e['id']])
             signature=e['answerSpec'] if e.get('responseMode')!='oral' else {'fields':[],'responseMode':'oral'}
-            e['answerVersion']=hashlib.sha256(json.dumps(signature,sort_keys=True).encode()).hexdigest()[:12]
-            if e.get('reviewedUnit11'):gaps.pop(e['id'],None)
+            e['answerVersion']=overrides[e['id']].get('answerVersion') or hashlib.sha256(json.dumps(signature,sort_keys=True).encode()).hexdigest()[:12]
+            if e.get('reviewedUnit11') or e.get('reviewedUnit12'):gaps.pop(e['id'],None)
 sources.update(json.loads((R/'data/source-context-overrides.json').read_text()) if (R/'data/source-context-overrides.json').exists() else {})
 videos=json.loads((R/'data/videos.json').read_text()) if (R/'data/videos.json').exists() else []
 D={'id':'focus-2','units':NAMES,'pages':pages,'tracks':{'sb':[p.stem[3:] for p in sorted((R/'media').glob('sb-*.mp3'))],'wb':[],'ws':[]},'resources':json.loads((R/'data/resources.json').read_text()),'videos':videos}

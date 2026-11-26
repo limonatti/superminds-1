@@ -4,6 +4,7 @@ const D=window.FOCUS2,$=s=>document.querySelector(s),$$=s=>[...document.querySel
 const params=new URLSearchParams(location.search), NS='focus-2:responses:v1';
 let book=['wb','ws'].includes(params.get('book'))?params.get('book'):'sb',unit=params.get('unit')||'1',page=null,active=null,user=null,responses={},storageKey='',ready=false,syncTimer,queue=Promise.resolve(),workStore=null;
 const M=window.FocusMarking;
+const audioCard=t=>{const path=`media/${book==='ws'?'sb':book}-${t}.mp3`;return window.Focus2Audio.html({path,track:t},'Трек '+t,path);};
 let shownRecord='',previousAnswers=[],homework=null,submitting=false,assigner=null;
 const H=window.Focus2HW;H.setData(D);
 const list=()=>D.pages.filter(p=>p.book===book&&String(p.unit)===String(unit));
@@ -28,8 +29,8 @@ function render(){
  window.ExerciseSource.regions($('#hotspots'),page.exercises.map(e=>e.box));
  $('#exerciseList').innerHTML=page.exercises.length?page.exercises.map(e=>`<button class="exercise-link" data-ex="${e.id}">Упражнение ${e.label}<span>${responses[e.id]?'Есть ответ':e.marking.mode==='mixed'?'Проверка + свой ответ':e.answerSpec?.length?'Автопроверка':'Свой ответ'}</span></button>`).join(''):'<p>Справочная страница. Читай и увеличивай её в режиме презентации.</p>';
  $$('[data-ex]').forEach(b=>b.onclick=()=>assigner?.mode?assigner.toggle(b.dataset.ex):openExercise(b.dataset.ex));$('#count').textContent=page.exercises.length;window.Focus2Video?.render(page);
- $('#audio').innerHTML=page.tracks.length?page.tracks.map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join(''):book==='wb'?'<p>Аудио Workbook в исходном комплекте нет.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
- $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book==='ws'?'sb':book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');$('#libraryAudio').pause();$('#libraryAudio').removeAttribute('src');
+ $('#audio').innerHTML=page.tracks.length?page.tracks.map(audioCard).join(''):book==='wb'?'<p>Аудио Workbook в исходном комплекте нет.</p>':'<p>Выбери аудио по номеру трека в учебнике.</p>';
+ $('#allTracks').innerHTML='<option value="">Выбери трек</option>'+D.tracks[book==='ws'?'sb':book].map(t=>`<option value="${t}">${book.toUpperCase()} · ${t}</option>`).join('');window.Focus2Audio.bind($('#audio'));window.Focus2Audio.update();
  $('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');renderProgress();assigner?.refresh();
  focusHome();
 }
@@ -38,7 +39,7 @@ function openExercise(id){
  window.CourseFocus?.reset($('#exercise'));
  active=page.exercises.find(e=>e.id===id);if(!active||!ready)return;shownRecord=JSON.stringify(responses[active.id]||{});const q=new URL(location.href);q.searchParams.set('ex',id);history.replaceState(null,'',q);
  $('#exerciseTitle').textContent=`Упражнение ${active.label}`;$('#exerciseLocation').textContent=`${book==='sb'?'Student’s Book':book==='ws'?'Word Store':'Workbook'} · стр. ${page.page}`;
- $('#exerciseAudio').innerHTML=(active.audioTracks||page.tracks).map(t=>`<label>Трек ${esc(t)}<audio controls preload="none" src="media/${book==='ws'?'sb':book}-${t}.mp3"></audio></label>`).join('');$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
+ $('#exerciseAudio').innerHTML=(active.audioTracks||page.tracks).map(audioCard).join('');window.Focus2Audio.bind($('#exerciseAudio'));$('#fullPage').setAttribute('aria-pressed','false');$('#exerciseImage').src=page.image;$('#exerciseImage').onload=resizeCrop;
  const restored=M.saved(active,responses[id]);previousAnswers=restored.previous;
  const vals=restored.values,spec=active.answerSpec||[],automatic=spec.length>0,mixed=active.marking.mode==='mixed';
  $('#instruction').textContent=active.marking.instruction||(automatic?'Впиши ответы в поля с номерами из задания. Несколько пропусков одного пункта разделяй запятой.':'Выполни задание по условию. Сохрани письменный ответ или заметки для устного ответа.');
@@ -60,7 +61,7 @@ function openExercise(id){
  $$('[data-personal]').forEach(el=>el.addEventListener('change',()=>save(false)));
  $$('[data-answer],#reflection').forEach(el=>el.addEventListener('input',()=>{clearMarking();save(false);}));
  window.ExerciseSource.columns($('#exercise'),$('#solutionColumns'),$('#solutionOriginal'),$('#solutionColumns .focus-responses'));window.ExerciseSource.mount($('#solutionOriginal'),active.id);if(!$('#exercise').open)$('#exercise').showModal();window.ExerciseSource.controls($('#solutionOriginal'));resizeCrop();updateAssignMarkers();
- if(active.reviewedUnit11)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
+ if(active.reviewedUnit11||active.reviewedUnit12)window.ExercisePlay.attach({dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:'',fields:[],native:true,reviewComplete:()=>M.canReveal(active,responses[active?.id])});
  else if(spec.length) window.ExercisePlay.attach({reviewComplete:()=>M.canReveal(active,responses[active?.id]),dialog:$('#exercise'),source:$('#solutionOriginal'),responses:$('#solutionColumns .focus-responses'),id:active.id,text:window.EXERCISE_GAPS?.[active.id]?active.text:'',fields:spec.map((f,i)=>{const input=$$('[data-answer]')[i];return window.ExercisePlay.inputField(f.label,input,f.accepted,input?.tagName==='SELECT'?[...input.options].filter(o=>o.value).map(o=>({value:o.value,label:o.text})):null,input?.closest('.answer-row'),{kind:f.kind})})});
  focusDialog();
 }
@@ -102,7 +103,7 @@ for(const [id,dir] of [['prev',-1],['next',1]])$('#'+id).onclick=()=>{page=list(
 $$('[data-book]').forEach(b=>b.onclick=()=>{book=b.dataset.book;page=null;render();});
 $('#zoom').onchange=ev=>$('#paper').style.width=Number(ev.target.value)*100+'%';
 $('#cover').onclick=()=>{const hide=!$('#curtain').hidden;$('#curtain').hidden=hide;$('#cover').setAttribute('aria-pressed',String(!hide));};$('#uncover').onclick=()=>{$('#curtain').hidden=true;$('#cover').setAttribute('aria-pressed','false');};
-$('#allTracks').onchange=ev=>{if(ev.target.value){$('#libraryAudio').src=`media/${book==='ws'?'sb':book}-${ev.target.value}.mp3`;$('#libraryAudio').play().catch(()=>{});}};
+$('#allTracks').onchange=ev=>{$('#libraryPlayer').innerHTML=ev.target.value?audioCard(ev.target.value):'';window.Focus2Audio.bind($('#libraryPlayer'));};
 $('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);status('Ссылка на страницу скопирована');}catch{status('Скопируй адрес страницы из строки браузера');}};
 $('#present').onclick=async()=>{const on=document.body.classList.toggle('present');$('#present').setAttribute('aria-pressed',on);try{if(on)await document.documentElement.requestFullscreen();else if(document.fullscreenElement)await document.exitFullscreen();}catch{}};
 $('#sync').onclick=sync;
