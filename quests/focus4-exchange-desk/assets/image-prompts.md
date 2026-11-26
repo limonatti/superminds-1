@@ -1,0 +1,7 @@
+# Generated exchange programme scenes
+
+Mode: built-in image_gen, new image, opaque background. Generated 26 November 2026. Final asset: `exchange-scenes.png`, 1536 × 1024. The four activities provide evidence for the formal captions in Challenge 1.
+
+## Exact prompt
+
+Use case: scientific-educational. Asset type: a four-scene visual vocabulary sheet for the B2 English quest The Exchange Desk, practising formal invitations and school exchange events. Generate one landscape 1536x1024 illustration in an exact two-by-two grid with thin burgundy dividers. Sophisticated warm editorial gouache, beige school interiors, burgundy and muted forest-green accents, clear actions, diverse young adults and adult staff. Top left: a school head gives a welcome speech at a lectern with microphone to a seated visiting group. Top right: two student representatives greet arriving exchange students with friendly handshakes near a school entrance; visitors have travel bags. Bottom left: a student guide shows visitors around the school, pointing to a wall display beside an open library doorway while the small group follows. Bottom right: a host serves light refreshments at a table with cups of tea, a water jug, small sandwiches and fruit; two guests accept cups. These four distinct activities must be visually identifiable for matching formal captions. No text, words, labels, numbers, logos or watermark; no flags or readable signs. Natural hands and expressions, no exaggerated fantasy elements. Opaque background.

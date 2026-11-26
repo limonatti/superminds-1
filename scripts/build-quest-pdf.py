@@ -47,7 +47,7 @@ for index,t in enumerate(data['tasks']):
   story.append(p('CARDS: '+' · '.join(o['label'] for o in t['bank']),'small' if t.get('compactPrint') else 'label'))
  if t['type']=='writing':
   for i,row in enumerate(t['rows']):
-   if i:story.append(PageBreak());story.extend([p(t['id']+' / '+t['title']+' (continued)','h'),p('Keep your email separate from your CV.','small')])
+   if i:story.append(PageBreak());story.extend([p(t['id']+' / '+t['title']+' (continued)','h'),p(t.get('continuationNote','Continue your next draft here.'),'small')])
    story.append(p(row['prompt'],'label'))
    story.append(lines(t.get('printLines',15 if i==0 else 22)))
   story.append(p('REVIEW: '+'  /  '.join(t['criteria']),'small'))
@@ -61,7 +61,7 @@ for index,t in enumerate(data['tasks']):
   if t.get('criteria'):story.append(p('YOUR REVIEW: '+'  /  '.join(t['criteria']),'small'))
  story.append(Spacer(1,10));story.append(p('HINT: '+t['hint'],'small'))
  if index%2:story.extend([p('CODE FRAGMENT '+str(index//2+1)+': '+station['clue'],'label'),p('My letter: ______','label')])
-story.append(PageBreak());story.extend([p('The final invitation','title'),p('Write your letters in station order.','label'),p('    '.join(['____']*len(data['stations'])),'h'),p('Check your code with your teacher or in the web quest. Then reflect on the skills you have practised.'),p('Mission debrief','h')]);story.extend(p('[  ] '+o) for o in data['outcomes']);story.extend([Spacer(1,20),p('My next learning goal:'),lines(3),Spacer(1,22),p('Original practice by English with Asya. Based on '+data['edition']+', '+data['section']+'. The stories and exercises are newly authored; this is not an official Pearson publication.','small'),p('Human audio with a transcript and replay is available in the web quest.','small')])
+story.append(PageBreak());story.extend([p('The final invitation','title'),p('Write your letters in station order.','label'),p('    '.join(['____']*len(data['stations'])),'h'),p('Check your code with your teacher or in the web quest. Then reflect on the skills you have practised.'),p('Mission debrief','h')]);story.extend(p('[  ] '+o) for o in data['outcomes']);story.extend([Spacer(1,20),p('My next learning goal:'),lines(3),Spacer(1,22),p('Original practice by English with Asya. Based on '+data['edition']+', '+data['section']+'. The stories and exercises are newly authored; this is not an official Pearson publication.','small'),p('Human audio with a transcript and replay is available in the web quest.' if (folder/'listening.json').exists() else 'Use the web quest to save your choices and drafts, or complete this booklet on paper.','small')])
 if (folder/'listening.json').exists():
  audio_data=json.loads((folder/'listening.json').read_text())
  for audio in (audio_data if isinstance(audio_data,list) else [audio_data]):

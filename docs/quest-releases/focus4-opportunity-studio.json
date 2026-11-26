@@ -1,0 +1,25 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "cvAndEmailDraftsReload": true,
+  "honestWritingReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5686396,
+  "pdfSHA256": "7f44799bc697f5e9066ab06058c1eec5c23779582664ea3d5ea37e3ae1b7e4e6",
+  "audio": "no separate recording assigned to section 1.8",
+  "placement": "after Unit 1.8 SB page 15; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-opportunity-studio",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 25,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.8"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false,
+  "pdfVisualReview": "all nine pages, English text, separate CV/email pages and four learning outcomes"
+}

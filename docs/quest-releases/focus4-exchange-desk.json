@@ -1,0 +1,24 @@
+{
+  "layouts": 24,
+  "keyboard": true,
+  "twoMessageDraftsReload": true,
+  "honestWritingReview": true,
+  "english": true,
+  "print": true,
+  "pdfBytes": 5487881,
+  "pdfSHA256": "567781e1c2eabf03e46d00c30cd32f617c340590d804397b49889b59f8344726",
+  "audio": "no separate recording assigned to section 1.7",
+  "placement": "after Unit 1.7 SB page 13; top-of-unit shortcut",
+  "errors": [],
+  "date": "2026-11-26",
+  "quest": "focus4-exchange-desk",
+  "stage": "local-verified-ready-to-publish",
+  "closedAnswers": 23,
+  "challenges": 6,
+  "pdfPages": 9,
+  "sourceSections": [
+    "1.7"
+  ],
+  "pdfForm": "printable worksheet",
+  "publicTeacherKey": false
+}

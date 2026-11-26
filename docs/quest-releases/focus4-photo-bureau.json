@@ -20,7 +20,7 @@
   "errors": [],
   "date": "2026-11-26",
   "quest": "focus4-photo-bureau",
-  "stage": "local-verified-ready-to-publish",
+  "stage": "published-and-live-verified",
   "closedAnswers": 20,
   "challenges": 6,
   "pdfPages": 9,
@@ -28,5 +28,8 @@
     "1.6"
   ],
   "pdfForm": "printable worksheet",
-  "publicTeacherKey": false
+  "publicTeacherKey": false,
+  "commit": "787ea469697f80620ba66f4b0145484b04dac926",
+  "deploymentRun": 45790129789,
+  "liveURL": "https://english-with-asya.com/quests/focus4-photo-bureau/"
 }
