@@ -16,7 +16,7 @@
   "errors": [],
   "date": "2026-11-26",
   "quest": "focus4-time-capsule",
-  "stage": "local-verified-ready-to-publish",
+  "stage": "published-and-live-verified",
   "closedAnswers": 19,
   "challenges": 6,
   "pdfPages": 9,
@@ -24,5 +24,24 @@
     "1.2"
   ],
   "pdfForm": "printable worksheet",
-  "publicTeacherKey": false
+  "publicTeacherKey": false,
+  "live": {
+    "layouts": 24,
+    "keyboard": true,
+    "personalWritingReload": true,
+    "oralReview": true,
+    "english": true,
+    "print": true,
+    "pdfBytes": 5477935,
+    "pdfSHA256": "28930d0edabc81f5cd85cb08bb8f38ee535abd4cc56e51e4839fc7912247f285",
+    "audio": {
+      "muted": true,
+      "volume": 0,
+      "duration": 73.809
+    },
+    "placement": "after Unit 1.2 SB page 6; top-of-unit shortcut",
+    "errors": []
+  },
+  "commit": "c5c8e210f6ddc3ce5aba7f62185cf7febc282ab7",
+  "deployment": "https://github.com/limonatti/superminds-1/actions/runs/45783140940"
 }

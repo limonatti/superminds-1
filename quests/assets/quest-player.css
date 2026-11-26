@@ -6,3 +6,4 @@
 @media print{body{background:white;color:#222;font-size:10pt}body>*:not(main),main>*:not(.print-sheet){display:none!important}.print-sheet{display:block}main{max-width:none;padding:0}.print-sheet h1{font-size:28pt}.print-sheet h2{font-size:16pt}.print-sheet article{break-inside:avoid;margin:24px 0}.print-sheet p{white-space:pre-wrap}.print-sheet li{margin:8px 0}.print-sheet small{color:#444}a{color:inherit;text-decoration:none}@page{size:A4;margin:18mm}}
 
 .hero img.scene-sheet,.finale>img.scene-sheet{aspect-ratio:1.5;object-fit:contain}
+#togglePicture{margin-bottom:16px}

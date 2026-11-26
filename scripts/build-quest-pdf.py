@@ -63,7 +63,10 @@ for index,t in enumerate(data['tasks']):
  if index%2:story.extend([p('CODE FRAGMENT '+str(index//2+1)+': '+station['clue'],'label'),p('My letter: ______','label')])
 story.append(PageBreak());story.extend([p('The final invitation','title'),p('Write your letters in station order.','label'),p('    '.join(['____']*len(data['stations'])),'h'),p('Check your code with your teacher or in the web quest. Then reflect on the skills you have practised.'),p('Mission debrief','h')]);story.extend(p('[  ] '+o) for o in data['outcomes']);story.extend([Spacer(1,20),p('My next learning goal:'),lines(3),Spacer(1,22),p('Original practice by English with Asya. Based on '+data['edition']+', '+data['section']+'. The stories and exercises are newly authored; this is not an official Pearson publication.','small'),p('Human audio with a transcript and replay is available in the web quest.','small')])
 if (folder/'listening.json').exists():
- audio=json.loads((folder/'listening.json').read_text());story.extend([PageBreak(),p('Listening transcript','h'),p('Companion to Challenge '+str(int(audio.get('challenge','05'))),'label'),p(audio['track'],'small'),p(audio['transcriptSource'],'small')]);story.extend(KeepTogether([p(line),Spacer(1,8)]) for line in audio['transcript'])
+ audio_data=json.loads((folder/'listening.json').read_text())
+ for audio in (audio_data if isinstance(audio_data,list) else [audio_data]):
+  if audio.get('pdfAppendix') is False:continue
+  story.extend([PageBreak(),p('Listening transcript','h'),p('Companion to Challenge '+str(int(audio.get('challenge','05'))),'label'),p(audio['track'],'small'),p(audio['transcriptSource'],'small')]);story.extend(KeepTogether([p(line),Spacer(1,8)]) for line in audio['transcript'])
 def footer(c,doc):
  c.saveState();c.setStrokeColor(LINE);c.line(48,42,547,42);c.setFont('QuestBody',8);c.setFillColor(WINE);c.drawString(48,28,'ENGLISH WITH ASYA · '+data['title'].upper());c.drawRightString(547,28,str(doc.page));c.restoreState()
 out=folder/data['pdf'];doc=SimpleDocTemplate(str(out),pagesize=(595.276,841.89),rightMargin=48,leftMargin=48,topMargin=44,bottomMargin=58,title=data['title'],author='English with Asya')

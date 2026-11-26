@@ -2,6 +2,80 @@
  * Planned coverage lives in docs/quest-coverage.json, never as empty cards. */
 (function(root){
 'use strict';
-root.QuestCatalog=[{id:'focus4-live-and-learn',course:'focus-4',courseTitle:'Focus 4',edition:'Second Edition',unit:1,section:'1.1 Vocabulary · Live and learn',book:'sb',afterPage:5,title:'The Future Academy',description:'Explore six stations, restore a learning story and unlock the Academy.',level:'B2',challenges:12,images:3,web:'/quests/focus4-live-and-learn/',pdf:'/quests/focus4-live-and-learn/focus4-live-and-learn-quest.pdf',image:'/quests/focus4-live-and-learn/assets/academy-gate.png'},{"id": "focus4-time-capsule", "course": "focus-4", "courseTitle": "Focus 4", "edition": "Second Edition", "unit": 1, "section": "1.2 Grammar · Present and past habits", "book": "sb", "afterPage": 6, "title": "The Time Capsule", "description": "Restore a timeline, listen to a dancer’s story and compare habits then and now.", "level": "B2", "challenges": 6, "images": 1, "web": "/quests/focus4-time-capsule/", "pdf": "/quests/focus4-time-capsule/focus4-time-capsule.pdf", "image": "/quests/focus4-time-capsule/assets/time-capsule-scenes.png"},{"id": "focus4-unit1-finale", "scope": "unit", "course": "focus-4", "courseTitle": "Focus 4", "edition": "Second Edition", "unit": 1, "section": "Unit 1 · Live and learn", "book": "sb", "afterPage": 19, "title": "The Academy Open Day", "description": "Prepare an open day using education vocabulary, habits, memory, listening, verb patterns, photo descriptions and formal writing.", "level": "B2", "challenges": 12, "images": 1, "web": "/quests/focus4-unit1-finale/", "pdf": "/quests/focus4-unit1-finale/focus4-unit1-finale.pdf", "image": "/quests/focus4-unit1-finale/assets/open-day-scenes.png"}];
+root.QuestCatalog=[
+  {
+    "id": "focus4-live-and-learn",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.1 Vocabulary · Live and learn",
+    "book": "sb",
+    "afterPage": 5,
+    "title": "The Future Academy",
+    "description": "Explore six stations, restore a learning story and unlock the Academy.",
+    "level": "B2",
+    "challenges": 12,
+    "images": 3,
+    "web": "/quests/focus4-live-and-learn/",
+    "pdf": "/quests/focus4-live-and-learn/focus4-live-and-learn-quest.pdf",
+    "image": "/quests/focus4-live-and-learn/assets/academy-gate.png"
+  },
+  {
+    "id": "focus4-time-capsule",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.2 Grammar · Present and past habits",
+    "book": "sb",
+    "afterPage": 6,
+    "title": "The Time Capsule",
+    "description": "Restore a timeline, listen to a dancer’s story and compare habits then and now.",
+    "level": "B2",
+    "challenges": 6,
+    "images": 1,
+    "web": "/quests/focus4-time-capsule/",
+    "pdf": "/quests/focus4-time-capsule/focus4-time-capsule.pdf",
+    "image": "/quests/focus4-time-capsule/assets/time-capsule-scenes.png"
+  },
+  {
+    "id": "focus4-memory-museum",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "1.3 Listening · Memory",
+    "book": "sb",
+    "afterPage": 7,
+    "title": "The Memory Museum",
+    "description": "Recover a visual memory route, listen for details and explore the different sounds of ea.",
+    "level": "B2",
+    "challenges": 6,
+    "images": 1,
+    "web": "/quests/focus4-memory-museum/",
+    "pdf": "/quests/focus4-memory-museum/focus4-memory-museum.pdf",
+    "image": "/quests/focus4-memory-museum/assets/memory-route.png"
+  },
+  {
+    "id": "focus4-unit1-finale",
+    "scope": "unit",
+    "course": "focus-4",
+    "courseTitle": "Focus 4",
+    "edition": "Second Edition",
+    "unit": 1,
+    "section": "Unit 1 · Live and learn",
+    "book": "sb",
+    "afterPage": 19,
+    "title": "The Academy Open Day",
+    "description": "Prepare an open day using education vocabulary, habits, memory, listening, verb patterns, photo descriptions and formal writing.",
+    "level": "B2",
+    "challenges": 12,
+    "images": 1,
+    "web": "/quests/focus4-unit1-finale/",
+    "pdf": "/quests/focus4-unit1-finale/focus4-unit1-finale.pdf",
+    "image": "/quests/focus4-unit1-finale/assets/open-day-scenes.png"
+  }
+];
 if(typeof module!=='undefined')module.exports=root.QuestCatalog;
 })(typeof window==='undefined'?globalThis:window);

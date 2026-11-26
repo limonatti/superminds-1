@@ -36,6 +36,7 @@
     "reload": true,
     "english": true,
     "print": true,
+    "pdfTransfer": "independent complete download plus live HEAD",
     "pdfBytes": 17247064,
     "pdfSHA256": "d860738b0c53943f36132bf3a8ea089cf3899611639f660c828debc8f0a2fcde",
     "audio": {
@@ -52,8 +53,8 @@
     "stage": "published-and-live-verified",
     "defaultPage": 4,
     "visibleButtons": [
-      "Start quest →",
-      "Open / print PDF ↗"
+      "Start quest \u2192",
+      "Open / print PDF \u2197"
     ],
     "desktop": true,
     "mobile": true,
