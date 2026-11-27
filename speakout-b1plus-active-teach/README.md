@@ -81,3 +81,17 @@ The compiler reads the supplied Word tasks and A/B/C answer keys; PDF text maps
 each exercise to its original page. It requires pypdf and macOS `textutil` for
 the single legacy `.doc`. `audit/material-interactions.json` records coverage
 and any unmapped keys/pages; all issues must be resolved before publication.
+
+## Reviewed Unit 1 opener (2026-11-27)
+
+`assets/unit1-opener.js` applies source-reviewed overrides after generated course
+and source data load. Keep it when rebuilding. Scope: SB printed 7, exercises 1–2.
+The Vlog personal-choice cards use the original video and SB170 videoscript;
+exercise 2 uses optional oral prompts. Neither task has an exact automatic grade.
+Existing note and answer IDs are preserved. The original Unit 1 Vlog video node
+stays connected across exercise/library navigation; other course media remain
+on their existing renderer and are not claimed as reviewed.
+
+Run `node tests/speakout-b1plus-opener-quality.cjs` with jsdom available, plus
+`node tests/speakout-b1plus.cjs` and `python3 check.py`. Real browser checks must
+verify source growth, phone overflow and muted video continuity separately.

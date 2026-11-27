@@ -1,0 +1,24 @@
+/* Scoped to the two source-reviewed Unit 1 opener tasks. */
+#exerciseDialog.reviewed-opener .cf-source{overflow:auto!important;max-width:100%;max-height:65dvh!important}
+#exerciseDialog.reviewed-opener .focus-sheet{max-width:none!important}
+#exerciseDialog.reviewed-opener .focus-source-controls{position:sticky;top:0;z-index:2;background:#faf6ef}
+.opener-gifts,.opener-prompts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}
+.opener-gifts button,.opener-prompts button{min-height:48px;padding:10px;border:1px solid #cdbfb3;border-radius:8px;background:#fbf7ef;color:#643047;text-align:left;overflow-wrap:anywhere}
+.opener-gifts button[aria-pressed=true],.opener-prompts button[aria-pressed=true]{background:#722940;color:#fff;border-color:#722940}
+.opener-activity button:focus-visible,.opener-controls button:focus-visible{outline:3px solid #a65872;outline-offset:3px}
+.opener-model{padding:12px;border-left:3px solid #722940;background:#f3e9de;font-style:italic}
+#openerMedia{flex:none;min-width:0;margin:0 0 12px;border:1px solid #d6c7bc;border-radius:8px;background:#faf6ef;padding:10px}
+#openerMedia[hidden]{display:none!important}
+.opener-video>summary{cursor:pointer;min-height:36px;color:#643047;font-weight:600}
+#openerVideo{display:block;width:min(100%,480px);max-height:30dvh;margin:0 auto;background:#181818;border-radius:6px}
+.opener-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;min-width:0}
+.opener-controls button{min-height:40px;font-size:13px}.opener-controls output{font-size:13px;white-space:nowrap}
+.opener-controls [data-opener-error]{flex-basis:100%;color:#922d34}
+.opener-script{margin-top:8px;font-size:13px}.opener-script>div{width:100%;overflow:auto;max-height:35vh}.opener-script img{display:block;width:900px;max-width:none!important}
+.opener-library{display:block}.opener-library>button{margin-top:8px}
+@media(max-width:760px){.opener-gifts,.opener-prompts{grid-template-columns:minmax(0,1fr)}#openerVideo{max-height:22dvh}#openerMedia{padding:8px}#exerciseDialog.reviewed-opener .cf-source{max-height:60dvh!important}}
+
+.opener-script svg{display:block;width:690px;max-width:none!important}
+#exerciseDialog.reviewed-opener #exerciseMedia{padding:0;background:transparent;margin:0 0 10px}
+
+.opener-options{flex-basis:100%;min-width:0}.opener-options label{display:inline-flex;align-items:center;gap:6px;font-size:13px}.opener-options select{width:auto!important;min-width:0}.opener-options summary{font-size:12px!important;min-height:30px!important;padding:6px 0!important}
