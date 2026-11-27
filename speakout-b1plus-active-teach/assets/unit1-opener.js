@@ -58,7 +58,7 @@ function bindControls(el){
 }
 function show(on){active=on;ensure();sync()}
 function libraryHTML(){return '<article class="mediaitem opener-library"><h3>BBC Vlogs · Unit 1 · Best present</h3>'+controls()+'<button type="button" data-opener-return>Открыть видео и задание 1</button><p>Видео и позиция сохраняются при возврате к заданию.</p></article>'}
-function bindLibrary(open){const el=q('.opener-library');if(!el)return;ensure();bindControls(el);el.querySelector('[data-opener-return]').onclick=open;sync()}
+function bindLibrary(open){const el=q('.opener-library');if(!el)return;ensure();bindControls(el);el.querySelector('[data-opener-play]').onclick=()=>{if(video.paused){open();play()}else video.pause()};el.querySelector('[data-opener-repeat]').onclick=()=>{open();play(true)};el.querySelector('[data-opener-return]').onclick=open;sync()}
 function decorate({id,state,body,persist,updateProgress}){
  const dialog=q('#exerciseDialog');dialog.classList.toggle('reviewed-opener',has(id));if(!has(id))return;
  const source=body.querySelector('.exercise-source');source.dataset.sourceFit='width';source.tabIndex=0;source.setAttribute('role','region');source.setAttribute('aria-label','Оригинал задания');root.ExerciseSource.controls(source);
