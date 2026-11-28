@@ -73,3 +73,16 @@ categories come from the original task. Keys remain locked until a complete
 attempt. Other Unit 1A pages and remaining B1 sections still need separate review.
 Run `NODE_PATH=<jsdom location> node tests/speakout-b1-unit1a-reviewed.cjs` for
 interaction, legacy-answer, reset and shared key-gate regression checks.
+
+### Reviewed listening, 2026-11-28
+
+`assets/unit1a-listening.js` adapts only SB9 exercises 3A–3C against the exact
+Third Edition B1 page, keys.pdf page2, original Audio1.01 and transcript SB158.
+Keep its script/style and app hooks when rebuilding generated course data.
+3A uses the printed topic bank with the given studies example and a self-check
+against possible answers; 3C is ungraded personal discussion. 3B provides
+source-grounded detail choices, preserving question numbers and three roles in9.
+Existing note/values remain; reset touches only new `listen:` values. The original
+1.01 audio node stays connected while visiting the media list and returning.
+Source controls use actual width zoom with bounded horizontal/vertical scrolling.
+Regression: `NODE_PATH=<jsdom installation>/node_modules node tests/speakout-b1-listening-quality.cjs`.

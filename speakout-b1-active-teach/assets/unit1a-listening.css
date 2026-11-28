@@ -1,0 +1,15 @@
+/* Only source-reviewed SB9 listening tasks; no change to other exercises. */
+#exerciseDialog.reviewed-listening .cf-source{overflow:auto!important;max-width:100%;max-height:65dvh!important}
+#exerciseDialog.reviewed-listening .focus-sheet{max-width:none!important}
+#exerciseDialog.reviewed-listening .focus-source-controls{position:sticky;top:0;z-index:2;background:#faf6ef}
+.b1-listening{min-width:0}.b1-listening fieldset{min-width:0;margin:16px 0;border:1px solid #d6c7bc;border-radius:8px;padding:12px}.b1-listening legend{font-weight:600;padding:0 6px}
+.listening-cards{display:flex;flex-wrap:wrap;gap:8px}.b1-listening button[data-listen-key]{min-height:44px;padding:10px 12px;text-align:left;border:1px solid #cdbfb3;border-radius:8px;background:#fbf7ef;color:#643047;overflow-wrap:anywhere;max-width:100%}.b1-listening>button[data-listen-key]{display:block;width:100%;margin:10px 0}
+.b1-listening button[aria-pressed=true]{background:#722940;color:#fff;border-color:#722940}.b1-listening button:focus-visible,.listening-controls button:focus-visible{outline:3px solid #a65872;outline-offset:3px}
+.b1-listening fieldset[data-result=correct]{border-color:#44794c}.b1-listening fieldset[data-result=incorrect]{border-color:#a3424b}.listening-example{padding:10px;font-style:italic;color:#5c534b;flex-basis:100%}
+#listeningMedia{min-width:0;flex:none;margin:0 0 12px;padding:10px;border:1px solid #d6c7bc;border-radius:8px;background:#faf6ef}#listeningMedia[hidden]{display:none!important}
+.listening-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}.listening-controls button{min-height:40px;font-size:13px}.listening-controls output{font-size:13px;white-space:nowrap}.listening-controls details{flex-basis:100%}.listening-controls summary,.listening-transcript summary{font-size:13px!important;padding:8px 0!important}.listening-controls select{width:auto!important}.listening-controls [data-listen-error]{flex-basis:100%;color:#922d34}.listening-library{display:block}.listening-library>button{margin-top:8px}
+.listening-transcript-hint{font-size:12px;margin:4px 0}.listening-transcript>div{overflow:auto;max-height:35vh}.listening-transcript svg{display:block;width:625px;max-width:none!important}
+#exerciseDialog.reviewed-listening #exerciseMedia{padding:0;background:transparent;margin:0 0 8px}
+@media(max-width:760px){#exerciseDialog.reviewed-listening .cf-source{max-height:60dvh!important}.b1-listening fieldset{padding:8px}.listening-cards{gap:6px}}
+
+#listeningMedia>.cf-repeat{display:none!important}
