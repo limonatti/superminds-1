@@ -13,3 +13,5 @@
 @media(max-width:760px){#exerciseDialog.reviewed-listening .cf-source{max-height:60dvh!important}.b1-listening fieldset{padding:8px}.listening-cards{gap:6px}}
 
 #listeningMedia>.cf-repeat{display:none!important}
+
+.listening-controls [data-listen-seek]{flex-basis:100%;width:100%;min-width:0;accent-color:#722940;margin:0;height:20px}
